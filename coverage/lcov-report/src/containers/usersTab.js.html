@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/containers/usersTab.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/containers</a> usersTab.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/60</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/58</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+import ReactDOM  from 'react-dom';
+import UserDataTable from './userTab/userTabTable';
+import { connect } from 'react-redux'; 
+import { defineMessages } from 'react-intl';
+import {stringConfig} from '../constants/backEndConstants'
+import Spinner from '../../components/spinner/Spinner';
+import { setUserSpinner } from  '../../actions/spinnerAction';
+import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../actions/sortHeaderActions';
+import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
+&nbsp;
+//Mesages for internationalization
+const messages=defineMessages({<span class="cstat-no" title="statement not covered" ></span>
+    userOperator: {
+      id:"userDetails.operator", 
+      defaultMessage: "Operator"
+    },
+    userManager:{
+      id:"userDetails.manager", 
+      defaultMessage: "Manager"
+    },
+    userPick:{
+      id:"userDetails.pick.status",
+      defaultMessage: "Pick"
+    },
+    auditCompletedStatus: {
+      id:"auditdetail.completed.status", 
+      defaultMessage: "Audited"
+    },
+    userPut:{
+      id:"userDetails.put.status", 
+      defaultMessage: "Put"
+    },
+    userAudit:{
+      id:"userDetails.audit.status", 
+      defaultMessage: "Audit"
+    },
+    userFront:{
+      id:"userDetails.front.status", 
+      defaultMessage: "Front"
+    },
+    userBack:{
+      id:"userDetails.back.status", 
+      defaultMessage: "Back"
+    },
+    userOnline:{
+      id:"userDetails.online.status", 
+      defaultMessage: "Online"
+    },
+    userOffline:{
+      id:"userDetails.offline.status", 
+      defaultMessage: "Offline"
+    },
+    userLocation:{
+      id:"userDetails.location",
+      defaultMessage: "PPS {ppsId}"
+    }
+&nbsp;
+&nbsp;
+});
+&nbsp;
+&nbsp;
+class UsersTab extends React.Component{
+	c<span class="fstat-no" title="function not covered" >on</span>structor(props) 
+	{
+<span class="cstat-no" title="statement not covered" >    	super(props);</span>
+    }
+<span class="fstat-no" title="function not covered" >  _p</span>rocessUserDetails() {
+  var nProps=this<span class="cstat-no" title="statement not covered" >,</span>
+  data=nPro<span class="cstat-no" title="statement not covered" >ps.props.userdetails ||{};</span>
+  let operator=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(messages.userOperator);</span>
+  let manager=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(messages.userManager);</span>
+  let pick=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(stringConfig.pick);</span>
+  let put=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(stringConfig.put);</span>
+  let audit=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(stringConfig.audit);</span>
+  let front=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(messages.userFront);</span>
+  let back=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(messages.userBack);</span>
+  let online=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(stringConfig.online);</span>
+  let offline=nPro<span class="cstat-no" title="statement not covered" >ps.context.intl.formatMessage(stringConfig.offline);</span>
+  var role={"bu<span class="cstat-no" title="statement not covered" >tler_ui":operator, "butler_supervisor":manager};</span>
+  var work_mode={"pi<span class="cstat-no" title="statement not covered" >ck":pick,"put": put,"audit": audit};</span>
+  var work_place={"fr<span class="cstat-no" title="statement not covered" >ont": front, "back":back};</span>
+&nbsp;
+&nbsp;
+  var userDetails=[], <span class="cstat-no" title="statement not covered" >use</span>rData={};<span class="cstat-no" title="statement not covered" ></span>
+  fo<span class="cstat-no" title="statement not covered" >r (var i=data.length - 1; i &gt;= 0; i--) {</span>
+&nbsp;
+    us<span class="cstat-no" title="statement not covered" >erData.id=(data[i].first_name || "--") + " " + (data[i].last_name || "--");</span>
+    if<span class="cstat-no" title="statement not covered" >(data[i].logged_in){</span>
+      us<span class="cstat-no" title="statement not covered" >erData.status=online;</span>
+      us<span class="cstat-no" title="statement not covered" >erData.statusClass="online";</span>
+    if(d<span class="cstat-no" title="statement not covered" >ata[i].pps.pps_mode &amp;&amp; data[i].pps.seat_type) {  </span>
+      user<span class="cstat-no" title="statement not covered" >Data.workMode=work_mode[data[i].pps.pps_mode] + " " + work_place[data[i].pps.seat_type];</span>
+    }
+&nbsp;
+    else<span class="cstat-no" title="statement not covered" > if(data[i].pps.pps_mode) {</span>
+      user<span class="cstat-no" title="statement not covered" >Data.workMode=work_mode[data[i].pps.pps_mode];</span>
+    }
+&nbsp;
+    user<span class="cstat-no" title="statement not covered" >Data.location=nProps.context.intl.formatMessage(messages.userLocation,{"ppsId":data[i].pps.pps_id});</span>
+    user<span class="cstat-no" title="statement not covered" >Data.logInTime=nProps.context.intl.formatTime(data[i].login_time,{hour: 'numeric',minute: 'numeric',hour12:false}) +</span>
+    " (" + nProps.context.intl.formatRelative(data[i].login_time) +")";;
+&nbsp;
+    }
+&nbsp;
+    else {
+    user<span class="cstat-no" title="statement not covered" >Data.status=offline;</span>
+    user<span class="cstat-no" title="statement not covered" >Data.statusClass="offline";</span>
+    user<span class="cstat-no" title="statement not covered" >Data.workMode="--";</span>
+    user<span class="cstat-no" title="statement not covered" >Data.location="--" ;</span>
+    user<span class="cstat-no" title="statement not covered" >Data.logInTime="--";</span>
+    }
+&nbsp;
+&nbsp;
+    us<span class="cstat-no" title="statement not covered" >erData.uid=data[i].user_id</span>
+    us<span class="cstat-no" title="statement not covered" >erData.userName= data[i].user_name;</span>
+    us<span class="cstat-no" title="statement not covered" >erData.first=data[i].first_name;</span>
+    us<span class="cstat-no" title="statement not covered" >erData.last=data[i].last_name;  </span>
+    us<span class="cstat-no" title="statement not covered" >erData.roleId=data[i].role;</span>
+    if<span class="cstat-no" title="statement not covered" >(role.hasOwnProperty(data[i].role)){</span>
+      us<span class="cstat-no" title="statement not covered" >erData.role=role[data[i].role];      </span>
+    }
+    else{
+      us<span class="cstat-no" title="statement not covered" >erData.role=data[i].role;</span>
+    }
+    us<span class="cstat-no" title="statement not covered" >erDetails.push(userData);</span>
+    us<span class="cstat-no" title="statement not covered" >erData={};</span>
+  }
+&nbsp;
+  re<span class="cstat-no" title="statement not covered" >turn userDetails;</span>
+}	
+	r<span class="fstat-no" title="function not covered" >en</span>der(){
+		var itemNumber=7, u<span class="cstat-no" title="statement not covered" >se</span>rData;	
+		if<span class="cstat-no" title="statement not covered" >(this.props.userdetails !== undefined) {</span>
+			use<span class="cstat-no" title="statement not covered" >rData=this._processUserDetails();</span>
+		}	
+		re<span class="cstat-no" title="statement not covered" >turn (</span>
+			&lt;div&gt;
+				&lt;div&gt;
+					&lt;div className="gor-User-Table"&gt;
+          &lt;Spinner isLoading={this.props.userSpinner} setSpinner={this.props.setUserSpinner}/&gt;
+						&lt;UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} 
+                           mid={this.props.manager.users?this.props.manager.users[0].id:''} 
+                           sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
+                           currentSortState={this.props.userSortHeader} currentHeaderOrder={this.props.userSortHeaderState}
+                           setUserFilter={this.props.userFilterDetail}
+                           getUserFilter={this.props.userFilter}/&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		);
+	}
+};
+&nbsp;
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+  
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    userFilter: state.sortHeaderState.userFilter|| "",
+    userdetails: state.userDetails.userDetails || [],
+    intlMessages: state.intl.messages,
+    manager:state.headerData.headerInfo||[],
+    userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
+    userSortHeaderState: <span class="branch-0 cbranch-no" title="branch not covered" >state.sortHeaderState.userHeaderSortOrder </span>|| INITIAL_HEADER_ORDER,
+    userSpinner:state.spinner.userSpinner || false
+&nbsp;
+  };
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+<span class="cstat-no" title="statement not covered" >  return{</span>
+    userFilterDetail: function(data){dispatch(userFilterD<span class="fstat-no" title="function not covered" >etail(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+    userHeaderSort: function(data){dispatch(userHeaderS<span class="fstat-no" title="function not covered" >ort(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+    userHeaderSortOrder: function(data){dispatch(userHeaderS<span class="fstat-no" title="function not covered" >ortOrder(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+    setUserSpinner:function(data){dispatch(setUserSpinn<span class="fstat-no" title="function not covered" >er(data))}<span class="cstat-no" title="statement not covered" ></span></span>
+  };
+}
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >UsersTab.contextTypes={</span>
+ intl:React.PropTypes.object.isRequired
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >UsersTab.PropTypes={</span>
+userFilterDetail:React.PropTypes.func,
+userHeaderSort: React.PropTypes.func,
+userHeaderSortOrder:React.PropTypes.func,
+setUserSpinner:React.PropTypes.func,
+userFilter: React.PropTypes.string,
+userdetails: React.PropTypes.array,
+manager:React.PropTypes.array,
+userSortHeader:React.PropTypes.string,
+userSortHeaderState:React.PropTypes.string,
+userSpinner:React.PropTypes.bool
+};
+&nbsp;
+&nbsp;
+export  default connect(mapStateToProps,mapDispatchToProps)(UsersTab);
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

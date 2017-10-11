@@ -3,7 +3,7 @@
  */
 import React  from 'react';
 
-class Zone extends React.Component {
+export class Zone extends React.Component {
     
 
     render() {

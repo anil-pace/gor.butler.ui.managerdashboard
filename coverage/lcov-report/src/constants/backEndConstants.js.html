@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/constants/backEndConstants.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/constants</a> backEndConstants.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>61/61</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>61/61</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { defineMessages } from 'react-intl';
+//WS constants
+export const WS_SUCCESS="Sucessfully logged in";
+&nbsp;
+/*Parsing Constants*/
+export const PARSE_PPS="pps";
+export const PARSE_BUTLERS="butlers";
+export const PARSE_CHARGERS="chargers";
+export const PARSE_ORDERS="orders";
+export const PARSE_OVERVIEW="overview";
+export const PARSE_SYSTEM="system";
+export const PARSE_INVENTORY= "inventory";
+export const PARSE_INVENTORY_TODAY="inventory_today";
+export const PARSE_INVENTORY_HISTORY="inventory_history";
+export const PARSE_PUT="put";
+export const PARSE_PICK="pick";
+export const PARSE_PPA_THROUGHPUT="put_pick_audit_throughput";
+export const PARSE_AUDIT="audit";
+export const PARSE_AUDIT_AGG="audit_agg";
+export const PARSE_STATUS="status";
+export const PARSE_ZONING="zones";
+export const PARSE_CONTROLLERS = "controllers";
+export const SYSTEM_CHARGERS_DETAILS="chargers";
+export const BUTLERBOTS="butlerbots";
+export const CHARGING="chargingstation";
+export const PPS_CONFIGURATION="ppsConfiguration";
+export const PPS="pps";
+export const SYS_OVERVIEW="sysOverview";
+export const SYS_CONTROLLERS = "sysControllers";
+&nbsp;
+/*Constants for response type */
+export const PPS_DETAIL="pps";
+export const SYSTEM_PPS_DETAILS="system_pps_details";
+export const SYSTEM_BUTLERS_DETAILS="butlers";
+export const HISTOGRAM_DETAILS="histogram";
+export const USER_DATA="users";
+&nbsp;
+/*Constants for api response codes*/
+export const CODE_US001='us001';
+export const CODE_US002='us002';
+export const CODE_US004='us004';
+export const CODE_UE001='ue001';
+export const CODE_UE002='ue002';
+export const CODE_UE003='ue003';
+export const CODE_UE004='ue004';
+export const CODE_UE005='ue005';
+export const CODE_UE006='ue006';
+export const CODE_E026='e026';
+export const CODE_E027='e027';
+export const CODE_G015='g015';
+export const CODE_AE001='ae001';
+export const CODE_AE002='ae002';
+export const CODE_AE004='ae004';
+export const CODE_AE005='ae005';
+export const CODE_AE006='ae006';
+export const CODE_AS002='as002';
+export const CODE_AS003='as003';
+export const CODE_G016='g016';
+export const CODE_AE007='ae007';
+export const CODE_AE008='ae008';
+export const CODE_E051='e051';
+export const CODE_E052='e052';
+export const CODE_E135='e135';
+/*User roles map*/
+export const BUTLER_SUPERVISOR='butler_supervisor';
+export const BUTLER_UI='butler_ui';
+export const USER_ROLE_MAP={
+	[BUTLER_SUPERVISOR] : "Manager",
+	[BUTLER_UI] : "Operator"
+&nbsp;
+}
+/*String config codes*/
+&nbsp;
+&nbsp;
+export const  stringConfig= defineMessages({
+    open: {
+        id: 'stringConfig.open',
+        description: 'Text to display on',
+        defaultMessage: 'Open'
+    },
+    close: {
+        id: 'stringConfig.off',
+        description: 'Text to show off',
+        defaultMessage: "Close"
+    },
+    fclose: {
+        id: 'stringConfig.fclose',
+        description: 'Text to show off',
+        defaultMessage: "Force Close"
+    },
+    per_hour:{
+        id: 'stringConfig.per_hour',
+        description: 'Text to show per_hour',
+        defaultMessage: "per_hour"
+    },
+    pick:{
+        id: 'stringConfig.pick',
+        description: 'Text to show pick',
+        defaultMessage: "pick"
+    },
+    put:{
+        id: 'stringConfig.put',
+        description: 'Text to show put',
+        defaultMessage: "put"
+    },
+    audit:{
+        id: 'stringConfig.audit',
+        description: 'Text to show audit',
+        defaultMessage: "audit"
+    },
+    soft:{
+        id: 'stringConfig.soft',
+        description: 'Text to show soft',
+        defaultMessage: "soft"
+    },
+    hard:{
+        id: 'stringConfig.hard',
+        description: 'Text to show hard',
+        defaultMessage: "hard"
+    },
+    soft_manual:{
+        id: 'stringConfig.soft_manual',
+        description: 'Text to show soft_manual',
+        defaultMessage: "soft_manual"
+    },
+    pending:{
+        id: 'stringConfig.pending',
+        description: 'Text to show pending',
+        defaultMessage: "In Progress"
+    },
+    wave_pending:{
+        id: 'stringConfig.wave.pending',
+        description: 'Text to show pending',
+        defaultMessage: "Pending"
+    },
+    disconnected:{
+        id: 'stringConfig.disconnected',
+        description: 'Text to show disconnected',
+        defaultMessage: "Disconnected"
+    },
+    connected:{
+        id: 'stringConfig.connected',
+        description: 'Text to show connected',
+        defaultMessage: "Connected"
+    },
+    completed:{
+        id: 'stringConfig.completed',
+        description: 'Text to show completed',
+        defaultMessage: "Completed"
+    },
+    Completed:{
+        id: 'stringConfig.Completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed"
+    },
+    in_progress:{
+        id: 'stringConfig.in_progress',
+        description: 'Text to show In Progress',
+        defaultMessage: "In Progress"
+    },
+    breached:{
+        id: 'stringConfig.breached',
+        description: 'Text to show breached',
+        defaultMessage: "Breached"
+    },
+    fulfillable:{
+        id: 'stringConfig.fulfillable',
+        description: 'Text to show fulfillable',
+        defaultMessage: "In Progress"
+    },
+    abandoned:{
+        id: 'stringConfig.abandoned',
+        description: 'Text to show abandoned',
+        defaultMessage: "Abandoned"
+    },
+    manual:{
+        id: 'stringConfig.manual',
+        description: 'Text to show manual',
+        defaultMessage: "Manual"
+    },
+    auto:{
+        id: 'stringConfig.auto',
+        description: 'Text to show auto',
+        defaultMessage: "Auto"
+    },
+    not_fulfillable:{
+        id: 'stringConfig.notFulfillable',
+        description: 'Text to show In progress',
+        defaultMessage: "Unfulfillable"
+    },
+    exception:{
+        id: 'stringConfig.exception',
+        description: 'Text to show exception',
+        defaultMessage: "Exception"
+    },
+    online:{
+        id: 'stringConfig.online',
+        description: 'Text to show Online',
+        defaultMessage: "online"
+    },
+    offline:{
+        id: 'stringConfig.offline',
+        description: 'Text to show Offline',
+        defaultMessage: "offline"
+    },
+    received:{
+        id: 'stringConfig.received',
+        description: 'Text to show received',
+        defaultMessage: "In Progress"
+    },
+    cancelled:{
+        id: 'stringConfig.cancelled',
+        description: 'Text to show cancelled',
+        defaultMessage: "Cancelled"  
+&nbsp;
+    },
+    butler_supervisor:{
+        id: 'stringConfig.butler_supervisor',
+        description: 'Text to show Manager',
+        defaultMessage: "Manager"  
+    },
+    butler_ui:{
+        id: 'stringConfig.butler_ui',
+        description: 'Text to show Operator',
+        defaultMessage: "Operator"  
+    },
+    admin:{
+        id: 'stringConfig.admin',
+        description: 'Text to show admin',
+        defaultMessage: "Admin" 
+    },
+    qc_operator:{
+        id: 'stringConfig.qc',
+        description: 'Text to show Qc operator',
+        defaultMessage: "QC Operator" 
+    },
+    packing_operator:{
+        id: 'stringConfig.packing_operator',
+        description: 'Text to show packing operator',
+        defaultMessage: "Packing Operator"         
+    },
+    temporary_unfulfillable:{
+        "id": "stringConfig.temporary_unfulfillable",
+        "description": "Text for temporary unfulfillable status",
+        "defaultMessage": "On hold"
+    },
+    audit_resolved:{
+        "id": "stringConfig.audit_resolved",
+        "description": "Text for audit resolved status",
+        "defaultMessage": "Resolved"
+    },
+    audit_pending_approval:{
+        "id": "stringConfig.audit_pending_approval",
+        "description": "Text for audit pending approval status",
+        "defaultMessage": "Unresolved"
+    },
+    audit_rejected: {
+        "id": "stringConfig.audit_rejected",
+        "description": "Text for audit rejected status",
+        "defaultMessage": "Rejected"
+    },
+    md001 : {
+        "id": "stringConfig.md001",
+        "description": "Text for safety checklist item 1",
+        "defaultMessage": "No personnel are present in the no-man zone."
+    },
+    md002 : {
+        "id": "stringConfig.md002",
+        "description": "Text for safety checklist item 2",
+        "defaultMessage": "All Butler and MSU positions have been corrected."
+    },
+    md003 : {
+        "id": "stringConfig.md003",
+        "description": "Text for safety checklist item 3",
+        "defaultMessage": "All no-man zone gates are properly closed."
+    },
+    md004 : {
+        "id": "stringConfig.md004",
+        "description": "Text for safety checklist item 4",
+        "defaultMessage": "All no-man gate limit switches are active and working."
+    },
+    md005 : {
+        "id": "stringConfig.md005",
+        "description": "Text for safety checklist item 5",
+        "defaultMessage": "All Hard Emergency buttons are released."
+    },
+    md006 : {
+        "id": "stringConfig.md006",
+        "description": "Text for safety checklist item 6",
+        "defaultMessage": "All Zigbee boxes are online."
+    },
+     md007 : {
+        "id": "stringConfig.md007",
+        "description": "Text for safety checklist item 7",
+        "defaultMessage": "Peripherals status known."
+    },
+     md008 : {
+        "id": "stringConfig.md008",
+        "description": "Text for safety checklist item 8",
+        "defaultMessage": "Physical inventory verified."
+    },
+     md009 : {
+        "id": "stringConfig.md009",
+        "description": "Text for safety checklist item 9",
+        "defaultMessage": "No Emergency buttons in 'Pressed' state."
+    },
+     md010 : {
+        "id": "stringConfig.md010",
+        "description": "Text for safety checklist item 10",
+        "defaultMessage": "All shutters open  in active zones."
+    },
+     md011 : {
+        "id": "stringConfig.md011",
+        "description": "Text for safety checklist item 11",
+        "defaultMessage": "No humans in operations area."
+    },
+     md012 : {
+        "id": "stringConfig.md012",
+        "description": "Text for safety checklist item 12",
+        "defaultMessage": "All paths cleared of any debris."
+    },
+     md013 : {
+        "id": "stringConfig.md013",
+        "description": "Text for safety checklist item 13",
+        "defaultMessage": 'Move bots to the PPS location and do an "init" after all bots are moved.'
+    },
+    md014 : {
+        "id": "stringConfig.md014",
+        "description": "Text for safety checklist item 14",
+        "defaultMessage": "No bots require to be moved to PPS."
+    },
+    audit_reaudited: {
+        "id": "stringConfig.audit_reaudited",
+        "description": "Text for audit reaudited status",
+        "defaultMessage": "Re-audited"
+    }
+});
+export const  roleDesc= defineMessages({
+    
+    butler_supervisor:{
+        id: 'roleDesc.butler_supervisor',
+        description: 'Text for Manager description',
+        defaultMessage: "Grant access to the Management Interface and Operator Interface to all systems"  
+    },
+    butler_ui:{
+        id: 'roleDesc.butler_ui',
+        description: 'Text for Operator description',
+        defaultMessage: "Grant access to the Operator Interface at each Pick Put Station in the Butler system"  
+    }
+});
+export const  pwdDesc= defineMessages({
+    
+    butler_supervisor:{
+        id: 'pwdDesc.butler_supervisor',
+        description: 'Text for password description of manager',
+        defaultMessage: "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface."  
+    },
+    butler_ui:{
+        id: 'pwdDesc.butler_ui',
+        description: 'Text for password description of operator',
+        defaultMessage: "A password of 6 digits will be required for logging into the Operator Interface."  
+    }
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

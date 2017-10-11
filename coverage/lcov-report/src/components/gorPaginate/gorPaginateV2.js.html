@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/gorPaginate/gorPaginateV2.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/gorPaginate</a> gorPaginateV2.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.33% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.57% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/28</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by gaurav.m on 4/26/17.
+ */
+import React  from 'react';
+import {FormattedMessage} from 'react-intl';
+import {hashHistory} from 'react-router'
+&nbsp;
+&nbsp;
+class GorPaginateV2 extends React.Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >        super(props);</span>
+        let current_query=<span class="cstat-no" title="statement not covered" >props.location.query,</span>currentPage=<span class="cstat-no" title="statement not covered" >1</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(current_query.page){</span>
+<span class="cstat-no" title="statement not covered" >            currentPage=+current_query.page</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.state={currentPage: currentPage, totalPage: props.totalPage, currentQuery: currentPage}</span>
+<span class="cstat-no" title="statement not covered" >        this.submit = this.submit.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >        this._textSubmit = this._textSubmit.bind(this);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps) {
+        let current_query=<span class="cstat-no" title="statement not covered" >nextProps.location.query,</span>currentPage=<span class="cstat-no" title="statement not covered" >1</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(current_query.page){</span>
+<span class="cstat-no" title="statement not covered" >            currentPage=+current_query.page</span>
+        }
+<span class="cstat-no" title="statement not covered" >        this.setState({totalPage: nextProps.totalPage, currentPage: currentPage,currentQuery:currentPage});</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _t</span>extSubmit(e) {
+<span class="cstat-no" title="statement not covered" >        this.setState({currentQuery: this.pageNum.value});</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    su</span>bmit(e) {
+<span class="cstat-no" title="statement not covered" >        e.preventDefault()</span>
+        var regex=<span class="cstat-no" title="statement not covered" >/^\d+$/;</span> // used for validation of numeric key by user
+<span class="cstat-no" title="statement not covered" >        if (regex.test(this.pageNum.value) &amp;&amp; +this.pageNum.value &gt; 0 &amp;&amp; +this.pageNum.value &lt;= this.state.totalPage) {</span>
+<span class="cstat-no" title="statement not covered" >            this._navigateToPage(+this.pageNum.value)</span>
+&nbsp;
+        } else {
+            //Do nothing
+<span class="cstat-no" title="statement not covered" >            this.setState({currentQuery: this.state.currentPage})</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    _n</span>avigateToPage(page) {
+        let _query=<span class="cstat-no" title="statement not covered" >this.props.location.query || {}</span>
+<span class="cstat-no" title="statement not covered" >        _query.page=page.toString();</span>
+       
+<span class="cstat-no" title="statement not covered" >        this.setState({currentQuery:page})</span>
+<span class="cstat-no" title="statement not covered" >        hashHistory.push({pathname: this.props.location.pathname, query: _query})</span>
+&nbsp;
+    }
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        var paginateButton=<span class="cstat-no" title="statement not covered" >{firstPg: "|&lt;", lastPg: "&gt;|", prevPg: "&lt;", nextPg: "&gt;"}</span>
+        var currentPage=<span class="cstat-no" title="statement not covered" >+this.state.currentQuery;</span>
+        var totalPage=<span class="cstat-no" title="statement not covered" >+this.state.totalPage;</span>
+        var disabled = <span class="cstat-no" title="statement not covered" >this.props.disabled;</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div&gt;
+                &lt;div className="gor-paginate-wrap"&gt;
+                    &lt;form onSubmit={!disabled ? this.submit : null}&gt;
+                        &lt;div className="gor-paginate-input-box-wrap"&gt;
+                            &lt;div className="gor-paginate-text-wrap"&gt;
+                                &lt;FormattedMessage id="paginate.page.heading" description='Heading for paginate page'
+                                                  defaultMessage='Page'/&gt;
+                            &lt;/div&gt;
+                            &lt;input disabled={disabled} className="gor-paginate-input-box" type="text" value={currentPage}
+                                   onChange={!disabled ? this._textSubmit : null} ref={<span class="fstat-no" title="function not covered" >no</span>de=&gt; {
+<span class="cstat-no" title="statement not covered" >                                this.pageNum=node</span>
+                            }}/&gt;
+                            &lt;div className="gor-paginate-text-wrap"&gt;
+                                &lt;FormattedMessage id="paginate.page.pageNum" description='Heading for paginate pageNum'
+                                                  defaultMessage='of {totalPage}' values={{totalPage: totalPage}}/&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div className="gor-button-wrap"&gt;
+                            &lt;div
+                                className={currentPage===1 ? "gor-paginate-left-btn gor-paginate-btn-disable" : "gor-paginate-left-btn"}
+                                onClick={currentPage !== 1 &amp;&amp; !disabled ?this._navigateToPage.bind(this, 1):null}&gt;
+                                &lt;span className="gor-pagination-first"/&gt;
+                            &lt;/div&gt;
+                            &lt;div
+                                className={currentPage===1? "gor-paginate-middle-left-btn gor-paginate-btn-disable" : "gor-paginate-middle-left-btn"}
+                                onClick={currentPage!==1 &amp;&amp; !disabled ? this._navigateToPage.bind(this, currentPage - 1) : null}&gt;
+                                &lt;span className="gor-pagination-previous"/&gt;
+                            &lt;/div&gt;
+                            &lt;div
+                                className={(currentPage)=== (totalPage) ? "gor-paginate-middle-right-btn gor-paginate-btn-disable" : "gor-paginate-middle-right-btn"}
+                                onClick={currentPage!==totalPage &amp;&amp; !disabled ? this._navigateToPage.bind(this, (currentPage + 1)) : null}&gt;
+                                &lt;span className="gor-pagination-next"/&gt;
+                            &lt;/div&gt;
+                            &lt;div
+                                className={currentPage=== totalPage ? "gor-paginate-right-btn gor-paginate-btn-disable" : "gor-paginate-right-btn"}
+                                onClick={currentPage !== totalPage &amp;&amp; !disabled ?this._navigateToPage.bind(this, totalPage):null}&gt;
+                                &lt;span className="gor-pagination-last"/&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+GorPaginateV2.defaultProps={
+    disabled:false
+}
+&nbsp;
+export  default GorPaginateV2;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

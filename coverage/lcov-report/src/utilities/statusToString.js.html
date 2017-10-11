@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/utilities/statusToString.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/utilities</a> statusToString.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/23</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+import { FormattedMessage } from 'react-intl'; 
+import {AUDIT_RESOLVED, AUDIT_LINE_REJECTED, SUCCESS, ERROR, AUDIT_BY_PDFA,ITEM_RECALLED_DATA} from '../constants/frontEndConstants';
+import {ERR_RES} from '../constants/messageConstants';
+&nbsp;
+export function statusToString(res){<span class="fstat-no" title="function not covered" ></span>
+          var stringInfo, auditType, auditTypeValue, auditId;
+<span class="cstat-no" title="statement not covered" >          switch(res.status)</span>
+          {
+            case AUDIT_RESOLVED:
+<span class="cstat-no" title="statement not covered" >              auditId=res.audit_displa</span>y_id;
+<span class="cstat-no" title="statement not covered" >               auditType=res.audit</span>_type;
+<span class="cstat-no" title="statement not covered" >               auditTypeValue=res.audit_type_</span>value;
+<span class="cstat-no" title="statement not covered" >               if(auditType=== AUDIT_BY_PDFA) {</span>
+<span class="cstat-no" title="statement not covered" >                auditType="</span>SKU";
+<span class="cstat-no" title="statement not covered" >                auditTypeValue=res.audit_type_value.product</span>_sku;
+              }
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="audit.resolve.success" description='Text for resolved audit lines' 
+                                       defaultMessage='Audit task {auditId} with {auditType} - {auditTypeValue} has been approved' 
+                                       values={{auditId:res.audit_display_id, auditType:res.audit_type, auditTypeValue:res.audit_type_value}}
+                    /&gt;)   
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+            
+            case AUDIT_LINE_REJECTED:
+<span class="cstat-no" title="statement not covered" >              auditId=res.audit_displa</span>y_id;
+<span class="cstat-no" title="statement not covered" >              auditType=res.audit_</span>type;
+<span class="cstat-no" title="statement not covered" >              auditTypeValue=res.audit_type_v</span>alue;
+<span class="cstat-no" title="statement not covered" >              if(auditType=== AUDIT_BY_PDFA) {</span>
+<span class="cstat-no" title="statement not covered" >                auditType="</span>SKU";
+<span class="cstat-no" title="statement not covered" >                auditTypeValue=res.audit_type_value.product</span>_sku;
+              }
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="audit.resolve.rejected" description='Text for rejected audit lines' 
+                                       defaultMessage='Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected' 
+                                       values={{auditId:res.audit_display_id, auditType:res.audit_type, auditTypeValue:res.audit_type_value}}
+                    /&gt;)   
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+&nbsp;
+            case ITEM_RECALLED_DATA:
+              var item<span class="cstat-no" title="statement not covered" >Count=res.item_count?res.item_count:</span>0;
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:SUCCESS,
+                msg:(&lt;FormattedMessage id="utility.item.recall" description='Item recall message' 
+                                       defaultMessage='{itemCount} expired items recalled' 
+                                       values={{itemCount:itemCount?itemCount:"0"}}
+                    /&gt;)   
+              }
+<span class="cstat-no" title="statement not covered" ></span>              break;
+&nbsp;
+            default:
+<span class="cstat-no" title="statement not covered" >              stringInfo={</span>
+                type:ERROR,
+                msg:ERR_RES
+              }
+          }
+<span class="cstat-no" title="statement not covered" >          return stri</span>ngInfo;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

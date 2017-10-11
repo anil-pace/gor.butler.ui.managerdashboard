@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/subtab/subTabs.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/subtab</a> subTabs.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/34</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+ * Container for Overview tab
+ * This will be switched based on tab click
+ */
+import React  from 'react';
+import SubTab from './subTab';
+import {Link}  from 'react-router';
+import { connect } from 'react-redux' ;
+import { FormattedMessage } from 'react-intl';
+import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
+import {subTabSelected} from '../../actions/tabSelectAction'
+import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
+import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS,PPS_CONFIGURATION} from '../../constants/backEndConstants'
+&nbsp;
+&nbsp;
+class SystemTab extends React.Component{
+<span class="fstat-no" title="function not covered" >	co</span>nstructor(props) 
+	{
+<span class="cstat-no" title="statement not covered" >    	super(props</span>);
+    }
+   
+<span class="fstat-no" title="function not covered" ></span>    handleSysSubTabClick(tabName){
+<span class="cstat-no" title="statement not covered" >      console.log(SYS_SUB_TAB_ROUTE_MAP[tabName]);</span>
+<span class="cstat-no" title="statement not covered" >      this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);</span>
+<span class="cstat-no" title="statement not covered" >      sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])</span>
+<span class="cstat-no" title="statement not covered" >      switch(tabName) {</span>
+  					case BUTLERBOTS:
+<span class="cstat-no" title="statement not covered" >  					this.props.setButlerSpinner(true</span>);
+<span class="cstat-no" title="statement not covered" >  					brea</span>k;
+&nbsp;
+  					case PPS:
+<span class="cstat-no" title="statement not covered" >  					this.props.setPpsSpinner(true</span>);
+<span class="cstat-no" title="statement not covered" >  					brea</span>k;
+&nbsp;
+  					case CHARGING:
+<span class="cstat-no" title="statement not covered" >  					this.props.setCsSpinner(true</span>);
+<span class="cstat-no" title="statement not covered" >  					brea</span>k;
+&nbsp;
+  					case SYS_OVERVIEW:
+<span class="cstat-no" title="statement not covered" >  					brea</span>k;
+&nbsp;
+  					default:
+<span class="cstat-no" title="statement not covered" >  					this.props.setButlerSpinner(false</span>);
+<span class="cstat-no" title="statement not covered" >					this.props.setPpsSpinner(false);</span>
+<span class="cstat-no" title="statement not covered" >					this.props.setCsSpinner(false);  					</span>
+  				}
+    }
+    
+<span class="fstat-no" title="function not covered" >	re</span>nder(){
+		let sysOverview=&lt;FormattedMessage id="sysOve<span class="cstat-no" title="statement not covered" >rview.tab.heading" description="System overview Tab"</span>
+              defaultMessage="Overview"/&gt;
+&nbsp;
+        let butlerBots=&lt;FormattedMessage id="<span class="cstat-no" title="statement not covered" >butlerBot.tab.heading" description="butler bot tab" </span>
+              defaultMessage="Butler Bots"/&gt;
+&nbsp;
+        let pps=&lt;FormattedMessage id="<span class="cstat-no" title="statement not covered" >pps.tab.heading" description="pps tab" </span>
+              defaultMessage="Pick Put Stations"/&gt;
+&nbsp;
+        let chargingStation=&lt;FormattedMessage id="<span class="cstat-no" title="statement not covered" >chargingstation.tab.heading" description="charging station tab" </span>
+              defaultMessage="Charging Station"/&gt;
+		let ppsConfiguration=&lt;FormattedMessage id="ppsCon<span class="cstat-no" title="statement not covered" >figuration.tab.heading" description="pps configuration tab"</span>
+              defaultMessage="PPS Configuration"/&gt;
+&nbsp;
+        let sysControllers = &lt;FormattedMessage id<span class="cstat-no" title="statement not covered" >="sysControllers.tab.heading" description="Syatem controllers Tab"</span>
+              defaultMessage="System Controllers"/&gt;
+&nbsp;
+		var selectClass={s<span class="cstat-no" title="statement not covered" >ysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block'};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if(this.props.subTab.length) {</span>
+<span class="cstat-no" title="statement not covered" >			selectClass[this.props.subTab]="gor-main-blockSelect";</span>
+		}
+&nbsp;
+		else {
+<span class="cstat-no" title="statement not covered" >			selectClass["sysOverview"]="gor-main-blockSelect";</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return (</span>
+			&lt;div&gt;
+				&lt;div className="gorMainSubtab"&gt;
+					&lt;Link to="/system/sysOverview" onClick={this.handleSysSubTabClick.bind(this,SYS_OVERVIEW)}&gt;
+						&lt;SubTab item={sysOverview} changeClass={selectClass[SYS_OVERVIEW]}/&gt;
+					&lt;/Link&gt;
+					&lt;Link to="/system/butlerbots" onClick={this.handleSysSubTabClick.bind(this,BUTLERBOTS)}&gt;
+						&lt;SubTab item={butlerBots} changeClass={selectClass[BUTLERBOTS]}/&gt; 
+					&lt;/Link&gt;
+					&lt;Link to="/system/pps" onClick={this.handleSysSubTabClick.bind(this,PPS)}&gt;
+						&lt;SubTab item={pps} changeClass={selectClass[PPS]}/&gt; 
+					&lt;/Link&gt;
+					&lt;Link to="/system/chargingstation" onClick={this.handleSysSubTabClick.bind(this,CHARGING)}&gt;
+						&lt;SubTab item={chargingStation} changeClass={selectClass[CHARGING]}/&gt; 
+					&lt;/Link&gt;
+					&lt;Link to="/system/sysControllers" onClick={this.handleSysSubTabClick.bind(this,SYS_CONTROLLERS)}&gt;
+						&lt;SubTab item={sysControllers} changeClass={selectClass[SYS_CONTROLLERS]}/&gt;
+					&lt;/Link&gt;
+					&lt;Link to="/system/ppsConfiguration" onClick={this.handleSysSubTabClick.bind(this,PPS_CONFIGURATION)}&gt;
+						&lt;SubTab item={ppsConfiguration} changeClass={selectClass[PPS_CONFIGURATION]}/&gt;
+					&lt;/Link&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		);
+	}
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
+<span class="cstat-no" title="statement not covered" >    return  {</span>
+         subTab:state.tabSelected.subTab || {},
+         tab:state.tabSelected.tab || {}
+    }
+}
+&nbsp;
+var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		setCsSpinner: function(data){ dispatch(setCsSpinn<span class="fstat-no" title="function not covered" >er(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+		setPpsSpinner: function(data){ dispatch(setPpsSpin<span class="fstat-no" title="function not covered" >ner(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+		setButlerSpinner: function(data){ dispatch(setButlerS<span class="fstat-no" title="function not covered" >pinner(data))},<span class="cstat-no" title="statement not covered" ></span></span>
+		subTabSelected: function(data){ dispatch(subTabSele<span class="fstat-no" title="function not covered" >cted(data)); }<span class="cstat-no" title="statement not covered" ></span></span>
+	}
+};
+&nbsp;
+&nbsp;
+&nbsp;
+export default connect(mapStateToProps,mapDispatchToProps)(SystemTab) ;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
