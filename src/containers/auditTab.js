@@ -5,6 +5,7 @@ import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
 import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
+import StartAudit from './auditTab/startAudit';
 import {
     AUDIT_RETRIEVE,
     GET,PUT,
@@ -37,7 +38,7 @@ import {
 } from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import {defineMessages} from 'react-intl';
-import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
+import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail, setCheckedAudit} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate';
 import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
@@ -606,6 +607,23 @@ createAudit() {
 
 }
 
+    startAudit() {
+        var auditId=[]; 
+        if (this.props.checkedAudit) {
+            for(var i=0,j=this.props.checkedAudit.length; i<j;i++)
+            auditId.push(this.props.checkedAudit[i].id)
+        }
+        modal.add(StartAudit, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true,
+            auditId: auditId,
+            bulkFlag:true
+        });
+    }
+
+
 //Render Function goes here
 render() {
     var filterHeight=screen.height - 190;
@@ -658,7 +676,8 @@ render() {
     setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
     setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
     isFilterApplied={this.props.isFilterApplied}
-    auditFilterStatus={this.props.auditFilterStatus}
+    auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
+    checkedAudit={this.props.checkedAudit} 
     responseFlag={this.props.auditSpinner}
     onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
 
@@ -676,6 +695,15 @@ render() {
 
     </div>
     <div className="gor-audit-filter-create-wrap">
+
+    <div className="gor-button-wrap">
+    <button className="gor-add-btn gor-bulk-audit-btn" onClick={this.startAudit.bind(this)}>
+    <FormattedMessage id="audit.table.bulkaudit"
+    description="button label for start bulk audit"
+    defaultMessage="Start Bulk Audit "/>
+    </button>
+    </div>
+
     <div className="gor-button-wrap">
     <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
     <div className="gor-filter-add-token"/>
@@ -732,6 +760,7 @@ function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.auditFilter || "",
         auditSortHeader: state.sortHeaderState.auditHeaderSort || "id",
+        checkedAudit: state.sortHeaderState.checkedAudit|| {},
         auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
         auditSpinner: state.spinner.auditSpinner || false,
@@ -800,6 +829,12 @@ var mapDispatchToProps=function (dispatch) {
         },
         cancelAudit:function(data){
             dispatch(cancelAudit(data))
+        },
+        setAuditQuery:function(data){
+            dispatch(setAuditQuery(data))
+        },
+        setCheckedAudit: function (data) {
+            dispatch(setCheckedAudit(data))
         }
 
     }

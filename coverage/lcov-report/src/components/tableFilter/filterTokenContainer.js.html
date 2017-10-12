@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/9</span>
       </div>
     </div>
   </div>
@@ -75,27 +75,27 @@
 30
 31
 32
-33</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+33</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,17 +107,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
-import FilterToken from './filterToken';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
+import FilterToken from './filterToken';
 &nbsp;
 class FilterTokenWrap extends React.Component{
 	
-<span class="fstat-no" title="function not covered" ></span>    _processTokenFields() {
-    	var tokens=t<span class="cstat-no" title="statement not covered" >his.props.label, </span>tokenWrap=[]<span class="cstat-no" title="statement not covered" >;</span>
-        var tokenSelecte<span class="cstat-no" title="statement not covered" >d=this.props.selectedToke</span>n;
-        var lengt<span class="cstat-no" title="statement not covered" >h= tokens.leng</span>th;
+<span class="fstat-no" title="function not covered" >    _p</span>rocessTokenFields() {
+    	var tokens=<span class="cstat-no" title="statement not covered" >this.props.label,</span> tokenWrap=<span class="cstat-no" title="statement not covered" >[];</span>
+        var tokenSelected=<span class="cstat-no" title="statement not covered" >this.props.selectedToken;</span>
+        var length= <span class="cstat-no" title="statement not covered" >tokens.length;</span>
 <span class="cstat-no" title="statement not covered" >    	for (let i=0; i &lt; length; i++) {</span>
-    		var tokenComponent=&lt;FilterToken key={tokens[i]+<span class="cstat-no" title="statement not covered" >i} tokenCallBack={this.props.tokenCallBack}  </span>
+    		var tokenComponent=<span class="cstat-no" title="statement not covered" >&lt;FilterToken key={tokens[i]+i} tokenCallBack={this.props.tokenCallBack}  </span>
                                               tokenField={this.props.field.value} tokenLabel={tokens[i]} selection={this.props.selection}
                                               tokenSelected={tokenSelected} lastToken={i?false:true} /&gt;
 <span class="cstat-no" title="statement not covered" >    		tokenWrap.push(tokenComponent);</span>
@@ -125,9 +125,9 @@ class FilterTokenWrap extends React.Component{
 <span class="cstat-no" title="statement not covered" >    	return tokenWrap;</span>
     }
     
-	r<span class="fstat-no" title="function not covered" >en</span>der(){
-		var tokenWrap=this<span class="cstat-no" title="statement not covered" >._processTokenFields()</span>
-		re<span class="cstat-no" title="statement not covered" >turn (</span>
+<span class="fstat-no" title="function not covered" >	re</span>nder(){
+		var tokenWrap=<span class="cstat-no" title="statement not covered" >this._processTokenFields()</span>
+<span class="cstat-no" title="statement not covered" >		return (</span>
 			&lt;div&gt;
 				&lt;div className="gor-filter-token-section-h1"&gt;
 					{this.props.field.label}
@@ -145,7 +145,7 @@ export default FilterTokenWrap;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 17:08:38 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

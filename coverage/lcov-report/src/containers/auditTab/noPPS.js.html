@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">10% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>1/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">10% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>1/10</span>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
 45
 46
 47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+48</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,7 +129,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -137,7 +137,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux' ;
 import {tabSelected,subTabSelected} from '../../actions/tabSelectAction'
@@ -145,15 +145,15 @@ import { SYS_SUB_TAB_ROUTE_MAP,TAB_ROUTE_MAP,SYSTEM } from '../../constants/fron
 import { PPS } from '../../constants/backEndConstants'
 class NoPPS extends React.Component{
  
-  ha<span class="fstat-no" title="function not covered" >nd</span>leSysSubTabClick(tabName){
-      th<span class="cstat-no" title="statement not covered" >is.props.removeFn();</span>
-      th<span class="cstat-no" title="statement not covered" >is.props.tabSelected(TAB_ROUTE_MAP[SYSTEM]);</span>
-      th<span class="cstat-no" title="statement not covered" >is.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);</span>
-      se<span class="cstat-no" title="statement not covered" >ssionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])</span>
+<span class="fstat-no" title="function not covered" >  ha</span>ndleSysSubTabClick(tabName){
+<span class="cstat-no" title="statement not covered" >      this.props.removeFn();</span>
+<span class="cstat-no" title="statement not covered" >      this.props.tabSelected(TAB_ROUTE_MAP[SYSTEM]);</span>
+<span class="cstat-no" title="statement not covered" >      this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);</span>
+<span class="cstat-no" title="statement not covered" >      sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])</span>
   }  
-  re<span class="fstat-no" title="function not covered" >nd</span>er()
+<span class="fstat-no" title="function not covered" >  re</span>nder()
   {
-   retur<span class="cstat-no" title="statement not covered" >n (&lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >   return (&lt;div&gt;</span>
    	&lt;FormattedMessage id="audit.start.auditdetails.subheading2" description='Text for audit details subheading when no pps'  
             defaultMessage='There are currently no PPS in audit mode.'/&gt;
             &lt;p&gt;
@@ -176,10 +176,10 @@ function <span class="fstat-no" title="function not covered" >mapStateToProps(</
          tab:state.tabSelected.tab || {}
     }
 }
-var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
-  re<span class="cstat-no" title="statement not covered" >turn {</span>
-      tabSelected: function(data){ dispatch(tabSelected(<span class="fstat-no" title="function not covered" >data)); },<span class="cstat-no" title="statement not covered" ></span></span>
-    subTabSelected: function(data){ dispatch(subTabSelected<span class="fstat-no" title="function not covered" >(data)); }<span class="cstat-no" title="statement not covered" ></span></span>
+var mapDispatchToProps=<span class="fstat-no" title="function not covered" >fu</span>nction(dispatch){
+<span class="cstat-no" title="statement not covered" >  return {</span>
+      tabSelected: <span class="fstat-no" title="function not covered" >fu</span>nction(data){ <span class="cstat-no" title="statement not covered" >dispatch(tabSelected(data)); </span>},
+    subTabSelected: <span class="fstat-no" title="function not covered" >fu</span>nction(data){ <span class="cstat-no" title="statement not covered" >dispatch(subTabSelected(data)); </span>}
   }
 };
 &nbsp;
@@ -190,7 +190,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(NoPPS);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 17:08:38 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

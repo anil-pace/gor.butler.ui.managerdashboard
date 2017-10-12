@@ -108,6 +108,10 @@ class AuditTable extends React.Component {
         if (nProps.currentHeaderOrder.colSortDirs) {
             sortIndex=nProps.currentHeaderOrder.colSortDirs;
         }
+        if (!nProps.checkedAudit && current.items) {
+            //var initialCheckState=new Array(nextProps.items.length).fill(false);
+            this.props.setCheckedAudit({})
+        }
         current.state={
             sortedDataList: current._dataList,
             colSortDirs: sortIndex,
@@ -121,6 +125,7 @@ class AuditTable extends React.Component {
                 actions: nProps.containerWidth * 0.25
             },
             headerChecked: false,
+            isChecked: nProps.checkedAudit
         };
     }
 
@@ -183,21 +188,21 @@ class AuditTable extends React.Component {
     }
 
       handleChange(columnKey, rowIndex, evt) {
-        var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+        var checkedAudit = JSON.parse(JSON.stringify(this.props.checkedAudit));
         var sortedDataList = this.state.sortedDataList;
         var selectedData =  sortedDataList._data ? 
                                 sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
                                 sortedDataList.newData[rowIndex];
         if(evt.target.checked){
-            checkedPPS[selectedData[columnKey]]=selectedData;
+            checkedAudit[selectedData[columnKey]]=selectedData;
         }
         else{
-            delete checkedPPS[selectedData[columnKey]];
+            delete checkedAudit[selectedData[columnKey]];
         }
 
        
-        this.props.setCheckedPps(checkedPPS)
-        this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false);
+        this.props.setCheckedAudit(checkedAudit)
+        //this.props.renderDdrop(Object.keys(checkedAudit).length ? true :false);
     }
 
     manageAuditTask(rowIndex, option) {
@@ -262,8 +267,8 @@ class AuditTable extends React.Component {
         var headerChecked=false;
         let checkState=this.handleChange.bind(this);
         let checkedStatePps=[];
-        if (this.props.checkedPps) {
-            checkedStatePps=this.props.checkedPps;
+        if (this.props.checkedAudit) {
+            checkedStatePps=this.props.checkedAudit;
         }
         var headerAlert=<div className="alertState">
 
@@ -322,7 +327,7 @@ class AuditTable extends React.Component {
                         </SortHeaderCell>
                         </div>
                     }
-                    cell={<AuditIssuesTooltipCell checkboxColumn={"auditId"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
+                    cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
                                                checked={checkedStatePps} unresolved="unresolvedTask"/>}
                     fixed={true}
                     width={columnWidths.display_id}
