@@ -613,12 +613,9 @@ createAudit() {
 
 }
 
-    startAudit() {
+    startBulkAudit() {
         var auditId=[]; 
-        if (this.props.checkedAudit) {
-            for(var i=0,j=this.props.checkedAudit.length; i<j;i++)
-            auditId.push(this.props.checkedAudit[i].id)
-        }
+        auditId=Object.keys(this.props.checkedAudit);
         modal.add(StartAudit, {
             title: '',
             size: 'large', // large, medium or small,
@@ -703,7 +700,7 @@ render() {
     <div className="gor-audit-filter-create-wrap">
 
     <div className="gor-button-wrap">
-    <button className="gor-add-btn gor-bulk-audit-btn" onClick={this.startAudit.bind(this)}>
+    <button className="gor-add-btn gor-bulk-audit-btn" onClick={this.startBulkAudit.bind(this)}>
     <FormattedMessage id="audit.table.bulkaudit"
     description="button label for start bulk audit"
     defaultMessage="Start Bulk Audit "/>

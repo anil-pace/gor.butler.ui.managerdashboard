@@ -3216,6 +3216,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
+  float: left;
 }
 
 .fixedDataTableLayout_main .sortIcon {
@@ -3478,6 +3479,7 @@ input[type="checkbox"] {
   padding-left: 22px;
   vertical-align: middle;
   padding-top: 10px;
+  float: left;
 }
 
 .gor-header-id {

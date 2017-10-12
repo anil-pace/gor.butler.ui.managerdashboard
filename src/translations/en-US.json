@@ -1865,6 +1865,12 @@
     "filepath": "./src/containers/auditTab.js"
   },
   {
+    "id": "audit.table.bulkaudit",
+    "description": "button label for start bulk audit",
+    "defaultMessage": "Start Bulk Audit",
+    "filepath": "./src/containers/auditTab.js"
+  },
+  {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
     "defaultMessage": "Create New Task",
