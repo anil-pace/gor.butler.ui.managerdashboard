@@ -702,10 +702,10 @@ render() {
     <div className="gor-audit-filter-create-wrap">
 
     <div className="gor-button-wrap">
-    <button className="gor-add-btn gor-bulk-audit-btn" onClick={this.startBulkAudit.bind(this)}>
+    <button className="gor-add-btn gor-bulk-audit-btn" disabled={!(Object.keys(this.props.checkedAudit).length>0)} onClick={this.startBulkAudit.bind(this)}>
     <FormattedMessage id="audit.table.bulkaudit"
     description="button label for start bulk audit"
-    defaultMessage="Start Bulk Audit "/>
+    defaultMessage="Start Bulk Audit(s) "/>
     </button>
     </div>
 
