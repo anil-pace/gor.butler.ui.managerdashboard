@@ -3705,6 +3705,11 @@ input[type="checkbox"] {
   color: #fff;
 }
 
+.gor-bulk-audit-btn {
+  margin-right: 20px;
+  vertical-align: top;
+}
+
 .gor-select-field {
   height: 35px;
   width: 40%;

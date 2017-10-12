@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">1.64% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/119</span>
+        <span class='fraction'>2/122</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/62</span>
+        <span class='fraction'>0/66</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">1.82% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/109</span>
+        <span class='fraction'>2/110</span>
       </div>
     </div>
   </div>
@@ -478,7 +478,7 @@
 433
 434
 435
-436</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+436</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -706,13 +706,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -818,7 +818,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -828,6 +827,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -900,20 +900,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
@@ -927,7 +927,7 @@ import {setResolveAuditSpinner} from '../../actions/spinnerAction';
 class ResolveAudit extends React.Component{
 <span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
   {
-<span class="cstat-no" title="statement not covered" >      super(props)</span>; 
+<span class="cstat-no" title="statement not covered" >      super(props); </span>
       var data=<span class="cstat-no" title="statement not covered" >this.props.auditLines.auditlines || [];</span>
 <span class="cstat-no" title="statement not covered" >      this._dataList=new tableRenderer(data ? data.length : 0);</span>
 <span class="cstat-no" title="statement not covered" >      this._dataList.newData=data;</span>
@@ -940,7 +940,7 @@ class ResolveAudit extends React.Component{
 &nbsp;
 <span class="fstat-no" title="function not covered" >  co</span>mponentWillReceiveProps(nextProps){
 &nbsp;
-     var data=n<span class="cstat-no" title="statement not covered" >extProps.auditLines.auditlines || [], </span>processedData;
+     var data=<span class="cstat-no" title="statement not covered" >nextProps.auditLines.auditlines || [],</span> processedData;
 <span class="cstat-no" title="statement not covered" >      processedData=this._processData(data,nextProps);</span>
 <span class="cstat-no" title="statement not covered" >      this._dataList=new tableRenderer(data ? data.length : 0);</span>
 <span class="cstat-no" title="statement not covered" >      this._dataList.newData=processedData;</span>
@@ -955,21 +955,21 @@ class ResolveAudit extends React.Component{
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  co</span>mponentDidMount() {
-        let url=AUDIT_URL + "/" + this.p<span class="cstat-no" title="statement not covered" >rops.auditId + PENDING_ORDERLINES; </span>
-        let paginationDat<span class="cstat-no" title="statement not covered" >a={</span>
+        let url=<span class="cstat-no" title="statement not covered" >AUDIT_URL + "/" + this.props.auditId + PENDING_ORDERLINES; </span>
+        let paginationData=<span class="cstat-no" title="statement not covered" >{</span>
          'url':url,
          'method':GET,
          'cause': AUDIT_RESOLVE_LINES,
          'token': this.props.auth_token,
          'contentType':APP_JSON
         } 
-<span class="cstat-no" title="statement not covered" >        this.props.setResolveAuditSpinner(tru</span>e);
-<span class="cstat-no" title="statement not covered" >       this.props.getAuditOrderLines(paginationData</span>);  
+<span class="cstat-no" title="statement not covered" >        this.props.setResolveAuditSpinner(true);</span>
+<span class="cstat-no" title="statement not covered" >       this.props.getAuditOrderLines(paginationData);  </span>
   }
   
 &nbsp;
 <span class="fstat-no" title="function not covered" >  _p</span>rocessData(auditLines,nProps) {
-    var data=au<span class="cstat-no" title="statement not covered" >ditLines, p</span>rocessedData=[],<span class="cstat-no" title="statement not covered" > au</span>ditData={}, <span class="cstat-no" title="statement not covered" >tot</span>alMismatch=0;<span class="cstat-no" title="statement not covered" ></span>
+    var data=<span class="cstat-no" title="statement not covered" >auditLines,</span> processedData=<span class="cstat-no" title="statement not covered" >[],</span> auditData=<span class="cstat-no" title="statement not covered" >{},</span> totalMismatch=<span class="cstat-no" title="statement not covered" >0;</span>
 <span class="cstat-no" title="statement not covered" >    for (var i=data.length - 1; i &gt;= 0; i--) {</span>
 <span class="cstat-no" title="statement not covered" >      auditData.actual_quantity=data[i].actual_quantity;</span>
 <span class="cstat-no" title="statement not covered" >      auditData.expected_quantity=data[i].expected_quantity;</span>
@@ -989,7 +989,7 @@ class ResolveAudit extends React.Component{
 <span class="cstat-no" title="statement not covered" >        auditData.status=data[i].status;</span>
       }
 <span class="cstat-no" title="statement not covered" >      if(data[i].pdfa_audit_attributes &amp;&amp; auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]) {</span>
-<span class="cstat-no" title="statement not covered" >        auditData.attributeDetail=auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)];  /</span>/assuming only one attributes is there as of now (kerry specific) 
+<span class="cstat-no" title="statement not covered" >        auditData.attributeDetail=auditLines[i].pdfa_audit_attributes[Object.keys(auditLines[0].pdfa_audit_attributes)]; </span> //assuming only one attributes is there as of now (kerry specific) 
       }
 <span class="cstat-no" title="statement not covered" >      if(data[i].anamoly_info){</span>
 <span class="cstat-no" title="statement not covered" >            auditData.anamoly_info=data[i].anamoly_info</span>
@@ -1008,14 +1008,14 @@ class ResolveAudit extends React.Component{
 <span class="fstat-no" title="function not covered" >  _c</span>heckAuditStatus(rowIndex,state,auditLineId) {
     var newAuditLineId;
 <span class="cstat-no" title="statement not covered" >    if(this.props.auditMethod===AUDIT_BY_PDFA) {</span>
-      var newAuditLineIndex=th<span class="cstat-no" title="statement not covered" >is.actualMapping[auditLineId]; /</span>/in case of pdfa rowindex wont work so using actual index
+      var newAuditLineIndex=<span class="cstat-no" title="statement not covered" >this.actualMapping[auditLineId];</span> //in case of pdfa rowindex wont work so using actual index
 <span class="cstat-no" title="statement not covered" >      newAuditLineId=this.state.auditDataList.newData[newAuditLineIndex].auditLineId;</span>
     }
     else{
 <span class="cstat-no" title="statement not covered" >      newAuditLineId=this.state.auditDataList.newData[rowIndex].auditLineId</span>
     }
-    var checkedAudit={"<span class="cstat-no" title="statement not covered" >response":state, "auditline_id":newAuditLineId}, audit</span>Indexed=false;<span class="cstat-no" title="statement not covered" ></span>
-    var tempState=th<span class="cstat-no" title="statement not covered" >is.state.checkedState.slice();</span>
+    var checkedAudit=<span class="cstat-no" title="statement not covered" >{"response":state, "auditline_id":newAuditLineId},</span> auditIndexed=<span class="cstat-no" title="statement not covered" >false;</span>
+    var tempState=<span class="cstat-no" title="statement not covered" >this.state.checkedState.slice();</span>
 <span class="cstat-no" title="statement not covered" >    for (var i=tempState.length - 1; i &gt;= 0; i--) {</span>
 <span class="cstat-no" title="statement not covered" >      if(tempState[i].auditline_id=== newAuditLineId) {</span>
 <span class="cstat-no" title="statement not covered" >        tempState[i].response=state;</span>
@@ -1035,14 +1035,14 @@ class ResolveAudit extends React.Component{
     // hence getting the username from the state and then sending 
     // the same during the request.
     
-    var userName=th<span class="cstat-no" title="statement not covered" >is.props.username||null; </span>
-    var auditConfirmDetail={d<span class="cstat-no" title="statement not covered" >ata:{</span>
+    var userName=<span class="cstat-no" title="statement not covered" >this.props.username||null; </span>
+    var auditConfirmDetail=<span class="cstat-no" title="statement not covered" >{data:{</span>
       username: userName,
       auditlines:this.state.checkedState
     }};
 &nbsp;
-    var url=AUDIT_URL + AUDIT_ANAMOLY;<span class="cstat-no" title="statement not covered" ></span>
-     let paginationData={<span class="cstat-no" title="statement not covered" ></span>
+    var url=<span class="cstat-no" title="statement not covered" >AUDIT_URL + AUDIT_ANAMOLY;</span>
+     let paginationData=<span class="cstat-no" title="statement not covered" >{</span>
          'url':url,
          'method':POST,
          'cause': AUDIT_RESOLVE_CONFIRMED,
@@ -1051,17 +1051,17 @@ class ResolveAudit extends React.Component{
          'accept':APP_JSON,
          'formdata': auditConfirmDetail
         }
-<span class="cstat-no" title="statement not covered" >        this.props.resolveAuditLines(paginationDat</span>a);
+<span class="cstat-no" title="statement not covered" >        this.props.resolveAuditLines(paginationData);</span>
      
 <span class="cstat-no" title="statement not covered" >    this._removeThisModal();</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  _r</span>esolveIssueByPdfa() {
-    var slotIdHashMap={}<span class="cstat-no" title="statement not covered" >;</span>
-    var auditDataLine=th<span class="cstat-no" title="statement not covered" >is.state.auditDataList.newData; </span>
-    var slotIdGrouping={}<span class="cstat-no" title="statement not covered" >, s</span>lotIdData={sl<span class="cstat-no" title="statement not covered" >otId:"", slotIdDataLine:[]}, actual</span>Mapping={};<span class="cstat-no" title="statement not covered" ></span>
+    var slotIdHashMap=<span class="cstat-no" title="statement not covered" >{};</span>
+    var auditDataLine=<span class="cstat-no" title="statement not covered" >this.state.auditDataList.newData; </span>
+    var slotIdGrouping=<span class="cstat-no" title="statement not covered" >{},</span> slotIdData=<span class="cstat-no" title="statement not covered" >{slotId:"", slotIdDataLine:[]},</span> actualMapping=<span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >    for (var i=auditDataLine.length - 1; i &gt;= 0; i--) {</span>
-      var columnSlotId=au<span class="cstat-no" title="statement not covered" >ditDataLine[i].slot_id;</span>
+      var columnSlotId=<span class="cstat-no" title="statement not covered" >auditDataLine[i].slot_id;</span>
 <span class="cstat-no" title="statement not covered" >      if(slotIdHashMap[columnSlotId]&gt;=0) {</span>
 <span class="cstat-no" title="statement not covered" >        slotIdGrouping[columnSlotId].slotIdDataLine.push(auditDataLine[i]);</span>
 <span class="cstat-no" title="statement not covered" >        actualMapping[auditDataLine[i].auditLineId]=i;</span>
@@ -1076,13 +1076,13 @@ class ResolveAudit extends React.Component{
 <span class="cstat-no" title="statement not covered" >        slotIdData={slotId:"", slotIdDataLine:[]}</span>
       }
     }
-<span class="cstat-no" title="statement not covered" >    this.actualMapping=actualMapping; //</span>due to grouping, actual mapping is lost. hence storing here
+<span class="cstat-no" title="statement not covered" >    this.actualMapping=actualMapping; </span>//due to grouping, actual mapping is lost. hence storing here
 <span class="cstat-no" title="statement not covered" >    return slotIdGrouping;</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  _r</span>enderPDFAtable(data) {
-    var pdfaResolveTable=[]<span class="cstat-no" title="statement not covered" >,re</span>solveTable;
-    var pdfaHeader=&lt;Table<span class="cstat-no" title="statement not covered" ></span>
+    var pdfaResolveTable=<span class="cstat-no" title="statement not covered" >[],</span>resolveTable;
+    var pdfaHeader=<span class="cstat-no" title="statement not covered" >&lt;Table</span>
                       rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
                       rowsCount={0}
                       headerHeight={GOR_USER_TABLE_HEADER_HEIGHT}
@@ -1109,9 +1109,9 @@ class ResolveAudit extends React.Component{
 <span class="cstat-no" title="statement not covered" >    pdfaResolveTable.push(pdfaHeader)                   </span>
 <span class="cstat-no" title="statement not covered" >    for (var key in data) {</span>
 <span class="cstat-no" title="statement not covered" >      if (data.hasOwnProperty(key)) {</span>
-        var auditDataList=ne<span class="cstat-no" title="statement not covered" >w tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);</span>
-        var inSlot=&lt;FormattedMessage id="audit.<span class="cstat-no" title="statement not covered" >inSlot.text" defaultMessage='In slot '/&gt; </span>
-        var containerHeight=(a<span class="cstat-no" title="statement not covered" >uditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;</span>
+        var auditDataList=<span class="cstat-no" title="statement not covered" >new tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);</span>
+        var inSlot=<span class="cstat-no" title="statement not covered" >&lt;FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/&gt; </span>
+        var containerHeight=<span class="cstat-no" title="statement not covered" >(auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;</span>
 <span class="cstat-no" title="statement not covered" >        auditDataList.newData=data[key].slotIdDataLine;</span>
 <span class="cstat-no" title="statement not covered" >        resolveTable=&lt;div&gt; </span>
                       &lt;div className="gor-auditresolve-pdfa-slot-header"&gt;
@@ -1135,16 +1135,16 @@ class ResolveAudit extends React.Component{
 <span class="cstat-no" title="statement not covered" >        pdfaResolveTable.push(resolveTable);               </span>
         }
     }    
-   r<span class="cstat-no" title="statement not covered" >eturn pdfaResolveTable;</span>
+<span class="cstat-no" title="statement not covered" >   return pdfaResolveTable;</span>
           
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  _r</span>enderSkutable() {
-    var resolveTable=&lt;div/&gt;, headerHeight=GOR_USE<span class="cstat-no" title="statement not covered" >R_TABLE_HEADER_HEIGHT,minHeight=GOR_AUDIT_RESOLVE_MIN_HEIGHT;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
-    var {auditDataList}=this.state 
-    var missingAudit=au<span class="cstat-no" title="statement not covered" >ditDataList.getSize();</span>
-    var screenId=th<span class="cstat-no" title="statement not covered" >is.props.screenId</span>
-    var containerHeight=((<span class="cstat-no" title="statement not covered" >(missingAudit?missingAudit:0)*headerHeight + headerHeight)&gt;minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);</span>
+    var resolveTable=<span class="cstat-no" title="statement not covered" >&lt;div/&gt;,</span> headerHeight=<span class="cstat-no" title="statement not covered" >GOR_USER_TABLE_HEADER_HEIGHT,</span>minHeight=<span class="cstat-no" title="statement not covered" >GOR_AUDIT_RESOLVE_MIN_HEIGHT;</span>
+    var {auditDataList}=<span class="cstat-no" title="statement not covered" >this.state </span>
+    var missingAudit=<span class="cstat-no" title="statement not covered" >auditDataList.getSize();</span>
+    var screenId=<span class="cstat-no" title="statement not covered" >this.props.screenId</span>
+    var containerHeight=(<span class="cstat-no" title="statement not covered" >((missingAudit?missingAudit:0)*headerHeight + headerHeight)&gt;minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight)</span>;
 <span class="cstat-no" title="statement not covered" >    if(auditDataList.newData.length&gt;0 &amp;&amp; auditDataList.newData[0].k_deep_audit){</span>
 <span class="cstat-no" title="statement not covered" >        containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)&gt;minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);</span>
 <span class="cstat-no" title="statement not covered" >        resolveTable=&lt;div&gt;</span>
@@ -1252,14 +1252,14 @@ class ResolveAudit extends React.Component{
         &lt;/div&gt;
     }
 &nbsp;
-   r<span class="cstat-no" title="statement not covered" >eturn resolveTable;                 </span>
+<span class="cstat-no" title="statement not covered" >   return resolveTable;                 </span>
 &nbsp;
   }
   
 <span class="fstat-no" title="function not covered" >  re</span>nder()
   {
-      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType, auditId=this.props.displayId;
-      var auditbysku=<span class="cstat-no" title="statement not covered" >(this.props.auditMethod==="pdfa"?false:true), res</span>olveTable=&lt;div/&gt;;<span class="cstat-no" title="statement not covered" ></span>
+      var {auditDataList}=<span class="cstat-no" title="statement not covered" >this.state,</span> screenId=<span class="cstat-no" title="statement not covered" >this.props.screenId,</span> auditType=<span class="cstat-no" title="statement not covered" >this.props.auditType,</span> auditId=<span class="cstat-no" title="statement not covered" >this.props.displayId;</span>
+      var auditbysku=(<span class="cstat-no" title="statement not covered" >this.props.auditMethod==="pdfa"?false:true)</span>, resolveTable=<span class="cstat-no" title="statement not covered" >&lt;div/&gt;;</span>
       var totalLines=<span class="cstat-no" title="statement not covered" >auditDataList.getSize()?auditDataList.getSize():0;</span>
 <span class="cstat-no" title="statement not covered" >      if(auditbysku) {</span>
 <span class="cstat-no" title="statement not covered" >        resolveTable=this._renderSkutable();</span>
@@ -1326,7 +1326,7 @@ class ResolveAudit extends React.Component{
     }
   }
 &nbsp;
-  functio<span class="fstat-no" title="function not covered" >n mapStateToProp</span>s(state, ownProps){
+  function <span class="fstat-no" title="function not covered" >mapStateToProps(</span>state, ownProps){
 <span class="cstat-no" title="statement not covered" >  return {</span>
     auth_token:state.authLogin.auth_token,
     username: state.authLogin.username,
@@ -1335,15 +1335,15 @@ class ResolveAudit extends React.Component{
   };
 }
 &nbsp;
-var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+var mapDispatchToProps=<span class="fstat-no" title="function not covered" >fu</span>nction(dispatch){
 <span class="cstat-no" title="statement not covered" >  return {</span>
-    resolveAuditLines: function(data){dispatch(resolveAudi<span class="fstat-no" title="function not covered" >tLines(data))},<span class="cstat-no" title="statement not covered" ></span></span>
-    getAuditOrderLines: function(data){dispatch(getAuditOrd<span class="fstat-no" title="function not covered" >erLines(data))},<span class="cstat-no" title="statement not covered" ></span></span>
-    setResolveAuditSpinner: function(data){dispatch(setResolveA<span class="fstat-no" title="function not covered" >uditSpinner(data))}<span class="cstat-no" title="statement not covered" ></span></span>
+    resolveAuditLines: <span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(resolveAuditLines(data))}</span>,
+    getAuditOrderLines: <span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(getAuditOrderLines(data))}</span>,
+    setResolveAuditSpinner: <span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(setResolveAuditSpinner(data))}</span>
   }
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >ResolveAudit.contextTypes={</span>
+ResolveAudit.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 &nbsp;
@@ -1354,7 +1354,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(ResolveAudit);</pre><
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 17:08:38 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

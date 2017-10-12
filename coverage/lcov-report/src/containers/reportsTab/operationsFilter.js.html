@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">3.23% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/93</span>
+        <span class='fraction'>3/93</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/53</span>
+        <span class='fraction'>0/56</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/15</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">3.49% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/85</span>
+        <span class='fraction'>3/86</span>
       </div>
     </div>
   </div>
@@ -352,7 +352,7 @@
 307
 308
 309
-310</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+310</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -536,7 +536,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -560,7 +560,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -633,14 +633,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -649,7 +649,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -661,7 +661,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter} from '../../actions/filterAction';
@@ -680,7 +680,7 @@ import {SINGLE} from '../../constants/frontEndConstants'
 class OperationsFilter extends React.Component{  
 <span class="fstat-no" title="function not covered" >  co</span>nstructor(props) 
   {
-<span class="cstat-no" title="statement not covered" >      super(props)</span>;
+<span class="cstat-no" title="statement not covered" >      super(props);</span>
 <span class="cstat-no" title="statement not covered" >      this.state={</span>
         tokenSelected: {
           "status":this.props.filters.status ? [this.props.filters.status]:["any"], 
@@ -699,24 +699,24 @@ class OperationsFilter extends React.Component{
           "timeperiod":["1_HOUR"]
         }
         }; 
-<span class="cstat-no" title="statement not covered" >      this._closeFilter = this._closeFilter.bind(this)</span>;
-<span class="cstat-no" title="statement not covered" >      this._clearFilter = this._clearFilter.bind(this)</span>;
-<span class="cstat-no" title="statement not covered" >      this._applyFilter = this._applyFilter.bind(this)</span>;
+<span class="cstat-no" title="statement not covered" >      this._closeFilter = this._closeFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >      this._clearFilter = this._clearFilter.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >      this._applyFilter = this._applyFilter.bind(this);</span>
 <span class="cstat-no" title="statement not covered" >      this._processSearchField= this._processSearchField.bind(this);</span>
     }
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _closeFilter() {
-<span class="cstat-no" title="statement not covered" >        this.props.showTableFilter(fals</span>e);
+<span class="fstat-no" title="function not covered" >    _c</span>loseFilter() {
+<span class="cstat-no" title="statement not covered" >        this.props.showTableFilter(false);</span>
     } 
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>     _processSearchField(filterInputFields){
-        let inputValu<span class="cstat-no" title="statement not covered" >e=this.state.searchQuer</span>y;
-        let inputField=&lt;FilterInputFieldWrap in<span class="cstat-no" title="statement not covered" >putText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/&gt;</span>
-<span class="cstat-no" title="statement not covered" >        return inputFie</span>ld;           
+<span class="fstat-no" title="function not covered" >     _p</span>rocessSearchField(filterInputFields){
+        let inputValue=<span class="cstat-no" title="statement not covered" >this.state.searchQuery;</span>
+        let inputField=<span class="cstat-no" title="statement not covered" >&lt;FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/&gt;</span>
+<span class="cstat-no" title="statement not covered" >        return inputField;           </span>
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    componentWillReceiveProps(nextProps){
+<span class="fstat-no" title="function not covered" >    co</span>mponentWillReceiveProps(nextProps){
         /**
          * It will update the state as soon as
          * filters are cleared.
@@ -729,47 +729,47 @@ class OperationsFilter extends React.Component{
          * Hide the filter as soon as data in the list get updated.
          */
 <span class="cstat-no" title="statement not covered" >        if(nextProps.hideLayer){</span>
-<span class="cstat-no" title="statement not covered" >            this.props.showTableFilter(fa</span>lse);
+<span class="cstat-no" title="statement not covered" >            this.props.showTableFilter(false);</span>
         }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _processFilterParams(){
-      var filterParams <span class="cstat-no" title="statement not covered" >= JSON.parse(JSON.stringify(REPORTS_FILTER_PARAMS));</span>
-      var filterInputFields <span class="cstat-no" title="statement not covered" >= [</span>],statusToken=<span class="cstat-no" title="statement not covered" >{},</span>statusLabels=[]<span class="cstat-no" title="statement not covered" >,</span>
-      timePeriodToken=<span class="cstat-no" title="statement not covered" >{},</span>timePeriodLabels=[]<span class="cstat-no" title="statement not covered" >,op</span>eratingModeToken={},o<span class="cstat-no" title="statement not covered" >per</span>atingModeLabels=[];<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterParams(){
+      var filterParams = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(REPORTS_FILTER_PARAMS));</span>
+      var filterInputFields = <span class="cstat-no" title="statement not covered" >[],</span>statusToken=<span class="cstat-no" title="statement not covered" >{},</span>statusLabels=<span class="cstat-no" title="statement not covered" >[],</span>
+      timePeriodToken=<span class="cstat-no" title="statement not covered" >{},</span>timePeriodLabels=<span class="cstat-no" title="statement not covered" >[],</span>operatingModeToken=<span class="cstat-no" title="statement not covered" >{},</span>operatingModeLabels=<span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >      for(let i=0,len = filterParams.length; i &lt; len ; i++){</span>
-          let filte<span class="cstat-no" title="statement not covered" >r = filterParams</span>[i],textInpu<span class="cstat-no" title="statement not covered" >t={</span>},tokenInput;
+          let filter = <span class="cstat-no" title="statement not covered" >filterParams[i],</span>textInput=<span class="cstat-no" title="statement not covered" >{},</span>tokenInput;
 <span class="cstat-no" title="statement not covered" >          if(filter["type"] === "text"){</span>
-<span class="cstat-no" title="statement not covered" >            textInput["value"] = filter.na</span>me;
-<span class="cstat-no" title="statement not covered" >            textInput["label"] = filter.labelTe</span>xt;
-<span class="cstat-no" title="statement not covered" >            filterInputFields.push(textInpu</span>t)
+<span class="cstat-no" title="statement not covered" >            textInput["value"] = filter.name;</span>
+<span class="cstat-no" title="statement not covered" >            textInput["label"] = filter.labelText;</span>
+<span class="cstat-no" title="statement not covered" >            filterInputFields.push(textInput)</span>
           }
-<span class="cstat-no" title="statement not covered" >          else if(filter["type"] === "token"){</span>
-            let token<span class="cstat-no" title="statement not covered" >s = filter["token</span>s"];
+          else <span class="cstat-no" title="statement not covered" >if(filter["type"] === "token"){</span>
+            let tokens = <span class="cstat-no" title="statement not covered" >filter["tokens"];</span>
 <span class="cstat-no" title="statement not covered" >            if(filter["name"] === "status"){</span>
-<span class="cstat-no" title="statement not covered" >              statusToken["value"] = filter["name</span>"];
-<span class="cstat-no" title="statement not covered" >              statusToken["label"] = filter["labelText</span>"];
+<span class="cstat-no" title="statement not covered" >              statusToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              statusToken["label"] = filter["labelText"];</span>
             }
-<span class="cstat-no" title="statement not covered" >            else if(filter["name"] === "timeperiod"){</span>
-<span class="cstat-no" title="statement not covered" >              timePeriodToken["value"] = filter["name</span>"];
-<span class="cstat-no" title="statement not covered" >              timePeriodToken["label"] = filter["labelText</span>"];
+            else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "timeperiod"){</span>
+<span class="cstat-no" title="statement not covered" >              timePeriodToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              timePeriodToken["label"] = filter["labelText"];</span>
             }
-<span class="cstat-no" title="statement not covered" >            else if(filter["name"] === "operatingMode"){</span>
-<span class="cstat-no" title="statement not covered" >              operatingModeToken["value"] = filter["name</span>"];
-<span class="cstat-no" title="statement not covered" >              operatingModeToken["label"] = filter["labelText</span>"];
+            else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "operatingMode"){</span>
+<span class="cstat-no" title="statement not covered" >              operatingModeToken["value"] = filter["name"];</span>
+<span class="cstat-no" title="statement not covered" >              operatingModeToken["label"] = filter["labelText"];</span>
             }
 <span class="cstat-no" title="statement not covered" >            for(let k in tokens){</span>
-              let toke<span class="cstat-no" title="statement not covered" >n =</span> {}
-<span class="cstat-no" title="statement not covered" >              token.value =</span> k
-<span class="cstat-no" title="statement not covered" >              token.label = tokens[</span>k];
+              let token = <span class="cstat-no" title="statement not covered" >{}</span>
+<span class="cstat-no" title="statement not covered" >              token.value = k</span>
+<span class="cstat-no" title="statement not covered" >              token.label = tokens[k];</span>
 <span class="cstat-no" title="statement not covered" >              if(filter["name"] === "status"){</span>
-<span class="cstat-no" title="statement not covered" >                statusLabels.push(toke</span>n);
+<span class="cstat-no" title="statement not covered" >                statusLabels.push(token);</span>
               }
-<span class="cstat-no" title="statement not covered" >              else if(filter["name"] === "timeperiod"){</span>
-<span class="cstat-no" title="statement not covered" >                timePeriodLabels.push(toke</span>n);
+              else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "timeperiod"){</span>
+<span class="cstat-no" title="statement not covered" >                timePeriodLabels.push(token);</span>
               }
-<span class="cstat-no" title="statement not covered" >              else if(filter["name"] === "operatingMode"){</span>
-<span class="cstat-no" title="statement not covered" >                operatingModeLabels.push(toke</span>n);
+              else <span class="cstat-no" title="statement not covered" >if(filter["name"] === "operatingMode"){</span>
+<span class="cstat-no" title="statement not covered" >                operatingModeLabels.push(token);</span>
               }
               
             }
@@ -787,69 +787,69 @@ class OperationsFilter extends React.Component{
       }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _processFilterToken(filterParams) {
-        let selectedToke<span class="cstat-no" title="statement not covered" >n= this.state.tokenSelect</span>ed;
-        let statusColumn=&lt;FilterTokenWrap field={<span class="cstat-no" title="statement not covered" >filterParams.statusToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.statusLabels} selectedToken={selectedToken}/&gt;;</span>
-        let timePeriodColumn=&lt;FilterTokenWrap selecti<span class="cstat-no" title="statement not covered" >on={SINGLE} field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/&gt;;</span>
-        let operatingModeColumn = &lt;FilterTokenWrap  fiel<span class="cstat-no" title="statement not covered" >d={filterParams.operatingModeToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.operatingModeLabels} selectedToken={selectedToken}/&gt;;</span>
-        let columnDetai<span class="cstat-no" title="statement not covered" >l={</span>
+<span class="fstat-no" title="function not covered" >    _p</span>rocessFilterToken(filterParams) {
+        let selectedToken= <span class="cstat-no" title="statement not covered" >this.state.tokenSelected;</span>
+        let statusColumn=<span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap field={filterParams.statusToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.statusLabels} selectedToken={selectedToken}/&gt;;</span>
+        let timePeriodColumn=<span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap selection={SINGLE} field={filterParams.timePeriodToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.timePeriodLabels} selectedToken={selectedToken}/&gt;;</span>
+        let operatingModeColumn = <span class="cstat-no" title="statement not covered" >&lt;FilterTokenWrap  field={filterParams.operatingModeToken} tokenCallBack={this._handelTokenClick.bind(this)} label={filterParams.operatingModeLabels} selectedToken={selectedToken}/&gt;;</span>
+        let columnDetail=<span class="cstat-no" title="statement not covered" >{</span>
           column1token:statusColumn,
          column2token:timePeriodColumn,
          column3token:operatingModeColumn
        };
-<span class="cstat-no" title="statement not covered" >        return columnDeta</span>il;
+<span class="cstat-no" title="statement not covered" >        return columnDetail;</span>
     }
 &nbsp;
 &nbsp;
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _handelTokenClick(field,value,state) {
-        var stateObjec<span class="cstat-no" title="statement not covered" >t = JSON.parse(JSON.stringify(this.stat</span>e))
+<span class="fstat-no" title="function not covered" >    _h</span>andelTokenClick(field,value,state) {
+        var stateObject = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.state))</span>
 <span class="cstat-no" title="statement not covered" >        this.setState({tokenSelected:handelTokenClick(field,value,state,stateObject)});</span>
         
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _handleInputQuery(inputQuery,queryField) {
-         var stateObje<span class="cstat-no" title="statement not covered" >ct = JSON.parse(JSON.stringify(this.sta</span>te))
+<span class="fstat-no" title="function not covered" >    _h</span>andleInputQuery(inputQuery,queryField) {
+         var stateObject = <span class="cstat-no" title="statement not covered" >JSON.parse(JSON.stringify(this.state))</span>
 <span class="cstat-no" title="statement not covered" >        this.setState({searchQuery:handleInputQuery(inputQuery,queryField,stateObject)})</span>
     }
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _applyFilter() {
-        let filterStat<span class="cstat-no" title="statement not covered" >e=this.stat</span>e, _query<span class="cstat-no" title="statement not covered" >={}</span>;
+<span class="fstat-no" title="function not covered" >    _a</span>pplyFilter() {
+        let filterState=<span class="cstat-no" title="statement not covered" >this.state,</span> _query=<span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >        if (filterState.searchQuery) {</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if ( filterState.searchQuery["request_id"]) {</span>
-<span class="cstat-no" title="statement not covered" >                _query.request_id=filterState.searchQuery["request_</span>id"]
+<span class="cstat-no" title="statement not covered" >                _query.request_id=filterState.searchQuery["request_id"]</span>
             }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["pps_id"]) {</span>
-<span class="cstat-no" title="statement not covered" >                _query.pps_id=filterState.searchQuery["pps_</span>id"]
+<span class="cstat-no" title="statement not covered" >                _query.pps_id=filterState.searchQuery["pps_id"]</span>
             }
 <span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["sku_id"]) {</span>
-<span class="cstat-no" title="statement not covered" >                _query.sku_id=filterState.searchQuery["sku_</span>id"]
+<span class="cstat-no" title="statement not covered" >                _query.sku_id=filterState.searchQuery["sku_id"]</span>
             }
 <span class="cstat-no" title="statement not covered" >            if (filterState.searchQuery["user_id"]) {</span>
-<span class="cstat-no" title="statement not covered" >                _query.user_id=filterState.searchQuery["user_</span>id"]
+<span class="cstat-no" title="statement not covered" >                _query.user_id=filterState.searchQuery["user_id"]</span>
             }
 &nbsp;
             
 <span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["status"] &amp;&amp; filterState.tokenSelected["status"][0] !== "any") {</span>
-<span class="cstat-no" title="statement not covered" >                _query.status=filterState.tokenSelected["stat</span>us"]
+<span class="cstat-no" title="statement not covered" >                _query.status=filterState.tokenSelected["status"]</span>
             }
 <span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["timeperiod"]) {</span>
-<span class="cstat-no" title="statement not covered" >                _query.time_period=filterState.tokenSelected["timeperi</span>od"]
+<span class="cstat-no" title="statement not covered" >                _query.time_period=filterState.tokenSelected["timeperiod"]</span>
             }
 <span class="cstat-no" title="statement not covered" >            if (filterState.tokenSelected["operatingMode"] &amp;&amp; filterState.tokenSelected["operatingMode"][0] !== "any") {</span>
-<span class="cstat-no" title="statement not covered" >                _query.operatingMode=filterState.tokenSelected["operatingMo</span>de"]
+<span class="cstat-no" title="statement not covered" >                _query.operatingMode=filterState.tokenSelected["operatingMode"]</span>
             }
-<span class="cstat-no" title="statement not covered" >            _query.pageSize = this.props.page</span>Size;
-<span class="cstat-no" title="statement not covered" >            this.props.applyOLFilterFlag(t</span>rue);
-            hashHistory.push({pathname: "/reports/operationsLog", query: _query})
+<span class="cstat-no" title="statement not covered" >            _query.pageSize = this.props.pageSize;</span>
+<span class="cstat-no" title="statement not covered" >            this.props.applyOLFilterFlag(true);</span>
+<span class="cstat-no" title="statement not covered" >            hashHistory.push({pathname: "/reports/operationsLog", query: _query})</span>
         }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" ></span>    _clearFilter(){
+<span class="fstat-no" title="function not covered" >    _c</span>learFilter(){
 <span class="cstat-no" title="statement not covered" >        this.setState({</span>
         tokenSelected: {
           "status":["any"], 
@@ -867,9 +867,9 @@ class OperationsFilter extends React.Component{
           "operatingMode":["any"],
           "timeperiod":["1_HOUR"]
         }
-<span class="fstat-no" title="function not covered" ></span>        },function(){
-<span class="cstat-no" title="statement not covered" >          this.props.applyOLFilterFlag(fals</span>e);
-          hashHistory.push({pathname: "/reports/operationsLog", query: {}})
+        },<span class="fstat-no" title="function not covered" >fu</span>nction(){
+<span class="cstat-no" title="statement not covered" >          this.props.applyOLFilterFlag(false);</span>
+<span class="cstat-no" title="statement not covered" >          hashHistory.push({pathname: "/reports/operationsLog", query: {}})</span>
         })
         
 &nbsp;
@@ -878,10 +878,10 @@ class OperationsFilter extends React.Component{
    
 <span class="fstat-no" title="function not covered" >  re</span>nder(){
         
-        var filterParam<span class="cstat-no" title="statement not covered" >s = this._processFilterParam</span>s();
-        let olSearchFiel<span class="cstat-no" title="statement not covered" >d=this._processSearchField(filterParams.filterInputFields</span>);
-        let olFilterToke<span class="cstat-no" title="statement not covered" >n=this._processFilterToken(filterParams</span>);
-        var noDat<span class="cstat-no" title="statement not covered" >a = this.props.noD</span>ata;
+        var filterParams = <span class="cstat-no" title="statement not covered" >this._processFilterParams();</span>
+        let olSearchField=<span class="cstat-no" title="statement not covered" >this._processSearchField(filterParams.filterInputFields);</span>
+        let olFilterToken=<span class="cstat-no" title="statement not covered" >this._processFilterToken(filterParams);</span>
+        var noData = <span class="cstat-no" title="statement not covered" >this.props.noData;</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div&gt;
                  &lt;Filter&gt;    
@@ -899,7 +899,7 @@ class OperationsFilter extends React.Component{
                             &lt;div className="gor-no-result-filter"&gt;
                             &lt;FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/&gt;
-<span class="branch-0 cbranch-no" title="branch not covered" ></span>                            &lt;/div&gt;:""}
+                            &lt;/div&gt;:""}
                     &lt;/div&gt;
                      &lt;div className="gor-filter-body"&gt;
                       &lt;div className="gor-filter-body-filterToken-wrap"&gt; 
@@ -942,14 +942,14 @@ class OperationsFilter extends React.Component{
   }
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >OperationsFilter.propTypes={</span>
+OperationsFilter.propTypes={
   filters:React.PropTypes.object,
   noData: React.PropTypes.bool,
   pageSize: React.PropTypes.string,
   hideLayer:React.PropTypes.bool,
   responseFlag: React.PropTypes.bool
 }
-<span class="cstat-no" title="statement not covered" >OperationsFilter.defaultProps={</span>
+OperationsFilter.defaultProps={
   filters:{},
   noData: false,
   pageSize: "25",
@@ -958,10 +958,10 @@ class OperationsFilter extends React.Component{
 }
 &nbsp;
 &nbsp;
-var mapDispatchToProps=fu<span class="cstat-no" title="statement not covered" >nction(di<span class="fstat-no" title="function not covered" >spatch){</span></span>
+var mapDispatchToProps=<span class="fstat-no" title="function not covered" >fu</span>nction(dispatch){
 <span class="cstat-no" title="statement not covered" >  return {</span>
-    showTableFilter: function(data){dispatch(showTableFi<span class="fstat-no" title="function not covered" >lter(data));},<span class="cstat-no" title="statement not covered" ></span></span>
-    applyOLFilterFlag:function(data){dispatch(applyOLFilte<span class="fstat-no" title="function not covered" >rFlag(data))}<span class="cstat-no" title="statement not covered" ></span></span>
+    showTableFilter: <span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(showTableFilter(data));}</span>,
+    applyOLFilterFlag:<span class="fstat-no" title="function not covered" >fu</span>nction(data){<span class="cstat-no" title="statement not covered" >dispatch(applyOLFilterFlag(data))}</span>
 &nbsp;
   }
 };
@@ -976,7 +976,7 @@ export default connect(null,mapDispatchToProps,null,{withRef: true})(OperationsF
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 16:54:25 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 11 2017 17:08:38 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
