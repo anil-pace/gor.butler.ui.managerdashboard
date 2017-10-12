@@ -116,14 +116,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
         ]
 },
 "users":{
@@ -185,14 +185,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "system":{
@@ -254,14 +254,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "pps":{
@@ -323,14 +323,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "chargingstation":{
@@ -392,14 +392,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 "notification":{
@@ -461,14 +461,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 "butlerbots":{
@@ -530,14 +530,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 
@@ -609,14 +609,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
                 
           ]
 },
@@ -679,14 +679,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 
@@ -749,77 +749,77 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
-// "emergency":{
-//           "type": "subscribe",
-//           "data": [
-//                 // {
-//                 //   "resource_id": "emergency",
-//                 //   "details": {
-//                 //     "data": "complete_v2",
-//                 //     "callback": []
-//                 //   }
-//                 // },
-//                 {
-//                   "resource_id": "audit",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "overview",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "waves",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "users",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "inventory_today",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "status",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 },
-//                 {
-//                   "resource_id": "system",
-//                   "details": {
-//                     "data": "header",
-//                     "callback": []
-//                   }
-//                 }
-//           ]
-// },
+"emergency":{
+          "type": "subscribe",
+          "data": [
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "audit",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "overview",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "waves",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "users",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "inventory_today",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "status",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                },
+                {
+                  "resource_id": "system",
+                  "details": {
+                    "data": "header",
+                    "callback": []
+                  }
+                }
+          ]
+},
 "zoning":{
           "type": "subscribe",
           "data": [
@@ -837,13 +837,13 @@ export const wsOverviewData={
                     "callback": []
                   }
                 },
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
                 {
                   "resource_id": "audit",
                   "details": {
@@ -915,13 +915,13 @@ export const wsOverviewData={
                     "callback": []
                   }
                 },
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // },
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                },
                 {
                   "resource_id": "audit",
                   "details": {

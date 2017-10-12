@@ -335,13 +335,12 @@ class AuditTable extends React.Component {
                 {...this.props}>
                 <Column
                     columnKey="display_id"
-                    header={
-                        <div>
-                        <div className="gor-header-check">
+                    header={   
+                        <SortHeaderCell onSortChange={this.backendSort} 
+                                        sortDir={colSortDirs.display_id}>
+                                        <div className="gor-audit-header-check">
                                     <input type="checkbox" checked={headerChecked} onChange={this.headerCheckChange.bind(this)}/>
                                 </div>
-                        <SortHeaderCell onSortChange={this.backendSort}
-                                        sortDir={colSortDirs.display_id}>
                             <div className="gorToolHeaderEl">
                                 <FormattedMessage id="auditTable.stationID.heading"
                                                   description='Heading for audit ID for auditTable'
@@ -354,7 +353,9 @@ class AuditTable extends React.Component {
                                 </div>
                             </div>
                         </SortHeaderCell>
-                        </div>
+                        
+               
+
                     }
                     cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
                                                checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit"/>}

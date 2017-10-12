@@ -3545,6 +3545,7 @@ input[type="checkbox"] {
 
 .gor-tooltip {
   display: none;
+  padding-left: 50px;
 }
 
 .gor-tool-tip-hover {
@@ -3552,6 +3553,14 @@ input[type="checkbox"] {
   color: #27aae1;
   font-size: 14px;
   padding-top: 4px;
+}
+
+.displayLeft {
+  float: left;
+}
+
+.displayHidden {
+  visibility: hidden;
 }
 
 .gor-tool-tip-hover:hover + .gor-tooltip {
@@ -3568,7 +3577,7 @@ input[type="checkbox"] {
   border: solid 1px grey;
   border-radius: 3px;
   padding-bottom: 20px;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-top: 20px;
 }
 
@@ -3615,6 +3624,13 @@ input[type="checkbox"] {
   padding-top: 5px;
   padding-bottom: 5px;
   color: red;
+}
+
+.gor-audit-header-check {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+  float: left;
 }
 
 .gorSubTab.gorContainer {
