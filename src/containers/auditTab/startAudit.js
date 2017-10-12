@@ -44,27 +44,6 @@ class StartAudit extends React.Component{
   {
     e.preventDefault();
     let formdata;
-    if(this.props.bulkFlag){
-      for(var i=0,j=this.props.auditId.length;i<j;i++){
-        formdata={
-      audit_id_list: this.props.auditId[i], 
-      pps_list: this.state.checked
-    }
-        let userData={
-                'url':START_AUDIT_URL,
-                'formdata':formdata,
-                'method':POST,
-                'cause':START_AUDIT,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
-    }
-    this.props.userRequest(userData);
-    this.props.removeModal();
-    }
-  }
-    else
-    {
     formdata={
       audit_id_list: this.props.auditId, 
       pps_list: this.state.checked
@@ -78,9 +57,8 @@ class StartAudit extends React.Component{
                 'accept':APP_JSON,
                 'token':this.props.auth_token
     }
-    this.props.userRequest(userData);
-    this.props.removeModal();
-  }
+      this.props.userRequest(userData);
+      this.props.removeModal();
   }
    _handleChange(event) 
    {

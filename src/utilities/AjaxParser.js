@@ -274,6 +274,19 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(getPPSAudit(auditpps));
             break;
         case START_AUDIT:
+        if(res.successful.length>1 || res.unsuccessful.length>1)
+        {
+           var successCount = res.successful.length,
+                unsuccessfulCount = Object.keys(res.unsuccessful).length,
+                values = {
+                    successful: successCount,
+                    totalCount: successCount + unsuccessfulCount
+                },
+                msg = getFormattedMessages("BulkAudit", values);
+            store.dispatch(notifySuccess(msg));
+        }
+        else
+        {
             if (res.successful.length) {
                 store.dispatch(notifySuccess(AS00A));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
@@ -281,8 +294,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
-            }
+            } 
+        }
             break;
+        
         case RECIEVE_HEADER:
             if (res.users[0].roles[0] == BUTLER_UI) {
                 endSession(store);
