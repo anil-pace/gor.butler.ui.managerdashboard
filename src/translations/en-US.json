@@ -5713,6 +5713,12 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "utility.bulkaudit.successMessage",
+    "description": "Bulk Audit successMessage",
+    "defaultMessage": "{successful}/{totalCount} audit started successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "pps.status.reject",
     "description": "PPS status change reject",
     "defaultMessage": "{unsuccessful}/{totalCount} status change request rejected",
