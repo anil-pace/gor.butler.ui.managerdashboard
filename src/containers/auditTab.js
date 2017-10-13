@@ -2,7 +2,7 @@ import React  from 'react';
 import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
 import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
-import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit} from '../actions/auditActions';
+import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit,setAuditQuery} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
 import StartAudit from './auditTab/startAudit';
