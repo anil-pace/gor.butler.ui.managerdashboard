@@ -369,7 +369,6 @@ class OrderListTab extends React.Component {
         var url;
         if (data.url=== undefined) {
             url=ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
-            //url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=0&PAGE_SIZE=25"
         }
 
         else {
@@ -457,13 +456,7 @@ class OrderListTab extends React.Component {
             if ((status=== undefined || status=== "all")) {
                 appendStatusUrl="";
             }
-
-            /*else if (status=== "exception") {
-                appendStatusUrl=EXCEPTION_TRUE;
-            }
-            */
             else {
-
                 appendStatusUrl=(status.length ===1) ? (WAREHOUSE_STATUS_SINGLE + "==" + status  + breachedtext) : breachedtext;
                  appendStatusUrl=(status.length >1) ? (WAREHOUSE_STATUS_MULTIPLE + "=" + "("+status+")"  + breachedtext) : breachedtext;
             }
@@ -473,24 +466,12 @@ class OrderListTab extends React.Component {
         
         //appending filter for orders by time
         if (data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length && data.tokenSelected["TIME PERIOD"][0] !== "allOrders") {
-            var timeOut=data.tokenSelected["TIME PERIOD"][0]
-            /*currentTime=new Date();
-            prevTime=new Date();
-            prevTime=new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
-            prevTime=prevTime.toISOString();
-            currentTime=currentTime.toISOString();
-            */
-
-            //appendTimeUrl=UPDATE_TIME_LOW + currentTime + UPDATE_TIME_HIGH + prevTime;
-
+            var timeOut=data.tokenSelected["TIME PERIOD"][0];
             appendTimeUrl="&"+UPDATE_TIME+convertTime[timeOut];
-            //appendTimeUnitUrl="&"+UPDATE_TIME_UNIT+(timeOut.indexOf("day")!==-1  ? "days":"hours");
             appendTimeUnitUrl="&"+UPDATE_TIME_UNIT+"hours";
             data.selected=1;
             filterApplied=true;
         }
-
-        
 
         //generating api url by pagination page no.
         data.url="";
