@@ -111,7 +111,6 @@ class AuditTable extends React.Component {
             sortIndex=nProps.currentHeaderOrder.colSortDirs;
         }
         if (!nProps.checkedAudit && current.items) {
-            //var initialCheckState=new Array(nextProps.items.length).fill(false);
             this.props.setCheckedAudit({})
         }
 
@@ -207,7 +206,6 @@ class AuditTable extends React.Component {
 
        
         this.props.setCheckedAudit(checkedAudit)
-        //this.props.renderDdrop(Object.keys(checkedAudit).length ? true :false);
     }
 
         headerCheckChange(evt) {
@@ -230,7 +228,6 @@ class AuditTable extends React.Component {
 
        
         this.props.setCheckedAudit(checkedAudit)
-        //this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false); 
         })
         
     }

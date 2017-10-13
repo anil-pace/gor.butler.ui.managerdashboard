@@ -1867,7 +1867,7 @@
   {
     "id": "audit.table.bulkaudit",
     "description": "button label for start bulk audit",
-    "defaultMessage": "Start Bulk Audit",
+    "defaultMessage": "Start Bulk Audit(s)",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -5715,7 +5715,7 @@
   {
     "id": "utility.bulkaudit.successMessage",
     "description": "Bulk Audit successMessage",
-    "defaultMessage": "{successful}/{totalCount} audit started successfully",
+    "defaultMessage": "{successful}/{totalCount} audits started successfully",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
