@@ -24,8 +24,7 @@ import {
     PAGE_SIZE_URL,
     PROTOCOL,
     ORDER_PAGE,
-    UPDATE_TIME_HIGH,
-    UPDATE_TIME_LOW, UPDATE_TIME,
+    UPDATE_TIME_UNIT, UPDATE_TIME,
     EXCEPTION_TRUE,
     WAREHOUSE_STATUS_SINGLE,
     WAREHOUSE_STATUS_MULTIPLE,
@@ -139,20 +138,10 @@ class OrderListTab extends React.Component {
 
 
         //appending filter for status
-        if (query.status) {
 
-         let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status]
-         let indexOfBreached=statusList.indexOf('breached');
-         let indexOfException=statusList.indexOf('exception');
-         if (indexOfBreached > -1) {
-             _query_params.push([BREACHED, "True"].join("="))
-             statusList.splice(indexOfBreached, 1)
-         }
-         if (indexOfException > -1) {
-        (indexOfBreached> -1)? statusList.splice(indexOfException-1, 1):statusList.splice(indexOfException, 1);
-         _query_params.push([EXCEPTION_TRUE, "true"].join("="))
-         }
-         //Case 2 & Case 3:
+        if (query.status) {
+            
+         let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
          if (statusList.length > 0) {
             let _flattened_statuses=[]
             statusList=statusList.constructor===Array?statusList:[statusList]
@@ -167,47 +156,21 @@ class OrderListTab extends React.Component {
             _query_params.push([WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("="))
         }
          }
-
-
-
-
-/*//Original Code:
-         if (statusList.length > 0) {
-            let _flattened_statuses=[]
-            statusList=statusList.constructor===Array?statusList:[statusList]
-            statusList.forEach(function (status) {
-                _flattened_statuses.push(status.split("__"))
-            })
-            statusList=[].concat.apply([], _flattened_statuses)
-            _query_params.push([WAREHOUSE_STATUS,"['"+statusList.join("','")+"']" ].join("="))
-
-         }
-         */
-
      }
 
-
-        //appending filter for orders by time(only time):
+        //appending filter for orders by time:
         
         
         if (query.period) {
             let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
             
-            _query_params.push("time="+convertTime[timeOut]);
-            _query_params.push("timeUnit="+(timeOut.indexOf("day")!==-1  ? "days":"hours") );
-             
-            
-
-           
-
+            _query_params.push(UPDATE_TIME+convertTime[timeOut]);
+            _query_params.push(UPDATE_TIME_UNIT+"hours") ;
         }
-
-
-        //let url=API_URL + ORDERS_URL
 
         let url = ORDERS_URL;
 
-        _query_params.push([GIVEN_PAGE, query.page || 0].join("="))
+        _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
         _query_params.push([GIVEN_PAGE_SIZE, this.props.filterOptions.pageSize || 25].join("="));
         if(orderbyParam && orderbyParam.sortDir){
             orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
@@ -405,8 +368,8 @@ class OrderListTab extends React.Component {
     handlePageClick=(data)=> {
         var url;
         if (data.url=== undefined) {
-            url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
-            //url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=1&PAGE_SIZE=25"
+            url=ORDERS_URL + ORDER_PAGE + (data.selected) + "&PAGE_SIZE=25";
+            //url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=0&PAGE_SIZE=25"
         }
 
         else {
@@ -420,6 +383,7 @@ class OrderListTab extends React.Component {
             'cause': ORDERS_RETRIEVE,
             'token': this.props.auth_token,
             'contentType': 'application/json',
+            'accept':'application/json'
 
         }
         this.props.setOrderListSpinner(true);
@@ -450,7 +414,7 @@ class OrderListTab extends React.Component {
                 "oneDayOrders": 24
             };
             var prevTime, currentTime;
-            var appendStatusUrl="", appendTimeUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
+            var appendStatusUrl="", appendTimeUrl="",appendTimeUnitUrl="", appendPageSize="", appendSortUrl="", appendTextFilterUrl="";
             var filterApplied=false;
             if (!data) {
                 data={};
@@ -494,33 +458,44 @@ class OrderListTab extends React.Component {
                 appendStatusUrl="";
             }
 
-            else if (status=== "exception") {
+            /*else if (status=== "exception") {
                 appendStatusUrl=EXCEPTION_TRUE;
             }
+            */
             else {
-                appendStatusUrl=status.length !== 0 ? (WAREHOUSE_STATUS_SINGLE + "['" + status + "']" + breachedtext) : breachedtext;
+
+                appendStatusUrl=(status.length ===1) ? (WAREHOUSE_STATUS_SINGLE + "==" + status  + breachedtext) : breachedtext;
+                 appendStatusUrl=(status.length >1) ? (WAREHOUSE_STATUS_MULTIPLE + "=" + "("+status+")"  + breachedtext) : breachedtext;
             }
             data.selected=1;
             filterApplied=true;
         }
-
+        
         //appending filter for orders by time
         if (data.tokenSelected && data.tokenSelected["TIME PERIOD"] && data.tokenSelected["TIME PERIOD"].length && data.tokenSelected["TIME PERIOD"][0] !== "allOrders") {
             var timeOut=data.tokenSelected["TIME PERIOD"][0]
-            currentTime=new Date();
+            /*currentTime=new Date();
             prevTime=new Date();
             prevTime=new Date(prevTime.setHours(prevTime.getHours() - convertTime[timeOut]));
             prevTime=prevTime.toISOString();
             currentTime=currentTime.toISOString();
-            appendTimeUrl=UPDATE_TIME_LOW + currentTime + UPDATE_TIME_HIGH + prevTime;
+            */
+
+            //appendTimeUrl=UPDATE_TIME_LOW + currentTime + UPDATE_TIME_HIGH + prevTime;
+
+            appendTimeUrl="&"+UPDATE_TIME+convertTime[timeOut];
+            //appendTimeUnitUrl="&"+UPDATE_TIME_UNIT+(timeOut.indexOf("day")!==-1  ? "days":"hours");
+            appendTimeUnitUrl="&"+UPDATE_TIME_UNIT+"hours";
             data.selected=1;
             filterApplied=true;
         }
 
+        
+
         //generating api url by pagination page no.
         data.url="";
-        //data.url=API_URL + ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 1);
-        data.url="http://192.168.8.116:8080/api-gateway/dashboard-service/platform-dashboard/api/orders?page=0";
+        data.url=ORDERS_URL + ORDER_PAGE + (data.selected ? data.selected : 0);
+        
         //appending page size filter
         if(!pageSize) {
             if (this.props.filterOptions.pageSize === undefined) {
@@ -537,7 +512,7 @@ class OrderListTab extends React.Component {
 
 
 //combining all the filters
-data.url=data.url + appendStatusUrl + appendTimeUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
+data.url=data.url + appendStatusUrl + appendTimeUrl + appendTimeUnitUrl + appendPageSize + appendSortUrl + appendTextFilterUrl;
 this.props.lastRefreshTime((new Date()));
 this.props.filterApplied(filterApplied);
 this.handlePageClick(data)

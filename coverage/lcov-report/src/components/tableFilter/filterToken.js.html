@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>0/27</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/24</span>
+        <span class='fraction'>0/25</span>
       </div>
     </div>
   </div>
@@ -106,7 +106,7 @@
 61
 62
 63
-64</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+64</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,47 +169,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React  from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
 import {SINGLE,ADD_TOKEN, ADD_DEFAULT,REMOVE_TOKEN} from '../../constants/frontEndConstants';
 &nbsp;
 &nbsp;
 class FilterToken extends React.Component{
 	
 &nbsp;
-<span class="fstat-no" title="function not covered" >   _h</span>andleTokenClick() {
-    var selectedToken=<span class="cstat-no" title="statement not covered" >this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,</span>tokenFound=<span class="cstat-no" title="statement not covered" >false;</span>
-    var selectedOption=<span class="cstat-no" title="statement not covered" >this.props.selection;</span>
-    var tokenSelect=<span class="cstat-no" title="statement not covered" >this.props.tokenLabel.value;</span>
-    var _this = <span class="cstat-no" title="statement not covered" >this;</span>
+   _<span class="fstat-no" title="function not covered" >ha</span>ndleTokenClick() {
+    var selectedToken=this.p<span class="cstat-no" title="statement not covered" >rops.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null,tokenF</span>ound=false;<span class="cstat-no" title="statement not covered" ></span>
+    var selectedOption=this.p<span class="cstat-no" title="statement not covered" >rops.selection;</span>
+    var tokenSelect=this.p<span class="cstat-no" title="statement not covered" >rops.tokenLabel.value;</span>
+    var _this = this<span class="cstat-no" title="statement not covered" >;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    switch(selectedOption)</span>
+    swit<span class="cstat-no" title="statement not covered" >ch(selectedOption)</span>
     {
         case SINGLE:
-<span class="cstat-no" title="statement not covered" >        if(selectedToken){</span>
-<span class="cstat-no" title="statement not covered" >            tokenFound=(tokenSelect===selectedToken[0])?true:false;</span>
-<span class="cstat-no" title="statement not covered" >            this.props.tokenCallBack(this.props.tokenField, selectedToken[0],REMOVE_TOKEN);</span>
+        if(selec<span class="cstat-no" title="statement not covered" >tedToken){</span>
+            tokenFou<span class="cstat-no" title="statement not covered" >nd=(tokenSelect===selectedToken[0])?true:false;</span>
+            this.pro<span class="cstat-no" title="statement not covered" >ps.tokenCallBack(this.props.tokenField, selectedToken[0],REMOVE_TOKEN);</span>
         }
-<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction(){</span>
-<span class="cstat-no" title="statement not covered" >            tokenFound?_this.props.tokenCallBack(_this.props.tokenField,selectedToken[0],ADD_TOKEN):_this.props.tokenCallBack(_this.props.tokenField,_this.props.tokenLabel.value,ADD_TOKEN);</span>
+        setTimeo<span class="cstat-no" title="statement not covered" >ut(function<span class="fstat-no" title="function not covered" >()</span>{</span>
+            tokenFou<span class="cstat-no" title="statement not covered" >nd?_this.props.tokenCallBack(_this.props.tokenField,selectedToken[0],ADD_TOKEN):_this.props.tokenCallBack(_this.props.tokenField,_this.props.tokenLabel.value,ADD_TOKEN);</span>
         },0)
          
-<span class="cstat-no" title="statement not covered" >        break; </span>
+        break; <span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
         default:
-<span class="cstat-no" title="statement not covered" >        if(selectedToken){</span>
-<span class="cstat-no" title="statement not covered" >            for (var i=selectedToken.length - 1; i &gt;= 0; i--) {</span>
-<span class="cstat-no" title="statement not covered" >                if(selectedToken[i]===this.props.tokenLabel.value) {</span>
-<span class="cstat-no" title="statement not covered" >                    this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,REMOVE_TOKEN);</span>
-<span class="cstat-no" title="statement not covered" >                    tokenFound=true;</span>
-<span class="cstat-no" title="statement not covered" >                    break;</span>
+        if(selec<span class="cstat-no" title="statement not covered" >tedToken){</span>
+            for (var<span class="cstat-no" title="statement not covered" > i=selectedToken.length - 1; i &gt;= 0; i--) {</span>
+                if(selec<span class="cstat-no" title="statement not covered" >tedToken[i]===this.props.tokenLabel.value) {</span>
+                    this.pro<span class="cstat-no" title="statement not covered" >ps.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,REMOVE_TOKEN);</span>
+                    tokenFou<span class="cstat-no" title="statement not covered" >nd=true;</span>
+                    break;<span class="cstat-no" title="statement not covered" ></span>
                 }
             }
         }   
-<span class="cstat-no" title="statement not covered" >        if(!tokenFound &amp;&amp; !this.props.lastToken){</span>
-<span class="cstat-no" title="statement not covered" >            this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN);</span>
+        if(!toke<span class="cstat-no" title="statement not covered" >nFound &amp;&amp; !this.props.lastToken){</span>
+            this.pro<span class="cstat-no" title="statement not covered" >ps.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_TOKEN);</span>
         }
-        else <span class="cstat-no" title="statement not covered" >if(!tokenFound &amp;&amp; this.props.lastToken) {</span>
-<span class="cstat-no" title="statement not covered" >            this.props.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_DEFAULT);</span>
+        else if(<span class="cstat-no" title="statement not covered" >!tokenFound &amp;&amp; this.props.lastToken) {</span>
+            this.pro<span class="cstat-no" title="statement not covered" >ps.tokenCallBack(this.props.tokenField,this.props.tokenLabel.value,ADD_DEFAULT);</span>
         }
 &nbsp;
     }
@@ -217,10 +217,10 @@ class FilterToken extends React.Component{
 }
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" >re</span>nder(){
-    var selectedToken= <span class="cstat-no" title="statement not covered" >this.props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null;</span>
-    var selectedState=(<span class="cstat-no" title="statement not covered" >selectedToken?(selectedToken.indexOf(this.props.tokenLabel.value)&gt;=0?true:false):false)</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
+rend<span class="fstat-no" title="function not covered" >er</span>(){
+    var selectedToken= this.<span class="cstat-no" title="statement not covered" >props.tokenSelected ? this.props.tokenSelected[this.props.tokenField] : null;</span>
+    var selectedState=(selec<span class="cstat-no" title="statement not covered" >tedToken?(selectedToken.indexOf(this.props.tokenLabel.value)&gt;=0?true:false):false)</span>
+    retu<span class="cstat-no" title="statement not covered" >rn (</span>
      &lt;div className="gor-filter-token-container"&gt;
      &lt;span className={selectedState?"gor-filter-token-selected":"gor-filter-token-wrap"} onClick={this._handleTokenClick.bind(this)}&gt;
      &lt;span className="gor-filter-token-text"&gt;{this.props.tokenLabel.label}&lt;/span&gt;
@@ -238,7 +238,7 @@ export default FilterToken ;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 05 2017 15:02:03 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Oct 12 2017 10:17:08 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

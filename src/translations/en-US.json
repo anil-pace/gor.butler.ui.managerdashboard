@@ -887,15 +887,21 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
-    "id": "stringConfig.completed",
-    "description": "Text to show completed",
-    "defaultMessage": "Completed",
+    "id": "stringConfig.complete",
+    "description": "Text to show Completed",
+    "defaultMessage": "completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
-    "id": "stringConfig.Completed",
+    "id": "stringConfig.completed",
     "description": "Text to show Completed",
     "defaultMessage": "completed",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.rejected",
+    "description": "Text to show rejected",
+    "defaultMessage": "Rejected",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -920,6 +926,30 @@
     "id": "stringConfig.abandoned",
     "description": "Text to show abandoned",
     "defaultMessage": "Abandoned",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.created",
+    "description": "Text to show created",
+    "defaultMessage": "Created",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.accepted",
+    "description": "Text to show accepted",
+    "defaultMessage": "Accepted",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.bad_request",
+    "description": "Text to show bad request",
+    "defaultMessage": "Bad Request",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
+    "id": "stringConfig.internal_server_error",
+    "description": "Text to show internal server error",
+    "defaultMessage": "Internal Error",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
