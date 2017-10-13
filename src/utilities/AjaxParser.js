@@ -284,6 +284,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 },
                 msg = getFormattedMessages("BulkAudit", values);
             store.dispatch(notifySuccess(msg));
+            store.dispatch(setAuditRefresh(true));
         }
         else
         {
