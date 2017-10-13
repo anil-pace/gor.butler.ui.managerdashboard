@@ -1811,6 +1811,12 @@
     "filepath": "./src/containers/auditTab.js"
   },
   {
+    "id": "audit.table.bulkaudit",
+    "description": "button label for start bulk audit",
+    "defaultMessage": "Start Bulk Audit(s)",
+    "filepath": "./src/containers/auditTab.js"
+  },
+  {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
     "defaultMessage": "Create New Task",
@@ -5542,6 +5548,12 @@
     "id": "pps.mode.success",
     "description": "PPS mode change success",
     "defaultMessage": "Mode change request successful",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "utility.bulkaudit.successMessage",
+    "description": "Bulk Audit successMessage",
+    "defaultMessage": "{successful}/{totalCount} audits started successfully",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

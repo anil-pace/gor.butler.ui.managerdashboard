@@ -115,7 +115,8 @@ export const wsOverviewData={
                     "data": "aggregate_v2",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -183,7 +184,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -251,7 +253,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -319,7 +322,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -387,7 +391,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -455,7 +460,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -523,7 +529,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -601,7 +608,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -670,7 +678,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
@@ -739,7 +748,8 @@ export const wsOverviewData={
                     "data": "header",
                     "callback": []
                   }
-                },
+                }
+                ,
                 {
                   "resource_id": "emergency",
                   "details": {
