@@ -43,7 +43,7 @@ export const REPORTS_FILTER_PARAMS = [{
 		"2_DAY":"Last 2 Days",
 		"1_MONTH":"Last 1 Month",
 		"2_MONTH":"Last 2 Months",
-		"3_MONTH":"Last 2 Months"
+		"3_MONTH":"Last 3 Months"
 
 	},
 	labelText:"Time Period"
