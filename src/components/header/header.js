@@ -234,7 +234,7 @@ class Header extends React.Component {
                                             defaultMessage='Start time:{time} '
                                             values={{
                                                 time: startTime
-                                            }}/>)          
+                                            }}/>          
                         </div>
                     </div>  
                 </div>
