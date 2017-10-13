@@ -57,8 +57,8 @@ class StartAudit extends React.Component{
                 'accept':APP_JSON,
                 'token':this.props.auth_token
     }
-    this.props.userRequest(userData);
-    this.props.removeModal();
+      this.props.userRequest(userData);
+      this.props.removeModal();
   }
    _handleChange(event) 
    {

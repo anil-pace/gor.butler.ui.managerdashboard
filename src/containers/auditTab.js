@@ -5,6 +5,7 @@ import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
 import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit,setAuditQuery} from '../actions/auditActions';
 import AuditTable from './auditTab/auditTable';
 import {getPageData} from '../actions/paginationAction';
+import StartAudit from './auditTab/startAudit';
 import {
     AUDIT_RETRIEVE,
     GET,PUT,
@@ -37,7 +38,7 @@ import {
 } from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import {defineMessages} from 'react-intl';
-import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail} from '../actions/sortHeaderActions';
+import {auditHeaderSortOrder, auditHeaderSort, auditFilterDetail, setCheckedAudit} from '../actions/sortHeaderActions';
 import {getDaysDiff} from '../utilities/getDaysDiff';
 import {addDateOffSet} from '../utilities/processDate';
 import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
@@ -282,8 +283,7 @@ class AuditTab extends React.Component {
         let reAudited=nProps.context.intl.formatMessage(messages.auditReAudited);
         let auditCancelled=nProps.context.intl.formatMessage(messages.auditCancelled);
         var timeOffset=nProps.props.timeOffset || "";
-        // cancellable: "audit_pending", "audit_waiting", "audit_conflicting","audit_accepted", "audit_started", "audit_tasked","audit_rejected"
-        //resolve issues first and then cancel: pending approval
+        var checkedAudit = nProps.props.checkedAudit || {};
         var auditStatus={
             "audit_created": created,
             "audit_pending": pending,
@@ -489,6 +489,7 @@ class AuditTab extends React.Component {
                 auditData.infoIcon="rejected"
             }
             auditData.resolvedTask=data[i].resolved;
+            auditData.isChecked = checkedAudit[data[i].audit_id] ? true :false;
             auditData.unresolvedTask=data[i].unresolved;
             auditDetails.push(auditData);
             auditData={};
@@ -612,6 +613,20 @@ createAudit() {
 
 }
 
+    startBulkAudit() {
+        var auditId=[]; 
+        auditId=Object.keys(this.props.checkedAudit);
+        modal.add(StartAudit, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true,
+            auditId: auditId,
+            bulkFlag:true
+        });
+    }
+
+
 //Render Function goes here
 render() {
     var filterHeight=screen.height - 190;
@@ -664,7 +679,8 @@ render() {
     setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
     setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
     isFilterApplied={this.props.isFilterApplied}
-    auditFilterStatus={this.props.auditFilterStatus}
+    auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
+    checkedAudit={this.props.checkedAudit} 
     responseFlag={this.props.auditSpinner}
     onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
 
@@ -682,6 +698,15 @@ render() {
 
     </div>
     <div className="gor-audit-filter-create-wrap">
+
+    <div className="gor-button-wrap">
+    <button className="gor-add-btn gor-bulk-audit-btn" disabled={!(Object.keys(this.props.checkedAudit).length>0)} onClick={this.startBulkAudit.bind(this)}>
+    <FormattedMessage id="audit.table.bulkaudit"
+    description="button label for start bulk audit"
+    defaultMessage="Start Bulk Audit(s) "/>
+    </button>
+    </div>
+
     <div className="gor-button-wrap">
     <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
     <div className="gor-filter-add-token"/>
@@ -738,6 +763,7 @@ function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.auditFilter || "",
         auditSortHeader: state.sortHeaderState.auditHeaderSort || "id",
+        checkedAudit: state.sortHeaderState.checkedAudit|| {},
         auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
         auditSpinner: state.spinner.auditSpinner || false,
@@ -811,6 +837,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         setAuditQuery:function(data){
             dispatch(setAuditQuery(data))
+        },
+        setCheckedAudit: function (data) {
+            dispatch(setCheckedAudit(data))
         }
 
     }
