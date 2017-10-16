@@ -116,14 +116,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
         ]
 },
 "users":{
@@ -185,14 +185,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "system":{
@@ -254,14 +254,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "pps":{
@@ -323,14 +323,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "chargingstation":{
@@ -392,14 +392,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 "notification":{
@@ -461,14 +461,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 "butlerbots":{
@@ -530,14 +530,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
 		]
 },
 
@@ -609,14 +609,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
                 
           ]
 },
@@ -679,14 +679,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 
@@ -749,14 +749,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "emergency":{
