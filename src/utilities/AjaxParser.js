@@ -283,7 +283,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(getPPSAudit(auditpps));
             break;
         case START_AUDIT:
-        if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length==1 && res.unsuccessful.length==1))
+        if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
         {
            var successCount = res.successful.length,
                 unsuccessfulCount = Object.keys(res.unsuccessful).length,
