@@ -116,14 +116,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
         ]
 },
 "users":{
@@ -185,14 +185,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "system":{
@@ -323,14 +323,14 @@ export const wsOverviewData={
                     "callback": []
                   }
                 }
-                // ,
-                // {
-                //   "resource_id": "emergency",
-                //   "details": {
-                //     "data": "complete_v2",
-                //     "callback": []
-                //   }
-                // }
+                ,
+                {
+                  "resource_id": "emergency",
+                  "details": {
+                    "data": "complete_v2",
+                    "callback": []
+                  }
+                }
           ]
 },
 "chargingstation":{
