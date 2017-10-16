@@ -264,7 +264,7 @@ class AuditTab extends React.Component {
 
     _processAuditData(data, nProps) {
         nProps=this;
-        data=nProps.props.auditDetail;
+        data=JSON.parse(JSON.stringify(nProps.props.auditDetail));
         let created=nProps.context.intl.formatMessage(messages.auditCreatedStatus);
         let pending=nProps.context.intl.formatMessage(messages.auditPendingStatus);
         let progress=nProps.context.intl.formatMessage(messages.auditInProgressStatus);
@@ -356,6 +356,7 @@ class AuditTab extends React.Component {
 
                 else {
                     auditData.startAudit=false;
+
                 }
 
 
@@ -483,7 +484,7 @@ class AuditTab extends React.Component {
                 auditData.infoIcon="rejected"
             }
             auditData.resolvedTask=data[i].resolved;
-            auditData.isChecked = checkedAudit[data[i].audit_id] ? true :false;
+            auditData.isChecked = (checkedAudit[data[i].audit_id] && auditData.startAudit) ? true :false;
             auditData.unresolvedTask=data[i].unresolved;
             auditDetails.push(auditData);
             auditData={};

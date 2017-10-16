@@ -127,6 +127,11 @@ import {
     recievePendingMSU,
     resetCheckedPPSList
 } from "../actions/ppsModeChangeAction";
+
+
+import {
+    resetaudit
+} from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
     recieveNotificationData,
@@ -283,14 +288,16 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     totalCount: successCount + unsuccessfulCount
                 },
                 msg = getFormattedMessages("BulkAudit", values);
-            store.dispatch(notifySuccess(msg));
-            store.dispatch(setAuditRefresh(true));
+                store.dispatch(notifySuccess(msg));
+                store.dispatch(resetaudit(res.successful));
+                store.dispatch(setAuditRefresh(true));
         }
         else
         {
             if (res.successful.length) {
                 store.dispatch(notifySuccess(AS00A));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(resetaudit(res.successful));
             } else {
                 stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
                 store.dispatch(notifyFail(stringInfo.msg));
