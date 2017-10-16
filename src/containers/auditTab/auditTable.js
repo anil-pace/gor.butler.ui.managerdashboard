@@ -44,7 +44,6 @@ class AuditTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
         this.tableState(nextProps, this);
 
     }
@@ -99,7 +98,7 @@ class AuditTable extends React.Component {
 
     tableState(nProps, current) {
         var items=nProps.items || [];
-        var headerChecked=false,checkedAudit;
+        var headerChecked=false, checkedAudit;
         current._dataList=new tableRenderer(items ? items.length : 0);
         current._defaultSortIndexes=[];
         current._dataList.newData=items;
