@@ -3474,7 +3474,7 @@
   {
     "id": "widget.put.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr",
+    "defaultMessage": "{pluralMsg} stocking {throughput} items/hr",
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
