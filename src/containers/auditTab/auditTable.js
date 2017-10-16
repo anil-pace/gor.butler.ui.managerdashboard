@@ -114,7 +114,7 @@ class AuditTable extends React.Component {
         }
 
      headerChecked=current.state? current.state.headerChecked:false;
-     //checkedAudit= false;
+     checkedAudit=current.state? current.state.checkedAudit:false;
         current.state={
             sortedDataList: current._dataList,
             colSortDirs: sortIndex,
@@ -127,8 +127,8 @@ class AuditTable extends React.Component {
                 completedTime: nProps.containerWidth * 0.13,
                 actions: nProps.containerWidth * 0.25
             },
-            headerChecked: headerChecked
-            // isChecked: checkedAudit
+            headerChecked: headerChecked,
+            isChecked: checkedAudit
         };
     }
 

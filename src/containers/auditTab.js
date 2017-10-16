@@ -264,7 +264,7 @@ class AuditTab extends React.Component {
 
     _processAuditData(data, nProps) {
         nProps=this;
-        data=JSON.parse(JSON.stringify(nProps.props.auditDetail));
+        data=nProps.props.auditDetail;
         let created=nProps.context.intl.formatMessage(messages.auditCreatedStatus);
         let pending=nProps.context.intl.formatMessage(messages.auditPendingStatus);
         let progress=nProps.context.intl.formatMessage(messages.auditInProgressStatus);
