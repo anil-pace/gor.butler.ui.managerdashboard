@@ -44,7 +44,6 @@ class AuditTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
         this.tableState(nextProps, this);
 
     }
@@ -99,7 +98,7 @@ class AuditTable extends React.Component {
 
     tableState(nProps, current) {
         var items=nProps.items || [];
-        var headerChecked=false,checkedAudit;
+        var headerChecked=false, checkedAudit;
         current._dataList=new tableRenderer(items ? items.length : 0);
         current._defaultSortIndexes=[];
         current._dataList.newData=items;
@@ -115,7 +114,7 @@ class AuditTable extends React.Component {
         }
 
      headerChecked=current.state? current.state.headerChecked:false;
-     checkedAudit=current.state? current.state.checkedAudit:false;
+     //checkedAudit= false;
         current.state={
             sortedDataList: current._dataList,
             colSortDirs: sortIndex,
@@ -128,8 +127,8 @@ class AuditTable extends React.Component {
                 completedTime: nProps.containerWidth * 0.13,
                 actions: nProps.containerWidth * 0.25
             },
-            headerChecked: headerChecked,
-            isChecked: checkedAudit
+            headerChecked: headerChecked
+            // isChecked: checkedAudit
         };
     }
 
