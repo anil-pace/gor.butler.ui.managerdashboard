@@ -16,6 +16,9 @@ export function getFormattedMessages(action,values){
 				return 	(<FormattedMessage id="pps.mode.success" description='PPS mode change success'
                                    defaultMessage='Mode change request successful' />);
 			}
+			case "BulkAudit":
+			return (<FormattedMessage id="utility.bulkaudit.successMessage" description='Bulk Audit successMessage'
+                                   defaultMessage='{successful}/{totalCount} audits started successfully' values={values}/>);
 			case "status":
 			if(values.unsuccessful){
 				return 	(<FormattedMessage id="pps.status.reject" description='PPS status change reject'

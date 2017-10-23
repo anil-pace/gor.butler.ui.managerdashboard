@@ -1,9 +1,9 @@
 
 import { BUTLER_HEADER_SORT ,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, 
 		 USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER, CS_HEADER_SORT, 
-		 PPS_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER, ORDER_HEADER_SORT_ORDER, ORDER_HEADER_SORT, 
+		 PPS_CHECKED,AUDIT_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER, ORDER_HEADER_SORT_ORDER, ORDER_HEADER_SORT, 
 		 AUDIT_HEADER_SORT_ORDER, AUDIT_HEADER_SORT, SET_ORDER_FILTER,SET_AUDIT_FILTER,SET_BUTLER_FILTER,SET_PPS_FILTER,
-		 SET_CS_FILTER,SET_WAVE_FILTER} from '../constants/frontEndConstants'
+		 SET_CS_FILTER,SET_WAVE_FILTER,AUDIT_RESET} from '../constants/frontEndConstants'
 
 export function butlerHeaderSort(data){
 	return {
@@ -29,6 +29,20 @@ export function butlerFilterDetail(data) {
 export function setCheckedPps(data){
 	return {
 		type: PPS_CHECKED,
+		data
+  	}
+}
+
+export function setCheckedAudit(data){
+	return {
+		type: AUDIT_CHECKED,
+		data
+  	}
+}
+
+export function resetaudit(data){
+	return {
+		type: AUDIT_RESET,
 		data
   	}
 }

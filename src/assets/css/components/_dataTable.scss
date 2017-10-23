@@ -1504,6 +1504,7 @@ color: #000000;
 .fixedDataTableLayout_main{
     .gorToolHeaderEl {
       display: inline-block;
+      float:left;
     }
     .sortIcon{
       display: inline-block;
@@ -1764,7 +1765,9 @@ display:inline-block;
   padding-left: 22px;
   vertical-align: middle;
   padding-top: 10px;
+  float:left;
 }
+
 
 .gor-header-id 
 {
@@ -1850,6 +1853,7 @@ font-family: "source sans pro";
 
 .gor-tooltip {
   display: none;
+  padding-left: 50px;
 
 }
 .gor-tool-tip-hover {
@@ -1857,6 +1861,13 @@ font-family: "source sans pro";
   color: #27aae1;
   font-size: 14px;
   padding-top: 4px;
+}
+
+.displayLeft{
+  float:left;
+}
+.displayHidden{
+  visibility:hidden;
 }
 
 .gor-tool-tip-hover:hover + .gor-tooltip 
@@ -1874,7 +1885,7 @@ font-family: "source sans pro";
     border: solid 1px grey;
     border-radius: 3px;
     padding-bottom: 20px;
-    padding-left: 20px;
+    padding-left: 30px;
     padding-top: 20px;
 }
 
@@ -1922,4 +1933,11 @@ font-family: "source sans pro";
   padding-top:5px;
   padding-bottom:5px;
   color:red;
+}
+
+.gor-audit-header-check {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+  float:left;
 }
