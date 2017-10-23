@@ -19,6 +19,15 @@ class Dropdown extends Component {
     return state;
   }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.placeholder !== this.state.placeholder) {
+            this.setState({
+                placeholder: nextProps.placeholder,
+                defaultPlaceHolder: nextProps.placeholder
+            })
+        }
+    }
+
   _toggleDropdown(){
     var currentVisibility = this.state.dropDownVisible;
     currentVisibility = !currentVisibility;
