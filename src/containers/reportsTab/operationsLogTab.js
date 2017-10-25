@@ -73,7 +73,8 @@ class OperationsLogTab extends React.Component{
             pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             dataFetchedOnLoad:false,
             hideLayer:false,
-            queryApplied:Object.keys(this.props.location.query).length ? true :false
+            queryApplied:Object.keys(this.props.location.query).length ? true :false,
+            totalSize:this.props.totalSize || null
         }
     }
 
@@ -90,8 +91,8 @@ class OperationsLogTab extends React.Component{
                 rowObj.status = rowData.status.type;
                 rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type
                 rowObj.requestId = rowData.requestId;
-                rowObj.skuId = rowData.productInfo.type+" "+rowData.productInfo.id+"/"+rowData.productInfo.quantity+" items";
-                rowObj.sourceId = rowData.source.type+" "+rowData.source.id+(rowData.source.children ? "/"+
+                rowObj.skuId = (rowData.productInfo.type || "--")+" "+(rowData.productInfo.id || "--")+"/"+(rowData.productInfo.quantity ? rowData.productInfo.quantity+" items" : "--");
+                rowObj.sourceId = (rowData.source.type || "--")+" "+rowData.source.id+(rowData.source.children ? "/"+
                                 rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
                 rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
                                 rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
@@ -140,10 +141,12 @@ class OperationsLogTab extends React.Component{
             let rawData = this.state.realTimeSelected  ? 
             nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
             let data = this._processData(rawData);
+            let totalSize = nextProps.totalSize;
             let dataList = new tableRenderer(data.length)
             dataList.newData=data;
             this.setState({
-                dataList
+                dataList,
+                totalSize
             })
         }
         if((!nextProps.olData.length || !nextProps.olWsData.length) 
@@ -198,9 +201,7 @@ class OperationsLogTab extends React.Component{
             let _query =  Object.assign({},this.props.location.query);
             _query.pageSize = this.state.pageSize;
             _query.page = _query.page || 1;
-            //this.props.applyOLFilterFlag(true);
             this.props.router.push({pathname: "/reports/operationsLog",query: _query})
-            //this._getOperationsData(this.props,{pageSize:e.value});
         })
         
     }
@@ -222,7 +223,10 @@ class OperationsLogTab extends React.Component{
                     filters.requestId = query.request_id;
                 }
                 if(query.sku_id){
-                    filters.skuId = query.sku_id;
+                    filters.productInfo = {
+                        type:"item",
+                        id:query.sku_id
+                    };
                 }
                 if(query.user_id){
                     filters.userId = query.user_id;
@@ -286,11 +290,18 @@ class OperationsLogTab extends React.Component{
     }
     _requestReportDownload(){
         var formData = {
-                "searchRequest": {}, 
                 "report": {
                 "requestedBy": this.props.username,
                 "type" : REPORT_NAME_OPERATOR_LOGS
                 }
+        }
+        if(this.props.location.query.time_period !== REALTIME){
+            formData.searchRequest = {
+                page:{
+                    size:this.state.totalSize ? parseInt(this.state.totalSize)-1 : null,
+                    from:0
+                }
+            }
         }
         var params={
                 'url':REQUEST_REPORT_DOWNLOAD,
@@ -341,7 +352,7 @@ class OperationsLogTab extends React.Component{
                                        <button className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
                                         <FormattedMessage id="operationLog.table.downloadBtn"
                                         description="button label for download report"
-                                        defaultMessage="Download Report"/>
+                                        defaultMessage="Generate Report"/>
                                         </button>
                                         <button
                                             className={this.props.filtersApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
@@ -580,6 +591,7 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         showFilter: state.filterInfo.filterState ,
         olData:state.operationsLogsReducer.olData,
+        totalSize:state.operationsLogsReducer.totalSize,
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
         filtersApplied:state.operationsLogsReducer.filtersApplied,
         filtersModified:state.operationsLogsReducer.filtersModified,

@@ -59,10 +59,7 @@ class InventoryTab extends React.Component{
 	}
 
 	render(){
-		/**
-		 * Need to remove these hardcoded variables
-		 * 
-		 */
+		
 		var histogramLabel=<FormattedMessage id="inventory.histogram.header" description="Inventory Histogram Header Message" 
               			defaultMessage="Stock level history"/>  ,
 		linechartLabel=<FormattedMessage id="inventory.linechart.header" description="Inventory Line Chart Header Message" 
@@ -80,7 +77,8 @@ class InventoryTab extends React.Component{
 				linechartLabel={linechartLabel} 
 				isPrevDateSelected={this.props.isPrevDateSelected} 
 				inventoryDataPrevious={this.props.inventoryDataPrevious} 
-				snapshotData={snapshotData}/>
+				snapshotData={snapshotData}
+                timeOffset={this.props.timeOffset}/>
 			</div>
 		);
 	}
@@ -107,7 +105,8 @@ function mapStateToProps(state, ownProps) {
         "recreatedData": state.inventoryInfo.recreatedData || {},
         "noData": state.inventoryInfo.noData,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        timeOffset:state.authLogin.timeOffset
     }
 }
     function mapDispatchToProps(dispatch){
