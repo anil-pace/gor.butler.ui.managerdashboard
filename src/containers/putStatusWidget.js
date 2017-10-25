@@ -45,12 +45,12 @@ class PutStatusWidget extends React.Component{
                             />;  
                 
                 lowStr=<FormattedMessage id="widget.put.throughput" description='Throughput message' 
-            					defaultMessage='{count} {pluralMsg} stocking {throughput} items/hr'
-            					values={{
-							        count: totalPut,
+                                defaultMessage='{pluralMsg} stocking {throughput} items/hr'
+                                values={{
+                                    count: totalPut,
                                     pluralMsg: pluralMsg,
-							        throughput:putThroughput
-							    }}/>;
+                                    throughput:putThroughput
+                                }}/>;;
     		}
             if(!this.props.system_status)
             {

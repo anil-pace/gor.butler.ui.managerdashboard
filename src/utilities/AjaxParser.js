@@ -514,7 +514,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(profileRequested(res))
             break;
         case OPERATION_LOG_FETCH:
-            store.dispatch(recieveOLData(res.hits.hits))
+            store.dispatch(recieveOLData(res.hits))
             break;
         case REPORTS_FETCH:
             store.dispatch(recieveReportsData(res))
