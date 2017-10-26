@@ -1,6 +1,7 @@
 import { OPERATION_LOG_FETCH,
 	APPLY_OL_FILTER_FLAG,
-	SET_REPORTS_SPINNER,RECIEVE_WS_OL_DATA,WS_OPERATOR_LOG_FLUSH} from '../constants/frontEndConstants'
+	SET_REPORTS_SPINNER,
+	RECIEVE_WS_OL_DATA,WS_OPERATOR_LOG_FLUSH} from '../constants/frontEndConstants'
 
 export  function operationsLogsReducer(state={},action){
 	
@@ -31,9 +32,10 @@ export  function operationsLogsReducer(state={},action){
 	    	hasDataChanged:!state.hasDataChanged,
 	    	reportsSpinner:false
       })
-	 case WS_OPERATOR_LOG_FLUSH:
+	  case WS_OPERATOR_LOG_FLUSH:
 	 	return Object.assign({}, state, {
 	    	olWsData:[],
+	    	olData:[],
 	    	hasDataChanged:!state.hasDataChanged,
 	    	reportsSpinner:false
       })

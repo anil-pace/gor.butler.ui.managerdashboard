@@ -23,23 +23,16 @@ export function wsOLSubscribe(data){
         data
     }
 }
-function wsUnsubscribe(data){
+export function wsOLUnSubscribe(data){
     return {
         type: WS_OPERATOR_LOG_UNSUBSCRIBE,
         data
     }
 }
-function flushWSData(){
+export function flushWSData(){
     return {
             type: WS_OPERATOR_LOG_FLUSH
     }
-}
-export function wsOLUnSubscribe(data){
-    return function(dispatch){
-        dispatch(wsUnsubscribe(data))
-        dispatch(flushWSData())
-    }
-    
 }
 export function setReportsSpinner(data){
     return {

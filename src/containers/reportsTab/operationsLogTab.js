@@ -3,13 +3,13 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage,FormattedDate} from 'react-intl';
+import { FormattedMessage,FormattedDate,injectIntl,intlShape,defineMessages} from 'react-intl';
 import { connect } from 'react-redux';
 import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
-import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner} from '../../actions/operationsLogsActions';
+import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
     ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
     DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
@@ -29,16 +29,24 @@ import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION,REQUEST_REPORT_DOWNLOAD} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 
-
-const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
+/*Page size dropdown options*/
+const pageSizeDDOpt = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
                                                           defaultMessage="25"/>},
             {value: "50",  disabled:false,label: <FormattedMessage id="operationLog.page.fifty" description="Page size 50"
                                                           defaultMessage="50"/>},
             {value: "100",  disabled:false,label: <FormattedMessage id="operationLog.page.hundred" description="Page size 100"
                                                           defaultMessage="100"/>}];
+/*Intl Messages*/
+const  messages= defineMessages({
+    genRepTooltip: {
+        id: 'operationLog.genRep.tooltip',
+        description: 'Tooltip to display Generate button',
+        defaultMessage: 'Reports not available for Realtime filter'
+    }
+})
 
 class OperationsLogTab extends React.Component{
-	constructor(props,context) {
+    constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
         
@@ -182,16 +190,16 @@ class OperationsLogTab extends React.Component{
     }
     componentWillUnmount(){
         /**
-		 * If a user navigates back to the inventory page,
-		 * it should subscribe to the packet again.
-		 */
-		this.setState({subscribed: false})
-        this.props.wsOLUnSubscribe();
-	}
+         * If a user navigates back to the inventory page,
+         * it should subscribe to the packet again.
+         */
+        this.setState({subscribed: false})
+        this.props.wsOLUnSubscribe(flushWSData);
+    }
 
     _subscribeData(){
         this.props.initDataSentCall(wsOverviewData["default"]);
-	}
+    }
     _handlePageChange(e){
         
         this.setState({
@@ -254,7 +262,7 @@ class OperationsLogTab extends React.Component{
                 }
 
         if(query.time_period !== REALTIME){
-            this.props.wsOLUnSubscribe();
+            this.props.wsOLUnSubscribe(flushWSData);
             
             let params={
                 'url':OPERATIONS_LOG_URL,
@@ -273,7 +281,7 @@ class OperationsLogTab extends React.Component{
         }
         else if(query.time_period && query.time_period === REALTIME 
             && !this.state.realTimeSubSent && isSocketConnected){
-            this.props.wsOLUnSubscribe(false);
+            this.props.wsOLUnSubscribe(flushWSData);
             let wsParams = {}
             delete filters.timeRange;
             delete filters.page;
@@ -289,44 +297,47 @@ class OperationsLogTab extends React.Component{
         this.props.showTableFilter(!this.props.showFilter);
     }
     _requestReportDownload(){
-        var formData = {
-                "report": {
-                "requestedBy": this.props.username,
-                "type" : REPORT_NAME_OPERATOR_LOGS
-                }
-        }
-        if(this.props.location.query.time_period !== REALTIME){
-            formData.searchRequest = {
-                page:{
-                    size:this.state.totalSize ? parseInt(this.state.totalSize)-1 : null,
-                    from:0
-                }
-            }
-        }
-        var params={
-                'url':REQUEST_REPORT_DOWNLOAD,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'formdata':formData,
-                'cause':DOWNLOAD_REPORT_REQUEST
-            }
-
         
-        this.props.makeAjaxCall(params);
-    }
+            let formData = {
+                    "report": {
+                    "requestedBy": this.props.username,
+                    "type" : REPORT_NAME_OPERATOR_LOGS
+                    }
+            }
+            
+                formData.searchRequest = {
+                    page:{
+                        size:this.state.totalSize ? parseInt(this.state.totalSize)-1 : null,
+                        from:0
+                    }
+                }
+            
+            let params={
+                    'url':REQUEST_REPORT_DOWNLOAD,
+                    'method':POST,
+                    'contentType':APP_JSON,
+                    'accept':APP_JSON,
+                    'formdata':formData,
+                    'cause':DOWNLOAD_REPORT_REQUEST
+                }
 
-	render(){
-		var {dataList} = this.state;
+            
+            this.props.makeAjaxCall(params);
+        }
+    
+
+    render(){
+        var {dataList,totalSize,pageSize} = this.state;
         var _this = this;
         var filterHeight=screen.height - 190 - 50;
         var dataSize = dataList.getSize();
-        var timePeriod = this.props.location.query.time_period;
+        var timePeriod = _this.props.location.query.time_period;
         var noData = !dataSize && timePeriod !== REALTIME;
         var pageSizeDDDisabled = timePeriod === REALTIME ;
-        var location = JSON.parse(JSON.stringify(this.props.location))
-		return (
-			<div className="gorTesting wrapper gor-operations-log">
+        var location = JSON.parse(JSON.stringify(_this.props.location));
+        var totalPage = Math.ceil(totalSize / pageSize);
+        return (
+            <div className="gorTesting wrapper gor-operations-log">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
             <div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
@@ -349,7 +360,7 @@ class OperationsLogTab extends React.Component{
                             
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                       <button className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
+                                       <button disabled = {pageSizeDDDisabled} title={this.props.intl.formatMessage(messages.genRepTooltip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
                                         <FormattedMessage id="operationLog.table.downloadBtn"
                                         description="button label for download report"
                                         defaultMessage="Generate Report"/>
@@ -386,7 +397,7 @@ class OperationsLogTab extends React.Component{
                 
                         
                
-				<Table
+                <Table
                     rowHeight={80}
                     rowsCount={dataList.getSize()}
                     headerHeight={70}
@@ -548,18 +559,18 @@ class OperationsLogTab extends React.Component{
                 <div className="gor-ol-paginate-wrap">
                 <div className="gor-ol-paginate-left">
                 <Dropdown 
-                    options={pageSize} 
+                    options={pageSizeDDOpt} 
                     onSelectHandler={(e) => this._handlePageChange(e)}
                     disabled={pageSizeDDDisabled} 
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={totalPage}/>
                 </div>
                 </div>
-			</div>
-		);
-	}
+            </div>
+        );
+    }
 };
 
 OperationsLogTab.propTypes = {
@@ -571,7 +582,8 @@ OperationsLogTab.propTypes = {
     filtersModified: React.PropTypes.bool,
     notificationSocketConnected: React.PropTypes.bool,
     reportsSpinner: React.PropTypes.bool,
-    olWsData: React.PropTypes.array
+    olWsData: React.PropTypes.array,
+    intl: intlShape.isRequired
 
 }
 OperationsLogTab.defaultProps = {
@@ -604,7 +616,7 @@ function mapStateToProps(state, ownProps) {
     };
 }
 function mapDispatchToProps(dispatch){
-	return {
+    return {
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         updateSubscriptionPacket: function (data) {
                 dispatch(updateSubscriptionPacket(data));
@@ -619,6 +631,4 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(OperationsLogTab)));
-
-
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(injectIntl(OperationsLogTab))));
