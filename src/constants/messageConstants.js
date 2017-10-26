@@ -261,7 +261,7 @@ export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
 }
 /*Messages for operations logs*/
 export const REQUEST_REPORT_SUCCESS = (<FormattedMessage id="operationsLog.reportRequest.success" description='Status text for zone' 
-      defaultMessage='Request successfully generated. Kindly check the Downloads Tab'/>)
+      defaultMessage='Request successfully generated. Kindly check the Download Tab'/>)
 export const REQUEST_REPORT_FAILURE = (<FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
       defaultMessage='Error creating request'/>)
 

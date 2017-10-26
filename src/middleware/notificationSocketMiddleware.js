@@ -99,6 +99,9 @@ const notificationSocketMiddleware = (function(){
           operatorLogWSClient.unsubscribe();
           operatorLogWSClient= null;
         }
+        if(action.data){
+          store.dispatch(action.data())
+        }
         break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:
