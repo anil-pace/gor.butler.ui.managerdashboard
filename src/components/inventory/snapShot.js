@@ -20,14 +20,17 @@
  	render(){
 
  		var isToday=this.props.currentDate=== Date.parse(this.props.snapshotTabData.date) ? true :false,
- 		dt,currentStock,todayDate;
+ 		dt,currentStock,todayDate,timeOffset;
+ 		timeOffset =  this.props.timeOffset;
  		if(isToday){
  			dt=<FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
  			currentStock=<FormattedMessage id='inventory.snaphot.currentStock' defaultMessage="Current Stock" description="Snapshot table header"/>
  		}
  		else{
- 			todayDate=this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date());
- 			dt=<FormattedDate year='numeric' month='short' day='2-digit' value={new Date(todayDate)}/>
+ 			let timeZonedDate;
+ 			todayDate=this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date(new Date().toLocaleDateString("en-US",{timeZone:timeOffset})));
+ 			timeZonedDate = new Date(new Date(todayDate).toLocaleDateString("en-US",{timeZone:timeOffset}));
+ 			dt=<FormattedDate year='numeric' month='short' day='2-digit' value={timeZonedDate}/>
  			currentStock=<FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
  		}
  		return (
@@ -78,7 +81,8 @@
  SnapShotDetails.propTypes={
  	currentDate:React.PropTypes.number,
  	snapshotData:React.PropTypes.object,
- 	hasDataChanged:React.PropTypes.bool
+ 	hasDataChanged:React.PropTypes.bool,
+ 	timeOffset:React.PropTypes.string
 
  }
  export default SnapShotDetails;

@@ -20,7 +20,7 @@ class Dropdown extends Component {
   }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.placeholder !== this.state.placeholder) {
+        if (nextProps.placeholder && nextProps.placeholder !== this.state.placeholder) {
             this.setState({
                 placeholder: nextProps.placeholder,
                 defaultPlaceHolder: nextProps.placeholder
