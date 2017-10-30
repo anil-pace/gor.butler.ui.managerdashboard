@@ -1747,7 +1747,7 @@
   {
     "id": "operationsLog.reportRequest.success",
     "description": "Status text for zone",
-    "defaultMessage": "Request successfully generated. Kindly check the Downloads Tab",
+    "defaultMessage": "Request successfully generated. Kindly check the Download Tab",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -3510,7 +3510,7 @@
   {
     "id": "widget.put.throughput",
     "description": "Throughput message",
-    "defaultMessage": "{count} {pluralMsg} stocking {throughput} items/hr",
+    "defaultMessage": "{pluralMsg} stocking {throughput} items/hr",
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
@@ -3670,6 +3670,12 @@
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
+    "id": "operationLog.genRep.tooltip",
+    "description": "Tooltip to display Generate button",
+    "defaultMessage": "Reports not available for Realtime filter",
+    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+  },
+  {
     "id": "operationLog.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "Operations Log",
@@ -3678,7 +3684,7 @@
   {
     "id": "operationLog.table.downloadBtn",
     "description": "button label for download report",
-    "defaultMessage": "Download Report",
+    "defaultMessage": "Generate Report",
     "filepath": "./src/containers/reportsTab/operationsLogTab.js"
   },
   {
