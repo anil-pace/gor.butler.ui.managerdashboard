@@ -136,7 +136,7 @@ export const ORDER_UNFULFILLABLE="not_fulfillable";
 export const ORDER_ONHOLD="temporary_unfulfillable";
 export const ORDER_CANCELLED="cancelled";
 export const ORDER_INPROGRESS="pending__fulfillable";
-export const ORDER_COMPLETED="completed";
+export const ORDER_COMPLETED="complete";
 export const ORDER_BREACHED="breached";
 export const ORDER_EXCEPTION="exception";
 	

@@ -2605,6 +2605,10 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
+.complete .public_fixedDataTableCell_cellContent {
+  text-transform: capitalize;
+}
+
 .pending .public_fixedDataTableCell_cellContent {
   text-transform: capitalize;
 }

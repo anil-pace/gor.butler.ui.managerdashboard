@@ -77,7 +77,7 @@ const messages=defineMessages({
 });
 
 
-class OrderListTab extends React.Component {
+ class OrderListTab extends React.Component {
     constructor(props) {
         super(props);
         this.state={selected_page: 1, query: null, orderListRefreshed: null};
@@ -140,9 +140,9 @@ class OrderListTab extends React.Component {
         //appending filter for status
 
         if (query.status) {
-            
-         let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
-         if (statusList.length > 0) {
+
+           let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
+           if (statusList.length > 0) {
             let _flattened_statuses=[]
             statusList=statusList.constructor===Array?statusList:[statusList]
             statusList.forEach(function (status) {
@@ -153,10 +153,10 @@ class OrderListTab extends React.Component {
                 _query_params.push([WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("=="))
             }
             else if(statusList.length>1){
-            _query_params.push([WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("="))
+                _query_params.push([WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("="))
+            }
         }
-         }
-     }
+    }
 
         //appending filter for orders by time:
         
@@ -308,7 +308,7 @@ class OrderListTab extends React.Component {
                     });
                 }
                 else {
-                    orderData.pickBy=nProps.context.intl.formatDate(data[i].pick_before_time,
+                    orderData.pickBy=nProps.context.intl.FormattedRelative(data[i].pick_before_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -458,7 +458,7 @@ class OrderListTab extends React.Component {
             }
             else {
                 appendStatusUrl=(status.length ===1) ? (WAREHOUSE_STATUS_SINGLE + "==" + status  + breachedtext) : breachedtext;
-                 appendStatusUrl=(status.length >1) ? (WAREHOUSE_STATUS_MULTIPLE + "=" + "("+status+")"  + breachedtext) : breachedtext;
+                appendStatusUrl=(status.length >1) ? (WAREHOUSE_STATUS_MULTIPLE + "=" + "("+status+")"  + breachedtext) : breachedtext;
             }
             data.selected=1;
             filterApplied=true;
@@ -505,9 +505,13 @@ _setFilter() {
     this.props.showTableFilter(newState)
 }
 
-    onPageSizeChange(arg) {
-        this.refresh(null, arg);
-    }
+_asdf(){
+    return "pranjal";
+}
+
+onPageSizeChange(arg) {
+    this.refresh(null, arg);
+}
 
 
 render() {
