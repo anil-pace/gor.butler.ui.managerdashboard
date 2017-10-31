@@ -29,6 +29,8 @@ export const CLEARED="cleared";
 export const PROGRESS="progress";
 export const NOT_FOUND="not_found";
 export const IN_PROGRESS="in_progress";
+export const SYSTEM_GENERATED="system";
+
 
 
 

@@ -354,7 +354,7 @@ class AuditTable extends React.Component {
 
                     }
                     cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
-                                               checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit"/>}
+                                               checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit" />}
                     fixed={true}
                     width={columnWidths.display_id}
                     isResizable={true}
