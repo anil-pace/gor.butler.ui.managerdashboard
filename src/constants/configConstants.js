@@ -1,11 +1,10 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.8.83';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
-export const HEADER_URL=API_URL+"/user"
-export const ORDERS_URL="/orders/md"
+export const HEADER_URL=API_URL+"/user";
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
 export const PPS_STATUS_CHANGE_URL = API_URL+"/pps/change_status";
 export const GET_PPS_MSU = API_URL+"/pps/get_pending_msu";
@@ -20,10 +19,10 @@ export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
 export const PPSLIST_URL=API_URL+"/pps/available_pps"
 export const ORDER_PAGE="?page=";
 export const EXCEPTION_TRUE="exception";
-export const WAREHOUSE_STATUS="warehouse_status";
-export const UPDATE_TIME_LOW='&update_time<=';
-export const UPDATE_TIME_HIGH='&update_time>=';
-export const UPDATE_TIME='update_time';
+export const WAREHOUSE_STATUS_SINGLE="search=state";
+export const WAREHOUSE_STATUS_MULTIPLE="search=state=in";
+export const UPDATE_TIME='time=';
+export const UPDATE_TIME_UNIT="timeUnit=";
 export const PICK_BEFORE_ORDER_URL="&pick_before_time<=";
 export const BREACHED_URL="&breached=true&warehouse_status=['pending','fulfillable','temporary_unfulfillable','completed']";
 export const TIME_ZONE_URL=API_URL+"/components/get_time_zone"
@@ -72,7 +71,4 @@ export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";/
 export const REPORTS_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
 export const DOWNLOAD_REPORT = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/download/";
 export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/generate-report";
-
-
-
-
+export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";

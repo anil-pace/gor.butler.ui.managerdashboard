@@ -55,9 +55,5 @@ describe('REACT-REDUX (Deep + passing the {store} using provider)',()=>{
        expect(container.find(OperationsLogTab).length).toEqual(1)
     });
     
-   /* it('+++ Checking count of zone tiles', () => {
-       expect(container.find(Zone).length).toEqual(8)
-    });*/
-    
 
 });

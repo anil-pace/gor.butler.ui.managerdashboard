@@ -143,15 +143,20 @@ export const  stringConfig= defineMessages({
         description: 'Text to show connected',
         defaultMessage: "Connected"
     },
-    completed:{
-        id: 'stringConfig.completed',
-        description: 'Text to show completed',
-        defaultMessage: "Completed"
-    },
-    Completed:{
-        id: 'stringConfig.Completed',
+    complete:{
+        id: 'stringConfig.complete',
         description: 'Text to show Completed',
         defaultMessage: "completed"
+    },
+    completed:{
+        id: 'stringConfig.completed',
+        description: 'Text to show Completed',
+        defaultMessage: "completed"
+    },
+    rejected: {
+        "id": "stringConfig.rejected",
+        "description": "Text to show rejected",
+        "defaultMessage": "Rejected"
     },
     in_progress:{
         id: 'stringConfig.in_progress',
@@ -172,6 +177,26 @@ export const  stringConfig= defineMessages({
         id: 'stringConfig.abandoned',
         description: 'Text to show abandoned',
         defaultMessage: "Abandoned"
+    },
+    CREATED:{
+        id: 'stringConfig.created',
+        description: 'Text to show created',
+        defaultMessage: "Created"
+    },
+    ACCEPTED:{
+        id: 'stringConfig.accepted',
+        description: 'Text to show accepted',
+        defaultMessage: "Accepted"
+    },
+    BAD_REQUEST:{
+        id: 'stringConfig.bad_request',
+        description: 'Text to show bad request',
+        defaultMessage: "Bad Request"
+    },
+    INTERNAL_SERVER_ERROR:{
+        id: 'stringConfig.internal_server_error',
+        description: 'Text to show internal server error',
+        defaultMessage: "Internal Error"
     },
     manual:{
         id: 'stringConfig.manual',
