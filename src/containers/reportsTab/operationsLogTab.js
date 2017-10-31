@@ -244,6 +244,10 @@ class OperationsLogTab extends React.Component{
                         "id":query.pps_id,
                         "type":"pps"
                     };
+                    filters.destination = {
+                        "id":query.pps_id,
+                        "type":"pps"
+                    };
                 }
                 if(query.operatingMode){
                     filters.operatingMode = (query.operatingMode.toString()).replace(/,/g," ");
