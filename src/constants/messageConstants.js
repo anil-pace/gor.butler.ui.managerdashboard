@@ -207,6 +207,10 @@ export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change reque
 export const ppsModeSuccess ="Mode change request successful";
 export const ppsStatusSuccess ="Status change request successful";
 
+//Message for system emergency audit
+export const SYTEM_GENERATED_TEXT=(<FormattedMessage id="audit.subheading" description='System Generated' defaultMessage='System Generated'/>);   
+
+
 /*Zoning messages*/
 export const ZONE_STATUS_INTL_MESSAGE ={
       operation_normal:(<FormattedMessage id="zoning.status.normal" description='Status text for zone' 
