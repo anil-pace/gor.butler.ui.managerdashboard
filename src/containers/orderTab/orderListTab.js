@@ -95,7 +95,7 @@ const messages=defineMessages({
 
      componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: nextProps.location.query})
+            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._subscribeData()
             this._refreshList(nextProps.location.query,nextProps.orderSortHeaderState.colSortDirs)
@@ -149,7 +149,7 @@ const messages=defineMessages({
                 _flattened_statuses.push(status.split("__"))
             })
             statusList=[].concat.apply([], _flattened_statuses)
-            if(statusList.length==1){
+            if(statusList.length===1){
                 _query_params.push([WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("=="))
             }
             else if(statusList.length>1){
@@ -505,9 +505,7 @@ _setFilter() {
     this.props.showTableFilter(newState)
 }
 
-_asdf(){
-    return "pranjal";
-}
+
 
 onPageSizeChange(arg) {
     this.refresh(null, arg);

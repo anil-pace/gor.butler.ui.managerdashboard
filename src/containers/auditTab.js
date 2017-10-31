@@ -129,7 +129,7 @@ class AuditTab extends React.Component {
             selectedToken=[nextProps.location.query.auditType];
             obj.name=mappingArray(selectedToken);
             this.props.setTextBoxStatus(obj);
-            this.setState({query: nextProps.location.query});
+            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
