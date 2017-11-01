@@ -1,12 +1,12 @@
 import React  from 'react';
-import LoginForm from './loginForm';
+import LoginForm from '../login/loginForm';
 import Footer from '../footer/Footer';
 import Spinner from '../../components/spinner/Spinner';
 import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {EN, JA, ES, ZH, DE, FR,FILL_BACK} from '../../constants/frontEndConstants'; 
-import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH} from '../../constants/messageConstants'; 
+import {EN, JA, ES, ZH, DE, FR,FILL_BACK} from '../../constants/frontEndConstants';
+import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH} from '../../constants/messageConstants';
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 
@@ -18,9 +18,9 @@ import { translationMessages } from '../../utilities/i18n';
 
 
 class Login extends React.Component{
-	 constructor(props) 
+	 constructor(props)
 	 {
-    	super(props);      
+    	super(props);
       this.state={sel:0, items :[
         { value: EN, label: ENG },
         { value: JA, label: JAP },
@@ -34,21 +34,21 @@ class Login extends React.Component{
     {
         document.body.className=FILL_BACK;
         this._changeDropdown();
-    } 
+    }
     _changeDropdown()
     {
-        for (let i=0; i < this.state.items.length; i++) 
-        { 
+        for (let i=0; i < this.state.items.length; i++)
+        {
             if(this.state.items[i].value=== this.props.sLang)
                 this.setState({sel:i});
-        }      
+        }
     }
     componentWillReceiveProps(nextProps) {
     /**
-     * Checking if the user is loggedin 
+     * Checking if the user is loggedin
      * and redirecting to main page
      */
-      if(nextProps.loginAuthorized)  
+      if(nextProps.loginAuthorized)
       {
            this.props.resetForm();
            document.body.className='';
@@ -78,17 +78,17 @@ class Login extends React.Component{
           <div>
               <TopNotifications />
             <div className='gor-login-form'>
-            
+
             <Spinner isLoading={this.props.loginSpinner} setSpinner={this.props.setLoginSpinner}/>
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>
-                    <FormattedMessage id='login.butler.language' 
+                    <FormattedMessage id='login.butler.language'
                         defaultMessage="Language" description="Text for language"/>
                     </div>
                     <Dropdown optionDispatch={(e)=> this._handleSelectionChange(e)} items={this.state.items}
-                     styleClass={'gor-lang-drop'} 
+                     styleClass={'gor-lang-drop'}
                     currentState={this.state.items[this.state.sel]} />
-                    
+
                 </div>
                 <div className='gor-login-logo alt-gor-logo'>
                 </div>
@@ -118,7 +118,7 @@ function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized ,
         sLang: state.intl.locale || null,
-        loginSpinner:state.spinner.loginSpinner         
+        loginSpinner:state.spinner.loginSpinner
     };
 }
 /**
