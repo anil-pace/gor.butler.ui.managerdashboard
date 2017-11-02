@@ -20,7 +20,7 @@ describe('REACT-REDUX (Deep + passing the {store} using provider)',()=>{
       sysOverviewReducer:{
         hasDataChanged:true,
         zones:{
-          "zones_data":{
+          "zones_data":{    
                 "1": {
                   "zone_status": "operation_normal" 
                 },

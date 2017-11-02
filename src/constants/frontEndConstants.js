@@ -29,6 +29,8 @@ export const CLEARED="cleared";
 export const PROGRESS="progress";
 export const NOT_FOUND="not_found";
 export const IN_PROGRESS="in_progress";
+export const SYSTEM_GENERATED="system";
+
 
 
 
@@ -136,7 +138,7 @@ export const ORDER_UNFULFILLABLE="not_fulfillable";
 export const ORDER_ONHOLD="temporary_unfulfillable";
 export const ORDER_CANCELLED="cancelled";
 export const ORDER_INPROGRESS="pending__fulfillable";
-export const ORDER_COMPLETED="completed";
+export const ORDER_COMPLETED="complete";
 export const ORDER_BREACHED="breached";
 export const ORDER_EXCEPTION="exception";
 	
@@ -520,6 +522,7 @@ export const BUTLER_HEADER_SORT="BUTLER_HEADER_SORT";
 export const BUTLER_HEADER_SORT_ORDER="BUTLER_HEADER_SORT_ORDER";
 export const PPS_CHECKED="PPS_CHECKED";
 export const AUDIT_CHECKED="AUDIT_CHECKED";
+export const AUDIT_RESET="AUDIT_RESET";
 export const PPS_HEADER_SORT="PPS_HEADER_SORT";
 export const PPS_HEADER_SORT_ORDER="PPS_HEADER_SORT_ORDER";
 export const USER_HEADER_SORT="USER_HEADER_SORT";
@@ -583,12 +586,15 @@ export const sortAuditHead={"startTime":"&order_by=start_actual_time",
     "completedTime":"&order_by=completion_time",
     "display_id":"&order_by=display_id",
     "status":"&order_by=audit_status&order_by_seq=[ 'audit_pending_approval','audit_created','audit_accepted','audit_conflicting','audit_waiting','audit_resolved','audit_pending','audit_reaudited','audit_started','audit_tasked','audit_rejected','audit_resolved','audit_aborted', 'audit_completed']"};
-export const sortOrder={"DESC":"&order=asc", "ASC":"&order=desc"};
 
-export const sortOrderHead={"recievedTime":"&order_by=create_time", 
-							  "pickBy":"&order_by=pick_before_time", 
-							  "id":"&order_by=order_id",
-                  			  "status":"&order_by=warehouse_status&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
+export const sortOrder={"DESC":"&order=ASC", "ASC":"&order=DESC"};
+
+
+export const sortOrderHead={"recievedTime":"&sort=createdOn", 
+							  "pickBy":"&sort=pick_before_time", 
+							  "id":"&sort=id",
+                  			  "status":"&sort=state&order_by_seq=['breached','exception','not_fulfillable','abandoned','temporary_unfulfillable','pending','fulfillable','cancelled','completed']"};
+
 /*Slider default marks we are passing from here*/
 export const filterMarks={
 		          0:"0",

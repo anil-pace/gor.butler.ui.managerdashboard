@@ -44,7 +44,6 @@ class AuditTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
         this.tableState(nextProps, this);
 
     }
@@ -99,7 +98,7 @@ class AuditTable extends React.Component {
 
     tableState(nProps, current) {
         var items=nProps.items || [];
-        var headerChecked=false,checkedAudit;
+        var headerChecked=false, checkedAudit;
         current._dataList=new tableRenderer(items ? items.length : 0);
         current._defaultSortIndexes=[];
         current._dataList.newData=items;
@@ -355,7 +354,7 @@ class AuditTable extends React.Component {
 
                     }
                     cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
-                                               checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit"/>}
+                                               checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit" />}
                     fixed={true}
                     width={columnWidths.display_id}
                     isResizable={true}

@@ -3,6 +3,7 @@ import { Cell} from 'fixed-data-table';
 import { FormattedMessage } from 'react-intl';
 import DropdownTable from './dropdown/dropdownTable'
 import {AUDIT_APPROVED, AUDIT_REJECTED,VIEW_AUDIT_ISSUES,APPROVE_AUDIT,GOR_STATUS,AUDIT_UNRESOLVED,AUDIT_REJECTED_STATUS,AUDIT_RESOLVED_STATUS,AUDIT_REAUDITED_STATUS,PPS_STATUS_FCLOSE,RESOLVED,REJECTED,AUDIT_LINE_REAUDITED,AUDIT_PENDING_APPROVAL,GOR_AUDIT_STATUS_DATA} from '../constants/frontEndConstants';
+import {SYTEM_GENERATED_TEXT} from "../constants/messageConstants";
 import Dropdown from "./gor-dropdown-component/dropdown";
 export var SortTypes={
   ASC: 'ASC',
@@ -544,16 +545,17 @@ export class SortHeaderCell extends React.Component {
 }
 }
 
-export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved,checkState,checked,showBox, ...props}) => (
-    <Cell {...props}>
 
-<input className={data.getObjectAt(rowIndex)[showBox]?'displayLeft':'displayHidden'} type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved,checkState,checked,showBox, ...props}) => (
+ <Cell {...props}>
+<input className={data.getObjectAt(rowIndex)[showBox]?'displayLeft':'displayHidden'} type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"] && data.getObjectAt(rowIndex)[showBox]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+      
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 
             <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black', float:'left'}}>
-                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>
-            </div>:data.getObjectAt(rowIndex)[columnKey]
-        }
+                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}
+            </div>:<div className="gor-subheading">{data.getObjectAt(rowIndex)[columnKey]}{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}</div>
+        } 
 
 
         {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?

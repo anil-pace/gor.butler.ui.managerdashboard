@@ -29,7 +29,7 @@ import {
     sortAuditHead,
     sortOrder,
     ALL,
-    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT
+    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED
 } from '../constants/frontEndConstants';
 import {
     SEARCH_AUDIT_URL,
@@ -129,7 +129,7 @@ class AuditTab extends React.Component {
             selectedToken=[nextProps.location.query.auditType];
             obj.name=mappingArray(selectedToken);
             this.props.setTextBoxStatus(obj);
-            this.setState({query: nextProps.location.query});
+            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
@@ -362,6 +362,7 @@ class AuditTab extends React.Component {
 
                 else {
                     auditData.startAudit=false;
+
                 }
 
 
@@ -489,8 +490,9 @@ class AuditTab extends React.Component {
                 auditData.infoIcon="rejected"
             }
             auditData.resolvedTask=data[i].resolved;
-            auditData.isChecked = checkedAudit[data[i].audit_id] ? true :false;
+            auditData.isChecked = (checkedAudit[data[i].audit_id] && auditData.startAudit) ? true :false;
             auditData.unresolvedTask=data[i].unresolved;
+            auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:false;
             auditDetails.push(auditData);
             auditData={};
         }

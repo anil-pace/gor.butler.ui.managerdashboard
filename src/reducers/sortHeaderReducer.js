@@ -1,7 +1,7 @@
 
 import {BUTLER_HEADER_SORT,BUTLER_HEADER_SORT_ORDER, PPS_HEADER_SORT, PPS_HEADER_SORT_ORDER, USER_HEADER_SORT, 
 		USER_HEADER_SORT_ORDER, WAVE_HEADER_SORT, WAVE_HEADER_SORT_ORDER, CS_HEADER_SORT_ORDER ,CS_HEADER_SORT,PPS_CHECKED, 
-		AUDIT_CHECKED, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER, ORDER_HEADER_SORT, ORDER_HEADER_SORT_ORDER, AUDIT_HEADER_SORT, 
+		AUDIT_CHECKED,AUDIT_RESET, DROP_RENDER_DISPLAY,SET_CHECK_ALL, SET_USER_FILTER, ORDER_HEADER_SORT, ORDER_HEADER_SORT_ORDER, AUDIT_HEADER_SORT, 
 		AUDIT_HEADER_SORT_ORDER, SET_ORDER_FILTER,SET_AUDIT_FILTER, SET_BUTLER_FILTER,SET_PPS_FILTER,SET_CS_FILTER,SET_WAVE_FILTER,RESET_CHECKED_PPS} from '../constants/frontEndConstants'
 
 export  function sortHeaderState(state={},action){
@@ -25,7 +25,18 @@ export  function sortHeaderState(state={},action){
 	  case AUDIT_CHECKED:
 	     return Object.assign({}, state, {
 	    	"checkedAudit":action.data
-      }) 
+      })
+
+	case AUDIT_RESET:
+	let checkedAudit=JSON.parse(JSON.stringify(state.checkedAudit));
+	let successFulAudit=action.data;
+	for(let i=0,len = successFulAudit.length ; i< len ; i++){
+	  		delete checkedAudit[successFulAudit[i]];
+	  	}
+	return Object.assign({}, state, {
+	    	"checkedAudit":checkedAudit
+      })
+
 	  case RESET_CHECKED_PPS:
 	  	let checkedPps = JSON.parse(JSON.stringify(state.checkedPps))
 	  	let successFulPPS = action.data;
