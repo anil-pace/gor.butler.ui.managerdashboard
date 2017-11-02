@@ -4712,7 +4712,7 @@
     "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
-    "id": "PPSTable.status",
+    "id": "PPStable.status",
     "description": "status for PPS table",
     "defaultMessage": "{ppsOnState} Open",
     "filepath": "./src/containers/systemTabs/PPStable.js"
