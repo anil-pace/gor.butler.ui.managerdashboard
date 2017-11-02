@@ -240,7 +240,7 @@ class OperationsLogTab extends React.Component{
                     filters.userId = query.user_id;
                 }
                 if(query.pps_id){
-                    filters.source = {
+                    filters.stationInfo = {
                         "id":query.pps_id,
                         "type":"pps"
                     };

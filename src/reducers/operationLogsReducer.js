@@ -26,9 +26,11 @@ export  function operationsLogsReducer(state={},action){
 	    	reportsSpinner:action.data
       })
 	  case RECIEVE_WS_OL_DATA:
-	  	 let oldData = state.olWsData || [];
+	  	 let oldData = JSON.parse(JSON.stringify(state.olWsData || []));
+	  	 let latestData = JSON.parse(JSON.stringify(action.data.hits ? action.data.hits.hits : []));
+	  	 
 	  	 return Object.assign({}, state, {
-	    	olWsData:oldData.concat(action.data.hits ? action.data.hits.hits : []),
+	    	olWsData:latestData.concat(oldData),
 	    	hasDataChanged:!state.hasDataChanged,
 	    	reportsSpinner:false
       })
