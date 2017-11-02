@@ -1,7 +1,8 @@
 import { OPERATION_LOG_FETCH,
 	APPLY_OL_FILTER_FLAG,
 	SET_REPORTS_SPINNER,
-	RECIEVE_WS_OL_DATA,WS_OPERATOR_LOG_FLUSH} from '../constants/frontEndConstants'
+	RECIEVE_WS_OL_DATA,WS_OPERATOR_LOG_FLUSH} from '../constants/frontEndConstants';
+import {removeDuplicates} from '../utilities/utils'
 
 export  function operationsLogsReducer(state={},action){
 	
@@ -30,7 +31,7 @@ export  function operationsLogsReducer(state={},action){
 	  	 let latestData = JSON.parse(JSON.stringify(action.data.hits ? action.data.hits.hits : []));
 	  	 
 	  	 return Object.assign({}, state, {
-	    	olWsData:latestData.concat(oldData),
+	    	olWsData:removeDuplicates(latestData.concat(oldData),"_id"),
 	    	hasDataChanged:!state.hasDataChanged,
 	    	reportsSpinner:false
       })
