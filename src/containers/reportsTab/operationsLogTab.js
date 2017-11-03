@@ -240,7 +240,7 @@ class OperationsLogTab extends React.Component{
                     filters.userId = query.user_id;
                 }
                 if(query.pps_id){
-                    filters.source = {
+                    filters.stationInfo = {
                         "id":query.pps_id,
                         "type":"pps"
                     };
@@ -565,7 +565,7 @@ class OperationsLogTab extends React.Component{
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={totalPage}/>
+                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={isNaN(totalPage) ? 1 : totalPage}/>
                 </div>
                 </div>
             </div>
