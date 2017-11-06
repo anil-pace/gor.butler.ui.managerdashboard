@@ -72,7 +72,3 @@ export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";/
 export const REPORTS_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
 export const DOWNLOAD_REPORT = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/download/";
 export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/generate-report";
-
-
-
-

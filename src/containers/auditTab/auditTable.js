@@ -193,7 +193,7 @@ class AuditTable extends React.Component {
       handleChange(columnKey, rowIndex, evt) {
         var checkedAudit = JSON.parse(JSON.stringify(this.props.checkedAudit));
         var sortedDataList = this.state.sortedDataList;
-        var selectedData =  sortedDataList._data ? 
+        var selectedData =  sortedDataList._data ?
                                 sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
                                 sortedDataList.newData[rowIndex];
         if(evt.target.checked){
@@ -203,7 +203,7 @@ class AuditTable extends React.Component {
             delete checkedAudit[selectedData[columnKey]];
         }
 
-       
+
         this.props.setCheckedAudit(checkedAudit)
     }
 
@@ -219,16 +219,16 @@ class AuditTable extends React.Component {
                     checkedAudit[this.props.items[i]["id"]]=this.props.items[i];
                 }
                 }
-                
+
             }
             else{
                  checkedAudit={};
             }
 
-       
+
         this.props.setCheckedAudit(checkedAudit)
         })
-        
+
     }
 
     manageAuditTask(rowIndex, option) {
@@ -295,6 +295,10 @@ class AuditTable extends React.Component {
         if (this.props.checkedAudit) {
             checkedStateAudit=this.props.checkedAudit;
         }
+        if (this.props.bulkAuditStarted) {
+            headerChecked=!this.props.bulkAuditStarted;
+        }
+
         var headerAlert=<div className="alertState">
 
             <div className="table-subtab-alert-icon"/>
@@ -331,8 +335,8 @@ class AuditTable extends React.Component {
                 {...this.props}>
                 <Column
                     columnKey="display_id"
-                    header={   
-                        <SortHeaderCell onSortChange={this.backendSort} 
+                    header={
+                        <SortHeaderCell onSortChange={this.backendSort}
                                         sortDir={colSortDirs.display_id}>
                                         <div className="gor-audit-header-check">
                                     <input type="checkbox" checked={headerChecked} onChange={this.headerCheckChange.bind(this)}/>
@@ -349,8 +353,8 @@ class AuditTable extends React.Component {
                                 </div>
                             </div>
                         </SortHeaderCell>
-                        
-               
+
+
 
                     }
                     cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}

@@ -110,7 +110,7 @@ const messages=defineMessages({
 class AuditTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state={selected_page: 1,query:null,auditListRefreshed:null};
+        this.state={selected_page: 1,query:null,auditListRefreshed:null, bulkAuditStarted: false};
     }
 
 
@@ -165,7 +165,7 @@ class AuditTab extends React.Component {
         if (query.auditType && query.auditType.length=== 1) {
             _query_params.push([AUDIT_PARAM_TYPE, query.auditType[0]].join("="))
          }
-       
+
         else {
             _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
         }
@@ -550,14 +550,14 @@ for (let propt in data.searchQuery) {
     }
 
 }
-//Formatting the param value for single and multiple type       
+//Formatting the param value for single and multiple type
 if (value.length) {
     paramValue=(value.length > 1 || selectvalue=== ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
     _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
     skuText=skuText + AUDIT_PARAM_VALUE + paramValue;
 }
 }
-//formating the audit status 
+//formating the audit status
 if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
     let statusToken=data.tokenSelected["STATUS"];
     skuText=skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
@@ -615,7 +615,7 @@ createAudit() {
 }
 
     startBulkAudit() {
-        var auditId=[]; 
+        var auditId=[];
         auditId=Object.keys(this.props.checkedAudit);
         modal.add(StartAudit, {
             title: '',
@@ -624,12 +624,19 @@ createAudit() {
             hideCloseButton: true,
             auditId: auditId,
             bulkFlag:true
-        });
+        },
+        this.setState({
+          bulkAuditStarted: true
+        })
+      );
     }
 
 
 //Render Function goes here
 render() {
+    console.log("=============================================>");
+    console.log("this.state.bulkAuditStarted");
+    console.log(this.state.bulkAuditStarted);
     var filterHeight=screen.height - 190;
     var renderTab=<div/>,
     timeOffset=this.props.timeOffset || "",
@@ -680,10 +687,10 @@ render() {
     setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
     setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
     isFilterApplied={this.props.isFilterApplied}
-    auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
-    checkedAudit={this.props.checkedAudit} 
+    auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit}
+    checkedAudit={this.props.checkedAudit}
     responseFlag={this.props.auditSpinner}
-    onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
+    onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)} bulkAuditStarted={this.state.bulkAuditStarted}/>
 
     let toolbar=<div>
     <div className="gor-filter-wrap"
@@ -879,4 +886,3 @@ AuditTab.PropTypes={
 
 
 export  default connect(mapStateToProps, mapDispatchToProps)(AuditTab);
-
