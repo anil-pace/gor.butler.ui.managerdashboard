@@ -72,3 +72,17 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
         return arraytoSearch.indexOf(a)== -1;
     });
 }
+/**
+ * Remove duplicates from array of objects
+ * @param  {array} Array from where duplicates need to be removed
+ * @param  {prop} Key based on which duplicates need to be removed  
+ */
+export function removeDuplicates( arr, prop ) {
+  var obj = {};
+  for ( var i = 0, len = arr.length; i < len; i++ ){
+    if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+  }
+  var newArr = [];
+  for ( var key in obj ) newArr.push(obj[key]);
+  return newArr;
+}
