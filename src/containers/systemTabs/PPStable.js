@@ -354,7 +354,7 @@ class PPStable extends React.Component {
                                                       defaultMessage="STATUS"/>
                                 <div className="gor-subStatus-online">
                                     <div >
-                                        <FormattedMessage id="PPSTable.status" description='status for PPS table'
+                                        <FormattedMessage id="PPStable.status" description='status for PPS table'
                                                           defaultMessage='{ppsOnState} Open'
                                                           values={{ppsOnState: ppsOnState ? ppsOnState : '0'}}/>
                                     </div>

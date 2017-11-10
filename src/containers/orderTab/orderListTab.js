@@ -183,7 +183,7 @@ const messages=defineMessages({
             orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
         }  
         url=[url, _query_params.join("&")].join("?");
-        url+=orderbyUrl;
+        url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
         
         let paginationData={
 
