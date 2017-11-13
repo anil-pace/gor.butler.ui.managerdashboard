@@ -219,7 +219,7 @@ class OperationsLogTab extends React.Component{
         isSocketConnected = props.notificationSocketConnected;
         var filters = {};
         var pageSize = this.state.pageSize;
-        var frm = ((query.page ? parseInt(query.page) : 1) -1) * pageSize;
+        var frm = ((query.page ? parseInt(query.page,10) : 1) -1) * pageSize;
         this.props.setReportsSpinner(true);
             if(Object.keys(query).length){
                 let timeOffset = query.time_period ? query.time_period.split("_") : [];
@@ -257,12 +257,12 @@ class OperationsLogTab extends React.Component{
                 if(timeOffset.length === 2){
                     filters.timeOffset={
                         "unit" : timeOffset[1],
-                        "value": parseInt(timeOffset[0])
+                        "value": parseInt(timeOffset[0],10)
                     }
                 }
             }
             filters.page={
-                    size:parseInt(pageSize),
+                    size:parseInt(pageSize,10),
                     from:frm
                 }
 
@@ -315,7 +315,7 @@ class OperationsLogTab extends React.Component{
             
             formData.searchRequest = Object.assign(derivedFilters,{
                     page:{
-                        size:this.state.totalSize ? parseInt(this.state.totalSize): null,
+                        size:this.state.totalSize ? parseInt(this.state.totalSize,10): null,
                         from:0
                     }
             })
