@@ -282,7 +282,7 @@ class OperationsLogTab extends React.Component{
         this.props.makeAjaxCall(params);
         this.setState({
                 realTimeSubSent:false,
-                derivedFilters: JSON.strigify(filters)
+                derivedFilters: JSON.stringify(filters)
             })
         }
         else if(query.time_period && query.time_period === REALTIME 
