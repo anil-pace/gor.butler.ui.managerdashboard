@@ -48,7 +48,9 @@ export const WS_NOTIFICATION_INIT = "WS_NOTIFICATION_INIT";
 export const WS_NOTIFICATION_END="WS_NOTIFICATION_END";
 export const WS_NOTIFICATION_SUBSCRIBE = "WS_NOTIFICATION_SUBSCRIBE";
 
-
+/*Constants for Orders from platform*/
+export const WS_ORDERS_PLATFORM_SUBSCRIBE = "WS_ORDERS_PLATFORM_SUBSCRIBE";
+export const WS_ORDERS_PLATFORM_UNSUBSCRIBE = "WS_ORDERS_PLATFORM_UNSUBSCRIBE";
 /* Header constants */
 export const GET_OVERVIEW="get_overview";
 export const GET_SYSTEM="get_system";
