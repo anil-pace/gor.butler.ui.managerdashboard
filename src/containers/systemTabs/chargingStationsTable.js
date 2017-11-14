@@ -106,9 +106,6 @@ class ChargingStationsTable extends React.Component {
         }
     }
 
-
-
-
     _onSortChange(columnKey, sortDir) {
 
         if (columnKey=== GOR_STATUS) {

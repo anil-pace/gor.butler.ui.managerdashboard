@@ -183,8 +183,16 @@ const messages=defineMessages({
             orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
         }  
         url=[url, _query_params.join("&")].join("?");
-        url+=orderbyUrl;
         
+        if(_query_params.length===2){
+            url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
+        }
+        else{
+            url+=orderbyUrl
+        }
+        
+        //url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
+        //url+=orderbyUrl
         let paginationData={
 
             'url': url,
@@ -326,7 +334,7 @@ const messages=defineMessages({
             else {
                 orderData.orderLine=data[i].completed_orderlines + "/" + data[i].total_orderlines;
             }
-            if (data[i].status=== "completed") {
+            if (data[i].status=== "complete") {
                 if (getDaysDiff(data[i].update_time) < 2) {
                     orderData.completedTime=nProps.context.intl.formatRelative(data[i].update_time, {
                         timeZone: timeOffset,

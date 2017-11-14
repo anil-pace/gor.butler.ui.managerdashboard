@@ -162,7 +162,7 @@ class PPS extends React.Component {
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
         var currentTask={"pick": pick, "put": put, "audit": audit};
-        var priStatus={"open": 1, "close": 2,"force_close": 2};
+        var priStatus={"open": 2, "close": 0,"force_close": 1};
         var checkedPPS = this.props.checkedPps || {};
         var requestedStatusText="--";
         detail.totalOperator=0;
@@ -198,7 +198,7 @@ class PPS extends React.Component {
             }
             else if(data[i].pps_status=== PPS_STATUS_CLOSE){
                 detail.status=CLOSE;
-                detail.statusPriority=1;
+                detail.statusPriority=0;
             }
             else{
                 detail.status=FCLOSE;
