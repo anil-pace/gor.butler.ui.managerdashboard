@@ -48,8 +48,8 @@ class PutStatusWidget extends React.Component{
             					defaultMessage='{pluralMsg} stocking {throughput} items/hr'
             					values={{
                                     pluralMsg: pluralMsg,
-							        throughput:putThroughput
-							    }}/>;
+                                    throughput:putThroughput
+                                }}/>;;
     		}
             if(!this.props.system_status)
             {

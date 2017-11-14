@@ -1,188 +1,44 @@
 [
 {
-	"id": "header.zones.inactiveZones",
-	"description": "Zone in operation count",
-	"defaultMessage": "{inactiveZones} {inactiveZones, plural, one {zone} other {zones}} paused",
-	"filepath": "./src/components/header/header.js"
+	"id": "stringConfig.complete",
+	"description": "Text to show Completed",
+	"defaultMessage": "completed",
+	"filepath": "./src/constants/backEndConstants.js"
 },
 {
-	"id": "operationsLog.reportRequest.success",
-	"description": "Status text for zone",
-	"defaultMessage": "Request successfully generated. Kindly check the Downloads Tab",
+	"id": "stringConfig.rejected",
+	"description": "Text to show rejected",
+	"defaultMessage": "Rejected",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.created",
+	"description": "Text to show created",
+	"defaultMessage": "Created",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.accepted",
+	"description": "Text to show accepted",
+	"defaultMessage": "Accepted",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.bad_request",
+	"description": "Text to show bad request",
+	"defaultMessage": "Bad Request",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.internal_server_error",
+	"description": "Text to show internal server error",
+	"defaultMessage": "Internal Error",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "audit.subheading",
+	"description": "System Generated",
+	"defaultMessage": "System Generated",
 	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "operationsLog.reportRequest.failure",
-	"description": "Status text for zone",
-	"defaultMessage": "Error creating request",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.substatus.action.zone_pause",
-	"description": "Status text for zone",
-	"defaultMessage": "Zone pause activated",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.substatus.action.zone_clear",
-	"description": "Status text for zone",
-	"defaultMessage": "Zone clear activated",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.substatus.action.emergency_stop",
-	"description": "Status text for zone",
-	"defaultMessage": "Emergency stop activated",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.substatus.action.emergency_pause",
-	"description": "Status text for zone",
-	"defaultMessage": "Emergency pause activated",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.entity.lightCurtains",
-	"description": "Status text for zone",
-	"defaultMessage": "Light Curtain",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "zoning.entity.latchGate",
-	"description": "Status text for zone",
-	"defaultMessage": "Latch Gate",
-	"filepath": "./src/constants/messageConstants.js"
-},
-{
-	"id": "audit.table.bulkaudit",
-	"description": "button label for start bulk audit",
-	"defaultMessage": "Start Bulk Audit(s)",
-	"filepath": "./src/containers/auditTab.js"
-},
-{
-	"id": "operation.alert.releaseSoftBreached",
-	"description": "Text for emergency button release heading",
-	"defaultMessage": "Pause button released",
-	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
-},
-{
-	"id": "operation.alert.releaseSoft.textBreached",
-	"description": "Text for emergency pause button release",
-	"defaultMessage": "Emergency pause button in {zone} has been released",
-	"filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
-},
-{
-	"id": "operation.alert.pause.breach.text",
-	"description": "Text for emergency button press",
-	"defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
-	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
-},
-{
-	"id": "widget.put.count",
-	"description": "Total put count",
-	"defaultMessage": "{count} {count, plural, one {PPS} other {PPS}}",
-	"filepath": "./src/containers/putStatusWidget.js"
-},
-{
-	"id": "downloadReport.type.operationsLog",
-	"description": "Heading for PPS",
-	"defaultMessage": "Operations Logs",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.status.pending",
-	"description": "Heading for PPS",
-	"defaultMessage": "Generating report...",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.status.failed",
-	"description": "Heading for PPS",
-	"defaultMessage": "Report failed!",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.status.completed",
-	"description": "button label for download report",
-	"defaultMessage": "DOWNLOAD",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.heading",
-	"description": "Heading for PPS",
-	"defaultMessage": "Download Report",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.refresh",
-	"description": "button label for download report",
-	"defaultMessage": "Refresh",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.reportName",
-	"description": "REPORT NAME",
-	"defaultMessage": "REPORT NAME",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.reportType",
-	"description": "REPORT TYPE",
-	"defaultMessage": "REPORT TYPE",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.requestedBy",
-	"description": "Request ID",
-	"defaultMessage": "REQUESTED BY",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.completionTime",
-	"description": "Status for PPS",
-	"defaultMessage": "COMPLETION TIME",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "downloadReport.table.status",
-	"description": "Status for PPS",
-	"defaultMessage": "GENERATION PROGRESS",
-	"filepath": "./src/containers/reportsTab/downloadReportTab.js"
-},
-{
-	"id": "reportsTab.downloadReport",
-	"description": "Operations Log tab for Reports tab",
-	"defaultMessage": "Download",
-	"filepath": "./src/containers/reportsTab/reportsTab.js"
-},
-{
-	"id": "sysOverView.zones.breached.subText",
-	"description": "Zone status subtext",
-	"defaultMessage": "{entityBreached} breached",
-	"filepath": "./src/containers/systemTabs/sysOverview.js"
-},
-{
-	"id": "sysOverView.zones.subText",
-	"description": "Zone status subtext",
-	"defaultMessage": "{subStatus} via Controller",
-	"filepath": "./src/containers/systemTabs/sysOverview.js"
-},
-{
-	"id": "overviewStatus.tab.paused",
-	"description": "overview Status emergency",
-	"defaultMessage": "PAUSED",
-	"filepath": "./src/containers/tabs.js"
-},
-{
-	"id": "overviewStatus.tab.breached",
-	"description": "overview Status emergency",
-	"defaultMessage": "BREACHED",
-	"filepath": "./src/containers/tabs.js"
-},
-{
-	"id": "utility.bulkaudit.successMessage",
-	"description": "Bulk Audit successMessage",
-	"defaultMessage": "{successful}/{totalCount} audits started successfully",
-	"filepath": "./src/utilities/getFormattedMessages.js"
 }
 ]
