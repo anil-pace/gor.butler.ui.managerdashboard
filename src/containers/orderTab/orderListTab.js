@@ -190,9 +190,6 @@ const messages=defineMessages({
         else{
             url+=orderbyUrl
         }
-        
-        //url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
-        //url+=orderbyUrl
         let paginationData={
 
             'url': url,
