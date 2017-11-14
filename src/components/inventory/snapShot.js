@@ -79,7 +79,7 @@
  	}
  };
  SnapShotDetails.propTypes={
- 	currentDate:React.PropTypes.number,
+ 	currentDate:React.PropTypes.object,
  	snapshotData:React.PropTypes.object,
  	hasDataChanged:React.PropTypes.bool,
  	timeOffset:React.PropTypes.string

@@ -5561,5 +5561,241 @@
    "description": "button label for show all",
    "defaultMessage": "すべての操作を表示",
    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+
+{
+   "id": "header.zones.inactiveZones",
+   "description": "Zone in operation count",
+   "defaultMessage": "{inactiveZones} {inactiveZones, plural, one {zone} other {zones}}が 休止されました",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "operationsLog.reportRequest.success",
+   "description": "Status text for zone",
+   "defaultMessage": "要求が効果的に発生されました。ダウンロードのタブを確認してください",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "operationsLog.reportRequest.failure",
+   "description": "Status text for zone",
+   "defaultMessage": "リクエストの作成中にエラーが発生されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.zone_pause",
+   "description": "Status text for zone",
+   "defaultMessage": "ゾーン休止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.zone_clear",
+   "description": "Status text for zone",
+   "defaultMessage": "ゾーンクリアが活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.emergency_stop",
+   "description": "Status text for zone",
+   "defaultMessage": "緊急停止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.emergency_pause",
+   "description": "Status text for zone",
+   "defaultMessage": "緊急休止が活性されました",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.entity.lightCurtains",
+   "description": "Status text for zone",
+   "defaultMessage": "ライトカーテン",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.entity.latchGate",
+   "description": "Status text for zone",
+   "defaultMessage": "ラッチゲート",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "audit.table.bulkaudit",
+   "description": "button label for start bulk audit",
+   "defaultMessage": "一括監査（ｓ）を開始します",
+   "filepath": "./src/containers/auditTab.js"
+},
+{
+   "id": "operation.alert.releaseSoftBreached",
+   "description": "Text for emergency button release heading",
+   "defaultMessage": "休止ボタンが解放されました",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.releaseSoft.textBreached",
+   "description": "Text for emergency pause button release",
+   "defaultMessage": "{zone}の緊急停止ボタンが解放されました",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.pause.breach.text",
+   "description": "Text for emergency button press",
+   "defaultMessage": "{zone}の{controller}経由のSOPの破棄によって緊急停止が活性化されました.",
+   "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+   "id": "widget.put.count",
+   "description": "Total put count",
+   "defaultMessage": "{count} {count, plural, one {PPS} other {PPS}}",
+   "filepath": "./src/containers/putStatusWidget.js"
+},
+{
+   "id": "downloadReport.type.operationsLog",
+   "description": "Heading for PPS",
+   "defaultMessage": "操作ログ",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.pending",
+   "description": "Heading for PPS",
+   "defaultMessage": "レポートを作成しています...",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.failed",
+   "description": "Heading for PPS",
+   "defaultMessage": "レポートが失敗しました!",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.completed",
+   "description": "button label for download report",
+   "defaultMessage": "ダウンロード",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.heading",
+   "description": "Heading for PPS",
+   "defaultMessage": "ダウンロードレポート",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.refresh",
+   "description": "button label for download report",
+   "defaultMessage": "リフレッシュ",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.reportName",
+   "description": "REPORT NAME",
+   "defaultMessage": "レポート名",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.reportType",
+   "description": "REPORT TYPE",
+   "defaultMessage": "レポートタイプ",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.requestedBy",
+   "description": "Request ID",
+   "defaultMessage": "要求された",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.completionTime",
+   "description": "Status for PPS",
+   "defaultMessage": "完了時間",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.status",
+   "description": "Status for PPS",
+   "defaultMessage": "ジェネレーション処理",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "operationLog.genRep.tooltip",
+   "description": "Tooltip to display Generate button",
+   "defaultMessage": "リアルタイムフィルタではレポートがありませんでした",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "reportsTab.downloadReport",
+   "description": "Operations Log tab for Reports tab",
+   "defaultMessage": "ダウンロード",
+   "filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+   "id": "sysOverView.zones.breached.subText",
+   "description": "Zone status subtext",
+   "defaultMessage": "{entityBreached} 破棄されました",
+   "filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+   "id": "sysOverView.zones.subText",
+   "description": "Zone status subtext",
+   "defaultMessage": "{subStatus} コントローラ経由で",
+   "filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+   "id": "overviewStatus.tab.paused",
+   "description": "overview Status emergency",
+   "defaultMessage": "休止されました",
+   "filepath": "./src/containers/tabs.js"
+},
+{
+   "id": "overviewStatus.tab.breached",
+   "description": "overview Status emergency",
+   "defaultMessage": "破棄されました",
+   "filepath": "./src/containers/tabs.js"
+},
+{
+   "id": "utility.bulkaudit.successMessage",
+   "description": "Bulk Audit successMessage",
+   "defaultMessage": "{successful}/{totalCount}　監査が効果的に開始されました",
+   "filepath": "./src/utilities/getFormattedMessages.js"
+},
+
+{
+   "id": "stringConfig.complete",
+   "description": "Text to show Completed",
+   "defaultMessage": "完成した",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.rejected",
+   "description": "Text to show rejected",
+   "defaultMessage": "拒否された",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.created",
+   "description": "Text to show created",
+   "defaultMessage": "作成した",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.accepted",
+   "description": "Text to show accepted",
+   "defaultMessage": "受け入れられた",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.bad_request",
+   "description": "Text to show bad request",
+   "defaultMessage": "要求の形式が正しくありません",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.internal_server_error",
+   "description": "Text to show internal server error",
+   "defaultMessage": "内部エラー",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "audit.subheading",
+   "description": "System Generated",
+   "defaultMessage": "システム生成",
+   "filepath": "./src/constants/messageConstants.js"
 }
 ]

@@ -345,32 +345,29 @@ class PPStable extends React.Component {
                         isResizable={true}
                     />
                     <Column
-                        columnKey="status"
-                        header={
-                            <SortHeaderCell onSortChange={this._onSortChange}
-
-                                            sortDir={colSortDirs.statusPriority}>
-
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="PPS.table.status" description="Status for PPS"
+                    columnKey="status"
+                    header={
+                        <SortHeaderCell onSortChange={this._onSortChange}
+                                        sortDir={colSortDirs.statusPriority}>
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="PPS.table.status" description="Status for PPS"
                                                       defaultMessage="STATUS"/>
-
-                                    <div className="gor-subStatus-online">
-                                        <div >
-                                            <FormattedMessage id="PPStable.status" description='status for PPS table'
-                                                              defaultMessage='{ppsOnState} Open'
-                                                              values={{ppsOnState: ppsOnState ? ppsOnState : '0'}}/>
-                                        </div>
+                                <div className="gor-subStatus-online">
+                                    <div >
+                                        <FormattedMessage id="PPStable.status" description='status for PPS table'
+                                                          defaultMessage='{ppsOnState} Open'
+                                                          values={{ppsOnState: ppsOnState ? ppsOnState : '0'}}/>
                                     </div>
                                 </div>
-                            </SortHeaderCell>
-                        }
-                        cell={<StatusCell data={sortedDataList} statusKey="statusClass"></StatusCell>}
-                        fixed={true}
-                        width={columnWidths.status}
-                        isResizable={true}
-                    />
+                            </div>
+                        </SortHeaderCell>
+                    }
+                    cell={<StatusCell data={sortedDataList} statusKey="statusClass"></StatusCell>}
+                    fixed={true}
+                    width={columnWidths.status}
+                    isResizable={true}
+                />
+            
                     <Column
                         columnKey="operatingMode"
                         header={
@@ -406,10 +403,12 @@ class PPStable extends React.Component {
                         columnKey="requested_status"
                         header={
                             <SortHeaderCell onSortChange={this._onSortChange}
-                                            sortDir={colSortDirs.operatingMode}>
+                                            sortDir={colSortDirs.requested_status}>
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="PPS.table.requestedStatus" description="Requested status for PPS"
                                                       defaultMessage="REQUESTED STATUS"/>
+                                    <div className="gorToolHeaderSubText">
+                                    </div>
                               
                                 </div>
                             </SortHeaderCell>
