@@ -1,10 +1,14 @@
 import {wsNotificationResponseAction,wsNotificationEndConnection} from '../actions/notificationSocketActions'
 import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
   WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE,
-  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE} from '../constants/frontEndConstants'
+  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE,
+  WS_ORDERS_PLATFORM_SUBSCRIBE,
+  WS_ORDERS_PLATFORM_UNSUBSCRIBE,WS_ORDERS_HEADER_UNSUBSCRIBE,
+WS_ORDERS_HEADER_SUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
 import {OLResponseParse} from '../utilities/operationLogsResParser';
+import {ordersPlatformResponseParse} from '../utilities/ordersPlatformResParser';
 import SockJS from 'sockjs-client';
 import webstomp from 'webstomp-client';
 
@@ -12,18 +16,25 @@ import webstomp from 'webstomp-client';
 const notificationSocketMiddleware = (function(){ 
   var socket = null;
   var operatorLogWSClient = null;
+  var ordersWSClient =null;
+  var orderHeaderWSClient = null;
 
   const onMessage = (ws,store,module) => frame => {
     //Parse the JSON message received on the websocket
     
-    var msg = JSON.parse(frame.body);
+    var msg = frame.body ? JSON.parse(frame.body) : [];
     switch(module){
       case 'notifications':
         NotificationResponseParse(store,msg);  
         break;  
       case 'operations':
         OLResponseParse(store,msg)
-        break; 
+        break;
+      case 'orders': 
+        ordersPlatformResponseParse(store,msg,null)
+        break;
+      case 'orders_header':
+        ordersPlatformResponseParse(store,msg,'header')
         default:
         //do nothing 
     }
@@ -98,6 +109,36 @@ const notificationSocketMiddleware = (function(){
         if(operatorLogWSClient){
           operatorLogWSClient.unsubscribe();
           operatorLogWSClient= null;
+        }
+        if(action.data){
+          store.dispatch(action.data())
+        }
+        break;
+      case WS_ORDERS_PLATFORM_SUBSCRIBE:
+        if(socket && !ordersWSClient){
+          ordersWSClient = socket.subscribe(action.data.url,onMessage(socket,store,'orders'));
+          socket.send(action.data.url,action.data.filters);
+        }
+        break;
+      case WS_ORDERS_PLATFORM_UNSUBSCRIBE:
+        if(ordersWSClient){
+          ordersWSClient.unsubscribe();
+          ordersWSClient= null;
+        }
+        if(action.data){
+          store.dispatch(action.data())
+        }
+        break;
+      case WS_ORDERS_HEADER_SUBSCRIBE:
+        if(socket && !orderHeaderWSClient){
+          orderHeaderWSClient = socket.subscribe(action.data.url,onMessage(socket,store,'orders_header'));
+          socket.send(action.data.url,action.data.filters);
+        }
+        break;
+      case WS_ORDERS_HEADER_UNSUBSCRIBE:
+         if(orderHeaderWSClient){
+          orderHeaderWSClient.unsubscribe();
+          orderHeaderWSClient= null;
         }
         if(action.data){
           store.dispatch(action.data())
