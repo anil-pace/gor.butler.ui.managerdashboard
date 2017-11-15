@@ -22,7 +22,7 @@ const notificationSocketMiddleware = (function(){
   const onMessage = (ws,store,module) => frame => {
     //Parse the JSON message received on the websocket
     
-    var msg = JSON.parse(frame.body);
+    var msg = frame.body ? JSON.parse(frame.body) : [];
     switch(module){
       case 'notifications':
         NotificationResponseParse(store,msg);  
