@@ -6,7 +6,9 @@ import React  from 'react';
 import {connect} from 'react-redux';
 import Zone from '../../components/systemOverview/zoneTile.js';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions';
+import {overviewRefreshed,wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './../../actions/overviewActions';
 import {WS_ONSEND,ZONE_STATUS_CLASS} from '../../constants/frontEndConstants';
+import {WS_PLATFORM_HEADER_ORDER_URL} from '../../constants/configConstants'
 import {ZONE_STATUS_INTL_MESSAGE,
     CONTROLLER_SENSOR_TRIGGERED_MESSAGES,ZONE_SUB_STATUS_INTL_MESSAGE,ENTITY_BREACHED} from '../../constants/messageConstants';
 import {wsOverviewData} from '../../constants/initData';
@@ -23,13 +25,27 @@ export class SystemOverview extends React.Component {
         this._onZoneClick =  this._onZoneClick.bind(this)
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.socketAuthorized && !this.state.subscribed){
+        if(nextProps.socketAuthorized && !this.state.subscribed && nextProps.notificationSocketConnected){
             this.setState({
                 subscribed:true
             },function(){
-                this.props.initDataSentCall(wsOverviewData["zoning"])
+                this.props.initDataSentCall(wsOverviewData["zoning"]);
+                 /*Making subscription to SRMS for orders*/
+                this.props.wsOrdersHeaderUnSubscribe(null);
+                let wsParams = {}
+                wsParams.url = WS_PLATFORM_HEADER_ORDER_URL;
+                this.props.wsOrdersHeaderSubscribe(wsParams);
             })
         }
+    }
+    componentWillUnmount() {
+        /**
+         * If a user navigates back to the inventory page,
+         * it should subscribe to the packet again.
+         */
+        this.setState({subscribed: false},function(){
+            this.props.wsOrdersHeaderUnSubscribe(null);
+        })
     }
     componentWillMount(){
         if(this.props.socketAuthorized && !this.state.subscribed){
@@ -130,13 +146,20 @@ function mapStateToProps(state, ownProps) {
         hasDataChanged:state.sysOverviewReducer.hasDataChanged ,
         zones:state.sysOverviewReducer.zones,
         zoneHeader:state.zoningReducer.zoneHeader || {},
-        zoneSubscriptionInitiated:state.sysOverviewReducer.zoneSubscriptionInitiated
+        zoneSubscriptionInitiated:state.sysOverviewReducer.zoneSubscriptionInitiated,
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected
     };
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        initDataSentCall: function(data){dispatch(setWsAction({type:WS_ONSEND,data:data})); }
+        initDataSentCall: function(data){dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+         wsOrdersHeaderSubscribe:function(data){
+            dispatch(wsOrdersHeaderSubscribe(data))
+        },
+        wsOrdersHeaderUnSubscribe:function(data){
+            dispatch(wsOrdersHeaderUnSubscribe(data))
+        }
     }
 };
 

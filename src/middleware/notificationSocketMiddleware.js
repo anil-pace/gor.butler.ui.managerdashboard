@@ -1,7 +1,10 @@
 import {wsNotificationResponseAction,wsNotificationEndConnection} from '../actions/notificationSocketActions'
 import {WS_NOTIFICATION_CONNECT,WS_NOTIFICATION_DISCONNECT,
   WS_NOTIFICATION_ONSEND,WS_NOTIFICATION_SUBSCRIBE,
-  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE,WS_ORDERS_PLATFORM_SUBSCRIBE,WS_ORDERS_PLATFORM_UNSUBSCRIBE} from '../constants/frontEndConstants'
+  WS_OPERATOR_LOG_SUBSCRIBE,WS_OPERATOR_LOG_UNSUBSCRIBE,
+  WS_ORDERS_PLATFORM_SUBSCRIBE,
+  WS_ORDERS_PLATFORM_UNSUBSCRIBE,WS_ORDERS_HEADER_UNSUBSCRIBE,
+WS_ORDERS_HEADER_SUBSCRIBE} from '../constants/frontEndConstants'
 import {WS_NOTIFICATION_URL,WS_URL} from '../constants/configConstants';
 import {NotificationResponseParse} from '../utilities/notificationResponseParser';
 import {OLResponseParse} from '../utilities/operationLogsResParser';
@@ -14,6 +17,7 @@ const notificationSocketMiddleware = (function(){
   var socket = null;
   var operatorLogWSClient = null;
   var ordersWSClient =null;
+  var orderHeaderWSClient = null;
 
   const onMessage = (ws,store,module) => frame => {
     //Parse the JSON message received on the websocket
@@ -27,8 +31,10 @@ const notificationSocketMiddleware = (function(){
         OLResponseParse(store,msg)
         break;
       case 'orders': 
-        ordersPlatformResponseParse(store,msg)
+        ordersPlatformResponseParse(store,msg,null)
         break;
+      case 'orders_header':
+        ordersPlatformResponseParse(store,msg,'header')
         default:
         //do nothing 
     }
@@ -122,6 +128,22 @@ const notificationSocketMiddleware = (function(){
         if(action.data){
           store.dispatch(action.data())
         }
+        break;
+      case WS_ORDERS_HEADER_SUBSCRIBE:
+        if(socket && !orderHeaderWSClient){
+          orderHeaderWSClient = socket.subscribe(action.data.url,onMessage(socket,store,'orders_header'));
+          socket.send(action.data.url,action.data.filters);
+        }
+        break;
+      case WS_ORDERS_HEADER_UNSUBSCRIBE:
+         if(orderHeaderWSClient){
+          orderHeaderWSClient.unsubscribe();
+          orderHeaderWSClient= null;
+        }
+        if(action.data){
+          store.dispatch(action.data())
+        }
+        break;
       //This action is irrelevant to us, pass it on to the next middleware
       default:
         return next(action);

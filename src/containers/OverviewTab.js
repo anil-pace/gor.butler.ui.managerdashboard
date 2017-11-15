@@ -10,10 +10,12 @@ import PutStatusWidget from '../containers/putStatusWidget'
 import PickStatusWidget from '../containers/pickStatusWidget'
 import {connect} from 'react-redux';
 import Dimensions from 'react-dimensions'
-import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions'
+import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions';
 import {wsOverviewData} from './../constants/initData.js';
 import {WS_ONSEND} from './../constants/frontEndConstants';
-import {overviewRefreshed} from './../actions/overviewActions'
+import {WS_PLATFORM_HEADER_ORDER_URL} from './../constants/configConstants'
+import {overviewRefreshed,wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './../actions/overviewActions';
+
 
 
 class Overview extends React.Component {
@@ -33,7 +35,7 @@ class Overview extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && !this.state.subscribed) {
+        if (nextProps.socketAuthorized && !this.state.subscribed && nextProps.notificationSocketConnected) {
             this.setState({subscribed: true})
             this._subscribeData(nextProps)
         }
@@ -44,13 +46,20 @@ class Overview extends React.Component {
          * If a user navigates back to the inventory page,
          * it should subscribe to the packet again.
          */
-        this.setState({subscribed: false})
+        this.setState({subscribed: false},function(){
+            this.props.wsOrdersHeaderUnSubscribe(null);
+        })
     }
 
     _subscribeData(nextProps) {
         let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
+        /*Making subscription to SRMS for orders*/
+        this.props.wsOrdersHeaderUnSubscribe(null);
+        let wsParams = {}
+        wsParams.url = WS_PLATFORM_HEADER_ORDER_URL;
+        this.props.wsOrdersHeaderSubscribe(wsParams);
     }
 
 
@@ -81,7 +90,8 @@ function mapStateToProps(state, ownProps) {
     return {
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        overviewRefreshed: state.overviewDetails.overviewRefreshed
+        overviewRefreshed: state.overviewDetails.overviewRefreshed,
+        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -94,6 +104,12 @@ function mapDispatchToProps(dispatch) {
         },
         updateOverviewProps: function (data) {
             dispatch(overviewRefreshed(data))
+        },
+        wsOrdersHeaderSubscribe:function(data){
+            dispatch(wsOrdersHeaderSubscribe(data))
+        },
+        wsOrdersHeaderUnSubscribe:function(data){
+            dispatch(wsOrdersHeaderUnSubscribe(data))
         }
     }
 };

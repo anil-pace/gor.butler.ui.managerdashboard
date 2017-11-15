@@ -1,8 +1,14 @@
 
 import {receiveOrdersData} from '../actions/responseAction';
+import {recieveOrdersStatus} from '../actions/tabActions';
 
 
-export function ordersPlatformResponseParse(store,res)
+export function ordersPlatformResponseParse(store,res,type)
 {
-		store.dispatch(receiveOrdersData(res));
+		if(type !== "header"){
+			store.dispatch(receiveOrdersData(res));
+		}
+		else{
+			store.dispatch(recieveOrdersStatus(res));
+		}
 } 

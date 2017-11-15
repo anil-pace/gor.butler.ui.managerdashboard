@@ -55,6 +55,7 @@ export const WS_NOTIFICATION_SUBSCRIPTION = '/dashboard/notification';
 
 /*URLs for order tile from platform*/
 export const WS_PLATFORM_ORDER_URL =  "/dashboard/api/aggregate-data/live";
+export const WS_PLATFORM_HEADER_ORDER_URL = "/dashboard/api/header-data/live";
 /**
  * URLs or PPS Configurations
  */
