@@ -448,8 +448,10 @@ class AuditTable extends React.Component {
                             </div>
                         </div>
                     }
-                    cell={<ProgressCell data={sortedDataList} resolved="resolvedTask"
-                                        unresolved="unresolvedTask"> </ProgressCell>}
+
+                    cell={<ProgressCell data={sortedDataList} totalIssues="totalTask"
+                                    unresolved="unresolvedTask"> </ProgressCell>}
+
                     fixed={true}
                     width={columnWidths.progress}
                     isResizable={true}

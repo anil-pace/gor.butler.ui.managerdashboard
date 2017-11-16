@@ -282,7 +282,7 @@ class OrderListTable extends React.Component {
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="orderlist.table.operatingMode"
                                                       description="recievedTime for Orders"
-                                                      defaultMessage="RECIEVED TIME"/>
+                                                      defaultMessage="RECEIVED TIME"/>
                                     <div className="gorToolHeaderSubText">
                                         {this.props.timeZoneString}
                                     </div>
