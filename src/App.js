@@ -6,14 +6,15 @@ import {setWsAction ,setMockAction, endWsAction, updateSubscriptionPacket} from 
 import {getTimeOffSetData,setTimeOffSetData, logoutRequest} from './actions/loginAction';
 import {RECIEVE_HEADER, RECIEVE_TIME_OFFSET,WS_CONNECT,WS_ONSEND,
   WS_MOCK,USERS,TAB_ROUTE_MAP,OVERVIEW ,SYSTEM,ORDERS,INVENTORY,GET,POST,GET_CONFIGS,APP_JSON} from './constants/frontEndConstants';
-  import { AUTO_LOGOUT } from './constants/messageConstants';
-  import { wsOverviewData} from './constants/initData.js';
-  import {TIME_ZONE_URL,GET_MD_CONFIG_URL} from './constants/configConstants'
-  import {prevTabSelected} from './actions/tabSelectAction';
-  import { connect } from 'react-redux'; 
-  import TopNotifications from './components/topnotify/topnotify';
-  import { notifyInfo} from './actions/validationActions';
+import { AUTO_LOGOUT } from './constants/messageConstants';
+import { wsOverviewData} from './constants/initData.js';
+import {TIME_ZONE_URL,GET_MD_CONFIG_URL,WS_PLATFORM_HEADER_ORDER_URL} from './constants/configConstants';
+import {prevTabSelected} from './actions/tabSelectAction';
+import { connect } from 'react-redux'; 
+import TopNotifications from './components/topnotify/topnotify';
+import { notifyInfo} from './actions/validationActions';
 import {userRequest} from './actions/userActions';
+import {wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './actions/overviewActions';
 import { FormattedMessage,FormattedNumber } from 'react-intl';
 
 
@@ -133,9 +134,18 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
      // this.props.initDataSentCall(subscribeData) ;
       this.props.prevTabSelected(currTab || TAB_ROUTE_MAP[OVERVIEW]);
     }
-    else if(nextProps.prevTab=== currTab && nextProps.location.pathname===this.props.location.pathname) {
-      //  this.props.initDataSentCall(subscribeData) ;
+    if(!this.state.platformSocketConnected && nextProps.notificationSocketConnected){
+      this.setState({
+        platformSocketConnected:true
+      },function(){
+        /*Making subscription to SRMS for orders*/
+        this.props.wsOrdersHeaderUnSubscribe(null);
+        let wsParams = {}
+        wsParams.url = WS_PLATFORM_HEADER_ORDER_URL;
+        this.props.wsOrdersHeaderSubscribe(wsParams);
+      })
     }
+    
   }
     /**Render method called when component react renders
      * @return {[type]}
@@ -179,6 +189,7 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
     prevTab:state.tabSelected.prevTab,
     wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected
 
     
   }
@@ -199,9 +210,15 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
     userLogout: function(){ dispatch(logoutRequest()); },
     notifyInfo: function(data){dispatch (notifyInfo(data));},
     updateSubscriptionPacket: function(data){dispatch (updateSubscriptionPacket(data));},
-      userRequest: function (data) {
-          dispatch(userRequest(data));
-      },
+    userRequest: function (data) {
+        dispatch(userRequest(data));
+    },
+    wsOrdersHeaderSubscribe:function(data){
+        dispatch(wsOrdersHeaderSubscribe(data))
+    },
+    wsOrdersHeaderUnSubscribe:function(data){
+        dispatch(wsOrdersHeaderUnSubscribe(data))
+    }
   }
 };
 export  default connect(mapStateToProps,mapDispatchToProps)(App);

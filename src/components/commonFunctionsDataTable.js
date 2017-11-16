@@ -257,23 +257,23 @@ export const ToolTipCell=({rowIndex, data, columnKey,setClass,callBack,tooltipDa
 //assuming only one attributes is there in tool tip component (kerry specific)
 
 
-export const ProgressCell=({rowIndex, data, columnKey, resolved, unresolved, ...props})=> (
+export const ProgressCell=({rowIndex, data, columnKey, totalIssues, unresolved, ...props})=> (
   <Cell {...props}>
   <div className="gor-progressBar-wrap">
     <div className="gor-progressBar" style={{width:((data.getObjectAt(rowIndex)[columnKey])*1.4)}} />
-    {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
+    {(data.getObjectAt(rowIndex)[totalIssues] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
-    <FormattedMessage id="audit.resolveUnresolve" description='resolveUnresolve issue for audit table' defaultMessage='{resolvedCount} issues, {unresolvedCount} unresolved' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved], unresolvedCount:data.getObjectAt(rowIndex)[unresolved] }}/>
+    <FormattedMessage id="audit.resolveUnresolve" description='resolveUnresolve issue for audit table' defaultMessage='{resolvedCount} issues, {unresolvedCount} unresolved' values={{resolvedCount:data.getObjectAt(rowIndex)[totalIssues], unresolvedCount:data.getObjectAt(rowIndex)[unresolved] }}/>
     </div> : ""
     }
 
-    {(data.getObjectAt(rowIndex)[resolved] && !data.getObjectAt(rowIndex)[unresolved])?
+    {(data.getObjectAt(rowIndex)[totalIssues] && !data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
-    <FormattedMessage id="audit.resolveIssues" description='resolve issue for audit table' defaultMessage='{resolvedCount} issues' values={{resolvedCount:data.getObjectAt(rowIndex)[resolved]}}/>
+    <FormattedMessage id="audit.resolveIssues" description='resolve issue for audit table' defaultMessage='{resolvedCount} issues' values={{resolvedCount:data.getObjectAt(rowIndex)[totalIssues]}}/>
     </div> : ""
     }
 
-    {(!data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved])?
+    {(!data.getObjectAt(rowIndex)[totalIssues] && data.getObjectAt(rowIndex)[unresolved])?
     <div className="gor-resolve-head">
     <FormattedMessage id="audit.unresolveIssues" description='unresolve issue for audit table' defaultMessage='{unresolvedCount} {unresolvedCount,plural, one {unresolved issue} other{unresolved issues}}' values={{unresolvedCount:data.getObjectAt(rowIndex)[unresolved]?data.getObjectAt(rowIndex)[unresolved]:"0"}}/>
     </div> : ""
