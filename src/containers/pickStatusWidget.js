@@ -4,6 +4,8 @@ import { connect } from 'react-redux' ;
 import { FormattedMessage,FormattedNumber,FormattedPlural,FormattedRelative, FormattedDate } from 'react-intl';
 import {PICK_ICON,GOR_RISK,GOR_SUCCESS,GOR_NONE,GOR_DELAY,TILE_ONTIME,TILE_ALERT,DELAY_ICON} from '../constants/frontEndConstants';
 import {secondsToTime} from '../utilities/processTime';
+import {wsOrdersSubscribe,wsOrdersUnSubscribe} from '../actions/responseAction';
+import {WS_PLATFORM_ORDER_URL} from '../constants/configConstants'
 
 class PickStatusWidget extends React.Component{
 	/**
@@ -13,7 +15,31 @@ class PickStatusWidget extends React.Component{
     constructor(props) 
     { 
     	super(props);
+        this.state={
+            subscriptionSent:false
+        }
     }
+    componentWillReceiveProps(nextProps) {
+        if(this.props.notificationSocketConnected && !this.state.subscriptionSent){
+            this.setState({
+                subscriptionSent:true
+            },function(){
+                this.props.wsOrdersUnSubscribe(null);
+                let wsParams = {}
+                wsParams.url = WS_PLATFORM_ORDER_URL;
+                this.props.wsOrdersSubscribe(wsParams);
+            })
+            
+        }
+    }
+    /*componentDidMount(){
+        if(this.props.notificationSocketConnected){
+            this.props.wsOrdersUnSubscribe(null);
+            let wsParams = {}
+            wsParams.url = WS_PLATFORM_ORDER_URL;
+            this.props.wsOrdersSubscribe(wsParams);
+        }
+    }*/
     _parseProps (){
         var statusClass='', 
         statusLogo, 
@@ -142,8 +168,15 @@ class PickStatusWidget extends React.Component{
             ppsData:state.ppsInfo.ppsData,
             throughputData : state.throughputInfo.throughputData,
             system_status:state.tabsData.status||null,
-            systemEmergency: state.tabsData.system_emergency||null
+            systemEmergency: state.tabsData.system_emergency||null,
+            notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected
         }
     }
-    export default connect(mapStateToProps)(PickStatusWidget);
+    function mapDispatchToProps(dispatch){
+        return {
+            wsOrdersUnSubscribe:function(data){dispatch(wsOrdersUnSubscribe(data))},
+            wsOrdersSubscribe:function(data){dispatch(wsOrdersSubscribe(data))}
+        }
+    }
+    export default connect(mapStateToProps,mapDispatchToProps)(PickStatusWidget);
 
