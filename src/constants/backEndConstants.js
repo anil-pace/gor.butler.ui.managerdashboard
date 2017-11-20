@@ -163,6 +163,16 @@ export const  stringConfig= defineMessages({
         description: 'Text to show In Progress',
         defaultMessage: "In Progress"
     },
+    requestToButlerSuccess:{
+        id: 'stringConfig.requestToButlerSuccess',
+        description: 'Text to show requestToButlerSuccess',
+        defaultMessage: "In Progress"
+    },
+    requestToButlerRetry:{
+        id: 'stringConfig.requestToButlerRetry',
+        description: 'Text to show requestToButlerRetry',
+        defaultMessage: "In Progress"
+    },
     breached:{
         id: 'stringConfig.breached',
         description: 'Text to show breached',
@@ -191,6 +201,11 @@ export const  stringConfig= defineMessages({
     BAD_REQUEST:{
         id: 'stringConfig.bad_request',
         description: 'Text to show bad request',
+        defaultMessage: "Bad Request"
+    },
+    requestToButlerFailed:{
+        id: 'stringConfig.requestToButlerFailed',
+        description: 'Text to show requestToButlerFailed',
         defaultMessage: "Bad Request"
     },
     INTERNAL_SERVER_ERROR:{
