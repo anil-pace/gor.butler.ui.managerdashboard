@@ -2385,32 +2385,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #00a54f;
 }
 
-.BAD_REQUEST .public_fixedDataTableCell_cellContent {
-  border-radius: 15px;
-  text-align: center;
-  width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ff0000;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
-  background-color: #ff0000;
-}
-
-.requestToButlerFailed .public_fixedDataTableCell_cellContent {
-  border-radius: 15px;
-  text-align: center;
-  width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ff0000;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
-  background-color: #ff0000;
-}
-
 .INTERNAL_SERVER_ERROR .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
@@ -2532,7 +2506,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.in_progress .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent{
+.in_progress {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2545,33 +2519,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
-.requestToButlerSuccess .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent{
-  border-radius: 15px;
-  text-align: center;
-  width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
-  color: #00a54f;
-  font-size: 12px;
-  max-height: 9px;
-  background: #ffffff;
-}
-
-.requestToButlerRetry .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent{
-  border-radius: 15px;
-  text-align: center;
-  width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
-  color: #00a54f;
-  font-size: 12px;
-  max-height: 9px;
-  background: #ffffff;
-}
-
-.CREATED .public_fixedDataTableCell_cellContent {
+.CREATED .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;

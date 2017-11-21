@@ -141,6 +141,12 @@ export const ORDER_INPROGRESS="pending__fulfillable";
 export const ORDER_COMPLETED="complete";
 export const ORDER_BREACHED="breached";
 export const ORDER_EXCEPTION="exception";
+export const EVALUATED_STATUS={
+	"requestToButlerSuccess" : "ACCEPTED",
+	"requestToButlerFailed" :   "INTERNAL_SERVER_ERROR",
+    "requestToButlerRetry"   :  "CREATED",
+    "BAD_REQUEST"            :  "rejected"
+}
 	
 
 

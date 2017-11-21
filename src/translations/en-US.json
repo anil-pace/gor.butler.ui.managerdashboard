@@ -911,18 +911,6 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
-    "id": "stringConfig.requestToButlerSuccess",
-    "description": "Text to show requestToButlerSuccess",
-    "defaultMessage": "In Progress",
-    "filepath": "./src/constants/backEndConstants.js"
-  },
-  {
-    "id": "stringConfig.requestToButlerRetry",
-    "description": "Text to show requestToButlerRetry",
-    "defaultMessage": "In Progress",
-    "filepath": "./src/constants/backEndConstants.js"
-  },
-  {
     "id": "stringConfig.breached",
     "description": "Text to show breached",
     "defaultMessage": "Breached",
@@ -950,18 +938,6 @@
     "id": "stringConfig.accepted",
     "description": "Text to show accepted",
     "defaultMessage": "Accepted",
-    "filepath": "./src/constants/backEndConstants.js"
-  },
-  {
-    "id": "stringConfig.bad_request",
-    "description": "Text to show bad request",
-    "defaultMessage": "Bad Request",
-    "filepath": "./src/constants/backEndConstants.js"
-  },
-  {
-    "id": "stringConfig.requestToButlerFailed",
-    "description": "Text to show requestToButlerFailed",
-    "defaultMessage": "Bad Request",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
