@@ -53,6 +53,10 @@ export const WS_NOTIFICATION_URL =  API_URL+"/platform-dashboard/dashboard-stomp
 export const NOTIFICATIONS_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/event";
 export const READ_MSG_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/event/mark-as-read";
 export const WS_NOTIFICATION_SUBSCRIPTION = '/dashboard/notification';
+
+/*URLs for order tile from platform*/
+export const WS_PLATFORM_ORDER_URL =  "/dashboard/api/aggregate-data/live";
+export const WS_PLATFORM_HEADER_ORDER_URL = "/dashboard/api/header-data/live";
 /**
  * URLs or PPS Configurations
  */

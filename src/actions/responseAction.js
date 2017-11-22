@@ -1,5 +1,8 @@
 
-import {BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA,INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_PERFORMANCE, USER_DETAILS,FIRE_EMERGENCY} from '../constants/frontEndConstants'
+import {BUTLERS_DATA,PPS_DATA,PUT_DATA,AUDIT_DATA,INVENTORY_DATA_TODAY,INVENTORY_DATA,
+	INVENTORY_DATA_HISTORY,ORDERS_DATA,CHARGERS_DATA,THROUGHPUT_DATA,
+	HISTOGRAM_DATA,CHARGERS_DETAIL,BUTLERS_DETAIL,PPS_PERFORMANCE, 
+	USER_DETAILS,FIRE_EMERGENCY,WS_ORDERS_PLATFORM_UNSUBSCRIBE,WS_ORDERS_PLATFORM_SUBSCRIBE} from '../constants/frontEndConstants'
 import {PPS_DETAIL,PARSE_PPS} from '../constants/backEndConstants'
 
 
@@ -106,6 +109,20 @@ export function recieveInventoryDetails(data){
 export function recievefireHazardDetails(data){
 	return {
 		type: FIRE_EMERGENCY,
+		data
+	}
+}
+
+/*Actions for orders from platform*/
+export function wsOrdersUnSubscribe(data){
+	return {
+		type: WS_ORDERS_PLATFORM_UNSUBSCRIBE,
+		data
+	}
+}
+export function wsOrdersSubscribe(data){
+	return {
+		type: WS_ORDERS_PLATFORM_SUBSCRIBE,
 		data
 	}
 }

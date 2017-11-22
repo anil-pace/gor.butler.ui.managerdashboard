@@ -32,13 +32,6 @@ export const wsOverviewData={
                 }
               },
               {
-                "resource_id": "orders",
-                "details": {
-                  "data": "aggregate_v2",
-                  "callback": []
-                }
-              },
-              {
                 "resource_id": "overview",
                 "details": {
                   "data": "pps_performance",
@@ -69,13 +62,6 @@ export const wsOverviewData={
                 },
                 {
                   "resource_id": "zones",
-                  "details": {
-                    "data": "header",
-                    "callback": []
-                  }
-                },
-                {
-                  "resource_id": "orders",
                   "details": {
                     "data": "header",
                     "callback": []

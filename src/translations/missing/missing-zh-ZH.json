@@ -444,6 +444,42 @@
 	"filepath": "./src/constants/backEndConstants.js"
 },
 {
+	"id": "stringConfig.complete",
+	"description": "Text to show Completed",
+	"defaultMessage": "completed",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.rejected",
+	"description": "Text to show rejected",
+	"defaultMessage": "Rejected",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.created",
+	"description": "Text to show created",
+	"defaultMessage": "Created",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.accepted",
+	"description": "Text to show accepted",
+	"defaultMessage": "Accepted",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.bad_request",
+	"description": "Text to show bad request",
+	"defaultMessage": "Bad Request",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
+	"id": "stringConfig.internal_server_error",
+	"description": "Text to show internal server error",
+	"defaultMessage": "Internal Error",
+	"filepath": "./src/constants/backEndConstants.js"
+},
+{
 	"id": "stringConfig.md007",
 	"description": "Text for safety checklist item 7",
 	"defaultMessage": "Peripherals status known.",
@@ -555,6 +591,12 @@
 	"id": "pps.modeChange.allModeSuccess",
 	"description": "Records in file should not be greater than",
 	"defaultMessage": "Mode change request successful",
+	"filepath": "./src/constants/messageConstants.js"
+},
+{
+	"id": "audit.subheading",
+	"description": "System Generated",
+	"defaultMessage": "System Generated",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -692,7 +734,7 @@
 {
 	"id": "operationsLog.reportRequest.success",
 	"description": "Status text for zone",
-	"defaultMessage": "Request successfully generated. Kindly check the Downloads Tab",
+	"defaultMessage": "Request successfully generated. Kindly check the Download Tab",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -1244,6 +1286,12 @@
 	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
 },
 {
+	"id": "operationLog.genRep.tooltip",
+	"description": "Tooltip to display Generate button",
+	"defaultMessage": "Reports not available for Realtime filter",
+	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
 	"id": "operationLog.table.heading",
 	"description": "Heading for PPS",
 	"defaultMessage": "Operations Log",
@@ -1252,7 +1300,7 @@
 {
 	"id": "operationLog.table.downloadBtn",
 	"description": "button label for download report",
-	"defaultMessage": "Download Report",
+	"defaultMessage": "Generate Report",
 	"filepath": "./src/containers/reportsTab/operationsLogTab.js"
 },
 {

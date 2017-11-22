@@ -490,6 +490,8 @@ class AuditTab extends React.Component {
                 auditData.infoIcon="rejected"
             }
             auditData.resolvedTask=data[i].resolved;
+            auditData.totalTask=data[i].resolved+data[i].unresolved;
+
             auditData.isChecked = (checkedAudit[data[i].audit_id] && auditData.startAudit) ? true :false;
             auditData.unresolvedTask=data[i].unresolved;
             auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:false;

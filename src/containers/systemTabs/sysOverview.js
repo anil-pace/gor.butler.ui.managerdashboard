@@ -23,13 +23,21 @@ export class SystemOverview extends React.Component {
         this._onZoneClick =  this._onZoneClick.bind(this)
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.socketAuthorized && !this.state.subscribed){
+        if(nextProps.socketAuthorized && !this.state.subscribed ){
             this.setState({
                 subscribed:true
             },function(){
-                this.props.initDataSentCall(wsOverviewData["zoning"])
+                this.props.initDataSentCall(wsOverviewData["zoning"]);
+                 
             })
         }
+    }
+    componentWillUnmount() {
+        /**
+         * Since callback of setState is not guaranteed
+         * to be called hence unsubscribing the socket here
+         */
+        this.setState({subscribed: false});
     }
     componentWillMount(){
         if(this.props.socketAuthorized && !this.state.subscribed){
@@ -137,6 +145,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps (dispatch) {
     return {
         initDataSentCall: function(data){dispatch(setWsAction({type:WS_ONSEND,data:data})); }
+         
     }
 };
 
