@@ -7,11 +7,11 @@ export  function getOrderDetail(state={},action){
             var res,totalPage, totalOrders,itemsPerOrder,totalCompletedOrder,totalPendingOrder;
             res=action.data;
             if(res.orders) {
-                totalOrders=res.totalOrders;
-                totalPage=res.totalPages;
-                itemsPerOrder=res.itemsPerOrder;
-                totalCompletedOrder=res.completedOrders;
-                totalPendingOrder=res.pendingOrders;
+                totalOrders=res.total_size;
+                totalPage=res.total_pages;
+                itemsPerOrder=res.items_per_order;
+                totalCompletedOrder=res.total_completed;
+                totalPendingOrder=res.total_pending;
                 return Object.assign({}, state, {
                     "ordersDetail" : res.orders.length>0?res.orders:state.ordersDetail,
                     "totalPage" : res.orders.length>0?totalPage:state.totalPage,
