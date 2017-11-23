@@ -308,7 +308,7 @@ const messages=defineMessages({
                     });
                 }
                 else {
-                    orderData.pickBy=nProps.context.intl.FormattedRelative(data[i].pick_before_time,
+                    orderData.pickBy=nProps.context.intl.formatRelative(data[i].pick_before_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
