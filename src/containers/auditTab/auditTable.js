@@ -45,7 +45,6 @@ class AuditTable extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.tableState(nextProps, this);
-
     }
 
 
@@ -64,10 +63,10 @@ class AuditTable extends React.Component {
      * This has to be removed once we get rid of the fixedDataTable
      * @param  {Number} rowIndex rowindex on which the click was initiated
      */
-    _handleOnClickDropdown(event, index) {
+     _handleOnClickDropdown(event, index) {
         var el=event.target;
         var elClassName=(el.className).trim(),
-            parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
+        parentEl, siblingEl, totalRowCount=this.props.items.length - 1;
         if (elClassName !== "gor-dropdown-wrapper" && elClassName !== "gor-dropdown" && elClassName!=='gor-audit-info-icon'  && elClassName!=="gor-tool-tip-hover") {
             return;
         }
@@ -113,8 +112,13 @@ class AuditTable extends React.Component {
             this.props.setCheckedAudit({})
         }
 
-     headerChecked=current.state? current.state.headerChecked:false;
+     
      checkedAudit=current.state? current.state.checkedAudit:false;
+     if (Object.keys(nProps.checkedAudit).length<=0){
+        headerChecked=false;
+     }else{
+        headerChecked=current.state? current.state.headerChecked:false;   
+     }
         current.state={
             sortedDataList: current._dataList,
             colSortDirs: sortIndex,
@@ -166,7 +170,7 @@ class AuditTable extends React.Component {
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true,
-            auditId: auditId
+            auditId: auditId,
         });
     }
 
@@ -191,44 +195,42 @@ class AuditTable extends React.Component {
         });
     }
 
-      handleChange(columnKey, rowIndex, evt) {
+    handleChange(columnKey, rowIndex, evt) {
         var checkedAudit = JSON.parse(JSON.stringify(this.props.checkedAudit));
         var sortedDataList = this.state.sortedDataList;
         var selectedData =  sortedDataList._data ? 
-                                sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
-                                sortedDataList.newData[rowIndex];
+        sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
+        sortedDataList.newData[rowIndex];
         if(evt.target.checked){
             checkedAudit[selectedData[columnKey]]=selectedData;
         }
         else{
             delete checkedAudit[selectedData[columnKey]];
         }
-
-       
         this.props.setCheckedAudit(checkedAudit)
     }
 
-        headerCheckChange(evt) {
+    headerCheckChange(evt) {
         var isChecked = evt.target.checked;
         this.setState({
             headerChecked: !this.state.headerChecked
         },function(){
-           var checkedAudit = JSON.parse(JSON.stringify(this.props.checkedAudit));
-            if(isChecked){
-                for(let i=0,len = this.props.items.length ;i < len ; i++){
-                    if(this.props.items[i].startAudit){
+         var checkedAudit = JSON.parse(JSON.stringify(this.props.checkedAudit));
+         if(isChecked){
+            for(let i=0,len = this.props.items.length ;i < len ; i++){
+                if(this.props.items[i].startAudit){
                     checkedAudit[this.props.items[i]["id"]]=this.props.items[i];
                 }
-                }
-                
-            }
-            else{
-                 checkedAudit={};
             }
 
+        }
+        else{
+           checkedAudit={};
+       }
+
        
-        this.props.setCheckedAudit(checkedAudit)
-        })
+       this.props.setCheckedAudit(checkedAudit)
+   })
         
     }
 
@@ -282,21 +284,22 @@ class AuditTable extends React.Component {
         this.props.refreshData(clearFilter);
     }
 //Render function for Audit Table
-    render() {
+render() {
 
-        var {sortedDataList, colSortDirs, columnWidths, headerChecked}=this.state, heightRes;
-        var auditCompleted=this.props.auditState.auditCompleted;
-        var auditIssue=this.props.auditState.auditIssue;
-        var locationAudit=this.props.auditState.locationAudit;
-        var skuAudit=this.props.auditState.skuAudit;
-        var totalProgress=this.props.auditState.totalProgress;
-        var rowsCount=sortedDataList.getSize();
-        let checkState=this.handleChange.bind(this);
-        let checkedStateAudit=[];
-        if (this.props.checkedAudit) {
-            checkedStateAudit=this.props.checkedAudit;
-        }
-        var headerAlert=<div className="alertState">
+    var {sortedDataList, colSortDirs, columnWidths, headerChecked}=this.state, heightRes;
+    var auditCompleted=this.props.auditState.auditCompleted;
+    var auditIssue=this.props.auditState.auditIssue;
+    var locationAudit=this.props.auditState.locationAudit;
+    var skuAudit=this.props.auditState.skuAudit;
+    var totalProgress=this.props.auditState.totalProgress;
+    var rowsCount=sortedDataList.getSize();
+    let checkState=this.handleChange.bind(this);
+    let checkedStateAudit=[];
+    if (this.props.checkedAudit) {
+        checkedStateAudit=this.props.checkedAudit;
+    }
+
+    var headerAlert=<div className="alertState">
 
             <div className="table-subtab-alert-icon"/>
             <div className="gor-inline"><FormattedMessage id="auditList.alert.lable"
@@ -486,6 +489,7 @@ class AuditTable extends React.Component {
             <div> {tableRenderer} </div>
         );
     }
+    
 }
 
 
