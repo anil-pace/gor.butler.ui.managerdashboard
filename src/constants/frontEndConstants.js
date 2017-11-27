@@ -123,7 +123,8 @@ export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
-export const DOWNLOAD_REPORT="downloadReport"
+export const DOWNLOAD_REPORT="downloadReport";
+export const STORAGE_SPACE="storageSpace";
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -311,7 +312,8 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 }
 export const REPORTS_SUB_TAB_ROUTE_MAP={
 	[OPERATIONS_LOG] : "operationsLog",
-	[DOWNLOAD_REPORT]:"downloadReport"
+	[DOWNLOAD_REPORT]:"downloadReport",
+	[STORAGE_SPACE]:"storageSpace"
 
 
 }
