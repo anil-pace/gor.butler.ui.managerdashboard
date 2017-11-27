@@ -11,7 +11,7 @@ export  function getOrderDetail(state={},action){
                 totalPage=res.total_pages;
                 itemsPerOrder=res.items_per_order;
                 totalCompletedOrder=res.total_completed;
-                totalPendingOrder=res.total_pending; 
+                totalPendingOrder=res.total_pending;
 
                 return Object.assign({}, state, {
                     "ordersDetail" : res.orders.length>0?res.orders:state.ordersDetail,
