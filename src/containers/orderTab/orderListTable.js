@@ -253,8 +253,7 @@ class OrderListTable extends React.Component {
                     <Column
                         columnKey="pickBy"
                         header={
-                            <SortHeaderCell onSortChange={this.backendSort}
-                                            sortDir={colSortDirs.pickBy}>
+                            <div className="gor-table-header">
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist"
                                                       defaultMessage="PICK BY"/>
@@ -267,7 +266,7 @@ class OrderListTable extends React.Component {
                                                           />
                                     </div>
                                 </div>
-                            </SortHeaderCell>
+                            </div>
                         }
                         cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
                         fixed={true}
