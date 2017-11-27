@@ -62,13 +62,13 @@ class StorageSpaceTab extends React.Component{
         dataList.newData=data;
         return {
             columnWidths: {
-                operatingMode: this.props.containerWidth * 0.15,
-                status: this.props.containerWidth * 0.1,
-                requestId: this.props.containerWidth * 0.13,
-                skuId: this.props.containerWidth * 0.1,
-                sourceId: this.props.containerWidth * 0.1,
-                userId: this.props.containerWidth * 0.1,
-                timestamp: this.props.containerWidth * 0.1
+                slotType: this.props.containerWidth * 0.15,
+                slotVolume: this.props.containerWidth * 0.1,
+                dimension: this.props.containerWidth * 0.13,
+                totalSlots: this.props.containerWidth * 0.1,
+                emptySlots: this.props.containerWidth * 0.1,
+                slotUtilization: this.props.containerWidth * 0.1,
+                //timestamp: this.props.containerWidth * 0.1
             },
             sortOrder:{
                 controller_id: "ASC",
@@ -209,7 +209,7 @@ class StorageSpaceTab extends React.Component{
             let _query =  Object.assign({},this.props.location.query);
             _query.pageSize = this.state.pageSize;
             _query.page = _query.page || 1;
-            this.props.router.push({pathname: "/reports/operationsLog",query: _query})
+            this.props.router.push({pathname: "/reports/storageSpace",query: _query})
         })
         
     }
@@ -336,6 +336,8 @@ class StorageSpaceTab extends React.Component{
     
 
     render(){
+        console.log("===============================================================>");
+        console.log("coming inside Storage space Tab.js file");
         var {dataList,totalSize,pageSize} = this.state;
         var _this = this;
         var filterHeight=screen.height - 190 - 50;
@@ -360,8 +362,8 @@ class StorageSpaceTab extends React.Component{
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
-                                        <FormattedMessage id="operationLog.table.heading" description="Heading for PPS"
-                                                          defaultMessage="Operations Log"/>
+                                        <FormattedMessage id="storageSpace.table.heading" description="Heading for PPS"
+                                                          defaultMessage="Storage space information"/>
                                         
                                     </div>
                                 </div>
@@ -374,13 +376,13 @@ class StorageSpaceTab extends React.Component{
                                         description="button label for download report"
                                         defaultMessage="Generate Report"/>
                                         </button>
-                                        <button
+                                        {/*<button
                                             className={this.props.filtersApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                             onClick={this._setFilter}>
                                             <div className="gor-manage-task"/>
                                             <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                                                               defaultMessage="Filter data"/>
-                                        </button>
+                                        </button>*/}
                                     </div>
                                 </div>
 
@@ -416,15 +418,15 @@ class StorageSpaceTab extends React.Component{
                     height={dataSize ? document.documentElement.clientHeight * 0.6 : 71}
                     {...this.props}>
                     <Column
-                        columnKey="operatingMode"
+                        columnKey="slotType"
                         header={
                             
                                
                                     <Cell >
                                         <div className="gorToolHeaderEl">
-                                            <FormattedMessage id="operationLog.table.operatingMode"
-                                                              description='OPERATING MODE'
-                                                              defaultMessage='OPERATING MODE'/>
+                                            <FormattedMessage id="storageSpace.table.slotType"
+                                                              description='SLOT TYPE'
+                                                              defaultMessage='SLOT TYPE'/>
                                             
                                         </div>
                                     </Cell>
@@ -433,18 +435,18 @@ class StorageSpaceTab extends React.Component{
                         }
                         cell={<TextCell data={dataList} classKey={"id"} />}
                         fixed={true}
-                        width={this.state.columnWidths.operatingMode}
+                        width={this.state.columnWidths.slotType}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="statusText"
+                        columnKey="slotVolume"
                         header={
                             <Cell >
 
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.status" description="STATUS"
-                                                      defaultMessage="STATUS"/>
+                                    <FormattedMessage id="storageSpace.table.slotVolume" description="SLOT VOLUME"
+                                                      defaultMessage="SLOT VOLUME"/>
 
                                    
                                 </div>
@@ -452,50 +454,50 @@ class StorageSpaceTab extends React.Component{
                         }
                         cell={<TextCell data={dataList} setClass={"status"}/>}
                         fixed={true}
-                        width={this.state.columnWidths.status}
+                        width={this.state.columnWidths.slotVolume}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="requestId"
+                        columnKey="dimension"
                         header={
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.requestId" description="Request ID"
-                                                      defaultMessage="REQUEST ID"/>
+                                    <FormattedMessage id="storageSpace.table.dimension" description="Dimension"
+                                                      defaultMessage="DIMENSION (L*B*H)"/>
                                 </div>
                             </Cell>
                         }
                         cell={<TextCell data={dataList} setClass={"requestId"}/>}
                         fixed={true}
-                        width={this.state.columnWidths.requestId}
+                        width={this.state.columnWidths.dimension}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="skuId"
+                        columnKey="totalSlots"
                         
                         header={
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.skuId" description="Status for PPS"
-                                                      defaultMessage="SKU ID"/>
+                                    <FormattedMessage id="storageSpace.table.totalSlots" description="Status for PPS"
+                                                      defaultMessage="TOTAL SLOTS"/>
                                 </div>
                                 </Cell>
                         }
                         cell={<TextCell data={dataList} setClass={"executionId"}/>}
                         fixed={true}
-                        width={this.state.columnWidths.requestId}
+                        width={this.state.columnWidths.totalSlots}
                         isResizable={true}
                     />
                     <Column
-                        columnKey="sourceId"
+                        columnKey="emptySlots"
                         header={
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.sourceId" description="Status for PPS"
-                                                      defaultMessage="SOURCE ID"/>
+                                    <FormattedMessage id="storageSpace.table.emptySlots" description="Status for PPS"
+                                                      defaultMessage="EMPTY SLOTS"/>
 
                                   
                                 </div>
@@ -503,17 +505,17 @@ class StorageSpaceTab extends React.Component{
                         }
                         cell={<TextCell data={dataList} setClass={"skuId"}/>}
                         fixed={true}
-                        width={this.state.columnWidths.skuId}
+                        width={this.state.columnWidths.emptySlots}
                         isResizable={true}
                     />
                      <Column
-                        columnKey="destinationId"
+                        columnKey="slotUtilization"
                         header={
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.destinationId" description="Status for PPS"
-                                                      defaultMessage="DESTINATION ID"/>
+                                    <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
+                                                      defaultMessage="SLOT UTILIZATION"/>
 
                                   
                                 </div>
@@ -521,9 +523,10 @@ class StorageSpaceTab extends React.Component{
                         }
                         cell={<TextCell data={dataList} setClass={"destinationId"}/>}
                         fixed={true}
-                        width={this.state.columnWidths.skuId}
+                        width={this.state.columnWidths.slotUtilization}
                         isResizable={true}
                     />
+                    {/*
                     <Column
                         columnKey="userId"
                         header={
@@ -548,7 +551,7 @@ class StorageSpaceTab extends React.Component{
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="operationLog.table.timestamp" description="Status for PPS"
+                                    <FormattedMessage id="opeartionLog.table.timestamp" description="Status for PPS"
                                                       defaultMessage="TIMESTAMP"/>
 
                                   
@@ -560,6 +563,7 @@ class StorageSpaceTab extends React.Component{
                         width={this.state.columnWidths.timestamp}
                         isResizable={true}
                     />
+                */}
                     
                 </Table>
                 {!dataSize ? <div className="gor-no-data"><FormattedMessage id="operationsLog.table.noData"

@@ -330,19 +330,21 @@ class Routes extends React.Component {
                                }}
                         />
 
-                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="storageSpace" path="/reports/storageSpace"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/reportsTab/storageSpaceTab.js').default);
-                                   }, "storageSpaceTab");
-                               }}
-                        />
+                        
 
                          <Route onEnter={this._handleNavigationChanges.bind(this)} name="downloadReport" path="/reports/downloadReport"
                                getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/reportsTab/downloadReportTab.js').default);
                                    }, "downloadReportTab");
+                               }}
+                        />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="storageSpace" path="/reports/storageSpace"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/reportsTab/storageSpaceTab.js').default);
+                                   }, "storageSpaceTab");
                                }}
                         />
 
