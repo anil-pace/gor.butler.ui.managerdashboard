@@ -16,7 +16,8 @@ import {
     toggleOrder,
     INITIAL_HEADER_SORT,
     sortOrderHead,
-    sortOrder, WS_ONSEND
+    sortOrder, WS_ONSEND,
+    EVALUATED_STATUS
 } from '../../constants/frontEndConstants';
 import {
     API_URL,
@@ -28,7 +29,7 @@ import {
     EXCEPTION_TRUE,
     WAREHOUSE_STATUS_SINGLE,
     WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM
+    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS
 } from '../../constants/configConstants';
 import OrderListTable from './orderListTable';
 import Dropdown from '../../components/dropdown/dropdown'
@@ -132,31 +133,36 @@ const messages=defineMessages({
             "oneDayOrders": 24
         };
 
-        if (query.orderId) {
-            _query_params.push([ORDER_ID_FILTER_PARAM, query.orderId].join("~="))
-        }
-
-
         //appending filter for status
 
         if (query.status) {
 
            let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
            if (statusList.length > 0) {
-            let _flattened_statuses=[]
-            statusList=statusList.constructor===Array?statusList:[statusList]
-            statusList.forEach(function (status) {
-                _flattened_statuses.push(status.split("__"))
-            })
-            statusList=[].concat.apply([], _flattened_statuses)
-            if(statusList.length===1){
-                _query_params.push([WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("=="))
-            }
-            else if(statusList.length>1){
-                _query_params.push([WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("="))
+                let _flattened_statuses=[]
+                let statusField="", orderIDfield="";
+                statusList=statusList.constructor===Array?statusList:[statusList]
+                statusList.forEach(function (status) {
+                    _flattened_statuses.push(status.split("__"))
+                })
+                statusList=[].concat.apply([], _flattened_statuses)
+                if(statusList.length===1){
+                    statusField = [WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("==");
+                }
+                else if(statusList.length>1){
+                    statusField = [WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("=");
+                }
+
+                if (query.orderId) {
+                    orderIDfield = [";"+ORDER_ID_FILTER_PARAM, query.orderId].join("==");
+                }
+                _query_params.push(statusField+orderIDfield);
             }
         }
-    }
+        else if(query.orderId){
+            _query_params.push([ORDER_ID_FILTER_PARAM_WITHOUT_STATUS, query.orderId].join("=="))
+        }
+
 
         //appending filter for orders by time:
         
@@ -183,7 +189,12 @@ const messages=defineMessages({
             orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
         }  
         url=[url, _query_params.join("&")].join("?");
-        url+=orderbyUrl;
+        if(_query_params.length===2){
+           url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
+        }
+        else{
+            url+=orderbyUrl
+        }
         
         let paginationData={
 
@@ -242,25 +253,21 @@ const messages=defineMessages({
         for (var i=0; i < data.length; i++) {
             orderData.id=data[i].order_id;
 
-            if (data[i].breached=== true) {
+            if (data[i].breached) {
 
                 orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
                 orderData.statusClass=GOR_BREACHED;
                 alertStatesNum++;
             }
-            else if (data[i].exception=== true) {
+            else if (data[i].exception) {
                 orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
                 orderData.statusClass=GOR_EXCEPTION;
                 alertStatesNum++;
             }
             else {
-                if (nProps.context.intl.formatMessage(stringConfig[data[i].status])) {
-                    orderData.status=nProps.context.intl.formatMessage(stringConfig[data[i].status]);
-                }
-                else {
-                    orderData.status=data[i].status;
-                }
-                orderData.statusClass=data[i].status;
+                let statusText = EVALUATED_STATUS[data[i].status] ? nProps.context.intl.formatMessage(stringConfig[EVALUATED_STATUS[data[i].status]]) : (nProps.context.intl.formatMessage(stringConfig[data[i].status]) || data[i].status);
+                orderData.status= statusText;
+                orderData.statusClass=EVALUATED_STATUS[data[i].status] ? EVALUATED_STATUS[data[i].status]:data[i].status;
             }
             if (!data[i].create_time) {
                 orderData.recievedTime="--";
@@ -308,7 +315,7 @@ const messages=defineMessages({
                     });
                 }
                 else {
-                    orderData.pickBy=nProps.context.intl.FormattedRelative(data[i].pick_before_time,
+                    orderData.pickBy=nProps.context.intl.formatRelative(data[i].pick_before_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -326,7 +333,7 @@ const messages=defineMessages({
             else {
                 orderData.orderLine=data[i].completed_orderlines + "/" + data[i].total_orderlines;
             }
-            if (data[i].status=== "completed") {
+            if (data[i].status=== "complete") {
                 if (getDaysDiff(data[i].update_time) < 2) {
                     orderData.completedTime=nProps.context.intl.formatRelative(data[i].update_time, {
                         timeZone: timeOffset,
@@ -439,13 +446,7 @@ const messages=defineMessages({
             appendSortUrl=sortOrderHead[this.props.orderSortHeader] + sortOrder[this.props.orderSortHeaderState.colSortDirs[this.props.orderSortHeader]]
         }
 
-        //for search via text filter
-        if (data.searchQuery && data.searchQuery["ORDER ID"]) {
-            appendTextFilterUrl=FILTER_ORDER_ID + data.searchQuery["ORDER ID"];
-            data.selected=1;
-            filterApplied=true;
-        }
-
+        
         //appending filter for status
         if (data.tokenSelected && data.tokenSelected["STATUS"] && data.tokenSelected["STATUS"].length) {
             let statusToken=(data.tokenSelected["STATUS"]).slice(0);
