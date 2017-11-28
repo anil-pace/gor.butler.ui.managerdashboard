@@ -744,6 +744,12 @@ export const REPORTS_FETCH = "REPORTS_FETCH";
 export const GET_REPORT = "GET_REPORT";
 export const DOWNLOAD_REPORT_REQUEST = "DOWNLOAD_REPORT_REQUEST";
 export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
+
+/**
+ * Constants for STORAGE SPACE
+ */
+export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
+
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
