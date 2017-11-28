@@ -9,25 +9,43 @@ import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
+
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
+
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
     ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
-    DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
+    DEFAULT_PAGE_SIZE_OL,REALTIME,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
+
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
+
 import Spinner from '../../components/spinner/Spinner';
+
 import {Table, Column,Cell} from 'fixed-data-table';
+
 import {
     tableRenderer,
-    TextCell
+    TextCell,
+    ProgressCell
 } from '../../components/commonFunctionsDataTable';
+
 import {
     showTableFilter
 } from '../../actions/filterAction';
 import OperationsFilter from './operationsFilter';
+
 import FilterSummary from '../../components/tableFilter/filterSummary';
+
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
-import {OPERATIONS_LOG_URL,WS_OPERATIONS_LOG_SUBSCRIPTION,REQUEST_REPORT_DOWNLOAD} from '../../constants/configConstants';
+
+import {OPERATIONS_LOG_URL, WS_OPERATIONS_LOG_SUBSCRIPTION, REQUEST_REPORT_DOWNLOAD, STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
+import {recieveStorageSpaceData} from '../../actions/storageSpaceActions';
+
+import {STORAGE_SPACE_FETCH, 
+        GET,
+        REPORT_NAME_STORAGE_SPACE,
+        DOWNLOAD_REPORT_REQUEST,
+        } from '../../constants/frontEndConstants';
 
 /*Page size dropdown options*/
 const pageSizeDDOpt = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -50,14 +68,15 @@ class StorageSpaceTab extends React.Component{
         super(props,context);
         this.state=this._getInitialState();
         
-        this._setFilter= this._setFilter.bind(this);
+        //this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
         this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
 
     _getInitialState(){
-        var data=this._processData(this.props.olData.slice(0));
+        //var data=this._processData(this.props.olData.slice(0));
+        var data=this._processData(this.props.storageSpaceData.slice(0));  // slice(0) simply duplicates an array
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
         return {
@@ -90,131 +109,142 @@ class StorageSpaceTab extends React.Component{
         
         var dataLen = data.length;
         var processedData=[];
-        var timeZone = this.props.timeOffset;
+        //var timeZone = this.props.timeOffset;
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
-                let rowData = data[i]["_source"];
+                let rowData = data[i];
                 let rowObj = {};//Object.assign({},data[i]["_source"]);
-                rowObj.operatingMode =  rowData.operatingMode || "--";
-                rowObj.status = rowData.status.type;
-                rowObj.statusText = rowData.status.type !== "success" ? (rowData.status.data || rowData.status.type) : rowData.status.type
-                rowObj.requestId = rowData.requestId;
-                rowObj.skuId = (rowData.productInfo.type || "--")+" "+(rowData.productInfo.id || "--")+"/"+(rowData.productInfo.quantity ? rowData.productInfo.quantity+" items" : "--");
-                rowObj.sourceId = (rowData.source.type || "--")+" "+rowData.source.id+(rowData.source.children ? "/"+
-                                rowData.source.children[0].type+"-"+rowData.source.children[0].id : "");
-                rowObj.destinationId = (rowData.destination.type || "--")+" "+(rowData.destination.id || "--")+(rowData.destination.children ? "/"+
-                                rowData.destination.children[0].type+"-"+rowData.destination.children[0].id:"");
-                rowObj.timestamp=<FormattedDate 
-                                    value={rowData.createdTime}
-                                    year='numeric'
-                                    month='long'
-                                    day='2-digit'
-                                    hour='2-digit'
-                                    minute='2-digit'
-                                    timeZone={timeZone}
-                                  />;
-                rowObj.userId=rowData.userId;
-
-                processedData.push(rowObj)
+                rowObj.slotType =  rowData.slot_type;
+                rowObj.slotVolume = rowData.slot_volume + " cc";
+                rowObj.dimension = rowData.slot_dimensions+ " cm";
+                rowObj.totalSlots = rowData.number_of_slots;
+                rowObj.emptySlots = rowData.number_of_empty_slots;
+                rowObj.slotUtilization = rowData.utilization;
+                processedData.push(rowObj);
             }
         }
-        return processedData
+        return processedData;
     }
-    shouldComponentUpdate(nextProps,nextState){
-        var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged) || 
-        (nextProps.showFilter !== this.props.showFilter) || (nextProps.reportsSpinner !== this.props.reportsSpinner);
-        return shouldUpdate;
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true},function(){
-                this._subscribeData(nextProps.location.query)
-            })
+    // shouldComponentUpdate(nextProps,nextState){
+    //     var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged) || 
+    //     (nextProps.showFilter !== this.props.showFilter) || (nextProps.reportsSpinner !== this.props.reportsSpinner);
+    //     return shouldUpdate;
+    // }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.socketAuthorized && !this.state.subscribed) {
+    //         this.setState({subscribed: true},function(){
+    //             this._subscribeData(nextProps.location.query)
+    //         })
             
-        }
+    //     }
         
-        else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected 
-            && (!this.state.dataFetchedOnLoad  
-                || ((this.props.filtersModified !== nextProps.filtersModified)
-                || (this.props.location.query.page !== nextProps.location.query.page)))){
-            this.setState({
-                dataFetchedOnLoad:true,
-                realTimeSelected:nextProps.location.query.time_period === REALTIME
-            },function(){
-                this._getOperationsData(nextProps)
-            })
+    //     else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected 
+    //         && (!this.state.dataFetchedOnLoad  
+    //             || ((this.props.filtersModified !== nextProps.filtersModified)
+    //             || (this.props.location.query.page !== nextProps.location.query.page)))){
+    //         this.setState({
+    //             dataFetchedOnLoad:true,
+    //             realTimeSelected:nextProps.location.query.time_period === REALTIME
+    //         },function(){
+    //             this._getStorageSpaceData(nextProps)
+    //         })
             
-        }
-        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-            let rawData = this.state.realTimeSelected  ? 
-            nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
-            let data = this._processData(rawData);
-            let totalSize = nextProps.totalSize;
-            let dataList = new tableRenderer(data.length)
-            dataList.newData=data;
-            this.setState({
-                dataList,
-                totalSize
-            })
-        }
-        if((!nextProps.olData.length || !nextProps.olWsData.length) 
-            && (this.props.filtersModified !== nextProps.filtersModified)){
-            this.setState({
-                hideLayer:false
-            })
-        }
-        else if(this.props.filtersModified !== nextProps.filtersModified){
-            this.setState({
-                hideLayer:true
-            })
-        }
-    }
+    //     }
+    //     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+    //         let rawData = this.state.realTimeSelected  ? 
+    //         nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
+    //         let data = this._processData(rawData);
+    //         let totalSize = nextProps.totalSize;
+    //         let dataList = new tableRenderer(data.length)
+    //         dataList.newData=data;
+    //         this.setState({
+    //             dataList,
+    //             totalSize
+    //         })
+    //     }
+    //     if((!nextProps.olData.length || !nextProps.olWsData.length) 
+    //         && (this.props.filtersModified !== nextProps.filtersModified)){
+    //         this.setState({
+    //             hideLayer:false
+    //         })
+    //     }
+    //     else if(this.props.filtersModified !== nextProps.filtersModified){
+    //         this.setState({
+    //             hideLayer:true
+    //         })
+    //     }
+    // }
     componentDidMount(){
-        var _query = JSON.parse(JSON.stringify(this.props.location.query))
-        delete _query.page;
-        delete _query.pageSize;
-        if(Object.keys(_query).length){
-            this.props.applyOLFilterFlag(true);
-        }
-        this._getOperationsData(this.props)
+        // var _query = JSON.parse(JSON.stringify(this.props.location.query))
+        // delete _query.page;
+        // delete _query.pageSize;
+        // if(Object.keys(_query).length){
+        //     this.props.applyOLFilterFlag(true);
+        // }
+        this._getStorageSpaceData(this.props);
+        // let params={
+        //         'url':STORAGE_SPACE_URL,
+        //         'method':GET,
+        //         'contentType':APP_JSON,
+        //         'accept':APP_JSON,
+        //         //'formdata':filters,
+        //         'cause':STORAGE_SPACE_FETCH,
+        //         'token': this.props.auth_token
+        //     }
+
+        
+        // this.props.makeAjaxCall(params);
     }
     /*Since componentWillRecieveProps is not called for the first time
     We need to put the subscription code in componentWillMount as well*/
-    componentWillMount() {
-        if (this.props.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true},function(){
-                this._subscribeData()
-            })
+    // componentWillMount() {
+    //     if (this.props.socketAuthorized && !this.state.subscribed) {
+    //         this.setState({subscribed: true},function(){
+    //             this._subscribeData()
+    //         })
             
-        }
-    }
-    componentWillUnmount(){
+    //     }
+    // }
+    //componentWillUnmount(){
         /**
          * If a user navigates back to the inventory page,
          * it should subscribe to the packet again.
          */
-        this.setState({subscribed: false})
-        this.props.wsOLUnSubscribe(flushWSData);
-    }
+        //this.setState({subscribed: false})
+        //this.props.wsOLUnSubscribe(flushWSData);
+    //}
 
-    _subscribeData(){
-        this.props.initDataSentCall(wsOverviewData["default"]);
-    }
-    _handlePageChange(e){
+    // _subscribeData(){
+    //     this.props.initDataSentCall(wsOverviewData["default"]);
+    // }
+    // _handlePageChange(e){
         
-        this.setState({
-            pageSize:e.value,
-            dataFetchedOnLoad:false
-        },function(){
-            let _query =  Object.assign({},this.props.location.query);
-            _query.pageSize = this.state.pageSize;
-            _query.page = _query.page || 1;
-            this.props.router.push({pathname: "/reports/storageSpace",query: _query})
-        })
+    //     this.setState({
+    //         pageSize:e.value,
+    //         dataFetchedOnLoad:false
+    //     },function(){
+    //         let _query =  Object.assign({},this.props.location.query);
+    //         _query.pageSize = this.state.pageSize;
+    //         _query.page = _query.page || 1;
+    //         this.props.router.push({pathname: "/reports/storageSpace",query: _query})
+    //     })
         
-    }
+    // }
 
-    _getOperationsData(props){
+    _getStorageSpaceData(props){
+
+        let params={
+                'url':STORAGE_SPACE_URL,
+                'method':GET,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                //'formdata':filters,
+                'cause':STORAGE_SPACE_FETCH,
+                'token': this.props.auth_token
+            }
+        this.props.makeAjaxCall(params);
+
+
         var query = props.location.query,
         isSocketConnected = props.notificationSocketConnected;
         var filters = {};
@@ -270,12 +300,12 @@ class StorageSpaceTab extends React.Component{
             this.props.wsOLUnSubscribe(flushWSData);
             
             let params={
-                'url':OPERATIONS_LOG_URL,
+                'url':STORAGE_SPACE_URL,
                 'method':POST,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'formdata':filters,
-                'cause':OPERATION_LOG_FETCH
+                'cause':STORAGE_SPACE_FETCH
             }
 
         
@@ -305,32 +335,35 @@ class StorageSpaceTab extends React.Component{
         this.props.showTableFilter(!this.props.showFilter);
     }
     _requestReportDownload(){
-            let derivedFilters = JSON.parse(this.state.derivedFilters);
-            let formData = {
-                    "report": {
-                    "requestedBy": this.props.username,
-                    "type" : REPORT_NAME_OPERATOR_LOGS
-                    }
-            }
+            // let derivedFilters = JSON.parse(this.state.derivedFilters);
+            // let formData = {
+            //         "report": {
+            //         "requestedBy": this.props.username,
+            //         "type" : REPORT_NAME_STORAGE_SPACE
+            //         }
+            // }
             
-            formData.searchRequest = Object.assign(derivedFilters,{
-                    page:{
-                        size:this.state.totalSize ? parseInt(this.state.totalSize,10): null,
-                        from:0
-                    }
-            })
+            // formData.searchRequest = Object.assign(derivedFilters,{
+            //         page:{
+            //             size:this.state.totalSize ? parseInt(this.state.totalSize,10): null,
+            //             from:0
+            //         }
+            // })
 
             
             let params={
-                    'url':REQUEST_REPORT_DOWNLOAD,
-                    'method':POST,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'formdata':formData,
-                    'cause':DOWNLOAD_REPORT_REQUEST
+                    'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
+                    'method':GET,
+                    //'contentType':APP_JSON,
+                    'contentType': 'application/vnd.ms-excel',
+                    //'accept':APP_JSON,
+                    //'formdata':formData,
+                    'cause':DOWNLOAD_REPORT_REQUEST,
+                    'token': this.props.auth_token,
+                    //'responseType': "arraybuffer",
+                    'responseType': "binary",
+                    'accept': "text/xls",
                 }
-
-            
             this.props.makeAjaxCall(params);
         }
     
@@ -347,8 +380,10 @@ class StorageSpaceTab extends React.Component{
         var pageSizeDDDisabled = timePeriod === REALTIME ;
         var location = JSON.parse(JSON.stringify(_this.props.location));
         var totalPage = Math.ceil(totalSize / pageSize);
+
+
         return (
-            <div className="gorTesting wrapper gor-operations-log">
+            <div className="gorTesting wrapper gor-storage-space">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
             <div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
@@ -420,20 +455,18 @@ class StorageSpaceTab extends React.Component{
                     <Column
                         columnKey="slotType"
                         header={
-                            
-                               
-                                    <Cell >
-                                        <div className="gorToolHeaderEl">
-                                            <FormattedMessage id="storageSpace.table.slotType"
-                                                              description='SLOT TYPE'
-                                                              defaultMessage='SLOT TYPE'/>
-                                            
-                                        </div>
-                                    </Cell>
+                                <Cell >
+                                    <div className="gorToolHeaderEl">
+                                        <FormattedMessage id="storageSpace.table.slotType"
+                                                          description='SLOT TYPE'
+                                                          defaultMessage='SLOT TYPE'/>
+                                        
+                                    </div>
+                                </Cell>
                                 
                             
                         }
-                        cell={<TextCell data={dataList} classKey={"id"} />}
+                        cell={<TextCell data={dataList} classKey={"type"} />}
                         fixed={true}
                         width={this.state.columnWidths.slotType}
                         isResizable={true}
@@ -452,7 +485,7 @@ class StorageSpaceTab extends React.Component{
                                 </div>
                             </Cell>
                         }
-                        cell={<TextCell data={dataList} setClass={"status"}/>}
+                        cell={<TextCell data={dataList} setClass={"volume"}/>}
                         fixed={true}
                         width={this.state.columnWidths.slotVolume}
                         isResizable={true}
@@ -468,7 +501,7 @@ class StorageSpaceTab extends React.Component{
                                 </div>
                             </Cell>
                         }
-                        cell={<TextCell data={dataList} setClass={"requestId"}/>}
+                        cell={<TextCell data={dataList} setClass={"dimension"}/>}
                         fixed={true}
                         width={this.state.columnWidths.dimension}
                         isResizable={true}
@@ -511,17 +544,19 @@ class StorageSpaceTab extends React.Component{
                      <Column
                         columnKey="slotUtilization"
                         header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
+                            <Cell>
+                            <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
-                                                      defaultMessage="SLOT UTILIZATION"/>
+                                <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
+                                                  defaultMessage="SLOT UTILIZATION"/>
 
-                                  
-                                </div>
-                                </Cell>
+                              
+                            </div>
+                            </Cell>
                         }
-                        cell={<TextCell data={dataList} setClass={"destinationId"}/>}
+                        
+
+                        cell={<ProgressCell data={dataList} setClass={"destinationId"}> </ProgressCell>}
                         fixed={true}
                         width={this.state.columnWidths.slotUtilization}
                         isResizable={true}
@@ -566,8 +601,8 @@ class StorageSpaceTab extends React.Component{
                 */}
                     
                 </Table>
-                {!dataSize ? <div className="gor-no-data"><FormattedMessage id="operationsLog.table.noData"
-                                                                    description="No data message for operations logs"
+                {!dataSize ? <div className="gor-no-data"><FormattedMessage id="storageSpace.table.noData"
+                                                                    description="No data message for Storage space"
                                                                     defaultMessage="No Data Found"/></div>:""}
                 <div className="gor-ol-paginate-wrap">
                 <div className="gor-ol-paginate-left">
@@ -596,7 +631,8 @@ StorageSpaceTab.propTypes = {
     notificationSocketConnected: React.PropTypes.bool,
     reportsSpinner: React.PropTypes.bool,
     olWsData: React.PropTypes.array,
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    storageSpaceData: React.PropTypes.array
 
 }
 StorageSpaceTab.defaultProps = {
@@ -608,14 +644,17 @@ StorageSpaceTab.defaultProps = {
   filtersModified:false,
   notificationSocketConnected:false,
   reportsSpinner:true,
-  olWsData:[]
+  olWsData:[],
+  storageSpaceData: []
 }
 
 function mapStateToProps(state, ownProps) {
     return {
+        auth_token: state.authLogin.auth_token,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         showFilter: state.filterInfo.filterState ,
         olData:state.operationsLogsReducer.olData,
+        storageSpaceData: state.storageSpaceReducer.storageSpaceData,
         totalSize:state.operationsLogsReducer.totalSize,
         hasDataChanged:state.operationsLogsReducer.hasDataChanged,
         filtersApplied:state.operationsLogsReducer.filtersApplied,
