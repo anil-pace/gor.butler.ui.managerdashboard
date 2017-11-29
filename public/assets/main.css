@@ -7075,7 +7075,7 @@ button:disabled {
   border-color: #aaaaaa;
   font-size: 14px;
   font-weight: 100;
-  color: #aaaaaa;
+  color: #7F8183;
   position: relative;
   float: left;
 }
@@ -7139,7 +7139,7 @@ button:disabled {
   font-size: 16px;
   font-weight: 500;
   box-sizing: border-box;
-  color: #A6A7A9;
+  color: #7F8183;
   cursor: pointer;
   padding: 0.5rem 0.625rem;
 }
