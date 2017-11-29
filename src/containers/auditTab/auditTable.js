@@ -125,7 +125,8 @@ class AuditTable extends React.Component {
                 startTime: nProps.containerWidth * 0.13,
                 progress: nProps.containerWidth * 0.14,
                 completedTime: nProps.containerWidth * 0.13,
-                actions: nProps.containerWidth * 0.25
+                actions: nProps.containerWidth * 0.25,
+                pps_id :nProps.containerWidth * 0.10
             },
             headerChecked: headerChecked,
             isChecked: checkedAudit
@@ -413,25 +414,7 @@ class AuditTable extends React.Component {
                     isResizable={true}
                 />
 
-                <Column
-                    columnKey="startTime"
-                    header={
-                        <SortHeaderCell onSortChange={this.backendSort}
-                                        sortDir={colSortDirs.startTime}>
-                            <div className="gorToolHeaderEl">
-                                <FormattedMessage id="audit.table.startTime" description="startTime for audit"
-                                                  defaultMessage="START TIME"/>
-                                <div className="gorToolHeaderSubText">
-
-                                </div>
-                            </div>
-                        </SortHeaderCell>
-                    }
-                    cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-                    fixed={true}
-                    width={columnWidths.startTime}
-                    isResizable={true}
-                />
+                
                 <Column
                     columnKey="progress"
                     header={
@@ -458,22 +441,19 @@ class AuditTable extends React.Component {
                 />
 
                 <Column
-                    columnKey="completedTime"
+                    columnKey="pps_id"
                     header={
-                        <SortHeaderCell onSortChange={this.backendSort}
-                                        sortDir={colSortDirs.completedTime}>
+                        <div className="gor-table-header">
                             <div className="gorToolHeaderEl">
-                                <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit"
-                                                  defaultMessage="TIME COMPLETED"/>
-                                <div className="gorToolHeaderSubText">
-                                    {this.props.timeZoneString}
-                                </div>
+                                <FormattedMessage id="audit.table.pps_id" description="pps assigned for audit task"
+                                                  defaultMessage="PPS"/>
                             </div>
-                        </SortHeaderCell>
+                        </div>
                     }
+
                     cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
                     fixed={true}
-                    width={columnWidths.completedTime}
+                    width={columnWidths.pps_id}
                     isResizable={true}
                 />
 
