@@ -1,4 +1,4 @@
-/**
+ /**
  * Container for Inventory tab
  * This will be switched based on tab click
  */
@@ -12,10 +12,6 @@ import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions'
 
 import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
 
-import {WS_ONSEND,POST,OPERATION_LOG_FETCH
-    ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
-    DEFAULT_PAGE_SIZE_OL,REALTIME,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
-
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 
 import Spinner from '../../components/spinner/Spinner';
@@ -28,10 +24,10 @@ import {
     ProgressCell
 } from '../../components/commonFunctionsDataTable';
 
-import {
-    showTableFilter
-} from '../../actions/filterAction';
-import OperationsFilter from './operationsFilter';
+// import {
+//     showTableFilter
+// } from '../../actions/filterAction';
+//import OperationsFilter from './operationsFilter';
 
 import FilterSummary from '../../components/tableFilter/filterSummary';
 
@@ -40,11 +36,13 @@ import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {OPERATIONS_LOG_URL, WS_OPERATIONS_LOG_SUBSCRIPTION, REQUEST_REPORT_DOWNLOAD, STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import {recieveStorageSpaceData} from '../../actions/storageSpaceActions';
-
 import {STORAGE_SPACE_FETCH, 
         GET,
-        REPORT_NAME_STORAGE_SPACE,
+        //REPORT_NAME_STORAGE_SPACE,
         DOWNLOAD_REPORT_REQUEST,
+        APP_JSON,
+        DEFAULT_PAGE_SIZE_OL,
+        REALTIME
         } from '../../constants/frontEndConstants';
 
 /*Page size dropdown options*/
@@ -68,14 +66,12 @@ class StorageSpaceTab extends React.Component{
         super(props,context);
         this.state=this._getInitialState();
         
-        //this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
         this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
 
     _getInitialState(){
-        //var data=this._processData(this.props.olData.slice(0));
         var data=this._processData(this.props.storageSpaceData.slice(0));  // slice(0) simply duplicates an array
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
@@ -105,11 +101,9 @@ class StorageSpaceTab extends React.Component{
         }
     }
 
-        _processData(data){
-        
+    _processData(data){
         var dataLen = data.length;
         var processedData=[];
-        //var timeZone = this.props.timeOffset;
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i];
@@ -125,114 +119,13 @@ class StorageSpaceTab extends React.Component{
         }
         return processedData;
     }
-    // shouldComponentUpdate(nextProps,nextState){
-    //     var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged) || 
-    //     (nextProps.showFilter !== this.props.showFilter) || (nextProps.reportsSpinner !== this.props.reportsSpinner);
-    //     return shouldUpdate;
-    // }
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.socketAuthorized && !this.state.subscribed) {
-    //         this.setState({subscribed: true},function(){
-    //             this._subscribeData(nextProps.location.query)
-    //         })
-            
-    //     }
-        
-    //     else if(nextProps.socketAuthorized && nextProps.notificationSocketConnected 
-    //         && (!this.state.dataFetchedOnLoad  
-    //             || ((this.props.filtersModified !== nextProps.filtersModified)
-    //             || (this.props.location.query.page !== nextProps.location.query.page)))){
-    //         this.setState({
-    //             dataFetchedOnLoad:true,
-    //             realTimeSelected:nextProps.location.query.time_period === REALTIME
-    //         },function(){
-    //             this._getStorageSpaceData(nextProps)
-    //         })
-            
-    //     }
-    //     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-    //         let rawData = this.state.realTimeSelected  ? 
-    //         nextProps.olWsData.slice(0) : nextProps.olData.slice(0);
-    //         let data = this._processData(rawData);
-    //         let totalSize = nextProps.totalSize;
-    //         let dataList = new tableRenderer(data.length)
-    //         dataList.newData=data;
-    //         this.setState({
-    //             dataList,
-    //             totalSize
-    //         })
-    //     }
-    //     if((!nextProps.olData.length || !nextProps.olWsData.length) 
-    //         && (this.props.filtersModified !== nextProps.filtersModified)){
-    //         this.setState({
-    //             hideLayer:false
-    //         })
-    //     }
-    //     else if(this.props.filtersModified !== nextProps.filtersModified){
-    //         this.setState({
-    //             hideLayer:true
-    //         })
-    //     }
-    // }
+    
+    
     componentDidMount(){
-        // var _query = JSON.parse(JSON.stringify(this.props.location.query))
-        // delete _query.page;
-        // delete _query.pageSize;
-        // if(Object.keys(_query).length){
-        //     this.props.applyOLFilterFlag(true);
-        // }
         this._getStorageSpaceData(this.props);
-        // let params={
-        //         'url':STORAGE_SPACE_URL,
-        //         'method':GET,
-        //         'contentType':APP_JSON,
-        //         'accept':APP_JSON,
-        //         //'formdata':filters,
-        //         'cause':STORAGE_SPACE_FETCH,
-        //         'token': this.props.auth_token
-        //     }
-
-        
-        // this.props.makeAjaxCall(params);
     }
-    /*Since componentWillRecieveProps is not called for the first time
-    We need to put the subscription code in componentWillMount as well*/
-    // componentWillMount() {
-    //     if (this.props.socketAuthorized && !this.state.subscribed) {
-    //         this.setState({subscribed: true},function(){
-    //             this._subscribeData()
-    //         })
-            
-    //     }
-    // }
-    //componentWillUnmount(){
-        /**
-         * If a user navigates back to the inventory page,
-         * it should subscribe to the packet again.
-         */
-        //this.setState({subscribed: false})
-        //this.props.wsOLUnSubscribe(flushWSData);
-    //}
-
-    // _subscribeData(){
-    //     this.props.initDataSentCall(wsOverviewData["default"]);
-    // }
-    // _handlePageChange(e){
-        
-    //     this.setState({
-    //         pageSize:e.value,
-    //         dataFetchedOnLoad:false
-    //     },function(){
-    //         let _query =  Object.assign({},this.props.location.query);
-    //         _query.pageSize = this.state.pageSize;
-    //         _query.page = _query.page || 1;
-    //         this.props.router.push({pathname: "/reports/storageSpace",query: _query})
-    //     })
-        
-    // }
 
     _getStorageSpaceData(props){
-
         let params={
                 'url':STORAGE_SPACE_URL,
                 'method':GET,
@@ -243,134 +136,38 @@ class StorageSpaceTab extends React.Component{
                 'token': this.props.auth_token
             }
         this.props.makeAjaxCall(params);
-
-
-        var query = props.location.query,
-        isSocketConnected = props.notificationSocketConnected;
-        var filters = {};
-        var pageSize = this.state.pageSize;
-        var frm = ((query.page ? parseInt(query.page,10) : 1) -1) * pageSize;
-        this.props.setReportsSpinner(true);
-            if(Object.keys(query).length){
-                let timeOffset = query.time_period ? query.time_period.split("_") : [];
-                if(query.status){
-                    filters.status = {
-                        type: (query.status.toString()).replace(/,/g," ") 
-                    };
-                }
-                if(query.request_id){
-                    filters.requestId = query.request_id;
-                }
-                if(query.sku_id){
-                    filters.productInfo = {
-                        type:"item",
-                        id:query.sku_id
-                    };
-                }
-                if(query.user_id){
-                    filters.userId = query.user_id;
-                }
-                if(query.pps_id){
-                    filters.stationInfo = {
-                        "id":query.pps_id,
-                        "type":"pps"
-                    };
-                    filters.destination = {
-                        "id":query.pps_id,
-                        "type":"pps"
-                    };
-                }
-                if(query.operatingMode){
-                    filters.operatingMode = (query.operatingMode.toString()).replace(/,/g," ");
-                }
-                
-                if(timeOffset.length === 2){
-                    filters.timeOffset={
-                        "unit" : timeOffset[1],
-                        "value": parseInt(timeOffset[0],10)
-                    }
-                }
-            }
-            filters.page={
-                    size:parseInt(pageSize,10),
-                    from:frm
-                }
-
-        if(query.time_period !== REALTIME){
-            this.props.wsOLUnSubscribe(flushWSData);
-            
-            let params={
-                'url':STORAGE_SPACE_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'formdata':filters,
-                'cause':STORAGE_SPACE_FETCH
-            }
-
-        
-        this.props.makeAjaxCall(params);
-        this.setState({
-                realTimeSubSent:false,
-                derivedFilters: JSON.stringify(filters)
-            })
-        }
-        else if(query.time_period && query.time_period === REALTIME 
-            && !this.state.realTimeSubSent && isSocketConnected){
-            this.props.wsOLUnSubscribe(flushWSData);
-            let wsParams = {},filterString;
-            delete filters.timeRange;
-            delete filters.page;
-            filterString = JSON.stringify(filters);
-            wsParams.url = WS_OPERATIONS_LOG_SUBSCRIPTION;
-            wsParams.filters = filterString;
-            this.props.wsOLSubscribe(wsParams);
-            this.setState({
-                realTimeSubSent:true,
-                derivedFilters: filterString
-            })
-        }
     }
-    _setFilter(){
-        this.props.showTableFilter(!this.props.showFilter);
-    }
+    
     _requestReportDownload(){
-            // let derivedFilters = JSON.parse(this.state.derivedFilters);
-            // let formData = {
-            //         "report": {
-            //         "requestedBy": this.props.username,
-            //         "type" : REPORT_NAME_STORAGE_SPACE
-            //         }
-            // }
-            
-            // formData.searchRequest = Object.assign(derivedFilters,{
-            //         page:{
-            //             size:this.state.totalSize ? parseInt(this.state.totalSize,10): null,
-            //             from:0
-            //         }
-            // })
+        let params={
+                'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
+                'method':GET,
+                'contentType': 'application/vnd.ms-excel',
+                'cause':DOWNLOAD_REPORT_REQUEST,
+                'token': this.props.auth_token,
+                //'responseType': "arraybuffer",
+                'responseType': "binary",
+                'accept': "text/xls"
+            }
+        this.props.makeAjaxCall(params);
+    }
 
-            
-            let params={
-                    'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
-                    'method':GET,
-                    //'contentType':APP_JSON,
-                    'contentType': 'application/vnd.ms-excel',
-                    //'accept':APP_JSON,
-                    //'formdata':formData,
-                    'cause':DOWNLOAD_REPORT_REQUEST,
-                    'token': this.props.auth_token,
-                    //'responseType': "arraybuffer",
-                    'responseType': "binary",
-                    'accept': "text/xls",
-                }
-            this.props.makeAjaxCall(params);
-        }
+    _handlePageChange(e){
+        
+        this.setState({
+            pageSize:e.value,
+            dataFetchedOnLoad:false
+        },function(){
+            let _query =  Object.assign({},this.props.location.query);
+            _query.pageSize = this.state.pageSize;
+            _query.page = _query.page || 1;
+            this.props.router.push({pathname: "/reports/storageSpace",query: _query})
+        })
+        
+    }
     
 
     render(){
-        console.log("===============================================================>");
-        console.log("coming inside Storage space Tab.js file");
         var {dataList,totalSize,pageSize} = this.state;
         var _this = this;
         var filterHeight=screen.height - 190 - 50;
@@ -381,11 +178,10 @@ class StorageSpaceTab extends React.Component{
         var location = JSON.parse(JSON.stringify(_this.props.location));
         var totalPage = Math.ceil(totalSize / pageSize);
 
-
         return (
             <div className="gorTesting wrapper gor-storage-space">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            <div className="gor-filter-wrap"
+            {/*<div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
                                 <OperationsFilter ref={instance => { this.child = instance; }}
                                 filters = {this.props.location.query} 
@@ -393,7 +189,7 @@ class StorageSpaceTab extends React.Component{
                                 pageSize={this.state.pageSize} 
                                 hideLayer={this.state.hideLayer}
                                 responseFlag={this.props.reportsSpinner}/>
-            </div>
+            </div>*/}
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -669,11 +465,11 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch){
     return {
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        //initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
         updateSubscriptionPacket: function (data) {
                 dispatch(updateSubscriptionPacket(data));
         },
-        showTableFilter: function(data){dispatch(showTableFilter(data));},
+        //showTableFilter: function(data){dispatch(showTableFilter(data));},
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
         applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))},
         wsOLUnSubscribe:function(data){dispatch(wsOLUnSubscribe(data))},

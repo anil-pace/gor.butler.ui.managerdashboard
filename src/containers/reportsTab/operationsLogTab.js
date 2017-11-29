@@ -16,12 +16,6 @@ import {applyOLFilterFlag,
         setReportsSpinner,
         flushWSData} from '../../actions/operationsLogsActions';
 
-// import {applyOLFilterFlag,
-//         wsOLSubscribe,
-//         wsOLUnSubscribe,
-//         setReportsSpinner,
-//         flushWSData} from '../../actions/storageSpaceActions';
-
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
     ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
     DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';

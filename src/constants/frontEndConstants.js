@@ -749,7 +749,6 @@ export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
  * Constants for STORAGE SPACE
  */
 export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
-export const REPORT_NAME_STORAGE_SPACE = "STORAGE_SPACE";
 
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";

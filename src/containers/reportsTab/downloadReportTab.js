@@ -161,7 +161,6 @@ class DownloadReportTab extends React.Component{
         this.props.makeAjaxCall(params);
    }
     _getReportsData(props){
-        console.log("coming inside _getReportsData function in downloadReportTab.js");
         var _props = props || this.props;
         var query = _props.location.query;
         var pageSize = query.pageSize || 25;
