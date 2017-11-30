@@ -941,12 +941,6 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
-    "id": "stringConfig.bad_request",
-    "description": "Text to show bad request",
-    "defaultMessage": "Bad Request",
-    "filepath": "./src/constants/backEndConstants.js"
-  },
-  {
     "id": "stringConfig.internal_server_error",
     "description": "Text to show internal server error",
     "defaultMessage": "Internal Error",
