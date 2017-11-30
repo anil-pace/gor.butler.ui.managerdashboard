@@ -72,6 +72,7 @@ class StorageSpaceTab extends React.Component{
     }
 
     _getInitialState(){
+        console.log("=========================> coming inside _getInitialState function"); 
         var data=this._processData(this.props.storageSpaceData.slice(0));  // slice(0) simply duplicates an array
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
@@ -102,6 +103,7 @@ class StorageSpaceTab extends React.Component{
     }
 
     _processData(data){
+        console.log("=========================> coming inside _processData function");
         var dataLen = data.length;
         var processedData=[];
         if(dataLen){
@@ -122,6 +124,7 @@ class StorageSpaceTab extends React.Component{
     
     
     componentDidMount(){
+        console.log("=========================> coming inside componentDidMount"); 
         this._getStorageSpaceData(this.props);
     }
 
@@ -177,6 +180,7 @@ class StorageSpaceTab extends React.Component{
         var pageSizeDDDisabled = timePeriod === REALTIME ;
         var location = JSON.parse(JSON.stringify(_this.props.location));
         var totalPage = Math.ceil(totalSize / pageSize);
+        var totalProgress=this.props.storageSpaceData.utilization;
 
         return (
             <div className="gorTesting wrapper gor-storage-space">
@@ -255,7 +259,7 @@ class StorageSpaceTab extends React.Component{
                                     <div className="gorToolHeaderEl">
                                         <FormattedMessage id="storageSpace.table.slotType"
                                                           description='SLOT TYPE'
-                                                          defaultMessage='SLOT TYPE'/>
+                                                          defaultMessage='slot type'/>
                                         
                                     </div>
                                 </Cell>
@@ -274,7 +278,7 @@ class StorageSpaceTab extends React.Component{
 
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="storageSpace.table.slotVolume" description="SLOT VOLUME"
+                                    <FormattedMessage id="storageSpace.table.slotVolume" description="slot volume"
                                                       defaultMessage="SLOT VOLUME"/>
 
                                    
@@ -309,7 +313,7 @@ class StorageSpaceTab extends React.Component{
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="storageSpace.table.totalSlots" description="Status for PPS"
+                                    <FormattedMessage id="storageSpace.table.totalSlots" description="Status for total slots"
                                                       defaultMessage="TOTAL SLOTS"/>
                                 </div>
                                 </Cell>
@@ -325,7 +329,7 @@ class StorageSpaceTab extends React.Component{
                                 <Cell>
                                 <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="storageSpace.table.emptySlots" description="Status for PPS"
+                                    <FormattedMessage id="storageSpace.table.emptySlots" description="Status for empty slots"
                                                       defaultMessage="EMPTY SLOTS"/>
 
                                   
@@ -342,9 +346,14 @@ class StorageSpaceTab extends React.Component{
                         header={
                             <Cell>
                             <div className="gorToolHeaderEl">
-
                                 <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
                                                   defaultMessage="SLOT UTILIZATION"/>
+                                <div className="gorToolHeaderSubText">
+                                    <FormattedMessage id="storageSpace.Totalprogress"
+                                                      description='total progress for slot utilization'
+                                                      defaultMessage='{totalProgress}%'
+                                                      values={{totalProgress: totalProgress.toFixed(1) ? totalProgress.toFixed(1) : '0'}}/>
+                                </div>
 
                               
                             </div>

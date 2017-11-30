@@ -43,17 +43,15 @@ const ajaxMiddleware=(function(){
                  try
                  {
                      let resContentType = httpRequest.getResponseHeader('Content-type');
-                      if(resContentType.match(/(text\/csv)/g) || 
+                   if(resContentType.match(/(text\/csv)/g) || 
                       resContentType.match(/(application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet)/g) ||
                       resContentType.match(/(application\/vnd.ms-excel)/g)){
                     //get the file name from the content-disposition header
                     //and then save the file
 
-                    
-
                     let fileName;
-                    if (this.getResponseHeader('Content-Disposition')){
-                      let strName=this.getResponseHeader('Content-Disposition').match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+                    if (this.getResponseHeader('Content-disposition')){
+                      let strName=this.getResponseHeader('Content-disposition').match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
                       fileName=strName[0].slice(10,strName.length-2);
                     }
                     fileName=(!fileName)?(resContentType.match(/(text\/csv)/g)? "download.csv" : "download.xlsx"):fileName;
