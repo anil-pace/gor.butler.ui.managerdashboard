@@ -11,6 +11,7 @@ import {
     GET,PUT,
     APP_JSON,
     GOR_COMPLETED_STATUS,
+    GOR_IN_PROGRESS_STATUS,
     LOCATION,
     AUDIT_PARAM_TYPE,
     AUDIT_PARAM_VALUE,
@@ -649,7 +650,7 @@ render() {
     headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
 
     var auditData=this._processAuditData();
-    var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0};
+    var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0,"auditInProgress":0};
     for (var i=auditData.length - 1; i >= 0; i--) {
         if (auditData[i].status=== GOR_COMPLETED_STATUS) {
             auditState["auditCompleted"]++;
@@ -658,6 +659,9 @@ render() {
         if (auditData[i].status=== AUDIT_ISSUES_STATUS) {
             auditState["auditIssue"]++;
         }
+        if(auditData[i].status===GOR_IN_PROGRESS_STATUS) {
+            auditState["auditInProgress"]++;
+         }
         if (auditData[i].auditType=== SKU || auditData[i].auditType=== AUDIT_BY_PDFA) {
             auditState["skuAudit"]++;
         }

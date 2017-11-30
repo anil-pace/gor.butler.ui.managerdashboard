@@ -292,6 +292,7 @@ render() {
     var locationAudit=this.props.auditState.locationAudit;
     var skuAudit=this.props.auditState.skuAudit;
     var totalProgress=this.props.auditState.totalProgress;
+    var auditInProgress=this.props.auditState.auditInProgress;
     var rowsCount=sortedDataList.getSize();
     let checkState=this.handleChange.bind(this);
     let checkedStateAudit=[];
@@ -403,9 +404,9 @@ render() {
                                     <div className="gor-subStatus-online">
                                         <div>
                                             <FormattedMessage id="auditTable.status"
-                                                              description='status completed audit'
-                                                              defaultMessage='{auditCompleted} Completed'
-                                                              values={{auditCompleted: auditCompleted ? auditCompleted : '0'}}/>
+                                                              description='status in progress audit'
+                                                              defaultMessage='{auditInProgress} in progress'
+                                                              values={{auditInProgress: auditInProgress ? auditInProgress : 'None'}}/>
                                         </div>
                                     </div>}
                             </div>
