@@ -149,7 +149,7 @@ class StorageSpaceTab extends React.Component{
                 'cause':DOWNLOAD_REPORT_REQUEST,
                 'token': this.props.auth_token,
                 //'responseType': "arraybuffer",
-                'responseType': "binary",
+                'responseType': "arraybuffer",
                 'accept': "text/xls"
             }
         this.props.makeAjaxCall(params);
@@ -348,12 +348,12 @@ class StorageSpaceTab extends React.Component{
                             <div className="gorToolHeaderEl">
                                 <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
                                                   defaultMessage="SLOT UTILIZATION"/>
-                                <div className="gorToolHeaderSubText">
+                               {/* <div className="gorToolHeaderSubText">
                                     <FormattedMessage id="storageSpace.Totalprogress"
                                                       description='total progress for slot utilization'
                                                       defaultMessage='{totalProgress}%'
                                                       values={{totalProgress: totalProgress.toFixed(1) ? totalProgress.toFixed(1) : '0'}}/>
-                                </div>
+                                </div>*/}
 
                               
                             </div>
