@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
 import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 import NoPPS from './noPPS';
+import {setCheckedAudit} from '../../actions/sortHeaderActions';
 
 
 class StartAudit extends React.Component{
@@ -59,6 +60,7 @@ class StartAudit extends React.Component{
     }
       this.props.userRequest(userData);
       this.props.removeModal();
+      this.props.setCheckedAudit({});
   }
    _handleChange(event) 
    {
@@ -132,7 +134,8 @@ var mapDispatchToProps=function(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
     resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
-    resetForm:   function(){ dispatch(resetForm()); }
+    resetForm:   function(){ dispatch(resetForm()); },
+    setCheckedAudit: function (data) { dispatch(setCheckedAudit(data));}
   }
 };
 
