@@ -497,6 +497,7 @@ export const GOR_ON_STATUS="open";
 export const GOR_CONNECTED_STATUS="connected";
 export const GOR_MANUAL_MODE="manual";
 export const GOR_COMPLETED_STATUS="Completed";
+export const GOR_IN_PROGRESS_STATUS="In Progress";
 export const GOR_BREACHED_LINES="gor-breached-lines";
 export const AUDIT_CREATED="audit_created";
 export const AUDIT_PENDING_APPROVAL="audit_pending_approval";
