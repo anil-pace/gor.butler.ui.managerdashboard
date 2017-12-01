@@ -476,6 +476,7 @@ export const PUT='PUT';
 export const DELETE='DELETE';
 export const PATCH = 'PATCH';
 export const APP_JSON='application/json';
+export const APP_EXCEL='application/vnd.ms-excel';
 export const GOR_RISK='gor-risk';
 export const GOR_DELAY='gor-breach';
 export const GOR_NONE='gor-none';

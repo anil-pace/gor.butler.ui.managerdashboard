@@ -10,7 +10,7 @@ import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 
-import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
+//import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
 
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 
@@ -24,38 +24,33 @@ import {
     ProgressCell
 } from '../../components/commonFunctionsDataTable';
 
-// import {
-//     showTableFilter
-// } from '../../actions/filterAction';
-//import OperationsFilter from './operationsFilter';
-
 import FilterSummary from '../../components/tableFilter/filterSummary';
 
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 
-import {OPERATIONS_LOG_URL, WS_OPERATIONS_LOG_SUBSCRIPTION, REQUEST_REPORT_DOWNLOAD, STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL} from '../../constants/configConstants';
+import {STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import {recieveStorageSpaceData} from '../../actions/storageSpaceActions';
 import {STORAGE_SPACE_FETCH, 
         GET,
-        //REPORT_NAME_STORAGE_SPACE,
         DOWNLOAD_REPORT_REQUEST,
         APP_JSON,
+        APP_EXCEL,
         DEFAULT_PAGE_SIZE_OL,
         REALTIME
         } from '../../constants/frontEndConstants';
 
 /*Page size dropdown options*/
-const pageSizeDDOpt = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
+const pageSizeDDOpt = [ {value: "25", disabled:false,label: <FormattedMessage id="storageSpace.page.twentyfive" description="Page size 25"
                                                           defaultMessage="25"/>},
-            {value: "50",  disabled:false,label: <FormattedMessage id="operationLog.page.fifty" description="Page size 50"
+            {value: "50",  disabled:false,label: <FormattedMessage id="storageSpace.page.fifty" description="Page size 50"
                                                           defaultMessage="50"/>},
-            {value: "100",  disabled:false,label: <FormattedMessage id="operationLog.page.hundred" description="Page size 100"
+            {value: "100",  disabled:false,label: <FormattedMessage id="storageSpace.page.hundred" description="Page size 100"
                                                           defaultMessage="100"/>}];
 /*Intl Messages*/
 const  messages= defineMessages({
     genRepTooltip: {
-        id: 'operationLog.genRep.tooltip',
+        id: 'storageSpace.genRep.tooltip',
         description: 'Tooltip to display Generate button',
         defaultMessage: 'Reports not available for Realtime filter'
     }
@@ -65,14 +60,12 @@ class StorageSpaceTab extends React.Component{
     constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
-        
         this._handlePageChange= this._handlePageChange.bind(this);
         this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
 
     _getInitialState(){
-        console.log("=========================> coming inside _getInitialState function"); 
         var data=this._processData(this.props.storageSpaceData.slice(0));  // slice(0) simply duplicates an array
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
@@ -83,33 +76,28 @@ class StorageSpaceTab extends React.Component{
                 dimension: this.props.containerWidth * 0.13,
                 totalSlots: this.props.containerWidth * 0.1,
                 emptySlots: this.props.containerWidth * 0.1,
-                slotUtilization: this.props.containerWidth * 0.1,
-                //timestamp: this.props.containerWidth * 0.1
+                slotUtilization: this.props.containerWidth * 0.1
             },
             sortOrder:{
-                controller_id: "ASC",
-                statusText: "ASC"
+                utilization: "ASC"
             },
             dataList:dataList,
             query:this.props.location.query,
-            subscribed:false,
-            realTimeSubSent:false,
+            ubSent:false,
             pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             dataFetchedOnLoad:false,
-            hideLayer:false,
-            queryApplied:Object.keys(this.props.location.query).length ? true :false,
+            plied:Object.keys(this.props.location.query).length ? true :false,
             totalSize:this.props.totalSize || null
         }
     }
 
     _processData(data){
-        console.log("=========================> coming inside _processData function");
         var dataLen = data.length;
         var processedData=[];
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowData = data[i];
-                let rowObj = {};//Object.assign({},data[i]["_source"]);
+                let rowObj = {};
                 rowObj.slotType =  rowData.slot_type;
                 rowObj.slotVolume = rowData.slot_volume + " cc";
                 rowObj.dimension = rowData.slot_dimensions+ " cm";
@@ -121,10 +109,26 @@ class StorageSpaceTab extends React.Component{
         }
         return processedData;
     }
+
+    componentWillReceiveProps(nextProps) {        
+        if(!this.state.dataFetchedOnLoad){
+            this.setState({
+                dataFetchedOnLoad:true
+            },function(){
+                this._getStorageSpaceData(nextProps)
+            })
+        }
+        let rawData = nextProps.storageSpaceData.slice(0);
+        let data = this._processData(rawData);
+        let dataList = new tableRenderer(data.length)
+        dataList.newData=data;
+        this.setState({
+            dataList
+        })
+    }
     
     
     componentDidMount(){
-        console.log("=========================> coming inside componentDidMount"); 
         this._getStorageSpaceData(this.props);
     }
 
@@ -134,7 +138,6 @@ class StorageSpaceTab extends React.Component{
                 'method':GET,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                //'formdata':filters,
                 'cause':STORAGE_SPACE_FETCH,
                 'token': this.props.auth_token
             }
@@ -145,10 +148,9 @@ class StorageSpaceTab extends React.Component{
         let params={
                 'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
                 'method':GET,
-                'contentType': 'application/vnd.ms-excel',
+                'contentType': APP_EXCEL,
                 'cause':DOWNLOAD_REPORT_REQUEST,
                 'token': this.props.auth_token,
-                //'responseType': "arraybuffer",
                 'responseType': "arraybuffer",
                 'accept': "text/xls"
             }
@@ -156,7 +158,6 @@ class StorageSpaceTab extends React.Component{
     }
 
     _handlePageChange(e){
-        
         this.setState({
             pageSize:e.value,
             dataFetchedOnLoad:false
@@ -166,7 +167,6 @@ class StorageSpaceTab extends React.Component{
             _query.page = _query.page || 1;
             this.props.router.push({pathname: "/reports/storageSpace",query: _query})
         })
-        
     }
     
 
@@ -180,20 +180,10 @@ class StorageSpaceTab extends React.Component{
         var pageSizeDDDisabled = timePeriod === REALTIME ;
         var location = JSON.parse(JSON.stringify(_this.props.location));
         var totalPage = Math.ceil(totalSize / pageSize);
-        var totalProgress=this.props.storageSpaceData.utilization;
 
         return (
             <div className="gorTesting wrapper gor-storage-space">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-            {/*<div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <OperationsFilter ref={instance => { this.child = instance; }}
-                                filters = {this.props.location.query} 
-                                noData={noData} 
-                                pageSize={this.state.pageSize} 
-                                hideLayer={this.state.hideLayer}
-                                responseFlag={this.props.reportsSpinner}/>
-            </div>*/}
              <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
@@ -207,17 +197,10 @@ class StorageSpaceTab extends React.Component{
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
                                        <button disabled = {pageSizeDDDisabled} title={this.props.intl.formatMessage(messages.genRepTooltip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
-                                        <FormattedMessage id="operationLog.table.downloadBtn"
+                                        <FormattedMessage id="storageSpace.table.downloadBtn"
                                         description="button label for download report"
                                         defaultMessage="Generate Report"/>
                                         </button>
-                                        {/*<button
-                                            className={this.props.filtersApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                            onClick={this._setFilter}>
-                                            <div className="gor-manage-task"/>
-                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                              defaultMessage="Filter data"/>
-                                        </button>*/}
                                     </div>
                                 </div>
 
@@ -225,23 +208,6 @@ class StorageSpaceTab extends React.Component{
             
                     
              </div>
-             {this.props.location.query.time_period !== REALTIME ? 
-             <FilterSummary 
-             total={dataSize} 
-             isFilterApplied={this.props.filtersApplied}  
-             filterText={<FormattedMessage id="operationsLog.filter.search.bar"
-                                     description='total waves for filter search bar'
-                                     defaultMessage='{total} Results found'
-                                     values={{total: dataSize.toString()}}/>}
-                                   refreshList={() => { 
-                                    _this.child.getWrappedInstance()._clearFilter();
-                                    }}
-                                   refreshText={<FormattedMessage id="operationsLog.filter.search.bar.showall"
-                                                                  description="button label for show all"
-                                                                  defaultMessage="Show all Operations"/>}/>
-                :null}
-                
-                        
                
                 <Table
                     rowHeight={80}
@@ -348,14 +314,6 @@ class StorageSpaceTab extends React.Component{
                             <div className="gorToolHeaderEl">
                                 <FormattedMessage id="storageSpace.table.slotUtilization" description="Status for PPS"
                                                   defaultMessage="SLOT UTILIZATION"/>
-                               {/* <div className="gorToolHeaderSubText">
-                                    <FormattedMessage id="storageSpace.Totalprogress"
-                                                      description='total progress for slot utilization'
-                                                      defaultMessage='{totalProgress}%'
-                                                      values={{totalProgress: totalProgress.toFixed(1) ? totalProgress.toFixed(1) : '0'}}/>
-                                </div>*/}
-
-                              
                             </div>
                             </Cell>
                         }
@@ -366,45 +324,6 @@ class StorageSpaceTab extends React.Component{
                         width={this.state.columnWidths.slotUtilization}
                         isResizable={true}
                     />
-                    {/*
-                    <Column
-                        columnKey="userId"
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="operationLog.table.userId" description="Status for PPS"
-                                                      defaultMessage="USER ID"/>
-
-                                  
-                                </div>
-                                </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"userId"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.userId}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="timestamp"
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="opeartionLog.table.timestamp" description="Status for PPS"
-                                                      defaultMessage="TIMESTAMP"/>
-
-                                  
-                                </div>
-                                </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"timestamp"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.timestamp}
-                        isResizable={true}
-                    />
-                */}
-                    
                 </Table>
                 {!dataSize ? <div className="gor-no-data"><FormattedMessage id="storageSpace.table.noData"
                                                                     description="No data message for Storage space"
@@ -414,11 +333,11 @@ class StorageSpaceTab extends React.Component{
                 <Dropdown 
                     options={pageSizeDDOpt} 
                     onSelectHandler={(e) => this._handlePageChange(e)}
-                    disabled={pageSizeDDDisabled} 
+                    disabled={false} 
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={isNaN(totalPage) ? 1 : totalPage}/>
+                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={isNaN(totalPage) ? 1 : totalPage}/>
                 </div>
                 </div>
             </div>
@@ -427,63 +346,25 @@ class StorageSpaceTab extends React.Component{
 };
 
 StorageSpaceTab.propTypes = {
-    olData: React.PropTypes.array,
-    socketAuthorized: React.PropTypes.bool,
-    showFilter: React.PropTypes.bool,
     hasDataChanged: React.PropTypes.bool,
-    filtersApplied: React.PropTypes.bool,
-    filtersModified: React.PropTypes.bool,
-    notificationSocketConnected: React.PropTypes.bool,
-    reportsSpinner: React.PropTypes.bool,
-    olWsData: React.PropTypes.array,
-    intl: intlShape.isRequired,
     storageSpaceData: React.PropTypes.array
-
 }
 StorageSpaceTab.defaultProps = {
-  olData: [],
-  socketAuthorized:false,
-  showFilter:false,
-  hasDataChanged:false,
-  filtersApplied:false,
-  filtersModified:false,
-  notificationSocketConnected:false,
-  reportsSpinner:true,
-  olWsData:[],
-  storageSpaceData: []
+    hasDataChanged:false,
+    storageSpaceData: []
 }
 
 function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        showFilter: state.filterInfo.filterState ,
-        olData:state.operationsLogsReducer.olData,
         storageSpaceData: state.storageSpaceReducer.storageSpaceData,
-        totalSize:state.operationsLogsReducer.totalSize,
-        hasDataChanged:state.operationsLogsReducer.hasDataChanged,
-        filtersApplied:state.operationsLogsReducer.filtersApplied,
-        filtersModified:state.operationsLogsReducer.filtersModified,
-        notificationSocketConnected:state.notificationSocketReducer.notificationSocketConnected,
-        reportsSpinner:state.operationsLogsReducer.reportsSpinner,
-        olWsData:state.operationsLogsReducer.olWsData,
-        timeOffset: state.authLogin.timeOffset,
-        username: state.authLogin.username
-
+        totalSize:state.storageSpaceReducer.totalSize,
+        hasDataChanged:state.storageSpaceReducer.hasDataChanged,
     };
 }
 function mapDispatchToProps(dispatch){
     return {
-        //initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        updateSubscriptionPacket: function (data) {
-                dispatch(updateSubscriptionPacket(data));
-        },
-        //showTableFilter: function(data){dispatch(showTableFilter(data));},
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
-        applyOLFilterFlag:function(data){dispatch(applyOLFilterFlag(data))},
-        wsOLUnSubscribe:function(data){dispatch(wsOLUnSubscribe(data))},
-        wsOLSubscribe:function(data){dispatch(wsOLSubscribe(data))},
-        setReportsSpinner:function(data){dispatch(setReportsSpinner(data))}
     }
 };
 

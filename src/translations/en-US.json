@@ -3778,25 +3778,25 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "operationLog.page.twentyfive",
+    "id": "storageSpace.page.twentyfive",
     "description": "Page size 25",
     "defaultMessage": "25",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
-    "id": "operationLog.page.fifty",
+    "id": "storageSpace.page.fifty",
     "description": "Page size 50",
     "defaultMessage": "50",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
-    "id": "operationLog.page.hundred",
+    "id": "storageSpace.page.hundred",
     "description": "Page size 100",
     "defaultMessage": "100",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
-    "id": "operationLog.genRep.tooltip",
+    "id": "storageSpace.genRep.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
@@ -3808,32 +3808,20 @@
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
-    "id": "operationLog.table.downloadBtn",
+    "id": "storageSpace.table.downloadBtn",
     "description": "button label for download report",
     "defaultMessage": "Generate Report",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
-    "id": "operationsLog.filter.search.bar",
-    "description": "total waves for filter search bar",
-    "defaultMessage": "{total} Results found",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "operationsLog.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Operations",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
     "id": "storageSpace.table.slotType",
     "description": "SLOT TYPE",
-    "defaultMessage": "SLOT TYPE",
+    "defaultMessage": "slot type",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
     "id": "storageSpace.table.slotVolume",
-    "description": "SLOT VOLUME",
+    "description": "slot volume",
     "defaultMessage": "SLOT VOLUME",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
@@ -3845,13 +3833,13 @@
   },
   {
     "id": "storageSpace.table.totalSlots",
-    "description": "Status for PPS",
+    "description": "Status for total slots",
     "defaultMessage": "TOTAL SLOTS",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
     "id": "storageSpace.table.emptySlots",
-    "description": "Status for PPS",
+    "description": "Status for empty slots",
     "defaultMessage": "EMPTY SLOTS",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
