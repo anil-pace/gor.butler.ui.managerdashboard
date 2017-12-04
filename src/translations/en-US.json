@@ -865,7 +865,7 @@
   {
     "id": "stringConfig.pending",
     "description": "Text to show pending",
-    "defaultMessage": "In Progress",
+    "defaultMessage": "Pending",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -889,13 +889,13 @@
   {
     "id": "stringConfig.complete",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.completed",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
