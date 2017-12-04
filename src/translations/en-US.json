@@ -889,13 +889,13 @@
   {
     "id": "stringConfig.complete",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.completed",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
