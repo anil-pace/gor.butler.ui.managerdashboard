@@ -865,7 +865,7 @@
   {
     "id": "stringConfig.pending",
     "description": "Text to show pending",
-    "defaultMessage": "Pending",
+    "defaultMessage": "In Progress",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {

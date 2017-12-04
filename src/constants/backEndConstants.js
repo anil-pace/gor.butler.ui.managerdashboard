@@ -126,7 +126,7 @@ export const  stringConfig= defineMessages({
     pending:{
         id: 'stringConfig.pending',
         description: 'Text to show pending',
-        defaultMessage: "Pending"
+        defaultMessage: "In Progress"
     },
     wave_pending:{
         id: 'stringConfig.wave.pending',
