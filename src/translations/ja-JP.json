@@ -338,7 +338,7 @@
  {
    "id": "stringConfig.fulfillable",
    "description": "Text to show fulfillable",
-   "defaultMessage": "引当可能"
+   "defaultMessage": "処理中"
  },
  {
    "id": "stringConfig.abandoned",
@@ -5761,7 +5761,7 @@
 {
    "id": "stringConfig.rejected",
    "description": "Text to show rejected",
-   "defaultMessage": "拒否された",
+   "defaultMessage": "却下されました",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
