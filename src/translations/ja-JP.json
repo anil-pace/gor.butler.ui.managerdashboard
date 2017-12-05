@@ -324,11 +324,7 @@
    "description": "Text to show completed",
    "defaultMessage": "完了"
  },
- {
-   "id": "stringConfig.Completed",
-   "description": "Text to show Completed",
-   "defaultMessage": "完了"
- },
+ 
  {
    "id": "stringConfig.in_progress",
    "description": "Text to show In Progress",
@@ -5759,7 +5755,7 @@
 {
    "id": "stringConfig.complete",
    "description": "Text to show Completed",
-   "defaultMessage": "完成した",
+   "defaultMessage": "完了",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
