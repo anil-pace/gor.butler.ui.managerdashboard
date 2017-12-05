@@ -129,7 +129,8 @@ class AuditTable extends React.Component {
                 startTime: nProps.containerWidth * 0.13,
                 progress: nProps.containerWidth * 0.14,
                 completedTime: nProps.containerWidth * 0.13,
-                actions: nProps.containerWidth * 0.25
+                actions: nProps.containerWidth * 0.25,
+                pps_id :nProps.containerWidth * 0.10
             },
             headerChecked: headerChecked,
             isChecked: checkedAudit

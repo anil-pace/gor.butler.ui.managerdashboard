@@ -325,7 +325,6 @@ class AuditTab extends React.Component {
             if (data[i].display_id) {
                 auditData.display_id=data[i].display_id;
             }
-
             else {
                 auditData.display_id="--";
             }
@@ -350,7 +349,9 @@ class AuditTab extends React.Component {
                     auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
                 }
             }
-
+            
+            auditData.pps_id=data[i].pps_id ||"--";
+            
             if (data[i].audit_status) {
                 if (auditData.statusPriority=== undefined) {
                     auditData.statusPriority=1;

@@ -889,13 +889,13 @@
   {
     "id": "stringConfig.complete",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.completed",
     "description": "Text to show Completed",
-    "defaultMessage": "completed",
+    "defaultMessage": "Completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2089,8 +2089,14 @@
   },
   {
     "id": "auditTable.status",
-    "description": "status completed audit",
-    "defaultMessage": "{auditCompleted} Completed",
+    "description": "status in progress audit",
+    "defaultMessage": "{auditInProgress} in progress",
+    "filepath": "./src/containers/auditTab/auditTable.js"
+  },
+  {
+    "id": "audit.table.startTime",
+    "description": "startTime for audit",
+    "defaultMessage": "START TIME",
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
@@ -2106,9 +2112,9 @@
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
-    "id": "audit.table.pps_id",
-    "description": "pps assigned for audit task",
-    "defaultMessage": "PPS",
+    "id": "audit.table.timeCompleted",
+    "description": "timeCompleted for audit",
+    "defaultMessage": "TIME COMPLETED",
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
