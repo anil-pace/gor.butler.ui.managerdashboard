@@ -1875,13 +1875,13 @@ font-family: "source sans pro";
   visibility:hidden;
 }
 
-.gor-tool-tip-hover:hover + .gor-tooltip 
+.gor-audit-info-icon:hover + .gor-tooltip 
 { display: block;   
   z-index:900;
-  padding-top: 14px;
   width: 210px;
   position: fixed;
   overflow: hidden;
+  padding-left: 10px;
   
 }
 .gor-subheading-title{

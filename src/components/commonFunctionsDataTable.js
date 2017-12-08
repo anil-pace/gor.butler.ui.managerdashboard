@@ -552,13 +552,8 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
       
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 
-            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black', float:'left'}}>
-                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}
-            </div>:<div className="gor-subheading">{data.getObjectAt(rowIndex)[columnKey]}{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}</div>
-        } 
-
-
-        {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+            <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black', display:'inline-block'}}>
+                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>{(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
             <div className="gor-tooltip">
                 <div className="gor-tooltip-arrow"/>
                 <div className="gor-tooltip-text-wrap">
@@ -654,7 +649,12 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
                 </div>
             </div>
             :""
-        }
+        }{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}
+            </div>:<div className="gor-subheading">{data.getObjectAt(rowIndex)[columnKey]}{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}</div>
+        } 
+
+
+        
 
     </Cell>
 );
