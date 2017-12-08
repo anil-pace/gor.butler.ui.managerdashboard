@@ -162,7 +162,7 @@ class PPS extends React.Component {
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
         var currentTask={"pick": pick, "put": put, "audit": audit};
-        var priStatus={"open": 1, "close": 2,"force_close": 2};
+        var priStatus={"open": 2, "close": 0,"force_close": 1};
         var checkedPPS = this.props.checkedPps || {};
         var requestedStatusText="--";
         detail.totalOperator=0;
@@ -194,11 +194,11 @@ class PPS extends React.Component {
             detail.isChecked = checkedPPS[data[i].pps_id] ? true :false;
             if (data[i].pps_status=== PPS_STATUS_OPEN) {
                 detail.status=OPEN;
-                detail.statusPriority=priStatus[data[i].pps_status];
+                detail.statusPriority=2;
             }
             else if(data[i].pps_status=== PPS_STATUS_CLOSE){
                 detail.status=CLOSE;
-                detail.statusPriority=1;
+                detail.statusPriority=0;
             }
             else{
                 detail.status=FCLOSE;
@@ -257,7 +257,7 @@ class PPS extends React.Component {
              if(!requestObj){
              let selectedPps = this.props.checkedPps,openPps={};
              for(let k in selectedPps){
-                if(selectedPps[k].status.toLowerCase() === "open" /*PPS_STATUS_OPEN.toLowerCase()*/){
+                if(selectedPps[k].statusPriority === 2){ // status priority for open is 2
                     openPps[k] = selectedPps[k];
                 }
              }
@@ -388,7 +388,7 @@ class PPS extends React.Component {
                                           defaultMessage="Change PPS Mode"/>
         var openCount=0,closeCount=0;
         for(let k in this.props.checkedPps){
-            if(this.props.checkedPps[k].status.toLowerCase() === "close" || this.props.checkedPps[k].status.toLowerCase() === "force close"){
+            if(this.props.checkedPps[k].statusPriority === 0 || this.props.checkedPps[k].statusPriority === 1){
                 closeCount++
             }
             else{

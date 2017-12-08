@@ -324,11 +324,7 @@
    "description": "Text to show completed",
    "defaultMessage": "完了"
  },
- {
-   "id": "stringConfig.Completed",
-   "description": "Text to show Completed",
-   "defaultMessage": "完了"
- },
+ 
  {
    "id": "stringConfig.in_progress",
    "description": "Text to show In Progress",
@@ -812,7 +808,7 @@
  {
    "id": "audit.add.typedetails.skutext",
    "description": "Subtext for sku",
-   "defaultMessage": "商品のSKUコードに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "商品のSKUコードで棚卸タスクを作成してください"
  },
  {
    "id": "audit.add.typedetails.location",
@@ -822,7 +818,7 @@
  {
    "id": "audit.add.typedetails.locationtext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "ロケーション番号で棚卸タスクを作成してください"
  },
  {
    "id": "audit.add.sku.heading",
@@ -962,7 +958,7 @@
  {
    "id": "audit.add.typedetails.skutext",
    "description": "Subtext for sku",
-   "defaultMessage": "商品のSKUコードに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "商品のSKUコードで棚卸タスクを作成してください"
  },
  {
    "id": "audit.add.typedetails.location",
@@ -972,7 +968,7 @@
  {
    "id": "audit.add.typedetails.locationtext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "ロケーション番号で棚卸タスクを作成してください"
  },
  {
    "id": "audit.add.sku.heading",
@@ -1432,7 +1428,7 @@
  {
    "id": "widget.pick.headingright",
    "description": "Heading for cut-off time",
-   "defaultMessage": "切離の時間"
+   "defaultMessage": "切離し時間"
  },
  {
    "id": "widget.pick.textright",
@@ -2062,7 +2058,7 @@
  {
    "id": "users.add.roledetails.managertext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "ロケーション番号で棚卸タスクを作成してください"
  },
  {
    "id": "users.add.roledetails.heading",
@@ -2092,7 +2088,7 @@
  {
    "id": "users.add.roledetails.managertext",
    "description": "Subtext for manager",
-   "defaultMessage": "MSUのロケーションに基づいて棚卸タスクを作成してください"
+   "defaultMessage": "ロケーション番号で棚卸タスクを作成してください"
  },
  {
    "id": "user.table.noData",
@@ -2804,7 +2800,7 @@
 {
    "id": "header.option.release",
    "description": "release operation option",
-   "defaultMessage": "操作を続行するために緊急停止ボタンをジグビーボックスから解放してください。",
+   "defaultMessage": "操作を続行するために緊急停止ボタンを解放してください。",
    "filepath": "./src/components/header/header.js"
 },
 {
@@ -2918,7 +2914,7 @@
 {
    "id": "utility.reportsHistory.clickToDownload",
    "description": "file name",
-   "defaultMessage": "ダウンロードするためにここでクリックしてください",
+   "defaultMessage": "ダウンロードするにはここをクリック",
    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
 },
 {
@@ -3140,7 +3136,7 @@
 {
    "id": "stringConfig.md004",
    "description": "Text for safety checklist item 4",
-   "defaultMessage": "全てのノーマンゲートの制限スイッチは動作しています。",
+   "defaultMessage": "全てのノーマンゲートのゲートスイッチは動作しています。",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
@@ -3242,13 +3238,13 @@
 {
    "id": "emergency.resume.statuserror",
    "description": "Error while resuming operation",
-   "defaultMessage": "緊急ステータスはソフトマニュアル状態でないこと",
+   "defaultMessage": "緊急ステータスが全域ポーズ状態でないこと",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "emergency.resume.Softemergency",
    "description": "Soft emergency still there",
-   "defaultMessage": "まだソフト緊急状態です",
+   "defaultMessage": "全域ポーズ状態です",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3272,7 +3268,7 @@
 {
    "id": "audit.cancellation.error.g020",
    "description": "Internal server error while requesting for audit cancel",
-   "defaultMessage": "棚卸解除を要求するときに内部サーバーエラーがあります",
+   "defaultMessage": "棚卸解除を要求するときに内部サーバーエラーが発生しました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3296,13 +3292,13 @@
 {
    "id": "pps.statusChange.allStatusSuccess",
    "description": "Records in file should not be greater than",
-   "defaultMessage": "状態変更要求が有効です",
+   "defaultMessage": "状態変更要求が成功です",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "pps.modeChange.allModeSuccess",
    "description": "Records in file should not be greater than",
-   "defaultMessage": "モード変更要求が有効です",
+   "defaultMessage": "モード変更要求が成功です",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -3492,7 +3488,7 @@
 {
    "id": "audit.resolve.heading",
    "description": "Heading for resolve audit",
-   "defaultMessage": "問題を解決します",
+   "defaultMessage": "問題を解決",
    "filepath": "./src/containers/auditTab/resolveAudit.js"
 },
 {
@@ -3504,7 +3500,7 @@
 {
    "id": "audit.missing.auditType",
    "description": "missing information for audit type",
-   "defaultMessage": "スロットにミスマッチが見つかりました {totalLines} ",
+   "defaultMessage": "スロットに差異が見つかりました {totalLines} ",
    "filepath": "./src/containers/auditTab/resolveAudit.js"
 },
 {
@@ -3552,13 +3548,13 @@
 {
    "id": "operation.fire.header",
    "description": "Header Text FIRE EMERGENCY",
-   "defaultMessage": "火災緊急",
+   "defaultMessage": "火災警報",
    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
 },
 {
    "id": "operation.fire.cautionText",
    "description": "Description Text FIRE EMERGENCY",
-   "defaultMessage": "火災緊急が起動し、システムの安全性の処置が開始されました。",
+   "defaultMessage": "火災警報が起動し、システムの安全措置が開始しました。",
    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
 },
 {
@@ -3696,13 +3692,13 @@
 {
    "id": "operation.safety.text",
    "description": "Text for ticking items",
-   "defaultMessage": "システムは操作を続行するために安全かどうかを確認して全ての項目をチェックしてください。",
+   "defaultMessage": "システムを続行するために、安全を確認して全ての項目にチェックしてください。",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
    "id": "operation.safety.errors",
    "description": "Text for safety error",
-   "defaultMessage": "手順が守られていないことをシステムが見つかりました。\n                   確認し、または、サポートのためにサービスエンジニアに連絡してください",
+   "defaultMessage": "手順が守られていないことをシステムが発見しました。\n                   確認し、または、サポートのためにサービスエンジニアに連絡してください",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -3913,7 +3909,7 @@
 {
    "id": "widget.pick.lowright.emergency",
    "description": "Estimated time",
-   "defaultMessage":" --に完了されると推測jしています",
+   "defaultMessage":" --に完了の見込み",
    "filepath": "./src/containers/pickStatusWidget.js"
 },
 {
@@ -4111,7 +4107,7 @@
 {
    "id": "ppsclose.tblhead2.text",
    "description": "Table second head",
-   "defaultMessage":"MSUが保留しています",
+   "defaultMessage":"MSUを保留しています",
    "filepath": "./src/containers/systemTabs/closePPSList.js"
 },
 {
@@ -4212,7 +4208,7 @@
 {
    "id": "PPS.table.openStatusLabel",
    "description": "audit dropdown option for Status change",
-   "defaultMessage":"選択したPPSを開放します",
+   "defaultMessage":"選択したPPSをオープンします",
    "filepath": "./src/containers/systemTabs/ppsTab.js"
 },
 {
@@ -4302,7 +4298,7 @@
 {
    "id": "operation.alert.triggeremergency",
    "description": "Text button to trigger emergency",
-   "defaultMessage":"火災の緊急事態が発生しました.すぐに避難手順に従ってください",
+   "defaultMessage":"火災が発生しました.すぐに避難手順に従ってください",
    "filepath": "./src/containers/tabs.js"
 },
 {
@@ -4594,13 +4590,13 @@
 {
    "id": "utility.downloadGRN.generateSuccess",
    "description": "GRN Request submitted successfully",
-   "defaultMessage": "GRNの要求が効果的に提出されました",
+   "defaultMessage": "GRNの要求が成功しました",
    "filepath": "./src/utilities/getFormattedMessages.js"
 },
 {
    "id": "utility.downloadInventory.generateSuccess",
    "description": "Inventory Report Request submitted successfully",
-   "defaultMessage": "在庫レポートの要求が効果的に提出されました",
+   "defaultMessage": "在庫レポートの要求が成功しました",
    "filepath": "./src/utilities/getFormattedMessages.js"
 },
 {
@@ -4636,7 +4632,7 @@
 {
    "id": "pps.configuration.profile.requestedText",
    "description": "requested profile for PPS",
-   "defaultMessage":"依頼されたプロファイル:{requestedProfile}",
+   "defaultMessage":"要求されたプロファイル:{requestedProfile}",
    "filepath": "./src/components/commonFunctionsDataTable.js"
 },
 {
@@ -4750,7 +4746,7 @@
 {
    "id": "audit.cancellation.success",
    "description": "Audit Id cancellation is successful",
-   "defaultMessage": "棚卸解除のために要求が送信されました",
+   "defaultMessage": "棚卸のキャンセルを実行しました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -4768,13 +4764,13 @@
 {
    "id": "zoning.status.pauseActivated",
    "description": "Status text for zone",
-   "defaultMessage": "休止が活性されました",
+   "defaultMessage": "休止が有効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.status.pauseDeactive",
    "description": "Status text for zone",
-   "defaultMessage": "休止が不活性されました",
+   "defaultMessage": "休止が無効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -4786,13 +4782,13 @@
 {
    "id": "zoning.status.clearActive",
    "description": "Status text for zone",
-   "defaultMessage": "クリアが活性されました",
+   "defaultMessage": "クリアが無効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.status.clearDeactivated",
    "description": "Status text for zone",
-   "defaultMessage": "クリアが不活性されました",
+   "defaultMessage": "クリアが無効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -4822,31 +4818,31 @@
 {
    "id": "zoning.action.zone_pause",
    "description": "Status text for zone",
-   "defaultMessage": "ゾーン休止が活性されました",
+   "defaultMessage": "ゾーン休止が有効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.zone_clear",
    "description": "Status text for zone",
-   "defaultMessage": "ゾーンクリアが活性されました",
+   "defaultMessage": "ゾーンクリアが有効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.emergency_stop",
    "description": "Status text for zone",
-   "defaultMessage": "緊急停止が活性されました",
+   "defaultMessage": "緊急停止が有効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.emergency_pause",
    "description": "Status text for zone",
-   "defaultMessage": "緊急休止が活性されました",
+   "defaultMessage": "緊急休止が有効になりました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.none",
    "description": "Status text for zone",
-   "defaultMessage": "基準",
+   "defaultMessage": "通常",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -4870,19 +4866,19 @@
 {
    "id": "zoning.action.latch_gate",
    "description": "Status text for zone",
-   "defaultMessage": "入力の門が破壊されました",
+   "defaultMessage": "ゲートが開放されました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.light_curtain",
    "description": "Status text for zone",
-   "defaultMessage": "ライトカーテン が破壊されました",
+   "defaultMessage": "ライトカーテン が遮蔽されました",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
    "id": "zoning.action.noneSensor",
    "description": "Status text for zone",
-   "defaultMessage": "基準",
+   "defaultMessage": "通常",
    "filepath": "./src/constants/messageConstants.js"
 },
 {
@@ -4894,7 +4890,7 @@
 {
    "id": "audit.delete.confirm",
    "description": "Text for audit delete confirm",
-   "defaultMessage": "棚卸タスクを削除します",
+   "defaultMessage": "棚卸タスクを削除",
    "filepath": "./src/containers/auditTab/deleteAudit.js"
 },
 {
@@ -4906,7 +4902,7 @@
 {
    "id": "audit.duplicate.confirm",
    "description": "Text for audit duplicate confirm",
-   "defaultMessage": "棚卸タスクを重複します",
+   "defaultMessage": "棚卸タスクを重複作成",
    "filepath": "./src/containers/auditTab/duplicateAudit.js"
 },
 {
@@ -4936,7 +4932,7 @@
 {
    "id": "operation.alert.stop.subtext",
    "description": "Subtext for pause alert",
-   "defaultMessage": "倉庫で作業を続行するために、緊急状態を確認して緊急停止ボタンを解放しなければなりません",
+   "defaultMessage": "倉庫で作業を続行するために、緊急状態を確認して緊急停止ボタンを解放してください",
    "filepath": "./src/containers/emergencyProcess/OperationStop.js"
 },
 {
@@ -4984,7 +4980,7 @@
 {
    "id": "operation.safetychecklist.errors",
    "description": "Text for safety error",
-   "defaultMessage": "一つ以上の要求の条件が満たされていないことをシステムが検出しました。\n                    再度してください、もしくは、サービスエンジニアを対応のために連絡してください。",
+   "defaultMessage": "一つ以上の条件が満たされていないことをシステムが検出しました。\n                    再度確認してください、もしくは、サービスエンジニアに連絡してください。",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -5008,7 +5004,7 @@
 {
    "id": "operation.safetychecklistTable.rackface",
    "description": "Rack face",
-   "defaultMessage": "ラックフェイス",
+   "defaultMessage": "ラック面",
    "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
 },
 {
@@ -5080,13 +5076,13 @@
 {
    "id": "pps.configuration.bins.selection.label",
    "description": "Select a bin to manage tags",
-   "defaultMessage": "タグを管理するためにビンを選択します",
+   "defaultMessage": "タグを指定するビンを選択します",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.direction.label",
    "description": "Bin Direction",
-   "defaultMessage": "PPSの現在の選択",
+   "defaultMessage": "PPSの向き",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
@@ -5104,49 +5100,49 @@
 {
    "id": "pps.configuration.bins.selection.count",
    "description": "total users for filter search bar",
-   "defaultMessage": "活性又は不活性のためにビンを選択します ({deactivated}/{total} ビンが不活性されました)",
+   "defaultMessage": "有効又は無効にするビンを選択します ({deactivated}/{total} ビンが無効になりました)",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.group.selection.count",
    "description": "total users for filter search bar",
-   "defaultMessage": "有効にする又は無効にするためにビングループを選択します ({disabled}/{total}グループが無効されました)",
+   "defaultMessage": "有効又は無効にするビングループを選択します ({disabled}/{total}グループが無効になりました)",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.tagCount.text",
    "description": "Tag",
-   "defaultMessage": "タッグ",
+   "defaultMessage": "タグ",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.activation.button.text",
    "description": "ACTIVATE",
-   "defaultMessage": "活性",
+   "defaultMessage": "有効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.deactivation.button.text",
    "description": "DEACTIVATE",
-   "defaultMessage": "不活性",
+   "defaultMessage": "無効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.group.enable.button.text",
    "description": "ENABLE",
-   "defaultMessage": "有効にする",
+   "defaultMessage": "有効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.bins.group.disable.button.text",
    "description": "DISABLE",
-   "defaultMessage": "無効にする",
+   "defaultMessage": "無効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
 },
 {
    "id": "pps.configuration.header.text",
    "description": "PPS Configurations",
-   "defaultMessage": "PPSの構成",
+   "defaultMessage": "PPS構成",
    "filepath": "./src/containers/systemTabs/ppsConfigurationList.js"
 },
 {
@@ -5170,19 +5166,19 @@
 {
    "id": "pps.configuration.bins.tags.label",
    "description": "Assign tags to bin",
-   "defaultMessage": "ビンにタッグを割り当てます",
+   "defaultMessage": "ビンにタグを割り当てます",
    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
 },
 {
    "id": "pps.configuration.bins.activation.label",
    "description": "Bin activate/deactivate",
-   "defaultMessage": "ビン活性する/不活性する",
+   "defaultMessage": "ビン有効/無効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
 },
 {
    "id": "pps.configuration.group.activation.label",
    "description": "Bin group enable/disable",
-   "defaultMessage": "ビングループ有効にする/無効にする",
+   "defaultMessage": "ビングループ有効/無効",
    "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
 },
 {
@@ -5230,19 +5226,19 @@
 {
    "id": "PPS.table.profiles",
    "description": "profiles for PPS",
-   "defaultMessage": "使用されているプロファイル",
+   "defaultMessage": "使用中プロファイル",
    "filepath": "./src/containers/systemTabs/PPStable.js"
 },
 {
    "id": "pps.configuration.confirm.saveAndapply.profile",
    "description": "Save and ppply Profile to PPS",
-   "defaultMessage": "プロファイルを保存して適用してもいいですか。",
+   "defaultMessage": "プロファイルを保存して適用しますか？",
    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
 },
 {
    "id": "pps.configuration.confirm.saveAndapply.profile.description",
    "description": "Profile will be applied after pending tasks are completed",
-   "defaultMessage": "保留中のタスクが完了されたあとプロファイルが適用されます",
+   "defaultMessage": "保留中のタスクが完了したあとプロファイルが適用されます",
    "filepath": "./src/containers/systemTabs/saveApplyProfile.js"
 },
 {
@@ -5325,13 +5321,13 @@
 },
 {
    "id": "pps.configuration.tag.search.placeholder",
-   "defaultMessage": "タッグを入力してください。。。",
+   "defaultMessage": "タグを入力してください。。。",
    "filepath": "./src/containers/systemTabs/tags.js"
 },
 {
    "id": "pps.configuration.tags.label",
    "description": "Tags",
-   "defaultMessage": "タッグ",
+   "defaultMessage": "タグ",
    "filepath": "./src/containers/systemTabs/tags.js"
 },
 {
@@ -5343,7 +5339,7 @@
 {
    "id": "pps.configuration.tags.all.text",
    "description": "All Tags",
-   "defaultMessage": "全てのタッグ",
+   "defaultMessage": "全てのタグ",
    "filepath": "./src/containers/systemTabs/tags.js"
 },
 {
@@ -5458,7 +5454,7 @@
 {
    "id": "operationLog.table.destinationId",
    "description": "Status for PPS",
-   "defaultMessage": "DESTINATION ID",
+   "defaultMessage": "対象ID",
    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
 },
 {
@@ -5759,13 +5755,13 @@
 {
    "id": "stringConfig.complete",
    "description": "Text to show Completed",
-   "defaultMessage": "完成した",
+   "defaultMessage": "完了",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
    "id": "stringConfig.rejected",
    "description": "Text to show rejected",
-   "defaultMessage": "拒否された",
+   "defaultMessage": "却下されました",
    "filepath": "./src/constants/backEndConstants.js"
 },
 {
