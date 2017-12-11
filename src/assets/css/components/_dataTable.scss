@@ -626,36 +626,36 @@ background-color: #FFFFFF;
   border-radius: 15px;
   text-align: center;
   width:90px;
-  border:1px solid #aaaaaa;
-  color: #aaaaaa;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
-  text-transform: capitalize;
 }
 
 .cancelled .public_fixedDataTableCell_cellContent{
   border-radius: 15px;
   text-align: center;
-  width:90px;
-  border:1px solid #aaaaaa;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
-  background: #aaaaaa;
-  text-transform: capitalize;
-}
-
-.abandoned .public_fixedDataTableCell_cellContent{
-  border-radius: 15px;
-  text-align: center;
-  width:90px;
-  border:1px solid #aaaaaa;
+  width: 90px;
+  border: 1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+}
+
+.abandoned .public_fixedDataTableCell_cellContent{
+  background: #ffffff;
+  border-radius: 15px;
+   border: 1px solid #f99405;
+  text-align: center;
+  width:90px;
+  color: #f99405;
+  font-size: 12px;
+  max-height: 9px;
 }
 
 .rejected .public_fixedDataTableCell_cellContent{
@@ -701,28 +701,26 @@ border-radius: 15px;
 .CREATED .public_fixedDataTableCell_cellContent,.exception .public_fixedDataTableCell_cellContent{
 border-radius: 15px;
   text-align: center;
-  width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
-  color: #00a54f;
+  width: 90px;
+  border: 1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
   
 }
 
 .ACCEPTED .public_fixedDataTableCell_cellContent{
 border-radius: 15px;
   text-align: center;
-  width:90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #00a54f;
-  color: #00a54f;
+  width: 90px;
+  border: 1px solid #aaaaaa;
+  color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  text-transform: capitalize;
   
 }
 
@@ -1739,8 +1737,7 @@ input[type="checkbox"]{
 
 .gor-audit-actions-button {
 display:inline-block;
-  padding-right: 20px;
-  width: 80px;
+  width: 110px;
   float:left;
 }
 

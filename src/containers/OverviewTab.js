@@ -13,7 +13,7 @@ import Dimensions from 'react-dimensions'
 import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions';
 import {wsOverviewData} from './../constants/initData.js';
 import {WS_ONSEND} from './../constants/frontEndConstants';
-import {overviewRefreshed} from './../actions/overviewActions';
+import {overviewRefreshed,wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './../actions/overviewActions';
 
 
 
