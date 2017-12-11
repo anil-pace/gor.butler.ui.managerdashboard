@@ -46,7 +46,6 @@ export  function appInfo(state={},action){
             "passwordInfo":null
           })
     case NOTIFY_PASS:
-        console.log("coming inside NOTIFY_PASS Reducer");
          let notifyMsg=action.data, notifyPass;
          notifyPass={
           type:GOR_PASS,

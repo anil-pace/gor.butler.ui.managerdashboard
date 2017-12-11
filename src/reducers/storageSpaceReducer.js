@@ -9,9 +9,7 @@ export  function storageSpaceReducer(state={},action){
 	  	case STORAGE_SPACE_FETCH:
 		  	return Object.assign({}, state, {
 		    	storageSpaceData:action.data || [],
-		    	hasDataChanged:!state.hasDataChanged,
-		    	reportsSpinner:false,
-		    	totalSize:action.data.total
+		    	reportsSpinner:false
 	      	});
 	    
 	  	default:

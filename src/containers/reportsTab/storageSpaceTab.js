@@ -1,52 +1,27 @@
  /**
- * Container for Inventory tab
+ * Container for Storage Space tab
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage,FormattedDate,injectIntl,intlShape,defineMessages} from 'react-intl';
+import { FormattedMessage, FormattedDate, injectIntl, intlShape, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
-import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
-import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
 
-//import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
-
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 
 import Spinner from '../../components/spinner/Spinner';
-
-import {Table, Column,Cell} from 'fixed-data-table';
-
-import {
-    tableRenderer,
-    TextCell,
-    ProgressCell
-} from '../../components/commonFunctionsDataTable';
-
-import FilterSummary from '../../components/tableFilter/filterSummary';
-
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
+import { Table, Column, Cell } from 'fixed-data-table';
+import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFunctionsDataTable';
 
-import {STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL} from '../../constants/configConstants';
-import {makeAjaxCall} from '../../actions/ajaxActions';
-import {recieveStorageSpaceData} from '../../actions/storageSpaceActions';
-import {STORAGE_SPACE_FETCH, 
-        GET,
-        DOWNLOAD_REPORT_REQUEST,
-        APP_JSON,
-        APP_EXCEL,
-        DEFAULT_PAGE_SIZE_OL,
-        REALTIME
-        } from '../../constants/frontEndConstants';
 
-/*Page size dropdown options*/
-const pageSizeDDOpt = [ {value: "25", disabled:false,label: <FormattedMessage id="storageSpace.page.twentyfive" description="Page size 25"
-                                                          defaultMessage="25"/>},
-            {value: "50",  disabled:false,label: <FormattedMessage id="storageSpace.page.fifty" description="Page size 50"
-                                                          defaultMessage="50"/>},
-            {value: "100",  disabled:false,label: <FormattedMessage id="storageSpace.page.hundred" description="Page size 100"
-                                                          defaultMessage="100"/>}];
+import { STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL } from '../../constants/configConstants';
+import { STORAGE_SPACE_FETCH, GET, DOWNLOAD_REPORT_REQUEST, APP_JSON, APP_EXCEL } from '../../constants/frontEndConstants';
+
+import { makeAjaxCall } from '../../actions/ajaxActions';
+import { recieveStorageSpaceData } from '../../actions/storageSpaceActions';
+import { setReportsSpinner } from '../../actions/operationsLogsActions';
+
 /*Intl Messages*/
 const  messages= defineMessages({
     genRepTooltip: {
@@ -60,7 +35,6 @@ class StorageSpaceTab extends React.Component{
     constructor(props,context) {
         super(props,context);
         this.state=this._getInitialState();
-        this._handlePageChange= this._handlePageChange.bind(this);
         this._requestReportDownload = this._requestReportDownload.bind(this);
         
     }
@@ -82,12 +56,7 @@ class StorageSpaceTab extends React.Component{
                 utilization: "ASC"
             },
             dataList:dataList,
-            query:this.props.location.query,
-            ubSent:false,
-            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
-            dataFetchedOnLoad:false,
-            plied:Object.keys(this.props.location.query).length ? true :false,
-            totalSize:this.props.totalSize || null
+            dataFetchedOnLoad:false
         }
     }
 
@@ -133,6 +102,7 @@ class StorageSpaceTab extends React.Component{
     }
 
     _getStorageSpaceData(props){
+        this.props.setReportsSpinner(true);
         let params={
                 'url':STORAGE_SPACE_URL,
                 'method':GET,
@@ -157,34 +127,15 @@ class StorageSpaceTab extends React.Component{
         this.props.makeAjaxCall(params);
     }
 
-    _handlePageChange(e){
-        this.setState({
-            pageSize:e.value,
-            dataFetchedOnLoad:false
-        },function(){
-            let _query =  Object.assign({},this.props.location.query);
-            _query.pageSize = this.state.pageSize;
-            _query.page = _query.page || 1;
-            this.props.router.push({pathname: "/reports/storageSpace",query: _query})
-        })
-    }
-    
-
     render(){
-        var {dataList,totalSize,pageSize} = this.state;
-        var _this = this;
+        var {dataList} = this.state;
         var filterHeight=screen.height - 190 - 50;
         var dataSize = dataList.getSize();
-        var timePeriod = _this.props.location.query.time_period;
-        var noData = !dataSize && timePeriod !== REALTIME;
-        var pageSizeDDDisabled = timePeriod === REALTIME ;
-        var location = JSON.parse(JSON.stringify(_this.props.location));
-        var totalPage = Math.ceil(totalSize / pageSize);
 
         return (
             <div className="gorTesting wrapper gor-storage-space">
                 <Spinner isLoading={this.props.reportsSpinner} setSpinner={this.props.setReportsSpinner}/>
-             <div className="gorToolBar">
+                <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
                                     <div className="gorToolBarElements">
                                         <FormattedMessage id="storageSpace.table.heading" description="Heading for PPS"
@@ -192,22 +143,19 @@ class StorageSpaceTab extends React.Component{
                                         
                                     </div>
                                 </div>
-                                  <div className="filterWrapper">
-                            
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                       <button disabled = {pageSizeDDDisabled} title={this.props.intl.formatMessage(messages.genRepTooltip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
-                                        <FormattedMessage id="storageSpace.table.downloadBtn"
-                                        description="button label for download report"
-                                        defaultMessage="Generate Report"/>
-                                        </button>
+                                <div className="filterWrapper">
+                                    <div className="gorToolBarDropDown">
+                                        <div className="gor-button-wrap">
+                                           <button title={this.props.intl.formatMessage(messages.genRepTooltip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
+                                            <FormattedMessage id="storageSpace.table.downloadBtn"
+                                            description="button label for download report"
+                                            defaultMessage="Generate Report"/>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
-                            </div>
-            
                     
-             </div>
+                </div>
                
                 <Table
                     rowHeight={80}
@@ -328,43 +276,32 @@ class StorageSpaceTab extends React.Component{
                 {!dataSize ? <div className="gor-no-data"><FormattedMessage id="storageSpace.table.noData"
                                                                     description="No data message for Storage space"
                                                                     defaultMessage="No Data Found"/></div>:""}
-                <div className="gor-ol-paginate-wrap">
-                <div className="gor-ol-paginate-left">
-                <Dropdown 
-                    options={pageSizeDDOpt} 
-                    onSelectHandler={(e) => this._handlePageChange(e)}
-                    disabled={false} 
-                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
-                </div>
-                <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={isNaN(totalPage) ? 1 : totalPage}/>
-                </div>
-                </div>
             </div>
         );
     }
 };
 
 StorageSpaceTab.propTypes = {
-    hasDataChanged: React.PropTypes.bool,
-    storageSpaceData: React.PropTypes.array
+    storageSpaceData: React.PropTypes.array,
+    reportsSpinner: React.PropTypes.bool
 }
+
 StorageSpaceTab.defaultProps = {
-    hasDataChanged:false,
-    storageSpaceData: []
+    storageSpaceData: [],
+    reportsSpinner:true
 }
 
 function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
         storageSpaceData: state.storageSpaceReducer.storageSpaceData,
-        totalSize:state.storageSpaceReducer.totalSize,
-        hasDataChanged:state.storageSpaceReducer.hasDataChanged,
+        reportsSpinner:state.storageSpaceReducer.reportsSpinner
     };
 }
 function mapDispatchToProps(dispatch){
     return {
-        makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
+        makeAjaxCall: function(params){dispatch(makeAjaxCall(params))},
+        setReportsSpinner:function(data){dispatch(setReportsSpinner(data))}
     }
 };
 
