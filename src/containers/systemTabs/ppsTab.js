@@ -257,7 +257,7 @@ class PPS extends React.Component {
              if(!requestObj){
              let selectedPps = this.props.checkedPps,openPps={};
              for(let k in selectedPps){
-                if(selectedPps[k].status.toLowerCase() === "open" /*PPS_STATUS_OPEN.toLowerCase()*/){
+                if(selectedPps[k].statusPriority === 2){ // status priority for open is 2
                     openPps[k] = selectedPps[k];
                 }
              }
@@ -388,7 +388,7 @@ class PPS extends React.Component {
                                           defaultMessage="Change PPS Mode"/>
         var openCount=0,closeCount=0;
         for(let k in this.props.checkedPps){
-            if(this.props.checkedPps[k].status.toLowerCase() === "close" || this.props.checkedPps[k].status.toLowerCase() === "force close"){
+            if(this.props.checkedPps[k].statusPriority === 0 || this.props.checkedPps[k].statusPriority === 1){
                 closeCount++
             }
             else{
