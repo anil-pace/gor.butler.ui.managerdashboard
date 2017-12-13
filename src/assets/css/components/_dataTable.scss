@@ -394,16 +394,18 @@ background-color: #FFFFFF;
 }
 
 
-.Stopped .public_fixedDataTableCell_cellContent{
-
-  background: #fc3838;
-  border-radius: 15px;
-  text-align: center;
-  width:90px;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
+.Stopped{   
+  .public_fixedDataTableCell_cellContent{
+      background: #fc3838;
+      border-radius: 15px;
+      text-align: center;
+      width:90px;
+      color: #ffffff;
+      font-size: 12px;
+      max-height: 9px;
+  }
 }
+
 
 .Error .public_fixedDataTableCell_cellContent{
 
@@ -1544,6 +1546,17 @@ color: #000000;
   position:relative;
 }
 
+.gor-Auditlist-table {
+  .gor-class {
+  vertical-align: middle;
+  display: inline-block;
+  padding-left:calculateRem(14px);
+  }
+  .gor-class-shift {
+  padding-left:calculateRem(45px);
+  }
+}
+
 .gorTableMainContainer {
   overflow-x: hidden;
 }
@@ -1867,7 +1880,9 @@ font-family: "source sans pro";
 }
 
 .displayLeft{
-  float:left;
+  display:inline-block;
+  vertical-align:middle;
+  width:22%;
 }
 .displayHidden{
   visibility:hidden;
@@ -1884,7 +1899,7 @@ font-family: "source sans pro";
 }
 .gor-subheading-title{
   line-height: 20px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   color: #666666;
 }
