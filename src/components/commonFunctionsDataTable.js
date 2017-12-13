@@ -548,14 +548,15 @@ export class SortHeaderCell extends React.Component {
 
 export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, callBack, resolved, unresolved,checkState,checked,showBox, ...props}) => (
  <Cell {...props}>
-<input className={data.getObjectAt(rowIndex)[showBox]?'displayLeft':'displayHidden'} type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"] && data.getObjectAt(rowIndex)[showBox]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
+ {data.getObjectAt(rowIndex)[showBox]?<div className='displayLeft'><input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"] && data.getObjectAt(rowIndex)[showBox]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/></div>:''}
       
+      <div className={data.getObjectAt(rowIndex)[showBox]?"gor-class":"gor-class gor-class-shift"}>
+
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 
             <div  className="gor-tool-tip-hover" style={{fontSize:16,color:'black', display:'inline-block'}}>
-                {data.getObjectAt(rowIndex)[columnKey]} <span className="gor-audit-info-icon" onMouseEnter={callBack}/>
-
-        {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
+                <span className="gor-inline"> {data.getObjectAt(rowIndex)[columnKey]} </span><span className="gor-audit-info-icon" onMouseEnter={callBack}/>
+                {(data.getObjectAt(rowIndex)[resolved] && data.getObjectAt(rowIndex)[unresolved]) ?
             <div className="gor-tooltip">
                 <div className="gor-tooltip-arrow"/>
                 <div className="gor-tooltip-text-wrap">
@@ -651,9 +652,11 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
                 </div>
             </div>
             :""
-        }{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}
-            </div>:<div className="gor-subheading">{data.getObjectAt(rowIndex)[columnKey]}{data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}</div>
+        }
+            </div>:<div className="gor-subheading">{data.getObjectAt(rowIndex)[columnKey]}</div>
         } 
+        {data.getObjectAt(rowIndex).system_created_audit?<div className="gor-subheading-title">{SYTEM_GENERATED_TEXT}</div>:''}
+        </div>
 
 
     </Cell>
