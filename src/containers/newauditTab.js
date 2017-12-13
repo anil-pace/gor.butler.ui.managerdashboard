@@ -50,6 +50,7 @@ import {wsOverviewData} from './../constants/initData.js';
 import AuditFilter from './auditTab/auditFilter';
 import {FormattedMessage} from 'react-intl';
 import CreateAudit from './auditTab/createAudit';
+import createNewTask from './auditTab/createNewTask';
 import {modal} from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary'
 import {mappingArray} from '../utilities/utils';
@@ -619,6 +620,17 @@ createAudit() {
 
 }
 
+createNewTask() {
+    modal.add(createNewTask, {
+        title: '',
+        size: 'large',
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;),
+        });
+
+}
+
     startBulkAudit() {
         var auditId=[]; 
         auditId=Object.keys(this.props.checkedAudit);
@@ -718,7 +730,7 @@ render() {
     </div>
 
     <div className="gor-button-wrap">
-    <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
+    <button className="gor-audit-create-btn" onClick={this.createNewTask.bind(this)}>
     <div className="gor-filter-add-token"/>
     <FormattedMessage id="audit.table.buttonLable"
     description="button label for audit create"

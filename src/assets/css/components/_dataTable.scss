@@ -1701,6 +1701,46 @@ input[type="checkbox"]{
     vertical-align: sub;
 }
 
+
+.gor-audit-drag-drop-wrapper{
+  border: 1px dashed grey;
+  cursor: pointer;
+  height: 120px;
+  width: 50%;
+  margin: 0 auto;
+  p{
+    line-height: 1.5em;
+  }
+}
+
+
+.gor-audit-ceter-align-using-flex{
+  display: flex;
+  flex-flow: column;
+  align-items:center;
+  justify-content:center;
+}
+
+ul{
+  height: 50px;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  li {
+    float: left;
+    width:50%;
+  }
+  .active{
+    color: black;
+    border-bottom: 5px solid blue;
+  }
+  li a {
+      display: inline-block;
+      //padding: 6px;
+      text-decoration: none;
+      text-align: center;
+  }
+}
+
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
