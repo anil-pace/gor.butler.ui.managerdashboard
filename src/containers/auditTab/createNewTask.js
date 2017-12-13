@@ -10,13 +10,17 @@ import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
 
+import ReactFileReader from 'react-file-reader';
+
 
 class CreateNewTask extends React.Component{
   constructor(props) 
   {
       super(props); 
       var selectedList=[]; 
-      this.state={selected:selectedList,confirmedSku:null,currentSku:""}
+      this.state={selected:selectedList,confirmedSku:null,currentSku:""};
+      this.parseCSVFile =  this.parseCSVFile.bind(this);
+      //this.handleFiles = this.handleFiles.bind(this);
   }
   componentWillUnmount()
   {
@@ -47,6 +51,46 @@ class CreateNewTask extends React.Component{
   _selectedAttributes(selectedList) {
     this.setState({selected:selectedList});
   }
+
+  parseCSVFile(evt){
+    console.log("parseCSV Fiel gettign called =================>");
+    var files = evt.target.files;
+    var fileInput = document.getElementById('myFile');
+    fileInput.addEventListener('change', function(e) {
+      var file = fileInput.files[0];
+      var textType = /text.*/;
+
+      if (file.type.match(textType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          let xyz = [];
+          xyz.push(reader.result);
+          console.log("==========================================>");
+          console.log(xyz);
+        }
+
+        reader.readAsText(file);  
+      } else {
+        console.log("=============File not supported!");
+      }
+    });
+  }
+
+//handleFiles = (files) => {
+  // console.log(files.base64);
+  // console.log("FILE NAME IS ===============>" + files.fileList[0].name);
+  // var reader = new window.FileReader();
+  //   reader.onload = function(e) {
+  //   // Use reader.result
+  //   let xyz = reader.result;
+  //   console.log("==============>" + xyz);
+    
+  //   }
+  //   reader.readAsText(files);
+  // alert(reader.result);
+//}
+
   _validSku() {
     var initialAttributes;
     let urlData={
@@ -258,10 +302,15 @@ class CreateNewTask extends React.Component{
                   <p> Drag and drop </p>
                   <p> OR </p>
                   <p style={{color: "blue"}}> Upload .CSV file </p>
-                  <input type="file" id="myFile" multiple size="50" />
+                  <input type="file" id="myFile" multiple size="50" onClick={this.parseCSVFile}/>
+                  <output id="list"></output>
                 </div>
               </div>
             </div>
+
+            {/*<ReactFileReader fileTypes={[".csv",".zip"]} base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
+              <button className='btn'>Upload</button>
+            </ReactFileReader>*/}
 
 
           {/* NEW code - ENDS*/}
