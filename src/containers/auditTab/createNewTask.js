@@ -11,6 +11,7 @@ import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
 
 import ReactFileReader from 'react-file-reader';
+import FileDragAndDrop from 'react-file-drag-and-drop';
 
 
 class CreateNewTask extends React.Component{
@@ -21,6 +22,7 @@ class CreateNewTask extends React.Component{
       this.state={selected:selectedList,confirmedSku:null,currentSku:""};
       this.parseCSVFile =  this.parseCSVFile.bind(this);
       //this.handleFiles = this.handleFiles.bind(this);
+      this.handleDrop = this.handleDrop.bind(this);
   }
   componentWillUnmount()
   {
@@ -56,6 +58,7 @@ class CreateNewTask extends React.Component{
     console.log("parseCSV Fiel gettign called =================>");
     var files = evt.target.files;
     var fileInput = document.getElementById('uploadCSVFile');
+    var displayCSVFile = document.getElementById('displayCSVFile');
     fileInput.addEventListener('change', function(e) {
       var file = fileInput.files[0];
       var textType = /text.*/;
@@ -66,15 +69,48 @@ class CreateNewTask extends React.Component{
         reader.onload = function(e) {
           let xyz = [];
           xyz.push(reader.result);
+          displayCSVFile.innerText = reader.result;
           console.log("==========================================>");
           console.log(xyz);
-        }
 
+        }
         reader.readAsText(file);  
       } else {
         console.log("=============File not supported!");
       }
     });
+  }
+
+  preventDefault(event) {
+    event.preventDefault();
+  }
+
+  handleDrop(dataTransfer){
+     console.log("coming inside HANDLE DROP FUNCTION =============================>")
+    // var files = dataTransfer.files;
+    //var files = evt.target.files;
+    var displayCSVFile = document.getElementById('displayCSVFile');
+    var file = dataTransfer.files[0];
+    var textType = /text.*/;
+
+      if (file.type.match(textType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          let xyz = [];
+          xyz.push(reader.result);
+          displayCSVFile.innerText = reader.result;
+          console.log("==========================================>");
+          console.log(xyz);
+
+        }
+        reader.readAsText(file);  
+      } else {
+        console.log("=============File not supported!");
+      }
+
+    
+
   }
 
 //handleFiles = (files) => {
@@ -301,14 +337,17 @@ class CreateNewTask extends React.Component{
             <div className='gor-usr-details'>
               <div className='gor-audit-drag-drop-wrapper'>
                 <div className='gor-audit-drag-drop-content'> 
-                  <p style={{border: "1px solid grey"}}> Image here </p>
-                  <p> Drag and drop </p>
-                  <p> OR </p>
-                  <p style={{color: "blue"}}> Upload .CSV file </p>
-                  <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.parseCSVFile}/>
-                  <output id="list"></output>
+                  <FileDragAndDrop onDragOver="return false" onDrop={this.handleDrop}>
+                    <p style={{border: "1px solid grey"}}> Image here </p>
+                    <p> Drag and drop </p>
+                    <p> OR </p>
+                    <p style={{color: "blue"}}> Upload .CSV file </p>
+                    <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.parseCSVFile}/>
+                    
+                  </FileDragAndDrop>
                 </div>
               </div>
+              <pre id="displayCSVFile"></pre>
             </div>
 
             {/*<ReactFileReader fileTypes={[".csv",".zip"]} base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
