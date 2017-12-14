@@ -467,7 +467,9 @@
 .connectionDetails{
 	line-height:25px;
 	span:first-child{
-		margin-right:15px;
+		margin-right:5px;
+		display: inline-block;
+		min-width: 8em;
 	}
 	span:nth-child(2){
 		color:#49BE7E;
@@ -526,8 +528,8 @@
 		}
 	}
 	&.none{
-		.action-icon{
-			background:none;
+		.action-left{
+			display: none;
 		}
 		.action-triggered{
 			color:#000000;
