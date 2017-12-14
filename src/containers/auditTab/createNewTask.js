@@ -55,7 +55,7 @@ class CreateNewTask extends React.Component{
   parseCSVFile(evt){
     console.log("parseCSV Fiel gettign called =================>");
     var files = evt.target.files;
-    var fileInput = document.getElementById('myFile');
+    var fileInput = document.getElementById('uploadCSVFile');
     fileInput.addEventListener('change', function(e) {
       var file = fileInput.files[0];
       var textType = /text.*/;
@@ -272,12 +272,15 @@ class CreateNewTask extends React.Component{
                 
             </div>
 
+
+
           {/* NEW code - BEGINS*/}
 
             <div className='gor-usr-details'>
+              <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/></div>
               <div className='gor-audit-button-wrap'>
-                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' defaultMessage='Enter SKUs'/></button>
-                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.csvUpload" description='Text for csv upload' defaultMessage='Upload .CSV'/></button>
+                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.enterSkus" description='Button for entering skus' defaultMessage='Enter SKUs'/></button>
+                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload .CSV'/></button>
               </div>
             </div>
 
@@ -297,12 +300,12 @@ class CreateNewTask extends React.Component{
 
             <div className='gor-usr-details'>
               <div className='gor-audit-drag-drop-wrapper'>
-                <div className='gor-audit-ceter-align-using-flex'> 
+                <div className='gor-audit-drag-drop-content'> 
                   <p style={{border: "1px solid grey"}}> Image here </p>
                   <p> Drag and drop </p>
                   <p> OR </p>
                   <p style={{color: "blue"}}> Upload .CSV file </p>
-                  <input type="file" id="myFile" multiple size="50" onClick={this.parseCSVFile}/>
+                  <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.parseCSVFile}/>
                   <output id="list"></output>
                 </div>
               </div>
