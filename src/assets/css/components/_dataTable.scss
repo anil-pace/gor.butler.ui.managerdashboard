@@ -1708,6 +1708,7 @@ input[type="checkbox"]{
   height: 120px;
   width: 50%;
   margin: 0 auto;
+  text-align: center;
   p{
     line-height: 1.5em;
   }
@@ -1717,8 +1718,14 @@ input[type="checkbox"]{
   position: relative;
   z-index: 999;
   cursor: pointer;
-  height: inherit;
+  height: 75%;
   text-align: center;
+  border: 1px solid grey;
+}
+
+.gor-audit-upload-file{
+  position: relative;
+  cursor: pointer;
 }
 
 #uploadCSVFile{

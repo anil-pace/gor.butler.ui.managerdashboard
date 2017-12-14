@@ -334,10 +334,13 @@ class CreateNewTask extends React.Component{
                     <p style={{border: "1px solid grey"}}> Image here </p>
                     <p> Drag and drop </p>
                     <p> OR </p>
-                    <p style={{color: "blue"}}> Upload .CSV file </p>
-                    <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.handleUploadCVSFile}/>
+                    
                     
                   </FileDragAndDrop>
+                </div>
+                <div className='gor-audit-upload-file'>
+                    <a href="#"> Upload .CSV file </a>
+                    <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.handleUploadCVSFile}/>
                 </div>
               </div>
               <pre id="displayCSVFile"></pre>
