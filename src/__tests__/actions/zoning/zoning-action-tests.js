@@ -2,7 +2,7 @@ import * as actions from '../../../actions/zoningActions'
 import * as CONSTANTS from '../../../constants/frontEndConstants'
 
 describe('actions', () => {
-  it('should create an action to recieve zoning header data', () => {
+  it('should create an action to receive zoning header data', () => {
     const data =  {
           "header_data": {
                 "zones_data": {
