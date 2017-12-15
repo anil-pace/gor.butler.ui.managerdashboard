@@ -19,9 +19,17 @@ class CreateNewTask extends React.Component{
   {
       super(props); 
       var selectedList=[]; 
-      this.state={selected:selectedList,confirmedSku:null,currentSku:""};
+      this.state={
+        selected: selectedList,
+        confirmedSku: null,
+        currentSku: "", 
+        csvUploadStatus:false,
+        active: 0
+      };
       this.handleUploadCVSFile = this.handleUploadCVSFile.bind(this);
       this.handleDragAndDrop = this.handleDragAndDrop.bind(this);
+      this.handleActiveTab = this.handleActiveTab.bind(this);
+      this.displayUploadCSVFileContent = this.displayUploadCSVFileContent.bind(this);
       //this.parseCSVFile =  this.parseCSVFile.bind(this);
       //this.handleFiles = this.handleFiles.bind(this);
   }
@@ -53,6 +61,18 @@ class CreateNewTask extends React.Component{
   }
   _selectedAttributes(selectedList) {
     this.setState({selected:selectedList});
+  }
+
+  handleActiveTab(index){
+    this.setState({
+      active: index
+    })
+  }
+
+  displayUploadCSVFileContent(){
+    this.setState({
+      active: 0
+    })
   }
 
   parseCSVFile(fileInstance){
@@ -92,7 +112,6 @@ class CreateNewTask extends React.Component{
            displayCSVFile.innerText = reader.result;
            console.log("==========================================>");
            console.log(xyz);
-
          }
          reader.readAsText(file);  
        } else {
@@ -264,6 +283,9 @@ class CreateNewTask extends React.Component{
       var skuState=this._claculateSkuState(processedSkuResponse);
       var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
       var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
+      var csvUploadStatus = this.state.csvUploadStatus;
+      let items = ["Upload CSV and validate", "Select attributes"];
+      var self = this;
       
       return (
         <div>
@@ -309,33 +331,42 @@ class CreateNewTask extends React.Component{
               <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/></div>
               <div className='gor-audit-button-wrap'>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.enterSkus" description='Button for entering skus' defaultMessage='Enter SKUs'/></button>
-                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload .CSV'/></button>
+                <button className="gor-auditCreate-btn" type="button" onClick={this.displayUploadCSVFileContent.bind(this)}><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload .CSV'/></button>
               </div>
             </div>
 
             <div className='gor-usr-details'>
               <ul className='gor-audit-hor-menubar'>
-                <li className="active">
+                {items.map(function(m, index){
+                  var style = '';
+                    if(self.state.active == index){
+                        style = 'active';
+                    }
+                    return <li className={style} onClick={self.handleActiveTab.bind(self, index)}> <span className='spanIndex'> {index+1} </span> {m}</li>; 
+                }) }
+                {/*<li onClick={this.handleActiveTab}>
                   <span> 1 </span>
                   <a href="#">Upload CSV and validate</a>
                 </li>
-                <li>
+                <li onClick={this.handleActiveTab}>
                   <span> 2 </span>
                   <a href="#">Select attributes</a>
-                </li>
+                </li>*/}
               </ul>
             </div>
 
+            {csvUploadStatus===false?
+              <div className='gor-audit-csv-upload-error-wrapper'>   
+                <span>Error Found, Please try again </span>
+              </div> : ""}
 
             <div className='gor-usr-details'>
               <div className='gor-audit-drag-drop-wrapper'>
                 <div className='gor-audit-drag-drop-content'> 
-                  <FileDragAndDrop onDragOver="return false" onDrop={this.handleDragAndDrop}>
+                  <FileDragAndDrop onDrop={this.handleDragAndDrop}>
                     <p style={{border: "1px solid grey"}}> Image here </p>
                     <p> Drag and drop </p>
                     <p> OR </p>
-                    
-                    
                   </FileDragAndDrop>
                 </div>
                 <div className='gor-audit-upload-file'>

@@ -1728,6 +1728,15 @@ input[type="checkbox"]{
   cursor: pointer;
 }
 
+.gor-audit-csv-upload-error-wrapper{
+  width: 33%;
+  margin: auto;
+  color: white;
+  background: red;
+  line-height: 25px;
+  padding-left: 15px;
+}
+
 #uploadCSVFile{
   opacity: 0;
   position: absolute;
@@ -1746,11 +1755,20 @@ ul{
   border-bottom: 1px solid lightgrey;
   li {
     float: left;
-    width:50%;
+    width: 50%;
+    height: 50%;
   }
   .active{
     color: black;
     border-bottom: 5px solid blue;
+  }
+  .spanIndex{
+    display: inline-block;
+    width: 10%;
+    border-radius: 50%;
+    color: white;
+    background: blue;
+    text-align: center;
   }
   li a {
       display: inline-block;
