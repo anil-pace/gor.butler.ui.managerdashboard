@@ -284,8 +284,8 @@ class OrderListTable extends React.Component {
                                             sortDir={colSortDirs.recievedTime}>
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="orderlist.table.operatingMode"
-                                                      description="recievedTime for Orders"
-                                                      defaultMessage="RECIEVED TIME"/>
+                                                      description="receivedTime for Orders"
+                                                      defaultMessage="RECEIVED TIME"/>
                                     <div className="gorToolHeaderSubText">
                                         {this.props.timeZoneString}
                                     </div>

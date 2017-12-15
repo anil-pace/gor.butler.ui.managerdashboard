@@ -2678,8 +2678,8 @@
   },
   {
     "id": "orderlist.table.operatingMode",
-    "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME",
+    "description": "receivedTime for Orders",
+    "defaultMessage": "RECEIVED TIME",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -4443,8 +4443,8 @@
   },
   {
     "id": "utility.goodsRcvdNotes.head",
-    "description": "Goods Recieved Notes",
-    "defaultMessage": "Goods Recieved Notes",
+    "description": "Goods Received Notes",
+    "defaultMessage": "Goods Received Notes",
     "filepath": "./src/containers/utilityTab.js"
   },
   {
