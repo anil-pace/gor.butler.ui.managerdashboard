@@ -3146,7 +3146,7 @@
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME",
+    "defaultMessage": "RECEIVED TIME",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
