@@ -2,7 +2,7 @@ import * as actions from '../../../actions/paginationAction'
 import * as CONSTANTS from '../../../constants/frontEndConstants'
 
 describe('actions', () => {
-  it('should create an action to recieve orders data', () => {
+  it('should create an action to receive orders data', () => {
     const data =  {
   "orders": [{
     "breached": false,
