@@ -1547,12 +1547,12 @@ color: #000000;
 }
 
 .gor-Auditlist-table {
-  .gor-class {
+  .gor-audit-id {
   vertical-align: middle;
   display: inline-block;
   padding-left:calculateRem(14px);
   }
-  .gor-class-shift {
+  .gor-audit-id-leftShift {
   padding-left:calculateRem(45px);
   }
 }
