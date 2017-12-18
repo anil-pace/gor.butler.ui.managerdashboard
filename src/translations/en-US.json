@@ -889,13 +889,13 @@
   {
     "id": "stringConfig.complete",
     "description": "Text to show Completed",
-    "defaultMessage": "Completed",
+    "defaultMessage": "completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.completed",
     "description": "Text to show Completed",
-    "defaultMessage": "Completed",
+    "defaultMessage": "completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2527,7 +2527,7 @@
   {
     "id": "operation.alert.pause.breach.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -3146,7 +3146,7 @@
   {
     "id": "orderlist.table.operatingMode",
     "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME",
+    "defaultMessage": "RECEIVED TIME",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
