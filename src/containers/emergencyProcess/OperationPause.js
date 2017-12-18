@@ -1,6 +1,6 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import { FormattedMessage,injectIntl } from 'react-intl';        
+import { FormattedMessage,injectIntl,defineMessages } from 'react-intl';        
 
 /*Intl Messages*/
 const  messages= defineMessages({
