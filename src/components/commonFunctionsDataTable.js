@@ -550,7 +550,7 @@ export const AuditIssuesTooltipCell = ({rowIndex, data, columnKey, setClass, cal
  <Cell {...props}>
  {data.getObjectAt(rowIndex)[showBox]?<div className='displayLeft'><input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"] && data.getObjectAt(rowIndex)[showBox]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/></div>:''}
       
-      <div className={data.getObjectAt(rowIndex)[showBox]?"gor-class":"gor-class gor-class-shift"}>
+      <div className={data.getObjectAt(rowIndex)[showBox]?"gor-audit-id":"gor-audit-id gor-audit-id-leftShift"}>
 
         {data.getObjectAt(rowIndex)[unresolved] || data.getObjectAt(rowIndex).infoIcon?
 

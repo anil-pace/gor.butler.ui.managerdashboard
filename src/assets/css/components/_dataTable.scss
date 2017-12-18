@@ -1519,6 +1519,10 @@ color: #000000;
   position:relative;
 }
 
+.gor-audit-paginate-wrap {
+  float: right;
+}
+
 .gor-Orderlist-table {
   width: 100%;
   height: 79vh;
@@ -1531,14 +1535,44 @@ color: #000000;
 }
 
 .gor-Auditlist-table {
-  .gor-class {
+  .gor-audit-id {
   vertical-align: middle;
   display: inline-block;
   padding-left:calculateRem(14px);
   }
-  .gor-class-shift {
+  .gor-audit-id-leftShift {
   padding-left:calculateRem(45px);
   }
+  .gor-audit-info-icon:hover + .gor-tooltip 
+  { display: block;   
+  z-index:900;
+  width: 210px;
+  position: fixed;
+  overflow: hidden;
+  padding-left: 10px;
+  
+  }
+  .gor-audit-create-btn {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: "source sans pro";
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 14px;
+    padding-right: 14px;
+    vertical-align: sub;
+    cursor: pointer;
+}
+.gor-audit-filter-create-wrap {
+  display: inline-block;
+    float: right;
+    margin-top: 16px;
+    margin-right: 40px;
+}
 }
 
 .gorTableMainContainer {
@@ -1846,10 +1880,6 @@ font-family: "source sans pro";
   
 }
 
-.gor-audit-paginate-wrap {
-  float: right;
-}
-
 .gor-tooltip {
   display: none;
   padding-left: 50px;
@@ -1871,15 +1901,7 @@ font-family: "source sans pro";
   visibility:hidden;
 }
 
-.gor-audit-info-icon:hover + .gor-tooltip 
-{ display: block;   
-  z-index:900;
-  width: 210px;
-  position: fixed;
-  overflow: hidden;
-  padding-left: 10px;
-  
-}
+
 .gor-subheading-title{
   line-height: 20px;
   font-size: 12px;
@@ -1911,30 +1933,6 @@ font-family: "source sans pro";
 .gor-tooltip-heading{
   font-weight: bold;
   padding-bottom: 15px;
-}
-
-.gor-audit-filter-create-wrap {
-  display: inline-block;
-    float: right;
-    margin-top: 16px;
-    margin-right: 40px;
-}
-
-
-.gor-audit-create-btn {
-  height: 35px;
-  border-radius: 3px;
-  background-color: #4d5055;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
-  font-size: 14px;
-  font-weight: 600;
-  text-align: left;
-  color: #ffffff;
-  padding-left: 14px;
-    padding-right: 14px;
-    vertical-align: sub;
-    cursor: pointer;
 }
 
 .gor-audit-cancelling-text{
