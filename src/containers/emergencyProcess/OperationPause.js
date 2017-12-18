@@ -1,6 +1,25 @@
 import React  from 'react';
 import { connect } from 'react-redux' ;
-import { FormattedMessage } from 'react-intl';        
+import { FormattedMessage,injectIntl } from 'react-intl';        
+
+/*Intl Messages*/
+const  messages= defineMessages({
+    latchGateSensor: {
+        id: 'operationPause.sensor.latchGate',
+        description: 'Text for latch_gate sensor',
+        defaultMessage: 'Latch Gate'
+    },
+    buttonSensor: {
+        id: 'operationPause.sensor.buttonSensor',
+        description: 'Text for button_press sensor',
+        defaultMessage: 'Button'
+    },
+    lightCurtainSensor: {
+        id: 'operationPause.sensor.lightCurtain',
+        description: 'Text for light_curtain sensor',
+        defaultMessage: 'Light Curtain'
+    }
+})
 
 class OperationPause extends React.Component{
   removeThisModal() {
@@ -15,10 +34,24 @@ class OperationPause extends React.Component{
  
   render()
   {
+      var sensor,sensorProp = this.props.sensor;
+
+      if(sensorProp === 'latch_gate'){
+       sensor = this.props.intl.formatMessage(messages.latchGateSensor)
+      }
+      else if(sensorProp === 'button_press'){
+        sensor =  this.props.intl.formatMessage(messages.buttonPressSensor)
+      }
+      else if(sensorProp === 'light_curtain'){
+        sensor =  this.props.intl.formatMessage(messages.lightCurtainSensor)
+      }
+      else{
+        sensor='';
+      }
       return (
         <div className='gor-emergency-overlay'>
           <div className='gor-delete gor-modal-content gor-operation-stop'>
-            <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
+            <span className="close" onClick={this.removeThisModal.bind(this)}>Ã—</span>
               <div className='gor-delete-text'>  
                 <div className='gor-alert-lg'></div>
                   <div className='gor-delete-line'>
@@ -30,11 +63,12 @@ class OperationPause extends React.Component{
                   <div className='gor-margin-top'>
                     <div className='gor-error-md'>
                     {this.props.poeEnabled && this.props.breached && (<FormattedMessage id='operation.alert.pause.breach.text' 
-                    defaultMessage="Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}."
+                    defaultMessage="Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}."
                             description="Text for emergency button press"
                             values={{
                               controller:this.props.controller,
-                              zone:this.props.zone
+                              zone:this.props.zone,
+                              sensor:this.props.sensor
                             }}/>)}
                     {this.props.poeEnabled && !this.props.breached && (<FormattedMessage id='operation.alert.pause.text' 
                     defaultMessage="Emergency-Pause activated via Controller {controller} in {zone}."
@@ -75,4 +109,4 @@ OperationPause.propTypes={
 }
 
 
-export default connect(mapStateToProps,null)(OperationPause);
+export default connect(mapStateToProps,null)(injectIntl(OperationPause));
