@@ -51,7 +51,7 @@ class OperationPause extends React.Component{
       return (
         <div className='gor-emergency-overlay'>
           <div className='gor-delete gor-modal-content gor-operation-stop'>
-            <span className="close" onClick={this.removeThisModal.bind(this)}>Ã—</span>
+            <span className="close" onClick={this.removeThisModal.bind(this)}>x—</span>
               <div className='gor-delete-text'>  
                 <div className='gor-alert-lg'></div>
                   <div className='gor-delete-line'>
