@@ -6,7 +6,6 @@ export  function downloadReportsReducer(state={},action){
 	switch (action.type) {
 	  
 	  case REPORTS_FETCH:
-	  	
 	    return Object.assign({}, state, {
 	    	reportsData:action.data,
 	    	hasDataChanged:!state.hasDataChanged,

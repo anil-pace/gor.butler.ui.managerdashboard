@@ -77,3 +77,5 @@ export const REPORTS_URL = API_URL+"/api-gateway/dashboard-service/platform-dash
 export const DOWNLOAD_REPORT = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/download/";
 export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/generate-report";
 export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
+export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
+export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
