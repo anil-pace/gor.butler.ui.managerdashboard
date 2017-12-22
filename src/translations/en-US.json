@@ -889,13 +889,13 @@
   {
     "id": "stringConfig.complete",
     "description": "Text to show Completed",
-    "defaultMessage": "Completed",
+    "defaultMessage": "completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
     "id": "stringConfig.completed",
     "description": "Text to show Completed",
-    "defaultMessage": "Completed",
+    "defaultMessage": "completed",
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
@@ -2174,7 +2174,7 @@
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "defaultMessage": "Enter SKU and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
