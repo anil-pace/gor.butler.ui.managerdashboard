@@ -1351,13 +1351,13 @@
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Invalid SKU",
+    "defaultMessage": "Please enter a valid SKU Number",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "audit.invalid.location",
     "description": "Text for invalid location ID",
-    "defaultMessage": "Invalid Location",
+    "defaultMessage": "Please enter a valid location Number",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1903,7 +1903,7 @@
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "CREATE AUDIT",
+    "defaultMessage": "Create New Task",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -2130,12 +2130,6 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.valid.location",
-    "description": "text for valid location",
-    "defaultMessage": "Location valid",
-    "filepath": "./src/containers/auditTab/createAudit.js"
-  },
-  {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
     "defaultMessage": "Please enter correct SKU number",
@@ -2150,37 +2144,37 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit",
+    "defaultMessage": "Create new audit task",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.select.sku.value",
-    "description": "Name of audit",
-    "defaultMessage": "Enter audit name:",
+    "id": "audit.add.subheading",
+    "description": "Subheading for add audit",
+    "defaultMessage": "Select and enter details below to create a new audit task",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.select.sku.mode",
-    "description": "Text for sku mode",
-    "defaultMessage": "Select mode of input:",
+    "id": "audit.add.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Select audit type by",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audits.enterSkus",
-    "description": "Button for entering skus",
-    "defaultMessage": "Enter SKU",
+    "id": "audit.add.typedetails.sku",
+    "description": "Text for sku",
+    "defaultMessage": "Audit by SKU code",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audits.csvUpload",
-    "description": "Button for csv upload",
-    "defaultMessage": "Upload CSV file",
+    "id": "audit.add.typedetails.location",
+    "description": "Text for location",
+    "defaultMessage": "Audit by Location code",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.sku.subheading",
-    "description": "Subtext for enter sku",
-    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2190,27 +2184,27 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audits.enterLocation",
-    "description": "Button for entering skus",
-    "defaultMessage": "Enter Location",
+    "id": "audit.dropdown.heading",
+    "description": "Text for dropdown heading",
+    "defaultMessage": "Choose Box Id (Optional)",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location and validate",
+    "defaultMessage": "Enter Location",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers",
+    "defaultMessage": "Format: (XXX.X.X.XX)",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audits.add.password.button",
     "description": "Text for add audit button",
-    "defaultMessage": "CREATE AUDIT",
+    "defaultMessage": "Create audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2222,7 +2216,7 @@
   {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Invalid SKU",
+    "defaultMessage": "Please enter correct SKU number",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2234,13 +2228,31 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit",
+    "defaultMessage": "Create new audit task",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
-    "id": "audit.select.sku.value",
-    "description": "Name of audit",
-    "defaultMessage": "Enter audit name:",
+    "id": "audit.add.subheading",
+    "description": "Subheading for add audit",
+    "defaultMessage": "Select and enter details below to create a new audit task",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Text for audit details heading",
+    "defaultMessage": "Select audit type by",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Text for sku",
+    "defaultMessage": "Audit by SKU code",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Text for location",
+    "defaultMessage": "Audit by Location code",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2252,13 +2264,19 @@
   {
     "id": "audits.enterSkus",
     "description": "Button for entering skus",
-    "defaultMessage": "Enter SKU",
+    "defaultMessage": "Enter SKUs",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
     "id": "audits.csvUpload",
     "description": "Button for csv upload",
-    "defaultMessage": "Upload CSV file",
+    "defaultMessage": "Upload .CSV",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Text for SKU heading",
+    "defaultMessage": "Enter SKU code",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2268,27 +2286,21 @@
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
-    "id": "audit.add.sku.subheading",
-    "description": "Subtext for enter sku",
-    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
-    "id": "audits.enterLocation",
-    "description": "Button for entering skus",
-    "defaultMessage": "Enter Location",
+    "id": "audit.dropdown.heading",
+    "description": "Text for dropdown heading",
+    "defaultMessage": "Choose Box Id (Optional)",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location and validate",
+    "defaultMessage": "Enter Location",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers",
+    "defaultMessage": "Format: (XXX.X.X.XX)",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2609,24 +2621,6 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
-    "id": "operationPause.sensor.latchGate",
-    "description": "Text for latch_gate sensor",
-    "defaultMessage": "Latch Gate",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
-  },
-  {
-    "id": "operationPause.sensor.buttonSensor",
-    "description": "Text for button_press sensor",
-    "defaultMessage": "Button",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
-  },
-  {
-    "id": "operationPause.sensor.lightCurtain",
-    "description": "Text for light_curtain sensor",
-    "defaultMessage": "Light Curtain",
-    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
-  },
-  {
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
@@ -2635,7 +2629,7 @@
   {
     "id": "operation.alert.pause.breach.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}.",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -2995,7 +2989,7 @@
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "CREATE AUDIT",
+    "defaultMessage": "Create New Task",
     "filepath": "./src/containers/newauditTab.js"
   },
   {
@@ -3982,7 +3976,7 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "storageSpace.report.tooltip",
+    "id": "storageSpace.genRep.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
@@ -3996,13 +3990,13 @@
   {
     "id": "storageSpace.table.downloadBtn",
     "description": "button label for download report",
-    "defaultMessage": "GENERATE REPORT",
+    "defaultMessage": "Generate Report",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
     "id": "storageSpace.table.slotType",
-    "description": "slot type",
-    "defaultMessage": "SLOT TYPE",
+    "description": "SLOT TYPE",
+    "defaultMessage": "slot type",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
@@ -5583,6 +5577,11 @@
     "filepath": "./src/containers/userTab/userFilter.js"
   },
   {
+    "id": "user.tokenfield.location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
     "id": "user.status.all",
     "defaultMessage": "Any",
     "filepath": "./src/containers/userTab/userFilter.js"
@@ -5630,6 +5629,26 @@
   {
     "id": "user.workmode.management",
     "defaultMessage": "Management",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "user.location.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "user.location.issueFound",
+    "defaultMessage": "Pick Put Station",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "user.location.rejected",
+    "defaultMessage": "QC Station",
+    "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "user.location.resolved",
+    "defaultMessage": "Head Office",
     "filepath": "./src/containers/userTab/userFilter.js"
   },
   {
