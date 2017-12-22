@@ -9,6 +9,7 @@ import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
+import {InputComponent} from '../../components/InputComponent/InputComponent.js'
 
 import ReactFileReader from 'react-file-reader';
 import FileDragAndDrop from 'react-file-drag-and-drop';
@@ -24,12 +25,17 @@ class CreateNewTask extends React.Component{
         confirmedSku: null,
         currentSku: "", 
         csvUploadStatus:false,
-        active: 0
+        active: 0,
+        arrGroup:[],
+        value:"",
+        userInput:[],
+        id:0
       };
       this.handleUploadCVSFile = this.handleUploadCVSFile.bind(this);
       this.handleDragAndDrop = this.handleDragAndDrop.bind(this);
       this.handleActiveTab = this.handleActiveTab.bind(this);
       this.displayUploadCSVFileContent = this.displayUploadCSVFileContent.bind(this);
+      this.updateInput=this.updateInput.bind(this);
       //this.parseCSVFile =  this.parseCSVFile.bind(this);
       //this.handleFiles = this.handleFiles.bind(this);
   }
@@ -43,7 +49,7 @@ class CreateNewTask extends React.Component{
 
     var initialSkuInfo={}, initialAttributes;
     var selectedList=[]; 
-    this.state={selected:selectedList}
+    this.state={selected:selectedList,userInput:[],arrGroup:[]}
     this.selectedList=[];
     this.noSkuValidation=true;
     this.props.validateSKU(initialSkuInfo);
@@ -142,7 +148,7 @@ class CreateNewTask extends React.Component{
   _validSku() {
     var initialAttributes;
     let urlData={
-         'url': SKU_VALIDATION_URL + this.skuId.value,
+         'url': SKU_VALIDATION_URL + this.state.arrGroup[0],
          'method':GET,
          'cause': VALIDATE_SKU_ID,
          'token': this.props.auth_token,
@@ -274,6 +280,77 @@ class CreateNewTask extends React.Component{
     }
   }
 
+  updateInput(id,event) {
+
+
+    let arrInput=[];
+    this.state.id=id;
+    if(event){
+      event.preventDefault();
+      let userInput = event.target.value.split(" ");
+      this.state.userInput=userInput;
+    /*this.setState({value:event.target.value,arrGroup:event.target.value.split(" ")},() => { 
+    for(let i=0;i<this.state.arrGroup.length;i++){
+    rows.push(<InputComponent2 key={i}  updateInput = {null} value={this.state.arrGroup[i]}/>);
+   }
+
+ })  */
+//Paste:
+if(userInput.length>1){
+
+  if(id===0){
+    arrInput=userInput;
+    this.state.arrGroup[0]=userInput[0];
+    
+  }
+  else{
+
+    arrInput[0]=this.state.arrGroup[0];
+    for(let i=1;i<id;i++){
+      arrInput.push(this.state.arrGroup[i]);
+    }
+    for(let i=id;i<id+userInput.length;i++){
+      arrInput.push(userInput[i-id]);
+    }
+  } 
+  
+}
+
+//For editing:
+else if(userInput.length===1){
+
+  //To make the first input field editable:
+  if(id===0){
+    for(var i=1;i<this.state.arrGroup.length;i++){
+      arrInput.push(this.state.arrGroup[i]);
+
+    }
+
+    this.state.arrGroup[0]=userInput[0];
+    arrInput=this.state.arrGroup;
+  }
+
+  else{
+
+   arrInput[0]=this.state.arrGroup[0];
+   for(var i=1;i<this.state.arrGroup.length;i++){
+    if(i===id){
+      arrInput.push(userInput[0]);
+    }
+    else{
+      arrInput.push(this.state.arrGroup[i]);
+    }
+  }
+
+}
+
+}
+this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
+
+}
+
+}
+
   render()
   {
       let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
@@ -286,6 +363,9 @@ class CreateNewTask extends React.Component{
       var csvUploadStatus = this.state.csvUploadStatus;
       let items = ["Upload CSV and validate", "Select attributes"];
       var self = this;
+      let userInput=this.state.userInput.slice(1);
+      let arrgroup=this.state.arrGroup.slice(1);
+      let me=this;
       
       return (
         <div>
@@ -387,18 +467,45 @@ class CreateNewTask extends React.Component{
             <div className='gor-usr-details'>
             <div style={{'display':this.props.auditType===LOCATION?'none':'block'}}>
              <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.sku.heading" description='Text for SKU heading' 
-            defaultMessage='Enter SKU code'/></div>
+            defaultMessage='Enter SKU and validate'/></div>
               <div className="gor-audit-input-wrap">
-                <input className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 46978072" id="skuid"  ref={node=> { this.skuId=node }} onChange={this._captureQuery.bind(this)}/>
-                <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
+              <InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} updateInput={this.updateInput} index={0}key={0}  value={this.state.value} />
+    <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
+
+   <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
               </div>
+               </div>
+    
+    <br />
+    {
+      userInput.length>1?
+      this.state.id===0?
+      arrgroup.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {me.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/></div><br /></div>;
+      }):arrgroup.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {me.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/></div><br /></div>;
+      })
+
+
+      :
+      this.state.id===0?
+      arrgroup.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {me.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/></div><br /></div>;
+      }):arrgroup.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {me.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/></div><br /></div>;
+     })
+
+    }
+   
               <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
                 <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
-              <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
-                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
-              </div>
+              
               {skuState===NO_ATTRIBUTE_SKU ?"":
                 <div className={"gor-searchDropdown-audit-wrap" + (skuState!==VALID_SKU || !confirmedSkuNotChanged?" gor-disable-content":"")}>
                   <div className='gor-usr-hdsm'><FormattedMessage id="audit.dropdown.heading" description='Text for dropdown heading' 

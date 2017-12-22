@@ -2013,7 +2013,7 @@ var messages = [
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "defaultMessage": "Enter SKU and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
