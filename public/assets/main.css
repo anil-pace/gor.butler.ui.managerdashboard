@@ -3484,14 +3484,32 @@ input[type="checkbox"] {
 
 .gor-auditCreate-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 125px;
+  width: 133px;
   height: 35px;
   font-size: 14px;
-  background: #4d5055;
-  color: #ffffff;
+  background: #FBFBFB;
+  color: #7C7C7C;
   border-radius: 3px;
-  margin-left: 30px;
+  margin-right: 10px;
   vertical-align: sub;
+  border-radius: 3px;
+  border: solid 1px #aaaaaa;
+  margin-top: 10px;
+}
+
+.gor-auditCreate-btn-active {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 133px;
+  height: 35px;
+  font-size: 14px;
+  background: #FBFBFB;
+  color: #2C94FD;
+  border-radius: 3px;
+  margin-right: 10px;
+  vertical-align: sub;
+  border-radius: 3px;
+  border: solid 1px #2C94FD;
+  margin-top: 10px;
 }
 
 .gor-audit-drag-drop-wrapper {
@@ -3543,19 +3561,44 @@ input[type="checkbox"] {
 
 ul {
   height: 50px;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
 }
 
 ul li {
   float: left;
-  width: 50%;
-  height: 50%;
+  width: 45%;
+  height: 40%;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 ul .active {
   color: black;
-  border-bottom: 5px solid blue;
+  border-top: 1px solid lightgrey;
+  border-bottom: 5px solid #2c94fd;
+}
+
+ul .inactive {
+  color: #DDDDDD;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+}
+
+ul .active_tab {
+  color: white;
+  background-color: #2c94fd;
+  border: solid 1px grey;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+ul .inactive_tab {
+  color: black;
+  border: solid 1px grey;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 ul .spanIndex {
@@ -3563,7 +3606,16 @@ ul .spanIndex {
   width: 10%;
   border-radius: 50%;
   color: white;
-  background: blue;
+  background-color: #2c94fd;
+  text-align: center;
+}
+
+ul .spanIndex_inactive {
+  display: inline-block;
+  width: 10%;
+  border-radius: 50%;
+  color: white;
+  background-color: #DDDDDD;
   text-align: center;
 }
 
@@ -3995,7 +4047,7 @@ ul li a {
 }
 
 .gor-modal-content .gor-usr-details {
-  width: 33%;
+  width: 40%;
   margin: auto;
   margin-top: 40px;
 }
@@ -5659,7 +5711,22 @@ button:disabled {
 
 .gor-audit-input-wrap {
   display: inline-block;
-  width: 42%;
+  width: 40%;
+  height: 35px;
+  border-radius: 3px;
+  border: solid 1px #aaaaaa;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin-top: 10px;
+}
+
+.gor-audit-inputlist-wrap {
+  background-color: #FBFBFB;
+}
+
+.gor-audit-name-wrap {
+  display: inline-block;
+  width: 60%;
   height: 35px;
   border-radius: 3px;
   border: solid 1px #aaaaaa;

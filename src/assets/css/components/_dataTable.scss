@@ -1691,14 +1691,32 @@ input[type="checkbox"]{
 
 .gor-auditCreate-btn{
     font-family:'Source Sans Pro Bold', sans-serif;
-    width:125px;
+    width:133px;
     height:35px;
     font-size:14px;
-    background:#4d5055;
-    color:#ffffff;
+    background:#FBFBFB;
+    color:#7C7C7C;
     border-radius:3px;
-    margin-left:30px;
+    margin-right:10px;
     vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #aaaaaa;
+    margin-top:10px;
+}
+
+.gor-auditCreate-btn-active{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:133px;
+    height:35px;
+    font-size:14px;
+    background:#FBFBFB;
+    color:#2C94FD;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #2C94FD;
+    margin-top:10px;
 }
 
 
@@ -1750,24 +1768,64 @@ input[type="checkbox"]{
 
 
 ul{
-  height: 50px;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
+height: 50px;
+  
   li {
     float: left;
-    width: 50%;
-    height: 50%;
+    width: 45%;
+    height: 40%;
+    text-align:center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
   }
   .active{
     color: black;
-    border-bottom: 5px solid blue;
+    border-top: 1px solid lightgrey;
+  
+    border-bottom: 5px solid #2c94fd;
+  
   }
+  .inactive{
+    color: #DDDDDD;
+    border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+
+  }
+  .active_tab{
+    color: white;
+    
+    background-color: #2c94fd;
+    border: solid 1px grey;
+    text-align:center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
+  }
+  .inactive_tab{
+    color: black;
+    border: solid 1px grey;
+    text-align:center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
+
+  }
+  
   .spanIndex{
     display: inline-block;
     width: 10%;
     border-radius: 50%;
     color: white;
-    background: blue;
+    background-color: #2c94fd;
+    text-align: center;
+  }
+  .spanIndex_inactive{
+    display: inline-block;
+    width: 10%;
+    border-radius: 50%;
+    color: white;
+    background-color: #DDDDDD;
     text-align: center;
   }
   li a {

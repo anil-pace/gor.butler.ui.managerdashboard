@@ -2144,7 +2144,7 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task",
+    "defaultMessage": "Create new audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2174,7 +2174,7 @@
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU and validate",
+    "defaultMessage": "Enter SKU code",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2228,31 +2228,13 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task",
+    "defaultMessage": "Create new audit",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
-    "id": "audit.add.subheading",
-    "description": "Subheading for add audit",
-    "defaultMessage": "Select and enter details below to create a new audit task",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
-    "id": "audit.add.auditdetails.heading",
-    "description": "Text for audit details heading",
-    "defaultMessage": "Select audit type by",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
-    "id": "audit.add.typedetails.sku",
-    "description": "Text for sku",
-    "defaultMessage": "Audit by SKU code",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
-    "id": "audit.add.typedetails.location",
-    "description": "Text for location",
-    "defaultMessage": "Audit by Location code",
+    "id": "audit.select.sku.value",
+    "description": "Name of audit",
+    "defaultMessage": "Enter audit name:",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2264,19 +2246,13 @@
   {
     "id": "audits.enterSkus",
     "description": "Button for entering skus",
-    "defaultMessage": "Enter SKUs",
+    "defaultMessage": "Enter SKU",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
     "id": "audits.csvUpload",
     "description": "Button for csv upload",
-    "defaultMessage": "Upload .CSV",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
-    "id": "audit.add.sku.heading",
-    "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "defaultMessage": "Upload CSV file",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2286,9 +2262,9 @@
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
-    "id": "audit.dropdown.heading",
-    "description": "Text for dropdown heading",
-    "defaultMessage": "Choose Box Id (Optional)",
+    "id": "audits.enterLocation",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter Location",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {

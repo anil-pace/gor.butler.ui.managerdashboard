@@ -1983,7 +1983,7 @@ var messages = [
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task",
+    "defaultMessage": "Create new audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

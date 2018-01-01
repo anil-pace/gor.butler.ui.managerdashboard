@@ -197,7 +197,7 @@ class CreateAudit extends React.Component{
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
               <div className='gor-usr-add'><FormattedMessage id="audit.add.heading" description='Heading for add audit' 
-            defaultMessage='Create new audit task'/>
+            defaultMessage='Create new audit'/>
                           <div className='gor-sub-head'><FormattedMessage id="audit.add.subheading" description='Subheading for add audit' 
             defaultMessage='Select and enter details below to create a new audit task'/></div>
               </div>
