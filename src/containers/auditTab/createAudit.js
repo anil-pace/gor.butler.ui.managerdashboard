@@ -890,7 +890,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Create new audit'/>
                           
               </div>
-              <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
+              <span className="close" onClick={this._removeThisModal.bind(this)}>Ã—</span>
             </div>
             <div className='gor-modal-body'>
             
