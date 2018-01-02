@@ -5,6 +5,7 @@
  *
  */
 import { addLocaleData } from 'react-intl';
+//import {Require} from "webpack-runtime-require";
 import enLocaleData from 'react-intl/locale-data/en'; //english
 import jaLocaleData from 'react-intl/locale-data/ja'; //japanes
 import zhLocaleData from 'react-intl/locale-data/zh'; //chinese
@@ -32,7 +33,13 @@ addLocaleData([...enLocaleData,
               ...esTranslationMessages,
               ...zhTranslationMessages
 	]);
-
+var translatedMessages = (function(){
+  var enTranslationMessages,jaTranslationMessages,
+  deTranslationMessages,frTranslationMessages,esTranslationMessages,zhTranslationMessages;
+  //var req = require.context("../translations", false, /json$/);
+    //var a = Require('../translations/en-US.json');
+    //req.resolve('en-US.json');
+}())
 export const formatTranslationMessages=(messages)=> {
   const formattedMessages={};
   for (const message of messages) {
