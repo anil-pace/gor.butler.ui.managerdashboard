@@ -2519,6 +2519,24 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
+    "id": "operationPause.sensor.latchGate",
+    "description": "Text for latch_gate sensor",
+    "defaultMessage": "Latch Gate",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.buttonSensor",
+    "description": "Text for button_press sensor",
+    "defaultMessage": "Button",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.lightCurtain",
+    "description": "Text for light_curtain sensor",
+    "defaultMessage": "Light Curtain",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
@@ -3778,25 +3796,7 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "storageSpace.page.twentyfive",
-    "description": "Page size 25",
-    "defaultMessage": "25",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.page.fifty",
-    "description": "Page size 50",
-    "defaultMessage": "50",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.page.hundred",
-    "description": "Page size 100",
-    "defaultMessage": "100",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.genRep.tooltip",
+    "id": "storageSpace.report.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"

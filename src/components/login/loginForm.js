@@ -8,6 +8,9 @@ import {LOGIN_URL} from '../../constants/configConstants';
 import { FormattedMessage } from 'react-intl';
 import { emptyField } from '../../utilities/fieldCheck';
 
+/*Delete the import once completed*/
+import {SelectAttributes} from '../gor-select-attributes/selectAttributes'
+
 class LoginForm extends React.Component{
 	 constructor(props) 
 	 {
@@ -107,7 +110,11 @@ class LoginForm extends React.Component{
                         <input className='field' onInput={this._typing.bind(this,2)} onBlur={this._checkPass.bind(this)} type="password" id="password" 
                         placeholder={this.props.intlMessages["login.form.password"]}
                          ref={node=> { this.password=node }}/>
+                <section>
+                <SelectAttributes/>
+                </section>
                 </div>
+
                 </section>
                 {this.props.passWordCheck?(this.props.passWordCheck.type=== ERROR?(
                     <div className='gor-login-usr-error' >
@@ -118,6 +125,7 @@ class LoginForm extends React.Component{
                 <section>
                     <input type="submit" className='gor-login-btn'  value={this.props.intlMessages["login.form.button"]} /><br />
                 </section>
+                
                 </div>
                 </form>
 		);

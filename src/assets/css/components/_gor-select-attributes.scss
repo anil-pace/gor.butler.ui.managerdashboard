@@ -1,0 +1,96 @@
+.gor-sel-att-wrap{
+	position:relative;
+	.gor-sel-att-pholder-text{
+		display:inline-block;
+		width:80%
+	}
+	.gor-sel-att-arr-cont{
+		display:inline-block;
+		width:20%;
+		text-align:right;
+	}
+	.gor-sel-att-arr{
+    	display: inline-block;
+    	width:10px;
+    	height:10px;
+		&.down{
+			background-position: 0 -108px ;
+		}
+		&.up{
+			background-position: 0 -108px ;
+		}
+	}
+	.gor-sel-att-drop{
+		position:absolute;
+		top:-130px;
+		background:#fff;
+		width:100%;
+		&.hide-drop{
+			display:none;
+		}
+	}
+	.gor-sel-att-content{
+		border-radius: 3px;
+    	box-shadow: 0px 0px 1px 1px #A2A2A2;
+    	min-height: 30vw;
+		.gor-sel-att-add{
+			padding: 15px;
+		}
+		.text-cont{
+			width: 65%;
+		    margin: auto;
+		    padding: 30% 0 30% 0;
+		    text-align: center;
+		    a{
+		    	text-decoration: none;
+			    color: #4699F9;
+			    font-size: 16px;
+		    }
+		}
+		.footer{
+			text-align: center;
+		    width: 65%;
+		    margin: auto;
+		    p{
+		    	font-size: 12px;
+    			color: #B7B7B7;
+		    }
+		}
+		.attribute-list{
+			min-height:25vw;
+		}
+	}
+	.hide{
+		display:none;
+	}
+	.show{
+		display:block;
+	}
+	
+	.gor-sel-att-head{
+		background: #F0F0F0;
+	    overflow: hidden;
+	    padding: 15px 10px;
+	    border-bottom: 1px solid #A2A2A2;
+		.gor-sel-att-back{
+			float:left;
+			a{
+				text-decoration: none;
+				color:#696969;
+			}
+		}
+		.gor-sel-att-clear{
+			float:right;
+			a{
+				text-decoration: none;
+				color:#499AF7;
+			}
+		}
+	}
+	.gor-sel-atts{
+		clear:both;
+		padding:15px 10px;
+	}
+	
+	
+}
