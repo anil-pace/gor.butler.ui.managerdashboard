@@ -11,9 +11,6 @@ import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js'
 
-import ReactFileReader from 'react-file-reader';
-import FileDragAndDrop from 'react-file-drag-and-drop';
-
 
 class CreateNewTask extends React.Component{
   constructor(props) 
@@ -32,10 +29,13 @@ class CreateNewTask extends React.Component{
         id:0
       };
       this.handleUploadCVSFile = this.handleUploadCVSFile.bind(this);
-      this.handleDragAndDrop = this.handleDragAndDrop.bind(this);
+      //this.handleDragAndDrop = this.handleDragAndDrop.bind(this);
       this.handleActiveTab = this.handleActiveTab.bind(this);
       this.displayUploadCSVFileContent = this.displayUploadCSVFileContent.bind(this);
       this.updateInput=this.updateInput.bind(this);
+      this.dropHandler= this.dropHandler.bind(this);
+      this.dragOverHandler= this.dragOverHandler.bind(this);
+      this.dragEndHandler= this.dragEndHandler.bind(this);
       //this.parseCSVFile =  this.parseCSVFile.bind(this);
       //this.handleFiles = this.handleFiles.bind(this);
   }
@@ -126,10 +126,10 @@ class CreateNewTask extends React.Component{
      });
   }
 
-  handleDragAndDrop(dataTransfer){
-    var file = dataTransfer.files[0];
-    this.parseCSVFile(file);
-  }
+  // handleDragAndDrop(dataTransfer){
+  //   var file = dataTransfer.files[0];
+  //   this.parseCSVFile(file);
+  // }
 
 //handleFiles = (files) => {
   // console.log(files.base64);
@@ -144,6 +144,50 @@ class CreateNewTask extends React.Component{
   //   reader.readAsText(files);
   // alert(reader.result);
 //}
+
+  dropHandler(event){
+    console.log("Coming inside Drop Handler Function =============>");
+    event.preventDefault();
+    // If dropped items aren't files, reject them
+    var dt = event.dataTransfer;
+    if (dt.items) {
+      // Use DataTransferItemList interface to access the file(s)
+      for (var i=0; i < dt.items.length; i++) {
+        if (dt.items[i].kind == "file") {
+          var fileName = dt.items[i].getAsFile();
+          this.parseCSVFile(fileName);
+        }
+      }
+    } else {
+      // Use DataTransfer interface to access the file(s)
+      for (var i=0; i < dt.files.length; i++) {
+        console.log("... file[" + i + "].name = " + dt.files[i].name);
+        var fileName = dt.files[i].name;
+        this.parseCSVFile(fileName);
+      }  
+    }
+  }
+
+  dragOverHandler(event){
+      console.log("dragOver");
+        // Prevent default select and drag behavior
+      event.preventDefault();
+    }
+
+    dragEndHandler(event){
+      console.log("dragEnd");
+    // Remove all of the drag data
+    var dt = event.dataTransfer;
+    if (dt.items) {
+      // Use DataTransferItemList interface to remove the drag data
+      for (var i = 0; i < dt.items.length; i++) {
+        dt.items.remove(i);
+      }
+    } else {
+      // Use DataTransfer interface to remove the drag data
+      event.dataTransfer.clearData();
+    }
+  }
 
   _validSku() {
     var initialAttributes;
@@ -361,6 +405,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
       var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
       var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
       var csvUploadStatus = this.state.csvUploadStatus;
+      let auditByList = ["Audit by SKU", "Audit by Location"];
       let items = ["Upload CSV and validate", "Select attributes"];
       var self = this;
       let userInput=this.state.userInput.slice(1);
@@ -443,11 +488,16 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
             <div className='gor-usr-details'>
               <div className='gor-audit-drag-drop-wrapper'>
                 <div className='gor-audit-drag-drop-content'> 
-                  <FileDragAndDrop onDrop={this.handleDragAndDrop}>
+                  <div id="drop-zone" onDrop={this.dropHandler} onDragOver={this.dragOverHandler} onDragEnd={this.dragEndHandler}>
                     <p style={{border: "1px solid grey"}}> Image here </p>
                     <p> Drag and drop </p>
                     <p> OR </p>
-                  </FileDragAndDrop>
+                  </div>
+                  {/*<FileDragAndDrop onDrop={this.handleDragAndDrop}>
+                    <p style={{border: "1px solid grey"}}> Image here </p>
+                    <p> Drag and drop </p>
+                    <p> OR </p>
+                  </FileDragAndDrop>*/}
                 </div>
                 <div className='gor-audit-upload-file'>
                     <a href="#"> Upload .CSV file </a>
