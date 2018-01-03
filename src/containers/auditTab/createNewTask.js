@@ -10,7 +10,7 @@ import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
-import ReactFileReader from 'react-file-reader';
+//import ReactFileReader from 'react-file-reader';
 import FileDragAndDrop from 'react-file-drag-and-drop';
 
 
