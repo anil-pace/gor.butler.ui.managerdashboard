@@ -99,6 +99,9 @@ function mapDispatchToProps(dispatch) {
         },
         updateOverviewProps: function (data) {
             dispatch(overviewRefreshed(data))
+        },
+        wsOrdersHeaderUnSubscribe:function(data){
+             dispatch(wsOrdersHeaderUnSubscribe(data))
         }
     }
 };

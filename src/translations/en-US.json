@@ -2603,6 +2603,24 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
+    "id": "operationPause.sensor.latchGate",
+    "description": "Text for latch_gate sensor",
+    "defaultMessage": "Latch Gate",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.buttonSensor",
+    "description": "Text for button_press sensor",
+    "defaultMessage": "Button",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.lightCurtain",
+    "description": "Text for light_curtain sensor",
+    "defaultMessage": "Light Curtain",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
@@ -2611,7 +2629,7 @@
   {
     "id": "operation.alert.pause.breach.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -3958,7 +3976,7 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "storageSpace.genRep.tooltip",
+    "id": "storageSpace.report.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
