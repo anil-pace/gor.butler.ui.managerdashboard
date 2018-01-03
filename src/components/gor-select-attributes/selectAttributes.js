@@ -52,11 +52,11 @@ export class SelectAttributes extends React.Component {
         selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
         selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
 
-        this.setState({
+        /*this.setState({
             selectedAttributes:[],
             selectionApplied:true,
             selectedSets
-        })
+        })*/
     }
 
     render() {
@@ -87,7 +87,7 @@ export class SelectAttributes extends React.Component {
                 <div className="values">
                     {row.attributeList.map((attr, index) => (
                         <div key={index}>
-                            <span><input type="checkbox" onClick={_this._selectAttribute.call(_this,row.category_value,attr.attributeValue)}/></span>
+                            <span><input type="checkbox" defaultChecked={this.state.chkbox} onClick={_this._selectAttribute.bind(_this,row.category_value,attr.attributeValue)}/></span>
                             <span>{attr.attributeText}</span>
                         </div>
 
