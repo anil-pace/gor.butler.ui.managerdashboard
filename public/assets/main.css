@@ -3497,6 +3497,21 @@ input[type="checkbox"] {
   margin-top: 10px;
 }
 
+.gor-auditValidate-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 133px;
+  height: 35px;
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 10px;
+  vertical-align: sub;
+  border-radius: 3px;
+  border: solid 1px #aaaaaa;
+  margin-top: 10px;
+}
+
 .gor-auditCreate-btn-active {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: 133px;
@@ -3512,61 +3527,15 @@ input[type="checkbox"] {
   margin-top: 10px;
 }
 
-.gor-audit-drag-drop-wrapper {
-  border: 1px dashed grey;
-  cursor: pointer;
-  height: 120px;
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.gor-audit-drag-drop-wrapper p {
-  line-height: 1.5em;
-}
-
-.gor-audit-drag-drop-content {
-  position: relative;
-  z-index: 999;
-  cursor: pointer;
-  height: 75%;
-  text-align: center;
-  border: 1px solid grey;
-}
-
-.gor-audit-upload-file {
-  position: relative;
-  cursor: pointer;
-}
-
-.gor-audit-csv-upload-error-wrapper {
-  width: 33%;
-  margin: auto;
-  color: white;
-  background: red;
-  line-height: 25px;
-  padding-left: 15px;
-}
-
-#uploadCSVFile {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-ul {
-  height: 50px;
+ul.tabs-audit {
+  overflow: hidden;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
 }
 
 ul li {
   float: left;
   width: 45%;
-  height: 40%;
   text-align: center;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -3574,14 +3543,14 @@ ul li {
 
 ul .active {
   color: black;
-  border-top: 1px solid lightgrey;
   border-bottom: 5px solid #2c94fd;
+  box-sizing: border-box;
+  margin-top: 10px;
 }
 
 ul .inactive {
   color: #DDDDDD;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
+  margin-top: 10px;
 }
 
 ul .active_tab {
@@ -3603,7 +3572,8 @@ ul .inactive_tab {
 
 ul .spanIndex {
   display: inline-block;
-  width: 10%;
+  width: 15px;
+  padding: 3px;
   border-radius: 50%;
   color: white;
   background-color: #2c94fd;
@@ -3612,7 +3582,8 @@ ul .spanIndex {
 
 ul .spanIndex_inactive {
   display: inline-block;
-  width: 10%;
+  width: 15px;
+  padding: 3px;
   border-radius: 50%;
   color: white;
   background-color: #DDDDDD;
@@ -4009,6 +3980,16 @@ ul li a {
   width: 75%;
 }
 
+.gor-modal-content .gor-sub-head-audit-input {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 12px;
+  color: #7E7C7C;
+  margin-top: 0.625rem;
+  padding-top: 0.9375rem;
+  width: 40%;
+  margin-left: 0.625rem;
+}
+
 .gor-modal-content .gor-modal-head {
   position: relative;
   font-family: 'Source Sans Pro Regular', sans-serif;
@@ -4071,6 +4052,7 @@ ul li a {
   font-size: 14px;
   color: #000000;
   margin-top: 25px;
+  display: inline-block;
 }
 
 .gor-modal-content .gor-usr-details .gor-usr-fdlg {
@@ -5686,21 +5668,79 @@ button:disabled {
   padding-top: 30px;
 }
 
-.gor-sku-validation-btn-wrap {
+.gor-audit-create .gor-sku-validation-btn-wrap {
   display: inline-block;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
-.gor-searchDropdown-audit-wrap {
+.gor-audit-create .gor-audit-drag-drop-wrapper {
+  border: 1px dashed grey;
+  cursor: pointer;
+  overflow: hidden;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gor-audit-create .gor-audit-drag-drop-wrapper p {
+  line-height: 1.5em;
+}
+
+.gor-audit-create .gor-audit-drag-drop-content {
+  position: relative;
+  z-index: 999;
+  cursor: pointer;
+  height: 75%;
+  text-align: center;
+  border: 1px solid grey;
+}
+
+.gor-audit-create .gor-audit-upload-file {
+  position: relative;
+  cursor: pointer;
+}
+
+.gor-audit-create .gor-audit-csv-upload-error-wrapper {
+  width: 33%;
+  margin: auto;
+  color: white;
+  background: red;
+  line-height: 25px;
+  padding-left: 15px;
+}
+
+.gor-audit-create #uploadCSVFile {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.gor-audit-create .gor-searchDropdown-audit-wrap {
   width: 44.5%;
   padding-top: 20px;
 }
 
-.gor-disable-content {
+.gor-audit-create .gor-disable-content {
   pointer-events: none;
   opacity: 0.4;
 }
 
-.spinnerImage {
+.gor-audit-create .gor-disable-content-audit-validate {
+  pointer-events: none;
+  opacity: 0.4;
+  background-color: grey;
+  color: white;
+}
+
+.gor-audit-create .spinnerImage {
   background-image: url(images/whiteSpinner.svg);
   width: 30px;
   height: 30px;
@@ -5709,7 +5749,7 @@ button:disabled {
   margin-right: auto;
 }
 
-.gor-audit-input-wrap {
+.gor-audit-create .gor-audit-input-wrap {
   display: inline-block;
   width: 40%;
   height: 35px;
@@ -5718,13 +5758,15 @@ button:disabled {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   margin-top: 10px;
+  margin-left: 10px;
 }
 
-.gor-audit-inputlist-wrap {
+.gor-audit-create .gor-audit-inputlist-wrap {
   background-color: #FBFBFB;
+  padding-bottom: 10px;
 }
 
-.gor-audit-name-wrap {
+.gor-audit-create .gor-audit-name-wrap {
   display: inline-block;
   width: 60%;
   height: 35px;
@@ -5736,7 +5778,7 @@ button:disabled {
   margin-top: 10px;
 }
 
-.gor-audit-input {
+.gor-audit-create .gor-audit-input {
   text-align: left;
   width: 80%;
   background-color: #FFFFFF;
@@ -5744,13 +5786,13 @@ button:disabled {
   height: 93%;
 }
 
-.gor-sku-error {
+.gor-audit-create .gor-sku-error {
   color: #EC1C24;
   padding-top: 10px;
   font-size: 15px;
 }
 
-.gor-sku-valid {
+.gor-audit-create .gor-sku-valid {
   color: #00a54f;
   padding-top: 10px;
 }

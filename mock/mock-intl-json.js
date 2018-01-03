@@ -2041,6 +2041,12 @@ var messages = [
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for copy paste sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audits.add.password.button",
     "description": "Text for add audit button",
     "defaultMessage": "Create audit",
