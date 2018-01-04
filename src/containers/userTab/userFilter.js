@@ -88,10 +88,7 @@ class UserFilter extends React.Component {
             value: "WORK MODE",
             label: <FormattedMessage id="user.tokenfield.mode" defaultMessage="WORK MODE"/>
         };
-        let tokenLocation={
-            value: "LOCATION",
-            label: <FormattedMessage id="user.tokenfield.location" defaultMessage="LOCATION"/>
-        };
+        
         const labelC1=[
             {value: 'all', label: <FormattedMessage id="user.status.all" defaultMessage="Any"/>},
             {value: 'online', label: <FormattedMessage id="user.status.online" defaultMessage="Online"/>},
@@ -109,16 +106,7 @@ class UserFilter extends React.Component {
             {value: 'management', label: <FormattedMessage id="user.workmode.management" defaultMessage="Management"/>}
         ];
 
-        const labelC4=[
-            {value: 'all', label: <FormattedMessage id="user.location.all" defaultMessage="Any"/>},
-            {
-                value: 'pickputstation',
-                label: <FormattedMessage id="user.location.issueFound" defaultMessage="Pick Put Station"/>
-            },
-            {value: 'qcstation', label: <FormattedMessage id="user.location.rejected" defaultMessage="QC Station"/>},
-            {value: 'headoffice', label: <FormattedMessage id="user.location.resolved" defaultMessage="Head Office"/>}
-        ];
-
+        
         let selectedToken=this.state.tokenSelected;
         let column1=<FilterTokenWrap field={tokenStatus} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC1} selectedToken={selectedToken}/>;
@@ -126,10 +114,9 @@ class UserFilter extends React.Component {
                                        label={labelC2} selectedToken={selectedToken}/>;
         let column3=<FilterTokenWrap field={tokenWorkMode} tokenCallBack={this._handelTokenClick.bind(this)}
                                        label={labelC3} selectedToken={selectedToken}/>;
-        let column4=<FilterTokenWrap field={tokenLocation} tokenCallBack={this._handelTokenClick.bind(this)}
-                                       label={labelC4} selectedToken={selectedToken}/>;
+        
 
-        let columnDetail={column1token: column1, column2token: column2, column3token: column3, column4token: column4};
+        let columnDetail={column1token: column1, column2token: column2, column3token: column3};
         return columnDetail;
     }
 
@@ -247,9 +234,7 @@ class UserFilter extends React.Component {
                             <div className="gor-filter-body-filterToken-section1">
                                 {userFilterToken.column3token}
                             </div>
-                            <div className="gor-filter-body-filterToken-section1">
-                                {userFilterToken.column4token}
-                            </div>
+                            
                             
 
                          </div>
