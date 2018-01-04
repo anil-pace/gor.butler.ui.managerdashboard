@@ -4,5 +4,6 @@
 /public/
 /coverage/
 /jest/
+/__test__/
 *configConstants*
 *.*~
