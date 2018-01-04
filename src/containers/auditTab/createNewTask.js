@@ -24,25 +24,44 @@ class CreateNewTask extends React.Component{
         confirmedSku: null,
         currentSku: "", 
         csvUploadStatus:false,
+        csvUploadStatusLocation:false,
         active: 0,
+        activeLocation: 0,
         activeSku: true,
         activeCSV: false,
+        activeCSVLocation:false,
         active_sku:0,
         active_tab: 0,
         arrGroupCsv:[],
+        arrGroupCsvLocation:[],
         arrGroup:[],
+        arrGroupLocation:[],
         value:"",
         valueCsv:"",
+        valueLocation:"",
+        valueCsvLocation:"",
         userInput:[],
+        userInputLocation:[],
+        userInputCSV:[],
+        userInputCSVLocation:[],
         id:0,
-        csvUploaded:false
+        id_location:0,
+        id_csv:0,
+        id_csv_location:0,
+        csvUploaded:false,
+        csvUploadedLocation:false
       };
       this.handleUploadCVSFile = this.handleUploadCVSFile.bind(this);
+      this.handleUploadCVSFileLocation = this.handleUploadCVSFileLocation.bind(this);
       this.handleDragAndDrop = this.handleDragAndDrop.bind(this);
       this.handleActiveTab = this.handleActiveTab.bind(this);
+      this.handleActiveTabLocation = this.handleActiveTabLocation.bind(this);
       this.displayUploadCSVFileContent = this.displayUploadCSVFileContent.bind(this);
+      this.displayUploadCSVFileContentLocation = this.displayUploadCSVFileContentLocation.bind(this);
       this.displayEnterSku = this.displayEnterSku.bind(this);
+      this.displayEnterLocation = this.displayEnterLocation.bind(this);
       this.updateInput=this.updateInput.bind(this);
+      this.updateInputLocation=this.updateInputLocation.bind(this);
       this._checkType = this._checkType.bind(this);
       //this.parseCSVFile =  this.parseCSVFile.bind(this);
       //this.handleFiles = this.handleFiles.bind(this);
@@ -57,7 +76,7 @@ class CreateNewTask extends React.Component{
 
     var initialSkuInfo={}, initialAttributes;
     var selectedList=[]; 
-    this.state={selected:selectedList,userInput:[],arrGroup:[],arrGroupCsv:[],csvUploaded:false}
+    this.state={selected:selectedList,userInput:[],userInputLocation:[],userInputCSV:[],userInputCSVLocation:[], arrGroup:[],arrGroupLocation:[],arrGroupCsv:[], arrGroupCsvLocation:[],csvUploaded:false,csvUploadedLocation:false}
     this.selectedList=[];
     this.noSkuValidation=true;
     this.props.validateSKU(initialSkuInfo);
@@ -85,19 +104,52 @@ class CreateNewTask extends React.Component{
     })
   }
 
+  handleActiveTabLocation(index){
+    this.setState({
+      activeLocation : index,
+      active_location:index
+
+    })
+
+  }
+
+
+
   displayUploadCSVFileContent(){
     this.setState({
       active: 0,
       activeSku:false,
-      activeCSV:true
+      activeCSV:true,
+
     })
 
   }
+
+  displayUploadCSVFileContentLocation(){
+    this.setState({
+      activeLocation:0,
+      activeCSVLocation:true,
+      activeSkuLocation:false
+
+
+    })
+
+
+  }
+
   displayEnterSku(){
     this.setState({
       activeSku: true,
       activeCSV:false,
       active_sku:0
+    })
+  }
+
+  displayEnterLocation(){
+    this.setState({
+      activeSkuLocation:true,
+      activeCSVLocation:false,
+      active_location:0
     })
   }
 
@@ -139,7 +191,7 @@ class CreateNewTask extends React.Component{
 
            xyz.push(reader.result.split("\n"));
            
-            me.setState({arrGroupCsv:xyz[0],valueCsv:me.state.arrGroupCsv[0],csvUploaded:true});
+            me.setState({arrGroupCsv:xyz[0],valueCsv:xyz[0][0],csvUploaded:true});
            
            displayCSVFile.innerText = reader.result;
            console.log("==========================================>");
@@ -154,6 +206,38 @@ class CreateNewTask extends React.Component{
      });
   }
 
+  handleUploadCVSFileLocation(evt){
+    console.log("parseCSV Fiel gettign called =================>");
+    let arrInput=[];
+    let me=this
+    var files = evt.target.files;
+    var fileInput = document.getElementById('uploadCSVFile');
+    var displayCSVFile = document.getElementById('displayCSVFile');
+     fileInput.addEventListener('change', function(e) {
+        var file = fileInput.files[0];
+       var textType = /text.*/;
+       if (file.type.match(textType)) {
+         var reader = new FileReader();
+
+         reader.onload = function(e) {
+           let xyz = [];
+
+           xyz.push(reader.result.split("\n"));
+           
+            me.setState({arrGroupCsvLocation:xyz[0],valueCsvLocation:xyz[0][0],csvUploadedLocation:true});
+           
+           displayCSVFile.innerText = reader.result;
+           console.log("==========================================>");
+           console.log(me.state.arrGroupCsvLocation[0]);
+           console.log(me.state.csvUploadedLocation);
+
+         }
+         reader.readAsText(file);  
+       } else {
+         console.log("=============File not supported!");
+       }
+     });
+  }
 
 
   handleDragAndDrop(dataTransfer){
@@ -318,11 +402,11 @@ class CreateNewTask extends React.Component{
 
 
     let arrInput=[];
-    this.state.id=id;
+    this.setState({id:id});
     if(event){
       event.preventDefault();
       let userInput = event.target.value.split(" ");
-      this.state.userInput=userInput;
+      this.setState({userInput:userInput});
     /*this.setState({value:event.target.value,arrGroup:event.target.value.split(" ")},() => { 
     for(let i=0;i<this.state.arrGroup.length;i++){
     rows.push(<InputComponent2 key={i}  updateInput = {null} value={this.state.arrGroup[i]}/>);
@@ -385,22 +469,241 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
 
 }
 
+ updateInputLocation(id,event) {
+
+
+    let arrInput=[];
+    this.setState({id_location:id});
+    if(event){
+      event.preventDefault();
+      let userInput = event.target.value.split(" ");
+      this.setState({userInputLocation:userInput});
+    
+
+if(userInput.length>1){
+
+  if(id===0){
+    arrInput=userInput;
+    this.state.arrGroupLocation[0]=userInput[0];
+    
+  }
+  else{
+
+    arrInput[0]=this.state.arrGroupLocation[0];
+    for(let i=1;i<id;i++){
+      arrInput.push(this.state.arrGroupLocation[i]);
+    }
+    for(let i=id;i<id+userInput.length;i++){
+      arrInput.push(userInput[i-id]);
+    }
+  } 
+  
+}
+
+
+else if(userInput.length===1){
+
+  //To make the first input field editable:
+  if(id===0){
+    for(var i=1;i<this.state.arrGroupLocation.length;i++){
+      arrInput.push(this.state.arrGroupLocation[i]);
+
+    }
+
+    this.state.arrGroupLocation[0]=userInput[0];
+    arrInput=this.state.arrGroupLocation;
+  }
+
+  else{
+
+   arrInput[0]=this.state.arrGroupLocation[0];
+   for(var i=1;i<this.state.arrGroupLocation.length;i++){
+    if(i===id){
+      arrInput.push(userInput[0]);
+    }
+    else{
+      arrInput.push(this.state.arrGroupLocation[i]);
+    }
+  }
+
+}
+
+}
+this.setState({arrGroupLocation:arrInput,valueLocation:this.state.arrGroupLocation[0]});
+
+}
+
+}
+
+updateInputCSV(id,event) {
+
+
+    let arrInput=[];
+    
+    this.setState({id_csv:id});
+    if(event){
+      event.preventDefault();
+      let userInput = event.target.value.split(" ");
+      this.setState({userInputCSV:userInput});
+    /*this.setState({value:event.target.value,arrGroup:event.target.value.split(" ")},() => { 
+    for(let i=0;i<this.state.arrGroup.length;i++){
+    rows.push(<InputComponent2 key={i}  updateInput = {null} value={this.state.arrGroup[i]}/>);
+   }
+
+ })  */
+//Paste:
+if(userInput.length>1){
+
+  if(id===0){
+    arrInput=userInput;
+    this.state.arrGroupCsv[0]=userInput[0];
+    
+  }
+  else{
+
+    arrInput[0]=this.state.arrGroupCsv[0];
+    for(let i=1;i<id;i++){
+      arrInput.push(this.state.arrGroupCsv[i]);
+    }
+    for(let i=id;i<id+userInput.length;i++){
+      arrInput.push(userInput[i-id]);
+    }
+  } 
+  
+}
+
+//For editing:
+else if(userInput.length===1){
+
+  //To make the first input field editable:
+  if(id===0){
+    for(var i=1;i<this.state.arrGroupCsv.length;i++){
+      arrInput.push(this.state.arrGroupCsv[i]);
+
+    }
+
+    this.state.arrGroupCsv[0]=userInput[0];
+    arrInput=this.state.arrGroupCsv;
+  }
+
+  else{
+
+   arrInput[0]=this.state.arrGroupCsv[0];
+   for(var i=1;i<this.state.arrGroupCsv.length;i++){
+    if(i===id){
+      arrInput.push(userInput[0]);
+    }
+    else{
+      arrInput.push(this.state.arrGroupCsv[i]);
+    }
+  }
+
+}
+
+}
+this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
+
+}
+
+}
+
+updateInputCSVLocation(id,event) {
+
+
+    let arrInput=[];
+    
+    this.setState({id_csv_location:id});
+    if(event){
+      event.preventDefault();
+      let userInput = event.target.value.split(" ");
+      this.setState({userInputCSVLocation:userInput});
+    
+
+if(userInput.length>1){
+
+  if(id===0){
+    arrInput=userInput;
+    this.state.arrGroupCsvLocation[0]=userInput[0];
+    
+  }
+  else{
+
+    arrInput[0]=this.state.arrGroupCsvLocation[0];
+    for(let i=1;i<id;i++){
+      arrInput.push(this.state.arrGroupCsvLocation[i]);
+    }
+    for(let i=id;i<id+userInput.length;i++){
+      arrInput.push(userInput[i-id]);
+    }
+  } 
+  
+}
+
+//For editing:
+else if(userInput.length===1){
+
+  //To make the first input field editable:
+  if(id===0){
+    for(var i=1;i<this.state.arrGroupCsvLocation.length;i++){
+      arrInput.push(this.state.arrGroupCsvLocation[i]);
+
+    }
+
+    this.state.arrGroupCsvLocation[0]=userInput[0];
+    arrInput=this.state.arrGroupCsvLocation;
+  }
+
+  else{
+
+   arrInput[0]=this.state.arrGroupCsvLocation[0];
+   for(var i=1;i<this.state.arrGroupCsvLocation.length;i++){
+    if(i===id){
+      arrInput.push(userInput[0]);
+    }
+    else{
+      arrInput.push(this.state.arrGroupCsvLocation[i]);
+    }
+  }
+
+}
+
+}
+this.setState({arrGroupCsvLocation:arrInput,valueCsvLocation:this.state.arrGroupCsvLocation[0]});
+
+}
+
+}
+
   render()
   {
       let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
-      let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Invalid SKU'/>;
       let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       var processedSkuResponse=this._processSkuAttributes();
       var skuState=this._claculateSkuState(processedSkuResponse);
       var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
       var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
       var csvUploadStatus = this.state.csvUploadStatus;
+      var csvUploadStatusLocation = this.state.csvUploadStatusLocation;
       let items = ["Upload CSV and validate", "Select attributes"];
       let items2 = ["Audit by SKU","Audit by Location"];
       let items3 = ["Enter SKU and validate","Select attributes"];
-      let userInput=this.state.userInput.slice(1);
-      let arrgroup=this.state.arrGroup.slice(1);
-      let arrGroupCsv=this.state.arrGroupCsv;
+      let userInput=JSON.parse(JSON.stringify(this.state.userInput))
+      userInput=userInput.slice(1);
+      let userInputLocation=JSON.parse(JSON.stringify(this.state.userInputLocation))
+      userInputLocation=userInputLocation.slice(1);
+      let userInputCSV=JSON.parse(JSON.stringify(this.state.userInputCSV))
+      userInputCSV=userInputCSV.slice(1);
+      let userInputCSVLocation=JSON.parse(JSON.stringify(this.state.userInputCSVLocation));
+      userInputCSVLocation=userInputCSVLocation.slice(1);
+      let arrgroup=JSON.parse(JSON.stringify(this.state.arrGroup));
+      arrgroup=arrgroup.slice(1);
+      let arrGroupLocation=JSON.parse(JSON.stringify(this.state.arrGroupLocation));
+      arrGroupLocation=arrGroupLocation.slice(1);
+      let arrGroupCsv=JSON.parse(JSON.stringify(this.state.arrGroupCsv));
+      arrGroupCsv=arrGroupCsv.slice(1);
+      let arrGroupCsvLocation=JSON.parse(JSON.stringify(this.state.arrGroupCsvLocation));
+      arrGroupCsvLocation=arrGroupCsvLocation.slice(1);
       let self=this;
       
       return (
@@ -440,7 +743,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
                     }
 
                     
-                    return <li className={style} onClick={self._checkType.bind(self,index_tab)}>  {m}</li>; 
+                    return <li className={style} key={index_tab}onClick={self._checkType.bind(self,index_tab)}>  {m}</li>; 
                 }) }
                 
               </ul>
@@ -451,13 +754,14 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
 
 
           {/* NEW code - BEGINS*/}
-
+            
             <div className='gor-usr-details' style={{'display':this.props.auditType!==LOCATION ?'block':'none'}}>
             <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
             <div>
             <input className="gor-audit-name-wrap" type="text" placeholder="Time,place or products"  />
             </div>
             </div>
+           
             <div className='gor-usr-details' style={{'display':this.props.auditType!==LOCATION ?'block':'none'}}>
             
               <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/></div>
@@ -486,7 +790,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
                       style='inactive';
                       styleNumber = 'spanIndex_inactive'
                     }
-                    return <li className={style} onClick={self.handleActiveTab.bind(self, index)}> <span className={styleNumber}> {index+1} </span> {m}</li>; 
+                    return <li className={style} key={index}onClick={self.handleActiveTab.bind(self, index)}> <span className={styleNumber}> {index+1} </span> {m}</li>; 
                 }) }
                 {/*<li onClick={this.handleActiveTab}>
                   <span> 1 </span>
@@ -526,51 +830,73 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
             </div>
             <div className='gor-usr-details'>
             <div style={{'display':self.state.csvUploaded===true && self.state.activeCSV===true && self.state.activeSku===false?'block':'none'}}>
-            <div className="gor-audit-inputlist-wrap">
+            <div className="gor-audit-inputlist-wrap" style={{'display':this.props.auditType!==LOCATION ?'block':'none'}}>
+            <div>
+              <div className="gor-audit-input-wrap" >
+              
+              <InputComponent  className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} updateInputCSV={this.updateInputCSV.bind(self)} index={0}key={0}  value={self.state.valueCsv} />
+              
+    <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
+    <div>
+   <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+               </div> 
+              </div>
+              </div>
+               </div>
+    
               {
-      userInput.length>1?
-      this.state.id===0?
+      userInputCSV.length>1?
+      this.state.id_csv===0?
       arrGroupCsv.map(function(field, i){
-        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSV = {self.updateInputCSV.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       }):arrGroupCsv.map(function(field, i){
-        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSV = {self.updateInputCSV.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       })
 
 
       :
-      this.state.id===0?
+      this.state.id_csv===0?
       arrGroupCsv.map(function(field, i){
-        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSV = {self.updateInputCSV.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       }):arrGroupCsv.map(function(field, i){
-        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSV  = {self.updateInputCSV.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
      })
 
     }
 
 
     </div>
+    <div style={{'display':this.props.auditType!==LOCATION ?'block':'none'}} className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
+                <button className={"gor-auditValidate-btn"+(this.state.arrGroupCsv.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/></button>
+              </div>
     </div>
             </div>
+
+
             {/*<ReactFileReader fileTypes={[".csv",".zip"]} base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
               <button className='btn'>Upload</button>
             </ReactFileReader>*/}
@@ -600,7 +926,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
                       style = 'inactive';
                         styleNumber = 'spanIndex_inactive';
                     }
-                    return <li className={style} onClick={self.handleActiveTab.bind(self, index_tab)}> <span className={styleNumber}> {index_tab+1} </span> {m}</li>; 
+                    return <li className={style} key={index_tab} onClick={self.handleActiveTab.bind(self, index_tab)}> <span className={styleNumber}> {index_tab+1} </span> {m}</li>; 
                 }) }
                 {/*<li onClick={this.handleActiveTab}>
                   <span> 1 </span>
@@ -613,7 +939,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
               </ul>
               
               
-              <div className="gor-audit-inputlist-wrap">
+              <div className="gor-audit-inputlist-wrap" style={{'display':this.props.auditType!==LOCATION ?'block':'none'}}>
               <div>
 
               <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
@@ -645,14 +971,14 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       }):arrgroup.map(function(field, i){
         return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       })
 
 
@@ -664,14 +990,14 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
       }):arrgroup.map(function(field, i){
         return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInput = {self.updateInput} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
                {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
                
                 
-              </div></div><br /></div>;
+              </div></div></div>;
      })
 
     }
@@ -683,31 +1009,243 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
               
               
             </div>
-            
+            </div>
             <div style={{'display':this.props.auditType===LOCATION?'block':'none'}}>
+            <div className="gor-usr-details">
+            
             <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
+            <div>
             <input className="gor-audit-name-wrap" type="text" placeholder="Time,place or products"  />
-            
-            
-            <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/></div>
+            </div>
+            </div>
+            <div className="gor-usr-details">
+            <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
               <div className='gor-audit-button-wrap'>
-                <button className="gor-auditCreate-btn" id="button1" type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
-                <button className="gor-auditCreate-btn" id="button2" type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
+                <button className={(self.state.active_location===undefined && self.state.activeLocation===undefined) || (self.state.active_location!==undefined && self.state.activeCSVLocation===false) || (self.state.activeCSVLocation===false && self.state.activeSkuLocation===true)?"gor-auditCreate-btn-active":"gor-auditCreate-btn"} id="button3" onClick={this.displayEnterLocation.bind(this)} type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering location' defaultMessage='Enter Location'/></button>
+                <button className={self.state.activeCSVLocation?"gor-auditCreate-btn-active":"gor-auditCreate-btn"} id="button4" onClick={this.displayUploadCSVFileContentLocation.bind(this)} type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload location' defaultMessage='Upload CSV file'/></button>
               </div>
+              </div>
+              <div className='gor-usr-details' style={{'display':this.props.auditType===LOCATION ?'block':'none'}}>
+
+            <div style={{'display':self.state.activeCSVLocation===true?'block':'none'}}>
+            
+              <ul className='tabs-audit'>
+                {items.map(function(m, index){
+                  var style = '';
+                  var styleNumber='';
+                    if(self.state.activeLocation == index){
+                        style = 'active';
+                        styleNumber = 'spanIndex' 
+                    }
+                    else{
+                      style='inactive';
+                      styleNumber = 'spanIndex_inactive'
+                    }
+                    return <li className={style} key={index}onClick={self.handleActiveTabLocation.bind(self, index)}> <span className={styleNumber}> {index+1} </span> {m}</li>; 
+                }) }
+                {/*<li onClick={this.handleActiveTab}>
+                  <span> 1 </span>
+                  <a href="#">Upload CSV and validate</a>
+                </li>
+                <li onClick={this.handleActiveTab}>
+                  <span> 2 </span>
+                  <a href="#">Select attributes</a>
+                </li>*/}
+              </ul>
+              <div style={{'display':self.state.csvUploadedLocation===false?'block':'none'}}>
+              <div className="gor-audit-inputlist-wrap">
+            {csvUploadStatusLocation===false?
+              <div className='gor-audit-csv-upload-error-wrapper'>   
+                <span>Error Found, Please try again </span>
+              </div> : ""}
+
+            <div className='gor-usr-details'>
+              <div className='gor-audit-drag-drop-wrapper'>
+                <div className='gor-audit-drag-drop-content'> 
+                  <FileDragAndDrop onDrop={this.handleDragAndDrop}>
+                    <p style={{border: "1px solid grey"}}> Image here </p>
+                    <p> Drag and drop </p>
+                    <p> OR </p>
+                  </FileDragAndDrop>
+                </div>
+                <div className='gor-audit-upload-file'>
+                    <a href="#"> Upload .CSV file </a>
+                    <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.handleUploadCVSFileLocation}/>
+                </div>
+              </div>
+              <pre id="displayCSVFile"></pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div className='gor-usr-details'>
+            <div style={{'display':self.state.csvUploadedLocation===true && self.state.activeCSVLocation===true && self.state.activeSkuLocation===false?'block':'none'}}>
+            <div className="gor-audit-inputlist-wrap" style={{'display':this.props.auditType===LOCATION ?'block':'none'}}>
+            <div>
+              <div className="gor-audit-input-wrap" >
               
+              <InputComponent  className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} updateInputCSVLocation={this.updateInputCSVLocation.bind(self)} index={0}key={0}  value={self.state.valueCsvLocation} />
+              
+    <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
+    <div>
+   <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
-             <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
-            defaultMessage='Enter Location'/></div>
-              <div className='gor-sub-head'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
-            defaultMessage='Format: (XXX.X.X.XX)'/></div>
+               
+               </div> 
+              </div>
+              </div>
+               </div>
+    
+              {
+      userInputCSVLocation.length>1?
+      this.state.id_csv_location===0?
+      arrGroupCsvLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSVLocation = {self.updateInputCSVLocation.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
 
-              <input className={"gor-audit-fdlg"+(this.props.locCheck.type=== ERROR ? ' gor-input-error':' gor-input-ok')} placeholder="e.g. 132.0.A.47" id="locationid"  ref={node=> { this.locationId=node }} />
-              {this.props.locCheck.type===ERROR?<FieldError txt={this.props.locCheck.msg} />:''}
-              <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
-                <button className="gor-auditCreate-btn" type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+               
+                
+              </div></div></div>;
+      }):arrGroupCsvLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSVLocation = {self.updateInputCSVLocation.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+      })
+
+
+      :
+      this.state.id_csv_location===0?
+      arrGroupCsvLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSVLocation = {self.updateInputCSVLocation.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+      }):arrGroupCsvLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputCSVLocation  = {self.updateInputCSVLocation.bind(self)} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+     })
+
+    }
+
+
+    </div>
+
+    <div style={{'display':this.props.auditType===LOCATION ?'block':'none'}} className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
+                <button className={"gor-auditValidate-btn"+(this.state.arrGroupCsvLocation.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
+    </div>
             </div>
+            <div style={{'display':(self.state.active_location===undefined && self.state.activeLocation===undefined) || (self.state.active_location!==undefined && self.state.activeCSVLocation===false) || (self.state.activeCSVLocation===false && self.state.activeLocation===true)?'block':'none'}}>
+            
+
+            <ul className='tabs-audit' style={{'display':this.props.auditType===LOCATION ?'block':'none'}}>
+                {items3.map(function(m, index_tab){
+                  var style = '';
+                  var styleNumber = '';
+                    if(self.state.active_location == index_tab){
+                        style = 'active';
+                        styleNumber = 'spanIndex';
+                    }
+                    else{
+                      style = 'inactive';
+                        styleNumber = 'spanIndex_inactive';
+                    }
+                    return <li className={style} key={index_tab} onClick={self.handleActiveTabLocation.bind(self, index_tab)}> <span className={styleNumber}> {index_tab+1} </span> {m}</li>; 
+                }) }
+                {/*<li onClick={this.handleActiveTab}>
+                  <span> 1 </span>
+                  <a href="#">Upload CSV and validate</a>
+                </li>
+                <li onClick={this.handleActiveTab}>
+                  <span> 2 </span>
+                  <a href="#">Select attributes</a>
+                </li>*/}
+              </ul>
+              
+              
+              <div className="gor-audit-inputlist-wrap" style={{'display':this.props.auditType===LOCATION ?'block':'none'}}>
+              
+              <div>
+              <div className="gor-audit-input-wrap" >
+              
+              <InputComponent  className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} updateInputLocation={this.updateInputLocation} index={0}key={0}  value={this.state.valueLocation} placeholder="  e.g:012678ABC"/>
+              
+    <div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/>
+    <div>
+   <div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+               </div> 
+              </div>
+              </div>
+               </div>
+    
+    
+    {
+      userInputLocation.length>1?
+      this.state.id_location===0?
+      arrGroupLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputLocation = {self.updateInputLocation} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+      }):arrGroupLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputLocation = {self.updateInputLocation} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+      })
+
+
+      :
+      this.state.id_location===0?
+      arrGroupLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputLocation = {self.updateInputLocation} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+      }):arrGroupLocation.map(function(field, i){
+        return <div><div className="gor-audit-input-wrap"><InputComponent className={"gor-audit-input"+(skuState===SKU_NOT_EXISTS ? ' gor-input-error':' gor-input-ok')} key={i+1} index={i+1} updateInputLocation = {self.updateInputLocation} value={field} /><div className={skuState===SKU_NOT_EXISTS?"gor-login-error":((skuState===VALID_SKU || skuState===NO_ATTRIBUTE_SKU )&& confirmedSkuNotChanged?"gor-verified-icon":"")}/><div className={skuState===SKU_NOT_EXISTS?"gor-sku-error":"gor-sku-valid"}>
+               {confirmedSkuNotChanged?(skuState===SKU_NOT_EXISTS?invalidSkuMessg:(skuState===VALID_SKU?validSkuMessg:(skuState===NO_ATTRIBUTE_SKU?validSkuNoAtriMessg:""))):""}
+
+               
+                
+              </div></div></div>;
+     })
+
+    }
+              </div>
+              <div style={{'display':this.props.auditType===LOCATION ?'block':'none'}} className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
+                <button className={"gor-auditValidate-btn"+(this.state.arrGroupLocation.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/></button>
+              </div>
+              
+              
+            </div>
+            
+
+              
+              
+            
             </div>
             <p className='gor-submit'>
              <button className={"gor-add-btn" + ((processedSkuResponse.isValid && confirmedSkuNotChanged)|| this.props.auditType===LOCATION?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 

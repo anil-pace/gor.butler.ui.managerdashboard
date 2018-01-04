@@ -1285,7 +1285,7 @@ var messages = [
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1971,7 +1971,7 @@ var messages = [
   {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Please enter correct SKU number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

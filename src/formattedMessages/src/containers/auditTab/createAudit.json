@@ -7,7 +7,7 @@
   {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Please enter correct SKU number"
+    "defaultMessage": "Invalid SKU"
   },
   {
     "id": "audit.noAtrributes.sku",

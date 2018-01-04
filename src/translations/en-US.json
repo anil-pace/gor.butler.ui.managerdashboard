@@ -1351,7 +1351,7 @@
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2216,7 +2216,7 @@
   {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Please enter correct SKU number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
@@ -2256,15 +2256,15 @@
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
-    "id": "audit.add.sku.subheading",
-    "description": "Subtext for enter sku",
-    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
-    "filepath": "./src/containers/auditTab/createNewTask.js"
-  },
-  {
     "id": "audits.validateSKU",
     "description": "Text for validate sku button",
     "defaultMessage": "Validate",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
     "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {

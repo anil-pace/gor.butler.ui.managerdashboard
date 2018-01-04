@@ -157,7 +157,7 @@
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number"
+    "defaultMessage": "Invalid SKU"
   },
   {
     "id": "audit.invalid.location",
