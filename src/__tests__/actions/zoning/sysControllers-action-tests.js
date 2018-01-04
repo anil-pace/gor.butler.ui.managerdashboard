@@ -2,7 +2,7 @@ import * as actions from '../../../actions/sysControllersActions'
 import * as CONSTANTS from '../../../constants/frontEndConstants'
 
 describe('actions', () => {
-  it('should create an action to recieve controllers data', () => {
+  it('should create an action to receive controllers data', () => {
     const data =  {
   "orders": [{
     "breached": false,

@@ -2148,33 +2148,33 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.subheading",
-    "description": "Subheading for add audit",
-    "defaultMessage": "Select and enter details below to create a new audit task",
+    "id": "audit.select.sku.value",
+    "description": "Name of audit",
+    "defaultMessage": "Enter audit name:",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.auditdetails.heading",
-    "description": "Text for audit details heading",
-    "defaultMessage": "Select audit type by",
+    "id": "audit.select.sku.mode",
+    "description": "Text for sku mode",
+    "defaultMessage": "Select mode of input:",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.typedetails.sku",
-    "description": "Text for sku",
-    "defaultMessage": "Audit by SKU code",
+    "id": "audits.enterSkus",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.typedetails.location",
-    "description": "Text for location",
-    "defaultMessage": "Audit by Location code",
+    "id": "audits.csvUpload",
+    "description": "Button for csv upload",
+    "defaultMessage": "Upload CSV file",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.sku.heading",
-    "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2184,9 +2184,9 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.dropdown.heading",
-    "description": "Text for dropdown heading",
-    "defaultMessage": "Choose Box Id (Optional)",
+    "id": "audits.enterLocation",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter Location",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2603,6 +2603,24 @@
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
+    "id": "operationPause.sensor.latchGate",
+    "description": "Text for latch_gate sensor",
+    "defaultMessage": "Latch Gate",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.buttonSensor",
+    "description": "Text for button_press sensor",
+    "defaultMessage": "Button",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
+    "id": "operationPause.sensor.lightCurtain",
+    "description": "Text for light_curtain sensor",
+    "defaultMessage": "Light Curtain",
+    "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+  },
+  {
     "id": "operation.alert.pause",
     "description": "Text for operation stopped heading",
     "defaultMessage": "Butler System - Operation Paused",
@@ -2611,7 +2629,7 @@
   {
     "id": "operation.alert.pause.breach.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
+    "defaultMessage": "Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}.",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -3958,7 +3976,7 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "storageSpace.genRep.tooltip",
+    "id": "storageSpace.report.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"

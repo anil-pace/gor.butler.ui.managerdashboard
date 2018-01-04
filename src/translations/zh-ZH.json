@@ -1976,7 +1976,7 @@
  },
  {
    "id": "orderlist.table.operatingMode",
-   "description": "RECIEVED TIME",
+   "description": "RECEIVED TIME",
    "defaultMessage": "接收時間"
  },
  {

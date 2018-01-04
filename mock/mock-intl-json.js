@@ -2834,8 +2834,8 @@ var messages = [
   },
   {
     "id": "orderlist.table.operatingMode",
-    "description": "recievedTime for Orders",
-    "defaultMessage": "RECIEVED TIME",
+    "description": "receivedTime for Orders",
+    "defaultMessage": "RECEIVED TIME",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {

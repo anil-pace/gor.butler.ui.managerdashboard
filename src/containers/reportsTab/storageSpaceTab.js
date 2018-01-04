@@ -3,10 +3,8 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage, FormattedDate, injectIntl, intlShape, defineMessages } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
-import Dimensions from 'react-dimensions';
-import {withRouter} from 'react-router';
 
 
 import Spinner from '../../components/spinner/Spinner';
@@ -19,13 +17,12 @@ import { STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL } from '../../cons
 import { STORAGE_SPACE_FETCH, GET, DOWNLOAD_REPORT_REQUEST, APP_JSON, APP_EXCEL } from '../../constants/frontEndConstants';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
-import { recieveStorageSpaceData } from '../../actions/storageSpaceActions';
 import { setReportsSpinner } from '../../actions/operationsLogsActions';
 
 /*Intl Messages*/
 const  messages= defineMessages({
-    genRepTooltip: {
-        id: 'storageSpace.genRep.tooltip',
+    reportToolTip: {
+        id: 'storageSpace.report.tooltip',
         description: 'Tooltip to display Generate button',
         defaultMessage: 'Reports not available for Realtime filter'
     }
@@ -146,7 +143,7 @@ class StorageSpaceTab extends React.Component{
                                 <div className="filterWrapper">
                                     <div className="gorToolBarDropDown">
                                         <div className="gor-button-wrap">
-                                           <button title={this.props.intl.formatMessage(messages.genRepTooltip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
+                                           <button title={this.props.intl.formatMessage(messages.reportToolTip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
                                             <FormattedMessage id="storageSpace.table.downloadBtn"
                                             description="button label for download report"
                                             defaultMessage="Generate Report"/>
@@ -306,8 +303,5 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(injectIntl(StorageSpaceTab))));
-
-
-
+export default connect(mapStateToProps,mapDispatchToProps)(StorageSpaceTab);
 
