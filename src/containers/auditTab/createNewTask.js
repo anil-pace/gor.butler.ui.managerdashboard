@@ -9,7 +9,8 @@ import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
-import {InputComponent} from '../../components/InputComponent/InputComponent.js'
+import {InputComponent} from '../../components/InputComponent/InputComponent.js';
+import CSVUpload from '../../components/csvUpload.js';
 
 
 class CreateNewTask extends React.Component{
@@ -444,22 +445,7 @@ this.setState({arrGroup:arrInput,value:this.state.arrGroup[0]});
                 <span>Error Found, Please try again </span>
               </div> : ""}
 
-            <div className='gor-usr-details'>
-              <div className='gor-audit-drag-drop-wrapper'>
-                <div className='gor-audit-drag-drop-content'> 
-                  <div id="drop-zone" onDrop={this.dropHandler} onDragOver={this.dragOverHandler} onDragEnd={this.dragEndHandler}>
-                    <p style={{border: "1px solid grey"}}> Image here </p>
-                    <p> Drag and drop </p>
-                    <p> OR </p>
-                  </div>
-                </div>
-                <div className='gor-audit-upload-file'>
-                    <a href="#"> Upload .CSV file </a>
-                    <input type="file" id="uploadCSVFile" multiple size="50" onClick={this.handleUploadCVSFile}/>
-                </div>
-              </div>
-              <pre id="displayCSVFile"></pre>
-            </div>
+            <CSVUpload />
 
           {/* NEW code - ENDS*/}
             
