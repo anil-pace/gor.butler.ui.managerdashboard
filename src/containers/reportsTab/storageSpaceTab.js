@@ -14,7 +14,7 @@ import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFu
 
 
 import { STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL } from '../../constants/configConstants';
-import { STORAGE_SPACE_FETCH, GET, DOWNLOAD_REPORT_REQUEST, APP_JSON, APP_EXCEL } from '../../constants/frontEndConstants';
+import { STORAGE_SPACE_FETCH, GET, POST, DOWNLOAD_REPORT_REQUEST, APP_JSON } from '../../constants/frontEndConstants';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
 import { setReportsSpinner } from '../../actions/operationsLogsActions';
@@ -112,14 +112,18 @@ class StorageSpaceTab extends React.Component{
     }
     
     _requestReportDownload(){
+        let formData = {
+                        "requestedBy": this.props.username
+                        }
         let params={
                 'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
-                'method':GET,
-                'contentType': APP_EXCEL,
+                'method':POST,
+                'contentType': APP_JSON,
                 'cause':DOWNLOAD_REPORT_REQUEST,
                 'token': this.props.auth_token,
                 'responseType': "arraybuffer",
-                'accept': "text/xls"
+                'formdata':formData,
+                'accept': APP_JSON
             }
         this.props.makeAjaxCall(params);
     }
@@ -292,7 +296,8 @@ function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
         storageSpaceData: state.storageSpaceReducer.storageSpaceData,
-        reportsSpinner:state.storageSpaceReducer.reportsSpinner
+        reportsSpinner:state.storageSpaceReducer.reportsSpinner,
+        username: state.authLogin.username
     };
 }
 function mapDispatchToProps(dispatch){
