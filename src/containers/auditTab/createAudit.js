@@ -69,6 +69,7 @@ class CreateAudit extends React.Component{
     //this.state={selected:selectedList,userInput:[],arrGroup:[],arrGroupCsv:[],csvUploaded:false}
     this.selectedList=[];
     this.noSkuValidation=true;
+    this.nolocationValidation=true;
     this.props.validateSKU(initialSkuInfo);
     this.props.validateSKUcodeSpinner(false);
     this.props.auditValidatedAttributes(initialAttributes)
@@ -228,7 +229,7 @@ class CreateAudit extends React.Component{
       this.props.auditValidatedAttributes(initialAttributes)
       this.props.validateSKUcodeSpinner(true);
      
-      this.noSkuValidation=false;
+      this.noLocationValidation=false;
      
 
 
@@ -315,8 +316,10 @@ class CreateAudit extends React.Component{
     var skuState=(this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
     skuState=(this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
     this.skuState=skuState;
+
     return skuState;
   }
+  
 
   _processSkuAttributes() {
     
@@ -334,6 +337,50 @@ class CreateAudit extends React.Component{
         }
     }
     skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};
+    this.keys=keys[0]; // harcoding since backend support only one entry
+    return skuAttributeData;
+  }
+
+  _processLocationAttributes() {
+    
+    var keys=[], hasAttribute=false, isValidMSU=[], isValidSlot=[], isValid=true;
+    var skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValidMSU:isValidMSU,isValidSlot:isValidSlot, isValid:isValid};
+    if(this.props.locationAttributes && this.props.locationAttributes.msu_list) {
+      for(var i=0;i<this.props.locationAttributes.msu_list.length;i++){
+        if(this.props.locationAttributes.msu_list[i].slot_list){
+          for(var j=0;j<this.props.locationAttributes.msu_list[i].slot_list.length;j++){
+            if(this.props.locationAttributes.msu_list[i].slot_list[j].valid===true){
+              isValidSlot[j]=true;
+            }
+            else{
+              isValidSlot[j]=false;
+              isValid=false;
+            }
+          }
+        }
+        if(this.props.locationAttributes.msu_list[i].valid===true){
+          isValidMSU[i]=true;
+        }
+        else{
+          isValidMSU[i]=false;
+          isValid=false;
+        }
+      }
+        //isValid=true;
+        /*
+        for (var key in this.props.skuAttributes.audit_attributes_values) {
+          if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {
+            keys.push(key);
+            if(this.props.skuAttributes.audit_attributes_values[key].length) {
+              hasAttribute=true;
+            }
+          }
+        }
+        */
+
+
+    }
+    skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValidMSU:isValidMSU, isValidSlot:isValidSlot, isValid:isValid};
     this.keys=keys[0]; // harcoding since backend support only one entry
     return skuAttributeData;
   }
@@ -529,7 +576,9 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
       let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
       let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       var processedSkuResponse=this._processSkuAttributes();
+      var processedLocationResponse=this._processLocationAttributes();
       var skuState=this._claculateSkuState(processedSkuResponse);
+
       var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
       var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
       var csvUploadStatus = this.state.csvUploadStatus;
@@ -849,6 +898,12 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
                 <button className={"gor-auditValidate-btn"+(this.state.arrGroupCsv.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validLocation.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
+              <div>
+              <p className='gor-submit'>
+             <button className={"gor-add-btn" + ((processedLocationResponse.isValid)?"":" gor-disable-content")}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+            defaultMessage='Create audit'/></button>
+            </p>
+            </div>
 
 
 
