@@ -215,7 +215,7 @@ class CreateAudit extends React.Component{
 
      
     let urlData={
-                'url':SKU_VALIDATION_URL,
+                'url': AUDIT_URL+'/validate',
                 'validLocationData':validLocationData,
                 'method':POST,
                 'cause':VALIDATE_LOCATION_ID,
