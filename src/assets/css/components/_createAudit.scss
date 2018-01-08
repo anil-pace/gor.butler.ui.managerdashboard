@@ -6,24 +6,61 @@
     width:85%;
     margin:auto;
   }
+  .audit-index{
+  width:100%;
+  background-color:#DDDDDD;
+  border-radius:50%;
+  padding:7px;
+  color:#ffffff;
+  overflow:hidden;
+  margin-right:10px;
+  &.active{
+    background-color:#2C94FD;
+    color:#ffffff;
+  }
+  }
   
   .tabs{
     width: 56%;
     margin: auto;
   }
+  .audit-tabsInternal{
+    width: 100%;
+    margin: auto;
+  }
   .tab{
     display:inline-block;
+    text-align:center;
     padding:15px 20px;
+    margin-bottom:20px;
     color:#6E6E6E;
     width:42%;
-    border-radius:2px;
     cursor:pointer;
     border:1px solid #6E6E6E;
     box-sizing: border-box;
     &.active{
-        background: #469DF6;
+        background: #2C94FD;
+        text-align:center;
         color:#fff;
-        border:none;
+        border:1px solid #2C94FD;
+    }
+  }
+  .audit-tabInternal{
+    display:inline-block;
+    text-align:center;
+    padding:15px 20px;
+    margin-bottom:20px;
+    color:#DDDDDD;
+    width:42%;
+    cursor:pointer;
+    border-top:1px solid #DDDDDD;
+    border-bottom:1px solid #DDDDDD;
+    &.active{
+        background: #ffffff;
+        text-align:center;
+        color:#000000;
+        box-sizing: border-box;
+        border-bottom:5px solid #2C94FD;
     }
   }
   .location-mode{
@@ -38,9 +75,12 @@
       border-radius: 3px;
       font-size: 14px;
       font-weight: 600;
-      text-align: left;
+      text-align: center;
       padding: 10px 5px;
-      width: 35%;
+      width: 25%;
+      margin-top:10px;
+      margin-bottom:20px;
+      margin-right:10px;
       cursor: pointer;
     &.active-mode{
       border:1px solid #4EA1F6;
@@ -57,6 +97,7 @@
     border-bottom: 1px solid lightgrey;
     padding-bottom: 10px;
     padding-top: 5px;
+    width:100%;
 }
 .gor-audit-drag-drop-wrapper{
   border: 1px dashed grey;
@@ -157,6 +198,7 @@
     background-color: #ffffff;
     padding-left: 10px;
     margin-top: 10px;
+    margin-bottom:20px;
 }
 
 .gor-audit-input {
@@ -264,7 +306,20 @@
     margin-right: 40px;
 }
 
-
+.gor-auditValidate-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:133px;
+    height:35px;
+    font-size:14px;
+    background:#4D5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #aaaaaa;
+    margin-top:10px;
+}
 .gor-audit-create-btn {
   height: 35px;
   border-radius: 3px;
@@ -295,5 +350,7 @@
   padding-top: 10px;
   float:left;
 }
+
+
 
 

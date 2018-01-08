@@ -62,7 +62,7 @@
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location"
+    "defaultMessage": "Enter Location and validate"
   },
   {
     "id": "audit.add.location.subheading",

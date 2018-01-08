@@ -2031,7 +2031,7 @@ var messages = [
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location",
+    "defaultMessage": "Enter Location and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

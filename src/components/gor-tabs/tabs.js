@@ -42,7 +42,7 @@ constructor(props, context) {
   
     render() {
         return (
-            <div className="tabs">
+            <div className={this.props.internalTab===false?"tabs":"audit-tabsInternal"}>
                 <ul className={`tabs-nav nav navbar-nav navbar-left ${this.props.tabClass}`}>
                     {this.renderChildrenWithTabsApiAsProps()}
                 </ul>

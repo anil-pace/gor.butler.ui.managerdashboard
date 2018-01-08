@@ -95,6 +95,13 @@ export function validateSKUcode(params){
 	}
 }
 
+export function validateLocationcode(params){
+	return{
+		type:AJAX_CALL,
+		params
+	}
+}
+
 export function validateSKUcodeSpinner(data) {
 	return{
 		type:VALIDATE_SKU_SPINNER,
