@@ -286,3 +286,8 @@ msgstr[1] ""
 msgctxt "gor.oi.product.testing.jenkins"
 msgid "testing jenkins"
 msgstr ""
+
+#: gor.oi.product.testing.jenkin2
+msgctxt "gor.oi.product.testing.jenkins2"
+msgid "testing jenkins2"
+msgstr ""
