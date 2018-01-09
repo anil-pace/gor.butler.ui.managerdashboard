@@ -4,7 +4,7 @@
   <project>gor-orderingui</project>
   <project-version>0.0.5</project-version>
   <project-type>gettext</project-type>
-  <trans-dir>publicTrans</trans-dir>
+  <trans-dir>public</trans-dir>
 
 
 
