@@ -4,5 +4,12 @@
   <project>gor-orderingui</project>
   <project-version>0.0.5</project-version>
   <project-type>gettext</project-type>
+  <src-dir>po</src-dir>
+	<trans-dir>.</trans-dir>
+<rules>
+  <rule pattern="**/pot/*.pot">{locale}/{path}/{filename}.po</rule>
+  <rule pattern="**/po/*.pot">{path}/{locale_with_underscore}.po</rule>
+</rules>
+
 
 </config>
