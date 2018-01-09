@@ -5391,11 +5391,6 @@
     "filepath": "./src/containers/userTab/userFilter.js"
   },
   {
-    "id": "user.tokenfield.location",
-    "defaultMessage": "LOCATION",
-    "filepath": "./src/containers/userTab/userFilter.js"
-  },
-  {
     "id": "user.status.all",
     "defaultMessage": "Any",
     "filepath": "./src/containers/userTab/userFilter.js"
@@ -5443,26 +5438,6 @@
   {
     "id": "user.workmode.management",
     "defaultMessage": "Management",
-    "filepath": "./src/containers/userTab/userFilter.js"
-  },
-  {
-    "id": "user.location.all",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/userTab/userFilter.js"
-  },
-  {
-    "id": "user.location.issueFound",
-    "defaultMessage": "Pick Put Station",
-    "filepath": "./src/containers/userTab/userFilter.js"
-  },
-  {
-    "id": "user.location.rejected",
-    "defaultMessage": "QC Station",
-    "filepath": "./src/containers/userTab/userFilter.js"
-  },
-  {
-    "id": "user.location.resolved",
-    "defaultMessage": "Head Office",
     "filepath": "./src/containers/userTab/userFilter.js"
   },
   {
