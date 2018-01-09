@@ -394,16 +394,18 @@ background-color: #FFFFFF;
 }
 
 
-.Stopped .public_fixedDataTableCell_cellContent{
-
-  background: #fc3838;
-  border-radius: 15px;
-  text-align: center;
-  width:90px;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
+.Stopped{   
+  .public_fixedDataTableCell_cellContent{
+      background: #fc3838;
+      border-radius: 15px;
+      text-align: center;
+      width:90px;
+      color: #ffffff;
+      font-size: 12px;
+      max-height: 9px;
+  }
 }
+
 
 .Error .public_fixedDataTableCell_cellContent{
 
@@ -1544,6 +1546,8 @@ color: #000000;
   position:relative;
 }
 
+
+
 .gorTableMainContainer {
   overflow-x: hidden;
 }
@@ -1750,19 +1754,6 @@ input[type="checkbox"]{
   display: inline-block;
 }
 
-.gor-audit-actions-button {
-display:inline-block;
-  padding-right: 20px;
-  width: 80px;
-  float:left;
-}
-
-.gor-audit-actions-drop {
- display: inline-block;
-  width: 10.625rem;
-  float:right;
-}
-
 .gor-header-check {
   display: inline-block;
   padding-left: 22px;
@@ -1850,10 +1841,6 @@ font-family: "source sans pro";
   
 }
 
-.gor-audit-paginate-wrap {
-  float: right;
-}
-
 .gor-tooltip {
   display: none;
   padding-left: 50px;
@@ -1866,25 +1853,9 @@ font-family: "source sans pro";
   padding-top: 4px;
 }
 
-.displayLeft{
-  float:left;
-}
-.displayHidden{
-  visibility:hidden;
-}
-
-.gor-tool-tip-hover:hover + .gor-tooltip 
-{ display: block;   
-  z-index:900;
-  padding-top: 14px;
-  width: 210px;
-  position: fixed;
-  overflow: hidden;
-  
-}
 .gor-subheading-title{
   line-height: 20px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   color: #666666;
 }
@@ -1915,41 +1886,3 @@ font-family: "source sans pro";
   padding-bottom: 15px;
 }
 
-.gor-audit-filter-create-wrap {
-  display: inline-block;
-    float: right;
-    margin-top: 16px;
-    margin-right: 40px;
-}
-
-
-.gor-audit-create-btn {
-  height: 35px;
-  border-radius: 3px;
-  background-color: #4d5055;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
-  font-size: 14px;
-  font-weight: 600;
-  text-align: left;
-  color: #ffffff;
-  padding-left: 14px;
-    padding-right: 14px;
-    vertical-align: sub;
-    cursor: pointer;
-}
-
-.gor-audit-cancelling-text{
-  font-size:12px;
-  text-align:center;
-  padding-top:5px;
-  padding-bottom:5px;
-  color:red;
-}
-
-.gor-audit-header-check {
-  display: inline-block;
-  vertical-align: middle;
-  padding-top: 10px;
-  float:left;
-}
