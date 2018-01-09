@@ -4,7 +4,8 @@
   <project>gor-orderingui</project>
   <project-version>0.0.3</project-version>
   <project-type>gettext</project-type>
-  
+  <src-dir>public/po</src-dir>
+<trans-dir>public/translations</trans-dir>
 
 
 
