@@ -9,10 +9,17 @@ import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
 import {updateSubscriptionPacket,setWsAction} from '../../actions/socketActions';
-import {applyOLFilterFlag,wsOLSubscribe,wsOLUnSubscribe,setReportsSpinner,flushWSData} from '../../actions/operationsLogsActions';
+
+import {applyOLFilterFlag,
+        wsOLSubscribe,
+        wsOLUnSubscribe,
+        setReportsSpinner,
+        flushWSData} from '../../actions/operationsLogsActions';
+
 import {WS_ONSEND,POST,OPERATION_LOG_FETCH
     ,APP_JSON,OPERATIONS_LOG_MODE_MAP,
     DEFAULT_PAGE_SIZE_OL,REALTIME,DOWNLOAD_REPORT_REQUEST,REPORT_NAME_OPERATOR_LOGS} from '../../constants/frontEndConstants';
+
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import Spinner from '../../components/spinner/Spinner';
 import {Table, Column,Cell} from 'fixed-data-table';

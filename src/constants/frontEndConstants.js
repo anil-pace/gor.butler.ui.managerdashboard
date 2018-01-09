@@ -123,7 +123,8 @@ export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
-export const DOWNLOAD_REPORT="downloadReport"
+export const DOWNLOAD_REPORT="downloadReport";
+export const STORAGE_SPACE="storageSpace";
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -311,7 +312,8 @@ export const SYS_SUB_TAB_ROUTE_MAP={
 }
 export const REPORTS_SUB_TAB_ROUTE_MAP={
 	[OPERATIONS_LOG] : "operationsLog",
-	[DOWNLOAD_REPORT]:"downloadReport"
+	[DOWNLOAD_REPORT]:"downloadReport",
+	[STORAGE_SPACE]:"storageSpace"
 
 
 }
@@ -474,6 +476,7 @@ export const PUT='PUT';
 export const DELETE='DELETE';
 export const PATCH = 'PATCH';
 export const APP_JSON='application/json';
+export const APP_EXCEL='application/vnd.ms-excel';
 export const GOR_RISK='gor-risk';
 export const GOR_DELAY='gor-breach';
 export const GOR_NONE='gor-none';
@@ -743,6 +746,12 @@ export const REPORTS_FETCH = "REPORTS_FETCH";
 export const GET_REPORT = "GET_REPORT";
 export const DOWNLOAD_REPORT_REQUEST = "DOWNLOAD_REPORT_REQUEST";
 export const SET_DOWNLOAD_REPORT_SPINNER = "SET_DOWNLOAD_REPORT_SPINNER";
+
+/**
+ * Constants for STORAGE SPACE
+ */
+export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
+
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";

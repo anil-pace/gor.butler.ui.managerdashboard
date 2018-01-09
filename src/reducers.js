@@ -47,7 +47,8 @@ import {sysControllersReducer} from './reducers/sysControllersReducer'
 
 import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
 import {operationsLogsReducer} from './reducers/operationLogsReducer';
-import {downloadReportsReducer} from './reducers/downloadReportsReducer'
+import {downloadReportsReducer} from './reducers/downloadReportsReducer';
+import {storageSpaceReducer} from './reducers/storageSpaceReducer';
 
 const rootReducer=combineReducers({
   intl:intlReducer,
@@ -96,7 +97,8 @@ const rootReducer=combineReducers({
   sysControllersReducer,
   ppsConfiguration,
   operationsLogsReducer,
-  downloadReportsReducer
+  downloadReportsReducer,
+  storageSpaceReducer
    })
 
 export default rootReducer
