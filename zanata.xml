@@ -4,9 +4,4 @@
   <project>gor-orderingui</project>
   <project-version>0.0.5</project-version>
   <project-type>gettext</project-type>
-  <src-dir>po</src-dir>
-	<trans-dir>trans</trans-dir>
-
-
-
 </config>
