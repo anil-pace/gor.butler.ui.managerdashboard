@@ -230,11 +230,7 @@ class CreateAudit extends React.Component{
       this.props.validateSKUcodeSpinner(true);
      
       this.noLocationValidation=false;
-     
-
-
-
-
+      //this.setState({confirmedSku:this.skuId.value})
   }
   _checkSku(skuId){
     let skuInfo;
@@ -342,48 +338,59 @@ class CreateAudit extends React.Component{
   }
 
   _processLocationAttributes() {
-    
-    var keys=[], hasAttribute=false, isValidMSU=[], isValidSlot=[], isValid=true;
-    var skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValidMSU:isValidMSU,isValidSlot:isValidSlot, isValid:isValid};
-    if(this.props.locationAttributes && this.props.locationAttributes.msu_list) {
-      for(var i=0;i<this.props.locationAttributes.msu_list.length;i++){
-        if(this.props.locationAttributes.msu_list[i].slot_list){
-          for(var j=0;j<this.props.locationAttributes.msu_list[i].slot_list.length;j++){
-            if(this.props.locationAttributes.msu_list[i].slot_list[j].valid===true){
-              isValidSlot[j]=true;
-            }
-            else{
-              isValidSlot[j]=false;
-              isValid=false;
-            }
-          }
-        }
-        if(this.props.locationAttributes.msu_list[i].valid===true){
+    var isValidMSU=[], isValidSlot=[], isValid=false;
+    var locationAttributeData={isValidMSU:isValidMSU,isValidSlot:isValidSlot, isValid:isValid};
+    if(this.props.locationAttributes && this.props.locationAttributes.ordered_msus) {
+      for(var i=0;i<this.props.locationAttributes.ordered_msus.length;i++){
+        if(this.props.locationAttributes.ordered_msus[i].status==="s1"){
           isValidMSU[i]=true;
         }
         else{
           isValidMSU[i]=false;
-          isValid=false;
         }
       }
-        //isValid=true;
-        /*
-        for (var key in this.props.skuAttributes.audit_attributes_values) {
-          if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {
-            keys.push(key);
-            if(this.props.skuAttributes.audit_attributes_values[key].length) {
-              hasAttribute=true;
-            }
-          }
-        }
-        */
-
-
     }
-    skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValidMSU:isValidMSU, isValidSlot:isValidSlot, isValid:isValid};
-    this.keys=keys[0]; // harcoding since backend support only one entry
-    return skuAttributeData;
+    if(this.props.locationAttributes && this.props.locationAttributes.ordered_slots) {
+      for(var j=0;j<this.props.locationAttributes.ordered_slots.length;j++){
+        if(this.props.locationAttributes.ordered_slots[j].status==="s1"){
+          isValidSlot[j]=true;
+        }
+        else{
+          isValidSlot[j]=false;
+        }
+      }
+        
+        
+      }
+
+
+      for(let j=0;j<isValidSlot.length;j++){
+        if(isValidSlot[j]===false){
+          isValid=false;
+          break;
+        }
+      }
+
+      for(let j=0;j<isValidMSU.length;j++){
+        if(isValidMSU[j]===false){
+          isValid=false;
+          break;
+        }
+      }
+
+
+        
+
+
+    
+    locationAttributeData={isValidMSU:isValidMSU, isValidSlot:isValidSlot, isValid:isValid};
+     
+    return locationAttributeData;
   }
+
+
+
+
 
   _searchDropdownEntries(skuState,processedSkuResponse) {
     if(skuState=== VALID_SKU && processedSkuResponse.keys){
@@ -578,7 +585,6 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
       var processedSkuResponse=this._processSkuAttributes();
       var processedLocationResponse=this._processLocationAttributes();
       var skuState=this._claculateSkuState(processedSkuResponse);
-
       var dropdownData=this._searchDropdownEntries(skuState,processedSkuResponse);
       var confirmedSkuNotChanged=(this.state.confirmedSku===this.state.currentSku?true:false)
       var csvUploadStatus = this.state.csvUploadStatus;
@@ -931,7 +937,8 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo || {},
       locCheck: state.appInfo.locInfo || {},
       auth_token:state.authLogin.auth_token,
-      skuAttributes: state.auditInfo.skuAttributes
+      skuAttributes: state.auditInfo.skuAttributes,
+      locationAttributes:state.auditInfo.locationAttributes
   };
 }
 
