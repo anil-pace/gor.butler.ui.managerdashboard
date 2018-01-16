@@ -5,6 +5,11 @@
     "defaultMessage": "SKU confirmed"
   },
   {
+    "id": "audit.valid.location",
+    "description": "text for valid location",
+    "defaultMessage": "Location valid"
+  },
+  {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
     "defaultMessage": "Invalid SKU"
@@ -62,7 +67,7 @@
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Format: (XXX.X.X.XX)"
+    "defaultMessage": "Use copy and paste if you have muktiple MSU and Slot numbers"
   },
   {
     "id": "audits.add.password.button",

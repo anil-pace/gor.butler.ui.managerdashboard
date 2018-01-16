@@ -9,7 +9,9 @@ import {
     setAuditRefresh,
     setAuditSpinner,
     setPendingAuditLines,
-    auditValidatedAttributes
+    auditValidatedAttributes,
+    auditValidatedAttributesLocation,
+    auditValidatedAttributesLocationCsv,
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
@@ -28,6 +30,8 @@ import {
 	loginError,
 	validateSKU,
 	validateSKUcodeSpinner,
+    validateLocationcodeSpinner,
+    validateLocationcodeSpinnerCsv,
 	modalStatus,
 	getSafetyList,
 	getSafetyErrorList,
@@ -54,6 +58,8 @@ import {
     AUDIT_RESOLVE_LINES,
     AUDIT_RESOLVE_CONFIRMED,
     VALIDATE_SKU_ID,
+    VALIDATE_LOCATION_ID,
+    VALIDATE_LOCATION_ID_CSV,
     PAUSE_OPERATION,
     RESUME_OPERATION,
     CONFIRM_SAFETY,
@@ -345,6 +351,22 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             store.dispatch(validateSKUcodeSpinner(false));
             break;
+
+
+        case VALIDATE_LOCATION_ID:
+            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
+                store.dispatch(auditValidatedAttributesLocation(res));
+            }
+            store.dispatch(validateLocationcodeSpinner(false));
+            break;
+
+        case VALIDATE_LOCATION_ID_CSV:
+            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
+                store.dispatch(auditValidatedAttributesLocationCsv(res));
+            }
+            store.dispatch(validateLocationcodeSpinnerCsv(false));
+            break;
+
 
 		case PAUSE_OPERATION:
 			var pausePwd;

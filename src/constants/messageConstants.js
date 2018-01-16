@@ -96,7 +96,7 @@ export const INVALID_SKUID= (<FormattedMessage id="audit.invalid.sku" descriptio
       defaultMessage="Invalid SKU"/>);
 
 export const INVALID_LOCID= (<FormattedMessage id="audit.invalid.location" description='Text for invalid location ID' 
-      defaultMessage="Please enter a valid location Number"/>);
+      defaultMessage="Invalid Location"/>);
 
 
 

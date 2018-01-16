@@ -9,6 +9,8 @@ import {
     DISPLAY_AUDIT_SPINNER,
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
+    VALIDATED_ATTIBUTES_DATA_LOCATION,
+    VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
     TEXTBOX_STATUS,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
@@ -84,6 +86,20 @@ export function resolveAuditLines(params) {
 export function auditValidatedAttributes(data) {
     return {
         type: VALIDATED_ATTIBUTES_DATA,
+        data
+    }
+}
+
+export function auditValidatedAttributesLocation(data) {
+    return {
+        type: VALIDATED_ATTIBUTES_DATA_LOCATION,
+        data
+    }
+}
+
+export function auditValidatedAttributesLocationCsv(data) {
+    return {
+        type: VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
         data
     }
 }
