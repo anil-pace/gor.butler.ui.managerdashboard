@@ -6,7 +6,4 @@
   <project-type>gettext</project-type>
   <src-dir>ZanataSource</src-dir>
 <trans-dir>public/translations</trans-dir>
-
-
-
 </config>
