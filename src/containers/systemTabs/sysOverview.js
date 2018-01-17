@@ -149,11 +149,22 @@ function mapDispatchToProps (dispatch) {
     }
 };
 
+SystemOverview.defaultProps={
+    socketAuthorized:false,
+    hasDataChanged:false,
+    zones:{},
+    zoneHeader:{},
+    zoneSubscriptionInitiated:false
 
+}
 
 
 SystemOverview.PropTypes={
-    ppsFilter: React.PropTypes.string,
+    socketAuthorized:React.PropTypes.boolean,
+    hasDataChanged:React.PropsTypes.boolean,
+    zones:React.PropTypes.object,
+    zoneHeader:React.PropTypes.object,
+    zoneSubscriptionInitiated:React.PropTypes.boolean
     
 }
 

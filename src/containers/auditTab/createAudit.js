@@ -34,7 +34,7 @@ class CreateAudit extends React.Component{
         active_sku:0,
         active_tab: 0,
         arrGroupCsv:[],
-        arrGroup:[],
+        arrGroup:[{"id":"1","value":""}],
         value:"",
         valueCsv:"",
         userInput:[],
@@ -74,21 +74,11 @@ class CreateAudit extends React.Component{
   }
 
   componentWillMount() {
-
-    var initialSkuInfo={}, initialAttributes;
-    var selectedList=[]; 
-    //this.state={selected:selectedList,userInput:[],arrGroup:[],arrGroupCsv:[],csvUploaded:false}
+    
     this.selectedList=[];
     this.noSkuValidation=true;
     this.nolocationValidation=true;
     this.noLocationValidationCsv=true;
-    this.props.validateSKU(initialSkuInfo);
-    this.props.validateSKUcodeSpinner(false);
-    this.props.validateLocationcodeSpinner(false);
-    this.props.validateLocationcodeSpinnerCsv(false);
-    this.props.auditValidatedAttributes(initialAttributes);
-    this.props.auditValidatedAttributesLocation(initialAttributes);
-    this.props.auditValidatedAttributesLocationCsv(initialAttributes);
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -373,7 +363,7 @@ class CreateAudit extends React.Component{
 
   _claculateSkuState(processedSkuResponse) {
     var skuState=(this.noSkuValidation?NO_SKU_VALIDATION:(!processedSkuResponse.isValid?SKU_NOT_EXISTS:(processedSkuResponse.hasAttribute?VALID_SKU:NO_ATTRIBUTE_SKU)));
-    skuState=(this.props.skuValidationResponse?WATING_FOR_VALIDATION:skuState);
+    skuState=(this.props.skuValidationSpinner?WATING_FOR_VALIDATION:skuState);
     this.skuState=skuState;
 
     return skuState;
@@ -381,14 +371,14 @@ class CreateAudit extends React.Component{
   
    _claculateLocationState(processedLocationResponse) {
    var locationState=(this.noLocationValidation?NO_LOCATION_VALIDATION:(!processedLocationResponse.isValid?LOCATION_NOT_EXISTS:VALID_LOCATION));
-    locationState=(this.props.locationValidationResponse?WATING_FOR_VALIDATION:locationState);
+    locationState=(this.props.locationValidationSpinner?WATING_FOR_VALIDATION:locationState);
     this.locationState=locationState;
 
     return locationState;
   }
   _claculateLocationStateCsv(processedLocationResponse) {
    var locationState=(this.noLocationValidationCsv?NO_LOCATION_VALIDATION:(!processedLocationResponse.isValid?LOCATION_NOT_EXISTS:VALID_LOCATION));
-    locationState=(this.props.locationValidationResponseCsv?WATING_FOR_VALIDATION:locationState);
+    locationState=(this.props.locationValidationSpinnerCsv?WATING_FOR_VALIDATION:locationState);
     this.locationState=locationState;
 
     return locationState;
@@ -514,7 +504,7 @@ _processSkuAttributes() {
     var msu_status=[];
     var slot_status=[];
     if(this.props.locationAttributesCsv){  
-    var ordered_msus=this.props.locationAttributesCsv.ordered_msus;
+    var ordered_msus=this.props.locationAttributesCsv.ordered_msus || [];
       /*var ordered_msus=[{
       "msu": "123",
       "status": "s1"
@@ -533,7 +523,7 @@ _processSkuAttributes() {
     }
   ];
   */
-    var ordered_slots=this.props.locationAttributesCsv.ordered_slots;
+    var ordered_slots=this.props.locationAttributesCsv.ordered_slots || [];
 /*
       var ordered_slots= [{
       "slot": "123.1.A.02",
@@ -557,7 +547,7 @@ _processSkuAttributes() {
     }
   ];
 */
-    var ordered_relations=this.props.locationAttributesCsv.ordered_relations;
+    var ordered_relations=this.props.locationAttributesCsv.ordered_relations || [];
 /*
     var ordered_relations=[
     [
@@ -664,7 +654,7 @@ _processSkuAttributes() {
     var msu_status=[];
     var slot_status=[];
     if(this.props.locationAttributes){  
-    var ordered_msus=this.props.locationAttributes.ordered_msus;
+    var ordered_msus=this.props.locationAttributes.ordered_msus || [];
       /*var ordered_msus=[{
       "msu": "123",
       "status": "s1"
@@ -683,7 +673,7 @@ _processSkuAttributes() {
     }
   ];
   */
-    var ordered_slots=this.props.locationAttributes.ordered_slots;
+    var ordered_slots=this.props.locationAttributes.ordered_slots || [];
 /*
       var ordered_slots= [{
       "slot": "123.1.A.02",
@@ -707,7 +697,7 @@ _processSkuAttributes() {
     }
   ];
 */
-    var ordered_relations=this.props.locationAttributes.ordered_relations;
+    var ordered_relations=this.props.locationAttributes.ordered_relations || [];
 /*
     var ordered_relations=[
     [
@@ -838,12 +828,7 @@ _processSkuAttributes() {
       event.preventDefault();
       let userInput = event.target.value!==undefined?event.target.value.split(" "):[this.state.arrGroup[this.state.arrGroup.length-1],""];
       this.state.userInput=userInput;
-    /*this.setState({value:event.target.value,arrGroup:event.target.value.split(" ")},() => { 
-    for(let i=0;i<this.state.arrGroup.length;i++){
-    rows.push(<InputComponent2 key={i}  updateInput = {null} value={this.state.arrGroup[i]}/>);
-   }
-
- })  */
+    
 //Paste:
 if(userInput.length>1){
 
@@ -1112,7 +1097,7 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
             </div>
               
               </div>
-              <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationResponse?" gor-disable-content":"")}>
+              <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"+(this.state.arrGroup.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
@@ -1183,7 +1168,7 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
             
               <div className="gor-audit-input-wrap">
               
-              <InputComponent  className={("gor-audit-input")+(statusList.length!==0 && statusList[0]!=="s0" ? ' gor-input-error':' gor-input-ok')} updateInput={this.updateInput.bind(self)} index={0}key={0}  value={self.state.value} placeholder={" e.g: 012678ABC"}/>
+              <InputComponent  className={("gor-audit-input")+(statusList.length!==0 && statusList[0]!=="s0" ? ' gor-input-error':' gor-input-ok')} updateInput={this.updateInput.bind(self)} index={0} key={0}  value={self.state.value} placeholder={" e.g: 012678ABC"}/>
               
     <div className={statusList.length!==0 && statusList[0]!=="s0"?"gor-login-error":""}/>
     <div>
@@ -1239,7 +1224,7 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
     <button className='gor-audit-addnew-button' type="button" onClick={this.updateInput.bind(this,this.state.arrGroup.length!==0?this.state.arrGroup.length-1:0)}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
-                          <div  className={"gor-sku-validation-btn-wrap" + (this.props.locationValidationResponse?" gor-disable-content":"")}>
+                          <div  className={"gor-sku-validation-btn-wrap" + (this.props.locationValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"+(this.state.arrGroup.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validLocation.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
@@ -1365,7 +1350,7 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
 
 
     </div>
-    <div  className={"gor-sku-validation-btn-wrap" + (this.props.locationValidationResponseCsv?" gor-disable-content":"")}>
+    <div  className={"gor-sku-validation-btn-wrap" + (this.props.locationValidationSpinnerCsv?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"+(this.state.arrGroupCsv.length===0?" gor-disable-content-audit-validate":"")}  type="button" onClick={this._validLocationCsv.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
@@ -1395,14 +1380,39 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
     }
   }
 
+CreateAudit.PropTypes={
+    skuValidationSpinner: React.PropTypes.boolean,
+    locationValidationSpinner:React.PropTypes.boolean,
+    locationValidationSpinnerCsv:React.PropTypes.boolean,
+    auditType:React.PropTypes.object,
+    skuCheck:React.PropTypes.object,
+    locCheck:React.PropTypes.object,
+    auth_token:React.PropTypes.string,
+    skuAttributes:React.PropTypes.object,
+    locationAttributes:React.PropTypes.object,
+    locationAttributesCsv:React.PropTypes.object
+
+}
+
+CreateAudit.defaultProps = {
+  skuValidationSpinner:false,
+  locationValidationSpinner:false,
+  locationValidationSpinnerCsv:false,
+  auditType:{},
+  skuCheck:{},
+  locCheck:{},
+  skuAttributes:{},
+  locationAttributes:{},
+  locationAttributesCsv:{}
+};
 function mapStateToProps(state, ownProps){
   return {
-      skuValidationResponse: state.auditInfo.skuValidationSpinner || false,
-      locationValidationResponse: state.auditInfo.locationValidationSpinner || false,
-      locationValidationResponseCsv: state.auditInfo.locationValidationSpinnerCsv || false,
-      auditType:  state.auditInfo.auditType  || {},
-      skuCheck: state.appInfo.skuInfo || {},
-      locCheck: state.appInfo.locInfo || {},
+      skuValidationSpinner: state.auditInfo.skuValidationSpinner ,
+      locationValidationSpinner: state.auditInfo.locationValidationSpinner ,
+      locationValidationSpinnerCsv: state.auditInfo.locationValidationSpinnerCsv ,
+      auditType:  state.auditInfo.auditType,
+      skuCheck: state.appInfo.skuInfo,
+      locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
@@ -1410,7 +1420,7 @@ function mapStateToProps(state, ownProps){
   };
 }
 
-var mapDispatchToProps=function(dispatch){
+function mapDispatchToProps(dispatch){
   return {
     userRequest: function(data){ dispatch(userRequest(data)); },
     setAuditType: function(data){ dispatch(setAuditType(data)); },
