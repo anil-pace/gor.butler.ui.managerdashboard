@@ -134,55 +134,15 @@
 }
 
 .gor-audit-input-wrap {
-    width: 50%;
-    padding:7px 5px;
+    width: 40%;
+    padding:10px 5px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
     margin-top: 10px;
-    margin-left:10px;
     &.after-validation{
       display:inline-block;
-      vertical-align:middle;
-      width:50%;
     }
-    &.error-tuple{
-      border: 1px solid #D8595E;
-      .error-icon{
-        height:18px;
-        width:18px;
-        display:block;
-        vertical-align: middle;
-        background-position: -17px -76px;
-        float:right;
-      }
-
-    }
-    &.valid-tuple{
-      border: 1px solid #D6D6D6;
-      background:#F8F8F8;
-      input[disabled]{
-        background:#F8F8F8;
-      }
-    }
-}
-.gor-valid-row{
-    > div:first-child{
-        width:48%;
-        display:inline-block;
-    }
-    &.has-error{
-       > div:first-child{
-        width:100%;
-    }
-    }
-  }
-.error-message{
-    font-size: 14px;
-    margin-left: 10px;
-    color: #C9262B;
-    font-weight: bold;
-    vertical-align: middle;
 }
 .gor-audit-input-wrap-shifted {
     display: inline-block;

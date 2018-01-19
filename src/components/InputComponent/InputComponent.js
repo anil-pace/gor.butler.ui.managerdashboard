@@ -18,8 +18,8 @@ class Input extends React.Component{
 			    className={this.props.className} 
 			    style={this.props.style} 
 			    onFocus={this._onFocus} 
-			    onChange={this.props.onInput}
-			    value={this.props.value}
+			    onInput={this.props.onInput}
+			    defaultValue={this.props.value}
 			    type="text"   
 			    placeholder={this.props.placeholder}/>
 			    )
@@ -36,28 +36,20 @@ class InputAfterValidation extends React.Component{
 		e.target.value=val;
 	}
 	render(){
-		let attributes = {
-				autoFocus : this.props.autoFocus,
-			    className : this.props.className,
-			    style : this.props.style,
-			    onFocus:this._onFocus,
-			    value:this.props.value,
-			    onChange:(e)=>{this.props.updateInput(e,this.props.index)},
-			    type:"text",
-			    placeholder:this.props.placeholder,
-			    disabled: this.props.errorMessage === true ? true : false
-		}
-		let hasError = this.props.errorMessage===true ? false : true;
-		let allRowValid = this.props.allRowValid;
-		
 		return(
 			<div>
-			{!allRowValid?<input type="checkbox" onChange={(e)=>{this.props.onAttributeCheck(e,this.props.index)}} checked={this.props.checked}/>:null}
-			<div className={"gor-audit-input-wrap after-validation "+(hasError ? "error-tuple" : "valid-tuple") }>
-			<input {...attributes}  />
-			<span className={hasError ? "error-icon" : ""}></span>
+			<input type="checkbox" checked/>
+			<div className="gor-audit-input-wrap after-validation">
+			<input 
+			    autoFocus={this.props.autoFocus} 
+			    className={this.props.className} 
+			    style={this.props.style} 
+			    onFocus={this._onFocus}
+			    defaultValue={this.props.value}
+			    type="text"   
+			    placeholder={this.props.placeholder}/>
 			</div>
-			    <span className={"error-message"}>{hasError ? this.props.errorMessage : null}</span>
+			    <span>Error</span>
 			    </div>
 
 			    )
