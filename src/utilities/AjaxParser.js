@@ -92,7 +92,7 @@ import {
     ADD_TAG_TO_LIST,CHANGE_PPS_PROFILE,
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
-    STORAGE_SPACE_FETCH,
+    STORAGE_SPACE_FETCH
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -162,6 +162,7 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
+
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -354,9 +355,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
 
         case VALIDATE_LOCATION_ID:
-            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
-                store.dispatch(auditValidatedAttributesLocation(res));
-            }
+            store.dispatch(auditValidatedAttributesLocation(res));
             store.dispatch(validateLocationcodeSpinner(false));
             break;
 
@@ -560,6 +559,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
             break;
+
         default:
             ShowError(store, cause, status);
             break;

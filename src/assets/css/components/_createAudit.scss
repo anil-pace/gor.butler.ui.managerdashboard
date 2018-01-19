@@ -175,14 +175,16 @@
 }
 
 .gor-audit-input-wrap {
-    display: inline-block;
     width: 40%;
-    height: 35px;
+    padding:10px 5px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     margin-top: 10px;
+    &.after-validation{
+      display:inline-block;
+    }
 }
 .gor-audit-input-wrap-shifted {
     display: inline-block;

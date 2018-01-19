@@ -89,7 +89,7 @@ export function loginError(data){
 	}
 }
 
-export function validateSKUcode(params){
+/*export function validateSKUcode(params){
 	return{
 		type:AJAX_CALL,
 		params
@@ -108,7 +108,7 @@ export function validateLocationcodeCsv(params){
 		type:AJAX_CALL,
 		params
 	}
-}
+}*/
 
 export function validateSKUcodeSpinner(data) {
 	return{
