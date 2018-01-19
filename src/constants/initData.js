@@ -109,6 +109,13 @@ export const wsOverviewData={
                     "data": "complete_v2",
                     "callback": []
                   }
+                },
+                {
+                 "resource_id": "orders",
+                 "details": {
+                     "data": "aggregate_v2",
+                    "callback": []
+                 }
                 }
         ]
 },
