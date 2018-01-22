@@ -40,7 +40,7 @@ class OperationPause extends React.Component{
        sensor = this.props.intl.formatMessage(messages.latchGateSensor)
       }
       else if(sensorProp === 'button_press'){
-        sensor =  this.props.intl.formatMessage(messages.buttonPressSensor)
+        sensor =  this.props.intl.formatMessage(messages.buttonSensor)
       }
       else if(sensorProp === 'light_curtain'){
         sensor =  this.props.intl.formatMessage(messages.lightCurtainSensor)
