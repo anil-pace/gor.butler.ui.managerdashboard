@@ -5,7 +5,7 @@ import {setAuditType,resetAuditType,auditValidatedAttributes,auditValidatedAttri
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
-import { AUDIT_URL ,SKU_VALIDATION_URL} from '../../constants/configConstants';
+import { AUDIT_URL,TIME_ZONE_URL,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
@@ -261,9 +261,9 @@ class CreateAudit extends React.Component{
 
      
     let urlData={
-                'url': 'https://192.168.14.124:5000/api/audit'+'/validate',
+                'url': TIME_ZONE_URL,//'https://192.168.14.124:5000/api/audit'+'/validate',
                 'formdata':validLocationData,
-                'method':POST,
+                'method':GET,//POST,
                 'cause':VALIDATE_LOCATION_ID,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
@@ -1051,6 +1051,7 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
             {value: 'Deselect All',  disabled:false,label: deselectAllLabel}  
             ];
        let {validationDone} = self.state; 
+       let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false
 
             
           
@@ -1154,7 +1155,8 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
                         defaultMessage='+ Add New'/></button>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
-                <div className={"success"}>
+              {allLocationsValid?
+                 <div className={"message success"}>
                   <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
                                                               defaultMessage='{valid} out of {total} locations valid'
                                                               values={
@@ -1163,20 +1165,50 @@ this.setState({arrGroupCsv:arrInput,valueCsv:this.state.arrGroupCsv[0]});
                                                                   total: self.state.locationAttributes.totalLocations.toString()
                                                                 }
                                                               }/>
-                </div>
+                </div>:<div className={"message error"}>
+                  <FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
+                                                              defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
+                                                              values={
+                                                                {
+                                                                  invalid: self.state.locationAttributes.totalInvalid.toString(),
+                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                }
+                                                              }/>
+                </div>}
+              
+             
                 
               </div>
                   <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.locationValidation.subheading" description='Subtext for enter location' 
             defaultMessage='MSU will always supercede and all slots in the MSU will be audited'/></div>
-            {self.state.locationAttributes.data.map(function(value,i){
-                    return(<div key={value.msu}>
+            {self.state.locationAttributes.data.map((value,i)=>{
+                    let tuples=[];
+                    tuples.push(<div key={value.name}>
                         <InputComponent.AfterValidation
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
-                        index={i} key={i}  
-                        value={value.msu} placeholder={"e.g: 012678ABC"}/>
-                      </div>) 
+                        index={i}
+                        allRowValid={allLocationsValid}
+                        errorMessage={!allLocationsValid ? value.status : null}  
+                        value={value.name} placeholder={"e.g: 012678ABC"}/>
+                      </div>)
+                    if(value.children){
+                        value.children.map((child,j)=>{
+                          tuples.push(<div key={child.name}>
+                        <InputComponent.AfterValidation
+                        className={"gor-audit-input gor-input-ok"} 
+                        autoFocus = {focus} 
+                        updateInput={self._updateInput} 
+                        index={j} 
+                        allRowValid={allLocationsValid} 
+                        errorMessage={!allLocationsValid ? value.status : null} 
+                        value={child.name} placeholder={"e.g: 012678ABC"}/>
+                      </div>)
+                      })
+                    }
+                    
+                    return(tuples) 
               })}
             <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>

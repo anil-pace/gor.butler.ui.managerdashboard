@@ -9,7 +9,13 @@ const dummyData = {
     "msu_list": [
       [
         "123",
-        "s0"
+        "s0",
+        [
+          "123.1.A.02"
+        ],
+        [
+          "s0"
+        ]
       ],
       [
         "434",
@@ -21,34 +27,25 @@ const dummyData = {
       ],
       [
         "011",
-        "s0"
+        "s0",
+        [
+          "011.1.A.02",
+          "011.1.A.03"
+        ],
+        [
+          "s0",
+          "s0"
+        ]
       ]
     ],
-    "slot_list": [
-      [
-        "123.1.A.02",
-        "s0",
-        0
-      ],
+    "individual_slot_list": [
       [
         "031.1.G.05",
-        "s1",
-        -1
-      ],
-      [
-        "011.1.A.02",
-        "s0",
-        3
-      ],
-      [
-        "011.1.A.03",
-        "s0",
-        3
+        "s1"
       ],
       [
         "051.1.G.05",
-        "s1",
-        -1
+        "s1"
       ]
     ],
     "status": {
@@ -122,7 +119,7 @@ export  function auditInfo(state={},action){
           
 
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
-       let processedData = processValidationData(dummyData)//(action.data)
+       let processedData = processValidationData(dummyData.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
             "hasDataChanged":!state.hasDataChanged
@@ -153,33 +150,43 @@ export  function auditInfo(state={},action){
 }
 
 function processValidationData(data){
-  var orderedMSU = data.ordered_msus,
-  ordered_relations = data.ordered_relations,
-  ordered_slots = data.slot_list,
-  status = data.status,
-  processedData=[],
-  totalValid=0,totalInvalid=0;
 
-  for(let i=0; i < orderedMSU.length; i++){
-    let tuple = Object.assign({},orderedMSU[i]),
-    children = ordered_relations[i],
-    tupleChildren=[];
-    tuple.status = status[tuple.status];
-    totalValid = tuple.status.constructor === Boolean ? (totalValid+1) : totalValid;
-    totalInvalid = tuple.status.constructor !== Boolean ? (totalInvalid +1) : totalInvalid;
+var processedData=[],
+msuList = data.msu_list,
+statusList = data.status,totalValid=0,totalInvalid=0,
+indSlotList = data.individual_slot_list;
 
-    for(let j=0; j < children.length;j++){
-      let child = Object.assign({},ordered_slots[j]);
-      child.status = status[child.status]
-      totalValid = child.status.constructor === Boolean ? (totalValid+1) : totalValid;
-      totalInvalid = child.status.constructor !== Boolean ? (totalInvalid +1) : totalInvalid;
-      tupleChildren.push(child)
-    }
-    tuple.children = tupleChildren;
-    processedData.push(tuple)
+for(let i=0,len=msuList.length; i<len ;i++){
+  let tuple = {},children=[];
+  tuple.name = msuList[i][0],
+  tuple.status = statusList[msuList[i][1]];
+  totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+  totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+  for(let j=0,childLen =msuList[i][2] ? msuList[i][2].length : 0; j<childLen ;j++ ){
+    let childTuple = {}
+    childTuple.name = msuList[i][2][j];
+    childTuple.status = statusList[msuList[i][3][j]];
+    totalValid = (childTuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+    totalInvalid = (childTuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    children.push(childTuple);
   }
-console.log(totalValid);
-console.log(totalInvalid)
+  if(children.length){
+    tuple.children = children
+  }
+  processedData.push(tuple)
+}
+indSlotList.map(function(value,i){
+  let tuple= {
+    name:value[0],
+    status:statusList[value[1]]
+  }
+  totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+  totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+  processedData.push(tuple)
+  
+})
+
+console.log(processedData);
 return {
     data:processedData,
     totalValid,

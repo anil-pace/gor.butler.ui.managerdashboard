@@ -36,20 +36,24 @@ class InputAfterValidation extends React.Component{
 		e.target.value=val;
 	}
 	render(){
+		let attributes = {
+				autoFocus : this.props.autoFocus,
+			    className : this.props.className,
+			    style : this.props.style,
+			    onFocus:this._onFocus,
+			    defaultValue:this.props.value,
+			    type:"text",
+			    placeholder:this.props.placeholder,
+			    disabled: this.props.errorMessage === true ? true : false
+		}
+		
 		return(
 			<div>
-			<input type="checkbox" checked/>
+			{!this.props.allRowValid?<input type="checkbox" checked/>:null}
 			<div className="gor-audit-input-wrap after-validation">
-			<input 
-			    autoFocus={this.props.autoFocus} 
-			    className={this.props.className} 
-			    style={this.props.style} 
-			    onFocus={this._onFocus}
-			    defaultValue={this.props.value}
-			    type="text"   
-			    placeholder={this.props.placeholder}/>
+			<input {...attributes}  />
 			</div>
-			    <span>Error</span>
+			    <span>{this.props.errorMessage.error_reason ? this.props.errorMessage.error_reason : null}</span>
 			    </div>
 
 			    )
