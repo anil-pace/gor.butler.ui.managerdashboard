@@ -65,6 +65,26 @@ body
     padding:0;
     margin:0;
 }
+
+.gor-footer-left{
+    font-family: 'Source Sans Pro regular', sans-serif;
+    font-size: calculateRem(16px);
+    padding:0;
+    margin:0;
+    width: 45%;
+    display: inline-block;
+    border: 1px solid red;
+}
+.gor-footer-right{
+    font-family: 'Source Sans Pro regular', sans-serif;
+    font-size: calculateRem(16px);
+    padding:0;
+    margin:0;
+    width: 45%;
+    display: inline-block;
+    border: 1px solid red;
+}
+
 .gor-success{
   color: #10C469;
 }

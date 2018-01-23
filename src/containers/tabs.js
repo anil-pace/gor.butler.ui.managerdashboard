@@ -8,7 +8,7 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
-import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+import {OVERVIEW,SYSTEM,ORDERS,NEWORDERS, USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
@@ -149,7 +149,7 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order,neworder, newordersClass, newordersStatus, ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
 
@@ -255,7 +255,7 @@ class Tabs extends React.Component{
       }
     }
 
-    items={overview:overview,system:system,order:order,
+    items={overview:overview,system:system,order:order,neworder: neworder,newordersStatus:newordersStatus, newordersClass:newordersClass,
            users:users,inventory:inventory,audit:audit,
            reports:reports,
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
@@ -337,6 +337,10 @@ singleNotification=<GorToastify key={1}>
 		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
+
+    <Link to="/neworders" onClick={this.handleTabClick.bind(this,NEWORDERS)}>
+      <Tab items={{ tab: items.neworder, Status: items.newordersStatus, currentState:items.newordersClass }} changeClass={(this.props.tab.toUpperCase()=== NEWORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
 
     <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
