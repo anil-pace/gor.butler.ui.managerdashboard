@@ -1,10 +1,11 @@
- /**
+/**
  * Container for Storage Space tab
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { FormattedMessage, injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
+import Dimensions from 'react-dimensions';
 
 
 import Spinner from '../../components/spinner/Spinner';
@@ -14,7 +15,7 @@ import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFu
 
 
 import { STORAGE_SPACE_URL, STORAGE_SPACE_REPORT_DOWNLOAD_URL } from '../../constants/configConstants';
-import { STORAGE_SPACE_FETCH, GET, POST, DOWNLOAD_REPORT_REQUEST, APP_JSON } from '../../constants/frontEndConstants';
+import { STORAGE_SPACE_FETCH, GET, POST, DOWNLOAD_REPORT_REQUEST, APP_JSON} from '../../constants/frontEndConstants';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
 import { setReportsSpinner } from '../../actions/operationsLogsActions';
@@ -43,11 +44,11 @@ class StorageSpaceTab extends React.Component{
         return {
             columnWidths: {
                 slotType: this.props.containerWidth * 0.15,
-                slotVolume: this.props.containerWidth * 0.1,
+                slotVolume: this.props.containerWidth * 0.13,
                 dimension: this.props.containerWidth * 0.13,
-                totalSlots: this.props.containerWidth * 0.1,
-                emptySlots: this.props.containerWidth * 0.1,
-                slotUtilization: this.props.containerWidth * 0.1
+                totalSlots: this.props.containerWidth * 0.13,
+                emptySlots: this.props.containerWidth * 0.13,
+                slotUtilization: this.props.containerWidth * 0.18
             },
             sortOrder:{
                 utilization: "ASC"
@@ -173,8 +174,8 @@ class StorageSpaceTab extends React.Component{
                                 <Cell >
                                     <div className="gorToolHeaderEl">
                                         <FormattedMessage id="storageSpace.table.slotType"
-                                                          description='SLOT TYPE'
-                                                          defaultMessage='slot type'/>
+                                                          description='slot type'
+                                                          defaultMessage='SLOT TYPE'/>
                                         
                                     </div>
                                 </Cell>
@@ -308,5 +309,5 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(StorageSpaceTab);
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(injectIntl(StorageSpaceTab)));
 
