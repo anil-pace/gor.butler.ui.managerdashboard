@@ -44,10 +44,10 @@ class StorageSpaceTab extends React.Component{
         return {
             columnWidths: {
                 slotType: this.props.containerWidth * 0.15,
-                slotVolume: this.props.containerWidth * 0.13,
-                dimension: this.props.containerWidth * 0.13,
-                totalSlots: this.props.containerWidth * 0.13,
-                emptySlots: this.props.containerWidth * 0.13,
+                slotVolume: this.props.containerWidth * 0.15,
+                dimension: this.props.containerWidth * 0.15,
+                totalSlots: this.props.containerWidth * 0.15,
+                emptySlots: this.props.containerWidth * 0.15,
                 slotUtilization: this.props.containerWidth * 0.18
             },
             sortOrder:{
