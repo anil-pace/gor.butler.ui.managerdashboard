@@ -5,7 +5,7 @@
 import React  from 'react';
 //import OrdersSubTab from '../components/subtab/ordersTabs';
 import Tilex from '../components/tile2x/Tile2x';
-import Accordion from '../components/Accordion';
+//import Accordion from '../components/Accordion';
 import {GTable} from '../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
 import {GTableBody} from "../components/gor-table-component/tableBody";
@@ -42,9 +42,26 @@ class newordersTab extends React.Component{
 						]
 		return(
 			<div>
-			  <Tilex 
-			  	items={items}
-			  />
+			  <div className="orderTopWrapper">
+			  	<div className="orderLeftWrapper">
+			  		<div className="orderLeftContent">
+				  		<div className="dateTimeWrapper">
+				  			<span className="dateTime"> Today's Date time </span>
+				  		</div>
+				  		<div className="orderLeftHeader"> Order fulfilment progress </div>
+				  		<div className="orderLeftProgressBar">Progress Bar </div>
+				  		<div className="orderLeftBottom">
+				  			<div className="bottomLeft">
+				  				<span> No PPS running </span>
+				  			</div>
+				  			<div className="bottomRight">
+				  				<span> No Products to be picked </span>
+				  			</div>
+				  		</div>
+				  	</div>
+			  	</div>
+
+			  </div>
 			  <GTable options={['table-bordered']}>
 	                
 	                <GTableBody data={processedData} >

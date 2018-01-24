@@ -1,0 +1,47 @@
+.orderTopWrapper{
+	height: 185px;
+	width: 100%;
+	border: 1px solid red;
+	color: #4a4a4a;
+	font-family: SourceSansPro;
+	.orderLeftWrapper{
+		width: 510px;
+		border: 1px solid green;
+		.orderLeftContent{
+			margin: 30px 75px 30px 45px;
+			.dateTimeWrapper{
+				
+				height: 23px;
+				.dateTime{
+					font-size: calculateRem(18px);
+					font-weight: bold;
+				}
+			}
+			.orderLeftHeader{
+				margin-top: 20px;
+				height: 20px;
+				font-size: calculateRem(16px);
+				font-weight: bold;
+			}
+			.orderLeftProgressBar{
+				margin-top: 20px;
+			}
+			.orderLeftBottom{
+				margin-top: 20px;
+				font-size: calculateRem(14px);
+				.bottomLeft{
+					display: inline-block;
+					width: 45%;
+					//border: 1px solid blue;
+				}
+				.bottomRight{
+					margin-left: 7%;
+					display: inline-block;
+					width: 45%;
+					//border: 1px solid blue;
+				}
+			}
+		}
+		
+	}
+}
