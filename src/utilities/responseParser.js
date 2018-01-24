@@ -95,16 +95,13 @@ export function ResponseParse(store,res)
 				}
 				break;
 			case PARSE_ORDERS:	
-				if(res.header_data)
-				{
-					store.dispatch(recieveOrdersStatus(res));
-				}
-				else
+				if(!res.header_data)
 				{
 					store.dispatch(setWavesSpinner(false));
 					store.dispatch(receiveOrdersData(res));	
-					store.dispatch(setWavesFilterSpinner(false));	
+					store.dispatch(setWavesFilterSpinner(false));
 				}
+				
 				break;
 		    case PARSE_PPA_THROUGHPUT:
 				store.dispatch(receiveThroughputData(res));

@@ -13,7 +13,7 @@ import Dimensions from 'react-dimensions'
 import {updateSubscriptionPacket, setWsAction} from './../actions/socketActions';
 import {wsOverviewData} from './../constants/initData.js';
 import {WS_ONSEND} from './../constants/frontEndConstants';
-import {overviewRefreshed,wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './../actions/overviewActions';
+import {overviewRefreshed,wsOrdersHeaderUnSubscribe} from './../actions/overviewActions';
 
 
 
@@ -99,6 +99,9 @@ function mapDispatchToProps(dispatch) {
         },
         updateOverviewProps: function (data) {
             dispatch(overviewRefreshed(data))
+        },
+        wsOrdersHeaderUnSubscribe:function(data){
+            dispatch(wsOrdersHeaderUnSubscribe(data))
         }
     }
 };
