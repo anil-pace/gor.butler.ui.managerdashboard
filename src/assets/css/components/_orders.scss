@@ -1,11 +1,15 @@
 .orderTopWrapper{
-	height: 185px;
+	display: flex;
+	flex-direction: row;
+	background: #fff;
+	//height: 185px;
 	width: 100%;
 	border: 1px solid red;
 	color: #4a4a4a;
 	font-family: SourceSansPro;
 	.orderLeftWrapper{
-		width: 510px;
+		display: inline-block;
+		width: 39%;
 		border: 1px solid green;
 		.orderLeftContent{
 			margin: 30px 75px 30px 45px;
@@ -26,15 +30,15 @@
 			.orderLeftProgressBar{
 				margin-top: 20px;
 			}
-			.orderLeftBottom{
+			.orderLeftStatus{
 				margin-top: 20px;
 				font-size: calculateRem(14px);
-				.bottomLeft{
+				.statusLeft{
 					display: inline-block;
 					width: 45%;
 					//border: 1px solid blue;
 				}
-				.bottomRight{
+				.statusRight{
 					margin-left: 7%;
 					display: inline-block;
 					width: 45%;
@@ -43,5 +47,31 @@
 			}
 		}
 		
+	}
+	.orderRightWrapper{
+		display: inline-block;
+		width: 59%;
+		border: 1px solid green;
+		.orderRightContent{
+			margin: 30px 75px 30px 45px;
+			.orderActionWrapper{
+				text-align: right;
+			}
+			.orderRightHeader{
+				margin-top: 20px;
+				height: 20px;
+				font-size: calculateRem(16px);
+				font-weight: bold;
+			}
+			.orderRightStatus{
+				.statusTop, .statusBottom{
+					margin-top: 20px;
+					span{
+						display: inline-block;
+						width: 33%;
+					}
+				}
+			}
+		}
 	}
 }

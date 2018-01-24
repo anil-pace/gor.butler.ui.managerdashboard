@@ -10,6 +10,7 @@ import {GTable} from '../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
 import {GTableBody} from "../components/gor-table-component/tableBody";
 import {GTableRow} from "../components/gor-table-component/tableRow";
+import {FormattedMessage} from 'react-intl';
 
 var items ={
 	"pageId": "orders",
@@ -43,6 +44,7 @@ class newordersTab extends React.Component{
 		return(
 			<div>
 			  <div className="orderTopWrapper">
+
 			  	<div className="orderLeftWrapper">
 			  		<div className="orderLeftContent">
 				  		<div className="dateTimeWrapper">
@@ -50,12 +52,42 @@ class newordersTab extends React.Component{
 				  		</div>
 				  		<div className="orderLeftHeader"> Order fulfilment progress </div>
 				  		<div className="orderLeftProgressBar">Progress Bar </div>
-				  		<div className="orderLeftBottom">
-				  			<div className="bottomLeft">
+				  		<div className="orderLeftStatus">
+				  			<div className="statusLeft">
 				  				<span> No PPS running </span>
 				  			</div>
-				  			<div className="bottomRight">
+				  			<div className="statusRight">
 				  				<span> No Products to be picked </span>
+				  			</div>
+				  		</div>
+				  	</div>
+			  	</div>
+
+			  	<div className="orderRightWrapper">
+			  		<div className="orderRightContent">
+				  		<div className="orderButtonWrapper">
+				  			<div className="orderAction">
+				  				<div className="gor-button-wrap">
+								    <button className="gor-orders-create-btn">
+								    	<div className="gor-filter-add-token"/>
+									    <FormattedMessage id="orders.table.buttonLabel"
+									    description="button label for audit create"
+									    defaultMessage="COLLAPSE ALL"/>
+								    </button>
+								</div>
+				  			</div>
+				  		</div>
+				  		<div className="orderRightHeader"> Order summary </div>
+				  		<div className="orderRightStatus">
+				  			<div className="statusTop">
+				  				<span> 0 Order(s) completed of 0 </span>
+				  				<span> 0 Orderline(s) completed of 0 </span>
+				  				<span> 0 Breached orders </span>
+				  			</div>
+				  			<div className="statusBottom">
+				  				<span> 0 currently in progress </span>
+				  				<span> 0 currently in progress </span>
+				  				<span> 0 Breached orders completed</span>
 				  			</div>
 				  		</div>
 				  	</div>
