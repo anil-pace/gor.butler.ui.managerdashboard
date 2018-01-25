@@ -27,8 +27,27 @@ class newordersTab extends React.Component{
 	constructor(props) 
 	{
     	super(props);
+    	this.state={
+    		todaysDate: ""
+    	}
+    	this.getTodaysDate = this.getTodaysDate.bind(this);
     	
     }	
+
+    componentDidMount(){
+    	this.getTodaysDate();
+    }
+
+    getTodaysDate(){
+    	let d = new Date();
+    	let date = d.getDate();
+    	let year = d.getFullYear();
+    	let month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()];
+    	let currentDate = date + " " + month + " " + year; 
+    	this.setState({
+    		todaysDate : currentDate
+    	})
+    }
 
     
 	render(){
@@ -48,9 +67,11 @@ class newordersTab extends React.Component{
 			  	<div className="orderLeftWrapper">
 			  		<div className="orderLeftContent">
 				  		<div className="dateTimeWrapper">
-				  			<span className="dateTime"> Today's Date time </span>
+				  			<span className="dateTime"> {this.state.todaysDate} </span>
 				  		</div>
-				  		<div className="orderLeftHeader"> Order fulfilment progress </div>
+				  		<div className="orderLeftHeader"> 
+				  			<FormattedMessage id="orders.progress" description="header of orders progress" defaultMessage="Order fulfuilment progress "/>
+				  		</div>
 				  		<div className="orderLeftProgressBar">Progress Bar </div>
 				  		<div className="orderLeftStatus">
 				  			<div className="statusLeft">
@@ -63,21 +84,27 @@ class newordersTab extends React.Component{
 				  	</div>
 			  	</div>
 
+			  	<div className="orderCenterWrapper"> </div>
+
 			  	<div className="orderRightWrapper">
 			  		<div className="orderRightContent">
 				  		<div className="orderButtonWrapper">
-				  			<div className="orderAction">
-				  				<div className="gor-button-wrap">
-								    <button className="gor-orders-create-btn">
-								    	<div className="gor-filter-add-token"/>
-									    <FormattedMessage id="orders.table.buttonLabel"
-									    description="button label for audit create"
-									    defaultMessage="COLLAPSE ALL"/>
-								    </button>
-								</div>
-				  			</div>
+				  			<div className="gorButtonWrap">
+							    <button className="ordersCollapseAll">
+							    <FormattedMessage id="orders.table.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
+							    </button>
+						    </div>
+							<div className="gorButtonWrap">
+							    <button className="ordersFilterData">
+							    <div className="gor-manage-task"/>
+							    <FormattedMessage id="orders.tabel.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
+							    </button>
+							</div>
 				  		</div>
-				  		<div className="orderRightHeader"> Order summary </div>
+
+				  		<div className="orderRightHeader"> 
+				  			<FormattedMessage id="orders.summary" description="header of orders summary" defaultMessage="Order summary "/>
+				  		</div>
 				  		<div className="orderRightStatus">
 				  			<div className="statusTop">
 				  				<span> 0 Order(s) completed of 0 </span>
