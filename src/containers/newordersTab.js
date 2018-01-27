@@ -11,6 +11,7 @@ import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/t
 import {GTableBody} from "../components/gor-table-component/tableBody";
 import {GTableRow} from "../components/gor-table-component/tableRow";
 import {FormattedMessage} from 'react-intl';
+import ProgressBar from '../components/ProgressBar.js';
 
 var items ={
 	"pageId": "orders",
@@ -28,7 +29,8 @@ class newordersTab extends React.Component{
 	{
     	super(props);
     	this.state={
-    		todaysDate: ""
+    		todaysDate: "",
+    		progressCount: 5
     	}
     	this.getTodaysDate = this.getTodaysDate.bind(this);
     	
@@ -72,7 +74,7 @@ class newordersTab extends React.Component{
 				  		<div className="orderLeftHeader"> 
 				  			<FormattedMessage id="orders.progress" description="header of orders progress" defaultMessage="Order fulfuilment progress "/>
 				  		</div>
-				  		<div className="orderLeftProgressBar">Progress Bar </div>
+				  		<ProgressBar progressWidth={this.state.progressCount}/>
 				  		<div className="orderLeftStatus">
 				  			<div className="statusLeft">
 				  				<span> No PPS running </span>

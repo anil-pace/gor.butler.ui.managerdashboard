@@ -2831,6 +2831,30 @@
     "filepath": "./src/containers/logoutTab.js"
   },
   {
+    "id": "orders.progress",
+    "description": "header of orders progress",
+    "defaultMessage": "Order fulfuilment progress",
+    "filepath": "./src/containers/newordersTab.js"
+  },
+  {
+    "id": "orders.table.collapseAll",
+    "description": "button label for collapse all",
+    "defaultMessage": "COLLAPSE ALL",
+    "filepath": "./src/containers/newordersTab.js"
+  },
+  {
+    "id": "orders.tabel.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "FILTER DATA",
+    "filepath": "./src/containers/newordersTab.js"
+  },
+  {
+    "id": "orders.summary",
+    "description": "header of orders summary",
+    "defaultMessage": "Order summary",
+    "filepath": "./src/containers/newordersTab.js"
+  },
+  {
     "id": "notification.table.description",
     "description": "Table first head",
     "defaultMessage": "Description",
