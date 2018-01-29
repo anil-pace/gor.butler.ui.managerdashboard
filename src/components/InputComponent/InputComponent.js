@@ -18,8 +18,8 @@ class Input extends React.Component{
 			    className={this.props.className} 
 			    style={this.props.style} 
 			    onFocus={this._onFocus} 
-			    onInput={this.props.onInput}
-			    defaultValue={this.props.value}
+			    onChange={this.props.onInput}
+			    value={this.props.value}
 			    type="text"   
 			    placeholder={this.props.placeholder}/>
 			    )
@@ -41,19 +41,23 @@ class InputAfterValidation extends React.Component{
 			    className : this.props.className,
 			    style : this.props.style,
 			    onFocus:this._onFocus,
-			    defaultValue:this.props.value,
+			    value:this.props.value,
+			    onChange:(e)=>{this.props.updateInput(e,this.props.index)},
 			    type:"text",
 			    placeholder:this.props.placeholder,
 			    disabled: this.props.errorMessage === true ? true : false
 		}
+		let hasError = this.props.errorMessage ? this.props.errorMessage.error_reason : this.props.errorMessage;
 		
 		return(
 			<div>
-			{!this.props.allRowValid?<input type="checkbox" checked/>:null}
-			<div className="gor-audit-input-wrap after-validation">
+			{!this.props.allRowValid?<input type="checkbox" onChange={(e)=>{this.props.onAttributeCheck(e,this.props.index)}} checked={this.props.checked}/>:null}
+			<div className={"gor-audit-input-wrap after-validation "+(hasError ? "error-tuple" : "valid-tuple") }>
 			<input {...attributes}  />
+			<span className={hasError ? "error-icon" : ""}></span>
 			</div>
-			    <span>{this.props.errorMessage.error_reason ? this.props.errorMessage.error_reason : null}</span>
+
+			    <span className={"error-message"}>{hasError ? this.props.errorMessage.error_reason : null}</span>
 			    </div>
 
 			    )

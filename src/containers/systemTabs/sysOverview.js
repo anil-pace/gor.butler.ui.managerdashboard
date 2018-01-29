@@ -61,8 +61,8 @@ export class SystemOverview extends React.Component {
 
     render() {
         var _this = this;
-        var zones=this.props.zones ? this.props.zones["zones_data"] : {};
-        var emergencyData = this.props.zones ? this.props.zones.emergency_data : {};
+        var zones=this.props.zones["zones_data"] || {};
+        var emergencyData = this.props.zones.emergency_data || {};
         return (
             <div className="gor-zone-wrapper">
             <div className="gor-zone-header">
@@ -161,7 +161,7 @@ SystemOverview.defaultProps={
 
 SystemOverview.PropTypes={
     socketAuthorized:React.PropTypes.boolean,
-    hasDataChanged:React.PropsTypes.boolean,
+    hasDataChanged:React.PropTypes.boolean,
     zones:React.PropTypes.object,
     zoneHeader:React.PropTypes.object,
     zoneSubscriptionInitiated:React.PropTypes.boolean

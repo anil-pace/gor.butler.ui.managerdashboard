@@ -119,7 +119,7 @@ export  function auditInfo(state={},action){
           
 
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
-       let processedData = processValidationData(dummyData.audit_location_validation_response)//(action.data)
+       let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
             "hasDataChanged":!state.hasDataChanged

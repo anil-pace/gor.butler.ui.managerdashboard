@@ -1,0 +1,45 @@
+.gor-filter-wrapper{
+    transition: all 200ms ease;
+    font-size: 14px;
+    font-weight: 100;
+    color: #aaaaaa;
+    position: relative;
+    width:10%;
+    .gor-filter-checkbox{
+    	display: inline-block;
+	    height: 18px;
+	    width: 18px;
+	    background-position: 2px -107px;
+	    vertical-align: middle;
+    	&.all{
+    		background-position: -102px -76px;
+    	}
+    	&.partial{
+    		background-position: -85px -76px;
+    	}
+    	&.none{
+    		background-position: -68px -76px;
+    	}
+
+    }
+	.gor-filter-upper-wrap{
+		width:100%;
+		border: 1px solid #aaaaaa;
+	    border-radius: 0.1875rem;
+	    padding: 8px 5px;
+	    box-sizing: border-box;
+	    cursor: pointer;
+	    outline: none;
+	.gor-filter-arrow{
+		display: inline-block;
+	    height: 12px;
+	    width: 12px;
+	    background-position: 2px -107px;
+	    vertical-align: middle;
+	    float:right;
+	    &.up{
+	    	background-position: 2px -107px;
+	    }
+	}
+}
+}

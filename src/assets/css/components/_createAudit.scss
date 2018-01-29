@@ -1,4 +1,21 @@
 .gor-audit-create{
+  .gor-filter-wrapper{
+    display:inline-block;
+  }
+  .gor-audit-edit-att{
+    padding: 5px 15px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    color: #606266;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .gor-audit-att-ribbon{
+    padding: 10px 15px;
+  }
+  .gor-option-wrapper{
+    width:130px;
+  }
   .gor-modal-head{
     position:static;
   }
@@ -102,26 +119,23 @@
     padding-top: 5px;
     width:100%;
 }
-.gor-audit-drag-drop-wrapper{
+.gor-audit-drag-drop-container{
+  padding:35px 20px;
+  .gor-audit-drag-drop-wrapper{
   border: 1px dashed grey;
   cursor: pointer;
   overflow:hidden;
-  width: 50%;
+  width: 30%;
   margin: 0 auto;
   text-align: center;
   p{
     line-height: 1.5em;
   }
 }
-
-.gor-audit-drag-drop-content{
-  position: relative;
-  z-index: 999;
-  cursor: pointer;
-  height: 75%;
-  text-align: center;
-  border: 1px solid grey;
 }
+
+
+
 
 .gor-audit-upload-file{
   position: relative;
@@ -185,6 +199,31 @@
     &.after-validation{
       display:inline-block;
     }
+    &.error-tuple{
+      border: 1px solid #D8595E;
+      .error-icon{
+        height:18px;
+        width:18px;
+        display:block;
+        vertical-align: middle;
+        background-position: -17px -76px;
+        float:right;
+      }
+
+    }
+    &.valid-tuple{
+      border: 1px solid #D6D6D6;
+      background:#F8F8F8;
+      input[disabled]{
+        background:#F8F8F8;
+      }
+    }
+}
+.error-message{
+    font-size: 14px;
+    margin-left: 10px;
+    color: #C9262B;
+    font-weight: bold;
 }
 .gor-audit-input-wrap-shifted {
     display: inline-block;
@@ -401,9 +440,16 @@
   cursor:pointer;
 }
 
-.gor-audit-input-checkbox{
-
+.gor-delete-location{
+  height: 18px;
+  width: 18px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: -187px -75px;
+  cursor:pointer;
 }
+
 .left-shift{
   margin-left:50px;
 }
