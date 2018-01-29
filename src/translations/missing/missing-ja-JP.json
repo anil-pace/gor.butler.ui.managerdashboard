@@ -1,44 +1,26 @@
 [
 {
-	"id": "stringConfig.complete",
-	"description": "Text to show Completed",
-	"defaultMessage": "completed",
-	"filepath": "./src/constants/backEndConstants.js"
+	"id": "operationPause.sensor.latchGate",
+	"description": "Text for latch_gate sensor",
+	"defaultMessage": "Latch Gate",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
 },
 {
-	"id": "stringConfig.rejected",
-	"description": "Text to show rejected",
-	"defaultMessage": "Rejected",
-	"filepath": "./src/constants/backEndConstants.js"
+	"id": "operationPause.sensor.buttonSensor",
+	"description": "Text for button_press sensor",
+	"defaultMessage": "Button",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
 },
 {
-	"id": "stringConfig.created",
-	"description": "Text to show created",
-	"defaultMessage": "Created",
-	"filepath": "./src/constants/backEndConstants.js"
+	"id": "operationPause.sensor.lightCurtain",
+	"description": "Text for light_curtain sensor",
+	"defaultMessage": "Light Curtain",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
 },
 {
-	"id": "stringConfig.accepted",
-	"description": "Text to show accepted",
-	"defaultMessage": "Accepted",
-	"filepath": "./src/constants/backEndConstants.js"
-},
-{
-	"id": "stringConfig.bad_request",
-	"description": "Text to show bad request",
-	"defaultMessage": "Bad Request",
-	"filepath": "./src/constants/backEndConstants.js"
-},
-{
-	"id": "stringConfig.internal_server_error",
-	"description": "Text to show internal server error",
-	"defaultMessage": "Internal Error",
-	"filepath": "./src/constants/backEndConstants.js"
-},
-{
-	"id": "audit.subheading",
-	"description": "System Generated",
-	"defaultMessage": "System Generated",
-	"filepath": "./src/constants/messageConstants.js"
+	"id": "storageSpace.report.tooltip",
+	"description": "Tooltip to display Generate button",
+	"defaultMessage": "Reports not available for Realtime filter",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
 }
 ]
