@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: butler_interface_kerry 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-09 15:13+0530\n"
+"PO-Revision-Date: 2016-10-14 19:34+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja_JP\n"
+
+#: gor.oi.product.testing.jenkin3
+msgctxt "gor.oi.product.testing.jenkins3"
+msgid "testing jenkins3"
+msgstr ""
+
+#: gor.oi.product.testing.jenkin21
+msgctxt "gor.oi.product.testing.jenkins2"
+msgid "testing jenkins2"
+msgstr ""
+
+#: login.butler.language
+msgctxt "login.butler.language"
+msgid "English"
+msgstr ""
+
+#: login.butler.fail
+msgctxt "login.butler.fail"
+msgid "Login Failed"
+msgstr ""
+
+#: login.butler.error.username
+msgctxt "login.butler.error.username"
+msgid "Username"
+msgstr ""
+
+#: login.butler.error.password
+msgctxt "login.butler.error.password"
+msgid "Password"
+msgstr ""
+
+#: OrderContainer.filter.all
+msgctxt "OrderContainer.filter.all"
+msgid "Filter all"
+msgstr ""
+
+#: OrderContainer.orderstatus.pending
+msgctxt "OrderContainer.orderstatus.pending"
+msgid "Pending"
+msgstr ""
+
+#: OrderContainer.orderstatus.unfulfillable
+msgctxt "OrderContainer.orderstatus.unfulfillable"
+msgid "Unfulfillable"
+msgstr ""
+
+#: OrderContainer.orderstatus.aborted
+msgctxt "OrderContainer.orderstatus.aborted"
+msgid "Aborted"
+msgstr ""
+
+#: OrderContainer.orderstatus.completed
+msgctxt "OrderContainer.orderstatus.completed"
+msgid "Completed"
+msgstr ""
+
+#: OrderContainer.orderstatus.progress
+msgctxt "OrderContainer.orderstatus.progress"
+msgid "Progress"
+msgstr ""
+
+#: OrderContainer.filter.fulfilling
+msgctxt "OrderContainer.filter.fulfilling"
+msgid "Fulfilling"
+msgstr ""
+
+#: OrderContainer.orderstatus.fulfilled
+msgctxt "OrderContainer.orderstatus.fulfilled"
+msgid "Fulfilled"
+msgstr ""
+
+#: OrderContainer.notification.orderscompleted
+msgctxt "OrderContainer.notification.orderscompleted"
+msgid "Orders Completed"
+msgstr ""
+
+#: OrderContainer.notification.ordersfulfilled
+msgctxt "OrderContainer.notification.ordersfulfilled"
+msgid "Orders Fulfilled"
+msgstr ""
+
+#: OrderContainer.notification.selectorder
+msgctxt "OrderContainer.notification.selectorder"
+msgid "Select Order"
+msgstr ""
+
+#: ProductList.notification.emptycart
+msgctxt "ProductList.notification.emptycart"
+msgid "Empty Cart"
+msgstr ""
+
+#: OrderContainer.filter.heading
+msgctxt "OrderContainer.filter.heading"
+msgid "Filter Heading"
+msgstr ""
+
+#: Header.navigation.neworder
+msgctxt "Header.navigation.neworder"
+msgid "New Order"
+msgstr ""
+
+#: Button.cancelorder
+msgctxt "Button.cancelorder"
+msgid "Cancel Order"
+msgstr ""
+
+#: Dropdown.orderfulfillment
+msgctxt "Dropdown.orderfulfillment"
+msgid "Order Fulfillment"
+msgstr ""
+
+#: Dropdown.logout
+msgctxt "Dropdown.logout"
+msgid "Logout"
+msgstr ""
+
+#: login.empty.password
+msgctxt "login.empty.password"
+msgid "Empty Password"
+msgstr ""
+
+#: appInfo.success
+msgctxt "appInfo.success"
+msgid "Success"
+msgstr ""
+
+#: login.lang.english
+msgctxt "login.lang.english"
+msgid "Login English"
+msgstr ""
+
+#: login.lang.japanese
+msgctxt "login.lang.japanese"
+msgid "Japanese"
+msgstr ""
+
+#: login.lang.spanish
+msgctxt "login.lang.spanish"
+msgid "Spanish"
+msgstr ""
+
+#: login.lang.chinese
+msgctxt "login.lang.chinese"
+msgid "Chinese"
+msgstr ""
+
+#: login.lang.german
+msgctxt "login.lang.german"
+msgid "German"
+msgstr ""
+
+#: login.lang.french
+msgctxt "login.lang.french"
+msgid "French"
+msgstr ""
+
+#: order.status.not_yet_started
+msgctxt "order.status.not_yet_started"
+msgid "Not Yet Started"
+msgstr ""
+
+#: order.status.unfulfillable
+msgctxt "order.status.unfulfillable"
+msgid "Status Unfulfillable"
+msgstr ""
+
+#: order.status.fulfilling
+msgctxt "order.status.fulfilling"
+msgid "Status Fulfilling"
+msgstr ""
+
+#: order.status.completed
+msgctxt "order.status.completed"
+msgid " Status Completed"
+msgstr ""
+
+#: OrderContainer.notification.multiput
+msgctxt "OrderContainer.notification.multiput"
+msgid "Multiput"
+msgstr ""
+
+#: cartView.tableFooterTxt
+msgctxt "cartView.tableFooterTxt"
+msgid "Footer"
+msgstr ""
+
+#: cartView.btnTxt
+msgctxt "cartView.btnTxt"
+msgid "Cart View Button"
+msgstr ""
+
+#: cartView.totalorder
+msgctxt "cartView.totalorder"
+msgid "Total Order"
+msgstr ""
+
+#: OrderContainer.orderid
+msgctxt "OrderContainer.orderid"
+msgid "Order Id"
+msgstr ""
+
+#: OrderContainer.ppsMode.put
+msgctxt "OrderContainer.ppsMode.put"
+msgid "Put"
+msgstr ""
+
+#: OrderContainer.ppsMode.pick
+msgctxt "OrderContainer.ppsMode.pick"
+msgid "Pick"
+msgstr ""
+
+#: OrderContainer.heading
+msgctxt "OrderContainer.heading"
+msgid "Order Heading"
+msgstr ""
+
+#: OrderContainer.startorder
+msgctxt "OrderContainer.startorder"
+msgid "Start Order"
+msgstr ""
+
+#: OrderContainer.subheading
+msgctxt "OrderContainer.subheading"
+msgid "Order Subheading"
+msgstr ""
+
+#: OrderStatusView.progress
+msgctxt "OrderStatusView.progress"
+msgid "Progress"
+msgstr ""
+
+#: OrderStatusView.processed
+msgctxt "OrderStatusView.processed"
+msgid "Processed"
+msgstr ""
+
+#: OrderStatusView.btnText
+msgctxt "OrderStatusView.btnText"
+msgid "Status View"
+msgstr ""
+
+#: OrderStatusView.orderId
+msgctxt "OrderStatusView.orderId"
+msgid "Order Id"
+msgstr ""
+
+#: productList.btnText
+msgctxt "productList.btnText"
+msgid "Product List"
+msgstr ""
+
+#: productList.placeHoldText
+msgctxt "productList.placeHoldText"
+msgid "Product List Placeholder"
+msgstr ""
+
+#: product.added
+msgctxt "product.added"
+msgid "Added"
+msgstr ""
+
+#: product.add
+msgctxt "product.add"
+msgid "Add"
+msgstr ""
+
+#: gor.oi.product.handlingType.normal
+msgctxt "gor.oi.product.handlingType.normal"
+msgid "normal"
+msgid_plural "normals"
+msgstr[0] ""
+msgstr[1] ""
+
+#: gor.oi.product.testing.jenkin
+msgctxt "gor.oi.product.testing.jenkins"
+msgid "testing jenkins"
+msgstr ""
