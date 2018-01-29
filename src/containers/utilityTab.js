@@ -468,6 +468,10 @@ class UtilityTab extends React.Component {
 		this._onGRNRefresh();
 	}
 
+	_recallOrder(e){
+		console.log(e);
+	}
+
 	/**
 	 * The method will download
 	 * the aggregated stock ledger
@@ -672,9 +676,16 @@ class UtilityTab extends React.Component {
 								tileHead={this.context.intl.formatMessage(
 									messages.scriptsTileHead
 								)}
-								showFooter={false}
+								showFooter={true}sdfdsf
+								enableButton={true}
+								footerAction={this._recallOrder.bind(
+									this
+								)}
 							>
-								<ScriptsTile auth_token={this.props.auth_token}/>
+								<ScriptsTile auth_token={this.props.auth_token}
+								//recall_item={this._recallOrder.bind(this,'ra')}
+								
+								/>
 							</UtilityTile>
 						: null}
 					{show_stock_ledger_widget
