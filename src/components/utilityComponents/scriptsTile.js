@@ -98,7 +98,11 @@ class ScriptTile extends React.Component {
 		 	<div>
 		 	{this.state.recallState=='ExpiredAll'?
 			<div key="1">
-			<div className='gor-utility-recall-header'>	<span >Order Id</span></div>
+			<div className='gor-utility-recall-header'>	<span><FormattedMessage
+								id="utility.script.orderid"
+								description="Order Id"
+								defaultMessage="Order Id"
+							/></span></div>
 				<div className="gor-audit-input-wrap gor-utility-sku-wrap">
 					<input className="gor-audit-input gor-input-ok" placeholder="Enter order id" 
 					ref={node => {
@@ -124,7 +128,11 @@ class ScriptTile extends React.Component {
 			</div>:
 <div>
 <div key="1">
-			<div className='gor-utility-recall-header'>	<span >SKU Number</span></div>
+			<div className='gor-utility-recall-header'>	<span ><FormattedMessage
+								id="utility.script.sku"
+								description="SKU Number"
+								defaultMessage="SKU Number"
+							/></span></div>
 				<div className="gor-audit-input-wrap gor-utility-sku-wrap">
 
 					<input className="gor-audit-input gor-input-ok" placeholder="Enter SKU Number" 
@@ -147,7 +155,11 @@ class ScriptTile extends React.Component {
 								defaultMessage="SKU does not exist"
 							/>
 						</div>:""}
-						<div className='gor-utility-recall-header'>	<span >Order Id</span></div>
+						<div className='gor-utility-recall-header'>	<span ><FormattedMessage
+								id="utility.script.orderid"
+								description="Order Id"
+								defaultMessage="Order Id"
+							/></span></div>
 				
 						<div className="gor-audit-input-wrap gor-utility-sku-wrap gor-utility-input-wrap">
 					<input className="gor-audit-input gor-input-ok" placeholder="Enter order id" 
@@ -170,7 +182,11 @@ class ScriptTile extends React.Component {
 								defaultMessage="Order id already exist"
 							/>
 						</div>:""}
-						<div className='gor-utility-recall-header'>	<span >Batch Number</span></div>
+						<div className='gor-utility-recall-header'>	<span ><FormattedMessage
+								id="utility.script.batch"
+								description="Batch Number"
+								defaultMessage="Batch Number"
+							/></span></div>
 					
 				<div className="gor-audit-input-wrap gor-utility-sku-wrap gor-utility-input-wrap">
 					<input className="gor-audit-input gor-input-ok" placeholder="Enter Batch number" 
@@ -252,7 +268,7 @@ class ScriptTile extends React.Component {
 				{invoiceInput}
 				<div className="gor-script-btn-wrap">
 					<button className={this.state.activeScriptRcecallButton?"gor-download-button got-align":"gor-download-button got-align gor-disable-content"} onClick={this._requestExpiredItems.bind(this)}>
-						{this.props.loading?<div className='spinnerImage'></div>:<FormattedMessage id="utility.recall" description="label for recall" defaultMessage="RECALL"/>}
+						<FormattedMessage id="utility.recall" description="label for recall" defaultMessage="RECALL"/>
          			</button>
          		</div>
 		

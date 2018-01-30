@@ -767,15 +767,33 @@
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
+    "id": "utility.script.orderid",
+    "description": "Order Id",
+    "defaultMessage": "Order Id",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
     "id": "utility.script.incorrectOrderid",
     "description": "Order id already exist",
     "defaultMessage": "Order id already exist",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
+    "id": "utility.script.sku",
+    "description": "SKU Number",
+    "defaultMessage": "SKU Number",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
     "id": "utility.script.incorrectSku",
     "description": "SKU does not exist",
     "defaultMessage": "SKU does not exist",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.script.batch",
+    "description": "Batch Number",
+    "defaultMessage": "Batch Number",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
@@ -797,9 +815,9 @@
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
-    "id": "utility.downDlabel",
-    "description": "label for download",
-    "defaultMessage": "DOWNLOAD",
+    "id": "utility.recall",
+    "description": "label for recall",
+    "defaultMessage": "RECALL",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
