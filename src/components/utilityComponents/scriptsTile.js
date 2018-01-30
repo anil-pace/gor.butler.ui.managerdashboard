@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import { FormattedMessage, defineMessages } from "react-intl";
 import ScriptRow from "./scriptsRow";
-import { GET_ITEM_RECALL } from "../../constants/configConstants";
-import { GET,POST, ITEM_RECALLED } from "../../constants/frontEndConstants";
-import { getItemRecall } from "../../actions/utilityActions";
+import { GET_ITEM_RECALL ,GET_ITEM_RECALL_FIXED} from "../../constants/configConstants";
+import { GET,POST, ITEM_RECALLED, APP_JSON } from "../../constants/frontEndConstants";
+import { getItemRecall,clearOrderRecallValidation } from "../../actions/utilityActions";
 const messages = defineMessages({
 	itemRecallHead: {
 		id: "utility.itemRecall.head",
@@ -32,26 +32,29 @@ class ScriptTile extends React.Component {
 		};
 }
 	_requestExpiredItems(e) {
-		let payload;
+		let payload,url;
 		if(this.state.recallState==='ExpiredAll')
 		{
- payload={
+ 		payload={
  		order_id:this.orderId.value
-	}
+		};
+		url=GET_ITEM_RECALL
 }
 	else{
 		payload={
- 		order_id:this.orderid.value,
- 		batch:this.batchNumber.value,
- 		product_sku:this.skuno.value
-	}
+ 		"order_id":this.orderid.value,
+ 		"batch":this.batchNumber.value,
+ 		"product_sku":this.skuno.value
+	};
+		url=GET_ITEM_RECALL_FIXED
 	}
 		let data = {
-			url: GET_ITEM_RECALL,
+			url: url,
 			method: POST,
 			token: this.props.auth_token,
 			cause: ITEM_RECALLED,
-			formdata:payload
+			formdata:payload,
+			contentType: APP_JSON
 		};
 		this.props.getItemRecall(data);
 	}
@@ -62,8 +65,9 @@ class ScriptTile extends React.Component {
 			this.setState({ recallState: newState });
 			if(newState=='ExpiredAll'){
 				this.orderid.value='';
-				this.skuno.value='',
-				this.batchNumber =''
+				this.skuno.value='';
+				this.batchNumber ='';
+				this.props.clearOrderRecallValidation();
 			}
 			else
 			{
@@ -72,6 +76,8 @@ class ScriptTile extends React.Component {
 			this._validateScriptRecallButton();
 		}
 	}
+
+
 
 	_validateScriptRecallButton(){
 		let validated = false;
@@ -87,8 +93,6 @@ class ScriptTile extends React.Component {
 
 
 	render() {
-		//var activeScriptRcecallButton = this._validateScriptRecallButton();
-		let current_state='';
 		 var invoiceInput =
 		 (
 		 	<div>
@@ -111,9 +115,9 @@ class ScriptTile extends React.Component {
 						this.state.recallState === "ExpiredAll"
 						?<div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
-								id="utility.stockLedger.incorrectSku"
-								description="Please enter correct order Id"
-								defaultMessage="Please enter correct order Id"
+								id="utility.script.incorrectOrderid"
+								description="Order id already exist"
+								defaultMessage="Order id already exist"
 							/>
 						</div>:""}
 					
@@ -138,9 +142,9 @@ class ScriptTile extends React.Component {
 						this.state.recallState === "Expiredsku"
 						? <div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
-								id="utility.stockLedger.incorrectSku"
-								description="Please enter correct SKU"
-								defaultMessage="Please enter correct SKU"
+								id="utility.script.incorrectSku"
+								description="SKU does not exist"
+								defaultMessage="SKU does not exist"
 							/>
 						</div>:""}
 						<div className='gor-utility-recall-header'>	<span >Order Id</span></div>
@@ -153,17 +157,17 @@ class ScriptTile extends React.Component {
             		onChange={this._validateScriptRecallButton.bind(this)}
 					/>
 					{this.props.validatedScriptOrderid &&
-						this.state.stockLedgerState.category === "Expiredsku"
+						this.state.recallState === "Expiredsku"
 						? <div className="gor-login-error" />
 						: ""}
 				</div>
 				{this.props.validatedScriptOrderid &&
-						this.state.stockLedgerState.category === "Expiredsku"
+						this.state.recallState === "Expiredsku"
 						? <div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
-								id="utility.stockLedger.incorrectOrder"
-								description="Please enter correct order id"
-								defaultMessage="Please enter correct order id"
+								id="utility.script.incorrectOrderid"
+								description="Order id already exist"
+								defaultMessage="Order id already exist"
 							/>
 						</div>:""}
 						<div className='gor-utility-recall-header'>	<span >Batch Number</span></div>
@@ -176,17 +180,17 @@ class ScriptTile extends React.Component {
             			onChange={this._validateScriptRecallButton.bind(this)}
 					/>
 					{this.props.validatedScriptBatch &&
-						this.state.stockLedgerState.category === "Expiredsku"
+						this.state.recallState === "Expiredsku"
 						? <div className="gor-login-error" />
 						: ""}
 				</div>
 				{this.props.validatedScriptBatch &&
-						this.state.stockLedgerState.category === "Expiredsku"
+						this.state.recallState === "Expiredsku"
 						?<div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
-								id="utility.stockLedger.incorrectBatch"
-								description="Please enter correct batch"
-								defaultMessage="Please enter correct batch number"
+								id="utility.script.incorrectBatch"
+								description="No product exist for given PDFA"
+								defaultMessage="No product exist for given PDFA"
 							/>
 						</div>	:""}	
 					
@@ -248,16 +252,11 @@ class ScriptTile extends React.Component {
 				{invoiceInput}
 				<div className="gor-script-btn-wrap">
 					<button className={this.state.activeScriptRcecallButton?"gor-download-button got-align":"gor-download-button got-align gor-disable-content"} onClick={this._requestExpiredItems.bind(this)}>
-						{this.props.loading?<div className='spinnerImage'></div>:<FormattedMessage id="utility.downDlabel" description="label for download" defaultMessage="DOWNLOAD"/>}
+						{this.props.loading?<div className='spinnerImage'></div>:<FormattedMessage id="utility.recall" description="label for recall" defaultMessage="RECALL"/>}
          			</button>
          		</div>
 		
 			</div>
-		
-			/*<ScriptRow
-				barData={barData}
-				barAction={this._requestExpiredItems.bind(this)}
-			/>*/
 		);
 	}
 }
@@ -266,6 +265,9 @@ var mapDispatchToProps = function(dispatch) {
 	return {
 		getItemRecall: function(data) {
 			dispatch(getItemRecall(data));
+		},
+		clearOrderRecallValidation:function() {
+			dispatch(clearOrderRecallValidation());
 		}
 	};
 };

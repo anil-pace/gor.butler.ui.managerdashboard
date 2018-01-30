@@ -72,3 +72,5 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
         return arraytoSearch.indexOf(a)== -1;
     });
 }
+
+

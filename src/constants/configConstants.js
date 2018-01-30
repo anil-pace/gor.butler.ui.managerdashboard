@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.8.109';
+export const BASE_URL = 'localhost';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -39,7 +39,8 @@ export const VALIDATION_LIST=API_URL + "/system/remove_emergency/validation_list
 export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL=API_URL + "/system/shift_start_time";
 export const INVENTORY_REPORT_URL=API_URL + "/inventories/get_inventory_report_v2";
-export const GET_ITEM_RECALL=API_URL + "/orders/fixed/generate_orders";
+export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
+export const GET_ITEM_RECALL_FIXED=API_URL + "/orders/fixed/generate_orders";
 export const GR_REPORT_URL=API_URL + "/components/generate_gr_report";
 export const MASTER_UPLOAD_URL=API_URL + "/products/csv";
 export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/agg-stock-ledger"; //Mapping needs to be there in ngnix config

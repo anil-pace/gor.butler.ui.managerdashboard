@@ -767,21 +767,21 @@
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
-    "id": "utility.stockLedger.incorrectSku",
-    "description": "Please enter correct SKU",
-    "defaultMessage": "Please enter correct SKU",
+    "id": "utility.script.incorrectOrderid",
+    "description": "Order id already exist",
+    "defaultMessage": "Order id already exist",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
-    "id": "utility.stockLedger.incorrectOrder",
-    "description": "Please enter correct order id",
-    "defaultMessage": "Please enter correct order id",
+    "id": "utility.script.incorrectSku",
+    "description": "SKU does not exist",
+    "defaultMessage": "SKU does not exist",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
-    "id": "utility.stockLedger.incorrectBatch",
-    "description": "Please enter correct batch",
-    "defaultMessage": "Please enter correct batch number",
+    "id": "utility.script.incorrectBatch",
+    "description": "No product exist for given PDFA",
+    "defaultMessage": "No product exist for given PDFA",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
@@ -794,6 +794,12 @@
     "id": "utility.orderRecall.category.Expiredsku",
     "description": "Recall item using SKU number",
     "defaultMessage": "Recall item using SKU number",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.downDlabel",
+    "description": "label for download",
+    "defaultMessage": "DOWNLOAD",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {

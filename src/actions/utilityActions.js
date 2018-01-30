@@ -1,5 +1,5 @@
 import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,REPORTS_HISTORY, GRN_HISTORY,
-UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION,ORDER_RECALL_VALIDATION} from '../constants/frontEndConstants'
+UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION,ORDER_RECALL_VALIDATION,CLEAR_ORDER_RECALL_VALIDATION} from '../constants/frontEndConstants'
 
 
 export function getItemRecall(params){
@@ -57,6 +57,14 @@ export function clearStockLedgerSKU(data){
     data
   }
 }
+export function clearOrderRecallValidation(){
+  return {
+    type: CLEAR_ORDER_RECALL_VALIDATION
+    
+  }
+}
+
+
 
 export function uploadMasterData(data){
   return {
