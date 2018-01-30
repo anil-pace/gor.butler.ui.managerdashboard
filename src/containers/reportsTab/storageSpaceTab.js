@@ -151,7 +151,7 @@ class StorageSpaceTab extends React.Component{
                                            <button title={this.props.intl.formatMessage(messages.reportToolTip)} className="gor-rpt-dwnld" onClick={this._requestReportDownload}>
                                             <FormattedMessage id="storageSpace.table.downloadBtn"
                                             description="button label for download report"
-                                            defaultMessage="Generate Report"/>
+                                            defaultMessage="GENERATE REPORT"/>
                                             </button>
                                         </div>
                                     </div>
