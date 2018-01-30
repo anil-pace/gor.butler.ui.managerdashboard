@@ -100,7 +100,7 @@ function mapStateToProps(state, ownProps) {
     return {
         selectedProfile: state.ppsConfiguration.selectedProfile,
         auth_token:state.authLogin.auth_token,
-        profileCreatedAt:state.ppsConfiguration.profileCreatedAt|| new Date().getTime(),
+        profileCreatedAt:state.ppsConfiguration.profileCreatedAt,
         selectedPPS:state.ppsConfiguration.selectedPPS
     };
 }
