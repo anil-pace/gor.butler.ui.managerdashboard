@@ -26,8 +26,6 @@ class Header extends React.Component {
         this.state={showDropdown: false};
         this._handleDocumentClick=this._handleDocumentClick.bind(this);
         this._showModal = this._showModal.bind(this);
-
-
     }
 
     /**
@@ -108,10 +106,7 @@ class Header extends React.Component {
             headerInfo.fullName=(headerInfo.users[0].first_name || '') + ' ' + (headerInfo.users[0].last_name || '');
             headerInfo.designation=headerInfo.users[0].roles[0] || 'butler_ui';
         }
-        /**
-         * Hard coded start time is replaced
-         * with the time fetched in API.
-         */
+
          headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',

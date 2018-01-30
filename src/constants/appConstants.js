@@ -215,11 +215,7 @@ export const CODE_G016='g016';
 /*User roles map*/
 export const BUTLER_SUPERVISOR='butler_supervisor';
 export const BUTLER_UI='butler_ui';
-export const USER_ROLE_MAP={
-	[BUTLER_SUPERVISOR] : "Manager",
-	[BUTLER_UI] : "Operator"
 
-}
 
 /*Constant for time on header*/
 export const HEADER_START_TIME='09:00 AM IST'
