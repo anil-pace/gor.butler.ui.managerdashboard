@@ -1,5 +1,5 @@
 import { AJAX_CALL,INVOICE_VALIDATION,MASTER_UPLOAD_PROCESSING,MASTER_UPLOAD_SUCCESS,REPORTS_HISTORY, GRN_HISTORY,
-UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION} from '../constants/frontEndConstants'
+UPLOAD_HISTORY,UPDATE_FILE_SIZE,UTILITY_TAB_REFRESHED,STOCK_LEDGER_SKU_VALIDATION,CLEAR_STOCK_LEDGER_SKU_VALIDATION,ORDER_RECALL_VALIDATION} from '../constants/frontEndConstants'
 
 
 export function getItemRecall(params){
@@ -42,6 +42,15 @@ export function validateStockLedgerSKU(data){
     data
   }
 }
+
+export function validateRecallOrder(data){
+  return {
+    type: ORDER_RECALL_VALIDATION,
+    data
+  }
+}
+
+
 export function clearStockLedgerSKU(data){
 	return {
     type: CLEAR_STOCK_LEDGER_SKU_VALIDATION,

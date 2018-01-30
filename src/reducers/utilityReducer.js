@@ -6,6 +6,7 @@ import {
     UPDATE_FILE_SIZE,
     UTILITY_TAB_REFRESHED,
     STOCK_LEDGER_SKU_VALIDATION,
+    ORDER_RECALL_VALIDATION,
     CLEAR_STOCK_LEDGER_SKU_VALIDATION,
     REPORTS_HISTORY,
     GRN_HISTORY
@@ -75,6 +76,16 @@ export function utilityValidations(state = {}, action) {
                     invalidStockLedgerSKU: false
                 });
             }
+        case ORDER_RECALL_VALIDATION:
+            var res=action.data;
+              var arr=res.alert_data[0].details;
+               if (arr.length!==0) {
+                return Object.assign({}, state, {
+                    invalidOrderId: arr.indexOf('order_id')?true:false,
+                    invalidSKU: arr.indexOf('product_sku')?true:false,
+                    invalidBatch: arr.indexOf('batch')?true:false
+                });
+            } 
 
         case CLEAR_STOCK_LEDGER_SKU_VALIDATION:
             return Object.assign({}, state, {

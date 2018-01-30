@@ -114,7 +114,8 @@ import {
 	updateMaxFileSize,
 	validateStockLedgerSKU,
 	uploadReportHistory,
-	uploadGRNHistory
+	uploadGRNHistory,
+	validateRecallOrder
 } from "../actions/utilityActions";
 import {
 	recievePendingMSU,
@@ -373,9 +374,16 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 			break;
 
 		case ITEM_RECALLED:
+			if(res.alert_data){
+			store.dispatch(validateRecallOrder(res));
+		}
+		else{
 			res.status = ITEM_RECALLED_DATA;
 			stringInfo = statusToString(res);
 			store.dispatch(notifySuccess(stringInfo.msg));
+		}
+
+
 			break;
 
 		case GR_REPORT_RESPONSE:

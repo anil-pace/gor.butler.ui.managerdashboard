@@ -767,6 +767,36 @@
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
+    "id": "utility.stockLedger.incorrectSku",
+    "description": "Please enter correct SKU",
+    "defaultMessage": "Please enter correct SKU",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.stockLedger.incorrectOrder",
+    "description": "Please enter correct order id",
+    "defaultMessage": "Please enter correct order id",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.stockLedger.incorrectBatch",
+    "description": "Please enter correct batch",
+    "defaultMessage": "Please enter correct batch number",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.orderRecall.category.ExpiredAll",
+    "description": "Recall expired items",
+    "defaultMessage": "Recall expired items",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
+    "id": "utility.orderRecall.category.Expiredsku",
+    "description": "Recall item using SKU number",
+    "defaultMessage": "Recall item using SKU number",
+    "filepath": "./src/components/utilityComponents/scriptsTile.js"
+  },
+  {
     "id": "utility.downDlabel",
     "description": "label for download",
     "defaultMessage": "DOWNLOAD",

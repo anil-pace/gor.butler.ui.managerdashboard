@@ -468,9 +468,9 @@ class UtilityTab extends React.Component {
 		this._onGRNRefresh();
 	}
 
-	_recallOrder(e){
-		console.log(e);
-	}
+	// _recallOrder(e){
+	// 	console.log(e);
+	// }
 
 	/**
 	 * The method will download
@@ -676,14 +676,16 @@ class UtilityTab extends React.Component {
 								tileHead={this.context.intl.formatMessage(
 									messages.scriptsTileHead
 								)}
-								showFooter={true}sdfdsf
-								enableButton={true}
-								footerAction={this._recallOrder.bind(
-									this
-								)}
+								//showFooter={true}
+								//enableButton={true}
+								// footerAction={this._recallOrder.bind(
+								// 	this
+								// )}
 							>
 								<ScriptsTile auth_token={this.props.auth_token}
-								//recall_item={this._recallOrder.bind(this,'ra')}
+								validatedScriptBatch={this.props.validatedScriptBatch}
+								validatedScriptOrderid={this.props.invalidOrderId}
+								validatedScriptSKU={this.props.invalidSKU}
 								
 								/>
 							</UtilityTile>
@@ -803,6 +805,9 @@ function mapStateToProps(state, ownProps) {
 		validatedInvoice: state.utilityValidations.invalidInvoice || false,
 		validatedStockLedgerSKU:
 			state.utilityValidations.invalidStockLedgerSKU || false,
+		validatedScriptBatch:state.utilityValidations.invalidBatch,
+		validatedScriptOrderid:state.utilityValidations.invalidOrderId,
+		validatedScriptSKU:	state.utilityValidations.invalidSKU,
 		inventorySpinner: state.spinner.inventoryReportSpinner || false,
 		isMasterUploadProcessing:
 			state.utilityValidations.isMasterUploadProcessing || false,

@@ -52,6 +52,19 @@
     padding-left: 48%;
   }
 }
+.gor-script-tile-footer{
+  border-top: 1px solid #AAAAAA;
+  height: 20%;
+  bottom: 0px;
+  width: 100%;
+  .got-script-btn-wrap {
+    width: 100%;
+    width: 100%;
+    padding-top: 12px;
+    position: absolute;
+    padding-left: 48%;
+  }
+}
 
 .gor-utility-tile {
   background: #fff;
@@ -213,6 +226,19 @@
 .gor-utility-accordian {
   border-bottom: solid 0.5px #cccccc;
   padding-bottom: 10px;
+}
+
+.gor-script-sku-wrap{
+  height: 16rem;
+  overflow-y: scroll;
+}
+.gor-script-btn-wrap{
+    bottom: 0px;
+    float: left;
+    border-top: 1px solid #AAAAAA;;
+    width: 100%;
+    padding: 10px;
+    margin-top: 41px;
 }
 
 .gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
