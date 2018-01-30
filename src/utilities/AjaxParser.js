@@ -87,6 +87,7 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    WHITELISTED_ROLES
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -313,7 +314,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         
         case RECIEVE_HEADER:
-            if (res.users[0].roles[0] == BUTLER_UI) {
+        console.log("WHITELISTED_ROLES:", WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0]))
+            if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
                 endSession(store);
             }
             store.dispatch(recieveHeaderInfo(res));
