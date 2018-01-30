@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-//import OrdersSubTab from '../components/subtab/ordersTabs';
+import {connect} from 'react-redux';
 import {GTable} from '../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
 import {GTableBody} from "../components/gor-table-component/tableBody";
@@ -11,6 +11,8 @@ import {GTableRow} from "../components/gor-table-component/tableRow";
 import {FormattedMessage} from 'react-intl';
 import ProgressBar from '../components/ProgressBar.js';
 import Accordion from '../components/Accordion.js';
+import ViewOrderLine from './neworderTab/viewOrderLine';
+import {modal} from 'react-redux-modal';
 
 var orderStrings ={
 	"ordersCompleted": "Order(s) completed of",
@@ -35,6 +37,16 @@ class newordersTab extends React.Component{
     componentDidMount(){
     	this.getTodaysDate();
     }
+
+    viewOrderLine() {
+	    modal.add(ViewOrderLine, {
+	        title: '',
+	        size: 'large',
+	            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+	            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+	            //.. all what you put in here you will get access in the modal props ;),
+	        });
+	}
 
     getTodaysDate(){
     	let d = new Date();
@@ -96,7 +108,7 @@ class newordersTab extends React.Component{
 				  		<div className="orderRightContent">
 					  		<div className="orderButtonWrapper">
 					  			<div className="gorButtonWrap">
-								    <button className="ordersCollapseAll">
+								    <button className="ordersCollapseAll" onClick={this.viewOrderLine.bind(this)}>
 								    <FormattedMessage id="orders.table.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
 								    </button>
 							    </div>
