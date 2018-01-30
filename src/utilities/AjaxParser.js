@@ -314,7 +314,6 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         
         case RECIEVE_HEADER:
-        console.log("WHITELISTED_ROLES:", WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0]))
             if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
                 endSession(store);
             }
