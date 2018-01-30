@@ -5594,6 +5594,359 @@
    "description": "Mensaje de devolución de ítem",
    "defaultMessage": "{itemCount} ítems expirados devueltos",
    "filepath": "./src/utilities/statusToString.js"
-}
+},
+{
+   "id": "audit.table.pack.outer.label",
+   "description": "audit.table.pack.outer.label",
+   "defaultMessage": "Exterior",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+   "id": "audit.table.pack.inner.label",
+   "description": "audit.table.pack.inner.label",
+   "defaultMessage": "Interior",
+   "filepath": "./src/components/commonFunctionsDataTable.js"
+},
+{
+   "id": "header.zones.inactiveZones",
+   "description": "Zona en operation count",
+   "defaultMessage": "{inactiveZones} {inactiveZones, plural, one {zone} otra {zones}} pausada",
+   "filepath": "./src/components/header/header.js"
+},
+{
+   "id": "utility.uploadHist.noresultfound",
+   "description": "Estado",
+   "defaultMessage": "No se han encontrado resultados",
+   "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+},
 
+{
+   "id": "stringConfig.complete",
+   "description": "Texto para mostrar Completado",
+   "defaultMessage": "completado",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.rejected",
+   "description": "Texto para mostrar rechazado",
+   "defaultMessage": "Rechazado",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.created",
+   "description": "Texto para mostrar creado",
+   "defaultMessage": "Creado",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.accepted",
+   "description": "Texto para mostrar aceptado",
+   "defaultMessage": "Aceptado",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "stringConfig.internal_server_error",
+   "description": "Texto para mostrar error interno del servidor",
+   "defaultMessage": "Error interno",
+   "filepath": "./src/constants/backEndConstants.js"
+},
+{
+   "id": "audit.subheading",
+   "description": "Sistema generado",
+   "defaultMessage": "Sistema generado",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "operationsLog.reportRequest.success",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Solicitud generada correctamente. Compruebe la pestaña Descargar",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "operationsLog.reportRequest.failure",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Error al crear la solicitud",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.zone_pause",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Pausa de zona activada",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.zone_clear",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Zona libre activada",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.emergency_stop",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Parada de emergencia activada",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.substatus.action.emergency_pause",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Pausa de emergencia activada",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.entity.lightCurtains",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Cortina de luz",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "zoning.entity.latchGate",
+   "description": "Texto de estado para la zona",
+   "defaultMessage": "Cerrar entrada",
+   "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "audit.table.bulkaudit",
+   "description": "Etiqueta de botón para comenzar a gran escala audit",
+   "defaultMessage": "Comenzar auditoría(s) masiva(s)",
+   "filepath": "./src/containers/auditTab.js"
+},
+{
+   "id": "audit.token2.cancelled",
+   "defaultMessage": "Cancelado",
+   "filepath": "./src/containers/auditTab/auditFilter.js"
+},
+{
+   "id": "operation.alert.releaseSoftBreached",
+   "description": "Texto para el encabezado de liberación de botón de emergencia",
+   "defaultMessage": "Botón de pausa liberado",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.releaseSoft.textBreached",
+   "description": "Texto para el encabezado de liberación de botón de pausa",
+   "defaultMessage": "El botón de pausa de emergencia en {zone} ha sido liberado",
+   "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
+},
+{
+   "id": "operation.alert.pause.breach.text",
+   "description": "Texto para presionar el botón de emergencia",
+   "defaultMessage": "Pausa de emergencia activada debido a una infracción de SOP en {sensor} {controller} en {zone}.",
+   "filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+   "id": "widget.put.count",
+   "description": "Cuenta total de colocaciones",
+   "defaultMessage": "{count} {count, plural, one {PPS} otros {PPS}}",
+   "filepath": "./src/containers/putStatusWidget.js"
+},
+{
+   "id": "downloadReport.type.operationsLog",
+   "description": "Encabezado para PPS",
+   "defaultMessage": "Registros de operaciones",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.pending",
+   "description": "Encabezado para PPS",
+   "defaultMessage": "Generando informe...",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.failed",
+   "description": "Encabezado para PPS",
+   "defaultMessage": "¡Hubo un error con el informe!",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.status.completed",
+   "description": "Etiqueta de botón para descargar el informe",
+   "defaultMessage": "DESCARGAR",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.heading",
+   "description": "Encabezado para PPS",
+   "defaultMessage": "Descargar informe",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.refresh",
+   "description": "Etiqueta de botón para descargar el informe",
+   "defaultMessage": "Actualizar",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.reportName",
+   "description": "NOMBRE DEL INFORME",
+   "defaultMessage": "NOMBRE DEL INFORME",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.reportType",
+   "description": "TIPO DE INFORME",
+   "defaultMessage": "TIPO DE INFORME",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.requestedBy",
+   "description": "ID de la solicitud",
+   "defaultMessage": "SOLICITADO POR",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.completionTime",
+   "description": "Estado de PPS",
+   "defaultMessage": "TIEMPO DE REALIZACIÓN",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "downloadReport.table.status",
+   "description": "Estado de PPS",
+   "defaultMessage": "PROGRESO DE LA GENERACIÓN",
+   "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+},
+{
+   "id": "operationLog.genRep.tooltip",
+   "description": "Información sobre herramientas para mostrar el botón Generar",
+   "defaultMessage": "Informes no disponibles para el filtro En tiempo real",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationLog.table.downloadBtn",
+   "description": "Etiqueta de botón para descargar el informe",
+   "defaultMessage": "Generar informe",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationsLog.filter.search.bar",
+   "description": "Olas totales para la barra de filtro de búsqueda",
+   "defaultMessage": "{total} resultados encontrados",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "operationsLog.filter.search.bar.showall",
+   "description": "Etiqueta de botón para mostrar todo",
+   "defaultMessage": "Mostrar todas las operaciones",
+   "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+},
+{
+   "id": "reportsTab.storageSpace",
+   "description": "Pestaña Espacio de almacenamiento para pestaña Informes",
+   "defaultMessage": "Espacio de almacenamiento",
+   "filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+   "id": "reportsTab.downloadReport",
+   "description": "Pestaña del registro de operaciones para la pestaña Informes",
+   "defaultMessage": "Descargar",
+   "filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+   "id": "storageSpace.page.twentyfive",
+   "description": "Tamaño de página 25",
+   "defaultMessage": "25",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.page.fifty",
+   "description": "Tamaño de página 50",
+   "defaultMessage": "50",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.page.hundred",
+   "description": "Tamaño de página 100",
+   "defaultMessage": "100",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.genRep.tooltip",
+   "description": "Información sobre herramientas para mostrar el botón Generar",
+   "defaultMessage": "Informes no disponibles para el filtro En tiempo real",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.heading",
+   "description": "Encabezado para PPS",
+   "defaultMessage": "Información de espacio de almacenamiento",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.downloadBtn",
+   "description": "Etiqueta de botón para descargar el informe",
+   "defaultMessage": "Generar informe",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotType",
+   "description": "TIPO DE SLOT",
+   "defaultMessage": "tipo de slot",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotVolume",
+   "description": "Volumen del slot",
+   "defaultMessage": "VOLUMEN DEL SLOT",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.dimension",
+   "description": "Dimensión",
+   "defaultMessage": "DIMENSIÓN (Largo * Ancho * Alto)",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.totalSlots",
+   "description": "Estado de los slots totales",
+   "defaultMessage": "SLOTS TOTALES",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.emptySlots",
+   "description": "Estado de los slots vacíos",
+   "defaultMessage": "SLOTS VACÍOS",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotUtilization",
+   "description": "Estado de PPS",
+   "defaultMessage": "UTILIZACIÓN DE SLOT",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.noData",
+   "description": "No hay mensaje de datos para espacio de almacenamiento",
+   "defaultMessage": "No se encontraron datos",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "sysOverView.zones.breached.subText",
+   "description": "Subtexto de estado de zona",
+   "defaultMessage": "{entityBreached} interrumpido",
+   "filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+   "id": "sysOverView.zones.subText",
+   "description": "Subtexto de estado de zona",
+   "defaultMessage": "{subStatus} a través del controlador",
+   "filepath": "./src/containers/systemTabs/sysOverview.js"
+},
+{
+   "id": "overviewStatus.tab.paused",
+   "description": "Descripción del Estado de emergencia",
+   "defaultMessage": "EN PAUSA",
+   "filepath": "./src/containers/tabs.js"
+},
+{
+   "id": "overviewStatus.tab.breached",
+   "description": "Descripción del Estado de emergencia",
+   "defaultMessage": "INTERRUMPIDO",
+   "filepath": "./src/containers/tabs.js"
+},
+{
+   "id": "utility.bulkaudit.successMessage",
+   "description": "Mensaje de éxito de auditoría masiva",
+   "defaultMessage": "{successful}/{totalCount} audits started successfully",
+   "filepath": "./src/utilities/getFormattedMessages.js"
+}
 ]
