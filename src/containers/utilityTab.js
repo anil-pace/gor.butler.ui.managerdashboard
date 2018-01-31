@@ -69,8 +69,8 @@ const messages = defineMessages({
 	},
 	scriptsTileHead: {
 		id: "utility.scriptsTile.head",
-		description: "Run Script",
-		defaultMessage: "Run Script"
+		description: "Recall expired items",
+		defaultMessage: "Recall Expired Items"
 	},
 	downloadReportsHead: {
 		id: "utility.downloadReport.head",

@@ -36,7 +36,7 @@ class ScriptTile extends React.Component {
 		if(this.state.recallState==='ExpiredAll')
 		{
  		payload={
- 		order_id:this.orderId.value
+ 		"order_id":this.orderId.value
 		};
 		url=GET_ITEM_RECALL
 }
@@ -57,6 +57,7 @@ class ScriptTile extends React.Component {
 			contentType: APP_JSON
 		};
 		this.props.getItemRecall(data);
+		this.props.clearOrderRecallValidation();
 	}
 
 	_handleChangeRunScriptCategory(e){
@@ -72,6 +73,7 @@ class ScriptTile extends React.Component {
 			else
 			{
 				this.orderId.value=''
+				this.props.clearOrderRecallValidation();
 			}
 			this._validateScriptRecallButton();
 		}
