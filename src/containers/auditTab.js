@@ -337,7 +337,7 @@ class AuditTab extends React.Component {
                 auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
                     auditData.auditValue=data[i].audit_param_value;
-                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
+                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + JSON.stringify(data[i].audit_param_value.locations_list);
                 }
             }
 
@@ -345,7 +345,7 @@ class AuditTab extends React.Component {
                 auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
                     auditData.auditValue=data[i].audit_param_value.product_sku;
-                    auditData.auditTypeValue=auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
+                    auditData.auditTypeValue=auditType[SKU] + "-" + JSON.stringify(data[i].audit_param_value.sku_list);
                     auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
                 }
             }
@@ -721,7 +721,7 @@ render() {
     <div className="gor-filter-add-token"/>
     <FormattedMessage id="audit.table.buttonLable"
     description="button label for audit create"
-    defaultMessage="Create New Task"/>
+    defaultMessage="CREATE AUDIT"/>
     </button>
     </div>
     <div className="gor-button-wrap">

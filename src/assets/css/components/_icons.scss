@@ -40,7 +40,7 @@
 .gor-dropdown-open,.gor-dropdown-close,.gor-caution,.gor-delay-icon,
 .gor-emergency-dropdown-close,.gor-emergency-dropdown-open,.gor-info-icon,.gor-selected-icon,.not-bell,.searchIcon,.not-statusIcon,
 .calloutArr,.gor-audit-info-icon,.gor-resume-icon,.gor-zone-status,.action-icon,.gor-up-arrow,.gor-tag-icon,.gor-tag-icon-grey,
-.dwnload-rpt-ico,.error-icon,.gor-filter-arrow,.gor-filter-checkbox,.gor-delete-location{
+.dwnload-rpt-ico,.error-icon,.gor-filter-arrow,.gor-filter-checkbox,.gor-delete-location-disabled, .gor-file-upload, .gor-delete-location{
     background-image: url(./images/icons.svg);
 }
 .fk-logo,
@@ -263,6 +263,13 @@ background-position: -101px -52px;
     width: 16px;
     height: 18px;
     cursor: pointer;
+    display:inline-block;
+}
+
+.gor-file-upload{
+    background-position:-380px -52px;
+    width:18px;
+    height:24px;    
     display:inline-block;
 }
 

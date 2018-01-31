@@ -1807,7 +1807,7 @@ var messages = [
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "Create New Task",
+    "defaultMessage": "CREATE AUDIT",
     "filepath": "./src/containers/auditTab.js"
   },
   {

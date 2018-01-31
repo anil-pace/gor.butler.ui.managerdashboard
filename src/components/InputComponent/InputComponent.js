@@ -47,7 +47,7 @@ class InputAfterValidation extends React.Component{
 			    placeholder:this.props.placeholder,
 			    disabled: this.props.errorMessage === true ? true : false
 		}
-		let hasError = this.props.errorMessage ? this.props.errorMessage.error_reason : this.props.errorMessage;
+		let hasError = this.props.errorMessage===true ? false : true;
 		
 		return(
 			<div>
@@ -57,7 +57,7 @@ class InputAfterValidation extends React.Component{
 			<span className={hasError ? "error-icon" : ""}></span>
 			</div>
 
-			    <span className={"error-message"}>{hasError ? this.props.errorMessage.error_reason : null}</span>
+			    <span className={"error-message"}>{hasError ? this.props.errorMessage : null}</span>
 			    </div>
 
 			    )

@@ -3,15 +3,16 @@
     display:inline-block;
   }
   .gor-audit-edit-att{
-    padding: 5px 15px;
+    padding: 5px 25px;
     border: 1px solid #BEBEBE;
     border-radius: 3px;
     color: #606266;
     font-size: 13px;
     font-weight: 500;
+    cursor:pointer;
   }
   .gor-audit-att-ribbon{
-    padding: 10px 15px;
+    
   }
   .gor-option-wrapper{
     width:130px;
@@ -69,7 +70,6 @@
     display:inline-block;
     text-align:center;
     padding:15px 20px;
-    margin-bottom:20px;
     color:#DDDDDD;
     width:46%;
     cursor:pointer;
@@ -116,8 +116,9 @@
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     padding-bottom: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     width:100%;
+    background-color:#ffffff;
 }
 .gor-audit-drag-drop-container{
   padding:35px 20px;
@@ -128,8 +129,11 @@
   width: 30%;
   margin: 0 auto;
   text-align: center;
+  padding: 10px;
+  background-color:#ffffff;
   p{
     line-height: 1.5em;
+    color:#AAAAAA;
   }
 }
 }
@@ -196,8 +200,10 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
     margin-top: 10px;
+    margin-left:10px;
     &.after-validation{
       display:inline-block;
+      vertical-align:middle;
     }
     &.error-tuple{
       border: 1px solid #D8595E;
@@ -240,10 +246,18 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
+    border-top:1px solid #DDDDDD;
+    margin-top:10px;
     .gor-audit-location-wrap{
-    border-top:1px solid lightgrey;
+    
     margin-top:10px;
     }
+}
+
+.gor-audit-csvupload-wrap {
+  background-color: #FBFBFB;
+    padding-bottom:10px;
+    border-top:1px solid #DDDDDD;
 }
 
 .gor-audit-name-wrap {
@@ -371,7 +385,7 @@
 
 .gor-auditValidate-btn{
     font-family:'Source Sans Pro Bold', sans-serif;
-    width:133px;
+    width:113px;
     height:35px;
     font-size:14px;
     background:#4D5055;
@@ -382,7 +396,29 @@
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     margin-top:10px;
+    margin-left:10px;
+    cursor: pointer;
 }
+
+.gor-auditValidate-btn-disabled{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#DDDDDD;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #DDDDDD;
+    margin-top:10px;
+    margin-left:10px;
+    pointer-events: none;
+    
+}
+
+
 .gor-audit-create-btn {
   height: 35px;
   border-radius: 3px;
@@ -438,21 +474,83 @@
   background-color:#FBFBFB;
   margin-top:10px;
   cursor:pointer;
+  margin-left:10px;
+}
+
+.gor-audit-addnew-button-disabled{
+  display:none;
+}
+
+.gor-delete-outline{
+  border:1px solid #aaaaaa;
+  padding:7px;
+  margin-left:10px;
+  display:inline-block;
+
 }
 
 .gor-delete-location{
   height: 18px;
   width: 18px;
-  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: -255px -75px;
+  cursor:pointer;
+  
+
+  
+}
+
+.gor-delete-location-disabled{
+  height: 18px;
+  width: 18px;
   display: inline-block;
   vertical-align: middle;
   background-position: -187px -75px;
   cursor:pointer;
+  
+      
 }
 
 .left-shift{
   margin-left:50px;
 }
+
+.gor-create-audit-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    min-width:133px;
+    height:35px;
+    font-size:14px;
+    margin-top:10px;
+    background:#f36f36;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    &.black{
+        background:#4D5055;
+        color:#fff;
+    }
+}
+
+.gor-create-audit-btn-disabled{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    min-width:133px;
+    height:35px;
+    font-size:14px;
+    margin-top:10px;
+    background:#FFD2C2;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    pointer-events: none;
+    &.black{
+        background:#4D5055;
+        color:#fff;
+    }
+}
+
+
+
 
 
 

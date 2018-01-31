@@ -67,7 +67,7 @@
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Use copy and paste if you have muktiple MSU and Slot numbers"
+    "defaultMessage": "Use copy and paste if you have muLtiple MSU and Slot numbers"
   },
   {
     "id": "audit.add.tips.heading",
