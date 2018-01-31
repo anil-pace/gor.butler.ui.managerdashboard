@@ -102,11 +102,11 @@ class ScriptTile extends React.Component {
 			<div key="1">
 			<div className='gor-utility-recall-header'>	<span><FormattedMessage
 								id="utility.script.orderid"
-								description="Order Id"
-								defaultMessage="Order Id"
+								description="Order ID"
+								defaultMessage="Order ID"
 							/></span></div>
 				<div className="gor-audit-input-wrap gor-utility-sku-wrap">
-					<input className="gor-audit-input gor-input-ok" placeholder="Enter order id" 
+					<input className="gor-audit-input gor-input-ok" placeholder="Enter Order ID" 
 					ref={node => {
               			this.orderId = node ||'';
            			 }}
@@ -122,8 +122,8 @@ class ScriptTile extends React.Component {
 						?<div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
 								id="utility.script.incorrectOrderid"
-								description="Order id already exist"
-								defaultMessage="Order id already exist"
+								description="Order ID already exist"
+								defaultMessage="Order ID already exist"
 							/>
 						</div>:""}
 					
@@ -159,12 +159,12 @@ class ScriptTile extends React.Component {
 						</div>:""}
 						<div className='gor-utility-recall-header'>	<span ><FormattedMessage
 								id="utility.script.orderid"
-								description="Order Id"
-								defaultMessage="Order Id"
+								description="Order ID"
+								defaultMessage="Order ID"
 							/></span></div>
 				
 						<div className="gor-audit-input-wrap gor-utility-sku-wrap gor-utility-input-wrap">
-					<input className="gor-audit-input gor-input-ok" placeholder="Enter order id" 
+					<input className="gor-audit-input gor-input-ok" placeholder="Enter Order ID" 
 						ref={node => {
               			this.orderid = node ||'';
            			 }}
@@ -180,8 +180,8 @@ class ScriptTile extends React.Component {
 						? <div className="gor-sku-error gor-utility-error-invoice">
 							<FormattedMessage
 								id="utility.script.incorrectOrderid"
-								description="Order id already exist"
-								defaultMessage="Order id already exist"
+								description="Order ID already exist"
+								defaultMessage="Order ID already exist"
 							/>
 						</div>:""}
 						<div className='gor-utility-recall-header'>	<span ><FormattedMessage
@@ -191,7 +191,7 @@ class ScriptTile extends React.Component {
 							/></span></div>
 					
 				<div className="gor-audit-input-wrap gor-utility-sku-wrap gor-utility-input-wrap">
-					<input className="gor-audit-input gor-input-ok" placeholder="Enter Batch number" 
+					<input className="gor-audit-input gor-input-ok" placeholder="Enter Batch Number" 
 					ref={node => {
               			this.batchNumber = node ||'';
            			 }}

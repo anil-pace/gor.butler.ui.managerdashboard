@@ -774,8 +774,8 @@
   },
   {
     "id": "utility.script.incorrectOrderid",
-    "description": "Order id already exist",
-    "defaultMessage": "Order id already exist",
+    "description": "Order ID already exist",
+    "defaultMessage": "Order ID already exist",
     "filepath": "./src/components/utilityComponents/scriptsTile.js"
   },
   {
@@ -4449,8 +4449,8 @@
   },
   {
     "id": "utility.scriptsTile.head",
-    "description": "Run Script",
-    "defaultMessage": "Run Script",
+    "description": "Recall expired items",
+    "defaultMessage": "Recall Expired Items",
     "filepath": "./src/containers/utilityTab.js"
   },
   {
