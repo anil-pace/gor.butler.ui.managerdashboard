@@ -57,7 +57,7 @@ class SaveApplyProfile extends React.Component {
 function mapStateToProps(state, ownProps) {
 
     return {
-        profileRequestedAt:state.ppsConfiguration.profileRequestedAt|| new Date().getTime()
+        profileRequestedAt:state.ppsConfiguration.profileRequestedAt
 
     };
 }

@@ -253,6 +253,10 @@ export const SET_ROLE='SET_ROLE';
 export const SKU_INFO='SKU_INFO';
 export const SKU_DATA="SKU_DATA";
 export const LOC_DATA="LOC_DATA";
+export const WHITELISTED_ROLES={
+	"butler_supervisor" : "Manager",
+	"admin" : "Admin"
+}
 
 /*Constants for pagination*/
 export const PAGE_DATA="PAGE_DATA";

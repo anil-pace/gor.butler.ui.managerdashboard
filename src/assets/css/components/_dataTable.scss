@@ -394,15 +394,16 @@ background-color: #FFFFFF;
 }
 
 
-.Stopped .public_fixedDataTableCell_cellContent{
-
-  background: #fc3838;
-  border-radius: 15px;
-  text-align: center;
-  width:90px;
-  color: #ffffff;
-  font-size: 12px;
-  max-height: 9px;
+.Stopped{   
+  .public_fixedDataTableCell_cellContent{
+      background: #fc3838;
+      border-radius: 15px;
+      text-align: center;
+      width:90px;
+      color: #ffffff;
+      font-size: 12px;
+      max-height: 9px;
+  }
 }
 
 .Error .public_fixedDataTableCell_cellContent{
@@ -1518,14 +1519,10 @@ color: #000000;
   position:relative;
 }
 
+
 .gor-Orderlist-table {
   width: 100%;
   height: 79vh;
-  position:relative;
-}
-
-.gor-Auditlist-table {
-  width: 100%;
   position:relative;
 }
 
@@ -1768,19 +1765,6 @@ input[type="checkbox"]{
   width: 140px;
   display: inline-block;
 }
-
-.gor-audit-actions-button {
-display:inline-block;
-  width: 110px;
-  float:left;
-}
-
-.gor-audit-actions-drop {
- display: inline-block;
-  width: 10.625rem;
-  float:right;
-}
-
 .gor-header-check {
   display: inline-block;
   padding-left: 22px;
@@ -1853,4 +1837,65 @@ font-family: "source sans pro";
   color: #fc3838;
   font-weight: bold;
 }
+
+
+.gorAuditHeader { 
+  display: inline-block; 
+  padding-left: 17px; 
+  padding-top: 14px; 
+  }
+
+.gor-resolve-head {
+  display: inline-block;
+    padding-top: 6px;
+    font-size: 14px;
+    color: #4d5055;
+  
+}
+
+.gor-tooltip {
+  display: none;
+  padding-left: 50px;
+
+}
+.gor-tool-tip-hover {
+  font-weight: normal;
+  color: #27aae1;
+  font-size: 14px;
+  padding-top: 4px;
+}
+
+.gor-subheading-title{
+  line-height: 20px;
+  font-size: 12px;
+  text-align: left;
+  color: #666666;
+}
+.gor-subheading{
+  display: inline-block;
+}
+
+.gor-tooltip-text-wrap {
+    background-color: #ffffff;
+    border: solid 1px grey;
+    border-radius: 3px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.gor-tooltip-arrow {
+  width: 0; 
+  height: 0; 
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid black;
+  margin-left: 23px;
+}
+
+.gor-tooltip-heading{
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
 

@@ -67,7 +67,7 @@ function mapStateToProps(state, ownProps) {
 
     return {
         auth_token: state.authLogin.auth_token,
-        profileRequestedAt:state.ppsConfiguration.profileRequestedAt|| new Date().getTime()
+        profileRequestedAt:state.ppsConfiguration.profileRequestedAt
 
     };
 }
