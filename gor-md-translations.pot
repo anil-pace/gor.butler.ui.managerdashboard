@@ -24,9 +24,9 @@ msgid "Filter all"
 msgstr ""
 
 
-#: OrderContainer.orderstatus.pending
-msgctxt "OrderContainer.orderstatus.pending"
-msgid "Pending"
+#: OrderContainer.orderstatus.pendingTest
+msgctxt "OrderContainer.orderstatus.pendingTest"
+msgid "Pending Test"
 msgstr ""
 
 
