@@ -3815,8 +3815,8 @@
   },
   {
     "id": "storageSpace.table.slotType",
-    "description": "SLOT TYPE",
-    "defaultMessage": "slot type",
+    "description": "slot type",
+    "defaultMessage": "SLOT TYPE",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
