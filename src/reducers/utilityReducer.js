@@ -6,10 +6,13 @@ import {
     UPDATE_FILE_SIZE,
     UTILITY_TAB_REFRESHED,
     STOCK_LEDGER_SKU_VALIDATION,
+    ORDER_RECALL_VALIDATION,
     CLEAR_STOCK_LEDGER_SKU_VALIDATION,
+    CLEAR_ORDER_RECALL_VALIDATION,
     REPORTS_HISTORY,
     GRN_HISTORY
 } from "../constants/frontEndConstants";
+
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -75,6 +78,26 @@ export function utilityValidations(state = {}, action) {
                     invalidStockLedgerSKU: false
                 });
             }
+        case ORDER_RECALL_VALIDATION:
+            var res=action.data;
+              var arr=res.alert_data[0].details;
+              var code=res.alert_data[0].code;
+
+               if (arr.length!==0 || code=='e138') {
+                return Object.assign({}, state, {
+                    invalidOrderId: arr.indexOf('order_id')!==-1?true:false,
+                    invalidSKU: arr.indexOf('product_sku')!==-1?true:false,
+                    invalidBatch: code=='e138'?true:false
+
+                });
+            } 
+        case CLEAR_ORDER_RECALL_VALIDATION:    
+            return Object.assign({}, state, {
+                    invalidOrderId: false,
+                    invalidSKU: false,
+                    invalidBatch: false
+
+                });
 
         case CLEAR_STOCK_LEDGER_SKU_VALIDATION:
             return Object.assign({}, state, {

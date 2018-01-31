@@ -5609,6 +5609,11 @@ button:disabled {
   border: solid 1px #f36f36;
 }
 
+.got-align {
+  float: right;
+  margin-right: 65px;
+}
+
 .gor-filter-body-slider-wrap {
   width: 87%;
   float: left;
@@ -6100,6 +6105,21 @@ button:disabled {
   padding-left: 48%;
 }
 
+.gor-script-tile-footer {
+  border-top: 1px solid #AAAAAA;
+  height: 20%;
+  bottom: 0px;
+  width: 100%;
+}
+
+.gor-script-tile-footer .got-script-btn-wrap {
+  width: 100%;
+  width: 100%;
+  padding-top: 12px;
+  position: absolute;
+  padding-left: 48%;
+}
+
 .gor-utility-tile {
   background: #fff;
   -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
@@ -6271,11 +6291,32 @@ button:disabled {
   padding-bottom: 10px;
 }
 
+.gor-script-sku-wrap {
+  height: 16rem;
+  overflow-y: scroll;
+}
+
+.gor-script-btn-wrap {
+  bottom: 0px;
+  float: left;
+  border-top: 1px solid #AAAAAA;
+  width: 100%;
+  padding: 10px;
+  margin-top: 60px;
+}
+
 .gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
   margin-left: 34px;
   width: 76%;
   box-shadow: none;
   margin-top: 0px;
+}
+
+.gor-utility-recall-header {
+  font-size: 15px;
+  margin-left: 35px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .gor-utility-invoice-h1, .gor-utility-stock-ledger-duration-label {

@@ -69,8 +69,8 @@ const messages = defineMessages({
 	},
 	scriptsTileHead: {
 		id: "utility.scriptsTile.head",
-		description: "Run Script",
-		defaultMessage: "Run Script"
+		description: "Recall expired items",
+		defaultMessage: "Recall Expired Items"
 	},
 	downloadReportsHead: {
 		id: "utility.downloadReport.head",
@@ -672,9 +672,13 @@ class UtilityTab extends React.Component {
 								tileHead={this.context.intl.formatMessage(
 									messages.scriptsTileHead
 								)}
-								showFooter={false}
 							>
-								<ScriptsTile auth_token={this.props.auth_token}/>
+								<ScriptsTile auth_token={this.props.auth_token}
+								validatedScriptBatch={this.props.validatedScriptBatch}
+								validatedScriptOrderid={this.props.validatedScriptOrderid}
+								validatedScriptSKU={this.props.validatedScriptSKU}
+								
+								/>
 							</UtilityTile>
 						: null}
 					{show_stock_ledger_widget
@@ -792,6 +796,9 @@ function mapStateToProps(state, ownProps) {
 		validatedInvoice: state.utilityValidations.invalidInvoice || false,
 		validatedStockLedgerSKU:
 			state.utilityValidations.invalidStockLedgerSKU || false,
+		validatedScriptBatch:state.utilityValidations.invalidBatch,
+		validatedScriptOrderid:state.utilityValidations.invalidOrderId,
+		validatedScriptSKU:	state.utilityValidations.invalidSKU,
 		inventorySpinner: state.spinner.inventoryReportSpinner || false,
 		isMasterUploadProcessing:
 			state.utilityValidations.isMasterUploadProcessing || false,
