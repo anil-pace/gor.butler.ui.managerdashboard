@@ -36,6 +36,19 @@ class InputAfterValidation extends React.Component{
 		e.target.value=val;
 	}
 	render(){
+		let attributes = {
+				autoFocus : this.props.autoFocus,
+			    className : this.props.className,
+			    style : this.props.style,
+			    onFocus:this._onFocus,
+			    value:this.props.value,
+			    onChange:(e)=>{this.props.updateInput(e,this.props.index)},
+			    type:"text",
+			    placeholder:this.props.placeholder,
+			    disabled: this.props.errorMessage === true ? true : false
+		}
+		let hasError = this.props.errorMessage===true ? false : true;
+		
 		return(
 			<div>
 			<input type="checkbox" checked/>
@@ -49,7 +62,8 @@ class InputAfterValidation extends React.Component{
 			    type="text"   
 			    placeholder={this.props.placeholder}/>
 			</div>
-			    <span>Error</span>
+
+			    <span className={"error-message"}>{hasError ? this.props.errorMessage : null}</span>
 			    </div>
 
 			    )

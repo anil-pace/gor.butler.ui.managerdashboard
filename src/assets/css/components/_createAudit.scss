@@ -1,4 +1,22 @@
 .gor-audit-create{
+  .gor-filter-wrapper{
+    display:inline-block;
+  }
+  .gor-audit-edit-att{
+    padding: 5px 25px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
+    color: #606266;
+    font-size: 13px;
+    font-weight: 500;
+    cursor:pointer;
+  }
+  .gor-audit-att-ribbon{
+    
+  }
+  .gor-option-wrapper{
+    width:130px;
+  }
   .gor-modal-head{
     position:static;
   }
@@ -23,7 +41,24 @@
     &.active{
         background: #469DF6;
         color:#fff;
-        border:none;
+        border:1px solid #2C94FD;
+    }
+  }
+  .audit-tabInternal{
+    display:inline-block;
+    text-align:center;
+    padding:15px 20px;
+    color:#DDDDDD;
+    width:46%;
+    cursor:pointer;
+    border-top:1px solid #DDDDDD;
+    border-bottom:1px solid #DDDDDD;
+    &.active{
+        background: #ffffff;
+        text-align:center;
+        color:#000000;
+        box-sizing: border-box;
+        border-bottom:5px solid #2C94FD;
     }
   }
   .location-mode{
@@ -56,7 +91,9 @@
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
     padding-bottom: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
+    width:100%;
+    background-color:#ffffff;
 }
 .gor-audit-drag-drop-container{
   padding:64px 47px;
@@ -140,8 +177,10 @@
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
     margin-top: 10px;
+    margin-left:10px;
     &.after-validation{
       display:inline-block;
+      vertical-align:middle;
     }
 }
 .gor-audit-input-wrap-shifted {
@@ -159,9 +198,10 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
-    max-height: 210px;
-    overflow: auto;
+    border-top:1px solid #DDDDDD;
+    margin-top:10px;
     .gor-audit-location-wrap{
+    
     margin-top:10px;
     }
 }
@@ -297,6 +337,41 @@
     margin-right: 40px;
 }
 
+.gor-auditValidate-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#4D5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #aaaaaa;
+    margin-top:10px;
+    margin-left:10px;
+    cursor: pointer;
+}
+
+.gor-auditValidate-btn-disabled{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#DDDDDD;
+    color:#ffffff;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #DDDDDD;
+    margin-top:10px;
+    margin-left:10px;
+    pointer-events: none;
+    
+}
+
 
 .gor-audit-create-btn {
   height: 35px;
@@ -328,5 +403,109 @@
   padding-top: 10px;
   float:left;
 }
+
+.gor-audit-validation_response{
+  background-color:#00BF6C;
+  color:#FFFFFF;
+  overflow:hidden;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:10px;
+  font-size:13px;
+}
+
+.gor-audit-validation_response_invalid{
+  background-color:#FF0000;
+  color:#FFFFFF;
+  overflow:hidden;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:10px;
+  font-size:13px;
+}
+.gor-audit-addnew-button{
+  color:#2C94FD;
+  background-color:#FBFBFB;
+  margin-top:10px;
+  cursor:pointer;
+  margin-left:10px;
+}
+
+.gor-audit-addnew-button-disabled{
+  display:none;
+}
+
+.gor-delete-outline{
+  border:1px solid #aaaaaa;
+  padding:7px;
+  margin-left:10px;
+  display:inline-block;
+
+}
+
+.gor-delete-location{
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: -255px -75px;
+  cursor:pointer;
+  
+
+  
+}
+
+.gor-delete-location-disabled{
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  background-position: -187px -75px;
+  cursor:pointer;
+  
+      
+}
+
+.left-shift{
+  margin-left:50px;
+}
+
+.gor-create-audit-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    min-width:133px;
+    height:35px;
+    font-size:14px;
+    margin-top:10px;
+    background:#f36f36;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    &.black{
+        background:#4D5055;
+        color:#fff;
+    }
+}
+
+.gor-create-audit-btn-disabled{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    min-width:133px;
+    height:35px;
+    font-size:14px;
+    margin-top:10px;
+    background:#FFD2C2;
+    color:#ffffff;
+    border-radius:3px;
+    cursor:pointer;
+    pointer-events: none;
+    &.black{
+        background:#4D5055;
+        color:#fff;
+    }
+}
+
+
+
+
+
 
 

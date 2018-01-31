@@ -171,7 +171,7 @@ body {
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
-.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr {
+.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-delete-location {
   background-image: url(./images/icons.svg);
 }
 
@@ -3802,7 +3802,7 @@ input[type="checkbox"] {
   font-family: 'Source Sans Pro';
   font-weight: normal;
   font-size: 12px;
-  color: #666666;
+  color: #7E7C7C;
   margin-top: 0.625rem;
   margin-left: 0.625rem;
 }
