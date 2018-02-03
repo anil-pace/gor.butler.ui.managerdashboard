@@ -2,9 +2,8 @@
 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
-import ProgressBar from '../components/progressBar.js';
-import ViewOrderLine from '../containers/neworderTab/viewOrderLine';
-import {modal} from 'react-redux-modal';
+import ProgressBar from '../../components/progressBar';
+import OrderFilter from './orderFilter';
 
 var orderStrings ={
   "ordersCompleted": "Order(s) completed of",
@@ -20,11 +19,13 @@ class OrderTile extends React.Component{
     super(props);
     this.state={
       todaysDate: "",
-      progressCount: 5
+      progressCount: 5,
+      showFilter: false
     }
     this.getTodaysDate = this.getTodaysDate.bind(this);
-    this.viewOrderLine = this.viewOrderLine.bind(this);
-    
+    this.collapseAll = this.collapseAll.bind(this);
+    this.showFilter = this.showFilter.bind(this);
+    this.hideFilter = this.hideFilter.bind(this);
   } 
 
   componentDidMount(){
@@ -42,18 +43,26 @@ class OrderTile extends React.Component{
     })
   }
 
-  viewOrderLine() {
-    modal.add(ViewOrderLine, {
-        title: '',
-        size: 'large',
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-            //.. all what you put in here you will get access in the modal props ;),
-        });
+  collapseAll(){
+     this.props.contractAll(false);
   }
-  
+
+  showFilter(){
+    this.setState({
+      showFilter: true
+    })
+  }
+
+  hideFilter(data){
+    this.setState({
+      showFilter: data
+    })
+  }
+
   render()
   {
+      let filterHeight=screen.height - 190 - 50;
+      console.log(this.state.showFilter);
       return (
           <div className="orderTopWrapper">
               <div className="orderLeftWrapper">
@@ -82,17 +91,25 @@ class OrderTile extends React.Component{
                 <div className="orderRightContent">
                   <div className="orderButtonWrapper">
                     <div className="gorButtonWrap">
-                      <button className="ordersCollapseAll" onClick={this.viewOrderLine.bind(this)}>
+                      <button className="ordersCollapseAll" onClick={this.collapseAll.bind(this)}>
                       <FormattedMessage id="orders.table.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
                       </button>
                     </div>
                   <div className="gorButtonWrap">
-                      <button className="ordersFilterData">
+                      <button className="ordersFilterData" onClick={this.showFilter.bind(this)}>
                       <div className="gor-manage-task"/>
                       <FormattedMessage id="orders.tabel.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
                       </button>
                   </div>
                   </div>
+
+                  {this.state.showFilter? 
+                        (<div className="gor-filter-wrap"
+                             style={{'width': this.state.showFilter ? '350px' : '0px', height: filterHeight}}>
+                            <OrderFilter hideFilter={this.hideFilter}/>
+                        </div>) : null
+                  }
+                  
 
                   <div className="orderRightHeader"> 
                     <FormattedMessage id="orders.summary" description="header of orders summary" defaultMessage="Order summary "/>
