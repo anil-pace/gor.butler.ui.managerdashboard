@@ -1,8 +1,16 @@
 .gor-global-notification{
-	.success{
-		background: #71B56D;
-    	padding: 10px 5px;
+	.message{
+		padding: 10px 5px;
     	color: #fff;
     	font-size: calculateRem(12px);
+    	background: #71B56D;
+    	font-weight: bold;
+	}
+	.success{
+		background: #3cb669;
+    	
+	}
+	.error{
+		background: #ea2127;
 	}
 }

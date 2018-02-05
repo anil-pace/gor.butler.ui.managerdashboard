@@ -24,24 +24,43 @@
     width:85%;
     margin:auto;
   }
+  .audit-index{
+  width:100%;
+  background-color:#dddddd;
+  border-radius:50%;
+  padding-left:7px;
+  padding-right:7px;
+  padding-top:2px;
+  padding-bottom:2px;
+  color:#ffffff;
+  overflow:hidden;
+  margin-right:10px;
+  &.active{
+    background-color:#419bf9;
+    color:#ffffff;
+  }
+  }
   
   .tabs{
-    width: 56%;
+    width: 45%;
     margin: auto;
   }
   .tab{
     display:inline-block;
     padding:15px 20px;
-    color:#6E6E6E;
-    width:42%;
-    border-radius:2px;
+    color:#666666;
+    width:46%;
     cursor:pointer;
-    border:1px solid #6E6E6E;
+    border:1px solid #aaaaaa;
     box-sizing: border-box;
+    font-family: 'Source Sans Pro';
+    font-size: 16px;
+    font-weight: 600;
     &.active{
-        background: #469DF6;
+        background: #419bf9;
+        text-align:center;
         color:#fff;
-        border:1px solid #2C94FD;
+        border:1px solid #419bf9;
     }
   }
   .audit-tabInternal{
@@ -52,7 +71,6 @@
     width:46%;
     cursor:pointer;
     border-top:1px solid #DDDDDD;
-    border-bottom:1px solid #DDDDDD;
     &.active{
         background: #ffffff;
         text-align:center;
@@ -62,6 +80,7 @@
     }
   }
   .location-mode{
+      width:92%;
     &.active-mode{
       display:block;
     }
@@ -75,23 +94,25 @@
       font-weight: 600;
       text-align: left;
       padding: 10px 5px;
-      width: 35%;
+      width: 29%;
+      margin-top:10px;
+      margin-right:10px;
       cursor: pointer;
     &.active-mode{
-      border:1px solid #4EA1F6;
-      color:#4EA1F6;
+      border:1px solid #419bf9;
+      color:#419bf9;
     }
     &.inactive-mode{
-      border:1px solid #737373;
-      color:#737373;
+      border:solid 1px #cccccc;
+      color:#666666;
     }
   }
 .gor-sku-validation-btn-wrap{
     display:inline-block;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: solid 1px #dddddd;
+    border-top: solid 1px #dddddd;
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top:3px;
     width:100%;
     background-color:#ffffff;
 }
@@ -118,6 +139,7 @@
 
 .gor-audit-upload-file{
   position: relative;
+  
   margin-top:5px;
 }
 
@@ -171,8 +193,8 @@
 }
 
 .gor-audit-input-wrap {
-    width: 40%;
-    padding:10px 5px;
+    width: 38%;
+    padding:7px 5px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
@@ -182,6 +204,32 @@
       display:inline-block;
       vertical-align:middle;
     }
+    &.error-tuple{
+      border: 1px solid #D8595E;
+      .error-icon{
+        height:18px;
+        width:18px;
+        display:block;
+        vertical-align: middle;
+        background-position: -17px -76px;
+        float:right;
+      }
+
+    }
+    &.valid-tuple{
+      border: 1px solid #D6D6D6;
+      background:#F8F8F8;
+      input[disabled]{
+        background:#F8F8F8;
+      }
+    }
+}
+.error-message{
+    font-size: 14px;
+    margin-left: 10px;
+    color: #C9262B;
+    font-weight: bold;
+    vertical-align: middle;
 }
 .gor-audit-input-wrap-shifted {
     display: inline-block;
@@ -198,10 +246,9 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
-    border-top:1px solid #DDDDDD;
+    border-top:1px solid #dddddd;
     margin-top:10px;
     .gor-audit-location-wrap{
-    
     margin-top:10px;
     }
 }
@@ -339,17 +386,16 @@
 
 .gor-auditValidate-btn{
     font-family:'Source Sans Pro Bold', sans-serif;
-    width:113px;
+    width:20%;
     height:35px;
     font-size:14px;
-    background:#4D5055;
+    background:#4d5055;
     color:#ffffff;
     border-radius:3px;
     margin-right:10px;
     vertical-align: sub;
     border-radius: 3px;
-    border: solid 1px #aaaaaa;
-    margin-top:10px;
+    border: solid 1px #4d5055;
     margin-left:10px;
     cursor: pointer;
 }
@@ -366,9 +412,9 @@
     vertical-align: sub;
     border-radius: 3px;
     border: solid 1px #DDDDDD;
-    margin-top:10px;
     margin-left:10px;
     pointer-events: none;
+    margin-top:10px;
     
 }
 
@@ -376,9 +422,9 @@
 .gor-audit-create-btn {
   height: 35px;
   border-radius: 3px;
-  background-color: #4d5055;
+  background-color: #FF6105;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: "Source Sans Pro Bold";
   font-size: 14px;
   font-weight: 600;
   text-align: left;
@@ -387,6 +433,7 @@
   padding-right: 14px;
   vertical-align: sub;
   cursor: pointer;
+
 }
 
 .gor-audit-cancelling-text{
@@ -424,11 +471,15 @@
   font-size:13px;
 }
 .gor-audit-addnew-button{
-  color:#2C94FD;
+  color:#419bf9;
   background-color:#FBFBFB;
   margin-top:10px;
   cursor:pointer;
   margin-left:10px;
+  font-weight:600;
+  font-family: 'Source Sans Pro';
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .gor-audit-addnew-button-disabled{
@@ -471,7 +522,8 @@
 }
 
 .gor-create-audit-btn{
-    font-family:'Source Sans Pro Bold', sans-serif;
+    font-family:'Source Sans Pro';
+    font-weight:bold;
     min-width:133px;
     height:35px;
     font-size:14px;
@@ -502,6 +554,76 @@
         color:#fff;
     }
 }
+
+h1 {
+  overflow: hidden;
+  text-align: center;
+}
+
+h1:before,
+h1:after {
+  background-color: #AAAAAA;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+h1:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+h1:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.gor-usr-hdsm-audit{
+            font-family:'Source Sans Pro';
+            font-size:14px;
+            font-weight: 600;
+            color:#333333;   
+            margin-top:25px; 
+            display:inline-block;
+            width:40%;
+        }
+
+
+  .gor-audit-csvupload-or{
+  color:#AAAAAA;
+  }
+.abc{
+  -webkit-animation: seconds 1.0s forwards;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-delay: 5s;
+  animation: seconds 1.0s forwards;
+  animation-iteration-count: 1;
+  animation-delay: 5s;
+  position: relative;
+  background: red;
+}
+@-webkit-keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    left: -9999px; 
+  }
+}
+@keyframes seconds {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    left: -9999px; 
+  }
+}
+
 
 
 

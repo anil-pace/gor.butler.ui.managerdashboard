@@ -722,7 +722,7 @@ render() {
     <div className="gor-filter-add-token"/>
     <FormattedMessage id="audit.table.buttonLable"
     description="button label for audit create"
-    defaultMessage="Create New Task"/>
+    defaultMessage="Create AUDIT"/>
     </button>
     </div>
     <div className="gor-button-wrap">

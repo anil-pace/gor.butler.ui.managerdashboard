@@ -361,6 +361,8 @@ singleNotification=<GorToastify key={1}>
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
+
+    
    {showFireHazardPopup?notificationWrap:""}
   </div>
 		);
