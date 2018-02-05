@@ -1,7 +1,7 @@
 //source: https://codepen.io/adamaoc/pen/wBGGQv?editors=1010
 
 import React  from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate } from 'react-intl';
 import ProgressBar from '../../components/progressBar';
 import OrderFilter from './orderFilter';
 
@@ -18,29 +18,15 @@ class OrderTile extends React.Component{
   {
     super(props);
     this.state={
-      todaysDate: "",
       progressCount: 5,
       showFilter: false
     }
-    this.getTodaysDate = this.getTodaysDate.bind(this);
     this.collapseAll = this.collapseAll.bind(this);
     this.showFilter = this.showFilter.bind(this);
     this.hideFilter = this.hideFilter.bind(this);
   } 
 
   componentDidMount(){
-    this.getTodaysDate();
-  }
-
-  getTodaysDate(){
-    let d = new Date();
-    let date = d.getDate();
-    let year = d.getFullYear();
-    let month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()];
-    let currentDate = date + " " + month + " " + year; 
-    this.setState({
-      todaysDate : currentDate
-    })
   }
 
   collapseAll(){
@@ -62,13 +48,17 @@ class OrderTile extends React.Component{
   render()
   {
       let filterHeight=screen.height - 190 - 50;
-      console.log(this.state.showFilter);
       return (
           <div className="orderTopWrapper">
               <div className="orderLeftWrapper">
                 <div className="orderLeftContent">
                   <div className="dateTimeWrapper">
-                    <span className="dateTime"> {this.state.todaysDate} </span>
+                      <FormattedDate 
+                          value={new Date()}
+                          day='2-digit'
+                          month='short'
+                          year='numeric'
+                      />
                   </div>
                   <div className="orderLeftHeader"> 
                     <FormattedMessage id="orders.progress" description="header of orders progress" defaultMessage="Order fulfuilment progress "/>
