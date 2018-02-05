@@ -362,9 +362,7 @@ singleNotification=<GorToastify key={1}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
 
-    <Link to="/newaudit" onClick={this.handleTabClick.bind(this,NEWAUDIT)}>
-      <Tab items={{ tab: items.newaudit, Status: items.newauditStatus, currentState:items.newauditClass}} changeClass={(this.props.tab.toUpperCase()=== NEWAUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.newauditIcon}/>
-      </Link>
+    
    {showFireHazardPopup?notificationWrap:""}
   </div>
 		);

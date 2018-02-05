@@ -4,7 +4,7 @@ import { resetForm,validateSKU,validateLOC,validateSKUcode,validateLocationcode,
 import {setAuditType,resetAuditType,auditValidatedAttributes,auditValidatedAttributesLocation,auditValidatedAttributesLocationCsv} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import { connect } from 'react-redux';
-import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION } from '../../constants/frontEndConstants';
+import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION,CREATE_AUDIT_REQUEST } from '../../constants/frontEndConstants';
 import { AUDIT_URL,AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
@@ -16,11 +16,13 @@ import {Tab} from '../../components/gor-tabs/tabContent';
 import CSVUpload from '../../components/gor-drag-drop-upload/index';
 import  {setCheckAll} from '../../actions/sortHeaderActions';
 import {makeAjaxCall} from '../../actions/ajaxActions';
+import Spinner from '../../components/spinner/Spinner';
+import {setAuditSpinner} from '../../actions/auditActions';
 const  messages= defineMessages({
     auditnameplaceholder: {
         id: 'audit.nameplaceholder.text',
         description: 'text for audit name placeholder',
-        defaultMessage: 'Time,place or products'
+        defaultMessage: 'Time, place or products'
     },
     auditinputplaceholder: {
         id: 'audit.inputplaceholder.text',
@@ -67,7 +69,8 @@ class CreateAudit extends React.Component{
         locationMode:"location",
         skuMode:"sku",
         checkedState:true,
-        isValidCsv:true
+        isValidCsv:true,
+        isAuditCreated:false
         
       };
       
@@ -215,7 +218,7 @@ class CreateAudit extends React.Component{
                 'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,//'https://192.168.14.124:5000/api/audit'+'/validate',
                 'formdata':(type === "create") ? validLocationDataCreateAudit : validLocationData,
                 'method':POST,//POST,
-                'cause':VALIDATE_LOCATION_ID,
+                'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_LOCATION_ID,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token
@@ -223,8 +226,10 @@ class CreateAudit extends React.Component{
     
     this.props.makeAjaxCall(urlData);
     this.props.validateLocationcodeSpinner(true);
+    this.props.setAuditSpinner(true);
     if(type==="create"){
       this.props.removeModal();
+      this.props.reloadAuditList(null);
     }
 
   }
@@ -586,11 +591,11 @@ _processSkuAttributes() {
                     <Tab tabName = {auditBySkuMessg} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'} internalTab={false} >
                           <div>
-                          <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
+                          <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
                           <div>
                           <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
-                            <div className='gor-usr-hdsm'>
+                            <div className='gor-usr-hdsm-audit'>
                           <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
                           </div>
                           
@@ -626,11 +631,11 @@ _processSkuAttributes() {
                                  linkClassName={'link-class-0'} internalTab={false} >
                          
                       <div>
-                        <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
                         <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
-                        <div className='gor-usr-hdsm'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
                             <button onClick={()=>(self._onLocationModeSelection('csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
@@ -639,7 +644,7 @@ _processSkuAttributes() {
 
                           
                       <div className={`location-mode ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}>
-                         <div className='gor-usr-hdsm'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
+                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
                         defaultMessage='Enter Location and validate'/></div>
 
 
@@ -665,9 +670,10 @@ _processSkuAttributes() {
                       </div>) 
               }) }
               
-
+               <div>
     <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
+                        </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
               {allLocationsValid?
@@ -723,15 +729,18 @@ _processSkuAttributes() {
                     
                     return(tuples) 
               })}
-
+            <div>
             <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
+                        </div>
+                        
               </div>
             }
-            
                           <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(!self.state.copyPasteLocation.isInputEmpty)?"gor-auditValidate-btn":"gor-auditValidate-btn-disabled"}  type="button" onClick={this._validLocation}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/></button>
+                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/>
+                          
+        </button>
               </div>
               <div>
              <button onClick={()=>{this._validLocation("create")}} className={validationDone && allLocationsValid && self.state.locationAttributes.totalLocations!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
@@ -757,7 +766,7 @@ _processSkuAttributes() {
                         <div className="gor-audit-csvupload-wrap">
                         <div className="gor-global-notification">
                         {!self.state.isValidCsv?
-                        <div className={"message error"}>
+                        <div className={"abc"}>
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
                                                               defaultMessage='Error found, Please try again'
                                                              />
@@ -771,8 +780,8 @@ _processSkuAttributes() {
                       <div className="gor-file-upload"></div>
                       <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
                         defaultMessage='Drag and drop'/></p>
-                      <p><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
-                        defaultMessage='OR'/></p>
+                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
+                        defaultMessage='OR'/></span></h1>
                     </div>
                   </CSVUpload>
                 </div>
@@ -804,7 +813,9 @@ CreateAudit.PropTypes={
     skuAttributes:React.PropTypes.object,
     locationAttributes:React.PropTypes.object,
     locationAttributesCsv:React.PropTypes.object,
-    intl: intlShape.isRequired
+    intl: intlShape.isRequired,
+    auditSpinner: React.PropTypes.bool,
+    setAuditSpinner: React.PropTypes.func
 
 }
 
@@ -832,7 +843,8 @@ function mapStateToProps(state, ownProps){
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       locationAttributesCsv:state.auditInfo.locationAttributesCsv,
-      hasDataChanged:state.auditInfo.hasDataChanged
+      hasDataChanged:state.auditInfo.hasDataChanged,
+      auditSpinner: state.spinner.auditSpinner || false
   };
 }
 
@@ -854,7 +866,10 @@ function mapDispatchToProps(dispatch){
     auditValidatedAttributes: function(data){dispatch(auditValidatedAttributes(data));},
     auditValidatedAttributesLocation: function(data){dispatch(auditValidatedAttributesLocation(data));},
     auditValidatedAttributesLocationCsv: function(data){dispatch(auditValidatedAttributesLocationCsv(data));},
-    setCheckAll: function (data) {dispatch(setCheckAll(data)) }
+    setCheckAll: function (data) {dispatch(setCheckAll(data)) },
+    setAuditSpinner: function (data) {
+            dispatch(setAuditSpinner(data))
+        }
   }
 };
 

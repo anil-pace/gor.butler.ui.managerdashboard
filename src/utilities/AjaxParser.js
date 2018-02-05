@@ -12,6 +12,7 @@ import {
     auditValidatedAttributes,
     auditValidatedAttributesLocation,
     auditValidatedAttributesLocationCsv,
+    createAuditAction
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
@@ -59,6 +60,7 @@ import {
     AUDIT_RESOLVE_CONFIRMED,
     VALIDATE_SKU_ID,
     VALIDATE_LOCATION_ID,
+    CREATE_AUDIT_REQUEST,
     VALIDATE_LOCATION_ID_CSV,
     PAUSE_OPERATION,
     RESUME_OPERATION,
@@ -360,7 +362,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(auditValidatedAttributesLocation(res));
             store.dispatch(validateLocationcodeSpinner(false));
             break;
-
+        case CREATE_AUDIT_REQUEST:
+            store.dispatch(createAuditAction(res));
+            break;
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
                 store.dispatch(auditValidatedAttributesLocationCsv(res));

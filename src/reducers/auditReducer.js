@@ -1,4 +1,10 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATE_LOCATION_SPINNER,VALIDATE_LOCATION_SPINNER_CSV,VALIDATED_ATTIBUTES_DATA,VALIDATED_ATTIBUTES_DATA_LOCATION,VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED} from '../constants/frontEndConstants';
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,
+  VALIDATE_SKU_SPINNER,VALIDATE_LOCATION_SPINNER,
+  VALIDATE_LOCATION_SPINNER_CSV,
+  VALIDATED_ATTIBUTES_DATA,
+  VALIDATED_ATTIBUTES_DATA_LOCATION,
+  VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
+  TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -137,13 +143,14 @@ export  function auditInfo(state={},action){
      return Object.assign({}, state, { 
             "textBoxStatus" : action.data
           })
-          
-
-      case AUDIT_LIST_REFRESHED:
+    case AUDIT_LIST_REFRESHED:
           return Object.assign({}, state, {
               "auditListRefreshed": new Date()
           })
-                     
+    case CREATE_AUDIT_REQUEST:
+           return Object.assign({}, state, {
+              "auditCreationSuccessful": action.data.audit_id ? !state.auditCreationSuccessful : state.auditCreationSuccessful
+          })          
     default:
       return state
   }

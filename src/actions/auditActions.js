@@ -12,7 +12,8 @@ import {
     VALIDATED_ATTIBUTES_DATA_LOCATION,
     VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
     TEXTBOX_STATUS,
-    AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
+    AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY,
+    CREATE_AUDIT_REQUEST
 } from '../constants/frontEndConstants'
 
 export function getAuditData(params) {
@@ -126,6 +127,13 @@ export function cancelAudit(params) {
 export function setAuditQuery(data){
     return {
         type:SET_AUDIT_QUERY,
+        data
+    }
+}
+
+export function createAuditAction(data){
+    return {
+        type:CREATE_AUDIT_REQUEST,
         data
     }
 }
