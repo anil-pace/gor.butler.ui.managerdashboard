@@ -17,11 +17,11 @@ import ProgressBar from '../components/progressBar';
 import {showTableFilter} from '../actions/filterAction';
 
 	var wData = [
-		{cutofftime: "CUT OFF TIME 1", timeLeft: "1 hrs left", progressBar: "5", totalOrder: "Total orders 1111", action: <i className="down"></i>},
-		{cutofftime: "CUT OFF TIME 2", timeLeft: "2 hrs left", progressBar: "10", totalOrder: "Total orders 2", action: <i className="down"></i>},
-		{cutofftime: "CUT OFF TIME 3", timeLeft: "3 hrs left", progressBar: "Pending", totalOrder: "Total orders 3", action: <i className="down"></i>},
-		{cutofftime: "CUT OFF TIME 4", timeLeft: "4 hrs left", progressBar: "Pending", totalOrder: "Total orders 4", action: <i className="down"></i>},
-		{cutofftime: "CUT OFF TIME 5", timeLeft: "5 hrs left", progressBar: "0", totalOrder: "Total orders 5", action: <i className="down"></i>}
+		{cutofftime: "CUT OFF TIME 1", timeLeft: "1 hrs left", progressBar: "5", totalOrder: "Total orders 1111"},
+		{cutofftime: "CUT OFF TIME 2", timeLeft: "2 hrs left", progressBar: "10", totalOrder: "Total orders 2"},
+		{cutofftime: "CUT OFF TIME 3", timeLeft: "3 hrs left", progressBar: "Pending", totalOrder: "Total orders 3"},
+		{cutofftime: "CUT OFF TIME 4", timeLeft: "4 hrs left", progressBar: "Pending", totalOrder: "Total orders 4"},
+		{cutofftime: "CUT OFF TIME 5", timeLeft: "5 hrs left", progressBar: "0", totalOrder: "Total orders 5"}
 	];
 
 	var oData = [
@@ -64,13 +64,15 @@ class newordersTab extends React.Component{
 		if(wDataLen){
 			for(let i =0 ; i < wDataLen; i++){
 				let waveRow = [];
-				waveRow.push(<div className="cellWrapper">
+				waveRow.push(<div style={{padding: "2px 35px"}} className="cellWrapper">
 								<div className="mainTitle">{wData[i].cutofftime}</div>
 								<div className="subTitle">{wData[i].timeLeft}</div>
 							</div>);
-				waveRow.push(<div className="cellWrapper"> <ProgressBar progressWidth={wData[i].progressBar}/> </div> );
-				waveRow.push(wData[i].totalOrder);
-				waveRow.push(wData[i].action);
+				waveRow.push(<div style={{width: "50%"}} className="cellWrapper"> <ProgressBar progressWidth={wData[i].progressBar}/> </div> );
+				waveRow.push(<div className="cellWrapper">
+								<span> {wData[i].totalOrder} </span>
+							</div>);
+				//waveRow.push(wData[i].action);
 				waveRows.push(waveRow);
 			}
 			processedData.waveData = waveRows;
@@ -79,12 +81,12 @@ class newordersTab extends React.Component{
 		if(oDataLen){
 			for(let i=0; i < oDataLen; i++){
 				let orderRow = [];
-				orderRow.push(oData[i].orderId);
+				orderRow.push(<div style={{padding: "2px 35px"}}> {oData[i].orderId} </div>);
 				orderRow.push(<div className="cellWrapper"> <ProgressBar progressWidth={oData[i].progressBar}/> </div>);
 				orderRow.push(oData[i].totalOrder);
 				if(oData[i].action === true){
 					orderRow.push(<div key={i} className="gorButtonWrap" onClick={this.viewOrderLine.bind(this)}>
-	                  <button className="ordersCollapseAll">
+	                  <button>
 	                  <FormattedMessage id="orders.view orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
 	                  </button>
 	                </div>);
@@ -117,6 +119,7 @@ class newordersTab extends React.Component{
 		return(
 			<div>
 			  	<OrderTile contractAll={this.collapseAll.bind(this)}/>
+
 			    <div className="waveListWrapper">
 				    <GTable options={['table-bordered']}>
                             <GTableBody data={processedData.waveData}>
@@ -169,9 +172,7 @@ var mapDispatchToProps=function (dispatch) {
     }
 };
 
-newordersTab.contextTypes={
-    intl: React.PropTypes.object.isRequired
-}
+
 newordersTab.PropTypes={
     showFilter: React.PropTypes.bool,
 }

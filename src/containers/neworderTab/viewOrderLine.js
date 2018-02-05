@@ -2,10 +2,32 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 
+
+let dataSource =[
+{
+    name:'Paul mak',
+    image: <img width="50" src="./images/profile_img.png"/>,
+},
+{
+    name:'John Doe',
+    image : '002'
+},
+{
+    name:'Sachin Tendulkar',
+    image : '003'
+}];
+
+
 class ViewOrderLine extends React.Component{
   constructor(props) 
   {
       super(props); 
+      this.state={
+        searchValue: 'Search product',
+        query: '',
+        filteredData: undefined
+      }
+      this.handleChange = this.handleChange.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -15,6 +37,51 @@ class ViewOrderLine extends React.Component{
     {
       this._removeThisModal();
     }
+  }
+
+  handleChange(event) {
+    this.setState({searchValue: event.target.value});
+    console.log("===========================================================>");
+      console.log("===========================================================>");
+      console.log(this.state.searchValue);
+    var queryResult=[];
+        dataSource.forEach(function(person){
+            if(person.name.toLowerCase().indexOf(event.target.value)!=-1)
+            queryResult.push(person);
+        });
+
+        console.log("===========================================================>");
+        console.log("===========================================================>");
+        console.log(queryResult);
+
+        // this.setState({
+        //     query:queryText,
+        //     filteredData: queryResult
+        // })
+  }
+
+  doSearch(queryText){
+    console.log(queryText);
+    var queryResult=[];
+        dataSource.forEach(function(person){
+            if(person.name.toLowerCase().indexOf(queryText)!=-1)
+            queryResult.push(person);
+        });
+
+        this.setState({
+            query:queryText,
+            filteredData: queryResult
+        })
+  }
+
+  renderResults(){
+      if (this.state.filteredData) {
+          return (
+            <div> 
+              Hello
+            </div>
+          );
+      }
   }
 
   render()
@@ -83,13 +150,17 @@ class ViewOrderLine extends React.Component{
                       </div>
                   </div>
                   <div className="orderDetailsSearchWrap"> 
+                    <div className="searchBarWrapper">
                       <div className="searchIconWrap"> 
                         <div className="gor-search-icon"></div>
                       </div>
-                      <input type="text" className="gor-search-input-wrap" value="Search Product" />
+                      <div className="inputWrapper"> 
+                        <input type="text" className="gor-search-input-wrap" value={this.state.searchValue} onChange={this.handleChange} doSearch={this.doSearch}/>
+                      </div>
+                    </div>
                   </div>
               </div>
-
+              {this.renderResults()}
             </div>
           </div>
         </div>

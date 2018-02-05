@@ -2,13 +2,14 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 // import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
 // import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 // import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-// import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
+import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 // import {hashHistory} from 'react-router'
-// import {SINGLE,ORDER_INPROGRESS,ORDER_BREACHED,ORDER_COMPLETED,ORDER_EXCEPTION,ORDER_UNFULFILLABLE,ORDER_ONHOLD,ORDER_CANCELLED,ALL} from './../../constants/frontEndConstants'
+import {SINGLE} from './../../constants/frontEndConstants'
 import {
     PICK_BEFORE_TIME,
     ORDER_ID,
@@ -19,9 +20,11 @@ class OrderFilter extends React.Component{
     constructor(props) 
     {
         super(props);
-        // this.state={tokenSelected: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}, searchQuery: {},
-        //               defaultToken: {"STATUS":["all"], "TIME PERIOD":["allOrders"]}}; 
-        this.state={searchQuery: {}};
+         this.state={
+                      tokenSelected: {"ORDER TAGS":["any"], "STATUS":["any"] }, 
+                      searchQuery: {},
+                      defaultToken: {"STATUS":["any"], "TIME PERIOD":["any"] }
+                    }; 
         // this._applyFilter =  this._applyFilter.bind(this);
          this._closeFilter = this._closeFilter.bind(this);
         // this._clearFilter = this._clearFilter.bind(this);
@@ -57,43 +60,37 @@ class OrderFilter extends React.Component{
   //           this.setState(this.props.orderFilterState)
   //       }
   //   }  
-  //   _processFilterToken() {
-  //       var tokenField1={value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage="STATUS"/>};
-  //       var tokenField2={value:"TIME PERIOD", label:<FormattedMessage id="order.token.timePeriod" defaultMessage="TIME PERIOD"/>}; 
-  //       var labelC1=[
-  //                   { value: ALL, label: <FormattedMessage id="order.STATUS.all" defaultMessage="All orders"/>},
-  //                   { value: ORDER_BREACHED, label: <FormattedMessage id="order.STATUS.breach" defaultMessage="Breached orders"/>},
-  //                   { value: ORDER_COMPLETED, label: <FormattedMessage id="order.STATUS.completed" defaultMessage="Completed orders"/>},
-  //                   { value: ORDER_EXCEPTION, label: <FormattedMessage id="order.STATUS.exep" defaultMessage="Exception"/>},
-  //                   { value: ORDER_UNFULFILLABLE, label: <FormattedMessage id="order.STATUS.unfulfillable" defaultMessage="Unfulfillable"/>},
-  //                   { value: ORDER_ONHOLD, label: <FormattedMessage id="order.STATUS.onhold" defaultMessage="On hold"/>},
-  //                   { value: ORDER_CANCELLED, label: <FormattedMessage id="order.STATUS.cancelled" defaultMessage="Cancelled"/>},  
-  //                   { value: ORDER_INPROGRESS, label: <FormattedMessage id="order.STATUS.inprogress" defaultMessage="In Progress"/>}
+    _processFilterToken() {
+        var tokenField1={value:"orderTags", label:<FormattedMessage id="order.token.orderTags" defaultMessage="ORDER TAGS"/>};
+        var tokenField2={value:"status", label:<FormattedMessage id="order.token.status" defaultMessage="STATUS"/>}; 
 
-  //                   ];
-  //       var labelC2=[
-  //                   { value: 'allOrders', label: <FormattedMessage id="order.timePeriod.all" defaultMessage="All"/>},
-  //                   { value: 'oneHourOrders', label: <FormattedMessage id="order.timePeriod.oneHr" defaultMessage="Last 1 hours"/>},
-  //                   { value: 'twoHourOrders', label: <FormattedMessage id="order.timePeriod.twoHR" defaultMessage="Last 2 hours"/>},
-  //                   { value: 'sixHourOrders', label: <FormattedMessage id="order.timePeriod.sixHr" defaultMessage="Last 6 hours"/>},
-  //                   { value: 'twelveHourOrders', label: <FormattedMessage id="order.timePeriod.twoHr" defaultMessage="Last 12 hours"/>},
-  //                   { value: 'oneDayOrders', label: <FormattedMessage id="order.timePeriod.oneday" defaultMessage="Last 1 day"/>}
-  //                   ];
-  //       var selectedToken= this.state.tokenSelected;
-  //       var column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-  //       var column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection={SINGLE}/>;
-  //       var columnDetail={column1token:column1, column2token:column2};
-  //       return columnDetail;
-  //   }
+        var labelC1=[
+                      { value: 'any', label: <FormattedMessage id="order.orderTags.any" defaultMessage="Any"/>},
+                      { value: 'urgent', label: <FormattedMessage id="order.orderTags.urgent" defaultMessage="Urgent"/>},
+                      { value: 'express', label: <FormattedMessage id="order.orderTags.express" defaultMessage="Express"/>},
+                    ];
 
-    // _handelTokenClick(field,value,state) {
-    //     this.setState({tokenSelected:handelTokenClick(field,value,state,this.state)});
-        
-    // }
+        var labelC2=[
+                      { value: 'any', label: <FormattedMessage id="order.status.any" defaultMessage="Any"/>},
+                      { value: 'pending', label: <FormattedMessage id="order.status.pending" defaultMessage="Pending"/>},
+                      { value: 'breachrisk', label: <FormattedMessage id="order.status.breachRish" defaultMessage="Braeach risk"/>},
+                      { value: 'breached', label: <FormattedMessage id="order.status.breached" defaultMessage="Breached"/>},
+                      { value: 'breached&completed', label: <FormattedMessage id="order.status.breached&Completed" defaultMessage="Breach&Completed"/>}
+                    ];
+        var selectedToken= this.state.tokenSelected;
+        var column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        var column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken} selection={SINGLE}/>;
+        var columnDetail={column1token:column1, column2token:column2};
+        return columnDetail;
+    }
 
-    // _handleInputQuery(inputQuery,queryField) {
-    //     this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})
-    // }
+    _handelTokenClick(field,value,state) {
+        this.setState({tokenSelected:handelTokenClick(field,value,state,this.state)});
+    }
+
+    _handleInputQuery(inputQuery,queryField) {
+        this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})
+    }
 
     // _applyFilter() {
     //     var filterState=this.state, _query={}
@@ -121,7 +118,7 @@ class OrderFilter extends React.Component{
     //     hashHistory.push({pathname: "/orders/orderlist", query: {}})
     // }
 
-    _processOrderInputField(){
+    _processOrderSearchField(){
 
       const filterInputFields=
         [{
@@ -143,8 +140,11 @@ class OrderFilter extends React.Component{
 
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
-        var inputField=<FilterInputFieldWrap inputText={filterInputFields}
-                                             inputValue={inputValue} textboxStatus={textboxStatus}/>
+        var inputField=<FilterInputFieldWrap 
+                             inputText={filterInputFields}
+                             inputValue={inputValue} 
+                             handleInputText={this._handleInputQuery.bind(this)}
+                             textboxStatus={textboxStatus}/>
         return inputField;
     }
 
@@ -152,8 +152,8 @@ class OrderFilter extends React.Component{
 
     render(){
         //var noOrder=this.props.orderData.noResultFound;
-         var orderInputField=this._processOrderInputField();
-        // var orderFilterToken=this._processFilterToken();
+         var orderSearchField=this._processOrderSearchField();
+         var orderFilterToken=this._processFilterToken();
         return (
             <div>
                  <Filter>
@@ -167,9 +167,18 @@ class OrderFilter extends React.Component{
                     </div>
                     <div className="gor-filter-body">
                          <div className="gor-filter-body-input-wrap"> 
-                            {orderInputField}
+                            {orderSearchField}
                          </div>
+                         <div className="gor-filter-body-filterToken-wrap"> 
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderFilterToken.column1token}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderFilterToken.column2token}
+                            </div>
+                            
 
+                         </div>
                          
                      </div>
 

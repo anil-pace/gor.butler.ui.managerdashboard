@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: row;
 	background: #fff;
-	height: 180px;
 	width: 100%;
 	color: #4a4a4a;
 	border-bottom: 3px solid #dddddd;
@@ -10,13 +9,14 @@
 		display: inline-block;
 		width: 40%;
 		.orderLeftContent{
-			margin: 30px 75px 30px 45px;
+			padding: 30px 30px 30px 45px;
+			width: 75%;
 			.dateTimeWrapper{
 				font-size: calculateRem(18px);
 				font-weight: bold;
 			}
 			.orderLeftHeader{
-				margin-top: 20px;
+				margin: 20px 0px;
 				font-size: calculateRem(16px);
 				font-weight: bold;
 			}
@@ -42,13 +42,14 @@
 		display: inline-block;
 		width: 60%;
 		.orderRightContent{
-			margin: 0px 30px 30px 70px;
+			padding: 0px 30px 30px 70px;
 			.orderButtonWrapper{
 				float: right;
 				.gorButtonWrap{
 					display: inline-block;
 					margin-top: 30px;
 					.ordersCollapseAll{
+						font-family: 'Source Sans Pro Bold', sans-serif;
 					    min-width: 113px;
 					    height: 35px;
 					    font-size: 14px;
@@ -60,6 +61,7 @@
 					    border: 1px solid #aaaaaa;
 					}
 					.ordersFilterData{
+						font-family: 'Source Sans Pro Bold', sans-serif;
 					    height: 35px;
 					    font-size: 14px;
 					    color: #666666;
@@ -89,10 +91,11 @@
 			.orderRightStatus{
 				font-size: calculateRem(14px);
 				.statusTop, .statusBottom{
-					margin-top: 20px;
-					span{
+					.liItem{
+						color: #4a4a4a;
 						display: inline-block;
 						width: 33%;
+						font-family: 'Source Sans Pro', sans-serif;
 					}
 				}
 			}
@@ -199,33 +202,28 @@
     		.orderDetailsSearchWrap{
     			position: absolute;
     			right: calculateRem(25px);
-    			width: calculateRem(310px);
-    			display: flex;
-    			align-items: center;
-    			border-radius: 3px;
-				border: 1px solid #aaaaaa;
-				background-color: #fff;
-				.searchIconWrap{
-					padding-left: calculateRem(10px);
-				}
-
-				.gor-search-input-wrap{
-					padding: .625rem;
-				    border: none;
-				    color: #aaaaaa;
-				    width: 100%;
-				}
+    			.searchBarWrapper{
+    				width: calculateRem(310px);
+	    			border-radius: 3px;
+					border: 1px solid #aaaaaa;
+					background-color: #fff;
+					.searchIconWrap{
+						display: inline-block;
+						padding-left: calculateRem(10px);
+						vertical-align: middle;
+					}
+					.inputWrapper{
+						display: inline-block;
+						.gor-search-input-wrap{
+							padding: .625rem;
+						    border: none;
+						    color: #aaaaaa;
+						    width: 100%;
+						}
+					}
+    			}
 			}
     	}
 
     }
-}
-
-.down {
-	border: solid black;
-	border-width: 0 3px 3px 0;
-	display: inline-block;
-	padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
 }

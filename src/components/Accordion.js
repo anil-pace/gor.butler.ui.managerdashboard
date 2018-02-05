@@ -34,7 +34,9 @@ class Accordion extends React.Component{
       return (
         <div className="main">
           <div className={this.state.class}>
-            <div className="panelHeader" onClick={this.handleClick}>{this.props.title}</div>
+            <div className="panelHeader" onClick={this.handleClick}>{this.props.title}
+            <span className="accordionIconWrapper"> <i className="down"></i> </span>
+            </div>
             <div className="panelWrapper">
               <div className="panelContent">
                 {(this.state.class === "panel open") ? this.props.children : null}

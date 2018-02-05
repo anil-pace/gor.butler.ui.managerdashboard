@@ -105,16 +105,16 @@ class OrderTile extends React.Component{
                     <FormattedMessage id="orders.summary" description="header of orders summary" defaultMessage="Order summary "/>
                   </div>
                   <div className="orderRightStatus">
-                    <div className="statusTop">
-                      <span> 0 {orderStrings.ordersCompleted} 0 </span>
-                      <span> 0 {orderStrings.orderLineCompleted} 0 </span>
-                      <span> 0 {orderStrings.breachedOrders} </span>
-                    </div>
-                    <div className="statusBottom">
-                      <span> 0 {orderStrings.inProgress} </span>
-                      <span> 0 {orderStrings.inProgress}</span>
-                      <span> 0 {orderStrings.breachedOrders} completed</span>
-                    </div>
+                    <ul className="statusTop">
+                      <li className="liItem"> 0 {orderStrings.ordersCompleted} 0 </li>
+                      <li className="liItem"> 0 {orderStrings.orderLineCompleted} 0 </li>
+                      <li className="liItem"> 0 {orderStrings.breachedOrders} </li>
+                    </ul>
+                    <ul className="statusBottom">
+                      <li className="liItem"> 0 {orderStrings.inProgress} </li>
+                      <li className="liItem"> 0 {orderStrings.inProgress}</li>
+                      <li className="liItem"> 0 {orderStrings.breachedOrders} completed</li>
+                    </ul>
                   </div>
                 </div>
               </div>

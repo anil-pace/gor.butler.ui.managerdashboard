@@ -164,6 +164,9 @@ class Tabs extends React.Component{
               
     order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
               defaultMessage="ORDERS"/>;
+
+    neworder=<FormattedMessage id="neworder.tab.heading" description="orders tab" 
+              defaultMessage="N ORDERS"/>;
               
     users=<FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage="USERS"/> ;
