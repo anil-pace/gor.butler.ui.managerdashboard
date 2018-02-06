@@ -110,6 +110,7 @@ class CreateAudit extends React.Component{
       let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
       validatedLocations = this._processLocationAttributes(locationAttributes.data),
       validationDone = Object.keys(locationAttributes).length ? true : false;
+
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
@@ -741,7 +742,7 @@ _processSkuAttributes() {
                           <div  className={"gor-sku-validation-btn-wrap"}>
                 <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}>
                 <label>
-                {(!validationDone && self.state.validateclicked )  ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                {(!validationDone && self.state.validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}
                         
             
