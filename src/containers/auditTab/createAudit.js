@@ -70,7 +70,8 @@ class CreateAudit extends React.Component{
         skuMode:"sku",
         checkedState:true,
         isValidCsv:true,
-        isAuditCreated:false
+        isAuditCreated:false,
+        validateclicked:false
         
       };
       
@@ -231,6 +232,7 @@ class CreateAudit extends React.Component{
       this.props.removeModal();
       this.props.reloadAuditList(null);
     }
+    this.setState({validateclicked:true});
 
   }
   _checkSku(skuId){
@@ -737,8 +739,13 @@ _processSkuAttributes() {
               </div>
             }
                           <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>
+                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}>
+                <label>
+                {(!validationDone && self.state.validateclicked )  ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/>}
+                        
+            
+            </label>
                           
         </button>
               </div>
@@ -766,11 +773,11 @@ _processSkuAttributes() {
                         <div className="gor-audit-csvupload-wrap">
                         <div className="gor-global-notification">
                         {!self.state.isValidCsv?
-                        <div className={"abc"}>
+                        
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
                                                               defaultMessage='Error found, Please try again'
                                                              />
-                </div>:""
+                :""
               }</div>
 
                 <div className='gor-audit-drag-drop-container'> 
