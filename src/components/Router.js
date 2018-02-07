@@ -264,16 +264,6 @@ class Routes extends React.Component {
                            }}
                     />
 
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="newaudit" path="/newaudit"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/newauditTab').default);
-                               }, "newauditTab");
-
-                           }}
-                    />
-
-
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {

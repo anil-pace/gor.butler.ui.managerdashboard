@@ -3,13 +3,14 @@
     display:inline-block;
   }
   .gor-audit-edit-att{
-    padding: 5px 25px;
+    padding: 8px 36px;
     border: 1px solid #BEBEBE;
     border-radius: 3px;
     color: #606266;
     font-size: 13px;
     font-weight: 500;
     cursor:pointer;
+    margin-left:10px;
   }
   .gor-audit-att-ribbon{
     
@@ -116,8 +117,8 @@
     display:inline-block;
     border-bottom: solid 1px #dddddd;
     border-top: solid 1px #dddddd;
-    padding-bottom: 10px;
-    padding-top:3px;
+    padding-bottom: 8px;
+    padding-top:8px;
     width:100%;
     background-color:#ffffff;
 }
@@ -127,7 +128,7 @@
   border: 1px dashed grey;
   cursor: pointer;
   overflow:hidden;
-  width: 30%;
+  width: 42%;
   margin: 0 auto;
   text-align: center;
   padding: 10px;
@@ -602,35 +603,10 @@ h1:after {
 
   .gor-audit-csvupload-or{
   color:#AAAAAA;
+  font-size: 10px;
+  font-weight: 600;
   }
-.abc{
-  -webkit-animation: seconds 1.0s forwards;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-delay: 5s;
-  animation: seconds 1.0s forwards;
-  animation-iteration-count: 1;
-  animation-delay: 5s;
-  position: relative;
-  background: red;
-}
-@-webkit-keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    left: -9999px; 
-  }
-}
-@keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    left: -9999px; 
-  }
-}
+
 
 
 

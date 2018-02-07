@@ -217,9 +217,9 @@ class CreateAudit extends React.Component{
 
      
     let urlData={
-                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,//'https://192.168.14.124:5000/api/audit'+'/validate',
+                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                 'formdata':(type === "create") ? validLocationDataCreateAudit : validLocationData,
-                'method':POST,//POST,
+                'method':POST,
                 'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_LOCATION_ID,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
@@ -366,12 +366,8 @@ _processSkuAttributes() {
         isInputEmpty:false
       }
     })
-    
-
-
+   
 }
-
-
 
 /*Function to check the location mode selection*/
   _onLocationModeSelection(selection){
@@ -521,9 +517,12 @@ _processSkuAttributes() {
     _onBackClick(){
       this.setState({
         validationDone:false,
-        locationAttributes:{}
+        locationAttributes:{},
+        validateclicked:false
       })
     }
+
+    
 
   render()
   {
@@ -541,11 +540,13 @@ _processSkuAttributes() {
       var processedSkuResponse=this._processSkuAttributes();
       
       var skuState=this._claculateSkuState(processedSkuResponse);
+
+      var validateclicked=this.state.validateclicked;
       
       let self=this;
       
       let {validationDone} = self.state; 
-      let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false
+      let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false;
       const selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>
       let selectAllInvalidLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllInvalidLabel" description="audit dropdown option for Select All Invalid"
@@ -682,7 +683,8 @@ _processSkuAttributes() {
               {allLocationsValid?
                  <div className={"gor-audit-att-ribbon"}>
                  <div className="gor-sku-validation-btn-wrap">
-                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}>Edit</button>
+                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location' 
+                        defaultMessage='Edit'/></button>
                  </div>
                  <div className={"message success"}>
                   <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
@@ -742,7 +744,7 @@ _processSkuAttributes() {
                           <div  className={"gor-sku-validation-btn-wrap"}>
                 <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}>
                 <label>
-                {(!validationDone && self.state.validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}
                         
             

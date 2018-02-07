@@ -50,7 +50,10 @@ class CSVUpload extends React.Component{
                 {this._renderChildren()}
                 </div>
                 <div className='gor-audit-upload-file'>
-                    <a href="#"><span className="gor-audit-csvupload-text"> Upload .CSV file </span> </a>
+                    <a href="#"><span className="gor-audit-csvupload-text">
+                    <FormattedMessage id="gor.audit.uploadcsv" description='Text for upload csv file' 
+            defaultMessage='Upload .CSV file'/>
+ </span> </a>
                     <input type="file" id="uploadCSVFile"  size="50" onChange={this.props.onFileUpload}/>
                 </div>
               </div>
