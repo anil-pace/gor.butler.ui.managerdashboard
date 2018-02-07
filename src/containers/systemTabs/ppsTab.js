@@ -156,7 +156,65 @@ class PPS extends React.Component {
         //TODO: codes need to be replaced after checking with backend
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
-        var data=nProps.props.PPSDetail.PPStypeDetail;
+        //var data=nProps.props.PPSDetail.PPStypeDetail;
+        //Dummy data
+        var data=[
+        {
+            current_task:"pick",
+            operators_assigned:null,
+            performance:-1,
+            pps_id:1,
+            pps_profiles:[],
+            pps_requested_mode:"audit",
+            pps_status:"open",
+            requested_status:null,
+            allowed_modes:["pick","put"]
+        },
+        {
+            current_task:"put",
+            operators_assigned:null,
+            performance:-1,
+            pps_id:2,
+            pps_profiles:[],
+            pps_requested_mode:"audit",
+            pps_status:"open",
+            requested_status:null,
+            allowed_modes:["pick"]
+        },
+        {
+            current_task:"put",
+            operators_assigned:null,
+            performance:-1,
+            pps_id:4,
+            pps_profiles:[],
+            pps_requested_mode:"audit",
+            pps_status:"open",
+            requested_status:null,
+            allowed_modes:["audit"]
+        },
+        {
+            current_task:"put",
+            operators_assigned:null,
+            performance:-1,
+            pps_id:3,
+            pps_profiles:[],
+            pps_requested_mode:null,
+            pps_status:"open",
+            requested_status:null,
+            allowed_modes:["pick","audit"]
+        },
+        {
+            current_task:"pick",
+            operators_assigned:null,
+            performance:-1,
+            pps_id:5,
+            pps_profiles:[],
+            pps_requested_mode:"audit",
+            pps_status:"open",
+            requested_status:"force_close",
+            allowed_modes:[]
+        }
+        ]
         let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
@@ -204,6 +262,7 @@ class PPS extends React.Component {
                 detail.status=FCLOSE;
                 detail.statusPriority=1;
             }
+            detail.allowedModes=data[i].allowed_modes;
             detail.statusClass=data[i].pps_status;
             detail.operatingMode=currentTask[data[i].current_task];
             detail.operatingModeClass=data[i].current_task;
@@ -387,22 +446,55 @@ class PPS extends React.Component {
         let modeDropPHolder = <FormattedMessage id="PPS.table.modePlaceholder" description="Placeholder for mode dropdown"
                                           defaultMessage="Change PPS Mode"/>
         var openCount=0,closeCount=0;
+        var arr=[];
+        var Modes={
+            "put":0,
+            "pick":0,
+            "audit":0
+        }
+
+        var putModeEnabled,pickModeEnabled,auditModeEnabled=false;
         for(let k in this.props.checkedPps){
             if(this.props.checkedPps[k].statusPriority === 0 || this.props.checkedPps[k].statusPriority === 1){
                 closeCount++
             }
+
             else{
                 openCount++
             }
-        }
 
+            if(this.props.checkedPps[k].allowedModes){
+
+            
+                for(let i=0;i< this.props.checkedPps[k].allowedModes.length;i++){
+
+                    let allowedModes=this.props.checkedPps[k].allowedModes[i];
+                    if(allowedModes==="put"){
+                        Modes.put++;
+                    }
+                    if(allowedModes==="pick"){
+                        Modes.pick++;
+                    }
+                    if(allowedModes==="audit"){
+                        Modes.audit++;
+                    }
+                }
+                
+            }
+
+
+
+        }
+    
+        
+        var count=openCount+closeCount;
         const status = [
             {value: 'open', disabled:(closeCount  ? false : true),label: openStatusLabel},
             {value: 'close', disabled:(openCount ? false : true),label: closeStatusLabel}
         ];
-        const modes=[ {value: 'put', disabled:false,label: pickDrop},
-            {value: 'pick',  disabled:false,label: putDrop},
-            {value: 'audit',  disabled:false,label: auditDrop}];
+        const modes=[ {value: 'put', disabled:(Modes.put===count ? false : true),label: pickDrop},
+            {value: 'pick',  disabled:(Modes.pick===count ? false : true),label: putDrop},
+            {value: 'audit',  disabled:(Modes.audit===count ? false : true),label: auditDrop}];
        
             drop=<Dropdown 
                     options={modes} 
