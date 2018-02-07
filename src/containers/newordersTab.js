@@ -9,11 +9,11 @@ import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/t
 import {GTableBody} from "../components/gor-table-component/tableBody";
 import {GTableRow} from "../components/gor-table-component/tableRow";
 import {FormattedMessage} from 'react-intl';
-import Accordion from '../components/accordion';
+import Accordion from '../components/accordion/accordion';
 import OrderTile from '../containers/neworderTab/OrderTile';
 import ViewOrderLine from '../containers/neworderTab/viewOrderLine';
 import {modal} from 'react-redux-modal';
-import ProgressBar from '../components/progressBar';
+import ProgressBar from '../components/progressBar/progressBar';
 import {showTableFilter} from '../actions/filterAction';
 import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
 
@@ -42,13 +42,20 @@ class newordersTab extends React.Component{
     	}
     	this.viewOrderLine = this.viewOrderLine.bind(this);
     	this.collapseAll = this.collapseAll.bind(this);
+    	this.resetCollapseAll = this.resetCollapseAll.bind(this);
     }	
 
-    collapseAll(data){
-    	console.log("collapseAll is being called");
+    collapseAll(){
     	this.setState({
-    		isPanelOpen: data
+    		isPanelOpen: false
     	});
+    }
+
+    resetCollapseAll(){
+    	this.setState({
+    		isPanelOpen: true
+    	});
+    	console.log("resetCollapseAll is being called" );
     }
 
     componentWillReceiveProps(nextProps) {        
@@ -115,8 +122,10 @@ class newordersTab extends React.Component{
   	}
 
 	render(){
+		var self = this;
 		var processedData = this._processData();
 		let isPanelOpen = this.state.isPanelOpen;
+		console.log("isPanelOpen" + isPanelOpen);
 		return(
 			<div>
 			  	<OrderTile contractAll={this.collapseAll.bind(this)}/>
@@ -126,7 +135,7 @@ class newordersTab extends React.Component{
                             <GTableBody data={processedData.waveData}>
                         		{processedData.waveData ? processedData.waveData.map(function (row, idx) {
                             		return (
-		                            	<Accordion title={
+		                            	<Accordion resetCollapseAll={self.resetCollapseAll} title={
 			                                <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.waveData}>
 			                                    {row.map(function (text, index) {
 			                                        return <div key={index} style={processedData.waveData[index]?{flex:'1 0 '+processedData.waveData[index].width+"%"}:{}} className="cell" >

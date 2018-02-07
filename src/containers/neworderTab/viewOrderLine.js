@@ -5,22 +5,11 @@ import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
-import Accordion from '../../components/accordion';
-import ProgressBar from '../../components/progressBar';
+import Accordion from '../../components/accordion/accordion';
+import ProgressBar from '../../components/progressBar/progressBar';
+import SearchFilter from '../../components/searchFilter/searchFilter';
 
-let dataSource =[
-{
-    name:'Paul mak',
-    image: <img width="50" src="./images/profile_img.png"/>,
-},
-{
-    name:'John Doe',
-    image : '002'
-},
-{
-    name:'Sachin Tendulkar',
-    image : '003'
-}];
+
 
 var oHeaderData = ["Order Lines", "ProgressBar", "10 cases picked      102 inners picked     10 each"];
 var oData = [
@@ -35,12 +24,21 @@ class ViewOrderLine extends React.Component{
   {
       super(props); 
       this.state={
-        searchValue: 'Search product',
-        query: '',
-        filteredData: undefined
+        initialItems: [
+            {orderId: "ORDER 123", progressBar: "5", totalOrder: "Total orders 1"},
+            {orderId: "ORDER 321", progressBar: "pending", totalOrder: "Total orders 1"},
+            {orderId: "ORDER 456", progressBar: "1", totalOrder: "Total orders 1"},
+            {orderId: "ORDER 654", progressBar: "70", totalOrder: "Total orders 1"},
+        ],
+       items: []
       }
       this.handleChange = this.handleChange.bind(this);
   }
+
+  componentWillMount(){
+    this.setState({items: this.state.initialItems})
+  }
+
   _removeThisModal() {
     this.props.removeModal();
   }
@@ -52,39 +50,13 @@ class ViewOrderLine extends React.Component{
   }
 
   handleChange(event) {
-    this.setState({searchValue: event.target.value});
-    console.log("===========================================================>");
-      console.log("===========================================================>");
-      console.log(this.state.searchValue);
-        var queryResult=[];
-        oData.forEach(function(row){
-            if(row.orderId.toLowerCase().indexOf(event.target.value)!=-1)
-            queryResult.push(row);
-        });
-
-        console.log("===========================================================>");
-        console.log("===========================================================>");
-        console.log(queryResult);
-        oData = queryResult;
-
-        // this.setState({
-        //     query:queryText,
-        //     filteredData: queryResult
-        // })
-  }
-
-  doSearch(queryText){
-    console.log(queryText);
+    var updatedList = this.state.initialItems;
     var queryResult=[];
-        dataSource.forEach(function(person){
-            if(person.name.toLowerCase().indexOf(queryText)!=-1)
-            queryResult.push(person);
-        });
-
-        this.setState({
-            query:queryText,
-            filteredData: queryResult
-        })
+    updatedList.forEach(function(item){
+            if(item.orderId.toLowerCase().indexOf(event)!=-1)
+              queryResult.push(item);
+    });
+    this.setState({items: queryResult});
   }
 
   _processData(){
@@ -115,16 +87,6 @@ class ViewOrderLine extends React.Component{
         // processedData.offset = 0;
         // processedData.max= waveRows.length;
     return processedData;
-  }
-
-  renderResults(){
-      if (this.state.filteredData) {
-          return (
-            <div> 
-              Hello
-            </div>
-          );
-      }
   }
 
   render()
@@ -193,43 +155,39 @@ class ViewOrderLine extends React.Component{
                           </div>
                       </div>
                   </div>
+
                   <div className="orderDetailsSearchWrap"> 
-                    <div className="searchBarWrapper">
-                      <div className="searchIconWrap"> 
-                        <div className="gor-search-icon"></div>
-                      </div>
-                      <div className="inputWrapper"> 
-                        <input type="text" className="gor-search-input-wrap" value={this.state.searchValue} onChange={this.handleChange} doSearch={this.doSearch}/>
-                      </div>
-                    </div>
+                      <SearchFilter handleChange={this.handleChange} />
                   </div>
+                  
               </div>
               <div className="orderDetailsListWrapper">
                 <GTable options={['table-bordered']}>
-                  <GTableHeader>
 
+                    <GTableHeader>
                         {oHeaderData.map(function (header, index) {
-                            return <GTableHeaderCell key={index} header={header}>
+                            return (
+                              <GTableHeaderCell style={{background: "#fafafa"}} key={index} header={header}>
                                   <span>{header}</span>
-                                </GTableHeaderCell>
-
+                              </GTableHeaderCell>
+                            )
                         })}
                     </GTableHeader>
-                    <GTableBody data={processedData.orderData}>
-                          <GTableBody data={processedData.orderData} >
-                            {processedData.orderData ? processedData.orderData.map(function (row, idx) {
-                                return (
-                                    <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.orderData}>
-                                        {Object.keys(row).map(function (text, index) {
-                                            return <div key={index} style={processedData.orderData[index]?{flex:'1 0 '+processedData.orderData[index].width+"%"}:{}} className="cell" >
-                                                {row[text]}
-                                            </div>
-                                        })}
-                                    </GTableRow>
-                                )
-                            }):""}
-                          </GTableBody>
-                    </GTableBody>
+
+                    <GTableBody data={this.state.items} >
+                      {this.state.items ? this.state.items.map(function (row, idx) {
+                          return (
+                            <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={row}>
+                                {Object.keys(row).map(function (text, index) {
+                                    return <div style={{height: "70px"}} key={index} style={processedData.orderData[index]?{flex:'1 0 '+processedData.orderData[index].width+"%"}:{}} className="cell" >
+                                        {row[text]}
+                                    </div>
+                                })}
+                            </GTableRow>
+                          )
+                        }):""}
+                    </GTableBody> 
+                    
                 </GTable>
               </div>
             </div>

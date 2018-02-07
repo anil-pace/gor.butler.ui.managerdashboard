@@ -17,15 +17,17 @@ class Accordion extends React.Component{
 
   handleClick(){
     if(this.state.open) {
+      console.log("===========================.           INSIDE OPEN FALSE");
       this.setState({
         open: false,
         class: "panel"
       });
     }else{
+      console.log("===========================.           INSIDE OPEN TRUE");
       this.setState({
         open: true,
         class: "panel open"
-      });
+      },this.props.resetCollapseAll);
     }
   }
   

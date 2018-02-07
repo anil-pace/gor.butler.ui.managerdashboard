@@ -2,7 +2,7 @@
 
 import React  from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import ProgressBar from '../../components/progressBar';
+import ProgressBar from '../../components/progressBar/progressBar';
 import OrderFilter from './orderFilter';
 
 var orderStrings ={
@@ -30,7 +30,7 @@ class OrderTile extends React.Component{
   }
 
   collapseAll(){
-     this.props.contractAll(false);
+     this.props.contractAll();
   }
 
   showFilter(){
