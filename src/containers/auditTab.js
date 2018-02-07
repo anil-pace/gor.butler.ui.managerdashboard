@@ -704,7 +704,7 @@ render() {
     <FormattedMessage id="audit.table.heading" description="Heading for audit table"
     defaultMessage="Audit Tasks"/>
     </div>
-
+<div>Place</div>
     </div>
     <div className="gor-audit-filter-create-wrap">
 

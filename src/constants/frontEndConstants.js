@@ -106,6 +106,7 @@ export const BAR_D3_COMPONENT="BAR_D3_COMPONENT";
 export const OVERVIEW="OVERVIEW";
 export const SYSTEM="SYSTEM";
 export const ORDERS="ORDERS";
+export const AUDITLISTING="AUDITLISTING";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
 export const AUDIT="AUDIT";

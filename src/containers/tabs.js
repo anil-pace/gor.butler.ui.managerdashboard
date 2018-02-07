@@ -10,7 +10,7 @@ import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
 import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE,AUDITLISTING} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import OperationPause from '../containers/emergencyProcess/OperationPause';
@@ -149,7 +149,7 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,neworder, newordersClass, newordersStatus,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
 
@@ -338,6 +338,9 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
+    <Link to="/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
+     <Tab items={{ tab: items.neworder, Status: items.newordersStatus, currentState:items.newordersClass }} changeClass={(this.props.tab.toUpperCase()=== AUDITLISTING ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
     <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>

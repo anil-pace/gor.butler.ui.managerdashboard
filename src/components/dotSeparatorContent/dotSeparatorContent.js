@@ -1,13 +1,9 @@
 import React  from 'react';
-import { FormattedMessage } from 'react-intl';
+//import { FormattedMessage } from 'react-intl';
 
 
 class DotSeparator extends React.Component{
-    constructor(props) 
-    {
-        super(props); 
-        
-    }
+   
 
 render()
 {
