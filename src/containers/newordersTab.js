@@ -15,6 +15,7 @@ import ViewOrderLine from '../containers/neworderTab/viewOrderLine';
 import {modal} from 'react-redux-modal';
 import ProgressBar from '../components/progressBar';
 import {showTableFilter} from '../actions/filterAction';
+import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
 
 	var wData = [
 		{cutofftime: "CUT OFF TIME 1", timeLeft: "1 hrs left", progressBar: "5", totalOrder: "Total orders 1111"},
@@ -25,10 +26,10 @@ import {showTableFilter} from '../actions/filterAction';
 	];
 
 	var oData = [
-		{orderId: "ORDER 123", progressBar: "5", totalOrder: "Total orders 1", action: true},
-		{orderId: "ORDER 321", progressBar: "pending", totalOrder: "Total orders 1", action: false},
-		{orderId: "ORDER 456", progressBar: "1", totalOrder: "Total orders 1", action: true},
-		{orderId: "ORDER 654", progressBar: "70", totalOrder: "Total orders 1", action: false},
+		{orderId: "ORDER 123", subOrderId: "PPS005", binId:"Bin 07", progressBar: "5", action: true},
+		{orderId: "ORDER 321", subOrderId: "PPS005", binId:"Bin 07", progressBar: "pending", action: false},
+		{orderId: "ORDER 456", subOrderId: "PPS005", binId:"Bin 07", progressBar: "1", action: true},
+		{orderId: "ORDER 654", subOrderId: "PPS005", binId:"Bin 07", progressBar: "70", action: false},
 	];
 
 class newordersTab extends React.Component{
@@ -64,15 +65,16 @@ class newordersTab extends React.Component{
 		if(wDataLen){
 			for(let i =0 ; i < wDataLen; i++){
 				let waveRow = [];
-				waveRow.push(<div style={{padding: "2px 35px"}} className="cellWrapper">
+				waveRow.push(<DotSeparatorContent header={[wData[i].cutofftime]} subHeader={[wData[i].timeLeft]} />);
+					{/*<div style={{padding: "2px 35px"}} className="cellWrapper">
 								<div className="mainTitle">{wData[i].cutofftime}</div>
 								<div className="subTitle">{wData[i].timeLeft}</div>
-							</div>);
+							</div>*/}
+							
 				waveRow.push(<div style={{width: "50%"}} className="cellWrapper"> <ProgressBar progressWidth={wData[i].progressBar}/> </div> );
 				waveRow.push(<div className="cellWrapper">
 								<span> {wData[i].totalOrder} </span>
 							</div>);
-				//waveRow.push(wData[i].action);
 				waveRows.push(waveRow);
 			}
 			processedData.waveData = waveRows;
@@ -81,9 +83,8 @@ class newordersTab extends React.Component{
 		if(oDataLen){
 			for(let i=0; i < oDataLen; i++){
 				let orderRow = [];
-				orderRow.push(<div style={{padding: "2px 35px"}}> {oData[i].orderId} </div>);
-				orderRow.push(<div className="cellWrapper"> <ProgressBar progressWidth={oData[i].progressBar}/> </div>);
-				orderRow.push(oData[i].totalOrder);
+				orderRow.push(<DotSeparatorContent header={[oData[i].orderId]} subHeader={[oData[i].subOrderId, oData[i].binId]} />);
+				orderRow.push(<div style={{width: "50%"}}> <ProgressBar progressWidth={oData[i].progressBar}/> </div>);
 				if(oData[i].action === true){
 					orderRow.push(<div key={i} className="gorButtonWrap" onClick={this.viewOrderLine.bind(this)}>
 	                  <button>
@@ -126,7 +127,7 @@ class newordersTab extends React.Component{
                         		{processedData.waveData ? processedData.waveData.map(function (row, idx) {
                             		return (
 		                            	<Accordion title={
-			                                <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.waveData}>
+			                                <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={processedData.waveData}>
 			                                    {row.map(function (text, index) {
 			                                        return <div key={index} style={processedData.waveData[index]?{flex:'1 0 '+processedData.waveData[index].width+"%"}:{}} className="cell" >
 			                                            {text}
