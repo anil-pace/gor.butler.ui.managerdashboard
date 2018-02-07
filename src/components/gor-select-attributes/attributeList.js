@@ -46,11 +46,7 @@ export class AttributeList extends React.Component {
             <div className="gor-sel-atts">
             {this.props.children}
             </div>
-            <div className="footer-apply">
-                <a href="javascript:void(0)" className="link" onClick={this.props._applySelection} >
-                APPLY
-                </a>
-            </div>
+            
         </div>
         <div className={!this.state.showAttrList ? "gor-sel-att-add show" : "gor-sel-att-add hide"}>
             <div className="text-cont">
