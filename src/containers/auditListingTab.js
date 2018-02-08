@@ -15,6 +15,7 @@ import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorC
 import ProgressBar from '../components/progressBar/progressBar.js';
 import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
 import AuditStart from '../containers/auditTab/auditStart';
+import ActionDropDown from '../components/actionDropDown/actionDropDown';
 import {modal} from 'react-redux-modal';
 
 class auditListingTab extends React.Component{
@@ -22,7 +23,8 @@ class auditListingTab extends React.Component{
 	constructor(props) 
 	{
         super(props);
-       
+        this._handelClick = this._handelClick.bind(this);
+        this.state={visibleMenu:false} 
     }	
 
     viewAuditDetails() {
@@ -42,9 +44,15 @@ class auditListingTab extends React.Component{
                         hideCloseButton: true // (optional) if you don't wanna show the top right close button
                         //.. all what you put in here you will get access in the modal props ;),
                     });
-              }        
+              }  
+              
+    _handelClick(field) {
+                console.log(field.target.value);
+               
+            }          
 
 	render(){
+        let me=this;
 		console.log("coming inside new orders Tab");
 		var processedData=[	
 			{columnId: "1", headerText: "WaveId"},
@@ -93,7 +101,12 @@ class auditListingTab extends React.Component{
                                                    {index==0?<NameInitial name='Raja dey' shape='round' />:""} 
                                                    {index==0?<DotSeparatorContent header={[<FormattedMessage id="audit.data.subheading" description='Text for user delete' defaultMessage='Information will be lost'/>,<FormattedMessage id="audit.data.data2" description='user delete' defaultMessage='Information lost'/>]} subHeader={['PPS 003','MultiSKU','Today, 09:00']} separator={'.'} />:""} 
                                                    {index==1?<ProgressBar progressWidth={70}/>:""}
-                                                   
+                                                   {index==2?<ActionDropDown clickOptionBack={me._handelClick} data={[{name:'raja',value:'dey'},{name:'abc',value:'def'}]}>
+                                                   <button className="gor-add-btn">
+                                                                Link
+                                                            </button>      
+                                                   </ActionDropDown>:""}
+
                                                 </div>
                                             })}
                                          
