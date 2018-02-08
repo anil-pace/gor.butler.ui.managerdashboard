@@ -101,7 +101,7 @@ class auditListingTab extends React.Component{
                                                    {index==0?<NameInitial name='Raja dey' shape='round' />:""} 
                                                    {index==0?<DotSeparatorContent header={[<FormattedMessage id="audit.data.subheading" description='Text for user delete' defaultMessage='Information will be lost'/>,<FormattedMessage id="audit.data.data2" description='user delete' defaultMessage='Information lost'/>]} subHeader={['PPS 003','MultiSKU','Today, 09:00']} separator={'.'} />:""} 
                                                    {index==1?<ProgressBar progressWidth={70}/>:""}
-                                                   {index==2?<ActionDropDown clickOptionBack={me._handelClick} data={[{name:'raja',value:'dey'},{name:'abc',value:'def'}]}>
+                                                   {index==2?<ActionDropDown style={{width:'115px'}} clickOptionBack={me._handelClick} data={[{name:'View deatils',value:'details'},{name:'Edit',value:'edit'},{name:'Duplicate',value:'Duplicate'},{name:'Delete',value:'Delete'}]}>
                                                    <button className="gor-add-btn">
                                                                 Link
                                                             </button>      
