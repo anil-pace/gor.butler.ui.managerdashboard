@@ -78,6 +78,7 @@ class Dropdown extends Component {
   }
 
   _handleDocumentClick() {
+     console.log(ReactDOM.findDOMNode(this).contains(event.target));
      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
        this.setState({dropDownVisible: false});
      }

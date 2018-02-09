@@ -32,9 +32,78 @@
 	.gor-sel-att-content{
 		border-radius: 3px;
     	box-shadow: 0px 0px 1px 1px #A2A2A2;
-    	min-height: 30vw;
-		.gor-sel-att-add{
-			padding: 15px;
+    	.attribute-cont{
+    		height: 20vw;
+    		overflow:auto;
+    		.header{
+    			    padding: 15px 10px;
+				    background: #F2F2F2;
+				    border-bottom: 1px solid #D2D2D2;
+				    font-size: calculateRem(14px);
+    		}
+    		.header-left{
+    			    display: inline-block;
+    				width: 50%;
+    		}
+    		.header-right{
+    				display: inline-block;
+    				width: 50%;
+    				text-align:right;
+    		}
+    		.back{
+    			background: none;
+			    font-size: 12px;
+			    font-weight: bold;
+			    color: #676767;
+			    cursor: pointer;
+    		}
+    		.clearAll{
+    			background: none;
+			    color: #6A9DF6;
+			    cursor: pointer;
+    		}
+    	}
+    	.footer-apply{
+    		padding: 15px 10px;
+		    text-align: center;
+		    border-top: 1px solid #DFDFDF;
+		    a{
+		    	text-decoration:none;
+		    	color:#88B2F9;
+		    }
+    	}
+    	.attribute-row{
+    		padding: 5px 0;
+    		border-bottom: 1px solid #E5E5E5;
+			box-sizing: border-box;
+    		&:hover{
+				background:#F8F8F8;
+				.gor-del-icon{
+					display:inline-block;
+				}
+				.gor-edit-icon{
+					display:inline-block;
+				}
+			}
+    	}
+		
+		.category{
+			font-size: calculateRem(14px);
+    		font-weight: bold;
+    		padding: 10px 10px 0 10px;
+		}
+		.values{
+			padding: 10px 10px 0 10px;
+			font-size: calculateRem(14px);
+			.set{
+				padding: 5px;
+			    display: inline-block;
+			    background: #659AF6;
+			    color: #fff;
+			    border-radius: calculateRem(14px);
+			    font-size: calculateRem(12px);
+			    margin-right: 5px;
+			}
 		}
 		.text-cont{
 			width: 65%;
@@ -58,6 +127,17 @@
 		}
 		.attribute-list{
 			min-height:25vw;
+		}
+		.gor-edit-icon{
+			background-position:-239px -77px;
+			margin-left:5px;
+			display:none;
+		}
+		.gor-del-icon{
+			display:none;
+		}
+		.actions-icons{
+			float:right;
 		}
 	}
 	.hide{
@@ -89,7 +169,6 @@
 	}
 	.gor-sel-atts{
 		clear:both;
-		padding:15px 10px;
 	}
 	
 	

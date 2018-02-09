@@ -1,5 +1,6 @@
 
-import React from 'react'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {AttributeList} from './attributeList.js'
 
 
@@ -9,7 +10,11 @@ export class SelectAttributes extends React.Component {
         this._toggleDrop = this._toggleDrop.bind(this);
         this._applySelection = this._applySelection.bind(this);
         this._selectAttribute = this._selectAttribute.bind(this);
-        this._toggleSelectionPane = this._toggleSelectionPane.bind(this);
+        this._backToDefault = this._backToDefault.bind(this);
+        this._handleDocumentClick= this._handleDocumentClick.bind(this);
+        this._clearSelectedAttributes= this._clearSelectedAttributes.bind(this);
+        this._showAttrList = this._showAttrList.bind(this);
+        this._deleteSet= this._deleteSet.bind(this);
         this.state = this._getInitialState();
     }
     _getInitialState(){
@@ -19,59 +24,166 @@ export class SelectAttributes extends React.Component {
                 category_text:"Product Color",
                 category_value:"p_color",
                 attributeList:{
-                    "slvr":"Silver",
-                    "Au":"Gold"
+                    "slvr":{
+                        text:"Silver",
+                        checked:false
+                    },
+                    "Au":{
+                        text:"Gold",
+                        checked:false
+                    }
                 }
             },
             {
                 category_text:"Product Age",
                 category_value:"p_age",
                 attributeList:{
-                    "3yr":"3 Years",
-                    "Au":"Gold"
+                    "3yrs":{
+                        text:"3 Years",
+                        checked:false
+                    },
+                    "1yr":{
+                        text:"1 Year",
+                        checked:false
+                    }
                 }
             },
             {
                 category_text:"Product test",
                 category_value:"p_test",
                 attributeList:{
-                    "slvr":"Silver",
-                    "Au":"Gold"
+                    "test1":{
+                        text:"Test1",
+                        checked:false
+                    },
+                    "test2":{
+                        text:"Test2",
+                        checked:false
+                    }
+                }
+            }],
+            nonMutatedData:[{
+                category_text:"Product Color",
+                category_value:"p_color",
+                attributeList:{
+                    "slvr":{
+                        text:"Silver",
+                        checked:false
+                    },
+                    "Au":{
+                        text:"Gold",
+                        checked:false
+                    }
+                }
+            },
+            {
+                category_text:"Product Age",
+                category_value:"p_age",
+                attributeList:{
+                    "3yrs":{
+                        text:"3 Years",
+                        checked:false
+                    },
+                    "1yr":{
+                        text:"1 Year",
+                        checked:false
+                    }
+                }
+            },
+            {
+                category_text:"Product test",
+                category_value:"p_test",
+                attributeList:{
+                    "test1":{
+                        text:"Test1",
+                        checked:false
+                    },
+                    "test2":{
+                        text:"Test2",
+                        checked:false
+                    }
                 }
             }],
             selectedAttributes:{},
             selectedSets:{},
+            showAttrList:false,
             selectionApplied:false
         }
     }
+
+
+
+
+      componentDidMount(){
+          document.addEventListener('click',this._handleDocumentClick,false);
+      }
+
+      componentWillUnmount() {
+          document.removeEventListener("click", this._handleDocumentClick,false)
+      }
+      _handleDocumentClick() {
+         console.log(ReactDOM.findDOMNode(this));
+         if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+           this.setState({dropdownVisible: false});
+         }
+     }
+
     _toggleDrop(){
         this.setState({
             dropdownVisible:!this.state.dropdownVisible
         })
     }
 
-    _selectAttribute(category,attribute,idx){
-        var selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes)),
-        data={
-            "text":this.state.data[idx].attributeList[attribute],
-            "category":category
-        }
-        selectedAttributes[attribute] = data
-        //selectedAttributes.push(selection);
+    _backToDefault(e){
+       // e.stopPropagation()
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
         this.setState({
-            selectedAttributes:selectedAttributes
+            showAttrList:false
+        })
+    }
+    _clearSelectedAttributes(e){
+         e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        var nonMutatedData = JSON.parse(JSON.stringify(this.state.nonMutatedData));
+        this.setState({
+            data:nonMutatedData,
+            selectedAttributes:{}
+        })
+    }
+
+    _selectAttribute(event,category,attribute,idx){
+        var checked = event.target.checked;
+        var selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes)),
+        data = JSON.parse(JSON.stringify(this.state.data));
+        if(checked){
+            let updatedData={
+                "text":data[idx].attributeList[attribute].text,
+                "category":category
+            }
+            selectedAttributes[attribute] = updatedData;
+            data[idx].attributeList[attribute].checked = true;
+        }
+        else{
+            delete selectedAttributes[attribute];
+            data[idx].attributeList[attribute].checked = false;
+        }
+        
+        this.setState({
+            selectedAttributes,
+            data
         })
 
     }
-    _toggleSelectionPane(){
-        this.setState({
-            selectionApplied:false
-        })
-    }
-    _applySelection(){
+   
+    _applySelection(e){
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
         var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
         selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
-        selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
+        if(Object.keys(selectedAttributes).length){
+            selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
+        
 
         this.setState({
             selectedAttributes:{},
@@ -79,9 +191,33 @@ export class SelectAttributes extends React.Component {
             selectedSets
         })
     }
+    }
+    _showAttrList(e){
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        var nonMutatedData = JSON.parse(JSON.stringify(this.state.nonMutatedData));
+        this.setState({
+            showAttrList:true,
+            selectionApplied:false,
+            data:nonMutatedData
+        })
+    }
+    _deleteSet(e,idx){
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets));
+        delete  selectedSets[idx];
+        this.setState({
+            selectedSets,
+            showAttrList:false
+        })
+    }
+  
 
     render() {
         var _this = this;
+        var attributeSelected = Object.keys(_this.state.selectedSets).length ? true : false;
+
         return <div className="gor-sel-att-wrap">
         <div className="gor-sel-att-placeholder" onClick={_this._toggleDrop}>
         <div className="gor-sel-att-pholder-text">
@@ -90,17 +226,34 @@ export class SelectAttributes extends React.Component {
         <div className="gor-sel-att-arr-cont">
         <span className="gor-sel-att-arr down"></span>
         </div>
-
         </div>
         
         <div className={this.state.dropdownVisible ? "gor-sel-att-drop" : "gor-sel-att-drop hide-drop"} >
             <div className="gor-sel-att-content">
-            <AttributeList 
-            noSelection={true} 
-            >
-
-            <div className="attribute-list">
-            {!this.state.selectionApplied && this.state.data.map((row, index) => (
+        {(!attributeSelected && !this.state.showAttrList) && <div className={"gor-sel-att-add show"}>
+            <div className="text-cont">
+                <a href="javascript:void(0)" className="link" onClick={this._showAttrList}>
+                + ADD SET OF ATTRIBUTES
+                </a>
+            </div>
+            <div className="footer">
+            <p>Note: You can add multiple sets of attributes</p>
+            </div>
+            
+        </div>}
+        {(!this.state.selectionApplied  && this.state.showAttrList) && <div>
+        <div className={"attribute-cont"}>
+        <div className={"header"}>
+            <div className={"header-left"}>
+                <button className={"back"} onClick={this._backToDefault}><span>&lt;</span>
+                <span>BACK</span></button>
+            </div>
+            <div className={"header-right"}>
+                <button className={"clearAll"} onClick={this._clearSelectedAttributes}>Clear All</button>
+            </div>
+        </div>
+        <AttributeList>
+            {this.state.data.map((row, index) => (
                 <section key={index} className="attribute-row">
                 <div className="category">
                     {row.category_text}
@@ -108,8 +261,8 @@ export class SelectAttributes extends React.Component {
                 <div className="values">
                     {Object.keys(row.attributeList).map((key, idx) => (
                         <div key={key+idx}>
-                            <span><input type="checkbox" defaultChecked={this.state.chkbox} onClick={()=>_this._selectAttribute(row.category_value,key,index)}/></span>
-                            <span>{row.attributeList[key]}</span>
+                            <span><input type="checkbox" checked={row.attributeList[key].checked} onClick={(e)=>_this._selectAttribute(e,row.category_value,key,index)}/></span>
+                            <span>{row.attributeList[key].text}</span>
                         </div>
 
                     ))}
@@ -118,16 +271,28 @@ export class SelectAttributes extends React.Component {
 
             </section>
             ))}
-            {this.state.selectionApplied && Object.keys(this.state.selectedSets).map((key, index) => (
+            </AttributeList>
+            </div>
+        <div className="footer-apply">
+             <a href="javascript:void(0)" className="link" onClick={this._applySelection} >
+                APPLY
+                </a>
+            </div>
+        </div>}
+        {attributeSelected && this.state.selectionApplied &&  <div>
+             <div className={"attribute-cont"}>
+             <div className={"header"}>Selected Set of Attributes</div>
+             <AttributeList>
+            {Object.keys(this.state.selectedSets).map((key, index) => (
                 <section key={key+index} className="attribute-row">
                 <div className="category">
-                   <span className={""}> {"Set "+(index+1)}</span>
+                   <span className={"setName"}> {"Set "+(index+1)}</span>
+                   <span className={"actions-icons"}><i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key)}/> <i className={"gor-edit-icon"} onClick={this._editSet}/></span>
                 </div>
                 <div className="values">
-                    {Object.keys(this.state.selectedSets[key]).map((key2, index) => (
-                        <div key={key2+index}>
-                           <span className={""}>{this.state.selectedSets[key][key2].text}</span>
-                        </div>
+                    {Object.keys(this.state.selectedSets[key]).map((key2, idx) => (
+                           <span key={key2+idx} className={"set"}>{this.state.selectedSets[key][key2].text}</span>
+                        
 
                     ))}
                   
@@ -135,18 +300,17 @@ export class SelectAttributes extends React.Component {
 
             </section>
             ))}
-            <div className="footer-apply">
-            {!this.state.selectionApplied && <a href="javascript:void(0)" className="link" onClick={this._applySelection} >
-                APPLY
-                </a>}
-            {this.state.selectionApplied && <a href="javascript:void(0)" className="link" onClick={this._toggleSelectionPane} >
-                Add More Sets of Attributes
-                </a>}
-                
-            </div>
-            
-            </div>
             </AttributeList>
+            </div>
+           <div className="footer-apply">
+             <a href="javascript:void(0)" className="link" onClick={this._showAttrList} >
+                Add More Sets of Attributes
+                </a>
+            </div>
+         
+        </div>}
+          
+
             </div>
         </div>
         </div>
