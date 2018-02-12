@@ -156,65 +156,7 @@ class PPS extends React.Component {
         //TODO: codes need to be replaced after checking with backend
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
-        //var data=nProps.props.PPSDetail.PPStypeDetail;
-        //Dummy data
-        var data=[
-        {
-            current_task:"pick",
-            operators_assigned:null,
-            performance:-1,
-            pps_id:1,
-            pps_profiles:[],
-            pps_requested_mode:"audit",
-            pps_status:"open",
-            requested_status:null,
-            allowed_modes:["pick","put"]
-        },
-        {
-            current_task:"put",
-            operators_assigned:null,
-            performance:-1,
-            pps_id:2,
-            pps_profiles:[],
-            pps_requested_mode:"audit",
-            pps_status:"open",
-            requested_status:null,
-            allowed_modes:["pick"]
-        },
-        {
-            current_task:"put",
-            operators_assigned:null,
-            performance:-1,
-            pps_id:4,
-            pps_profiles:[],
-            pps_requested_mode:"audit",
-            pps_status:"open",
-            requested_status:null,
-            allowed_modes:["audit"]
-        },
-        {
-            current_task:"put",
-            operators_assigned:null,
-            performance:-1,
-            pps_id:3,
-            pps_profiles:[],
-            pps_requested_mode:null,
-            pps_status:"open",
-            requested_status:null,
-            allowed_modes:["pick","audit"]
-        },
-        {
-            current_task:"pick",
-            operators_assigned:null,
-            performance:-1,
-            pps_id:5,
-            pps_profiles:[],
-            pps_requested_mode:"audit",
-            pps_status:"open",
-            requested_status:"force_close",
-            allowed_modes:[]
-        }
-        ]
+        var data=nProps.props.PPSDetail.PPStypeDetail;
         let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
