@@ -7,22 +7,25 @@ class ActionDropDown extends React.Component{
         this.state={visibleMenu:false}; 
     }
     _handleClick(field){
-      this.setState({visibleMenu:true});
+    	let currentStatus=this.state.visibleMenu;
+    	currentStatus=!currentStatus;
+      this.setState({visibleMenu:currentStatus});
+      this.props.clickOptionBack(field);
+
 	}	
 	_optionClick(obj){
-		this.setState({visibleMenu:false});
+		let val=false;
+		this.setState({visibleMenu: val});
 		this.props.clickOptionBack(obj);
-		
+
 	}
 	
 	render(){
-		let me=this;
-		
 		var arr=[];
 		var data=this.props.data;
 		data.map(function(item, i){
-			arr.push(<option className="headerName" onClick={me._optionClick.bind(me)} name={item.name} value={item.value}>{item.name}</option>)
-		})
+			arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
+		},this);
 	
 		return (
 			
