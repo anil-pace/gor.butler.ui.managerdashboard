@@ -1,20 +1,18 @@
 import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
-import { resetForm,validateSKU,validateLOC,validateSKUcode,validateLocationcode,validateLocationcodeCsv ,validateSKUcodeSpinner, validateLocationcodeSpinner,validateLocationcodeSpinnerCsv } from '../../actions/validationActions'; 
-import {setAuditType,resetAuditType,auditValidatedAttributes,auditValidatedAttributesLocation,auditValidatedAttributesLocationCsv} from '../../actions/auditActions';
-import {userRequest} from '../../actions/userActions';
+import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
 import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION,CREATE_AUDIT_REQUEST } from '../../constants/frontEndConstants';
 import { AUDIT_URL,AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,SKU_VALIDATION_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
+import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
 import Filter from '../../components/gor-filter-component/filter';
 import GorTabs from '../../components/gor-tabs/tabs';
 import {Tab} from '../../components/gor-tabs/tabContent';
 import CSVUpload from '../../components/gor-drag-drop-upload/index';
-import  {setCheckAll} from '../../actions/sortHeaderActions';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setAuditSpinner} from '../../actions/auditActions';
@@ -34,6 +32,11 @@ const  messages= defineMessages({
         description: 'text for audit location does not exist error',
         defaultMessage: 'Location does not exist'
     },
+    e027: {
+        id: 'audit.skudoesnotexist.text',
+        description: 'text for audit sku does not exist error',
+        defaultMessage: 'SKU does not exist'
+    },
     e0xx: {
         id: 'audit.duplicatelocation.text',
         description: 'text for audit duplicate location error',
@@ -52,7 +55,16 @@ class CreateAudit extends React.Component{
         selected: [],
         confirmedSku: null,
         currentSku: "",
-        copyPasteSKU:[{"id":"1","value":""}],
+        copyPasteSKU:{
+          data:[{
+            checked:false,
+            index:0,
+            value:"",
+            errorMessage:""
+          }],
+          focusedEl:"0",
+          isInputEmpty:true
+        },
         copyPasteLocation:{
           data:[{
             checked:false,
@@ -65,12 +77,14 @@ class CreateAudit extends React.Component{
         },
         filterSelectionState:"none",
         locationAttributes:this.props.locationAttributes,
+        skuAttributes:this.props.skuAttributes,
         csvUploaded:false,
         locationMode:"location",
         skuMode:"sku",
         checkedState:true,
         isValidCsv:true,
         isAuditCreated:false,
+        activeTabIndex:0,
         validateclicked:false
         
       };
@@ -86,14 +100,16 @@ class CreateAudit extends React.Component{
       this._dropHandler = this._dropHandler.bind(this);
       this._parseCSVFile =this._parseCSVFile.bind(this);
       this._onFileUpload = this._onFileUpload.bind(this);
-      this._validLocation=this._validLocation.bind(this);
+      this._validateLocation=this._validateLocation.bind(this);
       this._onBackClick=this._onBackClick.bind(this);
+      this._validateSKU=this._validateSKU.bind(this);
+      this._onTabClick = this._onTabClick.bind(this);
       
       
   }
   componentWillUnmount()
   {
-    this.props.resetAuditType();
+    
     this.props.resetForm();            
   }
 
@@ -108,16 +124,25 @@ class CreateAudit extends React.Component{
     }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
       let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      validatedLocations = this._processLocationAttributes(locationAttributes.data),
-      validationDone = Object.keys(locationAttributes).length ? true : false;
+      skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes)),
+      validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
+      validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
+      validationDone = Object.keys(locationAttributes).length ? true : false,
+      validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
 
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
         focusedEl:"0"
       },
+      copyPasteSKU:{
+        data:validatedSKUs,
+        focusedEl:"0"
+      },
       locationAttributes,
-      validationDone
+      validationDone,
+      skuAttributes,
+      validationDoneSKU
 
     })
     }
@@ -135,6 +160,19 @@ class CreateAudit extends React.Component{
         focusedEl:this.state.copyPasteLocation.focusedEl
       }
     })
+  }
+  _processSkuAttributes(data) {
+    var processedData=[]
+    for(let i=0,len=data.length; i<len ;i++){
+      let tuple={};
+      let error_code = data[i].status===true ? "" :data[i].status.error_code;
+      tuple.checked=false;
+      tuple.index=i;
+      tuple.value=data[i].skuName;
+      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      processedData.push(tuple);
+    }
+    return processedData
   }
   _processLocationAttributes(data){
     var processedData=[];
@@ -167,28 +205,43 @@ class CreateAudit extends React.Component{
   }
 
 
-  _validSku() {
-    var initialAttributes;
-    let validSkuData;
+  _validateSKU(type) {
+    let validSKUData;
+    let arrSKU=this.state.copyPasteSKU.data.slice(0);
+    let auditParamValue = []
+
+    for(let i=0,len=arrSKU.length; i<len;i++){
+      auditParamValue.push(arrSKU[i].value.trim())
+    }
+   
+    validSKUData={
+      "audit_param_name":"name",
+      "audit_param_type":"sku",
+      "audit_param_value":{
+        "sku_list":auditParamValue
+      }
+    }
     let urlData={
-         'url': SKU_VALIDATION_URL,
-         'method':GET,
-         'cause': VALIDATE_SKU_ID,
-         'token': this.props.auth_token,
-         'contentType':APP_JSON
-        }
-
-
-      this.props.auditValidatedAttributes(initialAttributes)
-      this.props.validateSKUcodeSpinner(true);
-      this.props.validateSKUcode(urlData);
-      this.noSkuValidation=false;
-      this.setState({confirmedSku:this.skuId.value})
+                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                'formdata':(type === "create") ? validSKUData : validSKUData,
+                'method':GET,//POST,
+                'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+    }
+    
+    this.props.makeAjaxCall(urlData);
+    if(type==="create"){
+      this.props.removeModal();
+      this.props.reloadAuditList(null);
+    }
+    //this.setState({validateclicked:true});
   }
 
 
 
-  _validLocation(type){
+  _validateLocation(type){
     let validLocationData, validLocationDataCreateAudit;
     let msu_list=[];
     let slot_list=[];
@@ -227,27 +280,16 @@ class CreateAudit extends React.Component{
     }
     
     this.props.makeAjaxCall(urlData);
-    this.props.validateLocationcodeSpinner(true);
-    this.props.setAuditSpinner(true);
+   // this.props.validateLocationcodeSpinner(true);
+   // this.props.setAuditSpinner(true);
     if(type==="create"){
       this.props.removeModal();
       this.props.reloadAuditList(null);
     }
-    this.setState({validateclicked:true});
+   // this.setState({validateclicked:true});
 
   }
-  _checkSku(skuId){
-    let skuInfo;
-    skuInfo=skuStatus(skuId);
-    this.props.validateSKU(skuInfo);
-    return skuInfo.type;
-   }  
-  _checkLocation(locId){
-    let locInfo;
-    locInfo=locationStatus(locId);
-    this.props.validateLoc(locInfo);
-    return locInfo.type;
-   }  
+   
 
 
 
@@ -274,29 +316,6 @@ class CreateAudit extends React.Component{
     return locationState;
   }
 
-_processSkuAttributes() {
-    
-    var keys=[], hasAttribute=false, isValid=false;
-    var skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};
-    if(this.props.skuAttributes && this.props.skuAttributes.audit_attributes_values) {
-        isValid=true;
-        for (var key in this.props.skuAttributes.audit_attributes_values) {
-          if (this.props.skuAttributes.audit_attributes_values.hasOwnProperty(key)) {
-            keys.push(key);
-            if(this.props.skuAttributes.audit_attributes_values[key].length) {
-              hasAttribute=true;
-            }
-          }
-        }
-    }
-    skuAttributeData={keys:keys, hasAttribute: hasAttribute, isValid:isValid};
-    this.keys=keys[0]; // hardcoding since backend support only one entry
-    return skuAttributeData;
-  }
-  
-
-
-
   _searchDropdownEntries(skuState,processedSkuResponse) {
     if(skuState=== VALID_SKU && processedSkuResponse.keys){
       var key=processedSkuResponse.keys[0]; //not generic need to change in version 2 of pdfa
@@ -317,15 +336,16 @@ _processSkuAttributes() {
     }
   }
 
-  _addNewInput(){
-    var stateInputList = JSON.parse(JSON.stringify(this.state.copyPasteLocation.data));
+  _addNewInput(type){
+    var stateInputList = JSON.parse(JSON.stringify(type === "location" ? this.state.copyPasteLocation.data : this.state.copyPasteSKU.data));
     var tuple={
       checked:false,
       index:stateInputList.length,
       value:"",
-      errorMessage:""
+      errorMessage:true
     }
     stateInputList.push(tuple);
+    if(type === "location"){
     this.setState({
       copyPasteLocation:{
         data:stateInputList,
@@ -333,13 +353,23 @@ _processSkuAttributes() {
       }
     })
   }
+  else{
+    this.setState({
+      copyPasteSKU:{
+        data:stateInputList,
+        focusedEl:(stateInputList.length -1).toString()
+      }
+    })
+  }
+  }
   _updateInput(event,id) {
    
    var input = event.target.value.trim(),
    inputList = input.split(/[\s,;\t\n]+/),
    processedList=[],
-   stateInputList = JSON.parse(JSON.stringify(this.state.copyPasteLocation.data)),
-   focusedEl = id.toString();
+   activeTabIndex = this.state.activeTabIndex,
+   stateInputList = JSON.parse(JSON.stringify(activeTabIndex === 1 ? this.state.copyPasteLocation.data : this.state.copyPasteSKU.data)),
+   focusedEl = id ? id.toString() : "0";
 
    if(inputList.length > 1){
     for(let i=0,len=inputList.length; i < len;i++){
@@ -359,6 +389,7 @@ _processSkuAttributes() {
     stateInputList.splice(id, 1, tuple);
     focusedEl = id.toString();
    }
+   if(activeTabIndex !== 0){
    this.setState({
       copyPasteLocation:{
         data:stateInputList,
@@ -366,6 +397,16 @@ _processSkuAttributes() {
         isInputEmpty:false
       }
     })
+ }
+ else{
+  this.setState({
+      copyPasteSKU:{
+        data:stateInputList,
+        focusedEl,
+        isInputEmpty:false
+      }
+    })
+ }
    
 }
 
@@ -400,7 +441,8 @@ _processSkuAttributes() {
       })
     }
     _onFilterSelection(selection){
-      var validatedData = JSON.parse(JSON.stringify(this.state.copyPasteLocation.data));
+      var activeTabIndex = this.state.activeTabIndex;
+      var validatedData = JSON.parse(JSON.stringify(activeTabIndex !==0 ? this.state.copyPasteLocation.data : this.state.copyPasteSKU.data));
       var processedData=[],filterSelectionState;
       for(let i=0,len=validatedData.length; i<len;i++){
         let tuple = Object.assign({},validatedData[i])
@@ -442,13 +484,26 @@ _processSkuAttributes() {
         filterSelectionState="partial";
       }
       
-     this.setState({
-      copyPasteLocation:{
-        data:processedData,
-        focusedEl:this.state.copyPasteLocation.focusedEl
-      },
-      filterSelectionState
-     })
+      if(activeTabIndex === 0){
+        this.setState({
+              copyPasteSKU:{
+              data:processedData,
+              focusedEl:this.state.copyPasteSKU.focusedEl
+            },
+            filterSelectionState
+           })
+      }
+      else{
+        this.setState({
+            copyPasteLocation:{
+            data:processedData,
+            focusedEl:this.state.copyPasteLocation.focusedEl
+          },
+          filterSelectionState
+         })
+      }
+      
+     
       
     }
     _dropHandler(evt){
@@ -486,12 +541,12 @@ _processSkuAttributes() {
             tuple.checked=false;
             tuple.index=i;
             tuple.value=data[i];
-            tuple.errorMessage = "";
+            tuple.errorMessage = true;
             processedList.push(tuple);
 
            }
            
-           
+           if(_this.state.activeTabIndex === 1){
             _this.setState({
               copyPasteLocation:{
                 data:processedList,
@@ -503,6 +558,20 @@ _processSkuAttributes() {
               csvUploaded:true,
               isValidCsv:true
             });
+          }
+          else{
+             _this.setState({
+              copyPasteSKU:{
+                data:processedList,
+                focusedEl:"0"
+              },
+              skuMode:"sku",
+              skuAttributes:{},
+              validationDoneSKU:false,
+              csvUploaded:true,
+              isValidCsv:true
+            });
+          }
         }
         reader.readAsText(fileObject);  
       } else {
@@ -515,10 +584,47 @@ _processSkuAttributes() {
       this._parseCSVFile(fileObject);
     }
     _onBackClick(){
-      this.setState({
+      if(this.state.activeTabIndex === 0){
+        this.setState({
+        validationDoneSKU:false,
+        skuAttributes:{},
+        validateclicked:false
+      })
+      }
+      else{
+        this.setState({
         validationDone:false,
         locationAttributes:{},
         validateclicked:false
+      })
+      }
+      
+    }
+    _onTabClick(tabIndex){
+      this.setState({
+        activeTabIndex:tabIndex,
+        locationAttributes: tabIndex === 0 ? {} : this.state.locationAttributes,
+        skuAttributes:tabIndex === 1 ? {} : this.state.skuAttributes,
+        validationDoneSKU:tabIndex === 0 ? false : this.state.validationDoneSKU,
+        validationDone:tabIndex === 1 ? false : this.state.validationDone,
+        copyPasteLocation:{
+          data:tabIndex === 1 ? [{
+            checked:false,
+            index:0,
+            value:"",
+            errorMessage:""
+          }] : this.state.copyPasteLocation.data,
+          focusedEl:"0"
+        },
+        copyPasteSKU:{
+          data:tabIndex === 0 ? [{
+            checked:false,
+            index:0,
+            value:"",
+            errorMessage:""
+          }] : this.state.copyPasteSKU.data,
+          focusedEl:"0"
+        }
       })
     }
 
@@ -537,16 +643,16 @@ _processSkuAttributes() {
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       
       
-      var processedSkuResponse=this._processSkuAttributes();
       
-      var skuState=this._claculateSkuState(processedSkuResponse);
+     // var skuState=this._claculateSkuState(processedSkuResponse);
 
       var validateclicked=this.state.validateclicked;
       
       let self=this;
       
-      let {validationDone} = self.state; 
+      let {validationDone,validationDoneSKU,activeTabIndex} = self.state; 
       let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false;
+      let allSKUsValid = (self.state.skuAttributes && !self.state.skuAttributes.totalInvalid) ? true : false;
       const selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>
       let selectAllInvalidLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllInvalidLabel" description="audit dropdown option for Select All Invalid"
@@ -557,7 +663,7 @@ _processSkuAttributes() {
       let deselectAllLabel = <FormattedMessage id="Audit.inputCheckbox.deselectAllLabel" description="audit dropdown option for Deselecting all"
                                           defaultMessage="Deselect All"/>
 
-      let filterOptions=[{
+      const filterOptions=[{
         value:"select_all",
         label:selectAllLabel,
         disabled:false
@@ -591,7 +697,7 @@ _processSkuAttributes() {
             
 
             <div className='gor-audit-form'>
-            <GorTabs defaultActiveTabIndex={0} tabClass={"tabs-audit"} internalTab={false}>
+            <GorTabs onTabClick ={this._onTabClick} defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
                     <Tab tabName = {auditBySkuMessg} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'} internalTab={false} >
                           <div>
@@ -606,25 +712,149 @@ _processSkuAttributes() {
                          
 
               <div className='gor-audit-button-wrap'>
-                            <button onClick={()=>(self._onSkuModeSelection('sku'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Sku'/></button>
-                            <button onClick={()=>(self._onSkuModeSelection('csv'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
+                            <button onClick={()=>(self._onSkuModeSelection('sku'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterSKU" description='Button for entering skus' defaultMessage='Enter Sku'/></button>
+                            <button onClick={()=>(self._onSkuModeSelection('sku_csv'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
                           </div>
                                
-                          <div className={`location-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
-
-                          <div className="gor-audit-inputlist-wrap" >
+            <div className={`sku-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
+            <GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 :1} disabledTabIndex={validationDoneSKU ? 0 :1} tabClass={"sub-tabs-audit"}>
+            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+                                 linkClassName={'link-class-0'}  >
+          {!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
               <div>
-
-              <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
+               <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
             defaultMessage='Use copy and paste if you have muktiple sku numbers'/></div>
             </div>
+              <div>
+               {self.state.copyPasteSKU.data.map(function(tuple, i){
+                    let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
+                    return(<div className="gor-audit-input-wrap" key={tuple.value+i}>
+                        <InputComponent.CopyPaste
+                        className={"gor-audit-input gor-input-ok"} 
+                        autoFocus = {focus} 
+                        updateInput={self._updateInput} 
+                        index={i}  
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                      </div>) 
+              }) }
+               <div>
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                        defaultMessage='+ Add New'/></button>
+                        </div>
+               </div>
+
+             
               
+              </div>}
+            </Tab>
+            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-1'}
+                                 linkClassName={'link-class-1'}  >
+                        <div className={"gor-global-notification"}>
+              {validationDoneSKU && allSKUsValid?
+                 <div className={"gor-audit-att-ribbon"}>
+                 <div className="gor-sku-validation-btn-wrap">
+                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location' 
+                        defaultMessage='Edit'/></button>
+                 </div>
+                 <div className={"message success"}>
+                  <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
+                                                              defaultMessage='{valid} out of {total} locations valid'
+                                                              values={
+                                                                {
+                                                                  valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
+                                                                  total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+                                                                }
+                                                              }/>
+                </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
+                <span className="gor-delete-outline">
+              <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
+              </span>
               </div>
+              <div className={"message error"}>
+                  <FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
+                                                              defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
+                                                              values={
+                                                                {
+                                                                  invalid: self.state.skuAttributes.totalInvalid ? self.state.skuAttributes.totalInvalid.toString() : "0",
+                                                                  total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+                                                                }
+                                                              }/>
+                </div></div>}
+              
+             
+                
+              </div>
+          {validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+              <div>
+               {self.state.copyPasteSKU.data.map((tuple,i)=>{
+                    let tuples=[],
+                    attributeList = this.state.skuAttributes.data[i].attributeList;
+                    tuples.push(<div className={"gor-valid-row"} key={tuple.value+i}>
+                        <InputComponent.AfterValidation
+                        className={"gor-audit-input gor-input-ok"} 
+                        autoFocus = {focus} 
+                        updateInput={self._updateInput} 
+                        index={i}
+                        allRowValid={allSKUsValid}
+                        onAttributeCheck={self._onAttributeCheck}
+                        checked={tuple.checked}
+                        errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
+                          attributeList={attributeList}
+                          />}
+                      </div>)
+                    
+                    
+                    return(tuples) 
+              })}
+               <div>
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                        defaultMessage='+ Add New'/></button>
+                        </div>
+               </div>
+
+             
+              
+              </div>}
+            </Tab>
+            </GorTabs>
+
+
+
               <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
-                <button className={"gor-auditValidate-btn"}  type="button" onClick={this._validSku.bind(this)}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/></button>
               </div>
                   </div>
+          <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
+
+          <div >
+      <div className="gor-audit-csvupload-wrap">
+                        <div className="gor-global-notification">
+                        {!self.state.isValidCsv?
+                        
+                  <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
+                                                              defaultMessage='Error found, Please try again'
+                                                             />
+                :""
+              }</div>
+
+                <div className='gor-audit-drag-drop-container'> 
+                  <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
+                    <div className={"file-drop"} >
+
+                      <div className="gor-file-upload"></div>
+                      <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
+                        defaultMessage='Drag and drop'/></p>
+                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
+                        defaultMessage='OR'/></span></h1>
+                    </div>
+                  </CSVUpload>
+                </div>
+            </div>
+                 </div> 
+                        </div>
             
                           </div>  
                                 
@@ -642,7 +872,7 @@ _processSkuAttributes() {
                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
-                            <button onClick={()=>(self._onLocationModeSelection('csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
+                            <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
                           </div>
 
 
@@ -675,7 +905,7 @@ _processSkuAttributes() {
               }) }
               
                <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
                         </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
@@ -742,7 +972,7 @@ _processSkuAttributes() {
               </div>
             }
                           <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validLocation}>
+                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
                 <label>
                 {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}
@@ -753,7 +983,7 @@ _processSkuAttributes() {
         </button>
               </div>
               <div>
-             <button onClick={()=>{this._validLocation("create")}} className={validationDone && allLocationsValid && self.state.locationAttributes.totalLocations!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button onClick={()=>{this._validateLocation("create")}} className={validationDone && allLocationsValid && self.state.locationAttributes.totalLocations!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </div>
               <div>
@@ -761,19 +991,10 @@ _processSkuAttributes() {
             </div>
 
                         </div>
-              <div className={`location-mode ${self.state.locationMode === 'csv'  ? 'active-mode' : 'inactive-mode'}`}>
-    <GorTabs defaultActiveTabIndex={0} tabClass={"tabs-audit"} internalTab={true}>               
-<Tab tabName = {uploadCsvMessg} iconClassName={'icon-class-0'}
-                                 linkClassName={'link-class-0'} internalTab={true} index={0}>
-                                 
-              </Tab>
-              <Tab tabName = {selectAttributesMessg} iconClassName={'icon-class-0'}
-                                 linkClassName={'link-class-0'} internalTab={true} index={1}>
-                                
-              </Tab>
-              </GorTabs>
+              <div className={`location-mode ${self.state.locationMode === 'location_csv'  ? 'active-mode' : 'inactive-mode'}`}>
+
           <div >
-                        <div className="gor-audit-csvupload-wrap">
+      <div className="gor-audit-csvupload-wrap">
                         <div className="gor-global-notification">
                         {!self.state.isValidCsv?
                         
@@ -822,7 +1043,6 @@ CreateAudit.PropTypes={
     auth_token:React.PropTypes.string,
     skuAttributes:React.PropTypes.object,
     locationAttributes:React.PropTypes.object,
-    locationAttributesCsv:React.PropTypes.object,
     intl: intlShape.isRequired,
     auditSpinner: React.PropTypes.bool,
     setAuditSpinner: React.PropTypes.func
@@ -838,7 +1058,6 @@ CreateAudit.defaultProps = {
   locCheck:{},
   skuAttributes:{},
   locationAttributes:{},
-  locationAttributesCsv:{},
   hasDataChanged:false
 };
 function mapStateToProps(state, ownProps){
@@ -852,7 +1071,6 @@ function mapStateToProps(state, ownProps){
       auth_token:state.authLogin.auth_token,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
-      locationAttributesCsv:state.auditInfo.locationAttributesCsv,
       hasDataChanged:state.auditInfo.hasDataChanged,
       auditSpinner: state.spinner.auditSpinner || false
   };
@@ -860,23 +1078,8 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch){
   return {
-    userRequest: function(data){ dispatch(userRequest(data)); },
-    setAuditType: function(data){ dispatch(setAuditType(data)); },
-    resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
-    validateSKU: function(data){ dispatch(validateSKU(data)); },
-    validateLoc: function(data){ dispatch(validateLOC(data)); },            
     resetForm:   function(){ dispatch(resetForm()); },
-    validateSKUcode: function(data){dispatch(validateSKUcode(data));},
-    validateLocationcode: function(data){dispatch(validateLocationcode(data));},
     makeAjaxCall: function (data) {dispatch(makeAjaxCall(data))},
-    validateLocationcodeCsv: function(data){dispatch(validateLocationcodeCsv(data))},
-    validateSKUcodeSpinner: function(data){dispatch(validateSKUcodeSpinner(data));},
-    validateLocationcodeSpinner: function(data){dispatch(validateLocationcodeSpinner(data));},
-    validateLocationcodeSpinnerCsv: function(data){dispatch(validateLocationcodeSpinnerCsv(data));},
-    auditValidatedAttributes: function(data){dispatch(auditValidatedAttributes(data));},
-    auditValidatedAttributesLocation: function(data){dispatch(auditValidatedAttributesLocation(data));},
-    auditValidatedAttributesLocationCsv: function(data){dispatch(auditValidatedAttributesLocationCsv(data));},
-    setCheckAll: function (data) {dispatch(setCheckAll(data)) },
     setAuditSpinner: function (data) {
             dispatch(setAuditSpinner(data))
         }

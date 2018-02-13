@@ -1,4 +1,20 @@
 .gor-audit-create{
+
+  .gor-valid-row{
+    > div:first-child{
+        width:50%;
+        display:inline-block;
+    }
+  }
+  .gor-sel-att-wrap{
+    width:40%;
+    display:inline-block;
+    padding: 10px 15px;
+    border: 1px solid #B3B3B3;
+    border-radius: 3px;
+    margin-top: 10px;
+    vertical-align: middle;
+  }
   .gor-filter-wrapper{
     display:inline-block;
   }
@@ -12,9 +28,7 @@
     cursor:pointer;
     margin-left:10px;
   }
-  .gor-audit-att-ribbon{
-    
-  }
+  
   .gor-option-wrapper{
     width:130px;
   }
@@ -22,7 +36,7 @@
     position:static;
   }
   .gor-audit-form{
-    width:85%;
+    width:45%;
     margin:auto;
   }
   .audit-index{
@@ -42,10 +56,7 @@
   }
   }
   
-  .tabs{
-    width: 45%;
-    margin: auto;
-  }
+  
   .audit-tabsInternal{
     width: 100%;
     margin: auto;
@@ -87,6 +98,15 @@
   }
   .location-mode{
       width:92%;
+    &.active-mode{
+      display:block;
+    }
+    &.inactive-mode{
+      display:none;
+    }
+  }
+  .sku-mode{
+    width:92%;
     &.active-mode{
       display:block;
     }
@@ -303,12 +323,11 @@
     color: #00a54f;
     padding-top: 10px;
 }
-}
 .gorAuditHeader { 
   display: inline-block; 
   padding-left: 17px; 
   padding-top: 14px; 
-  }
+}
 
 .gor-resolve-head {
   display: inline-block;
@@ -637,6 +656,43 @@ h1:after {
     border: solid 1px #2C94FD;
     margin-top:10px;
 }
+.sub-tabs-audit{
+  
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  margin-top:10px;
+  .sub-tab-index{
+      background: #DCDCDC;
+      border-radius: 50%;
+      display: inline-block;
+      height: 25px;
+      line-height: 22px;
+      width: 25px;
+      color: #fff;
+      text-decoration: none;
+      font-style: normal;
+      margin-right: 5px;
+  }
+  li{
+      color:#E1E1E1;
+       border:none;
+       width:50%;
+  }
+  .active{
+    background:none;
+    border:none;
+    border-bottom: 5px solid #659AF6;
+    box-sizing:border-box;
+    color:#666666;
+    .sub-tab-index{
+     background: #659AF6;
+      
+    }
+  }
+  
+}
+}
+
 
 
 

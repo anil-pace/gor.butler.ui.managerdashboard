@@ -2,71 +2,95 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,
   VALIDATE_SKU_SPINNER,VALIDATE_LOCATION_SPINNER,
   VALIDATE_LOCATION_SPINNER_CSV,
   VALIDATED_ATTIBUTES_DATA,
+  VALIDATED_ATTIBUTES_DATA_SKU,
   VALIDATED_ATTIBUTES_DATA_LOCATION,
   VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
-  TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
+  TEXTBOX_STATUS,
+  AUDIT_LIST_REFRESHED,
+  CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
  * @return {[Object] updated state}
  */
-const dummyData = {
-  "audit_location_validation_response": {
-    "msu_list": [
-      [
-        "123",
-        "s0",
-        [
-          "123.1.A.02"
-        ],
-        [
-          "s0"
+
+const validSKU ={
+  "audit_sku_validation_response": {
+    "attributes_list": [
+      {},
+      {
+        "product_color": [
+          "Black"
         ]
-      ],
-      [
-        "434",
-        "s0"
-      ],
-      [
-        "657",
-        "s1"
-      ],
-      [
-        "011",
-        "s0",
-        [
-          "011.1.A.02",
-          "011.1.A.03"
+      },
+      {},
+      {
+        "product_color": [
+          "Red",
+          "Black"
         ],
-        [
-          "s0",
-          "s0"
+        "product_internal_memory": [
+          "32GB",
+          "64GB"
+        ],
+        "product_region": [
+          "India version",
+          "China version"
         ]
-      ]
+      },
+      {
+        "product_internal_memory": [
+          "128GB"
+        ],
+        "product_region": [
+          "China version"
+        ]
+      }
     ],
-    "individual_slot_list": [
-      [
-        "031.1.G.05",
-        "s1"
+    "i18n_values": {
+      "product_color": [
+        {
+          "display_name": "Product color",
+          "locale": "en-US"
+        }
       ],
-      [
-        "051.1.G.05",
-        "s1"
+      "product_internal_memory": [
+        {
+          "display_name": "Internal memory",
+          "locale": "en-US"
+        }
+      ],
+      "product_region": [
+        {
+          "display_name": "Product region",
+          "locale": "en-US"
+        }
       ]
+    },
+    "sku_list": [
+      "2002",
+      "2003",
+      "2001",
+      "2004",
+      "2005"
     ],
     "status": {
       "s0": true,
       "s1": {
-        "error_code": "e026",
-        "error_reason": "location does not exist"
-      },
-      "s2": {
-        "error_code": "e0xx",
-        "error_reason": "duplicate entry"
+        "error_code": "e027",
+        "error_reason": "sku does not exist"
       }
-    }
+    },
+    "status_list": [
+      "s0",
+      "s0",
+      "s0",
+      "s0",
+      "s0"
+    ]
   }
 }
+
 export  function auditInfo(state={},action){
   switch (action.type) {
     case AUDIT_DATA:
@@ -116,28 +140,19 @@ export  function auditInfo(state={},action){
             return Object.assign({}, state, { 
             "locationValidationSpinnerCsv" : action.data
           })
-           
-
-    case VALIDATED_ATTIBUTES_DATA:
-       return Object.assign({}, state, { 
-            "skuAttributes" : action.data
-          })
           
-
+    case VALIDATED_ATTIBUTES_DATA_SKU:
+        let processedDataSKU = processValidationDataSKU(validSKU.audit_sku_validation_response/*action.data*/)//(action.data)
+       return Object.assign({}, state, { 
+            "skuAttributes" : processedDataSKU,
+            "hasDataChanged":!state.hasDataChanged
+          })
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
        let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
             "hasDataChanged":!state.hasDataChanged
           })
-           
-
-
-     case VALIDATED_ATTIBUTES_DATA_LOCATION_CSV:
-       return Object.assign({}, state, { 
-            "locationAttributesCsv" : action.data
-          })
-          
 
     case TEXTBOX_STATUS:  
      return Object.assign({}, state, { 
@@ -154,6 +169,48 @@ export  function auditInfo(state={},action){
     default:
       return state
   }
+}
+
+function processValidationDataSKU(data){
+  var processedData=[],
+  skuList = data.sku_list,
+  status = data.status,
+  statusList = data.status_list,
+  attList = data.attributes_list,
+  i18n = data.i18n_values,
+  totalValid=0,totalInvalid=0;
+
+  for(let i=0,len = skuList.length; i< len ;i++){
+    let tuple ={};
+    tuple.skuName = skuList[i],
+    tuple.status = status[statusList[i]];
+    totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+    totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    let attributeList = attList[i];
+    let categoryList = [];
+    for(let key in attributeList){
+      let attTuple = {}
+      attTuple.category_text = i18n[key][0].display_name;
+      attTuple.category_value = key;
+      let attObj={};
+      attributeList[key].forEach(function(el){
+        attObj[el] = {};
+        attObj[el].text = el;
+        attObj[el].checked = false;
+      })
+      attTuple.attributeList = attObj;
+      categoryList.push(attTuple);
+    }
+    tuple.attributeList = categoryList;
+    processedData.push(tuple)
+    
+  }
+  return {
+    data:processedData,
+    totalValid,
+    totalInvalid,
+    totalSKUs:totalValid+totalInvalid
+  };
 }
 
 function processValidationData(data){
@@ -193,7 +250,7 @@ indSlotList.map(function(value,i){
   
 })
 
-console.log(processedData);
+
 return {
     data:processedData,
     totalValid,

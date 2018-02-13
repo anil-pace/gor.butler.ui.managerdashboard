@@ -9,8 +9,8 @@ import {
     DISPLAY_AUDIT_SPINNER,
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
+    VALIDATED_ATTIBUTES_DATA_SKU,
     VALIDATED_ATTIBUTES_DATA_LOCATION,
-    VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
     TEXTBOX_STATUS,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY,
     CREATE_AUDIT_REQUEST
@@ -98,12 +98,13 @@ export function auditValidatedAttributesLocation(data) {
     }
 }
 
-export function auditValidatedAttributesLocationCsv(data) {
+export function auditValidatedAttributesSKU(data) {
     return {
-        type: VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
+        type: VALIDATED_ATTIBUTES_DATA_SKU,
         data
     }
 }
+
 //Set the text box value enable or disable
 export function setTextBoxStatus(data) {
     return {

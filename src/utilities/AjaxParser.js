@@ -9,7 +9,7 @@ import {
     setAuditRefresh,
     setAuditSpinner,
     setPendingAuditLines,
-    auditValidatedAttributes,
+    auditValidatedAttributesSKU,
     auditValidatedAttributesLocation,
     auditValidatedAttributesLocationCsv,
     createAuditAction
@@ -351,13 +351,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
 
         case VALIDATE_SKU_ID:
-            if (res.sku && res.audit_attributes_values) {
-                store.dispatch(auditValidatedAttributes(res));
-            }
-            store.dispatch(validateSKUcodeSpinner(false));
+            store.dispatch(auditValidatedAttributesSKU(res));
             break;
-
-
         case VALIDATE_LOCATION_ID:
             store.dispatch(auditValidatedAttributesLocation(res));
             store.dispatch(validateLocationcodeSpinner(false));
