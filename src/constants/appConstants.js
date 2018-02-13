@@ -112,6 +112,8 @@ export const SYSTEM_BUTLERS_DETAILS="butlers";
 export const HISTOGRAM_DETAILS="histogram";
 export const USER_DATA="users";
 export const ORDERLIST="ORDERLIST";
+export const ORDERS_FULFIL="ORDERS_FULFIL";
+export const ORDERS_SUMMARY = "ORDERS_SUMMARY";
 
 
 /*Constants for type of AJAX call*/

@@ -16,6 +16,10 @@ import {modal} from 'react-redux-modal';
 import ProgressBar from '../components/progressBar/progressBar';
 import {showTableFilter} from '../actions/filterAction';
 import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
+import Spinner from '../components/spinner/Spinner';
+import { makeAjaxCall } from '../actions/ajaxActions';
+import { ORDERS_FULFIL_FETCH, GET, ORDERS_SUMMARY_FETCH} from '../constants/frontEndConstants';
+
 
 	var wData = [
 		{cutofftime: "CUT OFF TIME 1", timeLeft: "1 hrs left", progressBar: "5", totalOrder: "Total orders 1111"},
@@ -45,13 +49,13 @@ class newordersTab extends React.Component{
     	this.resetCollapseAll = this.resetCollapseAll.bind(this);
     }	
 
-    collapseAll(){
+    collapseAll = () => {
     	this.setState({
     		isPanelOpen: false
     	});
     }
 
-    resetCollapseAll(){
+    resetCollapseAll = () => {
     	this.setState({
     		isPanelOpen: true
     	});
@@ -64,7 +68,41 @@ class newordersTab extends React.Component{
         })
     }
 
-    _processData(){
+    componentDidMount(){
+    	console.log("component DId Mount get called");
+        this._getOrdersFulfilment(this.props);
+        this._getOrdersSummary(this.props);
+    }
+
+    _getOrdersFulfilment(props){
+    	console.log("_getOrdersFulfilment get called");
+        //this.props.setReportsSpinner(true);
+        let params={
+            //'url':STORAGE_SPACE_URL,
+            //'method':GET,
+            //'contentType':APP_JSON,
+            //'accept':APP_JSON,
+            'cause':ORDERS_FULFIL_FETCH,
+            //'token': this.props.auth_token
+        }
+        this.props.makeAjaxCall(params);
+    }
+
+    _getOrdersSummary(props){
+    	console.log("_getOrdersSummary get called");
+        //this.props.setReportsSpinner(true);
+        let params={
+            //'url':STORAGE_SPACE_URL,
+            //'method':GET,
+            //'contentType':APP_JSON,
+            //'accept':APP_JSON,
+            'cause':ORDERS_SUMMARY_FETCH,
+            //'token': this.props.auth_token
+        }
+        this.props.makeAjaxCall(params);
+    }
+
+    _processData = () => {
 		let wDataLen = wData.length; let oDataLen = oData.length;
 		let waveRows = []; let orderRows = [];
 		let processedData = {};
@@ -111,7 +149,7 @@ class newordersTab extends React.Component{
 		return processedData;
 	}
 
-    viewOrderLine() {
+    viewOrderLine = () =>  {
 	    modal.add(ViewOrderLine, {
 	        title: '',
 	        size: 'large',
@@ -168,9 +206,20 @@ class newordersTab extends React.Component{
 	}
 }
 
+
+newordersTab.PropTypes={
+    orderFulfilment: React.PropTypes.array,
+}
+
+newordersTab.defaultProps = {
+    orderFulfilment: []
+}
+
 function mapStateToProps(state, ownProps) {
     return {
         showFilter: state.filterInfo.filterState || false,
+        orderFulfilment: state.orderDetails.orderFulfilment,
+        orderSummary: state.orderDetails.orderSummary
     };
 }
 
@@ -178,13 +227,11 @@ var mapDispatchToProps=function (dispatch) {
     return {
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
-        }
+        },
+        makeAjaxCall: function(params){
+        	dispatch(makeAjaxCall(params))
+        },
     }
 };
-
-
-newordersTab.PropTypes={
-    showFilter: React.PropTypes.bool,
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(newordersTab) ;

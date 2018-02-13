@@ -87,6 +87,8 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    ORDERS_FULFIL_FETCH,
+    ORDERS_SUMMARY_FETCH
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -156,6 +158,8 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
+import {receiveOrderFulfilmentData} from './../actions/norderDetailsAction';
+import {receiveOrderSummaryData} from './../actions/norderDetailsAction';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -537,6 +541,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
+            break;
+        case ORDERS_FULFIL_FETCH:
+            store.dispatch(receiveOrderFulfilmentData(res));
+            break;
+        case ORDERS_SUMMARY_FETCH:
+            store.dispatch(receiveOrderSummaryData(res));
             break;
         default:
             ShowError(store, cause, status);

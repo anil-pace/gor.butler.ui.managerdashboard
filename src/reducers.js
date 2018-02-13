@@ -50,6 +50,9 @@ import {operationsLogsReducer} from './reducers/operationLogsReducer';
 import {downloadReportsReducer} from './reducers/downloadReportsReducer';
 import {storageSpaceReducer} from './reducers/storageSpaceReducer';
 
+import {orderDetails} from './reducers/norderDetailsReducer';
+
+
 const rootReducer=combineReducers({
   intl:intlReducer,
   headerData,
@@ -98,7 +101,8 @@ const rootReducer=combineReducers({
   ppsConfiguration,
   operationsLogsReducer,
   downloadReportsReducer,
-  storageSpaceReducer
+  storageSpaceReducer,
+  orderDetails
    })
 
 export default rootReducer
