@@ -1,12 +1,8 @@
 .gor-sel-att-wrap{
 	position:relative;
-	
 	.gor-sel-att-pholder-text{
 		display:inline-block;
-		width:80%;
-		font-size: calculateRem(14px);
-    	color: #aaaaaa;
-    	font-family: 'Source Sans Pro';
+		width:80%
 	}
 	.gor-sel-att-arr-cont{
 		display:inline-block;
@@ -26,7 +22,7 @@
 	}
 	.gor-sel-att-drop{
 		position:absolute;
-		top:-244px;
+		top:0px;
 		left:0px;
 		background:#fff;
 		width:100%;
@@ -38,12 +34,11 @@
 	.gor-sel-att-content{
 		border-radius: 3px;
     	box-shadow: 0px 0px 1px 1px #A2A2A2;
-    	height:280px;
     	.attribute-cont{
-    		overflow:hidden;
-    		height:245px;
+    		height: 15vw;
+    		overflow:auto;
     		.header{
-    			    padding: 8px 10px;
+    			    padding: 15px 10px;
 				    background: #F2F2F2;
 				    border-bottom: 1px solid #D2D2D2;
 				    font-size: calculateRem(14px);
@@ -59,34 +54,29 @@
     		}
     		.back{
     			background: none;
-			    font-size: 14px;
-			    color: #666666;
-			    font-family: 'Source Sans Pro Semibold';
+			    font-size: 12px;
+			    font-weight: bold;
+			    color: #676767;
+			    cursor: pointer;
     		}
     		.clearAll{
     			background: none;
 			    color: #6A9DF6;
 			    cursor: pointer;
-			    font-size: 12px;
-			    font-weight: 600;
-			    font-family: 'Source Sans Pro';
     		}
     	}
     	.footer-apply{
-    		padding: 8px 10px;
+    		padding: 15px 10px;
 		    text-align: center;
 		    border-top: 1px solid #DFDFDF;
 		    a{
-		    	text-decoration: none;
-			    color: #88B2F9;
-			    font-size: 12px;
-			    font-weight: 600;
-			    font-family: 'Source Sans Pro';
-
+		    	text-decoration:none;
+		    	color:#88B2F9;
 		    }
     	}
     	.attribute-row{
     		padding: 5px 0;
+    		border-bottom: 1px solid #E5E5E5;
 			box-sizing: border-box;
     		&:hover{
 				background:#F8F8F8;
@@ -98,28 +88,15 @@
 				}
 			}
     	}
+		
 		.category{
-			font-size: calculateRem(12px);
-		    font-weight: bold;
-		    color: #666666;
-		    padding: 10px 10px 0 10px;
-		    font-family: 'Source Sans Pro Bold';
-		}
-		}
-		.setName{
-			font-size:calculateRem(14px);
+			font-size: calculateRem(14px);
+    		font-weight: bold;
+    		padding: 10px 10px 0 10px;
 		}
 		.values{
 			padding: 10px 10px 0 10px;
 			font-size: calculateRem(14px);
-			.values-wrapper{
-				line-height:30px;
-			}
-			.label{
-				font-size: calculateRem(12px);
-			    color: #666666;
-			    font-family: 'Source Sans Pro';
-			}
 			.set{
 				padding: 5px;
 			    display: inline-block;
@@ -131,15 +108,14 @@
 			}
 		}
 		.text-cont{
-			width: 75%;
+			width: 70%;
 		    margin: auto;
-		    padding: 43% 0 44% 0;
+		    padding: 30% 0 30% 0;
 		    text-align: center;
 		    a{
 		    	text-decoration: none;
-			    color: #88B2F9;
-			    font-size: calculateRem(14px);
-			    font-family: 'Source Sans Pro Bold';
+			    color: #4699F9;
+			    font-size: 16px;
 		    }
 		}
 		.footer{
@@ -165,7 +141,7 @@
 		.actions-icons{
 			float:right;
 		}
-	
+	}
 	.hide{
 		display:none;
 	}
@@ -195,11 +171,10 @@
 	}
 	.gor-sel-atts{
 		clear:both;
-		max-height: 200px;
-		overflow:auto;
 	}
 	input[type="checkbox"]{
-		margin:0;
-		margin-right:5px;
+		margin-top:0;
 	}
+	
+	
 }

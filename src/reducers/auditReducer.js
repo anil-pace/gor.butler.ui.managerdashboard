@@ -2,9 +2,12 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,
   VALIDATE_SKU_SPINNER,VALIDATE_LOCATION_SPINNER,
   VALIDATE_LOCATION_SPINNER_CSV,
   VALIDATED_ATTIBUTES_DATA,
+  VALIDATED_ATTIBUTES_DATA_SKU,
   VALIDATED_ATTIBUTES_DATA_LOCATION,
   VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
-  TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
+  TEXTBOX_STATUS,
+  AUDIT_LIST_REFRESHED,
+  CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -142,15 +145,13 @@ export  function auditInfo(state={},action){
         let processedDataSKU = processValidationDataSKU(validSKU.audit_sku_validation_response/*action.data*/)//(action.data)
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
-            "hasDataChanged":!state.hasDataChanged,
-            "auditSpinner":false
+            "hasDataChanged":!state.hasDataChanged
           })
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
        let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
-            "hasDataChanged":!state.hasDataChanged,
-            "auditSpinner":false
+            "hasDataChanged":!state.hasDataChanged
           })
 
     case TEXTBOX_STATUS:  
@@ -213,6 +214,49 @@ function processValidationDataSKU(data){
 }
 
 function processValidationData(data){
+  var orderedMSU = data.ordered_msus,
+  ordered_relations = data.ordered_relations,
+  ordered_slots = data.slot_list,
+  status = data.status,
+  statusList = data.status_list,
+  attList = data.attributes_list,
+  i18n = data.i18n_values,
+  totalValid=0,totalInvalid=0;
+
+  for(let i=0,len = skuList.length; i< len ;i++){
+    let tuple ={};
+    tuple.skuName = skuList[i],
+    tuple.status = status[statusList[i]];
+    totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+    totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    let attributeList = attList[i];
+    let categoryList = [];
+    for(let key in attributeList){
+      let attTuple = {}
+      attTuple.category_text = i18n[key][0].display_name;
+      attTuple.category_value = key;
+      let attObj={};
+      attributeList[key].forEach(function(el){
+        attObj[el] = {};
+        attObj[el].text = el;
+        attObj[el].checked = false;
+      })
+      attTuple.attributeList = attObj;
+      categoryList.push(attTuple);
+    }
+    tuple.attributeList = categoryList;
+    processedData.push(tuple)
+    
+  }
+  return {
+    data:processedData,
+    totalValid,
+    totalInvalid,
+    totalSKUs:totalValid+totalInvalid
+  };
+}
+
+function processValidationData(data){
 
 var processedData=[],
 msuList = data.msu_list,
@@ -232,16 +276,6 @@ for(let i=0,len=msuList.length; i<len ;i++){
     totalValid = (childTuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
     totalInvalid = (childTuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
     children.push(childTuple);
-  }
-  if(children.length){
-    tuple.children = children
-  }
-  processedData.push(tuple)
-}
-indSlotList.map(function(value,i){
-  let tuple= {
-    name:value[0],
-    status:statusList[value[1]]
   }
   totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
   totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;

@@ -8,16 +8,21 @@ class GorTabs extends React.Component{
 constructor(props, context) {
         super(props, context);
         this.state = {
-            activeTabIndex: this.props.defaultActiveTabIndex
+            activeTabIndex: this.props.defaultActiveTabIndex,
+            disabledTabIndex:this.props.disabledTabIndex
         };
         this.handleTabClick = this.handleTabClick.bind(this);
     }
   
     // Toggle currently active tab
     handleTabClick(tabIndex) {
+        let activeTabIndex = tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
         this.setState({
-            activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
+            activeTabIndex
         });
+        if(this.props.onTabClick){
+            this.props.onTabClick(activeTabIndex);
+        }
     }
   
     // Encapsulate <Tabs/> component API as props for <Tab/> children
@@ -26,7 +31,8 @@ constructor(props, context) {
             return React.cloneElement(child, {
                 onClick : this.handleTabClick,
                 tabIndex: index,
-                isActive: index === this.state.activeTabIndex
+                isActive: index === this.state.activeTabIndex,
+                disabled: index === this.state.disabledTabIndex
             });
         });
     }
@@ -39,10 +45,17 @@ constructor(props, context) {
             return children[activeTabIndex].props.children;
         }
     }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            activeTabIndex: nextProps.defaultActiveTabIndex,
+            disabledTabIndex:nextProps.disabledTabIndex
+        })
+    }
   
     render() {
         return (
-            <div className="tabs">
+            <div className={"tabs"}>
                 <ul className={`tabs-nav nav navbar-nav navbar-left ${this.props.tabClass}`}>
                     {this.renderChildrenWithTabsApiAsProps()}
                 </ul>
