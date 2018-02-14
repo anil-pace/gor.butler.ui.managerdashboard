@@ -3,11 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 
 export  function recieveAuditDetail(state={},action){
+    
     switch (action.type) {
+        
         case RECIEVE_AUDIT_DATA:
-
+            
             var res, auditDetail, totalPage, totalAudit;
-            res=action.data.data[0];
+            res=action.data[0];
             totalPage=Number(res.total_pages);
             totalAudit=Number(res.total_results);
             if(res.audit_list) {

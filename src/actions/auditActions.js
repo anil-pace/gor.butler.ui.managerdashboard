@@ -21,6 +21,7 @@ export function getAuditData(params) {
 }
 
 export function recieveAuditData(data) {
+    
     return {
         type: RECIEVE_AUDIT_DATA,
         data

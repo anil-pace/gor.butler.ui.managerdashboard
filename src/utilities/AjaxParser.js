@@ -174,6 +174,136 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
+       
+        res=[{
+        "audit_list": [{
+                "actual_quantity": null,
+                "audit_button_data": {
+                    "audit_cancel_button": "disable",
+                    "audit_delete_button": "disable",
+                    "audit_duplicate_button": "disable",
+                    "audit_resolve_button": "disable",
+                    "audit_start_button": "enable",
+                    "audit_view_issues_button": "disable"
+                },
+                "audit_created_by": "system",
+                "audit_id": "ewFS4i4SXF",
+                "audit_info": [],
+                "audit_name": "audit name",
+                "audit_param_type": "location",
+                "audit_param_value": {
+                    "locations_list": [
+                        "014",
+                        "039",
+                        "001",
+                        "011.1.A.02",
+                        "001.1.A.02",
+                        "039.1.E.02",
+                        "014.1.E.05"
+                    ]
+                },
+                "audit_status": "audit_created",
+                "audit_type": "Multi location",
+                "cancel_request": "undefined",
+                "completed_quantity": 0,
+                "completion_time": null,
+                "create_time": "Thu, 25 Jan 2018 04:21:05 GMT",
+                "description": "undefined",
+                "display_id": 53,
+                "expected_quantity": 0,
+                "pps_id": null,
+                "resolved": 0,
+                "start_actual_time": null,
+                "start_request_time": null,
+                "unresolved": 0
+            },
+            {
+                "actual_quantity": null,
+                "audit_button_data": {
+                    "audit_cancel_button": "disable",
+                    "audit_delete_button": "enable",
+                    "audit_duplicate_button": "enable",
+                    "audit_resolve_button": "disable",
+                    "audit_start_button": "enable",
+                    "audit_view_issues_button": "disable"
+                },
+                "audit_created_by": "user",
+                "audit_id": "GSmF3YUWT9",
+                "audit_info": [],
+                "audit_name": "audit name",
+                "audit_param_type": "sku",
+                "audit_param_value": {
+                    "sku_list": [
+                        "2001",
+                        "2002",
+                        "2003",
+                        "2004",
+                        "2005"
+                    ]
+                },
+                "audit_status": "audit_created",
+                "audit_type": "Multi SKU",
+                "cancel_request": "undefined",
+                "completed_quantity": 0,
+                "completion_time": null,
+                "create_time": "Mon, 29 Jan 2018 01:41:08 GMT",
+                "description": "undefined",
+                "display_id": 54,
+                "expected_quantity": 0,
+                "pps_id": null,
+                "resolved": 0,
+                "start_actual_time": null,
+                "start_request_time": null,
+                "unresolved": 0
+            },
+            {
+                "actual_quantity": null,
+                "audit_button_data": {
+                    "audit_cancel_button": "disable",
+                    "audit_delete_button": "disable",
+                    "audit_duplicate_button": "enable",
+                    "audit_resolve_button": "disable",
+                    "audit_start_button": "disable",
+                    "audit_view_issues_button": "disable"
+                },
+                "audit_created_by": "user",
+                "audit_id": "VNuH6RDhmi",
+                "audit_info": [],
+                "audit_name": "audit name",
+                "audit_param_type": "sku",
+                "audit_param_value": {
+                    "sku_list": [
+                        "2001",
+                        "2002",
+                        "2003",
+                        "2004",
+                        "2005"
+                    ]
+                },
+                "audit_status": "audit_aborted",
+                "audit_type": "Multi SKU",
+                "cancel_request": "undefined",
+                "completed_quantity": 0,
+                "completion_time": "2018-01-29T09:31:22.381920+05:30",
+                "create_time": "Mon, 29 Jan 2018 03:49:51 GMT",
+                "description": "undefined",
+                "display_id": 55,
+                "expected_quantity": 0,
+                "pps_id": 3,
+                "resolved": 0,
+                "start_actual_time": null,
+                "start_request_time": "2018-01-29T09:30:57.195800+05:30",
+                "unresolved": 0
+            }
+        ],
+        "create_time": "2018-1-14",
+        "end_time": null,
+        "next_page": "https://localhost:5000/api/audit?start_time=2018-1-14&page=2&PAGE_SIZE=20",
+        "page": 3,
+        "page_results": 20,
+        "total_pages": 3,
+        "total_results": 44
+    }];
             store.dispatch(recieveAuditData(res));
             store.dispatch(setAuditSpinner(false));
             break;

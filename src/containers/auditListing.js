@@ -3,9 +3,13 @@ import Spinner from '../components/spinner/Spinner';
 import {connect} from 'react-redux';
 import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
 import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit,setAuditQuery} from '../actions/auditActions';
-import AuditTable from './auditTab/auditTable';
+import AuditTable from './auditListingTab';
 import {getPageData} from '../actions/paginationAction';
 import StartAudit from './auditTab/startAudit';
+ import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
+import {GTable} from '../components/gor-table-component/index'
+ import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
+ import AuditStart from '../containers/auditTab/auditStart';
 import {
     AUDIT_RETRIEVE,
     GET,PUT,
@@ -25,6 +29,8 @@ import {
     AUDIT_LINE_REJECTED,
     AUDIT_ISSUES_STATUS,
     AUDIT_BY_PDFA,
+    AUDIT_BY_LOCATION,
+    AUDIT_BY_SKU,
     AUDIT_TASK_ID,
     AUDIT_STATUS,
     sortAuditHead,
@@ -150,6 +156,15 @@ class AuditTab extends React.Component {
         }
 
   }
+   viewAuditDetails() {
+  modal.add(ViewDetailsAudit, {
+    title: '',
+    size: 'large',
+                    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                    hideCloseButton: true // (optional) if you don't wanna show the top right close button
+                    //.. all what you put in here you will get access in the modal props ;),
+                  });
+}
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
@@ -322,42 +337,22 @@ class AuditTab extends React.Component {
         var i,limit=data.length;
         for (i=0;i<=limit - 1; i++) {
             auditData.id=data[i].audit_id;
-            if (data[i].display_id) {
-                auditData.display_id=data[i].display_id;
+            if (data[i].audit_name) {
+                auditData.audit_name=data[i].audit_name;
             }
             else {
-                auditData.display_id="--";
+                auditData.audit_name="--";
             }
-            let total_lines=0
-            try{
-                total_lines=data[i].audit_info.length
-            }catch(ex){}
+           auditData.auditBased=data[i].audit_type;
 
-            if (data[i].audit_param_type !== AUDIT_BY_PDFA) {
-                auditData.auditType=data[i].audit_param_type;
-                if (data[i].audit_param_value) {
-                    auditData.auditValue=data[i].audit_param_value;
-                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
-                }
-            }
-
-            else if (data[i].audit_param_type=== AUDIT_BY_PDFA) {
-                auditData.auditType=data[i].audit_param_type;
-                if (data[i].audit_param_value) {
-                    auditData.auditValue=data[i].audit_param_value.product_sku;
-                    auditData.auditTypeValue=auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
-                    auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
-                }
-            }
+        
             
-            auditData.pps_id=data[i].pps_id ||"--";
+            auditData.pps_id=data[i].pps_id ||" ";
             
             if (data[i].audit_status) {
-                if (auditData.statusPriority=== undefined) {
-                    auditData.statusPriority=1;
-                }
+                
                 auditData.status=auditStatus[data[i].audit_status];
-                auditData.statusClass=statusClass[data[i].audit_status];
+  
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
                     auditData.startAudit=true;
                 }
@@ -376,41 +371,18 @@ class AuditTab extends React.Component {
                     auditData.resolveAudit=false;
                 }
 
-                if (data[i].audit_button_data && data[i].audit_button_data.audit_view_issues_button==="enable") {
-                    auditData.viewIssues=true;
-                }
-
-                else {
-                    auditData.viewIssues=false;
-                }
-                if(data[i].audit_button_data && data[i].audit_button_data.audit_cancel_button==="enable"){
-                    auditData.cancellable=true
-                }else{
-                    auditData.cancellable=false
-                }
-
-                if(data[i].audit_button_data && data[i].audit_button_data.audit_duplicate_button==="enable"){
-                    auditData.duplicatable=true
-                }else{
-                    auditData.duplicatable=false
-                }
-
-                if(data[i].audit_button_data && data[i].audit_button_data.audit_delete_button==="enable"){
-                    auditData.deletable=true
-                }else{
-                    auditData.deletable=false
-                }
-
 
             }
 
-            if (data[i].start_actual_time) {
-                if (getDaysDiff(data[i].start_actual_time) < 2) {
-                    auditData.startTime=nProps.context.intl.formatRelative(data[i].start_actual_time, {
+
+//Create time need to be add
+            if (data[i].create_time) {
+                if (getDaysDiff(data[i].create_time) < 2) {
+                    auditData.startTime=nProps.context.intl.formatRelative(data[i].create_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
-                    ", " + nProps.context.intl.formatTime(data[i].start_actual_time, {
+                    ", " + nProps.context.intl.formatTime(data[i].create_time, {
                         timeZone: timeOffset,
                         hour: 'numeric',
                         minute: 'numeric',
@@ -418,7 +390,7 @@ class AuditTab extends React.Component {
                     });
                 }
                 else {
-                    auditData.startTime=nProps.context.intl.formatDate(data[i].start_actual_time,
+                    auditData.startTime=nProps.context.intl.formatDate(data[i].create_time,
                     {
                         timeZone: timeOffset,
                         year: 'numeric',
@@ -502,6 +474,10 @@ class AuditTab extends React.Component {
         }
         return auditDetails;
     }
+
+     headerCheckChange(){
+   console.log('Print checked');
+ }
 
     _mappingString(selectvalue) {
         switch (selectvalue) {
@@ -618,6 +594,16 @@ createAudit() {
         });
 
 }
+startAudit() {
+  modal.add(AuditStart, {
+    title: '',
+    size: 'large',
+                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                        hideCloseButton: true // (optional) if you don't wanna show the top right close button
+                        //.. all what you put in here you will get access in the modal props ;),
+                      });
+} 
+
 
     startBulkAudit() {
         var auditId=[]; 
@@ -676,22 +662,23 @@ render() {
         auditState["totalProgress"]=(totalProgress) / (auditData.length);
     }
 
-    renderTab=<AuditTable items={auditData}
-    intlMessg={this.props.intlMessages}
-    timeZoneString={headerTimeZone}
-    totalAudits={this.props.totalAudits}
-    sortHeaderState={this.props.auditHeaderSort}
-    currentSortState={this.props.auditSortHeader}
-    sortHeaderOrder={this.props.auditHeaderSortOrder}
-    currentHeaderOrder={this.props.auditSortHeaderState}
-    refreshData={this._clearFilter.bind(this)}
-    setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
-    setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
-    isFilterApplied={this.props.isFilterApplied}
-    auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
-    checkedAudit={this.props.checkedAudit} 
-    responseFlag={this.props.auditSpinner}
-    onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
+renderTab=<AuditTable/>
+    // renderTab=<AuditTable items={auditData}
+    // intlMessg={this.props.intlMessages}
+    // timeZoneString={headerTimeZone}
+    // totalAudits={this.props.totalAudits}
+    // sortHeaderState={this.props.auditHeaderSort}
+    // currentSortState={this.props.auditSortHeader}
+    // sortHeaderOrder={this.props.auditHeaderSortOrder}
+    // currentHeaderOrder={this.props.auditSortHeaderState}
+    // refreshData={this._clearFilter.bind(this)}
+    // setAuditFilter={this.props.auditFilterDetail} auditState={auditState}
+    // setFilter={this.props.showTableFilter} showFilter={this.props.showFilter}
+    // isFilterApplied={this.props.isFilterApplied}
+    // auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
+    // checkedAudit={this.props.checkedAudit} 
+    // responseFlag={this.props.auditSpinner}
+    // onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
 
     let toolbar=<div>
     <div className="gor-filter-wrap"
@@ -700,22 +687,28 @@ render() {
     </div>
     <div className="gorToolBar">
     <div className="gorToolBarWrap">
-    <div className="gorToolBarElements">
-    <FormattedMessage id="audit.table.heading" description="Heading for audit table"
-    defaultMessage="Audit Tasks"/>
-    </div>
-<div>Place</div>
+    
+
+    <GTable options={['table-bordered']}>
+   <GTableHeader>
+   <GTableHeaderCell key={1} header='Audit'>
+   <label className="container">
+   <input type="checkbox" onChange={this.headerCheckChange.bind(this)}/>
+   <span className="checkmark1"></span>
+   </label> 
+   <span>Audit</span>
+   <button className="gor-add-btn" onClick={this.viewAuditDetails.bind(this)}>
+   <FormattedMessage id="commonDataTable.auditview.button" description='View Details' defaultMessage='View Details'/>
+   </button>
+   <button className="gor-add-btn" onClick={this.startAudit.bind(this)}>
+   <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
+   </button>
+   </GTableHeaderCell>
+   </GTableHeader>
+    </GTable>
+
     </div>
     <div className="gor-audit-filter-create-wrap">
-
-    <div className="gor-button-wrap">
-    <button className="gor-add-btn gor-bulk-audit-btn" disabled={!(Object.keys(this.props.checkedAudit).length>0)} onClick={this.startBulkAudit.bind(this)}>
-    <FormattedMessage id="audit.table.bulkaudit"
-    description="button label for start bulk audit"
-    defaultMessage="Start Bulk Audit(s) "/>
-    </button>
-    </div>
-
     <div className="gor-button-wrap">
     <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
     <div className="gor-filter-add-token"/>

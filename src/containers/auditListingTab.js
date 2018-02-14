@@ -83,24 +83,6 @@ render(){
    <div className="waveListWrapper">
    <GTable options={['table-bordered']}>
 
-   <GTableHeader>
-
-   <GTableHeaderCell key={1} header='Audit'>
-   <label className="container">
-   <input type="checkbox" onChange={this.headerCheckChange.bind(this)}/>
-   <span className="checkmark1"></span>
-   </label> 
-   <span>Audit</span>
-   <button className="gor-add-btn" onClick={this.viewAuditDetails.bind(this)}>
-   <FormattedMessage id="commonDataTable.auditview.button" description='View Details' defaultMessage='View Details'/>
-   </button>
-   <button className="gor-add-btn" onClick={this.startAudit.bind(this)}>
-   <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
-   </button>
-   </GTableHeaderCell>
-
-   </GTableHeader>
-
    <GTableBody data={tableData} >
    {tableData ? tableData.map(function (row, idx) {
     return (

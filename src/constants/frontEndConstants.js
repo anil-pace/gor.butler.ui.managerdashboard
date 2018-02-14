@@ -346,6 +346,8 @@ export const NO_SKU_VALIDATION="NO_SKU_VALIDATION";
 export const WATING_FOR_VALIDATION="WATING_FOR_VALIDATION";
 export const AUDIT_ISSUES_STATUS="Issues found";
 export const AUDIT_BY_PDFA="pdfa";
+export const AUDIT_BY_LOCATION="location";
+export const AUDIT_BY_SKU="sku";
 export const BREACHED="breached"
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY='INVENTORY_DATA_TODAY'
