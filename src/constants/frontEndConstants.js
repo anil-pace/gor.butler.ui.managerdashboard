@@ -759,3 +759,11 @@ export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
 
+export const PICK_BEFORE_TIME = "PICK_BEFORE_TIME";
+export const ORDER_ID = "ORDER_ID";
+export const PPS_ID = "PPS_ID";
+export const SKU_ID = "SKU_ID";
+export const FROM_DATE = "FROM_DATE";
+export const TO_DATE = "TO_DATE";
+export const FROM_TIME = "FROM_TIME";
+export const TO_TIME = "TO_TIME";

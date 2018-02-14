@@ -2,6 +2,7 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
+import FilterDateTimeFieldWrap from '../../components/tableFilter/filterDateTimeFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 // import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
@@ -14,7 +15,11 @@ import {
     PICK_BEFORE_TIME,
     ORDER_ID,
     PPS_ID,
-    SKU_ID
+    SKU_ID,
+    FROM_DATE,
+    TO_DATE,
+    FROM_TIME,
+    TO_TIME
 }from '../../constants/frontEndConstants';
 class OrderFilter extends React.Component{
     constructor(props) 
@@ -148,12 +153,61 @@ class OrderFilter extends React.Component{
         return inputField;
     }
 
+    _processOrderDateField(){
+        const dateColumn = [
+          {
+            value: FROM_DATE,
+            label: <FormattedMessage id="order.inputField.fromDate" defaultMessage="FROM DATE"/>
+          },
+          {
+            value: TO_DATE,
+            label: <FormattedMessage id="order.inputField.toDate" defaultMessage="TO DATE"/>
+          }
+        ];
+
+        var inputValue=this.state.searchQuery;
+        var textboxStatus=this.props.textboxStatus || {};
+        var inputField=<FilterDateTimeFieldWrap 
+                             inputText={dateColumn}
+                             inputValue={inputValue} 
+                             handleInputText={this._handleInputQuery.bind(this)}
+                             textboxStatus={textboxStatus}
+                             inputType="date" />
+        return inputField;
+
+    }
+
+    _processOrderTimeField(){
+        const dateColumn = [
+          {
+            value: FROM_TIME,
+            label: <FormattedMessage id="order.inputField.fromTime" defaultMessage="TIME"/>
+          },
+          {
+            value: TO_TIME,
+            label: <FormattedMessage id="order.inputField.toTime" defaultMessage="TIME"/>
+          }
+        ];
+
+        var inputValue=this.state.searchQuery;
+        var textboxStatus=this.props.textboxStatus || {};
+        var inputField=<FilterDateTimeFieldWrap 
+                             inputText={dateColumn}
+                             inputValue={inputValue} 
+                             handleInputText={this._handleInputQuery.bind(this)}
+                             textboxStatus={textboxStatus}
+                             inputType="time" />
+        return inputField;
+    }
+
 
 
     render(){
         //var noOrder=this.props.orderData.noResultFound;
          var orderSearchField=this._processOrderSearchField();
          var orderFilterToken=this._processFilterToken();
+         var orderDateField = this._processOrderDateField();
+         var orderTimeField = this._processOrderTimeField();
         return (
             <div>
                  <Filter>
@@ -169,6 +223,16 @@ class OrderFilter extends React.Component{
                          <div className="gor-filter-body-input-wrap"> 
                             {orderSearchField}
                          </div>
+
+                         <div className="gor-filter-body-filterToken-wrap">
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderDateField}
+                            </div>
+                            <div className="gor-filter-body-filterToken-section1">
+                                {orderTimeField}
+                            </div>
+                         </div>
+
                          <div className="gor-filter-body-filterToken-wrap"> 
                             <div className="gor-filter-body-filterToken-section1">
                                 {orderFilterToken.column1token}
@@ -176,10 +240,8 @@ class OrderFilter extends React.Component{
                             <div className="gor-filter-body-filterToken-section1">
                                 {orderFilterToken.column2token}
                             </div>
-                            
-
                          </div>
-                         
+
                      </div>
 
                      <div className="gor-filter-footer"> 
