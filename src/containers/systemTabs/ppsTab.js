@@ -70,7 +70,17 @@ const messages=defineMessages({
 class PPS extends React.Component {
     constructor(props) {
         super(props);
-        this.state={query:null,sortedDataList:null}
+        this.state={
+            query:null,
+            sortedDataList:null,
+            openCount:0,
+            closeCount:0,
+            Modes:{
+                "pick":0,
+                "put":0,
+                "audit":0
+            }
+        }
     }
 
     componentWillMount() {
@@ -87,7 +97,11 @@ class PPS extends React.Component {
         if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
+           
         }
+         
+        this._processCheckedPPS(nextProps)
+    
     }
 
     /**
@@ -144,10 +158,50 @@ class PPS extends React.Component {
 
     }
 
+    _processCheckedPPS(nextProps){
+        var closeCount=0;
+        var openCount=0;
+        var Modes={
+            "put":0,
+            "pick":0,
+            "audit":0
+        }
+        for(let k in nextProps.checkedPps){
+            if(nextProps.checkedPps[k].statusPriority === 0 || nextProps.checkedPps[k].statusPriority === 1){
+                closeCount++
+            }
 
-    /**
-     *
-     */
+            else{
+                openCount++
+            }
+
+            if(nextProps.checkedPps[k].allowedModes){
+                for(let i=0;i< nextProps.checkedPps[k].allowedModes.length;i++){
+
+                    let allowedModes=nextProps.checkedPps[k].allowedModes[i];
+                    if(allowedModes==="put"){
+                        Modes.put++;
+                    }
+                    if(allowedModes==="pick"){
+                        Modes.pick++;
+                    }
+                    if(allowedModes==="audit"){
+                        Modes.audit++;
+                    }
+                }
+                
+            }
+
+        }
+        
+        this.setState({
+            openCount:openCount,
+            closeCount:closeCount,
+            Modes:Modes
+        })
+
+    }
+  
     _clearFilter() {
         hashHistory.push({pathname: "/system/pps", query: {}})
     }
@@ -157,6 +211,7 @@ class PPS extends React.Component {
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
         var data=nProps.props.PPSDetail.PPStypeDetail;
+        
         let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
@@ -387,48 +442,10 @@ class PPS extends React.Component {
                                           defaultMessage="Change PPS Status"/>
         let modeDropPHolder = <FormattedMessage id="PPS.table.modePlaceholder" description="Placeholder for mode dropdown"
                                           defaultMessage="Change PPS Mode"/>
-        var openCount=0,closeCount=0;
-        var arr=[];
-        var Modes={
-            "put":0,
-            "pick":0,
-            "audit":0
-        }
-
-        var putModeEnabled,pickModeEnabled,auditModeEnabled=false;
-        for(let k in this.props.checkedPps){
-            if(this.props.checkedPps[k].statusPriority === 0 || this.props.checkedPps[k].statusPriority === 1){
-                closeCount++
-            }
-
-            else{
-                openCount++
-            }
-
-            if(this.props.checkedPps[k].allowedModes){
-
-            
-                for(let i=0;i< this.props.checkedPps[k].allowedModes.length;i++){
-
-                    let allowedModes=this.props.checkedPps[k].allowedModes[i];
-                    if(allowedModes==="put"){
-                        Modes.put++;
-                    }
-                    if(allowedModes==="pick"){
-                        Modes.pick++;
-                    }
-                    if(allowedModes==="audit"){
-                        Modes.audit++;
-                    }
-                }
-                
-            }
-
-
-
-        }
-    
         
+        var openCount=this.state.openCount;
+        var closeCount=this.state.closeCount;
+        var Modes=this.state.Modes;
         var count=openCount+closeCount;
         const status = [
             {value: 'open', disabled:(closeCount  ? false : true),label: openStatusLabel},
