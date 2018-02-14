@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.8.109';
+export const BASE_URL = '192.168.8.83';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -79,3 +79,9 @@ export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/p
 export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
+
+export const ORDERS_FULFIL_URL = TIME_ZONE_URL;//API_URL+"/order-fulfilment";
+export const ORDERS_SUMMARY_URL = TIME_ZONE_URL;//API_URL+"/order-summary";
+export const ORDERS_CUT_OFF_TIME_URL = TIME_ZONE_URL;//API_URL+"/order-details/level1";
+export const ORDERS_PER_PBT_URL = TIME_ZONE_URL;//API_URL+"/order-details/level2";
+export const ORDERLINES_PER_ORDER_URL = TIME_ZONE_URL;//API_URL+"/order-details/level3";

@@ -8,49 +8,82 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import ProgressBar from '../../components/progressBar/progressBar';
 import SearchFilter from '../../components/searchFilter/searchFilter';
+import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
-
+import { makeAjaxCall } from '../../actions/ajaxActions';
+import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH} from '../../constants/frontEndConstants';
+import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 
 var oHeaderData = ["Order Lines", "ProgressBar", "10 cases picked      102 inners picked     10 each"];
-var oData = [
-    {orderId: "ORDER 123", progressBar: "5", totalOrder: "Total orders 1"},
-    {orderId: "ORDER 321", progressBar: "pending", totalOrder: "Total orders 1"},
-    {orderId: "ORDER 456", progressBar: "1", totalOrder: "Total orders 1"},
-    {orderId: "ORDER 654", progressBar: "70", totalOrder: "Total orders 1"},
-  ];
+
+let orderLinesData = {
+        'pps_id':"1",'pps_bin_id':"1", 'user_name':"anil", 'total_orderlines': 2000,'completed_orderlines': 100,'pending_orderlines': 260,
+        'cut_off_time':"200", 
+        'total_products_count': "2000",
+        'picked_products_count':"500", 
+        'is_breached': true,
+        'pick_info': [{total_orderlines: "250", 'total_products_count': 100, 'picked_products_count': 100, status: "10 cases picked      102 inners picked     10 each"}],
+        'orderlines': [
+            {pdfa_values:[{}], orderId: "SKU-3XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+            {pdfa_values:[{}], orderId: "SKU-4XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+            {pdfa_values:[{}], orderId: "SKU-5XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+            {pdfa_values:[{}], orderId: "SKU-6XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+            {pdfa_values:[{}], orderId: "SKU-7XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+            {pdfa_values:[{}], orderId: "SKU-8XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1}
+        ]
+    };
 
 class ViewOrderLine extends React.Component{
   constructor(props) 
   {
       super(props); 
       this.state={
-        initialItems: [
-            {orderId: "ORDER 123", progressBar: "5", totalOrder: "Total orders 1"},
-            {orderId: "ORDER 321", progressBar: "pending", totalOrder: "Total orders 1"},
-            {orderId: "ORDER 456", progressBar: "1", totalOrder: "Total orders 1"},
-            {orderId: "ORDER 654", progressBar: "70", totalOrder: "Total orders 1"},
-        ],
-       items: []
+        initialItems: orderLinesData.orderlines,
+        items: []
       }
       this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount(){
+    this._getOrdersLines(this.props.orderId);
   }
 
   componentWillMount(){
     this.setState({items: this.state.initialItems})
   }
 
+  // componentWillReceiveProps(nextProps) {        
+  //       this._getOrdersLines(nextProps);
+  //       let data = this._processData(nextProps.orderId);
+  //       this.setState({
+  //         items: data.orderlines
+  //       })
+  //   }
+
+  _getOrdersLines = (orderId) =>  {
+        console.log("_getOrdersLines get called");
+        let formData={
+            orderId: orderId
+        };
+        let params={
+            'url':ORDERLINES_PER_ORDER_URL,
+            'method':GET,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERLINES_PER_ORDER_FETCH,
+            'formdata':formData,
+        }
+        this.props.makeAjaxCall(params);
+        
+    }
+
   _removeThisModal() {
     this.props.removeModal();
-  }
-  componentWillReceiveProps(nextProps){
-    if(!nextProps.auth_token)
-    {
-      this._removeThisModal();
-    }
+    //this.props.startPolling(); //start previous ongoing poll again
   }
 
   handleChange(event) {
-    var updatedList = this.state.initialItems;
+    var updatedList =  this.state.initialItems; //this.props.orderLines.orderlines;
     var queryResult=[];
     updatedList.forEach(function(item){
             if(item.orderId.toLowerCase().indexOf(event)!=-1)
@@ -59,45 +92,109 @@ class ViewOrderLine extends React.Component{
     this.setState({items: queryResult});
   }
 
-  _processData(){
-    let oDataLen = oData.length;
-    let orderRows = [];
-    let processedData = {};
-
-    if(oDataLen){
-      for(let i=0; i < oDataLen; i++){
-        let orderRow = [];
-        orderRow.push(<div style={{padding: "2px 35px"}}> {oData[i].orderId} </div>);
-        orderRow.push(<div className="cellWrapper"> <ProgressBar progressWidth={oData[i].progressBar}/> </div>);
-        orderRow.push(oData[i].totalOrder);
-        if(oData[i].action === true){
-          orderRow.push(<div key={i} className="gorButtonWrap">
-                    <button>
-                    <FormattedMessage id="orders.view orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
-                    </button>
-                  </div>);
+  _formatProgressBar(nr, dr){
+      let x = {};
+      
+      if(nr === 0 && dr === 0){
+            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
+            x.action = false;
+        }
+        else if(nr === 0){
+            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
+                      values={{current:dr}} />);
+            x.action = false;
         }
         else{
-          orderRow.push(<div> </div>);
-        }
-        orderRows.push(orderRow);
+        x.width = (nr/dr)*100;
+        x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
+                            values={{current:nr, total: dr}} />);
+            x.action  = true;
       }
-      processedData.orderData = orderRows;
+      return x;
     }
-        // processedData.offset = 0;
-        // processedData.max= waveRows.length;
+
+  _processOLList = (arg) => {
+    let olDataLen = arg.length;
+    let olineRows = [];
+    let processedData = {};
+
+    if(olDataLen){
+      for(let i=0; i < olDataLen; i++){
+
+        let olineRow = [];
+
+        olineRow.push(<div className="DotSeparatorWrapper">
+                        <DotSeparatorContent header={[arg[i].orderId]} subHeader={["subHeader"]}/>
+                      </div>);
+
+        let formatProgressBar = this._formatProgressBar(arg[i].picked_products_count, arg[i].total_products_count);
+        olineRow.push( <div>
+                          <div className="ProgressBarWrapper">
+                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                          </div>
+                          <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                     </div>);
+
+        olineRow.push(<div> {arg[i].status} </div>);
+        
+        olineRows.push(olineRow);
+      }
+      processedData.olineData = olineRows;
+    }
+    processedData.offset = 0;
+    processedData.max= olineRows.length;
     return processedData;
   }
 
-  render()
-  {
-    var processedData = this._processData();
+  _processOLHeader = (arg) => {
+    let olHeaderLen = arg.length;
+    let olineHeaders = [];
+    let processedData = {};
+
+    if(olHeaderLen){
+      for(let i=0; i < olHeaderLen; i++){
+
+        let olineHeader = [];
+
+        olineHeader.push(<div className="DotSeparatorWrapper">
+                        <DotSeparatorContent header={["Order Lines"]} subHeader={["Total " + arg[i].total_orderlines]}/>
+                      </div>);
+
+        let formatProgressBar = this._formatProgressBar(arg[i].picked_products_count, arg[i].total_products_count);
+        olineHeader.push( <div>
+                          <div className="ProgressBarWrapper">
+                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                          </div>
+                          <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                     </div>);
+
+        olineHeader.push(<div> {arg[i].status} </div>);
+        
+        olineHeaders.push(olineHeader);
+      }
+      processedData.olineHeader = olineHeaders;
+    }
+    processedData.offset = 0;
+    processedData.max= olineHeaders.length;
+    return processedData;
+  }
+
+  render(){
+    console.log('%c ==================>!  ', 'background: #222; color: #bada55', "=============> RENDER FUNCTION BEING CALLED");
+    //const { orderLines } = this.props.orderLines;
+    const {orderlines} = this.props;
+    let processedList = this._processOLList(this.state.items);
+    let processedHeader = this._processOLHeader(orderLinesData.pick_info);
+    //var oHeaderData  = this._processOLHeader(orderLinesData.pick_info);
+
+    //var olHeaderData = this._processOLHeader();
        return (
         <div>
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
               <span className='orderIdWrapper'>
-                <FormattedMessage id="orders.orderId" description='Heading for view orderline' defaultMessage='Order ID'/>
+                <FormattedMessage id="orders.oLines.orderId" description='Heading for view orderline' defaultMessage='Order ID'/>
+                <span> {this.props.orderId}</span>
               </span>
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
@@ -105,52 +202,52 @@ class ViewOrderLine extends React.Component{
             <div className='gor-modal-body'>
               <div className="orderDetailsWrapper">
                   <div className="orderDetailsHeader">
-                    <FormattedMessage id="orders.orderdetails" description='Heading for Order details' defaultMessage='Order details'/>
+                    <FormattedMessage id="orders.oLines.oDetails" description='Heading for Order details' defaultMessage='Order details'/>
                   </div>
                   <div className="orderDetailsContent">
                       <div className="orderDetailsLeft"> 
                           <div className="orderDetailsColumn">
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.ppsId" description='pps id' defaultMessage='PPS ID:'/> </span>
-                                <span className="spanValue"> --- </span> 
+                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.ppsId" description='pps id' defaultMessage='PPS ID:'/> </span>
+                                <span className="spanValue"> {orderLinesData.pps_id} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
-                                <span className="spanValue"> --- </span> 
+                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.pps_bin_id} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.operator" description='operator' defaultMessage='Operator:'/> </span> 
-                                <span className="spanValue"> --- </span> 
-                              </div>
-                          </div>
-
-                          <div className="orderDetailsColumn">
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.operator" description='lines received' defaultMessage='Lines received:'/> </span> 
-                                <span className="spanValue"> --- </span> 
-                              </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.linesinprogress" description='lines in progress' defaultMessage='Lines in progress:'/> </span> 
-                                <span className="spanValue"> --- </span> 
-                              </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.linescompleted" description='lines completed' defaultMessage='Lines completed:'/> </span> 
-                                <span className="spanValue"> --- </span> 
+                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.user_name} </span> 
                               </div>
                           </div>
 
                           <div className="orderDetailsColumn">
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.waveId" description='wave id' defaultMessage='Wave ID:'/> </span> 
-                                <span className="spanValue"> --- </span> 
+                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.pending" description='lines received' defaultMessage='Lines received:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.total_orderlines}  </span> 
                               </div>
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.cutofftime" description='cut off time' defaultMessage='Cut off time:'/> </span> 
-                                <span className="spanValue"> --- hrs </span> 
+                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linesinprogress" description='lines in progress' defaultMessage='Lines in progress:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.pending_orderlines} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
-                                <span className="spanValue"> --- hrs left </span> 
+                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linescompleted" description='lines completed' defaultMessage='Lines completed:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.completed_orderlines} </span> 
+                              </div>
+                          </div>
+
+                          <div className="orderDetailsColumn">
+                              <div className="orderDetailsRow"> 
+                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.olines.waveId" description='wave id' defaultMessage='Wave ID:'/> </span> 
+                                <span className="spanValue"> N/A </span> 
+                              </div>
+                              <div className="orderDetailsRow"> 
+                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.cutofftime" description='cut off time' defaultMessage='Cut off time:'/> </span> 
+                                <span className="spanValue"> {orderLinesData.cut_off_time} hrs </span> 
+                              </div>
+                              <div className="orderDetailsRow"> 
+                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
+                                <span className="spanValue"> 0 hrs left </span> 
                               </div>
                           </div>
                       </div>
@@ -164,22 +261,26 @@ class ViewOrderLine extends React.Component{
               <div className="orderDetailsListWrapper">
                 <GTable options={['table-bordered']}>
 
-                    <GTableHeader>
-                        {oHeaderData.map(function (header, index) {
-                            return (
-                              <GTableHeaderCell style={{background: "#fafafa"}} key={index} header={header}>
-                                  <span>{header}</span>
-                              </GTableHeaderCell>
-                            )
-                        })}
-                    </GTableHeader>
-
-                    <GTableBody data={this.state.items} >
-                      {this.state.items ? this.state.items.map(function (row, idx) {
+                    <GTableBody data={processedHeader.olineHeader} > 
+                      {processedHeader.olineHeader ? processedHeader.olineHeader.map(function (row, idx) {
                           return (
-                            <GTableRow key={idx} index={idx} offset={processedData.offset} max={processedData.max} data={row}>
+                            <GTableRow key={idx} index={idx} offset={processedHeader.offset} max={processedHeader.max} data={row}>
                                 {Object.keys(row).map(function (text, index) {
-                                    return <div style={{height: "70px"}} key={index} style={processedData.orderData[index]?{flex:'1 0 '+processedData.orderData[index].width+"%"}:{}} className="cell" >
+                                    return <div style={{height: "70px"}} key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px", background: "#fafafa", borderTop: "2px solid #dddddd"}} className="cell" >
+                                        {row[text]}
+                                    </div>
+                                })}
+                            </GTableRow>
+                          )
+                        }):""}
+                    </GTableBody> 
+
+                    <GTableBody data={processedList.olineData} > {/*<GTableBody data={this.state.items} >*/}
+                      {processedList.olineData ? processedList.olineData.map(function (row, idx) {
+                          return (
+                            <GTableRow key={idx} index={idx} offset={processedList.offset} max={processedList.max} data={row}>
+                                {Object.keys(row).map(function (text, index) {
+                                    return <div style={{height: "70px"}} key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
                                         {row[text]}
                                     </div>
                                 })}
@@ -196,5 +297,20 @@ class ViewOrderLine extends React.Component{
       );
     }
   }
-export default ViewOrderLine;
+
+  function mapStateToProps(state, ownProps) {
+    return {
+        orderLines: state.orderDetails.orderLines,
+    };
+}
+
+var mapDispatchToProps=function (dispatch) {
+    return {
+        makeAjaxCall: function(params){
+          dispatch(makeAjaxCall(params))
+        },
+    }
+};
+
+  export default connect(mapStateToProps, mapDispatchToProps)(ViewOrderLine) ;
 

@@ -10,9 +10,7 @@ class ProgressBar extends React.Component{
   render(){
     const isProgressWidth = this.props.progressWidth;
     if(isNaN(isProgressWidth)){
-      return (
-        <div> Pending </div>
-      )
+      return null
     }
     else{
       return (
