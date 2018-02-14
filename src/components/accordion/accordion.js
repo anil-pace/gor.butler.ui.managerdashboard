@@ -3,6 +3,8 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 
+var storage = [];
+
 class Accordion extends React.Component{
   constructor(props) 
   {
@@ -10,12 +12,30 @@ class Accordion extends React.Component{
       this.handleClick = this.handleClick.bind(this);
       this.state={
         open: false,
-        class: "panel"
+        class: "panel",
       }
       
   }
 
-  handleClick(){
+  handleClick(e){
+
+    const index = storage.indexOf(this.props.cutOffTimeId);
+
+    if(index === -1){
+        storage.push(this.props.cutOffTimeId);
+    }
+    else{
+      storage.splice(index, 1);
+    }
+    if(storage.length >= 1){
+      this.props.enableCollapse();
+    }
+    else{
+      this.props.disableCollapse();
+    }
+
+    this.props.getOrderPerPbt(this.props.cutOffTimeId);
+
     if(this.state.open) {
       console.log("===========================.           INSIDE OPEN FALSE");
       this.setState({
@@ -27,7 +47,7 @@ class Accordion extends React.Component{
       this.setState({
         open: true,
         class: "panel open"
-      },this.props.resetCollapseAll);
+      });
     }
   }
   

@@ -36,7 +36,7 @@ $darkred: grey;
 .panel {
   position: relative;
   width: 100%;
-  border-bottom: 2px solid #dddddd;
+  //border-bottom: 1px solid #dddddd;
   background: #fafafa;
   button {
     // position: absolute;
@@ -51,6 +51,7 @@ $darkred: grey;
     // text-indent: -9999%;
     // pointer-events: none;
     font-family: 'Source Sans Pro Bold', sans-serif;
+    width:calculateRem(137px);
     min-width: 113px;
     height: 35px;
     font-size: 14px;
@@ -128,7 +129,7 @@ $darkred: grey;
 }
 .accordionIconWrapper{
   position: absolute;
-  right: calculateRem(75px);
+  right: calculateRem(55px);
   top: calculateRem(20px);
   .down {
     border: solid black;

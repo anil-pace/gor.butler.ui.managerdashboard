@@ -88,7 +88,10 @@ import {
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
     ORDERS_FULFIL_FETCH,
-    ORDERS_SUMMARY_FETCH
+    ORDERS_SUMMARY_FETCH,
+    ORDERS_CUT_OFF_TIME_FETCH,
+    ORDERS_PER_PBT_FETCH,
+    ORDERLINES_PER_ORDER_FETCH
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -158,8 +161,7 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
-import {receiveOrderFulfilmentData} from './../actions/norderDetailsAction';
-import {receiveOrderSummaryData} from './../actions/norderDetailsAction';
+import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData, receiveOrdersLinesData} from './../actions/norderDetailsAction';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -547,6 +549,31 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERS_SUMMARY_FETCH:
             store.dispatch(receiveOrderSummaryData(res));
+            break;
+        case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(receiveCufOffTimeData(res));
+            break;
+        case ORDERS_PER_PBT_FETCH:
+            store.dispatch(receiveOrdersPerPbtData(res));
+            break;
+        case ORDERLINES_PER_ORDER_FETCH:
+    //         let res = {
+    //     'pps_id':"1",'pps_bin_id':"1", 'user_name':"anil", 'total_orderlines': 2000,'completed_orderlines': 100,'pending_orderlines': 260,
+    //     'cut_off_time':"200", 
+    //     'total_products_count': "2000",
+    //     'picked_products_count':"500", 
+    //     'is_breached': true,
+    //     'pick_info': [{}],
+    //     'orderlines': [
+    //         {pdfa_values:[{}], orderId: "SKU-3XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+    //         {pdfa_values:[{}], orderId: "SKU-4XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+    //         {pdfa_values:[{}], orderId: "SKU-5XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+    //         {pdfa_values:[{}], orderId: "SKU-6XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+    //         {pdfa_values:[{}], orderId: "SKU-7XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
+    //         {pdfa_values:[{}], orderId: "SKU-8XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1}
+    //     ]
+    // };
+            store.dispatch(receiveOrdersLinesData(res));
             break;
         default:
             ShowError(store, cause, status);
