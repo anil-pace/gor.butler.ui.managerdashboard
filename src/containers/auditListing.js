@@ -406,6 +406,38 @@ class AuditTab extends React.Component {
                 auditData.startTime="--";
             }
 
+  //completion time
+    if (data[i].completion_time) {
+                if (getDaysDiff(data[i].completion_time) < 2) {
+                    auditData.endTime=nProps.context.intl.formatRelative(data[i].completion_time, {
+                        timeZone: timeOffset,
+                        units: 'day'
+                    }) +
+                    ", " + nProps.context.intl.formatTime(data[i].completion_time, {
+                        timeZone: timeOffset,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: false
+                    });
+                }
+                else {
+                    auditData.endTime=nProps.context.intl.formatDate(data[i].completion_time,
+                    {
+                        timeZone: timeOffset,
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false
+                    });
+                }
+            }
+            else {
+                auditData.endTime="--";
+            }
+
+
             if (data[i].expected_quantity && data[i].completed_quantity) {
                 auditData.progress=((data[i].completed_quantity) / (data[i].expected_quantity) * 100);
             }
@@ -446,29 +478,11 @@ class AuditTab extends React.Component {
             else {
                 auditData.completedTime="--";
             }
-
-            if(data[i].cancel_request==="requested"){
-                auditData.cancelling=nProps.context.intl.formatMessage(messages.auditCancellingText)
-            }
-            if(data[i].audit_status==='audit_created'){
-                auditData.infoIcon="created"
-            }
-            let rejected_lines=0
-            try{
-                rejected_lines=data[i].audit_info.filter(function(audit_line){
-                    return audit_line.audit_line_status==="audit_rejected"
-                }).length
-            }catch(ex){}
-            if(data[i].audit_status==="audit_rejected" ||rejected_lines>0){
-                auditData.auditInfo={total_lines:total_lines,rejected_lines:rejected_lines}
-                auditData.infoIcon="rejected"
-            }
-            auditData.resolvedTask=data[i].resolved;
-            auditData.totalTask=data[i].resolved+data[i].unresolved;
-
-            auditData.isChecked = (checkedAudit[data[i].audit_id] && auditData.startAudit) ? true :false;
-            auditData.unresolvedTask=data[i].unresolved;
-            auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:false;
+            auditData.progressStatus=70;
+            auditData.startButton=data[i].audit_button_data.audit_start_button==='enable'?true:false;
+            auditData.resolveButton=data[i].audit_button_data.audit_resolve_button==='enable'?true:false;
+            auditData.reauditButton=data[i].audit_button_data.audit_reaudit_button==='enable'?true:false;
+            auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:data[i].audit_created_by;
             auditDetails.push(auditData);
             auditData={};
         }
@@ -662,7 +676,7 @@ render() {
         auditState["totalProgress"]=(totalProgress) / (auditData.length);
     }
 
-renderTab=<AuditTable/>
+renderTab=<AuditTable items={auditData}/>
     // renderTab=<AuditTable items={auditData}
     // intlMessg={this.props.intlMessages}
     // timeZoneString={headerTimeZone}
