@@ -15,6 +15,7 @@ export default class SelectAttributes extends React.Component {
         this._clearSelectedAttributes= this._clearSelectedAttributes.bind(this);
         this._showAttrList = this._showAttrList.bind(this);
         this._deleteSet= this._deleteSet.bind(this);
+        this._editSet=this._editSet.bind(this);
         this._getInitialState=this._getInitialState.bind(this);
         this.state = this._getInitialState();
     }
@@ -26,7 +27,9 @@ export default class SelectAttributes extends React.Component {
             selectedAttributes:{},
             selectedSets:{},
             showAttrList:false,
-            selectionApplied:false
+            selectionApplied:false,
+            editedIndex:"-1",
+            placeHolder:"Select Attributes"
         }
     }
 
@@ -95,19 +98,26 @@ export default class SelectAttributes extends React.Component {
 
     }
    
-    _applySelection(e){
+    _applySelection(e,index){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
         selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
         if(Object.keys(selectedAttributes).length){
-            selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
-        
-
+            if(this.state.editedIndex === "-1"){
+                selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
+        }
+        else{
+            selectedSets[this.state.editedIndex] = selectedAttributes
+        }
         this.setState({
             selectedAttributes:{},
             selectionApplied:true,
-            selectedSets
+            editedIndex:"-1",
+            selectedSets,
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected"
+        },function(){
+            this.props.applyCallBack(selectedSets,index);
         })
     }
     }
@@ -117,19 +127,52 @@ export default class SelectAttributes extends React.Component {
         var nonMutatedData = JSON.parse(JSON.stringify(this.state.nonMutatedData));
         this.setState({
             showAttrList:true,
+            editedIndex:"-1",
             selectionApplied:false,
-            data:nonMutatedData
+            data:nonMutatedData,
+            selectedAttributes:{}
         })
     }
-    _deleteSet(e,idx){
+    _deleteSet(e,idx,skuIndex){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets));
         delete  selectedSets[idx];
         this.setState({
             selectedSets,
-            showAttrList:false
+            showAttrList:false,
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected"
+        },function(){
+            this.props.applyCallBack(selectedSets,skuIndex);
         })
+    }
+    _editSet(e,idx){
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets));
+        var selectedSet = selectedSets[idx];
+        var masterData = JSON.parse(JSON.stringify(this.state.data));
+        
+        for(let key in selectedSet){
+            let category = selectedSet[key].category;
+            for(let i=0,len=masterData.length; i<len; i++){
+                if(category === masterData[i].category_value){
+                    masterData[i].attributeList[key].checked = true;
+                    break;
+                }
+            }
+        }
+        this.setState({
+            data:masterData,
+            showAttrList:true,
+            selectionApplied:false,
+            selectedAttributes:selectedSet,
+            editedIndex:idx
+        })
+
+
+        
+
     }
   
 
@@ -140,7 +183,7 @@ export default class SelectAttributes extends React.Component {
         return <div className="gor-sel-att-wrap">
         <div className="gor-sel-att-placeholder" onClick={_this._toggleDrop}>
         <div className="gor-sel-att-pholder-text">
-            <p>This is Placeholder</p>
+            <p>{_this.state.placeHolder}</p>
         </div>
         <div className="gor-sel-att-arr-cont">
         <span className="gor-sel-att-arr down"></span>
@@ -193,7 +236,7 @@ export default class SelectAttributes extends React.Component {
             </AttributeList>
             </div>
         <div className="footer-apply">
-             <a href="javascript:void(0)" className="link" onClick={this._applySelection} >
+             <a href="javascript:void(0)" className="link" onClick={(e)=>_this._applySelection(e,_this.props.index)} >
                 APPLY
                 </a>
             </div>
@@ -206,7 +249,7 @@ export default class SelectAttributes extends React.Component {
                 <section key={key+index} className="attribute-row">
                 <div className="category">
                    <span className={"setName"}> {"Set "+(index+1)}</span>
-                   <span className={"actions-icons"}><i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key)}/> <i className={"gor-edit-icon"} onClick={this._editSet}/></span>
+                   <span className={"actions-icons"}><i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key,_this.props.index)}/> <i className={"gor-edit-icon"} onClick={(e)=>this._editSet(e,key)}/></span>
                 </div>
                 <div className="values">
                     {Object.keys(this.state.selectedSets[key]).map((key2, idx) => (

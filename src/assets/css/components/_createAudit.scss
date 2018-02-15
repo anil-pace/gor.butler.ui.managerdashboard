@@ -1,5 +1,11 @@
 .gor-audit-create{
 
+  .message{
+     -webkit-animation-duration: 5s;
+      animation-duration: 5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+  }
   .gor-valid-row{
     > div:first-child{
         width:50%;
@@ -692,6 +698,9 @@ h1:after {
   
 }
 }
+
+         
+
 
 
 
