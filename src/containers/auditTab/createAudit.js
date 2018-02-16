@@ -16,6 +16,8 @@ import CSVUpload from '../../components/gor-drag-drop-upload/index';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setAuditSpinner} from '../../actions/auditActions';
+import {modal} from 'react-redux-modal';
+import SkuAlerts from './skuAlerts';
 
 const  messages= defineMessages({
     auditnameplaceholder: {
@@ -103,6 +105,7 @@ class CreateAudit extends React.Component{
       this._validateSKU=this._validateSKU.bind(this);
       this._onTabClick = this._onTabClick.bind(this);
       this._onAttributeSelection = this._onAttributeSelection.bind(this);
+      this._invokeAlert = this._invokeAlert.bind(this);
       
       
   }
@@ -153,7 +156,7 @@ class CreateAudit extends React.Component{
     var sku = this.state.copyPasteSKU["data"][index].value;
     var tuple={};
     tuple.sku = sku;
-    tuple.attributes_list=[];
+    tuple.attributes_sets=[];
     for(let key in selAtt){
       let categories={};
       for(let k in selAtt[key]){
@@ -162,11 +165,11 @@ class CreateAudit extends React.Component{
         }
         categories[selAtt[key][k].category].push(k);
       }
-      tuple.attributes_list.push(categories);
+      tuple.attributes_sets.push(categories);
       
     }
     selectedSKUList[sku] = tuple;
-    console.log(selectedSKUList);
+    
     this.setState({
       selectedSKUList
     })
@@ -174,16 +177,27 @@ class CreateAudit extends React.Component{
 
   }
   _onAttributeCheck(event,index){
-    var copyPasteLocation = JSON.parse(JSON.stringify(this.state.copyPasteLocation.data));
+    var copyPasteLocation = JSON.parse(JSON.stringify(this.state.activeTabIndex === 0 ? this.state.copyPasteSKU.data :this.state.copyPasteLocation.data));
     var tuple = Object.assign({},copyPasteLocation[parseInt(index)]);
     tuple.checked = event.target.checked;
     copyPasteLocation.splice(parseInt(index), 1, tuple);
-    this.setState({
+    if(this.state.activeTabIndex === 0){
+      this.setState({
+      copyPasteSKU:{
+        data:copyPasteLocation,
+        focusedEl:this.state.copyPasteSKU.focusedEl
+      }
+    })
+    }
+    else{
+       this.setState({
       copyPasteLocation:{
         data:copyPasteLocation,
         focusedEl:this.state.copyPasteLocation.focusedEl
       }
     })
+    }
+    
   }
   _processSkuAttributes(data) {
     var processedData=[]
@@ -228,37 +242,69 @@ class CreateAudit extends React.Component{
 
 
   _validateSKU(type) {
-    let validSKUData;
-    let arrSKU=this.state.copyPasteSKU.data.slice(0);
-    let auditParamValue = []
-
-    for(let i=0,len=arrSKU.length; i<len;i++){
-      auditParamValue.push(arrSKU[i].value.trim())
-    }
-   
-    validSKUData={
+    let validSKUData={
       "audit_param_name":"name",
-      "audit_param_type":"sku",
-      "audit_param_value":{
-        "sku_list":auditParamValue
+      "audit_param_type":"sku"
+    };
+    let arrSKU=this.state.copyPasteSKU.data.slice(0);
+    let selectedSKUList = JSON.parse(JSON.stringify(this.state.selectedSKUList));
+    let auditParamValue = [];
+    let sendRequest = false;
+
+    if(type === "validate"){
+      validSKUData.audit_param_value = {};
+      for(let i=0,len=arrSKU.length; i<len;i++){
+      auditParamValue.push(arrSKU[i].value.trim())
       }
+      validSKUData.audit_param_value.sku_list = auditParamValue;
+      sendRequest = true;
     }
-    let urlData={
-                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
-                'formdata':(type === "create") ? validSKUData : validSKUData,
-                'method':GET,//POST,
-                'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
-    }
-    
-    this.props.makeAjaxCall(urlData);
-    if(type==="create"){
+    else if(type === "confirm" || type === "create"){
+      let selectedAttributeCount = Object.keys(selectedSKUList).length;
+      let isAttributeSelected = (arrSKU.length === selectedAttributeCount)
+      if(!isAttributeSelected && type === "create"){
+        this._invokeAlert({
+          validateSKU:this._validateSKU,
+          noneSelected:!selectedAttributeCount ? true :false,
+          totalSKUCount:arrSKU.length,
+          missingSKUCount:arrSKU.length - selectedAttributeCount
+        });
+      }
+      else{
+      validSKUData.audit_param_value = {};
+      validSKUData.audit_param_value.attributes_list = [];
+      let {selectedSKUList} = this.state;
+      let skuList = this.state.copyPasteSKU.data;
+      for(let i=0,len=skuList.length; i<len ;i++){
+        if(selectedSKUList[skuList[i].value]){
+          validSKUData.audit_param_value.attributes_list.push(selectedSKUList[skuList[i].value]);
+        }
+        else{
+          let noAttributeSKU = {};
+          noAttributeSKU.sku = skuList[i].value;
+          noAttributeSKU.attributes_sets=[];
+          validSKUData.audit_param_value.attributes_list.push(noAttributeSKU);
+        }
+      }
+      sendRequest = true;
       this.props.removeModal();
-      this.props.reloadAuditList(null);
     }
-    //this.setState({validateclicked:true});
+    }
+    if(sendRequest){
+      let urlData={
+                  'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                  'formdata': validSKUData,
+                  'method':POST,
+                  'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
+                  'contentType':APP_JSON,
+                  'accept':APP_JSON,
+                  'token':this.props.auth_token
+      }
+    this.props.makeAjaxCall(urlData);
+  }
+  
+  
+    
   }
 
 
@@ -302,13 +348,11 @@ class CreateAudit extends React.Component{
     }
     
     this.props.makeAjaxCall(urlData);
-   // this.props.validateLocationcodeSpinner(true);
-   // this.props.setAuditSpinner(true);
+   
     if(type==="create"){
       this.props.removeModal();
-      this.props.reloadAuditList(null);
+     
     }
-   // this.setState({validateclicked:true});
 
   }
 
@@ -418,18 +462,29 @@ class CreateAudit extends React.Component{
   
     _deleteTuples(){
       var selectedTuples =[];
-      var tuples = this.state.copyPasteLocation.data;
+      var tuples = this.state.activeTabIndex === 0 ? this.state.copyPasteSKU.data :this.state.copyPasteLocation.data ;
       for(let i=0,len=tuples.length; i<len ;i++){
         if(!tuples[i].checked){
           selectedTuples.push(Object.assign({},tuples[i]))
         }
       }
-      this.setState({
-        copyPasteLocation:{
+      if(this.state.activeTabIndex === 0){
+         this.setState({
+          copyPasteSKU:{
           data:selectedTuples,
           focusedEl:"0"
         }
       })
+      }
+      else{
+         this.setState({
+          copyPasteLocation:{
+          data:selectedTuples,
+          focusedEl:"0"
+        }
+      })
+      }
+     
     }
     _onFilterSelection(selection){
       var activeTabIndex = this.state.activeTabIndex;
@@ -618,6 +673,16 @@ class CreateAudit extends React.Component{
           focusedEl:"0"
         }
       })
+    }
+    _invokeAlert(additionalProps){
+      modal.add(SkuAlerts, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true,
+            ...additionalProps // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;)
+        });
     }
 
     
@@ -823,7 +888,7 @@ class CreateAudit extends React.Component{
                         defaultMessage='Validate'/></button>
               </div>}
                <div>
-             <button onClick={()=>{this._validateLocation("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+             <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
             defaultMessage='Create audit'/></button>
             </div>
                   </div>
