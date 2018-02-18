@@ -58,19 +58,15 @@ class ViewDetailsAudit extends React.Component {
       return (
          <div>
             <div className="gor-modal-content">
-               <div className='gor-modal-head'>
-                  <span className='orderIdWrapper'>
-                     <FormattedMessage id="orders.orderId" description='Heading for view orderline' defaultMessage='Order ID' />
-                  </span>
-                  <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
-               </div>
+               
 
                <div className='gor-modal-body'>
                <span>For Audit DHTA 001 - iPhone</span>
+               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
               
 
-                            <GTable options={['table-bordered']}>
+                            <GTable options={['table-bordered','auditStart']}>
 				    	
                    <GTableHeader options={['auditTable']}>
                            

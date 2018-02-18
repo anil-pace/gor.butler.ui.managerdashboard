@@ -51,30 +51,71 @@ startAudit() {
 }  
 
 _handelClick(field) {
-  console.log(field.target.value);
+  if(field.target.value=='viewdetails'){
+    this.viewAuditDetails();
+  }else if(field.target.value=='mannualassignpps'){
+    this.startAudit();
+  }
 
-}          
+}  
+
+_findStatus(data)
+{
+return (Math.round(data.completed*100)/data.total);
+}
+
+_tableBodyData(itemsData){
+  let tableData=[];
+  for(var i=0;i<itemsData.length;i++){
+  let rowObject={};
+  rowObject.initialName=itemsData[i].system_created_audit==true?"System":itemsData[i].system_created_audit;
+  rowObject.auditDetails={
+      "header":[itemsData[i].id,itemsData[i].audit_name],
+      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].startTime]
+      }
+  rowObject.auditProgress=this._findStatus(itemsData[i].progressStatus);
+  rowObject.resolvedState=itemsData[i].unresolved +' lines to be resolved';
+  rowObject.button={
+    "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
+    "reAudit":itemsData[i].startTime && itemsData[i].endTime!="--"?true:false
+  }
+  rowObject.butoonToSHow=[];
+      if(itemsData[i].button['audit_cancel_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'Cancel',value:'cancel'});
+      }
+      if(itemsData[i].button['audit_delete_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'Delete',value:'delete'});
+      }
+       if(itemsData[i].button['audit_duplicate_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'Duplicate',value:'duplicate'});
+      }
+       if(itemsData[i].button['audit_resolve_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'Resolve',value:'Resolve'});
+      }
+       if(itemsData[i].button['audit_view_issues_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'View Details',value:'viewdetails'});
+      }
+
+  tableData.push(rowObject);
+  rowObject={};
+}
+return tableData;
+} 
+
 
 render(){
-
-  console.log('raaj');
   let me=this;
-  console.log("coming inside new orders Tab");
-  var processedData=[	
-  {columnId: "1", headerText: "WaveId"},
-  {columnId: "2", headerText: "ProgressBar"},
-  {columnId: "3", headerText: "Cut off Time"},
-  {columnId: "4", headerText: "Icon"}
-  ];
+  var itemsData=me.props.items;
+  var tablerowdata=this._tableBodyData(itemsData);
+
 
   var tableData=[
-  {id:1,text: "SKU CODE", sortable: true, icon: true,width:20}, 
-  {id:2, text: "NAME",sortable: true,  icon: true,width:20}, 
-  {id:3,text: "OPENING STOCK", searchable: false, icon: true,width:20},
-  {id:4,text: "PURCHAGE QTY", searchable: false, icon: true},
-  {id:5,text: "SALE QTY",sortable: true, icon: true}, 
-  {id:6, text: "CLOSING STOCK",sortable: true, icon: true}
-
+  {sd:1,text: "INITIL NAME", sortable: true,width:7}, 
+  {sd:2,text: "SKU CODE", sortable: true,width:25}, 
+  {yd:3, text: "NAME",sortable: true, width:20}, 
+  {td:4,text: "OPENING STOCK", searchable: false,width:15},
+  {rd:5,text: "PURCHAGE QTY", searchable: false,width:20},
+  {ed:6,text: "PURCHAGE QTY", searchable: false,width:8}
   ];
   return(
 
@@ -83,22 +124,34 @@ render(){
    <div className="waveListWrapper">
    <GTable options={['table-bordered']}>
 
-   <GTableBody data={tableData} >
-   {tableData ? tableData.map(function (row, idx) {
+   <GTableBody data={tablerowdata} >
+   {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
 
-    <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tableData} >
+    <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
+
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?<NameInitial name='Raja dey' shape='round' />:""} 
-      {index==0?<DotSeparatorContent header={[<FormattedMessage id="audit.data.subheading" description='Text for user delete' defaultMessage='Information will be lost'/>,<FormattedMessage id="audit.data.data2" description='user delete' defaultMessage='Information lost'/>]} subHeader={['PPS 003','MultiSKU','Today, 09:00']} separator={'.'} />:""} 
-      {index==1?<ProgressBar progressWidth={70}/>:""}
-      {index==2?<ActionDropDown style={{width:'115px'}} clickOptionBack={me._handelClick} data={[{name:'View deatils',value:'details'},{name:'Edit',value:'edit'},{name:'Duplicate',value:'Duplicate'},{name:'Delete',value:'Delete'}]}>
+      {index==0?<NameInitial name={tablerowdata[idx][text]} shape='round' />:""} 
+      {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
+      {index==2?<ProgressBar progressWidth={tablerowdata[idx][text]}/>:""}
+      {index==3?<div>{tablerowdata[idx][text]}</div>:""}
+      {index==4 && tablerowdata[idx][text].startButton?<ActionDropDown style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn">
-      Link
+      Start
       </button>      
+      </ActionDropDown>:""}
+       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn">
+      Reaudit
+      </button>:""}
+      {index==4 && !tablerowdata[idx][text].startButton?
+      <button className="gor-add-btn" style={{float:'right'}}>
+      Resolve
+      </button>:""}
+       {index==5?<ActionDropDown style={{width:'110px'}} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+      <div className='embeddedImage'></div>    
       </ActionDropDown>:""}
 
       </div>

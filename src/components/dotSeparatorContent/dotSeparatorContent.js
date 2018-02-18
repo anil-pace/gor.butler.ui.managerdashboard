@@ -4,12 +4,28 @@ import React  from 'react';
 
 class DotSeparator extends React.Component{
    
+  removeEmptyElement(actualArray){
+    var index = -1,
+        arr_length = actualArray ? actualArray.length : 0,
+        resIndex = -1,
+        result = [];
+
+    while (++index < arr_length) {
+        var value = actualArray[index].trim();
+
+        if (value) {
+            result[++resIndex] = value;
+        }
+    }
+
+    return result;
+  } 
 
 render()
 {
     let separator=this.props.separator||'.';
-    let header=this.props.header;
-    let subHeader=this.props.subHeader;
+    let header=this.removeEmptyElement(this.props.header);
+    let subHeader=this.removeEmptyElement(this.props.subHeader);
     let finalHeader=[],finalSubHeader=[];
     header.map(function(item, i){
                 (header.length==i+1)?finalHeader.push(<span className="headerName">{item}</span>):finalHeader.push(<span><span className='headerName'>{item}</span><span className='headerSeparation'>{separator}</span></span>)   

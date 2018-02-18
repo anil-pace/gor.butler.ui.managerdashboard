@@ -341,13 +341,13 @@ class AuditTab extends React.Component {
                 auditData.audit_name=data[i].audit_name;
             }
             else {
-                auditData.audit_name="--";
+                auditData.audit_name="";
             }
-           auditData.auditBased=data[i].audit_type;
+           auditData.auditBased=data[i].audit_type?"":data[i].audit_type;
 
         
             
-            auditData.pps_id=data[i].pps_id ||" ";
+            auditData.pps_id=data[i].pps_id ||"";
             
             if (data[i].audit_status) {
                 
@@ -403,7 +403,7 @@ class AuditTab extends React.Component {
                 }
             }
             else {
-                auditData.startTime="--";
+                auditData.startTime="";
             }
 
   //completion time
@@ -478,11 +478,25 @@ class AuditTab extends React.Component {
             else {
                 auditData.completedTime="--";
             }
-            auditData.progressStatus=70;
+            auditData.resolved=data[i].resolved;
+            auditData.unresolved=data[i].unresolved;
+            auditData.progressStatus=data[i].audit_progress;
+            auditData.button=data[i].audit_button_data;
+            // Object.keys(data[i].audit_button_data).map((element,index)=>{
+            //      auditData.startButton.push(element);
+
+            // })
+
             auditData.startButton=data[i].audit_button_data.audit_start_button==='enable'?true:false;
             auditData.resolveButton=data[i].audit_button_data.audit_resolve_button==='enable'?true:false;
             auditData.reauditButton=data[i].audit_button_data.audit_reaudit_button==='enable'?true:false;
+            auditData.cancelButton=data[i].audit_button_data.audit_cancel_button==='enable'?true:false;
+            auditData.deleteButton=data[i].audit_button_data.audit_delete_button==='enable'?true:false;
+            auditData.duplicateButton=data[i].audit_button_data.audit_duplicate_button==='enable'?true:false;
+            auditData.detailsButton=data[i].audit_button_data.audit_view_issues_button==='enable'?true:false;
+           
             auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:data[i].audit_created_by;
+           
             auditDetails.push(auditData);
             auditData={};
         }
@@ -650,33 +664,33 @@ render() {
     headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
 
     var auditData=this._processAuditData();
-    var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0,"auditInProgress":0};
-    for (var i=auditData.length - 1; i >= 0; i--) {
-        if (auditData[i].status=== GOR_COMPLETED_STATUS) {
-            auditState["auditCompleted"]++;
-        }
+    // var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0,"auditInProgress":0};
+    // for (var i=auditData.length - 1; i >= 0; i--) {
+    //     if (auditData[i].status=== GOR_COMPLETED_STATUS) {
+    //         auditState["auditCompleted"]++;
+    //     }
 
-        if (auditData[i].status=== AUDIT_ISSUES_STATUS) {
-            auditState["auditIssue"]++;
-        }
-        if(auditData[i].status===GOR_IN_PROGRESS_STATUS) {
-            auditState["auditInProgress"]++;
-        }
-        if (auditData[i].auditType=== SKU || auditData[i].auditType=== AUDIT_BY_PDFA) {
-            auditState["skuAudit"]++;
-        }
-        if (auditData[i].auditType=== LOCATION) {
-            auditState["locationAudit"]++;
-        }
-        totalProgress=auditData[i].progress + totalProgress;
-        auditData[i].progress=auditData[i].progress.toFixed(1);
+    //     if (auditData[i].status=== AUDIT_ISSUES_STATUS) {
+    //         auditState["auditIssue"]++;
+    //     }
+    //     if(auditData[i].status===GOR_IN_PROGRESS_STATUS) {
+    //         auditState["auditInProgress"]++;
+    //     }
+    //     if (auditData[i].auditType=== SKU || auditData[i].auditType=== AUDIT_BY_PDFA) {
+    //         auditState["skuAudit"]++;
+    //     }
+    //     if (auditData[i].auditType=== LOCATION) {
+    //         auditState["locationAudit"]++;
+    //     }
+    //     totalProgress=auditData[i].progress + totalProgress;
+    //     auditData[i].progress=auditData[i].progress.toFixed(1);
 
-    }
-    if (auditData.length && auditData.length !== 0) {
-        auditState["totalProgress"]=(totalProgress) / (auditData.length);
-    }
+    // // }
+    // if (auditData.length && auditData.length !== 0) {
+    //     auditState["totalProgress"]=(totalProgress) / (auditData.length);
+    // }
 
-renderTab=<AuditTable items={auditData}/>
+renderTab=<AuditTable raja={'raja'} items={auditData}/>
     // renderTab=<AuditTable items={auditData}
     // intlMessg={this.props.intlMessages}
     // timeZoneString={headerTimeZone}
@@ -711,12 +725,6 @@ renderTab=<AuditTable items={auditData}/>
    <span className="checkmark1"></span>
    </label> 
    <span>Audit</span>
-   <button className="gor-add-btn" onClick={this.viewAuditDetails.bind(this)}>
-   <FormattedMessage id="commonDataTable.auditview.button" description='View Details' defaultMessage='View Details'/>
-   </button>
-   <button className="gor-add-btn" onClick={this.startAudit.bind(this)}>
-   <FormattedMessage id="commonDataTable.startAudit.button" description='start button' defaultMessage='Start audit'/>
-   </button>
    </GTableHeaderCell>
    </GTableHeader>
     </GTable>
