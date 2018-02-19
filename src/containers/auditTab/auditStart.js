@@ -6,15 +6,52 @@ import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
+import {userRequest} from '../../actions/userActions';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
+import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
+import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 
-class ViewDetailsAudit extends React.Component {
+class AuditStart extends React.Component {
    constructor(props) {
       super(props);
    }
    _removeThisModal() {
       this.props.removeModal();
    }
+
+   _tableBodyData(itemsData){
+  let tableData=[];
+  for(var i=0;i<itemsData.length;i++){
+  let rowObject={};
+  rowObject.initialName=itemsData[i].system_created_audit==true?"System":itemsData[i].system_created_audit;
+  rowObject.auditDetails={
+      "header":[itemsData[i].id,itemsData[i].audit_name],
+      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].startTime]
+      }
+  rowObject.auditProgress=this._findStatus(itemsData[i].progressStatus);
+  rowObject.resolvedState=itemsData[i].unresolved +' lines to be resolved';
+  rowObject.button={
+    "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
+    "reAudit":itemsData[i].startTime && itemsData[i].endTime!="--"?true:false
+  }
+
+  tableData.push(rowObject);
+  rowObject={};
+}
+return tableData;
+} 
+
+     componentDidMount(){
+        let userData={
+                'url':PPSLIST_URL,
+                'method':GET,
+                'cause':GET_PPSLIST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':sessionStorage.getItem('auth_token')
+            }
+        this.props.userRequest(userData);
+  }
    //   componentWillReceiveProps(nextProps){
    //     if(!nextProps.auth_token)
    //     {
@@ -23,27 +60,20 @@ class ViewDetailsAudit extends React.Component {
    //   }
 
    render() {
-      var data={
-         'Created By':'Raja Dey',
-         'Operator':'Raaja DDey',
-         'Audit Type':'Multi SKU'
-      }
-      var data1={
-         'Start Time':'Today, 11:30',
-         'End Time':'-',
-         'Progress':'128 lines completed out of 514'
-      }
-      var data1={
-         'PPS ID':'PPS 003',
-         'Show KQ':'Yes',
-         'Reminder':'-'
-      }
-      var processedData=[	
-			{columnId: "1", headerText: "WaveId"},
-			{columnId: "2", headerText: "ProgressBar"},
-			{columnId: "3", headerText: "Cut off Time"},
-			{columnId: "4", headerText: "Icon"}
-		];
+    let items=this.props.ppsList.pps_list;
+    let auditPPS=[],otherPPS=[];
+   Object.keys(items).map(function(key) {
+       if(items[key].pps_mode==='audit'){
+        auditPPS.push(items[key]);
+       }else{
+        otherPPS.push(items[key]);
+       }
+  });
+   var tablerowdataAudit=this._tableBodyData(auditPPS);
+  var tablerowdataOther=this._tableBodyData(otherPPS);
+
+
+
 
 		var tableData=[
 			{id:1,text: "SKU CODE", sortable: true, icon: true}, 
@@ -58,7 +88,7 @@ class ViewDetailsAudit extends React.Component {
       return (
          <div>
             <div className="gor-modal-content">
-               
+
 
                <div className='gor-modal-body'>
                <span>For Audit DHTA 001 - iPhone</span>
@@ -127,18 +157,24 @@ class ViewDetailsAudit extends React.Component {
                                 )
                             }):""}
                         </GTableBody>
-                       
                     </GTable>
-
-
-
-
-
-
             </div>
 
          </div>
       );
    }
 }
-export default ViewDetailsAudit;
+function mapStateToProps(state, ownProps){
+  return {
+      auditType:  state.auditInfo.auditType  || {},
+      ppsList: state.auditInfo.ppsList  || [],
+      auth_token:state.authLogin.auth_token
+  };
+}
+
+var mapDispatchToProps=function(dispatch){
+  return {
+    userRequest: function(data){ dispatch(userRequest(data)); }
+  }
+};
+export default connect(mapStateToProps,mapDispatchToProps)(AuditStart);

@@ -976,7 +976,34 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case GET_PPSLIST:
             let auditpps = [];
             if (res.data.audit) {
-                auditpps = res.data.audit;
+                //auditpps = res.data.audit;
+auditpps={
+    "pps_list": [{
+        "operator_assigned": "not yet",
+        "pps_id": "1",
+        "pps_mode": "put"
+    }, {
+        "auditlines_pending": 321,
+        "audits_pending": 4,
+        "operator_assigned": "not yet",
+        "pps_id": "2",
+        "pps_mode": "audit"
+    }, {
+        "auditlines_pending": 222,
+        "audits_pending": 3,
+        "operator_assigned": "not yet",
+        "pps_id": "3",
+        "pps_mode": "audit"
+    }, {
+        "operator_assigned": "not yet",
+        "pps_id": "4",
+        "pps_mode": "put"
+    }, {
+        "operator_assigned": "not yet",
+        "pps_id": "5",
+        "pps_mode": "put"
+    }]
+}
             }
             store.dispatch(getPPSAudit(auditpps));
             break;
