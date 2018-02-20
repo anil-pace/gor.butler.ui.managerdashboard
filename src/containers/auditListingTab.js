@@ -24,11 +24,27 @@
    {
     super(props);
     this._handelClick = this._handelClick.bind(this);
-    this.state={visibleMenu:false} 
+    this.state={visibleMenu:false} ;
+    this.state={checkedAudit:[]};
   }	
 
-  headerCheckChange(){
-   console.log('Print checked');
+  headerCheckChange(e){
+     for(let i=0;i<this.state.checkedAudit.length;i++){
+      if(e.currentTarget.id==this.state.checkedAudit[i])
+      {
+        delete this.state.checkedAudit[e.currentTarget.id];
+        return;
+      }
+      else
+      {
+        this.state.checkedAudit.push(e.currentTarget.id);
+      }
+    }
+    this.state.checkedAudit.length==0?this.state.checkedAudit.push(e.currentTarget.id):'';
+   
+    
+    //console.log(e.currentTarget.checked);
+    //console.log(e.currentTarget.id);
  }
 
  viewAuditDetails() {
@@ -133,7 +149,7 @@ render(){
     {Object.keys(row).map(function (text, index) {
 
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >
-      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?<NameInitial name={tablerowdata[idx][text]} shape='round' />:""} 
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?<ProgressBar progressWidth={tablerowdata[idx][text]}/>:""}

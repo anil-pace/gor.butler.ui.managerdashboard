@@ -19,28 +19,42 @@ class AuditStart extends React.Component {
       this.props.removeModal();
    }
 
-   _tableBodyData(itemsData){
+   _tableAuditPPSData(itemsData){
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
-  rowObject.initialName=itemsData[i].system_created_audit==true?"System":itemsData[i].system_created_audit;
-  rowObject.auditDetails={
-      "header":[itemsData[i].id,itemsData[i].audit_name],
-      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].startTime]
+  rowObject.ppsDetails={
+      "header":[itemsData[i].pps_id],
+      "subHeader":[itemsData[i].pps_mode]
       }
-  rowObject.auditProgress=this._findStatus(itemsData[i].progressStatus);
-  rowObject.resolvedState=itemsData[i].unresolved +' lines to be resolved';
-  rowObject.button={
-    "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
-    "reAudit":itemsData[i].startTime && itemsData[i].endTime!="--"?true:false
-  }
-
+  rowObject.assignOperator=itemsData[i].operator_assigned;
+  rowObject.auditStatus={
+      "header":[itemsData[i].audits_pending+' Audits pending'],
+      "subHeader":[itemsData[i].auditlines_pending+ ' lines remaining to be Audited']
+      }
   tableData.push(rowObject);
   rowObject={};
 }
 return tableData;
 } 
 
+   _tableotherPPSData(itemsData){
+  let tableData=[];
+  for(var i=0;i<itemsData.length;i++){
+  let rowObject={};
+  rowObject.ppsDetails={
+      "header":[itemsData[i].pps_id],
+      "subHeader":[itemsData[i].pps_mode]
+      }
+  rowObject.assignOperator=itemsData[i].operator_assigned;
+  tableData.push(rowObject);
+  rowObject={};
+}
+return tableData;
+}
+ headerCheckChange(){
+   console.log('Print checked');
+ }
      componentDidMount(){
         let userData={
                 'url':PPSLIST_URL,
@@ -60,30 +74,34 @@ return tableData;
    //   }
 
    render() {
-    let items=this.props.ppsList.pps_list;
+    let me=this;
+    let items=this.props.ppsList.pps_list||{};
     let auditPPS=[],otherPPS=[];
-   Object.keys(items).map(function(key) {
+   (Object.keys(items)).map(function(key) {
        if(items[key].pps_mode==='audit'){
         auditPPS.push(items[key]);
        }else{
         otherPPS.push(items[key]);
        }
   });
-   var tablerowdataAudit=this._tableBodyData(auditPPS);
-  var tablerowdataOther=this._tableBodyData(otherPPS);
+   var tablerowdataAudit=this._tableAuditPPSData(auditPPS);
+  var tablerowdataOther=this._tableotherPPSData(otherPPS);
 
 
 
 
 		var tableData=[
-			{id:1,text: "SKU CODE", sortable: true, icon: true}, 
-			{id:2, text: "NAME",sortable: true,  icon: true}, 
-            {id:3,text: "OPENING STOCK", searchable: false, icon: true},
-            {id:4,text: "PURCHAGE QTY", searchable: false, icon: true},
-            {id:5,text: "SALE QTY",sortable: true, icon: true}, 
-            {id:6, text: "CLOSING STOCK",sortable: true, icon: true}
+			{id:1,text: "SKU CODE", sortable: true}, 
+			{id:2, text: "NAME",sortable: true}, 
+      {id:3,text: "OPENING STOCK", searchable: false}
 
 		];
+      var tableDataother=[
+      {id:1,text: "SKU CODE", sortable: true}, 
+      {id:2, text: "NAME",sortable: true}, 
+      {id:3,text: "OPENING STOCK", searchable: false}
+
+    ];
 
       return (
          <div>
@@ -93,31 +111,30 @@ return tableData;
                <div className='gor-modal-body'>
                <span>For Audit DHTA 001 - iPhone</span>
                <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
-               </div>
+              
               
 
                             <GTable options={['table-bordered','auditStart']}>
-				    	
-                   <GTableHeader options={['auditTable']}>
-                           
-                                <GTableHeaderCell key={1} header='Audit'>
-                                       <span>7 SKUs in this Audit task</span>
-                                         
+                   <GTableHeader options={['auditTable']}>   
+                                <GTableHeaderCell key={1} header='Audit' className='audittable'>
+                                <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label>
+                                       <span>{tablerowdataAudit.length} PPS in audit mode</span>
                                    </GTableHeaderCell>
                           
                        </GTableHeader>
 
                        <GTableBody data={tableData} >
-                       {tableData ? tableData.map(function (row, idx) {
+                       {tablerowdataAudit ? tablerowdataAudit.map(function (row, idx) {
                            return (
                                
                                <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tableData} >
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
-                                          {index==0?<DotSeparatorContent header={['PPS 003']} subHeader={['Audit Mode']} separator={'.'} />:""} 
-                                          {index==1?<div>Operator Assigned: Harish Yadav</div>:""}
-                                          {index==2?<DotSeparatorContent header={['3 Attributes selected']} subHeader={['Red','128gb','Special Edition']} separator={'.'} />:""}     
+                                          {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+                                          {index==0?<DotSeparatorContent header={tablerowdataAudit[idx][text]['header']} subHeader={tablerowdataAudit[idx][text]['subHeader']} separator={'.'} />:""} 
+                                          {index==1?<div>Operator Assigned: {tablerowdataAudit[idx][text]}</div>:""}
+                                          {index==2?<DotSeparatorContent header={tablerowdataAudit[idx][text]['header']} subHeader={tablerowdataAudit[idx][text]['subHeader']} separator={'.'} />:""}     
                                           
                                        </div>
                                    })}
@@ -129,26 +146,26 @@ return tableData;
                   
                </GTable>
                <GTable options={['table-bordered']}>
-				    	
                         <GTableHeader options={['auditTable']}>
-                                
-                                     <GTableHeaderCell key={1} header='Audit'>
-                                            <span>7 SKUs in this Audit task</span>
+                                     <GTableHeaderCell key={1} header='Audit' className='audittable'>
+                                     <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label>
+                                            <span>{tablerowdataOther.length} PPS in other mode</span>
                                               
                                         </GTableHeaderCell>
                                
                             </GTableHeader>
      
                             <GTableBody data={tableData} >
-                            {tableData ? tableData.map(function (row, idx) {
+                            {tablerowdataOther ? tablerowdataOther.map(function (row, idx) {
                                 return (
                                     
                                     <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tableData} >
                                   
                                         {Object.keys(row).map(function (text, index) {
                                             return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
-                                                {index==0?<DotSeparatorContent header={['PPS 003']} subHeader={['Audit Mode']} separator={'.'} />:""} 
-                                                {index==1?<div>Operator Assigned: Harish Yadav</div>:""}
+                                                {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox"  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+                                                {index==0?<DotSeparatorContent header={tablerowdataOther[idx][text]['header']} subHeader={tablerowdataOther[idx][text]['subHeader']} separator={'.'} />:""} 
+                                                {index==1?<div>Operator Assigned: {tablerowdataOther[idx][text]}</div>:""}
                                                 
                                             </div>
                                         })}
@@ -158,6 +175,7 @@ return tableData;
                             }):""}
                         </GTableBody>
                     </GTable>
+                     </div>
             </div>
 
          </div>
