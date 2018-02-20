@@ -17,6 +17,7 @@ export default class SelectAttributes extends React.Component {
         this._deleteSet= this._deleteSet.bind(this);
         this._editSet=this._editSet.bind(this);
         this._getInitialState=this._getInitialState.bind(this);
+        this._isInViewport=this._isInViewport.bind(this);
         this.state = this._getInitialState();
     }
     _getInitialState(){
@@ -174,12 +175,29 @@ export default class SelectAttributes extends React.Component {
         
 
     }
+    _isInViewport(){
+        var bounding = this.dropElement.getBoundingClientRect();
+        return {
+            bounding,
+            actualBottom:(bounding.bottom - (window.innerHeight || document.documentElement.clientHeight))
+        }
+    }
   
 
     render() {
         var _this = this;
+        var dropStyleTop={}
         var attributeSelected = Object.keys(_this.state.selectedSets).length ? true : false;
-
+        if(this.state.dropdownVisible){
+            let elementPosition = this._isInViewport();
+            if(elementPosition.actualBottom > 0){
+                dropStyleTop.top=-(120+elementPosition.actualBottom);
+            }
+            else{
+                dropStyleTop.top=(parseInt(this.dropElement.style.top) || -120);
+            }
+        }
+        
         return <div className="gor-sel-att-wrap">
         <div className="gor-sel-att-placeholder" onClick={_this._toggleDrop}>
         <div className="gor-sel-att-pholder-text">
@@ -190,7 +208,7 @@ export default class SelectAttributes extends React.Component {
         </div>
         </div>
         
-        <div className={this.state.dropdownVisible ? "gor-sel-att-drop" : "gor-sel-att-drop hide-drop"} >
+        <div style={dropStyleTop} ref={(elem) => { this.dropElement = elem; }} className={this.state.dropdownVisible ? "gor-sel-att-drop" : "gor-sel-att-drop hide-drop"} >
             <div className="gor-sel-att-content">
         {(!attributeSelected && !this.state.showAttrList) && <div className={"gor-sel-att-add show"}>
             <div className="text-cont">

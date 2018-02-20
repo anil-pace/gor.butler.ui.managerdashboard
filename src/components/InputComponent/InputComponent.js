@@ -48,15 +48,15 @@ class InputAfterValidation extends React.Component{
 			    disabled: this.props.errorMessage === true ? true : false
 		}
 		let hasError = this.props.errorMessage===true ? false : true;
+		let allRowValid = this.props.allRowValid;
 		
 		return(
 			<div>
-			{!this.props.allRowValid?<input type="checkbox" onChange={(e)=>{this.props.onAttributeCheck(e,this.props.index)}} checked={this.props.checked}/>:null}
+			{!allRowValid?<input type="checkbox" onChange={(e)=>{this.props.onAttributeCheck(e,this.props.index)}} checked={this.props.checked}/>:null}
 			<div className={"gor-audit-input-wrap after-validation "+(hasError ? "error-tuple" : "valid-tuple") }>
 			<input {...attributes}  />
 			<span className={hasError ? "error-icon" : ""}></span>
 			</div>
-
 			    <span className={"error-message"}>{hasError ? this.props.errorMessage : null}</span>
 			    </div>
 

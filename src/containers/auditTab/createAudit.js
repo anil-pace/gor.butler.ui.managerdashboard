@@ -76,8 +76,8 @@ class CreateAudit extends React.Component{
           isInputEmpty:true
         },
         filterSelectionState:"none",
-        locationAttributes:this.props.locationAttributes,
-        skuAttributes:this.props.skuAttributes,
+        locationAttributes:{},
+        skuAttributes:{},
         csvUploaded:false,
         locationMode:"location",
         skuMode:"sku",
@@ -86,7 +86,8 @@ class CreateAudit extends React.Component{
         isAuditCreated:false,
         activeTabIndex:0,
         validateclicked:false,
-        selectedSKUList:{}
+        selectedSKUList:{},
+        auditSpinner:this.props.auditSpinner
       };
       
       
@@ -144,9 +145,15 @@ class CreateAudit extends React.Component{
       locationAttributes,
       validationDone,
       skuAttributes,
-      validationDoneSKU
+      validationDoneSKU,
+      auditSpinner:nextProps.auditSpinner
 
     })
+    }
+    if(this.props.auditSpinner !== nextProps.auditSpinner){
+      this.setState({
+        auditSpinner:nextProps.auditSpinner
+      })
     }
   }
   _onAttributeSelection(selectedAttributes,index){
@@ -300,6 +307,7 @@ class CreateAudit extends React.Component{
                   'accept':APP_JSON,
                   'token':this.props.auth_token
       }
+    this.props.setAuditSpinner(true);
     this.props.makeAjaxCall(urlData);
   }
   
@@ -346,7 +354,7 @@ class CreateAudit extends React.Component{
                 'accept':APP_JSON,
                 'token':this.props.auth_token
     }
-    
+    this.props.setAuditSpinner(true);
     this.props.makeAjaxCall(urlData);
    
     if(type==="create"){
@@ -635,14 +643,16 @@ class CreateAudit extends React.Component{
         validationDoneSKU:false,
         skuAttributes:{},
         validateclicked:false,
-        selectedSKUList:{}
+        selectedSKUList:{},
+        auditSpinner:false
       })
       }
       else{
         this.setState({
         validationDone:false,
         locationAttributes:{},
-        validateclicked:false
+        validateclicked:false,
+        auditSpinner:false
       })
       }
       
@@ -884,8 +894,8 @@ class CreateAudit extends React.Component{
 
 
               {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
-                <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}><FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/></button>
+                <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+                        defaultMessage='Validate'/>}</button>
               </div>}
                <div>
              <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 

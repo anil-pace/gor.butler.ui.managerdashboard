@@ -145,13 +145,15 @@ export  function auditInfo(state={},action){
         let processedDataSKU = processValidationDataSKU(action.data)//(action.data)
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
-            "hasDataChanged":!state.hasDataChanged
+            "hasDataChanged":!state.hasDataChanged,
+            "auditSpinner":false
           })
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
        let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
-            "hasDataChanged":!state.hasDataChanged
+            "hasDataChanged":!state.hasDataChanged,
+            "auditSpinner":false
           })
 
     case TEXTBOX_STATUS:  

@@ -1,5 +1,12 @@
 .gor-audit-create{
 
+  .gor-orange-spinner{
+    height: 18px;
+    position: static;
+    width: 20%;
+    margin: auto;
+    background-color: inherit;
+  }
   .message{
      -webkit-animation-duration: 5s;
       animation-duration: 5s;
@@ -8,12 +15,12 @@
   }
   .gor-valid-row{
     > div:first-child{
-        width:50%;
+        width:48%;
         display:inline-block;
     }
   }
   .gor-sel-att-wrap{
-    width:40%;
+    width:44%;
     display:inline-block;
     padding: 10px 15px;
     border: 1px solid #B3B3B3;
@@ -171,7 +178,6 @@
 
 .gor-audit-upload-file{
   position: relative;
-  
   margin-top:5px;
 }
 
@@ -225,7 +231,7 @@
 }
 
 .gor-audit-input-wrap {
-    width: 38%;
+    width: 50%;
     padding:7px 5px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
@@ -589,41 +595,16 @@
     }
 }
 
-h1 {
-  overflow: hidden;
-  text-align: center;
-}
-
-h1:before,
-h1:after {
-  background-color: #AAAAAA;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 50%;
-}
-
-h1:before {
-  right: 0.5em;
-  margin-left: -50%;
-}
-
-h1:after {
-  left: 0.5em;
-  margin-right: -50%;
-}
 
 .gor-usr-hdsm-audit{
-            font-family:'Source Sans Pro';
-            font-size:14px;
-            font-weight: 600;
-            color:#333333;   
-            margin-top:25px; 
-            display:inline-block;
-            width:40%;
-        }
+  font-family:'Source Sans Pro';
+  font-size:14px;
+  font-weight: 600;
+  color:#333333;   
+  margin-top:25px; 
+  display:inline-block;
+  width:40%;
+}
 
 
   .gor-audit-csvupload-or{
@@ -663,7 +644,6 @@ h1:after {
     margin-top:10px;
 }
 .sub-tabs-audit{
-  
   border-top: 1px solid #E5E5E5;
   border-bottom: 1px solid #E5E5E5;
   margin-top:10px;
