@@ -1,6 +1,6 @@
 import React from "react";
 import UtilityTile from "../components/utilityComponents/utilityTile";
-import ScriptsTile from "../components/utilityComponents/scriptsTile";
+import RecallItems from "../components/utilityComponents/recallItems";
 import UtilityDropDown from "../components/utilityComponents/utilityDropdownWrap";
 import MasterUploadTile from "../components/utilityComponents/masterUploadTile";
 import DownloadReportTile from "../components/utilityComponents/downloadReportsTile";
@@ -67,10 +67,10 @@ const messages = defineMessages({
         description: "Master data upload",
         defaultMessage: "Master data upload"
     },
-    scriptsTileHead: {
-        id: "utility.scriptsTile.head",
-        description: "Run Script",
-        defaultMessage: "Run Script"
+    recallItems: {
+        id: "utility.recallItems.head",
+        description: "Recall Items",
+        defaultMessage: "Recall Items"
     },
     downloadReportsHead: {
         id: "utility.downloadReport.head",
@@ -611,7 +611,7 @@ class UtilityTab extends React.Component {
         let show_gr_report = false;
         let show_masterdata_upload = false;
         let show_inventory_report = false;
-        let show_item_recall_scripts = false;
+        let show_item_recall = false;
         let show_stock_ledger_widget = false;
         let show_stock_ledger_raw_transaction_widget = false;
 
@@ -641,7 +641,7 @@ class UtilityTab extends React.Component {
             //Do nothing
         }
         try {
-            show_item_recall_scripts = this.props.config.utility_tab.widgets
+            show_item_recall = this.props.config.utility_tab.widgets
                 .scripts.item_recall;
         } catch (ex) {
             //Do nothing
@@ -733,14 +733,14 @@ class UtilityTab extends React.Component {
                         />
                     </UtilityTile>
                     : null}
-                {show_item_recall_scripts
+                {show_item_recall
                     ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
-                            messages.scriptsTileHead
+                            messages.recallItems
                         )}
                         showFooter={false}
                     >
-                        <ScriptsTile auth_token={this.props.auth_token}/>
+                        <RecallItems />
                     </UtilityTile>
                     : null}
                 {show_stock_ledger_widget
