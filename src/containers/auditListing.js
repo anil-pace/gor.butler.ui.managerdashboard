@@ -10,6 +10,7 @@ import StartAudit from './auditTab/startAudit';
 import {GTable} from '../components/gor-table-component/index'
  import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
  import AuditStart from '../containers/auditTab/auditStart';
+ import ActionDropDown from '../components/actionDropDown/actionDropDown';
 import {
     AUDIT_RETRIEVE,
     GET,PUT,
@@ -23,6 +24,7 @@ import {
     SPECIFIC_SKU_ID,
     AUDIT_TYPE,
     SKU,
+    TIMER_ID,
     AUDIT_PENDING_APPROVAL,
     AUDIT_RESOLVED,
     AUDIT_CREATED,
@@ -115,9 +117,13 @@ const messages=defineMessages({
 
 
 class AuditTab extends React.Component {
+    
     constructor(props) {
+        //var timerId=0;
         super(props);
-        this.state={selected_page: 1,query:null,auditListRefreshed:null};
+        this.state={selected_page: 1,query:null,auditListRefreshed:null,timerId:0};
+          this._handelClick = this._handelClick.bind(this);
+
     }
 
 
@@ -131,7 +137,9 @@ class AuditTab extends React.Component {
          this.props.auditListRefreshed()
      }
     componentWillReceiveProps(nextProps) {
+        let me=this;
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
+            this.props.showFilter;
             let obj={},selectedToken;
             selectedToken=[nextProps.location.query.auditType];
             obj.name=mappingArray(selectedToken);
@@ -139,23 +147,47 @@ class AuditTab extends React.Component {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
+            console.log(this.state.timerId);
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
+        
+//         (function polling(){
+// let timerId=0;
+//              timerId = setInterval(function(){
+//                 me._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs); 
+//         }, 3000);
+//         me.setState({timerId:timerId});
+//         })();
+
+//clearInterval(timerId);
+
+
+
+
         }
     }
+    _handelClick(field) {
+
+  if(field.target.value=='viewdetails'){
+    this.viewAuditDetails();
+  }else if(field.target.value=='mannualassignpps'){
+    this.startAudit();
+  }
+
+} 
 
     _subscribeData() {
         let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
-    _refresh(data){
-        if(this.props.noResultFound){
-            hashHistory.push({pathname: "/audit", query: this.props.successQuery})
-        }else{
-            this._refreshList(this.props.location.query,data);
-        }
+  //   _refresh(data){
+  //       if(this.props.noResultFound){
+  //           hashHistory.push({pathname: "/audit", query: this.props.successQuery})
+  //       }else{
+  //           this._refreshList(this.props.location.query,data);
+  //       }
 
-  }
+  // }
    viewAuditDetails() {
   modal.add(ViewDetailsAudit, {
     title: '',
@@ -627,7 +659,8 @@ this.props.getPageData(paginationData);
 
 _setFilter() {
     var newState=!this.props.showFilter;
-    this.props.showTableFilter(newState)
+    this.props.showTableFilter(newState);
+    clearInterval(this.state.timerId);
 }
 
 createAudit() {
@@ -739,21 +772,21 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
     <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
     </div>
-    <div className="gorToolBar">
-    <div className="gorToolBarWrap">
-    
-
-    <GTable options={['table-bordered']}>
-   <GTableHeader>
-   <GTableHeaderCell key={1} header='Audit'>
+    <div className="gorToolBar auditListingToolbar">
+    <div className="gorToolBarWrap auditListingToolbarWrap">
+<div className="auditHeaderContainer">
    <label className="container">
    <input type="checkbox" checked={this.props.checkedAudit.length==0?'':true} onChange={this.headerCheckChange.bind(this)}/>
    <span className={totalStartAuditCount==checkedAuditCount?"checkmark":"checkmark1"}></span>
    </label> 
-   <span>Audit</span>
-   </GTableHeaderCell>
-   </GTableHeader>
-    </GTable>
+   <span className='auditHeader'>Audit</span>
+</div>
+   {(this.props.checkedAudit.length>1)?<div style={{display:'inline','border-left':'2px solid #ffffff','margin-left':'25px','float': 'right'}}><ActionDropDown style={{width:'115px',display:'inline',float:'right','padding-left':'25px'}} clickOptionBack={this._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+      <button className="gor-add-btn gor-listing-button">
+      START
+      </button>      
+      </ActionDropDown></div>:""}
+   
 
     </div>
     <div className="gor-audit-filter-create-wrap">
@@ -762,7 +795,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     <div className="gor-filter-add-token"/>
     <FormattedMessage id="audit.table.buttonLable"
     description="button label for audit create"
-    defaultMessage="Create New Task"/>
+    defaultMessage="CREATE AUDIT"/>
     </button>
     </div>
     <div className="gor-button-wrap">
@@ -771,7 +804,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     onClick={this._setFilter.bind(this)}>
     <div className="gor-manage-task"/>
     <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-    defaultMessage="Filter data"/>
+    defaultMessage="FILTER DATA"/>
     </button>
     </div>
     </div>

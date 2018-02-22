@@ -31,6 +31,10 @@ export const PROGRESS="progress";
 export const NOT_FOUND="not_found";
 export const IN_PROGRESS="in_progress";
 export const SYSTEM_GENERATED="system";
+export const SETAUDIT_PPS_CHECKED="SETAUDIT_PPS_CHECKED";
+export const SETOTHER_PPS_CHECKED="SETOTHER_PPS_CHECKED";
+
+
 
 
 

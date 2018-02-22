@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,SETAUDIT_CHECKED} from '../constants/frontEndConstants';
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,SETAUDIT_CHECKED,SETAUDIT_PPS_CHECKED,SETOTHER_PPS_CHECKED} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -41,7 +41,16 @@ export  function auditInfo(state={},action){
             "checkedAuditList" : action.data
           })
           break; 
-
+     case SETAUDIT_PPS_CHECKED:
+          return Object.assign({}, state, { 
+            "checkedAuditPPSList" : action.data
+          })
+          break;     
+          case SETOTHER_PPS_CHECKED:
+          return Object.assign({}, state, { 
+            "checkedOtherPPSList" : action.data
+          })
+          break;
 
     case VALIDATE_SKU_SPINNER:
             return Object.assign({}, state, { 

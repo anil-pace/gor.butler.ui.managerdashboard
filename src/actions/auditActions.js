@@ -11,12 +11,26 @@ import {
     VALIDATED_ATTIBUTES_DATA,
     TEXTBOX_STATUS,
     SETAUDIT_CHECKED,
+    SETAUDIT_PPS_CHECKED,
+    SETOTHER_PPS_CHECKED,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
 
 export function setCheckedAudit(data) {
     return {
         type: SETAUDIT_CHECKED,
+        data
+    }
+}
+export function setCheckedAuditpps(data) {
+    return {
+        type: SETAUDIT_PPS_CHECKED,
+        data
+    }
+}
+export function setCheckedOtherpps(data) {
+    return {
+        type: SETOTHER_PPS_CHECKED,
         data
     }
 }
@@ -117,6 +131,13 @@ export function cancelAudit(params) {
 }
 
 export function setAuditQuery(data){
+    return {
+        type:SET_AUDIT_QUERY,
+        data
+    }
+}
+
+export function setcheckedPPS(data){
     return {
         type:SET_AUDIT_QUERY,
         data

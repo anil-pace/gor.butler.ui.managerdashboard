@@ -55,13 +55,16 @@ startAudit() {
   modal.add(AuditStart, {
     title: '',
     size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true // (optional) if you don't wanna show the top right close button
-                        //.. all what you put in here you will get access in the modal props ;),
+   closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+   hideCloseButton: true // (optional) if you don't wanna show the top right close button
+   //.. all what you put in here you will get access in the modal props ;),
                       });
 }  
 
 _handelClick(field) {
+  let a=field.currentTarget.id;
+        console.log(a);
+        console.log(field.target.value);
   if(field.target.value=='viewdetails'){
     this.viewAuditDetails();
   }else if(field.target.value=='mannualassignpps'){
@@ -142,22 +145,22 @@ render(){
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton?'true':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >
-      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?<NameInitial name={tablerowdata[idx][text]} shape='round' />:""} 
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?<ProgressBar progressWidth={tablerowdata[idx][text]}/>:""}
       {index==3?<div>{tablerowdata[idx][text]}</div>:""}
-      {(index==4) && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
-      <button className="gor-add-btn">
-      Start
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+      <button className="gor-add-btn gor-listing-button">
+      START
       </button>      
       </ActionDropDown>:""}
-       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn">
-      Reaudit
+       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
+      RE-AUDIT
       </button>:""}
       {index==4 && !tablerowdata[idx][text].startButton?
-      <button className="gor-add-btn" style={{float:'right'}}>
-      Resolve
+      <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
+      RESOLVE
       </button>:""}
        {index==5?<ActionDropDown style={{width:'110px'}} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
