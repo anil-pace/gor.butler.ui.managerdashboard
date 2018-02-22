@@ -10,8 +10,16 @@ import {
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
     TEXTBOX_STATUS,
+    SETAUDIT_CHECKED,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
+
+export function setCheckedAudit(data) {
+    return {
+        type: SETAUDIT_CHECKED,
+        data
+    }
+}
 
 export function getAuditData(params) {
     return {

@@ -503,8 +503,26 @@ class AuditTab extends React.Component {
         return auditDetails;
     }
 
-     headerCheckChange(){
-   console.log('Print checked');
+     headerCheckChange(e){
+    let checkedAudit=this.props.auditDetail;
+   let arr=[];// this.props.checkedAudit
+   if(e.currentTarget.checked)
+   {
+    for(let i=0,len=checkedAudit.length;i<len;i++){
+        if(checkedAudit[i].audit_button_data.audit_start_button==='enable')
+        arr.push(checkedAudit[i].audit_id)
+    }
+    this.props.setCheckedAudit(arr);
+   }
+   else{
+    this.props.setCheckedAudit([]);
+   }
+ //  let a= arr.indexOf(e.currentTarget.id);
+ //  (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
+ // console.log(e.currentTarget.checked);
+ //  this.props.setCheckedAudit(arr);
+ //   console.log((this.props.auditDetail).length);
+
  }
 
     _mappingString(selectvalue) {
@@ -649,6 +667,13 @@ startAudit() {
 
 //Render Function goes here
 render() {
+    let checkedAuditCount=this.props.checkedAudit.length;
+    let auditCount=this.props.auditDetail;
+    let totalStartAuditCount=0;
+    for(let i=0,len=auditCount.length;i<len;i++){
+        if(auditCount[i].audit_button_data.audit_start_button==='enable')
+        totalStartAuditCount++;
+    }
     var filterHeight=screen.height - 190;
     var renderTab=<div/>,
     timeOffset=this.props.timeOffset || "",
@@ -690,8 +715,9 @@ render() {
     //     auditState["totalProgress"]=(totalProgress) / (auditData.length);
     // }
 
-renderTab=<AuditTable raja={'raja'} items={auditData}/>
-    // renderTab=<AuditTable items={auditData}
+
+renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.props.setCheckedAudit} checkedAudit={this.props.checkedAudit}/>
+    // renderTab=<AuditTable items={auditData} 
     // intlMessg={this.props.intlMessages}
     // timeZoneString={headerTimeZone}
     // totalAudits={this.props.totalAudits}
@@ -721,8 +747,8 @@ renderTab=<AuditTable raja={'raja'} items={auditData}/>
    <GTableHeader>
    <GTableHeaderCell key={1} header='Audit'>
    <label className="container">
-   <input type="checkbox" onChange={this.headerCheckChange.bind(this)}/>
-   <span className="checkmark1"></span>
+   <input type="checkbox" checked={this.props.checkedAudit.length==0?'':true} onChange={this.headerCheckChange.bind(this)}/>
+   <span className={totalStartAuditCount==checkedAuditCount?"checkmark":"checkmark1"}></span>
    </label> 
    <span>Audit</span>
    </GTableHeaderCell>
@@ -787,7 +813,7 @@ function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.auditFilter || "",
         auditSortHeader: state.sortHeaderState.auditHeaderSort || "id",
-        checkedAudit: state.sortHeaderState.checkedAudit|| {},
+        checkedAudit: state.sortHeaderState.checkedAudit|| [],
         auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
         auditSpinner: state.spinner.auditSpinner || false,

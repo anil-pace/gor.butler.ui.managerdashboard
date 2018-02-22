@@ -11,6 +11,7 @@ export const SET_USERNAME="SET_USERNAME";
 export const SET_TIME_OFFSET="SET_TIME_OFFSET";
 export const RECIEVE_TIME_OFFSET="RECIEVE_TIME_OFFSET";
 export const LOGIN_ERROR="LOGIN_ERROR";
+export const SETAUDIT_CHECKED="SETAUDIT_CHECKED";
 /*Constants for Web Sockets*/
 export const WS_CONNECT="WS_CONNECT";
 export const WS_CONNECTED="WS_CONNECTED";

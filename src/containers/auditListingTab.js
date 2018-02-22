@@ -29,22 +29,17 @@
   }	
 
   headerCheckChange(e){
-     for(let i=0;i<this.state.checkedAudit.length;i++){
-      if(e.currentTarget.id==this.state.checkedAudit[i])
-      {
-        delete this.state.checkedAudit[e.currentTarget.id];
-        return;
-      }
-      else
-      {
-        this.state.checkedAudit.push(e.currentTarget.id);
-      }
-    }
-    this.state.checkedAudit.length==0?this.state.checkedAudit.push(e.currentTarget.id):'';
-   
+    let arr=this.props.checkedAudit;
+  let a= arr.indexOf(e.currentTarget.id);
+  (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
+  //console.log(this.state.checkedAudit);
+  this.props.setCheckedAudit(arr);
     
     //console.log(e.currentTarget.checked);
     //console.log(e.currentTarget.id);
+ }
+ componentWillReceiveProps(nextProps){
+  this.setState({'checkedAudit':nextProps.checkedAudit});
  }
 
  viewAuditDetails() {
@@ -123,8 +118,6 @@ render(){
   let me=this;
   var itemsData=me.props.items;
   var tablerowdata=this._tableBodyData(itemsData);
-
-
   var tableData=[
   {sd:1,text: "INITIL NAME", sortable: true,width:7}, 
   {sd:2,text: "SKU CODE", sortable: true,width:25}, 
@@ -147,14 +140,14 @@ render(){
     <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
-
+      let visibilityStatus=tablerowdata[idx]['button'].startButton?'true':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >
-      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?<NameInitial name={tablerowdata[idx][text]} shape='round' />:""} 
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?<ProgressBar progressWidth={tablerowdata[idx][text]}/>:""}
       {index==3?<div>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton?<ActionDropDown style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+      {(index==4) && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn">
       Start
       </button>      
