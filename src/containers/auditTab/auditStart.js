@@ -175,6 +175,7 @@ return tableData;
 
                <div className='gor-modal-body'>
                <span>For Audit DHTA 001 - iPhone</span>
+               
                <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
               
               
@@ -246,9 +247,9 @@ return tableData;
                         </GTableBody>
 
                     </GTable>
-                       <button className="gor-add-btn gor-listing-button">START
-      </button>
+                       
                      </div>
+                     <button className="gor-add-btn gor-listing-button rightMargin">START</button>
             </div>
 
          </div>

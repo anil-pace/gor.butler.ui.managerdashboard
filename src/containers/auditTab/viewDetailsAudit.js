@@ -60,7 +60,7 @@ class ViewDetailsAudit extends React.Component {
             <div className="gor-modal-content">
                <div className='gor-modal-head'>
                   <span className='orderIdWrapper'>
-                     <FormattedMessage id="orders.orderId" description='Heading for view orderline' defaultMessage='Order ID' />
+                     <FormattedMessage id="audit.audittask" description='Heading for view orderline' defaultMessage='Audit Task' />
                   </span>
                   <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
@@ -68,7 +68,7 @@ class ViewDetailsAudit extends React.Component {
                <div className='gor-modal-body'>
                   <div className="orderDetailsWrapper">
                      <div className="orderDetailsHeader">
-                        <FormattedMessage id="orders.orderdetails" description='Heading for Order details' defaultMessage='Order details' />
+                        <FormattedMessage id="audit.auditdetails" description='Heading for Order details' defaultMessage='Basic details' />
                      </div>
                      <div className="orderDetailsContent">
                         <div className="orderDetailsLeft">

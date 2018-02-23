@@ -29,7 +29,7 @@ class ActionDropDown extends React.Component{
 	
 		return (
 			
-		<div className="gor-actionDropDown" onClick={this._handleClick.bind(this)} {...this.props}>
+		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={this._handleClick.bind(this)} {...this.props}>
 		{this.props.children}
 			{this.state.visibleMenu?<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
 		</div>

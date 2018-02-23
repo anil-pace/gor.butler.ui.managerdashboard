@@ -75,6 +75,7 @@ _handelClick(field) {
 
 _findStatus(data)
 {
+ 
 return (Math.round(data.completed*100)/data.total);
 }
 
@@ -82,18 +83,27 @@ _tableBodyData(itemsData){
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
-  rowObject.initialName=itemsData[i].system_created_audit==true?"System":itemsData[i].system_created_audit;
+  rowObject.initialName={
+    'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
+    'flag':itemsData[i].system_created_audit
+  }
   rowObject.auditDetails={
       "header":[itemsData[i].id,itemsData[i].audit_name],
-      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].startTime]
+      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime]
       }
-  rowObject.auditProgress=this._findStatus(itemsData[i].progressStatus);
-  rowObject.resolvedState=itemsData[i].unresolved +' lines to be resolved';
+  rowObject.auditProgress={
+   "percentage": this._findStatus(itemsData[i].progressStatus),
+   "flag":(itemsData[i].progressStatus.total>=1)?true:false,
+   "status":itemsData[i].status
+  }
+  rowObject.resolvedState=itemsData[i].lineResolveState;
   rowObject.button={
     "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
-    "reAudit":itemsData[i].startTime && itemsData[i].endTime!="--"?true:false
+    "resolveButton":itemsData[i].button['audit_resolve_button']=='enable'?true:false,
+    "reAudit":itemsData[i].startTime && itemsData[i].endTime!=""?true:false
   }
   rowObject.butoonToSHow=[];
+    rowObject.butoonToSHow.push({name:'View Details',value:'viewdetails'});
       if(itemsData[i].button['audit_cancel_button']=='enable'){
       rowObject.butoonToSHow.push({name:'Cancel',value:'cancel'});
       }
@@ -106,9 +116,9 @@ _tableBodyData(itemsData){
        if(itemsData[i].button['audit_resolve_button']=='enable'){
       rowObject.butoonToSHow.push({name:'Resolve',value:'Resolve'});
       }
-       if(itemsData[i].button['audit_view_issues_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'View Details',value:'viewdetails'});
-      }
+      
+      
+      
 
   tableData.push(rowObject);
   rowObject={};
@@ -124,8 +134,8 @@ render(){
   var tableData=[
   {sd:1,text: "INITIL NAME", sortable: true,width:7}, 
   {sd:2,text: "SKU CODE", sortable: true,width:25}, 
-  {yd:3, text: "NAME",sortable: true, width:20}, 
-  {td:4,text: "OPENING STOCK", searchable: false,width:15},
+  {yd:3, text: "NAME",sortable: true, width:16,progressWidth:10}, 
+  {td:4,text: "OPENING STOCK", searchable: false,width:20},
   {rd:5,text: "PURCHAGE QTY", searchable: false,width:20},
   {ed:6,text: "PURCHAGE QTY", searchable: false,width:8}
   ];
@@ -144,13 +154,13 @@ render(){
 
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton?'true':'hidden';
-      return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >
+      return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?<NameInitial name={tablerowdata[idx][text]} shape='round' />:""} 
+      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
-      {index==2?<ProgressBar progressWidth={tablerowdata[idx][text]}/>:""}
-      {index==3?<div>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+      {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
+      {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
       </button>      
@@ -158,7 +168,7 @@ render(){
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
       RE-AUDIT
       </button>:""}
-      {index==4 && !tablerowdata[idx][text].startButton?
+      {index==4 && tablerowdata[idx][text].resolveButton?
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
       RESOLVE
       </button>:""}

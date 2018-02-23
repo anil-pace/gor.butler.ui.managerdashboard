@@ -332,38 +332,7 @@ class AuditTab extends React.Component {
         let auditCancelled=nProps.context.intl.formatMessage(messages.auditCancelled);
         var timeOffset=nProps.props.timeOffset || "";
         var checkedAudit = nProps.props.checkedAudit || {};
-        var auditStatus={
-            "audit_created": created,
-            "audit_pending": pending,
-            "audit_waiting": pending,
-            "audit_conflicting": pending,
-            "audit_accepted": pending,
-            "audit_started": progress,
-            "audit_tasked": progress,
-            "audit_aborted": completed,
-            "audit_completed": completed,
-            "audit_pending_approval": pendingApp,
-            "audit_resolved": resolved,
-            audit_rejected: rejected,
-            audit_reaudited: reAudited,
-            audit_cancelled: auditCancelled
-        };
-        var statusClass={
-            "audit_created": "pending",
-            "audit_pending": "pending",
-            "audit_waiting": "pending",
-            "audit_conflicting": "pending",
-            "audit_accepted": "pending",
-            "audit_started": "progress",
-            "audit_tasked": "progress",
-            "audit_aborted": "completed",
-            "audit_completed": "completed",
-            "audit_pending_approval": "breached",
-            "audit_resolved": "progress",
-            audit_rejected: "breached",
-            audit_reaudited: "completed",
-            audit_cancelled: "cancelled"
-        };
+        
         var auditType={"sku": sku, "location": location};
         var auditDetails=[], auditData={};
         var i,limit=data.length;
@@ -375,16 +344,26 @@ class AuditTab extends React.Component {
             else {
                 auditData.audit_name="";
             }
-           auditData.auditBased=data[i].audit_type?"":data[i].audit_type;
+           auditData.auditBased=data[i].audit_type?data[i].audit_type:"";
 
         
             
-            auditData.pps_id=data[i].pps_id ||"";
+            //auditData.pps_id=data[i].pps_id!==null?"PPS "+data[i].pps_id:"";
+
+            auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id.length==1?"PPS "+data[i].pps_id:"Multi PPS");
+
             
-            if (data[i].audit_status) {
-                
-                auditData.status=auditStatus[data[i].audit_status];
-  
+            if (data[i].audit_status=="audit_created") {
+                auditData.status="Not yet Started";
+  }
+  else  if(data[i].start_actual_time && data[i].completion_time){
+        auditData.status="Completed";
+    }
+    else if(data[i].audit_progress.completed || data[i].audit_progress.total){
+        auditData.status=data[i].audit_progress.completed+" completed out of "+data[i].audit_progress.total;
+    }
+
+
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
                     auditData.startAudit=true;
                 }
@@ -394,7 +373,6 @@ class AuditTab extends React.Component {
 
                 }
 
-
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_resolve_button==="enable") {
                     auditData.resolveAudit=true;
                 }
@@ -403,18 +381,15 @@ class AuditTab extends React.Component {
                     auditData.resolveAudit=false;
                 }
 
-
-            }
-
-
 //Create time need to be add
-            if (data[i].create_time) {
-                if (getDaysDiff(data[i].create_time) < 2) {
-                    auditData.startTime=nProps.context.intl.formatRelative(data[i].create_time, {
+        if(data[i].start_actual_time){
+
+            if (getDaysDiff(data[i].start_actual_time) < 2) {
+                    auditData.startTime=nProps.context.intl.formatRelative(data[i].start_actual_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
-                    ", " + nProps.context.intl.formatTime(data[i].create_time, {
+                    ", " + nProps.context.intl.formatTime(data[i].start_actual_time, {
                         timeZone: timeOffset,
                         hour: 'numeric',
                         minute: 'numeric',
@@ -422,10 +397,9 @@ class AuditTab extends React.Component {
                     });
                 }
                 else {
-                    auditData.startTime=nProps.context.intl.formatDate(data[i].create_time,
+                    auditData.startTime=nProps.context.intl.formatDate(data[i].start_actual_time,
                     {
                         timeZone: timeOffset,
-                        year: 'numeric',
                         month: 'short',
                         day: '2-digit',
                         hour: "2-digit",
@@ -433,19 +407,12 @@ class AuditTab extends React.Component {
                         hour12: false
                     });
                 }
-            }
-            else {
-                auditData.startTime="";
-            }
 
-  //completion time
-    if (data[i].completion_time) {
-                if (getDaysDiff(data[i].completion_time) < 2) {
-                    auditData.endTime=nProps.context.intl.formatRelative(data[i].completion_time, {
-                        timeZone: timeOffset,
-                        units: 'day'
-                    }) +
-                    ", " + nProps.context.intl.formatTime(data[i].completion_time, {
+
+                if (data[i].completion_time) {
+
+                if ((getDaysDiff(data[i].completion_time)==getDaysDiff(data[i].start_actual_time))) {
+                    auditData.endTime=nProps.context.intl.formatTime(data[i].completion_time, {
                         timeZone: timeOffset,
                         hour: 'numeric',
                         minute: 'numeric',
@@ -456,7 +423,6 @@ class AuditTab extends React.Component {
                     auditData.endTime=nProps.context.intl.formatDate(data[i].completion_time,
                     {
                         timeZone: timeOffset,
-                        year: 'numeric',
                         month: 'short',
                         day: '2-digit',
                         hour: "2-digit",
@@ -465,21 +431,11 @@ class AuditTab extends React.Component {
                     });
                 }
             }
-            else {
-                auditData.endTime="--";
-            }
-
-
-            if (data[i].expected_quantity && data[i].completed_quantity) {
-                auditData.progress=((data[i].completed_quantity) / (data[i].expected_quantity) * 100);
-            }
-
-            else {
-                auditData.progress=0;
-                if (["audit_completed"].indexOf(data[i].audit_status)>-1) {
-                    auditData.progress=100;
-                }
-            }
+            else
+                auditData.endTime=""
+        }
+        var endTIme=(auditData.endTime!=="")?" - "+auditData.endTime:"";
+        auditData.totalTime=(auditData.startTime?auditData.startTime:"")+(auditData.endTime?endTIme:"");
 
             if (data[i].completion_time) {
                 if (getDaysDiff(data[i].completion_time) < 2) {
@@ -511,13 +467,16 @@ class AuditTab extends React.Component {
                 auditData.completedTime="--";
             }
             auditData.resolved=data[i].resolved;
-            auditData.unresolved=data[i].unresolved;
+            if(data[i].audit_button_data.audit_resolve_button=='disable'){
+                auditData.lineResolveState=data[i].unresolved<=0?(data[i].unresolved+" lines to be resolved"):"";
+            }
+            else if(data[i].audit_button_data.audit_reaudit_button=='enable'){
+                auditData.lineResolveState=data[i].unresolved>0?(data[i].unresolved+" lines to be re-audited"):"";
+            }
+
             auditData.progressStatus=data[i].audit_progress;
             auditData.button=data[i].audit_button_data;
-            // Object.keys(data[i].audit_button_data).map((element,index)=>{
-            //      auditData.startButton.push(element);
-
-            // })
+            
 
             auditData.startButton=data[i].audit_button_data.audit_start_button==='enable'?true:false;
             auditData.resolveButton=data[i].audit_button_data.audit_resolve_button==='enable'?true:false;
@@ -525,7 +484,7 @@ class AuditTab extends React.Component {
             auditData.cancelButton=data[i].audit_button_data.audit_cancel_button==='enable'?true:false;
             auditData.deleteButton=data[i].audit_button_data.audit_delete_button==='enable'?true:false;
             auditData.duplicateButton=data[i].audit_button_data.audit_duplicate_button==='enable'?true:false;
-            auditData.detailsButton=data[i].audit_button_data.audit_view_issues_button==='enable'?true:false;
+            auditData.detailsButton=true;
            
             auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:data[i].audit_created_by;
            
@@ -722,31 +681,6 @@ render() {
     headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
 
     var auditData=this._processAuditData();
-    // var auditState={"auditCompleted": 0, "skuAudit": 0, "locationAudit": 0, "totalProgress": 0, auditIssue: 0,"auditInProgress":0};
-    // for (var i=auditData.length - 1; i >= 0; i--) {
-    //     if (auditData[i].status=== GOR_COMPLETED_STATUS) {
-    //         auditState["auditCompleted"]++;
-    //     }
-
-    //     if (auditData[i].status=== AUDIT_ISSUES_STATUS) {
-    //         auditState["auditIssue"]++;
-    //     }
-    //     if(auditData[i].status===GOR_IN_PROGRESS_STATUS) {
-    //         auditState["auditInProgress"]++;
-    //     }
-    //     if (auditData[i].auditType=== SKU || auditData[i].auditType=== AUDIT_BY_PDFA) {
-    //         auditState["skuAudit"]++;
-    //     }
-    //     if (auditData[i].auditType=== LOCATION) {
-    //         auditState["locationAudit"]++;
-    //     }
-    //     totalProgress=auditData[i].progress + totalProgress;
-    //     auditData[i].progress=auditData[i].progress.toFixed(1);
-
-    // // }
-    // if (auditData.length && auditData.length !== 0) {
-    //     auditState["totalProgress"]=(totalProgress) / (auditData.length);
-    // }
 
 
 renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.props.setCheckedAudit} checkedAudit={this.props.checkedAudit}/>
