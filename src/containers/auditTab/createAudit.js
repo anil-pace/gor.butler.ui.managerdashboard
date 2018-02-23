@@ -301,7 +301,7 @@ class CreateAudit extends React.Component{
       let urlData={
                   'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
-                  'method':GET,//POST,
+                  'method':POST,
                   'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
@@ -662,7 +662,7 @@ class CreateAudit extends React.Component{
         activeTabIndex:tabIndex,
         locationAttributes: tabIndex === 0 ? {} : this.state.locationAttributes,
         skuAttributes:tabIndex === 1 ? {} : this.state.skuAttributes,
-        validationDoneSKU:tabIndex === 0 ? false : this.state.validationDoneSKU,
+        validationDoneSKU:tabIndex === 1 ? false : this.state.validationDoneSKU,
         validationDone:tabIndex === 1 ? false : this.state.validationDone,
         copyPasteLocation:{
           data:tabIndex === 1 ? [{
