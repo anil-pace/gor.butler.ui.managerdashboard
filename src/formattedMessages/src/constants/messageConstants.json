@@ -157,12 +157,12 @@
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number"
+    "defaultMessage": "Invalid SKU"
   },
   {
     "id": "audit.invalid.location",
     "description": "Text for invalid location ID",
-    "defaultMessage": "Please enter a valid location Number"
+    "defaultMessage": "Invalid Location"
   },
   {
     "id": "notify.error.audit.location",

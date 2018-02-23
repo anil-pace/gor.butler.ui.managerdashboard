@@ -1,4 +1,34 @@
 var messages = [
+{
+    "id": "Audit.inputCheckbox.auditInputPHolder",
+    "description": "Placeholder for audit inputCheckbox dropdown",
+    "defaultMessage": "Select one",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "Audit.inputCheckbox.selectAllLabel",
+    "description": "audit dropdown option for Select All",
+    "defaultMessage": "Select All",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "Audit.inputCheckbox.selectAllInvalidLabel",
+    "description": "audit dropdown option for Select All Invalid",
+    "defaultMessage": "Select all invalid",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "Audit.inputCheckbox.selectAllValidLabel",
+    "description": "audit dropdown option for Select All valid",
+    "defaultMessage": "Select all valid",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "Audit.inputCheckbox.deselectAllLabel",
+    "description": "audit dropdown option for Deselecting all",
+    "defaultMessage": "Deselect All",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
   {
     "id": "audit.table.duplicateTask",
     "description": "duplicateTask option for audit",
@@ -1285,13 +1315,13 @@ var messages = [
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "audit.invalid.location",
     "description": "Text for invalid location ID",
-    "defaultMessage": "Please enter a valid location Number",
+    "defaultMessage": "Invalid Location",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1777,7 +1807,7 @@ var messages = [
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "Create New Task",
+    "defaultMessage": "CREATE AUDIT",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -1969,9 +1999,15 @@ var messages = [
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.valid.location",
+    "description": "text for valid location",
+    "defaultMessage": "Location valid",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Please enter correct SKU number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -1983,7 +2019,7 @@ var messages = [
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task",
+    "defaultMessage": "Create new audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2013,7 +2049,7 @@ var messages = [
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "defaultMessage": "Enter SKU and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2031,19 +2067,25 @@ var messages = [
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location",
+    "defaultMessage": "Enter Location and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Format: (XXX.X.X.XX)",
+    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for copy paste sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audits.add.password.button",
     "description": "Text for add audit button",
-    "defaultMessage": "Create audit",
+    "defaultMessage": "CREATE AUDIT",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

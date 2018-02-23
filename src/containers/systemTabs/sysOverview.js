@@ -61,8 +61,8 @@ export class SystemOverview extends React.Component {
 
     render() {
         var _this = this;
-        var zones=this.props.zones ? this.props.zones["zones_data"] : {};
-        var emergencyData = this.props.zones ? this.props.zones.emergency_data : {};
+        var zones=this.props.zones["zones_data"] || {};
+        var emergencyData = this.props.zones.emergency_data || {};
         return (
             <div className="gor-zone-wrapper">
             <div className="gor-zone-header">
@@ -149,11 +149,22 @@ function mapDispatchToProps (dispatch) {
     }
 };
 
+SystemOverview.defaultProps={
+    socketAuthorized:false,
+    hasDataChanged:false,
+    zones:{},
+    zoneHeader:{},
+    zoneSubscriptionInitiated:false
 
+}
 
 
 SystemOverview.PropTypes={
-    ppsFilter: React.PropTypes.string,
+    socketAuthorized:React.PropTypes.boolean,
+    hasDataChanged:React.PropTypes.boolean,
+    zones:React.PropTypes.object,
+    zoneHeader:React.PropTypes.object,
+    zoneSubscriptionInitiated:React.PropTypes.boolean
     
 }
 

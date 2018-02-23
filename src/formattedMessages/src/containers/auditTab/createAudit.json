@@ -5,9 +5,14 @@
     "defaultMessage": "SKU confirmed"
   },
   {
+    "id": "audit.valid.location",
+    "description": "text for valid location",
+    "defaultMessage": "Location valid"
+  },
+  {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
-    "defaultMessage": "Please enter correct SKU number"
+    "defaultMessage": "Invalid SKU"
   },
   {
     "id": "audit.noAtrributes.sku",
@@ -17,7 +22,7 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task"
+    "defaultMessage": "Create new audit"
   },
   {
     "id": "audit.add.subheading",
@@ -57,12 +62,12 @@
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location"
+    "defaultMessage": "Enter Location and validate"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Format: (XXX.X.X.XX)"
+    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers"
   },
   {
     "id": "audits.add.password.button",

@@ -1156,7 +1156,7 @@
  },
  {
    "id": "audit.add.heading",
-   "description": "Create new audit task",
+   "description": "Create new audit",
    "defaultMessage": "建立新的稽核工作"
  },
  {
@@ -1416,7 +1416,7 @@
  },
  {
    "id": "audit.add.heading",
-   "description": "Create new audit task",
+   "description": "Create new audit",
    "defaultMessage": "建立新的稽核工作"
  },
  {
