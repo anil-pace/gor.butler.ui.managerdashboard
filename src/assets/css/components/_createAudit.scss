@@ -1,5 +1,9 @@
 .gor-audit-create{
-
+  .new-audit{
+    >.tabs{
+      margin-top:40px;
+    }
+  }
   .gor-orange-spinner{
     height: 18px;
     position: static;
@@ -32,14 +36,14 @@
     display:inline-block;
   }
   .gor-audit-edit-att{
-    padding: 8px 36px;
+    padding: 8px 20px;
     border: 1px solid #BEBEBE;
     border-radius: 3px;
-    color: #606266;
-    font-size: 13px;
-    font-weight: 500;
+    color: #4d5055;
+    font-size: 14px;
     cursor:pointer;
     margin-left:10px;
+    font-family: 'Source Sans Pro Bold';
   }
   
   .gor-option-wrapper{
@@ -86,6 +90,14 @@
     font-family: 'Source Sans Pro';
     font-size: 16px;
     font-weight: 600;
+    &:eq(0){
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+    &:eq(1){
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
     &.active{
         background: #419bf9;
         text-align:center;
@@ -241,6 +253,7 @@
     &.after-validation{
       display:inline-block;
       vertical-align:middle;
+      width:80%;
     }
     &.error-tuple{
       border: 1px solid #D8595E;
@@ -284,8 +297,6 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
-    border-top:1px solid #dddddd;
-    margin-top:10px;
     .gor-audit-location-wrap{
     margin-top:10px;
     }

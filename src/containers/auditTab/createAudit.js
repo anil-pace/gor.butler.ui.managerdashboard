@@ -301,7 +301,7 @@ class CreateAudit extends React.Component{
       let urlData={
                   'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
-                  'method':POST,
+                  'method':GET,//POST,
                   'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
@@ -764,7 +764,7 @@ class CreateAudit extends React.Component{
             <div className='gor-modal-body'>
             
 
-            <div className='gor-audit-form'>
+            <div className='gor-audit-form new-audit'>
             <GorTabs onTabClick ={this._onTabClick} defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
                     <Tab tabName = {auditBySkuMessg} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'} internalTab={false} >
@@ -822,7 +822,8 @@ class CreateAudit extends React.Component{
                  <div className={"gor-audit-att-ribbon"}>
                  <div className="gor-sku-validation-btn-wrap">
                  <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location' 
-                        defaultMessage='Edit'/></button>
+                        defaultMessage='BACK TO EDIT'/></button>
+
                  </div>
                  <div className={"message success"}>
                   <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'

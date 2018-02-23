@@ -191,10 +191,10 @@ export default class SelectAttributes extends React.Component {
         if(this.state.dropdownVisible){
             let elementPosition = this._isInViewport();
             if(elementPosition.actualBottom > 0){
-                dropStyleTop.top=-(120+elementPosition.actualBottom);
+                dropStyleTop.top=-(244+elementPosition.actualBottom);
             }
             else{
-                dropStyleTop.top=(parseInt(this.dropElement.style.top) || -120);
+                dropStyleTop.top=(parseInt(this.dropElement.style.top) || -244);
             }
         }
         
@@ -204,7 +204,7 @@ export default class SelectAttributes extends React.Component {
             <p>{_this.state.placeHolder}</p>
         </div>
         <div className="gor-sel-att-arr-cont">
-        <span className="gor-sel-att-arr down"></span>
+        <span className={this.state.dropdownVisible ? "gor-sel-att-arr up" : "gor-sel-att-arr down"}></span>
         </div>
         </div>
         
@@ -225,7 +225,7 @@ export default class SelectAttributes extends React.Component {
         <div className={"attribute-cont"}>
         <div className={"header"}>
             <div className={"header-left"}>
-                <button className={"back"} onClick={this._backToDefault}><span>&lt;</span>
+                <button className={"back"} onClick={this._backToDefault}><span>&lt;&nbsp;&nbsp;&nbsp;</span>
                 <span>BACK</span></button>
             </div>
             <div className={"header-right"}>
@@ -240,9 +240,9 @@ export default class SelectAttributes extends React.Component {
                 </div>
                 <div className="values">
                     {Object.keys(row.attributeList).map((key, idx) => (
-                        <div key={key+idx}>
+                        <div className={"values-wrapper"} key={key+idx}>
                             <span><input type="checkbox" checked={row.attributeList[key].checked} onClick={(e)=>_this._selectAttribute(e,row.category_value,key,index)}/></span>
-                            <span>{row.attributeList[key].text}</span>
+                            <span className="label">{row.attributeList[key].text}</span>
                         </div>
 
                     ))}
