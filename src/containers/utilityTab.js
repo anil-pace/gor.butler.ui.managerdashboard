@@ -1,5 +1,6 @@
 import React from "react";
 import UtilityTile from "../components/utilityComponents/utilityTile";
+import UtilityTileExtended from "../components/utilityComponents/utilityTileExtended";
 import RecallItems from "../components/utilityComponents/recallItems";
 import UtilityDropDown from "../components/utilityComponents/utilityDropdownWrap";
 import MasterUploadTile from "../components/utilityComponents/masterUploadTile";
@@ -665,7 +666,7 @@ class UtilityTab extends React.Component {
         return (
             <div>
                 {show_inventory_report
-                    ? <UtilityTile
+                    ? <UtilityTileExtended
                         tileHead={this.context.intl.formatMessage(
                             messages.downloadReportsHead
                         )}
@@ -679,11 +680,11 @@ class UtilityTab extends React.Component {
                             reportsHistory={this.props.reportsHistory}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTile>
+                    </UtilityTileExtended>
                     : null}
 
                 {show_gr_report
-                    ? <UtilityTile
+                    ? <UtilityTileExtended
                         tileHead={this.context.intl.formatMessage(
                             messages.goodsRcvdNotesHead
                         )}
@@ -697,10 +698,20 @@ class UtilityTab extends React.Component {
                             grnHistory={this.props.grnHistory}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTile>
+                    </UtilityTileExtended>
+                    : null}
+                     {show_item_recall
+                    ? <UtilityTileExtended
+                        tileHead={this.context.intl.formatMessage(
+                            messages.recallItems
+                        )}
+                        showFooter={false}
+                    >
+                        <RecallItems />
+                    </UtilityTileExtended>
                     : null}
                 {show_masterdata_upload
-                    ? <UtilityTile
+                    ? <UtilityTileExtended
                         tileHead={this.context.intl.formatMessage(
                             messages.masterDataHead
                         )}
@@ -708,6 +719,7 @@ class UtilityTab extends React.Component {
                         showHeaderIcon={true}
                         onRefresh={this._onMDMRefresh.bind(this)}
                     >
+
                         <MasterUploadTile
                             uploadHistChanged={
                                 this.props.uploadHistChanged
@@ -731,18 +743,9 @@ class UtilityTab extends React.Component {
                             maxSize={this.props.maxsize}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTile>
+                    </UtilityTileExtended>
                     : null}
-                {show_item_recall
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.recallItems
-                        )}
-                        showFooter={false}
-                    >
-                        <RecallItems />
-                    </UtilityTile>
-                    : null}
+               
                 {show_stock_ledger_widget
                     ? <UtilityTile
                         loading={this.props.stockLedgerSpinner}
