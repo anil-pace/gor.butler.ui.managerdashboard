@@ -773,7 +773,6 @@ class CreateAudit extends React.Component{
         auditSpinner:false
       })
       }
-      
     }
     _onTabClick(tabIndex){
       this.setState({
