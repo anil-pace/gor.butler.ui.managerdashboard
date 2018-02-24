@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FormattedMessage, injectIntl,intlShape, defineMessages } from "react-intl";
+import { FormattedMessage, injectIntl, intlShape, defineMessages } from "react-intl";
 import { resetForm } from "../../../actions/validationActions";
 import SkuAlerts from "./skuAlerts";
 import {
@@ -43,33 +43,33 @@ import { makeAjaxCall } from "../../../actions/ajaxActions";
 import Spinner from "../../../components/spinner/Spinner";
 import { setAuditSpinner } from "../../../actions/auditActions";
 import { modal } from "react-redux-modal";
-const  messages= defineMessages({
-    auditnameplaceholder: {
-        id: 'audit.nameplaceholder.text',
-        description: 'text for audit name placeholder',
-        defaultMessage: 'Time, place or products'
-    },
-    auditinputplaceholder: {
-        id: 'audit.inputplaceholder.text',
-        description: 'text for audit input placeholder',
-        defaultMessage: 'e.g: 012678ABC'
-    },
-    e026: {
-        id: 'audit.locationdoesnotexist.text',
-        description: 'text for audit location does not exist error',
-        defaultMessage: 'Location does not exist'
-    },
-    e027: {
-        id: 'audit.skudoesnotexist.text',
-        description: 'text for audit sku does not exist error',
-        defaultMessage: 'SKU does not exist'
-    },
-    e0xx: {
-        id: 'audit.duplicatelocation.text',
-        description: 'text for audit duplicate location error',
-        defaultMessage: 'Duplicate entry'
-    }
-    
+const messages = defineMessages({
+	auditnameplaceholder: {
+		id: 'audit.nameplaceholder.text',
+		description: 'text for audit name placeholder',
+		defaultMessage: 'Time, place or products'
+	},
+	auditinputplaceholder: {
+		id: 'audit.inputplaceholder.text',
+		description: 'text for audit input placeholder',
+		defaultMessage: 'e.g: 012678ABC'
+	},
+	e026: {
+		id: 'audit.locationdoesnotexist.text',
+		description: 'text for audit location does not exist error',
+		defaultMessage: 'Location does not exist'
+	},
+	e027: {
+		id: 'audit.skudoesnotexist.text',
+		description: 'text for audit sku does not exist error',
+		defaultMessage: 'SKU does not exist'
+	},
+	e0xx: {
+		id: 'audit.duplicatelocation.text',
+		description: 'text for audit duplicate location error',
+		defaultMessage: 'Duplicate entry'
+	}
+
 })
 class SkuSelector extends React.Component {
 	constructor(props) {
@@ -246,8 +246,8 @@ class SkuSelector extends React.Component {
 		}
 		if (this.props.hasDataChanged !== nextProps.hasDataChanged) {
 			let locationAttributes = JSON.parse(
-					JSON.stringify(nextProps.locationAttributes)
-				),
+				JSON.stringify(nextProps.locationAttributes)
+			),
 				skuAttributes = JSON.parse(
 					JSON.stringify(nextProps.skuAttributes)
 				),
@@ -255,8 +255,8 @@ class SkuSelector extends React.Component {
 					this.state.activeTabIndex === 0
 						? this.state.copyPasteLocation.data
 						: this._processLocationAttributes(
-								locationAttributes.data || []
-							),
+							locationAttributes.data || []
+						),
 				validatedSKUs =
 					this.state.activeTabIndex === 0
 						? this._processSkuAttributes(skuAttributes.data || [])
@@ -478,8 +478,8 @@ class SkuSelector extends React.Component {
 						children[j].status === true
 							? children[j].status
 							: this.props.intl.formatMessage(
-									messages[error_code]
-								);
+								messages[error_code]
+							);
 					processedData.push(child);
 				}
 			}
@@ -627,8 +627,7 @@ class SkuSelector extends React.Component {
 			<FormattedMessage
 				id="audit.auditbylocation.text"
 				description="text for audit by location"
-				defaultMessage="Audit by Locatio
-				n"
+				defaultMessage="Audit by Location"
 			/>
 		);
 
@@ -639,12 +638,12 @@ class SkuSelector extends React.Component {
 		let { validationDone, validationDoneSKU, activeTabIndex } = self.state;
 		let allLocationsValid =
 			self.state.locationAttributes &&
-			!self.state.locationAttributes.totalInvalid
+				!self.state.locationAttributes.totalInvalid
 				? true
 				: false;
 		let allSKUsValid =
 			self.state.skuAttributes &&
-			self.state.skuAttributes.totalInvalid === 0
+				self.state.skuAttributes.totalInvalid === 0
 				? true
 				: false;
 		const selectAllLabel = (
@@ -701,364 +700,148 @@ class SkuSelector extends React.Component {
 		];
 
 		return (
-			  <div className='gor-audit-form new-audit'>
-            <GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
-                    <Tab tabName = {auditBySkuMessg} iconClassName={'icon-class-0'}
-                                 linkClassName={'link-class-0'} internalTab={false} >
-                          <div>
-                          <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
-                          <div>
-                          <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
-                          </div>                      
-                            <div className='gor-usr-hdsm-audit'>
-                          <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
-                          </div>
-                          
-                         
-
-              <div className='gor-audit-button-wrap'>
-                            <button onClick={()=>(self._onSkuModeSelection('sku'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterSKU" description='Button for entering skus' defaultMessage='Enter Sku'/></button>
-                            <button onClick={()=>(self._onSkuModeSelection('sku_csv'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
-                          </div>
-                               
-            <div className={`sku-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
-            <GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 :1} disabledTabIndex={validationDoneSKU ? 0 :1} tabClass={"sub-tabs-audit"}>
-            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
-                                 linkClassName={'link-class-0'}  >
-          {!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
-              <div>
-               <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
-            defaultMessage='Use copy and paste if you have muktiple sku numbers'/></div>
-            </div>
-              <div>
-               {self.state.copyPasteSKU.data.map(function(tuple, i){
-                    let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
-                    return(<div className="gor-audit-input-wrap" key={tuple.value+i}>
-                        <InputComponent.CopyPaste
-                        className={"gor-audit-input gor-input-ok"} 
-                        autoFocus = {focus} 
-                        updateInput={self._updateInput} 
-                        index={i}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
-                      </div>) 
-              }) }
-               <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
-              </div>
-               </div>
-
-             
-              
-              </div>}
-            </Tab>
-            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{skuSelectAttributes}</span>} iconClassName={'icon-class-1'}
-                                 linkClassName={'link-class-1'}  >
-                        <div className={"gor-global-notification"}>
-              {validationDoneSKU && allSKUsValid?
-                 <div className={"gor-audit-att-ribbon"}>
-                 <div className="gor-sku-validation-btn-wrap">
-                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location' 
-                        defaultMessage='BACK TO EDIT'/></button>
-
-                 </div>
-                 <div className={"message success"}>
-                  <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
-                                                              defaultMessage='{valid} out of {total} locations valid'
-                                                              values={
-                                                                {
-                                                                  valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
-                                                                  total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
-                                                                }
-                                                              }/>
-                </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
-                <span className="gor-delete-outline">
-              <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
-              </span>
-              </div>
-              <div className={"message error"}>
-                  <FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
-                                                              defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
-                                                              values={
-                                                                {
-                                                                  invalid: self.state.skuAttributes.totalInvalid ? self.state.skuAttributes.totalInvalid.toString() : "0",
-                                                                  total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
-                                                                }
-                                                              }/>
-                </div></div>}
-              
-             
-                
-              </div>
-          {validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
-              <div>
-               {self.state.copyPasteSKU.data.map((tuple,i)=>{
-                    let tuples=[],
-                    attributeList = this.state.skuAttributes.data[i].attributeList;
-                    tuples.push(<div className={"gor-valid-row"} key={tuple.value+i}>
-                        <InputComponent.AfterValidation
-                        className={"gor-audit-input gor-input-ok"} 
-                        autoFocus = {focus} 
-                        updateInput={self._updateInput} 
-                        index={i}
-                        allRowValid={allSKUsValid}
-                        onAttributeCheck={self._onAttributeCheck}
-                        checked={tuple.checked}
-                        errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
-                        {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
-                          attributeList={attributeList}
-                          applyCallBack={this._onAttributeSelection}
-                          index={i}
-                          />}
-                      </div>)
-                    
-                    
-                    return(tuples) 
-              })}
-               {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
-              </div>}
-               </div>
-
-             
-              
-              </div>}
-             
-            </Tab>
-            </GorTabs>
+			<div className='gor-audit-form new-audit'>
+				<GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
+					<Tab tabName={auditBySkuMessg} iconClassName={'icon-class-0'}
+						linkClassName={'link-class-0'} internalTab={false} >
+						<div>
+							<div className={'sku-mode active-mode'}>
+								<GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 : 1} disabledTabIndex={validationDoneSKU ? 0 : 1} tabClass={"sub-tabs-audit"}>
+									<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+										linkClassName={'link-class-0'}  >
+										{!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+											<div>
+												<div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku'
+													defaultMessage='Use copy and paste if you have muktiple sku numbers' /></div>
+											</div>
+											<div>
+												{self.state.copyPasteSKU.data.map(function (tuple, i) {
+													let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
+													return (<div className="gor-audit-input-wrap" key={tuple.value + i}>
+														<InputComponent.CopyPaste
+															className={"gor-audit-input gor-input-ok"}
+															autoFocus={focus}
+															updateInput={self._updateInput}
+															index={i}
+															value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
+													</div>)
+												})}
+												<div>
+													<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
+														defaultMessage='+ Add New' /></button>
+												</div>
+											</div>
 
 
 
-              {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
-                <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}</button>
-              </div>}
-               <div>
-             <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
-            </div>
-                  </div>
-          <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
+										</div>}
+									</Tab>
+									<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{skuSelectAttributes}</span>} iconClassName={'icon-class-1'}
+										linkClassName={'link-class-1'}  >
+										<div className={"gor-global-notification"}>
+											{validationDoneSKU && allSKUsValid ?
+												<div className={"gor-audit-att-ribbon"}>
+													<div className="gor-sku-validation-btn-wrap">
+														<button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location'
+															defaultMessage='BACK TO EDIT' /></button>
 
-          <div >
-      <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
-                        
-                  <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
-                                                             />
-                :""
-              }</div>
-
-                <div className='gor-audit-drag-drop-container'> 
-                  <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
-                    <div className={"file-drop"} >
-
-                      <div className="gor-file-upload"></div>
-                      <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
-                        defaultMessage='Drag and drop'/></p>
-                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
-                        defaultMessage='OR'/></span></h1>
-                    </div>
-                  </CSVUpload>
-                </div>
-            </div>
-                 </div> 
-                        </div>
-            
-                          </div>  
-                                
-               
-                    </Tab> 
-
-                    <Tab tabName = {auditByLocationMessg} iconClassName={'icon-class-0'}
-                                 linkClassName={'link-class-0'} internalTab={false} >
-                         
-                      <div>
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
-                        <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
-                        
-                        
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
-                          <div className='gor-audit-button-wrap'>
-                            <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
-                            <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
-                          </div>
-
-
-                          
-                      <div className={`location-mode ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}>
-                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.add.location.heading" description='Text for location heading' 
-                        defaultMessage='Enter Location and validate'/></div>
+													</div>
+													<div className={"message success"}>
+														<FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
+															defaultMessage='{valid} out of {total} locations valid'
+															values={
+																{
+																	valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
+																	total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+																}
+															} />
+													</div></div> : <div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
+														<span className="gor-delete-outline">
+															<span className={self.state.filterSelectionState === "none" ? "gor-delete-location-disabled" : "gor-delete-location"} onClick={this._deleteTuples}></span>
+														</span>
+													</div>
+													<div className={"message error"}>
+														<FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
+															defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
+															values={
+																{
+																	invalid: self.state.skuAttributes.totalInvalid ? self.state.skuAttributes.totalInvalid.toString() : "0",
+																	total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+																}
+															} />
+													</div></div>}
 
 
 
-                          
-             
-              
-            {!validationDone?<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
-            <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
-            defaultMessage='Use copy and paste if you have multiple MSU and Slot numbers'/></div>
+										</div>
+										{validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+											<div>
+												{self.state.copyPasteSKU.data.map((tuple, i) => {
+													let tuples = [],
+														attributeList = this.state.skuAttributes.data[i].attributeList;
+													tuples.push(<div className={"gor-valid-row"} key={tuple.value + i}>
+														<InputComponent.AfterValidation
+															className={"gor-audit-input gor-input-ok"}
+															autoFocus={focus}
+															updateInput={self._updateInput}
+															index={i}
+															allRowValid={allSKUsValid}
+															onAttributeCheck={self._onAttributeCheck}
+															checked={tuple.checked}
+															errorMessage={!allSKUsValid ? tuple.errorMessage : true}
+															value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
+														{allSKUsValid && attributeList.length > 0 && <SelectAttributes
+															attributeList={attributeList}
+															applyCallBack={this._onAttributeSelection}
+															index={i}
+														/>}
+													</div>)
+													return (tuples)
+												})}
+												{!validationDoneSKU && <div>
+													<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
+														defaultMessage='+ Add New' /></button>
+												</div>}
+											</div>
+										</div>}
+									</Tab>
+								</GorTabs>
+								{!allSKUsValid && <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner ? " gor-disable-content" : "")}>
+									<button className={"gor-auditValidate-btn"} type="button" onClick={(e) => this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} /> : <FormattedMessage id="audits.validateSKU" description='Text for validate sku button'
+										defaultMessage='Validate' />}</button>
+								</div>}
+							</div>
+						</div>
+					</Tab>
 
-            
-              
-               {self.state.copyPasteLocation.data.map(function(tuple, i){
-                    let focus = (self.state.copyPasteLocation.focusedEl === i.toString()) ? true : false;
-                    return(<div className="gor-audit-input-wrap" key={tuple.value+i}>
-                        <InputComponent.CopyPaste
-                        className={"gor-audit-input gor-input-ok"} 
-                        autoFocus = {focus} 
-                        updateInput={self._updateInput} 
-                        index={i}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
-                      </div>) 
-              }) }
-              
-               <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
-                        </div>
-              </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
-              <div className={"gor-global-notification"}>
-              {allLocationsValid?
-                 <div className={"gor-audit-att-ribbon"}>
-                 <div className="gor-sku-validation-btn-wrap">
-                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location' 
-                        defaultMessage='Edit'/></button>
-                 </div>
-                 <div className={"message success"}>
-                  <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
-                                                              defaultMessage='{valid} out of {total} locations valid'
-                                                              values={
-                                                                {
-                                                                  valid: self.state.locationAttributes.totalValid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
-                                                                }
-                                                              }/>
-                </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
-                <span className="gor-delete-outline">
-              <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
-              </span>
-              </div>
-              <div className={"message error"}>
-                  <FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
-                                                              defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
-                                                              values={
-                                                                {
-                                                                  invalid: self.state.locationAttributes.totalInvalid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
-                                                                }
-                                                              }/>
-                </div></div>}
-              
-             
-                
-              </div>
-                  <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.locationValidation.subheading" description='Subtext for enter location' 
-            defaultMessage='MSU will always supercede and all slots in the MSU will be audited'/></div>
-            {self.state.copyPasteLocation.data.map((tuple,i)=>{
-                    let tuples=[];
-                    tuples.push(<div key={tuple.value+i}>
-                        <InputComponent.AfterValidation
-                        className={"gor-audit-input gor-input-ok"} 
-                        autoFocus = {focus} 
-                        updateInput={self._updateInput} 
-                        index={i}
-                        allRowValid={allLocationsValid}
-                        onAttributeCheck={self._onAttributeCheck}
-                        checked={tuple.checked}
-                        errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
-                      </div>)
-                    
-                    
-                    return(tuples) 
-              })}
-            <div>
-            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
-                        </div>
-                        
-              </div>
-            }
-                          <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
-                <label>
-                {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}
-                        
-            
-            </label>
-                          
-        </button>
-              </div>
-              <div>
-             <button onClick={()=>{this._validateLocation("create")}} className={validationDone && allLocationsValid && self.state.locationAttributes.totalLocations!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
-            </div>
-              <div>
-             
-            </div>
-
-                        </div>
-              <div className={`location-mode ${self.state.locationMode === 'location_csv'  ? 'active-mode' : 'inactive-mode'}`}>
-
-          <div >
-      <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
-                        
-                  <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
-                                                             />
-                :""
-              }</div>
-
-                <div className='gor-audit-drag-drop-container'> 
-                  <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
-                    <div className={"file-drop"} >
-
-                      <div className="gor-file-upload"></div>
-                      <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
-                        defaultMessage='Drag and drop'/></p>
-                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
-                        defaultMessage='OR'/></span></h1>
-                    </div>
-                  </CSVUpload>
-                </div>
-            </div>
-                 </div> 
-                        </div>
-                        </div>
-                    </Tab>
-            </GorTabs>
-            </div>
+					<Tab tabName={auditByLocationMessg} iconClassName={'icon-class-0'}
+						linkClassName={'link-class-0'} internalTab={false} >
+					</Tab>
+				</GorTabs>
+			</div>
 		);
 	}
 }
 
-SkuSelector.PropTypes={
-    skuValidationSpinner: React.PropTypes.boolean,
-    locationValidationSpinner:React.PropTypes.boolean,
-    locationValidationSpinnerCsv:React.PropTypes.boolean,
-    auditType:React.PropTypes.object,
-    skuCheck:React.PropTypes.object,
-    locCheck:React.PropTypes.object,
-    auth_token:React.PropTypes.string,
-    skuAttributes:React.PropTypes.object,
-    locationAttributes:React.PropTypes.object,
-    intl: intlShape.isRequired,
-    auditSpinner: React.PropTypes.bool,
-    setAuditSpinner: React.PropTypes.func
+SkuSelector.PropTypes = {
+	skuValidationSpinner: React.PropTypes.boolean,
+	locationValidationSpinner: React.PropTypes.boolean,
+	locationValidationSpinnerCsv: React.PropTypes.boolean,
+	auditType: React.PropTypes.object,
+	skuCheck: React.PropTypes.object,
+	locCheck: React.PropTypes.object,
+	auth_token: React.PropTypes.string,
+	skuAttributes: React.PropTypes.object,
+	locationAttributes: React.PropTypes.object,
+	intl: intlShape.isRequired,
+	auditSpinner: React.PropTypes.bool,
+	setAuditSpinner: React.PropTypes.func
 
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
 	return {
-		resetForm:   function(){ dispatch(resetForm()); },
+		resetForm: function () { dispatch(resetForm()); },
 	};
 };
 
