@@ -213,6 +213,14 @@ var mapDispatchToProps = function(dispatch) {
   };
 };
 
+
+
+function mapStateToProps(state, ownProps) {
+    return {
+        intlMessages: state.intl.messages,
+    };
+}
+
 RecallItems.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
