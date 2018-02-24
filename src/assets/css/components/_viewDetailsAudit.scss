@@ -1,26 +1,43 @@
-.gor-modal-content {
+
+.gor-AuditDetails-modal-content {
       background-color: #fefefe;
       margin: auto;
       padding: 20px;
       width: 100%;
       min-height:100vh;
       color: #4a4a4a;
-      .gor-modal-head{
-          position: relative;
+      .gor-auditDetails-modal-body{
+       margin: 0px 0px 0px 17px;
+        width: 92%;
+            clear: both;
+    padding-top: 30px;
+        color: #4a4a4a;
+        .AuditDetailsWrapper{
+          height: calculateRem(160px);
+          margin-top:20px;
+          .AuditDetailsHeader{
+            font-size: calculateRem(20px);
+            font-weight: 600;
+            padding: 10px 10px 0px 10px;
+            color:#4a4a4a;
+          }
+          .auditDetailsContent{
+            margin-top: 10px;
+            .auditDetailsLeft{
+              width: 100%;
+            }
+            }
+        }
+        }
+      .gor-auditDetails-modal-head{
           font-size: calculateRem(20px);
           font-weight: 600;
           border-bottom:1px solid #AAAAAA;
-          min-height:calculateRem(60px);
-          width:92%;
-          padding-top:40px;
-          margin:auto;
-          margin-left:30px;
-          margin-right:30px;
+          min-height:calculateRem(50px);
+          width:97%;
           position:fixed;
-          top:0;
-          background:#ffffff;
-          z-index: 100;
-          .orderIdWrapper{
+          padding-top:10px;
+          .AuditIDWrapper{
           	font-size: calculateRem(26px);
       		font-weight: 400;
       		color: #000000;
@@ -43,25 +60,18 @@
               color: #666666;
           }
       }
-      .gor-modal-body{
-      	margin: 0px 30px 0px 55px;
-      	border-bottom: 2px solid #dddddd;
-      	width: 92%;
-      	color: #4a4a4a;
-      	.orderDetailsWrapper{
-      		margin-top: 120px;
-      		height: calculateRem(160px);
-      		.orderDetailsHeader{
-      			font-size: calculateRem(20px);
-      			font-weight: 600;
-      		}
-      		.orderDetailsContent{
-      			margin-top: 10px;
-      			.orderDetailsLeft{
-      				width: 100%;
-      			
-      			}
-            }
-        }
-    }
+.viewDetailsTable{
+width:94%;
+margin-left:20px;
+}
+.auditTable .cell{
+background-color:#dddddd;
+}
+ .missing-item{
+ padding:15px;
+ color:#ec1c2d;
+ font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+ }
 }

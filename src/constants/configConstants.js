@@ -18,7 +18,9 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
-export const PPSLIST_URL=API_URL+"/pps/available_pps"
+export const PPSLIST_URL=API_URL+"/pps/available_pps";
+export const AUDITDETAIL_URL=API_URL+"/pps/available_pps";
+
 export const ORDER_PAGE="?page=";
 export const EXCEPTION_TRUE="exception";
 export const WAREHOUSE_STATUS_SINGLE="search=state";

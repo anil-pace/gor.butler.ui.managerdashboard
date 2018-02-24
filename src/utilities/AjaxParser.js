@@ -16,7 +16,7 @@ import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -49,6 +49,7 @@ import {
     CREATE_AUDIT,
     AUDIT_RETRIEVE,
     GET_PPSLIST,
+    GET_AUDIT_DETAILS,
     START_AUDIT,
     DELETE_AUDIT,
     AUDIT_RESOLVE_LINES,
@@ -924,6 +925,64 @@ auditpps={
             }
             store.dispatch(getPPSAudit(auditpps));
             break;
+
+                    case GET_AUDIT_DETAILS:
+            let auditdetails = {};
+            if (res.data) {
+                //auditpps = res.data.audit;
+auditdetails={
+    "actual_quantity": 5,
+    "audit_created_by": "user",
+    "operator_name": "Raja Dey",
+    "audit_id": "PtAYcvUkjQ",
+    "audit_progress": {
+        "completed": 20,
+        "total": 89
+    },
+    "audit_param_type": "sku",
+    "audit_param_value": {
+        "attributes_list": [{
+            "attributes_sets": ["Black", "64GB", "32GB"],
+            "sku": "2002",
+            "name": "IPhone 8",
+            "audit_result": {
+                "total": 16,
+                "missing": 4
+            }
+        }, {
+            "attributes_sets": [],
+            "sku": "2003",
+            "name": "IPhone X",
+            "audit_result": {
+                "total": 16,
+                "missing": 4
+            }
+        }],
+        "uids_list": ["9a8ebf04-fc62-41bd-9431-ef142ce785cd", "9a45c477-b02e-44de-aaac-4bcffe941eef"]
+    },
+    "audit_status": "audit_created",
+    "kq": "true",
+    "reminder": "rocking audit",
+
+    "cancel_request": "undefined",
+    "completed_quantity": 0,
+    "completion_time": "2018-02-20 07:01:40.123477+05:30",
+    "create_time": "2018-02-20 07:01:40.123477+05:30",
+    "description": "undefined",
+    "display_id": 108,
+    "expected_quantity": 0,
+    "pps_id": [3, 4],
+    "resolved": 0,
+    "start_actual_time": "2018-02-20 07:01:40.123477+05:30",
+    "start_request_time": "2018-02-20 07:01:40.123477+05:30",
+    "unresolved": 0
+}
+            }
+            store.dispatch(getAuditDetails(auditdetails));
+            break;
+
+
+
         case START_AUDIT:
         if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
         {

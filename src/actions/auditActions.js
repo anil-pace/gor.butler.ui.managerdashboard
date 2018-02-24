@@ -5,6 +5,7 @@ import {
     SET_AUDIT,
     RESET_AUDIT,
     SETAUDIT_PPS,
+    SETAUDIT_DETAILS,
     REFRESH_AUDIT,
     DISPLAY_AUDIT_SPINNER,
     SET_AUDIT_ORDERLINES,
@@ -65,6 +66,12 @@ export function resetAuditType(data) {
 export function getPPSAudit(data) {
     return {
         type: SETAUDIT_PPS,
+        data
+    }
+}
+export function getAuditDetails(data) {
+    return {
+        type: SETAUDIT_DETAILS,
         data
     }
 }

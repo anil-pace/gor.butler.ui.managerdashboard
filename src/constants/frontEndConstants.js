@@ -767,4 +767,9 @@ export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
+export const GET_AUDIT_DETAILS = "GET_AUDIT_DETAILS";
+export const SETAUDIT_DETAILS = "SETAUDIT_DETAILS";
+export const AUDITDETAIL_URL = "AUDITDETAIL_URL";
+
+
 
