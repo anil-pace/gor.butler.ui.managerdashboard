@@ -65,6 +65,7 @@ class SkuSelector extends React.Component {
 		super(props);
 
 		this.state = {
+			visibility:`hidden`,
 			copyPasteSKU: {
 				data: [
 					{
@@ -226,12 +227,10 @@ class SkuSelector extends React.Component {
 		}
 	}
 
-	_removeThisModal() {
-		this.props.removeModal();
-	}
+
 	componentWillReceiveProps(nextProps) {
 		if (!nextProps.auth_token) {
-			this._removeThisModal();
+			//
 		}
 		if (this.props.hasDataChanged !== nextProps.hasDataChanged) {
 			let locationAttributes = JSON.parse(
@@ -277,6 +276,11 @@ class SkuSelector extends React.Component {
 			this.setState({
 				auditSpinner: nextProps.auditSpinner
 			});
+		}
+		if (this.props.visibility !== nextProps.visibility){
+			this.setState({
+				visibility:nextProps.visibility
+			})
 		}
 	}
 	_onAttributeSelection(selectedAttributes, index) {
@@ -495,51 +499,13 @@ class SkuSelector extends React.Component {
 			}
 			validSKUData.audit_param_value.sku_list = auditParamValue;
 			sendRequest = true;
-		} else if (type === "confirm" || type === "create") {
-			let selectedAttributeCount = Object.keys(selectedSKUList).length;
-			let isAttributeSelected = arrSKU.length === selectedAttributeCount;
-			if (!isAttributeSelected && type === "create") {
-				this._invokeAlert({
-					validateSKU: this._validateSKU,
-					noneSelected: !selectedAttributeCount ? true : false,
-					totalSKUCount: arrSKU.length,
-					missingSKUCount: arrSKU.length - selectedAttributeCount
-				});
-			} else {
-				validSKUData.audit_param_value = {};
-				validSKUData.audit_param_value.attributes_list = [];
-				let { selectedSKUList } = this.state;
-				let skuList = this.state.copyPasteSKU.data;
-				for (let i = 0, len = skuList.length; i < len; i++) {
-					if (selectedSKUList[skuList[i].value]) {
-						validSKUData.audit_param_value.attributes_list.push(
-							selectedSKUList[skuList[i].value]
-						);
-					} else {
-						let noAttributeSKU = {};
-						noAttributeSKU.sku = skuList[i].value;
-						noAttributeSKU.attributes_sets = [];
-						validSKUData.audit_param_value.attributes_list.push(
-							noAttributeSKU
-						);
-					}
-				}
-				sendRequest = true;
-				this.props.removeModal();
-			}
 		}
 		if (sendRequest) {
 			let urlData = {
-				url:
-					type === "create" || type === "confirm"
-						? AUDIT_CREATION_URL
-						: AUDIT_VALIDATION_URL,
+				url: SKU_VALIDATION_URL,
 				formdata: validSKUData,
-				method: POST,
-				cause:
-					type === "create" || type === "confirm"
-						? CREATE_AUDIT_REQUEST
-						: VALIDATE_SKU_ID,
+				method: GET,
+				cause: VALIDATE_SKU_ID,
 				contentType: APP_JSON,
 				accept: APP_JSON,
 				token: this.props.auth_token
@@ -689,12 +655,13 @@ class SkuSelector extends React.Component {
 		];
 
 		return (
-			<div className="gor-modal-content gor-audit-create">
+
+			<div className="gor-modal-content gor-audit-create" style={{visibility:this.state.visibility}}>
 				<div className='gor-modal-body'>
 					<div className='gor-audit-form new-audit'>
 						<GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
 							<Tab tabName={auditBySkuMessg} iconClassName={'icon-class-0'}
-								linkClassName={'link-class-0'} internalTab={false} >
+								linkClassName={'link-class-0'}>
 								<div>
 									<div className={'sku-mode active-mode'}>
 										<GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 : 1} disabledTabIndex={validationDoneSKU ? 0 : 1} tabClass={"sub-tabs-audit"}>
@@ -761,9 +728,6 @@ class SkuSelector extends React.Component {
 																		}
 																	} />
 															</div></div>}
-
-
-
 												</div>
 												{validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
 													<div>
@@ -789,10 +753,6 @@ class SkuSelector extends React.Component {
 															</div>)
 															return (tuples)
 														})}
-														{!validationDoneSKU && <div>
-															<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
-																defaultMessage='+ Add New' /></button>
-														</div>}
 													</div>
 												</div>}
 											</Tab>
@@ -835,6 +795,7 @@ SkuSelector.PropTypes = {
 var mapDispatchToProps = function (dispatch) {
 	return {
 		resetForm: function () { dispatch(resetForm()); },
+		makeAjaxCall: function (data) { dispatch(makeAjaxCall(data)) },
 	};
 };
 

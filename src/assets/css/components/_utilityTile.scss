@@ -103,6 +103,29 @@
   .gor-audit-create .gor-audit-form {
     width: initial;
   }
+  ul.tabs-nav.nav.navbar-nav.navbar-left.tabs-audit{
+    display: none; //needs to be removed after checking with Himanshu
+  }
+  button.gor-download-button.got-align.gor-disable-content{
+    margin-left: 270px;
+    margin-right:initial;
+  }
+  .gor-audit-input-wrap.gor-utility-sku-wrap{
+    .gor-audit-input.gor-input-ok {
+      display: inline-block;
+      width: 58%;
+      height: 35px;
+      border-radius: 3px;
+      border: solid 1px #666666;
+      background-color: #ffffff;
+      padding-left: 10px;
+      margin-top: 10px;
+      font-family: 'Source Sans Pro';
+      font-size: 14px;
+      font-weight: normal;
+      color: #333333;
+  }
+  }
 }
 
 

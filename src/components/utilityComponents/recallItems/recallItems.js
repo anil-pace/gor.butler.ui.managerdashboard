@@ -138,6 +138,8 @@ class RecallItems extends React.Component {
   render() {
 
     let orderIdComp = this._getOrderId();
+    let SKUSelectorVisibility = (this.state.recallState === "ExpiredAll")?`hidden`: `visible`;
+
     return (
       <div key="0" className="gor-script-sku-wrap">
         <div
@@ -180,7 +182,7 @@ class RecallItems extends React.Component {
           </div>
         </div>
         {orderIdComp}
-        <SkuSelector/>
+        <SkuSelector visibility={SKUSelectorVisibility} />
         <div className="gor-script-btn-wrap">
           <button
             className={
