@@ -47,7 +47,7 @@ class StartAudit extends React.Component{
     let formdata;
     formdata={
       audit_id_list: this.props.auditId, 
-      pps_list: this.state.checked
+      pps_list: this.props.ppsList
     }
     let userData={
                 'url':START_AUDIT_URL,
@@ -60,7 +60,7 @@ class StartAudit extends React.Component{
     }
       this.props.userRequest(userData);
       this.props.removeModal();
-      this.props.setCheckedAudit({});
+      //this.props.setCheckedAudit({});
   }
    _handleChange(event) 
    {

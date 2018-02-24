@@ -42,33 +42,35 @@
   this.setState({'checkedAudit':nextProps.checkedAudit});
  }
 
- viewAuditDetails() {
+ viewAuditDetails(auditId) {
   modal.add(ViewDetailsAudit, {
     title: '',
     size: 'large',
        	            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-       	            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-       	            //.. all what you put in here you will get access in the modal props ;),
+       	            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+       	            auditId:auditId
+                    //.. all what you put in here you will get access in the modal props ;),
                   });
 }
-startAudit() {
+startAudit(auditID) {
   modal.add(AuditStart, {
     title: '',
     size: 'large',
    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-   hideCloseButton: true // (optional) if you don't wanna show the top right close button
+   hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+   auditID: auditID
    //.. all what you put in here you will get access in the modal props ;),
                       });
 }  
 
 _handelClick(field) {
-  let a=field.currentTarget.id;
-        console.log(a);
+  let auditId=field.currentTarget.id;
+        console.log(auditId);
         console.log(field.target.value);
   if(field.target.value=='viewdetails'){
-    this.viewAuditDetails();
+    this.viewAuditDetails(auditId);
   }else if(field.target.value=='mannualassignpps'){
-    this.startAudit();
+    this.startAudit(auditId);
   }
 
 }  
@@ -172,7 +174,7 @@ render(){
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
       RESOLVE
       </button>:""}
-       {index==5?<ActionDropDown style={{width:'110px'}} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+       {index==5?<ActionDropDown style={{width:'110px'}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
       </ActionDropDown>:""}
 

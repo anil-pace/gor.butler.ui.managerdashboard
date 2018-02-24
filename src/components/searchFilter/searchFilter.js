@@ -20,7 +20,7 @@ class searchFilter extends React.Component{
               <div className="gor-search-icon"></div>
             </div>
             <div className="inputWrapper"> 
-              <input type="text" className="gor-search-input-wrap" placeholder="Search product" onChange={this.handleChange}/>
+              <input type="text" className="gor-search-input-wrap" placeholder={this.props.placeHolder} onChange={this.handleChange}/>
             </div>
         </div>
       );  

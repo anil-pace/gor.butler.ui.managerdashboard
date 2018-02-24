@@ -74,11 +74,26 @@
           }
       }
 .viewDetailsTable{
+  .auditSummary{
+  text-align: left;
+  color: #333333;
+  font-weight: 600; 
+  font-size:20px;
+  padding: 7px;
+    float: left;
+  }
 width:94%;
 margin-left:20px;
+.auditDetailsSearchWrap{
+  float:right;
 }
-.auditTable .cell{
+}
+.auditTable 
+{
+border-bottom:2px solid #dddddd;
+.cell{
 background-color:#dddddd;
+}
 }
  .missing-item{
  padding:15px;
@@ -88,3 +103,4 @@ background-color:#dddddd;
   text-align: left;
  }
 }
+

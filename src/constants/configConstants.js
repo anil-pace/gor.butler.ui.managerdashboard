@@ -1,10 +1,10 @@
-export const BASE_URL = '192.168.9.35'//'192.168.14.124';
+export const BASE_URL = '192.168.14.124';
 export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="wss://";
-//export const WS_URL = WS_PROTOCOL+BASE_URL+":8888/manager_api/ws";
-export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
-//export const API_URL=PROTOCOL+BASE_URL+":5000/api";
-export const API_URL=PROTOCOL+BASE_URL+"/api";
+export const WS_PROTOCOL ="ws://";
+export const WS_URL = WS_PROTOCOL+BASE_URL+":8888/manager_api/ws";
+//export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
+export const API_URL=PROTOCOL+BASE_URL+":5000/api";
+//export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
@@ -18,8 +18,8 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
-export const PPSLIST_URL=API_URL+"/pps/available_pps";
-export const AUDITDETAIL_URL=API_URL+"/pps/available_pps";
+export const PPSLIST_URL=API_URL+"/audit/pps_info";
+export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
 
 export const ORDER_PAGE="?page=";
 export const EXCEPTION_TRUE="exception";

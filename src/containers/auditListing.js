@@ -11,6 +11,7 @@ import {GTable} from '../components/gor-table-component/index'
  import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
  import AuditStart from '../containers/auditTab/auditStart';
  import ActionDropDown from '../components/actionDropDown/actionDropDown';
+
 import {
     AUDIT_RETRIEVE,
     GET,PUT,
@@ -173,6 +174,18 @@ class AuditTab extends React.Component {
     this.startAudit();
   }
 
+} 
+
+startAudit() {
+  var  auditId=this.props.checkedAudit;
+  modal.add(AuditStart, {
+    title: '',
+    size: 'large',
+                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                        hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+                        auditID: auditId
+                        //.. all what you put in here you will get access in the modal props ;),
+                      });
 } 
 
     _subscribeData() {
@@ -632,29 +645,21 @@ createAudit() {
         });
 
 }
-startAudit() {
-  modal.add(AuditStart, {
-    title: '',
-    size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true // (optional) if you don't wanna show the top right close button
-                        //.. all what you put in here you will get access in the modal props ;),
-                      });
-} 
 
 
-    startBulkAudit() {
-        var auditId=[]; 
-        auditId=Object.keys(this.props.checkedAudit);
-        modal.add(StartAudit, {
-            title: '',
-            size: 'large', // large, medium or small,
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true,
-            auditId: auditId,
-            bulkFlag:true
-        });
-    }
+
+    // startBulkAudit() {
+    //     var auditId=[]; 
+    //     auditId=Object.keys(this.props.checkedAudit);
+    //     modal.add(StartAudit, {
+    //         title: '',
+    //         size: 'large', // large, medium or small,
+    //         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+    //         hideCloseButton: true,
+    //         auditId: auditId,
+    //         bulkFlag:true
+    //     });
+    // }
 
 
 //Render Function goes here

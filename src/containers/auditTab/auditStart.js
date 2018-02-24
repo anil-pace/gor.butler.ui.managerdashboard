@@ -17,7 +17,8 @@ import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 class AuditStart extends React.Component {
    constructor(props) {
       super(props);
-      this.state={checkedAuditPPS:[],checkedOtherPPS:[]};
+      this.state={checkedAuditPPS:[],checkedOtherPPS:[],auditId:this.props.auditID};
+
    }
    _removeThisModal() {
       this.props.removeModal();
@@ -56,6 +57,30 @@ return tableData;
 }
 return tableData;
 }
+  _handlestartaudit(e)
+  {
+    e.preventDefault();
+    let allPPSList=this.props.checkedAuditPPSList.concat(this.props.checkedOtherPPSList);
+    let allAudtId= (this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId;
+    let formdata;
+    formdata={
+      audit_id_list: allAudtId, 
+      pps_list: allPPSList
+    }
+    let userData={
+                'url':START_AUDIT_URL,
+                'formdata':formdata,
+                'method':POST,
+                'cause':START_AUDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'token':this.props.auth_token
+    }
+      this.props.userRequest(userData);
+      this.props.removeModal();
+     // this.props.setCheckedAudit({});
+  }
+
  headerCheckChange(type,e){
      let ppslist=this.props.ppsList.pps_list;
    let arr=[];// this.props.checkedAudit
@@ -125,8 +150,10 @@ return tableData;
        //   this._removeThisModal();
        // }
      }
+     
 
    render() {
+    console.log(this.props.auditID)
     let me=this;
     let items=this.props.ppsList.pps_list||{};
  let checkedAuditPPSCount=this.props.checkedAuditPPSList.length;
@@ -183,7 +210,7 @@ return tableData;
                <div className='gor-auditDetails-modal-body'>
                 <div className="content-body">
                 <span className='left-float'>
-                     - {'For audit DHTA001 - iphone'}
+                     For audit - {this.state.auditId}
                   </span>
                    <span className='right-float'>
                      <input type="text"/>
@@ -258,7 +285,7 @@ return tableData;
                     </GTable>
                        
                      </div>
-                     <button className="gor-add-btn gor-listing-button rightMargin">START</button>
+                     <button className="gor-add-btn gor-listing-button rightMargin" onClick={this._handlestartaudit.bind(this)}>START</button>
             </div>
 
          </div>

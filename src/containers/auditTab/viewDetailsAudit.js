@@ -11,10 +11,13 @@ import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
+import SearchFilter from '../../components/searchFilter/searchFilter';
 
 class ViewDetailsAudit extends React.Component {
    constructor(props) {
       super(props);
+      this.handleChange = this.handleChange.bind(this);
+      this.state={items:[],auditId:this.props.auditId};
    }
    _removeThisModal() {
       this.props.removeModal();
@@ -26,16 +29,29 @@ class ViewDetailsAudit extends React.Component {
    //     }
    //   }
 
+
+  componentWillReceiveProps(nextProps){
+    if(JSON.stringify(this.props.auditDetails)!== JSON.stringify(nextProps.auditDetails)){
+    let attributeData= nextProps.auditDetails.entity_list?nextProps.auditDetails.entity_list:[];
+   this.setState({items: attributeData});
+ }
+  }
      componentDidMount(){
+    let formdata={
+      audit_id: this.state.auditId
+    }
         let userData={
                 'url':AUDITDETAIL_URL,
-                'method':GET,
+                'method':POST,
                 'cause':GET_AUDIT_DETAILS,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'token':sessionStorage.getItem('auth_token')
+                'token':sessionStorage.getItem('auth_token'),
+                'formdata':formdata
             }
         this.props.userRequest(userData);
+  let attributeData= this.props.auditDetails.entity_list?this.props.auditDetails.entity_list:[];
+   this.setState({items: attributeData});
   }
   _PPSstring(list){
     let finalstring="";
@@ -84,11 +100,11 @@ _timeFormat(UTCtime){
   _processDataTile(data){
     let tile1Data={},tile2Data={},tile3Data={};
     tile1Data['Created By']=data.audit_created_by;
-    tile1Data['Operator']=data.operator_name;
+    tile1Data['Operator']=data.operator_assigned;
     if(data.audit_param_type=="sku"){
-     tile1Data['Audit Type']=data.audit_param_value.attributes_list.length>1?"Multi SKU":"Single SKU";
-    }else if(data.audit_param_value=="location"){
-     tile1Data['Audit Type']=data.audit_param_value.attributes_list.length>1?"Multi Location":"Single Location";
+     tile1Data['Audit Type']=data.entity_list.length>1?"Multi SKU":"Single SKU";
+    }else if(data.audit_param_type=="location"){
+     tile1Data['Audit Type']=data.entity_list.length>1?"Multi Location":"Single Location";
     }
     tile3Data['PPS ID']=this._PPSstring(data.pps_id);
     tile3Data['Show KQ']=data.kq;
@@ -96,23 +112,49 @@ _timeFormat(UTCtime){
 
     tile2Data['Start time']=this._timeFormat(data.start_actual_time);
     tile2Data['End time']=this._timeFormat(data.completion_time);
-    tile2Data['Progress']=data.audit_progress && data.audit_progress.total>1? data.audit_progress.completed +" lines completed out of "+data.audit_progress.total:"-";
+    tile2Data['Progress']=data.progress && data.progress.total>1? data.progress.completed +" lines completed out of "+data.progress.total:"-";
     return [tile1Data,tile2Data,tile3Data];
   }
+
+  handleChange(data) {
+    var updatedList = this.props.auditDetails
+    let attributeData= updatedList.entity_list;
+    var queryResult=[];
+    attributeData.forEach(function(item){
+            if(item.id.toLowerCase().indexOf(data)!=-1)
+            {
+              queryResult.push(item);
+              return;
+            }
+            let flag=true;
+            item.attributes_list.forEach(function(arritem){
+              if(arritem.toLowerCase().indexOf(data)!=-1){
+                if(flag){
+                queryResult.push(item);
+                flag=false;
+                return;
+              }
+              }
+
+            })
+    });
+
+    this.setState({items: queryResult});
+  }
+
   processData(itemsData){
-  let attributeData= itemsData.audit_param_value?itemsData.audit_param_value.attributes_list:[];
   let tableData=[];
-  for(var i=0;i<attributeData.length;i++){
+  for(var i=0;i<itemsData.length;i++){
   let rowObject={};
   rowObject.auditDetails={
-      "header":[attributeData[i].sku],
-      "subHeader":[attributeData[i].name]
+      "header":[itemsData[i].id],
+      "subHeader":[itemsData[i].name||""]
       };
     
-      if(attributeData[i].attributes_sets!=0){
+      if(itemsData[i].entity_list!=0){
         rowObject.attrDetails={
-      "header":[attributeData[i].attributes_sets.length +" attributes selected"],
-      "subHeader":attributeData[i].attributes_sets
+      "header":[itemsData[i].attributes_list.length +" attributes selected"],
+      "subHeader":itemsData[i].attributes_list
       }
     }else{
       rowObject.attrDetails={
@@ -120,7 +162,7 @@ _timeFormat(UTCtime){
       "subHeader":[]
       }
     }
-    let a=attributeData[i].audit_result;
+    let a=itemsData[i].audit_result;
     rowObject.status= (a && a.total>=1)?a.missing+" missing out of "+a.total+" items":"";
   tableData.push(rowObject);
   rowObject={};
@@ -130,10 +172,12 @@ return tableData;
 }
 
    render() {
-    let rawData=this.props.auditDetails;
-    let tiledata=this._processDataTile(rawData);
-    let processedTableData=this.processData(rawData);
-    let type=rawData.audit_param_type;
+    //let rawData=this.state.items;
+    let allData=this.props.auditDetails;
+    let tiledata=this._processDataTile(allData);
+    let attributeData= this.state.items;
+    let processedTableData=this.processData(attributeData);
+    let type=allData.audit_param_type;
     let no_of_record=processedTableData.length;
       var processedData=[	
 			{columnId: "1", headerText: "WaveId"},
@@ -157,7 +201,7 @@ return tableData;
                      <FormattedMessage id="audit.audittask" description='Heading for view orderline' defaultMessage='Audit Task' />
                   </span>
                   <span className='AuditIDWrapper'>
-                     - {rawData.audit_id}
+                     - {allData.audit_id}
                   </span>
                   <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
@@ -183,8 +227,10 @@ return tableData;
                    <GTableHeader options={['auditTable']}>
                            
                                 <GTableHeaderCell key={1} header='Audit'>
-                                       <span>{no_of_record} {type} in this Audit task</span>
-                                         
+                                       <span className="auditSummary">{no_of_record} {type} in this Audit task</span>
+                                       <div className="auditDetailsSearchWrap"> 
+                                    <SearchFilter handleChange={this.handleChange} placeHolder={'Search by SKU or PDFA'} />
+                                       </div>  
                                    </GTableHeaderCell>
                           
                        </GTableHeader>
