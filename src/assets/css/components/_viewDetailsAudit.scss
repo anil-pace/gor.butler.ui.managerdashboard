@@ -10,7 +10,7 @@
        margin: 0px 0px 0px 17px;
         width: 92%;
             clear: both;
-    padding-top: 30px;
+         padding-top: 30px;
         color: #4a4a4a;
         .AuditDetailsWrapper{
           height: calculateRem(160px);
@@ -26,6 +26,19 @@
             .auditDetailsLeft{
               width: 100%;
             }
+            }
+        }
+        .content-body{
+          padding:30px;
+          padding-left:0px;
+          padding-right:0px;
+            .left-float{
+              font-size: 20px;
+              text-align: left;
+              color: #000000;
+            }
+            .right-float{
+            float:right;
             }
         }
         }

@@ -12,11 +12,12 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
 import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
 
+
+
 class AuditStart extends React.Component {
    constructor(props) {
       super(props);
-      this.state={checkedAuditPPS:[]};
-      this.state={checkedOtherPPS:[]};
+      this.state={checkedAuditPPS:[],checkedOtherPPS:[]};
    }
    _removeThisModal() {
       this.props.removeModal();
@@ -170,16 +171,24 @@ return tableData;
 
       return (
          <div>
-            <div className="gor-modal-content">
+            <div className="gor-AuditDetails-modal-content">
+            <div className='gor-auditDetails-modal-head'>
+                  <span className='AuditIDWrapper'>
+                     <FormattedMessage id="audit.audittask" description='Heading for view orderline' defaultMessage='Start Audit' />
+                  </span>
+                  
+                  <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
+               </div>
 
-
-               <div className='gor-modal-body'>
-               <span>For Audit DHTA 001 - iPhone</span>
-               
-               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
-              
-              
-
+               <div className='gor-auditDetails-modal-body'>
+                <div className="content-body">
+                <span className='left-float'>
+                     - {'For audit DHTA001 - iphone'}
+                  </span>
+                   <span className='right-float'>
+                     <input type="text"/>
+                  </span>
+                 </div> 
                             <GTable options={['table-bordered','auditStart']}>
                    <GTableHeader options={['auditTable']}>   
                                 <GTableHeaderCell key={1} header='Audit' className='audittable'>
