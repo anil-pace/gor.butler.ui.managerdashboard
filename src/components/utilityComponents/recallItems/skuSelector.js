@@ -54,22 +54,11 @@ const messages = defineMessages({
 		description: 'text for audit input placeholder',
 		defaultMessage: 'e.g: 012678ABC'
 	},
-	e026: {
-		id: 'audit.locationdoesnotexist.text',
-		description: 'text for audit location does not exist error',
-		defaultMessage: 'Location does not exist'
-	},
 	e027: {
 		id: 'audit.skudoesnotexist.text',
 		description: 'text for audit sku does not exist error',
 		defaultMessage: 'SKU does not exist'
 	},
-	e0xx: {
-		id: 'audit.duplicatelocation.text',
-		description: 'text for audit duplicate location error',
-		defaultMessage: 'Duplicate entry'
-	}
-
 })
 class SkuSelector extends React.Component {
 	constructor(props) {
@@ -700,124 +689,128 @@ class SkuSelector extends React.Component {
 		];
 
 		return (
-			<div className='gor-audit-form new-audit'>
-				<GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
-					<Tab tabName={auditBySkuMessg} iconClassName={'icon-class-0'}
-						linkClassName={'link-class-0'} internalTab={false} >
-						<div>
-							<div className={'sku-mode active-mode'}>
-								<GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 : 1} disabledTabIndex={validationDoneSKU ? 0 : 1} tabClass={"sub-tabs-audit"}>
-									<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
-										linkClassName={'link-class-0'}  >
-										{!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
-											<div>
-												<div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku'
-													defaultMessage='Use copy and paste if you have muktiple sku numbers' /></div>
-											</div>
-											<div>
-												{self.state.copyPasteSKU.data.map(function (tuple, i) {
-													let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
-													return (<div className="gor-audit-input-wrap" key={tuple.value + i}>
-														<InputComponent.CopyPaste
-															className={"gor-audit-input gor-input-ok"}
-															autoFocus={focus}
-															updateInput={self._updateInput}
-															index={i}
-															value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
-													</div>)
-												})}
-												<div>
-													<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
-														defaultMessage='+ Add New' /></button>
-												</div>
-											</div>
-
-
-
-										</div>}
-									</Tab>
-									<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{skuSelectAttributes}</span>} iconClassName={'icon-class-1'}
-										linkClassName={'link-class-1'}  >
-										<div className={"gor-global-notification"}>
-											{validationDoneSKU && allSKUsValid ?
-												<div className={"gor-audit-att-ribbon"}>
-													<div className="gor-sku-validation-btn-wrap">
-														<button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location'
-															defaultMessage='BACK TO EDIT' /></button>
-
+			<div className="gor-modal-content gor-audit-create">
+				<div className='gor-modal-body'>
+					<div className='gor-audit-form new-audit'>
+						<GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
+							<Tab tabName={auditBySkuMessg} iconClassName={'icon-class-0'}
+								linkClassName={'link-class-0'} internalTab={false} >
+								<div>
+									<div className={'sku-mode active-mode'}>
+										<GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 : 1} disabledTabIndex={validationDoneSKU ? 0 : 1} tabClass={"sub-tabs-audit"}>
+											<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+												linkClassName={'link-class-0'}  >
+												{!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+													<div>
+														<div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku'
+															defaultMessage='Use copy and paste if you have muktiple sku numbers' /></div>
 													</div>
-													<div className={"message success"}>
-														<FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
-															defaultMessage='{valid} out of {total} locations valid'
-															values={
-																{
-																	valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
-																	total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
-																}
-															} />
-													</div></div> : <div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
-														<span className="gor-delete-outline">
-															<span className={self.state.filterSelectionState === "none" ? "gor-delete-location-disabled" : "gor-delete-location"} onClick={this._deleteTuples}></span>
-														</span>
+													<div>
+														{self.state.copyPasteSKU.data.map(function (tuple, i) {
+															let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
+															return (<div className="gor-audit-input-wrap" key={tuple.value + i}>
+																<InputComponent.CopyPaste
+																	className={"gor-audit-input gor-input-ok"}
+																	autoFocus={focus}
+																	updateInput={self._updateInput}
+																	index={i}
+																	value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
+															</div>)
+														})}
+														<div>
+															<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
+																defaultMessage='+ Add New' /></button>
+														</div>
 													</div>
-													<div className={"message error"}>
-														<FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
-															defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
-															values={
-																{
-																	invalid: self.state.skuAttributes.totalInvalid ? self.state.skuAttributes.totalInvalid.toString() : "0",
-																	total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
-																}
-															} />
-													</div></div>}
 
 
 
-										</div>
-										{validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
-											<div>
-												{self.state.copyPasteSKU.data.map((tuple, i) => {
-													let tuples = [],
-														attributeList = this.state.skuAttributes.data[i].attributeList;
-													tuples.push(<div className={"gor-valid-row"} key={tuple.value + i}>
-														<InputComponent.AfterValidation
-															className={"gor-audit-input gor-input-ok"}
-															autoFocus={focus}
-															updateInput={self._updateInput}
-															index={i}
-															allRowValid={allSKUsValid}
-															onAttributeCheck={self._onAttributeCheck}
-															checked={tuple.checked}
-															errorMessage={!allSKUsValid ? tuple.errorMessage : true}
-															value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
-														{allSKUsValid && attributeList.length > 0 && <SelectAttributes
-															attributeList={attributeList}
-															applyCallBack={this._onAttributeSelection}
-															index={i}
-														/>}
-													</div>)
-													return (tuples)
-												})}
-												{!validationDoneSKU && <div>
-													<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
-														defaultMessage='+ Add New' /></button>
 												</div>}
-											</div>
-										</div>}
-									</Tab>
-								</GorTabs>
-								{!allSKUsValid && <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner ? " gor-disable-content" : "")}>
-									<button className={"gor-auditValidate-btn"} type="button" onClick={(e) => this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} /> : <FormattedMessage id="audits.validateSKU" description='Text for validate sku button'
-										defaultMessage='Validate' />}</button>
-								</div>}
-							</div>
-						</div>
-					</Tab>
+											</Tab>
+											<Tab tabName={<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{skuSelectAttributes}</span>} iconClassName={'icon-class-1'}
+												linkClassName={'link-class-1'}  >
+												<div className={"gor-global-notification"}>
+													{validationDoneSKU && allSKUsValid ?
+														<div className={"gor-audit-att-ribbon"}>
+															<div className="gor-sku-validation-btn-wrap">
+																<button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editLocation" description='Text for editing a location'
+																	defaultMessage='BACK TO EDIT' /></button>
 
-					<Tab tabName={auditByLocationMessg} iconClassName={'icon-class-0'}
-						linkClassName={'link-class-0'} internalTab={false} >
-					</Tab>
-				</GorTabs>
+															</div>
+															<div className={"message success"}>
+																<FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
+																	defaultMessage='{valid} out of {total} locations valid'
+																	values={
+																		{
+																			valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
+																			total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+																		}
+																	} />
+															</div></div> : <div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
+																<span className="gor-delete-outline">
+																	<span className={self.state.filterSelectionState === "none" ? "gor-delete-location-disabled" : "gor-delete-location"} onClick={this._deleteTuples}></span>
+																</span>
+															</div>
+															<div className={"message error"}>
+																<FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
+																	defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
+																	values={
+																		{
+																			invalid: self.state.skuAttributes.totalInvalid ? self.state.skuAttributes.totalInvalid.toString() : "0",
+																			total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
+																		}
+																	} />
+															</div></div>}
+
+
+
+												</div>
+												{validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+													<div>
+														{self.state.copyPasteSKU.data.map((tuple, i) => {
+															let tuples = [],
+																attributeList = this.state.skuAttributes.data[i].attributeList;
+															tuples.push(<div className={"gor-valid-row"} key={tuple.value + i}>
+																<InputComponent.AfterValidation
+																	className={"gor-audit-input gor-input-ok"}
+																	autoFocus={focus}
+																	updateInput={self._updateInput}
+																	index={i}
+																	allRowValid={allSKUsValid}
+																	onAttributeCheck={self._onAttributeCheck}
+																	checked={tuple.checked}
+																	errorMessage={!allSKUsValid ? tuple.errorMessage : true}
+																	value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
+																{allSKUsValid && attributeList.length > 0 && <SelectAttributes
+																	attributeList={attributeList}
+																	applyCallBack={this._onAttributeSelection}
+																	index={i}
+																/>}
+															</div>)
+															return (tuples)
+														})}
+														{!validationDoneSKU && <div>
+															<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
+																defaultMessage='+ Add New' /></button>
+														</div>}
+													</div>
+												</div>}
+											</Tab>
+										</GorTabs>
+										{!allSKUsValid && <div className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner ? " gor-disable-content" : "")}>
+											<button className={"gor-auditValidate-btn"} type="button" onClick={(e) => this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} /> : <FormattedMessage id="audits.validateSKU" description='Text for validate sku button'
+												defaultMessage='Validate' />}</button>
+										</div>}
+									</div>
+								</div>
+							</Tab>
+
+							<Tab tabName={auditByLocationMessg} iconClassName={'icon-class-0'}
+								linkClassName={'link-class-0'} internalTab={false} >
+							</Tab>
+						</GorTabs>
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -666,7 +666,7 @@ class UtilityTab extends React.Component {
         return (
             <div>
                 {show_inventory_report
-                    ? <UtilityTileExtended
+                    ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
                             messages.downloadReportsHead
                         )}
@@ -680,11 +680,11 @@ class UtilityTab extends React.Component {
                             reportsHistory={this.props.reportsHistory}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTileExtended>
+                    </UtilityTile>
                     : null}
 
                 {show_gr_report
-                    ? <UtilityTileExtended
+                    ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
                             messages.goodsRcvdNotesHead
                         )}
@@ -698,7 +698,7 @@ class UtilityTab extends React.Component {
                             grnHistory={this.props.grnHistory}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTileExtended>
+                    </UtilityTile>
                     : null}
                      {show_item_recall
                     ? <UtilityTileExtended
@@ -711,7 +711,7 @@ class UtilityTab extends React.Component {
                     </UtilityTileExtended>
                     : null}
                 {show_masterdata_upload
-                    ? <UtilityTileExtended
+                    ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
                             messages.masterDataHead
                         )}
@@ -743,7 +743,7 @@ class UtilityTab extends React.Component {
                             maxSize={this.props.maxsize}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTileExtended>
+                    </UtilityTile>
                     : null}
                
                 {show_stock_ledger_widget

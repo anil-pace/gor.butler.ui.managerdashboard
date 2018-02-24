@@ -6,7 +6,7 @@ class UtilityTileExtended extends React.Component{
 	
 	render(){
 		return (
-		<div className="gor-utility-tile">
+		<div className="gor-utility-tile-extended">
 			<div className="gor-utility-tile-h1">
 				<div className="gor-utility-tile-heading">
 					{this.props.tileHead}
@@ -16,7 +16,7 @@ class UtilityTileExtended extends React.Component{
 				</div>:""}
 			</div>
 			<div className="gor-utility-tile-body">
-				<div className="gor-utility-tile-body-extended">
+				<div className="gor-utility-tile-body">
 				{this.props.children}
 				</div>
 			</div>
