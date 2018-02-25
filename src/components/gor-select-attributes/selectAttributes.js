@@ -213,11 +213,11 @@ export default class SelectAttributes extends React.Component {
         {(!attributeSelected && !this.state.showAttrList) && <div className={"gor-sel-att-add show"}>
             <div className="text-cont">
                 <a href="javascript:void(0)" className="link" onClick={this._showAttrList}>
-                + ADD SET OF ATTRIBUTES
+                {this.props.messages.add_set_of_attributes}
                 </a>
             </div>
             <div className="footer">
-            <p>Note: You can add multiple sets of attributes</p>
+            <p>{this.props.messages.footer_message}</p>
             </div>
             
         </div>}
@@ -226,10 +226,10 @@ export default class SelectAttributes extends React.Component {
         <div className={"header"}>
             <div className={"header-left"}>
                 <button className={"back"} onClick={this._backToDefault}><span>&lt;&nbsp;&nbsp;&nbsp;</span>
-                <span>BACK</span></button>
+                <span>{this.props.messages.back}</span></button>
             </div>
             <div className={"header-right"}>
-                <button className={"clearAll"} onClick={this._clearSelectedAttributes}>Clear All</button>
+                <button className={"clearAll"} onClick={this._clearSelectedAttributes}>{this.props.messages.clear_all}</button>
             </div>
         </div>
         <AttributeList>
@@ -255,7 +255,7 @@ export default class SelectAttributes extends React.Component {
             </div>
         <div className="footer-apply">
              <a href="javascript:void(0)" className="link" onClick={(e)=>_this._applySelection(e,_this.props.index)} >
-                APPLY
+                {this.props.messages.apply}
                 </a>
             </div>
         </div>}
@@ -284,7 +284,7 @@ export default class SelectAttributes extends React.Component {
             </div>
            <div className="footer-apply">
              <a href="javascript:void(0)" className="link" onClick={this._showAttrList} >
-                Add More Sets of Attributes
+                {this.props.messages.add_more_sets_of_attributes}
                 </a>
             </div>
          
