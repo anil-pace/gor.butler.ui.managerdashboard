@@ -11,14 +11,15 @@ import {userRequest} from '../../actions/userActions';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
 import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
-
-
+import SearchFilter from '../../components/searchFilter/searchFilter';
+import AuditAction from '../auditTab/auditAction'; 
+import {modal} from 'react-redux-modal';
 
 class AuditStart extends React.Component {
    constructor(props) {
       super(props);
-      this.state={checkedAuditPPS:[],checkedOtherPPS:[],auditId:this.props.auditID};
-
+      this.state={checkedAuditPPS:[],checkedOtherPPS:[],auditId:this.props.auditID,items:[]};
+      this.handleChange = this.handleChange.bind(this);
    }
    _removeThisModal() {
       this.props.removeModal();
@@ -59,14 +60,33 @@ return tableData;
 }
   _handlestartaudit(e)
   {
-    e.preventDefault();
+
     let allPPSList=this.props.checkedAuditPPSList.concat(this.props.checkedOtherPPSList);
-    let allAudtId= (this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId;
-    let formdata;
-    formdata={
-      audit_id_list: allAudtId, 
+    let allAuditId= (this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId;
+    let formdata={
+      audit_id_list: allAuditId, 
       pps_list: allPPSList
     }
+    e.preventDefault();
+    if(this.props.checkedOtherPPSList.length>0){
+    let URL=START_AUDIT_URL;
+    let param='ppsChangeStart';
+  let data=<FormattedMessage id='audit.ppschangeStart' 
+                        defaultMessage="A mode change request will be sent for PPS that are not in Audit mode.Do you still wish to proceed?" description="Text for cancel"/>;
+                      
+      modal.add(AuditAction, {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      data:data,
+      param:param,
+      formdata:formdata,
+      URL:URL
+      });  
+  }
+  else
+    {
     let userData={
                 'url':START_AUDIT_URL,
                 'formdata':formdata,
@@ -76,10 +96,12 @@ return tableData;
                 'accept':APP_JSON,
                 'token':this.props.auth_token
     }
-      this.props.userRequest(userData);
+     this.props.userRequest(userData);
       this.props.removeModal();
-     // this.props.setCheckedAudit({});
   }
+     
+     // this.props.setCheckedAudit({});
+}
 
  headerCheckChange(type,e){
      let ppslist=this.props.ppsList.pps_list;
@@ -140,8 +162,16 @@ return tableData;
                 'token':sessionStorage.getItem('auth_token')
             }
         this.props.userRequest(userData);
+  let attributeData= this.props.ppsList.pps_list?this.props.ppsList.pps_list:[];
+   this.setState({items: attributeData});
   }
      componentWillReceiveProps(nextProps){
+
+    if(JSON.stringify(this.props.ppsList.pps_list)!== JSON.stringify(nextProps.ppsList.pps_list)){
+    let attributeData= nextProps.ppsList.pps_list||[];
+   this.setState({items: attributeData});
+ }
+  
       this.setState({'checkedAuditPPS':nextProps.checkedAuditPPSList});
       this.setState({'checkedOtherPPS':nextProps.checkedOtherPPSList});
     
@@ -150,12 +180,26 @@ return tableData;
        //   this._removeThisModal();
        // }
      }
+       handleChange(data) {
+    var updatedList = this.props.ppsList.pps_list
+    //let attributeData= updatedList.entity_list;
+    var queryResult=[];
+    Object.keys(updatedList).forEach(function(key) {
+            if((updatedList[key]['operator_assigned'].toLowerCase().indexOf(data)!=-1) || (updatedList[key]['pps_mode'].toLowerCase().indexOf(data)!=-1))
+            {
+              queryResult.push(updatedList[key]);
+            }
+
+    });
+
+    this.setState({items: queryResult});
+  }
      
 
    render() {
     console.log(this.props.auditID)
     let me=this;
-    let items=this.props.ppsList.pps_list||{};
+    let items=this.state.items||[];
  let checkedAuditPPSCount=this.props.checkedAuditPPSList.length;
   let checkedOtherPPSCount=this.props.checkedOtherPPSList.length;
     let totalAuditPPSCount=0;
@@ -212,11 +256,12 @@ return tableData;
                 <span className='left-float'>
                      For audit - {this.state.auditId}
                   </span>
-                   <span className='right-float'>
-                     <input type="text"/>
-                  </span>
+                  <div className="ppsSearchWrap"> 
+                            <SearchFilter handleChange={this.handleChange} placeHolder={'Search PPS by opertor name or mode'} />
+                  </div>  
+                   
                  </div> 
-                            <GTable options={['table-bordered','auditStart']}>
+                    {tablerowdataAudit.length>0?<GTable options={['table-bordered','auditStart']}>
                    <GTableHeader options={['auditTable']}>   
                                 <GTableHeaderCell key={1} header='Audit' className='audittable'>
                                 <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox" checked={this.props.checkedAuditPPSList.length==0?'':true} onChange={me.headerCheckChange.bind(me,'Audit')}/>
@@ -248,8 +293,9 @@ return tableData;
                        }):""}
                    </GTableBody>
                   
-               </GTable>
-               <GTable options={['table-bordered']}>
+               </GTable>:""}
+
+               {tablerowdataOther.length>0?<GTable options={['table-bordered']}>
                         <GTableHeader options={['auditTable']}>
                                      <GTableHeaderCell key={1} header='Audit' className='audittable'>
                                      <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox" checked={this.props.checkedOtherPPSList.length==0?'':true}  onChange={me.headerCheckChange.bind(me,'other')}/>
@@ -282,7 +328,7 @@ return tableData;
 
                         </GTableBody>
 
-                    </GTable>
+                    </GTable>:""}
                        
                      </div>
                      <button className="gor-add-btn gor-listing-button rightMargin" onClick={this._handlestartaudit.bind(this)}>START</button>

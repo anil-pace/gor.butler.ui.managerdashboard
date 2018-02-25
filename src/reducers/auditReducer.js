@@ -1,4 +1,4 @@
-import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,SETAUDIT_DETAILS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,SETAUDIT_CHECKED,SETAUDIT_PPS_CHECKED,SETOTHER_PPS_CHECKED} from '../constants/frontEndConstants';
+import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,SETAUDIT_DETAILS,VALIDATE_SKU_SPINNER,VALIDATED_ATTIBUTES_DATA,TEXTBOX_STATUS,AUDIT_LIST_REFRESHED,SETAUDIT_CHECKED,SETAUDIT_PPS_CHECKED,SETOTHER_PPS_CHECKED,UPDATE_STATUS} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -75,11 +75,19 @@ export  function auditInfo(state={},action){
             "textBoxStatus" : action.data
           })
           break;
+// //rajadey
+//     case UPDATE_STATUS:  
+//      return Object.assign({}, state, { 
+//             "" : action.data
+//           })
+//           break;      
 
       case AUDIT_LIST_REFRESHED:
           return Object.assign({}, state, {
               "auditListRefreshed": new Date()
           })
+
+          
                      
     default:
       return state

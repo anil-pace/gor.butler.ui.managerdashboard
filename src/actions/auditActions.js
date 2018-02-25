@@ -14,6 +14,7 @@ import {
     SETAUDIT_CHECKED,
     SETAUDIT_PPS_CHECKED,
     SETOTHER_PPS_CHECKED,
+    UPDATE_STATUS,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
 
@@ -150,5 +151,12 @@ export function setcheckedPPS(data){
         data
     }
 }
+//rajadey
+// export function updateStatus(params) {
+//     return {
+//         type: UPDATE_STATUS,
+//         params
+//     }
+// }
 
 

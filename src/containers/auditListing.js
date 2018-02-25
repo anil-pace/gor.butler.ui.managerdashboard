@@ -368,13 +368,34 @@ startAudit() {
             
             if (data[i].audit_status=="audit_created") {
                 auditData.status="Not yet Started";
+                auditData.progressBarflag=false;
+  } else if(data[i].audit_status=="audit_cancel"){
+                auditData.status="Cancelling";
+                auditData.progressBarflag=false;
   }
+    else if(data[i].audit_status=="audit_Pause"){
+                auditData.status="Pausing....";
+                auditData.progressBarflag=false;
+  }
+   else if(data[i].audit_button_data.audit_cancel_button==='enable'){
+                auditData.status=auditCancelled;
+                auditData.progressBarflag=false;
+  }
+
+    else if(data[i].audit_status=="audit_Paused"){
+                auditData.status="Paused";
+                auditData.progressBarflag=false;
+  }
+
   else  if(data[i].start_actual_time && data[i].completion_time){
         auditData.status="Completed";
+        auditData.progressBarflag=false;
     }
     else if(data[i].audit_progress.completed || data[i].audit_progress.total){
         auditData.status=data[i].audit_progress.completed+" completed out of "+data[i].audit_progress.total;
+        auditData.progressBarflag=true;
     }
+    auditData.progressStatus=data[i].audit_progress;
 
 
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
@@ -487,7 +508,7 @@ startAudit() {
                 auditData.lineResolveState=data[i].unresolved>0?(data[i].unresolved+" lines to be re-audited"):"";
             }
 
-            auditData.progressStatus=data[i].audit_progress;
+            
             auditData.button=data[i].audit_button_data;
             
 
@@ -497,6 +518,7 @@ startAudit() {
             auditData.cancelButton=data[i].audit_button_data.audit_cancel_button==='enable'?true:false;
             auditData.deleteButton=data[i].audit_button_data.audit_delete_button==='enable'?true:false;
             auditData.duplicateButton=data[i].audit_button_data.audit_duplicate_button==='enable'?true:false;
+            auditData.pauseButton=(data[i].audit_progress.completed || data[i].audit_progress.total)?true:false;
             auditData.detailsButton=true;
            
             auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:data[i].audit_created_by;

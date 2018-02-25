@@ -1,10 +1,10 @@
-export const BASE_URL = '192.168.14.124';
+export const BASE_URL = '192.168.9.35';
 export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="ws://";
-export const WS_URL = WS_PROTOCOL+BASE_URL+":8888/manager_api/ws";
-//export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
-export const API_URL=PROTOCOL+BASE_URL+":5000/api";
-//export const API_URL=PROTOCOL+BASE_URL+"/api";
+export const WS_PROTOCOL ="wss://";
+//export const WS_URL = WS_PROTOCOL+BASE_URL+":8888/manager_api/ws";
+export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
+//export const API_URL=PROTOCOL+BASE_URL+":5000/api";
+export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
@@ -83,3 +83,6 @@ export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/p
 export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
+
+export const AUDIT_PAUSE_URL=API_URL+"";
+export const AUDIT_DUPLICATE_URL=API_URL+"";

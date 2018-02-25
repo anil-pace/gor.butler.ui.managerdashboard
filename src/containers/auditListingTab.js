@@ -17,6 +17,14 @@
  import AuditStart from '../containers/auditTab/auditStart';
  import ActionDropDown from '../components/actionDropDown/actionDropDown';
  import {modal} from 'react-redux-modal';
+ import AuditAction from '../containers/auditTab/auditAction'; 
+ import {
+    APP_JSON,
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT
+} from '../constants/frontEndConstants';
+import {
+   AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
+} from '../constants/configConstants'; 
 
  class auditListingTab extends React.Component{
 
@@ -69,11 +77,92 @@ _handelClick(field) {
         console.log(field.target.value);
   if(field.target.value=='viewdetails'){
     this.viewAuditDetails(auditId);
+  }else if(field.target.value=='pause'){
+  this._pauseAudit(auditId,'pause');
+  }else if(field.target.value=='cancel'){
+    this._auditAction(auditId,'cancel');
+     }else if(field.target.value=='delete'){
+    this._auditAction(auditId,'delete');
+  }else if(field.target.value=='duplicate'){
+    this._duplicateAudit(auditId);
   }else if(field.target.value=='mannualassignpps'){
     this.startAudit(auditId);
+  }else if(field.target.value=='autoassignpps'){
+    this.startAuditAuto(auditId);
   }
+} 
 
-}  
+startAuditAuto(auditId){
+  let formData={
+    auditId:[auditId],
+    pps_list:[]
+  }
+      let auditData={
+                'url':START_AUDIT_URL,
+                'method':GET,
+                'cause':START_AUDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formData':formData,
+                'token':sessionStorage.getItem('auth_token')
+            }
+      this.props.userRequest(auditData);
+} 
+
+_duplicateAudit(auditId){
+   modal.add('AuditAction', {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      });
+}
+
+_pauseAudit(auditId){
+  let formData=auditId;
+      let auditData={
+                'url':AUDIT_PAUSE_URL,
+                'method':GET,
+                'cause':PAUSE_AUDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formData':formData,
+                'token':sessionStorage.getItem('auth_token')
+            }
+      this.props.userRequest(auditData);
+} 
+
+ _auditAction(auditId,param){
+  let data;
+  let URL;
+  let formdata={};
+if(param==CANCEL_AUDIT){
+  data=<FormattedMessage id='audit.cancel' 
+                        defaultMessage="Are you sure want to cancel {auditId} audit?" description="Text for cancel"
+                        values={{auditId:auditId}}/>
+                      URL=CANCEL_AUDIT_URL;
+                      formdata=auditId;
+                      }
+                      else if(param==DELETE_AUDIT)
+                      {
+  data=<FormattedMessage id='audit.delete' 
+                        defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
+                        values={{auditId:auditId}}/>
+                      URL=DELETE_AUDIT_URL;
+                      formdata=auditId;
+                      }              
+
+      modal.add(AuditAction, {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: false,
+      data:data,
+      param:param,
+      formdata:formdata,  
+      URL:URL
+      });  
+  } 
 
 _findStatus(data)
 {
@@ -116,7 +205,10 @@ _tableBodyData(itemsData){
       rowObject.butoonToSHow.push({name:'Duplicate',value:'duplicate'});
       }
        if(itemsData[i].button['audit_resolve_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Resolve',value:'Resolve'});
+      rowObject.butoonToSHow.push({name:'Resolve',value:'resolve'});
+      }
+       if(itemsData[i].pauseButton){
+      rowObject.butoonToSHow.push({name:'Pause',value:'pause'});
       }
       
       
