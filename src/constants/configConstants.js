@@ -17,7 +17,7 @@ export const AUDIT_URL=API_URL+"/audit";
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
-export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
+export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
 export const PPSLIST_URL=API_URL+"/audit/pps_info";
 export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
 
@@ -86,3 +86,4 @@ export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_avai
 
 export const AUDIT_PAUSE_URL=API_URL+"";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
+export const USERLIST_URL=API_URL+"";

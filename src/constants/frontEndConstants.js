@@ -524,6 +524,8 @@ export const AUDIT_REJECTED_STATUS="Rejected";
 export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";
 export const AUDIT_PARAM_TYPE='audit_param_type';
+export const AUDIT_START_TIME='start_time';
+export const AUDIT_END_TIME='end_time';
 export const AUDIT_PARAM_VALUE='audit_param_value';
 export const AUDIT_STATUS='audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
@@ -773,7 +775,20 @@ export const AUDITDETAIL_URL = "AUDITDETAIL_URL";
 export const UPDATE_STATUS = "UPDATE_STATUS";
 export const PAUSE_AUDIT = "PAUSE_AUDIT";
 export const AUDIT_DUPLICATE = "AUDIT_DUPLICATE";
+export const FROM_DATE = "FROM DATE";
+export const TO_DATE = "TO DATE";
+export const NOT_YET_STARTED = "NOT_YET_STARTED";
+export const TO_BE_RESOLVED = "TO_BE_RESOLVED";
+export const AUDIT_PAUSED = "AUDIT_PAUSED";
+export const AUDIT_DUPLICATED = "AUDIT_DUPLICATED";
+export const AUDIT_DELETED = "AUDIT_DELETED";
+export const SPECIFIC_PPS_ID = "SPECIFIC PPS ID";
+export const AUDIT_USERLIST = "AUDIT_USERLIST";
+export const SETAUDIT_USER = "SETAUDIT_USER";
+export const FILTER_PPS_ID="pps_id";
+export const AUDIT_CREATEDBY='audit_createdBy'
 
+ 
 
 
 

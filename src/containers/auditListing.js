@@ -38,7 +38,7 @@ import {
     AUDIT_STATUS,
     sortAuditHead,
     sortOrder,
-    ALL,
+    ALL,FILTER_PPS_ID,AUDIT_START_TIME,AUDIT_END_TIME,AUDIT_CREATEDBY,
     ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED
 } from '../constants/frontEndConstants';
 import {
@@ -138,17 +138,17 @@ class AuditTab extends React.Component {
          this.props.auditListRefreshed()
      }
     componentWillReceiveProps(nextProps) {
-        let me=this;
+        //let me=this;
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.props.showFilter;
             let obj={},selectedToken;
-            selectedToken=[nextProps.location.query.auditType];
+            selectedToken=(nextProps.location.query.auditType)?(nextProps.location.query.auditType).constructor.name!=='Array'?[nextProps.location.query.auditType]:nextProps.location.query.auditType:[];
             obj.name=mappingArray(selectedToken);
             this.props.setTextBoxStatus(obj);
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
-            console.log(this.state.timerId);
+            
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
         
 //         (function polling(){
@@ -217,8 +217,17 @@ startAudit() {
      */
      _refreshList(query,auditParam) {
         var auditbyUrl;
-        let _query_params=[], _auditParamValue=[], _auditStatuses=[],
-        url=SEARCH_AUDIT_URL + addDateOffSet(new Date(), -30)
+        let _query_params=[], _auditParamValue=[], _auditStatuses=[],_auditCretedBy=[],url="";
+        if(query.fromDate){
+            url=SEARCH_AUDIT_URL+AUDIT_START_TIME+"="+query.fromDate;
+        }else{
+            url=SEARCH_AUDIT_URL +AUDIT_START_TIME+"="+ addDateOffSet(new Date(), -30)
+        }
+         if(query.toDate)
+        {
+            _query_params.push([AUDIT_END_TIME, query.toDate].join("="))
+        }
+        
         if (query.auditType && query.auditType.constructor !== Array) {
             query.auditType=[query.auditType]
         }
@@ -252,8 +261,20 @@ startAudit() {
             _auditStatuses=[].concat.apply([], _flattened_statuses)
             _query_params.push([AUDIT_STATUS,"['"+_auditStatuses.join("','")+"']" ].join("="))
         }
+        if (query.createdBy) {
+            let _flattened_createdBy=[]
+            query.createdBy=query.createdBy.constructor===Array?query.createdBy:[query.createdBy]
+            query.createdBy.forEach(function (createdBy) {
+                _flattened_createdBy.push(createdBy.split("__"))
+            })
+            _auditStatuses=[].concat.apply([], _flattened_createdBy)
+            _query_params.push([AUDIT_CREATEDBY,"['"+_auditCretedBy.join("','")+"']" ].join("="))
+        }
         if (query.taskId) {
             _query_params.push([FILTER_AUDIT_ID, query.taskId].join("="))
+        }
+        if (query.ppsId) {
+            _query_params.push([FILTER_PPS_ID, query.ppsId].join("="))
         }
 
         _query_params.push([GIVEN_PAGE,query.page||1].join("="))
@@ -295,14 +316,18 @@ startAudit() {
         this.props.setAuditSpinner(true);
         this.props.auditfilterState({
             tokenSelected: {"AUDIT TYPE": query.auditType ? query.auditType.constructor=== Array ? query.auditType : [query.auditType] : [ANY],
-            "STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : [ALL]},
+            "STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : [ALL],
+            "CREATED BY": query.createdBy ? query.createdBy.constructor=== Array ? query.createdBy : [query.createdBy] : [ALL]},
             searchQuery: {
                 'SPECIFIC SKU ID':query.skuId||'',
                 'SPECIFIC LOCATION ID':query.locationId||'',
-                'AUDIT TASK ID':query.taskId||''
+                'AUDIT TASK ID':query.taskId||'',
+                'SPECIFIC PPS ID':query.ppsId||'',
+                'FROM DATE':query.fromDate||'',
+                'TO DATE':query.toDate||''
             },
             "PAGE": query.page || 1,
-            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
+            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]}
         })
         this.props.setAuditQuery({query:query})
         this.props.getPageData(paginationData);
@@ -311,7 +336,7 @@ startAudit() {
      *
      */
      _clearFilter() {
-        hashHistory.push({pathname: "/audit", query: {}})
+        hashHistory.push({pathname: "/auditlisting", query: {}})
     }
 
 
@@ -361,7 +386,7 @@ startAudit() {
 
         
             
-            //auditData.pps_id=data[i].pps_id!==null?"PPS "+data[i].pps_id:"";
+            
 
             auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id.length==1?"PPS "+data[i].pps_id:"Multi PPS");
 
@@ -563,93 +588,93 @@ startAudit() {
         ;
     }
 
-    handlePageClick(data) {
-        var url, appendTextFilterUrl="", makeDate, inc=0, value=[], paramValue="",
-        selectedAuditType="",_queryParams=[];
-        var currentDate=new Date();
-        var filterApplied=false;
-        var skuText="", arr=[], selectvalue;
-        makeDate=addDateOffSet(currentDate, -30);
+//     handlePageClick(data) {
+//         var url, appendTextFilterUrl="", makeDate, inc=0, value=[], paramValue="",
+//         selectedAuditType="",_queryParams=[];
+//         var currentDate=new Date();
+//         var filterApplied=false;
+//         var skuText="", arr=[], selectvalue;
+//         makeDate=addDateOffSet(currentDate, -30);
 
-        if (!data) {
-            /**
-             * After clearing the applied filter,
-             * It'll set the default state to the filters.
-             */
-             data={}
-             this.props.auditfilterState({
-                tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL]},
-                searchQuery: {},
-                defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL]}
-            })
-             this.props.toggleAuditFilter(false)
-             this.props.showTableFilter(false)
+//         if (!data) {
+//             /**
+//              * After clearing the applied filter,
+//              * It'll set the default state to the filters.
+//              */
+//              data={}
+//              this.props.auditfilterState({
+//                 tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]},
+//                 searchQuery: {},
+//                 defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]}
+//             })
+//              this.props.toggleAuditFilter(false)
+//              this.props.showTableFilter(false)
 
-         }
-//If user select both we are making it Any for backend support
-if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
-    selectvalue=(data.tokenSelected[AUDIT_TYPE].length=== 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
-    skuText=AUDIT_PARAM_TYPE + selectvalue;
-    _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
-    selectedAuditType=this._mappingString(selectvalue);
+//          }
+// //If user select both we are making it Any for backend support
+// if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
+//     selectvalue=(data.tokenSelected[AUDIT_TYPE].length=== 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
+//     skuText=AUDIT_PARAM_TYPE + selectvalue;
+//     _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
+//     selectedAuditType=this._mappingString(selectvalue);
 
-//Pushing the audit type into array to make it generic
-for (let propt in data.searchQuery) {
-    if (selectedAuditType=== 'any') {
-        (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
-    }
-    else {
-        (data.searchQuery[propt] !== "" && propt== selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
-    }
+// //Pushing the audit type into array to make it generic
+// for (let propt in data.searchQuery) {
+//     if (selectedAuditType=== 'any') {
+//         (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
+//     }
+//     else {
+//         (data.searchQuery[propt] !== "" && propt== selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
+//     }
 
-}
-//Formatting the param value for single and multiple type       
-if (value.length) {
-    paramValue=(value.length > 1 || selectvalue=== ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
-    _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
-    skuText=skuText + AUDIT_PARAM_VALUE + paramValue;
-}
-}
-//formating the audit status 
-if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
-    let statusToken=data.tokenSelected["STATUS"];
-    skuText=skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
-    _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
-}
+// }
+// //Formatting the param value for single and multiple type       
+// if (value.length) {
+//     paramValue=(value.length > 1 || selectvalue=== ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
+//     _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
+//     skuText=skuText + AUDIT_PARAM_VALUE + paramValue;
+// }
+// }
+// //formating the audit status 
+// if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
+//     let statusToken=data.tokenSelected["STATUS"];
+//     skuText=skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
+//     _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
+// }
 
-if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
-    appendTextFilterUrl=FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
-    _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
-    data.selected=1;
-    filterApplied=true;
-}
+// if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
+//     appendTextFilterUrl=FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
+//     _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
+//     data.selected=1;
+//     filterApplied=true;
+// }
 
 
-if (data.url=== undefined) {
-    data.selected=data.selected ? data.selected : 1;
-    if (data.columnKey && data.sortDir) {
-        _queryParams.push(sortAuditHead[data.columnKey])
-        _queryParams.push(sortOrder[data.sortDir])
-    }
-    _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
-    _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
-    url=[SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
-}
-else {
-    url=data.url;
-}
-this.setState({selected_page: data.selected});
-let paginationData={
-    'url': url,
-    'method': GET,
-    'cause': AUDIT_RETRIEVE,
-    'token': this.props.auth_token,
-    'contentType': APP_JSON
-}
-this.props.setAuditSpinner(true);
-this.props.filterApplied(filterApplied);
-this.props.getPageData(paginationData);
-}
+// if (data.url=== undefined) {
+//     data.selected=data.selected ? data.selected : 1;
+//     if (data.columnKey && data.sortDir) {
+//         _queryParams.push(sortAuditHead[data.columnKey])
+//         _queryParams.push(sortOrder[data.sortDir])
+//     }
+//     _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
+//     _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
+//     url=[SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
+// }
+// else {
+//     url=data.url;
+// }
+// this.setState({selected_page: data.selected});
+// let paginationData={
+//     'url': url,
+//     'method': GET,
+//     'cause': AUDIT_RETRIEVE,
+//     'token': this.props.auth_token,
+//     'contentType': APP_JSON
+// }
+// this.props.setAuditSpinner(true);
+// this.props.filterApplied(filterApplied);
+// this.props.getPageData(paginationData);
+// }
 
 _setFilter() {
     var newState=!this.props.showFilter;
@@ -753,8 +778,8 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     <div className="gor-audit-filter-create-wrap">
     <div className="gor-button-wrap">
     <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
-    <div className="gor-filter-add-token"/>
-    <FormattedMessage id="audit.table.buttonLable"
+    <div className="gor-filter-add-token-white"/>
+    <FormattedMessage id="audit.table.createAudit"
     description="button label for audit create"
     defaultMessage="CREATE AUDIT"/>
     </button>

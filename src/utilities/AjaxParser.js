@@ -16,7 +16,7 @@ import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit,getAuditDetails} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails,getAuditUserList} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -88,7 +88,7 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
-    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE
+    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -913,6 +913,15 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setAuditSpinner(false));
             store.dispatch(setAuditRefresh(true));
             break;
+
+            case AUDIT_USERLIST:
+            //let auditpps = [];
+            if (res) {
+               res=['raja','rohit','dsfdsg','ewrewr','hjhjhhj'] ;
+            store.dispatch(getAuditUserList(res));
+            }
+            break;
+            
         case GET_PPSLIST:
             let auditpps = [];
             if (res) {

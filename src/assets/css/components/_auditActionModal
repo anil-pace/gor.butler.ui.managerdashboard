@@ -8,15 +8,16 @@
     clear: both;
     margin-top:200px;
     .gor-logout-text{
-		margin:auto;
-		padding:calculateRem(30px);
-		min-height:5.375rem;
-		font-size: 20px;
-		color: #333333;
+		margin: auto;
+    	min-height: 5.375rem;
+    	color: #333333;
+    	padding-top: 50px;
+    	padding-bottom: 25px;
+    	padding-left: 40px
 	}
 	.gor-logout-bottom{
 		text-align:right;
-		margin-right:calculateRem(10px);
+		margin-right:calculateRem(16px);
 			.gor-logout-btn{
 				font-family:'Source Sans Pro Bold', sans-serif;
 			    min-width:calculateRem(113px);

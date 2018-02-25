@@ -15,6 +15,7 @@ import {
     SETAUDIT_PPS_CHECKED,
     SETOTHER_PPS_CHECKED,
     UPDATE_STATUS,
+    SETAUDIT_USER,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
 } from '../constants/frontEndConstants'
 
@@ -70,6 +71,13 @@ export function getPPSAudit(data) {
         data
     }
 }
+export function getAuditUserList(data) {
+    return {
+        type: SETAUDIT_USER,
+        data
+    }
+}
+
 export function getAuditDetails(data) {
     return {
         type: SETAUDIT_DETAILS,

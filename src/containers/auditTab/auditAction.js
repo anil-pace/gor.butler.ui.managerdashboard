@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl'; 
 import {userRequest} from '../../actions/userActions';
-import {PPSLIST_URL, GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';       
+import {PPSLIST_URL, GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST ,DELETE_AUDIT,CANCEL_AUDIT} from '../../constants/frontEndConstants';       
 
 
 class AuditAction extends React.Component{
@@ -36,10 +36,10 @@ class AuditAction extends React.Component{
     render()
     {
       let button='';
-      if(this.props.param=='cancel'){
+      if(this.props.param==CANCEL_AUDIT){
 button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
                         defaultMessage="PROCEDED" description="Text for proceed button"/></button>
-      }else if(this.props.param=='delete'){
+      }else if(this.props.param==DELETE_AUDIT){
 button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
                         defaultMessage="DELET" description="Text for delte button"/></button>
       }else if(this.props.param=='ppsChangeStart'){
@@ -50,7 +50,7 @@ button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMess
         
           <div className='gor-auditActionModal'>
             <div className='gor-logout-text'>
-              <div className='gor-question gor-align-middle'> </div>
+              <div className='gor-question gor-align-middle' style={{'float':'left'}}> </div>
               
                         {this.props.data}
                       

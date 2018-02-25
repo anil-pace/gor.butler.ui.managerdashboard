@@ -85,6 +85,11 @@
      background-color: #efefef;
 }
 
+.dividebyTwo{
+    width:45%;
+    float:left;
+}
+
 .gor-filter-input-text{
 	font-size: 14px;
     font-weight: 600;
@@ -133,6 +138,7 @@
     padding-bottom: 5px;
     padding-left: 20px;
     width: 88%;
+    clear:both;
 }
 
 .gor-filter-token-section-h1 {

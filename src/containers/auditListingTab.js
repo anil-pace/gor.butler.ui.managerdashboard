@@ -73,16 +73,14 @@ startAudit(auditID) {
 
 _handelClick(field) {
   let auditId=field.currentTarget.id;
-        console.log(auditId);
-        console.log(field.target.value);
   if(field.target.value=='viewdetails'){
     this.viewAuditDetails(auditId);
   }else if(field.target.value=='pause'){
   this._pauseAudit(auditId,'pause');
   }else if(field.target.value=='cancel'){
-    this._auditAction(auditId,'cancel');
+    this._auditAction(auditId,CANCEL_AUDIT);
      }else if(field.target.value=='delete'){
-    this._auditAction(auditId,'delete');
+    this._auditAction(auditId,DELETE_AUDIT);
   }else if(field.target.value=='duplicate'){
     this._duplicateAudit(auditId);
   }else if(field.target.value=='mannualassignpps'){
