@@ -28,7 +28,7 @@ case "$1" in
 	chmod u+rw ./butler_md_alpha-$RELVSN
 	sed -i --follow-symlinks "s/Version:.*$/Version: $RELVSN/" butler_md_alpha-$RELVSN/DEBIAN/control
 	fakeroot dpkg-deb --build butler_md_alpha-$RELVSN
-	rm -rf ./butler_md_alpha-$RELVSN
+	#rm -rf ./butler_md_alpha-$RELVSN
 	;;
     *)
         echo "Usage: $SCRIPT {run}"
