@@ -19,7 +19,8 @@ import {
     UPDATE_STATUS,
     SETAUDIT_USER,
     AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY,
-    CREATE_AUDIT_REQUEST
+    CREATE_AUDIT_REQUEST,
+    SET_AUDIT_EDIT_DATA
 
 } from '../constants/frontEndConstants'
 
@@ -188,6 +189,13 @@ export function setcheckedPPS(data){
 export function createAuditAction(data){
     return {
         type:CREATE_AUDIT_REQUEST,
+        data
+    }
+}
+
+export function setAuditEditData(data){
+    return {
+        type:SET_AUDIT_EDIT_DATA,
         data
     }
 }

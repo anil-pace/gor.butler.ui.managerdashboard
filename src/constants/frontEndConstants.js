@@ -790,16 +790,19 @@ export const PAUSE_AUDIT = "PAUSE_AUDIT";
 export const AUDIT_DUPLICATE = "AUDIT_DUPLICATE";
 export const FROM_DATE = "FROM DATE";
 export const TO_DATE = "TO DATE";
-export const NOT_YET_STARTED = "NOT_YET_STARTED";
-export const TO_BE_RESOLVED = "TO_BE_RESOLVED";
-export const AUDIT_PAUSED = "AUDIT_PAUSED";
-export const AUDIT_DUPLICATED = "AUDIT_DUPLICATED";
-export const AUDIT_DELETED = "AUDIT_DELETED";
+export const NOT_YET_STARTED = "audit_created";
+export const TO_BE_RESOLVED = "to_be_resolved";//pending
+export const AUDIT_PAUSED = "audit_paused";
+export const AUDIT_DUPLICATED = "duplicated";
+export const AUDIT_DELETED = "audit_deleted";
 export const SPECIFIC_PPS_ID = "SPECIFIC PPS ID";
 export const AUDIT_USERLIST = "AUDIT_USERLIST";
 export const SETAUDIT_USER = "SETAUDIT_USER";
 export const FILTER_PPS_ID="pps_id";
-export const AUDIT_CREATEDBY='audit_createdBy'
+export const AUDIT_CREATEDBY='audit_created_by';
+export const AUDIT_EDIT='AUDIT_EDIT';
+export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
+
 
  
 

@@ -8,7 +8,7 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,SETAUDIT_DETAILS,
   VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
   TEXTBOX_STATUS,
   AUDIT_LIST_REFRESHED,SETAUDIT_CHECKED,SETAUDIT_PPS_CHECKED,SETOTHER_PPS_CHECKED,UPDATE_STATUS,SETAUDIT_USER,
-  CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
+  CREATE_AUDIT_REQUEST,SET_AUDIT_EDIT_DATA} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -128,13 +128,23 @@ export  function auditInfo(state={},action){
     case CREATE_AUDIT_REQUEST:
            return Object.assign({}, state, {
               "auditCreationSuccessful": action.data.audit_id ? !state.auditCreationSuccessful : state.auditCreationSuccessful
-          })          
+          }) 
+  case SET_AUDIT_EDIT_DATA:
+  let processedDataSKU1 = processValidationDataSKU(action.data);
+          return Object.assign({}, state, {
+             //"auditEditData": processValidationDataSKU(action.data.audit_param_value,action.type)//action.data
+            "auditEditData":processedDataSKU1              //"skuAttributes" : processedDataSKU1,
+              // "hasDataChanged":!state.hasDataChanged,
+              // "auditSpinner":false
+          })
+                   
     default:
       return state
   }
 }
 
-function processValidationDataSKU(data){
+function processValidationDataSKU(data1,param){
+  let data=data1.audit_sku_validation_response;
   var processedData=[],
   skuList = data.sku_list,
   status = data.status,
@@ -145,10 +155,12 @@ function processValidationDataSKU(data){
 
   for(let i=0,len = skuList.length; i< len ;i++){
     let tuple ={};
-    tuple.skuName = skuList[i],
+    tuple.skuName = skuList[i];
+    
     tuple.status = status[statusList[i]];
     totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
     totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    
     let attributeList = attList[i];
     let categoryList = [];
     for(let key in attributeList){

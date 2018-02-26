@@ -17,10 +17,11 @@
  import AuditStart from '../containers/auditTab/auditStart';
  import ActionDropDown from '../components/actionDropDown/actionDropDown';
  import {modal} from 'react-redux-modal';
- import AuditAction from '../containers/auditTab/auditAction'; 
+ import AuditAction from '../containers/auditTab/auditAction';
+ import CreateAudit from '../containers/auditTab/createAudit';  
  import {
     APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST
 } from '../constants/frontEndConstants';
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
@@ -80,15 +81,34 @@ _handelClick(field) {
   }else if(field.target.value=='cancel'){
     this._auditAction(auditId,CANCEL_AUDIT);
      }else if(field.target.value=='delete'){
-    this._auditAction(auditId,DELETE_AUDIT);
+    //this._auditAction(auditId,DELETE_AUDIT);//changes
+    this._auditAction(auditId,CANCEL_AUDIT);
   }else if(field.target.value=='duplicate'){
-    this._duplicateAudit(auditId);
+    this._duplicateAudit(auditId,'duplicate');
+  }else if(field.target.value=='edit'){
+    this._editAudit(auditId,'edit');
   }else if(field.target.value=='mannualassignpps'){
     this.startAudit(auditId);
   }else if(field.target.value=='autoassignpps'){
     this.startAuditAuto(auditId);
   }
-} 
+}
+
+_editAudit(auditId,param){
+ modal.add(CreateAudit, {
+        title: '',
+        size: 'large',
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            param:param,
+            auditId:auditId
+            //.. all what you put in here you will get access in the modal props ;),
+        });
+}
+
+
+
+
 
 startAuditAuto(auditId){
   let formData={
@@ -107,8 +127,8 @@ startAuditAuto(auditId){
       this.props.userRequest(auditData);
 } 
 
-_duplicateAudit(auditId){
-   modal.add('AuditAction', {
+_duplicateAudit(auditId,param){
+   modal.add('CreateAudit', {
         title: '',
         size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -117,14 +137,16 @@ _duplicateAudit(auditId){
 }
 
 _pauseAudit(auditId){
-  let formData=auditId;
+  let formData={
+    audit_id:auditId
+  }
       let auditData={
                 'url':AUDIT_PAUSE_URL,
-                'method':GET,
+                'method':POST,
                 'cause':PAUSE_AUDIT,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'formData':formData,
+                'formdata':formData,
                 'token':sessionStorage.getItem('auth_token')
             }
       this.props.userRequest(auditData);
@@ -208,7 +230,9 @@ _tableBodyData(itemsData){
        if(itemsData[i].pauseButton){
       rowObject.butoonToSHow.push({name:'Pause',value:'pause'});
       }
-      
+      if(itemsData[i].button['audit_start_button']=='enable'){
+      rowObject.butoonToSHow.push({name:'Edit',value:'edit'});
+      }
       
       
 

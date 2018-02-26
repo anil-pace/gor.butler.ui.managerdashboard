@@ -17,10 +17,21 @@ class AuditAction extends React.Component{
     this.props.removeModal();
   }
   _confirm() {
+    let URL,method;
     let formData=this.props.formdata;
+    if(this.props.param==DELETE_AUDIT){
+      URL=this.props.URL+formData;
+      method="DELETE"
+    }
+    else
+    {
+      URL=this.props.URL+formData;
+      method="PUT"
+    }
+    
       let auditData={
-                'url':this.props.URL,
-                'method':GET,
+                'url':URL,
+                'method':method,
                 'cause':this.props.param,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,

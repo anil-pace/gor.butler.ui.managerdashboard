@@ -1,10 +1,12 @@
 import React  from 'react';
+import ReactDOM from 'react-dom';
 class ActionDropDown extends React.Component{
 	
 	constructor(props) 
 	{
 	   super(props);
         this.state={visibleMenu:false}; 
+        this._handleDocumentClick =  this._handleDocumentClick.bind(this);
     }
     _handleClick(field){
     	let currentStatus=this.state.visibleMenu;
@@ -13,6 +15,23 @@ class ActionDropDown extends React.Component{
       this.props.clickOptionBack(field);
 
 	}	
+
+  _handleDocumentClick() {
+     if (!ReactDOM.findDOMNode(this).contains(event.target)) {
+       this.setState({visibleMenu: false});
+     }
+ }
+
+
+  componentDidMount(){
+      document.addEventListener('click',this._handleDocumentClick,false);
+  }
+
+  componentWillUnmount() {
+      document.removeEventListener("click", this._handleDocumentClick,false)
+  }
+
+
 	_optionClick(obj){
 		let val=false;
 		this.setState({visibleMenu: val});

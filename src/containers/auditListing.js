@@ -5,6 +5,7 @@ import { FILTER_AUDIT_ID,CANCEL_AUDIT_URL} from '../constants/configConstants';
 import {getAuditData, setAuditRefresh,auditListRefreshed,setTextBoxStatus,cancelAudit,setAuditQuery} from '../actions/auditActions';
 import AuditTable from './auditListingTab';
 import {getPageData} from '../actions/paginationAction';
+import {userRequest} from '../actions/userActions';
 import StartAudit from './auditTab/startAudit';
  import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
 import {GTable} from '../components/gor-table-component/index'
@@ -249,7 +250,7 @@ startAudit() {
                 _auditParamValue.push(query.locationId)
             }
 
-            _query_params.push([AUDIT_PARAM_VALUE, "['"+_auditParamValue.join("','")+"']"].join("="))
+            _query_params.push([AUDIT_PARAM_VALUE, _auditParamValue.join("','")].join("="))
         }
 
         if (query.status) {
@@ -267,7 +268,7 @@ startAudit() {
             query.createdBy.forEach(function (createdBy) {
                 _flattened_createdBy.push(createdBy.split("__"))
             })
-            _auditStatuses=[].concat.apply([], _flattened_createdBy)
+            _auditCretedBy=[].concat.apply([], _flattened_createdBy)
             _query_params.push([AUDIT_CREATEDBY,"['"+_auditCretedBy.join("','")+"']" ].join("="))
         }
         if (query.taskId) {
@@ -394,20 +395,17 @@ startAudit() {
             if (data[i].audit_status=="audit_created") {
                 auditData.status="Not yet Started";
                 auditData.progressBarflag=false;
-  } else if(data[i].audit_status=="audit_cancel"){
-                auditData.status="Cancelling";
+  } else if(data[i].audit_status=="audit_cancelled"){
+                auditData.status="Cancelled";
                 auditData.progressBarflag=false;
   }
-    else if(data[i].audit_status=="audit_Pause"){
-                auditData.status="Pausing....";
-                auditData.progressBarflag=false;
-  }
+ 
    else if(data[i].audit_button_data.audit_cancel_button==='enable'){
                 auditData.status=auditCancelled;
                 auditData.progressBarflag=false;
   }
 
-    else if(data[i].audit_status=="audit_Paused"){
+    else if(data[i].audit_status=="audit_paused"){
                 auditData.status="Paused";
                 auditData.progressBarflag=false;
   }
@@ -735,7 +733,7 @@ render() {
     var auditData=this._processAuditData();
 
 
-renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.props.setCheckedAudit} checkedAudit={this.props.checkedAudit}/>
+renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.props.setCheckedAudit} checkedAudit={this.props.checkedAudit} userRequest={this.props.userRequest}/>
     // renderTab=<AuditTable items={auditData} 
     // intlMessg={this.props.intlMessages}
     // timeZoneString={headerTimeZone}
@@ -909,6 +907,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         setCheckedAudit: function (data) {
             dispatch(setCheckedAudit(data))
+        },
+        userRequest: function (data) {
+            dispatch(userRequest(data))
         }
 
     }

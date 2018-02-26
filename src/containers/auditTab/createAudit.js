@@ -2,8 +2,11 @@ import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION,CREATE_AUDIT_REQUEST } from '../../constants/frontEndConstants';
-import { AUDIT_URL,AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,SKU_VALIDATION_URL} from '../../constants/configConstants';
+import { ERROR,SKU,LOCATION,CREATE_AUDIT,APP_JSON,POST, GET, VALIDATE_SKU_ID,
+  VALIDATE_LOCATION_ID, VALIDATE_LOCATION_ID_CSV,VALID_SKU,VALID_LOCATION, 
+  NO_ATTRIBUTE_SKU, SKU_NOT_EXISTS,LOCATION_NOT_EXISTS,NO_SKU_VALIDATION,
+  NO_LOCATION_VALIDATION,WATING_FOR_VALIDATION,CREATE_AUDIT_REQUEST,AUDIT_EDIT } from '../../constants/frontEndConstants';
+import { AUDIT_URL,AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,SKU_VALIDATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL,PPSLIST_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import { locationStatus, skuStatus } from '../../utilities/fieldCheck';
 import SearchDropdown from '../../components/dropdown/searchDropdown';
@@ -110,6 +113,26 @@ class CreateAudit extends React.Component{
       
       
   }
+
+
+  componentDidMount(){
+    if(this.props.param=='edit' || this.props.param=='duplicate' )
+
+    {
+    let formData=this.props.auditId;
+      let auditData={
+                'url':PPSLIST_URL,//this.props.param=='edit'?AUDIT_EDIT_URL:AUDIT_DUPLICATE_URL,
+                'method':GET,
+                'cause':AUDIT_EDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formData':formData,
+                'token':sessionStorage.getItem('auth_token')
+            }
+      this.props.makeAjaxCall(auditData);
+    }
+  }
+
   componentWillUnmount()
   {
     
@@ -121,13 +144,15 @@ class CreateAudit extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
+    var a=nextProps.auditEditData;
     if(!nextProps.auth_token)
     {
       this._removeThisModal();
     }
-    if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+    //if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+
       let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes)),
+      skuAttributes = JSON.parse(JSON.stringify(nextProps.auditEditData)),
       validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
       validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
       validationDone = Object.keys(locationAttributes).length ? true : false,
@@ -149,7 +174,7 @@ class CreateAudit extends React.Component{
       auditSpinner:nextProps.auditSpinner
 
     })
-    }
+    //}
     if(this.props.auditSpinner !== nextProps.auditSpinner){
       this.setState({
         auditSpinner:nextProps.auditSpinner
@@ -1148,7 +1173,8 @@ function mapStateToProps(state, ownProps){
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
-      auditSpinner: state.spinner.auditSpinner || false
+      auditSpinner: state.spinner.auditSpinner || false,
+      auditEditData:state.auditInfo.auditEditData 
   };
 }
 

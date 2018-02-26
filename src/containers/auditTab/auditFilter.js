@@ -52,7 +52,7 @@ class AuditFilter extends React.Component {
 
      componentDidMount(){
         let userData={
-                'url':PPSLIST_URL,//USERLIST_URL,
+                'url':USERLIST_URL,
                 'method':GET,
                 'cause':AUDIT_USERLIST,
                 'contentType':APP_JSON,
