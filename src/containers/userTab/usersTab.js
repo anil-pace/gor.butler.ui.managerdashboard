@@ -135,18 +135,6 @@ class UsersTab extends React.Component {
         }
     }
 
-    componentDidMount() {
-        let userData = {
-            'url': ROLE_URL,
-            'method': GET,
-            'cause': GET_ROLES,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        this.props.userRequest(userData);
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
