@@ -1,4 +1,34 @@
 .gor-audit-create{
+  .note-message{
+    font-size: 12px;
+    padding: 5px 10px;
+    color: #7C7C7C;
+  }
+  .audit-footer{
+    margin:auto;
+    width:80%;
+    overflow:hidden;
+    border-top:1px solid #DCDCDC;
+    .gor-create-audit-btn{
+      float:right;
+      &.disabled{
+      background: #FFD2C2;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    }
+    
+  }
+  .sku-search{
+    float:right;
+    padding:5px 8px;
+    border: 1px solid #eee;
+    input{
+      border:none;
+    }
+  }
   .new-audit{
     >.tabs{
       margin-top:40px;
@@ -17,12 +47,7 @@
       -webkit-animation-fill-mode: both;
       animation-fill-mode: both;
   }
-  .gor-valid-row{
-    > div:first-child{
-        width:48%;
-        display:inline-block;
-    }
-  }
+  
   .gor-sel-att-wrap{
     width:44%;
     display:inline-block;
@@ -253,7 +278,7 @@
     &.after-validation{
       display:inline-block;
       vertical-align:middle;
-      width:80%;
+      width:50%;
     }
     &.error-tuple{
       border: 1px solid #D8595E;
@@ -275,6 +300,17 @@
       }
     }
 }
+.gor-valid-row{
+    > div:first-child{
+        width:48%;
+        display:inline-block;
+    }
+    &.has-error{
+       > div:first-child{
+        width:100%;
+    }
+    }
+  }
 .error-message{
     font-size: 14px;
     margin-left: 10px;
@@ -297,6 +333,8 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
+    max-height: 210px;
+    overflow: auto;
     .gor-audit-location-wrap{
     margin-top:10px;
     }
