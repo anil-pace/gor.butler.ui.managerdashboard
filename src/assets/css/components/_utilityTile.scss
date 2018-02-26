@@ -3,7 +3,6 @@
   height: 20%;
   border-bottom:1px solid #AAAAAA;
   .gor-utility-tile-icon {
-    display: inline-block;
     float: right;
     padding-top: 22px;
     padding-right: 24px;
@@ -91,14 +90,18 @@
   font-size: 0;
   position: relative;
   vertical-align: top;
-  height: 568px;
-  width: 434px;
+  height: 638px;
+  width: 406px;
   .gor-utility-tile-h1{
     height: initial;
   }
+  .gor-utility-tile-body {
+    height: 100%;
+}
   .gor-modal-content{
     width: initial;
     min-height: initial;
+    height: 330px;
   }
   .gor-audit-create .gor-audit-form {
     width: initial;
@@ -315,8 +318,6 @@
   bottom: 32px;
   cursor: pointer;
   left: 30px;
-  width: 150px;
-  height: 32px;
   display: inline;
   .gor-csvUpload {
     min-width: 125px;

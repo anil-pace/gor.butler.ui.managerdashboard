@@ -659,7 +659,7 @@ class SkuSelector extends React.Component {
 			<div className="gor-modal-content gor-audit-create" style={{visibility:this.state.visibility}}>
 				<div className='gor-modal-body'>
 					<div className='gor-audit-form new-audit'>
-						<GorTabs defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
+						<GorTabs defaultActiveTabIndex={0} tabClass={"tabs-audit"} >
 							<Tab tabName={auditBySkuMessg} iconClassName={'icon-class-0'}
 								linkClassName={'link-class-0'}>
 								<div>
@@ -764,7 +764,6 @@ class SkuSelector extends React.Component {
 									</div>
 								</div>
 							</Tab>
-
 							<Tab tabName={auditByLocationMessg} iconClassName={'icon-class-0'}
 								linkClassName={'link-class-0'} internalTab={false} >
 							</Tab>
