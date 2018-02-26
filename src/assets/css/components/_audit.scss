@@ -21,17 +21,7 @@
     margin-right: auto;
 }
 
-.gor-audit-input-wrap {
-    display: inline-block;
-    width: 42%;
-    height: 35px;
-    border-radius: 3px;
-    border: solid 1px #aaaaaa;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    padding-left: 10px;
-    margin-top: 20px;
-}
+
 
 .gor-audit-input {
     text-align: left;
@@ -74,20 +64,20 @@
   
   }
   .gor-audit-create-btn {
-  height: 35px;
+  width: 141px;
   border-radius: 3px;
   background-color: #f36f36;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: 'Source Sans Pro';
   font-size: 14px;
-  font-weight: 600;
-  text-align: left;
+  font-weight: bold;
   color: #ffffff;
-  padding-left: 14px;
-    padding-right: 14px;
-    vertical-align: sub;
-    cursor: pointer;
+  padding-left: 28px;
+  padding-right: 14px;
+  vertical-align: sub;
+  cursor: pointer;
 }
+
 .gor-audit-filter-create-wrap {
   display: inline-block;
     float: right;

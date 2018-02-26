@@ -47,7 +47,7 @@
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "Create New Task"
+    "defaultMessage": "CREATE AUDIT"
   },
   {
     "id": "audit.table.filterLabel",

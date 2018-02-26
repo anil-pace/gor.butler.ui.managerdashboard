@@ -1351,13 +1351,13 @@
   {
     "id": "audit.invalid.sku",
     "description": "Text for invalid SKU ID",
-    "defaultMessage": "Please enter a valid SKU Number",
+    "defaultMessage": "Invalid SKU",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "audit.invalid.location",
     "description": "Text for invalid location ID",
-    "defaultMessage": "Please enter a valid location Number",
+    "defaultMessage": "Invalid Location",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1927,7 +1927,7 @@
   {
     "id": "audit.table.buttonLable",
     "description": "button label for audit create",
-    "defaultMessage": "Create New Task",
+    "defaultMessage": "CREATE AUDIT",
     "filepath": "./src/containers/auditTab.js"
   },
   {
@@ -2160,6 +2160,12 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.valid.location",
+    "description": "text for valid location",
+    "defaultMessage": "Location valid",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.invalid.sku",
     "description": "text for invalid sku",
     "defaultMessage": "Please enter correct SKU number",
@@ -2174,37 +2180,37 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task",
+    "defaultMessage": "Create new audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.subheading",
-    "description": "Subheading for add audit",
-    "defaultMessage": "Select and enter details below to create a new audit task",
+    "id": "audit.select.sku.value",
+    "description": "Name of audit",
+    "defaultMessage": "Enter audit name:",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.auditdetails.heading",
-    "description": "Text for audit details heading",
-    "defaultMessage": "Select audit type by",
+    "id": "audit.select.sku.mode",
+    "description": "Text for sku mode",
+    "defaultMessage": "Select mode of input:",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.typedetails.sku",
-    "description": "Text for sku",
-    "defaultMessage": "Audit by SKU code",
+    "id": "audits.enterSkus",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.typedetails.location",
-    "description": "Text for location",
-    "defaultMessage": "Audit by Location code",
+    "id": "audits.csvUpload",
+    "description": "Button for csv upload",
+    "defaultMessage": "Upload CSV file",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.add.sku.heading",
-    "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code",
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2214,28 +2220,112 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.dropdown.heading",
-    "description": "Text for dropdown heading",
-    "defaultMessage": "Choose Box Id (Optional)",
+    "id": "audits.enterLocation",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter Location",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location",
+    "defaultMessage": "Enter Location and validate",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Format: (XXX.X.X.XX)",
+    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
     "id": "audits.add.password.button",
     "description": "Text for add audit button",
-    "defaultMessage": "Create audit",
+    "defaultMessage": "CREATE AUDIT",
     "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.valid.sku",
+    "description": "text for valid sku",
+    "defaultMessage": "SKU confirmed",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "text for invalid sku",
+    "defaultMessage": "Invalid SKU",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.noAtrributes.sku",
+    "description": "text for valid sku with no attributed",
+    "defaultMessage": "SKU confirmed but no Box Id found",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.heading",
+    "description": "Heading for add audit",
+    "defaultMessage": "Create new audit",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.select.sku.value",
+    "description": "Name of audit",
+    "defaultMessage": "Enter audit name:",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.select.sku.mode",
+    "description": "Text for sku mode",
+    "defaultMessage": "Select mode of input:",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audits.enterSkus",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter SKU",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audits.csvUpload",
+    "description": "Button for csv upload",
+    "defaultMessage": "Upload CSV file",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audits.validateSKU",
+    "description": "Text for validate sku button",
+    "defaultMessage": "Validate",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Subtext for enter sku",
+    "defaultMessage": "Use copy and paste if you have muktiple sku numbers",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audits.enterLocation",
+    "description": "Button for entering skus",
+    "defaultMessage": "Enter Location",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Text for location heading",
+    "defaultMessage": "Enter Location and validate",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Subtext for enter location",
+    "defaultMessage": "Use copy and paste if you have multiple MSU and Slot numbers",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Text for add audit button",
+    "defaultMessage": "Create audit",
+    "filepath": "./src/containers/auditTab/createNewTask.js"
   },
   {
     "id": "audit.delete.heading",
@@ -2871,6 +2961,102 @@
     "description": "Text for logout button",
     "defaultMessage": "Log out now",
     "filepath": "./src/containers/logoutTab.js"
+  },
+  {
+    "id": "auditdetail.created.status",
+    "defaultMessage": "Created",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.pending.status",
+    "defaultMessage": "Pending",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.progress.status",
+    "defaultMessage": "In Progress",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "defaultMessage": "Audited",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.sku.prefix",
+    "defaultMessage": "SKU",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.location.prefix",
+    "defaultMessage": "Location",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditPendingApp.prefix",
+    "defaultMessage": "Issues found",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditRejected.prefix",
+    "defaultMessage": "Rejected",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditResolved.prefix",
+    "defaultMessage": "Resolved",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditReaudited.prefix",
+    "defaultMessage": "Re-audited",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditCancelled.prefix",
+    "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditdetail.auditCancellingText.text",
+    "defaultMessage": "Cancelling...",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "audit.table.heading",
+    "description": "Heading for audit table",
+    "defaultMessage": "Audit Tasks",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "audit.table.bulkaudit",
+    "description": "button label for start bulk audit",
+    "defaultMessage": "Start Bulk Audit(s)",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "audit.table.buttonLable",
+    "description": "button label for audit create",
+    "defaultMessage": "CREATE AUDIT",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditList.filter.search.bar",
+    "description": "total results for filter search bar",
+    "defaultMessage": "{total} results found",
+    "filepath": "./src/containers/newauditTab.js"
+  },
+  {
+    "id": "auditList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all results",
+    "filepath": "./src/containers/newauditTab.js"
   },
   {
     "id": "notification.table.description",
@@ -5080,6 +5266,12 @@
     "id": "reports.tab.heading",
     "description": "reports tab",
     "defaultMessage": "REPORTS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "newaudit.tab.heading",
+    "description": "new audit tab",
+    "defaultMessage": "NEW AUDIT",
     "filepath": "./src/containers/tabs.js"
   },
   {

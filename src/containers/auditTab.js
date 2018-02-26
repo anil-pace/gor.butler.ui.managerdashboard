@@ -112,6 +112,7 @@ class AuditTab extends React.Component {
     constructor(props) {
         super(props);
         this.state={selected_page: 1,query:null,auditListRefreshed:null};
+        this.handlePageClick = this.handlePageClick.bind(this);
     }
 
 
@@ -134,6 +135,9 @@ class AuditTab extends React.Component {
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
+        }
+        if(this.props.auditCreationSuccessful !== nextProps.auditCreationSuccessful){
+            this.handlePageClick(null);
         }
     }
 
@@ -337,7 +341,7 @@ class AuditTab extends React.Component {
                 auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
                     auditData.auditValue=data[i].audit_param_value;
-                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + data[i].audit_param_value;
+                    auditData.auditTypeValue=auditType[data[i].audit_param_type] + "-" + JSON.stringify(data[i].audit_param_value.locations_list);
                 }
             }
 
@@ -345,7 +349,7 @@ class AuditTab extends React.Component {
                 auditData.auditType=data[i].audit_param_type;
                 if (data[i].audit_param_value) {
                     auditData.auditValue=data[i].audit_param_value.product_sku;
-                    auditData.auditTypeValue=auditType[SKU] + "-" + data[i].audit_param_value.product_sku;
+                    auditData.auditTypeValue=auditType[SKU] + "-" + JSON.stringify(data[i].audit_param_value.sku_list);
                     auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
                 }
             }
@@ -603,6 +607,9 @@ this.props.filterApplied(filterApplied);
 this.props.getPageData(paginationData);
 }
 
+
+
+
 _setFilter() {
     var newState=!this.props.showFilter;
     this.props.showTableFilter(newState)
@@ -612,8 +619,8 @@ createAudit() {
     modal.add(CreateAudit, {
         title: '',
         size: 'large',
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true // (optional) if you don't wanna show the top right close button
             //.. all what you put in here you will get access in the modal props ;),
         });
 
@@ -718,10 +725,9 @@ render() {
 
     <div className="gor-button-wrap">
     <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
-    <div className="gor-filter-add-token"/>
     <FormattedMessage id="audit.table.buttonLable"
     description="button label for audit create"
-    defaultMessage="Create New Task"/>
+    defaultMessage="CREATE AUDIT"/>
     </button>
     </div>
     <div className="gor-button-wrap">
@@ -790,7 +796,8 @@ function mapStateToProps(state, ownProps) {
         auditFilterState: state.filterInfo.auditFilterState || {},
         auditListRefreshed:state.auditInfo.auditListRefreshed,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        auditCreationSuccessful:state.auditInfo.auditCreationSuccessful
     };
 }
 
@@ -883,6 +890,7 @@ AuditTab.PropTypes={
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     setTextBoxStatus:React.PropTypes.func,
+    auditCreationSuccessful:React.PropTypes.boolean
 }
 
 

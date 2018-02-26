@@ -9,7 +9,7 @@ const  messages= defineMessages({
         description: 'Text for latch_gate sensor',
         defaultMessage: 'Latch Gate'
     },
-    buttonSensor: {
+buttonPressSensor: {
         id: 'operationPause.sensor.buttonSensor',
         description: 'Text for button_press sensor',
         defaultMessage: 'Button'

@@ -2,7 +2,7 @@
   {
     "id": "audit.add.heading",
     "description": "Heading for add audit",
-    "defaultMessage": "Create new audit task"
+    "defaultMessage": "Create new audit"
   },
   {
     "id": "audit.add.subheading",
@@ -52,7 +52,7 @@
   {
     "id": "audit.add.sku.heading",
     "description": "Text for SKU heading",
-    "defaultMessage": "Enter SKU code"
+    "defaultMessage": "Enter SKU and validate"
   },
   {
     "id": "audit.add.sku.subheading",
@@ -62,12 +62,12 @@
   {
     "id": "audit.add.location.heading",
     "description": "Text for location heading",
-    "defaultMessage": "Enter Location"
+    "defaultMessage": "Enter Location and validate"
   },
   {
     "id": "audit.add.location.subheading",
     "description": "Subtext for enter location",
-    "defaultMessage": "Format: (XXX.X.X.XX)"
+    "defaultMessage": "Use copy and paste if you have muLtiple MSU and Slot numbers"
   },
   {
     "id": "audit.add.tips.heading",
