@@ -24,8 +24,71 @@ import Spinner from '../components/spinner/Spinner';
 import { makeAjaxCall } from '../actions/ajaxActions';
 import { DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH} from '../constants/frontEndConstants';
 import { ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL} from '../constants/configConstants';
+import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../actions/orderListActions';
+import {filterApplied, orderfilterState, toggleOrderFilter} from '../actions/filterAction';
+import {hashHistory} from 'react-router';
+
+import {
+    AUDIT_RETRIEVE,
+    PUT,
+    GOR_COMPLETED_STATUS,
+    GOR_IN_PROGRESS_STATUS,
+    LOCATION,
+    AUDIT_PARAM_TYPE,
+    AUDIT_PARAM_VALUE,
+    SPECIFIC_LOCATION_ID,
+    SPECIFIC_SKU_ID,
+    AUDIT_TYPE,
+    SKU,
+    TIMER_ID,
+    AUDIT_PENDING_APPROVAL,
+    AUDIT_RESOLVED,
+    AUDIT_CREATED,
+    AUDIT_LINE_REJECTED,
+    AUDIT_ISSUES_STATUS,
+    AUDIT_BY_PDFA,
+    AUDIT_BY_LOCATION,
+    AUDIT_BY_SKU,
+    AUDIT_TASK_ID,
+    AUDIT_STATUS,
+    sortAuditHead,
+    sortOrder,
+    ALL,FILTER_PPS_ID,AUDIT_START_TIME,AUDIT_END_TIME,AUDIT_CREATEDBY,
+    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED
+} from '../constants/frontEndConstants';
+import {
+    ORDERS_RETRIEVE,
+    GOR_BREACHED,
+    BREACHED,
+    GOR_EXCEPTION,
+    INITIAL_HEADER_SORT,
+    sortOrderHead,
+    EVALUATED_STATUS,
+} from '../constants/frontEndConstants';
 
 
+import {
+    getPageData,
+    getStatusFilter,
+    getTimeFilter,
+    getPageSizeOrders,
+    currentPageOrders,
+    lastRefreshTime
+} from '../actions/paginationAction';
+
+import {
+    API_URL,
+    ORDERS_URL,
+    PAGE_SIZE_URL,
+    PROTOCOL,
+    ORDER_PAGE,
+    UPDATE_TIME_UNIT, UPDATE_TIME,
+    EXCEPTION_TRUE,
+    WAREHOUSE_STATUS_SINGLE,
+    WAREHOUSE_STATUS_MULTIPLE,
+    FILTER_ORDER_ID, SEARCH_AUDIT_URL, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,FILTER_AUDIT_ID,CANCEL_AUDIT_URL
+} from '../constants/configConstants';
+import {addDateOffSet} from '../utilities/processDate';
 
 var storage = [];
 /*Page size dropdown options*/
@@ -50,6 +113,8 @@ class newordersTab extends React.Component{
         
         this.enableCollapse = this.enableCollapse.bind(this);
         this.disableCollapse = this.disableCollapse.bind(this);
+
+        this.callBack= this.callBack.bind(this);
     }	
 
     _getInitialState(){
@@ -61,8 +126,27 @@ class newordersTab extends React.Component{
             pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             queryApplied:Object.keys(this.props.location.query).length ? true :false,
             totalSize:this.props.totalSize || null,
+            selected_page: 1, 
+            //query: null, 
+            orderListRefreshed: null
             //date: new Date().getTime() //get time in milliseconds since midnight, 1970-01-01.
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this._intervalId);
+        /**
+         * It will update the last refreshed property of
+         * overview details, so that updated subscription
+         * packet can be sent to the server for data
+         * update.
+         */
+         this.props.orderListRefreshed()
+    }
+
+    callBack(query){
+        //alert("coming to newordersTab" + JSON.stringify(query));
+        this._refreshList(this.props.location.query);
     }
 
     enableCollapse(){
@@ -80,22 +164,26 @@ class newordersTab extends React.Component{
     }
 
     _handlePageChange(e){
-        this.setState({
-            pageSize:e.value,
-            dataFetchedOnLoad:false
-        },function(){
-            let _query =  Object.assign({},this.props.location.query);
-            _query.pageSize = this.state.pageSize;
-            _query.page = _query.page || 1;
-            this.props.router.push({pathname: "/reports/operationsLog",query: _query})
-        })
+        // this.setState({
+        //     pageSize:e.value,
+        //     dataFetchedOnLoad:false
+        // },function(){
+        //     let _query =  Object.assign({},this.props.location.query);
+        //     _query.pageSize = this.state.pageSize;
+        //     _query.page = _query.page || 1;
+        //     this.props.router.push({pathname: "/reports/operationsLog",query: _query})
+        // })
         
     }
 
     componentWillReceiveProps(nextProps) {        
-        // this.setState({
-        //     isPanelOpen: true
-        // })
+        if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            
+            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
+            this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+            this._subscribeData();
+            this._refreshList(nextProps.location.query,nextProps.orderSortHeaderState.colSortDirs)
+        }
     }
 
     componentDidMount(){
@@ -104,8 +192,138 @@ class newordersTab extends React.Component{
         //this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
     }
 
-    componentWillUnmount() {
-        clearInterval(this._intervalId);
+    _subscribeData() {
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
+    
+
+    _refreshList(query,auditParam) {
+
+        var auditbyUrl;
+        let _query_params=[], _auditParamValue=[], _auditStatuses=[],_auditCretedBy=[],url="";
+        if(query.fromDate){
+            url=SEARCH_AUDIT_URL+AUDIT_START_TIME+"="+query.fromDate;
+        }else{
+            url=SEARCH_AUDIT_URL +AUDIT_START_TIME+"="+ addDateOffSet(new Date(), -30)
+        }
+         if(query.toDate)
+        {
+            _query_params.push([AUDIT_END_TIME, query.toDate].join("="))
+        }
+    //order TAGS
+        if (query.orderTags && query.orderTags.constructor !== Array) {
+            query.orderTags=[query.orderTags]
+        }
+
+        if (query.orderTags && query.orderTags.length=== 1) {
+            _query_params.push([AUDIT_PARAM_TYPE, query.orderTags[0]].join("="))
+         }
+       
+        else {
+            _query_params.push([AUDIT_PARAM_TYPE, ANY].join("="))
+        }
+
+        // if (query.skuId || query.locationId) {
+
+        //     if (query.skuId) {
+        //         _auditParamValue.push(query.skuId)
+        //     }
+        //     if (query.locationId) {
+        //         _auditParamValue.push(query.locationId)
+        //     }
+
+        //     _query_params.push([AUDIT_PARAM_VALUE, "['"+_auditParamValue.join("','")+"']"].join("="))
+        // }
+    //order STATUS
+        if (query.status) {
+            let _flattened_statuses=[]
+            query.status=query.status.constructor===Array?query.status:[query.status]
+            query.status.forEach(function (status) {
+                _flattened_statuses.push(status.split("__"))
+            })
+            _auditStatuses=[].concat.apply([], _flattened_statuses)
+            _query_params.push([AUDIT_STATUS,"['"+_auditStatuses.join("','")+"']" ].join("="))
+        }
+
+        if (query.orderId) {
+            _query_params.push([FILTER_AUDIT_ID, query.orderId].join("="))
+        }
+        
+        if (query.ppsId) {
+            _query_params.push([FILTER_PPS_ID, query.ppsId].join("="))
+        }
+
+        if (query.skuId) {
+            _query_params.push([FILTER_AUDIT_ID, query.skuId].join("="))
+        }
+
+        _query_params.push([GIVEN_PAGE,query.page||1].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE,20].join("="))
+
+           if(auditParam && auditParam.sortDir){
+            _query_params.push(['order',toggleOrder(auditParam.sortDir)].join("="));
+            auditbyUrl=sortAuditHead[auditParam["columnKey"]];
+
+        }
+        else
+        {
+            if (auditParam){
+                _query_params.push(['order',toggleOrder(auditParam[Object.keys(auditParam)])].join("="));
+                auditbyUrl=sortAuditHead[Object.keys(auditParam)[0]];
+            }else{
+                auditbyUrl="";
+            }
+        }
+
+        url=[url,_query_params.join("&")].join("&")
+        url+=auditbyUrl;
+
+        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+            this.props.toggleOrderFilter(true);
+            this.props.filterApplied(true);
+        } else {
+            this.props.toggleOrderFilter(false);
+            this.props.filterApplied(false);
+        }
+
+        let paginationData={
+            'url': url,
+            'method': 'GET',
+            'cause': ORDERS_RETRIEVE,
+            'token': this.props.auth_token,
+            'contentType': 'application/json',
+            'accept':'application/json'
+        }
+        this.props.setOrderListSpinner(true);
+        this.props.orderfilterState({
+            tokenSelected: {
+                "ORDER TAGS": query.orderTags ? (query.orderTags.constructor=== Array ? query.orderTags : [query.orderTags]) : [ANY],
+                "STATUS": query.status ? (query.status.constructor=== Array ? query.status[0] : query.status) : [ANY]
+            },
+            searchQuery: {
+                "PICK BEFORE TIME": query.pbt || '',
+                "ORDER ID": query.orderId || '',
+                "PPS ID": query.ppsId || '',
+                "SKU ID": query.skuId || '',
+                'FROM DATE':query.fromDate||'',
+                'TO DATE':query.toDate||''
+            },
+            "PAGE": query.page || 1,
+            defaultToken: {"ORDER TAGS": [ANY], "STATUS": [ANY]}
+        });
+        this.props.setOrderQuery({query:query})
+        //this.props.getPageData(paginationData);
+
+    }
+
+    /**
+     *
+     */
+     _clearFilter() {
+        hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
     _reqOrdersFulfilment(){
@@ -320,8 +538,6 @@ class newordersTab extends React.Component{
         return processedData;
     }
 
-    
-
     _restartPolling=()=> {
         this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
     }
@@ -369,6 +585,7 @@ class newordersTab extends React.Component{
                             orderSummaryData={this.props.orderSummary}
                             collapseState={this.state.collapseState}
                             disableCollapse={this.disableCollapse}
+                            callBack = {this.callBack}
                             />
 
 			    <div className="waveListWrapper">
@@ -439,7 +656,8 @@ newordersTab.defaultProps = {
     orderFulfilment: {},
     orderSummary: {},
     pbts: [],
-    ordersPerPbt: []
+    ordersPerPbt: [],
+    getPageData: React.PropTypes.func,
 }
 
 function mapStateToProps(state, ownProps) {
@@ -455,13 +673,45 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        
+        setOrderListSpinner: function (data) {
+            dispatch(setOrderListSpinner(data))
+        },
+        getPageData: function (data) {
+            dispatch(getPageData(data));
+        },
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
         },
         makeAjaxCall: function(params){
         	dispatch(makeAjaxCall(params))
         },
+        orderListRefreshed: function (data) {
+            dispatch(orderListRefreshed(data))
+        },
+        setOrderQuery: function (data) {
+            dispatch(setOrderQuery(data));
+        },
+        toggleOrderFilter: function (data) {
+            dispatch(toggleOrderFilter(data));
+        },
+        orderfilterState: function (data) {
+            dispatch(orderfilterState(data));
+        },
+        filterApplied: function (data) {
+            dispatch(filterApplied(data));
+        },
+        currentPage: function (data) {
+            dispatch(currentPageOrders(data));
+        },
+        getPageSizeOrders: function (data) {
+            dispatch(getPageSizeOrders(data));
+        },
+        // toggleAuditFilter: function (data) {
+        //     dispatch(toggleAuditFilter(data));
+        // },
+        // filterApplied: function (data) {
+        //     dispatch(filterApplied(data));
+        // },
     }
 };
 

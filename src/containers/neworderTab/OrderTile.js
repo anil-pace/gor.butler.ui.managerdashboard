@@ -15,6 +15,7 @@ class OrderTile extends React.Component{
     this.collapseAll = this.collapseAll.bind(this);
     this.showFilter = this.showFilter.bind(this);
     this.hideFilter = this.hideFilter.bind(this);
+    this.callBack = this.callBack.bind(this);
   } 
 
   componentDidMount(){
@@ -34,6 +35,10 @@ class OrderTile extends React.Component{
     this.setState({
       showFilter: data
     })
+  }
+
+  callBack(query){
+    this.props.callBack(query);
   }
 
   render()
@@ -104,7 +109,7 @@ class OrderTile extends React.Component{
                     this.state.showFilter? 
                       (<div className="gor-filter-wrap"
                            style={{'width': this.state.showFilter ? '400px' : '0px', height: filterHeight}}>
-                          <OrderFilter hideFilter={this.hideFilter}/>
+                          <OrderFilter callBack = {this.callBack} hideFilter={this.hideFilter}/>
                       </div>) : null
                   }
                   

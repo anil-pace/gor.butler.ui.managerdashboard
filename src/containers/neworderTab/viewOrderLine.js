@@ -14,32 +14,13 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 
-var oHeaderData = ["Order Lines", "ProgressBar", "10 cases picked      102 inners picked     10 each"];
-
-let orderLinesData = {
-        'pps_id':"1",'pps_bin_id':"1", 'user_name':"anil", 'total_orderlines': 2000,'completed_orderlines': 100,'pending_orderlines': 260,
-        'cut_off_time':"200", 
-        'total_products_count': "2000",
-        'picked_products_count':"500", 
-        'is_breached': true,
-        'pick_info': [{total_orderlines: "250", 'total_products_count': 100, 'picked_products_count': 100, status: "10 cases picked      102 inners picked     10 each"}],
-        'orderlines': [
-            {pdfa_values:[{}], orderId: "SKU-3XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
-            {pdfa_values:[{}], orderId: "SKU-4XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
-            {pdfa_values:[{}], orderId: "SKU-5XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
-            {pdfa_values:[{}], orderId: "SKU-6XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
-            {pdfa_values:[{}], orderId: "SKU-7XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1},
-            {pdfa_values:[{}], orderId: "SKU-8XCFAD09880",'total_products_count': 100, 'picked_products_count': 75, status: "In progress",'unfulfillable_count':1,missing_count:1,damaged_count:1,physically_damaged_count:1}
-        ]
-    };
-
 class ViewOrderLine extends React.Component{
   constructor(props) 
   {
       super(props); 
       this.state={
-        initialItems: orderLinesData.orderlines,
-        items: []
+        items: [],
+        headerItems: []
       }
       this.handleChange = this.handleChange.bind(this);
   }
@@ -48,18 +29,17 @@ class ViewOrderLine extends React.Component{
     this._getOrdersLines(this.props.orderId);
   }
 
-  componentWillMount(){
-    this.setState({items: this.state.initialItems})
+  componentWillReceiveProps(nextProps){
+    //if(JSON.stringify(this.props.orderLines.orderlines)!== JSON.stringify(nextProps.orderLines.orderlines)){
+      let olineData= nextProps.orderLines.orderlines || [];
+      let olineHeaderData = nextProps.orderLines.pick_info || []; 
+      this.setState({
+        items: olineData,
+        headerItems: olineHeaderData
+      });
+    //}
   }
-
-  // componentWillReceiveProps(nextProps) {        
-  //       this._getOrdersLines(nextProps);
-  //       let data = this._processData(nextProps.orderId);
-  //       this.setState({
-  //         items: data.orderlines
-  //       })
-  //   }
-
+  
   _getOrdersLines = (orderId) =>  {
         console.log("_getOrdersLines get called");
         let formData={
@@ -74,7 +54,6 @@ class ViewOrderLine extends React.Component{
             'formdata':formData,
         }
         this.props.makeAjaxCall(params);
-        
     }
 
   _removeThisModal() {
@@ -83,7 +62,7 @@ class ViewOrderLine extends React.Component{
   }
 
   handleChange(event) {
-    var updatedList =  this.state.initialItems; //this.props.orderLines.orderlines;
+    var updatedList = this.props.orderLines.orderlines;
     var queryResult=[];
     updatedList.forEach(function(item){
             if(item.orderId.toLowerCase().indexOf(event)!=-1)
@@ -180,14 +159,10 @@ class ViewOrderLine extends React.Component{
   }
 
   render(){
-    console.log('%c ==================>!  ', 'background: #222; color: #bada55', "=============> RENDER FUNCTION BEING CALLED");
-    //const { orderLines } = this.props.orderLines;
-    const {orderlines} = this.props;
+    console.log('%c ==================>!  ', 'background: #222; color: #bada55', "=============> RENDER FUNCTION BEING CALLED" + JSON.stringify(this.props.orderLines));
     let processedList = this._processOLList(this.state.items);
-    let processedHeader = this._processOLHeader(orderLinesData.pick_info);
-    //var oHeaderData  = this._processOLHeader(orderLinesData.pick_info);
+    let processedHeader = this._processOLHeader(this.state.headerItems);
 
-    //var olHeaderData = this._processOLHeader();
        return (
         <div>
           <div className="gor-modal-content">
@@ -209,30 +184,30 @@ class ViewOrderLine extends React.Component{
                           <div className="orderDetailsColumn">
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.ppsId" description='pps id' defaultMessage='PPS ID:'/> </span>
-                                <span className="spanValue"> {orderLinesData.pps_id} </span> 
+                                <span className="spanValue"> {this.props.orderLines.pps_id} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.pps_bin_id} </span> 
+                                <span className="spanValue"> {this.props.orderLines.pps_bin_id} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.user_name} </span> 
+                                <span className="spanValue"> {this.props.orderLines.user_name} </span> 
                               </div>
                           </div>
 
                           <div className="orderDetailsColumn">
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.pending" description='lines received' defaultMessage='Lines received:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.total_orderlines}  </span> 
+                                <span className="spanValue"> {this.props.orderLines.total_orderlines}  </span> 
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linesinprogress" description='lines in progress' defaultMessage='Lines in progress:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.pending_orderlines} </span> 
+                                <span className="spanValue"> {this.props.orderLines.pending_orderlines} </span> 
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linescompleted" description='lines completed' defaultMessage='Lines completed:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.completed_orderlines} </span> 
+                                <span className="spanValue"> {this.props.orderLines.completed_orderlines} </span> 
                               </div>
                           </div>
 
@@ -243,7 +218,7 @@ class ViewOrderLine extends React.Component{
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.cutofftime" description='cut off time' defaultMessage='Cut off time:'/> </span> 
-                                <span className="spanValue"> {orderLinesData.cut_off_time} hrs </span> 
+                                <span className="spanValue"> {this.props.orderLines.cut_off_time} hrs </span> 
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
@@ -297,6 +272,14 @@ class ViewOrderLine extends React.Component{
       );
     }
   }
+
+  ViewOrderLine.PropTypes={
+    orderLines: React.PropTypes.object,
+}
+
+  ViewOrderLine.defaultProps = {
+    orderLines: {},
+}
 
   function mapStateToProps(state, ownProps) {
     return {

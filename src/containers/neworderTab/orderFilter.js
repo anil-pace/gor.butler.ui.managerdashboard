@@ -9,6 +9,22 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {hashHistory} from 'react-router';
 import {
+    ANY,
+    ALL,
+    ORDER_TAGS,
+    STATUS,
+    URGENT_ORDER_TAG,
+    EXPRESS_ORDER_TAG,
+    PENDING_STATUS,
+    BREACH_RISK_STATUS,
+    BREACHED_STATUS,
+    BREACHED_COMPLETED_STATUS,
+    PRODUCT_SHORT_STATUS,
+    OUT_OF_STOCK_STATUS,
+    COMPLETED_STATUS,
+    REJECTED_STATUS,
+    CANCELLED_STATUS,
+    ABANDONED_STATUS,
     PICK_BEFORE_TIME,
     ORDER_ID,
     PPS_ID,
@@ -23,9 +39,10 @@ class OrderFilter extends React.Component{
     constructor(props) 
     {
         super(props);
-        this.state={tokenSelected: {"ORDER TAGS":["any"], "STATUS":["any"]},
-                    searchQuery: {},
-                    defaultToken: {"ORDER TAGS":["any"], "STATUS":["any"]}
+        this.state={
+          tokenSelected: {"ORDER TAGS":[ANY], "STATUS":[ANY]},
+          searchQuery: {},
+          defaultToken: {"ORDER TAGS":[ANY], "STATUS":[ANY]}
         }; 
 
         this._applyFilter =  this._applyFilter.bind(this);
@@ -86,33 +103,38 @@ class OrderFilter extends React.Component{
         if(this.props.orderFilterState) {
             this.setState(this.props.orderFilterState)
         }
-    }  
+    } 
+
     _processFilterToken() {
         var tokenField1={value:"ORDER TAGS", label:<FormattedMessage id="order.token.orderTags" defaultMessage="ORDER TAGS"/>};
         var tokenField2={value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage="STATUS"/>}; 
+        
         var labelC1=[
-                      { value: 'any', label: <FormattedMessage id="order.orderTags.any" defaultMessage="Any"/>},
-                      { value: 'urgent', label: <FormattedMessage id="order.orderTags.urgent" defaultMessage="Urgent"/>},
-                      { value: 'express', label: <FormattedMessage id="order.orderTags.express" defaultMessage="Express"/>}
+                      { value: ANY, label: <FormattedMessage id="order.orderTags.any" defaultMessage="Any"/>},
+                      { value: URGENT_ORDER_TAG, label: <FormattedMessage id="order.orderTags.urgent" defaultMessage="Urgent"/>},
+                      { value: EXPRESS_ORDER_TAG, label: <FormattedMessage id="order.orderTags.express" defaultMessage="Express"/>}
                     ];
 
         var labelC2=[
-                      { value: 'any', label: <FormattedMessage id="order.status.any" defaultMessage="Any"/>},
-                      { value: 'pending', label: <FormattedMessage id="order.status.pending" defaultMessage="Pending"/>},
-                      { value: 'breachrisk', label: <FormattedMessage id="order.status.breachRish" defaultMessage="Braeach risk"/>},
-                      { value: 'breached', label: <FormattedMessage id="order.status.breached" defaultMessage="Breached"/>},
-                      { value: 'breached&completed', label: <FormattedMessage id="order.status.breach&Completed" defaultMessage="Breach&Completed"/>},
-                      { value: 'productshort', label: <FormattedMessage id="order.status.productshort" defaultMessage="Product Short"/>},
-                      { value: 'outofstock', label: <FormattedMessage id="order.status.outofstock" defaultMessage="Out of Stock"/>},
-                      { value: 'completed', label: <FormattedMessage id="order.status.completed" defaultMessage="Completed"/>},
-                      { value: 'rejecetd', label: <FormattedMessage id="order.status.rejected" defaultMessage="Rejected"/>},
-                      { value: 'abandoned', label: <FormattedMessage id="order.status.abandoned" defaultMessage="Abandoned"/>},
-                      { value: 'cancelled', label: <FormattedMessage id="order.status.cancelled&Completed" defaultMessage="Cancelled"/>}
+                      { value: ANY, label: <FormattedMessage id="order.status.any" defaultMessage="Any"/>},
+                      { value: PENDING_STATUS, label: <FormattedMessage id="order.status.pending" defaultMessage="Pending"/>},
+                      { value: BREACH_RISK_STATUS, label: <FormattedMessage id="order.status.breachRish" defaultMessage="Breach risk"/>},
+                      { value: BREACHED_STATUS, label: <FormattedMessage id="order.status.breached" defaultMessage="Breached"/>},
+                      { value: BREACHED_COMPLETED_STATUS, label: <FormattedMessage id="order.status.breach&Completed" defaultMessage="Breach&Completed"/>},
+                      { value: PRODUCT_SHORT_STATUS, label: <FormattedMessage id="order.status.productshort" defaultMessage="Product Short"/>},
+                      { value: OUT_OF_STOCK_STATUS, label: <FormattedMessage id="order.status.outofstock" defaultMessage="Out of Stock"/>},
+                      { value: COMPLETED_STATUS, label: <FormattedMessage id="order.status.completed" defaultMessage="Completed"/>},
+                      { value: REJECTED_STATUS, label: <FormattedMessage id="order.status.rejected" defaultMessage="Rejected"/>},
+                      { value: ABANDONED_STATUS, label: <FormattedMessage id="order.status.abandoned" defaultMessage="Abandoned"/>},
+                      { value: CANCELLED_STATUS, label: <FormattedMessage id="order.status.cancelled&Completed" defaultMessage="Cancelled"/>}
                     ];
+
         var selectedToken= this.state.tokenSelected;
         var column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
         var column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
+
         var columnDetail={column1token:column1, column2token:column2};
+
         return columnDetail;
     }
 
@@ -175,41 +197,44 @@ class OrderFilter extends React.Component{
     _applyFilter() {
         var filterState=this.state, _query={};
 
-        if (filterState.tokenSelected["ORDER TAGS"] && filterState.tokenSelected["ORDER TAGS"][0] !== 'any') {
+        if (filterState.tokenSelected[ORDER_TAGS] && filterState.tokenSelected[ORDER_TAGS][0] !== ANY) {
             _query.orderTags=filterState.tokenSelected["ORDER TAGS"]
         }
-        if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== 'any') {
-            _query.status=filterState.tokenSelected["STATUS"]
+        if (filterState.tokenSelected[STATUS] && filterState.tokenSelected[STATUS][0] !== ANY) {
+            _query.status=filterState.tokenSelected[STATUS]
         }
 
-        if (filterState.searchQuery["PICK BEFORE TIME"]) {
-            _query.pbt=filterState.searchQuery["PICK BEFORE TIME"]
+        if (filterState.searchQuery[PICK_BEFORE_TIME]) {
+            _query.pbt=filterState.searchQuery[PICK_BEFORE_TIME]
         }
 
-        if (filterState.searchQuery["ORDER ID"]) {
-            _query.orderId=filterState.searchQuery["ORDER ID"]
+        if (filterState.searchQuery[ORDER_ID]) {
+            _query.orderId=filterState.searchQuery[ORDER_ID]
         }
 
-        if (filterState.searchQuery["PPS ID"]) {
-            _query.ppsId=filterState.searchQuery["PPS ID"]
+        if (filterState.searchQuery[PPS_ID]) {
+            _query.ppsId=filterState.searchQuery[PPS_ID]
         }
 
-        if (filterState.searchQuery["SKU ID"]) {
-            _query.skuId=filterState.searchQuery["SKU ID"]
+        if (filterState.searchQuery[SKU_ID]) {
+            _query.skuId=filterState.searchQuery[SKU_ID]
         }
 
-       //hashHistory.push({pathname: "/orders/orderlist", query: _query})
+        
+       hashHistory.push({pathname: "/neworders", query: _query});
+       this.props.callBack(_query);
+       
     }
 
     _clearFilter() {
         this.props.orderfilterState({
           tokenSelected: {
-              "ORDER TAGS": ['any'],
-              "STATUS": ['any']
+              "ORDER TAGS": [ANY],
+              "STATUS": [ANY]
           },
           searchQuery: {"ORDER ID":  '', "SKU ID":  '', "PICK BEFORE TIME": '', "PPS ID": ''},
         });
-        //hashHistory.push({pathname: "/orders/orderlist", query: {}})
+        hashHistory.push({pathname: "/neworders", query: {}})
     }
 
     render(){
