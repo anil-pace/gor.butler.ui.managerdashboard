@@ -331,7 +331,7 @@ class CreateAudit extends React.Component{
       let urlData={
                   'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
-                  'method':POST,
+                  'method':GET,//POST
                   'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
                   'contentType':APP_JSON,
                   'accept':APP_JSON,

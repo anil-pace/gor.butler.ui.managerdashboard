@@ -42,19 +42,35 @@ import { makeAjaxCall } from "../../../actions/ajaxActions";
 import Spinner from "../../../components/spinner/Spinner";
 import { setAuditSpinner } from "../../../actions/auditActions";
 import { modal } from "react-redux-modal";
+
+const attributeComponentMessages = {
+	"apply": <FormattedMessage id="skuSelector.selectAttribute.apply" description="Texts for select attribute component"
+		defaultMessage="Apply" />,
+	"add_set_of_attributes": <FormattedMessage id="skuSelector.selectAttribute.addSetofAttributes" description="Texts for select attribute component"
+		defaultMessage="+ ADD SET OF ATTRIBUTES" />,
+	"footer_message": <FormattedMessage id="skuSelector.selectAttribute.footerMessage" description="Texts for select attribute component"
+		defaultMessage="Note: You can add multiple sets of attributes" />,
+	"back": <FormattedMessage id="skuSelector.selectAttribute.back" description="Texts for select attribute component"
+		defaultMessage="Back" />,
+	"clear_all": <FormattedMessage id="skuSelector.selectAttribute.clearAll" description="Texts for select attribute component"
+		defaultMessage="Clear All" />,
+	"add_more_sets_of_attributes": <FormattedMessage id="skuSelector.selectAttribute.addMoreSets" description="Texts for select attribute component"
+		defaultMessage="Add more Sets of Attributes" />
+};
+
 const messages = defineMessages({
 	auditnameplaceholder: {
-		id: 'audit.nameplaceholder.text',
+		id: 'skuSelector.nameplaceholder.text',
 		description: 'text for audit name placeholder',
 		defaultMessage: 'Time, place or products'
 	},
 	auditinputplaceholder: {
-		id: 'audit.inputplaceholder.text',
+		id: 'skuSelector.inputplaceholder.text',
 		description: 'text for audit input placeholder',
 		defaultMessage: 'e.g: 012678ABC'
 	},
 	e027: {
-		id: 'audit.skudoesnotexist.text',
+		id: 'skuSelector.skudoesnotexist.text',
 		description: 'text for audit sku does not exist error',
 		defaultMessage: 'SKU does not exist'
 	},
@@ -196,6 +212,7 @@ class SkuSelector extends React.Component {
 				tuple.checked = false;
 				tuple.index = i;
 				tuple.value = inputList[i];
+				tuple.visible=true;
 				tuple.errorMessage = "";
 				processedList.push(tuple);
 			}
@@ -429,6 +446,7 @@ class SkuSelector extends React.Component {
 			tuple.checked = false;
 			tuple.index = i;
 			tuple.value = data[i].skuName;
+			tuple.visible= true;
 			tuple.errorMessage =
 				data[i].status === true
 					? data[i].status
@@ -500,7 +518,7 @@ class SkuSelector extends React.Component {
 			let urlData = {
 				url: AUDIT_VALIDATION_URL,
 				formdata: validSKUData,
-				method: GET,//POST,
+				method: GET, //POST
 				cause: VALIDATE_SKU_ID,
 				contentType: APP_JSON,
 				accept: APP_JSON,
@@ -513,70 +531,70 @@ class SkuSelector extends React.Component {
 	render() {
 		let validSkuMessg = (
 			<FormattedMessage
-				id="audit.valid.sku"
+				id="skuSelector.valid.sku"
 				description="text for valid sku"
 				defaultMessage="SKU confirmed"
 			/>
 		);
 		let validLocationMessg = (
 			<FormattedMessage
-				id="audit.valid.location"
+				id="skuSelector.valid.location"
 				description="text for valid location"
 				defaultMessage="Location valid"
 			/>
 		);
 		let invalidSkuMessg = (
 			<FormattedMessage
-				id="audit.invalid.sku"
+				id="skuSelector.invalid.sku"
 				description="text for invalid sku"
 				defaultMessage="Please enter correct SKU number"
 			/>
 		);
 		let invalidLocationMessg = (
 			<FormattedMessage
-				id="audit.invalid.location"
+				id="skuSelector.invalid.location"
 				description="text for invalid location"
 				defaultMessage="Please enter correct Location number"
 			/>
 		);
 		let validSkuNoAtriMessg = (
 			<FormattedMessage
-				id="audit.noAtrributes.sku"
+				id="skuSelector.noAtrributes.sku"
 				description="text for valid sku with no attributed"
 				defaultMessage="SKU confirmed but no Box Id found"
 			/>
 		);
 		let uploadCsvMessg = (
 			<FormattedMessage
-				id="audit.uploadcsv.text"
+				id="skuSelector.uploadcsv.text"
 				description="text for upload csv and validate"
 				defaultMessage="Upload CSV and validate"
 			/>
 		);
 		let selectAttributesMessg = (
 			<FormattedMessage
-				id="audit.selectattributes.text"
+				id="skuSelector.selectattributes.text"
 				description="text for select attributes"
 				defaultMessage="Select attributes"
 			/>
 		);
 		let auditBySkuMessg = (
 			<FormattedMessage
-				id="audit.auditbysku.text"
+				id="skuSelector.auditbysku.text"
 				description="text for audit by sku"
 				defaultMessage="Audit by SKU"
 			/>
 		);
 		let skuSelectAttributes = (
 			<FormattedMessage
-				id="audit.auditbysku.selectAttributes"
+				id="skuSelector.auditbysku.selectAttributes"
 				description="text for audit by sku"
 				defaultMessage="Select Attributes"
 			/>
 		);
 		let auditByLocationMessg = (
 			<FormattedMessage
-				id="audit.auditbylocation.text"
+				id="skuSelector.auditbylocation.text"
 				description="text for audit by location"
 				defaultMessage="Audit by Location"
 			/>
@@ -599,21 +617,21 @@ class SkuSelector extends React.Component {
 				: false;
 		const selectAllLabel = (
 			<FormattedMessage
-				id="Audit.inputCheckbox.selectAllLabel"
+				id="skuSelector.inputCheckbox.selectAllLabel"
 				description="audit dropdown option for Select All"
 				defaultMessage="Select All"
 			/>
 		);
 		let selectAllInvalidLabel = (
 			<FormattedMessage
-				id="Audit.inputCheckbox.selectAllInvalidLabel"
+				id="skuSelector.inputCheckbox.selectAllInvalidLabel"
 				description="audit dropdown option for Select All Invalid"
 				defaultMessage="Select all invalid"
 			/>
 		);
 		let selectAllValidLabel = (
 			<FormattedMessage
-				id="Audit.inputCheckbox.selectAllValidLabel"
+				id="skuSelector.inputCheckbox.selectAllValidLabel"
 				description="audit dropdown option for Select All valid"
 				defaultMessage="Select all valid"
 			/>
@@ -621,7 +639,7 @@ class SkuSelector extends React.Component {
 
 		let deselectAllLabel = (
 			<FormattedMessage
-				id="Audit.inputCheckbox.deselectAllLabel"
+				id="skuSelector.inputCheckbox.deselectAllLabel"
 				description="audit dropdown option for Deselecting all"
 				defaultMessage="Deselect All"
 			/>
@@ -665,7 +683,7 @@ class SkuSelector extends React.Component {
 												linkClassName={'link-class-0'}  >
 												{!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
 													<div>
-														<div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku'
+														<div className='gor-sub-head-audit-input'><FormattedMessage id="skuSelector.add.sku.subheading" description='Subtext for enter sku'
 															defaultMessage='Use copy and paste if you have muktiple sku numbers' /></div>
 													</div>
 													<div>
@@ -701,7 +719,7 @@ class SkuSelector extends React.Component {
 
 															</div>
 															<div className={"message success"}>
-																<FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
+																<FormattedMessage id="skuSelector.locationValidation.success" description='Audit location verification success message'
 																	defaultMessage='{valid} out of {total} locations valid'
 																	values={
 																		{
@@ -715,7 +733,7 @@ class SkuSelector extends React.Component {
 																</span>
 															</div>
 															<div className={"message error"}>
-																<FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
+																<FormattedMessage id="skuSelector.locationValidation.error" description='Audit location verification error message'
 																	defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
 																	values={
 																		{
@@ -726,29 +744,43 @@ class SkuSelector extends React.Component {
 															</div></div>}
 												</div>
 												{validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+													<div className={"note-message"}>
+														<FormattedMessage id="skuSelector.skuValidation.note" description='Audit location verification error message'
+															defaultMessage='Note: NOT setting any attributes will result in recalling the entire SKU with all attributes'
+														/>
+													</div>
 													<div>
 														{self.state.copyPasteSKU.data.map((tuple, i) => {
 															let tuples = [],
 																attributeList = this.state.skuAttributes.data[i].attributeList;
-															tuples.push(<div className={"gor-valid-row"} key={tuple.value + i}>
-																<InputComponent.AfterValidation
-																	className={"gor-audit-input gor-input-ok"}
-																	autoFocus={focus}
-																	updateInput={self._updateInput}
-																	index={i}
-																	allRowValid={allSKUsValid}
-																	onAttributeCheck={self._onAttributeCheck}
-																	checked={tuple.checked}
-																	errorMessage={!allSKUsValid ? tuple.errorMessage : true}
-																	value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
-																{allSKUsValid && attributeList.length > 0 && <SelectAttributes
-																	attributeList={attributeList}
-																	applyCallBack={this._onAttributeSelection}
-																	index={i}
-																/>}
-															</div>)
+															if (tuple.visible) {
+																tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value + i}>
+																	<InputComponent.AfterValidation
+																		className={"gor-audit-input gor-input-ok"}
+																		autoFocus={focus}
+																		updateInput={self._updateInput}
+																		index={i}
+																		allRowValid={allSKUsValid}
+																		onAttributeCheck={self._onAttributeCheck}
+																		checked={tuple.checked}
+																		errorMessage={!allSKUsValid ? tuple.errorMessage : true}
+																		value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)} />
+																	{allSKUsValid && attributeList.length > 0 && <SelectAttributes
+																		messages={attributeComponentMessages}
+																		attributeList={attributeList}
+																		applyCallBack={this._onAttributeSelection}
+																		index={i}
+																	/>}
+																</div>)
+															}
+
+
 															return (tuples)
 														})}
+														{!validationDoneSKU && <div>
+															<button className='gor-audit-addnew-button' type="button" onClick={() => this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location'
+																defaultMessage='+ Add New' /></button>
+														</div>}
 													</div>
 												</div>}
 											</Tab>
@@ -785,37 +817,37 @@ SkuSelector.PropTypes = {
 
 
 SkuSelector.defaultProps = {
-	skuValidationSpinner:false,
-	auditType:{},
-	skuCheck:{},
-	skuAttributes:{},
-	locationAttributes:{},
-	hasDataChanged:false
-  };
+	skuValidationSpinner: false,
+	auditType: {},
+	skuCheck: {},
+	skuAttributes: {},
+	locationAttributes: {},
+	hasDataChanged: false
+};
 var mapDispatchToProps = function (dispatch) {
 	return {
 		resetForm: function () { dispatch(resetForm()); },
 		makeAjaxCall: function (data) { dispatch(makeAjaxCall(data)) },
-		setAuditSpinner: function (data) {dispatch(setAuditSpinner(data))}
+		setAuditSpinner: function (data) { dispatch(setAuditSpinner(data)) }
 	};
 };
 
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state, ownProps) {
 	return {
-		skuValidationSpinner: state.auditInfo.skuValidationSpinner ,
-		locationValidationSpinner: state.auditInfo.locationValidationSpinner ,
-		locationValidationSpinnerCsv: state.auditInfo.locationValidationSpinnerCsv ,
-		auditType:  state.auditInfo.auditType,
+		skuValidationSpinner: state.auditInfo.skuValidationSpinner,
+		locationValidationSpinner: state.auditInfo.locationValidationSpinner,
+		locationValidationSpinnerCsv: state.auditInfo.locationValidationSpinnerCsv,
+		auditType: state.auditInfo.auditType,
 		skuCheck: state.appInfo.skuInfo,
 		locCheck: state.appInfo.locInfo,
-		auth_token:state.authLogin.auth_token,
+		auth_token: state.authLogin.auth_token,
 		skuAttributes: state.auditInfo.skuAttributes,
-		locationAttributes:state.auditInfo.locationAttributes,
-		hasDataChanged:state.auditInfo.hasDataChanged,
+		locationAttributes: state.auditInfo.locationAttributes,
+		hasDataChanged: state.auditInfo.hasDataChanged,
 		auditSpinner: state.spinner.auditSpinner || false
 	};
-  }
-  
+}
+
 
 SkuSelector.contextTypes = {
 	intl: React.PropTypes.object.isRequired

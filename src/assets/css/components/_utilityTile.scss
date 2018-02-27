@@ -91,7 +91,6 @@
   position: relative;
   vertical-align: top;
   height: 638px;
-  width: 406px;
   .gor-utility-tile-h1{
     height: initial;
   }
@@ -105,6 +104,7 @@
   }
   .gor-audit-create .gor-audit-form {
     width: initial;
+    overflow: hidden;
   }
   ul.tabs-nav.nav.navbar-nav.navbar-left.tabs-audit{
     display: none; //needs to be removed after checking with Himanshu
@@ -127,6 +127,9 @@
       font-weight: normal;
       color: #333333;
   }
+  }
+  button.gor-auditValidate-btn{
+       width: 108px; 
   }
 }
 
@@ -186,7 +189,7 @@
 .gor-utility-btn-wrap {
   padding-top: 19px;
   padding-bottom: 22px;
-  padding-left: 25%;
+  padding-left: 13%;
 }
 
 .gor-right-arrow {
