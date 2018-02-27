@@ -1,13 +1,55 @@
 .gor-audit-create{
-
-  .gor-valid-row{
-    > div:first-child{
-        width:50%;
-        display:inline-block;
+  .note-message{
+    font-size: 12px;
+    padding: 5px 10px;
+    color: #7C7C7C;
+  }
+  .audit-footer{
+    margin:auto;
+    width:80%;
+    overflow:hidden;
+    border-top:1px solid #DCDCDC;
+    .gor-create-audit-btn{
+      float:right;
+      &.disabled{
+      background: #FFD2C2;
+      color: #ffffff;
+      border-radius: 3px;
+      cursor: pointer;
+      pointer-events: none;
+    }
+    }
+    
+  }
+  .sku-search{
+    float:right;
+    padding:5px 8px;
+    border: 1px solid #eee;
+    input{
+      border:none;
     }
   }
+  .new-audit{
+    >.tabs{
+      margin-top:40px;
+    }
+  }
+  .gor-orange-spinner{
+    height: 18px;
+    position: static;
+    width: 20%;
+    margin: auto;
+    background-color: inherit;
+  }
+  .message{
+     -webkit-animation-duration: 5s;
+      animation-duration: 5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+  }
+  
   .gor-sel-att-wrap{
-    width:40%;
+    width:44%;
     display:inline-block;
     padding: 10px 15px;
     border: 1px solid #B3B3B3;
@@ -19,13 +61,14 @@
     display:inline-block;
   }
   .gor-audit-edit-att{
-    padding: 5px 25px;
+    padding: 8px 20px;
     border: 1px solid #BEBEBE;
     border-radius: 3px;
-    color: #606266;
-    font-size: 13px;
-    font-weight: 500;
+    color: #4d5055;
+    font-size: 14px;
     cursor:pointer;
+    margin-left:10px;
+    font-family: 'Source Sans Pro Bold';
   }
   
   .gor-option-wrapper{
@@ -62,6 +105,7 @@
   }
   .tab{
     display:inline-block;
+    text-align:center;
     padding:15px 20px;
     color:#666666;
     width:46%;
@@ -71,6 +115,14 @@
     font-family: 'Source Sans Pro';
     font-size: 16px;
     font-weight: 600;
+    &:eq(0){
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+    &:eq(1){
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
     &.active{
         background: #419bf9;
         text-align:center;
@@ -116,7 +168,7 @@
       border-radius: 3px;
       font-size: 14px;
       font-weight: 600;
-      text-align: left;
+      text-align: center;
       padding: 10px 5px;
       width: 29%;
       margin-top:10px;
@@ -135,8 +187,8 @@
     display:inline-block;
     border-bottom: solid 1px #dddddd;
     border-top: solid 1px #dddddd;
-    padding-bottom: 10px;
-    padding-top:3px;
+    padding-bottom: 8px;
+    padding-top:8px;
     width:100%;
     background-color:#ffffff;
 }
@@ -163,7 +215,6 @@
 
 .gor-audit-upload-file{
   position: relative;
-  
   margin-top:5px;
 }
 
@@ -217,7 +268,7 @@
 }
 
 .gor-audit-input-wrap {
-    width: 38%;
+    width: 50%;
     padding:7px 5px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
@@ -227,6 +278,7 @@
     &.after-validation{
       display:inline-block;
       vertical-align:middle;
+      width:50%;
     }
     &.error-tuple{
       border: 1px solid #D8595E;
@@ -248,6 +300,17 @@
       }
     }
 }
+.gor-valid-row{
+    > div:first-child{
+        width:48%;
+        display:inline-block;
+    }
+    &.has-error{
+       > div:first-child{
+        width:100%;
+    }
+    }
+  }
 .error-message{
     font-size: 14px;
     margin-left: 10px;
@@ -270,8 +333,8 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
-    border-top:1px solid #dddddd;
-    margin-top:10px;
+    max-height: 210px;
+    overflow: auto;
     .gor-audit-location-wrap{
     margin-top:10px;
     }
@@ -356,6 +419,9 @@
 }
 .displayHidden{
   visibility:hidden;
+}
+.displayHiddenCreateAuditCheckbox{
+  display:none;
 }
 
 .gor-tool-tip-hover:hover + .gor-tooltip 
@@ -578,76 +644,55 @@
     }
 }
 
-h1 {
-  overflow: hidden;
-  text-align: center;
-}
-
-h1:before,
-h1:after {
-  background-color: #AAAAAA;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 50%;
-}
-
-h1:before {
-  right: 0.5em;
-  margin-left: -50%;
-}
-
-h1:after {
-  left: 0.5em;
-  margin-right: -50%;
-}
 
 .gor-usr-hdsm-audit{
-            font-family:'Source Sans Pro';
-            font-size:14px;
-            font-weight: 600;
-            color:#333333;   
-            margin-top:25px; 
-            display:inline-block;
-            width:40%;
-        }
+  font-family:'Source Sans Pro';
+  font-size:14px;
+  font-weight: 600;
+  color:#333333;   
+  margin-top:25px; 
+  display:inline-block;
+  width:40%;
+}
 
 
   .gor-audit-csvupload-or{
   color:#AAAAAA;
+  font-size: 10px;
+  font-weight: 600;
   }
-.abc{
-  -webkit-animation: seconds 1.0s forwards;
-  -webkit-animation-iteration-count: 1;
-  -webkit-animation-delay: 5s;
-  animation: seconds 1.0s forwards;
-  animation-iteration-count: 1;
-  animation-delay: 5s;
-  position: relative;
-  background: red;
+
+
+  .gor-auditCreate-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:133px;
+    height:35px;
+    font-size:14px;
+    background:#FBFBFB;
+    color:#7C7C7C;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #aaaaaa;
+    margin-top:10px;
 }
-@-webkit-keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    left: -9999px; 
-  }
-}
-@keyframes seconds {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    left: -9999px; 
-  }
+
+.gor-auditCreate-btn-active{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:133px;
+    height:35px;
+    font-size:14px;
+    background:#FBFBFB;
+    color:#2C94FD;
+    border-radius:3px;
+    margin-right:10px;
+    vertical-align: sub;
+    border-radius: 3px;
+    border: solid 1px #2C94FD;
+    margin-top:10px;
 }
 .sub-tabs-audit{
-  
   border-top: 1px solid #E5E5E5;
   border-bottom: 1px solid #E5E5E5;
   margin-top:10px;
@@ -682,16 +727,3 @@ h1:after {
   
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

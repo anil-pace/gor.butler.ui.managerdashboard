@@ -27,8 +27,7 @@ import {
 import {
 	AUDIT_URL,
 	AUDIT_VALIDATION_URL,
-	AUDIT_CREATION_URL,
-	SKU_VALIDATION_URL
+	AUDIT_CREATION_URL
 } from "../../../constants/configConstants";
 import FieldError from "../../../components/fielderror/fielderror";
 import { locationStatus, skuStatus } from "../../../utilities/fieldCheck";
@@ -65,7 +64,7 @@ class SkuSelector extends React.Component {
 		super(props);
 
 		this.state = {
-			visibility:`hidden`,
+			visibility: `hidden`,
 			copyPasteSKU: {
 				data: [
 					{
@@ -229,9 +228,6 @@ class SkuSelector extends React.Component {
 
 
 	componentWillReceiveProps(nextProps) {
-		if (!nextProps.auth_token) {
-			//
-		}
 		if (this.props.hasDataChanged !== nextProps.hasDataChanged) {
 			let locationAttributes = JSON.parse(
 				JSON.stringify(nextProps.locationAttributes)
@@ -277,9 +273,9 @@ class SkuSelector extends React.Component {
 				auditSpinner: nextProps.auditSpinner
 			});
 		}
-		if (this.props.visibility !== nextProps.visibility){
+		if (this.props.visibility !== nextProps.visibility) {
 			this.setState({
-				visibility:nextProps.visibility
+				visibility: nextProps.visibility
 			})
 		}
 	}
@@ -502,9 +498,9 @@ class SkuSelector extends React.Component {
 		}
 		if (sendRequest) {
 			let urlData = {
-				url: SKU_VALIDATION_URL,
+				url: AUDIT_VALIDATION_URL,
 				formdata: validSKUData,
-				method: GET,
+				method: GET,//POST,
 				cause: VALIDATE_SKU_ID,
 				contentType: APP_JSON,
 				accept: APP_JSON,
@@ -656,7 +652,7 @@ class SkuSelector extends React.Component {
 
 		return (
 
-			<div className="gor-modal-content gor-audit-create" style={{visibility:this.state.visibility}}>
+			<div className="gor-modal-content gor-audit-create" style={{ visibility: this.state.visibility }}>
 				<div className='gor-modal-body'>
 					<div className='gor-audit-form new-audit'>
 						<GorTabs defaultActiveTabIndex={0} tabClass={"tabs-audit"} >
@@ -777,29 +773,52 @@ class SkuSelector extends React.Component {
 
 SkuSelector.PropTypes = {
 	skuValidationSpinner: React.PropTypes.boolean,
-	locationValidationSpinner: React.PropTypes.boolean,
-	locationValidationSpinnerCsv: React.PropTypes.boolean,
 	auditType: React.PropTypes.object,
 	skuCheck: React.PropTypes.object,
-	locCheck: React.PropTypes.object,
 	auth_token: React.PropTypes.string,
 	skuAttributes: React.PropTypes.object,
-	locationAttributes: React.PropTypes.object,
 	intl: intlShape.isRequired,
 	auditSpinner: React.PropTypes.bool,
 	setAuditSpinner: React.PropTypes.func
 
 }
 
+
+SkuSelector.defaultProps = {
+	skuValidationSpinner:false,
+	auditType:{},
+	skuCheck:{},
+	skuAttributes:{},
+	locationAttributes:{},
+	hasDataChanged:false
+  };
 var mapDispatchToProps = function (dispatch) {
 	return {
 		resetForm: function () { dispatch(resetForm()); },
 		makeAjaxCall: function (data) { dispatch(makeAjaxCall(data)) },
+		setAuditSpinner: function (data) {dispatch(setAuditSpinner(data))}
 	};
 };
+
+function mapStateToProps(state, ownProps){
+	return {
+		skuValidationSpinner: state.auditInfo.skuValidationSpinner ,
+		locationValidationSpinner: state.auditInfo.locationValidationSpinner ,
+		locationValidationSpinnerCsv: state.auditInfo.locationValidationSpinnerCsv ,
+		auditType:  state.auditInfo.auditType,
+		skuCheck: state.appInfo.skuInfo,
+		locCheck: state.appInfo.locInfo,
+		auth_token:state.authLogin.auth_token,
+		skuAttributes: state.auditInfo.skuAttributes,
+		locationAttributes:state.auditInfo.locationAttributes,
+		hasDataChanged:state.auditInfo.hasDataChanged,
+		auditSpinner: state.spinner.auditSpinner || false
+	};
+  }
+  
 
 SkuSelector.contextTypes = {
 	intl: React.PropTypes.object.isRequired
 };
 
-export default connect(null, mapDispatchToProps)(injectIntl(SkuSelector));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(SkuSelector));

@@ -642,8 +642,8 @@ class UtilityTab extends React.Component {
             //Do nothing
         }
         try {
-            show_item_recall = this.props.config.utility_tab.widgets
-                .scripts.item_recall;
+            show_item_recall = true;//this.props.config.utility_tab.widgets
+                //.scripts.item_recall;
         } catch (ex) {
             //Do nothing
         }

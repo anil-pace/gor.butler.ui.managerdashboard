@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.8.83';
+export const BASE_URL = '192.168.8.103';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -34,8 +34,7 @@ export const  ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
 export const FILTER_AUDIT_ID="display_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
-export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";
-export const AUDIT_VALIDATION_URL=TIME_ZONE_URL;//API_URL+"/audit/validate";
+export const AUDIT_VALIDATION_URL=TIME_ZONE_URL;//  API_URL+"/audit/validate";
 export const AUDIT_CREATION_URL=API_URL+"/audit/";//TIME_ZONE_URL;//API_URL + "api/audit/validate";
 export const VALIDATION_LIST=API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";

@@ -49,7 +49,7 @@ class RecallItems extends React.Component {
       contentType: APP_JSON
     };
     this.props.getItemRecall(data);
-    this.props.clearOrderRecallValidation();
+    // this.props.clearOrderRecallValidation();
   }
 
   _handleChangeRunScriptCategory(e) {
@@ -60,10 +60,10 @@ class RecallItems extends React.Component {
         this.orderid.value = "";
         this.skuno.value = "";
         this.batchNumber = "";
-        this.props.clearOrderRecallValidation();
+        // this.props.clearOrderRecallValidation();
       } else {
         this.orderId.value = "";
-        this.props.clearOrderRecallValidation();
+        // this.props.clearOrderRecallValidation();
       }
       this._validateScriptRecallButton();
     }
@@ -209,9 +209,9 @@ var mapDispatchToProps = function(dispatch) {
     getItemRecall: function(data) {
       dispatch(getItemRecall(data));
     },
-    clearOrderRecallValidation: function() {
-      dispatch(clearOrderRecallValidation());
-    }
+    // clearOrderRecallValidation: function() {
+    //   dispatch(clearOrderRecallValidation());
+    // }
   };
 };
 

@@ -331,7 +331,7 @@ class CreateAudit extends React.Component{
       let urlData={
                   'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
-                  'method':GET,//POST,
+                  'method':POST,
                   'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
@@ -890,7 +890,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Create new audit'/>
                           
               </div>
-              <span className="close" onClick={this._removeThisModal.bind(this)}>Ã—</span>
+              <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
             
@@ -1303,3 +1303,4 @@ function mapDispatchToProps(dispatch){
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(injectIntl(CreateAudit));
+
