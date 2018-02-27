@@ -29,7 +29,7 @@
 @import 'components/resolveAudit';
 @import 'components/gorPaginate';
 @import 'components/searchDropdown';
-@import 'components/createAudit';
+@import 'components/audit';
 @import 'components/tableFilter';
 @import 'components/hamburger';
 @import 'components/rangeSlider';
@@ -46,5 +46,9 @@
 @import 'components/operationsLogs';
 @import 'components/downloadReports';
 @import 'components/storageSpace';
+@import 'components/gor-global-notifications';
+@import 'components/gor-filter-component';
+@import 'components/createAudit';
+@import 'components/gor-select-attributes';
 
 

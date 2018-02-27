@@ -211,11 +211,11 @@ class WaveTab extends React.Component {
         let filterHeight=screen.height-190-50;
         var updateStatusIntl="";
         var itemNumber=7, waveData=this.props.waveDetail.waveData, waveState={
-            "pendingWave": "--",
-            "progressWave": "--",
-            "orderRemaining": "--",
-            "completedWaves": "--",
-            "totalOrders": "--"
+            "pendingWave": 0,
+            "progressWave": 0,
+            "orderRemaining": 0,
+            "completedWaves": 0,
+            "totalOrders": 0
         };
         var totalOrders=0, orderToFulfill=0, completedWaves=0, pendingWaves=0, progressWave=0, alertNum=0;
 

@@ -1,0 +1,41 @@
+.gor-global-notification{
+	.message{
+		padding: 10px 5px;
+    	color: #fff;
+    	font-size: calculateRem(12px);
+    	background: #71B56D;
+    	font-weight: bold;
+    	-webkit-animation-name: fadeOutUp;
+    	animation-name: fadeOutUp;
+	}
+	.success{
+		background: #3cb669;
+    	
+	}
+	.error{
+		background: #ea2127;
+	}
+}
+
+ @-webkit-keyframes fadeOutUp {
+    0% {
+       opacity: 1;
+       -webkit-transform: translateY(0);
+    }
+    100% {
+       opacity: 0;
+       -webkit-transform: translateY(0px);
+    }
+ }
+ 
+ @keyframes fadeOutUp {
+    0% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+    100% {
+       opacity: 0;
+       transform: translateY(0px);
+    }
+ }
+ 
