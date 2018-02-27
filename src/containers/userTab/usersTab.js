@@ -89,7 +89,7 @@ const SUBSCRIPTION_QUERY = gql`subscription USER_CHANNEL($username: String){
             role
             user_name
             login_time
-
+            full_name
 
 
         }
@@ -108,6 +108,7 @@ const USERS_QUERY = gql`
                 role
                 user_name
                 login_time
+                full_name
 
 
             }
@@ -136,10 +137,10 @@ class UsersTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
-            this._refreshList(nextProps.location.query)
 
+             this._refreshList(nextProps.location.query)
         }
         if ((!this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
@@ -179,7 +180,7 @@ class UsersTab extends React.Component {
             return []
         }
         var nProps = this,
-            data = nProps.props.data.UserList.list
+            data = this._filterList(nProps.props.data.UserList,nProps.props.location.query)
         let operator = nProps.context.intl.formatMessage(messages.userOperator);
         let manager = nProps.context.intl.formatMessage(messages.userManager);
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
@@ -247,6 +248,19 @@ class UsersTab extends React.Component {
         return userDetails;
     }
 
+
+    _filterList(init_data,query){
+        let filtered_data=init_data.list
+        if (query.username) {
+            var match_exp = new RegExp(query.username.split(" ").join("|"));
+            filtered_data=filtered_data.filter(function(user){
+                return user.full_name.match(match_exp)
+            })
+        }
+
+        return filtered_data
+    }
+
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
@@ -293,10 +307,6 @@ class UsersTab extends React.Component {
             this.props.toggleUserFilter(false);
             this.props.filterApplied(false);
         }
-        let updatedWsSubscription = this.props.wsSubscriptionData;
-        updatedWsSubscription["users"].data[0].details["filter_params"] = filterSubsData;
-        this.props.initDataSentCall(updatedWsSubscription["users"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.userfilterState({
             tokenSelected: {
                 "STATUS": query.status || ["all"],
@@ -307,11 +317,7 @@ class UsersTab extends React.Component {
             defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
         });
 
-        if (query.username && !this.props.data.loading) {
-            this.props.data.refetch({input: {username: query.username}})
-        }
-        let me = this
-        me.updateSubscription({input: {username: query.username}})
+
 
 
     }
@@ -345,9 +351,7 @@ class UsersTab extends React.Component {
         let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         var itemNumber = 7, userData;
-        if (this.props.userdetails !== undefined) {
-            userData = this._processUserDetails();
-        }
+        userData = this._processUserDetails();
         return (
             <div>
                 <div>
