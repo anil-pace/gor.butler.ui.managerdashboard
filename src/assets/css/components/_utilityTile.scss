@@ -100,7 +100,20 @@
   .gor-modal-content{
     width: initial;
     min-height: initial;
-    height: 330px;
+    padding-right: initial;
+  }
+  .gor-script-sku-wrap{
+    width: 500px;
+
+  }
+  .gor-modal-body{
+    height: 328px;
+  }
+  .gor-audit-create .new-audit > .tabs{
+    margin-top:initial;
+  }
+  .gor-audit-create .gor-audit-inputlist-wrap{
+    max-height: 150px;
   }
   .gor-audit-create .gor-audit-form {
     width: initial;
