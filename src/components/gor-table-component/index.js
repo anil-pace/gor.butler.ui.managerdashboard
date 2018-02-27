@@ -17,8 +17,12 @@
  */
 
 import React from 'react';
+import {GTableHeader,GTableHeaderCell} from './tableHeader'
+import {GTableBody} from './tableBody'
+import {GTableRow} from './tableRow'
+
 //require("./../../../library/table/css/table.css")
-export class GTable extends React.Component{
+export default class GTable extends React.Component{
     constructor(props){
         super(props)
     }
@@ -28,3 +32,4 @@ export class GTable extends React.Component{
         </div>
     }
 }
+export {GTableHeader,GTableHeaderCell,GTableBody,GTableRow}

@@ -1,5 +1,6 @@
 import React  from 'react';
 import UserDataTable from './userTabTable';
+import UsersTable from './usersTable'
 import {connect} from 'react-redux';
 import {defineMessages} from 'react-intl';
 import {userRequest} from '../../actions/userActions';
@@ -98,7 +99,7 @@ const SUBSCRIPTION_QUERY = gql`subscription USER_CHANNEL($username: String){
 `
 
 const USERS_QUERY = gql`
-    query UserList($input: UserListParams!) {
+    query UserList($input: UserListParams) {
         UserList(input:$input){
             list {
                 first_name
@@ -128,25 +129,19 @@ class UsersTab extends React.Component {
         this.linked = false
     }
 
-    shouldComponentUpdate(nextProps,nextState){
-        if(JSON.stringify(nextProps)===JSON.stringify(this.props)){
-            return false
-        }else{
-            return true
-        }
-    }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
 
              this._refreshList(nextProps.location.query)
         }
-        if ((!this.subscription && !nextProps.data.loading)) {
+
+
+        if ((!this.props.data.UserList && nextProps.data.UserList && !this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
         }
 
-
+        console.log("PROPS"+nextProps.data.networkStatus)
 
 
     }
@@ -252,7 +247,7 @@ class UsersTab extends React.Component {
     _filterList(init_data,query){
         let filtered_data=init_data.list
         if (query.username) {
-            var match_exp = new RegExp(query.username.split(" ").join("|"));
+            var match_exp = new RegExp(query.username.split(" ").join("|"),'gi');
             filtered_data=filtered_data.filter(function(user){
                 return user.full_name.match(match_exp)
             })
@@ -267,7 +262,7 @@ class UsersTab extends React.Component {
      * @private
      */
     _refreshList(query) {
-        this.props.userFilterApplySpinner(true);
+         this.props.userFilterApplySpinner(true);
         let filterSubsData = {}
         if (query.username) {
             let name_query = query.username.split(" ")
@@ -298,24 +293,24 @@ class UsersTab extends React.Component {
             })
             filterSubsData["pps"] = ['in', pps_list]
         }
-        if (Object.keys(query).filter(function (el) {
-                return el !== 'page'
-            }).length !== 0) {
-            this.props.toggleUserFilter(true);
-            this.props.filterApplied(true);
-        } else {
-            this.props.toggleUserFilter(false);
-            this.props.filterApplied(false);
-        }
-        this.props.userfilterState({
-            tokenSelected: {
-                "STATUS": query.status || ["all"],
-                "ROLE": query.role || ['all'],
-                "WORK MODE": query.mode || ['all'],
-                "LOCATION": ["all"]
-            }, searchQuery: {"USER NAME": query.username || null},
-            defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
-        });
+            if (Object.keys(query).filter(function (el) {
+                    return el !== 'page'
+                }).length !== 0) {
+                this.props.toggleUserFilter(true);
+                this.props.filterApplied(true);
+            } else {
+                this.props.toggleUserFilter(false);
+                this.props.filterApplied(false);
+            }
+            this.props.userfilterState({
+                tokenSelected: {
+                    "STATUS": query.status || ["all"],
+                    "ROLE": query.role || ['all'],
+                    "WORK MODE": query.mode || ['all'],
+                    "LOCATION": ["all"]
+                }, searchQuery: {"USER NAME": query.username || null},
+                defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
+            });
 
 
 
@@ -350,8 +345,8 @@ class UsersTab extends React.Component {
     render() {
         let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
-        var itemNumber = 7, userData;
-        userData = this._processUserDetails();
+        var itemNumber = 7, userList;
+        userList= this._processUserDetails();
         return (
             <div>
                 <div>
@@ -399,32 +394,18 @@ class UsersTab extends React.Component {
 
                         </div>
                         {/*Filter Summary*/}
-                        <FilterSummary total={userData.length || 0} isFilterApplied={this.props.isFilterApplied}
+                        <FilterSummary total={userList.length || 0} isFilterApplied={this.props.isFilterApplied}
                                        responseFlag={this.props.responseFlag}
                                        filterText={<FormattedMessage id="userList.filter.search.bar"
                                                                      description='total users for filter search bar'
                                                                      defaultMessage='{totalUsers} Users found'
-                                                                     values={{totalUsers: userData.length || 0}}/>}
+                                                                     values={{totalUsers: userList.length || 0}}/>}
                                        refreshList={this._clearFilter.bind(this)}
                                        refreshText={<FormattedMessage id="userList.filter.search.bar.showall"
                                                                       description="button label for show all"
                                                                       defaultMessage="Show all Users"/>}/>
 
-                        <UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages}
-                                       mid={this.props.manager.users ? this.props.manager.users[0].id : ''}
-                                       sortHeaderState={this.props.userHeaderSort}
-                                       sortHeaderOrder={this.props.userHeaderSortOrder}
-                                       currentSortState={this.props.userSortHeader}
-                                       currentHeaderOrder={this.props.userSortHeaderState}
-                                       setUserFilter={this.props.userFilterDetail}
-                                       getUserFilter={this.props.userFilter}
-                                       refreshList={this._clearFilter.bind(this)}
-                                       userFilterStatus={this.props.userFilterStatus}
-                                       isFilterApplied={this.props.isFilterApplied}
-                                       lastUpdatedText={updateStatusIntl}
-                                       lastUpdated={updateStatusIntl}
-                                       showFilter={this.props.showFilter}
-                                       setFilter={this.props.showTableFilter} noResultFound={this.props.noResultFound}/>
+                                       <UsersTable data={userList}/>
                     </div>
                 </div>
             </div>
@@ -520,7 +501,7 @@ UsersTab.PropTypes = {
 const withQuery = graphql(USERS_QUERY, {
     props: (data) => (data),
     options: ({match, location}) => ({
-        variables: {input: location.query},
+        variables: {},
         fetchPolicy: 'network-only'
     }),
 });
