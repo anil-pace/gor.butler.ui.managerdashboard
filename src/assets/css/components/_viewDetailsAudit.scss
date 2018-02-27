@@ -25,6 +25,16 @@
             margin-top: 10px;
             .auditDetailsLeft{
               width: 100%;
+              .details-changepps
+                  {
+                      display:inline-block;
+                      vertical-align:top;
+                      margin-top:13px;
+                      cursor:pointer;
+                       &:hover{
+                        color:#0389eb;  
+                    }
+                    }
             }
             }
         }
@@ -48,7 +58,7 @@
           border-bottom:1px solid #AAAAAA;
           min-height:calculateRem(50px);
           width:97%;
-          position:fixed;
+          position:absolute;
           padding-top:10px;
           .AuditIDWrapper{
           	font-size: calculateRem(26px);
@@ -103,4 +113,5 @@ background-color:#dddddd;
   text-align: left;
  }
 }
+
 

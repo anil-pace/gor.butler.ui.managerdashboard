@@ -7,6 +7,7 @@ class Tile extends React.Component{
 
 render()
 {
+  let className=this.props.className;
   let data=this.props.data;
   let line=[];
   
@@ -14,7 +15,7 @@ render()
     line.push(<div><span className='spanKey'>{key}</span><span>:</span><span className='spanValue'>{data[key]}</span></div>);
 });
     return (
-        <div className="orderDetailsColumn">
+        <div className={className?"orderDetailsColumn "+className:"orderDetailsColumn"}>
         <div className="orderDetailsRow">
            {line}
         </div>

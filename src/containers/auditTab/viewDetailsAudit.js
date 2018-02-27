@@ -12,6 +12,8 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 import SearchFilter from '../../components/searchFilter/searchFilter';
+import AuditStart from '../../containers/auditTab/auditStart';
+ import {modal} from 'react-redux-modal';
 
 class ViewDetailsAudit extends React.Component {
    constructor(props) {
@@ -22,12 +24,12 @@ class ViewDetailsAudit extends React.Component {
    _removeThisModal() {
       this.props.removeModal();
    }
-   //   componentWillReceiveProps(nextProps){
-   //     if(!nextProps.auth_token)
-   //     {
-   //       this._removeThisModal();
-   //     }
-   //   }
+     componentWillReceiveProps(nextProps){
+       if(!nextProps.auth_token)
+       {
+         this._removeThisModal();
+       }
+     }
 
 
   componentWillReceiveProps(nextProps){
@@ -61,6 +63,18 @@ class ViewDetailsAudit extends React.Component {
     }
   }
     return finalstring;
+  }
+
+  ppsChange(e){
+  modal.add(AuditStart, {
+    title: '',
+    size: 'large',
+   closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+   hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+   auditID: this.props.auditID
+   //.. all what you put in here you will get access in the modal props ;),
+                      });
+  this._removeThisModal();
   }
 _timeFormat(UTCtime){
   var timeOffset=this.props.timeOffset || "";
@@ -192,7 +206,6 @@ return tableData;
             {id:3,text: "OPENING STOCK", searchable: false, width:30}
 
 		];
-
       return (
          <div>
             <div className="gor-AuditDetails-modal-content">
@@ -205,7 +218,7 @@ return tableData;
                   </span>
                   <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
-
+            
                <div className='gor-auditDetails-modal-body'>
                   <div className="AuditDetailsWrapper">
                      <div className="AuditDetailsHeader">
@@ -215,8 +228,9 @@ return tableData;
                         <div className="auditDetailsLeft">
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
-                        <Tile data={tiledata[2]}/>
+                        <Tile className="width-auto" data={tiledata[2]}/><div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| Change PPS</div>
                         </div>
+                        
                      </div>
                   </div>
                </div>
@@ -262,7 +276,7 @@ return tableData;
 
 
 
-            </div>
+            </div>:<div>No data to show</div>}
 
          </div>
       );

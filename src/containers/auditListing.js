@@ -384,11 +384,6 @@ startAudit() {
                 auditData.audit_name="";
             }
            auditData.auditBased=data[i].audit_type?data[i].audit_type:"";
-
-        
-            
-            
-
             auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id.length==1?"PPS "+data[i].pps_id:"Multi PPS");
 
             
