@@ -697,6 +697,7 @@ class CreateAudit extends React.Component{
             tuple.checked=false;
             tuple.index=i;
             tuple.value=data[i];
+            tuple.visible=true;
             tuple.errorMessage = true;
             processedList.push(tuple);
 
