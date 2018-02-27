@@ -144,22 +144,13 @@ class SkuSelector extends React.Component {
 		});
 	}
 	_onBackClick() {
-		if (this.state.activeTabIndex === 0) {
 			this.setState({
-				validationDoneSKU: true,
-				skuAttributes: {},
-				validateclicked: false,
-				selectedSKUList: {},
-				auditSpinner: false
-			});
-		} else {
-			this.setState({
-				validationDone: false,
-				locationAttributes: {},
-				validateclicked: false,
-				auditSpinner: false
-			});
-		}
+				validationDoneSKU:false,
+				skuAttributes:{},
+				validateclicked:false,
+				selectedSKUList:{},
+				auditSpinner:false
+			  });	
 	}
 	_addNewInput(type) {
 		var stateInputList = JSON.parse(
@@ -752,7 +743,7 @@ class SkuSelector extends React.Component {
 													<div>
 														{self.state.copyPasteSKU.data.map((tuple, i) => {
 															let tuples = [],
-																attributeList = this.state.skuAttributes.data[i].attributeList;
+																attributeList = self.state.skuAttributes.data[i].attributeList;
 															if (tuple.visible) {
 																tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value + i}>
 																	<InputComponent.AfterValidation
