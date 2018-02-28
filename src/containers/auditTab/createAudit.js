@@ -238,11 +238,11 @@ class CreateAudit extends React.Component{
     var processedData=[]
     for(let i=0,len=data.length; i<len ;i++){
       let tuple={};
-      let error_code = data[i].status===true ? "" :data[i].status.error_code;//MIGHT
+      let error_code = data[i].status ? (data[i].status===true ? "" :data[i].status.error_code) : "";//MIGHT
       tuple.checked=false;
       tuple.index=i;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);//MIGHT
+      tuple.errorMessage = data[i].status ? (data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
       processedData.push(tuple);
     }
     return processedData
@@ -899,7 +899,7 @@ class CreateAudit extends React.Component{
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           attributeList={attributeList}
-                          attrSet={attributeSet}
+                          prefilledData={attributeSet}
                           applyCallBack={this._onAttributeSelection}
                           index={i}
                           />}
