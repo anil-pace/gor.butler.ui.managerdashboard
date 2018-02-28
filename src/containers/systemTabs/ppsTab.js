@@ -457,7 +457,9 @@ class PPS extends React.Component {
        
             drop=<Dropdown 
                     options={modes} 
-                    
+                    onSelectHandler={(e) => this.handleModeChange(e)}
+                    disabled={!this.props.bDropRender}
+                    resetOnSelect={true}
                     placeholder={modeDropPHolder} />
         
             statusDrop = <Dropdown 
