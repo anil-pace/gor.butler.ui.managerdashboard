@@ -8,6 +8,7 @@ import {
     SETAUDIT_DETAILS,
     REFRESH_AUDIT,
     DISPLAY_AUDIT_SPINNER,
+    DISPLAY_AUDIT_VALIDATION_SPINNER,
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
     VALIDATED_ATTIBUTES_DATA_SKU,
@@ -99,6 +100,13 @@ export function setAuditRefresh(data) {
 export function setAuditSpinner(data) {
     return {
         type: DISPLAY_AUDIT_SPINNER,
+        data
+    }
+}
+
+export function setValidationAuditSpinner(data) {
+    return {
+        type: DISPLAY_AUDIT_VALIDATION_SPINNER,
         data
     }
 }
