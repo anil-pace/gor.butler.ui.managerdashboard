@@ -226,6 +226,11 @@ export const  stringConfig= defineMessages({
         description: 'Text to show Offline',
         defaultMessage: "offline"
     },
+    error:{
+        id: 'stringConfig.error',
+        description: 'Text to show Error',
+        defaultMessage: "error"
+    },
     received:{
         id: 'stringConfig.received',
         description: 'Text to show received',

@@ -358,7 +358,7 @@ class CreateAudit extends React.Component{
       let urlData={
                   'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
-                  'method':POST,
+                  'method':GET,//POST,
                   'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
@@ -854,7 +854,6 @@ class CreateAudit extends React.Component{
 
   render()
   {
-
       let self=this;
      var header='',button='';
       let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
@@ -864,7 +863,6 @@ class CreateAudit extends React.Component{
       let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       let uploadCsvMessg=<FormattedMessage id="audit.uploadcsv.text" description='text for upload csv and validate' defaultMessage='Upload CSV and validate'/>;
       let selectAttributesMessg=<FormattedMessage id="audit.selectattributes.text" description='text for select attributes' defaultMessage='Select attributes'/>;
-
       let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
@@ -919,24 +917,26 @@ class CreateAudit extends React.Component{
         label:deselectAllLabel,
         disabled:false
       }]
+
       if(this.props.param=='edit')
       {
         header=<div className='gor-usr-add'><FormattedMessage id='audit.edit.heading' description='Heading for edir audit' 
        defaultMessage='Edit audit'/></div>
-       button=<button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for edit audit button' 
-            defaultMessage='UPDATE'/></button>
+       button= <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for add audit button' 
+       defaultMessage='UPDATE'/></button>
 }else if(this.props.param=='duplicate'){
    header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
        defaultMessage='Duplicate audit'/></div>
-         button= <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.duplicate.password.button" description='Text for edit duplicate button' 
-            defaultMessage='CREATE AUDIT'/></button>
+         button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+         defaultMessage='Create audit'/></button>
 }else
 {
      header=<div className='gor-usr-add'><FormattedMessage id='audit.add.heading' description='Heading for add audit' 
        defaultMessage='Create New audit'/></div>
-       button= <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for edit audit button' 
-            defaultMessage='CREATE AUDIT'/></button>
+       button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+       defaultMessage='Create audit'/></button>
 }
+
 
 
       
@@ -1054,6 +1054,7 @@ class CreateAudit extends React.Component{
                     if(tuple.visible){
                     tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value+i}>
 
+
                         <InputComponent.AfterValidation
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
@@ -1078,6 +1079,7 @@ class CreateAudit extends React.Component{
               }
               )}
 
+
                {!validationDoneSKU && <div>
                       <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
@@ -1096,7 +1098,7 @@ class CreateAudit extends React.Component{
               </div>}
 
                <div>
-            {button}
+           
             </div>
 
                   </div>
@@ -1298,8 +1300,7 @@ class CreateAudit extends React.Component{
            
             </div>
             <div className={"audit-footer"}>
-             <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
+            {button}
             </div>
             </div>
           </div>

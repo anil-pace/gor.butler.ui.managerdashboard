@@ -21,7 +21,82 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,SETAUDIT_DETAILS,
  * @return {[Object] updated state}
  */
 
-
+const validSKU ={
+  "audit_sku_validation_response": {
+    "attributes_list": [
+      {},
+      {
+        "product_color": [
+          "Black"
+        ]
+      },
+      {},
+      {
+        "product_color": [
+          "Red",
+          "Black"
+        ],
+        "product_internal_memory": [
+          "32GB",
+          "64GB"
+        ],
+        "product_region": [
+          "India version",
+          "China version"
+        ]
+      },
+      {
+        "product_internal_memory": [
+          "128GB"
+        ],
+        "product_region": [
+          "China version"
+        ]
+      }
+    ],
+    "i18n_values": {
+      "product_color": [
+        {
+          "display_name": "Product color",
+          "locale": "en-US"
+        }
+      ],
+      "product_internal_memory": [
+        {
+          "display_name": "Internal memory",
+          "locale": "en-US"
+        }
+      ],
+      "product_region": [
+        {
+          "display_name": "Product region",
+          "locale": "en-US"
+        }
+      ]
+    },
+    "sku_list": [
+      "2002",
+      "2003",
+      "2001",
+      "2004",
+      "2005"
+    ],
+    "status": {
+      "s0": true,
+      "s1": {
+        "error_code": "e027",
+        "error_reason": "sku does not exist"
+      }
+    },
+    "status_list": [
+      "s0",
+      "s0",
+      "s0",
+      "s0",
+      "s0"
+    ]
+  }
+}
 
 export  function auditInfo(state={},action){
   switch (action.type) {
@@ -102,7 +177,7 @@ export  function auditInfo(state={},action){
           })
           
     case VALIDATED_ATTIBUTES_DATA_SKU:
-        let processedDataSKU = processValidationDataSKU(action.data)//(action.data)
+        let processedDataSKU = processValidationDataSKU(validSKU.audit_sku_validation_response/*action.data*/)//(action.data)
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,
