@@ -19,6 +19,7 @@ class OrderTile extends React.Component{
     this.showFilter = this.showFilter.bind(this);
     this.hideFilter = this.hideFilter.bind(this);
     this.callBack = this.callBack.bind(this);
+    this._setFilter = this._setFilter.bind(this);
   } 
 
   componentDidMount(){
@@ -39,6 +40,11 @@ class OrderTile extends React.Component{
       showFilter: data
     })
   }
+
+  _setFilter() {
+    var newState=!this.props.showFilter;
+    this.props.showTableFilter(newState);
+}
 
   callBack(query){
     this.props.callBack(query);
@@ -123,9 +129,11 @@ class OrderTile extends React.Component{
 
               <div className="orderRightWrapper">
                 <div className="orderRightContent">
+                  
+{/*
                   {!this.props.showFilter? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
 
-                  {orderDetail /*orderDetail*/ ? (
+                  {orderDetail ? (
                     <div>
                       <div className="gor-filter-wrap" style={{'width': this.state.showFilter ? '400px' : '0px', height: filterHeight}}>
                         <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag} callBack={this.callBack} hideFilter={this.hideFilter}/>
@@ -138,27 +146,15 @@ class OrderTile extends React.Component{
                           </button>
                         </div>
                         <div className="gorButtonWrap">
-                            <button className="ordersFilterData" onClick={this.showFilter}>
+                            <button className="ordersFilterData" onClick={this._setFilter.bind(this)}>
                             <div className="gor-manage-task"/>
                             <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
                             </button>
                         </div>
                       </div>
-                   
-                      {/*
-                        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
-                        responseFlag={this.props.responseFlag}
-                        filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                        description='total order for filter search bar'
-                        defaultMessage='{total} Orders found'
-                        values={{total: orderDetail ? orderDetail.length : '0'}}/>}
-                        refreshList={this._clearFilter.bind(this)}
-                        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                        description="button label for show all"
-                        defaultMessage="Show all orders"/>}/>
-                      */}
                     </div>) : null
                   }
+                */}
                   
 
                   <div className="orderRightHeader"> 

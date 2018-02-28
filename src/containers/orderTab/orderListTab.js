@@ -570,6 +570,8 @@ render() {
             }}>
             <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
             </div>
+
+            
             <div className="gorToolBar">
             <div className="gorToolBarWrap">
             <div className="gorToolBarElements">

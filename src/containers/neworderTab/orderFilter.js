@@ -52,8 +52,7 @@ class OrderFilter extends React.Component{
 
 
     _closeFilter() {
-        this.props.hideFilter(false);
-        //this.props.showTableFilter(false);
+        this.props.showTableFilter(false);
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){

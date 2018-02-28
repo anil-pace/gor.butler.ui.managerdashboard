@@ -1,24 +1,44 @@
 import React  from 'react';
 import {connect} from 'react-redux';
-import {
-    getPageData,
-    getStatusFilter,
-    getTimeFilter,
-    getPageSizeOrders,
-    currentPageOrders,
-    lastRefreshTime
-} from '../../actions/paginationAction';
-import {
-    ORDERS_RETRIEVE,
-    GOR_BREACHED,
-    BREACHED,
-    GOR_EXCEPTION,
-    toggleOrder,
-    INITIAL_HEADER_SORT,
-    sortOrderHead,
-    sortOrder, WS_ONSEND,
-    EVALUATED_STATUS
+import {FormattedMessage, FormattedDate, defineMessages, FormattedRelative} from 'react-intl';
+import {hashHistory} from 'react-router';
+import {modal} from 'react-redux-modal';
+
+import OrderFilter from './orderFilter';
+import OrderListTable from './orderListTable';
+import Dropdown from '../../components/dropdown/dropdown'
+import Spinner from '../../components/spinner/Spinner';
+import {GTable} from '../../components/gor-table-component/index'
+import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
+import {GTableBody} from "../../components/gor-table-component/tableBody";
+import {GTableRow} from "../../components/gor-table-component/tableRow";
+import Accordion from '../../components/accordion/accordion';
+import OrderTile from '../../containers/neworderTab/OrderTile';
+import ViewOrderLine from '../../containers/neworderTab/viewOrderLine';
+import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
+import FilterSummary from '../../components/tableFilter/filterSummary';
+import ProgressBar from '../../components/progressBar/progressBar';
+import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
+
+import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
+import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
+import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
+import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
+import { makeAjaxCall } from '../../actions/ajaxActions';
+
+import {getDaysDiff} from '../../utilities/getDaysDiff';
+
+import {stringConfig} from '../../constants/backEndConstants';
+import {wsOverviewData} from './../../constants/initData.js';
+
+
+
+import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
+
+import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH
 } from '../../constants/frontEndConstants';
+
 import {
     API_URL,
     ORDERS_URL,
@@ -29,40 +49,10 @@ import {
     EXCEPTION_TRUE,
     WAREHOUSE_STATUS_SINGLE,
     WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS
+    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
+    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
-import OrderListTable from './orderListTable';
-import Dropdown from '../../components/dropdown/dropdown'
-import {FormattedMessage, FormattedDate, defineMessages, FormattedRelative} from 'react-intl';
-import Spinner from '../../components/spinner/Spinner';
-import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
-import {stringConfig} from '../../constants/backEndConstants';
-import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
-import {getDaysDiff} from '../../utilities/getDaysDiff';
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
-import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
-import {hashHistory} from 'react-router'
-import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
-import {wsOverviewData} from './../../constants/initData.js';
-import OrderFilter from './orderFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary';
 
-
-import {GTable} from '../../components/gor-table-component/index'
-import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
-import {GTableBody} from "../../components/gor-table-component/tableBody";
-import {GTableRow} from "../../components/gor-table-component/tableRow";
-import Accordion from '../../components/accordion/accordion';
-import OrderTile from '../../containers/neworderTab/OrderTile';
-import ViewOrderLine from '../../containers/neworderTab/viewOrderLine';
-
-
-import {modal} from 'react-redux-modal';
-import ProgressBar from '../../components/progressBar/progressBar';
-import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
-import { makeAjaxCall } from '../../actions/ajaxActions';
-import { DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH} from '../../constants/frontEndConstants';
-import { ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 const messages=defineMessages({
     inProgressStatus: {
         id: 'orderList.progress.status',
@@ -99,7 +89,7 @@ var storage = [];
     constructor(props) {
         super(props);
         this.state = this._getInitialState();
-        //this.state={selected_page: 1, query: null, orderListRefreshed: null};
+
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         //this._handlePageChange= this._handlePageChange.bind(this);
@@ -133,71 +123,17 @@ var storage = [];
          * packet can be sent to the server for data
          * update.
          */
-         this.props.orderListRefreshed()
+         this.props.orderListRefreshed();
      }
 
-     componentWillUnmount() {
-        clearInterval(this._intervalId);
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-         this.props.orderListRefreshed();
-    }
-
-     componentDidMount(){
-        console.log("component DId Mount get called");
-        this._reqCutOffTime();
-        //this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
-    }
-
-    callBack(query){
-        //alert("coming to newordersTab" + JSON.stringify(query));
-        this._refreshList(this.props.location.query);
-    }
-
-    enableCollapse(){
-        this.setState({
-            collapseState: true,
-            isPanelOpen: true
-        })
-    }
-
-    disableCollapse(){
-        this.setState({
-            collapseState: false,
-            isPanelOpen: false
-        })
-    }
-
-     componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            this._subscribeData()
+            //this._subscribeData()
             this._refreshList(nextProps.location.query,nextProps.orderSortHeaderState.colSortDirs)
         }
     }
-
-    _subscribeData() {
-        let updatedWsSubscription=this.props.wsSubscriptionData;
-        this.props.initDataSentCall(updatedWsSubscription["default"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
-    }
-
-
-    _handleClickRefreshButton(){
-        this._refreshList(this.state.query,(this.props.orderSortHeaderState?this.props.orderSortHeaderState.colSortDirs:null))
-    }
-    /**
-     * The method will update the subscription packet
-     * and will fetch the data from the socket.
-     * @private
-     */
-
-
 
      _refreshList(query,orderbyParam) {
         var orderbyUrl;
@@ -315,6 +251,59 @@ var storage = [];
      _clearFilter() {
         hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
+
+     componentWillUnmount() {
+        clearInterval(this._intervalId);
+    }
+
+     componentDidMount(){
+        console.log("component DId Mount get called");
+        this._reqCutOffTime();
+        //this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
+    }
+
+    callBack(query){
+        //alert("coming to newordersTab" + JSON.stringify(query));
+        this._refreshList(this.props.location.query);
+    }
+
+    enableCollapse(){
+        this.setState({
+            collapseState: true,
+            isPanelOpen: true
+        })
+    }
+
+    disableCollapse(){
+        this.setState({
+            collapseState: false,
+            isPanelOpen: false
+        })
+    }
+
+     
+
+    _subscribeData() {
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
+
+    _handleClickRefreshButton(){
+        this._refreshList(this.state.query,(this.props.orderSortHeaderState?this.props.orderSortHeaderState.colSortDirs:null))
+    }
+    /**
+     * The method will update the subscription packet
+     * and will fetch the data from the socket.
+     * @private
+     */
+
+
+
+    
+
+    
 
     processOrders(data, nProps) {
 
@@ -514,7 +503,7 @@ var storage = [];
              * It'll set the default state to the filters.
              */
              this.props.orderfilterState({
-                tokenSelected: {"STATUS": ["all"], "TIME PERIOD": ["allOrders"]},
+                tokenSelected: {"STATUS": [ANY], "ORDER TAGS": [ANY]},
                 searchQuery: {}
             })
              this.props.toggleOrderFilter(false)
@@ -591,6 +580,10 @@ _setFilter() {
     this.props.showTableFilter(newState)
 }
 
+onPageSizeChange(arg) {
+    this.refresh(null, arg);
+}
+
 _viewOrderLine = (orderId) =>  {
         clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
@@ -605,12 +598,7 @@ _viewOrderLine = (orderId) =>  {
     }
 
 
-
-onPageSizeChange(arg) {
-    this.refresh(null, arg);
-}
-
-_processPBTs = (arg) => {
+    _processPBTs = (arg) => {
         let pbtData = arg;
         let pbtDataLen = pbtData.length; 
         let pbtRows = []; 
@@ -826,186 +814,212 @@ _processPBTs = (arg) => {
         return x;
     }
 
+    render() {
 
-render() {
-
-    var self = this;
-    const todayDate = this._getTodayDate();
-    const processedPbtData = this._processPBTs(this.props.pbts);
-    const processedOrderData = this._processOrders(this.props.ordersPerPbt);
-    let isPanelOpen = this.state.isPanelOpen;
-
-
-    var filterHeight=screen.height - 190 - 50;
-    var updateStatus, timeOffset, headerTimeZone;
-    let updateStatusIntl, updateStatusText;
-    // if (this.props.filterOptions.lastUpdatedOn) {
-    //     updateStatusText=
-    //     <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
-    //     defaultMessage='Last Updated '/>
-    //     updateStatusIntl=<FormattedRelative updateInterval={10000} value={Date.now()}/>
-    // }
-    var itemNumber=6, table, pages;
-    const ordersByStatus=[
-    {value: '25', label: '25'},
-    {value: '50', label: '50'},
-    {value: '100', label: '100'},
-    {value: '250', label: '250'},
-    {value: '500', label: '500'},
-    {value: '1000', label: '1000'}
-    ];
-    var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
-    var orderDetail, alertNum=0, orderInfo;
-    // if (this.props.orderData.ordersDetail !== undefined) {
-    //     orderInfo=this.processOrders(this.props.orderData.ordersDetail, this);
-    //     orderDetail=orderInfo.renderOrderData;
-    //     alertNum=orderInfo.alertStatesNum;
-    // }
-    // timeOffset=this.props.timeOffset || "",
-    // headerTimeZone=(this.context.intl.formatDate(Date.now(),
-    // {
-    //     timeZone: timeOffset,
-    //     year: 'numeric',
-    //     timeZoneName: 'long'
-    // }));
-
-    /*Extracting Time zone string for the specified time zone*/
-    //headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
-    return (
-        <div>
-        <div className="gor-Orderlist-table">
-
-        {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner}
-        setSpinner={this.props.setOrderListSpinner}/> : ""}
-        {orderDetail ? <div>
-            <div className="gor-filter-wrap" style={{
-                'width': '350px',
-                'display': this.props.showFilter ? 'block' : 'none',
-                height: filterHeight
-            }}>
-            <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
-            </div>
-            <div className="gorToolBar">
-            <div className="gorToolBarWrap">
-            <div className="gorToolBarElements">
-            <FormattedMessage id="order.table.heading" description="Heading for order list"
-            defaultMessage="OrderList"/>
-            </div>
-            <div className="gor-button-wrap">
-
-            </div>
-            </div>
-            <div className="filterWrapper">
-            <div className="gorToolBarDropDown">
-            <div className="gor-button-wrap">
-            <div
-            className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
-            <button className="gor-filterBtn-btn"
-            onClick={this._handleClickRefreshButton.bind(this)}>
-            <div className="gor-refresh-icon"/>
-            <FormattedMessage id="order.table.buttonLable"
-            description="button label for refresh"
-            defaultMessage="Refresh Data"/>
-            </button>
-            <button
-            className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-            onClick={this._setFilter.bind(this)}>
-            <div className="gor-manage-task"/>
-            <FormattedMessage id="gor.filter.filterLabel"
-            description="button label for filter"
-            defaultMessage="Filter data"/>
-            </button>
-            </div>
-            </div>
-            </div>
-            </div>
-        {/*Filter Summary*/}
-        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
-        responseFlag={this.props.responseFlag}
-        filterText={<FormattedMessage id="orderlist.filter.search.bar"
-        description='total order for filter search bar'
-        defaultMessage='{total} Orders found'
-        values={{total: orderDetail ? orderDetail.length : '0'}}/>}
-        refreshList={this._clearFilter.bind(this)}
-        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-        description="button label for show all"
-        defaultMessage="Show all orders"/>}/>
-
-        </div> : null}
+        var self = this;
+        const todayDate = this._getTodayDate();
+        const processedPbtData = this._processPBTs(this.props.pbts);
+        const processedOrderData = this._processOrders(this.props.ordersPerPbt);
+        let isPanelOpen = this.state.isPanelOpen;
 
 
-        {/*<OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
-        statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
-        refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
-        lastUpdated={updateStatusIntl}
-        intlMessg={this.props.intlMessages} alertNum={alertNum}
-        totalOrders={this.props.orderData.totalOrders}
-        itemsPerOrder={this.props.orderData.itemsPerOrder}
-        totalCompletedOrder={this.props.orderData.totalCompletedOrder}
-        totalPendingOrder={this.props.orderData.totalPendingOrder}
-        sortHeaderState={this.props.orderHeaderSort}
-        currentSortState={this.props.orderSortHeader}
-        sortHeaderOrder={this.props.orderHeaderSortOrder}
-        currentHeaderOrder={this.props.orderSortHeaderState}
-        setOrderFilter={this.props.orderFilterDetail}
-        getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter}
-        showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
-        isFilterApplied={this.props.isFilterApplied}
-        orderFilterStatus={this.props.orderFilterStatus}
-        onSortChange={this.refresh.bind(this)}
-        pageNumber={this.props.pageNumber}
-        />*/}
+        var filterHeight=screen.height - 150;
+        var updateStatus, timeOffset, headerTimeZone;
+        let updateStatusIntl, updateStatusText;
+        // if (this.props.filterOptions.lastUpdatedOn) {
+        //     updateStatusText=
+        //     <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
+        //     defaultMessage='Last Updated '/>
+        //     updateStatusIntl=<FormattedRelative updateInterval={10000} value={Date.now()}/>
+        // }
+        var itemNumber=6, table, pages;
+        const ordersByStatus=[
+        {value: '25', label: '25'},
+        {value: '50', label: '50'},
+        {value: '100', label: '100'},
+        {value: '250', label: '250'},
+        {value: '500', label: '500'},
+        {value: '1000', label: '1000'}
+        ];
+        var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
+        var orderDetail, alertNum=0, orderInfo;
+        // if (this.props.orderData.ordersDetail !== undefined) {
+        //     orderInfo=this.processOrders(this.props.orderData.ordersDetail, this);
+        //     orderDetail=orderInfo.renderOrderData;
+        //     alertNum=orderInfo.alertStatesNum;
+        // }
+        // timeOffset=this.props.timeOffset || "",
+        // headerTimeZone=(this.context.intl.formatDate(Date.now(),
+        // {
+        //     timeZone: timeOffset,
+        //     year: 'numeric',
+        //     timeZoneName: 'long'
+        // }));
 
-        <div className="waveListWrapper">
-            <GTable options={['table-bordered']}>
-                <GTableBody data={processedPbtData.pbtData}>
-                    {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
-                        return (
-                            <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapse={self.enableCollapse} disableCollapse={self.disableCollapse} title={
-                                <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
-                                    {row.map(function (text, index) {
-                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                            {text}
+        /*Extracting Time zone string for the specified time zone*/
+        //headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
+        return (
+            <div>
+                <div className="gor-Orderlist-table">
+
+                    {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
+                    { true/*orderDetail*/ ? 
+                        <div>
+                            <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+                                <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
+                            </div>
+
+                            <div>
+                                <OrderTile date={todayDate} 
+                                        orderFulfilData={this.props.orderFulfilment}
+                                        orderSummaryData={this.props.orderSummary}
+                                        collapseState={this.state.collapseState}
+                                        disableCollapse={this.disableCollapse}
+                                        callBack = {this.callBack}
+                                        orderListSpinner={this.props.orderListSpinner}
+                                        showFilter={this.props.showFilter}
+                                        filterOptions={this.props.filterOptions}
+                                        orderData={this.props.orderData}
+                                        timeOffset={this.props.timeOffset}
+                                        showTableFilter={this.showTableFilter}
+                                        />
+
+                            {/*
+                            <div className="gorToolBarWrap">
+                            <div className="gorToolBarElements">
+                            <FormattedMessage id="order.table.heading" description="Heading for order list"
+                            defaultMessage="OrderList"/>
+                            </div>
+                            <div className="gor-button-wrap">
+
+                            </div>
+                            </div>
+
+                        */}
+
+                            <div style={{position: "absolute", right:"0", top:"10px"}} className="filterWrapper">
+                                <div className="gorToolBarDropDown">
+                                    <div className="gor-button-wrap">
+                                        <div className="gor-button-sub-status">
+                                            {this.props.lastUpdatedText} {this.props.lastUpdated}
                                         </div>
-                                    })}
-                                </GTableRow>}>
 
-                                {self.state.isPanelOpen === true ?
-                                    (<GTableBody data={processedOrderData.orderData} >
-                                        {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
-                                            return (
-                                                <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
-                                                    {Object.keys(row).map(function (text, index) {
-                                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                            {row[text]}
-                                                        </div>
-                                                    })}
-                                                </GTableRow>
-                                            )
-                                        }):""}
-                                    </GTableBody>): null 
-                                }
-                            </Accordion> 
-                        )
-                    }):""}
-                </GTableBody>
-            </GTable>
-        </div>
+                                        <div className="orderButtonWrapper">
+                                            <div className="gorButtonWrap">
+                                              <button disabled={!this.props.collapseState} className="gor-filterBtn-btn" onClick={this.collapseAll}>
+                                              <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
+                                              </button>
+                                            </div>
+                                            <div className="gorButtonWrap">
+                                                <button className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
+                                                    <div className="gor-manage-task"/>
+                                                        <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
+                                                    </button>
+                                            </div>
+                                        </div>
 
-        <div className="gor-pageNum">
-        <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]}
-        optionDispatch={this.props.getPageSizeOrders} refreshList={this.onPageSizeChange.bind(this)}/>
-        </div>
-        <div className="gor-paginate">
-        {this.state.query ?
-            <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1}
-            totalPage={this.props.orderData.totalPage}/> : null}
-            </div>
-            </div>
-            </div>
+                                    {/*
+                                        <button className="gor-filterBtn-btn" onClick={this._handleClickRefreshButton.bind(this)}>
+                                            <div className="gor-refresh-icon"/>
+                                            <FormattedMessage id="order.table.buttonLable" description="button label for refresh" defaultMessage="Refresh Data"/>
+                                        </button>
 
-            );
-}
+                                        <button className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
+                                            <div className="gor-manage-task"/>
+                                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter" defaultMessage="Filter data"/>
+                                         </button>
+                                        */}
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                {/*Filter Summary*/}
+                <FilterSummary total={ ["1","2","3"].length  /*orderDetail.length*/ || 0} isFilterApplied={this.props.isFilterApplied}
+                responseFlag={this.props.responseFlag}
+                filterText={<FormattedMessage id="orderlist.filter.search.bar"
+                description='total order for filter search bar'
+                defaultMessage='{total} Orders found'
+                values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                refreshList={this._clearFilter.bind(this)}
+                refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+                description="button label for show all"
+                defaultMessage="Show all orders"/>}/>
+
+                </div> : null}
+
+
+                {/*<OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
+                statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
+                refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
+                lastUpdated={updateStatusIntl}
+                intlMessg={this.props.intlMessages} alertNum={alertNum}
+                totalOrders={this.props.orderData.totalOrders}
+                itemsPerOrder={this.props.orderData.itemsPerOrder}
+                totalCompletedOrder={this.props.orderData.totalCompletedOrder}
+                totalPendingOrder={this.props.orderData.totalPendingOrder}
+                sortHeaderState={this.props.orderHeaderSort}
+                currentSortState={this.props.orderSortHeader}
+                sortHeaderOrder={this.props.orderHeaderSortOrder}
+                currentHeaderOrder={this.props.orderSortHeaderState}
+                setOrderFilter={this.props.orderFilterDetail}
+                getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter}
+                showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
+                isFilterApplied={this.props.isFilterApplied}
+                orderFilterStatus={this.props.orderFilterStatus}
+                onSortChange={this.refresh.bind(this)}
+                pageNumber={this.props.pageNumber}
+                />*/}
+
+
+
+                <div className="waveListWrapper">
+                    <GTable options={['table-bordered']}>
+                        <GTableBody data={processedPbtData.pbtData}>
+                            {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
+                                return (
+                                    <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapse={self.enableCollapse} disableCollapse={self.disableCollapse} title={
+                                        <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
+                                            {row.map(function (text, index) {
+                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                    {text}
+                                                </div>
+                                            })}
+                                        </GTableRow>}>
+
+                                        {self.state.isPanelOpen === true ?
+                                            (<GTableBody data={processedOrderData.orderData} >
+                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
+                                                    return (
+                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
+                                                            {Object.keys(row).map(function (text, index) {
+                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                                    {row[text]}
+                                                                </div>
+                                                            })}
+                                                        </GTableRow>
+                                                    )
+                                                }):""}
+                                            </GTableBody>): null 
+                                        }
+                                    </Accordion> 
+                                )
+                            }):""}
+                        </GTableBody>
+                    </GTable>
+                </div>
+
+                    <div className="gor-pageNum">
+                        <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]} 
+                            optionDispatch={this.props.getPageSizeOrders} refreshList={this.onPageSizeChange.bind(this)}/>
+                    </div>
+                    <div className="gor-paginate">
+                        {this.state.query ?
+                            <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1} totalPage={this.props.orderData.totalPage}/> : null}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 function mapStateToProps(state, ownProps) {
