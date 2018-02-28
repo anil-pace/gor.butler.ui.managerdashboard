@@ -133,7 +133,7 @@ class UsersTable extends React.Component {
                                         style={self.state.header[5].width ? {flex: '1 0 ' + self.state.header[5].width + "%"} : {}}
                                         className="cell">
                                         <div className="gor-user-Logo-wrap">
-                                            <button onClick={self.handleEdit.bind(self, row)}>
+                                             <button onClick={self.handleEdit.bind(self, row)}>
                                                 <div className="gor-edit-icon"/>
                                                 <span>
                                                     <FormattedMessage id="commonDataTable.edit.button"
