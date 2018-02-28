@@ -38,14 +38,14 @@ import {
     AUDIT_TASK_ID,
     AUDIT_STATUS,
     sortAuditHead,
-    sortOrder,
+    sortOrder,POST,START_AUDIT_TASK,
     ALL,FILTER_PPS_ID,AUDIT_START_TIME,AUDIT_END_TIME,AUDIT_CREATEDBY,
     ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED
 } from '../constants/frontEndConstants';
 import {
     SEARCH_AUDIT_URL,
     GIVEN_PAGE,
-    GIVEN_PAGE_SIZE
+    GIVEN_PAGE_SIZE,START_AUDIT_URL
 } from '../constants/configConstants';
 import {setAuditSpinner} from '../actions/auditActions';
 import {defineMessages} from 'react-intl';
@@ -174,8 +174,29 @@ class AuditTab extends React.Component {
   }else if(field.target.value=='mannualassignpps'){
     this.startAudit();
   }
+  else if(field.target.value=='autoassignpps'){
+this.startAuditAuto();
+  }
 
 } 
+
+startAuditAuto(auditId){
+    var  auditId=this.props.checkedAudit;
+    let formData={
+      audit_id_list:(auditId).constructor.name!=="Array"?[auditId]:auditId,
+      pps_list:[]
+    }
+        let auditData={
+                  'url':START_AUDIT_URL,
+                  'method':POST,
+                  'cause':START_AUDIT_TASK,
+                  'contentType':APP_JSON,
+                  'accept':APP_JSON,
+                  'formdata':formData,
+                  'token':sessionStorage.getItem('auth_token')
+              }
+        this.props.userRequest(auditData);
+  } 
 
 startAudit() {
   var  auditId=this.props.checkedAudit;
@@ -377,7 +398,7 @@ startAudit() {
                 auditData.audit_name="";
             }
            auditData.auditBased=data[i].audit_type?data[i].audit_type:"";
-            auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id.length==1?"PPS "+data[i].pps_id:"Multi PPS");
+            auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id?"PPS "+data[i].pps_id:"");
 
             
             if (data[i].audit_status=="audit_created") {
@@ -513,7 +534,7 @@ startAudit() {
             }
             auditData.resolved=data[i].resolved;
             if(data[i].audit_button_data.audit_resolve_button=='disable'){
-                auditData.lineResolveState=data[i].unresolved<=0?(data[i].unresolved+" lines to be resolved"):"";
+                auditData.lineResolveState=data[i].unresolved>0?(data[i].unresolved+" lines to be resolved"):"";
             }
             else if(data[i].audit_button_data.audit_reaudit_button=='enable'){
                 auditData.lineResolveState=data[i].unresolved>0?(data[i].unresolved+" lines to be re-audited"):"";
@@ -529,7 +550,6 @@ startAudit() {
             auditData.cancelButton=data[i].audit_button_data.audit_cancel_button==='enable'?true:false;
             auditData.deleteButton=data[i].audit_button_data.audit_delete_button==='enable'?true:false;
             auditData.duplicateButton=data[i].audit_button_data.audit_duplicate_button==='enable'?true:false;
-            auditData.pauseButton=(data[i].audit_progress.completed || data[i].audit_progress.total)?true:false;
             auditData.detailsButton=true;
            
             auditData.system_created_audit=data[i].audit_created_by===SYSTEM_GENERATED?true:data[i].audit_created_by;

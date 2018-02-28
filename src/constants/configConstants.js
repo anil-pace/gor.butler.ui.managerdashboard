@@ -1,9 +1,7 @@
-export const BASE_URL = '192.168.9.35';
+export const BASE_URL = 'localhost';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
-//export const WS_URL = WS_PROTOCOL+BASE_URL+":8888/manager_api/ws";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
-//export const API_URL=PROTOCOL+BASE_URL+":5000/api";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
@@ -17,6 +15,8 @@ export const AUDIT_URL=API_URL+"/audit";
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
+export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
+
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
 export const PPSLIST_URL=API_URL+"/audit/pps_info";
 export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
@@ -39,8 +39,8 @@ export const FILTER_AUDIT_ID="audit_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
 export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";
-export const AUDIT_VALIDATION_URL=TIME_ZONE_URL;//API_URL+"/audit/validate";
-export const AUDIT_CREATION_URL=API_URL+"/audit/";//TIME_ZONE_URL;//API_URL + "api/audit/validate";
+export const AUDIT_VALIDATION_URL=API_URL+"/audit/validate";
+export const AUDIT_CREATION_URL=API_URL+"/audit/";
 export const VALIDATION_LIST=API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL=API_URL + "/system/shift_start_time";
@@ -88,6 +88,7 @@ export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_avai
 
 export const AUDIT_PAUSE_URL=API_URL+"/audit/pause";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
-export const USERLIST_URL=PPS_LIST_URL;//API_URL+"/audit/users";
-export const AUDIT_EDIT_URL='AUDIT_EDIT_URL';
+export const USERLIST_URL=API_URL+"/audit/users";
+export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
+
 

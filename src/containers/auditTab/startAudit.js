@@ -46,7 +46,7 @@ class StartAudit extends React.Component{
     e.preventDefault();
     let formdata;
     formdata={
-      audit_id_list: this.props.auditId, 
+      audit_id_list: (this.props.auditId).constructor.name!=="Array"?[this.props.auditId]:this.props.auditId ,
       pps_list: this.props.ppsList
     }
     let userData={

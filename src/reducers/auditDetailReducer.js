@@ -9,7 +9,7 @@ export  function recieveAuditDetail(state={},action){
         case RECIEVE_AUDIT_DATA:
             
             var res, auditDetail, totalPage, totalAudit;
-            res=action.data[0];
+            res=action.data.data[0];
             totalPage=Number(res.total_pages);
             totalAudit=Number(res.total_results);
             if(res.audit_list) {

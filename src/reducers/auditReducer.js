@@ -177,7 +177,7 @@ export  function auditInfo(state={},action){
           })
           
     case VALIDATED_ATTIBUTES_DATA_SKU:
-        let processedDataSKU = processValidationDataSKU(validSKU.audit_sku_validation_response/*action.data*/)//(action.data)
+        let processedDataSKU = processValidationDataSKU(action.data)
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,

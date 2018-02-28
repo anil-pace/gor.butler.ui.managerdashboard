@@ -9,8 +9,8 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import { setCheckedAuditpps,setCheckedOtherpps} from '../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
-import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
-import { PPSLIST_URL,START_AUDIT_URL } from '../../constants/configConstants';
+import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST,START_AUDIT_TASK,CHANGE_PPS_TASK } from '../../constants/frontEndConstants';
+import { PPSLIST_URL,START_AUDIT_URL,START_CHANGE_PPS_URL } from '../../constants/configConstants';
 import SearchFilter from '../../components/searchFilter/searchFilter';
 import AuditAction from '../auditTab/auditAction'; 
 import {modal} from 'react-redux-modal';
@@ -60,17 +60,23 @@ return tableData;
 }
   _handlestartaudit(e)
   {
-
+     
+    let allAuditId, URL="",cause='',param='';
     let allPPSList=this.props.checkedAuditPPSList.concat(this.props.checkedOtherPPSList);
-    let allAuditId= (this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId;
+    allAuditId= (this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId;
+    if(this.props.param=="CHANGE_PPS"){
+        URL=START_CHANGE_PPS_URL;
+        param=CHANGE_PPS_TASK;
+    }else{
+       URL=START_AUDIT_URL;
+       param=START_AUDIT_TASK;
+    }
     let formdata={
       audit_id_list: allAuditId, 
       pps_list: allPPSList
     }
     e.preventDefault();
     if(this.props.checkedOtherPPSList.length>0){
-    let URL=START_AUDIT_URL;
-    let param='ppsChangeStart';
   let data=<FormattedMessage id='audit.ppschangeStart' 
                         defaultMessage="A mode change request will be sent for PPS that are not in Audit mode.Do you still wish to proceed?" description="Text for cancel"/>;
                       
@@ -82,16 +88,17 @@ return tableData;
       data:data,
       param:param,
       formdata:formdata,
-      URL:URL
-      });  
+      URL:URL,
+      }); 
+      this._removeThisModal(); 
   }
   else
     {
     let userData={
-                'url':START_AUDIT_URL,
+                'url':URL,
                 'formdata':formdata,
                 'method':POST,
-                'cause':START_AUDIT,
+                'cause':START_AUDIT_TASK,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token

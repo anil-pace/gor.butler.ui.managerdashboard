@@ -803,6 +803,10 @@ export const FILTER_PPS_ID="pps_id";
 export const AUDIT_CREATEDBY='audit_created_by';
 export const AUDIT_EDIT='AUDIT_EDIT';
 export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
+export const START_AUDIT_TASK='START_AUDIT_TASK';
+export const CHANGE_PPS_TASK='CHANGE_PPS_TASK';
+
+
 
 
  

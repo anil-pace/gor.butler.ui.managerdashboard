@@ -23,10 +23,14 @@ class AuditAction extends React.Component{
       URL=this.props.URL+formData;
       method="DELETE"
     }
-    else
-    {
+    else if(this.props.param==CANCEL_AUDIT){
       URL=this.props.URL+formData;
       method="PUT"
+    }
+    else
+    {
+      URL=this.props.URL;
+      method=POST;
     }
     
       let auditData={
@@ -35,7 +39,7 @@ class AuditAction extends React.Component{
                 'cause':this.props.param,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'formData':formData,
+                'formdata':formData,
                 'token':sessionStorage.getItem('auth_token')
             }
       this.props.userRequest(auditData);

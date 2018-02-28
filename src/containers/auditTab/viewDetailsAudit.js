@@ -40,7 +40,7 @@ class ViewDetailsAudit extends React.Component {
   }
      componentDidMount(){
     let formdata={
-      audit_id: this.state.auditId
+      audit_id_list:(this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId
     }
         let userData={
                 'url':AUDITDETAIL_URL,
@@ -66,12 +66,14 @@ class ViewDetailsAudit extends React.Component {
   }
 
   ppsChange(e){
+    let param="CHANGE_PPS";
   modal.add(AuditStart, {
     title: '',
     size: 'large',
    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
    hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-   auditID: this.props.auditID
+   auditID: this.props.auditId,
+   param:param
    //.. all what you put in here you will get access in the modal props ;),
                       });
   this._removeThisModal();

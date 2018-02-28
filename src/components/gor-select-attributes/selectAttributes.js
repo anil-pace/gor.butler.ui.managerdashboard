@@ -25,7 +25,7 @@ export default class SelectAttributes extends React.Component {
         return{
             dropdownVisible:false,
             data:this.props.attributeList,
-            selectedSets:this.props.prefilledData,
+            selectedSets:this.props.prefilledData||{},
             nonMutatedData:this.props.attributeList,
             selectedAttributes:{},
             showAttrList:false,
@@ -38,6 +38,7 @@ export default class SelectAttributes extends React.Component {
 
 
     componentWillMount(){
+        if(this.props.prefilledData)
         this._applySelectionFirstTime(1);
     }
 
