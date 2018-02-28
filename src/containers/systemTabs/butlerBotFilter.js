@@ -61,9 +61,7 @@ class ButlerBotFilter extends React.Component{
         let tokenFieldC2={value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage="MODE"/>}; 
         const labelC1=[
                     { value: 'any', label:<FormattedMessage id="butletbot.token1.all" defaultMessage="Any"/> },
-                    { value: 'stopped', label:<FormattedMessage id="butletbot.token1.stopped" defaultMessage="Stopped"/> },
                     { value: 'error', label:<FormattedMessage id="butletbot.token1.error" defaultMessage="Error"/> },
-                    { value: 'warning', label:<FormattedMessage id="butletbot.token1.warning" defaultMessage="Warning"/> },
                     { value: 'online', label:<FormattedMessage id="butletbot.token1.Online" defaultMessage="Online"/> },
                     { value: 'offline', label:<FormattedMessage id="butletbot.token1.Offline" defaultMessage="Offline"/> }
                     ];

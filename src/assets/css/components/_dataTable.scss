@@ -405,7 +405,16 @@ background-color: #FFFFFF;
       max-height: 9px;
   }
 }
-
+.error .public_fixedDataTableCell_cellContent{
+   background: #fc3838;
+  border-radius: 15px;
+  text-align: center;
+  width:90px;
+  color: #ffffff;
+  font-size: 12px;
+  max-height: 9px;
+  text-transform: capitalize;
+}
 .Error .public_fixedDataTableCell_cellContent{
 
   background: #fc3838;
