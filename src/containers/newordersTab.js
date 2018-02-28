@@ -27,7 +27,7 @@ import { ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_
 import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../actions/orderListActions';
 import {filterApplied, orderfilterState, toggleOrderFilter} from '../actions/filterAction';
 import {hashHistory} from 'react-router';
-import FilterSummary from '../components/tableFilter/filterSummary'
+import FilterSummary from '../components/tableFilter/filterSummary';
 
 import {
     AUDIT_RETRIEVE,
@@ -588,8 +588,7 @@ class newordersTab extends React.Component{
         var pageSizeDDDisabled = timePeriod === REALTIME ;
         var location = JSON.parse(JSON.stringify(self.props.location));
         var totalPage = Math.ceil(totalSize / pageSize);
-
-		return(
+		return (
 			<div>
 			  	<OrderTile date={todayDate} 
                             orderFulfilData={this.props.orderFulfilment}
