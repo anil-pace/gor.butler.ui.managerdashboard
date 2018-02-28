@@ -105,7 +105,16 @@ _editAudit(auditId,param){
             //.. all what you put in here you will get access in the modal props ;),
         });
 }
-
+_duplicateAudit(auditId,param){
+   modal.add(CreateAudit, {
+        title: '',
+        size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      param:param,
+      auditId:auditId
+      });
+}
 
 
 
@@ -127,14 +136,7 @@ startAuditAuto(auditId){
       this.props.userRequest(auditData);
 } 
 
-_duplicateAudit(auditId,param){
-   modal.add('CreateAudit', {
-        title: '',
-        size: 'large', // large, medium or small,
-      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: false,
-      });
-}
+
 
 _pauseAudit(auditId){
   let formData={

@@ -194,14 +194,7 @@ startAudit() {
         this.props.initDataSentCall(updatedWsSubscription["default"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
     }
-  //   _refresh(data){
-  //       if(this.props.noResultFound){
-  //           hashHistory.push({pathname: "/audit", query: this.props.successQuery})
-  //       }else{
-  //           this._refreshList(this.props.location.query,data);
-  //       }
 
-  // }
    viewAuditDetails() {
   modal.add(ViewDetailsAudit, {
     title: '',
@@ -561,11 +554,6 @@ startAudit() {
    else{
     this.props.setCheckedAudit([]);
    }
- //  let a= arr.indexOf(e.currentTarget.id);
- //  (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
- // console.log(e.currentTarget.checked);
- //  this.props.setCheckedAudit(arr);
- //   console.log((this.props.auditDetail).length);
 
  }
 
@@ -581,93 +569,6 @@ startAudit() {
         ;
     }
 
-//     handlePageClick(data) {
-//         var url, appendTextFilterUrl="", makeDate, inc=0, value=[], paramValue="",
-//         selectedAuditType="",_queryParams=[];
-//         var currentDate=new Date();
-//         var filterApplied=false;
-//         var skuText="", arr=[], selectvalue;
-//         makeDate=addDateOffSet(currentDate, -30);
-
-//         if (!data) {
-//             /**
-//              * After clearing the applied filter,
-//              * It'll set the default state to the filters.
-//              */
-//              data={}
-//              this.props.auditfilterState({
-//                 tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]},
-//                 searchQuery: {},
-//                 defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]}
-//             })
-//              this.props.toggleAuditFilter(false)
-//              this.props.showTableFilter(false)
-
-//          }
-// //If user select both we are making it Any for backend support
-// if (data.searchQuery && data.tokenSelected[AUDIT_TYPE]) {
-//     selectvalue=(data.tokenSelected[AUDIT_TYPE].length=== 2) ? ANY : data.tokenSelected[AUDIT_TYPE][0];
-//     skuText=AUDIT_PARAM_TYPE + selectvalue;
-//     _queryParams.push([AUDIT_PARAM_TYPE,selectvalue].join("="))
-//     selectedAuditType=this._mappingString(selectvalue);
-
-// //Pushing the audit type into array to make it generic
-// for (let propt in data.searchQuery) {
-//     if (selectedAuditType=== 'any') {
-//         (propt !== AUDIT_TASK_ID && data.searchQuery[propt] !== "") ? value.push(data.searchQuery[propt]) : '';
-//     }
-//     else {
-//         (data.searchQuery[propt] !== "" && propt== selectedAuditType) ? value.push(data.searchQuery[propt]) : '';
-//     }
-
-// }
-// //Formatting the param value for single and multiple type       
-// if (value.length) {
-//     paramValue=(value.length > 1 || selectvalue=== ANY) ? "['" + value.join("','") + "']" : "'" + value[0] + "'";
-//     _queryParams.push([AUDIT_PARAM_VALUE, "['"+value.join("','")+"']"].join("="))
-//     skuText=skuText + AUDIT_PARAM_VALUE + paramValue;
-// }
-// }
-// //formating the audit status 
-// if (data.tokenSelected && data.tokenSelected["STATUS"][0] !== ALL) {
-//     let statusToken=data.tokenSelected["STATUS"];
-//     skuText=skuText + AUDIT_STATUS + "['" + statusToken.join("','") + "']";
-//     _queryParams.push([AUDIT_STATUS,"['"+statusToken.join("','")+"']" ].join("="))
-// }
-
-// if (data.searchQuery && data.searchQuery[AUDIT_TASK_ID]) {
-//     appendTextFilterUrl=FILTER_AUDIT_ID + data.searchQuery[AUDIT_TASK_ID];
-//     _queryParams.push([FILTER_AUDIT_ID, data.searchQuery[AUDIT_TASK_ID]].join("="))
-//     data.selected=1;
-//     filterApplied=true;
-// }
-
-
-// if (data.url=== undefined) {
-//     data.selected=data.selected ? data.selected : 1;
-//     if (data.columnKey && data.sortDir) {
-//         _queryParams.push(sortAuditHead[data.columnKey])
-//         _queryParams.push(sortOrder[data.sortDir])
-//     }
-//     _queryParams.push([GIVEN_PAGE,data.selected||1].join("="))
-//     _queryParams.push([GIVEN_PAGE_SIZE,20].join("="))
-//     url=[SEARCH_AUDIT_URL + makeDate,_queryParams.join("&")].join("&")
-// }
-// else {
-//     url=data.url;
-// }
-// this.setState({selected_page: data.selected});
-// let paginationData={
-//     'url': url,
-//     'method': GET,
-//     'cause': AUDIT_RETRIEVE,
-//     'token': this.props.auth_token,
-//     'contentType': APP_JSON
-// }
-// this.props.setAuditSpinner(true);
-// this.props.filterApplied(filterApplied);
-// this.props.getPageData(paginationData);
-// }
 
 _setFilter() {
     var newState=!this.props.showFilter;
@@ -688,18 +589,7 @@ createAudit() {
 
 
 
-    // startBulkAudit() {
-    //     var auditId=[]; 
-    //     auditId=Object.keys(this.props.checkedAudit);
-    //     modal.add(StartAudit, {
-    //         title: '',
-    //         size: 'large', // large, medium or small,
-    //         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-    //         hideCloseButton: true,
-    //         auditId: auditId,
-    //         bulkFlag:true
-    //     });
-    // }
+
 
 
 //Render Function goes here
@@ -744,8 +634,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     // auditFilterStatus={this.props.auditFilterStatus} setCheckedAudit={this.props.setCheckedAudit} 
     // checkedAudit={this.props.checkedAudit} 
     // responseFlag={this.props.auditSpinner}
-    // onSortChange={this._refresh.bind(this)} cancelAudit={this._cancelAudit.bind(this)}/>
-
+    
     let toolbar=<div>
     <div className="gor-filter-wrap"
     style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>

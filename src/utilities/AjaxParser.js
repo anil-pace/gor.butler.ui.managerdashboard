@@ -1099,7 +1099,7 @@ auditdetails={
     "audit_name":"Raja Dey",
     "audit_param_type": "sku",
     "audit_param_value": {
-        "attr_list": [
+        "attributes_list": [
             {
         "product_color": [
           "Red",
@@ -1122,7 +1122,7 @@ auditdetails={
         ]
       }
         ],
-        "attributes_list": [{
+        "attributes_list_sets": [{
                 "attributes_sets": [{
                         "product_color": [
                             "Black"
