@@ -279,6 +279,7 @@ render(){
       {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
+       <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown>:""}
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">

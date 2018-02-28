@@ -509,3 +509,13 @@ background-position: -101px -52px;
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+.got-add-notch{
+   width: 5px;
+    height: 5px;
+    display: inline-block;
+    border-bottom: 2px solid #f36f36;
+    transform: rotate(40deg);
+    border-right: 2px solid #f36f36;
+    margin-left: 30px;
+    margin-bottom:3px;
+}

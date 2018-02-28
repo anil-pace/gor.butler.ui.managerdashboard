@@ -143,25 +143,83 @@ export  function auditInfo(state={},action){
   }
 }
 
-function processValidationDataSKU(data1,param){
-  let data=data1.audit_sku_validation_response;
+function processValidationDataSKU(data){
+  let param='edit';let finalArr=[],arrSkuwise={}
   var processedData=[],
   skuList = data.sku_list,
   status = data.status,
   statusList = data.status_list,
-  attList = data.attributes_list,
+  
+  attList = data.attr_list,
+  //attList = data.attributes_list,
+  //attrSet=data.attributes_list,
   i18n = data.i18n_values,
   totalValid=0,totalInvalid=0;
+  
+  // for(let a=0,len=attrSet.length;a< len;a++){
+  //     let arr=attrSet[a].attributes_sets;
+  //     let finalArr={};
+  //     let finalob={};
+  //     for(let b=0,lenb=arr.length;b<lenb;b++)
+  //     {
+  //       let x;
+  //       Object.keys(arr[b]).forEach(function(data,index){
+  //         let attObj={};
+  //         x = arr[b][data].toString();
+  //         attObj.text=(arr[b][data]).toString();
+  //         attObj.category=data;
+  //         finalob[arr[b][data]]=attObj;
+  //       })
+  //       //finalArr[x]=finalob;
+  //     }
+  //     arrSkuwise[attrSet[a].sku]= finalob;
+
+  // }
+let attrSet=data.attributes_list;
+
+let outerObj={};
+for(let a=0,len=attrSet.length;a<len;a++){
+  let skuobj={}, obj2={};
+  let arr=attrSet[a].attributes_sets;
+  for(let b=0,len=arr.length;b<len;b++){
+    let obj1={};
+    Object.keys(arr[b]).map(function(key,index){
+      
+      for(let c=0,len=arr[b][key].length;c<len;c++){
+        let obj={};
+        obj.text=arr[b][key][c];
+        obj.category=key;
+        obj1[arr[b][key][c]]=obj;
+        
+      }
+      obj2[b]=obj1;
+  
+    })
+
+  }
+  outerObj[attrSet[a].sku]=obj2;
+
+}
+
+
+
+
+
+
+
+
+
 
   for(let i=0,len = skuList.length; i< len ;i++){
     let tuple ={};
     tuple.skuName = skuList[i];
-    
-    tuple.status = status[statusList[i]];
-    totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
-    totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    totalValid++;
+    //tuple.status = status[statusList[i]];
+    //totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+    //totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
     
     let attributeList = attList[i];
+    //let attributeList = attList[i];
     let categoryList = [];
     for(let key in attributeList){
       let attTuple = {}
@@ -183,7 +241,7 @@ function processValidationDataSKU(data1,param){
   return {
     data:processedData,
     totalValid,
-    totalInvalid,
+    totalInvalid,outerObj,
     totalSKUs:totalValid+totalInvalid
   };
 }

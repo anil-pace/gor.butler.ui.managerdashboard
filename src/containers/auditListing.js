@@ -763,6 +763,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
    {(this.props.checkedAudit.length>1)?<div style={{display:'inline','border-left':'2px solid #ffffff','margin-left':'25px','float': 'right'}}><ActionDropDown style={{width:'115px',display:'inline',float:'right','padding-left':'25px'}} clickOptionBack={this._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
+      <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
    

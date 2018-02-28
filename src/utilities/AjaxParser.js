@@ -189,617 +189,617 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case AUDIT_RETRIEVE:
        //  debugger;
        // console.log(res);
-    //      res=[{
-    //     "audit_list": [{
-    //         "actual_quantity": null,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "enable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "enable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "system",
-    //         "audit_id": "b7ix4SUSfE",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["011.1.C.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 0,
-    //             "total": 0
-    //         },
-    //         "audit_status": "audit_created",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Tue, 20 Feb 2018 03:11:51 GMT",
-    //         "description": "undefined",
-    //         "display_id": 126,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": null,
-    //         "start_request_time": null,
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": null,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "enable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "enable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "system",
-    //         "audit_id": "UbcgKeZV3W",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "sku",
-    //         "audit_param_value": {
-    //             "attributes_list": [{
-    //                 "attributes_sets": [],
-    //                 "sku": "2002"
-    //             }, {
-    //                 "attributes_sets": [{
-    //                     "product_color": ["Black"]
-    //                 }],
-    //                 "sku": "2003"
-    //             }, {
-    //                 "attributes_sets": [],
-    //                 "sku": "2001"
-    //             }, {
-    //                 "attributes_sets": [{
-    //                     "product_color": ["Red"],
-    //                     "product_internal_memory": ["32GB"],
-    //                     "product_region": ["China version"]
-    //                 }, {
-    //                     "product_internal_memory": ["32GB"],
-    //                     "product_region": ["India version"]
-    //                 }, {
-    //                     "product_color": ["Red"],
-    //                     "product_region": ["India version"]
-    //                 }],
-    //                 "sku": "2004"
-    //             }],
-    //             "uids_list": ["b556de49-8ccd-44f5-acef-0c896b2c161c", "9a8ebf04-fc62-41bd-9431-ef142ce785cd"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_created",
-    //         "audit_type": "Multi Sku",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Tue, 20 Feb 2018 03:40:35 GMT",
-    //         "description": "undefined",
-    //         "display_id": 127,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": null,
-    //         "start_request_time": null,
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "enable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "system",
-    //         "audit_id": "AZtqopTnRi",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["011.1.C.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_tasked",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Wed, 21 Feb 2018 03:02:19 GMT",
-    //         "description": "undefined",
-    //         "display_id": 128,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-21T08:33:11.177466+05:30",
-    //         "start_request_time": "2018-02-21T08:32:41.367061+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": null,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "enable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "enable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "b6K3tYdnY7",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["011.1.C.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_created",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Wed, 21 Feb 2018 03:05:49 GMT",
-    //         "description": "undefined",
-    //         "display_id": 129,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": null,
-    //         "start_request_time": null,
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": null,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "enable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "enable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "pjGymb4Pha",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["011.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_created",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Wed, 21 Feb 2018 03:06:20 GMT",
-    //         "description": "undefined",
-    //         "display_id": 130,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": null,
-    //         "start_request_time": null,
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": null,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "enable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "enable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "qmJ8LEwUQ5",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["011.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_created",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": null,
-    //         "create_time": "Wed, 21 Feb 2018 03:08:04 GMT",
-    //         "description": "undefined",
-    //         "display_id": 131,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": null,
-    //         "start_request_time": null,
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "w8q3V3JGdQ",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["012.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-21T08:52:14.344776+05:30",
-    //         "create_time": "Wed, 21 Feb 2018 03:18:04 GMT",
-    //         "description": "undefined",
-    //         "display_id": 132,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-21T09:14:16.939884+05:30",
-    //         "start_request_time": "2018-02-21T09:13:59.587424+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "xaKxjr6gYG",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["013.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-21T13:57:35.236608+05:30",
-    //         "create_time": "Wed, 21 Feb 2018 05:51:52 GMT",
-    //         "description": "undefined",
-    //         "display_id": 133,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-21T11:22:57.734071+05:30",
-    //         "start_request_time": "2018-02-21T11:22:21.406952+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "BnUiTucF2p",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["014.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T06:54:27.064430+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 01:20:37 GMT",
-    //         "description": "undefined",
-    //         "display_id": 134,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T06:51:17.022443+05:30",
-    //         "start_request_time": "2018-02-23T06:50:45.906180+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "7KEApWvCTE",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["014.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T06:58:26.841212+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 01:26:04 GMT",
-    //         "description": "undefined",
-    //         "display_id": 135,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T06:56:12.586794+05:30",
-    //         "start_request_time": "2018-02-23T06:56:12.113354+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "WpHptCYTMe",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["014.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T07:03:10.186902+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 01:31:43 GMT",
-    //         "description": "undefined",
-    //         "display_id": 136,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T07:02:12.761684+05:30",
-    //         "start_request_time": "2018-02-23T07:02:12.230187+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "fhxPx37ecy",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["040.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T07:05:31.813905+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 01:33:24 GMT",
-    //         "description": "undefined",
-    //         "display_id": 137,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T07:04:10.629204+05:30",
-    //         "start_request_time": "2018-02-23T07:04:10.227792+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "B83GLdrq8b",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["040.1.B.02", "038.1.A.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T08:00:49.624541+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 02:27:27 GMT",
-    //         "description": "undefined",
-    //         "display_id": 138,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T08:00:15.533984+05:30",
-    //         "start_request_time": "2018-02-23T07:57:34.806433+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "Fydr4mMGAT",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["040.1.B.02", "038.1.A.02", "016.1.C.03"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T08:07:46.643344+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 02:33:16 GMT",
-    //         "description": "undefined",
-    //         "display_id": 139,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T08:06:01.469040+05:30",
-    //         "start_request_time": "2018-02-23T08:03:25.603900+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "zTqg77G68W",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["040.1.B.02", "038.1.A.02", "016.1.C.03"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T08:20:17.432092+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 02:41:07 GMT",
-    //         "description": "undefined",
-    //         "display_id": 140,
-    //         "expected_quantity": 0,
-    //         "pps_id": [2, 3],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T08:19:49.554472+05:30",
-    //         "start_request_time": "2018-02-23T08:11:30.912869+05:30",
-    //         "unresolved": 0
-    //     }, {
-    //         "actual_quantity": 0,
-    //         "audit_button_data": {
-    //             "audit_cancel_button": "disable",
-    //             "audit_delete_button": "disable",
-    //             "audit_duplicate_button": "enable",
-    //             "audit_resolve_button": "disable",
-    //             "audit_start_button": "disable",
-    //             "audit_view_issues_button": "disable"
-    //         },
-    //         "audit_created_by": "user",
-    //         "audit_id": "kNfQkQ8aUS",
-    //         "audit_info": [],
-    //         "audit_name": "audit name",
-    //         "audit_param_type": "location",
-    //         "audit_param_value": {
-    //             "locations_list": ["035.1.B.02"]
-    //         },
-    //         "audit_progress": {
-    //             "completed": 22,
-    //             "total": 45
-    //         },
-    //         "audit_status": "audit_completed",
-    //         "audit_type": "Multi Location",
-    //         "cancel_request": "undefined",
-    //         "completed_quantity": 0,
-    //         "completion_time": "2018-02-23T08:20:57.487495+05:30",
-    //         "create_time": "Fri, 23 Feb 2018 02:47:51 GMT",
-    //         "description": "undefined",
-    //         "display_id": 141,
-    //         "expected_quantity": 0,
-    //         "pps_id": [4],
-    //         "resolved": 0,
-    //         "start_actual_time": "2018-02-23T08:18:19.585124+05:30",
-    //         "start_request_time": "2018-02-23T08:17:59.788544+05:30",
-    //         "unresolved": 0
-    //     }],
-    //     "create_time": "2018-1-24",
-    //     "end_time": null,
-    //     "next_page": "null",
-    //     "page": 2,
-    //     "page_results": 16,
-    //     "total_pages": 2,
-    //     "total_results": 36
-    // }];
+         res=[{
+        "audit_list": [{
+            "actual_quantity": null,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "enable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "enable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "system",
+            "audit_id": "b7ix4SUSfE",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["011.1.C.02"]
+            },
+            "audit_progress": {
+                "completed": 0,
+                "total": 0
+            },
+            "audit_status": "audit_created",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Tue, 20 Feb 2018 03:11:51 GMT",
+            "description": "undefined",
+            "display_id": 126,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": null,
+            "start_request_time": null,
+            "unresolved": 0
+        }, {
+            "actual_quantity": null,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "enable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "enable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "system",
+            "audit_id": "UbcgKeZV3W",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "sku",
+            "audit_param_value": {
+                "attributes_list": [{
+                    "attributes_sets": [],
+                    "sku": "2002"
+                }, {
+                    "attributes_sets": [{
+                        "product_color": ["Black"]
+                    }],
+                    "sku": "2003"
+                }, {
+                    "attributes_sets": [],
+                    "sku": "2001"
+                }, {
+                    "attributes_sets": [{
+                        "product_color": ["Red"],
+                        "product_internal_memory": ["32GB"],
+                        "product_region": ["China version"]
+                    }, {
+                        "product_internal_memory": ["32GB"],
+                        "product_region": ["India version"]
+                    }, {
+                        "product_color": ["Red"],
+                        "product_region": ["India version"]
+                    }],
+                    "sku": "2004"
+                }],
+                "uids_list": ["b556de49-8ccd-44f5-acef-0c896b2c161c", "9a8ebf04-fc62-41bd-9431-ef142ce785cd"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_created",
+            "audit_type": "Multi Sku",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Tue, 20 Feb 2018 03:40:35 GMT",
+            "description": "undefined",
+            "display_id": 127,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": null,
+            "start_request_time": null,
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "enable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "system",
+            "audit_id": "AZtqopTnRi",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["011.1.C.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_tasked",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Wed, 21 Feb 2018 03:02:19 GMT",
+            "description": "undefined",
+            "display_id": 128,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": "2018-02-21T08:33:11.177466+05:30",
+            "start_request_time": "2018-02-21T08:32:41.367061+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": null,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "enable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "enable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "b6K3tYdnY7",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["011.1.C.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_created",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Wed, 21 Feb 2018 03:05:49 GMT",
+            "description": "undefined",
+            "display_id": 129,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": null,
+            "start_request_time": null,
+            "unresolved": 0
+        }, {
+            "actual_quantity": null,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "enable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "enable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "pjGymb4Pha",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["011.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_created",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Wed, 21 Feb 2018 03:06:20 GMT",
+            "description": "undefined",
+            "display_id": 130,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": null,
+            "start_request_time": null,
+            "unresolved": 0
+        }, {
+            "actual_quantity": null,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "enable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "enable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "qmJ8LEwUQ5",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["011.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_created",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": null,
+            "create_time": "Wed, 21 Feb 2018 03:08:04 GMT",
+            "description": "undefined",
+            "display_id": 131,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": null,
+            "start_request_time": null,
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "w8q3V3JGdQ",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["012.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-21T08:52:14.344776+05:30",
+            "create_time": "Wed, 21 Feb 2018 03:18:04 GMT",
+            "description": "undefined",
+            "display_id": 132,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": "2018-02-21T09:14:16.939884+05:30",
+            "start_request_time": "2018-02-21T09:13:59.587424+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "xaKxjr6gYG",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["013.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-21T13:57:35.236608+05:30",
+            "create_time": "Wed, 21 Feb 2018 05:51:52 GMT",
+            "description": "undefined",
+            "display_id": 133,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-21T11:22:57.734071+05:30",
+            "start_request_time": "2018-02-21T11:22:21.406952+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "BnUiTucF2p",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["014.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T06:54:27.064430+05:30",
+            "create_time": "Fri, 23 Feb 2018 01:20:37 GMT",
+            "description": "undefined",
+            "display_id": 134,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T06:51:17.022443+05:30",
+            "start_request_time": "2018-02-23T06:50:45.906180+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "7KEApWvCTE",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["014.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T06:58:26.841212+05:30",
+            "create_time": "Fri, 23 Feb 2018 01:26:04 GMT",
+            "description": "undefined",
+            "display_id": 135,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T06:56:12.586794+05:30",
+            "start_request_time": "2018-02-23T06:56:12.113354+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "WpHptCYTMe",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["014.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T07:03:10.186902+05:30",
+            "create_time": "Fri, 23 Feb 2018 01:31:43 GMT",
+            "description": "undefined",
+            "display_id": 136,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T07:02:12.761684+05:30",
+            "start_request_time": "2018-02-23T07:02:12.230187+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "fhxPx37ecy",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["040.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T07:05:31.813905+05:30",
+            "create_time": "Fri, 23 Feb 2018 01:33:24 GMT",
+            "description": "undefined",
+            "display_id": 137,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T07:04:10.629204+05:30",
+            "start_request_time": "2018-02-23T07:04:10.227792+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "B83GLdrq8b",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["040.1.B.02", "038.1.A.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T08:00:49.624541+05:30",
+            "create_time": "Fri, 23 Feb 2018 02:27:27 GMT",
+            "description": "undefined",
+            "display_id": 138,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T08:00:15.533984+05:30",
+            "start_request_time": "2018-02-23T07:57:34.806433+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "Fydr4mMGAT",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["040.1.B.02", "038.1.A.02", "016.1.C.03"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T08:07:46.643344+05:30",
+            "create_time": "Fri, 23 Feb 2018 02:33:16 GMT",
+            "description": "undefined",
+            "display_id": 139,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T08:06:01.469040+05:30",
+            "start_request_time": "2018-02-23T08:03:25.603900+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "zTqg77G68W",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["040.1.B.02", "038.1.A.02", "016.1.C.03"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T08:20:17.432092+05:30",
+            "create_time": "Fri, 23 Feb 2018 02:41:07 GMT",
+            "description": "undefined",
+            "display_id": 140,
+            "expected_quantity": 0,
+            "pps_id": [2, 3],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T08:19:49.554472+05:30",
+            "start_request_time": "2018-02-23T08:11:30.912869+05:30",
+            "unresolved": 0
+        }, {
+            "actual_quantity": 0,
+            "audit_button_data": {
+                "audit_cancel_button": "disable",
+                "audit_delete_button": "disable",
+                "audit_duplicate_button": "enable",
+                "audit_resolve_button": "disable",
+                "audit_start_button": "disable",
+                "audit_view_issues_button": "disable"
+            },
+            "audit_created_by": "user",
+            "audit_id": "kNfQkQ8aUS",
+            "audit_info": [],
+            "audit_name": "audit name",
+            "audit_param_type": "location",
+            "audit_param_value": {
+                "locations_list": ["035.1.B.02"]
+            },
+            "audit_progress": {
+                "completed": 22,
+                "total": 45
+            },
+            "audit_status": "audit_completed",
+            "audit_type": "Multi Location",
+            "cancel_request": "undefined",
+            "completed_quantity": 0,
+            "completion_time": "2018-02-23T08:20:57.487495+05:30",
+            "create_time": "Fri, 23 Feb 2018 02:47:51 GMT",
+            "description": "undefined",
+            "display_id": 141,
+            "expected_quantity": 0,
+            "pps_id": [4],
+            "resolved": 0,
+            "start_actual_time": "2018-02-23T08:18:19.585124+05:30",
+            "start_request_time": "2018-02-23T08:17:59.788544+05:30",
+            "unresolved": 0
+        }],
+        "create_time": "2018-1-24",
+        "end_time": null,
+        "next_page": "null",
+        "page": 2,
+        "page_results": 16,
+        "total_pages": 2,
+        "total_results": 36
+    }];
             store.dispatch(recieveAuditData(res));
             store.dispatch(setAuditSpinner(false));
             break;
@@ -970,57 +970,57 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
                     case GET_AUDIT_DETAILS:
             let auditdetails = {};
-            if (res.data) {
-                //auditpps = res.data.audit;
-// auditdetails={
-//     "actual_quantity": 5,
-//     "audit_created_by": "user",
-//     "operator_name": "Raja Dey",
-//     "audit_id": "PtAYcvUkjQ",
-//     "audit_progress": {
-//         "completed": 20,
-//         "total": 89
-//     },
-//     "audit_param_type": "sku",
-//     "audit_param_value": {
-//         "attributes_list": [{
-//             "attributes_sets": ["Black", "64GB", "32GB"],
-//             "sku": "2002",
-//             "name": "IPhone 8",
-//             "audit_result": {
-//                 "total": 16,
-//                 "missing": 4
-//             }
-//         }, {
-//             "attributes_sets": [],
-//             "sku": "2003",
-//             "name": "IPhone X",
-//             "audit_result": {
-//                 "total": 16,
-//                 "missing": 4
-//             }
-//         }],
-//         "uids_list": ["9a8ebf04-fc62-41bd-9431-ef142ce785cd", "9a45c477-b02e-44de-aaac-4bcffe941eef"]
-//     },
-//     "audit_status": "audit_created",
-//     "kq": "true",
-//     "reminder": "rocking audit",
-
-//     "cancel_request": "undefined",
-//     "completed_quantity": 0,
-//     "completion_time": "2018-02-20 07:01:40.123477+05:30",
-//     "create_time": "2018-02-20 07:01:40.123477+05:30",
-//     "description": "undefined",
-//     "display_id": 108,
-//     "expected_quantity": 0,
-//     "pps_id": [3, 4],
-//     "resolved": 0,
-//     "start_actual_time": "2018-02-20 07:01:40.123477+05:30",
-//     "start_request_time": "2018-02-20 07:01:40.123477+05:30",
-//     "unresolved": 0
-// }
+            //if (res.data) {
+                auditpps = res.data.audit;
+auditdetails={
+    "actual_quantity": 5,
+    "audit_created_by": "user",
+    "operator_name": "Raja Dey",
+    "audit_id": "PtAYcvUkjQ",
+    "audit_progress": {
+        "completed": 20,
+        "total": 89
+    },
+    "audit_param_type": "sku",
+    "audit_param_value": {
+        "attributes_list": [{
+            "attributes_sets": ["Black", "64GB", "32GB"],
+            "sku": "2002",
+            "name": "IPhone 8",
+            "audit_result": {
+                "total": 16,
+                "missing": 4
             }
-            store.dispatch(getAuditDetails(res));
+        }, {
+            "attributes_sets": [],
+            "sku": "2003",
+            "name": "IPhone X",
+            "audit_result": {
+                "total": 16,
+                "missing": 4
+            }
+        }],
+        "uids_list": ["9a8ebf04-fc62-41bd-9431-ef142ce785cd", "9a45c477-b02e-44de-aaac-4bcffe941eef"]
+    },
+    "audit_status": "audit_created",
+    "kq": "true",
+    "reminder": "rocking audit",
+
+    "cancel_request": "undefined",
+    "completed_quantity": 0,
+    "completion_time": "2018-02-20 07:01:40.123477+05:30",
+    "create_time": "2018-02-20 07:01:40.123477+05:30",
+    "description": "undefined",
+    "display_id": 108,
+    "expected_quantity": 0,
+    "pps_id": [3, 4],
+    "resolved": 0,
+    "start_actual_time": "2018-02-20 07:01:40.123477+05:30",
+    "start_request_time": "2018-02-20 07:01:40.123477+05:30",
+    "unresolved": 0
+}
+            //}
+            store.dispatch(getAuditDetails(auditdetails));
             break;
 
 
@@ -1093,30 +1093,27 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case AUDIT_EDIT:
         //raja
         const validSKU ={
-  "audit_sku_validation_response": {
-    "attributes_list": [
-      {},
-      {
-        "product_color": [
-          "Black"
-        ]
-      },
-      {},
-      {
+    "actual_quantity": null,
+    "audit_created_by": "user",
+    "audit_id": "y6znibWXM8",
+    "audit_name":"Raja Dey",
+    "audit_param_type": "sku",
+    "audit_param_value": {
+        "attr_list": [
+            {
         "product_color": [
           "Red",
           "Black"
         ],
         "product_internal_memory": [
-          "32GB",
-          "64GB"
+          "32GB"
         ],
         "product_region": [
           "India version",
           "China version"
         ]
       },
-      {
+               {
         "product_internal_memory": [
           "128GB"
         ],
@@ -1124,51 +1121,85 @@ export function AjaxParse(store, res, cause, status, saltParams) {
           "China version"
         ]
       }
-    ],
-    "i18n_values": {
-      "product_color": [
-        {
-          "display_name": "Product color",
-          "locale": "en-US"
+        ],
+        "attributes_list": [{
+                "attributes_sets": [{
+                        "product_color": [
+                            "Black"
+                        ]
+                    },
+                ],
+                "sku": "2002"
+            },
+            {
+                "attributes_sets": [{
+                        "product_color": [
+                            "Green"
+                        ],
+                        "product_internal_memory": [
+                           "64GB",
+                            "32GB"
+                        ]
+                    },
+                    {
+                        "product_color": [
+                            "Yello"
+                        ],
+                        "product_internal_memory": [
+                           
+                            "32GB"
+                        ]
+                    },
+                    {
+                        "product_color": [
+                            "Violet"
+                        ],
+                        "product_internal_memory": [
+                         
+                            "256GB"
+                        ]
+                    }
+                ],
+                "sku": "2003"
+            }
+        ],
+        "sku_list": [
+            "2002",
+            "2003"
+        ],
+        "uids_list": [
+            "9a45c477-b02e-44de-aaac-4bcffe941eef"
+        ],
+        "i18n_values": {
+            "product_color": [{
+                "display_name": "Product color",
+                "locale": "en-US"
+            }],
+            "product_internal_memory": [{
+                "display_name": "Internal memory",
+                "locale": "en-US"
+            }],
+            "product_region": [{
+                "display_name": "Product region",
+                "locale": "en-US"
+            }]
         }
-      ],
-      "product_internal_memory": [
-        {
-          "display_name": "Internal memory",
-          "locale": "en-US"
-        }
-      ],
-      "product_region": [
-        {
-          "display_name": "Product region",
-          "locale": "en-US"
-        }
-      ]
     },
-    "sku_list": [
-      "2002",
-      "2003",
-      "2001",
-      "2004",
-      "2005"
-    ],
-    "status": {
-      "s0": true,
-      "s1": {
-        "error_code": "e027",
-        "error_reason": "sku does not exist"
-      }
-    },
-    "status_list": [
-      "s0",
-      "s0",
-      "s0",
-      "s0",
-      "s0"
-    ]
-  }
+    "audit_status": "audit_created",
+    "cancel_request": "undefined",
+    "completed_quantity": 0,
+    "completion_time": null,
+    "create_time": "Sun, 25 Feb 2018 03:29:55 GMT",
+    "description": "undefined",
+    "display_id": 156,
+    "expected_quantity": 0,
+    "pps_id": null,
+    "resolved": 0,
+    "start_actual_time": null,
+    "start_request_time": null,
+    "unresolved": 0
 }
-            store.dispatch(setAuditEditData(validSKU));
+            store.dispatch(setAuditEditData(validSKU.audit_param_value));
             break;    
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
