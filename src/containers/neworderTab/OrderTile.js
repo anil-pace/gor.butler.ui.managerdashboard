@@ -1,87 +1,15 @@
-//source: https://codepen.io/adamaoc/pen/wBGGQv?editors=1010
-
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import ProgressBar from '../../components/progressBar/progressBar';
-import OrderFilter from './orderFilter';
-import Spinner from '../../components/spinner/Spinner';
-import FilterSummary from '../../components/tableFilter/filterSummary';
-import {hashHistory} from 'react-router';
 
 class OrderTile extends React.Component{
   constructor(props) 
   {
     super(props);
-    this.state={
-      showFilter: false,
-    }
-    this.collapseAll = this.collapseAll.bind(this);
-    this.showFilter = this.showFilter.bind(this);
-    this.hideFilter = this.hideFilter.bind(this);
-    this.callBack = this.callBack.bind(this);
-    this._setFilter = this._setFilter.bind(this);
   } 
-
-  componentDidMount(){
-  }
-
-  collapseAll(){
-     this.props.disableCollapse();
-  }
-
-  showFilter(){
-    this.setState({
-      showFilter: true
-    })
-  }
-
-  hideFilter(data){
-    this.setState({
-      showFilter: data
-    })
-  }
-
-  _setFilter() {
-    var newState=!this.props.showFilter;
-    this.props.showTableFilter(newState);
-}
-
-  callBack(query){
-    this.props.callBack(query);
-  }
-
-  /**
-     *
-     */
-     _clearFilter() {
-        hashHistory.push({pathname: "/neworders", query: {}})
-    }
 
   render()
   {
-      var updateStatus, timeOffset, headerTimeZone;
-      var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
-      var orderDetail, alertNum=0, orderInfo;
-      orderDetail = ["1","2","3"];
-
-      // if (this.props.orderData.ordersDetail !== undefined) {
-      //   orderInfo=this.processOrders(this.props.orderData.ordersDetail, this);
-      //   orderDetail=orderInfo.renderOrderData;
-      //   alertNum=orderInfo.alertStatesNum;
-      // }
-
-      // timeOffset=this.props.timeOffset || "",
-      // headerTimeZone=(this.context.intl.formatDate(Date.now(),
-      // {
-      //     timeZone: timeOffset,
-      //     year: 'numeric',
-      //     timeZoneName: 'long'
-      // }));
-
-    /*Extracting Time zone string for the specified time zone*/
-    //headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
-
-      let filterHeight=screen.height-100;
       const { orderFulfilData, orderSummaryData } = this.props;
       const progressWidth = (orderFulfilData.picked_products_count / orderFulfilData.total_products_count) * 100;
 
@@ -130,33 +58,6 @@ class OrderTile extends React.Component{
               <div className="orderRightWrapper">
                 <div className="orderRightContent">
                   
-{/*
-                  {!this.props.showFilter? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
-
-                  {orderDetail ? (
-                    <div>
-                      <div className="gor-filter-wrap" style={{'width': this.state.showFilter ? '400px' : '0px', height: filterHeight}}>
-                        <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag} callBack={this.callBack} hideFilter={this.hideFilter}/>
-                    </div>
-
-                    <div className="orderButtonWrapper">
-                        <div className="gorButtonWrap">
-                          <button disabled={!this.props.collapseState} className="ordersCollapseAll" onClick={this.collapseAll}>
-                          <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
-                          </button>
-                        </div>
-                        <div className="gorButtonWrap">
-                            <button className="ordersFilterData" onClick={this._setFilter.bind(this)}>
-                            <div className="gor-manage-task"/>
-                            <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
-                            </button>
-                        </div>
-                      </div>
-                    </div>) : null
-                  }
-                */}
-                  
-
                   <div className="orderRightHeader"> 
                     <FormattedMessage id="orders.summary" description="header of orders summary" defaultMessage="Order summary "/>
                   </div>

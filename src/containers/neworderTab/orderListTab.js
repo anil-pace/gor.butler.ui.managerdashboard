@@ -92,19 +92,16 @@ var storage = [];
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
-        //this._handlePageChange= this._handlePageChange.bind(this);
         this._restartPolling = this._restartPolling.bind(this);
-        
-        this.enableCollapse = this.enableCollapse.bind(this);
-        this.disableCollapse = this.disableCollapse.bind(this);
-
-        this.callBack= this.callBack.bind(this);
+        this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
+        this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
+        this._handleCollapseAll = this._handleCollapseAll.bind(this);
     }
 
     _getInitialState(){
         return {
             isPanelOpen:true,
-            collapseState: false,
+            collapseAllBtnState: true, 
             date: new Date(),
             //query:this.props.location.query,
             pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
@@ -124,7 +121,13 @@ var storage = [];
          * update.
          */
          this.props.orderListRefreshed();
-     }
+    }
+
+    componentDidMount(){
+        console.log("component DId Mount get called");
+        this._reqCutOffTime();
+        //this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
@@ -135,7 +138,7 @@ var storage = [];
         }
     }
 
-     _refreshList(query,orderbyParam) {
+    _refreshList(query,orderbyParam) {
         var orderbyUrl;
         this.props.setOrderListSpinner(true);
 
@@ -146,9 +149,6 @@ var storage = [];
             "twelveHourOrders": 12,
             "oneDayOrders": 24
         };
-
-        
-
 
         //appending filter for status
 
@@ -183,7 +183,6 @@ var storage = [];
 
         //appending filter for orders by time:
         
-        
         if (query.period) {
             let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
             
@@ -213,8 +212,8 @@ var storage = [];
         else{
             url+=orderbyUrl
         }
-        let paginationData={
 
+        let paginationData={
             'url': url,
             'method': 'GET',
             'cause': ORDERS_RETRIEVE,
@@ -245,26 +244,12 @@ var storage = [];
 
     }
 
-    /**
-     *
-     */
-     _clearFilter() {
+    _clearFilter() {
         hashHistory.push({pathname: "/orders/orderlist", query: {}})
     }
 
-     componentWillUnmount() {
+    componentWillUnmount() {
         clearInterval(this._intervalId);
-    }
-
-     componentDidMount(){
-        console.log("component DId Mount get called");
-        this._reqCutOffTime();
-        //this._intervalId = setInterval(() => this._reqCutOffTime(), 1000);
-    }
-
-    callBack(query){
-        //alert("coming to newordersTab" + JSON.stringify(query));
-        this._refreshList(this.props.location.query);
     }
 
     enableCollapse(){
@@ -814,6 +799,27 @@ _viewOrderLine = (orderId) =>  {
         return x;
     }
 
+    _enableCollapseAllBtn(){
+        this.setState({
+            collapseAllBtnState: false,
+            isPanelOpen: true
+        })
+    }
+
+    _disableCollapseAllBtn(){
+        this.setState({
+            collapseAllBtnState: true,
+            isPanelOpen: false
+        })
+    }
+
+    _handleCollapseAll(){
+        this.setState({
+            collapseAllBtnState: true,
+            isPanelOpen: false
+        })
+    }
+
     render() {
 
         var self = this;
@@ -897,7 +903,7 @@ _viewOrderLine = (orderId) =>  {
 
                         */}
 
-                            <div style={{position: "absolute", right:"0", top:"10px"}} className="filterWrapper">
+                            <div style={{position: "absolute", right:"0", top:"7px"}} className="filterWrapper">
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
                                         <div className="gor-button-sub-status">
@@ -906,7 +912,7 @@ _viewOrderLine = (orderId) =>  {
 
                                         <div className="orderButtonWrapper">
                                             <div className="gorButtonWrap">
-                                              <button disabled={!this.props.collapseState} className="gor-filterBtn-btn" onClick={this.collapseAll}>
+                                              <button disabled={this.state.collapseAllBtnState} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
                                               <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
                                               </button>
                                             </div>
@@ -977,7 +983,7 @@ _viewOrderLine = (orderId) =>  {
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
                                 return (
-                                    <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapse={self.enableCollapse} disableCollapse={self.disableCollapse} title={
+                                    <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
                                         <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                             {row.map(function (text, index) {
                                                 return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >

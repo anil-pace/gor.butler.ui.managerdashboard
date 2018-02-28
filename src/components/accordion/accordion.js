@@ -28,10 +28,10 @@ class Accordion extends React.Component{
       storage.splice(index, 1);
     }
     if(storage.length >= 1){
-      this.props.enableCollapse();
+      this.props.enableCollapseAllBtn();
     }
     else{
-      this.props.disableCollapse();
+      this.props.disableCollapseAllBtn();
     }
 
     this.props.getOrderPerPbt(this.props.cutOffTimeId);
