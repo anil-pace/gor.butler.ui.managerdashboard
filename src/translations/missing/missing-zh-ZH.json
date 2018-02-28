@@ -468,12 +468,6 @@
 	"filepath": "./src/constants/backEndConstants.js"
 },
 {
-	"id": "stringConfig.bad_request",
-	"description": "Text to show bad request",
-	"defaultMessage": "Bad Request",
-	"filepath": "./src/constants/backEndConstants.js"
-},
-{
 	"id": "stringConfig.internal_server_error",
 	"description": "Text to show internal server error",
 	"defaultMessage": "Internal Error",
@@ -919,9 +913,27 @@
 	"filepath": "./src/containers/emergencyProcess/fireHazard.js"
 },
 {
+	"id": "operationPause.sensor.latchGate",
+	"description": "Text for latch_gate sensor",
+	"defaultMessage": "Latch Gate",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operationPause.sensor.buttonSensor",
+	"description": "Text for button_press sensor",
+	"defaultMessage": "Button",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
+	"id": "operationPause.sensor.lightCurtain",
+	"description": "Text for light_curtain sensor",
+	"defaultMessage": "Light Curtain",
+	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
+},
+{
 	"id": "operation.alert.pause.breach.text",
 	"description": "Text for emergency button press",
-	"defaultMessage": "Emergency-Pause activated due to SOP breach via Controller {controller} in {zone}.",
+	"defaultMessage": "Emergency-Pause activated due to SOP breach at {sensor} {controller} in {zone}.",
 	"filepath": "./src/containers/emergencyProcess/OperationPause.js"
 },
 {
@@ -1376,10 +1388,76 @@
 	"filepath": "./src/containers/reportsTab/reportsTab.js"
 },
 {
+	"id": "reportsTab.storageSpace",
+	"description": "Storage space tab for Reports tab",
+	"defaultMessage": "Storage Space",
+	"filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
 	"id": "reportsTab.downloadReport",
 	"description": "Operations Log tab for Reports tab",
 	"defaultMessage": "Download",
 	"filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+	"id": "storageSpace.report.tooltip",
+	"description": "Tooltip to display Generate button",
+	"defaultMessage": "Reports not available for Realtime filter",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.heading",
+	"description": "Heading for PPS",
+	"defaultMessage": "Storage space information",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.downloadBtn",
+	"description": "button label for download report",
+	"defaultMessage": "Generate Report",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.slotType",
+	"description": "SLOT TYPE",
+	"defaultMessage": "slot type",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.slotVolume",
+	"description": "slot volume",
+	"defaultMessage": "SLOT VOLUME",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.dimension",
+	"description": "Dimension",
+	"defaultMessage": "DIMENSION (L*B*H)",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.totalSlots",
+	"description": "Status for total slots",
+	"defaultMessage": "TOTAL SLOTS",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.emptySlots",
+	"description": "Status for empty slots",
+	"defaultMessage": "EMPTY SLOTS",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.slotUtilization",
+	"description": "Status for PPS",
+	"defaultMessage": "SLOT UTILIZATION",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+	"id": "storageSpace.table.noData",
+	"description": "No data message for Storage space",
+	"defaultMessage": "No Data Found",
+	"filepath": "./src/containers/reportsTab/storageSpaceTab.js"
 },
 {
 	"id": "gor.filter.hide",

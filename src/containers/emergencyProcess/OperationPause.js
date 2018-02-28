@@ -9,7 +9,7 @@ const  messages= defineMessages({
         description: 'Text for latch_gate sensor',
         defaultMessage: 'Latch Gate'
     },
-    buttonSensor: {
+buttonPressSensor: {
         id: 'operationPause.sensor.buttonSensor',
         description: 'Text for button_press sensor',
         defaultMessage: 'Button'
@@ -40,7 +40,7 @@ class OperationPause extends React.Component{
        sensor = this.props.intl.formatMessage(messages.latchGateSensor)
       }
       else if(sensorProp === 'button_press'){
-        sensor =  this.props.intl.formatMessage(messages.buttonPressSensor)
+        sensor =  this.props.intl.formatMessage(messages.buttonSensor)
       }
       else if(sensorProp === 'light_curtain'){
         sensor =  this.props.intl.formatMessage(messages.lightCurtainSensor)

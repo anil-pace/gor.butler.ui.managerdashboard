@@ -7,10 +7,14 @@ import {
     SETAUDIT_PPS,
     REFRESH_AUDIT,
     DISPLAY_AUDIT_SPINNER,
+    DISPLAY_AUDIT_VALIDATION_SPINNER,
     SET_AUDIT_ORDERLINES,
     VALIDATED_ATTIBUTES_DATA,
+    VALIDATED_ATTIBUTES_DATA_SKU,
+    VALIDATED_ATTIBUTES_DATA_LOCATION,
     TEXTBOX_STATUS,
-    AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY
+    AUDIT_LIST_REFRESHED,SET_AUDIT_QUERY,
+    CREATE_AUDIT_REQUEST
 } from '../constants/frontEndConstants'
 
 export function getAuditData(params) {
@@ -59,6 +63,13 @@ export function setAuditSpinner(data) {
     }
 }
 
+export function setValidationAuditSpinner(data) {
+    return {
+        type: DISPLAY_AUDIT_VALIDATION_SPINNER,
+        data
+    }
+}
+
 export function getAuditOrderLines(params) {
     return {
         type: AJAX_CALL,
@@ -87,6 +98,21 @@ export function auditValidatedAttributes(data) {
         data
     }
 }
+
+export function auditValidatedAttributesLocation(data) {
+    return {
+        type: VALIDATED_ATTIBUTES_DATA_LOCATION,
+        data
+    }
+}
+
+export function auditValidatedAttributesSKU(data) {
+    return {
+        type: VALIDATED_ATTIBUTES_DATA_SKU,
+        data
+    }
+}
+
 //Set the text box value enable or disable
 export function setTextBoxStatus(data) {
     return {
@@ -110,6 +136,13 @@ export function cancelAudit(params) {
 export function setAuditQuery(data){
     return {
         type:SET_AUDIT_QUERY,
+        data
+    }
+}
+
+export function createAuditAction(data){
+    return {
+        type:CREATE_AUDIT_REQUEST,
         data
     }
 }

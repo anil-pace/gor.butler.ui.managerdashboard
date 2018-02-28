@@ -9,7 +9,10 @@ import {
     setAuditRefresh,
     setAuditSpinner,
     setPendingAuditLines,
-    auditValidatedAttributes
+    auditValidatedAttributesSKU,
+    auditValidatedAttributesLocation,
+    auditValidatedAttributesLocationCsv,
+    createAuditAction
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
@@ -28,6 +31,8 @@ import {
 	loginError,
 	validateSKU,
 	validateSKUcodeSpinner,
+    validateLocationcodeSpinner,
+    validateLocationcodeSpinnerCsv,
 	modalStatus,
 	getSafetyList,
 	getSafetyErrorList,
@@ -54,6 +59,9 @@ import {
     AUDIT_RESOLVE_LINES,
     AUDIT_RESOLVE_CONFIRMED,
     VALIDATE_SKU_ID,
+    VALIDATE_LOCATION_ID,
+    CREATE_AUDIT_REQUEST,
+    VALIDATE_LOCATION_ID_CSV,
     PAUSE_OPERATION,
     RESUME_OPERATION,
     CONFIRM_SAFETY,
@@ -91,7 +99,8 @@ import {
     ORDERS_SUMMARY_FETCH,
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
-    ORDERLINES_PER_ORDER_FETCH
+    ORDERLINES_PER_ORDER_FETCH,
+    WHITELISTED_ROLES
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -162,6 +171,7 @@ import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
 import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData, receiveOrdersLinesData} from './../actions/norderDetailsAction';
+
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -319,7 +329,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         
         case RECIEVE_HEADER:
-            if (res.users[0].roles[0] == BUTLER_UI) {
+            if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
                 endSession(store);
             }
             store.dispatch(recieveHeaderInfo(res));
@@ -346,11 +356,22 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
 
         case VALIDATE_SKU_ID:
-            if (res.sku && res.audit_attributes_values) {
-                store.dispatch(auditValidatedAttributes(res));
-            }
-            store.dispatch(validateSKUcodeSpinner(false));
+            store.dispatch(auditValidatedAttributesSKU(res));
             break;
+        case VALIDATE_LOCATION_ID:
+            store.dispatch(auditValidatedAttributesLocation(res));
+            store.dispatch(validateLocationcodeSpinner(false));
+            break;
+        case CREATE_AUDIT_REQUEST:
+            store.dispatch(createAuditAction(res));
+            break;
+        case VALIDATE_LOCATION_ID_CSV:
+            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
+                store.dispatch(auditValidatedAttributesLocationCsv(res));
+            }
+            store.dispatch(validateLocationcodeSpinnerCsv(false));
+            break;
+
 
 		case PAUSE_OPERATION:
 			var pausePwd;

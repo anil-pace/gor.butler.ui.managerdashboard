@@ -5793,5 +5793,89 @@
    "description": "System Generated",
    "defaultMessage": "システム生成",
    "filepath": "./src/constants/messageConstants.js"
+},
+{
+   "id": "reportsTab.storageSpace",
+   "description": "Storage space tab for Reports tab",
+   "デフォルト・メッセージ": "収納スペース",
+   "filepath": "./src/containers/reportsTab/reportsTab.js"
+},
+{
+   "id": "storageSpace.page.twentyfive",
+   "description": "Page size 25",
+   "デフォルト・メッセージ": "25",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.page.fifty",
+   "description": "Page size 50",
+   "デフォルト・メッセージ": "50",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.page.hundred",
+   "description": "Page size 100",
+   "デフォルト・メッセージ": "100",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.genRep.tooltip",
+   "description": "Tooltip to display Generate button",
+   "デフォルト・メッセージ": "リアルタイムフィルタでは利用可能でないレポート",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.heading",
+   "description": "Heading for PPS",
+   "デフォルト・メッセージ": "収納スペース情報",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.downloadBtn",
+   "description": "button label for download report",
+   "デフォルト・メッセージ": "レポートを生成します",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotType",
+   "description": "SLOT TYPE",
+   "デフォルト・メッセージ": "スロットタイプ",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotVolume",
+   "description": "slot volume",
+   "デフォルト・メッセージ": "スロット容積",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.dimension",
+   "description": "Dimension",
+   "デフォルト・メッセージ": "ダイメンション (L*B*H)",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.totalSlots",
+   "description": "Status for total slots",
+   "デフォルト・メッセージ": "全体のスロット",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.emptySlots",
+   "description": "Status for empty slots",
+   "デフォルト・メッセージ": "空のスロット",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.slotUtilization",
+   "description": "Status for PPS",
+   "デフォルト・メッセージ": "スロット利用",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
+},
+{
+   "id": "storageSpace.table.noData",
+   "description": "No data message for Storage space",
+   "デフォルト・メッセージ": "データが見つかりませんでした",
+   "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
 }
 ]

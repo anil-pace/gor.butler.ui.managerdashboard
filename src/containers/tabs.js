@@ -10,7 +10,7 @@ import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
 import {OVERVIEW,SYSTEM,ORDERS,NEWORDERS, USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import OperationPause from '../containers/emergencyProcess/OperationPause';
@@ -151,7 +151,7 @@ class Tabs extends React.Component{
   {
     let overview,system,order,neworder, newordersClass, newordersStatus, ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
-        offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities;
+        offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
     offline=<FormattedMessage id="tabs.offline" description="offline" 
               defaultMessage="Offline"/>;
@@ -179,7 +179,10 @@ class Tabs extends React.Component{
     utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
               defaultMessage="UTILITIES"/>;   
     reports= <FormattedMessage id="reports.tab.heading" description="reports tab" 
-              defaultMessage="REPORTS"/>;                  
+              defaultMessage="REPORTS"/>;      
+
+    newaudit= <FormattedMessage id="newaudit.tab.heading" description="new audit tab" 
+              defaultMessage="NEW AUDIT"/>;             
 
     if(!this.props.system_status)
     {
@@ -264,7 +267,9 @@ class Tabs extends React.Component{
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
-           auditIcon:auditIcon, utilities:utilities};
+           auditIcon:auditIcon, utilities:utilities,
+           newaudit:newaudit, newauditStatus:newauditStatus, newauditClass:newauditClass, newauditIcon:newauditIcon
+         };
 
     return items;
   }
@@ -363,6 +368,8 @@ singleNotification=<GorToastify key={1}>
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
+
+    
    {showFireHazardPopup?notificationWrap:""}
   </div>
 		);
