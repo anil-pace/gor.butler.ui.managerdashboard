@@ -52,6 +52,7 @@ export default class SelectAttributes extends React.Component {
      }
 
     _toggleDrop(){
+        
         this.setState({
             dropdownVisible:!this.state.dropdownVisible
         })
@@ -186,7 +187,9 @@ export default class SelectAttributes extends React.Component {
 
     render() {
         var _this = this;
-        var dropStyleTop={}
+        var dropStyleTop={};
+        var hackPositionStyles={};
+        
         var attributeSelected = Object.keys(_this.state.selectedSets).length ? true : false;
         if(this.state.dropdownVisible){
             let elementPosition = this._isInViewport();
@@ -196,10 +199,19 @@ export default class SelectAttributes extends React.Component {
             else{
                 dropStyleTop.top=(parseInt(this.dropElement.style.top) || -244);
             }
+            hackPositionStyles = Object.assign({},dropStyleTop);
+            if(this.props.usePositionHack){
+                let boundingPlaceHolderEl = this.placeHolderEl.getBoundingClientRect();
+                hackPositionStyles.position="fixed";
+                hackPositionStyles.width="267";
+                hackPositionStyles.left="49%";
+                hackPositionStyles.top = boundingPlaceHolderEl.top -254;
+            }
         }
+
         
         return <div className="gor-sel-att-wrap">
-        <div className="gor-sel-att-placeholder" onClick={_this._toggleDrop}>
+        <div className="gor-sel-att-placeholder" ref={(elem) => { this.placeHolderEl = elem; }} onClick={_this._toggleDrop}>
         <div className="gor-sel-att-pholder-text">
             <p>{_this.state.placeHolder}</p>
         </div>
@@ -208,7 +220,7 @@ export default class SelectAttributes extends React.Component {
         </div>
         </div>
         
-        <div style={dropStyleTop} ref={(elem) => { this.dropElement = elem; }} className={this.state.dropdownVisible ? "gor-sel-att-drop" : "gor-sel-att-drop hide-drop"} >
+        <div style={hackPositionStyles} ref={(elem) => { this.dropElement = elem; }} className={this.state.dropdownVisible ? "gor-sel-att-drop" : "gor-sel-att-drop hide-drop"} >
             <div className="gor-sel-att-content">
         {(!attributeSelected && !this.state.showAttrList) && <div className={"gor-sel-att-add show"}>
             <div className="text-cont">
@@ -267,7 +279,7 @@ export default class SelectAttributes extends React.Component {
                 <section key={key+index} className="attribute-row">
                 <div className="category">
                    <span className={"setName"}> {"Set "+(index+1)}</span>
-                   <span className={"actions-icons"}><i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key,_this.props.index)}/> <i className={"gor-edit-icon"} onClick={(e)=>this._editSet(e,key)}/></span>
+                   <span className={"actions-icons"}> <i className={"gor-edit-icon"} onClick={(e)=>this._editSet(e,key)}/> <i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key,_this.props.index)}/></span>
                 </div>
                 <div className="values">
                     {Object.keys(this.state.selectedSets[key]).map((key2, idx) => (
