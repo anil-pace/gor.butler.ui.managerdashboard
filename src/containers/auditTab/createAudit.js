@@ -13,7 +13,7 @@ import {Tab} from '../../components/gor-tabs/tabContent';
 import CSVUpload from '../../components/gor-drag-drop-upload/index';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
-import {setAuditSpinner} from '../../actions/auditActions';
+import {setValidationAuditSpinner} from '../../actions/auditActions';
 import {modal} from 'react-redux-modal';
 import SkuAlerts from './skuAlerts';
 
@@ -697,6 +697,7 @@ class CreateAudit extends React.Component{
             tuple.checked=false;
             tuple.index=i;
             tuple.value=data[i];
+            tuple.visible=true;
             tuple.errorMessage = true;
             processedList.push(tuple);
 
@@ -958,8 +959,8 @@ class CreateAudit extends React.Component{
 
                  </div>
                  <div className={"message success"}>
-                  <FormattedMessage id="audit.locationValidation.success" description='Audit location verification success message'
-                                                              defaultMessage='{valid} out of {total} locations valid'
+                  <FormattedMessage id="audit.skuValidation.success" description='Audit sku verification success message'
+                                                              defaultMessage='{valid} out of {total} SKUs valid'
                                                               values={
                                                                 {
                                                                   valid: self.state.skuAttributes.totalValid ? self.state.skuAttributes.totalValid.toString() : "0",
@@ -1012,6 +1013,7 @@ class CreateAudit extends React.Component{
                           attributeList={attributeList}
                           applyCallBack={this._onAttributeSelection}
                           index={i}
+                          usePositionHack={true}
                           />}
                       </div>)
                   }
@@ -1274,7 +1276,8 @@ CreateAudit.defaultProps = {
   locCheck:{},
   skuAttributes:{},
   locationAttributes:{},
-  hasDataChanged:false
+  hasDataChanged:false,
+  auditSpinner:false
 };
 function mapStateToProps(state, ownProps){
   return {
@@ -1288,7 +1291,7 @@ function mapStateToProps(state, ownProps){
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
-      auditSpinner: state.spinner.auditSpinner || false
+      auditSpinner: state.auditInfo.auditValidationSpinner 
   };
 }
 
@@ -1297,7 +1300,7 @@ function mapDispatchToProps(dispatch){
     resetForm:   function(){ dispatch(resetForm()); },
     makeAjaxCall: function (data) {dispatch(makeAjaxCall(data))},
     setAuditSpinner: function (data) {
-            dispatch(setAuditSpinner(data))
+            dispatch(setValidationAuditSpinner(data))
         }
   }
 };

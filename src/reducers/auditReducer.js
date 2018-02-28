@@ -6,6 +6,7 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,
   VALIDATED_ATTIBUTES_DATA_LOCATION,
   VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
   TEXTBOX_STATUS,
+  DISPLAY_AUDIT_VALIDATION_SPINNER,
   AUDIT_LIST_REFRESHED,
   CREATE_AUDIT_REQUEST} from '../constants/frontEndConstants';
 /**
@@ -146,15 +147,19 @@ export  function auditInfo(state={},action){
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,
-            "auditSpinner":false
+            "auditValidationSpinner":false
           })
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
        let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
             "hasDataChanged":!state.hasDataChanged,
-            "auditSpinner":false
+            "auditValidationSpinner":false
           })
+    case DISPLAY_AUDIT_VALIDATION_SPINNER:
+            return Object.assign({}, state, {
+                "auditValidationSpinner": action.data
+            })
 
     case TEXTBOX_STATUS:  
      return Object.assign({}, state, { 
