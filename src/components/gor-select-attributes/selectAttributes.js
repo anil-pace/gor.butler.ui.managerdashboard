@@ -25,10 +25,9 @@ export default class SelectAttributes extends React.Component {
         return{
             dropdownVisible:false,
             data:this.props.attributeList,
-            selectedSets:this.props.attrSet,
+            selectedSets:this.props.prefilledData,
             nonMutatedData:this.props.attributeList,
             selectedAttributes:{},
-            selectedSets:this.props.attrSet,
             showAttrList:false,
             selectionApplied:false,
             editedIndex:"-1",

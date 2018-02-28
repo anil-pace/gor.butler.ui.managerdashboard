@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST } from '../../constants/frontEndConstants';
+import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL,PPSLIST_URL,GET_MD_CONFIG_URL} from '../../constants/configConstants';
 import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
@@ -176,7 +176,7 @@ class CreateAudit extends React.Component{
     {
       this._removeThisModal();
     }
-    //if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+    if(this.props.hasDataChanged !== nextProps.hasDataChanged){
 
       let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
       skuAttributes = JSON.parse(JSON.stringify(nextProps.auditEditData)),
@@ -202,7 +202,7 @@ class CreateAudit extends React.Component{
       auditSpinner:nextProps.auditSpinner
 
     })
-    //
+  }
     if(this.props.auditSpinner !== nextProps.auditSpinner){
       this.setState({
         auditSpinner:nextProps.auditSpinner
@@ -265,11 +265,13 @@ class CreateAudit extends React.Component{
     for(let i=0,len=data.length; i<len ;i++){
       let tuple={};
       let error_code = data[i].status ? (data[i].status===true ? "" :data[i].status.error_code) : "";//MIGHT
+
       tuple.checked=false;
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
       tuple.errorMessage = data[i].status ? (data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
+
       processedData.push(tuple);
     }
     return processedData
@@ -852,7 +854,17 @@ class CreateAudit extends React.Component{
 
   render()
   {
+
       let self=this;
+     var header='',button='';
+      let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
+      let validLocationMessg=<FormattedMessage id="audit.valid.location" description='text for valid location' defaultMessage='Location valid'/>;
+      let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let invalidLocationMessg=<FormattedMessage id="audit.invalid.location" description='text for invalid location' defaultMessage='Please enter correct Location number'/>;
+      let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
+      let uploadCsvMessg=<FormattedMessage id="audit.uploadcsv.text" description='text for upload csv and validate' defaultMessage='Upload CSV and validate'/>;
+      let selectAttributesMessg=<FormattedMessage id="audit.selectattributes.text" description='text for select attributes' defaultMessage='Select attributes'/>;
+
       let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
@@ -907,16 +919,32 @@ class CreateAudit extends React.Component{
         label:deselectAllLabel,
         disabled:false
       }]
+      if(this.props.param=='edit')
+      {
+        header=<div className='gor-usr-add'><FormattedMessage id='audit.edit.heading' description='Heading for edir audit' 
+       defaultMessage='Edit audit'/></div>
+       button=<button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for edit audit button' 
+            defaultMessage='UPDATE'/></button>
+}else if(this.props.param=='duplicate'){
+   header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
+       defaultMessage='Duplicate audit'/></div>
+         button= <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.duplicate.password.button" description='Text for edit duplicate button' 
+            defaultMessage='CREATE AUDIT'/></button>
+}else
+{
+     header=<div className='gor-usr-add'><FormattedMessage id='audit.add.heading' description='Heading for add audit' 
+       defaultMessage='Create New audit'/></div>
+       button= <button onClick={()=>{this._validateSKU("create")}} className={validationDoneSKU && allSKUsValid && self.state.skuAttributes.totalSKUs!==0?"gor-create-audit-btn":"gor-create-audit-btn-disabled"}><FormattedMessage id="audits.add.password.button" description='Text for edit audit button' 
+            defaultMessage='CREATE AUDIT'/></button>
+}
+
 
       
       return (
         <div>
           <div className="gor-modal-content gor-audit-create">
             <div className='gor-modal-head'>
-             
-                       <div className='gor-usr-add'><FormattedMessage id='audit.add.heading' description='Heading for add audit' 
-            defaultMessage='Create new audit'/>   
-              </div>
+             {header}      
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
@@ -1021,7 +1049,8 @@ class CreateAudit extends React.Component{
               <div>
                {copyPasteSKU.data.map((tuple,i)=>{
                     let tuples=[],
-                    attributeList = this.state.skuAttributes.data[i].attributeList;
+                    attributeList = self.state.skuAttributes.data[i].attributeList,
+                    attributeSet = self.state.skuAttributes.outerObj[tuple.value];
                     if(tuple.visible){
                     tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value+i}>
 
@@ -1061,14 +1090,15 @@ class CreateAudit extends React.Component{
              
             </Tab>
             </GorTabs>
-
-
-
               {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}</button>
               </div>}
-               
+
+               <div>
+            {button}
+            </div>
+
                   </div>
           <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
 

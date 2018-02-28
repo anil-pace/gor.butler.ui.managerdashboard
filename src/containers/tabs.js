@@ -343,11 +343,9 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-    <Link to="/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
-     <Tab items={{ tab: items.neworder, Status: items.newordersStatus, currentState:items.newordersClass }} changeClass={(this.props.tab.toUpperCase()=== AUDITLISTING ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
+  
 
-    <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
+    <Link to="/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
     <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>

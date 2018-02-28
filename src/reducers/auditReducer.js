@@ -6,7 +6,11 @@ import {AUDIT_DATA,SET_AUDIT,RESET_AUDIT,SETAUDIT_PPS,SETAUDIT_DETAILS,
   VALIDATED_ATTIBUTES_DATA_SKU,
   VALIDATED_ATTIBUTES_DATA_LOCATION,
   VALIDATED_ATTIBUTES_DATA_LOCATION_CSV,
+  SETAUDIT_USER,
+  SETAUDIT_CHECKED,
   TEXTBOX_STATUS,
+  SETAUDIT_PPS_CHECKED,
+  SETOTHER_PPS_CHECKED,
   DISPLAY_AUDIT_VALIDATION_SPINNER,
   AUDIT_LIST_REFRESHED,
   CREATE_AUDIT_REQUEST,SET_AUDIT_EDIT_DATA} from '../constants/frontEndConstants';
@@ -136,12 +140,11 @@ export  function auditInfo(state={},action){
               "auditCreationSuccessful": action.data.audit_id ? !state.auditCreationSuccessful : state.auditCreationSuccessful
           }) 
   case SET_AUDIT_EDIT_DATA:
-  let processedDataSKU1 = processValidationDataSKU(action.data);
+  let processedDataSKU1 = processValidationDataSKU(action.data,"Edit_Dup");
           return Object.assign({}, state, {
-             //"auditEditData": processValidationDataSKU(action.data.audit_param_value,action.type)//action.data
-            "auditEditData":processedDataSKU1              //"skuAttributes" : processedDataSKU1,
-              // "hasDataChanged":!state.hasDataChanged,
-              // "auditSpinner":false
+               "auditEditData":processedDataSKU1,              //"skuAttributes" : processedDataSKU1,
+              "hasDataChanged":!state.hasDataChanged,
+               "auditSpinner":false
           })
                    
     default:
@@ -149,41 +152,19 @@ export  function auditInfo(state={},action){
   }
 }
 
-function processValidationDataSKU(data){
-  let param='edit';let finalArr=[],arrSkuwise={}
+function processValidationDataSKU(data,param){
+  let finalArr=[],outerObj={}
   var processedData=[],
   skuList = data.sku_list,
   status = data.status,
   statusList = data.status_list,
-  
-  attList = data.attr_list,
-  //attList = data.attributes_list,
-  //attrSet=data.attributes_list,
+  attList = data.attributes_list,
   i18n = data.i18n_values,
   totalValid=0,totalInvalid=0;
-  
-  // for(let a=0,len=attrSet.length;a< len;a++){
-  //     let arr=attrSet[a].attributes_sets;
-  //     let finalArr={};
-  //     let finalob={};
-  //     for(let b=0,lenb=arr.length;b<lenb;b++)
-  //     {
-  //       let x;
-  //       Object.keys(arr[b]).forEach(function(data,index){
-  //         let attObj={};
-  //         x = arr[b][data].toString();
-  //         attObj.text=(arr[b][data]).toString();
-  //         attObj.category=data;
-  //         finalob[arr[b][data]]=attObj;
-  //       })
-  //       //finalArr[x]=finalob;
-  //     }
-  //     arrSkuwise[attrSet[a].sku]= finalob;
+ if(param=="Edit_Dup")
+ {
+let attrSet=data.attributes_list_sets;
 
-  // }
-let attrSet=data.attributes_list;
-
-let outerObj={};
 for(let a=0,len=attrSet.length;a<len;a++){
   let skuobj={}, obj2={};
   let arr=attrSet[a].attributes_sets;
@@ -204,28 +185,24 @@ for(let a=0,len=attrSet.length;a<len;a++){
 
   }
   outerObj[attrSet[a].sku]=obj2;
-
 }
 
-
-
-
-
-
-
-
+}
 
 
   for(let i=0,len = skuList.length; i< len ;i++){
     let tuple ={};
     tuple.skuName = skuList[i];
+    if(param=="Edit_Dup")
+    {
     totalValid++;
-    //tuple.status = status[statusList[i]];
-    //totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
-    //totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
-    
+  }else
+  {
+    tuple.status = status[statusList[i]];
+    totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
+    totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
+    }
     let attributeList = attList[i];
-    //let attributeList = attList[i];
     let categoryList = [];
     for(let key in attributeList){
       let attTuple = {}
