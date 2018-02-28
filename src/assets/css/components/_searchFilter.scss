@@ -1,0 +1,21 @@
+.searchBarWrapper{
+	width: calculateRem(310px);
+	border-radius: 3px;
+	border: 1px solid #aaaaaa;
+	background-color: #fff;
+	.searchIconWrap{
+		display: inline-block;
+		padding-left: calculateRem(10px);
+		vertical-align: middle;
+	}
+	.inputWrapper{
+		display: inline-block;
+		width:80%;
+		.gor-search-input-wrap{
+			padding: .625rem;
+		    border: none;
+		    color: #aaaaaa;
+		    width: 100%;
+		}
+	}
+}

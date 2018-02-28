@@ -12,14 +12,15 @@ import {
     auditValidatedAttributesSKU,
     auditValidatedAttributesLocation,
     auditValidatedAttributesLocationCsv,
-    createAuditAction
+    createAuditAction,
+    setAuditEditData
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails,getAuditUserList} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -54,6 +55,7 @@ import {
     CREATE_AUDIT,
     AUDIT_RETRIEVE,
     GET_PPSLIST,
+    GET_AUDIT_DETAILS,
     START_AUDIT,
     DELETE_AUDIT,
     AUDIT_RESOLVE_LINES,
@@ -95,8 +97,8 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
-    WHITELISTED_ROLES
-
+    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -180,10 +182,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setLoginSpinner(false));
             break;
         case ORDERS_RETRIEVE:
-            store.dispatch(recieveOrdersData(res));
-            store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
+           store.dispatch(recieveOrdersData(res));
+            store.dispatch(setOrderListSpinner(false));
+       
             store.dispatch(recieveAuditData(res));
             store.dispatch(setAuditSpinner(false));
             break;
@@ -255,6 +258,27 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
             }
             break;
+        case PAUSE_AUDIT:
+            stringInfo = codeToString(res.alert_data[0]);
+            if (stringInfo.type) {
+                store.dispatch(notifySuccess(stringInfo.msg));
+                store.dispatch(setAuditRefresh(true)); //set refresh flag
+            } else {
+                store.dispatch(notifyFail(stringInfo.msg));
+                store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            }
+            break;
+            case AUDIT_DUPLICATE:
+            stringInfo = codeToString(res.alert_data[0]);
+            if (stringInfo.type) {
+                store.dispatch(notifyDelete(stringInfo.msg));
+                store.dispatch(setAuditRefresh(true)); //set refresh flag
+            } else {
+                store.dispatch(notifyFail(stringInfo.msg));
+                store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            }
+            break;
+            
         case CANCEL_AUDIT:
             if (res.alert_data && res.alert_data.length > 0) {
                 //ERROR
@@ -288,13 +312,69 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setAuditSpinner(false));
             store.dispatch(setAuditRefresh(true));
             break;
+
+            case AUDIT_USERLIST:
+            //let auditpps = [];
+            if (res) {
+            store.dispatch(getAuditUserList(res.users));
+            }
+            break;
+            
         case GET_PPSLIST:
             let auditpps = [];
-            if (res.data.audit) {
-                auditpps = res.data.audit;
+            if (res) {
+            store.dispatch(getPPSAudit(res));
             }
-            store.dispatch(getPPSAudit(auditpps));
             break;
+        case CHANGE_PPS_TASK:
+        if(res){
+        store.dispatch(
+            notifySuccess(res.alert_data[0].description)
+        );
+    }
+            break;
+        case GET_AUDIT_DETAILS:
+            let auditdetails = {};
+            if (res) {
+                auditdetails = res;
+                store.dispatch(getAuditDetails(auditdetails));
+            }
+            else{
+                store.dispatch(notifyFail('Internal Error'));
+            }
+            
+            break;
+        case START_AUDIT_TASK:
+        if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        {
+           var successCount = res.successful.length,
+                unsuccessfulCount = Object.keys(res.unsuccessful).length,
+                values = {
+                    successful: successCount,
+                    totalCount: successCount + unsuccessfulCount
+                },
+                msg = getFormattedMessages("BulkAudit", values);
+                store.dispatch(notifySuccess(msg));
+                store.dispatch(resetaudit(res.successful));
+                store.dispatch(setAuditRefresh(true));
+        }
+        else
+        {
+            if (res.successful.length) {
+                store.dispatch(notifySuccess(AS00A));
+                store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(resetaudit(res.successful));
+            } else {
+                stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
+                store.dispatch(notifyFail(stringInfo.msg));
+                store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            } 
+        }
+        
+        break;
+
+
+
         case START_AUDIT:
         if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
         {
@@ -360,6 +440,14 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case CREATE_AUDIT_REQUEST:
             store.dispatch(createAuditAction(res));
             break;
+        case AUDIT_EDIT:
+        //raja
+        if(res){
+            store.dispatch(setAuditEditData(res));
+        }else{
+
+        }
+            break;    
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
                 store.dispatch(auditValidatedAttributesLocationCsv(res));

@@ -2,8 +2,8 @@ import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST } from '../../constants/frontEndConstants';
-import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL} from '../../constants/configConstants';
+import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT } from '../../constants/frontEndConstants';
+import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL} from '../../constants/configConstants';
 import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
 import Filter from '../../components/gor-filter-component/filter';
@@ -74,7 +74,7 @@ const  messages= defineMessages({
 
 
 
-class CreateAudit extends React.Component{
+class EditAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
@@ -132,14 +132,38 @@ class CreateAudit extends React.Component{
       this._validateLocation=this._validateLocation.bind(this);
       this._onBackClick=this._onBackClick.bind(this);
       this._validateSKU=this._validateSKU.bind(this);
-      this._onTabClick = this._onTabClick.bind(this);
-      this._onAttributeSelection = this._onAttributeSelection.bind(this);
+      this._onTbClick = this._onTabClick.bind(this);
+      this._onAattributeSelection = this._onAttributeSelection.bind(this);
       this._invokeAlert = this._invokeAlert.bind(this);
       this._searchCallBack = this._searchCallBack.bind(this);
       this._createAudit=this._createAudit.bind(this);
       
       
   }
+
+
+  componentDidMount(){
+    if(this.props.param=='edit' || this.props.param=='duplicate' )
+
+    {
+    let formdata={
+      "audit_id":this.props.auditId
+    }
+    
+    this.props.auditId;
+      let auditData={
+                'url':AUDIT_EDIT_URL,
+                'method':POST,
+                'cause':AUDIT_EDIT,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'formdata':formdata,
+                'token':sessionStorage.getItem('auth_token')
+            }
+      this.props.makeAjaxCall(auditData);
+    }
+  }
+
   componentWillUnmount()
   {
     
@@ -151,13 +175,16 @@ class CreateAudit extends React.Component{
     this.props.removeModal();
   }
   componentWillReceiveProps(nextProps){
+    var a=nextProps.auditEditData;
     if(!nextProps.auth_token)
     {
       this._removeThisModal();
     }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+
       let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes)),
+      skuAttributes = JSON.parse(JSON.stringify(nextProps.auditEditData)),
+      attrList=nextProps.auditEditData.outerObj,
       validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
       validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
       validationDone = Object.keys(locationAttributes).length ? true : false,
@@ -179,7 +206,7 @@ class CreateAudit extends React.Component{
       auditSpinner:nextProps.auditSpinner
 
     })
-    }
+  }
     if(this.props.auditSpinner !== nextProps.auditSpinner){
       this.setState({
         auditSpinner:nextProps.auditSpinner
@@ -205,6 +232,8 @@ class CreateAudit extends React.Component{
       
     }
     selectedSKUList[sku] = tuple;
+
+
     
     this.setState({
       selectedSKUList
@@ -239,12 +268,14 @@ class CreateAudit extends React.Component{
     var processedData=[]
     for(let i=0,len=data.length; i<len ;i++){
       let tuple={};
-      let error_code = data[i].status===true ? "" :data[i].status.error_code;
+      let error_code = data[i].status ? (data[i].status===true ? "" :data[i].status.error_code) : "";//MIGHT
+
       tuple.checked=false;
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status ? (data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
+
       processedData.push(tuple);
     }
     return processedData
@@ -828,6 +859,14 @@ class CreateAudit extends React.Component{
   render()
   {
       let self=this;
+     var header='',button='';
+      let validSkuMessg=<FormattedMessage id="audit.valid.sku" description='text for valid sku' defaultMessage='SKU confirmed'/>;
+      let validLocationMessg=<FormattedMessage id="audit.valid.location" description='text for valid location' defaultMessage='Location valid'/>;
+      let invalidSkuMessg=<FormattedMessage id="audit.invalid.sku" description='text for invalid sku' defaultMessage='Please enter correct SKU number'/>;
+      let invalidLocationMessg=<FormattedMessage id="audit.invalid.location" description='text for invalid location' defaultMessage='Please enter correct Location number'/>;
+      let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
+      let uploadCsvMessg=<FormattedMessage id="audit.uploadcsv.text" description='text for upload csv and validate' defaultMessage='Upload CSV and validate'/>;
+      let selectAttributesMessg=<FormattedMessage id="audit.selectattributes.text" description='text for select attributes' defaultMessage='Select attributes'/>;
       let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
@@ -882,15 +921,34 @@ class CreateAudit extends React.Component{
         label:deselectAllLabel,
         disabled:false
       }]
+
+      if(this.props.param=='edit')
+      {
+        header=<div className='gor-usr-add'><FormattedMessage id='audit.edit.heading' description='Heading for edir audit' 
+       defaultMessage='Edit audit'/></div>
+       button= <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for add audit button' 
+       defaultMessage='UPDATE'/></button>
+}else if(this.props.param=='duplicate'){
+   header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
+       defaultMessage='Duplicate audit'/></div>
+         button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+         defaultMessage='Create audit'/></button>
+}else
+{
+     header=<div className='gor-usr-add'><FormattedMessage id='audit.add.heading' description='Heading for add audit' 
+       defaultMessage='Create New audit'/></div>
+       button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+       defaultMessage='Create audit'/></button>
+}
+
+
+
       
       return (
         <div>
           <div className="gor-modal-content gor-audit-create">
             <div className='gor-modal-head'>
-              <div className='gor-usr-add'><FormattedMessage id="audit.add.heading" description='Heading for add audit' 
-            defaultMessage='Create new audit'/>
-                          
-              </div>
+             {header}      
               <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
@@ -995,9 +1053,12 @@ class CreateAudit extends React.Component{
               <div>
                {copyPasteSKU.data.map((tuple,i)=>{
                     let tuples=[],
-                    attributeList = this.state.skuAttributes.data[i].attributeList;
+                    attributeList = self.state.skuAttributes.data[i].attributeList,
+                    attributeSet = self.state.skuAttributes.outerObj[tuple.value];
                     if(tuple.visible){
                     tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value+i}>
+
+
                         <InputComponent.AfterValidation
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
@@ -1011,17 +1072,18 @@ class CreateAudit extends React.Component{
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
                           attributeList={attributeList}
+                          prefilledData={attributeSet}
                           applyCallBack={this._onAttributeSelection}
                           index={i}
                           usePositionHack={true}
                           />}
                       </div>)
                   }
-                    
-                    
                     return(tuples) 
               }
               )}
+
+
                {!validationDoneSKU && <div>
                       <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
@@ -1034,14 +1096,15 @@ class CreateAudit extends React.Component{
              
             </Tab>
             </GorTabs>
-
-
-
               {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}</button>
               </div>}
-               
+
+               <div>
+           
+            </div>
+
                   </div>
           <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
 
@@ -1241,8 +1304,7 @@ class CreateAudit extends React.Component{
            
             </div>
             <div className={"audit-footer"}>
-             <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
+            {button}
             </div>
             </div>
           </div>
@@ -1251,7 +1313,7 @@ class CreateAudit extends React.Component{
     }
   }
 
-CreateAudit.PropTypes={
+EditAudit.PropTypes={
     skuValidationSpinner: React.PropTypes.boolean,
     locationValidationSpinner:React.PropTypes.boolean,
     locationValidationSpinnerCsv:React.PropTypes.boolean,
@@ -1267,7 +1329,7 @@ CreateAudit.PropTypes={
 
 }
 
-CreateAudit.defaultProps = {
+EditAudit.defaultProps = {
   skuValidationSpinner:false,
   locationValidationSpinner:false,
   locationValidationSpinnerCsv:false,
@@ -1291,7 +1353,9 @@ function mapStateToProps(state, ownProps){
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
-      auditSpinner: state.auditInfo.auditValidationSpinner 
+      auditSpinner: state.auditInfo.auditValidationSpinner,
+      auditEditData:state.auditInfo.auditEditData 
+
   };
 }
 
@@ -1305,4 +1369,5 @@ function mapDispatchToProps(dispatch){
   }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(injectIntl(CreateAudit));
+export default connect(mapStateToProps,mapDispatchToProps)(injectIntl(EditAudit));
+

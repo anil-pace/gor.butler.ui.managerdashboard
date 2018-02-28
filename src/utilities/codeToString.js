@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
 import {ERROR,SUCCESS} from '../constants/frontEndConstants';
 import {CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE001,CODE_AE002,
-  CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027,CODE_AE007,CODE_AE008,CODE_E052,CODE_E051,CODE_E135} from '../constants/backEndConstants'
+  CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027,CODE_AE007,CODE_AE008,CODE_E052,CODE_E051,CODE_E135,AS006,AS005} from '../constants/backEndConstants'
 import {US004,UE001,UE002,UE003,UE004,UE005,UE006,AS003,G016,AE001,AE002,AE004,AE005,AE006,E026,E027,ERR_RES,AE007,AE008,E051,E052,E135} from '../constants/messageConstants';
 
 export function codeToString(res){
@@ -33,7 +33,7 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit task {audit_id} has been deleted" values={{audit_id:res.details["display_id"]||"--"}}/>)
+            defaultMessage="Audit {audit_id} has been deleted" values={{audit_id:res.details["audit_id"]||"--"}}/>)
               }
               break;              
             case CODE_UE001:
@@ -156,7 +156,21 @@ export function codeToString(res){
                 msg:E135
               }                                   
               break;
+              case AS005:
+              stringInfo={
+                type:SUCCESS,
+                msg:(<FormattedMessage id="notify.success.auditPaused" description='Text for successfull pause audit' 
+            defaultMessage='Audit "{id}" has been paused' values={{id:res.details.audit_id||"--"}}/>)   //Make string for addition
+              }                                   
+              break;
 
+              case AS006:
+              stringInfo={
+                type:ERROR,
+                msg:(<FormattedMessage id="audit.paused.fail" description='audit paused fail' 
+      defaultMessage='{reason} for {id}' values={{id:res.details.audit_id||"--",reason:res.description}}/>)
+                  }                                   
+              break;
               
             default:
               stringInfo={

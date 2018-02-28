@@ -19,29 +19,35 @@ export default class SelectAttributes extends React.Component {
         this._getInitialState=this._getInitialState.bind(this);
         this._isInViewport=this._isInViewport.bind(this);
         this.state = this._getInitialState();
+        
     }
     _getInitialState(){
         return{
             dropdownVisible:false,
             data:this.props.attributeList,
+            selectedSets:this.props.prefilledData||{},
             nonMutatedData:this.props.attributeList,
             selectedAttributes:{},
-            selectedSets:{},
             showAttrList:false,
             selectionApplied:false,
             editedIndex:"-1",
             placeHolder:"Select Attributes"
         }
+
     }
 
 
-
+    componentWillMount(){
+        if(this.props.prefilledData)
+        this._applySelectionFirstTime(1);
+    }
 
       componentDidMount(){
           document.addEventListener('click',this._handleDocumentClick,false);
       }
 
       componentWillUnmount() {
+
           document.removeEventListener("click", this._handleDocumentClick,false)
       }
       _handleDocumentClick() {
@@ -99,12 +105,27 @@ export default class SelectAttributes extends React.Component {
         })
 
     }
+     _applySelectionFirstTime(index){
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
+        selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        this.setState({
+            selectedAttributes:{},
+            selectionApplied:true,
+            editedIndex:"-1",
+            selectedSets,
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected"
+        }
+        
+        )
+    //}
+    }
    
     _applySelection(e,index){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
-        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
-        selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets));
+        let selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        
         if(Object.keys(selectedAttributes).length){
             if(this.state.editedIndex === "-1"){
                 selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
@@ -112,6 +133,7 @@ export default class SelectAttributes extends React.Component {
         else{
             selectedSets[this.state.editedIndex] = selectedAttributes
         }
+
         this.setState({
             selectedAttributes:{},
             selectionApplied:true,
@@ -122,7 +144,8 @@ export default class SelectAttributes extends React.Component {
             this.props.applyCallBack(selectedSets,index);
         })
     }
-    }
+}
+    
     _showAttrList(e){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
@@ -275,15 +298,15 @@ export default class SelectAttributes extends React.Component {
              <div className={"attribute-cont"}>
              <div className={"header"}>Selected Set of Attributes</div>
              <AttributeList>
-            {Object.keys(this.state.selectedSets).map((key, index) => (
+            {Object.keys(_this.state.selectedSets).map((key, index) => (
                 <section key={key+index} className="attribute-row">
                 <div className="category">
                    <span className={"setName"}> {"Set "+(index+1)}</span>
                    <span className={"actions-icons"}> <i className={"gor-edit-icon"} onClick={(e)=>this._editSet(e,key)}/> <i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key,_this.props.index)}/></span>
                 </div>
                 <div className="values">
-                    {Object.keys(this.state.selectedSets[key]).map((key2, idx) => (
-                           <span key={key2+idx} className={"set"}>{this.state.selectedSets[key][key2].text}</span>
+                    {Object.keys(_this.state.selectedSets[key]).map((key2, idx) => (
+                           <span key={key2+idx} className={"set"}>{_this.state.selectedSets[key][key2].text}</span>
                         
 
                     ))}
