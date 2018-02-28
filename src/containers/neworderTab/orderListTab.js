@@ -1014,6 +1014,7 @@ _viewOrderLine = (orderId) =>  {
                     </GTable>
                 </div>
 
+                <div className="paginateWrapper">
                     <div className="gor-pageNum">
                         <Dropdown styleClass={'gor-Page-Drop'} items={ordersByStatus} currentState={ordersByStatus[0]} 
                             optionDispatch={this.props.getPageSizeOrders} refreshList={this.onPageSizeChange.bind(this)}/>
@@ -1022,6 +1023,7 @@ _viewOrderLine = (orderId) =>  {
                         {this.state.query ?
                             <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page || 1} totalPage={this.props.orderData.totalPage}/> : null}
                     </div>
+                </div>
                 </div>
             </div>
         );
