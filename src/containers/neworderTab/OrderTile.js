@@ -4,6 +4,9 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import ProgressBar from '../../components/progressBar/progressBar';
 import OrderFilter from './orderFilter';
+import Spinner from '../../components/spinner/Spinner';
+import FilterSummary from '../../components/tableFilter/filterSummary';
+import {hashHistory} from 'react-router';
 
 class OrderTile extends React.Component{
   constructor(props) 
@@ -41,8 +44,37 @@ class OrderTile extends React.Component{
     this.props.callBack(query);
   }
 
+  /**
+     *
+     */
+     _clearFilter() {
+        hashHistory.push({pathname: "/neworders", query: {}})
+    }
+
   render()
   {
+      var updateStatus, timeOffset, headerTimeZone;
+      var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
+      var orderDetail, alertNum=0, orderInfo;
+      orderDetail = ["1","2","3"];
+
+      // if (this.props.orderData.ordersDetail !== undefined) {
+      //   orderInfo=this.processOrders(this.props.orderData.ordersDetail, this);
+      //   orderDetail=orderInfo.renderOrderData;
+      //   alertNum=orderInfo.alertStatesNum;
+      // }
+
+      // timeOffset=this.props.timeOffset || "",
+      // headerTimeZone=(this.context.intl.formatDate(Date.now(),
+      // {
+      //     timeZone: timeOffset,
+      //     year: 'numeric',
+      //     timeZoneName: 'long'
+      // }));
+
+    /*Extracting Time zone string for the specified time zone*/
+    //headerTimeZone=headerTimeZone.substr(5, headerTimeZone.length);
+
       let filterHeight=screen.height-100;
       const { orderFulfilData, orderSummaryData } = this.props;
       const progressWidth = (orderFulfilData.picked_products_count / orderFulfilData.total_products_count) * 100;
@@ -91,26 +123,41 @@ class OrderTile extends React.Component{
 
               <div className="orderRightWrapper">
                 <div className="orderRightContent">
-                  <div className="orderButtonWrapper">
-                    <div className="gorButtonWrap">
-                      <button disabled={!this.props.collapseState} className="ordersCollapseAll" onClick={this.collapseAll}>
-                      <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
-                      </button>
-                    </div>
-                  <div className="gorButtonWrap">
-                      <button className="ordersFilterData" onClick={this.showFilter}>
-                      <div className="gor-manage-task"/>
-                      <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
-                      </button>
-                  </div>
-                  </div>
+                  {!this.props.showFilter? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
 
-                  {
-                    this.state.showFilter? 
-                      (<div className="gor-filter-wrap"
-                           style={{'width': this.state.showFilter ? '400px' : '0px', height: filterHeight}}>
-                          <OrderFilter callBack = {this.callBack} hideFilter={this.hideFilter}/>
-                      </div>) : null
+                  {orderDetail /*orderDetail*/ ? (
+                    <div>
+                      <div className="gor-filter-wrap" style={{'width': this.state.showFilter ? '400px' : '0px', height: filterHeight}}>
+                        <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag} callBack={this.callBack} hideFilter={this.hideFilter}/>
+                    </div>
+
+                    <div className="orderButtonWrapper">
+                        <div className="gorButtonWrap">
+                          <button disabled={!this.props.collapseState} className="ordersCollapseAll" onClick={this.collapseAll}>
+                          <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
+                          </button>
+                        </div>
+                        <div className="gorButtonWrap">
+                            <button className="ordersFilterData" onClick={this.showFilter}>
+                            <div className="gor-manage-task"/>
+                            <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
+                            </button>
+                        </div>
+                      </div>
+                   
+                      {/*
+                        <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
+                        responseFlag={this.props.responseFlag}
+                        filterText={<FormattedMessage id="orderlist.filter.search.bar"
+                        description='total order for filter search bar'
+                        defaultMessage='{total} Orders found'
+                        values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                        refreshList={this._clearFilter.bind(this)}
+                        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+                        description="button label for show all"
+                        defaultMessage="Show all orders"/>}/>
+                      */}
+                    </div>) : null
                   }
                   
 

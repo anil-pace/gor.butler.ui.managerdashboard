@@ -27,6 +27,7 @@ import { ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_
 import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../actions/orderListActions';
 import {filterApplied, orderfilterState, toggleOrderFilter} from '../actions/filterAction';
 import {hashHistory} from 'react-router';
+import FilterSummary from '../components/tableFilter/filterSummary'
 
 import {
     AUDIT_RETRIEVE,
@@ -555,6 +556,14 @@ class newordersTab extends React.Component{
 	        });
   	}
 
+    //To check where the object is empty or not
+
+    
+
+    onPageSizeChange(arg) {
+        //this.refresh(null, arg);
+    }
+
 	render(){
 
         const ordersByStatus=[
@@ -565,6 +574,8 @@ class newordersTab extends React.Component{
             {value: '500', label: '500'},
             {value: '1000', label: '1000'}
         ];
+
+        var orderDetail = ["1","2","3"];
 
         var {totalSize,pageSize} = this.state;
 		var self = this;
@@ -586,7 +597,25 @@ class newordersTab extends React.Component{
                             collapseState={this.state.collapseState}
                             disableCollapse={this.disableCollapse}
                             callBack = {this.callBack}
+                            orderListSpinner={this.props.orderListSpinner}
+                            showFilter={this.props.showFilter}
+                            filterOptions={this.props.filterOptions}
+                            orderData={this.props.orderData}
+                            timeOffset={this.props.timeOffset}
                             />
+
+                        {orderDetail ?
+                            <div>
+                                <FilterSummary total={orderDetail.length || 0} isFilterApplied={this.props.isFilterApplied}
+                                responseFlag={this.props.responseFlag}
+                                filterText={<FormattedMessage id="orderlist.filter.search.bar"
+                                description='total order for filter search bar'
+                                defaultMessage='{total} Orders found'
+                                values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                                refreshList={this._clearFilter.bind(this)}
+                                refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+                                description="button label for show all"
+                                defaultMessage="Show all orders"/>}/></div> : null}
 
 			    <div className="waveListWrapper">
                 {(this.props.pbts.length !==0 ) ? 
@@ -629,13 +658,15 @@ class newordersTab extends React.Component{
                 <div className="paginateWrapper">
                     <div className="paginateLeft">
                         <Dropdown 
-                        options={pageSizeDDOpt} 
-                        onSelectHandler={(e) => this._handlePageChange(e)}
-                        disabled={pageSizeDDDisabled} 
-                        selectedOption={DEFAULT_PAGE_SIZE_OL}/>
+                         options={pageSizeDDOpt} 
+                         onSelectHandler={(e) => this._handlePageChange(e)}
+                         disabled={pageSizeDDDisabled} 
+                         selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                     </div>
+                    
                     <div className="paginateRight">
-                        <GorPaginateV2 disabled={pageSizeDDDisabled} location={location} currentPage={this.state.query.page||1} totalPage={isNaN(totalPage) ? 1 : totalPage}/>
+                    {this.state.query ?
+                        <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.orderData.totalPage ? 1 : totalPage}/> : null}
                     </div>
                 </div>
 			</div>
@@ -650,6 +681,7 @@ newordersTab.PropTypes={
     pbts: React.PropTypes.array,
     ordersPerPbt: React.PropTypes.array,
     getPageSizeOrders: React.PropTypes.func,
+    showFilter: React.PropTypes.bool,
 }
 
 newordersTab.defaultProps = {
@@ -662,12 +694,30 @@ newordersTab.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        showFilter: state.filterInfo.filterState || false,
         orderFulfilment: state.orderDetails.orderFulfilment,
         orderSummary: state.orderDetails.orderSummary,
         pbts: state.orderDetails.pbts,
         ordersPerPbt: state.orderDetails.ordersPerPbt,
         orderData: state.getOrderDetail || {},
+
+        orderFilter: state.sortHeaderState.orderFilter || "",
+        orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT,
+        orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        filterOptions: state.filterOptions || {},
+        orderData: state.getOrderDetail || {},
+        statusFilter: state.filterOptions.statusFilter || null,
+        intlMessages: state.intl.messages,
+        timeOffset: state.authLogin.timeOffset,
+        auth_token: state.authLogin.auth_token,
+        showFilter: state.filterInfo.filterState || false,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        orderFilterStatus: state.filterInfo.orderFilterStatus,
+        orderFilterState: state.filterInfo.orderFilterState || {},
+        //wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        orderListRefreshed: state.ordersInfo.orderListRefreshed,
+        pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1
     };
 }
 
@@ -705,13 +755,7 @@ var mapDispatchToProps=function (dispatch) {
         },
         getPageSizeOrders: function (data) {
             dispatch(getPageSizeOrders(data));
-        },
-        // toggleAuditFilter: function (data) {
-        //     dispatch(toggleAuditFilter(data));
-        // },
-        // filterApplied: function (data) {
-        //     dispatch(filterApplied(data));
-        // },
+        }
     }
 };
 
