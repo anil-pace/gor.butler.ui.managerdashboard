@@ -100,7 +100,7 @@ var storage = [];
 
     _getInitialState(){
         return {
-            isPanelOpen:true,
+            //isPanelOpen:true,
             collapseAllBtnState: true, 
             date: new Date(),
             //query:this.props.location.query,
@@ -977,7 +977,10 @@ _viewOrderLine = (orderId) =>  {
                 />*/}
 
 
-
+                <OrderListTable 
+                    enableCollapseAllBtn={this._enableCollapseAllBtn}
+                    disableCollapseAllBtn={this._disableCollapseAllBtn} />
+                {/*
                 <div className="waveListWrapper">
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
@@ -1013,6 +1016,7 @@ _viewOrderLine = (orderId) =>  {
                         </GTableBody>
                     </GTable>
                 </div>
+            */}
 
                 <div className="paginateWrapper">
                     <div className="gor-pageNum">

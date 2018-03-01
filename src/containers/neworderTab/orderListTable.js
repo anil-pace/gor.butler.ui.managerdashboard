@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage, defineMessages} from 'react-intl';
@@ -14,93 +15,66 @@ import {
 } from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
 
-const messages=defineMessages({
-    filterPlaceholder: {
-        id: 'table.filter.placeholder',
-        description: 'placeholder for table filter',
-        defaultMessage: 'Filter by keywords',
-    }
-});
+import OrderFilter from './orderFilter';
+import Dropdown from '../../components/dropdown/dropdown'
+import Spinner from '../../components/spinner/Spinner';
+import {GTable} from '../../components/gor-table-component/index'
+import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
+import {GTableBody} from "../../components/gor-table-component/tableBody";
+import {GTableRow} from "../../components/gor-table-component/tableRow";
+import Accordion from '../../components/accordion/accordion';
+import OrderTile from '../../containers/neworderTab/OrderTile';
+import ViewOrderLine from '../../containers/neworderTab/viewOrderLine';
+import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
+import FilterSummary from '../../components/tableFilter/filterSummary';
+import ProgressBar from '../../components/progressBar/progressBar';
+import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
+
+import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
+import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
+import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
+import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
+import { makeAjaxCall } from '../../actions/ajaxActions';
+
+import {getDaysDiff} from '../../utilities/getDaysDiff';
+
+import {stringConfig} from '../../constants/backEndConstants';
+import {wsOverviewData} from './../../constants/initData.js';
+
+import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
+
+import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH
+} from '../../constants/frontEndConstants';
+
+import {
+    API_URL,
+    ORDERS_URL,
+    PAGE_SIZE_URL,
+    PROTOCOL,
+    ORDER_PAGE,
+    UPDATE_TIME_UNIT, UPDATE_TIME,
+    EXCEPTION_TRUE,
+    WAREHOUSE_STATUS_SINGLE,
+    WAREHOUSE_STATUS_MULTIPLE,
+    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
+    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
+} from '../../constants/configConstants';
 
 
+var storage = [];
 class OrderListTable extends React.Component {
-
 
     constructor(props) {
         super(props);
-        if (this.props.items=== undefined) {
-            this._dataList=new tableRenderer(0);
-        }
-        else {
-            this._dataList=new tableRenderer(this.props.items.length);
-        }
-        this._defaultSortIndexes=[];
-        this._dataList.newData=this.props.items;
-        var size=this._dataList.getSize();
-        for (var index=0; index < size; index++) {
-            this._defaultSortIndexes.push(index);
-        }
-        var columnWidth=(this.props.containerWidth / this.props.itemNumber)
         this.state={
-            sortedDataList: this._dataList,
-            colSortDirs: {status: "DESC"},
-            columnWidths: {
-                id: columnWidth,
-                status: columnWidth,
-                recievedTime: columnWidth,
-                completedTime: columnWidth,
-                pickBy: columnWidth,
-                orderLine: columnWidth
-            },
-        };
-        this._onFilterChange=this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
-        this.backendSort=this.backendSort.bind(this);
+            isPanelOpen:true,
+        }
+
+        this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
+        this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
+        this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
     }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.items=== undefined) {
-            this._dataList=new tableRenderer(0);
-        }
-        else {
-            this._dataList=new tableRenderer(nextProps.items.length);
-        }
-
-        this._defaultSortIndexes=[];
-        this._dataList.newData=nextProps.items;
-        var size=this._dataList.getSize();
-        for (var index=0; index < size; index++) {
-            this._defaultSortIndexes.push(index);
-        }
-        var columnWidth=(nextProps.containerWidth / nextProps.itemNumber), sortIndex={status: "DESC"};
-        if (this.props.currentHeaderOrder.colSortDirs) {
-            sortIndex=this.props.currentHeaderOrder.colSortDirs;
-        }
-        this.state={
-            sortedDataList: this._dataList,
-            colSortDirs: sortIndex,
-            columnWidths: {
-                id: columnWidth,
-                status: columnWidth,
-                recievedTime: columnWidth,
-                completedTime: columnWidth,
-                pickBy: columnWidth,
-                orderLine: columnWidth
-            },
-        };
-        this._onFilterChange=this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
-        this.backendSort=this.backendSort.bind(this);
-    }
-
-
-    shouldComponentUpdate(nextProps) {
-        if (this.props.items && nextProps.items.length=== 0) {
-            return false;
-        }
-        return true;
-    }
-
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
         this.setState(({columnWidths})=> ({
@@ -134,215 +108,299 @@ class OrderListTable extends React.Component {
         })
     }
 
-
-
     _showAllOrder() {
         this.props.refreshOption();
     }
 
+    _reqOrderPerPbt(arg){
+        let cutOffTimeId = this.props.pbts[arg].cut_off_time;
+        // #condition to not hitting http request on closing of accordion
+        const index = storage.indexOf(cutOffTimeId);
+        if(index === -1){
+            storage.push(cutOffTimeId);
+            console.log('%c ==================>!  ', 'background: #222; color: #bada55', cutOffTimeId);
+            let formData={
+                "start_date": this.state.date,
+                "end_date": this.state.date,
+                "cut_off_time" : cutOffTimeId
+            };
+
+            let params={
+                'url':ORDERS_PER_PBT_URL,
+                'method':GET,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':ORDERS_PER_PBT_FETCH,
+                'formdata':formData,
+            }
+            this.props.makeAjaxCall(params);
+        }
+        else{
+            storage.splice(index, 1);
+        }
+    }
+
+    _enableCollapseAllBtn(){
+        this.props.enableCollapseAllBtn();
+        // this.setState({
+        //     collapseAllBtnState: false,
+        //     isPanelOpen: true
+        // })
+    }
+
+    _disableCollapseAllBtn(){
+        this.props.disableCollapseAllBtn();
+        // this.setState({
+        //     collapseAllBtnState: true,
+        //     isPanelOpen: false
+        // })
+    }
+
+    _handleCollapseAll(){
+        this.setState({
+            collapseAllBtnState: true,
+            isPanelOpen: false
+        })
+    }
+
+    _processPBTs = (arg) => {
+        let pbtData = arg;
+        let pbtDataLen = pbtData.length; 
+        let pbtRows = []; 
+        let processedData = {};
+
+        if(pbtDataLen){
+            for(let i =0 ; i < pbtDataLen; i++){
+                let pbtRow = [];
+                
+                let formatPbtTime = (<FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs"
+                                        values={{cutOffTime:pbtData[i].cut_off_time}} />);
+
+                let formatTimeLeft = this._formatTime(pbtData[i].time_left);
+
+                let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+
+                let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders"
+                                         values={{total:pbtData[i].total_orders}} />);
+
+                pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> 
+                            </div>);
+
+                pbtRow.push(<div>
+                                <div className="ProgressBarWrapper">
+                                    <ProgressBar progressWidth={formatProgressBar.width}/>
+                                </div>
+                                <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
+                             </div>);
+
+                pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
+                            
+                pbtRows.push(pbtRow);
+            }
+            processedData.pbtData = pbtRows;
+        }
+        processedData.offset = 0;
+        processedData.max= pbtRows.length;
+        return processedData;
+    }
+
+    _formatProgressBar(nr, dr){
+        let x = {};
+        
+        if(nr === 0 && dr === 0){
+            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
+            x.action = false;
+        }
+        else if(nr === 0){
+            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
+                      values={{current:dr}} />);
+            x.action = false;
+        }
+        else{
+            x.width = (nr/dr)*100;
+            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
+                            values={{current:nr, total: dr}} />);
+            x.action  = true;
+        }
+        return x;
+    }
+
+    _formatTime(timeLeft){
+        let hours = Math.trunc(timeLeft/60);
+        let minutes = timeLeft % 60;
+        let final = hours +" hrs left";
+        return final;
+        //console.log(hours +":"+ minutes);
+    }
+
+    _processOrders = (arg) => {
+        let orderData = arg;
+        let orderDataLen = orderData.length;
+        let orderRows = [];
+        let processedData = {};
+        if(orderDataLen){
+            for(let i=0; i < orderDataLen; i++){
+                let orderRow = [];
+                let formatOrderId = "Order " + orderData[i].order_id;
+                let formatPpsId = "PPS " + orderData[i].pps_id;
+                let formatBinId = "Bin" + orderData[i].pps_bin_id;
+
+                let formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
+                 
+                orderRow.push(<div className="DotSeparatorWrapper"> 
+                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, orderData[i].start_date]}/>
+                            </div>);
+                orderRow.push( <div>
+                                 <div className="ProgressBarWrapper">
+                                    <ProgressBar progressWidth={formatProgressBar.width}/>
+                                </div>
+                                 <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                             </div>);
+                if(formatProgressBar.action === true){
+                    orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap" onClick={() => this._viewOrderLine(orderData[i].order_id)}>
+                      <button>
+                      <FormattedMessage id="orders.view orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                      </button>
+                    </div>);
+                }
+                else{
+                    orderRow.push(<div> </div>);
+                }
+                orderRows.push(orderRow);
+            }
+            processedData.orderData = orderRows;
+        }
+        processedData.offset = 0;
+        processedData.max= orderRows.length;
+        return processedData;
+    }
+
     render() {
-        var {sortedDataList, colSortDirs, columnWidths}=this.state;
-        var totalOrder=this.props.totalOrders, headerAlert=<div/>, heightRes;
-        let allDrop=<FormattedMessage id="orderlist.table.allDrop"
-                                        description="allOrders dropdown option for orderlist"
-                                        defaultMessage="All orders"/>
-        let breachedDrop=<FormattedMessage id="orderlist.table.breachedDrop"
-                                             description="breached dropdown option for orderlist"
-                                             defaultMessage="Breached orders"/>
-        let pendingDrop=<FormattedMessage id="pendingDrop.table.allDrop"
-                                            description="pending dropdown option for orderlist"
-                                            defaultMessage="Pending orders"/>
-        let completedDrop=<FormattedMessage id="completedDrop.table.allDrop"
-                                              description="completed dropdown option for orderlist"
-                                              defaultMessage="Completed orders"/>
-        let exception=<FormattedMessage id="exceptionDrop.table" description="exception order dropdown for orderlist"
-                                          defaultMessage="Exception"/>
+        var self=this;
+        const processedPbtData = this._processPBTs(this.props.pbts);
+        const processedOrderData = this._processOrders(this.props.ordersPerPbt);
 
-        let allTimeDrop=<FormattedMessage id="orderlist.table.allTimeDrop"
-                                            description="allTime dropdown option for orderlist" defaultMessage="All"/>
-        let oneHrDrop=<FormattedMessage id="orderlist.table.oneHrDrop"
-                                          description="oneHr dropdown option for orderlist"
-                                          defaultMessage="Last 1 hours"/>
-        let twoHrDrop=<FormattedMessage id="pendingDrop.table.twoHrDrop"
-                                          description="twoHr dropdown option for orderlist"
-                                          defaultMessage="Last 2 hours"/>
-        let sixHrDrop=<FormattedMessage id="completedDrop.table.sixHrDrop"
-                                          description="sixHr dropdown option for orderlist"
-                                          defaultMessage="Last 6 hours"/>
-        let twelveHrDrop=<FormattedMessage id="pendingDrop.table.twelveHrDrop"
-                                             description="twelveHr dropdown option for orderlist"
-                                             defaultMessage="Last 12 hours"/>
-        let oneDayDrop=<FormattedMessage id="completedDrop.table.oneDayDrop"
-                                           description="oneDay dropdown option for orderlist"
-                                           defaultMessage="Last 1 day"/>
-        if (this.props.alertNum !== 0) {
-
-            headerAlert=<div className="gorToolHeaderEl alertState">
-                <div className="table-subtab-alert-icon"/>
-                <div className="gor-inline">{this.props.alertNum} Alerts</div>
-            </div>
-        }
-
-        if (this.props.containerHeight !== 0) {
-            heightRes=this.props.containerHeight;
-        }
-        var noData=<div/>;
-        if (totalOrder=== 0 || totalOrder=== undefined || totalOrder=== null) {
-            noData=<div className="gor-no-data"><FormattedMessage id="orderlist.table.noData"
-                                                                    description="No data message for orderlist table"
-                                                                    defaultMessage="No Orders Found"/></div>
-            heightRes=GOR_TABLE_HEADER_HEIGHT;
-        }
+        
 
         return (
-            <div className="gorTableMainContainer">
-                <Table
-                    rowHeight={50}
-                    rowsCount={sortedDataList.getSize()}
-                    headerHeight={70}
-                    onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-                    isColumnResizing={false}
-                    width={this.props.containerWidth}
-                    height={heightRes * 0.9}
-                    {...this.props}>
-                    <Column
-                        columnKey="id"
-                        header={
-                            <SortHeaderCell onSortChange={this.backendSort}
-                                            sortDir={colSortDirs.id}>
-                                <div className="gorToolHeaderEl">
-                                        <FormattedMessage id="orderlist.order.headingText"
-                                                          description='Heading for order IDs in ordertable'
-                                                          defaultMessage='ORDER ID'/>
-                                    <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.subTotalorder"
-                                                          description='subtotal order for ordertable'
-                                                          defaultMessage='Total:{totalOrder}'
-                                                          values={{totalOrder: totalOrder ? totalOrder : '0'}}/>
-                                    </div>
-                                </div>
-                            </SortHeaderCell>
-                        }
-                        cell={  <TextCell data={sortedDataList}/>}
-                        fixed={true}
-                        width={columnWidths.id}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="status"
-                        header={
-                            <SortHeaderCell onSortChange={this.backendSort} sortDir={colSortDirs.status}>
-                                <div className="gorToolHeaderEl">
-                                    <div>
-                                        <FormattedMessage id="orderList.table.status" description="Status for orders"
-                                                          defaultMessage="STATUS"/>
-                                    </div>
-                                    <div>
-                                        <div className="statuslogoWrap">
-                                            {headerAlert}
-                                        </div>
-                                    </div>
-                                </div>
-                            </SortHeaderCell>
-                        }
-                        cell={<StatusCell data={sortedDataList} statusKey="statusClass"></StatusCell>}
-                        fixed={true}
-                        width={columnWidths.status}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="pickBy"
-                        header={
-                            <SortHeaderCell onSortChange={this.backendSort}
-                                            sortDir={colSortDirs.pickBy}>
-                                <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="orderlist.table.pickBy" description="pick by for orderlist"
-                                                      defaultMessage="PICK BY"/>
-                                    <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.pendingOrders"
-                                                          description='pendingOrders header ordertable'
-                                                          defaultMessage='{pendingOrders, number} {pendingOrders, plural, one {order} other {orders}} pending'
-                                                          values={{pendingOrders: this.props.totalPendingOrder ? this.props.totalPendingOrder : '0'}}
+            <div>
+                <div className="waveListWrapper">
+                    <GTable options={['table-bordered']}>
+                        <GTableBody data={processedPbtData.pbtData}>
+                            {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
+                                return (
+                                    <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
+                                        <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
+                                            {row.map(function (text, index) {
+                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                    {text}
+                                                </div>
+                                            })}
+                                        </GTableRow>}>
 
-                                                          />
-                                    </div>
-                                </div>
-                            </SortHeaderCell>
-                        }
-                        cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-                        fixed={true}
-                        width={columnWidths.pickBy}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="recievedTime"
-                        header={
-                            <SortHeaderCell onSortChange={this.backendSort}
-                                            sortDir={colSortDirs.recievedTime}>
-                                <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="orderlist.table.operatingMode"
-                                                      description="recievedTime for Orders"
-                                                      defaultMessage="RECEIVED TIME"/>
-                                    <div className="gorToolHeaderSubText">
-                                        {this.props.timeZoneString}
-                                    </div>
-                                </div>
-                            </SortHeaderCell>
-                        }
-                        cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-                        fixed={true}
-                        width={columnWidths.recievedTime}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="completedTime"
-                        header={
-                            <div className="gor-table-header">
-                                <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="orderlist.table.completedTime"
-                                                      description="completedTime for orderlist"
-                                                      defaultMessage="COMPLETED"/>
-                                    <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.totalCompletedOrder"
-                                                          description='totalCompletedOrder header ordertable'
-                                                          defaultMessage='{totalCompletedOrder, number} {totalCompletedOrder, plural, one {order} other {orders}} completed'
-                                                          values={{totalCompletedOrder: this.props.totalCompletedOrder ? this.props.totalCompletedOrder : '0'}}/>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-                        fixed={true}
-                        width={columnWidths.completedTime}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="orderLine"
-                        header={
-                            <div className="gor-table-header">
-                                <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="orderlist.table.orderLine"
-                                                      description="orderLine for orderlist"
-                                                      defaultMessage="ORDER LINE"/>
-                                    <div className="gorToolHeaderSubText">
-                                        <FormattedMessage id="orderlist.itemsPerOrder"
-                                                          description='itemsPerOrder header ordertable'
-                                                          defaultMessage='Avg {itemsPerOrder, number} {itemsPerOrder, plural, one {item} other {items}}/order'
-                                                          values={{itemsPerOrder: this.props.itemsPerOrder ? (this.props.itemsPerOrder).toFixed(2) : '0'}}/>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        cell={<TextCell data={sortedDataList} align="left"/>}
-                        fixed={true}
-                        width={columnWidths.orderLine}
-                        isResizable={true}
-                    />
-                </Table>
-                <div> {noData} </div>
+                                        {/*{self.state.isPanelOpen === true ?*/}
+                                            <GTableBody data={processedOrderData.orderData} >
+                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
+                                                    return (
+                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
+                                                            {Object.keys(row).map(function (text, index) {
+                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                                    {row[text]}
+                                                                </div>
+                                                            })}
+                                                        </GTableRow>
+                                                    )
+                                                }):""}
+                                            </GTableBody>{/*): null
+                                        }*/}
+                                    </Accordion> 
+                                )
+                            }):""}
+                        </GTableBody>
+                    </GTable>
+                </div>
+                
+                {/*<div> {noData} </div>*/}
             </div>
         );
     }
+}
+
+function mapStateToProps(state, ownProps) {
+    return {
+        orderFilter: state.sortHeaderState.orderFilter || "",
+        orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
+        orderListSpinner: state.spinner.orderListSpinner || false,
+        filterOptions: state.filterOptions || {},
+        orderData: state.getOrderDetail || {},
+        statusFilter: state.filterOptions.statusFilter || null,
+        intlMessages: state.intl.messages,
+        timeOffset: state.authLogin.timeOffset,
+        auth_token: state.authLogin.auth_token,
+        showFilter: state.filterInfo.filterState || false,
+        isFilterApplied: state.filterInfo.isFilterApplied || false,
+        orderFilterStatus: state.filterInfo.orderFilterStatus,
+        orderFilterState: state.filterInfo.orderFilterState || {},
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        orderListRefreshed: state.ordersInfo.orderListRefreshed,
+        pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
+
+        pbts: state.orderDetails.pbts,
+        ordersPerPbt:state.orderDetails.ordersPerPbt
+    };
+}
+
+var mapDispatchToProps=function (dispatch) {
+    return {
+        orderFilterDetail: function (data) {
+            dispatch(orderFilterDetail(data))
+        },
+        orderHeaderSort: function (data) {
+            dispatch(orderHeaderSort(data))
+        },
+        orderHeaderSortOrder: function (data) {
+            dispatch(orderHeaderSortOrder(data))
+        },
+
+        setOrderListSpinner: function (data) {
+            dispatch(setOrderListSpinner(data))
+        },
+        
+        showTableFilter: function (data) {
+            dispatch(showTableFilter(data));
+        },
+        filterApplied: function (data) {
+            dispatch(filterApplied(data));
+        },
+        orderfilterState: function (data) {
+            dispatch(orderfilterState(data));
+        },
+        toggleOrderFilter: function (data) {
+            dispatch(toggleOrderFilter(data));
+        },
+        orderListRefreshed: function (data) {
+            dispatch(orderListRefreshed(data))
+        },
+        updateSubscriptionPacket: function (data) {
+            dispatch(updateSubscriptionPacket(data));
+        },
+        
+        setOrderQuery: function (data) {
+            dispatch(setOrderQuery(data));
+        },
+        makeAjaxCall: function(params){
+            dispatch(makeAjaxCall(params))
+        },
+
+
+    }
+};
+
+OrderListTable.defaultProps = {
+    pbts: [],
+    ordersPerPbt: []
 }
 
 OrderListTable.PropTypes={
@@ -360,4 +418,4 @@ OrderListTable.PropTypes={
     responseFlag: React.PropTypes.bool
 };
 
-export default Dimensions()(OrderListTable);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListTable);
