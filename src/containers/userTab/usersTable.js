@@ -141,7 +141,7 @@ class UsersTable extends React.Component {
                                         </div>
                                         <div className="gor-user-Logo-wrap">
 
-                                            <button >
+                                            <button onClick={self.handleDel.bind(self,row)}>
                                                 <div className="gor-del-icon"/>
                                                 <span><FormattedMessage id="commonDataTable.Delete.button"
                                                                         description='Delete button'
