@@ -19,19 +19,11 @@ class UsersTable extends React.Component {
                 {id: 4, text: "WORKMODE", key: 'role', sortable: false},
                 {id: 5, text: "LOG IN TIME", key: 'role', sortable: false},
                 {id: 6, text: "ACTIONS", key: 'role', sortable: false},
-            ]
+            ],
+            userList:props.data
         }
 
     }
-
-    componentDidMount() {
-        this.processUserList()
-    }
-
-    processUserList() {
-
-    }
-
 
     handleEdit(user) {
         let uid = user.uid;
@@ -72,6 +64,12 @@ class UsersTable extends React.Component {
 
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.data && nextProps.data.length!==0){
+            this.setState({userList:nextProps.data})
+        }
+    }
+
     render() {
         let self = this
         return (
@@ -99,11 +97,11 @@ class UsersTable extends React.Component {
                     </GTableHeaderCell>
                     </GTableHeader>
 
-                    <GTableBody data={self.props.data}>
+                    <GTableBody data={self.state.userList}>
 
-                        {self.props.data && self.props.data.map(function (row, idx) {
+                        {self.state.userList && self.state.userList.map(function (row, idx) {
                             return (
-                                <GTableRow key={idx} index={idx} data={self.props.data}>
+                                <GTableRow key={idx} index={idx} data={self.state.userList}>
                                     <div
                                         style={self.state.header[0].width ? {flex: '1 0 ' + self.state.header[0].width + "%"} : {}}
                                         className="cell">

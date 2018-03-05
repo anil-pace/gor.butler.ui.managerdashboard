@@ -3,9 +3,8 @@ import UserDataTable from './userTabTable';
 import UsersTable from './usersTable'
 import {connect} from 'react-redux';
 import {defineMessages} from 'react-intl';
-import {userRequest} from '../../actions/userActions';
 import {stringConfig} from '../../constants/backEndConstants'
-import {userHeaderSort, userHeaderSortOrder, userFilterDetail} from '../../actions/sortHeaderActions';
+import {userHeaderSort, userHeaderSortOrder} from '../../actions/sortHeaderActions';
 import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
@@ -14,18 +13,16 @@ import {
     APP_JSON,
     WS_ONSEND
 } from '../../constants/frontEndConstants';
-import {showTableFilter, filterApplied, userfilterState, toggleUserFilter} from '../../actions/filterAction';
+import {filterApplied, userfilterState} from '../../actions/filterAction';
 import {ROLE_URL} from '../../constants/configConstants';
-import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import {hashHistory} from 'react-router'
-import {userFilterApplySpinner}  from '../../actions/spinnerAction';
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
 import UserFilter from './userFilter';
 import {FormattedMessage} from 'react-intl';
 import FilterSummary from '../../components/tableFilter/filterSummary'
-import {graphql, withApollo} from "react-apollo";
+import {graphql, withApollo, compose} from "react-apollo";
 
 import gql from 'graphql-tag'
 // import SUBSCRIPTION_QUERY from './../../../src/graphql/CommentSubscription.graphql';
@@ -116,8 +113,6 @@ const USERS_QUERY = gql`
         }
     }
 `;
-
-
 class UsersTab extends React.Component {
     constructor(props) {
         super(props);
@@ -126,23 +121,21 @@ class UsersTab extends React.Component {
         // we don't need to unsubscribe on unmount, because the subscription
         // gets stopped when the query stops.
         this.subscription = null;
-        this.linked = false
+        this.linked = false,
+            this.showUserFilter = this.props.showUserFilter.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
 
-             this._refreshList(nextProps.location.query)
+            this._refreshList(nextProps.location.query)
         }
 
 
         if ((!this.props.data.UserList && nextProps.data.UserList && !this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
         }
-
-        console.log("PROPS"+nextProps.data.networkStatus)
-
 
     }
 
@@ -175,7 +168,7 @@ class UsersTab extends React.Component {
             return []
         }
         var nProps = this,
-            data = this._filterList(nProps.props.data.UserList,nProps.props.location.query)
+            data = this._filterList(nProps.props.data.UserList, nProps.props.location.query)
         let operator = nProps.context.intl.formatMessage(messages.userOperator);
         let manager = nProps.context.intl.formatMessage(messages.userManager);
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
@@ -244,11 +237,11 @@ class UsersTab extends React.Component {
     }
 
 
-    _filterList(init_data,query){
-        let filtered_data=init_data.list
+    _filterList(init_data, query) {
+        let filtered_data = init_data.list
         if (query.username) {
-            var match_exp = new RegExp(query.username.split(" ").join("|"),'gi');
-            filtered_data=filtered_data.filter(function(user){
+            var match_exp = new RegExp(query.username.split(" ").join("|"), 'gi');
+            filtered_data = filtered_data.filter(function (user) {
                 return user.full_name.match(match_exp)
             })
         }
@@ -262,7 +255,6 @@ class UsersTab extends React.Component {
      * @private
      */
     _refreshList(query) {
-         this.props.userFilterApplySpinner(true);
         let filterSubsData = {}
         if (query.username) {
             let name_query = query.username.split(" ")
@@ -293,26 +285,29 @@ class UsersTab extends React.Component {
             })
             filterSubsData["pps"] = ['in', pps_list]
         }
-            if (Object.keys(query).filter(function (el) {
-                    return el !== 'page'
-                }).length !== 0) {
-                this.props.toggleUserFilter(true);
-                this.props.filterApplied(true);
-            } else {
-                this.props.toggleUserFilter(false);
-                this.props.filterApplied(false);
+        if (Object.keys(query).filter(function (el) {
+                return el !== 'page'
+            }).length !== 0) {
+            this.props.filterApplied(true);
+        } else {
+            this.props.filterApplied(false);
+        }
+        this.props.userfilterState({
+            tokenSelected: {
+                "STATUS": query.status || ["all"],
+                "ROLE": query.role || ['all'],
+                "WORK_MODE": query.mode || ['all'],
+                "LOCATION": ["all"],
+                __typename: "UserFilterTokenSelected"
+            }, searchQuery: {"USER_NAME": query.username || null, __typename: "UserFilterSearchQuery"},
+            defaultToken: {
+                "STATUS": ["all"],
+                "ROLE": ["all"],
+                "WORK_MODE": ["all"],
+                "LOCATION": ["all"],
+                __typename: "UserFilterDefaultToken"
             }
-            this.props.userfilterState({
-                tokenSelected: {
-                    "STATUS": query.status || ["all"],
-                    "ROLE": query.role || ['all'],
-                    "WORK MODE": query.mode || ['all'],
-                    "LOCATION": ["all"]
-                }, searchQuery: {"USER NAME": query.username || null},
-                defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
-            });
-
-
+        });
 
 
     }
@@ -346,14 +341,18 @@ class UsersTab extends React.Component {
         let filterHeight = screen.height - 190 - 50;
         let updateStatusIntl = "";
         var itemNumber = 7, userList;
-        userList= this._processUserDetails();
+        userList = this._processUserDetails();
+        let self=this
         return (
             <div>
                 <div>
                     <div className="gor-User-Table">
                         <div className="gor-filter-wrap"
                              style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                            <UserFilter userData={this.props.userdetails} responseFlag={this.props.responseFlag}/>
+                            <UserFilter userfilterState={this.props.userfilterState} noResults={userList.length===0} isFilterApplied={this.props.isFilterApplied}
+                                        filterState={this.props.userFilterStatus} showUserFilter={this.showUserFilter}
+                                        userData={userList}
+                                        responseFlag={this.props.responseFlag}/>
                         </div>
 
                         <div className="gorToolBar">
@@ -380,8 +379,8 @@ class UsersTab extends React.Component {
                                         <div
                                             className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
                                         <button
-                                            className={this.props.userFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                            onClick={this.props.showTableFilter.bind(this)}>
+                                            className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                            onClick={this.showUserFilter.bind(this, true)}>
                                             <div className="gor-manage-task"/>
                                             <FormattedMessage id="gor.filter.filterLabel"
                                                               description="button label for filter"
@@ -394,7 +393,7 @@ class UsersTab extends React.Component {
 
                         </div>
                         {/*Filter Summary*/}
-                        <FilterSummary total={userList.length || 0} isFilterApplied={this.props.isFilterApplied}
+                        <FilterSummary noResults={userList.length===0} total={userList.length || 0} isFilterApplied={this.props.isFilterApplied}
                                        responseFlag={this.props.responseFlag}
                                        filterText={<FormattedMessage id="userList.filter.search.bar"
                                                                      description='total users for filter search bar'
@@ -405,7 +404,7 @@ class UsersTab extends React.Component {
                                                                       description="button label for show all"
                                                                       defaultMessage="Show all Users"/>}/>
 
-                                       <UsersTable data={userList}/>
+                        <UsersTable data={userList}/>
                     </div>
                 </div>
             </div>
@@ -418,60 +417,8 @@ class UsersTab extends React.Component {
 function mapStateToProps(state, ownProps) {
 
     return {
-        userFilter: state.sortHeaderState.userFilter || "",
-        userdetails: state.userDetails.userDetails || [],
-        noResultFound: state.userDetails.noResultFound,
-        intlMessages: state.intl.messages,
-        manager: state.headerData.headerInfo || [],
         userSortHeader: state.sortHeaderState.userHeaderSort || "role",
         userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
-        showFilter: state.filterInfo.filterState || false,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        userFilterStatus: state.filterInfo.userFilterStatus || false,
-        roleList: state.appInfo.roleList || null,
-        auth_token: state.authLogin.auth_token,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        username: state.authLogin.username,
-
-    };
-}
-
-var mapDispatchToProps = function (dispatch) {
-    return {
-        userRequest: function (data) {
-            dispatch(userRequest(data));
-        },
-        userFilterDetail: function (data) {
-            dispatch(userFilterDetail(data))
-        },
-        userHeaderSort: function (data) {
-            dispatch(userHeaderSort(data))
-        },
-        userHeaderSortOrder: function (data) {
-            dispatch(userHeaderSortOrder(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        userfilterState: function (data) {
-            dispatch(userfilterState(data));
-        },
-        toggleUserFilter: function (data) {
-            dispatch(toggleUserFilter(data));
-        },
-        userFilterApplySpinner: function (data) {
-            dispatch(userFilterApplySpinner(data));
-        },
-        initDataSentCall: function (data) {
-            dispatch(setWsAction({type: WS_ONSEND, data: data}));
-        },
     };
 }
 
@@ -480,20 +427,15 @@ UsersTab.contextTypes = {
     client: React.PropTypes.object.isRequired
 }
 UsersTab.PropTypes = {
-    userFilter: React.PropTypes.string,
-    userdetails: React.PropTypes.array,
     manager: React.PropTypes.array,
     userSortHeader: React.PropTypes.string,
     userSortHeaderState: React.PropTypes.string,
     showFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
-    userFilterStatus: React.PropTypes.bool,
     auth_token: React.PropTypes.object,
-    userRequest: React.PropTypes.func,
-    userFilterDetail: React.PropTypes.func,
     userHeaderSort: React.PropTypes.func,
     userHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    showUserFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
     wsSubscriptionData: React.PropTypes.object
 };
@@ -506,8 +448,88 @@ const withQuery = graphql(USERS_QUERY, {
     }),
 });
 
+const userClientData = gql`
+    query  {
+    todos @client
+    userFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+                ROLE
+                WORK_MODE
+                LOCATION
+            }
+            searchQuery{
+                USER_NAME
+            }
+            defaultToken{
+                STATUS
+                ROLE
+                WORK_MODE
+                LOCATION
+            }
+        }
+    }
+    }
+`;
 
-export default connect(mapStateToProps, mapDispatchToProps)(withQuery(UsersTab));
+
+const SET_VISIBILITY = gql`
+    mutation setUserFiler($filter: String!) {
+        setShowUserFilter(filter: $filter) @client
+    }
+`;
+
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setUserFilterState(state: $state) @client
+    }
+`;
+
+const withClientData = graphql(userClientData, {
+    props: (data) => ({
+        todos: data.data.todos,
+        showFilter: data.data.userFilter.display,
+        isFilterApplied: data.data.userFilter.isFilterApplied,
+        userFilterStatus: JSON.parse(JSON.stringify(data.data.userFilter.filterState))
+    })
+})
+
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        showUserFilter: function (show) {
+            mutate({variables: {filter: show}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        userfilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+export default compose(
+    withClientData,
+    setVisibilityFilter,
+    setFilterApplied,
+    setFilterState,
+    withQuery
+)(connect(mapStateToProps)(UsersTab));
 
 
 

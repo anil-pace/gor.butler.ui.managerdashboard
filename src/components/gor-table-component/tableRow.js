@@ -20,6 +20,7 @@ export class GTableRow extends React.Component {
         delete props_to_be_passed.offset
         delete props_to_be_passed.max
         delete props_to_be_passed.data
+        delete props_to_be_passed.index
 
 
 
