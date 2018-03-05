@@ -87,27 +87,11 @@ class Routes extends React.Component {
         }
     }
 
-    _updateLanguage() {
-        var sessionLocale=sessionStorage.getItem('localLanguage');
-
-        sessionLocale=sessionLocale.substring(0, 2);// since we need only the first two characters fo the locale.
-        let data={
-            locale: sessionLocale,
-            messages: translationMessages[sessionLocale]
-        }
-        sessionStorage.setItem('localLanguage', sessionLocale);
-        this.props.updateIntl(data);
-    }
-
-
     _refreshPage(nextState, replace) {
-        if (sessionStorage.getItem('auth_token')) {
+        if (localStorage.getItem('auth_token')) {
             this._requireAuth.call(this, nextState, replace);
         }
 
-        if (sessionStorage.getItem('localLanguage')) {
-            this._updateLanguage.call(this);
-        }
     }
 
     _handleNavigationChanges(context, replace) {

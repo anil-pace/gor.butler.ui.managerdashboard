@@ -9,7 +9,7 @@ import ReactDOM  from 'react-dom';
 import {Provider} from 'react-redux';
 
 
-import {IntlProvider} from 'react-intl-redux';
+import {IntlProvider} from 'react-intl';
 
 
 // Import redux modal

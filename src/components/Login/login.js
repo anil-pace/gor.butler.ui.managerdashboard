@@ -33,13 +33,16 @@ class Login extends React.Component{
     componentWillMount()
     {
         document.body.className=FILL_BACK;
+        if(!localStorage.getItem('localLanguage')){
+            localStorage.setItem('localLanguage',navigator.language)
+        }
         this._changeDropdown();
-    } 
+    }
     _changeDropdown()
     {
         for (let i=0; i < this.state.items.length; i++) 
         { 
-            if(this.state.items[i].value=== this.props.sLang)
+            if(this.state.items[i].value=== localStorage.getItem('localLanguage').substring(0,2))
                 this.setState({sel:i});
         }      
     }
@@ -69,8 +72,8 @@ class Login extends React.Component{
             locale : sLocale,
             messages: translationMessages[sLocale]
         }
-        this.props.updateIntl(data);
-        sessionStorage.setItem('localLanguage', sLocale);
+        localStorage.setItem('localLanguage', sLocale);
+        location.reload()
         this._changeDropdown();
     }
  	render(){
@@ -117,7 +120,7 @@ Login.contextTypes={
 function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized ,
-        sLang: state.intl.locale || null,
+        sLang: localStorage.getItem('localeLanguage'),
         loginSpinner:state.spinner.loginSpinner         
     };
 }
