@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {modal} from 'react-redux-modal';
 import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage, defineMessages} from 'react-intl';
@@ -74,42 +75,56 @@ class OrderListTable extends React.Component {
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
+        this._viewOrderLine = this._viewOrderLine.bind(this);
     }
 
-    _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-        this.setState(({columnWidths})=> ({
-            columnWidths: {
-                ...columnWidths,
-                [columnKey]: newColumnWidth,
-            }
-        }));
-    }
+    // _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    //     this.setState(({columnWidths})=> ({
+    //         columnWidths: {
+    //             ...columnWidths,
+    //             [columnKey]: newColumnWidth,
+    //         }
+    //     }));
+    // }
 
-    _onFilterChange(e) {
-        var data={"type": "searchOrder", "captureValue": "", "selected": 1}, debounceFilter;
-        if (e.target && (e.target.value || e.target.value=== "")) {
-            data["captureValue"]=e.target.value;
-            this.props.setOrderFilter(e.target.value);
-        }
-        else {
-            data["captureValue"]=e;
-        }
-        debounceFilter=debounce(this.props.refreshOption, DEBOUNCE_TIMER);
-        debounceFilter(data);
-    }
+    // _onFilterChange(e) {
+    //     var data={"type": "searchOrder", "captureValue": "", "selected": 1}, debounceFilter;
+    //     if (e.target && (e.target.value || e.target.value=== "")) {
+    //         data["captureValue"]=e.target.value;
+    //         this.props.setOrderFilter(e.target.value);
+    //     }
+    //     else {
+    //         data["captureValue"]=e;
+    //     }
+    //     debounceFilter=debounce(this.props.refreshOption, DEBOUNCE_TIMER);
+    //     debounceFilter(data);
+    // }
 
 
-    backendSort(columnKey, sortDir) {
-        var data={"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
-        this.props.sortHeaderState(columnKey);
-        this.props.onSortChange(data);
-        this.props.sortHeaderOrder({
-            colSortDirs: {[columnKey]: sortDir},
-        })
-    }
+    // backendSort(columnKey, sortDir) {
+    //     var data={"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
+    //     this.props.sortHeaderState(columnKey);
+    //     this.props.onSortChange(data);
+    //     this.props.sortHeaderOrder({
+    //         colSortDirs: {[columnKey]: sortDir},
+    //     })
+    // }
 
     _showAllOrder() {
         this.props.refreshOption();
+    }
+
+    _viewOrderLine = (orderId) =>  {
+        clearInterval(this._intervalId);  // #stop ongoing polling.
+        modal.add(ViewOrderLine, {
+            startPolling: this._restartPolling,
+            orderId: orderId,
+            title: '',
+            size: 'large',
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true      // (optional) if you don't wanna show the top right close button
+                                       //.. all what you put in here you will get access in the modal props ;),
+            });
     }
 
     _reqOrderPerPbt(arg){
@@ -299,8 +314,8 @@ class OrderListTable extends React.Component {
                                             })}
                                         </GTableRow>}>
 
-                                        {/*{self.state.isPanelOpen === true ?*/}
-                                            <GTableBody data={processedOrderData.orderData} >
+                                        {self.props.isPanelOpen === true ?
+                                            (<GTableBody data={processedOrderData.orderData} >
                                                 {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
                                                     return (
                                                         <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
@@ -312,8 +327,8 @@ class OrderListTable extends React.Component {
                                                         </GTableRow>
                                                     )
                                                 }):""}
-                                            </GTableBody>{/*): null
-                                        }*/}
+                                            </GTableBody>): null
+                                        }
                                     </Accordion> 
                                 )
                             }):""}

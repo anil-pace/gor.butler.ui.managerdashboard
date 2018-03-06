@@ -100,7 +100,7 @@ var storage = [];
 
     _getInitialState(){
         return {
-            //isPanelOpen:true,
+            isPanelOpen:true,
             collapseAllBtnState: true, 
             date: new Date(),
             //query:this.props.location.query,
@@ -979,7 +979,8 @@ _viewOrderLine = (orderId) =>  {
 
                 <OrderListTable 
                     enableCollapseAllBtn={this._enableCollapseAllBtn}
-                    disableCollapseAllBtn={this._disableCollapseAllBtn} />
+                    disableCollapseAllBtn={this._disableCollapseAllBtn}
+                    isPanelOpen={this.state.isPanelOpen} />
                 {/*
                 <div className="waveListWrapper">
                     <GTable options={['table-bordered']}>
