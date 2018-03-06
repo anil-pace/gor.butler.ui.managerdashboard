@@ -14,7 +14,7 @@ import {
     notifySuccess,
     notifyFail,
 } from "./../../actions/validationActions";
-import {graphql, withApollo} from "react-apollo";
+import {graphql, compose} from "react-apollo";
 import gql from 'graphql-tag'
 const EDIT_USER_MUTATION = gql`
     mutation editUser($id:ID, $input: CreateUserInput) {
@@ -33,31 +33,9 @@ class EditUser extends React.Component {
         this.state={pwdView: false}
     }
 
-    componentDidMount() {
-        let userData={
-            'url': ROLE_URL,
-            'method': GET,
-            'cause': GET_ROLES,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        if (!this.props.roleList) {
-            this.props.userRequest(userData);
-        }
-
-
-    }
-
     removeThisModal() {
         this.props.resetForm();
         this.props.removeModal();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.auth_token) {
-            this.removeThisModal();
-        }
     }
 
     _checkName() {
@@ -118,15 +96,6 @@ class EditUser extends React.Component {
         else if (!this._checkPwd()) {
             return;
         }
-        let formdata={
-            "first_name": firstname,
-            "last_name": lastname,
-            "role_id": role,
-            "password": pswd,
-            "password_confirm": confirmPswd
-
-        };
-
         let graphql_data={
             id:this.props.id,
             "first_name": firstname,
@@ -136,15 +105,6 @@ class EditUser extends React.Component {
             "password_confirm": confirmPswd
         }
         let editurl=HEADER_URL + '/' + this.props.id;
-        let userData={
-            'url': editurl,
-            'formdata': formdata,
-            'method': PUT,
-            'cause': EDIT_USER,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
         this.props.editUser(graphql_data)
         // this.props.userRequest(userData);
         this.removeThisModal();
@@ -291,7 +251,6 @@ function mapStateToProps(state, ownProps) {
     return {
         nameCheck: state.appInfo.nameInfo || {},
         passwordCheck: state.appInfo.passwordInfo || {},
-        roleList: state.appInfo.roleList || [],
         roleSet: state.appInfo.roleSet || null,
         auth_token: state.authLogin.auth_token
     };
@@ -338,5 +297,31 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
     }),
 });
 
+const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMutations(EditUser));
+            }
+        }
+    }
+`;
+const withRoleList = graphql(ROLE_LIST_QUERY, {
+    props: (data) => ({
+        roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],
+    }),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+export default (connect(mapStateToProps,mapDispatchToProps)(compose(
+    withRoleList,
+    withMutations
+)(EditUser)));
+
+

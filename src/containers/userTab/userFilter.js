@@ -7,7 +7,8 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {stringConfig} from '../../constants/backEndConstants';
 import {hashHistory} from 'react-router'
-import {compose} from "react-apollo";
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 
 class UserFilter extends React.Component {
     constructor(props) {
@@ -262,7 +263,6 @@ UserFilter.contextTypes={
 
 function mapStateToProps(state, ownProps) {
     return {
-        roleList: state.appInfo.roleList || [],
     };
 }
 
@@ -277,4 +277,29 @@ UserFilter.PropTypes={
     showUserFilter: React.PropTypes.func,
 };
 
-export default connect(mapStateToProps)(UserFilter) ;
+const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
+
+            }
+        }
+    }
+`;
+const withRoleList = graphql(ROLE_LIST_QUERY, {
+    props: (data) => ({
+        roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],
+    }),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+export default compose(
+    withRoleList
+)(connect(mapStateToProps)(UserFilter));
+
