@@ -310,6 +310,7 @@ class CreateAudit extends React.Component{
       else{
       validSKUData.audit_param_value = {};
       validSKUData.audit_param_value.attributes_list = [];
+      validSKUData.kq = this.kqCheck.checked;
       let {selectedSKUList} = this.state;
       let skuList = this.state.copyPasteSKU.data;
       for(let i=0,len=skuList.length; i<len ;i++){
@@ -366,6 +367,7 @@ class CreateAudit extends React.Component{
 
     validLocationDataCreateAudit={
       "audit_param_type":"location",
+      "kq":this.kqCheck.checked,
       "audit_param_value":{
         "locations_list":auditParamValue
       }
@@ -1238,7 +1240,21 @@ class CreateAudit extends React.Component{
                     </Tab>
 
             </GorTabs>
-           
+           <div className={"audit-sub-footer"}>
+           <section className={"set-kq-wrp"}>
+              <div className={"kq-check-wrp"}>
+              <span><input type="checkbox" ref={(input) => { this.kqCheck = input; }} /></span>
+              </div>
+              <div className={"kq-check-label"}>
+                <p className={"kq-check-msg"}> <FormattedMessage id="audit.kq.label.msg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Show KQ on Butler Operator Interface'
+                                                             /></p>
+                <p className={"kq-check-submsg"}> <FormattedMessage id="audit.kq.label.submsg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Selecting this will enable key in quantity for this audit task'
+                                                             /></p>
+              </div>
+           </section>
+           </div>
             </div>
             <div className={"audit-footer"}>
              <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 

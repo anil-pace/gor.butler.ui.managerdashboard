@@ -1,4 +1,31 @@
 .gor-audit-create{
+  .audit-sub-footer{
+    padding: 12px 0;
+    input{
+      margin:0;
+    }
+    .kq-check-msg{
+      font-family: 'Source Sans Pro Bold';
+      font-size: calculateRem(14px);
+      color:#333333;
+    }
+    .kq-check-submsg{
+      font-family: 'Source Sans Pro';
+      font-size: calculateRem(12px);
+      color:#333333;
+      line-height:calculateRem(25px);
+    }
+    .kq-check-wrp{
+      display:inline-block;
+      width: 10%;
+      vertical-align: middle;
+    }
+    .kq-check-label{
+      display: inline-block;
+      width: 80%;
+      vertical-align: middle;
+    }
+  }
   .note-message{
     font-size: 12px;
     padding: 5px 10px;
