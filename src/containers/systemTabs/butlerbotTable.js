@@ -298,13 +298,13 @@ class ButlerBotTable extends React.Component {
                             <SortHeaderCell onSortChange={this._onSortChange}
                                             sortDir={colSortDirs.voltage}>
                                 <div className="gorToolHeaderEl">
-                                    <FormattedMessage id="butlerBot.table.voltage" description="voltage for butlerbot"
-                                                      defaultMessage="VOLTAGE"/>
+                                    <FormattedMessage id="butlerBot.table.power" description="power for butlerbot"
+                                                      defaultMessage="POWER"/>
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="ButlerBotTable.avgVoltage"
                                                           description='avgVoltage for ButlerBotTable'
                                                           defaultMessage='Avg {voltage}'
-                                                          values={{voltage: voltage ? voltage : "0 V"}}/>
+                                                          values={{voltage: voltage ? voltage : "0 %"}}/>
                                     </div>
                                 </div>
                             </SortHeaderCell>

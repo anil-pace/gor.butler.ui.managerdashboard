@@ -151,13 +151,13 @@ class ButlerBot extends React.Component {
             else {
                 butlerDetail.location="--";
             }
-            if (data[i].voltage || data[i].voltage=== 0) {
-                butlerDetail.voltage=data[i].voltage + " V";
+            if (data[i].power || data[i].power=== 0) {
+                butlerDetail.voltage=data[i].power + " %";
             }
             else {
                 butlerDetail.voltage="--";
             }
-            butlerDetail.butlerAvgVoltage=data[i].voltage;
+            butlerDetail.butlerAvgVoltage=data[i].power;
             butlerDetail.taskNum=currentTask[data[i].current_task];
             butlerDetail.taskNumClass=currentTaskClass[data[i].current_task];
             butlerDetail.taskType=data[i].current_task;
@@ -289,9 +289,11 @@ class ButlerBot extends React.Component {
 
         if (this.props.butlerDetail.butlerDetail !== undefined) {
             butlerData=this._processButlersData();
+            let activeBotsCount=0;
             if (butlerData && butlerData.length) {
                 for (var i=butlerData.length - 1; i >= 0; i--) {
-                    avgVoltage=butlerData[i].butlerAvgVoltage + avgVoltage;
+                    avgVoltage=(butlerData[i].butlerAvgVoltage || 0) + avgVoltage;
+                    activeBotsCount=butlerData[i].butlerAvgVoltage ? activeBotsCount +1 : activeBotsCount;
                     if (butlerData[i].taskNumClass=== null || butlerData[i].taskNumClass=== undefined) {
                         taskDetail["Idle"]++;
                     }
@@ -317,8 +319,8 @@ class ButlerBot extends React.Component {
                     }
 
                 }
-                avgVoltage=((avgVoltage / (butlerData.length)).toFixed(1));
-                taskDetail["avgVoltage"]=avgVoltage + "V";
+                avgVoltage=((avgVoltage / (activeBotsCount)).toFixed(1));
+                taskDetail["avgVoltage"]=avgVoltage + "%";
             }
             else {
                 taskDetail={
