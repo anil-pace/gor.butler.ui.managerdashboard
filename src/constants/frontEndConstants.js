@@ -806,6 +806,11 @@ export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
 export const START_AUDIT_TASK='START_AUDIT_TASK';
 export const CHANGE_PPS_TASK='CHANGE_PPS_TASK';
 
+/*Constants for seller recall*/
+
+export const SELLER_RECALL="SELLER_RECALL";
+export const VALIDATE_SKU_ITEM_RECALL = "VALIDATE_SKU_ITEM_RECALL";
+
 
 
 

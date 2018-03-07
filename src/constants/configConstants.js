@@ -91,4 +91,8 @@ export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
 
+/*URL for seller recall*/
+export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/item-recall";
+export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
+
 
