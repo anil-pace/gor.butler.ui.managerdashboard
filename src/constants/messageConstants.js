@@ -287,6 +287,9 @@ export const ENTITY_BREACHED = {
       defaultMessage='Latch Gate'/>)
 }
 
+export const ITEM_RECALL_SUCCESS = (<FormattedMessage id="itemRecall.message.success" description='Status text for zone' 
+      defaultMessage='Items recalled successfully'/>)
+
 
 
 

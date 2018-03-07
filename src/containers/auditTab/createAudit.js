@@ -78,7 +78,6 @@ class CreateAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
-
       this.state={
         copyPasteSKU:{
           data:[{
@@ -280,7 +279,7 @@ class CreateAudit extends React.Component{
 
   _validateSKU(type) {
     let validSKUData={
-      "audit_param_name":"name",
+      "audit_param_name":this.auditNameSKU.value,
       "audit_param_type":"sku"
     };
     let arrSKU=this.state.copyPasteSKU.data.slice(0);
@@ -358,7 +357,7 @@ class CreateAudit extends React.Component{
     }
    
     validLocationData={
-      "audit_param_name":"name",
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -905,7 +904,7 @@ class CreateAudit extends React.Component{
                           <div>
                           <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
                           <div>
-                          <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
+                          <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
                           <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
@@ -1084,7 +1083,7 @@ class CreateAudit extends React.Component{
                          
                       <div>
                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
-                        <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
+                        <input className="gor-audit-name-wrap" ref={(input) => { this.auditNameLoc = input; }} type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>

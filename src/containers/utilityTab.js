@@ -1,6 +1,7 @@
 import React from "react";
 import UtilityTile from "../components/utilityComponents/utilityTile";
 import ScriptsTile from "../components/utilityComponents/scriptsTile";
+import ItemRecall from "../containers/itemRecall/itemRecall";
 import UtilityDropDown from "../components/utilityComponents/utilityDropdownWrap";
 import MasterUploadTile from "../components/utilityComponents/masterUploadTile";
 import DownloadReportTile from "../components/utilityComponents/downloadReportsTile";
@@ -126,6 +127,11 @@ const messages = defineMessages({
         id: "utility.uploadBtn.label",
         description: "Upload Master Data",
         defaultMessage: "Upload Master Data"
+    },
+    itemsRecall:{
+        id: "utility.itemsRecall.head",
+        description: "Recall Items",
+        defaultMessage: "Recall Items"
     }
 });
 
@@ -615,6 +621,7 @@ class UtilityTab extends React.Component {
         let show_stock_ledger_widget = false;
         let show_stock_ledger_raw_transaction_widget = false;
 
+
         try {
             if (!this.props.config.utility_tab.enabled) {
                 return null;
@@ -681,6 +688,17 @@ class UtilityTab extends React.Component {
                         />
                     </UtilityTile>
                     : null}
+                 {show_item_recall_scripts
+                    ? <UtilityTile
+                        tileHead={this.context.intl.formatMessage(
+                            messages.itemsRecall
+                        )}
+                        showFooter={false}
+                        additionalClass="item-recall"
+                    >
+                        <ItemRecall auth_token={this.props.auth_token}/>
+                    </UtilityTile>
+                    : null}
 
                 {show_gr_report
                     ? <UtilityTile
@@ -733,16 +751,6 @@ class UtilityTab extends React.Component {
                         />
                     </UtilityTile>
                     : null}
-                {show_item_recall_scripts
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.scriptsTileHead
-                        )}
-                        showFooter={false}
-                    >
-                        <ScriptsTile auth_token={this.props.auth_token}/>
-                    </UtilityTile>
-                    : null}
                 {show_stock_ledger_widget
                     ? <UtilityTile
                         loading={this.props.stockLedgerSpinner}
@@ -775,6 +783,7 @@ class UtilityTab extends React.Component {
                         {stockLedgerRawTransactionTile}
                     </UtilityTile>
                     : null}
+               
 
             </div>
         );

@@ -102,7 +102,7 @@ export  function auditInfo(state={},action){
           })
           
     case VALIDATED_ATTIBUTES_DATA_SKU:
-        let processedDataSKU = processValidationDataSKU(action.data)//(action.data)
+        let processedDataSKU = processValidationDataSKU(action.data,null,action.includeExpiry)
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,
@@ -125,12 +125,7 @@ export  function auditInfo(state={},action){
             "textBoxStatus" : action.data
           })
 
-// //rajadey
-//     case UPDATE_STATUS:  
-//      return Object.assign({}, state, { 
-//             "" : action.data
-//           })
-//           break; 
+
     case AUDIT_LIST_REFRESHED:
           return Object.assign({}, state, {
               "auditListRefreshed": new Date()
@@ -152,7 +147,7 @@ export  function auditInfo(state={},action){
   }
 }
 
-function processValidationDataSKU(data,param){
+function processValidationDataSKU(data,param,includeExpiry){
   let finalArr=[],outerObj={}
   var processedData=[],
   skuList = data.sku_list,
@@ -161,6 +156,17 @@ function processValidationDataSKU(data,param){
   attList = data.attributes_list,
   i18n = data.i18n_values,
   totalValid=0,totalInvalid=0;
+  const expiryCategory = {
+    category_text:"",
+    category_value:"expired",
+    attributeList:{
+      "$expired":{
+        text:"Expired",
+        checked:false,
+        excludeFromSet:true
+      }
+    }
+  }
  if(param=="Edit_Dup")
  {
 let attrSet=data.attributes_list_sets;
@@ -217,10 +223,14 @@ for(let a=0,len=attrSet.length;a<len;a++){
       attTuple.attributeList = attObj;
       categoryList.push(attTuple);
     }
+    if(includeExpiry && categoryList.length){
+      categoryList.unshift(expiryCategory);
+    }
     tuple.attributeList = categoryList;
     processedData.push(tuple)
     
   }
+  
   return {
     data:processedData,
     totalValid,

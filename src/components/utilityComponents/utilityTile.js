@@ -6,7 +6,7 @@ class UtilityTile extends React.Component{
 	
 	render(){
 		return (
-		<div className="gor-utility-tile">
+		<div className={"gor-utility-tile "+(this.props.additionalClass || "")}>
 			<div className="gor-utility-tile-h1">
 				<div className="gor-utility-tile-heading">
 					{this.props.tileHead}
