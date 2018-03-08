@@ -34,6 +34,17 @@ const messages = defineMessages({
         id: "userDetails.operator",
         defaultMessage: "Operator"
     },
+    userAdmin: {
+        id: "userDetails.userAdmin",
+        defaultMessage: "Admin"
+    },qc_operator: {
+        id: "userDetails.qc_operator",
+        defaultMessage: "QC Operator"
+    },packing_operator: {
+        id: "userDetails.packing_operator",
+        defaultMessage: "Packing Operator"
+    },
+
     userManager: {
         id: "userDetails.manager",
         defaultMessage: "Manager"
@@ -170,6 +181,9 @@ class UsersTab extends React.Component {
         var nProps = this,
             data = this._filterList(nProps.props.data.UserList, nProps.props.location.query)
         let operator = nProps.context.intl.formatMessage(messages.userOperator);
+        let admin = nProps.context.intl.formatMessage(messages.userAdmin);
+        let qc_operator = nProps.context.intl.formatMessage(messages.qc_operator);
+        let packing_operator = nProps.context.intl.formatMessage(messages.packing_operator);
         let manager = nProps.context.intl.formatMessage(messages.userManager);
         let pick = nProps.context.intl.formatMessage(stringConfig.pick);
         let put = nProps.context.intl.formatMessage(stringConfig.put);
@@ -178,7 +192,7 @@ class UsersTab extends React.Component {
         let back = nProps.context.intl.formatMessage(messages.userBack);
         let online = nProps.context.intl.formatMessage(stringConfig.online);
         let offline = nProps.context.intl.formatMessage(stringConfig.offline);
-        var role = {"butler_ui": operator, "butler_supervisor": manager};
+        var role = {"butler_ui": operator, "butler_supervisor": manager,"admin":admin,'qc_operator':qc_operator,'packing_operator':packing_operator};
         var work_mode = {"pick": pick, "put": put, "audit": audit};
         var work_place = {"front": front, "back": back};
 
@@ -245,6 +259,14 @@ class UsersTab extends React.Component {
                 return user.full_name.match(match_exp)
             })
         }
+
+        if(query.role){
+            query.role = query.role.constructor === Array ? query.role : [query.role]
+            filtered_data = filtered_data.filter(function (user) {
+                return query.role.indexOf(user.role)>-1
+            })
+        }
+
 
         return filtered_data
     }
