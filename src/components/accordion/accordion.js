@@ -53,11 +53,18 @@ class Accordion extends React.Component{
   
   render()
   {
+      let arrowClassName="";
+      if(this.state.open === false){
+        arrowClassName = "gor-expand-icon";
+      }
+      else{
+        arrowClassName = "gor-collapse-icon";
+      }
       return (
         <div className="main">
           <div className={this.state.class}>
             <div className="panelHeader" onClick={this.handleClick}>{this.props.title}
-            <span className="accordionIconWrapper"> <i className="down"></i> </span>
+            <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
             <div className="panelWrapper">
               <div className="panelContent">

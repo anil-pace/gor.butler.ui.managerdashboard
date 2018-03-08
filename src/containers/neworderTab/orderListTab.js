@@ -814,10 +814,10 @@ _viewOrderLine = (orderId) =>  {
     }
 
     _handleCollapseAll(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
+        // this.setState({
+        //     collapseAllBtnState: true,
+        //     isPanelOpen: false
+        // })
     }
 
     render() {

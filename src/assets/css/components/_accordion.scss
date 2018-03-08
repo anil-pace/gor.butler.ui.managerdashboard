@@ -130,15 +130,15 @@ $darkred: grey;
 .accordionIconWrapper{
   position: absolute;
   right: calculateRem(55px);
-  top: calculateRem(20px);
-  .down {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
+  top: calculateRem(25px);
+  // .down {
+  //   border: solid black;
+  //   border-width: 0 3px 3px 0;
+  //   display: inline-block;
+  //   padding: 3px;
+  //   transform: rotate(45deg);
+  //   -webkit-transform: rotate(45deg);
+  // }
 }
 .panelContent {
   //padding: 1em;

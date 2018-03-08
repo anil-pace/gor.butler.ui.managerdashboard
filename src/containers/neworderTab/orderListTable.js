@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
-import {FormattedMessage, defineMessages} from 'react-intl';
+import {FormattedMessage, defineMessages, FormattedRelative} from 'react-intl';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -171,12 +171,12 @@ class OrderListTable extends React.Component {
         // })
     }
 
-    _handleCollapseAll(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
-    }
+    // _handleCollapseAll(){
+    //     this.setState({
+    //         collapseAllBtnState: true,
+    //         isPanelOpen: false
+    //     })
+    // }
 
     _processPBTs = (arg) => {
         let pbtData = arg;
@@ -191,7 +191,17 @@ class OrderListTable extends React.Component {
                 let formatPbtTime = (<FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs"
                                         values={{cutOffTime:pbtData[i].cut_off_time}} />);
 
-                let formatTimeLeft = this._formatTime(pbtData[i].time_left);
+                //let formatTimeLeft = this._formatTime(pbtData[i].time_left);
+                // let originalDate = pbtData[i].cut_off_time;
+                // var convertedDate =  originalDate.getTime(); 
+                // var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
+
+                //let msec = Date.parse("March 8, 2018");
+                var d = new Date();
+                var n = d.getMilliseconds();
+                var x = n - 5 * 60000;
+
+                let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={x} timeZone={this.props.timeZone}/>);
 
                 let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
 
@@ -363,7 +373,8 @@ function mapStateToProps(state, ownProps) {
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
 
         pbts: state.orderDetails.pbts,
-        ordersPerPbt:state.orderDetails.ordersPerPbt
+        ordersPerPbt:state.orderDetails.ordersPerPbt,
+        timeZone:state.authLogin.timeOffset
     };
 }
 
