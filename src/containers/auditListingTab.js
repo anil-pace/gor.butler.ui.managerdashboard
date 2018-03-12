@@ -9,7 +9,6 @@
  import {GTableBody} from "../components/gor-table-component/tableBody";
  import {GTableRow} from "../components/gor-table-component/tableRow";
  import {FormattedMessage} from 'react-intl';
- import Accordion from '../components/Accordian/accordian';
  import NameInitial from '../components/NameInitial/nameInitial';
  import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
  import ProgressBar from '../components/progressBar/progressBar.js';
