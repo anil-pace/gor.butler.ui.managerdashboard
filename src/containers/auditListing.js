@@ -391,6 +391,7 @@ startAudit() {
         var i,limit=data.length;
         for (i=0;i<=limit - 1; i++) {
             auditData.id=data[i].audit_id;
+            auditData.progressBarflag=false;
             if (data[i].audit_name) {
                 auditData.audit_name=data[i].audit_name;
             }
@@ -399,36 +400,29 @@ startAudit() {
             }
            auditData.auditBased=data[i].audit_type?data[i].audit_type:"";
             auditData.pps_id=data[i].audit_status=='audit_created'?"":(data[i].pps_id?"PPS "+data[i].pps_id:"");
-
-            
             if (data[i].audit_status=="audit_created") {
                 auditData.status="Not yet Started";
-                auditData.progressBarflag=false;
-  } else if(data[i].audit_status=="audit_cancelled"){
+            } else if(data[i].audit_status=="audit_cancelled"){
                 auditData.status="Cancelled";
-                auditData.progressBarflag=false;
-  }
- 
-   else if(data[i].audit_button_data.audit_cancel_button==='enable'){
-                auditData.status=auditCancelled;
-                auditData.progressBarflag=false;
   }
 
     else if(data[i].audit_status=="audit_paused"){
                 auditData.status="Paused";
-                auditData.progressBarflag=false;
   }
 
   else  if(data[i].start_actual_time && data[i].completion_time){
         auditData.status="Completed";
-        auditData.progressBarflag=false;
     }
     else if(data[i].audit_progress.completed || data[i].audit_progress.total){
         auditData.status=data[i].audit_progress.completed+" completed out of "+data[i].audit_progress.total;
         auditData.progressBarflag=true;
     }
-    auditData.progressStatus=data[i].audit_progress;
+    else if(data[i].audit_status=="audit_pending"|| data[i].audit_status=="audit_waiting" || data[i].audit_status=="audit_conflicting"|| data[i].audit_status=="audit_accepted" ||
+    data[i].audit_status=="audit_started"|| data[i].audit_status=="audit_tasked" ||data[i].audit_status=="audit_rejected"||data[i].audit_status=="audit_pending_approval"){
+        auditData.progressBarflag=true;
+    }
 
+    auditData.progressStatus=data[i].audit_progress;
 
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
                     auditData.startAudit=true;

@@ -1,8 +1,10 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.14.124'; 
 export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="wss://";
-export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
-export const API_URL=PROTOCOL+BASE_URL+"/api";
+export const WS_PROTOCOL ="ws://";
+//export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
+export const WS_URL = WS_PROTOCOL+BASE_URL+":8889/manager_api/ws";
+export const API_URL=PROTOCOL+BASE_URL+":5000/api";
+//export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
@@ -86,13 +88,9 @@ export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboa
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 
-export const AUDIT_PAUSE_URL=API_URL+"/audit/pause";
+export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
-
-/*URL for seller recall*/
-export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/item-recall";
-export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
 
 

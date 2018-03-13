@@ -205,7 +205,7 @@ _tableBodyData(itemsData){
       }
   rowObject.auditProgress={
    "percentage": this._findStatus(itemsData[i].progressStatus),
-   "flag":(itemsData[i].progressStatus.total>=1)?true:false,
+   "flag":(itemsData[i].progressBarflag)?true:false,
    "status":itemsData[i].status
   }
   rowObject.resolvedState=itemsData[i].lineResolveState;
