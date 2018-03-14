@@ -443,6 +443,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case CREATE_AUDIT_REQUEST:
             store.dispatch(createAuditAction(res));
+            store.dispatch(setAuditRefresh(true));
             break;
         case AUDIT_EDIT:
         //raja

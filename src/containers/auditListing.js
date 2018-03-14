@@ -410,7 +410,7 @@ startAudit() {
   }
  
    else if(data[i].audit_button_data.audit_cancel_button==='enable'){
-                auditData.status=auditCancelled;
+               // auditData.status=auditCancelled;
                 auditData.progressBarflag=false;
   }
 
