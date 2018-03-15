@@ -52,7 +52,7 @@ export function utilityValidations(state = {}, action) {
         case UPLOAD_HISTORY:
             var uploadHistChanged = !state.uploadHistChanged;
             return Object.assign({}, state, {
-                uploadHistoryData: action.data.mdm_upload_info || [],
+                uploadHistoryData: action.data || [],
                 uploadHistChanged: uploadHistChanged
             });
         case UPDATE_FILE_SIZE:
