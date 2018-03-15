@@ -7,6 +7,7 @@ import ResultPane from './resultPane';
 import ReactDOM  from 'react-dom';
 import NotificationSearchPanel from './notificationSearchPanel';
 import { FormattedRelative , FormattedMessage} from 'react-intl';
+import { connect } from 'react-redux'; 
 
 
 
@@ -64,7 +65,7 @@ class Notification extends React.Component{
 							<div className="content">
 								<p className="title">{tuple.title}</p>
 								<p className="message">{tuple.description}</p>
-								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></span></p>
+								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(new Date(tuple.createTime).toLocaleString("en-US",{timeZone: this.props.timeOffset}))} /></span></p>
 							</div>
 							<div className="status">
 								
@@ -91,6 +92,11 @@ class Notification extends React.Component{
 	}
 }
 
+function mapStateToProps(state, ownProps) {
+    return {
+         "timeOffset":state.authLogin.timeOffset,
+     }
+ }
 Notification.propTypes={
 	unreadCount: React.PropTypes.number,
 	onPaneSearch: React.PropTypes.func.isRequired,
@@ -100,4 +106,4 @@ Notification.propTypes={
 	searchApplied:React.PropTypes.bool
 }
 
-export default Notification ;
+export default connect(mapStateToProps)(Notification);
