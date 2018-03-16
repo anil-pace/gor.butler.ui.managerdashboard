@@ -305,8 +305,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             case AUDIT_USERLIST:
             //let auditpps = [];
             if (res) {
-            
-                store.dispatch(getAuditUserList(res.users));
+            store.dispatch(getAuditUserList(res.users));
             }
             break;
             

@@ -1,7 +1,7 @@
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter} from '../../actions/filterAction';
+import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter,setClearIntervalFlag} from '../../actions/filterAction';
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -64,14 +64,15 @@ class AuditFilter extends React.Component {
   }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)) {
+        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (!nextProps.pollTimerId)) {
             this.setState(nextProps.auditFilterState)
         }
         /**
          * Hide the filter as soon as data in the list get updated.
          */
-        if(nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail)){
+        if((nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail) && (!nextProps.pollTimerId))||(nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail) && this.props.clearIntervalFlag)){
             this.props.showTableFilter(false);
+            this.props.setClearIntervalFlag(false);
         }
 
     }
@@ -238,6 +239,9 @@ class AuditFilter extends React.Component {
         }
 
         hashHistory.push({pathname: "/auditlisting", query: _query})
+        clearInterval(this.props.pollTimerId);
+        this.props.setClearIntervalFlag(true);
+
     }
 
     _clearFilter() {
@@ -246,6 +250,8 @@ class AuditFilter extends React.Component {
             defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]}
         })
         hashHistory.push({pathname: "/auditlisting", query: {}});
+        this.props.pollingFunc();
+        this.props.setClearIntervalFlag(true);
     }
 
     render() {
@@ -318,7 +324,8 @@ function mapStateToProps(state, ownProps) {
         auditFilterState: state.filterInfo.auditFilterState,
         auditFilterStatus: state.filterInfo.auditFilterStatus,
         textboxStatus: state.auditInfo.textBoxStatus || {},
-        auditUserList:state.auditInfo.auditUserList ||[]
+        auditUserList:state.auditInfo.auditUserList ||[],
+        clearIntervalFlag:state.filterInfo.clearIntervalFlag|| false
     };
 }
 
@@ -341,6 +348,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         setAuditSpinner: function (data) {
             dispatch(setAuditSpinner(data))
+        },
+        setClearIntervalFlag: function (data) {
+            dispatch(setClearIntervalFlag(data))
         },
         userRequest: function(data){ dispatch(userRequest(data)); }
 
