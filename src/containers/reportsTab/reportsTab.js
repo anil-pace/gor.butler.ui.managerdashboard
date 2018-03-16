@@ -8,7 +8,7 @@ import SubTab from '../../components/subtab/subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP,DOWNLOAD_REPORT, STORAGE_SPACE} from '../../constants/frontEndConstants';
+import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP,DOWNLOAD_REPORT, STORAGE_SPACE, MISC} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -29,6 +29,7 @@ class ReportsTab extends React.Component{
 		var selectClass={};
 		var operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
 		var storageSpace=<FormattedMessage id="reportsTab.storageSpace" description="Storage space tab for Reports tab" defaultMessage="Storage Space"/>
+		var misc=<FormattedMessage id="reportsTab.misc" description="Storage space tab for GR Reports tab" defaultMessage="Misc"/>
 		var downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
     
 		return (
@@ -41,6 +42,10 @@ class ReportsTab extends React.Component{
 
 					<Link to="/reports/storageSpace" onClick={this.handleSysSubTabClick.bind(this,STORAGE_SPACE)}>
 						<SubTab item={storageSpace} changeClass={this.props.subTab === STORAGE_SPACE ? "gor-main-blockSelect" : "gor-main-block"}/> 
+					</Link>
+
+					<Link to="/reports/misc" onClick={this.handleSysSubTabClick.bind(this,MISC)}>
+						<SubTab item={misc} changeClass={this.props.subTab === MISC ? "gor-main-blockSelect" : "gor-main-block"}/> 
 					</Link>
 
 					<Link to="/reports/downloadReport" onClick={this.handleSysSubTabClick.bind(this,DOWNLOAD_REPORT)}>

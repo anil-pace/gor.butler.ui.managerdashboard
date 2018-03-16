@@ -131,6 +131,7 @@ export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
 export const DOWNLOAD_REPORT="downloadReport";
 export const STORAGE_SPACE="storageSpace";
+export const MISC="misc";
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
