@@ -88,7 +88,7 @@ export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboa
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 
-export const AUDIT_PAUSE_URL=API_URL+"/audit/pause";
+export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';

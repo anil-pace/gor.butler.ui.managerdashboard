@@ -35,14 +35,17 @@
     	cursor: pointer;
 	}
 }
+.allNotificationWrap .gor-filter-footer {
+    bottom: 35px;
+}
 
 .gor-filter-footer {
 	height: 68px;
     background-color: #ffffff;
     border-top: solid 2px #dddddd;
     position: absolute;
-
     width: 100%;
+
     .gor-filter-footer-h2 {
 		font-size: 16px;
   		color: #1d8cbb;

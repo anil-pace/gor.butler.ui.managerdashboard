@@ -310,6 +310,7 @@ class CreateAudit extends React.Component{
       validSKUData.audit_param_value = {};
       validSKUData.audit_param_value.attributes_list = [];
       validSKUData.kq = this.kqCheck.checked;
+      validSKUData.action=(type === "create" || type === "confirm")?'create':'';
       let {selectedSKUList} = this.state;
       let skuList = this.state.copyPasteSKU.data;
       for(let i=0,len=skuList.length; i<len ;i++){
@@ -367,6 +368,7 @@ class CreateAudit extends React.Component{
     validLocationDataCreateAudit={
       "audit_param_type":"location",
       "kq":this.kqCheck.checked,
+      "action":(type === "create" || type === "confirm")?'create':'',
       "audit_param_value":{
         "locations_list":auditParamValue
       }

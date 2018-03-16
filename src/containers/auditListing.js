@@ -409,10 +409,10 @@ startAudit() {
                 auditData.progressBarflag=false;
   }
  
-   else if(data[i].audit_button_data.audit_cancel_button==='enable'){
-                auditData.status=auditCancelled;
-                auditData.progressBarflag=false;
-  }
+//    else if(data[i].audit_button_data.audit_cancel_button==='enable'){
+//                 auditData.status=auditCancelled;
+//                 auditData.progressBarflag=false;
+//   }
 
     else if(data[i].audit_status=="audit_paused"){
                 auditData.status="Paused";
@@ -669,7 +669,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
    </label> 
    <span className='auditHeader'>Audit</span>
 </div>
-   {(this.props.checkedAudit.length>1)?<div style={{display:'inline','border-left':'2px solid #ffffff','margin-left':'25px','float': 'right'}}><ActionDropDown style={{width:'115px',display:'inline',float:'right','padding-left':'25px'}} clickOptionBack={this._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+   {(this.props.checkedAudit.length>1)?<div style={{display:'inline','border-left':'2px solid #ffffff','margin-left':'25px','float': 'right'}}><ActionDropDown style={{width:'115px',display:'inline',float:'right','padding-left':'25px'}} clickOptionBack={this._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
       <div className="got-add-notch"></div>
@@ -692,7 +692,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
     onClick={this._setFilter.bind(this)}>
     <div className="gor-manage-task"/>
-    <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
+    <FormattedMessage id="gor.filter.filterLabelCaps" description="button label for filter"
     defaultMessage="FILTER DATA"/>
     </button>
     </div>

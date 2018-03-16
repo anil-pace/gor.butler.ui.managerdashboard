@@ -21,7 +21,7 @@
  import EditAudit from '../containers/auditTab/editAudit';  
  import {
     APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT
 } from '../constants/frontEndConstants';
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
@@ -138,16 +138,13 @@ startAuditAuto(auditId){
 
 
 _pauseAudit(auditId){
-  let formData={
-    audit_id_list:(auditId).constructor.name!=="Array"?[auditId]:auditId
-  }
+  let  audit_id=(auditId).constructor.name!=="Array"?auditId:auditId.toString()
       let auditData={
-                'url':AUDIT_PAUSE_URL,
-                'method':POST,
+                'url':AUDIT_PAUSE_URL+audit_id,
+                'method':PUT,
                 'cause':PAUSE_AUDIT,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'formdata':formData,
                 'token':sessionStorage.getItem('auth_token')
             }
       this.props.userRequest(auditData);
@@ -277,7 +274,7 @@ render(){
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
        <div className="got-add-notch"></div>

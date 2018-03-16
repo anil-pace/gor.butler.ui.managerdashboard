@@ -21,11 +21,43 @@
                           &.info{
                           background-color: #3cb669;
                           }
+                          &.whiteBG{
+                            background-color:#ffffff;
+                            &:hover{
+                              cursor: pointer;
+                          }
+                          } 
+                         
                           .msg-content{
                           width: 275px;
                           display: inline-block;
                           margin-top: -10px;
                           }
+                          .msg-content-full{
+                            width: 300px;
+                            display: inline-block;
+                            margin-top: 2px;
+                            color: #4a4a4a;
+                            margin-left: 10px;
+                            
+                            .headermsg{
+                              font-size: 14px;
+                              font-weight: bold;
+                              text-align: left;
+                              line-height: 0.71;
+                              margin-bottom: 5px;
+                             
+                            }
+                            .descmsg{
+                              font-size: 13px;
+                              font-weight: normal;
+                              text-align: left;
+                              color: #666666;
+                              line-height: 1.23;
+                              
+                            }
+                          }
+                         
                     
                     .gor-toastify-details{
                               max-width: 80px;

@@ -1,7 +1,7 @@
 import {ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,ERROR,HIDE,
   NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_INFO,ID_MAP,SET_ROLE,
   NOTIFY_DELETE,GOR_PASS,GOR_FAIL,GOR_INFO,TICK_WHITE,REMOVE_ICON,
-  ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA,PASSWORD_BUTTON_RESET} from '../constants/frontEndConstants';
+  ERROR_WHITE,LOGIN_ERROR,SKU_DATA,LOC_DATA,PASSWORD_BUTTON_RESET,NOTIFY_FEEDBACK,NOTIFY_MSG_HIDE} from '../constants/frontEndConstants';
 
 /**
  * @param  {State Object}
@@ -95,6 +95,16 @@ export  function appInfo(state={},action){
          return Object.assign({}, state, { 
             "notifyInfo":notifyHide
          })
+         
+    case NOTIFY_MSG_HIDE:
+         let notifymsgHide;
+         notifymsgHide={
+          type:HIDE
+         }
+         return Object.assign({}, state, { 
+            "notifyInfomsg":notifymsgHide
+         })     
+
     case ID_MAP:
         let roleList;
         roleList=action.data;
@@ -115,6 +125,16 @@ export  function appInfo(state={},action){
           return Object.assign({}, state, { 
             "locInfo":action.data     
           })
+    //Feedback Notification      
+    case NOTIFY_FEEDBACK:
+          notifyInfoMsg=action.data, notifyInfo;
+         notifyInfo={
+          type:GOR_INFO,
+          msg:notifyInfoMsg
+         };
+         return Object.assign({}, state, { 
+            "notifyInfomsg":notifyInfo
+         })     
     default:
       return state
   }

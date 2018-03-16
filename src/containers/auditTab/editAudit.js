@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT } from '../../constants/frontEndConstants';
+import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT,AUDIT_EDIT_REQUEST ,CREATE_DUPLICATE_REQUEST} from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL} from '../../constants/configConstants';
 import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
@@ -116,6 +116,7 @@ class EditAudit extends React.Component{
         validateclicked:false,
         selectedSKUList:{},
         auditSpinner:this.props.auditSpinner
+        
       };
       
       
@@ -132,8 +133,7 @@ class EditAudit extends React.Component{
       this._validateLocation=this._validateLocation.bind(this);
       this._onBackClick=this._onBackClick.bind(this);
       this._validateSKU=this._validateSKU.bind(this);
-      this._onTbClick = this._onTabClick.bind(this);
-      this._onAattributeSelection = this._onAttributeSelection.bind(this);
+      //this._onTbClick = this._onTabClick.bind(this);
       this._invokeAlert = this._invokeAlert.bind(this);
       this._searchCallBack = this._searchCallBack.bind(this);
       this._createAudit=this._createAudit.bind(this);
@@ -181,15 +181,32 @@ class EditAudit extends React.Component{
       this._removeThisModal();
     }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-
-      let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      skuAttributes = JSON.parse(JSON.stringify(nextProps.auditEditData)),
-      attrList=nextProps.auditEditData.outerObj,
-      validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
-      validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
+      let locationAttributes=[],validatedLocations=[],validationDone=true,skuAttributes={},validatedSKUs=[],validationDoneSKU=true,attrList={},activeTabIndex=0;
+      if(Object.keys(nextProps.locationAttributes).length){
+         locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes));
+        validatedLocations = this._processLocationAttributes(locationAttributes.data) || [];
+        validationDone = Object.keys(locationAttributes).length ? true : false;
+        skuAttributes ={};
+        validatedSKUs =[];
+        activeTabIndex=1;
+      }
+      else{
+        if(this.props.auditEditData!==nextProps.auditEditData){
+       skuAttributes =JSON.parse(JSON.stringify(nextProps.auditEditData));
+       attrList=nextProps.auditEditData.outerObj;
+       
+        }
+        else
+        {
+        skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes));
+        attrList={};
+        }
+      validatedLocations = this.state.copyPasteLocation.data,
+      validatedSKUs = this._processSkuAttributes(skuAttributes.data || []);
       validationDone = Object.keys(locationAttributes).length ? true : false,
       validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
-
+      activeTabIndex=0;
+      }
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
@@ -203,8 +220,11 @@ class EditAudit extends React.Component{
       validationDone,
       skuAttributes,
       validationDoneSKU,
+      activeTabIndex,
       auditSpinner:nextProps.auditSpinner
 
+    },function(){
+      this._onAttributeSelectionFirstTime();
     })
   }
     if(this.props.auditSpinner !== nextProps.auditSpinner){
@@ -212,7 +232,40 @@ class EditAudit extends React.Component{
         auditSpinner:nextProps.auditSpinner
       })
     }
+
   }
+
+
+
+_onAttributeSelectionFirstTime(){
+  var selectedSKUList = JSON.parse(JSON.stringify(this.state.selectedSKUList));
+  this.state.copyPasteSKU.data.map((tuple,i)=>{
+   let selAtt = this.state.skuAttributes.outerObj[tuple.value];
+    var sku =tuple.value;
+    var tuple={};
+      tuple.sku = sku;
+      tuple.attributes_sets=[];
+      for(let key in selAtt){
+        let categories={};
+        for(let k in selAtt[key]){
+          if(!categories[selAtt[key][k].category]){
+            categories[selAtt[key][k].category] = []
+          }
+          categories[selAtt[key][k].category].push(k);
+        }
+        tuple.attributes_sets.push(categories);
+        
+      }
+      selectedSKUList[sku] = tuple;
+    this.setState({
+      selectedSKUList
+    })
+
+  })
+}
+
+
+
   _onAttributeSelection(selectedAttributes,index){
     var selAtt = JSON.parse(JSON.stringify(selectedAttributes));
     var selectedSKUList = JSON.parse(JSON.stringify(this.state.selectedSKUList));
@@ -319,6 +372,15 @@ class EditAudit extends React.Component{
     let auditParamValue = [];
     let sendRequest = false;
 
+    if(this.props.auditId && type !== "validate" && this.props.param!=='duplicate'){
+      validSKUData.audit_id=this.props.auditId;
+      validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
+    }
+    if(this.props.param=='duplicate'){
+      validSKUData.action='duplicate';
+    }
+    
+
     if(type === "validate"){
       validSKUData.audit_param_value = {};
       for(let i=0,len=arrSKU.length; i<len;i++){
@@ -327,10 +389,10 @@ class EditAudit extends React.Component{
       validSKUData.audit_param_value.sku_list = auditParamValue;
       sendRequest = true;
     }
-    else if(type === "confirm" || type === "create"){
+    else if(type === "confirm" || type === "create" || type === "duplicate"){
       let selectedAttributeCount = Object.keys(selectedSKUList).length;
       let isAttributeSelected = (arrSKU.length === selectedAttributeCount)
-      if(!isAttributeSelected && type === "create"){
+      if(!isAttributeSelected && (type === "create"|| type === "duplicate")){
         this._invokeAlert({
           validateSKU:this._validateSKU,
           noneSelected:!selectedAttributeCount ? true :false,
@@ -360,10 +422,10 @@ class EditAudit extends React.Component{
     }
     if(sendRequest){
       let urlData={
-                  'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                  'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
                   'method':POST,
-                  'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
+                  'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_SKU_ID),
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
                   'token':this.props.auth_token
@@ -390,25 +452,41 @@ class EditAudit extends React.Component{
     validLocationData={
       "audit_param_name":"name",
       "audit_param_type":"location",
+     
       "audit_param_value":{
         "locations_list":auditParamValue
       }
     }
-
+    
+    if(this.props.auditId &&  this.props.param!=='duplicate' && type !== "validate"){
     validLocationDataCreateAudit={
       "audit_param_type":"location",
+      "action":(type === "create" || type === "confirm")?'edit':'',
+      "audit_param_value":{
+        "locations_list":auditParamValue
+      },
+      audit_id:this.props.auditId
+    }
+  }
+  else
+  {
+    validLocationDataCreateAudit={
+      "audit_param_type":"location",
+      "action":'duplicate',
       "audit_param_value":{
         "locations_list":auditParamValue
       }
+      
     }
+  }
 
 
      
     let urlData={
-                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
-                'formdata':(type === "create") ? validLocationDataCreateAudit : validLocationData,
+                'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                'formdata':(type === "create" || type === "duplicate") ? validLocationDataCreateAudit : validLocationData,
                 'method':POST,
-                'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_LOCATION_ID,
+                'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_LOCATION_ID),
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token
@@ -416,7 +494,7 @@ class EditAudit extends React.Component{
     this.props.setAuditSpinner(true);
     this.props.makeAjaxCall(urlData);
    
-    if(type==="create"){
+    if(type==="create"||type=="duplicate"){
       this.props.removeModal();
      
     }
@@ -808,6 +886,7 @@ class EditAudit extends React.Component{
       
     }
     _onTabClick(tabIndex){
+
       this.setState({
         activeTabIndex:tabIndex,
         locationAttributes: tabIndex === 0 ? {} : this.state.locationAttributes,
@@ -843,15 +922,22 @@ class EditAudit extends React.Component{
             size: 'large', // large, medium or small,
             closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true,
+            param:"edit",
             ...additionalProps // (optional) if you don't wanna show the top right close button
             //.. all what you put in here you will get access in the modal props ;)
         });
     }
-    _createAudit(){
+    _createAudit(type){
       if(this.state.activeTabIndex === 0){
+        if(type=='duplicate')
+        this._validateSKU("duplicate");
+        else
         this._validateSKU("create");
       }
       else{
+        if(type=='duplicate')
+        this._validateLocation("duplicate");
+        else
         this._validateLocation("create");
       }
     }
@@ -885,7 +971,7 @@ class EditAudit extends React.Component{
       let {validationDone,validationDoneSKU,activeTabIndex,filterApplied} = self.state; 
       let copyPasteSKU =  self.state.copyPasteSKU;
       let copyPasteLocation = self.state.copyPasteLocation;
-      let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false;
+      let allLocationsValid = (Object.keys(self.state.locationAttributes).length && !self.state.locationAttributes.totalInvalid) ? true : false;
       let allSKUsValid = (self.state.skuAttributes && self.state.skuAttributes.totalInvalid === 0) ? true : false;
       let enableCreateAudit;
       if(activeTabIndex === 0){
@@ -931,7 +1017,7 @@ class EditAudit extends React.Component{
 }else if(this.props.param=='duplicate'){
    header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
        defaultMessage='Duplicate audit'/></div>
-         button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
+         button=  <button onClick={()=>{this._createAudit("duplicate")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
          defaultMessage='Create audit'/></button>
 }else
 {
@@ -955,7 +1041,7 @@ class EditAudit extends React.Component{
             
 
             <div className='gor-audit-form new-audit'>
-            <GorTabs onTabClick ={this._onTabClick} defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
+            <GorTabs onTabClick ={self._onTabClick.bind(self)} defaultActiveTabIndex={this.state.activeTabIndex} tabClass={"tabs-audit"} internalTab={false}>
                     <Tab tabName = {auditBySkuMessg} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'} internalTab={false} >
                           <div>
@@ -1025,7 +1111,8 @@ class EditAudit extends React.Component{
                                                                   total: self.state.skuAttributes.totalSKUs ? self.state.skuAttributes.totalSKUs.toString() : "0"
                                                                 }
                                                               }/>
-                </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
+                </div>
+                </div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
                 <span className="gor-delete-outline">
               <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
               </span>
@@ -1052,9 +1139,10 @@ class EditAudit extends React.Component{
                 </div>
               <div>
                {copyPasteSKU.data.map((tuple,i)=>{
+                 var self=this;
                     let tuples=[],
-                    attributeList = self.state.skuAttributes.data[i].attributeList,
-                    attributeSet = self.state.skuAttributes.outerObj[tuple.value];
+                    attributeList = self.state.skuAttributes.data?self.state.skuAttributes.data[i].attributeList:{},
+                    attributeSet = self.state.skuAttributes.data?self.state.skuAttributes.outerObj[tuple.value]:{};
                     if(tuple.visible){
                     tuples.push(<div className={allSKUsValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value+i}>
 
@@ -1073,7 +1161,7 @@ class EditAudit extends React.Component{
                           messages={attributeComponentMessages}
                           attributeList={attributeList}
                           prefilledData={attributeSet}
-                          applyCallBack={this._onAttributeSelection}
+                          applyCallBack={self._onAttributeSelection.bind(self)}
                           index={i}
                           usePositionHack={true}
                           />}
@@ -1189,6 +1277,7 @@ class EditAudit extends React.Component{
                         </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
+             
               {allLocationsValid?
                  <div className={"gor-audit-att-ribbon"}>
                  <div className="gor-sku-validation-btn-wrap">
@@ -1214,8 +1303,8 @@ class EditAudit extends React.Component{
                                                               defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
                                                               values={
                                                                 {
-                                                                  invalid: self.state.locationAttributes.totalInvalid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                  invalid:self.state.locationAttributes.totalInvalid? self.state.locationAttributes.totalInvalid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>}

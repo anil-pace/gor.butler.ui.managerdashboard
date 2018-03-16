@@ -2,7 +2,7 @@ import {SKU_DATA,LOC_DATA,ID_DATA,NAME_DATA,PASSWORD_DATA,INFO_RESET,
 	ID_BACKEND,NOTIFY_PASS,NOTIFY_HIDE,NOTIFY_FAIL,NOTIFY_DELETE,
 	NOTIFY_INFO,LOGIN_ERROR,AJAX_CALL,VALIDATE_SKU_SPINNER,
 	VALIDATE_LOCATION_SPINNER,VALIDATE_LOCATION_SPINNER_CSV,
-	VALIDATED_SKU_CODE,MODAL_STATUS,SAFETY_MAP,
+	VALIDATED_SKU_CODE,MODAL_STATUS,SAFETY_MAP,NOTIFY_FEEDBACK,NOTIFY_MSG_HIDE,
 	SAFETY_ERROR_MAP,SAFETY_ERROR_BOT,SET_MODAL_KEY,CHECKLIST,MODAL_RESET,PASSWORD_BUTTON_RESET} from '../constants/frontEndConstants';
 
 
@@ -71,17 +71,33 @@ export function notifyFail(data){
 		data
 	}
 }
+//
 export function notifyInfo(data){	
 	return{
 		type:NOTIFY_INFO,
 		data
 	}
 }
+//feedback Notification
+export function notifyfeedback(data){	
+	return{
+		type:NOTIFY_FEEDBACK,
+		data
+	}
+}
+
 export function notifyHide(){	
 	return{
 		type:NOTIFY_HIDE
 	}
 }
+
+export function notifymsgHide(){	
+	return{
+		type:NOTIFY_MSG_HIDE
+	}
+}
+
 export function loginError(data){
 	return{
 		type:LOGIN_ERROR,

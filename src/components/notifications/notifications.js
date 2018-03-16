@@ -63,12 +63,12 @@ class Notification extends React.Component{
 					{this.props.notificationData.length ? this.props.notificationData.map((tuple, index) => (
 				        <section className="row" key={index}>
 							<div className="content">
-								<p className="title">{tuple.title}</p>
-								<p className="message">{tuple.description}</p>
-								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(new Date(tuple.createTime).toLocaleString("en-US",{timeZone: this.props.timeOffset}))} /></span></p>
-							</div>
-							<div className="status">
-								
+								<span className={tuple.type+'-icon'}></span>
+								<div className="containerText">
+								<div className="title">{tuple.title.toUpperCase()}</div>
+								<div className="message">{tuple.description}</div>
+								<div className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></div>
+								</div>
 							</div>
 						</section>
 				    )):<section className="row" >

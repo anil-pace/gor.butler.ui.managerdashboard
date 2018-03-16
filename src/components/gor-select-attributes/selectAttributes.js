@@ -41,7 +41,7 @@ export default class SelectAttributes extends React.Component {
 
     componentWillMount(){
         if(this.props.prefilledData)
-        this._applySelectionFirstTime(1);
+        this._applySelectionFirstTime();
     }
 
       componentDidMount(){
@@ -121,9 +121,8 @@ export default class SelectAttributes extends React.Component {
         }
         
         )
-    //}
     }
-   
+    
     _applySelection(e,index){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();

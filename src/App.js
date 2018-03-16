@@ -12,6 +12,7 @@ import {TIME_ZONE_URL,GET_MD_CONFIG_URL,WS_PLATFORM_HEADER_ORDER_URL} from './co
 import {prevTabSelected} from './actions/tabSelectAction';
 import { connect } from 'react-redux'; 
 import TopNotifications from './components/topnotify/topnotify';
+import FeedbackNotification from './components/feedBackNotification/feedBackNotification';
 import { notifyInfo} from './actions/validationActions';
 import {userRequest} from './actions/userActions';
 import {wsOrdersHeaderUnSubscribe,wsOrdersHeaderSubscribe} from './actions/overviewActions';
@@ -154,7 +155,8 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
        return (
 
         <div className="mainContainer">
-        <TopNotifications />
+         <TopNotifications />
+        <FeedbackNotification/>
         <Header />
         <Tabs/>
         {this.props.children}

@@ -187,7 +187,7 @@ export const fileUploadMessages={
       defaultMessage='File size should not be greater than'/>)
       
 }
-
+//AUDITRAJACANCEL
 export const g020=(<FormattedMessage id="audit.cancellation.error.g020" description='Internal server error while requesting for audit cancel'
                                    defaultMessage='Internal server error while requesting for audit cancel'/>);
 export const g021=(<FormattedMessage id="audit.cancellation.error.g021" description='Audit Id already sent for cancellation'
@@ -196,7 +196,8 @@ export const g023=(<FormattedMessage id="audit.cancellation.error.g023" descript
                                    defaultMessage='Audit Id already successfully cancelled'/>);
 export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit cancellation request denied'
                                    defaultMessage='Audit cancellation request denied'/>);
-/*Message for status change notification*/
+
+                                   /*Message for status change notification*/
 export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
       defaultMessage='Status change request successful'/>)
 

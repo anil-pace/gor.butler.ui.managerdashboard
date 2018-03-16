@@ -1,6 +1,6 @@
 import React  from 'react';
 import { FormattedMessage,FormattedPlural } from 'react-intl'; 
-import {ERROR,SUCCESS} from '../constants/frontEndConstants';
+import {ERROR,SUCCESS,WARNING} from '../constants/frontEndConstants';
 import {CODE_US001,CODE_US002,CODE_US004,CODE_UE001,CODE_UE002,CODE_UE003,CODE_UE004,CODE_UE005,CODE_UE006,CODE_AS002,CODE_AS003,CODE_G016,CODE_AE001,CODE_AE002,
   CODE_AE004,CODE_AE005,CODE_AE006,CODE_E026,CODE_E027,CODE_AE007,CODE_AE008,CODE_E052,CODE_E051,CODE_E135,AS006,AS005} from '../constants/backEndConstants'
 import {US004,UE001,UE002,UE003,UE004,UE005,UE006,AS003,G016,AE001,AE002,AE004,AE005,AE006,E026,E027,ERR_RES,AE007,AE008,E051,E052,E135} from '../constants/messageConstants';
@@ -29,13 +29,7 @@ export function codeToString(res){
                 msg:US004
               }
               break;
-            case CODE_AS002:
-              stringInfo={
-                type:SUCCESS,
-                msg:(<FormattedMessage id="notify.delete.audit.success" description='Text for successfull audit deletion' 
-            defaultMessage="Audit {audit_id} has been deleted" values={{audit_id:res.details["audit_id"]||"--"}}/>)
-              }
-              break;              
+                          
             case CODE_UE001:
               stringInfo={
                 type:ERROR,
@@ -44,8 +38,9 @@ export function codeToString(res){
               break;
             case CODE_UE002:
               stringInfo={
-                type:ERROR,
-                msg:UE002
+                type:WARNING,
+                msg:'USER NOT CREATED',
+                desc:UE002
               }
               break;
             case CODE_UE003:
@@ -71,19 +66,8 @@ export function codeToString(res){
                 type:ERROR,
                 msg:UE006
               }
-              break;
-            case CODE_AS003:
-              stringInfo={
-                type:ERROR,
-                msg:AS003
-              }
-              break;     
-            case CODE_G016:
-              stringInfo={
-                type:ERROR,
-                msg:G016
-              }
-              break;
+              break;    
+          
             case CODE_AE001:
               stringInfo={
                 type:ERROR,
@@ -164,13 +148,102 @@ export function codeToString(res){
               }                                   
               break;
 
-              case AS006:
+              case "g026":
               stringInfo={
-                type:ERROR,
+                type:WARNING,
                 msg:(<FormattedMessage id="audit.paused.fail" description='audit paused fail' 
-      defaultMessage='{reason} for {id}' values={{id:res.details.audit_id||"--",reason:res.description}}/>)
+            defaultMessage='AUDIT NOT PAUSED'/>),
+            desc:(<FormattedMessage id="audit.paused.fail_desc" description='audit paused fail description' 
+            defaultMessage='Audit {id} could not be paused due to intenal issue' values={{id:res.details.audit_id||"--"}}/>)
                   }                                   
               break;
+
+              case "g016":
+              stringInfo={
+                type:WARNING,
+                msg:(<FormattedMessage id="audit.delete.fail" description='audit delete fail' 
+            defaultMessage='AUDIT NOT DELETED'/>),
+            desc:(<FormattedMessage id="audit.delete.fail_desc" description='audit delete fail description' 
+            defaultMessage='Audit {id} does not exist' values={{id:res.details.audit_id||"--"}}/>)
+                  }                                   
+              break;
+              case "as003":
+              stringInfo={
+                type:WARNING,
+                msg:(<FormattedMessage id="audit.delete.fail" description='audit delete fail' 
+            defaultMessage='AUDIT NOT DELETED'/>),
+            desc:(<FormattedMessage id="audit.delete.fail_desc" description='audit delete fail description' 
+            defaultMessage='Audit {id} already processed  could not be deleted' values={{id:res.details.audit_id||"--"}}/>)
+                  }                                   
+              break;
+              case "bx001":
+              stringInfo={
+                type:WARNING,
+                msg:(<FormattedMessage id="audit.fail.fail" description='audit fail fail' 
+            defaultMessage='AUDIT PROCESS FAILED'/>),
+            desc:(<FormattedMessage id="audit.fail.fail_desc" description='audit delete fail description' 
+            defaultMessage='Audit process failed due to internal error'/>)
+                  }                                   
+              break;      
+            
+              
+              case "g030":
+              if(res.details.action=="create")
+              {
+                 stringInfo={
+                  type:'WARNING',
+                  msg:(<FormattedMessage id="audit.create.fail" description='audit create fail' 
+              defaultMessage='AUDIT CREATION FAILED'/>),
+              desc:(<FormattedMessage id="audit.create.fail_desc" description='audit create fail description' 
+              defaultMessage='No audit task has been created'/>)
+            }
+                }
+                else if(res.details.action=="edit"){
+                  stringInfo={
+                    type:WARNING,
+                    msg:(<FormattedMessage id="audit.edit.fail" description='audit edit fail' 
+                defaultMessage='AUDIT EDIT FAILED'/>),
+                desc:(<FormattedMessage id="audit.EDIT.fail_desc" description='audit edit fail description' 
+                defaultMessage='Audit {id} could not be edited due to network issue ' values={{id:res.details.audit_id||"--"}}/>)
+                      }
+                }  
+                else{
+                  stringInfo={
+                    type:WARNING,
+                    msg:(<FormattedMessage id="audit.duplicate.fail" description='audit duplicate fail' 
+                defaultMessage='AUDIT NOT DUPLICATED'/>),
+                desc:(<FormattedMessage id="audit.duplicate.fail_desc" description='audit duplicate fail description' 
+                defaultMessage='Audit could not be duplicated due to network issue '/>)
+                      } 
+                }                                
+              break;
+
+              case "g027":
+              stringInfo={
+                type:WARNING,
+                msg:(<FormattedMessage id="audit.Cancellation.fail" description='audit Cancellation fail' 
+            defaultMessage='AUDIT NOT CANCELLED'/>),
+            desc:(<FormattedMessage id="audit.duplicate.fail_desc" description='audit duplicate fail description' 
+            defaultMessage='Audit {id} could not be cancelled due to network issue ' values={{id:res.details.audit_id||"--"}}/>)
+                  }                                   
+              break;
+              case "g028":
+              stringInfo={
+                type:WARNING,
+                msg:(<FormattedMessage id="audit.start.changepps" description='audit changepps' 
+            defaultMessage='PPS CHANGE FAILED'/>),
+            desc:(<FormattedMessage id="audit.start.changePpsdesc" description='change pps failedn' 
+            defaultMessage='PPS change failed due to internal error'/>)
+                  }                                   
+              break;
+              case "as007":
+              stringInfo={
+                type:SUCCESS,
+                  msg:(<FormattedMessage id="audit.ppschange.success" description='Text for successfull pps change' 
+              defaultMessage='PPS change request sent' />)   //Make string for addition
+                  }                                   
+              break;
+
               
             default:
               stringInfo={
