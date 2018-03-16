@@ -196,4 +196,11 @@ export function setFilterApplyFlag(data){
 
 }
 
+export function setClearIntervalFlag(data){
+		return {
+		type: "SET_CLEAR_INTERVAL_FLAG",
+		data
+	 	}
+		}
+
 
