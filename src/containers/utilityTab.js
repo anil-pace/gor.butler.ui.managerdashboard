@@ -33,7 +33,8 @@ import {
     GET_MAX_FILE_SIZE,
     WS_ONSEND,
     DOWNLOAD_STOCK_LEDGER_REPORT,
-    DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT
+    DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
+    APP_JSON
 } from "../constants/frontEndConstants";
 import {fileUploadMessages} from "../constants/messageConstants";
 
@@ -341,7 +342,8 @@ class UtilityTab extends React.Component {
             token: this.props.auth_token,
             cause: MASTER_FILE_UPLOAD,
             contentType: false,
-            formdata: formData
+            formdata: formData,
+            accept: APP_JSON
         };
         this.props.uploadMasterDataProcessing(true);
         this.props.getItemRecall(params);
@@ -426,7 +428,8 @@ class UtilityTab extends React.Component {
             url: UPLOAD_HISTORY_URL + "?&order_by=create_time",
             method: GET,
             token: this.props.auth_token,
-            cause: UPLOAD_HISTORY
+            cause: UPLOAD_HISTORY,
+            accept: APP_JSON
         };
         this.props.getUploadHistory(params);
     }
