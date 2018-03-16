@@ -40,7 +40,7 @@ import {
     sortAuditHead,
     sortOrder,POST,START_AUDIT_TASK,
     ALL,FILTER_PPS_ID,AUDIT_START_TIME,AUDIT_END_TIME,AUDIT_CREATEDBY,
-    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED
+    ANY,WS_ONSEND,toggleOrder,CANCEL_AUDIT,SYSTEM_GENERATED,POLLING_INTERVAL
 } from '../constants/frontEndConstants';
 import {
     SEARCH_AUDIT_URL,
@@ -125,7 +125,7 @@ class AuditTab extends React.Component {
         super(props);
         this.state={selected_page: 1,query:null,auditListRefreshed:null,timerId:0};
           this._handelClick = this._handelClick.bind(this);
-
+          this.polling=this.polling.bind(this);
     }
 
 
@@ -136,6 +136,7 @@ class AuditTab extends React.Component {
          * packet can be sent to the server for data
          * update.
          */
+        this.polling();
          this.props.auditListRefreshed()
      }
     componentWillReceiveProps(nextProps) {
@@ -143,28 +144,17 @@ class AuditTab extends React.Component {
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh!==this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.props.showFilter;
             let obj={},selectedToken;
+            if(!this.state.pollTimerId){
             selectedToken=(nextProps.location.query.auditType)?(nextProps.location.query.auditType).constructor.name!=='Array'?[nextProps.location.query.auditType]:nextProps.location.query.auditType:[];
             obj.name=mappingArray(selectedToken);
             this.props.setTextBoxStatus(obj);
+            }
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({auditListRefreshed:nextProps.auditListRefreshed});
             this._subscribeData();
             
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
         
-//         (function polling(){
-// let timerId=0;
-//              timerId = setInterval(function(){
-//                 me._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs); 
-//         }, 3000);
-//         me.setState({timerId:timerId});
-//         })();
-
-//clearInterval(timerId);
-
-
-
-
         }
     }
     _handelClick(field) {
@@ -178,7 +168,16 @@ class AuditTab extends React.Component {
 this.startAuditAuto();
   }
 
-} 
+}
+
+polling(){
+             self=this;
+            let timerId=0;
+                 timerId = setInterval(function(){
+                    self._refreshList({},undefined); 
+            }, POLLING_INTERVAL);
+            self.setState({timerId:timerId});
+            }
 
 startAuditAuto(auditId){
     var  auditId=this.props.checkedAudit;
@@ -351,7 +350,8 @@ startAudit() {
      *
      */
      _clearFilter() {
-        hashHistory.push({pathname: "/auditlisting", query: {}})
+        hashHistory.push({pathname: "/auditlisting", query: {}});
+        this.polling();
     }
 
 
@@ -593,7 +593,6 @@ startAudit() {
 _setFilter() {
     var newState=!this.props.showFilter;
     this.props.showTableFilter(newState);
-    clearInterval(this.state.timerId);
 }
 
 createAudit() {
@@ -658,7 +657,7 @@ renderTab=<AuditTable raja={'raja'} items={auditData} setCheckedAudit={this.prop
     let toolbar=<div>
     <div className="gor-filter-wrap"
     style={{'display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-    <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag}/>
+    <AuditFilter auditDetail={this.props.auditDetail} responseFlag={this.props.responseFlag} pollingFunc={this.polling} pollTimerId={this.state.timerId}/>
     </div>
     <div className="gorToolBar auditListingToolbar">
     <div className="gorToolBarWrap auditListingToolbarWrap">

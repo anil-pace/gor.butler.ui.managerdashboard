@@ -156,7 +156,11 @@ case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFil
     })
     
 
-
+    case "SET_CLEAR_INTERVAL_FLAG":              //This reducer will update the the Apply flag value true/false
+        return Object.assign({}, state, { 
+          "clearIntervalFlag" : action.data
+        })
+        
     default:
     return state
   }
