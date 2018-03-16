@@ -21,6 +21,25 @@ class SkuAlerts extends React.Component{
     }  
     render()
     {
+      let button,text;
+      if(this.props.param=="edit"){
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.update' 
+        defaultMessage="Update Audit" description="Text for logout button"/></button>;
+        text= <FormattedMessage id='audit.sku.alert.update' 
+        defaultMessage="Do you wish to update Audit?" description="Text for logout question"/>;
+      }
+      else if(this.props.param=="duplicate"){
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.duplicate' 
+        defaultMessage="Duplicate Audit" description="Text for logout button"/></button>;
+        text= <FormattedMessage id='audit.sku.alert.duplicate' 
+        defaultMessage="Do you wish to duplicate Audit?" description="Text for logout question"/>;
+      }else
+      {
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.create' 
+        defaultMessage="Create Audit" description="Text for logout button"/></button>;
+        text= <FormattedMessage id='audit.sku.alert.create' 
+        defaultMessage="Do you wish to create Audit?" description="Text for logout question"/>;
+      }
       return (
         <div>
           <div className='gor-logout'>
@@ -36,15 +55,13 @@ class SkuAlerts extends React.Component{
                         />}
                         </span>
               <div>
-                <FormattedMessage id='audit.sku.alert.confirm' 
-                        defaultMessage="Do you wish to create Audit?" description="Text for logout question"/>
+                {text}
               </div>
            </div>
               <div className='gor-logout-bottom'>
                 <button className='gor-cancel-btn' onClick={this._removeThisModal}><FormattedMessage id='audit.sku.alert.cancel' 
                         defaultMessage="Cancel" description="Text for cancel"/></button>
-                <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.confirm' 
-                        defaultMessage="Create Audit" description="Text for logout button"/></button>
+                {button}
               </div> 
           </div>
         </div>
