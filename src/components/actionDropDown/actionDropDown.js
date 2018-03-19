@@ -5,16 +5,26 @@ class ActionDropDown extends React.Component{
 	constructor(props) 
 	{
 	   super(props);
-        this.state={visibleMenu:false}; 
+		this.state={visibleMenu:false,flyoutHack:false}; 
         this._handleDocumentClick =  this._handleDocumentClick.bind(this);
     }
     _handleClick(field){
+		if(field.target.className=="embeddedImage"){
+		var domRect = (field.target).getBoundingClientRect();
+		if(domRect.top>=546){
+			this.setState({flyoutHack:true});
+		}
+		else
+		{
+			this.setState({flyoutHack:false});
+		}
     	let currentStatus=this.state.visibleMenu;
     	currentStatus=!currentStatus;
       this.setState({visibleMenu:currentStatus});
       this.props.clickOptionBack(field);
 
 	}	
+}
 
   _handleDocumentClick() {
      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
@@ -50,7 +60,7 @@ class ActionDropDown extends React.Component{
 			
 		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={this._handleClick.bind(this)} {...this.props}>
 		{this.props.children}
-			{this.state.visibleMenu?<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
+			{this.state.visibleMenu?this.state.flyoutHack?<div className='gor-add-flyoutWrapper' style={{'margin-top':-arr.length*37+'px'}} >{arr}</div>:<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
 		</div>
 		
 		

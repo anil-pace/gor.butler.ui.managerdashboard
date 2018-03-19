@@ -258,8 +258,9 @@ render(){
    <div>
 
    <div className="waveListWrapper">
-   <GTable options={['table-bordered']}>
+   <GTable options={['table-bordered','table-auditListing']}>
 
+{tablerowdata && tablerowdata.length>=1?
    <GTableBody data={tablerowdata} >
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
@@ -297,7 +298,7 @@ render(){
     </GTableRow>
     )
   }):""}
-  </GTableBody>
+  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>There are no audit to view. Create audit</div>}
 
   </GTable>
   </div>
