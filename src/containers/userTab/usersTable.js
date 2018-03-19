@@ -13,10 +13,11 @@ class UsersTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            header: [{id: 1, text: "USERS", key: 'full_name', sortable: true,sortDir:"ASC"},
-                {id: 2, text: "STATUS", key: 'status', sortable: true},
-                {id: 3, text: "ROLE", key: 'role', sortable: true},
-                {id: 4, text: "WORKMODE", key: 'role', sortable: true},
+            header: [{id: 0, text: "USERS", key: 'full_name', sortable: true,sortDir:"ASC"},
+                {id: 1, text: "STATUS", key: 'status', sortable: true},
+                {id: 2, text: "ROLE", key: 'role', sortable: true},
+                {id: 3, text: "WORKMODE", key: 'role', sortable: true},
+                {id: 4, text: "LOG IN TIME", key: 'role', sortable: true},
                 {id: 5, text: "LOG IN TIME", key: 'role', sortable: true},
                 {id: 6, text: "ACTIONS", key: 'role', sortable: false},
             ],
@@ -91,19 +92,29 @@ class UsersTable extends React.Component {
                     <GTableHeader>
 
                         <GTableHeaderCell header={self.state.header[0]} onClick={self._onSortChange.bind(self, this.state.header[0])}>
-                            <span>{this.props.data.length} USERS</span>
+                            <span><FormattedMessage id="user.table.usersCount" description="Users Column"
+                                                    defaultMessage="{rowsCount} USERS"
+                                                    values={{rowsCount: this.props.data.length}}/> {}</span>
                         </GTableHeaderCell>
                         <GTableHeaderCell header={self.state.header[1]} onClick={self._onSortChange.bind(self, this.state.header[1])}>
-                        <span>STATUS</span>
+                        <span><FormattedMessage id="user.table.status" description="Users Status"
+                                                defaultMessage="STATUS"/></span>
                     </GTableHeaderCell>
                         <GTableHeaderCell header={self.state.header[2]} onClick={self._onSortChange.bind(self, this.state.header[2])}>
-                        <span>ROLE</span>
+                        <span><FormattedMessage id="user.table.role" description="User Role"
+                                                defaultMessage="ROLE"/></span>
                     </GTableHeaderCell>
                         <GTableHeaderCell header={self.state.header[3]} onClick={self._onSortChange.bind(self, this.state.header[3])}>
-                        <span>WORKMODE</span>
+                        <span><FormattedMessage id="user.table.workMode" description="User Workmode"
+                                                defaultMessage="WORKMODE"/></span>
                     </GTableHeaderCell>
                         <GTableHeaderCell header={self.state.header[4]} onClick={self._onSortChange.bind(self, this.state.header[4])}>
-                        <span>LOG IN TIME</span>
+                        <span><FormattedMessage id="user.table.location" description="User location"
+                                                defaultMessage="LOCATION"/></span>
+                    </GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[5]} onClick={self._onSortChange.bind(self, this.state.header[5])}>
+                        <span><FormattedMessage id="user.table.logInTime" description="User log in time"
+                                                defaultMessage="LOG IN TIME"/></span>
                     </GTableHeaderCell>
                         <GTableHeaderCell>
                         <span>ACTIONS</span>
@@ -134,6 +145,11 @@ class UsersTable extends React.Component {
                                         style={self.state.header[3].width ? {flex: '1 0 ' + self.state.header[3].width + "%"} : {}}
                                         className="cell">
                                         {row.workMode}
+                                    </div>
+                                    <div
+                                        style={self.state.header[4].width ? {flex: '1 0 ' + self.state.header[4].width + "%"} : {}}
+                                        className="cell">
+                                        {row.location}
                                     </div>
                                     <div
                                         style={self.state.header[4].width ? {flex: '1 0 ' + self.state.header[4].width + "%"} : {}}
