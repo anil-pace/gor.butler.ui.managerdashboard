@@ -25,7 +25,7 @@ import {
     notifySuccess,
     notifyFail,
 } from "./../../actions/validationActions";
-import {graphql, withApollo} from "react-apollo";
+import {graphql, withApollo,compose} from "react-apollo";
 import gql from 'graphql-tag'
 const CREATE_USER_MUTATION = gql`
     mutation createUser($input: CreateUserInput) {
@@ -37,6 +37,7 @@ const CREATE_USER_MUTATION = gql`
         }
     }
 `;
+
 
 class AddUser extends React.Component {
     constructor(props) {
@@ -54,35 +55,10 @@ class AddUser extends React.Component {
         }
     }
 
-    componentDidMount() {
-        let userData = {
-            'url': ROLE_URL,
-            'method': GET,
-            'cause': GET_ROLES,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        if (!this.props.roleList) {
-            this.props.userRequest(userData);
-        }
-    }
-
     _checkId() {
         let userid = this.userId.value, idInfo;
-        idInfo = idStatus(userid);
+        idInfo = idStatus(userid,this.props.existingUserIds);
         this.props.validateID(idInfo);
-        if (idInfo.type) {
-            let userData = {
-                'url': CHECK_USER + userid,
-                'method': GET,
-                'cause': CHECK_ID,
-                'contentType': APP_JSON,
-                'accept': APP_JSON,
-                'token': this.props.auth_token
-            }
-            this.props.userRequest(userData);
-        }
     }
 
     _checkName() {
@@ -132,18 +108,7 @@ class AddUser extends React.Component {
             "password_confirm": confirmPswd
 
         };
-        let userData = {
-            'url': HEADER_URL,
-            'formdata': formdata,
-            'method': POST,
-            'cause': ADD_USER,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-
         this.props.createUser(formdata)
-        // this.props.userRequest(userData);
         this.removeThisModal();
     }
 
@@ -290,7 +255,6 @@ function mapStateToProps(state, ownProps) {
         idCheck: state.appInfo.idInfo || {},
         nameCheck: state.appInfo.nameInfo || {},
         passwordCheck: state.appInfo.passwordInfo || {},
-        roleList: state.appInfo.roleList || [],
         roleSet: state.appInfo.roleSet || null,
         auth_token: state.authLogin.auth_token
     };
@@ -339,4 +303,27 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
     }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withMutations(AddUser)) ;
+const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
+
+            }
+        }
+    }
+`;
+const withRoleList = graphql(ROLE_LIST_QUERY, {
+    props: (data) => ({
+        roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],
+    }),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(compose(withRoleList,withMutations)(AddUser)) ;

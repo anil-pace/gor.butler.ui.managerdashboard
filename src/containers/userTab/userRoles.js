@@ -58,7 +58,8 @@ class UserRoles extends React.Component{
            }
            objDropdown={
             value: currentRole.name, 
-            label:label
+            label:label,
+               key:i
            }
            options.push(objDropdown);
         }
@@ -77,7 +78,7 @@ class UserRoles extends React.Component{
            if(!this._isMapped(stringConfig,currentRole.name) || !this._isMapped(roleDesc,currentRole.name)){
                 continue;
            }
-            info=(<div className='gor-role-details'>
+            info=(<div key={i} className='gor-role-details'>
                     <span className='gor-usr-hdsm'>
                         {this.context.intl.formatMessage(stringConfig[currentRole.name])}: 
                     </span>
