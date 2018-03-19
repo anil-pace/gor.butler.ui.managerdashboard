@@ -11,6 +11,7 @@ import {butlersInfo}  from './reducers/butlerReducer'
 import {chargerInfo}  from './reducers/chargerReducer'
 import {auditInfo}  from './reducers/auditReducer'
 import {ppsInfo}  from './reducers/ppsReducer'
+import {msuInfo}  from './reducers/msuReducer'
 import {putInfo}  from './reducers/putReducer'
 import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
@@ -64,6 +65,7 @@ const rootReducer=combineReducers({
   auditInfo,
   putInfo,
   ppsInfo,
+  msuInfo,
   throughputInfo,
   inventoryInfo,
   ordersInfo,

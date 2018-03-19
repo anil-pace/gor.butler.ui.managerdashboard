@@ -8,8 +8,9 @@ import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldW
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setButlerFilterSpinner}  from '../../actions/spinnerAction';
-import {hashHistory} from 'react-router'
-class ButlerBotFilter extends React.Component{
+import {hashHistory} from 'react-router';
+
+class MsuConfigFilter extends React.Component{
 	constructor(props) 
 	{
     	super(props);
@@ -139,13 +140,11 @@ class ButlerBotFilter extends React.Component{
                          <FormattedMessage id="gor.filter.filterLabel" description="label for filter" defaultMessage="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter}>
-                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
-                            defaultMessage="Hide"/>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" defaultMessage="Hide"/>
                     </div>
                  </div>
                     <div>{noOrder?
-                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
-                            defaultMessage="No results found, please try again"/></div>:""}
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" defaultMessage="No results found, please try again"/></div>:""}
                     </div>
                      <div className="gor-filter-body">
                          <div className="gor-filter-body-input-wrap"> 
@@ -208,7 +207,7 @@ var mapDispatchToProps=function(dispatch){
     setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
   } 
 };
-ButlerBotFilter.PropTypes={
+MsuConfigFilter.PropTypes={
   butlerDetail: React.PropTypes.array,
 showFilter: React.PropTypes.bool,
 wsSubscriptionData:React.PropTypes.object,
@@ -222,4 +221,4 @@ butlerfilterState:React.PropTypes.func,
 toggleBotButton:React.PropTypes.func
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(MsuConfigFilter) ;
