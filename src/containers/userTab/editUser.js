@@ -252,7 +252,6 @@ function mapStateToProps(state, ownProps) {
         nameCheck: state.appInfo.nameInfo || {},
         passwordCheck: state.appInfo.passwordInfo || {},
         roleSet: state.appInfo.roleSet || null,
-        auth_token: state.authLogin.auth_token
     };
 }
 

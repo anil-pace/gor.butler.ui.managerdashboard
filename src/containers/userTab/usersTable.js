@@ -13,11 +13,11 @@ class UsersTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            header: [{id: 1, text: "USERS", key: 'full_name', sortable: false},
-                {id: 2, text: "STATUS", key: 'status', sortable: false},
-                {id: 3, text: "ROLE", key: 'role', sortable: false},
-                {id: 4, text: "WORKMODE", key: 'role', sortable: false},
-                {id: 5, text: "LOG IN TIME", key: 'role', sortable: false},
+            header: [{id: 1, text: "USERS", key: 'full_name', sortable: true,sortDir:"ASC"},
+                {id: 2, text: "STATUS", key: 'status', sortable: true},
+                {id: 3, text: "ROLE", key: 'role', sortable: true},
+                {id: 4, text: "WORKMODE", key: 'role', sortable: true},
+                {id: 5, text: "LOG IN TIME", key: 'role', sortable: true},
                 {id: 6, text: "ACTIONS", key: 'role', sortable: false},
             ],
             userList:props.data
@@ -60,8 +60,21 @@ class UsersTable extends React.Component {
 
     }
 
-    _onSortChange() {
-
+    _onSortChange(header) {
+        let updated_header = this.state.header.map(function (hdr) {
+            if (header.id === hdr.id) {
+                hdr.sortDir = hdr.sortDir === 'asc' ? 'desc' : 'asc'
+            } else {
+                hdr.sortDir = ''
+            }
+            return hdr
+        })
+        let updated_list=this.state.userList.sort(function(a, b){
+            if(a[header.key].toLowerCase() < b[header.key].toLowerCase()) return header.sortDir==='asc'?-1:1;
+            if(a[header.key].toLowerCase() > b[header.key].toLowerCase()) return header.sortDir==='asc'?1:-1;
+            return 0;
+        })
+        this.setState({header: updated_header,userList:updated_list})
     }
 
     componentWillReceiveProps(nextProps){
@@ -77,19 +90,19 @@ class UsersTable extends React.Component {
                 <GTable>
                     <GTableHeader>
 
-                        <GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[0]} onClick={self._onSortChange.bind(self, this.state.header[0])}>
                             <span>{this.props.data.length} USERS</span>
                         </GTableHeaderCell>
-                        <GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[1]} onClick={self._onSortChange.bind(self, this.state.header[1])}>
                         <span>STATUS</span>
                     </GTableHeaderCell>
-                        <GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[2]} onClick={self._onSortChange.bind(self, this.state.header[2])}>
                         <span>ROLE</span>
                     </GTableHeaderCell>
-                        <GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[3]} onClick={self._onSortChange.bind(self, this.state.header[3])}>
                         <span>WORKMODE</span>
                     </GTableHeaderCell>
-                        <GTableHeaderCell>
+                        <GTableHeaderCell header={self.state.header[4]} onClick={self._onSortChange.bind(self, this.state.header[4])}>
                         <span>LOG IN TIME</span>
                     </GTableHeaderCell>
                         <GTableHeaderCell>
