@@ -135,12 +135,23 @@ export  function auditInfo(state={},action){
               "auditCreationSuccessful": action.data.audit_id ? !state.auditCreationSuccessful : state.auditCreationSuccessful
           }) 
   case SET_AUDIT_EDIT_DATA:
-  let processedDataSKU1 = processValidationDataSKU(action.data,"Edit_Dup");
-          return Object.assign({}, state, {
-               "auditEditData":processedDataSKU1,              //"skuAttributes" : processedDataSKU1,
-              "hasDataChanged":!state.hasDataChanged,
-               "auditSpinner":false
-          })
+  if(action.data && action.data.attributes_list_sets){
+    let processedDataSKU1 = processValidationDataSKU(action.data,"Edit_Dup");
+    return Object.assign({}, state, {
+         "auditEditData":processedDataSKU1,              
+        "hasDataChanged":!state.hasDataChanged,
+         "auditSpinner":false
+    })
+  }else
+  {
+    let processedData = processValidationData(action.data,"Edit_Dup")//(action.data)
+    return Object.assign({}, state, { 
+      "locationAttributes":processedData, 
+         "hasDataChanged":!state.hasDataChanged,
+         "auditValidationSpinner":false
+       })
+  }
+
                    
     default:
       return state
@@ -230,19 +241,19 @@ for(let a=0,len=attrSet.length;a<len;a++){
     processedData.push(tuple)
     
   }
-  
   return {
-    data:processedData,
+   data:processedData,
+   
     totalValid,
     totalInvalid,outerObj,
     totalSKUs:totalValid+totalInvalid
   };
 }
 
-function processValidationData(data){
-
-var processedData=[],
-msuList = data.msu_list,
+function processValidationData(data,param){
+  var processedData=[],totalValid=0,totalInvalid=0;
+if(param!=="Edit_Dup"){
+  var msuList = data.msu_list,
 statusList = data.status,totalValid=0,totalInvalid=0,
 indSlotList = data.individual_slot_list;
 
@@ -275,8 +286,20 @@ indSlotList.map(function(value,i){
   processedData.push(tuple)
   
 })
-
-
+}
+else{
+var arr= data.locations_list;
+processedData=[];
+for(var i=0,len=arr.length;i<len;i++){
+  var objLoc={
+    'name':arr[i],
+    'status':true
+  }
+  totalValid++;
+  processedData.push(objLoc);
+}
+totalInvalid=0;
+}
 return {
     data:processedData,
     totalValid,

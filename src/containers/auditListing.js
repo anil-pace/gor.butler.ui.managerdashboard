@@ -154,7 +154,6 @@ class AuditTab extends React.Component {
             this._subscribeData();
             
             this._refreshList(nextProps.location.query,nextProps.auditSortHeaderState.colSortDirs);
-        
         }
     }
     _handelClick(field) {
