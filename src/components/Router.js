@@ -88,7 +88,7 @@ class Routes extends React.Component {
     }
 
     _refreshPage(nextState, replace) {
-        if (localStorage.getItem('auth_token')) {
+        if (sessionStorage.getItem('auth_token')) {
             this._requireAuth.call(this, nextState, replace);
         }
 
