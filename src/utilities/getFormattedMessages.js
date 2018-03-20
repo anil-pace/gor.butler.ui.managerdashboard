@@ -40,7 +40,17 @@ export function getFormattedMessages(action,values){
                                    defaultMessage='GRN History Refreshed!' />);
 			case "reprtsRefreshed":
 			return (<FormattedMessage id="utility.downloadReprt.refreshed" description='Reports History Refreshed!'
-                                   defaultMessage='Reports History Refreshed!' />);
+								   defaultMessage='Reports History Refreshed!' />);
+			
+								   case "EDITED":
+			return 	(<FormattedMessage id="audit.edit.success" description='Audit edited success'
+			defaultMessage='Audit {id} updated successfully' values={values}/>);
+			break;
+		
+			case "DUPLICATED":
+			return 	(<FormattedMessage id="audit.duplicate.success" description='Audit duplicate success'
+			defaultMessage='Audit {id} successfully duplicated' values={values}/>);
+			break;
 			
 			default:
 			return null;
