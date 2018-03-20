@@ -10,10 +10,11 @@ import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/t
 import {setButlerFilterSpinner}  from '../../actions/spinnerAction';
 import {hashHistory} from 'react-router';
 
-class MsuConfigFilter extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
+
+class ButlerBotFilter extends React.Component{
+    constructor(props) 
+    {
+        super(props);
         this.state={tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
                       defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
         this._closeFilter = this._closeFilter.bind(this);
@@ -47,11 +48,12 @@ class MsuConfigFilter extends React.Component{
     _closeFilter() {
         let filterState=!this.props.showFilter;
         this.props.showTableFilter(filterState);
-    }	
+    }   
 
     _processButlerSearchField(){
-        const temp=[{value:"BOT ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage="BOT ID"/>}, 
-                    {value:"SPECIFIC LOCATION/ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage="SPECIFIC LOCATION/ZONE"/>}];
+        //const temp=[{value:"MSU ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage="MSU ID"/>}, 
+                    //{value:"SPECIFIC LOCATION/ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage="SPECIFIC LOCATION/ZONE"/>}];
+        const temp=[{value:"MSU ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -61,10 +63,13 @@ class MsuConfigFilter extends React.Component{
         let tokenFieldC1={value:"STATUS", label:<FormattedMessage id="butletbot.tokenfield.STATUS" defaultMessage="STATUS"/>};
         let tokenFieldC2={value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage="MODE"/>}; 
         const labelC1=[
-                    { value: 'any', label:<FormattedMessage id="butletbot.token1.all" defaultMessage="Any"/> },
-                    { value: 'error', label:<FormattedMessage id="butletbot.token1.error" defaultMessage="Error"/> },
-                    { value: 'online', label:<FormattedMessage id="butletbot.token1.Online" defaultMessage="Online"/> },
-                    { value: 'offline', label:<FormattedMessage id="butletbot.token1.Offline" defaultMessage="Offline"/> }
+                    { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> },
+                    { value: 'typeA', label:<FormattedMessage id="msuConfig.token1.typeA" defaultMessage="Type A"/> },
+                    { value: 'typeB', label:<FormattedMessage id="msuConfig.token1.typeB" defaultMessage="Type B"/> },
+                    { value: 'typeC', label:<FormattedMessage id="msuConfig.token1.typeC" defaultMessage="Type C"/> },
+                    { value: 'typeD', label:<FormattedMessage id="msuConfig.token1.typeD" defaultMessage="Type D"/> },
+                    { value: 'typeE', label:<FormattedMessage id="msuConfig.token1.typeE" defaultMessage="Type E"/> },
+                    { value: 'typeF', label:<FormattedMessage id="msuConfig.token1.typeF" defaultMessage="Type F"/> }
                     ];
         const labelC2=[
                     { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage="Any"/> },
@@ -75,9 +80,10 @@ class MsuConfigFilter extends React.Component{
                     { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
                     ];
         let selectedToken= this.state.tokenSelected;
-        let column1=<FilterTokenWrap field={tokenFieldC2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
-        let column2=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        let columnDetail={column1token:column1, column2token:column2};
+        let column1=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        //let column2=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
+        //let columnDetail={column1token:column1, column2token:column2};
+        let columnDetail={column1token:column1};
         return columnDetail;
     }
 
@@ -97,8 +103,8 @@ class MsuConfigFilter extends React.Component{
         if (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]) {
             _query.location=filterState.searchQuery["SPECIFIC LOCATION/ZONE"]
         }
-        if (filterState.searchQuery["BOT ID"]) {
-            _query.butler_id=filterState.searchQuery["BOT ID"]
+        if (filterState.searchQuery["MSU ID"]) {
+            _query.butler_id=filterState.searchQuery["MSU ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
@@ -114,37 +120,34 @@ class MsuConfigFilter extends React.Component{
         this.props.butlerfilterState({
             tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {
                 "SPECIFIC LOCATION/ZONE":null,
-                "BOT ID":null
+                "MSU ID":null
             },
         });
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
         
     }
-
-
-    
     
 
-    
-
-	render(){
+    render(){
     let butlerDetails=this.props.butlerDetail;
-         let noOrder=this.props.noResultFound;
+        let noOrder=this.props.noResultFound;
         let butlerSearchField=this._processButlerSearchField();
         let butlerFilterToken=this._processFilterToken();
-		return (
-			<div>
+        return (
+            <div>
                  <Filter>
                 <div className="gor-filter-header">
                     <div className="gor-filter-header-h1">
                          <FormattedMessage id="gor.filter.filterLabel" description="label for filter" defaultMessage="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter}>
-                        <FormattedMessage id="gor.filter.hide" description="label for hide" defaultMessage="Hide"/>
+                        <FormattedMessage id="gor.filter.hide" description="label for hide" 
+                            defaultMessage="Hide"/>
                     </div>
                  </div>
                     <div>{noOrder?
-                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" defaultMessage="No results found, please try again"/></div>:""}
+                            <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
+                            defaultMessage="No results found, please try again"/></div>:""}
                     </div>
                      <div className="gor-filter-body">
                          <div className="gor-filter-body-input-wrap"> 
@@ -178,8 +181,8 @@ class MsuConfigFilter extends React.Component{
                  </div>
                 </Filter>
             </div>
-		);
-	}
+        );
+    }
 };
 
 
@@ -207,18 +210,18 @@ var mapDispatchToProps=function(dispatch){
     setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
   } 
 };
-MsuConfigFilter.PropTypes={
-  butlerDetail: React.PropTypes.array,
-showFilter: React.PropTypes.bool,
-wsSubscriptionData:React.PropTypes.object,
-filterState: React.PropTypes.object,
-isFilterApplied:React.PropTypes.bool,
-botFilterStatus:React.PropTypes.bool,
-showTableFilter:React.PropTypes.func,
-filterApplied: React.PropTypes.func,
-updateSubscriptionPacket:React.PropTypes.func,
-butlerfilterState:React.PropTypes.func,
-toggleBotButton:React.PropTypes.func
+ButlerBotFilter.PropTypes={
+    butlerDetail: React.PropTypes.array,
+    showFilter: React.PropTypes.bool,
+    wsSubscriptionData:React.PropTypes.object,
+    filterState: React.PropTypes.object,
+    isFilterApplied:React.PropTypes.bool,
+    botFilterStatus:React.PropTypes.bool,
+    showTableFilter:React.PropTypes.func,
+    filterApplied: React.PropTypes.func,
+    updateSubscriptionPacket:React.PropTypes.func,
+    butlerfilterState:React.PropTypes.func,
+    toggleBotButton:React.PropTypes.func
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(MsuConfigFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;

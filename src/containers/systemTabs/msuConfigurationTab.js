@@ -199,7 +199,10 @@ class ButlerBot extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={query:null}
+        this.state={query:null};
+        this._handleRefreshData = this._handleRefreshData.bind(this);
+        this._releaseMSU = this._releaseMSU.bind(this);
+        this._startReconfig = this._startReconfig.bind(this);
     }
 
     componentWillMount() {
@@ -210,6 +213,19 @@ class ButlerBot extends React.Component {
          * update.
          */
         this.props.butlerBotsRefreshed()
+    }
+
+
+    _handleRefreshData = () => {
+        console.log("inside _handleRefreshData function");
+    }
+
+    _releaseMSU = () => {
+        console.log("inside _releaseMSU function");
+    }
+
+    _startReconfig = () => {
+        console.log("inside _startReconfig function");
     }
 
 
@@ -359,9 +375,9 @@ class ButlerBot extends React.Component {
                             <div className="filterWrapper">
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                        <button className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
-                                            <div className="gor-manage-task"/>
+                                    <div className="gor-operations-log">
+                                        <button style={{width: "145px"}} className="gor-rpt-dwnld" onClick={this._handleRefreshData}>
+                                            <div className="gor-refresh-icon"/>
                                             <FormattedMessage id="gor.msuConfig.refreshData" description="button label for refresh data" defaultMessage="REFRESH DATA"/>
                                         </button>
                                     </div>
@@ -369,8 +385,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
-                                            <div className="gor-manage-task"/>
+                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._releaseMSU}>
                                             <FormattedMessage id="gor.msuConfig.releaseMsu" description="button label for release msu" defaultMessage="RELEASE MSU(S)"/>
                                         </button>
                                     </div>
@@ -378,8 +393,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
-                                            <div className="gor-manage-task"/>
+                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._startReconfig}>
                                             <FormattedMessage id="gor.msuConfig.startReconfig" description="button label for start reconfig" defaultMessage="START RECONFIG"/>
                                         </button>
                                     </div>
@@ -388,7 +402,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
+                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
                                             <div className="gor-manage-task"/>
                                             <FormattedMessage id="gor.msuConfig.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
                                         </button>
