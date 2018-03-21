@@ -21,7 +21,12 @@ import FieldError from '../../components/fielderror/fielderror';
 //import UserRoles from './userRoles';
 import {nameStatus, passwordStatus, idStatus} from '../../utilities/fieldCheck';
 import Dropdown from '../../components/dropdown/dropdown';
-import MsuRackFlex from './MsuRackFlex'
+import MsuRackFlex from './msuRackFlex';
+import UtilityDropDown from "../../components/utilityComponents/utilityDropdownWrap";
+
+var xyz = [
+  {"rack_type_rec":[{"barcodes":["A.05","A.06"],"length":32,"orig_coordinates":[0,5],"height":33},{"barcodes":["A.03","A.04"],"length":32,"orig_coordinates":[32,5],"height":33},{"barcodes":["A.01","A.02"],"length":32,"orig_coordinates":[64,5],"height":33},{"barcodes":["B.05","B.06"],"length":32,"orig_coordinates":[0,43],"height":33},{"barcodes":["B.03","B.04"],"length":32,"orig_coordinates":[32,43],"height":33},{"barcodes":["B.01","B.02"],"length":32,"orig_coordinates":[64,43],"height":33},{"barcodes":["C.05","C.06"],"length":32,"orig_coordinates":[0,81],"height":33},{"barcodes":["C.03","C.04"],"length":32,"orig_coordinates":[32,81],"height":33},{"barcodes":["C.01","C.02"],"length":32,"orig_coordinates":[64,81],"height":33},{"barcodes":["D.05","D.06"],"length":32,"orig_coordinates":[0,119],"height":33},{"barcodes":["D.03","D.04"],"length":32,"orig_coordinates":[32,119],"height":33},{"barcodes":["D.01","D.02"],"length":32,"orig_coordinates":[64,119],"height":33},{"barcodes":["E.05","E.06"],"length":32,"orig_coordinates":[0,157],"height":33},{"barcodes":["E.03","E.04"],"length":32,"orig_coordinates":[32,157],"height":33},{"barcodes":["E.01","E.02"],"length":32,"orig_coordinates":[64,157],"height":33}],"slot_type":"slot","rack_width":96,"slot_barcodes":["038.1.B.01","038.1.B.02"]}
+];
 
 class ChangeRackType extends React.Component {
     constructor(props) {
@@ -143,18 +148,15 @@ class ChangeRackType extends React.Component {
 
     render() {
 
-        let pickPerformance=<FormattedMessage id="pickPerformance.dropdown" description="pickPerformance dropdown label" 
-              defaultMessage="PPS Pick Performance"/>
+        let defaultOption=<FormattedMessage id="msuConfig.dropdown" description="pickPerformance dropdown label" defaultMessage="Select destination type"/>
 
-         let putPerformance=<FormattedMessage id="putPerformance.dropdown" description="putPerformance dropdown label" 
-              defaultMessage="PPS Put Performance"/>
+        let putPerformance=<FormattedMessage id="msuConfig.dropdown" description="putPerformance dropdown label" defaultMessage="PPS Put Performance"/>
               
-        let auditPerformance=<FormattedMessage id="auditPerformance.dropdown" description="auditPerformance dropdown label" 
-              defaultMessage="PPS Audit Performance"/>
+        let auditPerformance=<FormattedMessage id="msuConfig.dropdown" description="auditPerformance dropdown label" defaultMessage="PPS Audit Performance"/>
               
 
         const item=[
-                  { value: 'PPS_PICK_PERFORMANCE', label: pickPerformance },
+                  { value: 'Select destination type', label: defaultOption },
                   { value: 'PPS_PUT_PERFORMANCE', label: putPerformance },
                   { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
         ];
@@ -162,126 +164,70 @@ class ChangeRackType extends React.Component {
 
         let tick=(<div className='gor-tick'/>);
         return (
-            <div>
-                <div className="gor-modal-content">
-                    <div className='gor-modal-head'>
+            <div style={{marginTop:"15vh"}}>
+                <div className="gor-smmodal-content">
+                    <div className='gor-smmodal-head'>
                         <div className='gor-usr-add'><FormattedMessage id="msuConfig.add.heading" description='Heading for change rack type' defaultMessage='Change destination type'/>
-                            {/*<div className='gor-sub-head'><FormattedMessage id="users.add.subheading"
-                                                                            description='Subheading for add new user'
-                                                                            defaultMessage='All the fields are mandatory'/>
-                            </div>*/}
+                            
                         </div>
                         <span className="close" onClick={this.removeThisModal.bind(this)}>×</span>
                     </div>
-                    <div className='gor-modal-body'>
-
-                        
-
-
-                        <form action="#" id="addUserForm" ref={node=> {
-                            this.addUserForm=node
-                        }}
-                              onSubmit={(e)=> this._handleAddUser(e)}>
-                            <div className='gor-usr-form'>
-                                
-                                <div style={{width: "50%"}} className='gor-usr-details'>
-
-                                    <div className="sourceWrapper" style={{width: "48%", float: "left", border: "1px solid red", height:"300px"}}>
-                                        <div className="sourceTypeHeading">
-                                            <FormattedMessage id="msuConfig.sourceType.heading" description='Heading for source type' defaultMessage='Source Type: B'/>
-                                        </div>
-
-                                        <MsuRackFlex />
-
-                                    </div>
-
-                                    <div className="destWrapper" style={{width: "48%", float: "left", border: "1px solid red", height:"300px"}}>
-                                        <div style={{width: "100%"}} className="Order-Stats-Drop">
-                                            <Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
-                                        </div>
-
-                                    </div>
-                                    
-
-                                    <div className='gor-usr-hdlg'><FormattedMessage id="users.add.userdetails.heading"
-                                                                                    description='Text for user details heading'
-                                                                                    defaultMessage='Enter User details'/>
-                                    </div>
-                                    <div className='gor-sub-head'><FormattedMessage
-                                        id="users.add.userdetails.subheading"
-                                        description='Text for user details subheading'
-                                        defaultMessage='A User ID will be required to log into the system'/></div>
-
-                                    <div className='gor-usr-hdsm'><FormattedMessage id="users.add.userdetails.userid"
-                                                                                    description='Text for user id'
-                                                                                    defaultMessage='User ID'/></div>
-                                    <input
-                                        className={"gor-usr-fdlg" + (this.props.idCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
-                                        type="text" onBlur={this._checkId.bind(this)} id="userid" ref={node=> {
-                                        this.userId=node
-                                    }}/>
-                                    {this.props.idCheck.type ? tick : ((this.props.idCheck.type=== ERROR) ?
-                                        <FieldError txt={this.props.idCheck.msg}/> : '')}
-
-
-                                    
-                                    
-
+                    <div className='gor-smmodal-body'>
+                        <div className='gor-body-content'>
+                            <div className="sourceWrapper">
+                                <div className="sourceTypeHeading">
+                                    <FormattedMessage id="msuConfig.sourceType.heading" description='Heading for source type' defaultMessage='Source Type: B'/>
                                 </div>
 
-                                
-
-                                <div className='gor-usr-details'>
-                                    <div className='gor-usr-hdlg'><FormattedMessage id="users.add.password.heading"
-                                                                                    description='Heading for create password'
-                                                                                    defaultMessage='Create password'/>
-                                    </div>
-                                    <div className='gor-sub-head'>
-                                        {pwdDesc.hasOwnProperty(this.props.roleSet) ?
-                                            this.context.intl.formatMessage(pwdDesc[this.props.roleSet]) :
-                                            this.context.intl.formatMessage(pwdDesc[BUTLER_UI])}
-                                    </div>
-
-                                    <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field1"
-                                                                                    description='Text for password'
-                                                                                    defaultMessage='Password'/></div>
-                                    <input
-                                        className={"gor-usr-fdlg" + (this.props.passwordCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
-                                        type="password" id="pswd"
-                                        onBlur={(this.props.passwordCheck.type=== ERROR || this.props.passwordCheck.type=== SUCCESS) ? this._checkPwd.bind(this) : ''}
-                                        ref={node=> {
-                                            this.pswd=node
-                                        }}/>
-                                    {this.props.passwordCheck.type ? tick : ''}
-
-                                    <div className='gor-usr-hdsm'><FormattedMessage id="users.add.password.field2"
-                                                                                    description='Text for confirm password'
-                                                                                    defaultMessage='Confirm Password'/>
-                                    </div>
-                                    <input
-                                        className={"gor-usr-fdlg" + (this.props.passwordCheck.type=== ERROR ? ' gor-input-error' : ' gor-input-ok')}
-                                        type="password" id="confirmPswd" onChange={this._checkPwd.bind(this)}
-                                        ref={node=> {
-                                            this.confirmPswd=node
-                                        }}/>
-                                    {this.props.passwordCheck.type=== SUCCESS ? tick : ((this.props.passwordCheck.type=== ERROR) ?
-                                        <FieldError txt={this.props.passwordCheck.msg}/> : '')}
-
+                                <div className="rackWrapper">
+                                    <MsuRackFlex rackDetails={xyz[0].rack_type_rec} slotBarcodes={xyz[0].slot_barcodes} rackWidth={xyz[0].rack_width} />
+                                    {/*<MsuRackFlex rackDetails={this.props.rackData.rack_type_rec} slotBarcodes={this.props.rackData.slot_barcodes} rackWidth={this.props.rackData.rack_width} putDirectionFlex={this.props.putDirection} />*/}
                                 </div>
-                                <p className='gor-submit'>
-                                    <button type="submit" className="gor-add-btn"><FormattedMessage
-                                        id="users.add.password.button" description='Text for add new user button'
-                                        defaultMessage='Add new user'/></button>
-                                </p>
+
                             </div>
-                        </form>
 
+                            <div className="destWrapper">
+
+                                {/*<UtilityDropDown
+                                      items={modes}
+                                      dropdownLabel={this.context.intl.formatMessage(
+                                        messages.downloadRprtsCategoryLabel
+                                      )}
+                                      placeHolderText={this.context.intl.formatMessage(
+                                        messages.downloadRprtsCategoryPlchldr
+                                      )}
+                                      changeMode={this._changeReportCategory.bind(this)}
+                                      currentState={currentCategoryState}
+                                    />*/}
+                                <div style={{width: "100%"}} className="Order-Stats-Drop">
+                                    <Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
+                                </div>
+
+                                <div className="rackWrapper">
+                                    <MsuRackFlex rackDetails={xyz[0].rack_type_rec} slotBarcodes={xyz[0].slot_barcodes} rackWidth={xyz[0].rack_width} />
+                                    {/*<MsuRackFlex rackDetails={this.props.rackData.rack_type_rec} slotBarcodes={this.props.rackData.slot_barcodes} rackWidth={this.props.rackData.rack_width} putDirectionFlex={this.props.putDirection} />*/}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="gor-smmodal-footer">
+                        <div className="gor-footer-msg">
+                             <span> Select a destination type in order to block put. </span>
+                        </div>
+                        <div className="gor-button-wrap">
+                            <button className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._releaseMSU}>
+                                <FormattedMessage id="gor.msuConfig.blockPutChangeType" description="button label for block put & change type" defaultMessage="BLOCK PUT AND CHANGE TYPE"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+
 ChangeRackType.contextTypes={
     intl: React.PropTypes.object.isRequired
 }

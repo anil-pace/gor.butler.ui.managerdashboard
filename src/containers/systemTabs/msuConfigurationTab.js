@@ -27,6 +27,7 @@ import MsuConfigFilter from './msuConfigFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {modal} from 'react-redux-modal';
 import ChangeRackType from './changeRackType';
+import MsuRackFlex from './msuRackFlex';
 //Mesages for internationalization
 const messages=defineMessages({
     butlerPrefix: {
@@ -428,6 +429,9 @@ class ButlerBot extends React.Component {
                             refreshList={this._clearFilter.bind(this)}
                             refreshText={<FormattedMessage id="msuConfig.filter.search.bar.showall" description="button label for show all" defaultMessage="Show all MSUs"/>}/></div>:null}
 
+                        
+                        {/*
+                            <MsuRackFlex rackDetails={this.props.rackData.rack_type_rec} slotBarcodes={this.props.rackData.slot_barcodes} rackWidth={this.props.rackData.rack_width} putDirectionFlex={this.props.putDirection} />
                         <ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}
                                         intlMessg={this.props.intlMessages}
                                         sortHeaderState={this.props.butlerHeaderSort}
@@ -445,6 +449,7 @@ class ButlerBot extends React.Component {
                                         butlerState={this.props.filterState}
                                         refreshList={this._clearFilter.bind(this)}
                         />
+                    */}
                     </div>
                 </div>
             </div>

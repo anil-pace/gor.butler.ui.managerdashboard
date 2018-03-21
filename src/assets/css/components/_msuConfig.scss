@@ -1,0 +1,169 @@
+.gor-smmodal-content{
+    border-radius: 0.5%;
+    margin-top: 15vh; 
+    width: 55vw;
+    background: #fff;
+    margin: 0 auto;
+    .gor-smmodal-head{
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #666666;
+
+        .gor-usr-add{
+            padding-left: 5%;
+            font-size: 1.5rem;
+        }
+        .close{
+            margin-right: 2%;
+            background: #f2f2f2;
+            color: #AAAAAA;
+            float: right;
+            text-align: center;
+            font-size: 28px;
+            width: 30px;
+            height: 30px;
+            padding: 10px;
+            border-radius: 50%;
+        }
+    }
+    .gor-smmodal-body{
+        margin: auto;
+        // margin-top: 40px;
+        height: 60vh;
+        border-bottom: 1px solid #666666;
+        width: 100%;
+
+        .gor-body-content{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            .sourceWrapper{
+                 height: 100%;
+                 width: 50%;
+                 .sourceTypeHeading{
+                    height: 15%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+
+                .rackWrapper{
+                    height: 85%;
+
+                    .parent-container{
+                        width: 100%;
+                        height: 85%; //earlier not there
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .slotsFlexContainer{
+                            display: flex;
+                            flex-flow:column;
+                            height: 85%;
+                            width: 70%;
+                            //width: 50%;
+                            background: #979797;
+                            position: relative;
+                            float: left;
+                            .subSlot{
+                                position: absolute;
+                            }       
+                            .legsSpaceContainer{
+                                position: relative; //position: absolute;
+                                top: 100%; 
+                                height: 20%;//height: 15vh; 
+                                //width: 100%;
+                                margin-left: 0%;
+                                border-left: 0.625vw solid #939598;
+                                border-right: 0.625vw solid #939598;
+                            }
+                          
+                        }
+
+                    }
+
+                }
+            }
+
+            .destWrapper{
+                height: 100%;
+                 width: 50%;
+                .Order-Stats-Drop{
+                    height: 15%;
+                    width: 100%;
+                    display:flex;
+                    align-items:center;
+                    justify-content: center;
+                    max-width: 100%;
+                    .ddown{
+                        border: 1px solid #888888;
+                        .Dropdown-control{
+                            background: transparent;
+                        }
+                    }
+                }
+                .rackWrapper{
+                    height: 85%;
+
+                    .parent-container{
+                        width: 100%;
+                        height: 85%; //earlier not there
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .slotsFlexContainer{
+                            display: flex;
+                            flex-flow:column;
+                            height: 85%;
+                            width: 70%;
+                            //width: 50%;
+                            background: #979797;
+                            position: relative;
+                            float: left;
+                            .subSlot{
+                                position: absolute;
+                            }       
+                            .legsSpaceContainer{
+                                position: relative; //position: absolute;
+                                top: 100%; 
+                                height: 20%;//height: 15vh; 
+                                //width: 100%;
+                                margin-left: 0%;
+                                border-left: 0.625vw solid #939598;
+                                border-right: 0.625vw solid #939598;
+                            }
+                          
+                        }
+
+                    }
+
+                }
+            }
+        }
+    }
+    .gor-smmodal-footer{
+        height: 10vh;
+        display:flex;
+        align-items: center;
+        justify-content:space-between;
+        .gor-footer-msg{
+            padding-left: 5%;
+        }
+        .gor-button-wrap{
+            padding-right: 5%;
+        }
+    }
+}
+
+
+
+    
+
+    
+
+

@@ -1,179 +1,47 @@
-//var React = require('react');
 import React from 'react';
 
-var xyz = [
-  {
-  "rack_type_rec":[
-    {
-      "height": "10",
-      "orig_coordinates": [
-        0,
-        5
-      ],
-      "length": "32",
-      "barcodes":["A.01", "A.02"]
-    },
-    {
-      "height": "33",
-      "orig_coordinates": [
-        32,
-        5
-      ],
-      "length": "32",
-      "barcodes":["N.01", "N.02", "N.03"]
-    },
-    {
-      "height": "20",
-      "orig_coordinates": [
-        64,
-        5
-      ],
-      "length": "32",
-      "barcodes":["M.01", "M.02"]
-    },
-    {
-      "height": "33",
-      "orig_coordinates": [
-        0,
-        43
-      ],
-      "length": "32",
-      "barcodes":["L.01", "L.02"]
-    },
-    {
-      "height": "20",
-      "orig_coordinates": [
-        32,
-        43
-      ],
-      "length": "32",
-      "barcodes":["K.01", "K.02"]
-    },
-    {
-      "height": "33",
-      "orig_coordinates": [
-        64,
-        43
-      ],
-      "length": "32",
-      "barcodes":["J.01", "J.02"]
-    },
-    {
-      "height": "33",
-      "orig_coordinates": [
-        0,
-        81
-      ],
-      "length": "32",
-      "barcodes":["I.01", "I.02"]
-    },
-    {
-      "height": "20",
-      "orig_coordinates": [
-        32,
-        81
-      ],
-      "length": "32",
-      "barcodes":["H.01", "H.02"]
-    },
-    {
-      "height": "10",
-      "orig_coordinates": [
-        64,
-        81
-      ],
-      "length": "32",
-      "barcodes":["G.01", "G.02"]
-    },
-    {
-      "height": "18",
-      "orig_coordinates": [
-        0,
-        20
-      ],
-      "length": "32",
-      "barcodes":["F.01", "F.02"]
-    },
-    {
-      "height": "8",
-      "orig_coordinates": [
-        32,
-        68
-      ],
-      "length": "32",
-      "barcodes":["E.01", "E.02"]
-    },
-    {
-      "height": "8",
-      "orig_coordinates": [
-        32,
-        106
-      ],
-      "length": "32",
-      "barcodes":["D.01", "D.02"]
-    },
-    {
-      "height": "18",
-      "orig_coordinates": [
-        64,
-        96
-      ],
-      "length": "32",
-      "barcodes":["C.01", "C.02"]
-    },
-    {
-      "height": "8",
-      "orig_coordinates": [
-        64,
-        30
-      ],
-      "length": "32",
-      "barcodes":["B.01", "B.02"]
+
+class MsuRackFlex extends React.Component {
+
+    constructor(props) {
+          super(props);
+          this.state = this._getMaxXMaxYCoords(this.props.rackDetails);
     }
-    ]
-  },
-  {"slot_barcodes":["003.1.N.01", "003.1.N.02", "003.1.N.03"]}
-];
 
-var MsuRackFlex = React.createClass({
-
-    getInitialState: function(){
-      return this._getMaxXMaxYCoords(xyz.rack_type_rec);
-    },
-    componentWillReceiveProps: function() {
-      this._getMaxXMaxYCoords(xyz.rack_type_rec);
-    },
-
-    componentDidUpdate:function(){
+    componentWillReceiveProps(nextProps) {
+        this._getMaxXMaxYCoords(this.props.rackDetails);
+    }
+      
+    componentDidMount() {
       /*
           Calling the line function only if the drawerLineDrawn is false 
           and the slot type is drawer.
           drawerLineDrawn is set true once the line is created
        */
 
-       var lines = document.getElementsByClassName("connectingLine");
-       if(lines.length===0){
-          var strEl = document.querySelectorAll("#selectedSlot")[0];
-          strEl = strEl ? strEl.parentNode : null;
-          var endEl  = document.querySelectorAll("#slotDisplayArea")[0];
-          if(strEl && endEl){
-           this.connect(strEl, endEl, "#626262", 3);
-          }
-      }
-    },
+      //  var lines = document.getElementsByClassName("connectingLine");
+      //  if(lines.length===0){
+      //     var strEl = document.querySelectorAll("#selectedSlot")[0];
+      //     strEl = strEl ? strEl.parentNode : null;
+      //     var endEl  = document.querySelectorAll("#slotDisplayArea")[0];
+      //     if(strEl && endEl){
+      //      this.connect(strEl, endEl, "#626262", 3);
+      //     }
+      // }
+    }
 
-    componentWillUnmount:function(){
+    componentWillUnmount(){
       var lines = document.getElementsByClassName("connectingLine");
       if(lines.length){
         lines[0].remove();
       }
-    },
+    }
 
-    _getMaxXMaxYCoords:function (vSlots){
+    _getMaxXMaxYCoords(vSlots){
       if (!vSlots || (vSlots.constructor !== Array && vSlots.length < 1)){
         //no slots found
         return;
-      }
+    }
 
       var totalSlots = vSlots.length;
       var totalWidth =0, totalHeight=0;
@@ -184,17 +52,18 @@ var MsuRackFlex = React.createClass({
       var newBarcodes = []; // for storing post data manipulation
       var selectedSlotIds = "";
 
-      // this.props.slotBarcodes.map(function(slotBarcodes,idx){
-      //     var str = slotBarcodes,
-      //     delimiter = '.',
-      //     start = 2,
-      //     tokens = str.split(delimiter).slice(start);
-      //     if(tokens.length > 1) result = tokens.join("."); //take extra care when we have 3rd "." as delimiter
-      //     else result = tokens.toString();
+      this.props.slotBarcodes.map(function(slotBarcodes,idx){
+          var str = slotBarcodes,
+          delimiter = '.',
+          start = 2,
+          result,
+          tokens = str.split(delimiter).slice(start);
+          if(tokens.length > 1) result = tokens.join("."); //take extra care when we have 3rd "." as delimiter
+          else result = tokens.toString();
 
-      //     newBarcodes.push(result);
-      // });
-      // selectedSlotIds = newBarcodes.join(', ');
+          newBarcodes.push(result);
+      });
+      selectedSlotIds = newBarcodes.join(', ');
     
 
       vSlots.map(function(eachSlot, index){
@@ -234,9 +103,9 @@ var MsuRackFlex = React.createClass({
           selectedSlotIndex: selectedSlotIndex,
           selectedSlotIds: selectedSlotIds
       }
-    },
+    }
 
-    connect:function(startEl, endEl, color, thickness) {
+    connect(startEl, endEl, color, thickness) {
       var off1 = this.getOffset(startEl);
       var off2 = this.getOffset(endEl);
       // bottom right
@@ -256,7 +125,7 @@ var MsuRackFlex = React.createClass({
 
       var htmlLine = "<div class='connectingLine' style='padding:0px; margin:0px; height:" + thickness + "px; background-color:" + color + "; line-height:1px; position:absolute; left:" + cx + "px; top:" + cy + "px; width:" + length + "px; -moz-transform:rotate(" + angle + "deg); -webkit-transform:rotate(" + angle + "deg); -o-transform:rotate(" + angle + "deg); -ms-transform:rotate(" + angle + "deg); transform:rotate(" + angle + "deg);' />";
       document.getElementById('app').innerHTML += htmlLine; 
-    },
+    }
 
     getOffset( el ) {
       var rect = el.getBoundingClientRect();
@@ -266,8 +135,9 @@ var MsuRackFlex = React.createClass({
           width: rect.width || el.offsetWidth,
           height: rect.height || el.offsetHeight
       };
-    },
-    _createSlotLayouts: function(vSlots, lastHSlot, lastVSlot, selectedSlotIndex, selectedSlotIds) {
+    }
+
+      _createSlotLayouts(vSlots, lastHSlot, lastVSlot, selectedSlotIndex, selectedSlotIds) {
         if ((vSlots.constructor !== Array && vSlots.length < 1) || !(lastHSlot.length) || !(lastVSlot.length)){
             //no bins found
             return;
@@ -345,9 +215,9 @@ var MsuRackFlex = React.createClass({
           //attach legs to Rack
           vHTMLSlots.push(<div key={"legsSpaceContainer"} className="legsSpaceContainer"> </div>);
         return vHTMLSlots;
-    },
+    }
 
-    render: function() {
+    render() {
       var orientationClass,stackText,count,stackCount,fragileClass,stackClass,nestable_count,nestable_direction,stackicon;
       var putDirection = this.props.putDirectionFlex;
       var vHTMLSlots = this._createSlotLayouts(this.state.vSlots,
@@ -381,34 +251,14 @@ var MsuRackFlex = React.createClass({
 
     // }
       return(
-        <div  className="parent-container">
-        <div className="slotsFlexContainer">
-            {vHTMLSlots}
-
-       </div>
-        <div className="right-container">
-          <div id="slotDisplayArea" className="slotDisplayArea">
-              <img style={{paddingLeft:"5%"}} src='./assets/images/slot.png'></img>
-              <span style={{marginLeft:"8%"}}>{"SLOT " + this.state.selectedSlotIds}</span>
-            </div>
-            {putDirection?(
-                <div className="specialContainer">
-                {/*<img className={orientation} src={orientationClass}></img> */}  
-                <div className={stackClass}>
-                        <span className={stackicon}></span>
-                        <span className="stackText">{stackText}</span>
-                        <span className="stackCount">{count}</span>
-                </div> 
-                 {/*<div className={fragileClass}>
-                        <span className="fragileicons"></span>
-                        <span className="fragileText">{_("FRAGILE")}</span>  
-                 </div> */}
-                 </div>
-):""}
-            </div>
- </div>
+        <div  style={{width: "100%"}} className="parent-container">
+          <div className="slotsFlexContainer">
+              {vHTMLSlots}
+         </div>
+      </div>
       );
     }
-});
+};
 
-module.exports = MsuRackFlex;
+//module.exports = MsuRackFlex;
+export default MsuRackFlex;
