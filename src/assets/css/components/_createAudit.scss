@@ -1,6 +1,6 @@
 .gor-audit-create{
   .audit-sub-footer{
-    padding: 12px 0;
+    padding: 30px 0;
     input{
       margin:0;
     }
@@ -105,7 +105,7 @@
     position:static;
   }
   .gor-audit-form{
-    width:45%;
+    width:33%;
     margin:auto;
   }
   .audit-index{
@@ -133,7 +133,7 @@
   .tab{
     display:inline-block;
     text-align:center;
-    padding:15px 20px;
+    padding:12px 20px;
     color:#666666;
     width:46%;
     cursor:pointer;
@@ -214,8 +214,8 @@
     display:inline-block;
     border-bottom: solid 1px #dddddd;
     border-top: solid 1px #dddddd;
-    padding-bottom: 8px;
-    padding-top:8px;
+    padding-bottom: 10px;
+    padding-top:10px;
     width:100%;
     background-color:#ffffff;
 }
@@ -295,8 +295,8 @@
 }
 
 .gor-audit-input-wrap {
-    width: 50%;
-    padding:7px 5px;
+    width: 39%;
+    padding:1px 12px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
@@ -371,6 +371,7 @@
   background-color: #FBFBFB;
     padding-bottom:10px;
     border-top:1px solid #DDDDDD;
+    margin-top:12px;
 }
 
 .gor-audit-name-wrap {
@@ -577,7 +578,7 @@
   margin-left:10px;
   font-weight:600;
   font-family: 'Source Sans Pro';
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -623,7 +624,7 @@
 .gor-create-audit-btn{
     font-family:'Source Sans Pro';
     font-weight:bold;
-    min-width:133px;
+    min-width:120px;
     height:35px;
     font-size:14px;
     margin-top:10px;
@@ -660,8 +661,7 @@
   font-size:14px;
   font-weight: 600;
   color:#333333;   
-  margin-top:25px; 
-  display:inline-block;
+  margin-top:25px;
   width:40%;
 }
 
@@ -711,7 +711,7 @@
       border-radius: 50%;
       display: inline-block;
       height: 25px;
-      line-height: 22px;
+      line-height: 24px;
       width: 25px;
       color: #fff;
       text-decoration: none;
@@ -726,11 +726,11 @@
   .active{
     background:none;
     border:none;
-    border-bottom: 5px solid #659AF6;
+    border-bottom: 5px solid #419BF9;
     box-sizing:border-box;
-    color:#666666;
+    color:#333333;
     .sub-tab-index{
-     background: #659AF6;
+     background: #419BF9;
       
     }
   }

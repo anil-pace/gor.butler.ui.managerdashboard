@@ -831,6 +831,7 @@ class CreateAudit extends React.Component{
   render()
   {
       let self=this;
+      let enterSkuMessg=<FormattedMessage id="audit.enterSku.text" description='text for enter sku' defaultMessage='Enter SKU and validate'/>;
       let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
@@ -921,7 +922,7 @@ class CreateAudit extends React.Component{
                                
             <div className={`sku-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
             <GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 :1} disabledTabIndex={validationDoneSKU ? 0 :1} tabClass={"sub-tabs-audit"}>
-            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{enterSkuMessg}</span>} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'}  >
           {!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
               <div>
@@ -942,7 +943,7 @@ class CreateAudit extends React.Component{
               }) }
                <div>
                       <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                        defaultMessage='+ ADD NEW'/></button>
               </div>
                </div>
 
@@ -1027,7 +1028,7 @@ class CreateAudit extends React.Component{
               )}
                {!validationDoneSKU && <div>
                       <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                        defaultMessage='+ ADD NEW'/></button>
               </div>}
                </div>
 
@@ -1042,7 +1043,7 @@ class CreateAudit extends React.Component{
 
               {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}</button>
+                        defaultMessage='VALIDATE'/>}</button>
               </div>}
                
                   </div>
@@ -1125,7 +1126,7 @@ class CreateAudit extends React.Component{
               
                <div>
     <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                        defaultMessage='+ ADD NEW'/></button>
                         </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
@@ -1187,7 +1188,7 @@ class CreateAudit extends React.Component{
               })}
             <div>
             <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                        defaultMessage='+ ADD NEW'/></button>
                         </div>
                         
               </div>
@@ -1196,7 +1197,7 @@ class CreateAudit extends React.Component{
                 <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
                 <label>
                 {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}
+                        defaultMessage='VALIDATE'/>}
                         
             
             </label>
@@ -1259,7 +1260,7 @@ class CreateAudit extends React.Component{
             </div>
             <div className={"audit-footer"}>
              <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
+            defaultMessage='CREATE AUDIT'/></button>
             </div>
             </div>
           </div>
