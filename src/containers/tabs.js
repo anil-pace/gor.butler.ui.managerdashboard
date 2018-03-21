@@ -10,7 +10,7 @@ import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
 import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT,AUDITLISTING} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE,ANALYTICS,AUDITLISTING} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import OperationPause from '../containers/emergencyProcess/OperationPause';
@@ -162,7 +162,7 @@ class Tabs extends React.Component{
   _parseStatus()
   {
     let overview,system,neworder, newordersClass, newordersStatus,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
-        inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
+        inventory,audit,analytics,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
     offline=<FormattedMessage id="tabs.offline" description="offline" 
@@ -188,7 +188,9 @@ class Tabs extends React.Component{
     utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
               defaultMessage="UTILITIES"/>;   
     reports= <FormattedMessage id="reports.tab.heading" description="reports tab" 
-              defaultMessage="REPORTS"/>;      
+              defaultMessage="REPORTS"/>;  
+    analytics =     <FormattedMessage id="analytics.tab.heading" description="reports tab" 
+              defaultMessage="ANALYTICS"/>;  
 
     newaudit= <FormattedMessage id="newaudit.tab.heading" description="new audit tab" 
               defaultMessage="NEW AUDIT"/>;             
@@ -277,6 +279,7 @@ class Tabs extends React.Component{
            auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
            systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
            auditIcon:auditIcon, utilities:utilities,
+           analytics:analytics,
            newaudit:newaudit, newauditStatus:newauditStatus, newauditClass:newauditClass, newauditIcon:newauditIcon
          };
 
@@ -389,6 +392,9 @@ else
     {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
       <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
     </Link>:""}
+    <Link to="/analytics" onClick={this.handleTabClick.bind(this,ANALYTICS)}>
+      <Tab items={{ tab: items.analytics, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== ANALYTICS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
 
     
    {showFireHazardPopup?notificationWrap:""}

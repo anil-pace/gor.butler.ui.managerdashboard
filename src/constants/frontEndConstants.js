@@ -117,6 +117,7 @@ export const USERS="USERS";
 export const AUDIT="AUDIT";
 export const REPORTS="REPORTS";
 export const UTILITIES="UTILITIES";
+export const ANALYTICS = "AUDITLISTING";
 export const NOTIFICATION_TAB="Notification";
 export const BUTLERBOTS_TAB="Butler Bots";
 export const CHARGING_TAB="Charging Station";
