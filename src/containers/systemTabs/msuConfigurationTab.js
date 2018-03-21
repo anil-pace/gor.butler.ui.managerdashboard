@@ -24,7 +24,9 @@ import {updateSubscriptionPacket,setWsAction} from './../../actions/socketAction
 import {wsOverviewData} from './../../constants/initData.js';
 //import ButlerBotFilter from './butlerBotFilter';
 import MsuConfigFilter from './msuConfigFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+import FilterSummary from '../../components/tableFilter/filterSummary';
+import {modal} from 'react-redux-modal';
+import ChangeRackType from './changeRackType';
 //Mesages for internationalization
 const messages=defineMessages({
     butlerPrefix: {
@@ -218,6 +220,13 @@ class ButlerBot extends React.Component {
 
     _handleRefreshData = () => {
         console.log("inside _handleRefreshData function");
+        modal.add(ChangeRackType, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true // (optional) if you don't wanna show the top right close button
+            //.. all what you put in here you will get access in the modal props ;),
+        });
     }
 
     _releaseMSU = () => {
