@@ -262,7 +262,14 @@ class Routes extends React.Component {
 
                            }}
                     />
+    <Route onEnter={this._handleNavigationChanges.bind(this)} name="butlermap" path="/butlermap"
+                           getComponent={(location, callback)=> {
+                               require.ensure([], function (require) {
+                                   callback(null, require('../containers/ButlerMap').default);
+                               }, "butlermap");
 
+                           }}
+                    />
 
 
        

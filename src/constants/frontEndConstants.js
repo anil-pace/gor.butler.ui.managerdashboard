@@ -114,6 +114,8 @@ export const ORDERS="ORDERS";
 export const AUDITLISTING="AUDITLISTING";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
+export const BUTLERMAP="BUTLERMAP";
+
 export const AUDIT="AUDIT";
 export const REPORTS="REPORTS";
 export const UTILITIES="UTILITIES";
