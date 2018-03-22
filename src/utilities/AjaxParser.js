@@ -98,8 +98,8 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
-    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL
+    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,CREATE_DUPLICATE_REQUEST,
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,AUDIT_EDIT_REQUEST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -452,7 +452,39 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         }else{
 
         }
-            break;    
+            break; 
+            case AUDIT_EDIT_REQUEST:    
+           if (res.audit_id) {
+               values={id:res.audit_id},
+               msg = getFormattedMessages("EDITED", values);  
+               store.dispatch(notifySuccess(msg));
+               store.dispatch(setAuditRefresh(true)); //set refresh flag
+            }
+         else {
+           stringInfo = codeToString(res.alert_data[0]);
+           store.dispatch(notifyFail(stringInfo.msg));
+           store.dispatch(setAuditRefresh(true)); //set refresh flag
+        }
+        break; 
+            case CREATE_DUPLICATE_REQUEST:
+                if (res.audit_id) {
+                  values={id:res.audit_id},
+                  msg = getFormattedMessages("DUPLICATED", values);
+                  store.dispatch(notifySuccess(msg));
+
+                  store.dispatch(setAuditRefresh(false)); //reset refresh flag
+                }
+                else{
+                  stringInfo = codeToString(res.alert_data[0]);
+                  store.dispatch(notifyFail(stringInfo.msg));
+
+                  store.dispatch(setAuditRefresh(true)); //set refresh flag
+                }
+                break;    
+            
+
+
+
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
                 store.dispatch(auditValidatedAttributesLocationCsv(res));

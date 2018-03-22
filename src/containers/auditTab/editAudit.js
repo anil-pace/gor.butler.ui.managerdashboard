@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT } from '../../constants/frontEndConstants';
+import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL} from '../../constants/configConstants';
 import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
@@ -374,7 +374,11 @@ _onAttributeSelectionFirstTime(){
 
     if(this.props.auditId && type !== "validate" && this.props.param!=='duplicate'){
       validSKUData.audit_id=this.props.auditId;
+      validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
     }
+    if(this.props.param=='duplicate'){
+            validSKUData.action='duplicate';
+          }
 
     if(type === "validate"){
       validSKUData.audit_param_value = {};
@@ -384,10 +388,10 @@ _onAttributeSelectionFirstTime(){
       validSKUData.audit_param_value.sku_list = auditParamValue;
       sendRequest = true;
     }
-    else if(type === "confirm" || type === "create"){
+    else if(type === "confirm" || type === "create" || type === "duplicate"){
       let selectedAttributeCount = Object.keys(selectedSKUList).length;
       let isAttributeSelected = (arrSKU.length === selectedAttributeCount)
-      if(!isAttributeSelected && type === "create"){
+      if(!isAttributeSelected && (type === "create"|| type === "duplicate")){
         this._invokeAlert({
           validateSKU:this._validateSKU,
           noneSelected:!selectedAttributeCount ? true :false,
@@ -417,10 +421,10 @@ _onAttributeSelectionFirstTime(){
     }
     if(sendRequest){
       let urlData={
-                  'url': (type === "create" || type === "confirm") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                  'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
                   'formdata': validSKUData,
                   'method':POST,
-                  'cause':(type === "create" || type === "confirm") ? CREATE_AUDIT_REQUEST : VALIDATE_SKU_ID,
+                  'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_SKU_ID),
                   'contentType':APP_JSON,
                   'accept':APP_JSON,
                   'token':this.props.auth_token
@@ -455,6 +459,7 @@ _onAttributeSelectionFirstTime(){
     if(this.props.auditId &&  this.props.param!=='duplicate' && type !== "validate"){
     validLocationDataCreateAudit={
       "audit_param_type":"location",
+      "action":(type === "create" || type === "confirm")?'edit':'',
       "audit_param_value":{
         "locations_list":auditParamValue
       },
@@ -465,6 +470,7 @@ _onAttributeSelectionFirstTime(){
   {
     validLocationDataCreateAudit={
       "audit_param_type":"location",
+      "action":'duplicate',
       "audit_param_value":{
         "locations_list":auditParamValue
       }
@@ -474,10 +480,10 @@ _onAttributeSelectionFirstTime(){
 
      
     let urlData={
-                'url': (type === "create") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
-                'formdata':(type === "create") ? validLocationDataCreateAudit : validLocationData,
+                'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
+                'formdata':(type === "create" || type === "duplicate") ? validLocationDataCreateAudit : validLocationData,
                 'method':POST,
-                'cause':(type === "create") ? CREATE_AUDIT_REQUEST : VALIDATE_LOCATION_ID,
+                'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_LOCATION_ID),
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'token':this.props.auth_token
@@ -485,7 +491,7 @@ _onAttributeSelectionFirstTime(){
     this.props.setAuditSpinner(true);
     this.props.makeAjaxCall(urlData);
    
-    if(type==="create"){
+    if(type==="create"||type=="duplicate"){
       this.props.removeModal();
      
     }
@@ -918,11 +924,17 @@ _onAttributeSelectionFirstTime(){
             //.. all what you put in here you will get access in the modal props ;)
         });
     }
-    _createAudit(){
+    _createAudit(type){
       if(this.state.activeTabIndex === 0){
+        if(type=='duplicate')
+        this._validateSKU("duplicate");
+        else
         this._validateSKU("create");
       }
       else{
+        if(type=='duplicate')
+        this._validateLocation("duplicate");
+        else
         this._validateLocation("create");
       }
     }
@@ -1002,8 +1014,8 @@ _onAttributeSelectionFirstTime(){
 }else if(this.props.param=='duplicate'){
    header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
        defaultMessage='Duplicate audit'/></div>
-         button=  <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-         defaultMessage='Create audit'/></button>
+         button=  <button onClick={()=>{this._createAudit("duplicate")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.duplicate" description='Text for add audit button' 
+         defaultMessage='Duplicate audit'/></button>
 }else
 {
      header=<div className='gor-usr-add'><FormattedMessage id='audit.add.heading' description='Heading for add audit' 
