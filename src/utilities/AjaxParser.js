@@ -21,7 +21,7 @@ import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit,getAuditDetails,getAuditUserList} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -444,6 +444,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case CREATE_AUDIT_REQUEST:
             store.dispatch(createAuditAction(res));
             store.dispatch(setAuditRefresh(true));
+            store.dispatch(setValidationAuditSpinner(false));
             break;
         case AUDIT_EDIT:
         //raja
@@ -459,11 +460,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                msg = getFormattedMessages("EDITED", values);  
                store.dispatch(notifySuccess(msg));
                store.dispatch(setAuditRefresh(true)); //set refresh flag
+               store.dispatch(setValidationAuditSpinner(false));
             }
          else {
            stringInfo = codeToString(res.alert_data[0]);
            store.dispatch(notifyFail(stringInfo.msg));
            store.dispatch(setAuditRefresh(true)); //set refresh flag
+           store.dispatch(setValidationAuditSpinner(false));
         }
         break; 
             case CREATE_DUPLICATE_REQUEST:
@@ -471,13 +474,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                   values={id:res.audit_id},
                   msg = getFormattedMessages("DUPLICATED", values);
                   store.dispatch(notifySuccess(msg));
-
+                  store.dispatch(setValidationAuditSpinner(false));
                   store.dispatch(setAuditRefresh(false)); //reset refresh flag
                 }
                 else{
                   stringInfo = codeToString(res.alert_data[0]);
                   store.dispatch(notifyFail(stringInfo.msg));
-
+                  store.dispatch(setValidationAuditSpinner(false));
                   store.dispatch(setAuditRefresh(true)); //set refresh flag
                 }
                 break;    
