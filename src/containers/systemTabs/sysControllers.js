@@ -29,6 +29,9 @@ import {
     showTableFilter,
     filterApplied
 } from '../../actions/filterAction';
+import {graphql, withApollo, compose} from "react-apollo";
+
+import gql from 'graphql-tag';
 
 
 
