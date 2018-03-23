@@ -8,8 +8,8 @@ class searchFilter extends React.Component{
       this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event){
-    this.props.handleChange(event.target.value);
+  handleChange(){
+    this.props.handleChange(this.inputText.value);
   }
   
 
@@ -20,7 +20,7 @@ class searchFilter extends React.Component{
               <div className="gor-search-icon"></div>
             </div>
             <div className="inputWrapper"> 
-              <input type="text" className="gor-search-input-wrap" placeholder={this.props.placeHolder} onChange={this.handleChange}/>
+              <input type="text" className="gor-search-input-wrap" ref={(node) => { this.inputText = node; }} placeholder={this.props.placeHolder} onChange={this.handleChange}/>
             </div>
         </div>
       );  

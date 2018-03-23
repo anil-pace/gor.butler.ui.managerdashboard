@@ -193,9 +193,9 @@ return tableData;
        //   this._removeThisModal();
        // }
      }
-       handleChange(data) {
+       handleChange(input) {
     var updatedList = this.props.ppsList.pps_list
-    //let attributeData= updatedList.entity_list;
+    let data=input.toLowerCase();
     var queryResult=[];
     Object.keys(updatedList).forEach(function(key) {
             if((updatedList[key]['operator_assigned'].toLowerCase().indexOf(data)!=-1) || (updatedList[key]['pps_mode'].toLowerCase().indexOf(data)!=-1))
