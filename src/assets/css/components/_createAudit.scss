@@ -295,7 +295,7 @@
 }
 
 .gor-audit-input-wrap {
-    width: 39%;
+    width: 43%;
     padding:1px 12px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
@@ -362,10 +362,16 @@
     padding-bottom:10px;
     max-height: 210px;
     overflow: auto;
-    .gor-audit-location-wrap{
-    margin-top:10px;
-    }
+    
 }
+.gor-audit-location-wrap{
+    margin-top:10px;
+    background-color: #FBFBFB;
+    padding-bottom:10px;
+    max-height: 210px;
+    overflow: auto;
+    border-top: 1px solid #DDDDDD;
+    }
 
 .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;

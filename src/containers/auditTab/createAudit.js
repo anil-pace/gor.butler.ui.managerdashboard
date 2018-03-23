@@ -1106,7 +1106,7 @@ class CreateAudit extends React.Component{
                           
              
               
-            {!validationDone?<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
+            {!validationDone?<div className="gor-audit-location-wrap" >
             <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Use copy and paste if you have multiple MSU and Slot numbers'/></div>
 
@@ -1128,7 +1128,7 @@ class CreateAudit extends React.Component{
     <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
                         defaultMessage='+ ADD NEW'/></button>
                         </div>
-              </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
+              </div>:<div className="gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
               {allLocationsValid?
                  <div className={"gor-audit-att-ribbon"}>
