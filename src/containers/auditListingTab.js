@@ -295,7 +295,10 @@ render(){
     </GTableRow>
     )
   }):""}
-  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>There are no audit to view. Create audit</div>}
+  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>
+  <FormattedMessage id='audit.notfound'  defaultMessage="There are no audit to view. Create audit" description="audit not found"/>
+  
+  </div>}
 
   </GTable>
   </div>
