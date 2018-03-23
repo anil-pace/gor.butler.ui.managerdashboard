@@ -160,12 +160,7 @@ class AuditFilter extends React.Component {
             {value: AUDIT_DELETED, label: <FormattedMessage id="audit.token2.deleted" defaultMessage="Deleted"/>}
 
         ];
-        // const labelC3=[
-        //     {value: ALL, label: <FormattedMessage id="audit.token3.all" defaultMessage="Any"/>},
-        //     {value: 'SYSTEM', label: <FormattedMessage id="audit.token3.system" defaultMessage="System"/>},
-        //     {value: 'RAJA', label: <FormattedMessage id="audit.token3.raja" defaultMessage="Raja Dey"/>}
-        
-        // ];
+      
         var selectedToken=this.state.tokenSelected;
         var column1=<FilterTokenWrap field={tokenStatusField} tokenCallBack={this._handelTokenClick.bind(this)}
                                      label={labelC2} selectedToken={selectedToken}/>;
