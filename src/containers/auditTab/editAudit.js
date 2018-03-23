@@ -376,7 +376,7 @@ _onAttributeSelectionFirstTime(){
       validSKUData.audit_id=this.props.auditId;
       validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
     }
-    if(this.props.param=='duplicate'){
+    if(this.props.param=='duplicate' && type !== "validate"){
       validSKUData.action='duplicate';
     }
     
