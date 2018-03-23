@@ -130,7 +130,7 @@ class AuditFilter extends React.Component {
          labelC3.push(
          {
             value:data,
-            label:<FormattedMessage id="audit.token3.name" defaultMessage={data}/>
+            label:data
          }
             )   
         });
