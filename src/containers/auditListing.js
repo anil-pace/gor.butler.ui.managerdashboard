@@ -393,6 +393,7 @@ startAudit() {
         var i,limit=data.length;
         for (i=0;i<=limit - 1; i++) {
             auditData.id=data[i].audit_id;
+            auditData.progressBarflag=false;
             if (data[i].audit_name) {
                 auditData.audit_name=data[i].audit_name;
             }
@@ -405,31 +406,29 @@ startAudit() {
             
             if (data[i].audit_status=="audit_created") {
                 auditData.status="Not yet Started";
-                auditData.progressBarflag=false;
+                
   } else if(data[i].audit_status=="audit_cancelled"){
                 auditData.status="Cancelled";
-                auditData.progressBarflag=false;
   }
- 
-//    else if(data[i].audit_button_data.audit_cancel_button==='enable'){
-//                 auditData.status=auditCancelled;
-//                 auditData.progressBarflag=false;
-//   }
 
     else if(data[i].audit_status=="audit_paused"){
                 auditData.status="Paused";
-                auditData.progressBarflag=false;
   }
+    else if(data[i].audit_status=="audit_accepted"){
+        auditData.status="Waiting for operator log in";
+    }
 
-  else  if(data[i].start_actual_time && data[i].completion_time){
+  else  if((data[i].start_actual_time && data[i].completion_time) || (data[i].audit_status=="audit_aborted")){
         auditData.status="Completed";
-        auditData.progressBarflag=false;
     }
-    else if(data[i].audit_progress.completed || data[i].audit_progress.total){
-        auditData.status=data[i].audit_progress.completed+" completed out of "+data[i].audit_progress.total;
-        auditData.progressBarflag=true;
-    }
-    auditData.progressStatus=data[i].audit_progress;
+   
+    else if(data[i].audit_status=="audit_pending"|| data[i].audit_status=="audit_waiting" || data[i].audit_status=="audit_conflicting"||
+        data[i].audit_status=="audit_started"|| data[i].audit_status=="audit_tasked" ||data[i].audit_status=="audit_rejected"||data[i].audit_status=="audit_pending_approval"){
+            auditData.status=data[i].audit_progress.completed+" completed out of "+data[i].audit_progress.total;
+            auditData.progressBarflag=true;
+        }
+
+        auditData.progressStatus=data[i].audit_progress;
 
 
                 if (data[i].audit_button_data && data[i].audit_button_data.audit_start_button==="enable") {
