@@ -5,16 +5,20 @@ class ActionDropDown extends React.Component{
 	constructor(props) 
 	{
 	   super(props);
-        this.state={visibleMenu:false}; 
-        this._handleDocumentClick =  this._handleDocumentClick.bind(this);
+		this.state={visibleMenu:false,flyoutHack:false}; 
+		this._handleDocumentClick =  this._handleDocumentClick.bind(this);
+		this._handleClick=this._handleClick.bind(this);	
     }
     _handleClick(field){
+		var domRect = (field.target).getBoundingClientRect();
+		this.setState({flyoutHack:domRect.top>=546});
     	let currentStatus=this.state.visibleMenu;
     	currentStatus=!currentStatus;
       this.setState({visibleMenu:currentStatus});
       this.props.clickOptionBack(field);
 
-	}	
+		
+}
 
   _handleDocumentClick() {
      if (!ReactDOM.findDOMNode(this).contains(event.target)) {
@@ -30,14 +34,6 @@ class ActionDropDown extends React.Component{
   componentWillUnmount() {
       document.removeEventListener("click", this._handleDocumentClick,false)
   }
-
-
-	_optionClick(obj){
-		let val=false;
-		this.setState({visibleMenu: val});
-		this.props.clickOptionBack(obj);
-
-	}
 	
 	render(){
 		var arr=[];
@@ -48,9 +44,9 @@ class ActionDropDown extends React.Component{
 	
 		return (
 			
-		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={this._handleClick.bind(this)} {...this.props}>
+		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={this._handleClick} {...this.props}>
 		{this.props.children}
-			{this.state.visibleMenu?<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
+			{this.state.visibleMenu?this.state.flyoutHack?<div className='gor-add-flyoutWrapper' style={{'bottom':0}} >{arr}</div>:<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
 		</div>
 		
 		

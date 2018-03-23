@@ -257,8 +257,8 @@ render(){
    <div>
 
    <div className="waveListWrapper">
-   <GTable options={['table-bordered']}>
-
+   <GTable options={['table-bordered','table-auditListing']}>
+  {tablerowdata && tablerowdata.length>=1?
    <GTableBody data={tablerowdata} >
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
@@ -273,12 +273,11 @@ render(){
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto Assign PPS',value:'autoassignpps'},{name:'Manual Assign PPS',value:'mannualassignpps'}]}>
-      <button className="gor-add-btn gor-listing-button">
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       START
        <div className="got-add-notch"></div>
       </button>      
-      </ActionDropDown>:""}
+      </ActionDropDown></div>:""}
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
       RE-AUDIT
       </button>:""}
@@ -286,7 +285,7 @@ render(){
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
       RESOLVE
       </button>:""}
-       {index==5?<ActionDropDown style={{width:'110px'}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+       {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
       </ActionDropDown>:""}
 
@@ -296,7 +295,7 @@ render(){
     </GTableRow>
     )
   }):""}
-  </GTableBody>
+  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>There are no audit to view. Create audit</div>}
 
   </GTable>
   </div>

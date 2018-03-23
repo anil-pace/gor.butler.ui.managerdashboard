@@ -719,9 +719,14 @@ return (
         {renderTab}
         </div>
         </div>
-        {auditData.length && this.state.query ? <div className="gor-audit-paginate-wrap">
-        <GorPaginateV2 location={this.props.location} currentPage={this.state.query.page||1} totalPage={this.props.totalPage}/>
-        </div> : ""}
+        {auditData.length && this.state.query ?
+           <div className="gor-auditlist-paginate-wrap">
+           <div className="gor-audit-paginate-left">
+           </div>
+           <div className="gor-auditlist-paginate-right">
+           <GorPaginateV2 location={this.props.location} currentPage={this.state.query?this.state.query.page:1} totalPage={this.props.totalPage}/>
+           </div>
+           </div>: ""}
         </div>
         );
 }

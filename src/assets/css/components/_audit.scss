@@ -113,6 +113,27 @@ display:inline-block;
   float: right;
 }
 
+.gor-auditlist-paginate-wrap{
+   width: 100%;
+   position: relative;
+   background-color: #ffffff;
+   border-top:1px solid lightgrey;
+   float: left;
+ }
+ .gor-auditlist-paginate-right{
+   float: right;
+ }
+ .gor-Audit-no-data {
+   display: inline-block;
+   width: 100%;
+   text-align: center;
+   padding-top: 200px;
+   font-size: 20px;
+   font-weight: bold;
+   color: #4d5055;
+   height: 400px;
+ }
+
 .gor-audit-cancelling-text{
   font-size:12px;
   text-align:center;
@@ -132,3 +153,17 @@ display:inline-block;
   color: #000000;
   font-weight: normal;
 }
+.table-auditListing {
+  .table-body{
+max-height:none !important;
+min-height: 60vh;
+overflow: auto;
+background-color: white;
+}
+}
+.gor-auditlist-paginate-right {
+.gor-paginate-wrap{
+padding-top: 1rem;
+margin-right: 20px;
+}
+} 
