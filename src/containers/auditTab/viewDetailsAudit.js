@@ -132,9 +132,10 @@ _timeFormat(UTCtime){
     return [tile1Data,tile2Data,tile3Data];
   }
 
-  handleChange(data) {
+  handleChange(input) {
     var updatedList = this.props.auditDetails
     let attributeData= updatedList.entity_list;
+    let data=input.toLowerCase();
     var queryResult=[];
     attributeData.forEach(function(item){
             if(item.id.toLowerCase().indexOf(data)!=-1)
