@@ -85,6 +85,7 @@ class UtilityTab extends React.Component {
                 sku: ""
             },
             prodStatusCalledOnLoad: false,
+            utilityTabRefreshed: null
         };
     }
 
