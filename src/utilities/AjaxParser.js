@@ -148,7 +148,7 @@ import {
 
 
 import {
-    resetaudit
+    resetaudit, setCheckedAudit
 } from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
@@ -254,6 +254,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             if (stringInfo.type) {
                 store.dispatch(notifyDelete(stringInfo.msg));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(setCheckedAudit([]));
             } else {
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
@@ -264,6 +265,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             if (stringInfo.type) {
                 store.dispatch(notifySuccess(stringInfo.msg));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(setCheckedAudit([]));
             } else {
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
@@ -312,6 +314,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             store.dispatch(setAuditSpinner(false));
             store.dispatch(setAuditRefresh(true));
+            store.dispatch(setCheckedAudit([]));
             break;
 
             case AUDIT_USERLIST:
@@ -358,6 +361,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(msg));
                 store.dispatch(resetaudit(res.successful));
                 store.dispatch(setAuditRefresh(true));
+                store.dispatch(setCheckedAudit([]));
         }
         else
         {
@@ -365,10 +369,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(AS00A));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
                 store.dispatch(resetaudit(res.successful));
+                store.dispatch(setCheckedAudit([]));
             } else {
                 stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
+                store.dispatch(setCheckedAudit([]));
             } 
         }
         

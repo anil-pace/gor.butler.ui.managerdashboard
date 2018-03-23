@@ -172,6 +172,11 @@ return tableData;
   let attributeData= this.props.ppsList.pps_list?this.props.ppsList.pps_list:[];
    this.setState({items: attributeData});
   }
+
+    componentWillUnmount(){
+        this.props.setCheckedAuditpps([]);
+        this.props.setCheckedOtherpps([]);
+      }
      componentWillReceiveProps(nextProps){
 
     if(JSON.stringify(this.props.ppsList.pps_list)!== JSON.stringify(nextProps.ppsList.pps_list)){

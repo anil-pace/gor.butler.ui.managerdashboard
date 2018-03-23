@@ -41,11 +41,7 @@ import {
     let arr=this.props.checkedAudit;
   let a= arr.indexOf(e.currentTarget.id);
   (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
-  //console.log(this.state.checkedAudit);
   this.props.setCheckedAudit(arr);
-    
-    //console.log(e.currentTarget.checked);
-    //console.log(e.currentTarget.id);
  }
  componentWillReceiveProps(nextProps){
   this.setState({'checkedAudit':nextProps.checkedAudit});
@@ -270,7 +266,7 @@ render(){
     <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
-      let visibilityStatus=tablerowdata[idx]['button'].startButton?'true':'hidden';
+      let visibilityStatus=tablerowdata[idx]['button'].startButton?'visible':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div className='systemGenerated'></div>:""}
