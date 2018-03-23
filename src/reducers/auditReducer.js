@@ -136,12 +136,14 @@ export  function auditInfo(state={},action){
           }) 
   case SET_AUDIT_EDIT_DATA:
   if(action.data && action.data.attributes_list_sets){
-    let processedDataSKU1 = processValidationDataSKU(action.data,"Edit_Dup");
+    let processedDataSKUEditDup = processValidationDataSKU(action.data,"Edit_Dup");
     return Object.assign({}, state, {
-         "auditEditData":processedDataSKU1,              
+         "auditEditData":processedDataSKUEditDup,              
         "hasDataChanged":!state.hasDataChanged,
-         "auditSpinner":false
-    })
+         "auditSpinner":false,
+         "auditValidationSpinner":false,
+         "locationAttributes":[]
+    })  
   }else
   {
     let processedData = processValidationData(action.data,"Edit_Dup")//(action.data)
