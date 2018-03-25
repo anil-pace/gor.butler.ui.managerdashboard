@@ -100,7 +100,8 @@ import {
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
+    FETCH_MSU_CONFIG_LIST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -172,6 +173,7 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
+import { receiveMsuConfigList } from './../actions/msuConfigAction';
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -660,6 +662,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
             }
             break;
+        case FETCH_MSU_CONFIG_LIST:
+            // let res=[
+            //   {'msu_id':"177"},
+            //   {'msu_id':"178"}
+            // ];
+            store.dispatch(receiveMsuConfigList(res));
         default:
             ShowError(store, cause, status);
             break;

@@ -93,3 +93,4 @@ export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
 
 
+export const MSU_CONFIG_URL = TIME_ZONE_URL;//API_URL+"/order-details/level1";

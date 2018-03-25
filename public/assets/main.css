@@ -11282,6 +11282,71 @@ checkmark1 for indeterminate state*/
   pointer-events: none;
 }
 
+.noDataWrapper {
+  font-weight: 600;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.875rem;
+  color: #aaaaaa;
+}
+
+.changeDestTypeBtn {
+  width: 14.375rem;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border: 1px solid #ec6520;
+  color: #ec6520;
+  height: 35px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.msuConfigTableWrapper {
+  height: auto;
+  width: 100%;
+  background: #ffffff;
+  border-top: 2px solid #dddddd;
+}
+
+.msuConfigTableWrapper .DotSeparatorWrapper {
+  margin-left: 30px;
+}
+
+.msuConfigTableWrapper .ProgressBarWrapper {
+  width: 7.5rem;
+  margin-top: 5px;
+}
+
+.msuConfigTableWrapper .totalOrderWrapper {
+  position: absolute;
+  margin-left: 8.375rem;
+  line-height: 3em;
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.msuConfigTableWrapper .msuIdWrapper {
+  padding-left: 7%;
+}
+
+.msuConfigTableWrapper .msuIdWrapper .msuId {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.msuConfigTableWrapper .msuIdWrapper .sourceType {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #333333;
+}
+
 .gor-smmodal-content {
   border-radius: 0.5%;
   margin-top: 15vh;

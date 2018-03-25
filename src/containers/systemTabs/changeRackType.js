@@ -1,5 +1,5 @@
 import React  from 'react';
-import {FormattedMessage, FormattedPlural} from 'react-intl';
+import {FormattedMessage, FormattedPlural, defineMessages} from 'react-intl';
 import {validateID, validateName, validatePassword, resetForm} from '../../actions/validationActions';
 import {userRequest} from '../../actions/userActions';
 import {
@@ -28,9 +28,86 @@ var xyz = [
   {"rack_type_rec":[{"barcodes":["A.05","A.06"],"length":32,"orig_coordinates":[0,5],"height":33},{"barcodes":["A.03","A.04"],"length":32,"orig_coordinates":[32,5],"height":33},{"barcodes":["A.01","A.02"],"length":32,"orig_coordinates":[64,5],"height":33},{"barcodes":["B.05","B.06"],"length":32,"orig_coordinates":[0,43],"height":33},{"barcodes":["B.03","B.04"],"length":32,"orig_coordinates":[32,43],"height":33},{"barcodes":["B.01","B.02"],"length":32,"orig_coordinates":[64,43],"height":33},{"barcodes":["C.05","C.06"],"length":32,"orig_coordinates":[0,81],"height":33},{"barcodes":["C.03","C.04"],"length":32,"orig_coordinates":[32,81],"height":33},{"barcodes":["C.01","C.02"],"length":32,"orig_coordinates":[64,81],"height":33},{"barcodes":["D.05","D.06"],"length":32,"orig_coordinates":[0,119],"height":33},{"barcodes":["D.03","D.04"],"length":32,"orig_coordinates":[32,119],"height":33},{"barcodes":["D.01","D.02"],"length":32,"orig_coordinates":[64,119],"height":33},{"barcodes":["E.05","E.06"],"length":32,"orig_coordinates":[0,157],"height":33},{"barcodes":["E.03","E.04"],"length":32,"orig_coordinates":[32,157],"height":33},{"barcodes":["E.01","E.02"],"length":32,"orig_coordinates":[64,157],"height":33}],"slot_type":"slot","rack_width":96,"slot_barcodes":["038.1.B.01","038.1.B.02"]}
 ];
 
+const messages = defineMessages({
+  downloadReportsHead: {
+    id: "utility.downloadReport.head",
+    description: "Download Reports",
+    defaultMessage: "Download Reports"
+  },
+  downloadRprtsStatusHead: {
+    id: "utility.downloadReport.Status.heading",
+    description: "Reports Status",
+    defaultMessage: "Reports Status"
+  },
+  downloadRprtsCategoryLabel: {
+    id: "utility.downloadRprts.CategoryLabel",
+    description: "Category",
+    defaultMessage: "Category"
+  },
+
+
+  destTypeDdownPlcHldr: {
+    id: "msuConfig.destType.destTypeDdownPlcHldr",
+    description: "Select destination type",
+    defaultMessage: "Select destination type"
+  },
+
+
+  typeA: {
+    id: "msuConfig.destTypes.typeA",
+    description: "type A",
+    defaultMessage: "Type A"
+  },
+  typeB: {
+    id: "msuConfig.destTypes.typeB",
+    description: "type B",
+    defaultMessage: "Type B"
+  },
+
+  typeC: {
+    id: "msuConfig.destTypes.typeC",
+    description: "type C",
+    defaultMessage: "Type C"
+  },
+  typeD: {
+    id: "msuConfig.destTypes.typeD",
+    description: "type D",
+    defaultMessage: "Type D"
+  },
+
+  downloadFileFormatPlchldr: {
+    id: "utility.downloadRprts.FileFormatPlchldr",
+    description: "Select File Format",
+    defaultMessage: "Select File Format"
+  },
+  downloadFileFormatLabel: {
+    id: "utility.downloadRprts.FileFormatLabel",
+    description: "File Format",
+    defaultMessage: "File Format"
+  },
+  downloadFileFormatCsv: {
+    id: "utility.downloadRports.csvFormat",
+    description: "Comma separated values (csv)",
+    defaultMessage: "Comma separated values (csv)"
+  },
+  downloadFileFormatXls: {
+    id: "utiltiy.downloadRports.xlsFormat",
+    description: "ExceL Spreadsheet (xlsx)",
+    defaultMessage: "ExceL Spreadsheet (xlsx)"
+  },
+  downloadLink: {
+    id: "utility.grnHistory.clickToDownload",
+    description: "file name",
+    defaultMessage: "Click here to download "
+  }
+});
+
 class ChangeRackType extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+          destType: null
+        };
     }
 
     removeThisModal() {
@@ -135,6 +212,23 @@ class ChangeRackType extends React.Component {
         this.removeThisModal();
     }
 
+    _changeDestType(data) {
+    this.setState({ destType: data.value });
+  }
+
+  _changeReportFileType(data) {
+    this.setState({ fileType: data.value });
+  }
+
+  _getCurrentDropDownState(fileType, currentValue) {
+    for (var i = fileType.length - 1; i >= 0; i--) {
+      if (fileType[i].value === currentValue) {
+        return fileType[i].label;
+      }
+    }
+    return null;
+  }
+
     _getId(role) {
         let roles=this.props.roleList, len;
         len=roles.length;
@@ -148,18 +242,40 @@ class ChangeRackType extends React.Component {
 
     render() {
 
-        let defaultOption=<FormattedMessage id="msuConfig.dropdown" description="pickPerformance dropdown label" defaultMessage="Select destination type"/>
-
-        let putPerformance=<FormattedMessage id="msuConfig.dropdown" description="putPerformance dropdown label" defaultMessage="PPS Put Performance"/>
-              
-        let auditPerformance=<FormattedMessage id="msuConfig.dropdown" description="auditPerformance dropdown label" defaultMessage="PPS Audit Performance"/>
-              
-
-        const item=[
-                  { value: 'Select destination type', label: defaultOption },
-                  { value: 'PPS_PUT_PERFORMANCE', label: putPerformance },
-                  { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
+        const destTypes = [
+          {
+            value: "Type A",
+            label: this.context.intl.formatMessage(messages.typeA)
+          },
+          {
+            value: "Type B",
+            label: this.context.intl.formatMessage(messages.typeB)
+          },
+          {
+            value: "Type C",
+            label: this.context.intl.formatMessage(messages.typeC)
+          },
+          {
+            value: "Type D",
+            label: this.context.intl.formatMessage(messages.typeD)
+          }
         ];
+
+        let currentDestType = this.state.destType? this._getCurrentDropDownState(destTypes, this.state.destType): null;
+
+
+        // let defaultOption=<FormattedMessage id="msuConfig.dropdown" description="pickPerformance dropdown label" defaultMessage="Select destination type"/>
+
+        // let putPerformance=<FormattedMessage id="msuConfig.dropdown" description="putPerformance dropdown label" defaultMessage="PPS Put Performance"/>
+              
+        // let auditPerformance=<FormattedMessage id="msuConfig.dropdown" description="auditPerformance dropdown label" defaultMessage="PPS Audit Performance"/>
+              
+
+        // const item=[
+        //           { value: 'Select destination type', label: defaultOption },
+        //           { value: 'PPS_PUT_PERFORMANCE', label: putPerformance },
+        //           { value: 'PPS_AUDIT_PERFORMANCE', label: auditPerformance },
+        // ];
 
 
         let tick=(<div className='gor-tick'/>);
@@ -188,20 +304,16 @@ class ChangeRackType extends React.Component {
 
                             <div className="destWrapper">
 
-                                {/*<UtilityDropDown
-                                      items={modes}
-                                      dropdownLabel={this.context.intl.formatMessage(
-                                        messages.downloadRprtsCategoryLabel
-                                      )}
-                                      placeHolderText={this.context.intl.formatMessage(
-                                        messages.downloadRprtsCategoryPlchldr
-                                      )}
-                                      changeMode={this._changeReportCategory.bind(this)}
-                                      currentState={currentCategoryState}
-                                    />*/}
-                                <div style={{width: "100%"}} className="Order-Stats-Drop">
+                                <UtilityDropDown
+                                  items={destTypes}
+                                  dropdownLabel=""
+                                  placeHolderText={this.context.intl.formatMessage(messages.destTypeDdownPlcHldr)}
+                                  changeMode={this._changeDestType.bind(this)}
+                                  currentState={currentDestType}
+                                />
+                                {/*<div style={{width: "100%"}} className="Order-Stats-Drop">
                                     <Dropdown optionDispatch={this.props.renderStatsWidget} items={item} styleClass={'ddown'} currentState={item[0]}/>
-                                </div>
+                                </div>*/}
 
                                 <div className="rackWrapper">
                                     <MsuRackFlex rackDetails={xyz[0].rack_type_rec} slotBarcodes={xyz[0].slot_barcodes} rackWidth={xyz[0].rack_width} />

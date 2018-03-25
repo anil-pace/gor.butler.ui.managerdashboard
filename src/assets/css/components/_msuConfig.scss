@@ -1,3 +1,63 @@
+.noDataWrapper{
+    font-weight: 600;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calculateRem(30px);
+    color: #aaaaaa;
+}
+
+.changeDestTypeBtn{
+    width: calculateRem(230px);
+    font-weight: bold;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border: 1px solid #ec6520;
+    color: #ec6520;
+    height: 35px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.msuConfigTableWrapper{
+    height: auto;
+    width: 100%;
+    background: #ffffff;
+    border-top: 2px solid #dddddd;
+    .DotSeparatorWrapper{
+        margin-left: 30px
+    }
+    .ProgressBarWrapper{
+        width: calculateRem(120px);
+        margin-top: 5px
+    }
+    .totalOrderWrapper{
+        position: absolute;
+        margin-left: 8.375rem;
+        line-height: 3em;
+        color: #4a4a4a;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .msuIdWrapper{
+        padding-left: 7%;
+        .msuId{
+            font-size: 16px;
+            font-weight: bold;
+            color: #333333;
+        }
+        .sourceType{
+            padding-top: 5px;
+            font-size: 14px;
+            font-weight: normal;
+            color: #333333;
+        }
+    }
+
+}
+
 .gor-smmodal-content{
     border-radius: 0.5%;
     margin-top: 15vh; 

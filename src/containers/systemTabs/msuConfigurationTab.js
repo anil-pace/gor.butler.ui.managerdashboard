@@ -28,6 +28,7 @@ import FilterSummary from '../../components/tableFilter/filterSummary';
 import {modal} from 'react-redux-modal';
 import ChangeRackType from './changeRackType';
 import MsuRackFlex from './msuRackFlex';
+import MsuConfigTable from './msuConfigTable';
 //Mesages for internationalization
 const messages=defineMessages({
     butlerPrefix: {
@@ -220,14 +221,7 @@ class ButlerBot extends React.Component {
 
 
     _handleRefreshData = () => {
-        console.log("inside _handleRefreshData function");
-        modal.add(ChangeRackType, {
-            title: '',
-            size: 'large', // large, medium or small,
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-            //.. all what you put in here you will get access in the modal props ;),
-        });
+        // console.log("inside _handleRefreshData function");
     }
 
     _releaseMSU = () => {
@@ -386,7 +380,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-operations-log">
-                                        <button style={{width: "145px"}} className="gor-rpt-dwnld" onClick={this._handleRefreshData}>
+                                        <button style={{minWidth: "145px"}} className="gor-rpt-dwnld" onClick={this._handleRefreshData}>
                                             <div className="gor-refresh-icon"/>
                                             <FormattedMessage id="gor.msuConfig.refreshData" description="button label for refresh data" defaultMessage="REFRESH DATA"/>
                                         </button>
@@ -395,7 +389,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._releaseMSU}>
+                                        <button style={{minWidth: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._releaseMSU}>
                                             <FormattedMessage id="gor.msuConfig.releaseMsu" description="button label for release msu" defaultMessage="RELEASE MSU(S)"/>
                                         </button>
                                     </div>
@@ -403,7 +397,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._startReconfig}>
+                                        <button style={{minWidth: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._startReconfig}>
                                             <FormattedMessage id="gor.msuConfig.startReconfig" description="button label for start reconfig" defaultMessage="START RECONFIG"/>
                                         </button>
                                     </div>
@@ -412,7 +406,7 @@ class ButlerBot extends React.Component {
 
                                 <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                        <button style={{width: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
+                                        <button style={{minWidth: "145px"}} className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
                                             <div className="gor-manage-task"/>
                                             <FormattedMessage id="gor.msuConfig.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
                                         </button>
@@ -431,7 +425,6 @@ class ButlerBot extends React.Component {
 
                         
                         {/*
-                            <MsuRackFlex rackDetails={this.props.rackData.rack_type_rec} slotBarcodes={this.props.rackData.slot_barcodes} rackWidth={this.props.rackData.rack_width} putDirectionFlex={this.props.putDirection} />
                         <ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}
                                         intlMessg={this.props.intlMessages}
                                         sortHeaderState={this.props.butlerHeaderSort}
@@ -450,6 +443,8 @@ class ButlerBot extends React.Component {
                                         refreshList={this._clearFilter.bind(this)}
                         />
                     */}
+
+                     <MsuConfigTable />
                     </div>
                 </div>
             </div>

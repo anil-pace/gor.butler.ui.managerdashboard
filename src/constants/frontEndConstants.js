@@ -734,6 +734,12 @@ export const PPS_PROFILE_REQUESTED="PPS_PROFILE_REQUESTED"
 export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
 
 /**
+ * Constants for MSU Configuration Tab
+ */
+export const FETCH_MSU_CONFIG_LIST="FETCH_MSU_CONFIG_LIST"
+
+
+/**
  * Constants for Operations log
  */
 export const OPERATION_LOG_FETCH = "OPERATION_LOG_FETCH";
