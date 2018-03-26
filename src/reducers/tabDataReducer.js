@@ -18,11 +18,11 @@ export  function tabsData(state={},action){
       let system_data,system_emergency=false,zoneDetails,lastEmergencyState,breached;
       if(action.data.header_data)
       {      
-        system_emergency=true;//action.data.header_data.emergency;
-        system_data="soft";//action.data.header_data.emergency_level;
-        lastEmergencyState = "none";//action.data.header_data.last_emergency_state;
+        system_emergency=action.data.header_data.emergency;
+        system_data=action.data.header_data.emergency_level;
+        lastEmergencyState = action.data.header_data.last_emergency_state;
         zoneDetails = action.data.header_data.zone_details;
-        breached = true;//action.data.header_data.breached
+        breached = action.data.header_data.breached
 
       }
       return Object.assign({}, state, {
