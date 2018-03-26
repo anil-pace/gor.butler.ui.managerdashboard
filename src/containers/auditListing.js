@@ -96,6 +96,14 @@ const messages = defineMessages({
     pps: {
         id: "auditdetail.pps.prefix",
         defaultMessage: "PPS "
+    },
+    autoassignpps: {
+        id: "auditdetail.label.autoassignpps",
+        defaultMessage: "Auto Assign PPS"
+    },
+    manualassignpps: {
+        id: "auditdetail.label.manualassignpps",
+        defaultMessage: "Manually-Assign PPS"
     }
 
 });
@@ -352,6 +360,9 @@ class AuditTab extends React.Component {
 
 
     _processAuditData(data, nProps) {
+        if(this){
+            console.log('raja');
+        }
         nProps = this;
         data = nProps.props.auditDetail;
         let notStarted = nProps.context.intl.formatMessage(messages.auditNotStartedStatus);
@@ -590,6 +601,9 @@ class AuditTab extends React.Component {
 
     //Render Function goes here
     render() {
+        let autoassignpps = this.context.intl.formatMessage(messages.autoassignpps);
+        let manualassignpps= this.context.intl.formatMessage(messages.manualassignpps);
+        
         let checkedAuditCount = this.props.checkedAudit.length;
         let auditCount = this.props.auditDetail;
         let totalStartAuditCount = 0;
@@ -632,7 +646,7 @@ class AuditTab extends React.Component {
                                 description="button label for audit"
                                 defaultMessage="Audits" /></span>
                     </div>
-                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name: this.props.context.intl.formatMessage('Auto Assign PPS'), value: 'autoassignpps' }, { name:  this.props.context.intl.formatMessage('Manual Assign PPS'), value: 'mannualassignpps' }]}>
+                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name: autoassignpps, value: 'autoassignpps' }, { name:  manualassignpps, value: 'mannualassignpps' }]}>
                         <button className="gor-add-btn gor-listing-button">
                         <FormattedMessage id="audit.start.Audit"
                                 description="button label for start"
@@ -657,7 +671,7 @@ class AuditTab extends React.Component {
                             className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                             onClick={this._setFilter.bind(this)}>
                             <div className="gor-manage-task" />
-                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
+                            <FormattedMessage id="audit.filter.filterLabel" description="button label for filter"
                                 defaultMessage="FILTER DATA" />
                         </button>
                     </div>

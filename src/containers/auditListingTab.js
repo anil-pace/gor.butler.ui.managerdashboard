@@ -19,6 +19,7 @@
  import {modal} from 'react-redux-modal';
  import AuditAction from '../containers/auditTab/auditAction';
  import EditAudit from '../containers/auditTab/editAudit';  
+ import {defineMessages} from 'react-intl';
  import {
     APP_JSON,
     GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK
@@ -26,6 +27,57 @@
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
 } from '../constants/configConstants'; 
+
+const messages=defineMessages({
+  alCancel: {
+    id: "auditlisting.cancel.status",
+    defaultMessage: "Cancel"
+},
+aldelete: {
+    id: "auditlisting.delete.status",
+    defaultMessage: "Delete"
+},
+alduplicate: {
+    id: "auditlisting.duplicate.prefix",
+    defaultMessage: "Duplicate"
+},
+alresolve: {
+    id: "auditlisting.resolve.status",
+    defaultMessage: "Resolve"
+},
+alpause: {
+  id: "auditlisting.pause.status",
+  defaultMessage: "Pause"
+},
+aledit: {
+  id: "auditlisting.edit.status",
+  defaultMessage: "Edit"
+},
+alviewdetails: {
+  id: "auditlisting.viewdetails.status",
+  defaultMessage: "View Details"
+},
+autoassignpps: {
+  id: "auditlisting.label.autoassignpps",
+  defaultMessage: "Auto Assign PPS"
+},
+manualassignpps: {
+  id: "auditlisting.label.manualassignpps",
+  defaultMessage: "Manually-Assign PPS"
+},
+startbutton: {
+  id: "auditlisting.label.startbutton",
+  defaultMessage: "START"
+},
+reauditbutton: {
+  id: "auditlisting.label.reauditbutton",
+  defaultMessage: "RE-AUDIT"
+},
+resolvebutton: {
+  id: "auditlisting.label.reolvebutton",
+  defaultMessage: "RESOLVE"
+}
+});
 
  class auditListingTab extends React.Component{
 
@@ -188,6 +240,15 @@ return (Math.round(data.completed*100)/data.total);
 }
 
 _tableBodyData(itemsData){
+  let alCancel = this.context.intl.formatMessage(messages.alCancel);
+  let aldelete = this.context.intl.formatMessage(messages.aldelete);
+  let alduplicate = this.context.intl.formatMessage(messages.alduplicate);
+  let alresolve = this.context.intl.formatMessage(messages.alresolve);
+  let alpause = this.context.intl.formatMessage(messages.alpause);
+  let aledit = this.context.intl.formatMessage(messages.aledit);
+  let alviewdetails = this.context.intl.formatMessage(messages.alviewdetails);
+
+ 
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
@@ -211,24 +272,24 @@ _tableBodyData(itemsData){
     "reAudit":itemsData[i].button['audit_reaudit_button']=='enable'?true:false,
   }
   rowObject.butoonToSHow=[];
-    rowObject.butoonToSHow.push({name:'View Details',value:'viewdetails'});
+    rowObject.butoonToSHow.push({name:alviewdetails,value:'viewdetails'});
       if(itemsData[i].button['audit_cancel_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Cancel',value:'cancel'});
+      rowObject.butoonToSHow.push({name:alCancel,value:'cancel'});
       }
       if(itemsData[i].button['audit_delete_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Delete',value:'delete'});
+      rowObject.butoonToSHow.push({name:aldelete,value:'delete'});
       }
        if(itemsData[i].button['audit_duplicate_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Duplicate',value:'duplicate'});
+      rowObject.butoonToSHow.push({name:alduplicate,value:'duplicate'});
       }
        if(itemsData[i].button['audit_resolve_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Resolve',value:'resolve'});
+      rowObject.butoonToSHow.push({name:alresolve,value:'resolve'});
       }
       if(itemsData[i].button['audit_pause_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Pause',value:'pause'});
+      rowObject.butoonToSHow.push({name:alpause,value:'pause'});
       }
       if(itemsData[i].button['audit_start_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Edit',value:'edit'});
+      rowObject.butoonToSHow.push({name:aledit,value:'edit'});
       }
       
       
@@ -241,6 +302,12 @@ return tableData;
 
 
 render(){
+  let autoassignpps = this.context.intl.formatMessage(messages.autoassignpps);
+  let manualassignpps = this.context.intl.formatMessage(messages.manualassignpps);
+  let startbutton = this.context.intl.formatMessage(messages.startbutton);
+  let reauditbutton = this.context.intl.formatMessage(messages.reauditbutton);
+  let resolvebutton = this.context.intl.formatMessage(messages.resolvebutton);
+
   let me=this;
   var itemsData=me.props.items;
   var tablerowdata=this._tableBodyData(itemsData);
@@ -273,17 +340,17 @@ render(){
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
-      START
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:autoassignpps,value:'autoassignpps'},{name:manualassignpps,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+      {startbutton}
        <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
-      RE-AUDIT
+    {reauditbutton}
       </button>:""}
       {index==4 && tablerowdata[idx][text].resolveButton?
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
-      RESOLVE
+      {resolvebutton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
@@ -305,5 +372,8 @@ render(){
   </div>
   )
 }
+}
+auditListingTab.contextTypes={
+  intl: React.PropTypes.object.isRequired
 }
 export default auditListingTab ;

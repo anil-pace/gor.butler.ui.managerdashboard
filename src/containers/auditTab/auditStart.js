@@ -14,7 +14,22 @@ import { PPSLIST_URL,START_AUDIT_URL,START_CHANGE_PPS_URL } from '../../constant
 import SearchFilter from '../../components/searchFilter/searchFilter';
 import AuditAction from '../auditTab/auditAction'; 
 import {modal} from 'react-redux-modal';
+import {defineMessages} from 'react-intl';
 
+const messages=defineMessages({
+    pendingAudit: {
+      id: "audit.startaudit.pendingAudit",
+      defaultMessage: " Audits pending"
+  },
+  linesRemaining: {
+      id: "audit.startaudit.linesRemaining",
+      defaultMessage: " lines remaining to be Audited"
+  },
+  searchPlaceholder:{
+    id: "audit.startaudit.searchPlaceholder",
+    defaultMessage: "Search PPS by opertor name or mode"
+  }
+});
 class AuditStart extends React.Component {
    constructor(props) {
       super(props);
@@ -26,6 +41,9 @@ class AuditStart extends React.Component {
    }
 
    _tableAuditPPSData(itemsData){
+let pendingAudit = this.context.intl.formatMessage(messages.pendingAudit);
+  let linesRemaining = this.context.intl.formatMessage(messages.linesRemaining);
+
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
@@ -35,8 +53,8 @@ class AuditStart extends React.Component {
       }
   rowObject.assignOperator=itemsData[i].operator_assigned;
   rowObject.auditStatus={
-      "header":[itemsData[i].audits_pending+' Audits pending'],
-      "subHeader":[itemsData[i].auditlines_pending+ ' lines remaining to be Audited']
+      "header":[itemsData[i].audits_pending+pendingAudit],
+      "subHeader":[itemsData[i].auditlines_pending+linesRemaining]
       }
   tableData.push(rowObject);
   rowObject={};
@@ -212,7 +230,15 @@ return tableData;
     console.log(this.props.auditID)
     let me=this;
     let items=this.state.items||[];
- let checkedAuditPPSCount=this.props.checkedAuditPPSList.length;
+    let auditmodepps= <FormattedMessage id="audit.startaudit.auditmodepps" description='PPS in audit mode' defaultMessage='PPS in audit mode' />;
+    let othermodepps= <FormattedMessage id="audit.startaudit.othermodepps" description='PPS in other mode' defaultMessage='PPS in other mode' />;
+    let operatorassign= <FormattedMessage id="audit.startaudit.operatorassign" description='Operator Assigned' defaultMessage='Operator Assigned' />;
+    let startButton= <FormattedMessage id="audit.startaudit.startButton" description='start' defaultMessage='START' />;
+    let searchPlaceholder = this.context.intl.formatMessage(messages.searchPlaceholder);
+    let forAudit= <FormattedMessage id="audit.startaudit.Foraudit" description='For audit' defaultMessage='For audit' />;
+
+    
+    let checkedAuditPPSCount=this.props.checkedAuditPPSList.length;
   let checkedOtherPPSCount=this.props.checkedOtherPPSList.length;
     let totalAuditPPSCount=0;
     let totalOtherPPSCount=0;
@@ -235,9 +261,6 @@ return tableData;
   });
    var tablerowdataAudit=this._tableAuditPPSData(auditPPS);
   var tablerowdataOther=this._tableotherPPSData(otherPPS);
-
-
-
 
 		var tableData=[
 			{id:1,text: "SKU CODE", sortable: true,width:35}, 
@@ -266,10 +289,10 @@ return tableData;
                <div className='gor-auditDetails-modal-body'>
                 <div className="content-body">
                 <span className='left-float'>
-                     For audit - {this.state.auditId}
+                    {forAudit} - {this.state.auditId}
                   </span>
                   <div className="ppsSearchWrap"> 
-                            <SearchFilter handleChange={this.handleChange} placeHolder={'Search PPS by opertor name or mode'} />
+                            <SearchFilter handleChange={this.handleChange} placeHolder={searchPlaceholder} />
                   </div>  
                    
                  </div> 
@@ -279,7 +302,7 @@ return tableData;
                                 <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox" checked={this.props.checkedAuditPPSList.length==0?'':true} onChange={me.headerCheckChange.bind(me,'Audit')}/>
                                  <span className={totalAuditPPSCount==checkedAuditPPSCount?"checkmark":"checkmark1"}></span>
                                 </label>
-                                       <span>{tablerowdataAudit.length} PPS in audit mode</span>
+                                       <span>{tablerowdataAudit.length}{auditmodepps}</span>
                                    </GTableHeaderCell>
                           
                        </GTableHeader>
@@ -294,7 +317,7 @@ return tableData;
                                        return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
                                           {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox" id={tablerowdataAudit[idx]['ppsDetails']['header'][0]} checked={(me.state.checkedAuditPPS).indexOf(tablerowdataAudit[idx]['ppsDetails']['header'][0])==-1?'':true} onChange={me.CheckChange.bind(me,'Audit')}/><span className="checkmark"></span></label> :""}
                                           {index==0?<DotSeparatorContent header={tablerowdataAudit[idx][text]['header']} subHeader={tablerowdataAudit[idx][text]['subHeader']} separator={'.'} />:""} 
-                                          {index==1?<div>Operator Assigned: {tablerowdataAudit[idx][text]}</div>:""}
+                                          {index==1?<div>{operatorassign}: {tablerowdataAudit[idx][text]}</div>:""}
                                           {index==2?<DotSeparatorContent header={tablerowdataAudit[idx][text]['header']} subHeader={tablerowdataAudit[idx][text]['subHeader']} separator={'.'} />:""}     
                                           
                                        </div>
@@ -312,7 +335,7 @@ return tableData;
                                      <GTableHeaderCell key={1} header='Audit' className='audittable'>
                                      <label className="container" style={{'margin-left': '10px'}}> <input type="checkbox" checked={this.props.checkedOtherPPSList.length==0?'':true}  onChange={me.headerCheckChange.bind(me,'other')}/>
                                      <span className={totalOtherPPSCount==checkedOtherPPSCount?"checkmark":"checkmark1"}></span></label>
-                                            <span>{tablerowdataOther.length} PPS in other mode</span>
+                                            <span>{tablerowdataOther.length} {othermodepps}</span>
                                               
                                         </GTableHeaderCell>
                                
@@ -328,7 +351,7 @@ return tableData;
                                             return <div key={index} style={tableDataother[index].width?{flex:'1 0 '+tableDataother[index].width+"%"}:{}} className="cell" >  
                                                 {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '10px'}}> <input type="checkbox" id={tablerowdataOther[idx]['ppsDetails']['header'][0]} checked={(me.state.checkedOtherPPS).indexOf(tablerowdataOther[idx]['ppsDetails']['header'][0])==-1?'':true}  onChange={me.CheckChange.bind(me,'Other')}/><span className="checkmark"></span></label> :""}
                                                 {index==0?<DotSeparatorContent header={tablerowdataOther[idx][text]['header']} subHeader={tablerowdataOther[idx][text]['subHeader']} separator={'.'} />:""} 
-                                                {index==1?<div>Operator Assigned: {tablerowdataOther[idx][text]}</div>:""}
+                                                {index==1?<div>{operatorassign}: {tablerowdataOther[idx][text]}</div>:""}
                                                 
                                             </div>
                                         })}
@@ -343,12 +366,15 @@ return tableData;
                     </GTable>:""}
                        
                      </div>
-                     <button className="gor-add-btn gor-listing-button rightMargin" onClick={this._handlestartaudit.bind(this)}>START</button>
+                     <button className="gor-add-btn gor-listing-button rightMargin" onClick={this._handlestartaudit.bind(this)}>{startButton}</button>
             </div>
 
          </div>
       );
    }
+}
+AuditStart.contextTypes = {
+    intl: React.PropTypes.object.isRequired
 }
 function mapStateToProps(state, ownProps){
   return {
