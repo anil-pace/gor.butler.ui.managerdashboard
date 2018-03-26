@@ -104,7 +104,19 @@ const messages = defineMessages({
     manualassignpps: {
         id: "auditdetail.label.manualassignpps",
         defaultMessage: "Manually-Assign PPS"
-    }
+    },
+    completedoutof: {
+       id: "auditdetail.label.completedoutof",
+       defaultMessage: " completed out of "
+    },
+   linestoberesolved: {
+       id: "auditdetail.label.linestoberesolved",
+       defaultMessage: " lines to be resolved "
+   },
+   linestobereaudited: {
+    id: "auditdetail.label.linestobereaudited",
+    defaultMessage: " lines to be re-audited "
+},
 
 });
 
@@ -360,9 +372,7 @@ class AuditTab extends React.Component {
 
 
     _processAuditData(data, nProps) {
-        if(this){
-            console.log('raja');
-        }
+        
         nProps = this;
         data = nProps.props.auditDetail;
         let notStarted = nProps.context.intl.formatMessage(messages.auditNotStartedStatus);
@@ -373,6 +383,9 @@ class AuditTab extends React.Component {
         let sku = nProps.context.intl.formatMessage(messages.auditSKU);
         let location = nProps.context.intl.formatMessage(messages.auditLocation);
         let pps = nProps.context.intl.formatMessage(messages.pps);
+        let completedoutof = nProps.context.intl.formatMessage(messages.completedoutof);
+          let linestoberesolved = nProps.context.intl.formatMessage(messages.linestoberesolved);
+          let linestobereaudited = nProps.context.intl.formatMessage(messages.linestobereaudited);
         var timeOffset = nProps.props.timeOffset || "";
         var checkedAudit = nProps.props.checkedAudit || {};
 
@@ -413,7 +426,7 @@ class AuditTab extends React.Component {
             else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_waiting" || data[i].audit_status == "audit_conflicting" ||
                 data[i].audit_status == "audit_started" || data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || data[i].audit_status == "audit_pending_approval") {
                 auditData.progressBarflag = true;
-                auditData.status = data[i].audit_progress.completed + nProps.context.intl.formatMessage(" completed out of ") + data[i].audit_progress.total;
+                auditData.status = data[i].audit_progress.completed + completedoutof + data[i].audit_progress.total;
             }
 
 
@@ -523,10 +536,10 @@ class AuditTab extends React.Component {
             }
             auditData.resolved = data[i].resolved;
             if (data[i].audit_button_data.audit_resolve_button == 'disable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  nProps.context.intl.formatMessage(" lines to be resolved")) : "";
+                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestoberesolved) : "";
             }
             else if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +nProps.context.intl.formatMessage(" lines to be re-audited")) : "";
+                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +linestobereaudited) : "";
             }
 
 
