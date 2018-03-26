@@ -132,9 +132,10 @@ _timeFormat(UTCtime){
     return [tile1Data,tile2Data,tile3Data];
   }
 
-  handleChange(data) {
+  handleChange(input) {
     var updatedList = this.props.auditDetails
     let attributeData= updatedList.entity_list;
+    let data=input.toLowerCase();
     var queryResult=[];
     attributeData.forEach(function(item){
             if(item.id.toLowerCase().indexOf(data)!=-1)
@@ -178,17 +179,21 @@ _timeFormat(UTCtime){
       "subHeader":[]
       }
     }
-    let a=itemsData[i].audit_result;
-    rowObject.status= (a && a.total>=1)?a.missing+" missing out of "+a.total+" items":"";
-  tableData.push(rowObject);
-  rowObject={};
+    if(itemsData[i].result.sku_status=='inventory_empty'){
+      rowObject.status="No inventory found";
+    }
+    else{
+    let items=itemsData[i].result;
+    rowObject.status=(items && items.total>=1)?items.missing+" missing out of "+items.total+" items":"";
+    }
+    tableData.push(rowObject);
+    rowObject={};
       
 }
 return tableData;
 }
 
    render() {
-    //let rawData=this.state.items;
     let allData=this.props.auditDetails;
     let tiledata=this._processDataTile(allData);
     let attributeData= this.state.items;

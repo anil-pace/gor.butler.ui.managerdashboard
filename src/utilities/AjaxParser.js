@@ -146,10 +146,8 @@ import {
     recievePendingMSU,
     resetCheckedPPSList
 } from "../actions/ppsModeChangeAction";
-
-
 import {
-    resetaudit
+    resetaudit,setCheckedAudit
 } from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
@@ -268,6 +266,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 msg = getFormattedMessages("DELETEAUDIT", values);
                 store.dispatch(notifyfeedback(msg));
                 store.dispatch(setAuditRefresh(true)); //reset refresh flag
+                store.dispatch(setCheckedAudit([]));
             }
             break;
 
@@ -277,6 +276,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("PAUSEAUDIT", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
             }
             else{
                 values={id:res.alert_data[0].details.audit_id},
@@ -300,6 +300,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("CANCELLED", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
         }
 
             case AUDIT_USERLIST:
@@ -355,21 +356,24 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     stringInfo = getFormattedMessages("STARTFAIL", values);
                     store.dispatch(setNotification(stringInfo));
                 }
-
+                store.dispatch(setCheckedAudit([]));
                 store.dispatch(setAuditRefresh(true));
         }
         else if(res.alert_data[0].code== "as007"){//to do
                 stringInfo = codeToString(res.alert_data[0]);
-				store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(setCheckedAudit([]));
         }
         else if(res.alert_data[0].code== "g028"){
             stringInfo = codeToString(res.alert_data[0]);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         else
         {
             stringInfo = getFormattedMessages("STARTFAILALL", values);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         break;
 

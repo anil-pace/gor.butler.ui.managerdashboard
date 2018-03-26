@@ -41,15 +41,12 @@ import {
     let arr=this.props.checkedAudit;
   let a= arr.indexOf(e.currentTarget.id);
   (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
-  //console.log(this.state.checkedAudit);
   this.props.setCheckedAudit(arr);
-    
-    //console.log(e.currentTarget.checked);
-    //console.log(e.currentTarget.id);
  }
  componentWillReceiveProps(nextProps){
   this.setState({'checkedAudit':nextProps.checkedAudit});
  }
+
 
  viewAuditDetails(auditId) {
   modal.add(ViewDetailsAudit, {
@@ -202,7 +199,7 @@ _tableBodyData(itemsData){
       }
   rowObject.auditProgress={
    "percentage": this._findStatus(itemsData[i].progressStatus),
-   "flag":(itemsData[i].progressStatus.total>=1)?true:false,
+   "flag":(itemsData[i].progressBarflag)?true:false,
    "status":itemsData[i].status
   }
   rowObject.resolvedState=itemsData[i].lineResolveState;
@@ -258,8 +255,9 @@ render(){
    <div>
 
    <div className="waveListWrapper">
-   <GTable options={['table-bordered']}>
+   <GTable options={['table-bordered','table-auditListing']}>
 
+{tablerowdata && tablerowdata.length>=1?
    <GTableBody data={tablerowdata} >
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
@@ -267,19 +265,19 @@ render(){
     <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
-      let visibilityStatus=tablerowdata[idx]['button'].startButton?'true':'hidden';
+      let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{width:'115px',display:'inline',float:'right',position:'relative'}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>
       <button className="gor-add-btn gor-listing-button">
       START
        <div className="got-add-notch"></div>
       </button>      
-      </ActionDropDown>:""}
+      </ActionDropDown></div>:""}
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
       RE-AUDIT
       </button>:""}
@@ -287,7 +285,7 @@ render(){
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
       RESOLVE
       </button>:""}
-       {index==5?<ActionDropDown style={{width:'110px'}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+       {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
       </ActionDropDown>:""}
 
@@ -297,7 +295,7 @@ render(){
     </GTableRow>
     )
   }):""}
-  </GTableBody>
+  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>There are no audit to view. Create audit</div>}
 
   </GTable>
   </div>
