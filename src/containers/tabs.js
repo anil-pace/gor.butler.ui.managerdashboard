@@ -222,7 +222,7 @@ class Tabs extends React.Component{
         systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="STOPPED"/>; 
       }
-      else if(this.props.system_emergency && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+      else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
               defaultMessage="PAUSED"/>; 
