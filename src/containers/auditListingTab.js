@@ -8,7 +8,7 @@
  import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
  import {GTableBody} from "../components/gor-table-component/tableBody";
  import {GTableRow} from "../components/gor-table-component/tableRow";
- import {FormattedMessage} from 'react-intl';
+ import {FormattedMessage,defineMessages} from 'react-intl';
  import Accordion from '../components/Accordian/accordian';
  import NameInitial from '../components/NameInitial/nameInitial';
  import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
@@ -26,6 +26,57 @@
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
 } from '../constants/configConstants'; 
+
+const messages=defineMessages({
+  alCancel: {
+    id: "auditlisting.cancel.status",
+    defaultMessage: "Cancel"
+},
+alDelete: {
+    id: "auditlisting.delete.status",
+    defaultMessage: "Delete"
+},
+alDuplicate: {
+    id: "auditlisting.duplicate.prefix",
+    defaultMessage: "Duplicate"
+},
+alResolve: {
+    id: "auditlisting.resolve.status",
+    defaultMessage: "Resolve"
+},
+alPause: {
+  id: "auditlisting.pause.status",
+  defaultMessage: "Pause"
+},
+alEdit: {
+  id: "auditlisting.edit.status",
+  defaultMessage: "Edit"
+},
+alViewDetails: {
+  id: "auditlisting.viewdetails.status",
+  defaultMessage: "View Details"
+},
+autoAssignPPS: {
+  id: "auditlisting.label.autoassignpps",
+  defaultMessage: "Auto Assign PPS"
+},
+manualAssignPPS: {
+  id: "auditlisting.label.manualassignpps",
+  defaultMessage: "Manually-Assign PPS"
+},
+startButton: {
+  id: "auditlisting.label.startbutton",
+  defaultMessage: "START"
+},
+reauditButton: {
+  id: "auditlisting.label.reauditbutton",
+  defaultMessage: "RE-AUDIT"
+},
+resolveButton: {
+  id: "auditlisting.label.reolvebutton",
+  defaultMessage: "RESOLVE"
+}
+});
 
  class auditListingTab extends React.Component{
 
@@ -186,6 +237,15 @@ return (Math.round(data.completed*100)/data.total);
 }
 
 _tableBodyData(itemsData){
+  let alCancel = this.context.intl.formatMessage(messages.alCancel);
+  let alDelete = this.context.intl.formatMessage(messages.alDelete);
+  let alDuplicate = this.context.intl.formatMessage(messages.alDuplicate);
+  let alResolve = this.context.intl.formatMessage(messages.alResolve);
+  let alPause = this.context.intl.formatMessage(messages.alPause);
+  let alEdit = this.context.intl.formatMessage(messages.alEdit);
+  let alViewDetails = this.context.intl.formatMessage(messages.alViewDetails);
+
+ 
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
@@ -209,24 +269,24 @@ _tableBodyData(itemsData){
     "reAudit":itemsData[i].button['audit_reaudit_button']=='enable'?true:false,
   }
   rowObject.butoonToSHow=[];
-    rowObject.butoonToSHow.push({name:'View Details',value:'viewdetails'});
+    rowObject.butoonToSHow.push({name:alViewDetails,value:'viewdetails'});
       if(itemsData[i].button['audit_cancel_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Cancel',value:'cancel'});
+      rowObject.butoonToSHow.push({name:alCancel,value:'cancel'});
       }
       if(itemsData[i].button['audit_delete_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Delete',value:'delete'});
+      rowObject.butoonToSHow.push({name:alDelete,value:'delete'});
       }
        if(itemsData[i].button['audit_duplicate_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Duplicate',value:'duplicate'});
+      rowObject.butoonToSHow.push({name:alDuplicate,value:'duplicate'});
       }
        if(itemsData[i].button['audit_resolve_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Resolve',value:'resolve'});
+      rowObject.butoonToSHow.push({name:alResolve,value:'resolve'});
       }
       if(itemsData[i].button['audit_pause_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Pause',value:'pause'});
+      rowObject.butoonToSHow.push({name:alPause,value:'pause'});
       }
       if(itemsData[i].button['audit_start_button']=='enable'){
-      rowObject.butoonToSHow.push({name:'Edit',value:'edit'});
+      rowObject.butoonToSHow.push({name:alEdit,value:'edit'});
       }
       
       
@@ -239,6 +299,12 @@ return tableData;
 
 
 render(){
+  let autoAssignPPS = this.context.intl.formatMessage(messages.autoAssignPPS);
+  let manualAssignPPS = this.context.intl.formatMessage(messages.manualAssignPPS);
+  let startButton = this.context.intl.formatMessage(messages.startButton);
+  let reauditButton = this.context.intl.formatMessage(messages.reauditButton);
+  let resolveButton = this.context.intl.formatMessage(messages.resolveButton);
+
   let me=this;
   var itemsData=me.props.items;
   var tablerowdata=this._tableBodyData(itemsData);
@@ -272,18 +338,17 @@ render(){
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:'Auto-assign PPS',value:'autoassignpps'},{name:'Manually-assign PPS',value:'mannualassignpps'}]}>
-      <button className="gor-add-btn gor-listing-button">
-      START
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:autoAssignPPS,value:'autoassignpps'},{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+      {startButton}
        <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
        {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
-      RE-AUDIT
+    {reauditButton}
       </button>:""}
       {index==4 && tablerowdata[idx][text].resolveButton?
       <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
-      RESOLVE
+      {resolveButton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
@@ -295,12 +360,18 @@ render(){
     </GTableRow>
     )
   }):""}
-  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>There are no audit to view. Create audit</div>}
+  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>
+  <FormattedMessage id='audit.notfound'  defaultMessage="There are no audit to view. Create audit" description="audit not found"/>
+  
+  </div>}
 
   </GTable>
   </div>
   </div>
   )
 }
+}
+auditListingTab.contextTypes={
+  intl: React.PropTypes.object.isRequired
 }
 export default auditListingTab ;

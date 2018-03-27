@@ -56,10 +56,10 @@ button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMess
                         defaultMessage="PROCEDED" description="Text for proceed button"/></button>
       }else if(this.props.param==DELETE_AUDIT){
 button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
-                        defaultMessage="DELET" description="Text for delte button"/></button>
+                        defaultMessage="DELETE" description="Text for delte button"/></button>
       }else if(this.props.param=='ppsChangeStart'){
 button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
-                        defaultMessage="CONFIRM" description="Text for delte button"/></button>
+                        defaultMessage="CONFIRM" description="Text for delete button"/></button>
       }      
       return (
         
