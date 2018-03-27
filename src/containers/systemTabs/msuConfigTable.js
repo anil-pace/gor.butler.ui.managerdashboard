@@ -119,11 +119,8 @@ class MsuConfigTable extends React.Component {
                                 </div>
                              </div>);
 
-                msuRow.push(<div className="msuIdWrapper"> 
-                             </div>);
-
-                msuRow.push(<div className="msuIdWrapper"> 
-                             </div>);
+                msuRow.push(<div className="msuIdWrapper"> </div>);
+                msuRow.push(<div className="msuIdWrapper"> </div>);
 
                 msuRow.push(<div key={i} style={{textAlign:"center"}}>
                         <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].msu_id)}>

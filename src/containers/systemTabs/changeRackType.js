@@ -316,7 +316,12 @@ class ChangeRackType extends React.Component {
                                 </div>*/}
 
                                 <div className="rackWrapper">
-                                    <MsuRackFlex rackDetails={xyz[0].rack_type_rec} slotBarcodes={xyz[0].slot_barcodes} rackWidth={xyz[0].rack_width} />
+                                    <div className="parent-container" style={{width: "100%"}}>
+                                        <div className="slotsFlexContainer">
+                                            <div className="legsSpaceContainer"> </div>
+                                         </div>
+                                    </div>
+                                    {/*<MsuRackFlex rackDetails={xyz[0].rack_type_rec} slotBarcodes={xyz[0].slot_barcodes} rackWidth={xyz[0].rack_width} />*/}
                                     {/*<MsuRackFlex rackDetails={this.props.rackData.rack_type_rec} slotBarcodes={this.props.rackData.slot_barcodes} rackWidth={this.props.rackData.rack_width} putDirectionFlex={this.props.putDirection} />*/}
                                 </div>
 

@@ -663,10 +663,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case FETCH_MSU_CONFIG_LIST:
-            // let res=[
-            //   {'msu_id':"177"},
-            //   {'msu_id':"178"}
-            // ];
+            let res=[
+              {'msu_id':"177"},
+              {'msu_id':"178"}
+            ];
             store.dispatch(receiveMsuConfigList(res));
         default:
             ShowError(store, cause, status);
