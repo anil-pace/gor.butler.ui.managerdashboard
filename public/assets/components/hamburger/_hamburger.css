@@ -1,0 +1,125 @@
+.gor-menuWrap {
+  display: inline-block;
+  line-height: 22px;
+  width: 38%;
+  position: relative;
+}
+
+.gor-menu-heading {
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  color: #3c3f43;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.gor-menu-heading.gor-white-text {
+  color: #FFFFFF;
+}
+
+.gor-menuIcon {
+  display: inline-block;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.gor-menu-subheading {
+  font-family: "Source Sans Pro";
+  font-size: 0.75rem;
+  color: #3c3f43;
+}
+
+.gor-menu-subheading.gor-white-text {
+  color: #FFFFFF;
+}
+
+.gor-hamburger-option {
+  padding: 19px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: #666666;
+}
+
+.gor-hamburger-option h1 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3C3F43;
+}
+
+.gor-hamburger-option button {
+  background: #fff;
+  border: 1px solid #525252;
+  border-radius: 2px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3C3F43;
+}
+
+.gor-hamburger-option.gor-operation-normal {
+  font-size: 18px;
+  background: #10c469;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.gor-hamburger-option.gor-fail {
+  font-size: 18px;
+  background: #EC1C24;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.gor-option-icon {
+  width: 15%;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.gor-option-icon .gor-tick-white {
+  vertical-align: middle;
+}
+
+.gor-option-icon .gor-error-white {
+  vertical-align: middle;
+}
+
+.gor-hamburger-wrapper {
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 330px;
+  top: 34px;
+  right: -47px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: solid 1px #B9B9B9;
+  border-radius: 3px;
+}
+
+.gor-sec-footer {
+  padding: 8px 15px;
+  border-top: 1px solid #eee;
+}
+
+.gor-sec-footer .gor-footer-link {
+  color: #77ACE9;
+  font-size: 14px;
+}
+
+.gor-btn-small {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 60px;
+  background: #f36f36;
+  padding: 2%;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.gor-right {
+  float: right;
+}

@@ -1,0 +1,122 @@
+.health.mainBlock {
+  width: 100%;
+}
+
+.health .block {
+  display: inline-block;
+  text-align: center;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+.health .attributes {
+  width: 5.5625rem;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.health .upperText {
+  font-family: "source sans pro";
+  font-size: 1.5rem;
+}
+
+.health .subtext {
+  font-family: "source sans pro";
+  font-size: 0.75rem;
+  width: 99%;
+}
+
+.health .parameters {
+  width: auto;
+}
+
+.health .stoppedState {
+  background: #ec1c24;
+  width: 1.75rem;
+  height: 1.125rem;
+  border-radius: 0.9375rem;
+  color: #ffffff;
+  font-family: "source sans pro";
+  font-weight: bold;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.health .onState {
+  background: #ffffff;
+  width: 1.75rem;
+  height: 1.125rem;
+  border-radius: 0.9375rem;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-color: #00a54f;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.health .offState {
+  background: #ffffff;
+  width: 1.75rem;
+  height: 1.125rem;
+  border-radius: 0.9375rem;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-color: #999999;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.health .errorState {
+  background: #ffffff;
+  width: 1.875rem;
+  height: 1.125rem;
+  border-radius: 0.9375rem;
+  color: #666666;
+  font-family: "source sans pro";
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-color: #ec1c24;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.health .paramPosition {
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+  width: auto;
+}
+
+.health .paramPositionFront {
+  padding-right: 0.9375rem;
+  padding-left: 0.625rem;
+  width: auto;
+}
+
+.health .paramPositionMiddle {
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+  width: auto;
+}
+
+.health .paramPositionBack {
+  padding-right: 0.625rem;
+  padding-left: 0.9375rem;
+  width: auto;
+}
+
+.health .status {
+  font-family: "source sans pro";
+  font-size: 0.75rem;
+  color: #666666;
+  text-align: center;
+}
+
+.health .horizontal-line {
+  display: inline-block;
+  height: 1.875rem;
+  border-left: 0.0625rem solid #f7f7f7;
+}

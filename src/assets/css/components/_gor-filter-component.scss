@@ -1,3 +1,6 @@
+@import '../abstracts/functions';
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
 .gor-filter-wrapper{
     transition: all 200ms ease;
     font-size: 14px;

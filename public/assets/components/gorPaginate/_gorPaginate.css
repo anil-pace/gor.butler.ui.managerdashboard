@@ -1,0 +1,120 @@
+.gor-paginate-wrap {
+  padding-top: 2rem;
+  padding-bottom: 0.625rem;
+}
+
+.gor-paginate-wrap .gor-paginate-input-box-wrap {
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+.gor-paginate-wrap .gor-paginate-input-box-wrap .gor-paginate-text-wrap {
+  display: inline-block;
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 0.875rem;
+  color: #AAAAAA;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+}
+
+.gor-paginate-wrap .gor-paginate-input-box-wrap .gor-paginate-input-box {
+  width: 2.875rem;
+  height: 2.1875rem;
+  border-color: #AAAAAA;
+  border-style: solid;
+  border-radius: 0.1875rem;
+  font-size: 0.875rem;
+  text-align: center;
+  color: #AAAAAA;
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 0.875rem;
+}
+
+.gor-paginate-wrap .gor-button-wrap {
+  width: 11.875rem;
+  height: 2.1875rem;
+  background: #ffffff;
+  color: #AAAAAA;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-right-btn {
+  display: inline-block;
+  border-style: solid;
+  border-width: 0.0625rem;
+  width: 2.875rem;
+  height: 2.1875rem;
+  border-color: #AAAAAA;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-right-btn:hover {
+  border-color: #4D5055;
+  color: #4D5055;
+  cursor: pointer;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-right-btn {
+  display: inline-block;
+  border-style: solid;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-right-width: 0.0625rem;
+  border-left-width: 0rem;
+  width: 2.875rem;
+  height: 2.1875rem;
+  border-color: #AAAAAA;
+  border-bottom-right-radius: 0.1875rem;
+  border-top-right-radius: 0.1875rem;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-right-btn:hover {
+  border-color: #4D5055;
+  color: #4D5055;
+  cursor: pointer;
+  border-left-style: solid;
+  border-left-width: 1px;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-left-btn {
+  display: inline-block;
+  border-style: solid;
+  border-left-width: 0.0625rem;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-right-width: 0rem;
+  width: 2.875rem;
+  height: 2.1875rem;
+  border-color: #AAAAAA;
+  border-bottom-left-radius: 0.1875rem;
+  border-top-left-radius: 0.1875rem;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-left-btn:hover {
+  border-color: #4D5055;
+  color: #4D5055;
+  cursor: pointer;
+  border-right: solid 1px;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-left-btn {
+  display: inline-block;
+  border-style: solid;
+  border-top-width: 0.0625rem;
+  border-bottom-width: 0.0625rem;
+  border-left-width: 0.0625rem;
+  border-right-width: 0rem;
+  width: 2.875rem;
+  height: 2.1875rem;
+  border-color: #AAAAAA;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-middle-left-btn:hover {
+  border-color: #4D5055;
+  color: #4D5055;
+  cursor: pointer;
+  border-right: solid 1px;
+}
+
+.gor-paginate-wrap .gor-button-wrap .gor-paginate-btn-disable {
+  pointer-events: none;
+  opacity: 0.5;
+}

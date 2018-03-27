@@ -1,0 +1,587 @@
+.pps-configuration-container {
+  box-sizing: border-box;
+  background-color: white;
+  overflow: auto;
+  position: absolute;
+  width: 100%;
+}
+
+.pps-configuration-container .pps-configuration-details-container {
+  float: right;
+  width: 83%;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.pps-configuration-container .pps-configuration-navigation-tabs {
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 16px;
+  color: #666;
+  clear: both;
+  overflow: auto;
+  text-align: center;
+}
+
+.pps-configuration-container .pps-configuration-navigation-tabs .active {
+  border-bottom: 2px solid black;
+  color: black;
+}
+
+.pps-configuration-container .pps-configuration-navigation-tabs .navigation-tab {
+  padding: 20px;
+  box-sizing: border-box;
+  width: 20%;
+  float: left;
+  cursor: pointer;
+}
+
+.pps-configuration-container .pps-configuration-navigation-tabs .seat-description {
+  padding: 20px;
+  box-sizing: border-box;
+  width: 20%;
+  float: right;
+  font-weight: normal;
+  text-align: right;
+}
+
+.pps-configuration-container .pps-bin-action-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 113px;
+  height: 35px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 3px;
+  border-color: #A6A7A9;
+  border-style: double;
+  border-width: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.pps-configuration-container .pps-bin-next-button, .pps-configuration-container .pps-bin-save-apply-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right;
+  background-color: #f36f36;
+  border: solid 1px #f36f36;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+.pps-configuration-container .pps-bin-next-button {
+  width: 113px;
+}
+
+.pps-configuration-container .pps-bin-save-apply-button {
+  width: 150px;
+}
+
+.pps-configuration-container .pps-bin-back-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 113px;
+  height: 30px;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 3px;
+  border-color: #A6A7A9;
+  border-style: double;
+  border-width: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  float: right;
+}
+
+.pps-configuration-container .pps-bin-cancel-button, .pps-configuration-container .pps-bin-save-button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: transparent;
+  margin-top: 10px;
+  color: #4990e2;
+}
+
+.pps-configuration-container .pps-bin-cancel-button {
+  width: 113px;
+  float: left;
+}
+
+.pps-configuration-container .pps-bin-save-button {
+  float: right;
+}
+
+.pps-configuration-container .pps-bin-cancel-button:focus, .pps-configuration-container .pps-bin-save-button:focus {
+  outline: none;
+}
+
+.pps-configuration-container .pps-list-container {
+  float: left;
+  width: 17%;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  height: 100%;
+  position: absolute;
+}
+
+.pps-configuration-container .pps-list-header {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.pps-configuration-container .pps-list-item-name {
+  font-weight: bold;
+}
+
+.pps-configuration-container .selected .pps-list-item-name {
+  color: black;
+}
+
+.pps-configuration-container .pps-list {
+  color: #666;
+  height: 39.0625rem;
+  overflow-y: scroll;
+}
+
+.pps-configuration-container .pps-list-item {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.pps-configuration-container .pps-list-item.selected {
+  background: #f2f2f2;
+}
+
+.pps-configuration-container .pps-list-item-profiles {
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.pps-configuration-container .pps-list-item-profiles .selected {
+  font-weight: bold;
+  color: black;
+}
+
+.pps-configuration-container .pps-profile-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  clear: both;
+  overflow: auto;
+}
+
+.pps-configuration-container .pps-profile-name {
+  float: left;
+  line-height: 20px;
+  width: 68%;
+}
+
+.pps-configuration-container .profile-applied-label {
+  float: right;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  background-color: #3cb669;
+  font-size: 12px;
+}
+
+.pps-configuration-container .profile-label-container {
+  float: right;
+  width: 32%;
+}
+
+.pps-configuration-container .profile-requested-label {
+  float: right;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  background-color: orange;
+  font-size: 12px;
+}
+
+.pps-configuration-container .currentBinDirection {
+  background-color: transparent;
+  color: #999;
+}
+
+.pps-configuration-container .currentBinDirection .active {
+  background-color: #4990e2;
+  color: white;
+}
+
+.pps-configuration-container .pps-bins-container {
+  float: left;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.pps-configuration-container .pps-bins-container.include-tags {
+  width: 80%;
+}
+
+.pps-configuration-container .pps-bin-row {
+  margin: 20px;
+  text-align: center;
+  clear: both;
+  overflow: auto;
+}
+
+.pps-configuration-container .pps-bin {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #979797;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+}
+
+.pps-configuration-container .pps-bin.disabled {
+  opacity: 0.5;
+  background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
+}
+
+.pps-configuration-container .selected .pps-bin {
+  border: 2px solid #4990e2;
+  background-color: rgba(73, 144, 226, 0.3);
+}
+
+.pps-configuration-container .selected .pps-bin .pps-bin-tag-info {
+  color: black;
+}
+
+.pps-configuration-container .selected .pps-bin .pps-bin-tag-info .gor-tag-icon-grey {
+  background-position: -209px -94px;
+}
+
+.pps-configuration-container .mouseover .pps-bin.disabled {
+  background-image: linear-gradient(-45deg, transparent 25%, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%, transparent 75%, transparent);
+}
+
+.pps-configuration-container .pps-bin-tag-info {
+  display: inline-block;
+  height: 20px;
+  font-size: 14px;
+  color: #ccc;
+  padding-top: 8px;
+  padding-left: 5px;
+  word-wrap: break-word;
+}
+
+.pps-configuration-container .pps-bin-info {
+  width: 100%;
+  height: 20px;
+  background-color: #979797;
+  display: inline-block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  color: white;
+  text-align: center;
+}
+
+.pps-configuration-container .selected .pps-bin-info {
+  background-color: #4990e2;
+}
+
+.pps-configuration-container .pps-tags-container {
+  float: right;
+  width: 20%;
+  border-left: 1px solid #ccc;
+  box-sizing: border-box;
+  height: 520px;
+}
+
+.pps-configuration-container .pps-tags-header {
+  margin: 15px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 16px;
+  color: #666;
+  padding-bottom: 15px;
+}
+
+.pps-configuration-container .pps-searchbox-container {
+  margin: 15px;
+  font-size: 12px;
+}
+
+.pps-configuration-container .pps-searchresult-label {
+  margin: 15px;
+}
+
+.pps-configuration-container .pps-tags-row {
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  color: #666;
+  font-size: 12px;
+  clear: both;
+  overflow: auto;
+}
+
+.pps-configuration-container .pps-tag-list {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.pps-configuration-container .pps-tag-name {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: left;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.pps-configuration-container .pps-tag-name .highlight {
+  color: black;
+}
+
+.pps-configuration-container .pps-tag-selection {
+  float: right;
+}
+
+.pps-configuration-container .pps-tag-selection input[type=checkbox] {
+  margin: 0px;
+}
+
+.pps-configuration-container .pps-add-tag-container {
+  margin-left: 15px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  color: #666;
+  font-size: 12px;
+  clear: both;
+  overflow: auto;
+}
+
+.pps-configuration-container .pps-add-tag-name {
+  float: left;
+  max-width: 80%;
+  padding: 5px;
+  color: black;
+  word-wrap: break-word;
+}
+
+.pps-configuration-container .pps-add-tag-button {
+  float: right;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.pps-configuration-container .pps-searchbox-tags {
+  width: 80%;
+  height: 25px;
+  padding-left: 5px;
+  padding-right: 25px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  outline: none;
+}
+
+.pps-configuration-container .pps-configuration-actions-container {
+  width: 83%;
+  float: right;
+  height: 50px;
+  clear: both;
+  overflow: auto;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.pps-configuration-container .pps-bin-group {
+  border: 10px solid white;
+}
+
+.pps-configuration-container .pps-bin-group.highlight {
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent;
+  background-color: rgba(73, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-1 {
+  background-color: rgba(36, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-2 {
+  background-color: rgba(73, 72, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-3 {
+  background-color: rgba(73, 144, 113, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-4 {
+  background-color: rgba(109, 144, 216, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-5 {
+  background-color: rgba(109, 216, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-6 {
+  background-color: rgba(36, 144, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-7 {
+  background-color: rgba(73, 72, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-8 {
+  background-color: rgba(73, 144, 113, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-9 {
+  background-color: rgba(109, 144, 216, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.pps-bin-group-10 {
+  background-color: rgba(109, 216, 226, 0.3);
+}
+
+.pps-configuration-container .pps-bin-group.disabled {
+  opacity: 0.5;
+}
+
+.gor-create-profile {
+  width: 40%;
+  min-height: 18.75rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+}
+
+.gor-create-profile .gor-create-profile-header {
+  margin: auto;
+  padding: 1.875rem;
+  padding-bottom: 0;
+  min-height: 3.125rem;
+  clear: both;
+  overflow: auto;
+}
+
+.gor-create-profile .gor-create-profile-header .gor-question {
+  float: left;
+}
+
+.gor-create-profile .gor-create-profile-header .gor-create-profile-header-description {
+  font-size: 16px;
+  margin-top: 5px;
+  display: block;
+}
+
+.gor-create-profile .gor-create-profile-body {
+  font-size: 14px;
+  padding: 0px 1.875rem;
+  min-height: 9.375rem;
+  display: table;
+  width: 50%;
+}
+
+.gor-create-profile .gor-create-profile-action-button {
+  text-align: right;
+  margin-right: 1.25rem;
+}
+
+.gor-create-profile .gor-save-profile-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-create-profile .gor-filter-input-text {
+  padding-top: 0;
+}
+
+.gor-create-profile .gor-cancel-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 0.625rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.pps-table .requestedProfileTxt {
+  display: inline-block;
+  width: 65px;
+  font-size: 12px;
+  color: #27aae1;
+  vertical-align: middle;
+}
+
+.pps-table .pps-list-available-profile {
+  clear: both;
+  overflow: auto;
+  padding: 2px;
+}
+
+.pps-table .pps-list-available-profile .profile-name {
+  float: left;
+}
+
+.pps-table .pps-list-available-profile .applied-status {
+  float: right;
+}
+
+.pps-table .gor-pps-profile-drop {
+  display: inline-block;
+}
+
+.pps-table .gor-pps-profile-drop .gor-dropdown-wrapper {
+  display: inline-block;
+  width: 150px;
+  color: black;
+}
+
+.pps-table .gor-pps-profile-drop .gor-dropdown-option {
+  color: black;
+}
+
+.pps-table .gor-pps-profile-drop .gor-dropdown-option:hover {
+  background-color: #F2F2F2;
+}
+
+.pps-table .gor-pps-profile-drop .gor-option-wrapper {
+  border: 1px solid #aaa;
+}
+
+.pps-table .gor-pps-profile-drop .gor-dropdown-wrapper.disabled {
+  color: #aaa;
+}
+
+.pps-table .gor-pps-profile-drop .gor-white-background {
+  background-color: transparent;
+}

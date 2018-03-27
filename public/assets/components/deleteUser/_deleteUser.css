@@ -1,0 +1,49 @@
+.gor-align-middle {
+  vertical-align: middle;
+}
+
+.gor-align-top {
+  vertical-align: top;
+}
+
+.gor-delete {
+  width: 50%;
+  min-height: 15rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+  margin-top: 30vh;
+}
+
+.gor-delete .gor-delete-text {
+  margin: auto;
+  padding: 1.875rem;
+  min-height: 9.375rem;
+}
+
+.gor-delete .gor-delete-text .gor-delete-line {
+  display: inline-block;
+  width: 75%;
+}
+
+.gor-delete .gor-delete-text .gor-delete-line .gor-delete-query {
+  display: inline;
+}
+
+.gor-delete .gor-delete-bottom {
+  text-align: right;
+}
+
+.gor-delete .gor-delete-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}

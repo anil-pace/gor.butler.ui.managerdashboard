@@ -1,0 +1,15 @@
+.gor-footer {
+  background: #4D5055;
+  color: #CCCCCC;
+  border-top: solid 1px #AAAAAA;
+  text-align: center;
+  bottom: 0;
+  padding: 20px 0 20px 0;
+  width: 97%;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 14px;
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  margin-top: 50px;
+}

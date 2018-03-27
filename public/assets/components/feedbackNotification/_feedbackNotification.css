@@ -1,0 +1,17 @@
+.gor-feedbacknotify-top {
+  text-align: center;
+  width: 300px;
+  margin-top: 120px;
+  top: 5%;
+  font-size: 14px;
+  font-weight: 600;
+  position: absolute;
+  border-radius: 3px;
+  background-color: #fdf1c6;
+  box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.5);
+  padding: 10px 20px 10px 20px;
+  left: 37%;
+  z-index: 100;
+  color: #4a4a4a;
+  line-height: 15px;
+}

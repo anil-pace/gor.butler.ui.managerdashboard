@@ -1,0 +1,52 @@
+.gor-filter-wrapper {
+  transition: all 200ms ease;
+  font-size: 14px;
+  font-weight: 100;
+  color: #aaaaaa;
+  position: relative;
+  width: 13%;
+}
+
+.gor-filter-wrapper .gor-filter-checkbox {
+  display: inline-block;
+  height: 17px;
+  width: 17px;
+  background-position: 2px -107px;
+  vertical-align: middle;
+}
+
+.gor-filter-wrapper .gor-filter-checkbox.all {
+  background-position: -102px -76px;
+}
+
+.gor-filter-wrapper .gor-filter-checkbox.partial {
+  background-position: -85px -76px;
+}
+
+.gor-filter-wrapper .gor-filter-checkbox.none {
+  background-position: -68px -76px;
+}
+
+.gor-filter-wrapper .gor-filter-upper-wrap {
+  width: 100%;
+  border: 1px solid #aaaaaa;
+  border-radius: 0.1875rem;
+  padding: 8px 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  margin-top: 10px;
+}
+
+.gor-filter-wrapper .gor-filter-upper-wrap .gor-filter-arrow {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  background-position: 2px -107px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.gor-filter-wrapper .gor-filter-upper-wrap .gor-filter-arrow.up {
+  background-position: 2px -107px;
+}

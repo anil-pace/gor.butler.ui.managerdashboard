@@ -1,6 +1,7 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import {getYear} from '../../utilities/processDate';
+import '../../../public/assets/components/footer/_footer.css';
 class Footer extends React.Component{
 	constructor(props) 
 	{

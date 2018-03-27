@@ -1,0 +1,118 @@
+.lineGraph .bar {
+  cursor: pointer;
+}
+
+.lineGraph path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+.lineGraph .y path.domain {
+  display: none;
+}
+
+.lineGraph .y .tick line {
+  display: none;
+}
+
+.lineGraph .axis.x .domain {
+  display: block;
+}
+
+.lineGraph .axis path {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.lineGraph .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.lineGraph .x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.lineGraph .x line {
+  display: none;
+}
+
+.lineGraph .x line.month-break {
+  display: block;
+}
+
+.lineGraph .bar {
+  fill: #498BD8;
+  opacity: 1;
+}
+
+.lineGraph .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.lineGraph .grid .domain {
+  display: none;
+}
+
+.lineGraph .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.lineGraph .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.lineGraph .grid circle {
+  cursor: pointer;
+}
+
+.lineGraph .grid circle.pick {
+  fill: #1976D2;
+}
+
+.lineGraph .grid circle.put {
+  fill: #F5A623;
+}
+
+.lineGraph .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}
+
+.lineGraph .grid path.line {
+  stroke-width: 3.5;
+  stroke: #F5A623;
+}
+
+.lineGraph .grid path.line.pick {
+  stroke: #1976D2;
+}
+
+.lineGraph circle.line {
+  cursor: pointer;
+}
+
+.tooltip.ppLine {
+  position: absolute;
+  text-align: left;
+  width: 100px;
+  height: 40px;
+  padding: 5px 10px;
+  font: 12px sans-serif;
+  background: #4D5055;
+  border: 0px;
+  border-radius: 8px;
+  opacity: 0.9;
+  line-height: 20px;
+  pointer-events: none;
+  color: #fff;
+}

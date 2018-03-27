@@ -1,0 +1,49 @@
+.gor-auditActionModal {
+  width: 30%;
+  min-height: 13.25rem;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+  margin-top: 200px;
+}
+
+.gor-auditActionModal .gor-logout-text {
+  margin: auto;
+  min-height: 5.375rem;
+  color: #333333;
+  padding-top: 50px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+}
+
+.gor-auditActionModal .gor-logout-bottom {
+  text-align: right;
+  margin-right: 1rem;
+}
+
+.gor-auditActionModal .gor-logout-bottom .gor-logout-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.gor-auditActionModal .gor-logout-bottom .gor-cancel-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 7.0625rem;
+  height: 2.1875rem;
+  font-size: 14px;
+  background: #4D5055;
+  color: #ffffff;
+  border-radius: 3px;
+  margin-right: 0.625rem;
+  display: inline-block;
+  cursor: pointer;
+}

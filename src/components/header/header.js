@@ -14,6 +14,7 @@ import {connect} from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import NotificationsWrapper from '../../containers/notifications/notificationsWrapper';
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
+import '../../../public/assets/components/header/_header.css';
 
 
 

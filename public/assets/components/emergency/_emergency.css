@@ -1,0 +1,271 @@
+.gor-operation-head {
+  border-bottom: 1px solid #dddddd;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 90%;
+  margin: auto;
+  font-size: 20px;
+  text-align: left;
+}
+
+.gor-operation-head .gor-question-2 {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.gor-emergency-overlay {
+  position: absolute;
+  height: 100vh;
+  background: rgba(236, 28, 35, 0.4);
+  width: 100%;
+}
+
+.gor-safetylist .gor-usr-details {
+  width: 50%;
+}
+
+.gor-safetylist .gor-usr-details .gor-safety-hd {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  font-size: 20px;
+  color: #000000;
+  margin-top: 25px;
+}
+
+.gor-safetylist .gor-safetysub-head {
+  width: 80%;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-top: 0.875rem;
+}
+
+.gor-safety-body {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.gor-safety-body .tab-alert-icon {
+  margin-right: 10px;
+}
+
+.gor-safety-body .gor-instruction-table {
+  display: table;
+  margin-left: 40px;
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-heading {
+  display: table-row;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-row {
+  display: table-row;
+  font-size: 13px;
+  line-height: 1.15;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.gor-safety-body .gor-instruction-table .gor-instruction-cell {
+  display: table-cell;
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.gor-safety-error {
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #ef301e;
+  padding: 3%;
+  width: 75%;
+}
+
+.gor-safety-error .gor-error-sm {
+  display: inline-block;
+  width: 90%;
+}
+
+.gor-checklist-item {
+  font-size: 14px;
+  color: #666666;
+  margin-right: 10px;
+  font-family: 'Source Sans Pro Regular';
+  letter-spacing: -0.3px;
+}
+
+.gor-resume-operation {
+  width: 50%;
+  min-height: 15.625rem;
+  margin-top: 25vh;
+  border-radius: 1%;
+  text-align: left;
+}
+
+.gor-resume-operation .gor-operation-head {
+  width: 100%;
+  padding: 2%;
+  border: none;
+  font-size: 26px;
+  color: #666666;
+}
+
+.gor-resume-operation .gor-operation-head .gor-operation-heading {
+  color: #4d5055;
+  margin-left: 20px;
+}
+
+.gor-resume-operation .gor-operation-body {
+  padding: 2%;
+}
+
+.gor-text-bold {
+  font-weight: bold;
+  font-size: 18px;
+  color: #4a4a4a;
+}
+
+.gor-operation-text {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #666666;
+}
+
+.close {
+  float: right;
+  font-size: 40px;
+  color: #666666;
+  cursor: pointer;
+}
+
+.gor-operation-stop {
+  position: relative;
+  height: 230px;
+}
+
+.gor-error-lg {
+  font-size: 26px;
+  color: #ec1c24;
+}
+
+.gor-error-md {
+  font-size: 18px;
+  color: #ec1c24;
+}
+
+.gor-error-sm {
+  font-size: 14px;
+  color: #e63831;
+}
+
+.gor-text-sm {
+  font-size: 15px;
+  color: #666666;
+}
+
+.gor-center-align {
+  margin: auto;
+  text-align: center;
+}
+
+button:disabled {
+  opacity: 0.60;
+}
+
+.gor-password-field-lg {
+  margin: auto;
+  text-align: left;
+  margin-top: 1.25rem;
+  padding: 0.3125rem;
+  padding-left: 0.9375rem;
+  width: 75%;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  color: #666666;
+  font-size: 16px;
+}
+
+.gor-password-field-lg.gor-input-typing {
+  color: #666666;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-user {
+  background-position: -273px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing .gor-login-password {
+  background-position: -291px -77px;
+}
+
+.gor-password-field-lg.gor-input-typing:focus {
+  color: #333333;
+}
+
+.gor-operation-body {
+  padding: 5%;
+  font-size: 14px;
+  color: #666666;
+}
+
+.gor-margin-top {
+  margin-top: 40px;
+}
+
+.gor-operation-pause {
+  width: 40%;
+  min-height: 18.75rem;
+  margin-top: 25vh;
+  text-align: center;
+  border-radius: 1%;
+}
+
+.gor-operation-pause .gor-delete-line {
+  margin-left: 20px;
+}
+
+.gor-emergency {
+  width: 60%;
+  min-height: 31.25rem;
+  background: #ffffff;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+}
+
+.gor-emergency .gor-emergency-heading {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 30px;
+  background: #fc3838;
+  color: #ffffff;
+  padding: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.gor-emergency .gor-emergency-body {
+  width: 70%;
+  padding: 2.5rem;
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 22px;
+  color: #000000;
+  line-height: 1.875rem;
+}
+
+.gor-emergency .gor-emergency-body .gor-emergency-details {
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+}
+
+.gor-emergency .gor-emergency-close {
+  font-family: 'Source Sans Pro Semibold', sans-serif;
+  background: #efefef;
+  min-width: 20%;
+  height: 2.8125rem;
+  font-size: 18px;
+  border-radius: 3px;
+  border: 1px solid #AAAAAA;
+  margin-left: 40%;
+}

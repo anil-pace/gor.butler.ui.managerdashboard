@@ -1,0 +1,24 @@
+.searchBarWrapper {
+  width: 19.375rem;
+  border-radius: 3px;
+  border: 1px solid #aaaaaa;
+  background-color: #fff;
+}
+
+.searchBarWrapper .searchIconWrap {
+  display: inline-block;
+  padding-left: 0.625rem;
+  vertical-align: middle;
+}
+
+.searchBarWrapper .inputWrapper {
+  display: inline-block;
+  width: 80%;
+}
+
+.searchBarWrapper .inputWrapper .gor-search-input-wrap {
+  padding: .625rem;
+  border: none;
+  color: #aaaaaa;
+  width: 100%;
+}

@@ -1,3 +1,7 @@
+@import '../abstracts/functions';
+@import '../abstracts/mixins';
+@import '../abstracts/variables';
+
 .gor-audit-create{
   .audit-sub-footer{
     padding: 12px 0;

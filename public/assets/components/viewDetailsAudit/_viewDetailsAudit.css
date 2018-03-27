@@ -1,0 +1,133 @@
+.gor-AuditDetails-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
+  color: #4a4a4a;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body {
+  margin: 0px 0px 0px 17px;
+  width: 92%;
+  clear: both;
+  padding-top: 30px;
+  color: #4a4a4a;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper {
+  height: 10rem;
+  margin-top: 20px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .AuditDetailsHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 10px 10px 0px 10px;
+  color: #4a4a4a;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent {
+  margin-top: 10px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft {
+  width: 100%;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft .details-changepps {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft .details-changepps:hover {
+  color: #0389eb;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body {
+  padding: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .left-float {
+  font-size: 20px;
+  text-align: left;
+  color: #000000;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .ppsSearchWrap {
+  float: right;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid #AAAAAA;
+  min-height: 3.125rem;
+  width: 97%;
+  position: absolute;
+  padding-top: 10px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .AuditIDWrapper {
+  font-size: 1.625rem;
+  font-weight: 400;
+  color: #000000;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close {
+  background: #f2f2f2;
+  color: #AAAAAA;
+  float: right;
+  text-align: center;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:hover {
+  color: #333333;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:focus {
+  color: #666666;
+}
+
+.gor-AuditDetails-modal-content .viewDetailsTable {
+  width: 94%;
+  margin-left: 20px;
+}
+
+.gor-AuditDetails-modal-content .viewDetailsTable .auditSummary {
+  text-align: left;
+  color: #333333;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 7px;
+  float: left;
+}
+
+.gor-AuditDetails-modal-content .viewDetailsTable .auditDetailsSearchWrap {
+  float: right;
+}
+
+.gor-AuditDetails-modal-content .auditTable {
+  border-bottom: 2px solid #dddddd;
+}
+
+.gor-AuditDetails-modal-content .auditTable .cell {
+  background-color: #dddddd;
+}
+
+.gor-AuditDetails-modal-content .missing-item {
+  padding: 15px;
+  color: #ec1c2d;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}

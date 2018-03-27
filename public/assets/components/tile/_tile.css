@@ -1,0 +1,29 @@
+.orderDetailsColumn {
+  width: 33%;
+  display: inline-block;
+}
+
+.orderDetailsColumn .orderDetailsRow {
+  padding: 10px;
+  line-height: 25px;
+}
+
+.orderDetailsColumn .orderDetailsRow .spanKey {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+  color: #4a4a4a;
+}
+
+.orderDetailsColumn .orderDetailsRow .spanValue {
+  font-size: 0.875rem;
+  font-weight: 400;
+  display: inline-block;
+  color: #4a4a4a;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.width-auto {
+  width: auto;
+}

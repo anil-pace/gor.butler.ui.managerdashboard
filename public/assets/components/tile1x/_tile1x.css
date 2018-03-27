@@ -1,0 +1,115 @@
+.gor-tile {
+  background: #fff;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0.1875rem;
+  display: inline-block;
+  min-height: 10.625rem;
+  margin: 1% 2% 0% 1%;
+  font-size: 0;
+}
+
+.gor-tile.gor-double {
+  width: 97%;
+}
+
+.gor-tile.gor-single {
+  width: 47%;
+}
+
+.gor-tile .gor-status {
+  font-family: 'Source Sans Pro semibold', sans-serif;
+  color: #666666;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.gor-tile .gor-up-tile {
+  padding: 30px 10px 10px 20px;
+  min-height: 5rem;
+}
+
+.gor-tile .gor-up-tile .gor-tile-right {
+  width: 50px;
+  display: inline-block;
+  height: 55px;
+}
+
+.gor-tile .gor-tile-left {
+  width: 80%;
+  display: inline-block;
+}
+
+.gor-tile .gor-tile-one {
+  width: 42%;
+  display: inline-block;
+  margin-right: auto;
+}
+
+.gor-tile .gor-tile-two {
+  width: 58%;
+  display: inline-block;
+  margin-right: 0;
+}
+
+.gor-tile .gor-heading {
+  font-family: 'Source Sans Pro semibold', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+.gor-tile .gor-heading-value {
+  font-family: 'Source Sans Pro regular', sans-serif;
+  font-size: 2.8125rem;
+  padding: 0;
+  margin: 0;
+}
+
+.gor-tile .gor-success {
+  color: #10C469;
+}
+
+.gor-tile .gor-breach {
+  color: #ec1c24;
+}
+
+.gor-tile .gor-risk {
+  color: #dd7f03;
+}
+
+.gor-tile .gor-none {
+  color: #aaaaaa;
+}
+
+.gor-tile .gor-low-tile {
+  font-family: 'Source Sans Pro semibold', sans-serif;
+  font-size: 1rem;
+  background: #F7F7F7;
+  color: #666666;
+  padding: 17px 0px 17px 20px;
+  min-height: 1rem;
+  overflow: hidden;
+  vertical-align: middle;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.gorNoML {
+  margin-left: 0;
+}
+
+/*Media queries*/
+@media only screen and (max-width: 480px) {
+  .gor-tile .gor-tile-one {
+    width: 100%;
+  }
+  .gor-tile .gor-tile-two {
+    width: 100%;
+  }
+  .gor-tile.gor-single {
+    width: 100%;
+  }
+}

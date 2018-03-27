@@ -1,0 +1,8 @@
+.gor-list-none {
+  margin-top: 0px;
+  font-family: inherit;
+  list-style: none;
+  border-bottom: solid 0.5px #cccccc;
+  height: 50px;
+  padding-left: 10px;
+}

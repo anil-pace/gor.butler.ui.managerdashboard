@@ -1,0 +1,75 @@
+.gor-audit-detail {
+  font-family: 'Source Sans Pro', sans-serif;
+  width: 80%;
+  margin: auto;
+}
+
+.gor-auditResolve-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 1.25rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.gor-auditResolve-head {
+  font-family: 'Source Sans Pro Regular', sans-serif;
+  font-size: 1.625rem;
+  border-bottom: 1px solid #AAAAAA;
+  min-height: 3.75rem;
+  width: 92%;
+  padding-top: 2.5rem;
+  margin: auto;
+  margin-left: 1.875rem;
+  margin-right: 1.875rem;
+  position: fixed;
+  top: 0;
+  background: #ffffff;
+}
+
+.gor-audit-resolve {
+  display: inline-block;
+  width: 100%;
+}
+
+.gor-auditResolve-h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding-left: 10%;
+  padding-bottom: 0.5rem;
+}
+
+.gor-auditResolve-h2 {
+  padding-left: 10%;
+  padding-bottom: 3.1875rem;
+}
+
+.gor-auditResolve-btn-wrap {
+  padding-left: 69%;
+  padding-top: 1.25rem;
+}
+
+.gor-auditIssue-btn-wrap {
+  padding-left: 83%;
+  padding-top: 1.25rem;
+}
+
+.gor-auditresolve-btn {
+  display: inline-block;
+  padding-left: 1.5625rem;
+  vertical-align: middle;
+}
+
+.gor-auditresolve-pdfa-slot-header {
+  height: 36px;
+  padding-top: 20px;
+  padding-left: 10px;
+  border: solid 1px #dedede;
+  border-top: 0px;
+  width: 1088px;
+}
+
+.gor-audit-resolve-packing-cell {
+  height: 30px;
+  padding-top: 15px;
+}

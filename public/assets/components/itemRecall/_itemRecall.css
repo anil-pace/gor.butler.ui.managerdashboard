@@ -1,0 +1,72 @@
+.item-recall-wrapper li {
+  line-height: 32px;
+}
+
+.item-recall-wrapper .searchBarWrapper {
+  border: none;
+}
+
+.item-recall-wrapper .recall-options {
+  padding: 20px 20px 0 20px;
+}
+
+.item-recall-wrapper .order-id-wrap {
+  padding: 0px 20px 20px 20px;
+}
+
+.item-recall-wrapper .order-id-label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.item-recall-wrapper .recall-option {
+  margin: 0;
+}
+
+.item-recall-wrapper .option-text {
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+.item-recall-wrapper .order-id-label {
+  line-height: 32px;
+}
+
+.item-recall-wrapper .order-inp-wrap {
+  padding: 10px 15px;
+  width: 25%;
+  border: 1px solid #BEBEBE;
+  border-radius: 3px;
+}
+
+.item-recall-wrapper .order-id-input {
+  border: none;
+}
+
+.item-recall-wrapper .recall-footer {
+  overflow: hidden;
+  padding: 20px;
+  border-top: 1px solid #DCDCDC;
+}
+
+.item-recall-wrapper .recall-footer .gor-item-recall-btn {
+  float: right;
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+  min-width: 133px;
+  height: 35px;
+  font-size: 14px;
+  margin-top: 10px;
+  background: #f36f36;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.item-recall-wrapper .recall-footer .gor-item-recall-btn.disabled {
+  background: #FFD2C2;
+  color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+  pointer-events: none;
+}

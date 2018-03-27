@@ -1,0 +1,113 @@
+.gor-tabs .gorTab.gorContainer {
+  background-color: #4d5055;
+  display: inline-block;
+  height: 60px;
+}
+
+.gor-tabs .gorTab .gor-main-block {
+  width: 118px;
+  padding-left: 20px;
+  height: 62px;
+  display: table-cell;
+  border-right: .5px solid black;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.gor-tabs .gorTab .gor-main-block:hover {
+  background-color: #323539;
+}
+
+.gor-tabs .gorTab .gor-main-block.sel {
+  background-color: #323539;
+}
+
+.gor-tabs .gorTab .gor-main-block .gor-normal-tab {
+  background: #4d5055;
+}
+
+.gor-tabs .gorTab .gor-main-block .gor-toastify {
+  position: fixed;
+  width: 400px;
+  height: 83px;
+  border-radius: 6px;
+  background-color: #ec1c2d;
+  box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+  right: 0;
+  top: 60px;
+}
+
+.gor-tabs .gorTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
+
+.gor-tabs .gorTab .gor-upperText {
+  font-family: "source sans pro";
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 3px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.gor-tabs .gorTab .gorSubText {
+  font-size: 14px;
+  padding-top: 0px;
+  font-weight: bold;
+}
+
+.gor-tabs .gorTab .gorOverview {
+  font-family: "source sans pro";
+  color: #ffffff;
+}
+
+.gor-tabs .gorTab .gor-online {
+  font-family: "source sans pro";
+  color: #10c469;
+}
+
+.gor-tabs .gorTab .gor-alert {
+  color: #EC1C24;
+}
+
+.gor-tabs .gorTab .gor-emergency-alert {
+  color: #FFFFFF;
+}
+
+.gor-tabs .gorTab .gor-offline {
+  font-family: "source sans pro";
+  color: #9C9FA0;
+}
+
+.gor-tabs .gorTab .gorEvent {
+  font-family: "source sans pro";
+  color: #27aae1;
+}
+
+.gor-tabs .gorTab .gorRisk {
+  font-family: "source sans pro";
+  color: #f99405;
+}
+
+.gor-tabs .gorTab .gorError {
+  font-family: "source sans pro";
+  color: #fc3838;
+}
+
+.gor-tabs .gorTab .gorEmergency {
+  font-family: "source sans pro";
+  color: #ffffff;
+  background: #fc3838;
+}
+
+.gor-tabs .gorTab .gorIconsInline {
+  display: inline-block;
+  vertical-align: super;
+  padding-left: 18px;
+}
+
+.gor-tabs .gorTab .gorInlineDisplay {
+  display: inline-block;
+  font-size: 13px;
+}

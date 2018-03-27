@@ -11,6 +11,7 @@ import {NOTIFICATIONS_URL,READ_MSG_URL,WS_NOTIFICATION_SUBSCRIPTION} from '../..
 import {GET,POST,APP_JSON,SEARCHED_NOTIFICATIONS_DATA} from '../../constants/frontEndConstants';
 import {getNotificationData,resetNotificationData} from '../../actions/notificationAction';
 import {wsNotificationInit,wsNotificationSubscribe} from '../../actions/notificationSocketActions';
+import '../../../public/assets/components/notifications/_notifications.css';
 
 
 

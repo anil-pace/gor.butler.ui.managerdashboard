@@ -1,0 +1,179 @@
+.react-redux-modal .rrm-content.customColor {
+  min-height: 100vh;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+.rr-title-actions {
+  display: none;
+}
+
+.gor-firehazard {
+  width: 65%;
+  min-height: 15.625rem;
+  border-radius: 5px;
+  text-align: left;
+  display: inline-block;
+}
+
+.gor-firehazard .gor-shutter-text-status {
+  font-size: 16px;
+  text-align: left;
+  color: #383838;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+.gor-firehazard .gor-shutter-image-status {
+  width: 16px;
+  height: 16px;
+  float: left;
+}
+
+.gor-firehazard .gor-shutter-image-status.cleared {
+  background-position: -426px -77px;
+}
+
+.gor-firehazard .gor-shutter-image-status.failed {
+  background-position: -562px -77px;
+}
+
+.gor-firehazard .gor-shutter-image-status.progress {
+  background-image: url(images/loader.svg);
+  background-size: contain;
+}
+
+.gor-firehazard .gor-shutter-status-box {
+  float: left;
+  clear: both;
+}
+
+.gor-firehazard .gor-shutter-status-box .gor-shutter-status {
+  width: 190px;
+  height: 40px;
+  padding: 10px;
+  display: block;
+  background-color: #f2f2f2;
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.gor-firehazard .gor-image-status {
+  width: 25px;
+  height: 25px;
+  float: left;
+}
+
+.gor-firehazard .gor-image-status.progress {
+  background-image: url(images/loader.svg);
+  background-size: contain;
+  background-position: -225px -50px;
+}
+
+.gor-firehazard .gor-image-status.failed {
+  background-position: -301px -52px;
+}
+
+.gor-firehazard .gor-image-status.cleared {
+  background-position: -225px -52px;
+}
+
+.gor-firehazard .hazard-image {
+  background-image: url(./images/hazard-strip.svg);
+  width: 103%;
+  float: left;
+  margin-top: -20px;
+  height: 8px;
+  margin-left: -20px;
+}
+
+.gor-firehazard .gor-firehazard-header {
+  width: 100%;
+  padding: 2%;
+  font-size: 26px;
+  color: #666666;
+  margin-top: 3%;
+  border-bottom: 2px solid #dbdbdb;
+  box-sizing: border-box;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-image {
+  background-position: -1px 305px;
+  width: 128px;
+  height: 128px;
+  float: left;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text-header {
+  font-family: Source Sans Pro;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: left;
+  color: #ef301e;
+  padding-left: 5%;
+  padding-bottom: 5px;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text {
+  padding-left: 5%;
+  padding-top: 20px;
+  font-family: Source Sans Pro;
+  font-size: 80%;
+  line-height: 1.5;
+  text-align: left;
+  color: #383838;
+  display: inline-block;
+  width: 75%;
+  height: 70px;
+}
+
+.gor-firehazard .gor-firehazard-header .gor-caution-text .gor-bold-underline {
+  font-weight: bold;
+}
+
+.gor-firehazard .gor-shutter-section {
+  float: left;
+  width: 100%;
+  border-bottom: 2px solid #dbdbdb;
+  padding: 10px;
+  box-sizing: border-box;
+  max-height: 200px;
+  overflow: scroll;
+  vertical-align: middle;
+}
+
+.gor-firehazard .gor-shutter-section.hidden {
+  display: none;
+}
+
+.gor-firehazard .gor-shutter-section .gor-status-text {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  color: #383838;
+  margin-left: 15px;
+}
+
+.gor-firehazard .gor-resume-btn {
+  width: 220px;
+  height: 50px;
+  border-radius: 6px;
+  background-color: #ec1c2d;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 600;
+  float: right;
+  margin-top: 10px;
+}
+
+.gor-firehazard .gor-resume-btn.disable {
+  cursor: default;
+  opacity: 0.3;
+}

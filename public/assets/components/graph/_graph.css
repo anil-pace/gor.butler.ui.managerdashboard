@@ -1,0 +1,65 @@
+.axis path,
+.axis line {
+  fill: none;
+}
+
+.bar {
+  fill: #D3D3D3;
+  opacity: 0.5;
+  stroke-linejoin: round;
+}
+
+.bar:hover {
+  stroke: #4d5055;
+  stroke-width: 0.0625rem;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.d3-tip {
+  line-height: 3;
+  font-weight: bold;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  padding: 0.3125rem;
+  background: #4d5055;
+  color: #ffffff;
+  width: 9.375rem;
+  border-radius: 3%;
+}
+
+.d3-tip:after {
+  display: inline;
+  font-size: 1.25rem;
+  width: 100%;
+  line-height: 1;
+  color: #4d5055;
+  content: "\25C0";
+  position: absolute;
+  text-align: center;
+}
+
+.d3-tip.n:after {
+  margin: -3.75rem 0rem 0rem -5rem;
+  top: 100%;
+  left: 0;
+}
+
+.grid .tick {
+  stroke: #f2f2f2;
+  opacity: 0.7;
+}
+
+.grid path {
+  stroke-width: 0.0625rem;
+}
+
+.gor-tip-wrap {
+  background: #323539;
+  color: #ffffff;
+  padding: 10px 30px 10px 10px;
+  border-radius: 5%;
+  font-size: 14px;
+}

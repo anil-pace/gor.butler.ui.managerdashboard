@@ -1,0 +1,207 @@
+.gorInventory {
+  background: #fff;
+}
+
+.gorInventory .head {
+  padding: 15px 15px 15px 20px;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.gorInventory .labelCnt {
+  display: inline-block;
+  width: 50%;
+  overflow: hidden;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.gorInventory .dwnLoadCnt {
+  width: 50%;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.gorInventory .gorBtn {
+  font-family: Source Sans Pro Bold, sans-serif;
+  padding: 10px;
+  font-size: 14px;
+  background: #4d5055;
+  color: #ffffff;
+  border-radius: 3px;
+  float: right;
+}
+
+.gorInventory .histLbl {
+  width: 70%;
+  display: inline-block;
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+  padding: 0.3125rem 1.125rem;
+}
+
+.gorInventory .histCnt {
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+  height: auto;
+}
+
+.gorInventory .legendCnt {
+  width: 25%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.gorInventory .stkSnapSht {
+  width: 28%;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 550px;
+  padding: 1.25rem 0.625rem;
+}
+
+.gorInventory .snapShtWrap {
+  height: 100%;
+  border-radius: 0.1875rem;
+  box-shadow: 0px 0px 2px 2px #ECECEC;
+  overflow: hidden;
+}
+
+.gorInventory .catColor {
+  display: inline-block;
+  width: 0.9375rem;
+  height: 0.9375rem;
+  margin-right: 0.3125rem;
+  vertical-align: middle;
+}
+
+.gorInventory .catText {
+  vertical-align: middle;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.gorInventory .stkParam {
+  padding: 0.625rem;
+  text-align: center;
+}
+
+.gorInventory .stkParam p:nth-child(1) {
+  font-family: 'Source Sans Pro Regular';
+  font-size: 0.75rem;
+  color: #000000;
+  line-height: 1.25rem;
+}
+
+.gorInventory .stkParam p:nth-child(2) {
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.0625rem;
+  color: #000000;
+}
+
+.gorInventory .gorSnapShot {
+  padding: 1.5625rem 1.25rem;
+}
+
+.gorInventory .gorSnapShot h1 {
+  font-family: 'Source Sans Pro Semibold';
+  font-size: 1.25rem;
+  color: #000000;
+}
+
+.gorInventory .gorSnapShot table td {
+  padding-bottom: 1.25rem;
+  text-transform: capitalize;
+}
+
+.gorInventory .gorSnapShot table th {
+  text-align: left;
+  padding-bottom: 1.25rem;
+}
+
+.gorInventory .gorSnapShotCont {
+  margin-top: 1.875rem;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(1) {
+  border-bottom: 1px solid #C9C9C9;
+  border-right: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(2) {
+  border-bottom: 1px solid #C9C9C9;
+  border-right: 1px solid #C9C9C9;
+  border-left: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr td:nth-child(3) {
+  border-bottom: 1px solid #C9C9C9;
+  border-left: 1px solid #C9C9C9;
+}
+
+.gorInventory .gorSnapShotCont table tr:nth-child(2) td {
+  border-bottom: 0;
+}
+
+.inventoryHist .bar {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.inventoryHist .bar.sel {
+  fill: #949699;
+}
+
+.inventoryHist .bar:last-child {
+  stroke: #4d5055;
+  stroke-width: 0.0625rem;
+}
+
+.inventoryHist .axis--y path.domain {
+  display: none;
+}
+
+.inventoryHist .axis--y .tick line {
+  display: none;
+}
+
+.inventoryHist .axis--x path.domain {
+  stroke-width: 2;
+  stroke: #666666;
+  display: block;
+}
+
+.inventoryHist .axis--x line {
+  display: none;
+}
+
+.inventoryHist .axis--x line.month-break {
+  display: block;
+}
+
+.inventoryHist .tick text {
+  fill: #666666;
+  font-size: 12px;
+}
+
+.inventoryHist .grid .domain {
+  display: none;
+}
+
+.inventoryHist .grid .tick {
+  opacity: 1;
+  stroke: none;
+}
+
+.inventoryHist .grid .tick line {
+  stroke: #CCCCCC;
+}
+
+.inventoryHist .grid .tick:nth-child(1) line {
+  stroke: #666666;
+  stroke-width: 2;
+}

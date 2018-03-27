@@ -1,0 +1,21 @@
+.gor-notify-top {
+  min-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
+}
+
+.gor-pass {
+  background: #27aae1;
+  color: #ffffff;
+}
+
+.gor-fail {
+  background: #EC1C24;
+  color: #ffffff;
+}
+
+.gor-info {
+  background: #799e9f;
+  color: #ffffff;
+}

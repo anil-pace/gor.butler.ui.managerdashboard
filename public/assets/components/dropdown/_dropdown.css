@@ -1,0 +1,219 @@
+.ddown {
+  width: auto;
+  min-height: 2.8125rem;
+}
+
+.ddown .Dropdown-root {
+  position: relative;
+}
+
+.ddown .Dropdown-control {
+  position: relative;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: "Source Sans Pro";
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 0.75rem 3.25rem 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 45px;
+}
+
+.ddown .Dropdown-control:hover {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.ddown .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 0.9375rem;
+  top: 1.125rem;
+}
+
+.ddown .is-open .Dropdown-arrow {
+  border-color: #000000 transparent transparent;
+  border-style: solid;
+  border-width: 0.5rem 0.4375rem 0.1875rem;
+}
+
+.ddown .is-open .Dropdown-control {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.ddown .Dropdown-menu {
+  border-radius: 0.25rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 3px 0px #888888;
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+  position: absolute;
+  top: 105%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ddown .Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  height: 45px;
+  padding-left: 10px;
+  padding-top: 12px;
+}
+
+.ddown .Dropdown-option:last-child {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.ddown .Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.ddown .Dropdown-option.is-selected {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.ddown .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
+
+.Order-Stats-Drop {
+  width: 33%;
+  max-width: 280px;
+}
+
+.Performance-Widget-Drop {
+  width: 75%;
+  max-width: 282px;
+}
+
+.gor-usr-dropdown {
+  width: 50%;
+  min-height: 25px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 20px;
+  border: 1px solid #aaaaaa;
+}
+
+.gor-usr-dropdown .Dropdown-root {
+  position: relative;
+}
+
+.gor-usr-dropdown .Dropdown-control {
+  position: relative;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: #aaaaaa;
+  font-family: "Source Sans Pro";
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: default;
+  outline: none;
+  padding: 0.5rem 0 0.5rem 0.625rem;
+  transition: all 200ms ease;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 35px;
+}
+
+.gor-usr-dropdown .Dropdown-control .Dropdown-placeholder {
+  display: inline-block;
+  width: 90%;
+}
+
+.gor-usr-dropdown .Dropdown-control:hover {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-arrow {
+  width: 8px;
+  height: 6px;
+  display: inline-block;
+  right: 0.9375rem;
+}
+
+.gor-usr-dropdown .is-open .Dropdown-control {
+  box-shadow: 0px 0px 3px 0px #888888;
+  border: 0.0625rem solid #ccc;
+}
+
+.gor-usr-dropdown .Dropdown-menu {
+  border-radius: 0.25rem;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 3px 0px #888888;
+  box-sizing: border-box;
+  margin-top: -0.0625rem;
+  position: absolute;
+  top: 105%;
+  width: 100%;
+  overflow: auto;
+  max-height: 200px;
+}
+
+.gor-usr-dropdown .Dropdown-option {
+  box-sizing: border-box;
+  color: #666666;
+  cursor: pointer;
+  display: block;
+  height: 45px;
+  padding-left: 10px;
+  padding-top: 12px;
+}
+
+.gor-usr-dropdown .Dropdown-option:last-child {
+  border-bottom-right-radius: 0.125rem;
+  border-bottom-left-radius: 0.125rem;
+}
+
+.gor-usr-dropdown .Dropdown-option:hover {
+  background-color: #efefef;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-option.is-selected {
+  box-shadow: 0.125rem 0.125rem 0.125rem #888888;
+  background-color: #f2f9fc;
+  color: #333;
+}
+
+.gor-usr-dropdown .Dropdown-noresults {
+  box-sizing: border-box;
+  color: #ccc;
+  cursor: default;
+  display: block;
+  padding: 0.5rem 0.625rem;
+}
