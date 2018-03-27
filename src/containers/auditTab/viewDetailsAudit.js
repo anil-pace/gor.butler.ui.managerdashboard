@@ -167,7 +167,7 @@ class ViewDetailsAudit extends React.Component {
        finalstring=len>i+1?finalstring+pps+list[i]+", ":finalstring+pps+list[i];
     }
   }
-    return finalstring;
+    return finalstring!==""?finalstring:"-";
   }
 
   ppsChange(e){
@@ -244,7 +244,7 @@ _timeFormat(UTCtime){
     }
     tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
     tile3Data[vdhShowKQ]=data.kq;
-    tile3Data[vdhReminder]=data.reminder;
+    tile3Data[vdhReminder]=data.reminder!==""?data.reminder:'-';
 
     tile2Data[vdhStartTime]=this._timeFormat(data.start_actual_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
@@ -365,7 +365,8 @@ return tableData;
                         <div className="auditDetailsLeft">
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
-                        <Tile className="width-auto" data={tiledata[2]}/><div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>
+                        <Tile className="width-auto" data={tiledata[2]}/>
+                        {tiledata[2]["PPS ID"]!=='-'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
