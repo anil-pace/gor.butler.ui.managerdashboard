@@ -1,38 +1,46 @@
 import React  from 'react';
-import {Canvas,Circle, Image, Path, Text,Rect} from 'react-fabricjs';
+import {fabric} from 'fabric'
+
 
 class ButlerMap extends React.Component {
     
-    constructor(props) {
+    constructor() {
 
-        super(props);
+        super();
+        this.refs = {
+            canvas: {}
+          };
         
 
     }
 
-
-    componentWillMount() {
-       
-      
-     }
-    componentWillReceiveProps(nextProps) {
-     
-    }
     componentDidMount() {
-        const canvas = new Canvas('canvas', {
-          width: '200px',
-          height: '200px'
-        });
+        const canvas = new fabric.Canvas('c', {
+            width: 500,
+            height: 500
+          });
+          var rect = new fabric.Rect({
+            left: 100,
+            top: 100,
+            fill: 'white',
+            width: 80,
+            height: 80,
+            
+          });
+          rect.set('selectable', false); 
+          canvas.add(rect);
     }
+
 
 render() {
 
 return (
  
-    <Canvas ref={node => {this.refs.canvas = node}}>
-</Canvas>
-   
-
+    <div className="dey">
+    <canvas
+          id="c"
+          />
+</div>
         );
 }
 };
