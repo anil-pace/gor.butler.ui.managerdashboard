@@ -48,7 +48,6 @@ import {
     GIVEN_PAGE_SIZE, START_AUDIT_URL
 } from '../constants/configConstants';
 import { setAuditSpinner } from '../actions/auditActions';
-import { defineMessages } from 'react-intl';
 import { auditHeaderSortOrder, setCheckedAudit } from '../actions/sortHeaderActions';
 import { getDaysDiff } from '../utilities/getDaysDiff';
 import { addDateOffSet } from '../utilities/processDate';
@@ -58,7 +57,7 @@ import { hashHistory } from 'react-router'
 import { updateSubscriptionPacket, setWsAction } from './../actions/socketActions'
 import { wsOverviewData } from './../constants/initData.js';
 import AuditFilter from './auditTab/auditFilter';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,defineMessages } from 'react-intl';
 import CreateAudit from './auditTab/createAudit';
 import { modal } from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary'
@@ -97,23 +96,23 @@ const messages = defineMessages({
         id: "auditdetail.pps.prefix",
         defaultMessage: "PPS "
     },
-    autoassignpps: {
+    autoAssignpps: {
         id: "auditdetail.label.autoassignpps",
         defaultMessage: "Auto Assign PPS"
     },
-    manualassignpps: {
+    manualAssignpps: {
         id: "auditdetail.label.manualassignpps",
         defaultMessage: "Manually-Assign PPS"
     },
-    completedoutof: {
+    completedOutof: {
        id: "auditdetail.label.completedoutof",
        defaultMessage: " completed out of "
     },
-   linestoberesolved: {
+   linestobeResolved: {
        id: "auditdetail.label.linestoberesolved",
        defaultMessage: " lines to be resolved "
    },
-   linestobereaudited: {
+   linestobeReaudited: {
     id: "auditdetail.label.linestobereaudited",
     defaultMessage: " lines to be re-audited "
 },
@@ -124,7 +123,6 @@ const messages = defineMessages({
 class AuditTab extends React.Component {
 
     constructor(props) {
-        //var timerId=0;
         super(props);
         this.state = { selected_page: 1, query: null, auditListRefreshed: null, timerId: 0 };
         this._handelClick = this._handelClick.bind(this);
@@ -143,7 +141,6 @@ class AuditTab extends React.Component {
         this.props.auditListRefreshed()
     }
     componentWillReceiveProps(nextProps) {
-        //let me=this;
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.props.showFilter;
             let obj = {}, selectedToken;
@@ -383,9 +380,9 @@ class AuditTab extends React.Component {
         let sku = nProps.context.intl.formatMessage(messages.auditSKU);
         let location = nProps.context.intl.formatMessage(messages.auditLocation);
         let pps = nProps.context.intl.formatMessage(messages.pps);
-        let completedoutof = nProps.context.intl.formatMessage(messages.completedoutof);
-          let linestoberesolved = nProps.context.intl.formatMessage(messages.linestoberesolved);
-          let linestobereaudited = nProps.context.intl.formatMessage(messages.linestobereaudited);
+        let completedOutof = nProps.context.intl.formatMessage(messages.completedOutof);
+          let linestobeResolved = nProps.context.intl.formatMessage(messages.linestobeResolved);
+          let linestobeReaudited = nProps.context.intl.formatMessage(messages.linestobeReaudited);
         var timeOffset = nProps.props.timeOffset || "";
         var checkedAudit = nProps.props.checkedAudit || {};
 
@@ -426,7 +423,7 @@ class AuditTab extends React.Component {
             else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_waiting" || data[i].audit_status == "audit_conflicting" ||
                 data[i].audit_status == "audit_started" || data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || data[i].audit_status == "audit_pending_approval") {
                 auditData.progressBarflag = true;
-                auditData.status = data[i].audit_progress.completed + completedoutof + data[i].audit_progress.total;
+                auditData.status = data[i].audit_progress.completed + completedOutof + data[i].audit_progress.total;
             }
 
 
@@ -536,10 +533,10 @@ class AuditTab extends React.Component {
             }
             auditData.resolved = data[i].resolved;
             if (data[i].audit_button_data.audit_resolve_button == 'disable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestoberesolved) : "";
+                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestobeResolved) : "";
             }
             else if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +linestobereaudited) : "";
+                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +linestobeReaudited) : "";
             }
 
 
@@ -614,8 +611,8 @@ class AuditTab extends React.Component {
 
     //Render Function goes here
     render() {
-        let autoassignpps = this.context.intl.formatMessage(messages.autoassignpps);
-        let manualassignpps= this.context.intl.formatMessage(messages.manualassignpps);
+        let autoAssignpps = this.context.intl.formatMessage(messages.autoAssignpps);
+        let manualAssignpps= this.context.intl.formatMessage(messages.manualAssignpps);
         
         let checkedAuditCount = this.props.checkedAudit.length;
         let auditCount = this.props.auditDetail;
@@ -659,7 +656,7 @@ class AuditTab extends React.Component {
                                 description="button label for audit"
                                 defaultMessage="Audits" /></span>
                     </div>
-                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name: autoassignpps, value: 'autoassignpps' }, { name:  manualassignpps, value: 'mannualassignpps' }]}>
+                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name: autoAssignpps, value: 'autoassignpps' }, { name:  manualAssignpps, value: 'mannualassignpps' }]}>
                         <button className="gor-add-btn gor-listing-button">
                         <FormattedMessage id="audit.start.Audit"
                                 description="button label for start"
