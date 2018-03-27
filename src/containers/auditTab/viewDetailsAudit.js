@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import Tile from '../../components/tile/tile.js';
 import {GTable} from '../../components/gor-table-component/index'
@@ -13,7 +13,110 @@ import {getDaysDiff} from '../../utilities/getDaysDiff';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 import SearchFilter from '../../components/searchFilter/searchFilter';
 import AuditStart from '../../containers/auditTab/auditStart';
- import {modal} from 'react-redux-modal';
+import {modal} from 'react-redux-modal';
+
+const messages = defineMessages({
+  vdMultiSKU: {
+      id: "viewDetais.multisku.status",
+      defaultMessage: "Multi SKU"
+  },
+  vdSingleSKU: {
+      id: "viewDetais.singlesku.status",
+      defaultMessage: "Single SKU"
+  },
+  vdMultiLocation: {
+      id: "viewDetais.multilocation.prefix",
+      defaultMessage: "Multi Location"
+  },
+  vdSingleLocation: {
+      id: "viewDetais.singlelocation.status",
+      defaultMessage: "Single Location"
+  },
+  vdLinesCompleted: {
+      id: "viewDetais.linescompleted.status",
+      defaultMessage: " lines completed out of "
+  },
+  vdAttrSelected: {
+      id: "viewDetais.attrselected.status",
+      defaultMessage: " attributes selected"
+  },
+  vdNoAttrSelected: {
+      id: "viewDetais.noattrselected.status",
+      defaultMessage: "No attributes selected"
+  },
+  vdNoInventory: {
+      id: "viewDetais.noinventory.status",
+      defaultMessage: "No inventory found"
+  },
+  vdMissingOut: {
+      id: "viewDetais.missing.status",
+      defaultMessage: " missing out of "
+  },
+  vdItems: {
+      id: "viewDetais.items.status",
+      defaultMessage: " items"
+  },
+  vdChangePPS: {
+    id: "viewDetais.changepps.status",
+    defaultMessage: "Change PPS"
+},
+vdSearchBySKU: {
+  id: "viewDetais.searchbysku.status",
+  defaultMessage: "Search by SKU or PDFA"
+},
+pps: {
+  id: "viewDetais.pps.prefix",
+  defaultMessage: "PPS "
+},
+audit: {
+  id: "viewDetais.audit.header",
+  defaultMessage: "Audit"
+},
+auditTask: {
+  id: "viewDetais.audit.audittask",
+  defaultMessage: "in this Audit task"
+},
+noDataToShow: {
+  id: "viewDetais.audit.nodatashow",
+  defaultMessage: "No data to show"
+},
+vdhCreatedBy: {
+  id: "viewDetais.createdby.status",
+  defaultMessage: "Created By"
+},
+vdhOperator: {
+  id: "viewDetais.operator.status",
+  defaultMessage: "Operator"
+},
+vdhAuditType: {
+  id: "viewDetais.audittype.status",
+  defaultMessage: "Audit Type"
+},
+vdhPPSid: {
+id: "viewDetais.ppsid.status",
+defaultMessage: "PPS ID"
+},
+vdhShowKQ: {
+id: "viewDetais.showkq.status",
+defaultMessage: "Show KQ"
+},
+vdhReminder: {
+id: "viewDetais.audit.Reminder",
+defaultMessage: "Reminder"
+},
+vdhStartTime: {
+id: "viewDetais.audit.starttime",
+defaultMessage: "Start time"
+},
+vdhEndTime: {
+id: "viewDetais.audit.endtime",
+defaultMessage: "End time"
+},
+vdhProgress: {
+id: "viewDetais.audit.progress",
+defaultMessage: "Progress"
+}
+});
 
 class ViewDetailsAudit extends React.Component {
    constructor(props) {
@@ -56,10 +159,12 @@ class ViewDetailsAudit extends React.Component {
    this.setState({items: attributeData});
   }
   _PPSstring(list){
+    let pps = this.context.intl.formatMessage(messages.pps);
+    
     let finalstring="";
     if(list && list.length!=0){
     for(let i=0,len=list.length;i<len;i++){
-       finalstring=len>i+1?finalstring+"PPS "+list[i]+", ":finalstring+"PPS "+list[i];
+       finalstring=len>i+1?finalstring+pps+list[i]+", ":finalstring+pps+list[i];
     }
   }
     return finalstring;
@@ -114,21 +219,36 @@ _timeFormat(UTCtime){
 }
 
   _processDataTile(data){
-    let tile1Data={},tile2Data={},tile3Data={};
-    tile1Data['Created By']=data.audit_created_by;
-    tile1Data['Operator']=data.operator_assigned;
-    if(data.audit_param_type=="sku"){
-     tile1Data['Audit Type']=data.entity_list.length>1?"Multi SKU":"Single SKU";
-    }else if(data.audit_param_type=="location"){
-     tile1Data['Audit Type']=data.entity_list.length>1?"Multi Location":"Single Location";
-    }
-    tile3Data['PPS ID']=this._PPSstring(data.pps_id);
-    tile3Data['Show KQ']=data.kq;
-    tile3Data['Reminder']=data.reminder;
+    let vdMultiSKU = this.context.intl.formatMessage(messages.vdMultiSKU);
+    let vdSingleSKU = this.context.intl.formatMessage(messages.vdSingleSKU);
+    let vdMultiLocation = this.context.intl.formatMessage(messages.vdMultiLocation);
+    let vdSingleLocation = this.context.intl.formatMessage(messages.vdSingleLocation);
+    let vdLinesCompleted = this.context.intl.formatMessage(messages.vdLinesCompleted);
+    let vdhCreatedBy = this.context.intl.formatMessage(messages.vdhCreatedBy);
+    let vdhOperator = this.context.intl.formatMessage(messages.vdhOperator);
+    let vdhAuditType = this.context.intl.formatMessage(messages.vdhAuditType);
+    let vdhPPSid = this.context.intl.formatMessage(messages.vdhPPSid);
+    let vdhShowKQ = this.context.intl.formatMessage(messages.vdhShowKQ);
+    let vdhReminder = this.context.intl.formatMessage(messages.vdhReminder);
+    let vdhStartTime = this.context.intl.formatMessage(messages.vdhStartTime);
+    let vdhEndTime = this.context.intl.formatMessage(messages.vdhEndTime);
+    let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
 
-    tile2Data['Start time']=this._timeFormat(data.start_actual_time);
-    tile2Data['End time']=this._timeFormat(data.completion_time);
-    tile2Data['Progress']=data.progress && data.progress.total>1? data.progress.completed +" lines completed out of "+data.progress.total:"-";
+    let tile1Data={},tile2Data={},tile3Data={};
+    tile1Data[vdhCreatedBy]=data.audit_created_by;
+    tile1Data[vdhOperator]=data.operator_assigned;
+    if(data.audit_param_type=="sku"){
+     tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiSKU:vdSingleSKU;
+    }else if(data.audit_param_type=="location"){
+     tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
+    }
+    tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
+    tile3Data[vdhShowKQ]=data.kq;
+    tile3Data[vdhReminder]=data.reminder;
+
+    tile2Data[vdhStartTime]=this._timeFormat(data.start_actual_time);
+    tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
+    tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +vdLinesCompleted+data.progress.total:"-";
     return [tile1Data,tile2Data,tile3Data];
   }
 
@@ -160,6 +280,11 @@ _timeFormat(UTCtime){
   }
 
   processData(itemsData){
+    let vdAttrSelected = this.context.intl.formatMessage(messages.vdAttrSelected);
+    let vdNoAttrSelected = this.context.intl.formatMessage(messages.vdNoAttrSelected);
+    let vdNoInventory = this.context.intl.formatMessage(messages.vdNoInventory);
+    let vdMissingOut = this.context.intl.formatMessage(messages.vdMissingOut);
+    let vdItems = this.context.intl.formatMessage(messages.vdItems);
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
@@ -170,21 +295,21 @@ _timeFormat(UTCtime){
     
       if(itemsData[i].entity_list!=0){
         rowObject.attrDetails={
-      "header":[itemsData[i].attributes_list.length +" attributes selected"],
+      "header":[itemsData[i].attributes_list.length +vdAttrSelected],
       "subHeader":itemsData[i].attributes_list
       }
     }else{
       rowObject.attrDetails={
-      "header":["No attributes selected"],
+      "header":[vdNoAttrSelected],
       "subHeader":[]
       }
     }
     if(itemsData[i].result.sku_status=='inventory_empty'){
-           rowObject.status="No inventory found";
+           rowObject.status=vdNoInventory;
          }
          else{
          let items=itemsData[i].result;
-         rowObject.status=(items && items.total>=1)?items.missing+" missing out of "+items.total+" items":"";
+         rowObject.status=(items && items.total>=1)?items.missing+vdMissingOut+items.total+vdItems:"";
          }
          tableData.push(rowObject);
          rowObject={};
@@ -194,6 +319,11 @@ return tableData;
 }
 
    render() {
+    let audit = this.context.intl.formatMessage(messages.audit);
+    let vdSearchBySKU = this.context.intl.formatMessage(messages.vdSearchBySKU);
+    let vdChangePPS = this.context.intl.formatMessage(messages.vdChangePPS);
+    let auditTask = this.context.intl.formatMessage(messages.auditTask);
+    let noDataToShow = this.context.intl.formatMessage(messages.noDataToShow);
     let allData=this.props.auditDetails;
     let tiledata=this._processDataTile(allData);
     let attributeData= this.state.items;
@@ -210,7 +340,7 @@ return tableData;
 		var tableData=[
 			{id:1,text: "SKU CODE", sortable: true, width:30}, 
 			{id:2, text: "NAME",sortable: true,  width:30}, 
-            {id:3,text: "OPENING STOCK", searchable: false, width:30}
+      {id:3,text: "OPENING STOCK", searchable: false, width:30}
 
 		];
       return (
@@ -229,28 +359,27 @@ return tableData;
                <div className='gor-auditDetails-modal-body'>
                   <div className="AuditDetailsWrapper">
                      <div className="AuditDetailsHeader">
-                        <FormattedMessage id="audit.auditdetails" description='Heading for Order details' defaultMessage='Basic details' />
+                        <FormattedMessage id="audit.auditdetails" description='Heading for audit details' defaultMessage='Basic details' />
                      </div>
                      <div className="auditDetailsContent">
                         <div className="auditDetailsLeft">
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
-                        <Tile className="width-auto" data={tiledata[2]}/><div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| Change PPS</div>
+                        <Tile className="width-auto" data={tiledata[2]}/><div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>
                         </div>
                         
                      </div>
                   </div>
                </div>
               
-
                             <GTable options={['table-bordered','viewDetailsTable']}>
 				    	
                    <GTableHeader options={['auditTable']}>
                            
-                                <GTableHeaderCell key={1} header='Audit'>
-                                       <span className="auditSummary">{no_of_record} {type} in this Audit task</span>
+                                <GTableHeaderCell key={1} header={audit}>
+                                       <span className="auditSummary">{no_of_record} {type} {auditTask}</span>
                                        <div className="auditDetailsSearchWrap"> 
-                                    <SearchFilter handleChange={this.handleChange} placeHolder={'Search by SKU or PDFA'} />
+                                    <SearchFilter handleChange={this.handleChange} placeHolder={vdSearchBySKU} />
                                        </div>  
                                    </GTableHeaderCell>
                           
@@ -283,7 +412,7 @@ return tableData;
 
 
 
-            </div>:<div>No data to show</div>}
+            </div>:<div>{noDataToShow}</div>}
 
          </div>
       );
@@ -304,7 +433,6 @@ ViewDetailsAudit.contextTypes={
 var mapDispatchToProps=function(dispatch){
   return {
      userRequest: function(data){ dispatch(userRequest(data)); },
-    // resetAuditType: function(data){ dispatch(resetAuditType(data)); },    
 
 
   }
