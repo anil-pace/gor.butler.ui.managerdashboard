@@ -70,7 +70,7 @@ const messages = defineMessages({
     },
     auditwaitingOperatorStatus: {
         id: "auditdetail.waitingoperator.status",
-        defaultMessage: "Waiting for operator log in"
+        defaultMessage: "Waiting for the operator to login"
     },
     auditCancelled: {
         id: "auditdetail.auditCancelled.prefix",
