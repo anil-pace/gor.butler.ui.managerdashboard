@@ -64,6 +64,7 @@ class ValidateSelAtt extends React.Component{
    this._searchCallBack = this._searchCallBack.bind(this);
    this._resetStateData = this._resetStateData.bind(this);
    this._onBackClick = this._onBackClick.bind(this);
+   this._togglePanel = this._togglePanel.bind(this);
    this.state=this._getInitialState()
  } 
  _getInitialState(){
@@ -71,7 +72,8 @@ class ValidateSelAtt extends React.Component{
   return {
     ...this.props,
     filterSelectionState:"none",
-    isInputEmpty:true
+    isInputEmpty:true,
+    panelClass:'collapsed'
   }
  }
 
@@ -277,6 +279,11 @@ class ValidateSelAtt extends React.Component{
     
     
   }
+  _togglePanel(){
+     this.setState({
+        panelClass:this.state.panelClass === 'expanded' ? 'collapsed' : 'expanded'
+      })
+  }
 
   componentWillReceiveProps(nextProps){
     //var validationDoneSKU = this.props.skuAttributes && Object.keys(this.props.skuAttributes).length ? true : false;
@@ -364,7 +371,7 @@ class ValidateSelAtt extends React.Component{
                  <div className="gor-sku-validation-btn-wrap">
                  <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editSKUText" description='Text for editing a location' 
                         defaultMessage='BACK TO EDIT'/></button>
-                <div className="sku-search"> <SearchFilterComponent callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
+                <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
 
                  </div>
                  <div className={"message success"}>
@@ -395,7 +402,8 @@ class ValidateSelAtt extends React.Component{
              
                 
               </div>
-          {validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+          {validationDoneSKU && <div><div className="gor-audit-inputlist-wrap" >
+          <div className={"gor-audit-inputlist-cont "+self.state.panelClass}>
           <div className={"note-message"}>
                   <FormattedMessage id="audit.skuValidation.note" description='Audit location verification error message'
                                                               defaultMessage='Note: Not setting any attributes will result in auditing the entire SKU with all attributes'
@@ -434,7 +442,10 @@ class ValidateSelAtt extends React.Component{
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>
-              
+              </div>
+              </div>
+              <div className="gor-audit-excol-wrap"> <span onClick={this._togglePanel} className={"gor-exp-coll "+self.state.panelClass}></span>
+              </div>
               </div>}
              
             </Tab>

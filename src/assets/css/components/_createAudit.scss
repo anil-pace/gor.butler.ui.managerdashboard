@@ -1,6 +1,45 @@
 .gor-audit-create{
+  .gor-csv-upl-msg{
+    width: 78%;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 1px solid #E5E5E5;
+    line-height: 0.1em;
+    margin: 10px auto 16px auto;
+  }
+  .gor-option-wrapper{
+    left:0;
+  }
+  .gor-filter-upper-wrap{
+    margin-top:0;
+  }
+  .searchBarWrapper{
+    width:auto;
+    border:none;
+  }
+  .searchIconWrap{
+    padding-left:0;
+  }
+  .gor-audit-excol-wrap{
+     width:10%;
+    margin:auto;
+  }
+  .gor-exp-coll{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    cursor:pointer;
+    position: relative;
+    bottom: 10px;
+    &.collapsed{
+      background-position: -403px -55px;
+    }
+    &.expanded{
+      background-position: -428px -55px;
+    }
+  }
   .audit-sub-footer{
-    padding: 12px 0;
+    padding: 30px 0;
     input{
       margin:0;
     }
@@ -49,9 +88,10 @@
     
   }
   .sku-search{
-    float:right;
-    padding:5px 8px;
-    border: 1px solid #eee;
+    float: right;
+    padding: 7px 10px;
+    border: 1px solid #BEBEBE;
+    border-radius: 3px;
     input{
       border:none;
     }
@@ -100,12 +140,16 @@
   
   .gor-option-wrapper{
     width:130px;
+    top:34px;
+    .gor-dropdown-option{
+      font-size:calculateRem(14px);
+    }
   }
   .gor-modal-head{
     position:static;
   }
   .gor-audit-form{
-    width:45%;
+    width:42%;
     margin:auto;
   }
   .audit-index{
@@ -133,14 +177,14 @@
   .tab{
     display:inline-block;
     text-align:center;
-    padding:15px 20px;
+    padding:12px 20px;
     color:#666666;
     width:46%;
     cursor:pointer;
     border:1px solid #aaaaaa;
     box-sizing: border-box;
     font-family: 'Source Sans Pro';
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     &:eq(0){
       border-top-left-radius: 2px;
@@ -183,7 +227,7 @@
     }
   }
   .sku-mode{
-    width:92%;
+    width:100%;
     &.active-mode{
       display:block;
     }
@@ -213,9 +257,8 @@
 .gor-sku-validation-btn-wrap{
     display:inline-block;
     border-bottom: solid 1px #dddddd;
-    border-top: solid 1px #dddddd;
-    padding-bottom: 8px;
-    padding-top:8px;
+    padding-bottom: 10px;
+    padding-top:10px;
     width:100%;
     background-color:#ffffff;
 }
@@ -295,8 +338,8 @@
 }
 
 .gor-audit-input-wrap {
-    width: 50%;
-    padding:7px 5px;
+    width: 43%;
+    padding:1px 12px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
@@ -313,6 +356,7 @@
         height:18px;
         width:18px;
         display:block;
+        margin-top:5px;
         vertical-align: middle;
         background-position: -17px -76px;
         float:right;
@@ -360,17 +404,42 @@
 .gor-audit-inputlist-wrap {
     background-color: #FBFBFB;
     padding-bottom:10px;
+    
+    border-bottom: 1px solid #DCDCDC;
+    
+    .gor-audit-inputlist-cont{
+    overflow: auto;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+      &.expanded{
+          max-height: 400px;
+      }
+      &.collapsed{
+        max-height: 210px;
+      }
+  }
+
+    
+}
+.gor-audit-location-wrap{
+
+    margin-top:10px;
+    background-color: #FBFBFB;
+    padding-bottom:10px;
+    
+    border-top: 1px solid #DDDDDD;
+}
+.gor-audit-location-list{
     max-height: 210px;
     overflow: auto;
-    .gor-audit-location-wrap{
-    margin-top:10px;
-    }
 }
 
 .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;
     padding-bottom:10px;
     border-top:1px solid #DDDDDD;
+    margin-top:12px;
 }
 
 .gor-audit-name-wrap {
@@ -577,7 +646,7 @@
   margin-left:10px;
   font-weight:600;
   font-family: 'Source Sans Pro';
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -623,7 +692,7 @@
 .gor-create-audit-btn{
     font-family:'Source Sans Pro';
     font-weight:bold;
-    min-width:133px;
+    min-width:120px;
     height:35px;
     font-size:14px;
     margin-top:10px;
@@ -660,8 +729,7 @@
   font-size:14px;
   font-weight: 600;
   color:#333333;   
-  margin-top:25px; 
-  display:inline-block;
+  margin-top:25px;
   width:40%;
 }
 
@@ -670,6 +738,8 @@
   color:#AAAAAA;
   font-size: 10px;
   font-weight: 600;
+  background:#fff;
+  padding: 0 5px;
   }
 
 
@@ -711,7 +781,7 @@
       border-radius: 50%;
       display: inline-block;
       height: 25px;
-      line-height: 22px;
+      line-height: 24px;
       width: 25px;
       color: #fff;
       text-decoration: none;
@@ -726,11 +796,11 @@
   .active{
     background:none;
     border:none;
-    border-bottom: 5px solid #659AF6;
+    border-bottom: 5px solid #419BF9;
     box-sizing:border-box;
-    color:#666666;
+    color:#333333;
     .sub-tab-index{
-     background: #659AF6;
+     background: #419BF9;
       
     }
   }
