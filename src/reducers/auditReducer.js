@@ -106,13 +106,16 @@ export  function auditInfo(state={},action){
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,
-            "auditValidationSpinner":false
+            "skuDataChanged":!state.skuDataChanged,
+            "auditValidationSpinner":false,
+            "locationAttributes":[],
           })
     case VALIDATED_ATTIBUTES_DATA_LOCATION:
        let processedData = processValidationData(action.data.audit_location_validation_response)//(action.data)
        return Object.assign({}, state, { 
             "locationAttributes" : processedData,
             "hasDataChanged":!state.hasDataChanged,
+            "locationDataChanged":!state.locationDataChanged,
             "auditValidationSpinner":false
           })
     case DISPLAY_AUDIT_VALIDATION_SPINNER:
@@ -140,16 +143,23 @@ export  function auditInfo(state={},action){
     return Object.assign({}, state, {
          "auditEditData":processedDataSKUEditDup,              
         "hasDataChanged":!state.hasDataChanged,
+        "skuDataChanged":!state.skuDataChanged,
          "auditSpinner":false,
          "auditValidationSpinner":false,
          "locationAttributes":[]
+<<<<<<< HEAD
     })  
+=======
+         
+    })
+>>>>>>> ab9bb4fd7... Fixed issue https://work.greyorange.com/jira/browse/BSS-7588
   }else
   {
     let processedData = processValidationData(action.data,"Edit_Dup")//(action.data)
     return Object.assign({}, state, { 
       "locationAttributes":processedData, 
          "hasDataChanged":!state.hasDataChanged,
+         "locationDataChanged":!state.locationDataChanged,
          "auditValidationSpinner":false
        })
   }
@@ -168,7 +178,7 @@ function processValidationDataSKU(data,param,includeExpiry){
   statusList = data.status_list,
   attList = data.attributes_list,
   i18n = data.i18n_values,
-  totalValid=0,totalInvalid=0;
+  totalValid=0,totalInvalid=0,kq=false;
   const expiryCategory = {
     category_text:"",
     category_value:"expired",
@@ -205,6 +215,7 @@ for(let a=0,len=attrSet.length;a<len;a++){
   }
   outerObj[attrSet[a].sku]=obj2;
 }
+kq=data.kq;
 
 }
 
@@ -243,17 +254,19 @@ for(let a=0,len=attrSet.length;a<len;a++){
     processedData.push(tuple)
     
   }
+ 
   return {
    data:processedData,
    
     totalValid,
     totalInvalid,outerObj,
+    kq,
     totalSKUs:totalValid+totalInvalid
   };
 }
 
 function processValidationData(data,param){
-  var processedData=[],totalValid=0,totalInvalid=0;
+  var processedData=[],totalValid=0,totalInvalid=0,kq=false;
 if(param!=="Edit_Dup"){
   var msuList = data.msu_list,
 statusList = data.status,totalValid=0,totalInvalid=0,
@@ -301,11 +314,13 @@ for(var i=0,len=arr.length;i<len;i++){
   processedData.push(objLoc);
 }
 totalInvalid=0;
+kq=data.kq;
 }
 return {
     data:processedData,
     totalValid,
     totalInvalid,
-    totalLocations:totalValid+totalInvalid
+    totalLocations:totalValid+totalInvalid,
+    kq
   }
 }

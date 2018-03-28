@@ -34,7 +34,7 @@ export default class SelectAttributes extends React.Component {
             editedIndex:"-1",
             placeHolder:"Select Attributes",
             selectedSetCount:0,
-            extraFlagtoBack:this.props.prefilledData?true:false
+            extraFlagtoBack:this.props.attributeList.length?true:false
         }
 
     }
