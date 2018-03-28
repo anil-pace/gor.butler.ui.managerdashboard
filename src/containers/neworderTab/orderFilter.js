@@ -54,6 +54,7 @@ class OrderFilter extends React.Component{
     _closeFilter() {
         this.props.showTableFilter(false);
     }
+
     componentWillReceiveProps(nextProps){
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
@@ -72,19 +73,19 @@ class OrderFilter extends React.Component{
         const filterInputFields=
         [{
             value: "PICK BEFORE TIME",
-            label: <FormattedMessage id="order.inputField.pickbeforetime" defaultMessage="PICK BEFORE TIME"/>
+            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="PICK BEFORE TIME"/>
         },
         {
             value: "ORDER ID",
-            label: <FormattedMessage id="order.inputField.orderid" defaultMessage="ORDER ID"/>
+            label: <FormattedMessage id="order.inputField.orderId" defaultMessage="ORDER ID"/>
         },
         {
             value: "PPS ID",
-            label: <FormattedMessage id="order.inputField.ppsid" defaultMessage="PPS ID"/>
+            label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
         },
         {
             value: "SKU ID",
-            label: <FormattedMessage id="order.inputField.skuid" defaultMessage="SKU ID"/>
+            label: <FormattedMessage id="order.inputField.skuId" defaultMessage="SKU ID"/>
         }];
 
         var inputValue=this.state.searchQuery;
@@ -140,11 +141,11 @@ class OrderFilter extends React.Component{
     _processOrderDateField(){
         const dateColumn = [
           {
-            value: FROM_DATE,
+            value: "FROM DATE",
             label: <FormattedMessage id="order.inputField.fromDate" defaultMessage="FROM DATE"/>
           },
           {
-            value: TO_DATE,
+            value: "TO DATE",
             label: <FormattedMessage id="order.inputField.toDate" defaultMessage="TO DATE"/>
           }
         ];
@@ -164,11 +165,11 @@ class OrderFilter extends React.Component{
     _processOrderTimeField(){
         const dateColumn = [
           {
-            value: FROM_TIME,
+            value: "FROM TIME",
             label: <FormattedMessage id="order.inputField.fromTime" defaultMessage="TIME"/>
           },
           {
-            value: TO_TIME,
+            value: "TO TIME",
             label: <FormattedMessage id="order.inputField.toTime" defaultMessage="TIME"/>
           }
         ];
@@ -196,15 +197,16 @@ class OrderFilter extends React.Component{
     _applyFilter() {
         var filterState=this.state, _query={};
 
-        if (filterState.tokenSelected[ORDER_TAGS] && filterState.tokenSelected[ORDER_TAGS][0] !== ANY) {
-            _query.orderTags=filterState.tokenSelected["ORDER TAGS"]
-        }
-        if (filterState.tokenSelected[STATUS] && filterState.tokenSelected[STATUS][0] !== ANY) {
-            _query.status=filterState.tokenSelected[STATUS]
+        /*if (filterState.tokenSelected[ORDER_TAGS] && filterState.tokenSelected[ORDER_TAGS][0] !== ANY) {
+            _query.orderTags=filterState.tokenSelected[ORDER_TAGS]
         }
 
-        if (filterState.searchQuery[PICK_BEFORE_TIME]) {
-            _query.pbt=filterState.searchQuery[PICK_BEFORE_TIME]
+        if (filterState.tokenSelected[STATUS] && filterState.tokenSelected[STATUS][0] !== ANY) {
+            _query.status=filterState.tokenSelected[STATUS]
+        }*/
+
+        if (filterState.searchQuery["PICK BEFORE TIME"]) {
+            _query.cutOffTime=filterState.searchQuery["PICK BEFORE TIME"]
         }
 
         if (filterState.searchQuery[ORDER_ID]) {
@@ -219,9 +221,24 @@ class OrderFilter extends React.Component{
             _query.skuId=filterState.searchQuery[SKU_ID]
         }
 
+        if (filterState.searchQuery[FROM_DATE]) {
+            _query.fromDate=filterState.searchQuery[FROM_DATE]
+        }
+
+        if (filterState.searchQuery[FROM_TIME]) {
+            _query.fromTime=filterState.searchQuery[FROM_TIME]
+        }
+
         
-       hashHistory.push({pathname: "/neworders", query: _query});
-       this.props.callBack(_query);
+        if (filterState.searchQuery[TO_DATE]) {
+            _query.toDate=filterState.searchQuery[TO_DATE]
+        }
+
+        if (filterState.searchQuery[TO_TIME]) {
+            _query.toTime=filterState.searchQuery[TO_TIME]
+        }
+        
+       hashHistory.push({pathname: "/orders", query: _query});
        
     }
 
@@ -231,9 +248,9 @@ class OrderFilter extends React.Component{
               "ORDER TAGS": [ANY],
               "STATUS": [ANY]
           },
-          searchQuery: {"ORDER ID":  '', "SKU ID":  '', "PICK BEFORE TIME": '', "PPS ID": ''},
+          searchQuery: {"ORDER ID": '', "SKU ID": '', "PICK BEFORE TIME": '', "PPS ID": ''},
         });
-        hashHistory.push({pathname: "/neworders", query: {}})
+        hashHistory.push({pathname: "/orders", query: {}})
     }
 
     render(){

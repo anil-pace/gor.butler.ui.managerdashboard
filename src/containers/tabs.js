@@ -149,7 +149,7 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,order,neworder, newordersClass, newordersStatus, ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order/*,neworder, newordersClass, newordersStatus*/, ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
@@ -165,8 +165,8 @@ class Tabs extends React.Component{
     order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
               defaultMessage="ORDERS"/>;
 
-    neworder=<FormattedMessage id="neworder.tab.heading" description="orders tab" 
-              defaultMessage="N ORDERS"/>;
+    /*neworder=<FormattedMessage id="neworder.tab.heading" description="orders tab" 
+              defaultMessage="N ORDERS"/>;*/
               
     users=<FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage="USERS"/> ;
@@ -261,7 +261,7 @@ class Tabs extends React.Component{
       }
     }
 
-    items={overview:overview,system:system,order:order,neworder: neworder,newordersStatus:newordersStatus, newordersClass:newordersClass,
+    items={overview:overview,system:system,order:order,/*neworder: neworder,newordersStatus:newordersStatus, newordersClass:newordersClass*/
            users:users,inventory:inventory,audit:audit,
            reports:reports,
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
@@ -342,13 +342,13 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
+		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
-    <Link to="/neworders" onClick={this.handleTabClick.bind(this,NEWORDERS)}>
+    {/*<Link to="/neworders" onClick={this.handleTabClick.bind(this,NEWORDERS)}>
       <Tab items={{ tab: items.neworder, Status: items.newordersStatus, currentState:items.newordersClass }} changeClass={(this.props.tab.toUpperCase()=== NEWORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
+    </Link>*/}
 
 
     <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>

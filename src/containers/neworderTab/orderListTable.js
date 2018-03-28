@@ -70,6 +70,10 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             isPanelOpen:true,
+            date: "2017-03-27T11:53:30.084Z",
+            //startDate: new Date(),
+            //endDate: new Date(this.state.startDate - 1000*3600*24)
+            //var d = new Date( (new Date)*1 - 1000*3600*2 );
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -78,38 +82,6 @@ class OrderListTable extends React.Component {
         this._viewOrderLine = this._viewOrderLine.bind(this);
     }
 
-    // _onColumnResizeEndCallback(newColumnWidth, columnKey) {
-    //     this.setState(({columnWidths})=> ({
-    //         columnWidths: {
-    //             ...columnWidths,
-    //             [columnKey]: newColumnWidth,
-    //         }
-    //     }));
-    // }
-
-    // _onFilterChange(e) {
-    //     var data={"type": "searchOrder", "captureValue": "", "selected": 1}, debounceFilter;
-    //     if (e.target && (e.target.value || e.target.value=== "")) {
-    //         data["captureValue"]=e.target.value;
-    //         this.props.setOrderFilter(e.target.value);
-    //     }
-    //     else {
-    //         data["captureValue"]=e;
-    //     }
-    //     debounceFilter=debounce(this.props.refreshOption, DEBOUNCE_TIMER);
-    //     debounceFilter(data);
-    // }
-
-
-    // backendSort(columnKey, sortDir) {
-    //     var data={"columnKey": columnKey, "sortDir": sortDir, selected: this.props.pageNumber}
-    //     this.props.sortHeaderState(columnKey);
-    //     this.props.onSortChange(data);
-    //     this.props.sortHeaderOrder({
-    //         colSortDirs: {[columnKey]: sortDir},
-    //     })
-    // }
-
     _showAllOrder() {
         this.props.refreshOption();
     }
@@ -117,7 +89,7 @@ class OrderListTable extends React.Component {
     _viewOrderLine = (orderId) =>  {
         clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
-            startPolling: this._restartPolling,
+            restartPolling: this._restartPolling,
             orderId: orderId,
             title: '',
             size: 'large',
@@ -129,14 +101,19 @@ class OrderListTable extends React.Component {
 
     _reqOrderPerPbt(arg){
         let cutOffTimeId = this.props.pbts[arg].cut_off_time;
-        // #condition to not hitting http request on closing of accordion
+
+        // #condition to STOP hitting http request on OPENING OF ACCORDION
         const index = storage.indexOf(cutOffTimeId);
         if(index === -1){
             storage.push(cutOffTimeId);
-            console.log('%c ==================>!  ', 'background: #222; color: #bada55', cutOffTimeId);
+            this.props.stopPolling(this.props.intervalId);  // #stop ongoing polling.
+            console.log('%c ==================>!  ', 'background: #222; color: #bada55');
+            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID" + cutOffTimeId);
+            console.log("startDate =========================>" + this.props.startDate);   
+            console.log("endDate  ==========================>" + this.props.endDate); 
             let formData={
-                "start_date": this.state.date,
-                "end_date": this.state.date,
+                "start_date": this.props.startTime,
+                "end_date": this.props.endDate,
                 "cut_off_time" : cutOffTimeId
             };
 
@@ -152,6 +129,12 @@ class OrderListTable extends React.Component {
         }
         else{
             storage.splice(index, 1);
+
+            /* condition to re-starting polling when all the accordions are in CLOSED state */
+            if(storage.length <= 0){
+                this.props.restartPolling();
+            }
+            
         }
     }
 
@@ -178,58 +161,6 @@ class OrderListTable extends React.Component {
     //     })
     // }
 
-    _processPBTs = (arg) => {
-        let pbtData = arg;
-        let pbtDataLen = pbtData.length; 
-        let pbtRows = []; 
-        let processedData = {};
-
-        if(pbtDataLen){
-            for(let i =0 ; i < pbtDataLen; i++){
-                let pbtRow = [];
-                
-                let formatPbtTime = (<FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs"
-                                        values={{cutOffTime:pbtData[i].cut_off_time}} />);
-
-                //let formatTimeLeft = this._formatTime(pbtData[i].time_left);
-                // let originalDate = pbtData[i].cut_off_time;
-                // var convertedDate =  originalDate.getTime(); 
-                // var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
-
-                //let msec = Date.parse("March 8, 2018");
-                var d = new Date();
-                var n = d.getMilliseconds();
-                var x = n - 5 * 60000;
-
-                let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={x} timeZone={this.props.timeZone}/>);
-
-                let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
-
-                let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders"
-                                         values={{total:pbtData[i].total_orders}} />);
-
-                pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> 
-                            </div>);
-
-                pbtRow.push(<div>
-                                <div className="ProgressBarWrapper">
-                                    <ProgressBar progressWidth={formatProgressBar.width}/>
-                                </div>
-                                <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
-                             </div>);
-
-                pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
-                            
-                pbtRows.push(pbtRow);
-            }
-            processedData.pbtData = pbtRows;
-        }
-        processedData.offset = 0;
-        processedData.max= pbtRows.length;
-        return processedData;
-    }
-
     _formatProgressBar(nr, dr){
         let x = {};
         
@@ -251,15 +182,102 @@ class OrderListTable extends React.Component {
         return x;
     }
 
-    _formatTime(timeLeft){
-        let hours = Math.trunc(timeLeft/60);
-        let minutes = timeLeft % 60;
-        let final = hours +" hrs left";
-        return final;
-        //console.log(hours +":"+ minutes);
+    _processPBTs = (arg) => {
+        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
+        let pbtData = arg;
+        let pbtDataLen = pbtData.length; 
+        let pbtRows = []; 
+        let processedData = {};
+
+        if(pbtDataLen){
+            for(let i =0 ; i < pbtDataLen; i++){
+                let pbtRow = [];
+                
+                if(pbtData[i].order_id){
+                    formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
+                    formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
+                    formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
+                    formatStartDate = (pbtData[i].start_date ? <FormattedRelative updateInterval={10000} value={pbtData[i].start_date} timeZone={this.props.timeZone}/> : "null");
+                    formatCompleteDate = (pbtData[i].completion_date ? <FormattedRelative updateInterval={10000} value={pbtData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+                    formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+
+                    pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
+                            </div>);
+
+                    pbtRow.push(<div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                    <div style={{width: "35%"}}>
+                                        <div className="ProgressBarWrapper">
+                                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                                        </div>
+                                        <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                                    </div>
+                                    <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                        <span>{pbtData[i].status}</span>
+                                        <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                        <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
+                                        <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
+                                        <span>{pbtData[i].unfulfillable_count > 0 ? pbtData[i].unfulfillable_count : ""}</span>
+                                        <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                    </div>
+                                </div>);
+
+                    if(formatProgressBar.action === true){
+                        pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
+                          <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
+                            <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                          </button>
+                        </div>);
+                    }
+                    else{
+                        pbtRow.push(<div> </div>);
+                    }
+                }
+
+                
+
+                //let formatTimeLeft = this._formatTime(pbtData[i].time_left);
+                // let originalDate = pbtData[i].cut_off_time;
+                // var convertedDate =  originalDate.getTime(); 
+                // var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
+
+                let msec = Date.parse("March 8, 2018");
+                var d = new Date();  //2018-02-22 23:00:00
+                var n = d.getMilliseconds();
+                var x = n - 5 * 60000;
+
+                //if(pbtData[i].cut_off_time){
+                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time.split(" ")[1]}} /> : "NO CUT OFF TIME");
+                    let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={x} timeZone={this.props.timeZone}/>);
+                    let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+                    let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
+
+                    pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                </div>);
+
+                    pbtRow.push(<div>
+                                    <div className="ProgressBarWrapper">
+                                        <ProgressBar progressWidth={formatProgressBar.width}/>
+                                    </div>
+                                    <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
+                                 </div>);
+
+                    pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
+                                
+                    
+                pbtRows.push(pbtRow);
+            }
+            processedData.pbtData = pbtRows;
+        }
+        processedData.offset = 0;
+        processedData.max= pbtRows.length;
+        return processedData;
     }
 
     _processOrders = (arg) => {
+        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
+        let pbtData = arg;
         let orderData = arg;
         let orderDataLen = orderData.length;
         let orderRows = [];
@@ -267,25 +285,40 @@ class OrderListTable extends React.Component {
         if(orderDataLen){
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
-                let formatOrderId = "Order " + orderData[i].order_id;
-                let formatPpsId = "PPS " + orderData[i].pps_id;
-                let formatBinId = "Bin" + orderData[i].pps_bin_id;
 
-                let formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
+                formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
+                formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
+                formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
+                formatStartDate = (orderData[i].start_date ? <FormattedRelative updateInterval={10000} value={orderData[i].start_date} timeZone={this.props.timeZone}/> : "null");
+                formatCompleteDate = (orderData[i].completion_date ? <FormattedRelative updateInterval={10000} value={orderData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+                formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
                  
+
+                 
+
                 orderRow.push(<div className="DotSeparatorWrapper"> 
-                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, orderData[i].start_date]}/>
+                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatCompleteDate]}/>
                             </div>);
-                orderRow.push( <div>
-                                 <div className="ProgressBarWrapper">
-                                    <ProgressBar progressWidth={formatProgressBar.width}/>
-                                </div>
-                                 <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                orderRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                    <div style={{width: "35%"}}>
+                                        <div className="ProgressBarWrapper">
+                                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                                        </div>
+                                        <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                                    </div>
+                                    <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                        <span> {orderData[i].status} </span>
+                                        <span> {orderData[i].missing_count > 0 ? orderData[i].missing_count : ""} </span>
+                                        <span> {orderData[i].damaged_count > 0 ? orderData[i].damaged_count : ""} </span>
+                                        <span> {orderData[i].physically_damaged_count > 0 ? orderData[i].physically_damaged_count : ""} </span>
+                                        <span> {orderData[i].unfulfillable_count > 0 ? orderData[i].unfulfillable_count : ""} </span>
+                                        <span> {orderData[i].missing_count > 0 ? orderData[i].missing_count : ""} </span>
+                                    </div>
                              </div>);
                 if(formatProgressBar.action === true){
-                    orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap" onClick={() => this._viewOrderLine(orderData[i].order_id)}>
-                      <button>
-                      <FormattedMessage id="orders.view orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                    orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
+                      <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
+                        <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                       </button>
                     </div>);
                 }
@@ -305,48 +338,48 @@ class OrderListTable extends React.Component {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
         const processedOrderData = this._processOrders(this.props.ordersPerPbt);
-
-        
-
         return (
             <div>
                 <div className="waveListWrapper">
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
-                                return (
-                                    <Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
-                                        <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
-                                            {row.map(function (text, index) {
-                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                    {text}
-                                                </div>
-                                            })}
-                                        </GTableRow>}>
+                                return self.props.pbts[idx].total_orders ? (<Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
+                                    <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
+                                        {row.map(function (text, index) {
+                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                {text}
+                                            </div>
+                                        })}
+                                    </GTableRow>}>
 
-                                        {self.props.isPanelOpen === true ?
-                                            (<GTableBody data={processedOrderData.orderData} >
-                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
-                                                    return (
-                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
-                                                            {Object.keys(row).map(function (text, index) {
-                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                                    {row[text]}
-                                                                </div>
-                                                            })}
-                                                        </GTableRow>
-                                                    )
-                                                }):""}
-                                            </GTableBody>): null
-                                        }
-                                    </Accordion> 
-                                )
+                                    {self.props.isPanelOpen === true ?
+                                        (<GTableBody data={processedOrderData.orderData} >
+                                            {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
+                                                return (
+                                                    <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
+                                                        {Object.keys(row).map(function (text, index) {
+                                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                                {row[text]}
+                                                            </div>
+                                                        })}
+                                                    </GTableRow>
+                                                )
+                                            }):""}
+                                        </GTableBody>): null
+                                    }
+                                </Accordion>)
+                                :<GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
+                                        {row.map(function (text, index) {
+                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                {text}
+                                            </div>
+                                        })}
+                                    </GTableRow>
                             }):""}
                         </GTableBody>
                     </GTable>
                 </div>
-                
-                {/*<div> {noData} </div>*/}
             </div>
         );
     }
@@ -372,7 +405,8 @@ function mapStateToProps(state, ownProps) {
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
 
-        pbts: state.orderDetails.pbts,
+        totalPages: state.orderDetails.totalPages,
+        totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,
         timeZone:state.authLogin.timeOffset
     };
@@ -425,8 +459,9 @@ var mapDispatchToProps=function (dispatch) {
 };
 
 OrderListTable.defaultProps = {
-    pbts: [],
-    ordersPerPbt: []
+    ordersPerPbt: [],
+    totalPages: "",
+    totalOrders: ""
 }
 
 OrderListTable.PropTypes={

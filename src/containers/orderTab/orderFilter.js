@@ -111,7 +111,7 @@ class OrderFilter extends React.Component{
             },
             searchQuery: {"ORDER ID":  ''},
         });
-        hashHistory.push({pathname: "/orders/orderlist", query: {}})
+        hashHistory.push({pathname: "/orders/orderlist", query: _query});
     }
 
 

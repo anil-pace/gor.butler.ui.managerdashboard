@@ -222,7 +222,7 @@ class Routes extends React.Component {
                         />
                     </Route>
 
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
+                    {/*<Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/ordersTab').default);
@@ -252,13 +252,13 @@ class Routes extends React.Component {
                                    }, "orderList");
                                }}
                         />
-                    </Route>
+                    </Route>*/}
 
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="neworders" path="/neworders"
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/neworderTab/orderListTab').default);
-                               }, "neworders");
+                               }, "orders");
                            }}
                     />
 

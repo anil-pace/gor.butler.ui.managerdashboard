@@ -8,17 +8,30 @@ class OrderTile extends React.Component{
     super(props);
   } 
 
+  _formatDate(arg){
+    let dateObj = new Date(arg);
+    let dateObjArr = dateObj.toString().split(" ");
+    let dateFormat = dateObjArr[2] + " " + dateObjArr[1] + " " + dateObjArr[3];
+    return dateFormat;
+  }
+
   render()
   {
       const { orderFulfilData, orderSummaryData } = this.props;
+      let fromDate, toDate;
       const progressWidth = (orderFulfilData.picked_products_count / orderFulfilData.total_products_count) * 100;
+      let backgroundColor = (this.props.pbtsData.length > 0 ? "#ffffff" : "#fafafa");
+      if(this.props.fromDate && this.props.toDate){
+         fromDate = this._formatDate(this.props.fromDate);
+         toDate = this._formatDate(this.props.toDate);
+      }
 
       return (
-          <div className="orderTopWrapper">
+          <div style={{background: backgroundColor}} className="orderTopWrapper">
               <div className="orderLeftWrapper">
                 <div className="orderLeftContent">
                   <div className="dateTimeWrapper">
-                      {this.props.date}
+                      {fromDate && toDate ? fromDate + " - " +  toDate : this.props.date}
                   </div>
                   <div className="orderLeftHeader"> 
                     <FormattedMessage id="orders.fulfil" description="header of orders fulfilment" defaultMessage="Order fulfuilment progress "/>
@@ -66,14 +79,14 @@ class OrderTile extends React.Component{
                       <li className="liItem"> 
                         <FormattedMessage id="orders.summary.ordersDone" description="orders completed" defaultMessage="{picked} Order(s) completed of {totalItems}"
                           values={{
-                            picked:<span style={{fontWeight:"bold"}}>{orderSummaryData.completed_orders}</span> || 0,
-                            totalItems:<span style={{fontWeight:"bold"}}>{orderSummaryData.total_orders}</span> || 0
+                            picked:<span style={{fontWeight:"bold"}}>{orderSummaryData.completed_orders || 0}</span>,
+                            totalItems:<span style={{fontWeight:"bold"}}>{orderSummaryData.total_orders || 0}</span>
                           }}
                         /> 
                        </li>
                       <li className="liItem"> 
                         <FormattedMessage id="orders.summary.ordersProg" description="orders in progress" defaultMessage="{current} currently in progress"
-                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orders}</span> || 0}}
+                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orders || 0}</span> }}
                         />
                       </li>
                     </ul>
@@ -82,14 +95,14 @@ class OrderTile extends React.Component{
                       <li className="liItem"> 
                         <FormattedMessage id="orders.summary.olinesDone" description="orderlines completed" defaultMessage="{picked} Orderline(s) completed of {totalItems}"
                           values={{
-                            picked:<span style={{fontWeight:"bold"}}>{orderSummaryData.completed_orderlines}</span> || 0,
-                            totalItems:<span style={{fontWeight:"bold"}}>{orderSummaryData.total_orderlines}</span> || 0
+                            picked:<span style={{fontWeight:"bold"}}>{orderSummaryData.completed_orderlines || 0}</span>,
+                            totalItems:<span style={{fontWeight:"bold"}}>{orderSummaryData.total_orderlines || 0}</span> 
                           }}
                         />
                       </li>
                       <li className="liItem"> 
                         <FormattedMessage id="orders.summary.olinesProg" description="orderlines in progress" defaultMessage="{current} currently in progress"
-                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orderlines}</span> || 0}}
+                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orderlines || 0}</span> }}
                         /> 
                       </li>
                     </ul>
@@ -97,7 +110,7 @@ class OrderTile extends React.Component{
                     <ul className="summaryColumn">
                       <li className="liItem"> 
                         <FormattedMessage id="orders.summary.breached" description="breached orders" defaultMessage="{current} Breached orders"
-                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.breached_orders}</span> || 0}}
+                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.breached_orders || 0 }</span> }}
                         />
                       </li>
                     </ul>

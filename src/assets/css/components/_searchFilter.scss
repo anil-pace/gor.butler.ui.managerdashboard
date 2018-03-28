@@ -7,6 +7,11 @@
 		display: inline-block;
 		padding-left: calculateRem(10px);
 		vertical-align: middle;
+		.gor-search-icon {
+		    background-position: -1px -93px;
+		    width: 14px;
+		    height: 14px;
+		}
 	}
 	.inputWrapper{
 		display: inline-block;

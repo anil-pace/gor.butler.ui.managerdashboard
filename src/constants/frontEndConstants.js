@@ -32,12 +32,6 @@ export const IN_PROGRESS="in_progress";
 export const SYSTEM_GENERATED="system";
 
 
-
-
-
-
-
-
 /*Constants for Notification Web Sockets*/
 export const WS_NOTIFICATION_CONNECT = "WS_NOTIFICATION_CONNECT";
 export const WS_NOTIFICATION_CONNECTED = "WS_NOTIFICATION_CONNECTED";
@@ -781,21 +775,21 @@ export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
 
 export const PICK_BEFORE_TIME = "PICK_BEFORE_TIME";
-export const ORDER_ID = "ORDER_ID";
-export const PPS_ID = "PPS_ID";
-export const SKU_ID = "SKU_ID";
-export const FROM_DATE = "FROM_DATE";
-export const TO_DATE = "TO_DATE";
-export const FROM_TIME = "FROM_TIME";
-export const TO_TIME = "TO_TIME";
+export const ORDER_ID = "ORDER ID";
+export const PPS_ID = "PPS ID";
+export const SKU_ID = "SKU ID";
+export const FROM_DATE = "FROM DATE";
+export const TO_DATE = "TO DATE";
+export const FROM_TIME = "FROM TIME";
+export const TO_TIME = "TO TIME";
 export const URGENT_ORDER_TAG = "URGENT";
 export const EXPRESS_ORDER_TAG = "EXPRESS";
 export const PENDING_STATUS = "PENDING";
 export const BREACH_RISK_STATUS ="BREACH_RISK";
 export const BREACHED_STATUS ="BREACHED";
-export const BREACHED_COMPLETED_STATUS ="BREACHED_COMPLETED";
-export const PRODUCT_SHORT_STATUS ="PRODUCT_SHORT";
-export const OUT_OF_STOCK_STATUS ="OUT_OF_STOCK";
+export const BREACHED_COMPLETED_STATUS ="BREACHED COMPLETED";
+export const PRODUCT_SHORT_STATUS ="PRODUCT SHORT";
+export const OUT_OF_STOCK_STATUS ="OUT OF STOCK";
 export const COMPLETED_STATUS ="COMPLETED";
 export const REJECTED_STATUS ="REJECTED";
 export const CANCELLED_STATUS ="CANCELLED";

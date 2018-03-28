@@ -3,9 +3,7 @@ import FilterInputField from './filterInputField';
 
 class FilterInputFieldWrap extends React.Component{
 	
- _textSubmit(e) {
-   this.props.handleInputText(this.pageNum.value,this.props.inputText.value);
- }
+ 
  _processInputField() {
   var totalInput=this.props.inputText, inputFieldWrap=[], flag=false;
   var textboxStatus=this.props.textboxStatus ||{};

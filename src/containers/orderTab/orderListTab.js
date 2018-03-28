@@ -98,8 +98,8 @@ const messages=defineMessages({
         if (nextProps.socketAuthorized && nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            this._subscribeData()
-            this._refreshList(nextProps.location.query,nextProps.orderSortHeaderState.colSortDirs)
+            //this._subscribeData()
+            this._refreshList(nextProps.location.query)
         }
     }
 
@@ -121,113 +121,118 @@ const messages=defineMessages({
 
 
 
-     _refreshList(query,orderbyParam) {
-        var orderbyUrl;
+     _refreshList(query) {
         this.props.setOrderListSpinner(true);
-
-        let _query_params=[], convertTime={
-            "oneHourOrders": 1,
-            "twoHourOrders": 2,
-            "sixHourOrders": 6,
-            "twelveHourOrders": 12,
-            "oneDayOrders": 24
+        let filterSubsData={};
+        if (query.orderId) {
+            filterSubsData["order_id"]=['contains', query.charger_id]
         };
+        // var orderbyUrl;
+        // this.props.setOrderListSpinner(true);
+
+        // let _query_params=[], convertTime={
+        //     "oneHourOrders": 1,
+        //     "twoHourOrders": 2,
+        //     "sixHourOrders": 6,
+        //     "twelveHourOrders": 12,
+        //     "oneDayOrders": 24
+        // };
 
         
 
 
-        //appending filter for status
+        // //appending filter for status
 
-        if (query.status) {
+        // if (query.status) {
 
-           let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
-           if (statusList.length > 0) {
-                let _flattened_statuses=[]
-                let statusField="", orderIDfield="";
-                statusList=statusList.constructor===Array?statusList:[statusList]
-                statusList.forEach(function (status) {
-                    _flattened_statuses.push(status.split("__"))
-                })
-                statusList=[].concat.apply([], _flattened_statuses)
-                if(statusList.length===1){
-                    statusField = [WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("==");
-                }
-                else if(statusList.length>1){
-                    statusField = [WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("=");
-                }
+        //    let statusList=query.status.constructor=== Array ? query.status.slice() : [query.status];
+        //    if (statusList.length > 0) {
+        //         let _flattened_statuses=[]
+        //         let statusField="", orderIDfield="";
+        //         statusList=statusList.constructor===Array?statusList:[statusList]
+        //         statusList.forEach(function (status) {
+        //             _flattened_statuses.push(status.split("__"))
+        //         })
+        //         statusList=[].concat.apply([], _flattened_statuses)
+        //         if(statusList.length===1){
+        //             statusField = [WAREHOUSE_STATUS_SINGLE,statusList.toString() ].join("==");
+        //         }
+        //         else if(statusList.length>1){
+        //             statusField = [WAREHOUSE_STATUS_MULTIPLE,"("+statusList.toString()+")" ].join("=");
+        //         }
 
-                if (query.orderId) {
-                    orderIDfield = [";"+ORDER_ID_FILTER_PARAM, query.orderId].join("==");
-                }
-                _query_params.push(statusField+orderIDfield);
-            }
-        }
+        //         if (query.orderId) {
+        //             orderIDfield = [";"+ORDER_ID_FILTER_PARAM, query.orderId].join("==");
+        //         }
+        //         _query_params.push(statusField+orderIDfield);
+        //     }
+        // }
 
-        else if(query.orderId){
-            _query_params.push([ORDER_ID_FILTER_PARAM_WITHOUT_STATUS, query.orderId].join("=="))
-        }
+        // else if(query.orderId){
+        //     _query_params.push([ORDER_ID_FILTER_PARAM_WITHOUT_STATUS, query.orderId].join("=="))
+        // }
 
-        //appending filter for orders by time:
+        // //appending filter for orders by time:
         
         
-        if (query.period) {
-            let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
+        // if (query.period) {
+        //     let timeOut=query.period.constructor=== Array ? query.period[0] : query.period
             
-            _query_params.push(UPDATE_TIME+convertTime[timeOut]);
-            _query_params.push(UPDATE_TIME_UNIT+"hours") ;
-        }
+        //     _query_params.push(UPDATE_TIME+convertTime[timeOut]);
+        //     _query_params.push(UPDATE_TIME_UNIT+"hours") ;
+        // }
 
-        let url = ORDERS_URL;
+        // let url = ORDERS_URL;
 
-        _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
-        _query_params.push([GIVEN_PAGE_SIZE, this.props.filterOptions.pageSize || 25].join("="));
-        if(orderbyParam && orderbyParam.sortDir){
-            orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
-            orderbyUrl=orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
+        // _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
+        // _query_params.push([GIVEN_PAGE_SIZE, this.props.filterOptions.pageSize || 25].join("="));
+        // if(orderbyParam && orderbyParam.sortDir){
+        //     orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam.sortDir)].join("=")):"";
+        //     orderbyUrl=orderbyParam? sortOrderHead[orderbyParam["columnKey"]]:"";
 
-        }
-        else
-        {
-            orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
-            orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
-        }  
-        url=[url, _query_params.join("&")].join("?");
+        // }
+        // else
+        // {
+        //     orderbyParam? _query_params.push(['order',toggleOrder(orderbyParam[Object.keys(orderbyParam)])].join("=")):"";
+        //     orderbyUrl=orderbyParam? sortOrderHead[Object.keys(orderbyParam)[0]]:"";
+        // }  
+        // url=[url, _query_params.join("&")].join("?");
         
-        if(_query_params.length===2){
-            url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
-        }
-        else{
-            url+=orderbyUrl
-        }
-        let paginationData={
+        // if(_query_params.length===2){
+        //     url+=orderbyUrl+sortOrder["ASC"]+sortOrderHead["recievedTime"];
+        // }
+        // else{
+        //     url+=orderbyUrl
+        // }
+        // let paginationData={
 
-            'url': url,
-            'method': 'GET',
-            'cause': ORDERS_RETRIEVE,
-            'token': this.props.auth_token,
-            'contentType': 'application/json',
-            'accept':'application/json'
-        }
-        if (Object.keys(query).filter(function (el) {
-            return el !== 'page'
-        }).length !== 0) {
-            this.props.toggleOrderFilter(true);
-            this.props.filterApplied(true);
-        } else {
-            this.props.toggleOrderFilter(false);
-            this.props.filterApplied(false);
-        }
-        this.props.currentPage(1);
-        this.props.orderfilterState({
-            tokenSelected: {
-                "STATUS": query.status ? (query.status.constructor=== Array ? query.status : [query.status]) : ['all'],
-                "TIME PERIOD": query.period ? (query.period.constructor=== Array ? query.period[0] : query.period) : ['allOrders']
-            },
-            searchQuery: {"ORDER ID": query.orderId || ''},
-            "PAGE": query.page || 1
-        });
-        this.props.setOrderQuery({query:query})
-        this.props.getPageData(paginationData);
+        //     'url': url,
+        //     'method': 'GET',
+        //     'cause': ORDERS_RETRIEVE,
+        //     'token': this.props.auth_token,
+        //     'contentType': 'application/json',
+        //     'accept':'application/json'
+        // }
+        // if (Object.keys(query).filter(function (el) {
+        //     return el !== 'page'
+        // }).length !== 0) {
+        //     this.props.toggleOrderFilter(true);
+        //     this.props.filterApplied(true);
+        // } else {
+        //     this.props.toggleOrderFilter(false);
+        //     this.props.filterApplied(false);
+        // }
+        // this.props.currentPage(1);
+        // this.props.orderfilterState({
+        //     tokenSelected: {
+        //         "STATUS": query.status ? (query.status.constructor=== Array ? query.status : [query.status]) : ['all'],
+        //         "TIME PERIOD": query.period ? (query.period.constructor=== Array ? query.period[0] : query.period) : ['allOrders']
+        //     },
+        //     searchQuery: {"ORDER ID": query.orderId || ''},
+        //     "PAGE": query.page || 1
+        // });
+        // this.props.setOrderQuery({query:query})
+        // this.props.getPageData(paginationData);
 
     }
 
