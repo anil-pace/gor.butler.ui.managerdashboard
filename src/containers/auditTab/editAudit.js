@@ -189,12 +189,13 @@ class EditAudit extends React.Component{
         skuAttributes ={};
         validatedSKUs =[];
         activeTabIndex=1;
+        this.kqCheck.checked=locationAttributes.kq;
       }
       else{
         if(this.props.auditEditData!==nextProps.auditEditData){
        skuAttributes =JSON.parse(JSON.stringify(nextProps.auditEditData));
        attrList=nextProps.auditEditData.outerObj;
-       
+       this.kqCheck.checked=skuAttributes.kq
         }
         else
         {
@@ -375,9 +376,11 @@ _onAttributeSelectionFirstTime(){
     if(this.props.auditId && type !== "validate" && this.props.param!=='duplicate'){
       validSKUData.audit_id=this.props.auditId;
       validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
+      validSKUData.kq = this.kqCheck.checked;
     }
     if(this.props.param=='duplicate' && type !== "validate"){
             validSKUData.action='duplicate';
+            validSKUData.kq = this.kqCheck.checked;
           }
 
     if(type === "validate"){
@@ -460,6 +463,7 @@ _onAttributeSelectionFirstTime(){
     validLocationDataCreateAudit={
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
+      "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
       "audit_param_value":{
         "locations_list":auditParamValue
       },
@@ -471,6 +475,7 @@ _onAttributeSelectionFirstTime(){
     validLocationDataCreateAudit={
       "audit_param_type":"location",
       "action":'duplicate',
+      "kq":this.kqCheck.checked,
       "audit_param_value":{
         "locations_list":auditParamValue
       }
@@ -1096,7 +1101,7 @@ _onAttributeSelectionFirstTime(){
                  <div className="gor-sku-validation-btn-wrap">
                  <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editSKUText" description='Text for editing a location' 
                         defaultMessage='BACK TO EDIT'/></button>
-                <div className="sku-search"> <SearchFilterComponent callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
+                <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
 
                  </div>
                  <div className={"message success"}>
@@ -1286,8 +1291,8 @@ _onAttributeSelectionFirstTime(){
                                                               defaultMessage='{valid} out of {total} locations valid'
                                                               values={
                                                                 {
-                                                                  valid: self.state.locationAttributes.totalValid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                  valid: self.state.locationAttributes.totalValid?self.state.locationAttributes.totalValid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
@@ -1387,7 +1392,21 @@ _onAttributeSelectionFirstTime(){
                     </Tab>
 
             </GorTabs>
-           
+            <div className={"audit-sub-footer"}>
+           <section className={"set-kq-wrp"}>
+              <div className={"kq-check-wrp"}>
+              <span><input type="checkbox" ref={(input) => { this.kqCheck = input; }} /></span>
+              </div>
+              <div className={"kq-check-label"}>
+                <p className={"kq-check-msg"}> <FormattedMessage id="audit.kq.label.msg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Show KQ on Butler Operator Interface'
+                                                             /></p>
+                <p className={"kq-check-submsg"}> <FormattedMessage id="audit.kq.label.submsg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Selecting this will enable key in quantity for this audit task'
+                                                             /></p>
+              </div>
+           </section>
+           </div>
             </div>
             <div className={"audit-footer"}>
             {button}
