@@ -337,7 +337,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
            
         case START_AUDIT_TASK:
-        if(res.successful.length>=1 || res.unsuccessful.length>=1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        
+        if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
         {
            var successCount = res.successful.length,
                 unsuccessfulCount = Object.keys(res.unsuccessful).length,
