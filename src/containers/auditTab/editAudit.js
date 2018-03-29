@@ -959,8 +959,8 @@ _onAttributeSelectionFirstTime(){
       let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       let uploadCsvMessg=<FormattedMessage id="audit.uploadcsv.text" description='text for upload csv and validate' defaultMessage='Upload CSV and validate'/>;
       let selectAttributesMessg=<FormattedMessage id="audit.selectattributes.text" description='text for select attributes' defaultMessage='Select attributes'/>;
-      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
-      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
+      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Enter SKU and validate'/>;
+      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>

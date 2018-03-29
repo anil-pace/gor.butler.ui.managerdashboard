@@ -836,10 +836,10 @@ class CreateAudit extends React.Component{
   render()
   {
       let self=this;
-      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
+      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Enter SKU and validate'/>;
       let enterSkuMessg=<FormattedMessage id="audit.auditbysku.enterSKU" description='text for audit by sku' defaultMessage='Enter SKU and validate'/>;
       let enterCSVMessg=<FormattedMessage id="audit.auditbysku.enterCSV" description='text for audit by sku' defaultMessage='Upload CSV and validate'/>;
-      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
+      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>

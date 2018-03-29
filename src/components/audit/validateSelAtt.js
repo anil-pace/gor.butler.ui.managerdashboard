@@ -301,8 +301,8 @@ class ValidateSelAtt extends React.Component{
     render(){
       var {validationDoneSKU,copyPasteData,allTuplesValid} = this.state;
       let searchSKUPH = this.props.intl.formatMessage(messages.searchPlaceholderSKU);
-      let auditBySkuMessg=<FormattedMessage id="ValidateSelAtt.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
-      let skuSelectAttributes = <FormattedMessage id="ValidateSelAtt.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
+      let auditBySkuMessg=<FormattedMessage id="ValidateSelAtt.auditbysku.text" description='text for Enter SKU and validate ' defaultMessage='Enter SKU and validate'/>;
+      let skuSelectAttributes = <FormattedMessage id="ValidateSelAtt.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="ValidateSelAtt.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="ValidateSelAtt.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>
