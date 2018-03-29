@@ -158,8 +158,8 @@ class CreateAudit extends React.Component{
       this._removeThisModal();
     }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-      let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes)),
+      let locationAttributes =this.props.locationDataChanged !== nextProps.locationDataChanged?JSON.parse(JSON.stringify(nextProps.locationAttributes)):{},
+      skuAttributes = this.props.skuDataChanged !== nextProps.skuDataChanged?JSON.parse(JSON.stringify(nextProps.skuAttributes)):{},
       validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
       validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
       validationDone = Object.keys(locationAttributes).length ? true : false,
@@ -1159,8 +1159,8 @@ class CreateAudit extends React.Component{
                                                               defaultMessage='{valid} out of {total} locations valid'
                                                               values={
                                                                 {
-                                                                  valid: (self.state.locationAttributes.totalValid || "").toString(),
-                                                                  total: (self.state.locationAttributes.totalLocations || "").toString()
+                                                                  valid: self.state.locationAttributes.totalValid?self.state.locationAttributes.totalValid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
@@ -1174,8 +1174,8 @@ class CreateAudit extends React.Component{
                                                               defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
                                                               values={
                                                                 {
-                                                                  invalid: self.state.locationAttributes.totalInvalid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                  invalid:self.state.locationAttributes.totalInvalid? self.state.locationAttributes.totalInvalid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>}
@@ -1316,6 +1316,8 @@ CreateAudit.defaultProps = {
   skuAttributes:{},
   locationAttributes:{},
   hasDataChanged:false,
+  locationDataChanged:false,
+  skuDataChanged:false,
   auditSpinner:false
 };
 function mapStateToProps(state, ownProps){
@@ -1330,6 +1332,8 @@ function mapStateToProps(state, ownProps){
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
+      locationDataChanged:state.auditInfo.locationDataChanged,
+      skuDataChanged:state.auditInfo.skuDataChanged,
       auditSpinner: state.auditInfo.auditValidationSpinner 
   };
 }

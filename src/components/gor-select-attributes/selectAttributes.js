@@ -33,7 +33,8 @@ export default class SelectAttributes extends React.Component {
             selectionApplied:false,
             editedIndex:"-1",
             placeHolder:"Select Attributes",
-            selectedSetCount:0
+            selectedSetCount:0,
+            extraFlagtoBack:this.props.attributeList.length?true:false
         }
 
     }
@@ -67,11 +68,11 @@ export default class SelectAttributes extends React.Component {
     }
 
     _backToDefault(e){
-       // e.stopPropagation()
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         this.setState({
-            showAttrList:false
+            showAttrList:false,
+            extraFlagtoBack:true
         })
     }
     _clearSelectedAttributes(e){
@@ -143,14 +144,15 @@ export default class SelectAttributes extends React.Component {
             editedIndex:"-1",
             selectedSets,
             placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected",
-            selectedSetCount:Object.keys(selectedSets).length
+            selectedSetCount:Object.keys(selectedSets).length,
+            extraFlagtoBack:true
         },function(){
             this.props.applyCallBack(selectedSets,index);
         })
     }
 }
     
-    _showAttrList(e){
+    _showAttrList(e){   
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
         var nonMutatedData = JSON.parse(JSON.stringify(this.state.nonMutatedData));
@@ -159,7 +161,9 @@ export default class SelectAttributes extends React.Component {
             editedIndex:"-1",
             selectionApplied:false,
             data:nonMutatedData,
-            selectedAttributes:{}
+            selectedAttributes:{},
+            extraFlagtoBack:false
+
         })
     }
     _deleteSet(e,idx,skuIndex){
@@ -197,7 +201,8 @@ export default class SelectAttributes extends React.Component {
             showAttrList:true,
             selectionApplied:false,
             selectedAttributes:selectedSet,
-            editedIndex:idx
+            editedIndex:idx,
+            extraFlagtoBack:false
         })
 
 
@@ -305,7 +310,8 @@ export default class SelectAttributes extends React.Component {
                 </a>
             </div>
         </div>}
-        {attributeSelected && this.state.selectionApplied &&  <div>
+       
+        {(attributeSelected && _this.state.extraFlagtoBack) &&  <div>
              <div className={"attribute-cont"}>
              <div className={"header"}>Selected Set of Attributes</div>
              <AttributeList>

@@ -174,7 +174,8 @@ body {
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
-.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr {
+.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr,
+.gor-exp-coll {
   background-image: url(./images/icons.svg);
 }
 
@@ -5654,7 +5655,6 @@ button:disabled {
   height: 35px;
   border-radius: 3px;
   border: solid 1px #aaaaaa;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   padding-left: 10px;
   margin-top: 20px;
@@ -9064,11 +9064,11 @@ button:disabled {
   display: inline-block;
   vertical-align: top;
   margin-top: 13px;
-  cursor: pointer;
+  color: #0389eb;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft .details-changepps:hover {
-  color: #0389eb;
+  cursor: pointer;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body {
@@ -9314,6 +9314,10 @@ checkmark1 for indeterminate state*/
   vertical-align: middle;
 }
 
+.searchBarWrapper .searchIconWrap .gor-search-icon {
+  cursor: pointer;
+}
+
 .searchBarWrapper .inputWrapper {
   display: inline-block;
   width: 80%;
@@ -9324,6 +9328,35 @@ checkmark1 for indeterminate state*/
   border: none;
   color: #aaaaaa;
   width: 100%;
+}
+
+.searchBarWrapper.animated {
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+}
+
+.searchBarWrapper.animated .inputWrapper {
+  width: 0;
+}
+
+.searchBarWrapper.animated .gor-search-input-wrap {
+  padding: 0;
+  width: 0;
+}
+
+.searchBarWrapper.animated.opened {
+  width: 150px;
+}
+
+.searchBarWrapper.animated.opened .inputWrapper {
+  width: 120px;
+}
+
+.searchBarWrapper.animated.opened .gor-search-input-wrap {
+  padding: 0;
+  width: 120px;
 }
 
 .gor-auditActionModal {
@@ -9469,8 +9502,56 @@ checkmark1 for indeterminate state*/
   background-position: 2px -107px;
 }
 
+.gor-audit-create .gor-csv-upl-msg {
+  width: 78%;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 1px solid #E5E5E5;
+  line-height: 0.1em;
+  margin: 10px auto 16px auto;
+}
+
+.gor-audit-create .gor-option-wrapper {
+  left: 0;
+}
+
+.gor-audit-create .gor-filter-upper-wrap {
+  margin-top: 0;
+}
+
+.gor-audit-create .searchBarWrapper {
+  width: auto;
+  border: none;
+}
+
+.gor-audit-create .searchIconWrap {
+  padding-left: 0;
+}
+
+.gor-audit-create .gor-audit-excol-wrap {
+  width: 10%;
+  margin: auto;
+}
+
+.gor-audit-create .gor-exp-coll {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  bottom: 10px;
+}
+
+.gor-audit-create .gor-exp-coll.collapsed {
+  background-position: -403px -55px;
+}
+
+.gor-audit-create .gor-exp-coll.expanded {
+  background-position: -428px -55px;
+}
+
 .gor-audit-create .audit-sub-footer {
-  padding: 12px 0;
+  padding: 30px 0;
 }
 
 .gor-audit-create .audit-sub-footer input {
@@ -9529,8 +9610,9 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .sku-search {
   float: right;
-  padding: 5px 8px;
-  border: 1px solid #eee;
+  padding: 7px 10px;
+  border: 1px solid #BEBEBE;
+  border-radius: 3px;
 }
 
 .gor-audit-create .sku-search input {
@@ -9583,6 +9665,11 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .gor-option-wrapper {
   width: 130px;
+  top: 34px;
+}
+
+.gor-audit-create .gor-option-wrapper .gor-dropdown-option {
+  font-size: 0.875rem;
 }
 
 .gor-audit-create .gor-modal-head {
@@ -9590,7 +9677,7 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .gor-audit-form {
-  width: 45%;
+  width: 42%;
   margin: auto;
 }
 
@@ -9620,14 +9707,14 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .tab {
   display: inline-block;
   text-align: center;
-  padding: 15px 20px;
+  padding: 12px 20px;
   color: #666666;
   width: 46%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
   font-family: 'Source Sans Pro';
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -9679,7 +9766,7 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .sku-mode {
-  width: 92%;
+  width: 100%;
 }
 
 .gor-audit-create .sku-mode.active-mode {
@@ -9715,9 +9802,8 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-sku-validation-btn-wrap {
   display: inline-block;
   border-bottom: solid 1px #dddddd;
-  border-top: solid 1px #dddddd;
-  padding-bottom: 8px;
-  padding-top: 8px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   width: 100%;
   background-color: #ffffff;
 }
@@ -9798,8 +9884,8 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .gor-audit-input-wrap {
-  width: 50%;
-  padding: 7px 5px;
+  width: 43%;
+  padding: 1px 12px;
   border-radius: 3px;
   border: solid 1px #aaaaaa;
   background-color: #ffffff;
@@ -9821,6 +9907,7 @@ checkmark1 for indeterminate state*/
   height: 18px;
   width: 18px;
   display: block;
+  margin-top: 5px;
   vertical-align: middle;
   background-position: -17px -76px;
   float: right;
@@ -9867,18 +9954,41 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-audit-inputlist-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
-  max-height: 210px;
-  overflow: auto;
+  border-bottom: 1px solid #DCDCDC;
 }
 
-.gor-audit-create .gor-audit-inputlist-wrap .gor-audit-location-wrap {
+.gor-audit-create .gor-audit-inputlist-wrap .gor-audit-inputlist-cont {
+  overflow: auto;
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.gor-audit-create .gor-audit-inputlist-wrap .gor-audit-inputlist-cont.expanded {
+  max-height: 400px;
+}
+
+.gor-audit-create .gor-audit-inputlist-wrap .gor-audit-inputlist-cont.collapsed {
+  max-height: 210px;
+}
+
+.gor-audit-create .gor-audit-location-wrap {
   margin-top: 10px;
+  background-color: #FBFBFB;
+  padding-bottom: 10px;
+  border-top: 1px solid #DDDDDD;
+}
+
+.gor-audit-create .gor-audit-location-list {
+  max-height: 210px;
+  overflow: auto;
 }
 
 .gor-audit-create .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
   border-top: 1px solid #DDDDDD;
+  margin-top: 12px;
 }
 
 .gor-audit-create .gor-audit-name-wrap {
@@ -10086,7 +10196,7 @@ checkmark1 for indeterminate state*/
   margin-left: 10px;
   font-weight: 600;
   font-family: 'Source Sans Pro';
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -10126,7 +10236,7 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-create-audit-btn {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-  min-width: 133px;
+  min-width: 120px;
   height: 35px;
   font-size: 14px;
   margin-top: 10px;
@@ -10165,7 +10275,6 @@ checkmark1 for indeterminate state*/
   font-weight: 600;
   color: #333333;
   margin-top: 25px;
-  display: inline-block;
   width: 40%;
 }
 
@@ -10173,6 +10282,8 @@ checkmark1 for indeterminate state*/
   color: #AAAAAA;
   font-size: 10px;
   font-weight: 600;
+  background: #fff;
+  padding: 0 5px;
 }
 
 .gor-audit-create .gor-auditCreate-btn {
@@ -10216,7 +10327,7 @@ checkmark1 for indeterminate state*/
   border-radius: 50%;
   display: inline-block;
   height: 25px;
-  line-height: 22px;
+  line-height: 24px;
   width: 25px;
   color: #fff;
   text-decoration: none;
@@ -10233,13 +10344,13 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .sub-tabs-audit .active {
   background: none;
   border: none;
-  border-bottom: 5px solid #659AF6;
+  border-bottom: 5px solid #419BF9;
   box-sizing: border-box;
-  color: #666666;
+  color: #333333;
 }
 
 .gor-audit-create .sub-tabs-audit .active .sub-tab-index {
-  background: #659AF6;
+  background: #419BF9;
 }
 
 .gor-sel-att-wrap {
@@ -10505,8 +10616,80 @@ checkmark1 for indeterminate state*/
   line-height: 15px;
 }
 
+.validate-sel-att .gor-audit-input-wrap {
+  display: block;
+}
+
+.validate-sel-att .gor-option-wrapper {
+  left: 0;
+}
+
+.validate-sel-att .gor-filter-upper-wrap {
+  margin-top: 0;
+}
+
 .validate-sel-att .searchBarWrapper {
   width: auto;
+  border: none;
+}
+
+.validate-sel-att .searchIconWrap {
+  padding-left: 0;
+}
+
+.validate-sel-att .gor-audit-excol-wrap {
+  width: 10%;
+  margin: auto;
+}
+
+.validate-sel-att .gor-exp-coll {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  bottom: 10px;
+}
+
+.validate-sel-att .gor-exp-coll.collapsed {
+  background-position: -403px -55px;
+}
+
+.validate-sel-att .gor-exp-coll.expanded {
+  background-position: -428px -55px;
+}
+
+.validate-sel-att .audit-sub-footer {
+  padding: 30px 0;
+}
+
+.validate-sel-att .audit-sub-footer input {
+  margin: 0;
+}
+
+.validate-sel-att .audit-sub-footer .kq-check-msg {
+  font-family: 'Source Sans Pro Bold';
+  font-size: 0.875rem;
+  color: #333333;
+}
+
+.validate-sel-att .audit-sub-footer .kq-check-submsg {
+  font-family: 'Source Sans Pro';
+  font-size: 0.75rem;
+  color: #333333;
+  line-height: 1.5625rem;
+}
+
+.validate-sel-att .audit-sub-footer .kq-check-wrp {
+  display: inline-block;
+  width: 10%;
+  vertical-align: middle;
+}
+
+.validate-sel-att .audit-sub-footer .kq-check-label {
+  display: inline-block;
+  width: 80%;
+  vertical-align: middle;
 }
 
 .validate-sel-att .note-message {
@@ -10536,8 +10719,9 @@ checkmark1 for indeterminate state*/
 
 .validate-sel-att .sku-search {
   float: right;
-  width: 25%;
-  border: 1px solid #eee;
+  padding: 7px 10px;
+  border: 1px solid #BEBEBE;
+  border-radius: 3px;
 }
 
 .validate-sel-att .sku-search input {
@@ -10590,6 +10774,11 @@ checkmark1 for indeterminate state*/
 
 .validate-sel-att .gor-option-wrapper {
   width: 130px;
+  top: 34px;
+}
+
+.validate-sel-att .gor-option-wrapper .gor-dropdown-option {
+  font-size: 0.875rem;
 }
 
 .validate-sel-att .gor-modal-head {
@@ -10597,7 +10786,7 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .gor-audit-form {
-  width: 45%;
+  width: 42%;
   margin: auto;
 }
 
@@ -10627,14 +10816,14 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .tab {
   display: inline-block;
   text-align: center;
-  padding: 15px 20px;
+  padding: 12px 20px;
   color: #666666;
   width: 46%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
   font-family: 'Source Sans Pro';
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -10686,7 +10875,7 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .sku-mode {
-  width: 92%;
+  width: 100%;
 }
 
 .validate-sel-att .sku-mode.active-mode {
@@ -10722,9 +10911,8 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-sku-validation-btn-wrap {
   display: inline-block;
   border-bottom: solid 1px #dddddd;
-  border-top: solid 1px #dddddd;
-  padding-bottom: 8px;
-  padding-top: 8px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   width: 100%;
   background-color: #ffffff;
 }
@@ -10805,8 +10993,8 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .gor-audit-input-wrap {
-  width: 50%;
-  padding: 7px 5px;
+  width: 43%;
+  padding: 1px 12px;
   border-radius: 3px;
   border: solid 1px #aaaaaa;
   background-color: #ffffff;
@@ -10828,6 +11016,7 @@ checkmark1 for indeterminate state*/
   height: 18px;
   width: 18px;
   display: block;
+  margin-top: 5px;
   vertical-align: middle;
   background-position: -17px -76px;
   float: right;
@@ -10874,18 +11063,41 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-audit-inputlist-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
-  max-height: 210px;
-  overflow: auto;
+  border-bottom: 1px solid #DCDCDC;
 }
 
-.validate-sel-att .gor-audit-inputlist-wrap .gor-audit-location-wrap {
+.validate-sel-att .gor-audit-inputlist-wrap .gor-audit-inputlist-cont {
+  overflow: auto;
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.validate-sel-att .gor-audit-inputlist-wrap .gor-audit-inputlist-cont.expanded {
+  max-height: 400px;
+}
+
+.validate-sel-att .gor-audit-inputlist-wrap .gor-audit-inputlist-cont.collapsed {
+  max-height: 210px;
+}
+
+.validate-sel-att .gor-audit-location-wrap {
   margin-top: 10px;
+  background-color: #FBFBFB;
+  padding-bottom: 10px;
+  border-top: 1px solid #DDDDDD;
+}
+
+.validate-sel-att .gor-audit-location-list {
+  max-height: 210px;
+  overflow: auto;
 }
 
 .validate-sel-att .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
   border-top: 1px solid #DDDDDD;
+  margin-top: 12px;
 }
 
 .validate-sel-att .gor-audit-name-wrap {
@@ -11093,7 +11305,7 @@ checkmark1 for indeterminate state*/
   margin-left: 10px;
   font-weight: 600;
   font-family: 'Source Sans Pro';
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -11133,7 +11345,7 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-create-audit-btn {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-  min-width: 133px;
+  min-width: 120px;
   height: 35px;
   font-size: 14px;
   margin-top: 10px;
@@ -11172,7 +11384,6 @@ checkmark1 for indeterminate state*/
   font-weight: 600;
   color: #333333;
   margin-top: 25px;
-  display: inline-block;
   width: 40%;
 }
 
@@ -11223,7 +11434,7 @@ checkmark1 for indeterminate state*/
   border-radius: 50%;
   display: inline-block;
   height: 25px;
-  line-height: 22px;
+  line-height: 24px;
   width: 25px;
   color: #fff;
   text-decoration: none;
@@ -11240,13 +11451,13 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .sub-tabs-audit .active {
   background: none;
   border: none;
-  border-bottom: 5px solid #659AF6;
+  border-bottom: 5px solid #419BF9;
   box-sizing: border-box;
-  color: #666666;
+  color: #333333;
 }
 
 .validate-sel-att .sub-tabs-audit .active .sub-tab-index {
-  background: #659AF6;
+  background: #419BF9;
 }
 
 .item-recall-wrapper li {
