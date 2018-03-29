@@ -354,7 +354,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             
             break;
         case START_AUDIT_TASK:
-        if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
         {
            var successCount = res.successful.length,
                 unsuccessfulCount = Object.keys(res.unsuccessful).length,
@@ -370,17 +370,28 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         }
         else
         {
-            if (res.successful.length) {
+            if (res.successful && res.successful.length) {
                 store.dispatch(notifySuccess(AS00A));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
                 store.dispatch(resetaudit(res.successful));
                 store.dispatch(setCheckedAudit([]));
-            } else {
-                stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
-                store.dispatch(notifyFail(stringInfo.msg));
-                store.dispatch(setAuditRefresh(false)); //reset refresh flag
-                store.dispatch(setCheckedAudit([]));
             } 
+            else if(res.alert_data[0].code== "as007"){//to do
+                stringInfo = codeToString(res.alert_data[0]);
+                store.dispatch(notifySuccess(stringInfo.msg)); 
+                store.dispatch(setCheckedAudit([]));
+        }
+        else if(res.alert_data[0].code== "g028"){
+            stringInfo = codeToString(res.alert_data[0]);
+            store.dispatch(notifyFail(stringInfo.msg));
+            store.dispatch(setCheckedAudit([]));
+        }
+        else
+        {
+            stringInfo = getFormattedMessages("STARTFAILALL", values);
+            store.dispatch(notifyFail(stringInfo.msg));
+            store.dispatch(setCheckedAudit([]));
+        }
         }
         
         break;

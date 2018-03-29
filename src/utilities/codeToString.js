@@ -171,6 +171,21 @@ export function codeToString(res){
             defaultMessage='AUDIT NOT PAUSED'/>)
                   }                                   
               break;
+              case "g028":
+              stringInfo={
+                type:ERROR,
+                msg:(<FormattedMessage id="audit.start.changepps" description='audit changepps' 
+            defaultMessage='PPS CHANGE FAILED'/>)
+                  }                                   
+              break;
+              case "as007":
+              stringInfo={
+                type:SUCCESS,
+                  msg:(<FormattedMessage id="audit.ppschange.success" description='Text for successfull pps change' 
+              defaultMessage='PPS change request sent' />)   //Make string for addition
+                  }                                   
+              break;
+              
 
               case "g030":
                 if(res.details.action=="create")
