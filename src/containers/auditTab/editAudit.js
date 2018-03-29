@@ -519,7 +519,7 @@ _onAttributeSelectionFirstTime(){
     if(value !== ""){
     //Traversing the list
     for(let i=0,len=data.length;i<len;i++){
-      if(data[i].value.indexOf(value) > -1){
+      if(data[i].value.toLowerCase().indexOf(value) > -1){
         data[i].visible = true;
       }
       else{
