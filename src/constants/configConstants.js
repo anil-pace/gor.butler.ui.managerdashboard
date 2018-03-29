@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = 'localhost'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -44,13 +44,13 @@ export const AUDIT_CREATION_URL=API_URL+"/audit/";
 export const VALIDATION_LIST=API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL=API_URL + "/system/shift_start_time";
-export const INVENTORY_REPORT_URL=API_URL + "/inventories/get_inventory_report_v2";
 export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
-export const GR_REPORT_URL=API_URL + "/components/generate_gr_report";
-export const MASTER_UPLOAD_URL=API_URL + "/products/csv";
+export const MASTER_UPLOAD_URL=API_URL + "/api-gateway/dashboard-service/platform-dashboard/report/processItems";
+
 export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/agg-stock-ledger"; //Mapping needs to be there in ngnix config
 export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/stock-ledger/"; //Mapping needs to be there in ngnix config
-export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
+export const UPLOAD_HISTORY_URL=API_URL + "/api-gateway/mdm-service/wms-masterdata/csv";
+
 export const REPORTS_HISTORY_URL=API_URL+"/components/reports_info"
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
@@ -85,8 +85,10 @@ export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/p
 export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
+export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
+export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report/{invoice}";
 
-export const AUDIT_PAUSE_URL=API_URL+"/audit/pause";
+export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';

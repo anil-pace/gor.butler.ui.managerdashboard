@@ -131,6 +131,7 @@ export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
 export const DOWNLOAD_REPORT="downloadReport";
 export const STORAGE_SPACE="storageSpace";
+export const MISC="misc";
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -805,6 +806,15 @@ export const AUDIT_EDIT='AUDIT_EDIT';
 export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
 export const START_AUDIT_TASK='START_AUDIT_TASK';
 export const CHANGE_PPS_TASK='CHANGE_PPS_TASK';
+
+/*Constants for seller recall*/
+
+export const SELLER_RECALL="SELLER_RECALL";
+export const VALIDATE_SKU_ITEM_RECALL = "VALIDATE_SKU_ITEM_RECALL";
+export const POLLING_INTERVAL = 300000; 
+export const AUDIT_EDIT_REQUEST='AUDIT_EDIT_REQUEST';
+export const CREATE_DUPLICATE_REQUEST='CREATE_DUPLICATE_REQUEST';
+export const WARNING='WARNING';
 
 
 

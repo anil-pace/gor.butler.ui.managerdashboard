@@ -21,7 +21,17 @@
     margin-right: auto;
 }
 
-
+.gor-audit-input-wrap {
+     display: inline-block;
+     width: 42%;
+     height: 35px;
+     border-radius: 3px;
+     border: solid 1px #aaaaaa;
+     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+     background-color: #ffffff;
+     padding-left: 10px;
+     margin-top: 20px;
+}
 
 .gor-audit-input {
     text-align: left;
@@ -103,6 +113,27 @@ display:inline-block;
   float: right;
 }
 
+.gor-auditlist-paginate-wrap{
+   width: 100%;
+   position: relative;
+   background-color: #ffffff;
+   border-top:1px solid lightgrey;
+   float: left;
+ }
+ .gor-auditlist-paginate-right{
+   float: right;
+ }
+ .gor-Audit-no-data {
+   display: inline-block;
+   width: 100%;
+   text-align: center;
+   padding-top: 200px;
+   font-size: 20px;
+   font-weight: bold;
+   color: #4d5055;
+   height: 400px;
+ }
+
 .gor-audit-cancelling-text{
   font-size:12px;
   text-align:center;
@@ -122,3 +153,17 @@ display:inline-block;
   color: #000000;
   font-weight: normal;
 }
+.table-auditListing {
+  .table-body{
+max-height:none !important;
+min-height: 60vh;
+overflow: auto;
+background-color: white;
+}
+}
+.gor-auditlist-paginate-right {
+.gor-paginate-wrap{
+padding-top: 1rem;
+margin-right: 20px;
+}
+} 

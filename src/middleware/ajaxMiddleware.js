@@ -43,9 +43,9 @@ const ajaxMiddleware=(function(){
                  try
                  {
                      let resContentType = httpRequest.getResponseHeader('Content-type');
-                    if(resContentType.match(/(text\/csv)/g) || 
+                    if(resContentType && (resContentType.match(/(text\/csv)/g) || 
                       resContentType.match(/(application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet)/g) ||
-                      resContentType.match(/(application\/vnd.ms-excel)/g)){
+                      resContentType.match(/(application\/vnd.ms-excel)/g))){
                     //get the file name from the content-disposition header
                     //and then save the file
 
@@ -59,7 +59,7 @@ const ajaxMiddleware=(function(){
                   }
                    else{
                     let  decodedString= httpRequest.responseType==="arraybuffer"? String.fromCharCode.apply(null, new Uint8Array(httpRequest.response)):httpRequest.response;
-                    var response=JSON.parse(decodedString,httpRequest.status);
+                    var response= decodedString ? JSON.parse(decodedString,httpRequest.status) : decodedString;
                     AjaxParse(store,response,params.cause,httpRequest.status,saltParams);          
 
                   }

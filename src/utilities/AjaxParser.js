@@ -13,14 +13,15 @@ import {
     auditValidatedAttributesLocation,
     auditValidatedAttributesLocationCsv,
     createAuditAction,
-    setAuditEditData
+    setAuditEditData,
+    attributeValidationItemRecall
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit,getAuditDetails,getAuditUserList} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -97,8 +98,8 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
-    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK
+    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,CREATE_DUPLICATE_REQUEST,
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,AUDIT_EDIT_REQUEST
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -117,6 +118,7 @@ import {
     g024,
     REQUEST_REPORT_SUCCESS,
     REQUEST_REPORT_FAILURE,
+    ITEM_RECALL_SUCCESS,
     INVALID_SKUID
 } from "../constants/messageConstants";
 import {ShowError} from "./showError";
@@ -146,7 +148,7 @@ import {
 
 
 import {
-    resetaudit
+    resetaudit, setCheckedAudit
 } from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
@@ -182,8 +184,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setLoginSpinner(false));
             break;
         case ORDERS_RETRIEVE:
-        store.dispatch(recieveOrdersData(res));
-        store.dispatch(setOrderListSpinner(false));
+            store.dispatch(recieveOrdersData(res));
+            store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
             store.dispatch(recieveAuditData(res));
@@ -252,6 +254,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             if (stringInfo.type) {
                 store.dispatch(notifyDelete(stringInfo.msg));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(setCheckedAudit([]));
             } else {
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
@@ -262,6 +265,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             if (stringInfo.type) {
                 store.dispatch(notifySuccess(stringInfo.msg));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
+                store.dispatch(setCheckedAudit([]));
             } else {
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
@@ -310,6 +314,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             store.dispatch(setAuditSpinner(false));
             store.dispatch(setAuditRefresh(true));
+            store.dispatch(setCheckedAudit([]));
             break;
 
             case AUDIT_USERLIST:
@@ -356,6 +361,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(msg));
                 store.dispatch(resetaudit(res.successful));
                 store.dispatch(setAuditRefresh(true));
+                store.dispatch(setCheckedAudit([]));
         }
         else
         {
@@ -363,10 +369,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(AS00A));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
                 store.dispatch(resetaudit(res.successful));
+                store.dispatch(setCheckedAudit([]));
             } else {
                 stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
                 store.dispatch(notifyFail(stringInfo.msg));
                 store.dispatch(setAuditRefresh(false)); //reset refresh flag
+                store.dispatch(setCheckedAudit([]));
             } 
         }
         
@@ -432,12 +440,17 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case VALIDATE_SKU_ID:
             store.dispatch(auditValidatedAttributesSKU(res));
             break;
+        case VALIDATE_SKU_ITEM_RECALL:
+            store.dispatch(attributeValidationItemRecall(res));
+            break;
         case VALIDATE_LOCATION_ID:
             store.dispatch(auditValidatedAttributesLocation(res));
             store.dispatch(validateLocationcodeSpinner(false));
             break;
         case CREATE_AUDIT_REQUEST:
             store.dispatch(createAuditAction(res));
+            store.dispatch(setAuditRefresh(true));
+            store.dispatch(setValidationAuditSpinner(false));
             break;
         case AUDIT_EDIT:
         //raja
@@ -446,7 +459,41 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         }else{
 
         }
-            break;    
+            break; 
+            case AUDIT_EDIT_REQUEST:    
+           if (res.audit_id) {
+               values={id:res.audit_id},
+               msg = getFormattedMessages("EDITED", values);  
+               store.dispatch(notifySuccess(msg));
+               store.dispatch(setAuditRefresh(true)); //set refresh flag
+               store.dispatch(setValidationAuditSpinner(false));
+            }
+         else {
+           stringInfo = codeToString(res.alert_data[0]);
+           store.dispatch(notifyFail(stringInfo.msg));
+           store.dispatch(setAuditRefresh(true)); //set refresh flag
+           store.dispatch(setValidationAuditSpinner(false));
+        }
+        break; 
+            case CREATE_DUPLICATE_REQUEST:
+                if (res.audit_id) {
+                  values={id:res.audit_id},
+                  msg = getFormattedMessages("DUPLICATED", values);
+                  store.dispatch(notifySuccess(msg));
+                  store.dispatch(setValidationAuditSpinner(false));
+                  store.dispatch(setAuditRefresh(false)); //reset refresh flag
+                }
+                else{
+                  stringInfo = codeToString(res.alert_data[0]);
+                  store.dispatch(notifyFail(stringInfo.msg));
+                  store.dispatch(setValidationAuditSpinner(false));
+                  store.dispatch(setAuditRefresh(true)); //set refresh flag
+                }
+                break;    
+            
+
+
+
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
                 store.dispatch(auditValidatedAttributesLocationCsv(res));
@@ -647,7 +694,14 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
             break;
-
+        case SELLER_RECALL:
+            if(status !== 202){
+                ShowError(store, cause, status);
+            }
+            else{
+                store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
+            }
+            break;
         default:
             ShowError(store, cause, status);
             break;

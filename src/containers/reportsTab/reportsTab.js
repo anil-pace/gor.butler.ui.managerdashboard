@@ -8,7 +8,7 @@ import SubTab from '../../components/subtab/subTab';
 import {Link}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {subTabSelected} from '../../actions/tabSelectAction'
-import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP,DOWNLOAD_REPORT, STORAGE_SPACE} from '../../constants/frontEndConstants';
+import { OPERATIONS_LOG,REPORTS_SUB_TAB_ROUTE_MAP,DOWNLOAD_REPORT, STORAGE_SPACE, MISC} from '../../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -25,10 +25,13 @@ class ReportsTab extends React.Component{
     }
     
 	render(){
+
+		let showMiscReportTab = this.props.config.utility_tab && (this.props.config.utility_tab.widgets.gr_report && this.props.config.utility_tab.widgets.reports.inventory_report) ? true : false;
 		
 		var selectClass={};
 		var operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
 		var storageSpace=<FormattedMessage id="reportsTab.storageSpace" description="Storage space tab for Reports tab" defaultMessage="Storage Space"/>
+		var misc=<FormattedMessage id="reportsTab.misc" description="Storage space tab for GR Reports tab" defaultMessage="Misc"/>
 		var downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
     
 		return (
@@ -43,6 +46,12 @@ class ReportsTab extends React.Component{
 						<SubTab item={storageSpace} changeClass={this.props.subTab === STORAGE_SPACE ? "gor-main-blockSelect" : "gor-main-block"}/> 
 					</Link>
 
+					{showMiscReportTab? 
+						(<Link to="/reports/misc" onClick={this.handleSysSubTabClick.bind(this,MISC)}>
+							<SubTab item={misc} changeClass={this.props.subTab === MISC ? "gor-main-blockSelect" : "gor-main-block"}/> 
+						</Link>):""
+					}
+
 					<Link to="/reports/downloadReport" onClick={this.handleSysSubTabClick.bind(this,DOWNLOAD_REPORT)}>
 						<SubTab item={downloadReport} changeClass={this.props.subTab === DOWNLOAD_REPORT ? "gor-main-blockSelect" : "gor-main-block"}/> 
 					</Link>
@@ -56,7 +65,8 @@ class ReportsTab extends React.Component{
 function mapStateToProps(state, ownProps){
     return  {
          subTab:state.tabSelected.subTab || {},
-         tab:state.tabSelected.tab
+         tab:state.tabSelected.tab,
+         config:state.config||{}
     }
 }
 
