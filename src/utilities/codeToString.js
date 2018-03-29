@@ -156,19 +156,19 @@ export function codeToString(res){
                 msg:E135
               }                                   
               break;
-              case AS005:
+              case AS006:
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.auditPaused" description='Text for successfull pause audit' 
             defaultMessage='Audit "{id}" has been paused' values={{id:res.details.audit_id||"--"}}/>)   //Make string for addition
               }                                   
-              break;
-
-              case AS006:
+              break;                                  
+              
+              case "g026":
               stringInfo={
                 type:ERROR,
                 msg:(<FormattedMessage id="audit.paused.fail" description='audit paused fail' 
-      defaultMessage='{reason} for {id}' values={{id:res.details.audit_id||"--",reason:res.description}}/>)
+            defaultMessage='AUDIT NOT PAUSED'/>)
                   }                                   
               break;
 

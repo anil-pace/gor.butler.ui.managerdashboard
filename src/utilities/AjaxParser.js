@@ -116,6 +116,7 @@ import {
     g021,
     g023,
     g024,
+    g027,
     REQUEST_REPORT_SUCCESS,
     REQUEST_REPORT_FAILURE,
     ITEM_RECALL_SUCCESS,
@@ -286,6 +287,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             if (res.alert_data && res.alert_data.length > 0) {
                 //ERROR
                 switch (res.alert_data[0].code) {
+                    
+                    case "g027":
+                        store.dispatch(notifyFail(g027));
+                        break;
                     case "g020":
                         store.dispatch(notifySuccess(g020));
                         break;
@@ -301,7 +306,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     case "g024":
                         store.dispatch(notifySuccess(g024));
                         break;
-
+                       
                     default:
                         store.dispatch(
                             notifySuccess(res.alert_data[0].description)

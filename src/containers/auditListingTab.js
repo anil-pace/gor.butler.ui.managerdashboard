@@ -21,7 +21,7 @@
  import EditAudit from '../containers/auditTab/editAudit';  
  import {
     APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,PUT,START_AUDIT_TASK
 } from '../constants/frontEndConstants';
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
@@ -185,16 +185,13 @@ startAuditAuto(auditId){
 
 
 _pauseAudit(auditId){
-  let formData={
-    audit_id_list:(auditId).constructor.name!=="Array"?[auditId]:auditId
-  }
+  let  audit_id=(auditId).constructor.name!=="Array"?auditId:auditId.toString();
       let auditData={
-                'url':AUDIT_PAUSE_URL,
-                'method':POST,
+                'url':AUDIT_PAUSE_URL+audit_id,
+                'method':PUT,
                 'cause':PAUSE_AUDIT,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'formdata':formData,
                 'token':sessionStorage.getItem('auth_token')
             }
       this.props.userRequest(auditData);
