@@ -902,7 +902,7 @@ class CreateAudit extends React.Component{
             defaultMessage='Create new audit'/>
                           
               </div>
-              <span className="close" onClick={this._removeThisModal.bind(this)}>Ã—</span>
+              <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
             </div>
             <div className='gor-modal-body'>
             
@@ -936,7 +936,7 @@ class CreateAudit extends React.Component{
           {!validationDoneSKU && !skuCSVSelected && <div>
             <div>
                <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
-            defaultMessage='Use copy and paste if you have muktiple sku numbers'/></div>
+            defaultMessage='Use copy and paste if you have multiple sku numbers'/></div>
             </div>
             <div className="gor-audit-inputlist-wrap" >
               <div className="gor-audit-inputlist-cont">
@@ -957,7 +957,7 @@ class CreateAudit extends React.Component{
              
               </div>
               <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                        defaultMessage='+ ADD NEW'/></button>
               </div>
                
               </div>}

@@ -340,6 +340,7 @@
 .gor-audit-input-wrap {
     width: 43%;
     padding:1px 12px;
+    height:35px;
     border-radius: 3px;
     border: solid 1px #aaaaaa;
     background-color: #ffffff;
@@ -409,6 +410,7 @@
     
     .gor-audit-inputlist-cont{
     overflow: auto;
+    max-height: 210px;
     transition-property: all;
     transition-duration: .5s;
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
