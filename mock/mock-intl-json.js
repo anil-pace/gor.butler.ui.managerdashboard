@@ -578,13 +578,13 @@ var messages = [
     "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",
-    "filepath": "./src/components/tableFilter/filter.js"
+    "filepath": "./src/components/tableFilter/ppsConfigurations.js"
   },
   {
     "id": "gor.filter.heading",
     "description": "filter heading",
     "defaultMessage": "Apply filter",
-    "filepath": "./src/components/tableFilter/filter.js"
+    "filepath": "./src/components/tableFilter/ppsConfigurations.js"
   },
   {
     "id": "utility.uploadHist.fileName",
