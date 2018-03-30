@@ -35,18 +35,27 @@
 .gor-action-pps-icon,
 .gor-action-audit-icon,
 .gor-tick-icon,
+.embeddedImage,
+.systemGenerated,
+.gor-filter-add-token-white,
 .gor-image-status,.gor-shutter-image-status,
 .statusOl,.statusAl,.iStock ,.iAudit,.iPick,.gor-login-user,.gor-login-password,.gor-login-error,.gor-tick,.gor-question,.gor-tick-white,.gor-remove-white,.gor-error-white,.gor-login-user-error,.gor-login-password-error,.gor-question-2,.gor-operation-tick,.gor-alert-lg,
 .gor-dropdown-open,.gor-dropdown-close,.gor-caution,.gor-delay-icon,
 .gor-emergency-dropdown-close,.gor-emergency-dropdown-open,.gor-info-icon,.gor-selected-icon,.not-bell,.searchIcon,.not-statusIcon,
 .calloutArr,.gor-audit-info-icon,.gor-resume-icon,.gor-zone-status,.action-icon,.gor-up-arrow,.gor-tag-icon,.gor-tag-icon-grey,
-.dwnload-rpt-ico,.error-icon,.gor-filter-arrow,.gor-filter-checkbox,.gor-delete-location-disabled, .gor-file-upload,.gor-spinner, .gor-delete-location, .gor-sel-att-arr{
+.dwnload-rpt-ico,.error-icon,.gor-filter-arrow,.gor-filter-checkbox,.gor-delete-location-disabled, .gor-file-upload,.gor-spinner, .gor-delete-location, .gor-sel-att-arr,
+.gor-exp-coll{
     background-image: url(./images/icons.svg);
 }
 .fk-logo,
 .gor-logo{
     background-image: url(./images/Logos.svg);
 }
+.WARNING-Biggericon,.ERROR-Biggericon,.INFO-Biggericon,
+.WARNING-icon,.INFO-icon,.ERROR-icon{
+    background-image: url(./images/Icons_need_update.svg);
+}
+
 
 .gor-login-user{
     background-position:-205px -77px;
@@ -343,6 +352,14 @@ background-position: -101px -52px;
     vertical-align: middle;
 }
 
+.gor-filter-add-token-white{
+    background-position: -227px -94px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .gor-filter-checked-token {
     background-position: -135px -94px;
     width: 16px;
@@ -498,4 +515,62 @@ background-position: -101px -52px;
     -o-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
+}
+.got-add-notch{
+   width: 5px;
+    height: 5px;
+    display: inline-block;
+    border-bottom: 2px solid #f36f36;
+    transform: rotate(40deg);
+    border-right: 2px solid #f36f36;
+    margin-left: 30px;
+    margin-bottom:3px;
+}
+.WARNING-icon{
+    width:30px;
+    height:45px;
+    background-position: -88px -38px; 
+    display: inline-block; 
+    vertical-align: top;  
+    margin-top: 5px;                      
+}
+.INFO-icon{
+    width:30px;
+    height:35px;
+    background-position: -3px -41px; 
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 5px;                           
+}
+.ERROR-icon{
+    width:30px;
+    height:35px;
+    background-position: -41px -41px; 
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 5px;    
+}
+.WARNING-Biggericon{
+    width:35px;
+    height:35px;
+    background-position: -162px -2px;
+    display: inline-block; 
+    vertical-align: top;  
+    margin-top: 5px;                      
+}
+.INFO-Biggericon{
+    width:35px;
+    height:35px;
+    background-position: -2px -2px;
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 5px;                           
+}
+.ERROR-Biggericon{
+    width:40px;
+    height:40px;
+    background-position: -52px -2px;
+    display: inline-block; 
+    vertical-align: top; 
+    margin-top: 5px;    
 }

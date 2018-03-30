@@ -9,7 +9,9 @@ import React  from 'react';
 class GORToastify extends React.Component{
 	
 	
+	
 	render(){
+	
 		return (
 		<div className="gor-toastify" {...this.props}>
    			{this.props.children}

@@ -187,7 +187,7 @@ export const fileUploadMessages={
       defaultMessage='File size should not be greater than'/>)
       
 }
-
+//AUDITRAJACANCEL
 export const g020=(<FormattedMessage id="audit.cancellation.error.g020" description='Internal server error while requesting for audit cancel'
                                    defaultMessage='Internal server error while requesting for audit cancel'/>);
 export const g021=(<FormattedMessage id="audit.cancellation.error.g021" description='Audit Id already sent for cancellation'
@@ -196,7 +196,8 @@ export const g023=(<FormattedMessage id="audit.cancellation.error.g023" descript
                                    defaultMessage='Audit Id already successfully cancelled'/>);
 export const g024=(<FormattedMessage id="audit.cancellation.error.g024" description='Audit cancellation request denied'
                                    defaultMessage='Audit cancellation request denied'/>);
-/*Message for status change notification*/
+
+                                   /*Message for status change notification*/
 export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatusSuccess" description='Records in file should not be greater than' 
       defaultMessage='Status change request successful'/>)
 
@@ -228,7 +229,7 @@ export const ZONE_STATUS_INTL_MESSAGE ={
       zone_clear_deactivated:(<FormattedMessage id="zoning.status.clearDeactivated" description='Status text for zone' 
       defaultMessage='CLEAR DEACTIVATED'/>),
       emergency_stop:(<FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
-      defaultMessage='EMERGENCY STOP'/>),
+      defaultMessage='EMERGENCY STOP ACTIVATED'/>),
       emergency_pause:(<FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
       defaultMessage='EMERGENCY PAUSE'/>),
       stopped:(<FormattedMessage id="zoning.status.stopped" description='Status text for zone' 
@@ -286,6 +287,9 @@ export const ENTITY_BREACHED = {
       latch_gate:(<FormattedMessage id="zoning.entity.latchGate" description='Status text for zone' 
       defaultMessage='Latch Gate'/>)
 }
+
+export const ITEM_RECALL_SUCCESS = (<FormattedMessage id="itemRecall.message.success" description='Status text for zone' 
+      defaultMessage='Items recalled successfully'/>)
 
 
 

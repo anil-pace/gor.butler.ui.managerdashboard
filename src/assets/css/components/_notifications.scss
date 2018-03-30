@@ -85,28 +85,52 @@
 		    border-bottom: 1px solid #F7F7F7;
 		 }
 		 .content{
-		 	width: 85%;
+		 	width: 100%;
     		display: inline-block;
-    		vertical-align: middle;
-		 }
+    		
+			.containerText{
+				display: inline-block;
+				padding-left: 10px;
+				line-height: 18px;
+			}
+			.warningicon{
+				width:30px;
+				height: 27px;
+				display: inline-block;
+				background-position: -222px -50px;
+			}
+			.erroricon{
+				width:30px;
+				height: 27px;
+				display: inline-block;
+				background-position: -97px -50px;
+			} 
+			.okicon{
+				width:30px;
+				height: 27px;
+				display: inline-block;
+				background-position: -50px -49px;
+			}
+		}
 		 .errorMsg{
 		 	float:right;
 		 }
 		 .time{
 		 	float:left;
 		 	color: #979797;
-    		line-height: 25px;
+    		
 		 }
-		 p{
+		 div{
+			
 		 	&.message{
-		 		line-height: 20px;
+		 		
 			    font-size: 13px;
 			    font-weight: normal;
-			    margin-top: 10px;
+			   
 			    color: #535353;
 		 	}
 		 	&.title{
-		 		line-height: inherit;
+		 		
 			    font-weight: bold;
 			    font-size: 14px;
 			    color: #535353;
@@ -218,13 +242,18 @@
 }  
 .allNotificationWrap{
 		.gor-modal-head  {
-			position:relative;
+			position:absolute;
 			border-bottom:none;
+			padding-top:0px;
+			top:20px;
 		}
 		.modal-head-text{
 			width: 50%;
 			display: inline-block;
     		vertical-align: middle;
+		}
+		.gor-modal-body{
+			margin-top: 140px;
 		}
 		.modal-search-input{
 			width: 43%;
@@ -270,4 +299,14 @@
 		    }
 		}
 	}
+}
+.descNotification{
+	font-size: 16px;
+  line-height: 1.38;
+  text-align: left;
+  color: #383838;
+margin-top: 10px;
+}
+.topLineBorder{
+	border-top:1px solid #aaaaaa; 
 }

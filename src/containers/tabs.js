@@ -1,6 +1,6 @@
 import React  from 'react';
 import Tab from '../components/tabs/tab';
-import {Link}  from 'react-router';
+import {Link,hashHistory}  from 'react-router';
 import { connect } from 'react-redux' ;
 import {setFireHazrdFlag} from '../actions/tabActions';
 import {modal} from 'react-redux-modal';
@@ -10,13 +10,16 @@ import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
 import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT} from '../constants/frontEndConstants';
+SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT,AUDITLISTING} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
 import OperationStop from '../containers/emergencyProcess/OperationStop';
 import OperationPause from '../containers/emergencyProcess/OperationPause';
 import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
 import fireHazard from '../containers/emergencyProcess/fireHazard'; 
 import GorToastify from '../components/gor-toastify/gor-toastify';
+import {setNotificationNull
+} from "../actions/notificationAction";
+
 
 
 class Tabs extends React.Component{
@@ -33,10 +36,14 @@ class Tabs extends React.Component{
       isHardEmergencyOpen:this.props.isHardEmergencyOpen
     }
     this._openPopup =  this._openPopup.bind(this);
+    this._redirectAudit=this._redirectAudit.bind(this);
   }
 
     _openPopup(){
         this.props.setFireHazrdFlag(false);      
+  }
+  _redirectAudit(){
+    hashHistory.push({pathname: "/auditlisting"})
   }
 
 
@@ -113,6 +120,11 @@ class Tabs extends React.Component{
   
  
   componentWillReceiveProps(nextProps){
+
+    if(nextProps.noticationData){
+         setTimeout(this.props.setNotificationNull.bind(this), 5000);    	
+    }
+
     if(!nextProps.isEmergencyOpen){
         if( nextProps.system_emergency  && nextProps.system_data === HARD){
             this.props.setEmergencyModalStatus(true);
@@ -149,7 +161,7 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,neworder, newordersClass, newordersStatus,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
@@ -210,7 +222,7 @@ class Tabs extends React.Component{
         systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="STOPPED"/>; 
       }
-      else if(this.props.system_emergency && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+      else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
               defaultMessage="PAUSED"/>; 
@@ -270,14 +282,14 @@ class Tabs extends React.Component{
 
     return items;
   }
-   _processNotification(){
+   _processNotification(notificationPopup,showFireHazardPopup){
   
   var notificationWrap=[],singleNotification,time,timeText;
   var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): (this.props.fireHazardStartTime? new Date(this.props.fireHazardStartTime):new Date());
   var convertedDate =  originalDate.getTime(); 
   var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
 
- if(this.props.fireHazardNotifyTime){
+ if(this.props.fireHazardNotifyTime && showFireHazardPopup){
 singleNotification=<GorToastify key={1}>
 <div className="gor-toastify-content info">
                   <p className="msg-content">
@@ -292,9 +304,20 @@ singleNotification=<GorToastify key={1}>
      </div>
      
     </GorToastify>
-}else
+}else if(this.props.noticationData){
+  singleNotification=<GorToastify key={2}>
+  <div className="gor-toastify-content whiteBG" onClick={this._redirectAudit}>
+                    <div className={this.props.noticationData.type+'-Biggericon'}></div>
+                    <p className="msg-content-full">
+                    <div className='headermsg'>{this.props.noticationData.msg} </div>
+                    <div className='descmsg'>{this.props.noticationData.desc}</div>            
+                    </p>    
+     </div>
+    </GorToastify>
+}
+else
 {
-  singleNotification=<GorToastify key={2} >
+  singleNotification=<GorToastify key={3} >
    <div className="gor-toastify-content">
                   <p className="msg-content">
                    <FormattedMessage id='operation.alert.triggeremergency' 
@@ -315,9 +338,10 @@ singleNotification=<GorToastify key={1}>
     notificationWrap.push(singleNotification);
   return notificationWrap;
 }
+
 	render(){
   let items=this._parseStatus();
-  let showFireHazardPopup;
+  let showFireHazardPopup,notificationPopup;
   if(this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
   {
   showFireHazardPopup=true;
@@ -326,8 +350,11 @@ singleNotification=<GorToastify key={1}>
   {
   showFireHazardPopup=false;
   }
+  if(this.props.noticationData){
+    notificationPopup=true;
+  }
   
-  let notificationWrap=this._processNotification();
+  let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
 		return (
 		<div className="gor-tabs gor-main-block">
@@ -343,8 +370,9 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
+  
 
-    <Link to="/audit" onClick={this.handleTabClick.bind(this,AUDIT)}>
+    <Link to="/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
     <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
@@ -364,6 +392,8 @@ singleNotification=<GorToastify key={1}>
 
     
    {showFireHazardPopup?notificationWrap:""}
+   {notificationPopup?notificationWrap:""}
+   
   </div>
 		);
 	}
@@ -391,8 +421,9 @@ function mapStateToProps(state, ownProps){
          fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
          fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
          timeZone:state.authLogin.timeOffset,
-        zoneDetails: state.tabsData.zoneDetails || {},
-        isEmergencyOpen:state.tabsData.isEmergencyOpen
+          zoneDetails: state.tabsData.zoneDetails || {},
+          isEmergencyOpen:state.tabsData.isEmergencyOpen,
+          noticationData:state.notificationReducer.noticationData||null
 
     }
 }
@@ -403,7 +434,8 @@ var mapDispatchToProps=function(dispatch){
         setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
         setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
-        setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));}
+        setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));},
+        setNotificationNull:function(data){dispatch(setNotificationNull(data));}
 	}
 };
 

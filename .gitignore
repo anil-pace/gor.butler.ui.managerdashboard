@@ -1,9 +1,11 @@
 .DS_Store
 /node_modules/
 /build/
-/public/
 /coverage/
 /jest/
 /__test__/
-*configConstants*
+/public/assets/main.css
+/public/assets/main.min.css
 *.*~
+*.orig
+*.swp

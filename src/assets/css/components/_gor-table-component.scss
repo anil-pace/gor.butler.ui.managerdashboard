@@ -3,6 +3,16 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+.auditStart{
+    display:inline!important;
+}
+.audittable{
+    padding: 15px 5px;
+    border-bottom: 1px solid lightgrey;
+    background-color: silver;
+    width: 100%;
+
+}
 
 .table-container .cell {
     overflow: hidden;
@@ -55,6 +65,7 @@
     max-height:60vh;
     overflow: auto;
 }
+
 .table-container .table-body .cell {
     padding: 15px 5px;
 }

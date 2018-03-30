@@ -238,15 +238,18 @@ class Routes extends React.Component {
                         />
                     </Route>
 
-
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit"
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="auditlisting" path="/auditlisting"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
-                                   callback(null, require('../containers/auditTab').default);
-                               }, "audit");
+                                   callback(null, require('../containers/auditListing').default);
+                               }, "auditlisting");
 
                            }}
                     />
+
+
+
+       
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
                            getComponent={(location, callback)=> {
@@ -258,13 +261,7 @@ class Routes extends React.Component {
                            }}
                     />
 
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/auditTab').default);
-                               }, "audit");
-                           }}
-                    />
+                   
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="users" path="/users"
                            getComponent={(location, callback)=> {
@@ -329,6 +326,14 @@ class Routes extends React.Component {
                                    require.ensure([], function (require) {
                                        callback(null, require('../containers/reportsTab/storageSpaceTab.js').default);
                                    }, "storageSpaceTab");
+                               }}
+                        />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="misc" path="/reports/misc"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/reportsTab/misc.js').default);
+                                   }, "misc");
                                }}
                         />
 

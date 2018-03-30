@@ -21,7 +21,16 @@
     margin-right: auto;
 }
 
-
+.gor-audit-input-wrap {
+     display: inline-block;
+     width: 42%;
+     height: 35px;
+     border-radius: 3px;
+     border: solid 1px #aaaaaa;
+     background-color: #ffffff;
+     padding-left: 10px;
+     margin-top: 20px;
+}
 
 .gor-audit-input {
     text-align: left;
@@ -64,24 +73,25 @@
   
   }
   .gor-audit-create-btn {
-  width: 141px;
+    height: 35px;
   border-radius: 3px;
   background-color: #f36f36;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: 'Source Sans Pro';
+  font-family: "source sans pro";
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
+  text-align: left;
   color: #ffffff;
-  padding-left: 28px;
-  padding-right: 14px;
-  vertical-align: sub;
-  cursor: pointer;
+  padding-left: 14px;
+    padding-right: 14px;
+    vertical-align: sub;
+    cursor: pointer;
 }
 
 .gor-audit-filter-create-wrap {
   display: inline-block;
     float: right;
-    margin-top: 16px;
+    margin-top: 22px;
     margin-right: 40px;
 }
 }
@@ -101,7 +111,26 @@ display:inline-block;
 .gor-audit-paginate-wrap {
   float: right;
 }
-
+.gor-auditlist-paginate-wrap{
+  width: 100%;
+  position: relative;
+  background-color: #ffffff;
+  border-top:1px solid lightgrey;
+  float: left;
+}
+.gor-auditlist-paginate-right{
+  float: right;
+}
+.gor-Audit-no-data {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-top: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4d5055;
+  height: 400px;
+}
 .gor-audit-cancelling-text{
   font-size:12px;
   text-align:center;
@@ -116,3 +145,33 @@ display:inline-block;
   padding-top: 10px;
   float:left;
 }
+.auditHeader{
+  font-size:24px;
+  color: #000000;
+  font-weight: normal;
+}
+.table-auditListing {
+          .table-body{
+        max-height:none !important;
+        min-height: 60vh;
+        overflow: auto;
+        background-color: white;
+      }
+}
+.gor-auditlist-paginate-right {
+        .gor-paginate-wrap{
+  padding-top: 1rem;
+  margin-right: 20px;
+  }
+}  
+.embeddedImage{
+  width:17px;
+  height:20px;
+    float:right;
+    margin-top:15px;
+    background-position:-596px -77px ;
+    margin-right: 15px;
+    &:hover{
+    cursor:pointer;
+  }
+  }  

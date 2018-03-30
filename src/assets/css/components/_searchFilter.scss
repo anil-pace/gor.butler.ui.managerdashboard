@@ -1,0 +1,48 @@
+.searchBarWrapper{
+	width: calculateRem(310px);
+	border-radius: 3px;
+	border: 1px solid #aaaaaa;
+	background-color: #fff;
+	.searchIconWrap{
+		display: inline-block;
+		padding-left: calculateRem(10px);
+		vertical-align: middle;
+		.gor-search-icon{
+			cursor:pointer;
+		}
+	}
+	.inputWrapper{
+		display: inline-block;
+		width:80%;
+		.gor-search-input-wrap{
+			padding: .625rem;
+		    border: none;
+		    color: #aaaaaa;
+		    width: 100%;
+		}
+	}
+	&.animated{
+		-webkit-transition: width 1s ease-in-out;
+	    -moz-transition: width 1s ease-in-out;
+	    -o-transition: width 1s ease-in-out;
+	    transition: width 1s ease-in-out;
+		.inputWrapper{
+			width:0;
+
+		}
+		.gor-search-input-wrap{
+			padding:0;
+			width:0;
+		}
+		&.opened{
+				width:150px;
+			.inputWrapper{
+				width:120px;
+			}
+			.gor-search-input-wrap{
+			padding:0;
+			width:120px;
+		}
+		}
+	}
+}

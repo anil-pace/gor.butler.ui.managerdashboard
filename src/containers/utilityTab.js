@@ -1,25 +1,17 @@
 import React from "react";
 import UtilityTile from "../components/utilityComponents/utilityTile";
-import ScriptsTile from "../components/utilityComponents/scriptsTile";
-import UtilityDropDown from "../components/utilityComponents/utilityDropdownWrap";
+import ItemRecall from "../containers/itemRecall/itemRecall";
 import MasterUploadTile from "../components/utilityComponents/masterUploadTile";
-import DownloadReportTile from "../components/utilityComponents/downloadReportsTile";
-import DownloadGRNTile from "../components/utilityComponents/downloadGRTile";
 import {
-    INVENTORY_REPORT_URL,
-    GET_ITEM_RECALL,
-    GR_REPORT_URL,
     MASTER_UPLOAD_URL,
     UPLOAD_HISTORY_URL,
     GET_MAXSIZE_FILE_URL,
     STOCK_LEDGER_REPORT_DOWNLOAD_URL,
-    REPORTS_HISTORY_URL,
     STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL
 } from "../constants/configConstants";
 import {connect} from "react-redux";
 import {
     getItemRecall,
-    getGRdata,
     validateInvoiceID,
     uploadMasterDataProcessing,
     getUploadHistory,
@@ -29,29 +21,23 @@ import {
     downloadStockLedgerRawTransactionsReport
 } from "../actions/utilityActions";
 import {
-    setInventoryReportSpinner,
     setStockLedgerSpinner,
     setStockLedgerRawTransactionsSpinner
 } from "../actions/spinnerAction";
 import {
     GET,
-    ITEM_RECALLED,
     MASTER_FILE_UPLOAD,
-    GR_REPORT_RESPONSE,
-    INVENTORY_REPORT_RESPONSE,
     POST,
     MASTER_FILE_FORMATS,
     UPLOAD_HISTORY,
-    REPORTS_HISTORY,
-    GRN_HISTORY,
     GET_MAX_FILE_SIZE,
     WS_ONSEND,
     DOWNLOAD_STOCK_LEDGER_REPORT,
-    DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT
+    DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
+    APP_JSON
 } from "../constants/frontEndConstants";
 import {fileUploadMessages} from "../constants/messageConstants";
 
-import FieldError from "../components/fielderror/fielderror";
 import {defineMessages} from "react-intl";
 import {
     updateSubscriptionPacket,
@@ -67,51 +53,6 @@ const messages = defineMessages({
         description: "Master data upload",
         defaultMessage: "Master data upload"
     },
-    scriptsTileHead: {
-        id: "utility.scriptsTile.head",
-        description: "Run Script",
-        defaultMessage: "Run Script"
-    },
-    downloadReportsHead: {
-        id: "utility.downloadReport.head",
-        description: "Download Reports",
-        defaultMessage: "Download Reports"
-    },
-    downloadRprtsCategoryLabel: {
-        id: "utility.downloadRprts.CategoryLabel",
-        description: "Category",
-        defaultMessage: "Category"
-    },
-    downloadRprtsCategoryPlchldr: {
-        id: "utility.downloadRprts.CategoryPlchldr",
-        description: "Select Category",
-        defaultMessage: "Select Category"
-    },
-    downloadFileFormatPlchldr: {
-        id: "utility.downloadRprts.FileFormatPlchldr",
-        description: "Select File Format",
-        defaultMessage: "Select File Format"
-    },
-    downloadFileFormatLabel: {
-        id: "utility.downloadRprts.FileFormatLabel",
-        description: "File Format",
-        defaultMessage: "File Format"
-    },
-    downloadFileFormatCsv: {
-        id: "utility.downloadRports.csvFormat",
-        description: "Comma separated values (csv)",
-        defaultMessage: "Comma separated values (csv)"
-    },
-    downloadFileFormatXls: {
-        id: "utiltiy.downloadRports.xlsFormat",
-        description: "ExceL Spreadsheet (xlsx)",
-        defaultMessage: "ExceL Spreadsheet (xlsx)"
-    },
-    goodsRcvdNotesHead: {
-        id: "utility.goodsRcvdNotes.head",
-        description: "Goods Received Notes",
-        defaultMessage: "Goods Received Notes"
-    },
     stockLedgerHead: {
         id: "utility.stockLedgerHead.head",
         description: "Inventory Stock Ledger",
@@ -126,6 +67,11 @@ const messages = defineMessages({
         id: "utility.uploadBtn.label",
         description: "Upload Master Data",
         defaultMessage: "Upload Master Data"
+    },
+    itemsRecall:{
+        id: "utility.itemsRecall.head",
+        description: "Recall Items",
+        defaultMessage: "Recall Items"
     }
 });
 
@@ -133,8 +79,6 @@ class UtilityTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reportState: {},
-            grnState: {},
             stockLedgerState: {
                 category: "all",
                 duration: {today: false, yesterday: false},
@@ -143,18 +87,6 @@ class UtilityTab extends React.Component {
             prodStatusCalledOnLoad: false,
             utilityTabRefreshed: null
         };
-    }
-
-    _changeReportCategory(data) {
-        var newState = this.state.reportState;
-        newState.category = data.value;
-        this.setState({reportState: newState});
-    }
-
-    _changeReportFileType(data) {
-        var newState = this.state.reportState;
-        newState.fileType = data.value;
-        this.setState({reportState: newState});
     }
 
     _handleChangeSkuNumber(e) {
@@ -411,7 +343,8 @@ class UtilityTab extends React.Component {
             token: this.props.auth_token,
             cause: MASTER_FILE_UPLOAD,
             contentType: false,
-            formdata: formData
+            formdata: formData,
+            accept: APP_JSON
         };
         this.props.uploadMasterDataProcessing(true);
         this.props.getItemRecall(params);
@@ -426,48 +359,6 @@ class UtilityTab extends React.Component {
             contentType: false
         };
         this.props.getItemRecall(params);
-    }
-
-    _generateReport(reqFileType) {
-        let fileType = "csv";
-        if (reqFileType) {
-            fileType = reqFileType;
-        }
-        let url = INVENTORY_REPORT_URL + "?sync=false&format=" + fileType;
-        let data = {
-            url: url,
-            method: GET,
-            token: this.props.auth_token,
-            responseType: "arraybuffer",
-            cause: INVENTORY_REPORT_RESPONSE
-        };
-        this.props.setInventoryReportSpinner(true);
-        this.props.getGRdata(data);
-        this._onInvRprtRefresh();
-    }
-
-    _generateGRN(reqFileType, invoiceId) {
-        var fileType = "csv";
-        if (reqFileType) {
-            fileType = reqFileType;
-        }
-        if (!invoiceId) {
-            throw new Error(
-                "Did not receive the Invoice id for GRN generation!"
-            );
-        }
-        var url =
-            GR_REPORT_URL + "/" + invoiceId + "?sync=false&format=" + fileType;
-        let data = {
-            url: url,
-            method: GET,
-            token: this.props.auth_token,
-            cause: GR_REPORT_RESPONSE,
-            responseType: "arraybuffer"
-        };
-        this.props.getGRdata(data);
-        this.props.validateInvoiceID(false);
-        this._onGRNRefresh();
     }
 
     /**
@@ -538,27 +429,8 @@ class UtilityTab extends React.Component {
             url: UPLOAD_HISTORY_URL + "?&order_by=create_time",
             method: GET,
             token: this.props.auth_token,
-            cause: UPLOAD_HISTORY
-        };
-        this.props.getUploadHistory(params);
-    }
-
-    _onInvRprtRefresh() {
-        var params = {
-            url: REPORTS_HISTORY_URL + "?component=inventory&order_by=create_time",
-            method: GET,
-            token: this.props.auth_token,
-            cause: REPORTS_HISTORY
-        };
-        this.props.getUploadHistory(params);
-    }
-
-    _onGRNRefresh() {
-        var params = {
-            url: REPORTS_HISTORY_URL + "?component=gr&order_by=create_time",
-            method: GET,
-            token: this.props.auth_token,
-            cause: GRN_HISTORY
+            cause: UPLOAD_HISTORY,
+            accept: APP_JSON
         };
         this.props.getUploadHistory(params);
     }
@@ -566,8 +438,6 @@ class UtilityTab extends React.Component {
     componentDidMount() {
         this._onMDMRefresh();
         this._getfilemaxsize();
-        this._onInvRprtRefresh();
-        this._onGRNRefresh();
     }
 
     componentWillReceiveProps(nextProps, nextState) {
@@ -605,15 +475,12 @@ class UtilityTab extends React.Component {
     render() {
         let stockLedgerTile = this._renderStockLedgertile();
         let stockLedgerRawTransactionTile = this._renderStockLedgerRawTransactionTile();
-        var activeReportDownButton = this.state.reportState.fileType && this.state.reportState.category
-        var activeGRNDownButton = this.state.grnState.fileType && this.state.grnState.invoiceId
-        var activeStockLedgerButton = this._validateStockLedgerButton();
-        let show_gr_report = false;
+        let activeStockLedgerButton = this._validateStockLedgerButton();
         let show_masterdata_upload = false;
-        let show_inventory_report = false;
         let show_item_recall_scripts = false;
         let show_stock_ledger_widget = false;
         let show_stock_ledger_raw_transaction_widget = false;
+
 
         try {
             if (!this.props.config.utility_tab.enabled) {
@@ -624,22 +491,12 @@ class UtilityTab extends React.Component {
         }
 
         try {
-            show_gr_report = this.props.config.utility_tab.widgets.gr_report;
-        } catch (ex) {
-            //Do nothing
-        }
-        try {
             show_masterdata_upload = this.props.config.utility_tab.widgets
                 .masterdata_upload;
         } catch (ex) {
             //Do nothing
         }
-        try {
-            show_inventory_report = this.props.config.utility_tab.widgets
-                .reports.inventory_report;
-        } catch (ex) {
-            //Do nothing
-        }
+       
         try {
             show_item_recall_scripts = this.props.config.utility_tab.widgets
                 .scripts.item_recall;
@@ -664,41 +521,18 @@ class UtilityTab extends React.Component {
 
         return (
             <div>
-                {show_inventory_report
+                 {show_item_recall_scripts
                     ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
-                            messages.downloadReportsHead
+                            messages.itemsRecall
                         )}
-                        showHeaderIcon={true}
-                        onRefresh={this._onInvRprtRefresh.bind(this)}
+                        showFooter={false}
+                        additionalClass="item-recall"
                     >
-                        <DownloadReportTile
-                            generateReport={this._generateReport.bind(
-                                this
-                            )}
-                            reportsHistory={this.props.reportsHistory}
-                            timeOffset={this.props.timeOffset}
-                        />
+                        <ItemRecall auth_token={this.props.auth_token}/>
                     </UtilityTile>
                     : null}
 
-                {show_gr_report
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.goodsRcvdNotesHead
-                        )}
-                        showFooter={false}
-                        showHeaderIcon={true}
-                        onRefresh={this._onGRNRefresh.bind(this)}
-                    >
-                        <DownloadGRNTile
-                            validatedInvoice={this.props.validatedInvoice}
-                            generateReport={this._generateGRN.bind(this)}
-                            grnHistory={this.props.grnHistory}
-                            timeOffset={this.props.timeOffset}
-                        />
-                    </UtilityTile>
-                    : null}
                 {show_masterdata_upload
                     ? <UtilityTile
                         tileHead={this.context.intl.formatMessage(
@@ -733,16 +567,6 @@ class UtilityTab extends React.Component {
                         />
                     </UtilityTile>
                     : null}
-                {show_item_recall_scripts
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.scriptsTileHead
-                        )}
-                        showFooter={false}
-                    >
-                        <ScriptsTile auth_token={this.props.auth_token}/>
-                    </UtilityTile>
-                    : null}
                 {show_stock_ledger_widget
                     ? <UtilityTile
                         loading={this.props.stockLedgerSpinner}
@@ -775,6 +599,7 @@ class UtilityTab extends React.Component {
                         {stockLedgerRawTransactionTile}
                     </UtilityTile>
                     : null}
+               
 
             </div>
         );
@@ -784,17 +609,12 @@ class UtilityTab extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
-        reportsHistory: state.utilityValidations.reportsHistory || [],
-        grnHistory: state.utilityValidations.grnHistory || [],
-        validatedInvoice: state.utilityValidations.invalidInvoice || false,
         validatedStockLedgerSKU: state.utilityValidations.invalidStockLedgerSKU || false,
-        inventorySpinner: state.spinner.inventoryReportSpinner || false,
         isMasterUploadProcessing: state.utilityValidations.isMasterUploadProcessing || false,
         newFileUploaded: state.utilityValidations.newFileUploaded,
         uploadHistoryData: state.utilityValidations.uploadHistoryData,
         uploadHistChanged: state.utilityValidations.uploadHistChanged,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket ||
-        wsOverviewData,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket ||wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
         config: state.config || {},
@@ -815,9 +635,6 @@ var mapDispatchToProps = function (dispatch) {
         getUploadHistory: function (data) {
             dispatch(getUploadHistory(data));
         },
-        getGRdata: function (data) {
-            dispatch(getGRdata(data));
-        },
         downloadStockLedgerReport: function (data) {
             dispatch(downloadStockLedgerReport(data));
         },
@@ -832,9 +649,6 @@ var mapDispatchToProps = function (dispatch) {
         },
         uploadMasterDataProcessing: function (data) {
             dispatch(uploadMasterDataProcessing(data));
-        },
-        setInventoryReportSpinner: function (data) {
-            dispatch(setInventoryReportSpinner(data));
         },
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
