@@ -349,9 +349,11 @@ class AuditTab extends React.Component {
                     auditData.pdfaValues=data[i].audit_param_value.pdfa_values;
                 }
             }
-            
-            auditData.pps_id=data[i].pps_id ||"--";
-            
+            if (data[i].pps_id){
+                auditData.pps_id=data[i].pps_id;
+            }else{
+                auditData.pps_id="--";
+            }
             if (data[i].audit_status) {
                 if (auditData.statusPriority=== undefined) {
                     auditData.statusPriority=1;

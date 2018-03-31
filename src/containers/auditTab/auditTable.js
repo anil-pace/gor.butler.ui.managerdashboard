@@ -299,219 +299,198 @@ render() {
     if (this.props.checkedAudit) {
         checkedStateAudit=this.props.checkedAudit;
     }
+
     var headerAlert=<div className="alertState">
 
-    <div className="table-subtab-alert-icon"/>
-    <div className="gor-inline"><FormattedMessage id="auditList.alert.lable"
-    description='audit list alert lable'
-    defaultMessage='{auditIssue} {auditIssue,plural, one{Alert} other{Alerts}}'
-    values={{auditIssue: auditIssue ? auditIssue : '0'}}/></div>
-
-    </div>
-
-    var noData=<div/>;
-    if (rowsCount=== 0 || rowsCount=== undefined || rowsCount=== null) {
-        noData=<div className="gor-no-data"><FormattedMessage id="audit.table.noData"
-        description="No data message for audit table"
-        defaultMessage="No Audit Task Found"/></div>
-        heightRes=GOR_TABLE_HEADER_HEIGHT;
-    }
-    else {
-        heightRes=Math.max(GOR_USER_TABLE_HEADER_HEIGHT * rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION, screen.height - GOR_AUDIT_TABLE_HEIGHT_CORRECTION);
-    }
-
-    var tableRenderer=<div/>
-    tableRenderer=<div className="gorTableMainContainer">
-
-    <Table
-    rowHeight={50}
-    rowsCount={rowsCount}
-    headerHeight={70}
-    onRowClick={this._handleOnClickDropdown.bind(this)}
-    onColumnResizeEndCallback={this._onColumnResizeEndCallback}
-    isColumnResizing={false}
-    width={this.props.containerWidth}
-    height={heightRes}
-    {...this.props}>
-    <Column
-    columnKey="display_id"
-    header={   
-        <SortHeaderCell onSortChange={this.backendSort} 
-        sortDir={colSortDirs.display_id}>
-        <div className="gor-audit-header-check">
-        <input type="checkbox" checked={headerChecked} onChange={this.headerCheckChange.bind(this)}/>
-        </div>
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="auditTable.stationID.heading"
-        description='Heading for audit ID for auditTable'
-        defaultMessage='AUDIT ID'/>
-        <div className="gorToolHeaderSubText">
-        <FormattedMessage id="auditTable.SubAuditID"
-        description='total Sub auditID for auditTable'
-        defaultMessage='Total:{rowsCount}'
-        values={{rowsCount: this.props.totalAudits ? this.props.totalAudits : '0'}}/>
-        </div>
-        </div>
-        </SortHeaderCell>
-
-
-
-    }
-    cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
-    checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit" />}
-    fixed={true}
-    width={columnWidths.display_id}
-    isResizable={true}
-    />
-
-    <Column
-
-
-    columnKey="auditTypeValue"
-    header={
-        <div className="gor-table-header">
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="audit.table.type" description="audit type for audit table"
-        defaultMessage="AUDIT TYPE"/>
-        <div className="gorToolHeaderSubText">
-        <FormattedMessage id="audit.auditType" description='audit type for audit table'
-        defaultMessage='SKU ({sku}) . Location ({location})'
-        values={{
-          sku: skuAudit ? skuAudit : '0',
-          location: locationAudit ? locationAudit : '0'
-      }}/>
-      </div>
-      </div>
-      </div>
-  }
-  cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)}
-  tooltipData="pdfaValues"></ToolTipCell>}
-  fixed={true}
-  width={columnWidths.auditTypeValue}
-  isResizable={true}
-  />
-  <Column
-  columnKey="status"
-  header={
-    <SortHeaderCell onSortChange={this.backendSort}
-    sortDir={colSortDirs.status}>
-    <div className="gorToolHeaderEl">
-
-    <FormattedMessage id="audit.table.STATUS" description="STATUS for audit"
-    defaultMessage="STATUS"/>
-    {auditIssue ? headerAlert :
-        <div className="gor-subStatus-online">
-        <div>
-        <FormattedMessage id="auditTable.status"
-        description='status in progress audit'
-        defaultMessage='{auditInProgress} in progress'
-        values={{auditInProgress: auditInProgress ? auditInProgress : 'None'}}/>
-        </div>
-        </div>}
-        </div>
-        </SortHeaderCell>
-    }
-    cell={<AuditStatusCell data={sortedDataList} statusKey="statusClass" descriptionKey="cancelling"></AuditStatusCell>}
-    fixed={true}
-    width={columnWidths.status}
-    isResizable={true}
-    />
-
-    <Column
-    columnKey="startTime"
-    header={
-        <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.startTime}>
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="audit.table.startTime" description="startTime for audit"
-        defaultMessage="START TIME"/>
-        <div className="gorToolHeaderSubText">
+            <div className="table-subtab-alert-icon"/>
+            <div className="gor-inline"><FormattedMessage id="auditList.alert.lable"
+                                                          description='audit list alert lable'
+                                                          defaultMessage='{auditIssue} {auditIssue,plural, one{Alert} other{Alerts}}'
+                                                          values={{auditIssue: auditIssue ? auditIssue : '0'}}/></div>
 
         </div>
+
+        var noData=<div/>;
+        if (rowsCount=== 0 || rowsCount=== undefined || rowsCount=== null) {
+            noData=<div className="gor-no-data"><FormattedMessage id="audit.table.noData"
+                                                                    description="No data message for audit table"
+                                                                    defaultMessage="No Audit Task Found"/></div>
+            heightRes=GOR_TABLE_HEADER_HEIGHT;
+        }
+        else {
+            heightRes=Math.max(GOR_USER_TABLE_HEADER_HEIGHT * rowsCount + GOR_AUDIT_TABLE_HEIGHT_CORRECTION, screen.height - GOR_AUDIT_TABLE_HEIGHT_CORRECTION);
+        }
+
+        var tableRenderer=<div/>
+        tableRenderer=<div className="gorTableMainContainer">
+
+            <Table
+                rowHeight={50}
+                rowsCount={rowsCount}
+                headerHeight={70}
+                onRowClick={this._handleOnClickDropdown.bind(this)}
+                onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                isColumnResizing={false}
+                width={this.props.containerWidth}
+                height={heightRes}
+                {...this.props}>
+                <Column
+                    columnKey="display_id"
+                    header={   
+                        <SortHeaderCell onSortChange={this.backendSort} 
+                                        sortDir={colSortDirs.display_id}>
+                                        <div className="gor-audit-header-check">
+                                    <input type="checkbox" checked={headerChecked} onChange={this.headerCheckChange.bind(this)}/>
+                                </div>
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="auditTable.stationID.heading"
+                                                  description='Heading for audit ID for auditTable'
+                                                  defaultMessage='AUDIT ID'/>
+                                <div className="gorToolHeaderSubText">
+                                    <FormattedMessage id="auditTable.SubAuditID"
+                                                      description='total Sub auditID for auditTable'
+                                                      defaultMessage='Total:{rowsCount}'
+                                                      values={{rowsCount: this.props.totalAudits ? this.props.totalAudits : '0'}}/>
+                                </div>
+                            </div>
+                        </SortHeaderCell>
+                        
+               
+
+                    }
+                    cell={<AuditIssuesTooltipCell checkboxColumn={"id"} data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)} resolved="resolvedTask" data={sortedDataList} checkState={checkState}
+                                               checked={checkedStateAudit} unresolved="unresolvedTask" showBox="startAudit" />}
+                    fixed={true}
+                    width={columnWidths.display_id}
+                    isResizable={true}
+                />
+
+                <Column
+
+
+                    columnKey="auditTypeValue"
+                    header={
+                        <div className="gor-table-header">
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="audit.table.type" description="audit type for audit table"
+                                                  defaultMessage="AUDIT TYPE"/>
+                                <div className="gorToolHeaderSubText">
+                                    <FormattedMessage id="audit.auditType" description='audit type for audit table'
+                                                      defaultMessage='SKU ({sku}) . Location ({location})'
+                                                      values={{
+                                                          sku: skuAudit ? skuAudit : '0',
+                                                          location: locationAudit ? locationAudit : '0'
+                                                      }}/>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    cell={<ToolTipCell data={sortedDataList} callBack={this._handleOnClickDropdown.bind(this)}
+                                       tooltipData="pdfaValues"></ToolTipCell>}
+                    fixed={true}
+                    width={columnWidths.auditTypeValue}
+                    isResizable={true}
+                />
+                <Column
+                    columnKey="status"
+                    header={
+                        <SortHeaderCell onSortChange={this.backendSort}
+                                        sortDir={colSortDirs.status}>
+                            <div className="gorToolHeaderEl">
+
+                                <FormattedMessage id="audit.table.STATUS" description="STATUS for audit"
+                                                  defaultMessage="STATUS"/>
+                                {auditIssue ? headerAlert :
+                                    <div className="gor-subStatus-online">
+                                        <div>
+                                            <FormattedMessage id="auditTable.status"
+                                                              description='status in progress audit'
+                                                              defaultMessage='{auditInProgress} in progress'
+                                                              values={{auditInProgress: auditInProgress ? auditInProgress : 'None'}}/>
+                                        </div>
+                                    </div>}
+                            </div>
+                        </SortHeaderCell>
+                    }
+                    cell={<AuditStatusCell data={sortedDataList} statusKey="statusClass" descriptionKey="cancelling"></AuditStatusCell>}
+                    fixed={true}
+                    width={columnWidths.status}
+                    isResizable={true}
+                />
+
+                
+                <Column
+                    columnKey="progress"
+                    header={
+                        <div className="gor-table-header">
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="audit.table.progress" description="progress for audit task"
+                                                  defaultMessage="PROGRESS(%)"/>
+                                <div className="gorToolHeaderSubText">
+                                    <FormattedMessage id="audit.Totalprogress"
+                                                      description='total progress for audit table'
+                                                      defaultMessage='{totalProgress}% Completed'
+                                                      values={{totalProgress: totalProgress.toFixed(1) ? totalProgress.toFixed(1) : '0'}}/>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    cell={<ProgressCell data={sortedDataList} resolved="resolvedTask"
+                                        unresolved="unresolvedTask"> </ProgressCell>}
+                    fixed={true}
+                    width={columnWidths.progress}
+                    isResizable={true}
+                />
+
+                <Column
+                    columnKey="pps_id"
+                    header={
+                        <div className="gor-table-header">
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="audit.table.pps_id" description="pps assigned for audit task"
+                                                  defaultMessage="PPS"/>
+                            </div>
+                        </div>
+                    }
+
+                    cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
+                    fixed={true}
+                    width={columnWidths.pps_id}
+                    isResizable={true}
+                />
+
+                <Column
+                    columnKey="actions"
+                    header={
+                        <div className="gor-table-header">
+                            <div className="gorToolHeaderEl">
+                                <FormattedMessage id="audit.table.action" description="action Column"
+                                                  defaultMessage="ACTIONS"/>
+                                <div className="gorToolHeaderSubText"></div>
+                            </div>
+                        </div>
+                    }
+                    cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)}
+                                           manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
+
+                                           placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
+                                           resolveflag="resolveAudit" resolveAudit={this.resolveAudit.bind(this)}
+                                           checkIssues="viewIssues"
+                    />}
+                    width={columnWidths.actions}
+
+                />
+
+            </Table>
+            <div> {noData} </div>
         </div>
-        </SortHeaderCell>
-    }
-    cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-    fixed={true}
-    width={columnWidths.startTime}
-    isResizable={true}
-    />
-    <Column
-    columnKey="progress"
-    header={
-        <div className="gor-table-header">
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="audit.table.progress" description="progress for audit task"
-        defaultMessage="PROGRESS(%)"/>
-        <div className="gorToolHeaderSubText">
-        <FormattedMessage id="audit.Totalprogress"
-        description='total progress for audit table'
-        defaultMessage='{totalProgress}% Completed'
-        values={{totalProgress: totalProgress.toFixed(1) ? totalProgress.toFixed(1) : '0'}}/>
-        </div>
-        </div>
-        </div>
-    }
-
-    cell={<ProgressCell data={sortedDataList} totalIssues="totalTask"
-    unresolved="unresolvedTask"> </ProgressCell>}
-
-    fixed={true}
-    width={columnWidths.progress}
-    isResizable={true}
-    />
-
-    <Column
-    columnKey="completedTime"
-    header={
-        <SortHeaderCell onSortChange={this.backendSort}
-        sortDir={colSortDirs.completedTime}>
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="audit.table.timeCompleted" description="timeCompleted for audit"
-        defaultMessage="TIME COMPLETED"/>
-        <div className="gorToolHeaderSubText">
-        {this.props.timeZoneString}
-        </div>
-        </div>
-        </SortHeaderCell>
-    }
-    cell={<TextCell style={{textTransform: 'capitalize'}} data={sortedDataList}/>}
-    fixed={true}
-    width={columnWidths.completedTime}
-    isResizable={true}
-    />
-
-    <Column
-    columnKey="actions"
-    header={
-        <div className="gor-table-header">
-        <div className="gorToolHeaderEl">
-        <FormattedMessage id="audit.table.action" description="action Column"
-        defaultMessage="ACTIONS"/>
-        <div className="gorToolHeaderSubText"></div>
-        </div>
-        </div>
-    }
-    cell={<ActionCellAudit data={sortedDataList} handleAudit={this.startAudit.bind(this)}
-    manageAuditTask={this.manageAuditTask.bind(this)} showBox="startAudit"
-
-    placeholderText={this.context.intl.formatMessage(messages.auditPlaceholder)}
-    resolveflag="resolveAudit" resolveAudit={this.resolveAudit.bind(this)}
-    checkIssues="viewIssues"
-    />}
-    width={columnWidths.actions}
-
-    />
-
-    </Table>
-    <div> {noData} </div>
-    </div>
 
 
-    return (
-        <div> {tableRenderer} </div>
+        return (
+            <div> {tableRenderer} </div>
         );
     }
+    
 }
 
 
