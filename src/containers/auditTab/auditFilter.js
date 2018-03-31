@@ -64,7 +64,7 @@ class AuditFilter extends React.Component {
   }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (!nextProps.pollTimerId)) {
+        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (this.props.pollTimerId!==nextProps.pollTimerId)) {
             this.setState(nextProps.auditFilterState)
         }
         /**
@@ -280,7 +280,7 @@ class AuditFilter extends React.Component {
                             <div className="gor-filter-body-filterToken-section1">
                                 {auditFilterToken.column2token}
                             </div>
-                            <div className="gor-filter-body-filterToken-section2">
+                            <div className="gor-filter-body-filterToken-section1">
                                 {auditFilterToken.column3token}
                             </div>
 

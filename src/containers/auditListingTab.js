@@ -184,6 +184,8 @@ startAuditAuto(auditId){
 
 
 
+
+
 _pauseAudit(auditId){
   let  audit_id=(auditId).constructor.name!=="Array"?auditId:auditId.toString();
       let auditData={
