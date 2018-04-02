@@ -48,17 +48,6 @@ const SLOTS_QUERY = gql`
     }
 `;
 
-const GENERATE_REPORT_MUTATION = gql`
-    mutation createUser($input: CreateUserInput) {
-        createUser(input: $input) {
-            password
-            username
-            code
-            description
-        }
-    }
-`;
-
 
 class StorageSpaceTab extends React.Component{
     constructor(props,context) {
