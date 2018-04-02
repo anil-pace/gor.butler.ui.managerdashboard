@@ -73,7 +73,7 @@ class OrderFilter extends React.Component{
         const filterInputFields=
         [{
             value: "PICK BEFORE TIME",
-            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="PICK BEFORE TIME"/>
+            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="CUT OFF TIME"/>
         },
         {
             value: "ORDER ID",

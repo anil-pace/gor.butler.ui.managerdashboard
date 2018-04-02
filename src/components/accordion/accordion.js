@@ -2,6 +2,7 @@
 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
+import Spinner from '../../components/spinner/Spinner';
 
 var storage = [];
 
@@ -50,7 +51,7 @@ class Accordion extends React.Component{
       });
     }
   }
-  
+
   render()
   {
       let arrowClassName="";
@@ -64,10 +65,14 @@ class Accordion extends React.Component{
         <div className="main">
           <div className={this.state.class}>
             <div className="panelHeader" onClick={this.handleClick}>{this.props.title}
-            <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
+              <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
+             
             <div className="panelWrapper">
-              <div className="panelContent">
+                    <Spinner isLoading={this.props.isInfiniteLoading} utilClassNames={"infinite-scroll"}>
+                      <div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
+                    </Spinner>
+              <div className="panelContent" onScroll={this.props.onScrollHandler ? (event) => this.props.onScrollHandler(event, this.props.cutOffTimeId) : null}>
                 {(this.state.class === "panel open") ? this.props.children : null}
               </div>
             </div>

@@ -99,6 +99,7 @@ import {
     ORDERS_SUMMARY_FETCH,
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
+    ORDERS_PER_PBT_FETCH_1,
     ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES
 } from "../constants/frontEndConstants";
@@ -170,7 +171,7 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
-import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData, receiveOrdersLinesData} from './../actions/norderDetailsAction';
+import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData,receiveOrdersPerPbtData_1, receiveOrdersLinesData} from './../actions/norderDetailsAction';
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -300,33 +301,33 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             store.dispatch(getPPSAudit(auditpps));
             break;
-        case START_AUDIT:
-        if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
-        {
-           var successCount = res.successful.length,
-                unsuccessfulCount = Object.keys(res.unsuccessful).length,
-                values = {
-                    successful: successCount,
-                    totalCount: successCount + unsuccessfulCount
-                },
-                msg = getFormattedMessages("BulkAudit", values);
-                store.dispatch(notifySuccess(msg));
-                store.dispatch(resetaudit(res.successful));
-                store.dispatch(setAuditRefresh(true));
-        }
-        else
-        {
-            if (res.successful.length) {
-                store.dispatch(notifySuccess(AS00A));
-                store.dispatch(setAuditRefresh(true)); //set refresh flag
-                store.dispatch(resetaudit(res.successful));
-            } else {
-                stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
-                store.dispatch(notifyFail(stringInfo.msg));
-                store.dispatch(setAuditRefresh(false)); //reset refresh flag
-            } 
-        }
-            break;
+        // case START_AUDIT:
+        // if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        // {
+        //    var successCount = res.successful.length,
+        //         unsuccessfulCount = Object.keys(res.unsuccessful).length,
+        //         values = {
+        //             successful: successCount,
+        //             totalCount: successCount + unsuccessfulCount
+        //         },
+        //         msg = getFormattedMessages("BulkAudit", values);
+        //         store.dispatch(notifySuccess(msg));
+        //         store.dispatch(resetaudit(res.successful));
+        //         store.dispatch(setAuditRefresh(true));
+        // }
+        // else
+        // {
+        //     if (res.successful.length) {
+        //         store.dispatch(notifySuccess(AS00A));
+        //         store.dispatch(setAuditRefresh(true)); //set refresh flag
+        //         store.dispatch(resetaudit(res.successful));
+        //     } else {
+        //         stringInfo = codeToString(res.unsuccessful[0].alert_data[0]);
+        //         store.dispatch(notifyFail(stringInfo.msg));
+        //         store.dispatch(setAuditRefresh(false)); //reset refresh flag
+        //     } 
+        // }
+        //     break;
         
         case RECIEVE_HEADER:
             if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
@@ -576,6 +577,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(receiveOrdersPerPbtData(res));
+            break;
+        case ORDERS_PER_PBT_FETCH_1:
+            store.dispatch(receiveOrdersPerPbtData_1(res));
             break;
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));

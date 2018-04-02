@@ -45,8 +45,10 @@ import {wsOverviewData} from './../../constants/initData.js';
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDERS_PER_PBT_FETCH_1
 } from '../../constants/frontEndConstants';
+
+import { setInfiniteSpinner } from '../../actions/notificationAction';
 
 import {
     API_URL,
@@ -70,16 +72,15 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             isPanelOpen:true,
-            date: "2017-03-27T11:53:30.084Z",
-            //startDate: new Date(),
-            //endDate: new Date(this.state.startDate - 1000*3600*24)
-            //var d = new Date( (new Date)*1 - 1000*3600*2 );
+            page:0,
+            size:5,
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
+        this._onScrollHandler = this._onScrollHandler.bind(this);
     }
 
     _showAllOrder() {
@@ -99,7 +100,7 @@ class OrderListTable extends React.Component {
             });
     }
 
-    _reqOrderPerPbt(arg){
+    _reqOrderPerPbt(arg, saltParams={}){
         let cutOffTimeId = this.props.pbts[arg].cut_off_time;
 
         // #condition to STOP hitting http request on OPENING OF ACCORDION
@@ -112,13 +113,14 @@ class OrderListTable extends React.Component {
             console.log("startDate =========================>" + this.props.startDate);   
             console.log("endDate  ==========================>" + this.props.endDate); 
             let formData={
-                "start_date": this.props.startTime,
+                "start_date": this.props.startDate,
                 "end_date": this.props.endDate,
                 "cut_off_time" : cutOffTimeId
             };
 
             let params={
                 'url':ORDERS_PER_PBT_URL,
+                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size
                 'method':GET,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
@@ -136,6 +138,27 @@ class OrderListTable extends React.Component {
             }
             
         }
+    }
+
+    _reqOrderPerPbt_1(arg){
+        let cutOffTimeId = this.props.pbts[arg].cut_off_time;
+            let formData={
+                "start_date": this.props.startDate,
+                "end_date": this.props.endDate,
+                "cut_off_time" : cutOffTimeId
+            };
+
+            let params={
+                'url':ORDERS_PER_PBT_URL,
+                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size
+                'method':GET,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':ORDERS_PER_PBT_FETCH_1,
+                'formdata':formData,
+            }
+            this.props.makeAjaxCall(params);
+        
     }
 
     _enableCollapseAllBtn(){
@@ -247,13 +270,13 @@ class OrderListTable extends React.Component {
                 var x = n - 5 * 60000;
 
                 //if(pbtData[i].cut_off_time){
-                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time.split(" ")[1]}} /> : "NO CUT OFF TIME");
-                    let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={x} timeZone={this.props.timeZone}/>);
+                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time}} /> : "NO CUT OFF TIME");
+                    let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={pbtData[i].cut_off_time} timeZone={this.props.timeZone}/>);
                     let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
                     let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
                     pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/>
                                 </div>);
 
                     pbtRow.push(<div>
@@ -289,15 +312,17 @@ class OrderListTable extends React.Component {
                 formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
                 formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
                 formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
-                formatStartDate = (orderData[i].start_date ? <FormattedRelative updateInterval={10000} value={orderData[i].start_date} timeZone={this.props.timeZone}/> : "null");
-                formatCompleteDate = (orderData[i].completion_date ? <FormattedRelative updateInterval={10000} value={orderData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+                //formatStartDate = (orderData[i].start_date ? <FormattedRelative updateInterval={10000} value={orderData[i].start_date} timeZone={this.props.timeZone}/> : "null");
+                formatStartDate = (orderData[i].start_date ? orderData[i].start_date.split("T")[0] + ", " + orderData[i].start_date.split("T")[1].split(".")[0] : "null");
+                formatCompleteDate = (orderData[i].completion_date ? orderData[i].completion_date.split("T")[0] + ", " + orderData[i].completion_date.split("T")[1].split(".")[0] : "null");
+                //formatCompleteDate = (orderData[i].completion_date ? <FormattedRelative updateInterval={10000} value={orderData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
                 formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
                  
 
                  
 
                 orderRow.push(<div className="DotSeparatorWrapper"> 
-                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatCompleteDate]}/>
+                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
                             </div>);
                 orderRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
                                     <div style={{width: "35%"}}>
@@ -334,6 +359,29 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
+    _onScrollHandler(event, arg){
+        console.log("coming insdie _onScrollHandler");
+        //if(event.target.scrollHeight - event.target.scrollTop >= 375){
+            console.log(Math.round(event.target.scrollTop));
+            console.log(event.target.clientHeight);
+            console.log(event.target.scrollHeight);
+        if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
+            this.props.setInfiniteSpinner(true);
+            
+            this._reqOrderPerPbt_1(arg);
+            //let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
+            // this.setState({
+            //         page
+            //     },function(){
+            //         this.props.setInfiniteSpinner(true);
+            //         this._fetchNotificationData({lazyData:true});
+            //     })
+        }
+        else{
+            this.props.setInfiniteSpinner(false);
+        }
+    }
+
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
@@ -341,10 +389,12 @@ class OrderListTable extends React.Component {
         return (
             <div>
                 <div className="waveListWrapper">
+                   
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
-                                return self.props.pbts[idx].total_orders ? (<Accordion getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
+                                return self.props.pbts[idx].total_orders ? 
+                                (<Accordion isInfiniteLoading={self.props.isInfiniteLoading} onScrollHandler={self._onScrollHandler} getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
                                     <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                         {row.map(function (text, index) {
                                             return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
@@ -408,7 +458,9 @@ function mapStateToProps(state, ownProps) {
         totalPages: state.orderDetails.totalPages,
         totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,
-        timeZone:state.authLogin.timeOffset
+        timeZone:state.authLogin.timeOffset,
+        isInfiniteLoading:state.notificationReducer.isInfiniteLoading
+
     };
 }
 
@@ -453,6 +505,7 @@ var mapDispatchToProps=function (dispatch) {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
+        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
 
 
     }

@@ -130,6 +130,7 @@ var storage = [];
         // let endDate = "3017-03-27T11:53:30.084Z";
         let startDate =  this.state.startDate;
         let endDate = this.state.endDate;
+        this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
         this._intervalId = setInterval(() => this._reqCutOffTime(startDate, endDate), 10000);
     }
 
@@ -141,6 +142,7 @@ var storage = [];
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             //this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+            clearInterval(this._intervalId);
             this._refreshList(nextProps.location.query);
         }
     }
@@ -165,6 +167,28 @@ var storage = [];
             }
             else
                 this._reqCutOffTime(startDateFromFilter, endDateFromFilter);  // for fetching cut off time list
+        }
+        else{
+            if(query.cutOffTime){
+                var today = new Date();
+                var todayDate = today.getFullYear()+':'+(today.getMonth()+1)+':'+today.getDate();
+                let setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
+                let setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
+                console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate );
+                let cutOffTimeFromFilter = query.cutOffTime; 
+                console.log("cut off time  from filter =========================>" + cutOffTimeFromFilter);
+                this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+            }
+            else if(query.orderId){
+                let params={
+                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
+                    'method':GET,
+                    'contentType':APP_JSON,
+                    'accept':APP_JSON,
+                    'cause':ORDERLINES_PER_ORDER_FETCH,
+                }
+                this.props.makeAjaxCall(params);
+            }
         }
         this.props.setOrderListSpinner(true);
     }
