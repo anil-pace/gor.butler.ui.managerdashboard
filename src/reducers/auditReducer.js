@@ -210,7 +210,7 @@ for(let a=0,len=attrSet.length;a<len;a++){
   }
   outerObj[attrSet[a].sku]=obj2;
 }
-audit_name=data.audit_param_name;
+audit_name=data.audit_param_name||"";
 kq=data.kq;
 }
 
@@ -310,7 +310,7 @@ for(var i=0,len=arr.length;i<len;i++){
 }
 totalInvalid=0;
 kq=data.kq;
-audit_name=data.audit_param_name;
+audit_name=data.audit_param_name||"";
 }
 return {
     data:processedData,
