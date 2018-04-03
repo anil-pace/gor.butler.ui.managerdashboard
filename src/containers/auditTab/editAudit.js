@@ -190,7 +190,6 @@ class EditAudit extends React.Component{
         validatedSKUs =[];
         activeTabIndex=1;
         this.kqCheck.checked=locationAttributes.kq;
-        //this.auditNameLoc.value=locationAttributes.audit_name;
       }
       else{
         if(this.props.auditEditData!==nextProps.auditEditData){
