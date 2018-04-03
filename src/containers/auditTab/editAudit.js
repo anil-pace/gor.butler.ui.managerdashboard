@@ -190,14 +190,14 @@ class EditAudit extends React.Component{
         validatedSKUs =[];
         activeTabIndex=1;
         this.kqCheck.checked=locationAttributes.kq;
-        this.auditNameSKU.value=locationAttributes.audit_name;
+        //this.auditNameLoc.value=locationAttributes.audit_name;
       }
       else{
         if(this.props.auditEditData!==nextProps.auditEditData){
        skuAttributes =JSON.parse(JSON.stringify(nextProps.auditEditData));
        attrList=nextProps.auditEditData.outerObj;
        this.kqCheck.checked=skuAttributes.kq
-       this.auditNameSKU.value=locationAttributes.audit_name;
+       
         }
         else
         {
@@ -228,6 +228,13 @@ class EditAudit extends React.Component{
 
     },function(){
       this._onAttributeSelectionFirstTime();
+      if(activeTabIndex==1){
+      this.auditNameLoc.value=locationAttributes.audit_name;
+      }
+      else
+      {
+        this.auditNameSKU.value=skuAttributes.audit_name;
+      }
     })
   }
     if(this.props.auditSpinner !== nextProps.auditSpinner){
