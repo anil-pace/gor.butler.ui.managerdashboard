@@ -173,7 +173,7 @@ function processValidationDataSKU(data,param,includeExpiry){
   statusList = data.status_list,
   attList = data.attributes_list,
   i18n = data.i18n_values,
-  totalValid=0,totalInvalid=0,kq=false;
+  totalValid=0,totalInvalid=0,kq=false,audit_name="";
   const expiryCategory = {
     category_text:"",
     category_value:"expired",
@@ -210,6 +210,7 @@ for(let a=0,len=attrSet.length;a<len;a++){
   }
   outerObj[attrSet[a].sku]=obj2;
 }
+audit_name=data.audit_param_name||"";
 kq=data.kq;
 }
 
@@ -254,12 +255,13 @@ kq=data.kq;
     totalValid,
     totalInvalid,outerObj,
     kq,
+    audit_name,
     totalSKUs:totalValid+totalInvalid
   };
 }
 
 function processValidationData(data,param){
-  var processedData=[],totalValid=0,totalInvalid=0,kq=false;
+  var processedData=[],totalValid=0,totalInvalid=0,kq=false,audit_name="";
 if(param!=="Edit_Dup"){
   var msuList = data.msu_list,
 statusList = data.status,totalValid=0,totalInvalid=0,
@@ -308,12 +310,14 @@ for(var i=0,len=arr.length;i<len;i++){
 }
 totalInvalid=0;
 kq=data.kq;
+audit_name=data.audit_param_name||"";
 }
 return {
     data:processedData,
     totalValid,
     totalInvalid,
     totalLocations:totalValid+totalInvalid,
-    kq
+    kq,
+    audit_name
   }
 }
