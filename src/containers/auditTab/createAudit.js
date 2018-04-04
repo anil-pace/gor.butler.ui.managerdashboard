@@ -366,6 +366,7 @@ class CreateAudit extends React.Component{
     }
 
     validLocationDataCreateAudit={
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "kq":this.kqCheck.checked,
       "action":(type === "create" || type === "confirm")?'create':'',
