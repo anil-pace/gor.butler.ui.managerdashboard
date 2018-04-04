@@ -576,7 +576,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveCufOffTimeData(res));
             break;
         case ORDERS_PER_PBT_FETCH:
-            store.dispatch(receiveOrdersPerPbtData(res));
+            store.dispatch(receiveOrdersPerPbtData(res, saltParams));
             break;
         case ORDERS_PER_PBT_FETCH_1:
             store.dispatch(receiveOrdersPerPbtData_1(res));

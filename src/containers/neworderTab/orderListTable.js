@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
-import {FormattedMessage, defineMessages, FormattedRelative} from 'react-intl';
+import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime} from 'react-intl';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -72,8 +72,8 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             isPanelOpen:true,
-            page:0,
-            size:5,
+            page:1,
+            size:20,
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -100,27 +100,27 @@ class OrderListTable extends React.Component {
             });
     }
 
-    _reqOrderPerPbt(arg, saltParams={}){
-        let cutOffTimeId = this.props.pbts[arg].cut_off_time;
+    _reqOrderPerPbt(cutOffTimeIndex, saltParams={}){
+        let cutOffTime = this.props.pbts[cutOffTimeIndex].cut_off_time;
 
         // #condition to STOP hitting http request on OPENING OF ACCORDION
-        const index = storage.indexOf(cutOffTimeId);
-        if(index === -1){
-            storage.push(cutOffTimeId);
+        const index = storage.indexOf(cutOffTime);
+        let formData={
+            "start_date": this.props.startDate,
+            "end_date": this.props.endDate,
+            "cut_off_time" : cutOffTime
+        };
+        if(index === -1){   // FIRST TIME CLICK OF ACCORDION
+            storage.push(cutOffTime);
             this.props.stopPolling(this.props.intervalId);  // #stop ongoing polling.
             console.log('%c ==================>!  ', 'background: #222; color: #bada55');
-            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID" + cutOffTimeId);
+            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID" + cutOffTime);
             console.log("startDate =========================>" + this.props.startDate);   
             console.log("endDate  ==========================>" + this.props.endDate); 
-            let formData={
-                "start_date": this.props.startDate,
-                "end_date": this.props.endDate,
-                "cut_off_time" : cutOffTimeId
-            };
 
             let params={
-                'url':ORDERS_PER_PBT_URL,
-                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size
+                'url': ORDERS_PER_PBT_URL,
+                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
                 'method':GET,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
@@ -129,7 +129,23 @@ class OrderListTable extends React.Component {
             }
             this.props.makeAjaxCall(params);
         }
-        else{
+        else if( index !== -1 && JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
+                console.log("coming inside lazyData TRUE");
+            let params={
+                'url': ORDERS_PER_PBT_URL,
+                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+                'method':GET,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':ORDERS_PER_PBT_FETCH,
+                'formdata':formData,
+                'saltParams':saltParams,
+            }
+            
+            this.props.makeAjaxCall(params);
+        }
+        else{    // CLICKED ON ALREADY OPEN ACCORDION
+            console.log("coming inside else case means ACCORDION HAS BEEN CLOSED");
             storage.splice(index, 1);
 
             /* condition to re-starting polling when all the accordions are in CLOSED state */
@@ -138,27 +154,7 @@ class OrderListTable extends React.Component {
             }
             
         }
-    }
 
-    _reqOrderPerPbt_1(arg){
-        let cutOffTimeId = this.props.pbts[arg].cut_off_time;
-            let formData={
-                "start_date": this.props.startDate,
-                "end_date": this.props.endDate,
-                "cut_off_time" : cutOffTimeId
-            };
-
-            let params={
-                'url':ORDERS_PER_PBT_URL,
-                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size
-                'method':GET,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH_1,
-                'formdata':formData,
-            }
-            this.props.makeAjaxCall(params);
-        
     }
 
     _enableCollapseAllBtn(){
@@ -270,7 +266,7 @@ class OrderListTable extends React.Component {
                 var x = n - 5 * 60000;
 
                 //if(pbtData[i].cut_off_time){
-                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time}} /> : "NO CUT OFF TIME");
+                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time.split(" ")[0]}} /> : "NO CUT OFF TIME");
                     let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={pbtData[i].cut_off_time} timeZone={this.props.timeZone}/>);
                     let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
                     let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
@@ -298,13 +294,14 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
-    _processOrders = (arg) => {
+    _processOrders = (orderData, nProps) => {
+        nProps = this;
+        orderData  = nProps.props.ordersPerPbt;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
-        let pbtData = arg;
-        let orderData = arg;
         let orderDataLen = orderData.length;
         let orderRows = [];
         let processedData = {};
+        var timeOffset = nProps.props.timeOffset || "";
         if(orderDataLen){
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
@@ -312,18 +309,96 @@ class OrderListTable extends React.Component {
                 formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
                 formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
                 formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
-                //formatStartDate = (orderData[i].start_date ? <FormattedRelative updateInterval={10000} value={orderData[i].start_date} timeZone={this.props.timeZone}/> : "null");
-                formatStartDate = (orderData[i].start_date ? orderData[i].start_date.split("T")[0] + ", " + orderData[i].start_date.split("T")[1].split(".")[0] : "null");
-                formatCompleteDate = (orderData[i].completion_date ? orderData[i].completion_date.split("T")[0] + ", " + orderData[i].completion_date.split("T")[1].split(".")[0] : "null");
-                //formatCompleteDate = (orderData[i].completion_date ? <FormattedRelative updateInterval={10000} value={orderData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+
+                //Create time need to be add
+                    if (orderData[i].start_date) {
+                        if (getDaysDiff(orderData[i].start_date) < 2) {
+                            formatStartDate = nProps.context.intl.formatRelative(orderData[i].start_date, {
+                                timeZone: timeOffset,
+                                units: 'day'
+                            }) +
+                                ", " + nProps.context.intl.formatTime(orderData[i].start_date, {
+                                    timeZone: timeOffset,
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: false
+                                });
+                        }
+                        else {
+                            formatStartDate = nProps.context.intl.formatDate(orderData[i].start_date,
+                                {
+                                    timeZone: timeOffset,
+                                    month: 'short',
+                                    day: '2-digit',
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false
+                                });
+                        }
+
+                        if (orderData[i].completion_date) {
+                            if ((getDaysDiff(orderData[i].completion_date) == getDaysDiff(orderData[i].start_date))) {
+                                formatCompleteDate = nProps.context.intl.formatTime(orderData[i].completion_date, {
+                                    timeZone: timeOffset,
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: false
+                                });
+                            }
+                            else {
+                                formatCompleteDate = nProps.context.intl.formatDate(orderData[i].completion_date,
+                                    {
+                                        timeZone: timeOffset,
+                                        month: 'short',
+                                        day: '2-digit',
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false
+                                    });
+                            }
+                        }
+                        else
+                            formatCompleteDate = "";
+                    }
+                    //var endTIme = (formatCompleteDate !== "") ? " - " + formatCompleteDate : "";
+                    //var totalTime = (formatStartDate ? formatStartDate : "") + (formatCompleteDate ? endTIme : "");
+
+                    if (orderData[i].completion_date) {
+                        if (getDaysDiff(orderData[i].completion_date) < 2) {
+                            formatCompleteDate = nProps.context.intl.formatRelative(orderData[i].completion_date, {
+                                timeZone: timeOffset,
+                                units: 'day'
+                            }) +
+                                ", " + nProps.context.intl.formatTime(orderData[i].completion_date, {
+                                    timeZone: timeOffset,
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: false
+                                });
+                        }
+                        else {
+                            formatCompleteDate = nProps.context.intl.formatDate(orderData[i].completion_date,
+                                {
+                                    timeZone: timeOffset,
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: '2-digit',
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false
+                                });
+                        }
+                    }
+                    else {
+                        formatCompleteDate = "--";
+                    }
+
                 formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
                  
-
-                 
-
                 orderRow.push(<div className="DotSeparatorWrapper"> 
                                 <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
                             </div>);
+
                 orderRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
                                     <div style={{width: "35%"}}>
                                         <div className="ProgressBarWrapper">
@@ -359,25 +434,21 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
-    _onScrollHandler(event, arg){
-        console.log("coming insdie _onScrollHandler");
+    _onScrollHandler(event, cutOffTimeIndex){
         //if(event.target.scrollHeight - event.target.scrollTop >= 375){
             console.log(Math.round(event.target.scrollTop));
             console.log(event.target.clientHeight);
             console.log(event.target.scrollHeight);
         if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
-            this.props.setInfiniteSpinner(true);
-            
-            this._reqOrderPerPbt_1(arg);
-            //let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
-            // this.setState({
-            //         page
-            //     },function(){
-            //         this.props.setInfiniteSpinner(true);
-            //         this._fetchNotificationData({lazyData:true});
-            //     })
+            let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
+            this.setState({
+                    page
+                },function(){
+                    this.props.setInfiniteSpinner(true);
+                    this._reqOrderPerPbt(cutOffTimeIndex, {lazyData:true});
+                })
         }
-        else{
+        else {
             this.props.setInfiniteSpinner(false);
         }
     }
@@ -394,7 +465,7 @@ class OrderListTable extends React.Component {
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
                                 return self.props.pbts[idx].total_orders ? 
-                                (<Accordion isInfiniteLoading={self.props.isInfiniteLoading} onScrollHandler={self._onScrollHandler} getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeId={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
+                                (<Accordion isInfiniteLoading={self.props.isInfiniteLoading} onScrollHandler={self._onScrollHandler} getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeIndex={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
                                     <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                         {row.map(function (text, index) {
                                             return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
@@ -517,6 +588,10 @@ OrderListTable.defaultProps = {
     totalOrders: ""
 }
 
+OrderListTable.contextTypes = {
+    intl: React.PropTypes.object.isRequired
+}
+
 OrderListTable.PropTypes={
     items: React.PropTypes.array,
     containerWidth: React.PropTypes.number,
@@ -529,7 +604,8 @@ OrderListTable.PropTypes={
     isFilterApplied: React.PropTypes.bool,
     timeZoneString: React.PropTypes.string,
     lastUpdated: React.PropTypes.string,
-    responseFlag: React.PropTypes.bool
+    responseFlag: React.PropTypes.bool,
+    timeOffset: React.PropTypes.number
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderListTable);

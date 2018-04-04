@@ -241,12 +241,12 @@ class ViewOrderLine extends React.Component{
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
-                                <span style={{color: "red"}} className="spanValue"> "Will not show because of UNexpected time format from backend." </span> 
+                                <span className="spanValue"> {""} </span> 
                               </div>
-                              {/*<div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.olines.waveId" description='wave id' defaultMessage='Wave ID:'/> </span> 
-                                <span className="spanValue"> N/A </span> 
-                              </div>*/}
+                              <div className="orderDetailsRow"> 
+                                {/*<span className="spanKey col-3-span-key"> <FormattedMessage id="orders.olines.waveId" description='wave id' defaultMessage='Wave ID:'/> </span> 
+                                <span className="spanValue"> N/A </span>*/} 
+                              </div>
                           </div>
                       </div>
                   </div>

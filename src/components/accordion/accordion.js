@@ -20,10 +20,10 @@ class Accordion extends React.Component{
 
   handleClick(e){
 
-    const index = storage.indexOf(this.props.cutOffTimeId);
+    const index = storage.indexOf(this.props.cutOffTimeIndex);
 
     if(index === -1){
-        storage.push(this.props.cutOffTimeId);
+        storage.push(this.props.cutOffTimeIndex);
     }
     else{
       storage.splice(index, 1);
@@ -35,7 +35,7 @@ class Accordion extends React.Component{
       this.props.disableCollapseAllBtn();
     }
 
-    this.props.getOrderPerPbt(this.props.cutOffTimeId);
+    this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
 
     if(this.state.open) {
       console.log("===========================.           INSIDE OPEN FALSE");
@@ -72,7 +72,7 @@ class Accordion extends React.Component{
                     <Spinner isLoading={this.props.isInfiniteLoading} utilClassNames={"infinite-scroll"}>
                       <div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
                     </Spinner>
-              <div className="panelContent" onScroll={this.props.onScrollHandler ? (event) => this.props.onScrollHandler(event, this.props.cutOffTimeId) : null}>
+              <div className="panelContent" onScroll={this.props.onScrollHandler ? (event) => this.props.onScrollHandler(event, this.props.cutOffTimeIndex) : null}>
                 {(this.state.class === "panel open") ? this.props.children : null}
               </div>
             </div>

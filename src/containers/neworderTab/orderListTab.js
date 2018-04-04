@@ -505,16 +505,16 @@ var storage = [];
                             </div>
                     </div>
                 {/*Filter Summary*/}
-                <FilterSummary total={ ["1","2","3"].length  /*orderDetail.length*/ || 0} isFilterApplied={this.props.isFilterApplied}
-                responseFlag={this.props.responseFlag}
-                filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                description='total order for filter search bar'
-                defaultMessage='{total} Orders found'
-                values={{total: orderDetail ? orderDetail.length : '0'}}/>}
-                refreshList={this._clearFilter.bind(this)}
-                refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                description="button label for show all"
-                defaultMessage="Show all orders"/>}/>
+                <FilterSummary total={ this.props.pbts.length  /*orderDetail.length*/ || 0} isFilterApplied={this.props.isFilterApplied}
+                    responseFlag={this.props.responseFlag}
+                    filterText={<FormattedMessage id="orderlist.filter.search.bar"
+                    description='total order for filter search bar'
+                    defaultMessage='{total} Orders found'
+                    values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                    refreshList={this._clearFilter.bind(this)}
+                    refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+                    description="button label for show all"
+                    defaultMessage="Show all orders"/>}/>
 
                 </div> : null}
 
@@ -549,6 +549,7 @@ var storage = [];
                         intervalId={this._intervalId}
                         restartPolling={this._restartPolling}
                         stopPolling={this._stopPolling}
+                        isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}
                         disableCollapseAllBtn={this._disableCollapseAllBtn}
                         isPanelOpen={this.state.isPanelOpen} />)

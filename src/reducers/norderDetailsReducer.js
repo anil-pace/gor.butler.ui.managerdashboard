@@ -54,7 +54,7 @@ const order_data = [{
   "missing_count": 0,
   "is_at_breach_risk": "to_do_as_data_is_wrong",
   "pps_id": "1",
-  "completion_date": "2018-02-28T11:49:45.428761+00:00",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
   "order_id": "22Feb_09",
   "status": "complete"
 }, {
@@ -112,9 +112,8 @@ const order_data = [{
   "completion_date": "2018-02-28T11:49:45.428761+00:00",
   "order_id": "22Feb_09",
   "status": "complete"
-}];
-
-const order_data_1 = [{
+},
+{
   "picked_products_count": 1,
   "pps_bin_id": "6",
   "damaged_count": 0,
@@ -125,7 +124,150 @@ const order_data_1 = [{
   "missing_count": 0,
   "is_at_breach_risk": "to_do_as_data_is_wrong",
   "pps_id": "1",
-  "completion_date": "2018-02-28T11:49:45.428761+00:00",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+},{
+  "picked_products_count": 1,
+  "pps_bin_id": "6",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
+  "order_id": "22Feb_09",
+  "status": "complete"
+}];
+
+const order_data_1 = [{
+  "picked_products_count": 1,
+  "pps_bin_id": "16",
+  "damaged_count": 0,
+  "physically_damaged_count": 0,
+  "is_breached": "to_do_as_data_is_wrong",
+  "total_products_count": 1,
+  "unfulfillable_count": 0,
+  "missing_count": 0,
+  "is_at_breach_risk": "to_do_as_data_is_wrong",
+  "pps_id": "1",
+  "start_date": "2018-04-04T09:49:45.428761+00:00",
+  "completion_date": "2018-04-04T11:49:45.428761+00:00",
   "order_id": "22Feb_2019",
   "status": "complete"
 }, {
@@ -242,18 +384,21 @@ export  function orderDetails(state={},action){
         ordersPerPbt: [...order_data]|| [],
         // ordersPerPbt: res.serviceRequests,
         // totalPages : res.totalPages,
-        // totalOrders : res.totaElements
+        // totalOrders : res.totalElements
       });
       return state;
       break;
 
     case ORDERS_PER_PBT_FETCH_1:
-      var res = action.data;
+      let res = action.data;
+      let ordersData = action.saltParams.lazyData ? (state.ordersPerPbt || []) : [];
       return Object.assign({}, state, {
-        ordersPerPbt: [...order_data].concat([...order_data_1]) || [],
-        // ordersPerPbt: res.serviceRequests,
-        // totalPages : res.totalPages,
-        // totalOrders : res.totaElements
+        "ordersPerPbt": ordersData.concat(res.serviceRequests) || [],
+        "isInfiniteLoading":false,
+        "dataFound":res.serviceRequests.length < 1,
+        //"ordersPerPbt": res.serviceRequests,
+        "totalPages" : res.totalPages,
+        "totalOrders" : res.totaElements
       });
       return state;
       break;

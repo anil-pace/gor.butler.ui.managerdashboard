@@ -30,11 +30,12 @@ export function receiveCufOffTimeData(data){
 	}
 }
 
-export function receiveOrdersPerPbtData(data){
+export function receiveOrdersPerPbtData(data, saltParams){
 	console.log("coming inside norderDetailsAction => receiveOrderSummaryData => ORDERS_PER_PBT_FETCH");
 	return {
 		type: ORDERS_PER_PBT_FETCH,
-		data
+		data,
+		saltParams
 	}
 }
 
