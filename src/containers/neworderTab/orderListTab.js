@@ -36,7 +36,8 @@ import {wsOverviewData} from './../../constants/initData.js';
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH,
+    POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 
 import {
@@ -131,7 +132,7 @@ var storage = [];
         let startDate =  this.state.startDate;
         let endDate = this.state.endDate;
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-        this._intervalId = setInterval(() => this._reqCutOffTime(startDate, endDate), 10000);
+        this._intervalId = setInterval(() => this._reqCutOffTime(startDate, endDate), POLLING_INTERVAL);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -142,7 +143,7 @@ var storage = [];
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             //this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            clearInterval(this._intervalId);
+            //clearInterval(this._intervalId);
             this._refreshList(nextProps.location.query);
         }
     }
@@ -349,7 +350,7 @@ var storage = [];
     }
 
     _restartPolling = ()=> {
-        this._intervalId = setInterval(() => this._reqCutOffTime(this.state.startDate, this.state.endDate), 10000);
+        this._intervalId = setInterval(() => this._reqCutOffTime(this.state.startDate, this.state.endDate), POLLING_INTERVAL);
     }
 
     _stopPolling = (intervalId) => {
@@ -419,7 +420,7 @@ var storage = [];
         //     updateStatusText=
         //     <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
         //     defaultMessage='Last Updated '/>
-        //     updateStatusIntl=<FormattedRelative updateInterval={10000} value={Date.now()}/>
+        //     updateStatusIntl=<FormattedRelative updateInterval={POLLING_INTERVAL} value={Date.now()}/>
         // }
         var itemNumber=6, table, pages;
         const ordersByStatus=[
