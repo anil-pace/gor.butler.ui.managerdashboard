@@ -39,6 +39,7 @@ import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INI
     ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH,
     POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
+import { setInfiniteSpinner } from '../../actions/notificationAction';
 
 import {
     API_URL,
@@ -136,13 +137,9 @@ var storage = [];
     }
 
     componentWillReceiveProps(nextProps) {
-        // if(Object.keys(nextProps.location.query).length > 0){
-        //     clearInterval(this._intervalId);
-        //     this._refreshList(nextProps.location.query);
-        // }
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-            //this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+            this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             //clearInterval(this._intervalId);
             this._refreshList(nextProps.location.query);
         }
@@ -153,42 +150,49 @@ var storage = [];
         console.log("FILTER QUERY COMING POST APPLY FILTER");
         console.log("query =========================>" + JSON.stringify(query)); 
 
+        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
+
         if( (query.fromDate && query.toDate) && (query.toDate && query.toTime) ){
-            let startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
-            let endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
-             console.log("start date from filter =========================>" + startDateFromFilter);
-             console.log("end date from filter =========================>" + endDateFromFilter);
+            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
+            endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
              if( query.cutOffTime){
                 /* convert cut off time from filter to format accepted by backend i.e., //2018-03-01 23:00:00 */
-                let dt = new Date().toISOString().split("T")[0];  // date will be bydefault today's date
-                let tm = query.cutOffTime + ":00";  // time can be selected by user in hr:mm format
-                let cutOffTimeFromFilter = dt + " " + tm; 
-                console.log("cut off time  from filter =========================>" + cutOffTimeFromFilter);
+                // let date = new Date();
+                // let dt = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();  // date will be bydefault today's date
+                // let tm = query.cutOffTime + ":00";  // time can be selected by user in hr:mm format
+                // cutOffTimeFromFilter = dt + " " + tm; 
+                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
+                console.log("setStartDate" + startDateFromFilter, "setEndDate" + endDateFromFilter, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // for fetching orders by giving cut off time
             }
-            else
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter);  // for fetching cut off time list
         }
         else{
             if(query.cutOffTime){
-                var today = new Date();
-                var todayDate = today.getFullYear()+':'+(today.getMonth()+1)+':'+today.getDate();
-                let setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
-                let setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
-                console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate );
-                let cutOffTimeFromFilter = query.cutOffTime; 
-                console.log("cut off time  from filter =========================>" + cutOffTimeFromFilter);
+                setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
+                setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
+                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
+                console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+                this.props.filterApplied(true);
             }
             else if(query.orderId){
                 let params={
-                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
+                    //'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
+                    'url':ORDERLINES_PER_ORDER_URL,
                     'method':GET,
                     'contentType':APP_JSON,
                     'accept':APP_JSON,
                     'cause':ORDERLINES_PER_ORDER_FETCH,
                 }
                 this.props.makeAjaxCall(params);
+                modal.add(ViewOrderLine, {
+                    orderId: query.orderId,
+                    title: '',
+                    size: 'large',
+                    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                    hideCloseButton: true      // (optional) if you don't wanna show the top right close button
+                                           //.. all what you put in here you will get access in the modal props ;),
+                });
             }
         }
         this.props.setOrderListSpinner(true);
@@ -506,7 +510,7 @@ var storage = [];
                             </div>
                     </div>
                 {/*Filter Summary*/}
-                <FilterSummary total={ this.props.pbts.length  /*orderDetail.length*/ || 0} isFilterApplied={this.props.isFilterApplied}
+                <FilterSummary total={ this.props.pbts.length || 0} isFilterApplied={this.props.isFilterApplied}
                     responseFlag={this.props.responseFlag}
                     filterText={<FormattedMessage id="orderlist.filter.search.bar"
                     description='total order for filter search bar'
@@ -650,6 +654,7 @@ var mapDispatchToProps=function (dispatch) {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
+        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
 
 
     }

@@ -73,7 +73,7 @@ class OrderListTable extends React.Component {
         this.state={
             isPanelOpen:true,
             page:1,
-            size:20,
+            size:10,
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -151,6 +151,7 @@ class OrderListTable extends React.Component {
             /* condition to re-starting polling when all the accordions are in CLOSED state */
             if(storage.length <= 0){
                 this.props.restartPolling();
+                this.props.setInfiniteSpinner(false); // remove the loading more status
             }
             
         }

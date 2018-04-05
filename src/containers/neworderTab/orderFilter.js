@@ -307,9 +307,10 @@ class OrderFilter extends React.Component{
                            <FormattedMessage id="gor.filter.reset" description="label for reset" 
                               defaultMessage="Reset"/>
                       </span>
-                      <div className="gor-filter-btn-wrap">
+                      <div className="gor-filter-btn-wrap"> 
                           <button className='gor-add-btn' onClick={this._applyFilter}>
-                              {!this.props.orderListSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>}
+                              {<FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/>}
+                             {/* {!this.props.orderListSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>} */}
                           </button>
                       </div> 
                    </div>
