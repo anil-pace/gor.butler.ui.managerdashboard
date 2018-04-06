@@ -94,7 +94,8 @@ var storage = [];
         this.state = this._getInitialState();
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
-        this._restartPolling = this._restartPolling.bind(this);
+        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
+        this._stopPollingCutOffTime = this._stopPollingCutOffTime.bind(this);
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
@@ -133,19 +134,20 @@ var storage = [];
         let startDate =  this.state.startDate;
         let endDate = this.state.endDate;
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-        this._intervalId = setInterval(() => this._reqCutOffTime(startDate, endDate), POLLING_INTERVAL);
+       
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            //clearInterval(this._intervalId);
+            //clearTimeout(this._intervalIdForCutOffTime);
             this._refreshList(nextProps.location.query);
         }
     }
 
     _refreshList(query) {
+        //this.props.setOrderListSpinner(true);
         console.log('%c ==================>!  ', 'background: #222; color: #bada55');
         console.log("FILTER QUERY COMING POST APPLY FILTER");
         console.log("query =========================>" + JSON.stringify(query)); 
@@ -164,15 +166,20 @@ var storage = [];
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
                 console.log("setStartDate" + startDateFromFilter, "setEndDate" + endDateFromFilter, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // for fetching orders by giving cut off time
+                this.props.toggleOrderFilter(true);
+                this.props.filterApplied(true);
             }
         }
         else{
             if(query.cutOffTime){
-                setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
-                setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
+                // setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
+                // setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
+                 setStartDate = "2018-04-10T09:53:03.550Z";
+                setEndDate = "2018-04-10T09:53:03.550Z";
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
                 console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+                this.props.toggleOrderFilter(true);
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
@@ -195,34 +202,54 @@ var storage = [];
                 });
             }
         }
-        this.props.setOrderListSpinner(true);
+
+        // if (Object.keys(query).filter(function (el) {
+        //     return el !== 'page'
+        // }).length !== 0) {
+        //     this.props.toggleOrderFilter(true);
+        //     this.props.filterApplied(true);
+        // } else {
+        //     this.props.toggleOrderFilter(false);
+        //     this.props.filterApplied(false);
+        // }
+        // this.props.currentPage(1);
+        // this.props.orderfilterState({
+        //     tokenSelected: {
+        //         "STATUS": query.status ? (query.status.constructor=== Array ? query.status : [query.status]) : ['all'],
+        //         "TIME PERIOD": query.period ? (query.period.constructor=== Array ? query.period[0] : query.period) : ['allOrders']
+        //     },
+        //     searchQuery: {"ORDER ID": query.orderId || ''},
+        //     "PAGE": query.page || 1
+        // });
+        // this.props.setOrderQuery({query:query})
+        //this.props.getPageData(paginationData);
+        
     }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
-        _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
-                console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID" + cutOffTime);
-                console.log("startDate =========================>" + fromDateTime);   
-                console.log("endDate  ==========================>" + toDateTime); 
-                let formData={
-                    "start_date": fromDateTime,
-                    "end_date": toDateTime,
-                    "cut_off_time" : cutOffTime
-                };
+    _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
+            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID ===>" + cutOffTime);
+            console.log("startDate =========================>" + fromDateTime);   
+            console.log("endDate  ==========================>" + toDateTime); 
+            let formData={
+                "start_date": fromDateTime,
+                "end_date": toDateTime,
+                "cut_off_time" : cutOffTime
+            };
 
-                let params={
-                    'url':ORDERS_PER_PBT_URL,
-                    'method':GET,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'cause':ORDERS_PER_PBT_FETCH,
-                    'formdata':formData,
-                }
-                this.props.makeAjaxCall(params);
-        }
-    /* END ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */
+            let params={
+                'url':ORDERS_PER_PBT_URL,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':ORDERS_PER_PBT_FETCH,
+                'formdata':formData,
+            }
+            this.props.makeAjaxCall(params);
+    }
 
     _clearFilter() {
-        hashHistory.push({pathname: "/orders", query: {}})
+        hashHistory.push({pathname: "/orders", query: {}});
     }
 
     componentWillUnmount() {
@@ -293,10 +320,11 @@ var storage = [];
         return todayDate;
     }
 
-    _reqOrdersFulfilment(fromTime, toTime){
+    _reqOrdersFulfilment(startDate, endDate){
+        console.log("ORDER FULFILMENT REQUESTED");
         let formData={
-            "start_date": fromTime,
-            "end_date": toTime
+            "start_date": startDate,
+            "end_date": endDate
         };
 
         let params={
@@ -310,10 +338,11 @@ var storage = [];
         this.props.makeAjaxCall(params);
     }
 
-    _reqOrdersSummary(fromTime, toTime){
+    _reqOrdersSummary(startDate, endDate){
+        console.log("ORDER SUMMARY REQUESTED");
         let formData={
-            "start_date": fromTime,
-            "end_date": toTime
+            "start_date": startDate,
+            "end_date": endDate
         };
 
         let params={
@@ -328,11 +357,10 @@ var storage = [];
     }
 
     _reqCutOffTime(startDate, endDate){
-        console.log('%c ==================>!  ', 'background: #222; color: #bada55');
+        console.log('%c ==================>!  ', 'background: green; color: black');
         console.log("LEVEL 1 CUT OFF TIME REQUESTED");
         //this.props.setReportsSpinner(true);
-        console.log("startDate =========================>" + startDate);   
-        console.log("endDate  ==========================>" + endDate);        
+        console.log("startDate ====>" + startDate, "endDate  ========>" + endDate);   
 
         let formData={
             "start_date": startDate,
@@ -341,7 +369,7 @@ var storage = [];
 
         let params={
             'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':GET,
+            'method':POST,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause':ORDERS_CUT_OFF_TIME_FETCH,
@@ -349,16 +377,17 @@ var storage = [];
         }
         this.props.makeAjaxCall(params);
         //call other http calls
-        //this._reqOrdersFulfilment(startDate, endDate);
-        //this._reqOrdersSummary(startDate, endDate);
+        this._reqOrdersFulfilment(startDate, endDate);
+        this._reqOrdersSummary(startDate, endDate);
+        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(startDate, endDate), POLLING_INTERVAL);
     }
 
-    _restartPolling = ()=> {
-        this._intervalId = setInterval(() => this._reqCutOffTime(this.state.startDate, this.state.endDate), POLLING_INTERVAL);
+    _startPollingCutOffTime = ()=> {
+        this._reqCutOffTime(this.state.startDate, this.state.endDate);
     }
 
-    _stopPolling = (intervalId) => {
-        clearInterval(intervalId);
+    _stopPollingCutOffTime = (intervalId) => {
+        clearTimeout(intervalId);
     }
 
     _formatTime(timeLeft){
@@ -405,10 +434,10 @@ var storage = [];
     }
 
     _handleCollapseAll(){
-        // this.setState({
-        //     collapseAllBtnState: true,
-        //     isPanelOpen: false
-        // })
+        this.setState({
+            collapseAllBtnState: true,
+            isPanelOpen: false
+        })
     }
 
     render() {
@@ -510,7 +539,7 @@ var storage = [];
                             </div>
                     </div>
                 {/*Filter Summary*/}
-                <FilterSummary total={ this.props.pbts.length || 0} isFilterApplied={this.props.isFilterApplied}
+                <FilterSummary total={this.props.pbts.length || 0} isFilterApplied={this.props.isFilterApplied}
                     responseFlag={this.props.responseFlag}
                     filterText={<FormattedMessage id="orderlist.filter.search.bar"
                     description='total order for filter search bar'
@@ -551,13 +580,14 @@ var storage = [];
                         pbts={this.props.pbts}
                         startDate={this.state.startDate}
                         endDate={this.state.endDate}
-                        intervalId={this._intervalId}
-                        restartPolling={this._restartPolling}
-                        stopPolling={this._stopPolling}
+                        intervalIdForCutOffTime={this._intervalIdForCutOffTime}
+                        startPollingCutOffTime={this._startPollingCutOffTime}
+                        stopPollingCutOffTime={this._stopPollingCutOffTime}
                         isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}
                         disableCollapseAllBtn={this._disableCollapseAllBtn}
-                        isPanelOpen={this.state.isPanelOpen} />)
+                        isPanelOpen={this.state.isPanelOpen}
+                        />)
                     : <div className="noOrdersPresent"> No orders available </div>
                 }
                 </div>

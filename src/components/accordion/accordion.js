@@ -24,18 +24,27 @@ class Accordion extends React.Component{
 
     if(index === -1){
         storage.push(this.props.cutOffTimeIndex);
+        /*when more than one cut off time is in expanded state */
+        // if(storage.length > 1){
+        //   for(let i =0; i< storage.length -1 ; i++){
+        //     this.props.stopPollingOrders(this.props.intervalIdForOrders);
+        //   }
+        // }
+        /*END */
+        this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
     }
     else{
       storage.splice(index, 1);
+      this.props.stopPollingOrders(this.props.intervalIdForOrders);
     }
+
+
     if(storage.length >= 1){
       this.props.enableCollapseAllBtn();
     }
     else{
       this.props.disableCollapseAllBtn();
     }
-
-    this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
 
     if(this.state.open) {
       console.log("===========================.           INSIDE OPEN FALSE");

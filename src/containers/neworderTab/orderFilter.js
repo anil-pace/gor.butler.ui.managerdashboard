@@ -78,7 +78,8 @@ class OrderFilter extends React.Component{
         {
             value: "ORDER ID",
             label: <FormattedMessage id="order.inputField.orderId" defaultMessage="ORDER ID"/>
-        },
+        }
+       /* ,
         {
             value: "PPS ID",
             label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
@@ -86,7 +87,8 @@ class OrderFilter extends React.Component{
         {
             value: "SKU ID",
             label: <FormattedMessage id="order.inputField.skuId" defaultMessage="SKU ID"/>
-        }];
+        }*/
+        ];
 
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
@@ -195,6 +197,7 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
+        this._closeFilter();
         var filterState=this.state, _query={};
 
         /*if (filterState.tokenSelected[ORDER_TAGS] && filterState.tokenSelected[ORDER_TAGS][0] !== ANY) {
@@ -256,7 +259,7 @@ class OrderFilter extends React.Component{
     render(){
         var noOrder=this.props.orderData.noResultFound;
         var orderSearchField=this._processOrderSearchField();
-        var orderFilterToken=this._processFilterToken();
+        //var orderFilterToken=this._processFilterToken();
         var orderDateField = this._processOrderDateField();
         var orderTimeField = this._processOrderTimeField();
 
@@ -291,6 +294,7 @@ class OrderFilter extends React.Component{
                           </div>
                        </div>
 
+                       {/*
                        <div className="gor-filter-body-filterToken-wrap"> 
                           <div className="gor-filter-body-filterToken-section1">
                               {orderFilterToken.column1token}
@@ -300,6 +304,7 @@ class OrderFilter extends React.Component{
                           </div>
 
                        </div>
+                     */}
                        
                    </div>
                    <div className="gor-filter-footer"> 

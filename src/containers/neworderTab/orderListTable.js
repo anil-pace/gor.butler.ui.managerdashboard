@@ -45,7 +45,7 @@ import {wsOverviewData} from './../../constants/initData.js';
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDERS_PER_PBT_FETCH_1
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
@@ -71,6 +71,7 @@ class OrderListTable extends React.Component {
     constructor(props) {
         super(props);
         this.state={
+            cutOffTimeIndex:"",
             isPanelOpen:true,
             page:1,
             size:10,
@@ -81,6 +82,7 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
+        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
     }
 
     _showAllOrder() {
@@ -88,9 +90,13 @@ class OrderListTable extends React.Component {
     }
 
     _viewOrderLine = (orderId) =>  {
-        clearInterval(this._intervalId);  // #stop ongoing polling.
+         // #stop polling orders while opening viewOrderline //
+        clearTimeout(this._intervalIdForOrders);
+        //this.props.stopPollingCutOffTime(this.props.intervalIdForCutOffTime);
         modal.add(ViewOrderLine, {
-            restartPolling: this._restartPolling,
+            startPollingOrders: this._reqOrderPerPbt,
+            startPollingCutOffTime: this.props.startPollingCutOffTime,
+            cutOffTimeIndex: this.state.cutOffTimeIndex,
             orderId: orderId,
             title: '',
             size: 'large',
@@ -101,10 +107,44 @@ class OrderListTable extends React.Component {
     }
 
     _reqOrderPerPbt(cutOffTimeIndex, saltParams={}){
+        this.setState({
+            cutOffTimeIndex: cutOffTimeIndex
+        });
+
         let cutOffTime = this.props.pbts[cutOffTimeIndex].cut_off_time;
+        const index = storage.indexOf(cutOffTime);
+
+
+        //this.props.stopPollingCutOffTime(this.props.intervalId);
+
+        //console.log("CUT OFF TIME POLLING STOPPED...!");
+
+
+        console.log('%c ==================>!  ', 'background: blue; color: white');
+        console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID===>" + cutOffTime);
+        console.log("startDate =====>" + this.props.startDate,"endDate  =======>" + this.props.endDate, "cutofftime ========>" + cutOffTime);   
+
+        let formData={
+            "start_date": this.props.startDate,
+            "end_date": this.props.endDate,
+            "cut_off_time" : cutOffTime
+        };
+
+        let params={
+            'url': ORDERS_PER_PBT_URL,
+            //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+            'method':POST,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERS_PER_PBT_FETCH,
+            'formdata':formData,
+        }
+        this.props.makeAjaxCall(params);
+
+        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
 
         // #condition to STOP hitting http request on OPENING OF ACCORDION
-        const index = storage.indexOf(cutOffTime);
+        /*const index = storage.indexOf(cutOffTime);
         let formData={
             "start_date": this.props.startDate,
             "end_date": this.props.endDate,
@@ -113,10 +153,9 @@ class OrderListTable extends React.Component {
         if(index === -1){   // FIRST TIME CLICK OF ACCORDION
             storage.push(cutOffTime);
             this.props.stopPolling(this.props.intervalId);  // #stop ongoing polling.
-            console.log('%c ==================>!  ', 'background: #222; color: #bada55');
-            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID" + cutOffTime);
-            console.log("startDate =========================>" + this.props.startDate);   
-            console.log("endDate  ==========================>" + this.props.endDate); 
+            console.log('%c ==================>!  ', 'background: blue; color: white');
+            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID===>" + cutOffTime);
+            console.log("startDate =====>" + this.props.startDate,"endDate  =======>" + this.props.endDate, "cut off time ========>" + cutOffTime);   
 
             let params={
                 'url': ORDERS_PER_PBT_URL,
@@ -149,37 +188,44 @@ class OrderListTable extends React.Component {
             storage.splice(index, 1);
 
             /* condition to re-starting polling when all the accordions are in CLOSED state */
-            if(storage.length <= 0){
-                this.props.restartPolling();
-                this.props.setInfiniteSpinner(false); // remove the loading more status
-            }
+        //     if(storage.length <= 0){
+        //         this.props.restartPolling();
+        //         this.props.setInfiniteSpinner(false); // remove the loading more status
+        //     }
             
-        }
+        // }*/
+
+        
 
     }
 
+    _startPollingCutOffTime(){
+        this.props.startPollingCutOffTime();
+    }
+
+    _stopPollingOrders(intervalIdForOrders){
+        clearTimeout(intervalIdForOrders);
+        console.log("ORDERS POLLING STOPPED....!");
+        //this.startPollingCutOffTime();
+    }
+
+    
+
     _enableCollapseAllBtn(){
         this.props.enableCollapseAllBtn();
-        // this.setState({
-        //     collapseAllBtnState: false,
-        //     isPanelOpen: true
-        // })
+        this.setState({
+            collapseAllBtnState: false,
+            isPanelOpen: true
+        })
     }
 
     _disableCollapseAllBtn(){
         this.props.disableCollapseAllBtn();
-        // this.setState({
-        //     collapseAllBtnState: true,
-        //     isPanelOpen: false
-        // })
+        this.setState({
+            collapseAllBtnState: true,
+            isPanelOpen: false
+        })
     }
-
-    // _handleCollapseAll(){
-    //     this.setState({
-    //         collapseAllBtnState: true,
-    //         isPanelOpen: false
-    //     })
-    // }
 
     _formatProgressBar(nr, dr){
         let x = {};
@@ -200,6 +246,33 @@ class OrderListTable extends React.Component {
             x.action  = true;
         }
         return x;
+    }
+
+    calculateTimeLeft(cutOffTimeFromBK){
+         let timeLeft, d1, d2, diff;
+
+        if(cutOffTimeFromBK){
+            d1 = new Date();
+            d2= new Date(cutOffTimeFromBK);
+            diff = d1 - d2;
+
+            if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
+                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+            }
+            else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
+                timeLeft = Math.floor(diff / 60000) + "mins left";
+            }
+            else {  // 1000 milliseconds is for 1 sec
+                timeLeft = Math.floor(diff / 1000) + "seconds left";
+            }
+            return timeLeft;
+        }
+        else 
+        {
+            timeLeft = "";
+            return timeLeft;
+        }
+        
     }
 
     _processPBTs = (arg) => {
@@ -267,13 +340,30 @@ class OrderListTable extends React.Component {
                 var x = n - 5 * 60000;
 
                 //if(pbtData[i].cut_off_time){
-                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:pbtData[i].cut_off_time.split(" ")[0]}} /> : "NO CUT OFF TIME");
-                    let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={pbtData[i].cut_off_time} timeZone={this.props.timeZone}/>);
+                    //let formatPbtTime = (<FormattedTime
+                             // value={pbtData[i].cut_off_time}
+                             // hour= "numeric"
+                             // minute= "numeric"
+                             // timeZone= {this.props.timeOffset}
+                             // hour12= {false}
+                             // />);
+                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:<FormattedTime
+                             value={pbtData[i].cut_off_time}
+                             hour= "numeric"
+                             minute= "numeric"
+                             timeZone= {this.props.timeOffset}
+                             hour12= {false}
+                             />}} /> : "NO CUT OFF TIME");
+                    //let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={pbtData[i].cut_off_time} timeZone={this.props.timeZone}/>);
+                    let formatTimeLeft = this.calculateTimeLeft(pbtData[i].cut_off_time);
                     let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
                     let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
                     pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/>
+                                    {formatTimeLeft!== "" ?
+                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
+                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                    }
                                 </div>);
 
                     pbtRow.push(<div>
@@ -461,36 +551,46 @@ class OrderListTable extends React.Component {
         return (
             <div>
                 <div className="waveListWrapper">
-                   
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
                                 return self.props.pbts[idx].total_orders ? 
-                                (<Accordion isInfiniteLoading={self.props.isInfiniteLoading} onScrollHandler={self._onScrollHandler} getOrderPerPbt={self._reqOrderPerPbt} cutOffTimeIndex={idx} enableCollapseAllBtn={self._enableCollapseAllBtn} disableCollapseAllBtn={self._disableCollapseAllBtn} title={
-                                    <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
-                                        {row.map(function (text, index) {
-                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                {text}
-                                            </div>
-                                        })}
-                                    </GTableRow>}>
+                                (<Accordion 
+                                    intervalIdForOrders={self._intervalIdForOrders}
+                                    startPollingCutOffTime={self._startPollingCutOffTime}
+                                    stopPollingOrders={self._stopPollingOrders}
+                                    isInfiniteLoading={self.props.isInfiniteLoading}
+                                    onScrollHandler={self._onScrollHandler} 
+                                    getOrderPerPbt={self._reqOrderPerPbt} 
+                                    cutOffTimeIndex={idx} 
+                                    enableCollapseAllBtn={self._enableCollapseAllBtn}
+                                    disableCollapseAllBtn={self._disableCollapseAllBtn} 
+                                    title={
+                                        <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
+                                            {row.map(function (text, index) {
+                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                    {text}
+                                                </div>
+                                            })}
+                                        </GTableRow>}>
 
-                                    {self.props.isPanelOpen === true ?
-                                        (<GTableBody data={processedOrderData.orderData} >
-                                            {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
-                                                return (
-                                                    <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
-                                                        {Object.keys(row).map(function (text, index) {
-                                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                                {row[text]}
-                                                            </div>
-                                                        })}
-                                                    </GTableRow>
-                                                )
-                                            }):""}
-                                        </GTableBody>): null
-                                    }
+                                        {self.props.isPanelOpen === true ?
+                                            (<GTableBody data={processedOrderData.orderData} >
+                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
+                                                    return (
+                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
+                                                            {Object.keys(row).map(function (text, index) {
+                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                                    {row[text]}
+                                                                </div>
+                                                            })}
+                                                        </GTableRow>
+                                                    )
+                                                }):""}
+                                            </GTableBody>): null
+                                        }
                                 </Accordion>)
+
                                 :<GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                         {row.map(function (text, index) {
                                             return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >

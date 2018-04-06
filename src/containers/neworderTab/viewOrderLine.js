@@ -11,7 +11,7 @@ import SearchFilter from '../../components/searchFilter/searchFilter';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
-import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 
 let xyz={"pps_bin_id":null,"total_orderlines":0,"user_name":null,"pending_orderlines":0,"cut_off_time":null,"pps_id":null,"orderlines":[],"pick_info":"will not do","is_breached":"todo","completed_orderlines":0};
@@ -25,6 +25,12 @@ class ViewOrderLine extends React.Component{
         items: []
       }
       this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this._intervalIdViewOrderLines);
+    //this.props.startPollingOrders(this.props.cutOffTimeIndex);
+    //this.props.startPollingCutOffTime();
   }
 
   componentDidMount(){
@@ -50,8 +56,8 @@ class ViewOrderLine extends React.Component{
   }
   
   _getOrdersLines = (orderId) =>  {
-        console.log('%c ==================>!  ', 'background: #222; color: #bada55');
-            console.log("LEVEL 3 ORDER LINES REQUESTED WITH ORDER ID" + orderId);
+        console.log('%c ==================>!  ', 'background: red; color: white');
+        console.log("LEVEL 3 ORDER LINES REQUESTED WITH ORDER ID ===>" + orderId);
         let params={
             //'url':ORDERLINES_PER_ORDER_URL+"/"+orderId,
             url: ORDERLINES_PER_ORDER_URL,
@@ -61,6 +67,8 @@ class ViewOrderLine extends React.Component{
             'cause':ORDERLINES_PER_ORDER_FETCH,
         }
         this.props.makeAjaxCall(params);
+
+        this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), POLLING_INTERVAL);
     }
 
   _removeThisModal() {
@@ -177,7 +185,6 @@ class ViewOrderLine extends React.Component{
   }
 
   render(){
-    console.log('%c ==================>!  ', 'background: #222; color: #bada55', "=============> RENDER FUNCTION BEING CALLED" + JSON.stringify(this.props.orderLines));
     let processedHeader = this._processOLHeader(this.state.headerItems);
     let processedList = this._processOLList(this.state.items);
     let formatCutOffTime = (this.props.orderLines.cut_off_time ?  
