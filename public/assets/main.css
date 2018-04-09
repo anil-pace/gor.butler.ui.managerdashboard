@@ -8821,6 +8821,16 @@ button:disabled {
   cursor: pointer;
 }
 
+.gor-download-rpts .gor-download-report-table .row {
+  background: #f7f7f7;
+}
+
+.gor-download-rpts .gor-download-report-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
 .gor-download-rpts .gor-rpt-dwnld {
   min-width: 60%;
   border-radius: 3px;

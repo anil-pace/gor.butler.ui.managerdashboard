@@ -21,9 +21,13 @@ import {
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
-import {setDownloadReportSpinner} from '../../actions/downloadReportsActions'
+import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+import DownloadReportTable from './DownloadReportTable';
 
 
+/*
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
                                                           defaultMessage="25"/>},
             {value: "50",  disabled:false,label: <FormattedMessage id="operationLog.page.fifty" description="Page size 50"
@@ -31,17 +35,41 @@ const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="ope
             {value: "100",  disabled:false,label: <FormattedMessage id="operationLog.page.hundred" description="Page size 100"
                                                           defaultMessage="100"/>}];
 
+*/
+const DOWNLOAD_REPORT_QUERY = gql`
+    query DownloadReportList($input: DownloadReportListParams) {
+        DownloadReportList(input:$input){
+            list {
+                id
+                requestedTime
+                completionTime
+                query
+                fileName
+                type
+                requestedBy
+                status
+                lastDownloaded
+                storageId
+
+            }
+        }
+    }
+`;
+
+
 class DownloadReportTab extends React.Component{
     constructor(props,context) {
         super(props,context);
-        this.state=this._getInitialState();
-        this._refreshList = this._refreshList.bind(this);
-        this._handlePageChange = this._handlePageChange.bind(this);
-        this._subscribeData = this._subscribeData.bind(this);
-        this._rowClassNameGetter = this._rowClassNameGetter.bind(this);
+        //this.state=this._getInitialState();
+        //this._refreshList = this._refreshList.bind(this);
+        //this._handlePageChange = this._handlePageChange.bind(this);
+        //this._subscribeData = this._subscribeData.bind(this);
+        //this._rowClassNameGetter = this._rowClassNameGetter.bind(this);
+
+        this.state={page:4,loading:false};
         
     }
-
+/*
     _getInitialState(){
         var data=this._processData(this.props.reportsData);
         var dataList = new tableRenderer(data.length);
@@ -61,8 +89,10 @@ class DownloadReportTab extends React.Component{
             dataFetchedOnLoad:false
         }
     }
+    */
 
         _processData(data){
+            if(data){   
         var processedData = [],
         datalen = data.length,
         _this=this,
@@ -114,12 +144,16 @@ class DownloadReportTab extends React.Component{
                processedData.push(dataTuple) ;
             }
         }
+    }
         return processedData;
     }
+    /*
     shouldComponentUpdate(nextProps,nextState){
         var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged);
         return shouldUpdate;
     }
+    */
+    /*
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
@@ -138,6 +172,8 @@ class DownloadReportTab extends React.Component{
             })
         }
     }
+    */
+    /*
     componentDidMount(){
        if (this.props.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
@@ -147,6 +183,8 @@ class DownloadReportTab extends React.Component{
             
         }
     }
+    */
+/*
    _downloadReport(id){
 
     
@@ -160,6 +198,9 @@ class DownloadReportTab extends React.Component{
         this.props.setDownloadReportSpinner(true);
         this.props.makeAjaxCall(params);
    }
+   */
+
+/*
     _getReportsData(props){
         var _props = props || this.props;
         var query = _props.location.query;
@@ -176,21 +217,26 @@ class DownloadReportTab extends React.Component{
         _props.makeAjaxCall(params);
         
     }
-
+    */
+/*
     _subscribeData(){
         this.props.initDataSentCall(wsOverviewData["default"]);
     }
-
+*/  
+/*
     _refreshList(){
         this._getReportsData();
     }
-
+*/
+/*
     _handlePageChange(e){
         var _query =  Object.assign({},this.props.location.query);
             _query.pageSize = e.value;
             _query.page = _query.page || 1;
             this.props.router.push({pathname: "/reports/downloadReport",query: _query})
     }
+    */
+    /*  
     _rowClassNameGetter(index){
         var {dataList} = this.state;
         if(dataList.newData[index].lastDownloaded){
@@ -198,30 +244,64 @@ class DownloadReportTab extends React.Component{
         }
         return ""
     }
-
-    render(){
-        var {dataList} = this.state;
-        var _this = this;
-        var dataSize = dataList.getSize();
-        var noData = !dataSize ;
-        
-        return (
-            <div className="gorTesting wrapper gor-download-rpts">
-               <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/> 
+    */
+    _onScrollHandler(event){
        
-             <div className="gorToolBar">
-                    <div className="gorToolBarWrap">
-                        <div className="gorToolBarElements">
-                            <FormattedMessage id="downloadReport.table.heading" description="Heading for PPS"
-                                              defaultMessage="Download Report"/>
-                            
-                        </div>
-                    </div>
-                    <div className="filterWrapper">
+        let self=this;
+        let page_num=self.state.page;
+        if((Math.floor(event.target.scrollHeight) - Math.floor(event.target.scrollTop)) === Math.floor(event.target.clientHeight))
+        {
+            page_num++;
+            
+            self.props.fetchMore({variables:{input:{page:page_num,size:5}},updateQuery:self.props.updateQuery});
+            self.setState({page:page_num,loading:self.props.loading});
+            
+                
+        }
+        
+    }
+
+    _refreshList(event){
+         this.props.refetch(); 
+         this.setState({page:4});     
+        
+        
+    }
+    
+    render(){
+        //var {dataList} = this.state;
+        //var _this = this;
+        //var dataSize = dataList.getSize();
+        //var noData = !dataSize ;
+        var data=this._processData(this.props.downloadReportList); 
+        let self=this
+
+        if(!data){
+            return null
+        }
+
+        if(data){
+        
+           return(
+
+
+            <div className="gorTesting wrapper gor-download-rpts">
+                <div>
+                    <div>
+                    <div className="gorToolBar">
+                            <div className="gorToolBarWrap">
+                                <div className="gorToolBarElements">
+                                    <FormattedMessage id="downloadReport.table.heading" description="Heading for Download Report"
+                                                          defaultMessage="Download Report"/>
+                                </div>
+                                
+                            </div>
+
+                            <div className="filterWrapper">
                             
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                       <button className="gor-filterBtn-btn" onClick={this._refreshList}>
+                                       <button className="gor-filterBtn-btn" onClick={self._refreshList.bind(self)}>
                                        <span className="ico-wrap"><i className="gor-refresh-icon"></i></span>
                                        <span className="ico-txt-wrp">
                                         <FormattedMessage id="downloadReport.table.refresh"
@@ -234,163 +314,85 @@ class DownloadReportTab extends React.Component{
                                 </div>
 
                             </div>
-             </div>    
-               
-                <Table
-                    rowHeight={80}
-                    rowsCount={dataList.getSize()}
-                    headerHeight={70}
-                    isColumnResizing={false}
-                    rowClassNameGetter={this._rowClassNameGetter}
-                    width={this.props.containerWidth}
-                    height={dataSize ? document.documentElement.clientHeight * 0.5 : 71}
-                    {...this.props}>
-                    <Column
-                        columnKey="fileName"
-                        header={
-                            
-                               
-                                    <Cell >
-                                        <div className="gorToolHeaderEl">
-                                            <FormattedMessage id="downloadReport.table.reportName"
-                                                              description='REPORT NAME'
-                                                              defaultMessage='REPORT NAME'/>
-                                            
-                                        </div>
-                                    </Cell>
-                                
-                            
-                        }
-                        cell={<TextCell data={dataList} classKey={"fileName"} />}
-                        fixed={true}
-                        width={this.state.columnWidths.reportName}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="typeText"
-                        header={
-                            <Cell >
+            
 
-                                <div className="gorToolHeaderEl">
 
-                                    <FormattedMessage id="downloadReport.table.reportType" description="REPORT TYPE"
-                                                      defaultMessage="REPORT TYPE"/>
-
-                                   
-                                </div>
-                            </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"type"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.reportType}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="requestedBy"
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="downloadReport.table.requestedBy" description="Request ID"
-                                                      defaultMessage="REQUESTED BY"/>
-                                </div>
-                            </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"requestedBy"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.requestedBy}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="formattedCompletionDate"
+                        </div>
                         
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="downloadReport.table.completionTime" description="Status for PPS"
-                                                      defaultMessage="COMPLETION TIME"/>
-                                </div>
-                                </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"completionTime"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.completionTime}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="statusText"
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="downloadReport.table.status" description="Status for PPS"
-                                                      defaultMessage="GENERATION PROGRESS"/>
-
-                                  
-                                </div>
-                                </Cell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"status"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.status}
-                        isResizable={true}
-                    />
-                     
+                        <DownloadReportTable data={data} onScrollHandler={self._onScrollHandler.bind(self)}/>
                     
-                </Table>
-                {!dataSize ? <div className="gor-no-data"><FormattedMessage id="operationsLog.table.noData"
-                                                                    description="No data message for operations logs"
-                                                                    defaultMessage="No Data Found"/></div>:""}
-            <div className="gor-ol-paginate-wrap">
-                <div className="gor-ol-paginate-left">
-                <Dropdown 
-                    options={pageSize} 
-                    onSelectHandler={(e) => this._handlePageChange(e)}
-                    disabled={false} 
-                    selectedOption={DEFAULT_PAGE_SIZE_OL}/>
+
+                         
+
+
+                    </div>
                 </div>
-                <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={false} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
-                </div>
-                </div>   
             </div>
-        );
+
+
+           );
+        
+    }
     }
 };
 
 DownloadReportTab.propTypes = {
-    reportsData: React.PropTypes.array,
-    hasDataChanged: React.PropTypes.bool,
-    socketAuthorized: React.PropTypes.bool
-
+   
 }
 DownloadReportTab.defaultProps = {
-  reportsData: [],
-  socketAuthorized:false,
-  hasDataChanged:false,
+  //reportsData: [],
+  //socketAuthorized:false,
+  //hasDataChanged:false,
   timeOffset:"",
-  downloadReportsSpinner:true
+  //downloadReportsSpinner:true
 }
 
 function mapStateToProps(state, ownProps) {
     return {
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        reportsData:state.downloadReportsReducer.reportsData,
-        hasDataChanged:state.downloadReportsReducer.hasDataChanged,
+        //socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        //reportsData:state.downloadReportsReducer.reportsData,
+        //hasDataChanged:state.downloadReportsReducer.hasDataChanged,
         timeOffset: state.authLogin.timeOffset,
-        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
+        //downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
 
     };
 }
-function mapDispatchToProps(dispatch){
-    return {
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
-        setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));}
-    }
-};
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab)));
+const withQuery = graphql(DOWNLOAD_REPORT_QUERY, {
+    
+    props: function(data){
+         if(!data || !data.data.DownloadReportList || !data.data.DownloadReportList.list){
+            return{}
+        }
+        
+        return {
+            refetch: data.data.refetch,
+            fetchMore:data.data.fetchMore,
+            loading:data.data.loading,
+            downloadReportList: data.data.DownloadReportList.list,
+
+            updateQuery:function(prev,next){
+                    const newEntries = next.fetchMoreResult.DownloadReportList;
+                    return { DownloadReportList: {
+                            list: [...prev.DownloadReportList.list, ...newEntries.list],
+                            __typename: "DownloadReportList"
+                     }};
+
+            }
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only',
+
+    }),
+});
+
+
+
+export default compose(
+    withQuery
+)(connect(mapStateToProps)(Dimensions()(withRouter(DownloadReportTab))));
+
 

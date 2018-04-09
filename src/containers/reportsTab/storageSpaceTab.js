@@ -49,6 +49,15 @@ const SLOTS_QUERY = gql`
 `;
 
 
+const GENERATE_SLOT_REPORT_QUERY = gql`
+    query GenerateSlotLogReport($input: GenerateSlotLogReportParams) {
+        GenerateSlotLogReport(input:$input){
+           data
+        }
+    }
+`;
+
+
 class StorageSpaceTab extends React.Component{
     constructor(props,context) {
         super(props,context);
@@ -56,7 +65,7 @@ class StorageSpaceTab extends React.Component{
         this.linked = false;
         //this.state=this._getInitialState();
         //this._requestReportDownload = this._requestReportDownload.bind(this);
-        
+        this.state={generateSlotReport:""};
     }
 /*
     _getInitialState(){
@@ -139,8 +148,24 @@ class StorageSpaceTab extends React.Component{
         this.props.makeAjaxCall(params);
     }
 */
+
+
+    generateSlotReport(event){
+       this.props.client.query({
+        query: GENERATE_SLOT_REPORT_QUERY,
+        variables:{input:{requestedBy:this.props.username}}
+       }).then(result => {
+        console.log(result);
+        this.setState({ generateSlotReport: result.data.GenerateSlotLogReport.data })
+    })
+    }
+
+
+
+
     render(){
-        var data=this._processData(this.props.slotList);  
+        var data=this._processData(this.props.slotList);
+
         //var dataList = new tableRenderer(data.length);
         //dataList.newData=data;
         //var dataSize = dataList.getSize();
@@ -153,8 +178,11 @@ class StorageSpaceTab extends React.Component{
         }
         var dataSize = dataList.size;
         */
+        if(!this.props.slotList){
+            return null;
+        }
         
-        if(this.props.slotList){
+        else {
             //return(<div>{JSON.stringify(dataList)}</div>);
             return (
             <div className="gorTesting wrapper gor-storage-space">
@@ -173,7 +201,7 @@ class StorageSpaceTab extends React.Component{
                             
                                 <div className="gorToolBarDropDown">
                                     <div className="gor-button-wrap">
-                                       <button  title={this.props.intl.formatMessage(messages.reportToolTip)} className="gor-rpt-dwnld" >
+                                       <button  title={this.props.intl.formatMessage(messages.reportToolTip)} className="gor-rpt-dwnld" onClick={this.generateSlotReport.bind(this)}>
                                         <FormattedMessage id="storageSpace.table.downloadBtn"
                                         description="button label for download report"
                                         defaultMessage="GENERATE REPORT"/>
@@ -236,9 +264,27 @@ const withQuery = graphql(SLOTS_QUERY, {
     }),
 });
 
-
-
-
+/*
+const withQuery_2 = graphql(GENERATE_SLOT_REPORT_QUERY, {
+    props: function(data){
+        if(!data || !data.data.GenerateSlotLogReport){
+            return {}
+        }
+        return {
+            generateSlotReport: data.data.GenerateSlotLogReport
+        }
+    },
+    options: props => ({
+        variables: {requestedBy:props.username},
+        fetchPolicy: 'network-only'
+    }),
+});
+*/
+function mapStateToProps(state, ownProps) {
+    return {
+        username: state.authLogin.username
+    };
+}
 
 /*
 function mapDispatchToProps(dispatch){
@@ -254,4 +300,4 @@ function mapDispatchToProps(dispatch){
 
 export default compose(
     withQuery
-)(connect()(Dimensions()(injectIntl(StorageSpaceTab))));
+)(connect(mapStateToProps)(Dimensions()(injectIntl(withApollo(StorageSpaceTab)))));
