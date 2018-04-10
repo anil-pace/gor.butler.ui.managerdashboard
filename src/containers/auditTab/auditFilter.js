@@ -27,7 +27,7 @@ import {
     AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CANCELLED,AUDIT_CREATED,PENDING,INPROGRESS,
     AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE,AUDIT_USERLIST,APP_JSON,GET
 }from '../../constants/frontEndConstants';
-import {USERLIST_URL,PPSLIST_URL} from '../../constants/configConstants';
+import {USERLIST_URL} from '../../constants/configConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
