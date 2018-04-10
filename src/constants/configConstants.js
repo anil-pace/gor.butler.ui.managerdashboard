@@ -88,7 +88,7 @@ export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboa
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
-export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report/{invoice}";
+export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
 
 export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
