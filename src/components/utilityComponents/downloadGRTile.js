@@ -2,7 +2,6 @@ import React from "react";
 import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
 import UtilityDropDown from "./utilityDropdownWrap";
 import ListItem from "../list/listItem";
-import { GR_REPORT_URL } from "../../constants/configConstants";
 import { GET, GR_REPORT_RESPONSE } from "../../constants/frontEndConstants";
 
 const messages = defineMessages({
