@@ -5,5 +5,10 @@
 /coverage/
 /jest/
 /__test__/
-*configConstants*
 *.*~
+/public/assets/main.css
+/public/assets/main.min.css
+*.*~
+*.orig
+*.swp
+yarn-error.log

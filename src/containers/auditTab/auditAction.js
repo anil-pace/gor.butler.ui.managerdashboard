@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl'; 
 import {userRequest} from '../../actions/userActions';
-import {PPSLIST_URL, GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST ,DELETE_AUDIT,CANCEL_AUDIT} from '../../constants/frontEndConstants';       
+import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST ,DELETE_AUDIT,CANCEL_AUDIT} from '../../constants/frontEndConstants';       
 
 
 class AuditAction extends React.Component{
