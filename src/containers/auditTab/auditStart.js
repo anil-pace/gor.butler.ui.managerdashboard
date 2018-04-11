@@ -203,9 +203,9 @@ class AuditStart extends React.Component {
   componentDidMount() {
       let urlStr = "";
     if (this.props.param === "CHANGE_PPS"){
-        urlStr = PPSLIST_ALL_URL
-    }else{
         urlStr = PPSLIST_ACTIVE_AUDIT_URL
+    }else{
+        urlStr = PPSLIST_ALL_URL
     }
 
     let userData = {
