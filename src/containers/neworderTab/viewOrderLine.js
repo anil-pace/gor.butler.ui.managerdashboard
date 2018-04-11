@@ -1,5 +1,5 @@
 import React  from 'react';
-import { FormattedMessage, FormattedRelative } from 'react-intl'; 
+import { FormattedMessage, defineMessages, FormattedRelative, injectIntl } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -14,7 +14,47 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 
-let xyz={"pps_bin_id":null,"total_orderlines":0,"user_name":null,"pending_orderlines":0,"cut_off_time":null,"pps_id":null,"orderlines":[],"pick_info":"will not do","is_breached":"todo","completed_orderlines":0};
+const messages=defineMessages({
+    fulfillableStatus: {
+        id: 'orderList.fulfillable.status',
+        description: "In 'fulfillable' for orders",
+        defaultMessage: "Fulfillable"
+    },
+
+    completeStatus: {
+        id: "orderList.complete.status",
+        description: " 'complete' status",
+        defaultMessage: "Complete"
+    },
+
+    cancelledStatus: {
+        id: "orderList.cancelled.status",
+        description: " 'Cancelled' status",
+        defaultMessage: "Cancelled"
+    },
+
+    createdStatus: {
+        id: "orderList.created.status",
+        description: " 'created' status",
+        defaultMessage: "Created"
+    },
+    badRequestStatus: {
+        id: 'orderlist.badRequest.status',
+        description: " 'Bad Request' status",
+        defaultMessage: 'Bad request'
+    },
+    notFulfillableStatus: {
+        id: 'orderlist.notFulfillale.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'Not fulfillable'
+    },
+    acceptedStatus: {
+        id: 'orderlist.accepted.status',
+        description: " 'accepted' status",
+        defaultMessage: 'Accepted'
+    }
+});
+
 
 class ViewOrderLine extends React.Component{
   constructor(props) 
@@ -22,7 +62,16 @@ class ViewOrderLine extends React.Component{
       super(props); 
       this.state={
         headerItems: [],
-        items: []
+        items: [],
+        statusMapping:{
+            "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
+            "complete": this.props.intl.formatMessage(messages.completeStatus),
+            "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
+            "CREATED": this.props.intl.formatMessage(messages.createdStatus),
+            "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
+            "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
+            "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
+        }
       }
       this.handleChange = this.handleChange.bind(this);
   }
@@ -167,7 +216,7 @@ class ViewOrderLine extends React.Component{
                                     </div>
                              </div>);
       olineRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"flex-start"}}>
-                                        <span> {arg[i].status} </span>
+                                        <span> {this.state.statusMapping[arg[i].status] ? this.state.statusMapping[arg[i].status] : arg[i].status} </span>
                                         <span> {arg[i].missing_count > 0 ? arg[i].missing_count : ""} </span>
                                         <span> {arg[i].damaged_count > 0 ? arg[i].damaged_count : ""} </span>
                                         <span> {arg[i].physically_damaged_count > 0 ? arg[i].physically_damaged_count : ""} </span>
@@ -326,5 +375,5 @@ var mapDispatchToProps=function (dispatch) {
     }
 };
 
-  export default connect(mapStateToProps, mapDispatchToProps)(ViewOrderLine) ;
+  export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ViewOrderLine)) ;
 

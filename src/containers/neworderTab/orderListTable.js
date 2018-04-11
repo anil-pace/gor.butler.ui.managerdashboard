@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {Table, Column} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
-import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime} from 'react-intl';
+import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -64,6 +64,48 @@ import {
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
+const messages=defineMessages({
+    fulfillableStatus: {
+        id: 'orderList.fulfillable.status',
+        description: "In 'fulfillable' for orders",
+        defaultMessage: "Fulfillable"
+    },
+
+    completeStatus: {
+        id: "orderList.complete.status",
+        description: " 'complete' status",
+        defaultMessage: "Complete"
+    },
+
+    cancelledStatus: {
+        id: "orderList.cancelled.status",
+        description: " 'Cancelled' status",
+        defaultMessage: "Cancelled"
+    },
+
+    createdStatus: {
+        id: "orderList.created.status",
+        description: " 'created' status",
+        defaultMessage: "Created"
+    },
+    badRequestStatus: {
+        id: 'orderlist.badRequest.status',
+        description: " 'Bad Request' status",
+        defaultMessage: 'Bad request'
+    },
+    notFulfillableStatus: {
+        id: 'orderlist.notFulfillale.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'Not fulfillable'
+    },
+    acceptedStatus: {
+        id: 'orderlist.accepted.status',
+        description: " 'accepted' status",
+        defaultMessage: 'Accepted'
+    }
+});
+
+
 
 var storage = [];
 class OrderListTable extends React.Component {
@@ -75,6 +117,15 @@ class OrderListTable extends React.Component {
             isPanelOpen:true,
             page:1,
             size:10,
+            statusMapping:{
+                "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
+                "complete": this.props.intl.formatMessage(messages.completeStatus),
+                "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
+                "CREATED": this.props.intl.formatMessage(messages.createdStatus),
+                "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
+                "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
+                "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
+            }
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -142,6 +193,21 @@ class OrderListTable extends React.Component {
         this.props.makeAjaxCall(params);
 
         this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
+
+        if(JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
+                console.log("coming inside lazyData TRUE");
+            let params={
+                'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':ORDERS_PER_PBT_FETCH,
+                'formdata':formData,
+                'saltParams':saltParams,
+            }
+            
+            this.props.makeAjaxCall(params);
+        }
 
         // #condition to STOP hitting http request on OPENING OF ACCORDION
         /*const index = storage.indexOf(cutOffTime);
@@ -275,9 +341,11 @@ class OrderListTable extends React.Component {
         
     }
 
-    _processPBTs = (arg) => {
+    _processPBTs = (arg, nProps) => {
+        nProps = this;
+        let pbtData  = nProps.props.pbts;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
-        let pbtData = arg;
+        //let pbtData = arg;
         let pbtDataLen = pbtData.length; 
         let pbtRows = []; 
         let processedData = {};
@@ -389,6 +457,7 @@ class OrderListTable extends React.Component {
         nProps = this;
         orderData  = nProps.props.ordersPerPbt;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
+
         let orderDataLen = orderData.length;
         let orderRows = [];
         let processedData = {};
@@ -498,7 +567,7 @@ class OrderListTable extends React.Component {
                                         <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                     </div>
                                     <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
-                                        <span> {orderData[i].status} </span>
+                                        <span> {this.state.statusMapping[orderData[i].status] ? this.state.statusMapping[orderData[i].status] : orderData[i].status} </span>
                                         <span> {orderData[i].missing_count > 0 ? orderData[i].missing_count : ""} </span>
                                         <span> {orderData[i].damaged_count > 0 ? orderData[i].damaged_count : ""} </span>
                                         <span> {orderData[i].physically_damaged_count > 0 ? orderData[i].physically_damaged_count : ""} </span>
@@ -709,4 +778,4 @@ OrderListTable.PropTypes={
     timeOffset: React.PropTypes.number
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderListTable);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(OrderListTable));
