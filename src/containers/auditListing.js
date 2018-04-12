@@ -6,7 +6,6 @@ import { getAuditData, setAuditRefresh, auditListRefreshed, setTextBoxStatus, ca
 import AuditTable from './auditListingTab';
 import { getPageData } from '../actions/paginationAction';
 import { userRequest } from '../actions/userActions';
-import StartAudit from './auditTab/startAudit';
 import { GTableHeader, GTableHeaderCell } from '../components/gor-table-component/tableHeader';
 import { GTable } from '../components/gor-table-component/index'
 import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
