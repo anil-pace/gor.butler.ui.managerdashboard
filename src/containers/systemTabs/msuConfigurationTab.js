@@ -27,7 +27,7 @@ import MsuConfigFilter from './msuConfigFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {modal} from 'react-redux-modal';
 import ChangeRackType from './changeRackType';
-import MsuRackFlex from './msuRackFlex';
+import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 //Mesages for internationalization
 const messages=defineMessages({
@@ -99,7 +99,7 @@ const messages=defineMessages({
 });
 
 
-class ButlerBot extends React.Component {
+class MsuConfigTab extends React.Component {
 
 
     _processButlersData() {
@@ -275,11 +275,11 @@ class ButlerBot extends React.Component {
         this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
         this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.butlerfilterState({
-            tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"], "MODE": query.current_task?query.current_task.constructor===Array?query.current_task:[query.current_task]:["any"]}, searchQuery: {
-                "SPECIFIC LOCATION/ZONE":query.location||null,
-                "BOT ID":query.butler_id||null
+            tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
+            searchQuery: {
+                "MSU ID":query.rack_id||null
             },
-            defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
+            defaultToken: {"STATUS": ["any"]}
         });
     }
 
@@ -288,7 +288,7 @@ class ButlerBot extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/system/butlerbots", query: {}})
+        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
     }
 
 
@@ -506,10 +506,10 @@ var mapDispatchToProps=function (dispatch) {
     };
 }
 
-ButlerBot.contextTypes={
+MsuConfigTab.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
-ButlerBot.PropTypes={
+MsuConfigTab.PropTypes={
     butlerFilter: React.PropTypes.string,
     butlerSortHeader: React.PropTypes.string,
     butlerSortHeaderState: React.PropTypes.string,
@@ -527,6 +527,6 @@ ButlerBot.PropTypes={
     filterApplied: React.PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ButlerBot) ;
+export default connect(mapStateToProps, mapDispatchToProps)(MsuConfigTab) ;
 
 

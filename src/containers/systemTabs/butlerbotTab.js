@@ -267,7 +267,7 @@ class ButlerBot extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/system/butlerbots", query: {}})
+        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
     }
 
 

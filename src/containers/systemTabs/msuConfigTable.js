@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
-import {FormattedMessage, defineMessages, FormattedRelative} from 'react-intl';
+import {FormattedMessage, defineMessages, FormattedRelative, injectIntl} from 'react-intl';
 
 import {
     GOR_TABLE_HEADER_HEIGHT,
@@ -58,12 +58,64 @@ import {
     MSU_CONFIG_LIST_FETCH
 } from '../../constants/configConstants';
 
+const messages=defineMessages({
+    progressStatus: {
+        id: 'msuConfig.progress.status',
+        description: "In progrss for msus",
+        defaultMessage: "Progress"
+    },
+
+    putBlockedStatus: {
+        id: "msuConfig.putBlocked.status",
+        description: "Put blocked status",
+        defaultMessage: "Put Blocked"
+    }
+
+    // cancelledStatus: {
+    //     id: "msuConfig.cancelled.status",
+    //     description: " 'Cancelled' status",
+    //     defaultMessage: "Cancelled"
+    // },
+
+    // createdStatus: {
+    //     id: "msuConfig.created.status",
+    //     description: " 'created' status",
+    //     defaultMessage: "Created"
+    // },
+    // badRequestStatus: {
+    //     id: 'msuConfig.badRequest.status',
+    //     description: " 'Bad Request' status",
+    //     defaultMessage: 'Bad request'
+    // },
+    // notFulfillableStatus: {
+    //     id: 'msuConfig.notFulfillale.status',
+    //     description: " 'Refreshed' status",
+    //     defaultMessage: 'Not fulfillable'
+    // },
+    // acceptedStatus: {
+    //     id: 'msuConfig.accepted.status',
+    //     description: " 'accepted' status",
+    //     defaultMessage: 'Accepted'
+    // }
+});
+
 
 class MsuConfigTable extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={};
+        this.state={
+            statusMapping: {
+                "progress": this.props.intl.formatMessage(messages.progressStatus),
+                "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
+                // "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
+                // "CREATED": this.props.intl.formatMessage(messages.createdStatus),
+                // "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
+                // "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
+                // "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
+            }
+
+        };
         this._changeDestinationType = this._changeDestinationType.bind(this);
     }
 
@@ -73,18 +125,11 @@ class MsuConfigTable extends React.Component {
 
     _requestMsuList(){
         console.log("_requestMsuList get called");
-        // let formData={
-        //     "start_date": this.state.date,
-        //     "end_date": this.state.date,
-        // };
-
         let params={
-            'url':ORDERS_CUT_OFF_TIME_URL,
             'url': MSU_CONFIG_URL,
             'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
-            'cause':ORDERS_CUT_OFF_TIME_FETCH,
             'cause' : FETCH_MSU_CONFIG_LIST
             //'formdata':formData,
         }
@@ -112,21 +157,42 @@ class MsuConfigTable extends React.Component {
                 let msuRow = [];
                 msuRow.push(<div className="msuIdWrapper"> 
                                 <div className="msuId">
-                                    <FormattedMessage id="msuConfig.table.msuText" description="label for Msu Text" defaultMessage="MSU {msuId}" values={{msuId: msuData[i].msu_id}} />
+                                    <FormattedMessage 
+                                        id="msuConfig.table.msuText" 
+                                        description="label for Msu Text" 
+                                        defaultMessage="MSU {msuId}" 
+                                        values={{msuId: msuData[i].rack_id}} />
                                 </div>
                                 <div className="sourceType">
-                                    <FormattedMessage id="msuConfig.table.sourceType" description="label for Source type" defaultMessage="Source Type: {sourceType}" values={{sourceType: "B"}} />
+                                    <FormattedMessage 
+                                        id="msuConfig.table.sourceType" 
+                                        description="label for Source type" 
+                                        defaultMessage="Source Type:{sourceType}" 
+                                        values={{sourceType: msuData[i].source_type}} />
                                 </div>
                              </div>);
 
-                msuRow.push(<div className="msuIdWrapper"> </div>);
-                msuRow.push(<div className="msuIdWrapper"> </div>);
+                msuRow.push(<div className="msuIdWrapper">
+                                <FormattedMessage 
+                                    id="msuConfig.table.destType" 
+                                    description="label for Destination Type" 
+                                    defaultMessage="Selected destination type: {destType}"
+                                    values={{destType: msuData[i].destination_type}} />
+                             </div>);
 
-                msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].msu_id)}>
-                            <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
-                        </button>
-                    </div>);
+                msuRow.push(<div className="msuIdWrapper">
+                                <FormattedMessage 
+                                                id="msuConfig.table.msuStatus" 
+                                                description="label for MSU status" 
+                                                defaultMessage="{status}"
+                                                values={{status: this.state.statusMapping[msuData[i].status]}} />
+                                </div>);
+
+                // msuRow.push(<div key={i} style={{textAlign:"center"}}>
+                //         <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].msu_id)}>
+                //             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
+                //         </button>
+                //     </div>);
                 msuRows.push(msuRow);
             }
             processedData.msuData = msuRows;
@@ -137,9 +203,8 @@ class MsuConfigTable extends React.Component {
     }
 
     render() {
-        console.log("==========================>");
-        console.log("=======RENDER ===========>");
-        console.log("FETCH_MSU_CONFIG_LIST" + this.props.msuList);
+        console.log("===================>");
+        console.log(this.props.msuList);
         const processedMsuData = this._processMSUs(this.props.msuList);
         
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
@@ -265,4 +330,4 @@ MsuConfigTable.PropTypes={
     responseFlag: React.PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MsuConfigTable);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTable));

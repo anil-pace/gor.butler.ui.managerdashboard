@@ -1,5 +1,7 @@
 import { 
     FETCH_MSU_CONFIG_LIST, 
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_DEST_TYPE_LIST,
     GET_PENDING_MSU, 
     MSU_CONFIGURATION_REFRESHED} 
 from '../constants/frontEndConstants';
@@ -10,19 +12,13 @@ from '../constants/frontEndConstants';
  * @return {[Object] updated state}
  */
 
+
+
 export  function msuInfo(state={},action){
   
   switch (action.type) {
-    case FETCH_MSU_CONFIG_LIST:
-        console.log("==========================>");
-        console.log("=======REDUCERS ===========>");
-        console.log("FETCH_MSU_CONFIG_LIST" + action.data);
-         //let msuData={},totalCount;
-         //totalCount=processPPSData(action.data);
-         // msuData.totalPut=totalCount.totalPut;
-         // msuData.totalAudit=totalCount.totalAudit;
-         // msuData.totalPick=totalCount.totalPick;
 
+    case FETCH_MSU_CONFIG_LIST:
         return Object.assign({}, state, {
             "msuList" : action.data
         });
@@ -31,6 +27,18 @@ export  function msuInfo(state={},action){
     case MSU_CONFIGURATION_REFRESHED:
         return Object.assign({}, state, {
             "msuRefreshed": action.data
+        });
+        break;
+
+    case FETCH_MSU_CONFIG_DEST_TYPE_LIST:
+        return Object.assign({}, state, {
+            "destType": action.data
+        });
+        break;
+
+    case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
+        return Object.assign({}, state, {
+            "filteredMsu": action.data
         });
         break;
     

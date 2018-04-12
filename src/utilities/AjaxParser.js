@@ -101,7 +101,9 @@ import {
     STORAGE_SPACE_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
-    FETCH_MSU_CONFIG_LIST
+    FETCH_MSU_CONFIG_LIST,
+    FETCH_MSU_CONFIG_DEST_TYPE_LIST,
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -173,7 +175,7 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
-import { receiveMsuConfigList } from './../actions/msuConfigAction';
+import { receiveMsuConfigList, receiveMsuConfigDestTypesList,receiveMsuConfigListViaFilter } from './../actions/msuConfigAction';
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -663,11 +665,22 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case FETCH_MSU_CONFIG_LIST:
-            let res=[
-              {'msu_id':"177"},
-              {'msu_id':"178"}
-            ];
-            store.dispatch(receiveMsuConfigList(res));
+            // let res=[
+            //   {'msu_id':"177"},
+            //   {'msu_id':"178"}
+            // ];
+            let res_1 = [{"rack_id":"021","source_type":"11","destination_type":"19","status":"progress"},{"rack_id":"022","source_type":"11","destination_type":"19","status":"progress"},{"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}];
+            store.dispatch(receiveMsuConfigList(res_1));
+            break;
+
+        case FETCH_MSU_CONFIG_DEST_TYPE_LIST: 
+            let res_2 = ["33","15","24","16","12","27","26","14","11","22","19","17","21","MSU-KERRY-D","23","20","MSU-H","100","25","28","18","13"];
+            store.dispatch(receiveMsuConfigDestTypesList(res_2));
+            break;
+
+        case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
+            let res_3 = [{"id":"041","direction":2,"position":"023.033","last_store_position":"023.033","is_stored":true,"reserved_store_position":"undefined","lifted_butler_id":null,"racktype":"11","upcoming_pps_list":[],"type":"msu"}];
+            store.dispatch(receiveMsuConfigListViaFilter(res_3));
         default:
             ShowError(store, cause, status);
             break;

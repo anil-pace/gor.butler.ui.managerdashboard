@@ -9,14 +9,23 @@ import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {setButlerFilterSpinner}  from '../../actions/spinnerAction';
 import {hashHistory} from 'react-router';
+import { makeAjaxCall } from '../../actions/ajaxActions';
+import {
+    APP_JSON, POST, GET,
+    FETCH_MSU_CONFIG_DEST_TYPE_LIST
+} from '../../constants/frontEndConstants';
 
+import {
+    MSU_CONFIG_DEST_TYPE_URL
+} from '../../constants/configConstants';
 
-class ButlerBotFilter extends React.Component{
+class MsuConfigFilter extends React.Component{
     constructor(props) 
     {
         super(props);
-        this.state={tokenSelected: {"STATUS":["any"], "MODE":["any"]}, searchQuery: {},
-                      defaultToken: {"STATUS":["any"], "MODE":["any"]}}; 
+        this.state={tokenSelected: {"STATUS":["any"]}, searchQuery: {},
+                      defaultToken: {"STATUS":["any"]}}; 
+                      
         this._closeFilter = this._closeFilter.bind(this);
         this._applyFilter = this._applyFilter.bind(this);
         this._clearFilter = this._clearFilter.bind(this);
@@ -26,6 +35,23 @@ class ButlerBotFilter extends React.Component{
         if(this.props.filterState) {
             this.setState(this.props.filterState)
         }
+    }
+
+    componentDidMount(){
+        this._requestDestTypeList();
+    }
+
+    _requestDestTypeList(){
+        console.log("__requestDestTypeList get called");
+        let params={
+            'url': MSU_CONFIG_DEST_TYPE_URL,
+            'method':GET,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
+            //'formdata':formData,
+        }
+        this.props.makeAjaxCall(params);
     }
 
     componentWillReceiveProps(nextProps){
@@ -61,24 +87,30 @@ class ButlerBotFilter extends React.Component{
  
     _processFilterToken() {
         let tokenFieldC1={value:"STATUS", label:<FormattedMessage id="butletbot.tokenfield.STATUS" defaultMessage="STATUS"/>};
-        let tokenFieldC2={value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage="MODE"/>}; 
+        let destTypeList = this.props.destType;
+
+        //let tokenFieldC2={value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage="MODE"/>}; 
         const labelC1=[
-                    { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> },
-                    { value: 'typeA', label:<FormattedMessage id="msuConfig.token1.typeA" defaultMessage="Type A"/> },
-                    { value: 'typeB', label:<FormattedMessage id="msuConfig.token1.typeB" defaultMessage="Type B"/> },
-                    { value: 'typeC', label:<FormattedMessage id="msuConfig.token1.typeC" defaultMessage="Type C"/> },
-                    { value: 'typeD', label:<FormattedMessage id="msuConfig.token1.typeD" defaultMessage="Type D"/> },
-                    { value: 'typeE', label:<FormattedMessage id="msuConfig.token1.typeE" defaultMessage="Type E"/> },
-                    { value: 'typeF', label:<FormattedMessage id="msuConfig.token1.typeF" defaultMessage="Type F"/> }
+                    { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }
                     ];
-        const labelC2=[
-                    { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage="Any"/> },
-                    { value: '0', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage="Pick"/>},
-                    { value: '1', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
-                    { value: '2', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
-                    { value: '3', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
-                    { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
-                    ];
+        if(destTypeList){
+            destTypeList.forEach((data)=>{
+             labelC1.push(
+             {
+                value:data,
+                label:data
+             }
+                )   
+            });
+        }
+        // const labelC2=[
+        //             { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage="Any"/> },
+        //             { value: '0', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage="Pick"/>},
+        //             { value: '1', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
+        //             { value: '2', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
+        //             { value: '3', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
+        //             { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
+        //             ];
         let selectedToken= this.state.tokenSelected;
         let column1=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
         //let column2=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
@@ -100,36 +132,35 @@ class ButlerBotFilter extends React.Component{
         /**
          * for query generation
          */
-        if (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]) {
-            _query.location=filterState.searchQuery["SPECIFIC LOCATION/ZONE"]
-        }
+        // if (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]) {
+        //     _query.location=filterState.searchQuery["SPECIFIC LOCATION/ZONE"]
+        // }
         if (filterState.searchQuery["MSU ID"]) {
-            _query.butler_id=filterState.searchQuery["MSU ID"]
+            _query.rack_id=filterState.searchQuery["MSU ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
         }
-        if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !=='any') {
-            _query.current_task=filterState.tokenSelected["MODE"]
-        }
+        // if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !=='any') {
+        //     _query.current_task=filterState.tokenSelected["MODE"]
+        // }
 
-        hashHistory.push({pathname: "/system/butlerbots", query: _query})
+        hashHistory.push({pathname: "/system/msuConfigurationTab", query: _query})
     }
 
     _clearFilter() {
         this.props.butlerfilterState({
-            tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {
-                "SPECIFIC LOCATION/ZONE":null,
+            tokenSelected: {"STATUS": ["any"]}, searchQuery: {
                 "MSU ID":null
             },
         });
-        hashHistory.push({pathname: "/system/butlerbots", query: {}})
+        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
         
     }
     
 
     render(){
-    let butlerDetails=this.props.butlerDetail;
+        let butlerDetails=this.props.butlerDetail;
         let noOrder=this.props.noResultFound;
         let butlerSearchField=this._processButlerSearchField();
         let butlerFilterToken=this._processFilterToken();
@@ -196,7 +227,8 @@ function mapStateToProps(state, ownProps){
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     botFilterStatus:state.filterInfo.botFilterStatus || false,
     butlerFilter:state.spinner.butlerSpinner || false,
-    butlerFilterSpinnerState:state.spinner.butlerFilterSpinnerState || false
+    butlerFilterSpinnerState:state.spinner.butlerFilterSpinnerState || false,
+    destType: state.msuInfo.destType
   };
 }
 
@@ -207,10 +239,12 @@ var mapDispatchToProps=function(dispatch){
     updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
     butlerfilterState: function(data){dispatch(butlerfilterState(data));},
     toggleBotButton: function(data){dispatch(toggleBotButton(data));},
-    setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));}
+    setButlerFilterSpinner: function(data){dispatch(setButlerFilterSpinner(data));},
+    makeAjaxCall: function(data){dispatch(makeAjaxCall(data))}
+
   } 
 };
-ButlerBotFilter.PropTypes={
+MsuConfigFilter.PropTypes={
     butlerDetail: React.PropTypes.array,
     showFilter: React.PropTypes.bool,
     wsSubscriptionData:React.PropTypes.object,
@@ -224,4 +258,4 @@ ButlerBotFilter.PropTypes={
     toggleBotButton:React.PropTypes.func
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ButlerBotFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(MsuConfigFilter) ;

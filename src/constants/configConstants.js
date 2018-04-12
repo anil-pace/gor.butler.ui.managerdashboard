@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.9.71'; 
+export const BASE_URL = '192.168.9.136'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -34,7 +34,7 @@ export const GIVEN_PAGE="page";
 export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
 export const ORDER_ID_FILTER_PARAM_WITHOUT_STATUS= "search=externalServiceRequestId";
-export const  ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
+export const ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
 export const FILTER_AUDIT_ID="audit_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
@@ -93,4 +93,25 @@ export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
 
 
-export const MSU_CONFIG_URL = TIME_ZONE_URL;//API_URL+"/order-details/level1";
+// export const MSU_CONFIG_URL = "http://192.168.14.124:8181"+"/api/msu_reconfig/all?details=true";  // for fetching all msus list
+// export const MSU_CONFIG_DEST_TYPE_URL = "http://192.168.14.124:8181/api/racktypes/all";   // displays all destination types
+// export const MSU_CONFIG_FILTER_URL = "http://192.168.14.124:8181/api/racks/search";
+
+export const MSU_CONFIG_URL = TIME_ZONE_URL;
+export const MSU_CONFIG_DEST_TYPE_URL = TIME_ZONE_URL;
+export const MSU_CONFIG_FILTER_URL = TIME_ZONE_URL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
