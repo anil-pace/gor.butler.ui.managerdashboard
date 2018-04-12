@@ -1,24 +1,9 @@
-/**
- * Container for Inventory tab
- * This will be switched based on tab click
- */
 import React  from 'react';
 import { FormattedMessage,FormattedDate} from 'react-intl';
 import { connect } from 'react-redux';
-import {wsOverviewData} from '../../constants/initData.js';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
-import {setWsAction} from '../../actions/socketActions';
-import {setReportsSpinner} from '../../actions/operationsLogsActions';
 import {WS_ONSEND,GET,APP_JSON,DEFAULT_PAGE_SIZE_OL,REPORTS_FETCH,GET_REPORT} from '../../constants/frontEndConstants';
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
-import Spinner from '../../components/spinner/Spinner';
-import {Table, Column,Cell} from 'fixed-data-table';
-import {
-    tableRenderer,
-    TextCell
-} from '../../components/commonFunctionsDataTable';
-import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
@@ -27,15 +12,6 @@ import gql from 'graphql-tag';
 import DownloadReportTable from './DownloadReportTable';
 
 
-/*
-const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
-                                                          defaultMessage="25"/>},
-            {value: "50",  disabled:false,label: <FormattedMessage id="operationLog.page.fifty" description="Page size 50"
-                                                          defaultMessage="50"/>},
-            {value: "100",  disabled:false,label: <FormattedMessage id="operationLog.page.hundred" description="Page size 100"
-                                                          defaultMessage="100"/>}];
-
-*/
 const DOWNLOAD_REPORT_QUERY = gql`
     query DownloadReportList($input: DownloadReportListParams) {
         DownloadReportList(input:$input){
@@ -60,37 +36,9 @@ const DOWNLOAD_REPORT_QUERY = gql`
 class DownloadReportTab extends React.Component{
     constructor(props,context) {
         super(props,context);
-        //this.state=this._getInitialState();
-        //this._refreshList = this._refreshList.bind(this);
-        //this._handlePageChange = this._handlePageChange.bind(this);
-        //this._subscribeData = this._subscribeData.bind(this);
-        //this._rowClassNameGetter = this._rowClassNameGetter.bind(this);
-
         this.state={page:4,loading:false};
         
     }
-/*
-    _getInitialState(){
-        var data=this._processData(this.props.reportsData);
-        var dataList = new tableRenderer(data.length);
-        dataList.newData=data;
-        return {
-            columnWidths: {
-                reportName: this.props.containerWidth * 0.2,
-                reportType: this.props.containerWidth * 0.15,
-                requestedBy: this.props.containerWidth * 0.15,
-                completionTime: this.props.containerWidth * 0.15,
-                status: this.props.containerWidth * 0.2
-            },
-            dataList:dataList,
-            query:this.props.location.query,
-            subscribed:false,
-            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
-            dataFetchedOnLoad:false
-        }
-    }
-    */
-
         _processData(data){
             if(data){   
         var processedData = [],
@@ -147,47 +95,8 @@ class DownloadReportTab extends React.Component{
     }
         return processedData;
     }
-    /*
-    shouldComponentUpdate(nextProps,nextState){
-        var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged);
-        return shouldUpdate;
-    }
-    */
-    /*
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true},function(){
-                this._subscribeData();
-                this._getReportsData(nextProps);
-            })
-            
-        }
-        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-            let rawData = nextProps.reportsData.slice(0);
-            let data = this._processData(rawData);
-            let dataList = new tableRenderer(data.length)
-            dataList.newData=data;
-            this.setState({
-                dataList
-            })
-        }
-    }
-    */
-    /*
-    componentDidMount(){
-       if (this.props.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true},function(){
-                this._subscribeData();
-                this._getReportsData(this.props)
-            })
-            
-        }
-    }
-    */
-/*
+   
    _downloadReport(id){
-
-    
         var params={
                 'url':DOWNLOAD_REPORT+id,
                 'method':GET,
@@ -198,53 +107,7 @@ class DownloadReportTab extends React.Component{
         this.props.setDownloadReportSpinner(true);
         this.props.makeAjaxCall(params);
    }
-   */
-
-/*
-    _getReportsData(props){
-        var _props = props || this.props;
-        var query = _props.location.query;
-        var pageSize = query.pageSize || 25;
-        var page = query.page || 1;
-
-        var params={
-                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize,
-                'method':GET,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':REPORTS_FETCH
-            }
-        _props.makeAjaxCall(params);
-        
-    }
-    */
-/*
-    _subscribeData(){
-        this.props.initDataSentCall(wsOverviewData["default"]);
-    }
-*/  
-/*
-    _refreshList(){
-        this._getReportsData();
-    }
-*/
-/*
-    _handlePageChange(e){
-        var _query =  Object.assign({},this.props.location.query);
-            _query.pageSize = e.value;
-            _query.page = _query.page || 1;
-            this.props.router.push({pathname: "/reports/downloadReport",query: _query})
-    }
-    */
-    /*  
-    _rowClassNameGetter(index){
-        var {dataList} = this.state;
-        if(dataList.newData[index].lastDownloaded){
-            return "public_fixedDataTableRow_downloaded"
-        }
-        return ""
-    }
-    */
+   
     _onScrollHandler(event){
        
         let self=this;
@@ -269,10 +132,6 @@ class DownloadReportTab extends React.Component{
     }
     
     render(){
-        //var {dataList} = this.state;
-        //var _this = this;
-        //var dataSize = dataList.getSize();
-        //var noData = !dataSize ;
         var data=this._processData(this.props.downloadReportList); 
         let self=this
 
@@ -321,10 +180,6 @@ class DownloadReportTab extends React.Component{
                         
                         <DownloadReportTable data={data} onScrollHandler={self._onScrollHandler.bind(self)}/>
                     
-
-                         
-
-
                     </div>
                 </div>
             </div>
@@ -340,21 +195,13 @@ DownloadReportTab.propTypes = {
    
 }
 DownloadReportTab.defaultProps = {
-  //reportsData: [],
-  //socketAuthorized:false,
-  //hasDataChanged:false,
   timeOffset:"",
-  //downloadReportsSpinner:true
+ 
 }
 
 function mapStateToProps(state, ownProps) {
     return {
-        //socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        //reportsData:state.downloadReportsReducer.reportsData,
-        //hasDataChanged:state.downloadReportsReducer.hasDataChanged,
-        timeOffset: state.authLogin.timeOffset,
-        //downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
-
+        timeOffset: state.authLogin.timeOffset
     };
 }
 
@@ -390,9 +237,17 @@ const withQuery = graphql(DOWNLOAD_REPORT_QUERY, {
 });
 
 
+function mapDispatchToProps(dispatch){
+    return {
+        
+        makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
+        setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));}
+    }
+};
+
 
 export default compose(
     withQuery
-)(connect(mapStateToProps)(Dimensions()(withRouter(DownloadReportTab))));
+)(connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab))));
 
 

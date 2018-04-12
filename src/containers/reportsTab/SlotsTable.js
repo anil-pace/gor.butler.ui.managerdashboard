@@ -5,6 +5,8 @@ import {modal} from 'react-redux-modal';
 
 import GTable from './../../components/gor-table-component'
 import {GTableHeader, GTableHeaderCell, GTableBody, GTableRow} from './../../components/gor-table-component'
+import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFunctionsDataTable';
+
 class SlotsTable extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,8 @@ class SlotsTable extends React.Component {
                 {id: 5, text: "SLOT UTILIZATION", key: 'slot_utilization', sortable: false}
                 
             ],
-            slotList:props.data
+            slotList:props.data,
+            dataList:props.dataList
         }
 
     }
