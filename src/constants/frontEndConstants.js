@@ -817,13 +817,27 @@ export const CREATE_DUPLICATE_REQUEST='CREATE_DUPLICATE_REQUEST';
 export const WARNING='WARNING';
 
 
-
-
- 
-
-
-
-
+export const PICK_BEFORE_TIME = "PICK_BEFORE_TIME";
+export const ORDER_ID = "ORDER ID";
+export const PPS_ID = "PPS ID";
+export const SKU_ID = "SKU ID";
+export const FROM_TIME = "FROM TIME";
+export const TO_TIME = "TO TIME";
+export const URGENT_ORDER_TAG = "URGENT";
+export const EXPRESS_ORDER_TAG = "EXPRESS";
+export const PENDING_STATUS = "PENDING";
+export const BREACH_RISK_STATUS ="BREACH_RISK";
+export const BREACHED_STATUS ="BREACHED";
+export const BREACHED_COMPLETED_STATUS ="BREACHED COMPLETED";
+export const PRODUCT_SHORT_STATUS ="PRODUCT SHORT";
+export const OUT_OF_STOCK_STATUS ="OUT OF STOCK";
+export const COMPLETED_STATUS ="COMPLETED";
+export const REJECTED_STATUS ="REJECTED";
+export const CANCELLED_STATUS ="CANCELLED";
+export const ABANDONED_STATUS ="ABANDONED";
+export const ORDER_TAGS = "ORDER TAGS";
+export const STATUS = "STATUS";
+export const ORDERS_POLLING_INTERVAL = 60000;//60000;
 
 
 
