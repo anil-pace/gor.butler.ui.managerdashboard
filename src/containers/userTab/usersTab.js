@@ -1,21 +1,11 @@
 import React  from 'react';
-import UserDataTable from './userTabTable';
 import UsersTable from './usersTable'
 import {connect} from 'react-redux';
 import {defineMessages} from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants'
-import {userHeaderSort, userHeaderSortOrder} from '../../actions/sortHeaderActions';
 import {
-    INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
-    GET_ROLES,
-    GET,
-    APP_JSON,
-    WS_ONSEND
 } from '../../constants/frontEndConstants';
-import {filterApplied, userfilterState} from '../../actions/filterAction';
-import {ROLE_URL} from '../../constants/configConstants';
-import {wsOverviewData} from './../../constants/initData.js';
 import {hashHistory} from 'react-router'
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
@@ -25,9 +15,6 @@ import FilterSummary from '../../components/tableFilter/filterSummary'
 import {graphql, withApollo, compose} from "react-apollo";
 
 import gql from 'graphql-tag'
-// import SUBSCRIPTION_QUERY from './../../../src/graphql/CommentSubscription.graphql';
-
-
 //Mesages for internationalization
 const messages = defineMessages({
     userOperator: {
