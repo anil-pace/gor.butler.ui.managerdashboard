@@ -125,13 +125,14 @@ class WaveTab extends React.Component {
                 else {
                     waveDetail.status=data[i].status;
                 }
+                data[i].parsed_start_time = new Date(data[i].start_time).toLocaleDateString('en-US',{timeZone:timeOffset});
                 if (!data[i].start_time) {
                     waveDetail.startTime="--";
                 }
+
                 else {
                     if (getDaysDiff(data[i].start_time) < 2) {
-                        waveDetail.startTime=nProps.context.intl.formatRelative(data[i].start_time, {
-                                timeZone: timeOffset,
+                        waveDetail.startTime=nProps.context.intl.formatRelative(data[i].parsed_start_time, {
                                 units: 'day'
                             }) +
                             ", " + nProps.context.intl.formatTime(data[i].start_time, {
@@ -155,13 +156,13 @@ class WaveTab extends React.Component {
                     }
                 }
 
+                data[i].parsed_cut_off_time = new Date(data[i].cut_off_time).toLocaleDateString('en-US',{timeZone:timeOffset});
                 if (!data[i].cut_off_time) {
                     waveDetail.cutOffTime="--";
                 }
                 else {
                     if (getDaysDiff(data[i].cut_off_time) < 2) {
-                        waveDetail.cutOffTime=nProps.context.intl.formatRelative(data[i].cut_off_time, {
-                                timeZone: timeOffset,
+                        waveDetail.cutOffTime=nProps.context.intl.formatRelative(data[i].parsed_cut_off_time, {
                                 units: 'day'
                             }) +
                             ", " + nProps.context.intl.formatTime(data[i].cut_off_time, {
@@ -257,6 +258,7 @@ class WaveTab extends React.Component {
         }
         return (
             <div className="gorTesting">
+            
                 <Spinner isLoading={this.props.wavesSpinner} setSpinner={this.props.setWavesSpinner}/>
                 {waveData?<div>
                     <div className="gor-filter-wrap" style={{'width':this.props.showFilter?'350px':'0px', height:filterHeight}}>

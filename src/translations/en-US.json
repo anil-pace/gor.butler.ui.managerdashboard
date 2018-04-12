@@ -2094,12 +2094,6 @@
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
-    "id": "audit.table.startTime",
-    "description": "startTime for audit",
-    "defaultMessage": "START TIME",
-    "filepath": "./src/containers/auditTab/auditTable.js"
-  },
-  {
     "id": "audit.table.progress",
     "description": "progress for audit task",
     "defaultMessage": "PROGRESS(%)",
@@ -2112,9 +2106,9 @@
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
-    "id": "audit.table.timeCompleted",
-    "description": "timeCompleted for audit",
-    "defaultMessage": "TIME COMPLETED",
+    "id": "audit.table.pps_id",
+    "description": "pps assigned for audit task",
+    "defaultMessage": "PPS",
     "filepath": "./src/containers/auditTab/auditTable.js"
   },
   {
