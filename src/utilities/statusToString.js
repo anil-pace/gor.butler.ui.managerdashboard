@@ -8,7 +8,7 @@ export function statusToString(res){
           switch(res.status)
           {
             case AUDIT_RESOLVED:
-              auditId=res.audit_display_id;
+            auditId=res.audit_id;
                auditType=res.audit_type;
                auditTypeValue=res.audit_type_value;
                if(auditType=== AUDIT_BY_PDFA) {
@@ -17,15 +17,15 @@ export function statusToString(res){
               }
               stringInfo={
                 type:SUCCESS,
-                msg:(<FormattedMessage id="audit.resolve.success" description='Text for resolved audit lines' 
-                                       defaultMessage='Audit task {auditId} with {auditType} - {auditTypeValue} has been approved' 
-                                       values={{auditId:res.audit_display_id, auditType:res.audit_type, auditTypeValue:res.audit_type_value}}
+                msg:(<FormattedMessage id="audit.resolve.succedd" description='Text for resolved audit lines' 
+                                       defaultMessage='Audit task {auditId} with {auditType} has been approved' 
+                                       values={{auditId:res.audit_display_id, auditType:res.audit_type}}
                     />)   
               }
               break;
             
             case AUDIT_LINE_REJECTED:
-              auditId=res.audit_display_id;
+            auditId=res.audit__id;
               auditType=res.audit_type;
               auditTypeValue=res.audit_type_value;
               if(auditType=== AUDIT_BY_PDFA) {
@@ -34,9 +34,9 @@ export function statusToString(res){
               }
               stringInfo={
                 type:SUCCESS,
-                msg:(<FormattedMessage id="audit.resolve.rejected" description='Text for rejected audit lines' 
-                                       defaultMessage='Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected' 
-                                       values={{auditId:res.audit_display_id, auditType:res.audit_type, auditTypeValue:res.audit_type_value}}
+                msg:(<FormattedMessage id="audit.resolve.reject" description='Text for rejected audit lines' 
+                                                       defaultMessage='Audit task {auditId} with {auditType} has been rejected' 
+                                                       values={{auditId:res.audit_display_id, auditType:res.audit_type}}
                     />)   
               }
               break;

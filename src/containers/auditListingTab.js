@@ -9,7 +9,7 @@
  import {GTableBody} from "../components/gor-table-component/tableBody";
  import {GTableRow} from "../components/gor-table-component/tableRow";
  import {FormattedMessage,defineMessages} from 'react-intl';
- import Accordion from '../components/Accordian/accordian';
+ import ResolveAudit from './auditTab/resolveAudit';
  import NameInitial from '../components/NameInitial/nameInitial';
  import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
  import ProgressBar from '../components/progressBar/progressBar.js';
@@ -84,6 +84,7 @@ resolveButton: {
    {
     super(props);
     this._handelClick = this._handelClick.bind(this);
+    this._handelResolveAudit = this._handelResolveAudit.bind(this);
     this.state={visibleMenu:false} ;
     this.state={checkedAudit:[]};
   }	
@@ -160,6 +161,19 @@ _duplicateAudit(auditId,param){
       param:param,
       auditId:auditId
       });
+}
+_handelResolveAudit(event){
+  let auditId=event.currentTarget.id;
+  modal.add(ResolveAudit, {
+    title: '',
+    size: 'large', // large, medium or small,
+    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+    hideCloseButton: true,
+    auditId: auditId,
+    screenId: "APPROVE_AUDIT",
+    auditType: auditId,
+    auditMethod: 'pdfa'//"location or pdfa"
+});
 }
 
 
@@ -347,7 +361,7 @@ render(){
     {reauditButton}
       </button>:""}
       {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" style={{float:'right'}}>
+       <button className="gor-add-btn gor-listing-button" style={{float:'right'}} id={tablerowdata[idx]['auditDetails']['header'][0]}   onClick={me._handelResolveAudit}>
       {resolveButton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
