@@ -24,10 +24,10 @@ const messages = defineMessages({
     userAdmin: {
         id: "userDetails.userAdmin",
         defaultMessage: "Admin"
-    },qc_operator: {
+    }, qc_operator: {
         id: "userDetails.qc_operator",
         defaultMessage: "QC Operator"
-    },packing_operator: {
+    }, packing_operator: {
         id: "userDetails.packing_operator",
         defaultMessage: "Packing Operator"
     },
@@ -179,7 +179,13 @@ class UsersTab extends React.Component {
         let back = nProps.context.intl.formatMessage(messages.userBack);
         let online = nProps.context.intl.formatMessage(stringConfig.online);
         let offline = nProps.context.intl.formatMessage(stringConfig.offline);
-        var role = {"butler_ui": operator, "butler_supervisor": manager,"admin":admin,'qc_operator':qc_operator,'packing_operator':packing_operator};
+        var role = {
+            "butler_ui": operator,
+            "butler_supervisor": manager,
+            "admin": admin,
+            'qc_operator': qc_operator,
+            'packing_operator': packing_operator
+        };
         var work_mode = {"pick": pick, "put": put, "audit": audit};
         var work_place = {"front": front, "back": back};
 
@@ -248,10 +254,10 @@ class UsersTab extends React.Component {
             })
         }
 
-        if(query.role){
+        if (query.role) {
             query.role = query.role.constructor === Array ? query.role : [query.role]
             filtered_data = filtered_data.filter(function (user) {
-                return query.role.indexOf(user.role)>-1
+                return query.role.indexOf(user.role) > -1
             })
         }
 
@@ -338,7 +344,9 @@ class UsersTab extends React.Component {
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-            existingUserIds:this.props.data.UserList.list.map(function(user){return user.user_name})
+            existingUserIds: this.props.data.UserList.list.map(function (user) {
+                return user.user_name
+            })
             //.. all what you put in here you will get access in the modal props ;),
         });
     }
@@ -353,14 +361,15 @@ class UsersTab extends React.Component {
         let updateStatusIntl = "";
         var itemNumber = 7, userList;
         userList = this._processUserDetails();
-        let self=this
+        let self = this
         return (
             <div>
                 <div>
                     <div className="gor-User-Table">
                         <div className="gor-filter-wrap"
                              style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                            <UserFilter userfilterState={this.props.userfilterState} noResults={userList.length===0} isFilterApplied={this.props.isFilterApplied}
+                            <UserFilter userfilterState={this.props.userfilterState} noResults={userList.length === 0}
+                                        isFilterApplied={this.props.isFilterApplied}
                                         filterState={this.props.userFilterStatus} showUserFilter={this.showUserFilter}
                                         userData={userList}
                                         responseFlag={this.props.responseFlag}/>
@@ -404,7 +413,8 @@ class UsersTab extends React.Component {
 
                         </div>
                         {/*Filter Summary*/}
-                        <FilterSummary noResults={userList.length===0} total={userList.length || 0} isFilterApplied={this.props.isFilterApplied}
+                        <FilterSummary noResults={userList.length === 0} total={userList.length || 0}
+                                       isFilterApplied={this.props.isFilterApplied}
                                        responseFlag={this.props.responseFlag}
                                        filterText={<FormattedMessage id="userList.filter.search.bar"
                                                                      description='total users for filter search bar'
