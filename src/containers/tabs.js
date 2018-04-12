@@ -8,7 +8,7 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setButlerSpinner} from '../actions/spinnerAction';
 import {setEmergencyModalStatus} from '../actions/tabActions'  
-import {OVERVIEW,SYSTEM,ORDERS,NEWORDERS, USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
+import {OVERVIEW,SYSTEM,ORDERS, USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
 FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
 SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT,AUDITLISTING} from '../constants/frontEndConstants';
 import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
@@ -177,9 +177,6 @@ class Tabs extends React.Component{
     order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
               defaultMessage="ORDERS"/>;
 
-    /*neworder=<FormattedMessage id="neworder.tab.heading" description="orders tab" 
-              defaultMessage="N ORDERS"/>;*/
-              
     users=<FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage="USERS"/> ;
     inventory=<FormattedMessage id="inventory.tab.heading" description="inventory tab" 
@@ -273,7 +270,7 @@ class Tabs extends React.Component{
       }
     }
 
-    items={overview:overview,system:system,order:order,/*neworder: neworder,newordersStatus:newordersStatus, newordersClass:newordersClass*/
+    items={overview:overview,system:system,order:order,
            users:users,inventory:inventory,audit:audit,
            reports:reports,
            overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,

@@ -272,7 +272,6 @@ import {
     }
 
     _reqOrdersFulfilment(startDate, endDate){
-        console.log("ORDER FULFILMENT REQUESTED");
         let formData={
             "start_date": startDate,
             "end_date": endDate
@@ -290,7 +289,6 @@ import {
     }
 
     _reqOrdersSummary(startDate, endDate){
-        console.log("ORDER SUMMARY REQUESTED");
         let formData={
             "start_date": startDate,
             "end_date": endDate
@@ -308,11 +306,6 @@ import {
     }
 
     _reqCutOffTime(startDate, endDate){
-        console.log('%c ==================>!  ', 'background: green; color: black');
-        console.log("LEVEL 1 CUT OFF TIME REQUESTED");
-        //this.props.setReportsSpinner(true);
-        console.log("startDate ====>" + startDate, "endDate  ========>" + endDate);   
-
         let formData={
             "start_date": startDate,
             "end_date": endDate

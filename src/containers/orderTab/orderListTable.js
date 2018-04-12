@@ -24,8 +24,8 @@ import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-componen
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
-import OrderTile from '../../containers/orderTabÏ/OrderTile';
-import ViewOrderLine from '../../containers/orderTabÏ/viewOrderLine';
+import OrderTile from '../../containers/orderTab/OrderTile';
+import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
 import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import ProgressBar from '../../components/progressBar/progressBar';
