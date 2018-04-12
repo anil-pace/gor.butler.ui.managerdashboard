@@ -1027,7 +1027,7 @@ _onAttributeSelectionFirstTime(){
        button= <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for add audit button' 
        defaultMessage='UPDATE'/></button>
 }else if(this.props.param=='duplicate'){
-   header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
+   header=<div className='gor-usr-add'><FormattedMessage id='audit.createduplicate.heading' description='Heading for duplicate audit' 
        defaultMessage='Duplicate audit'/></div>
          button=  <button onClick={()=>{this._createAudit("duplicate")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.duplicate" description='Text for add audit button' 
          defaultMessage='Duplicate audit'/></button>
