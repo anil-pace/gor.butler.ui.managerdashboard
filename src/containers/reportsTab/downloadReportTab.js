@@ -128,7 +128,10 @@ class DownloadReportTab extends React.Component{
             })
             
         }
-        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+        else if(JSON.stringify(this.props.location.query) !== JSON.stringify(nextProps.location.query)){
+            this._getReportsData(nextProps);
+        }
+        else if(this.props.hasDataChanged !== nextProps.hasDataChanged){
             let rawData = nextProps.reportsData.slice(0);
             let data = this._processData(rawData);
             let dataList = new tableRenderer(data.length)
@@ -204,6 +207,7 @@ class DownloadReportTab extends React.Component{
         var _this = this;
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
+        var location = JSON.parse(JSON.stringify(this.props.location));
         
         return (
             <div className="gorTesting wrapper gor-download-rpts">
@@ -351,7 +355,7 @@ class DownloadReportTab extends React.Component{
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={false} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>   
             </div>
