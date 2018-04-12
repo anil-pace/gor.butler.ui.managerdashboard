@@ -263,6 +263,16 @@ class AuditStart extends React.Component {
     console.log(this.props.auditID);
     let me = this;
     let items = this.state.items || [];
+    let changePPSHeader=( <FormattedMessage
+            id="audit.audittask.headerchangeppd"
+            description="Heading for change pps"
+            defaultMessage="Change PPS"
+          />);
+    let startAuditHeader=( <FormattedMessage
+            id="audit.audittask.headerstartaudit"
+            description="Heading for start audit"
+            defaultMessage="Start Audit"
+          />);
     let auditModePPS = (
       <FormattedMessage
         id="audit.startaudit.auditmodepps"
@@ -341,11 +351,7 @@ class AuditStart extends React.Component {
         <div className="gor-AuditDetails-modal-content">
           <div className="gor-auditDetails-modal-head">
             <span className="AuditIDWrapper">
-              <FormattedMessage
-                id="audit.audittask"
-                description="Heading for view orderline"
-                defaultMessage="Start Audit"
-              />
+            {this.props.param == "CHANGE_PPS"?changePPSHeader:startAuditHeader}
             </span>
 
             <span className="close" onClick={this._removeThisModal.bind(this)}>
