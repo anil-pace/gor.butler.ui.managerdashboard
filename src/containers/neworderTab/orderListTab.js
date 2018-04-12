@@ -37,7 +37,7 @@ import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentP
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
     ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH,
-    POLLING_INTERVAL
+    ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 
@@ -55,38 +55,7 @@ import {
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-const messages=defineMessages({
-    inProgressStatus: {
-        id: 'orderList.progress.status',
-        description: "In 'progress message' for orders",
-        defaultMessage: "In Progress"
-    },
 
-    completedStatus: {
-        id: "orderList.completed.status",
-        description: " 'Completed' status",
-        defaultMessage: "Completed"
-    },
-
-    exceptionStatus: {
-        id: "orderList.exception.status",
-        description: " 'Exception' status",
-        defaultMessage: "Exception"
-    },
-
-    unfulfillableStatus: {
-        id: "orderList.Unfulfillable.status",
-        description: " 'Unfulfillable' status",
-        defaultMessage: "Unfulfillable"
-    },
-    orderListRefreshedat: {
-        id: 'orderlist.Refreshed.at',
-        description: " 'Refreshed' status",
-        defaultMessage: 'Last Updated '
-    }
-});
-
-var storage = [];
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -113,8 +82,6 @@ var storage = [];
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
-            startDate: new Date (new Date() - 1000*3600*24).toISOString(),
-            endDate: new Date().toISOString(),
         }
     }
 
@@ -129,10 +96,8 @@ var storage = [];
     }
 
     componentDidMount(){
-        // let startDate =  "2017-03-27T11:53:30.084Z";
-        // let endDate = "3017-03-27T11:53:30.084Z";
-        let startDate =  this.state.startDate;
-        let endDate = this.state.endDate;
+        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+        let endDate = new Date().toISOString();
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
        
     }
@@ -147,24 +112,13 @@ var storage = [];
     }
 
     _refreshList(query) {
-        //this.props.setOrderListSpinner(true);
-        console.log('%c ==================>!  ', 'background: #222; color: #bada55');
-        console.log("FILTER QUERY COMING POST APPLY FILTER");
-        console.log("query =========================>" + JSON.stringify(query)); 
-
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
         if( (query.fromDate && query.toDate) && (query.toDate && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
              if( query.cutOffTime){
-                /* convert cut off time from filter to format accepted by backend i.e., //2018-03-01 23:00:00 */
-                // let date = new Date();
-                // let dt = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();  // date will be bydefault today's date
-                // let tm = query.cutOffTime + ":00";  // time can be selected by user in hr:mm format
-                // cutOffTimeFromFilter = dt + " " + tm; 
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                console.log("setStartDate" + startDateFromFilter, "setEndDate" + endDateFromFilter, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // for fetching orders by giving cut off time
                 this.props.toggleOrderFilter(true);
                 this.props.filterApplied(true);
@@ -172,36 +126,36 @@ var storage = [];
         }
         else{
             if(query.cutOffTime){
-                // setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
-                // setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
-                 setStartDate = "2018-04-10T09:53:03.550Z";
-                setEndDate = "2018-04-10T09:53:03.550Z";
+                setStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+                setEndDate = new Date().toISOString();
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate, "cut off time===> " + cutOffTimeFromFilter); 
                 this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
                 this.props.toggleOrderFilter(true);
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
                 let params={
-                    //'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                    'url':ORDERLINES_PER_ORDER_URL,
+                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
                     'method':GET,
                     'contentType':APP_JSON,
                     'accept':APP_JSON,
                     'cause':ORDERLINES_PER_ORDER_FETCH,
                 }
                 this.props.makeAjaxCall(params);
-                modal.add(ViewOrderLine, {
-                    orderId: query.orderId,
-                    title: '',
-                    size: 'large',
-                    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                    hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                                           //.. all what you put in here you will get access in the modal props ;),
-                });
+                    if(this.props.orderLines){
+                        modal.add(ViewOrderLine, {
+                        orderId: query.orderId,
+                        title: '',
+                        size: 'large',
+                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                        hideCloseButton: true      // (optional) if you don't wanna show the top right close button
+                                               //.. all what you put in here you will get access in the modal props ;),
+                        });
+                }
+                
             }
         }
+        this.props.setOrderQuery({query:query});
 
         // if (Object.keys(query).filter(function (el) {
         //     return el !== 'page'
@@ -228,9 +182,6 @@ var storage = [];
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
     _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
-            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID ===>" + cutOffTime);
-            console.log("startDate =========================>" + fromDateTime);   
-            console.log("endDate  ==========================>" + toDateTime); 
             let formData={
                 "start_date": fromDateTime,
                 "end_date": toDateTime,
@@ -379,23 +330,17 @@ var storage = [];
         //call other http calls
         this._reqOrdersFulfilment(startDate, endDate);
         this._reqOrdersSummary(startDate, endDate);
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(startDate, endDate), POLLING_INTERVAL);
+        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+        let newEndendDate = new Date().toISOString();
+        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime = ()=> {
-        this._reqCutOffTime(this.state.startDate, this.state.endDate);
+        this._reqCutOffTime( new Date (new Date() - 1000*3600*24).toISOString(), new Date().toISOString() );
     }
 
     _stopPollingCutOffTime = (intervalId) => {
         clearTimeout(intervalId);
-    }
-
-    _formatTime(timeLeft){
-        let hours = Math.trunc(timeLeft/60);
-        let minutes = timeLeft % 60;
-        let final = hours +" hrs left";
-        return final;
-        //console.log(hours +":"+ minutes);
     }
 
     _formatProgressBar(nr, dr){
@@ -453,17 +398,10 @@ var storage = [];
         //     updateStatusText=
         //     <FormattedMessage id="orderlistTab.orderListRefreshedat" description='Refresh Status text'
         //     defaultMessage='Last Updated '/>
-        //     updateStatusIntl=<FormattedRelative updateInterval={POLLING_INTERVAL} value={Date.now()}/>
+        //     updateStatusIntl=<FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={Date.now()}/>
         // }
         var itemNumber=6, table, pages;
-        const ordersByStatus=[
-        {value: '25', label: '25'},
-        {value: '50', label: '50'},
-        {value: '100', label: '100'},
-        {value: '250', label: '250'},
-        {value: '500', label: '500'},
-        {value: '1000', label: '1000'}
-        ];
+        
         var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
         var orderDetail, alertNum=0, orderInfo;
         // if (this.props.orderData.ordersDetail !== undefined) {
@@ -494,8 +432,8 @@ var storage = [];
 
                             <div>
                                 <OrderTile 
-                                        startDate={this.state.startDate}
-                                        endDate={this.state.endDate} 
+                                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
+                                        endDate={new Date().toISOString()} 
                                         pbtsData={this.props.pbts} 
                                         date={todayDate} 
                                         orderFulfilData={this.props.orderFulfilment}
@@ -552,34 +490,11 @@ var storage = [];
 
                 </div> : null}
 
-
-                {/*<OrderListTable items={orderDetail} timeZoneString={headerTimeZone} itemNumber={itemNumber}
-                statusFilter={this.props.getStatusFilter} timeFilter={this.props.getTimeFilter}
-                refreshOption={this._clearFilter.bind(this)} lastUpdatedText={updateStatusText}
-                lastUpdated={updateStatusIntl}
-                intlMessg={this.props.intlMessages} alertNum={alertNum}
-                totalOrders={this.props.orderData.totalOrders}
-                itemsPerOrder={this.props.orderData.itemsPerOrder}
-                totalCompletedOrder={this.props.orderData.totalCompletedOrder}
-                totalPendingOrder={this.props.orderData.totalPendingOrder}
-                sortHeaderState={this.props.orderHeaderSort}
-                currentSortState={this.props.orderSortHeader}
-                sortHeaderOrder={this.props.orderHeaderSortOrder}
-                currentHeaderOrder={this.props.orderSortHeaderState}
-                setOrderFilter={this.props.orderFilterDetail}
-                getOrderFilter={this.props.orderFilter} setFilter={this.props.showTableFilter}
-                showFilter={this.props.showFilter} responseFlag={this.props.orderListSpinner}
-                isFilterApplied={this.props.isFilterApplied}
-                orderFilterStatus={this.props.orderFilterStatus}
-                onSortChange={this.refresh.bind(this)}
-                pageNumber={this.props.pageNumber}
-                />*/}
-
                 {this.props.pbts.length> 0 ?
                     (<OrderListTable 
                         pbts={this.props.pbts}
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
+                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
+                        endDate={new Date().toISOString()}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
                         startPollingCutOffTime={this._startPollingCutOffTime}
                         stopPollingCutOffTime={this._stopPollingCutOffTime}
@@ -620,6 +535,7 @@ function mapStateToProps(state, ownProps) {
         orderFulfilment: state.orderDetails.orderFulfilment,
         orderSummary: state.orderDetails.orderSummary,
         pbts: state.orderDetails.pbts,
+        orderLines: state.orderDetails.orderLines,
         orderData: state.getOrderDetail || {},
     };
 }

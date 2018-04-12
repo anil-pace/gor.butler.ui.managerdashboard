@@ -796,7 +796,7 @@ export const CANCELLED_STATUS ="CANCELLED";
 export const ABANDONED_STATUS ="ABANDONED";
 export const ORDER_TAGS = "ORDER TAGS";
 export const STATUS = "STATUS";
-export const POLLING_INTERVAL = 10000;//300000;
+export const ORDERS_POLLING_INTERVAL = 60000;//60000;
 
 
 

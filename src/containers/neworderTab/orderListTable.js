@@ -45,7 +45,8 @@ import {wsOverviewData} from './../../constants/initData.js';
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL
+    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL,ORDERS_PER_PBT_FETCH_1,
+    ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
@@ -141,9 +142,7 @@ class OrderListTable extends React.Component {
     }
 
     _viewOrderLine = (orderId) =>  {
-         // #stop polling orders while opening viewOrderline //
-        clearTimeout(this._intervalIdForOrders);
-        //this.props.stopPollingCutOffTime(this.props.intervalIdForCutOffTime);
+        this.props.stopPollingCutOffTime(this.props.intervalIdForCutOffTime);
         modal.add(ViewOrderLine, {
             startPollingOrders: this._reqOrderPerPbt,
             startPollingCutOffTime: this.props.startPollingCutOffTime,
@@ -165,37 +164,13 @@ class OrderListTable extends React.Component {
         let cutOffTime = this.props.pbts[cutOffTimeIndex].cut_off_time;
         const index = storage.indexOf(cutOffTime);
 
-
-        //this.props.stopPollingCutOffTime(this.props.intervalId);
-
-        //console.log("CUT OFF TIME POLLING STOPPED...!");
-
-
-        console.log('%c ==================>!  ', 'background: blue; color: white');
-        console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID===>" + cutOffTime);
-        console.log("startDate =====>" + this.props.startDate,"endDate  =======>" + this.props.endDate, "cutofftime ========>" + cutOffTime);   
-
         let formData={
             "start_date": this.props.startDate,
             "end_date": this.props.endDate,
             "cut_off_time" : cutOffTime
         };
 
-        let params={
-            'url': ORDERS_PER_PBT_URL,
-            //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':ORDERS_PER_PBT_FETCH,
-            'formdata':formData,
-        }
-        this.props.makeAjaxCall(params);
-
-        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
-
         if(JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
-                console.log("coming inside lazyData TRUE");
             let params={
                 'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
                 'method':POST,
@@ -205,28 +180,16 @@ class OrderListTable extends React.Component {
                 'formdata':formData,
                 'saltParams':saltParams,
             }
-            
             this.props.makeAjaxCall(params);
+            this.setState({
+                page: 1,
+                size: this.props.ordersPerPbt.length
+            })
         }
-
-        // #condition to STOP hitting http request on OPENING OF ACCORDION
-        /*const index = storage.indexOf(cutOffTime);
-        let formData={
-            "start_date": this.props.startDate,
-            "end_date": this.props.endDate,
-            "cut_off_time" : cutOffTime
-        };
-        if(index === -1){   // FIRST TIME CLICK OF ACCORDION
-            storage.push(cutOffTime);
-            this.props.stopPolling(this.props.intervalId);  // #stop ongoing polling.
-            console.log('%c ==================>!  ', 'background: blue; color: white');
-            console.log("LEVEL 2 ORDER PER CUT OFF TIME REQUESTED WITH CUT OFF TIME ID===>" + cutOffTime);
-            console.log("startDate =====>" + this.props.startDate,"endDate  =======>" + this.props.endDate, "cut off time ========>" + cutOffTime);   
-
+        else{
             let params={
-                'url': ORDERS_PER_PBT_URL,
-                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
-                'method':GET,
+                'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+                'method':POST,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'cause':ORDERS_PER_PBT_FETCH,
@@ -234,35 +197,7 @@ class OrderListTable extends React.Component {
             }
             this.props.makeAjaxCall(params);
         }
-        else if( index !== -1 && JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
-                console.log("coming inside lazyData TRUE");
-            let params={
-                'url': ORDERS_PER_PBT_URL,
-                //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
-                'method':GET,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH,
-                'formdata':formData,
-                'saltParams':saltParams,
-            }
-            
-            this.props.makeAjaxCall(params);
-        }
-        else{    // CLICKED ON ALREADY OPEN ACCORDION
-            console.log("coming inside else case means ACCORDION HAS BEEN CLOSED");
-            storage.splice(index, 1);
-
-            /* condition to re-starting polling when all the accordions are in CLOSED state */
-        //     if(storage.length <= 0){
-        //         this.props.restartPolling();
-        //         this.props.setInfiniteSpinner(false); // remove the loading more status
-        //     }
-            
-        // }*/
-
-        
-
+        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime(){
@@ -271,8 +206,6 @@ class OrderListTable extends React.Component {
 
     _stopPollingOrders(intervalIdForOrders){
         clearTimeout(intervalIdForOrders);
-        console.log("ORDERS POLLING STOPPED....!");
-        //this.startPollingCutOffTime();
     }
 
     
@@ -314,7 +247,7 @@ class OrderListTable extends React.Component {
         return x;
     }
 
-    calculateTimeLeft(cutOffTimeFromBK){
+    _calculateTimeLeft(cutOffTimeFromBK){
          let timeLeft, d1, d2, diff;
 
         if(cutOffTimeFromBK){
@@ -354,96 +287,75 @@ class OrderListTable extends React.Component {
             for(let i =0 ; i < pbtDataLen; i++){
                 let pbtRow = [];
                 
-                if(pbtData[i].order_id){
-                    formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
-                    formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
-                    formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
-                    formatStartDate = (pbtData[i].start_date ? <FormattedRelative updateInterval={10000} value={pbtData[i].start_date} timeZone={this.props.timeZone}/> : "null");
-                    formatCompleteDate = (pbtData[i].completion_date ? <FormattedRelative updateInterval={10000} value={pbtData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
-                    formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+                /* START => when cut off time is not there */
+                    if(pbtData[i].order_id){
+                        formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
+                        formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
+                        formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
+                        formatStartDate = (pbtData[i].start_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].start_date} timeZone={this.props.timeZone}/> : "null");
+                        formatCompleteDate = (pbtData[i].completion_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+                        formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
 
-                    pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
-                            </div>);
+                        pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                    <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
+                                </div>);
 
-                    pbtRow.push(<div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
-                                    <div style={{width: "35%"}}>
-                                        <div className="ProgressBarWrapper">
-                                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                        pbtRow.push(<div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                        <div style={{width: "35%"}}>
+                                            <div className="ProgressBarWrapper">
+                                                <ProgressBar progressWidth={formatProgressBar.width}/>
+                                            </div>
+                                            <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                         </div>
-                                        <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
-                                    </div>
-                                    <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
-                                        <span>{pbtData[i].status}</span>
-                                        <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
-                                        <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
-                                        <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
-                                        <span>{pbtData[i].unfulfillable_count > 0 ? pbtData[i].unfulfillable_count : ""}</span>
-                                        <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
-                                    </div>
-                                </div>);
+                                        <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                            <span>{pbtData[i].status}</span>
+                                            <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                            <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
+                                            <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
+                                            <span>{pbtData[i].unfulfillable_count > 0 ? pbtData[i].unfulfillable_count : ""}</span>
+                                            <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                        </div>
+                                    </div>);
 
-                    if(formatProgressBar.action === true){
-                        pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
-                          <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
-                            <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
-                          </button>
-                        </div>);
+                        if(formatProgressBar.action === true){
+                            pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
+                              <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
+                                <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                              </button>
+                            </div>);
+                        }
+                        else{
+                            pbtRow.push(<div> </div>);
+                        }
                     }
-                    else{
-                        pbtRow.push(<div> </div>);
-                    }
-                }
-
+                /* END => when cut off time is not there */
                 
+                let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" 
+                         values={{cutOffTime:<FormattedTime
+                                     value={pbtData[i].cut_off_time}
+                                     hour= "numeric"
+                                     minute= "numeric"
+                                     timeZone= {this.props.timeOffset}
+                                     hour12= {false}/>
+                                 }} /> : "NO CUT OFF TIME");
+                let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
+                let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+                let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
-                //let formatTimeLeft = this._formatTime(pbtData[i].time_left);
-                // let originalDate = pbtData[i].cut_off_time;
-                // var convertedDate =  originalDate.getTime(); 
-                // var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
+                pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                {formatTimeLeft!== "" ?
+                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
+                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                }
+                            </div>);
+                pbtRow.push(<div>
+                                <div className="ProgressBarWrapper">
+                                    <ProgressBar progressWidth={formatProgressBar.width}/>
+                                </div>
+                                <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
+                             </div>);
 
-                let msec = Date.parse("March 8, 2018");
-                var d = new Date();  //2018-02-22 23:00:00
-                var n = d.getMilliseconds();
-                var x = n - 5 * 60000;
-
-                //if(pbtData[i].cut_off_time){
-                    //let formatPbtTime = (<FormattedTime
-                             // value={pbtData[i].cut_off_time}
-                             // hour= "numeric"
-                             // minute= "numeric"
-                             // timeZone= {this.props.timeOffset}
-                             // hour12= {false}
-                             // />);
-                    let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" values={{cutOffTime:<FormattedTime
-                             value={pbtData[i].cut_off_time}
-                             hour= "numeric"
-                             minute= "numeric"
-                             timeZone= {this.props.timeOffset}
-                             hour12= {false}
-                             />}} /> : "NO CUT OFF TIME");
-                    //let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={pbtData[i].cut_off_time} timeZone={this.props.timeZone}/>);
-                    let formatTimeLeft = this.calculateTimeLeft(pbtData[i].cut_off_time);
-                    let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
-                    let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
-
-                    pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                    {formatTimeLeft!== "" ?
-                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
-                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
-                                    }
-                                </div>);
-
-                    pbtRow.push(<div>
-                                    <div className="ProgressBarWrapper">
-                                        <ProgressBar progressWidth={formatProgressBar.width}/>
-                                    </div>
-                                    <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
-                                 </div>);
-
-                    pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
-                                
-                    
+                pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
                 pbtRows.push(pbtRow);
             }
             processedData.pbtData = pbtRows;
@@ -520,8 +432,6 @@ class OrderListTable extends React.Component {
                         else
                             formatCompleteDate = "";
                     }
-                    //var endTIme = (formatCompleteDate !== "") ? " - " + formatCompleteDate : "";
-                    //var totalTime = (formatStartDate ? formatStartDate : "") + (formatCompleteDate ? endTIme : "");
 
                     if (orderData[i].completion_date) {
                         if (getDaysDiff(orderData[i].completion_date) < 2) {
@@ -595,18 +505,14 @@ class OrderListTable extends React.Component {
     }
 
     _onScrollHandler(event, cutOffTimeIndex){
-        //if(event.target.scrollHeight - event.target.scrollTop >= 375){
-            console.log(Math.round(event.target.scrollTop));
-            console.log(event.target.clientHeight);
-            console.log(event.target.scrollHeight);
-        if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
-            let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
-            this.setState({
-                    page
-                },function(){
-                    this.props.setInfiniteSpinner(true);
-                    this._reqOrderPerPbt(cutOffTimeIndex, {lazyData:true});
-                })
+            if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
+                let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
+                this.setState({
+                        page
+                    },function(){
+                        this.props.setInfiniteSpinner(false);
+                        this._reqOrderPerPbt(cutOffTimeIndex, {lazyData:true});
+                    })
         }
         else {
             this.props.setInfiniteSpinner(false);

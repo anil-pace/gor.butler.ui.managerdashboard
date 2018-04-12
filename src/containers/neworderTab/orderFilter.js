@@ -72,23 +72,9 @@ class OrderFilter extends React.Component{
 
         const filterInputFields=
         [{
-            value: "PICK BEFORE TIME",
-            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="CUT OFF TIME"/>
-        },
-        {
             value: "ORDER ID",
             label: <FormattedMessage id="order.inputField.orderId" defaultMessage="ORDER ID"/>
-        }
-       /* ,
-        {
-            value: "PPS ID",
-            label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
-        },
-        {
-            value: "SKU ID",
-            label: <FormattedMessage id="order.inputField.skuId" defaultMessage="SKU ID"/>
-        }*/
-        ];
+        }];
 
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
@@ -99,6 +85,24 @@ class OrderFilter extends React.Component{
                              textboxStatus={textboxStatus}/>  
         return inputField;       
 
+    }
+
+    _processCutOffTimeSearchField(){
+      const filterInputFields=
+        [{
+            value: "PICK BEFORE TIME",
+            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="CUT OFF TIME"/>
+        }];
+
+        var inputValue=this.state.searchQuery;
+        var textboxStatus=this.props.textboxStatus || {};
+        var inputField=<FilterInputFieldWrap 
+                             placeholder="Enter time in hh:mm format e.g:09:30"
+                             inputText={filterInputFields}
+                             inputValue={inputValue} 
+                             handleInputText={this._handleInputQuery.bind(this)}
+                             textboxStatus={textboxStatus}/>  
+        return inputField;
     }
 
   componentWillMount(){
@@ -258,6 +262,7 @@ class OrderFilter extends React.Component{
 
     render(){
         var noOrder=this.props.orderData.noResultFound;
+        var orderCutOffTimeSearchField = this._processCutOffTimeSearchField();
         var orderSearchField=this._processOrderSearchField();
         //var orderFilterToken=this._processFilterToken();
         var orderDateField = this._processOrderDateField();
@@ -282,6 +287,9 @@ class OrderFilter extends React.Component{
 
                    <div className="gor-filter-body">
                        <div className="gor-filter-body-input-wrap"> 
+                          {orderCutOffTimeSearchField}
+                       </div>
+                      <div className="gor-filter-body-input-wrap"> 
                           {orderSearchField}
                        </div>
 

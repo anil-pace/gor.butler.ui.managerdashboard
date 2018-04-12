@@ -1,5 +1,5 @@
 import React  from 'react';
-import { FormattedMessage, defineMessages, FormattedRelative, injectIntl } from 'react-intl'; 
+import { FormattedMessage, defineMessages, FormattedRelative, injectIntl, FormattedTime } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -11,7 +11,7 @@ import SearchFilter from '../../components/searchFilter/searchFilter';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
-import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, ORDERS_POLLING_INTERVAL} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 
 const messages=defineMessages({
@@ -78,8 +78,8 @@ class ViewOrderLine extends React.Component{
 
   componentWillUnmount(){
     clearInterval(this._intervalIdViewOrderLines);
+    this.props.startPollingCutOffTime();
     //this.props.startPollingOrders(this.props.cutOffTimeIndex);
-    //this.props.startPollingCutOffTime();
   }
 
   componentDidMount(){
@@ -95,29 +95,20 @@ class ViewOrderLine extends React.Component{
         items: olineData
       });
     //}
-
-    if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-            //this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            //this._subscribeData()
-            this._refreshList(nextProps.location.query)
-        }
   }
   
   _getOrdersLines = (orderId) =>  {
         console.log('%c ==================>!  ', 'background: red; color: white');
         console.log("LEVEL 3 ORDER LINES REQUESTED WITH ORDER ID ===>" + orderId);
         let params={
-            //'url':ORDERLINES_PER_ORDER_URL+"/"+orderId,
-            url: ORDERLINES_PER_ORDER_URL,
+            'url':ORDERLINES_PER_ORDER_URL+"/"+orderId,
             'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause':ORDERLINES_PER_ORDER_FETCH,
         }
         this.props.makeAjaxCall(params);
-
-        this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), POLLING_INTERVAL);
+        this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), ORDERS_POLLING_INTERVAL);
     }
 
   _removeThisModal() {
@@ -160,11 +151,8 @@ class ViewOrderLine extends React.Component{
     let olineHeaders = [];
     let processedData = {};
 
-    //if(olHeaderLen){
-      //for(let i=0; i < olHeaderLen; i++){
 
         let olineHeader = [];
-
         let formatOLTotal = (<FormattedMessage id="orders.orderlines.total" description="total orderlines" defaultMessage="Total {totalOrderlines}"
                                         values={{totalOrderlines:arg.total_orderlines}} />)
 
@@ -183,9 +171,7 @@ class ViewOrderLine extends React.Component{
         olineHeader.push(<div> {arg.status} </div>);
         
         olineHeaders.push(olineHeader);
-      //}
       processedData.olineHeader = olineHeaders;
-    //}
     processedData.offset = 0;
     processedData.max= olineHeaders.length;
     return processedData;
@@ -203,7 +189,7 @@ class ViewOrderLine extends React.Component{
         let formatSkuId = (arg[i].orderline_id ? <FormattedMessage id="orders.orderlines.skuId" description="sku id" defaultMessage="SKU -  {skuId}" values={{skuId: arg[i].orderline_id}} />: "null")
 
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
-                        <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0]]}/>
+                        <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1)]}/>
                     </div>);
 
         let formatProgressBar = this._formatProgressBar(arg[i].pick_products_count, arg[i].total_products_count);
@@ -233,14 +219,47 @@ class ViewOrderLine extends React.Component{
     return processedData;
   }
 
+  _calculateTimeLeft(cutOffTimeFromBK){
+         let timeLeft, d1, d2, diff;
+
+        if(cutOffTimeFromBK){
+            d1 = new Date();
+            d2= new Date(cutOffTimeFromBK);
+            diff = d1 - d2;
+
+            if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
+                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+            }
+            else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
+                timeLeft = Math.floor(diff / 60000) + "mins left";
+            }
+            else {  // 1000 milliseconds is for 1 sec
+                timeLeft = Math.floor(diff / 1000) + "seconds left";
+            }
+            return timeLeft;
+        }
+        else 
+        {
+            timeLeft = "-";
+            return timeLeft;
+        }
+    }
+
   render(){
     let processedHeader = this._processOLHeader(this.state.headerItems);
     let processedList = this._processOLList(this.state.items);
-    let formatCutOffTime = (this.props.orderLines.cut_off_time ?  
-                          <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage="{cutOffTime} hrs"
-                                        values={{cutOffTime:this.props.orderLines.cut_off_time.split(" ")[1]}} />: "--");
 
-    //let formatTimeLeft = (<FormattedRelative updateInterval={10000} value={orderData[i].completion_date} timeZone={this.props.timeZone}/>);
+    let formatCutOffTime = (this.props.orderLines.cut_off_time ? <FormattedMessage id="orders.orderlines.cutofftime" description="orderlines cut off time" 
+                          defaultMessage="{cutOffTime} hrs" 
+                         values={{cutOffTime:<FormattedTime
+                                     value={this.props.orderLines.cut_off_time}
+                                     hour= "numeric"
+                                     minute= "numeric"
+                                     timeZone= {this.props.timeOffset}
+                                     hour12= {false}/>
+                                 }} /> : "NO CUT OFF TIME");
+
+      let formatTimeLeft = this._calculateTimeLeft(this.props.orderLines.cut_off_time);
 
        return (
         <div>
@@ -297,11 +316,7 @@ class ViewOrderLine extends React.Component{
                               </div>
                               <div className="orderDetailsRow"> 
                                 <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
-                                <span className="spanValue"> {""} </span> 
-                              </div>
-                              <div className="orderDetailsRow"> 
-                                {/*<span className="spanKey col-3-span-key"> <FormattedMessage id="orders.olines.waveId" description='wave id' defaultMessage='Wave ID:'/> </span> 
-                                <span className="spanValue"> N/A </span>*/} 
+                                <span className="spanValue"> {formatTimeLeft} </span> 
                               </div>
                           </div>
                       </div>
