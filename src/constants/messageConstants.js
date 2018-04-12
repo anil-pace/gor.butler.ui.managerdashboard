@@ -229,7 +229,7 @@ export const ZONE_STATUS_INTL_MESSAGE ={
       zone_clear_deactivated:(<FormattedMessage id="zoning.status.clearDeactivated" description='Status text for zone' 
       defaultMessage='CLEAR DEACTIVATED'/>),
       emergency_stop:(<FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
-      defaultMessage='EMERGENCY STOP'/>),
+      defaultMessage='EMERGENCY STOP ACTIVATED'/>),
       emergency_pause:(<FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
       defaultMessage='EMERGENCY PAUSE'/>),
       stopped:(<FormattedMessage id="zoning.status.stopped" description='Status text for zone' 

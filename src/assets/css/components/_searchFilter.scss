@@ -24,4 +24,28 @@
 		    width: 100%;
 		}
 	}
+	&.animated{
+		-webkit-transition: width 1s ease-in-out;
+	    -moz-transition: width 1s ease-in-out;
+	    -o-transition: width 1s ease-in-out;
+	    transition: width 1s ease-in-out;
+		.inputWrapper{
+			width:0;
+
+		}
+		.gor-search-input-wrap{
+			padding:0;
+			width:0;
+		}
+		&.opened{
+				width:150px;
+			.inputWrapper{
+				width:120px;
+			}
+			.gor-search-input-wrap{
+			padding:0;
+			width:120px;
+		}
+		}
+	}
 }

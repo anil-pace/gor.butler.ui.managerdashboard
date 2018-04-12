@@ -19,6 +19,8 @@ export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
 
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
 export const PPSLIST_URL=API_URL+"/audit/pps_info";
+export const PPSLIST_ALL_URL=PPSLIST_URL+"?mode=any";
+export const PPSLIST_ACTIVE_AUDIT_URL=PPSLIST_URL+"?mode=audit_active";
 export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
 
 export const ORDER_PAGE="?page=";
@@ -46,6 +48,7 @@ export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL=API_URL + "/system/shift_start_time";
 export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
 export const MASTER_UPLOAD_URL=API_URL + "/api-gateway/dashboard-service/platform-dashboard/report/processItems";
+
 export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/agg-stock-ledger"; //Mapping needs to be there in ngnix config
 export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/stock-ledger/"; //Mapping needs to be there in ngnix config
 export const UPLOAD_HISTORY_URL=API_URL + "/api-gateway/mdm-service/wms-masterdata/csv";
@@ -93,11 +96,15 @@ export const ORDERS_PER_PBT_URL = API_URL+"/api-gateway/sr-service/platform-srms
 export const ORDERLINES_PER_ORDER_URL = API_URL+"/api-gateway/sr-service/platform-srms/md/order-details/level3";
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
-export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report/{invoice}";
+export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
 
 export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
+
+/*URL for seller recall*/
+export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/item-recall";
+export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
 
 
