@@ -86,15 +86,15 @@ export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_avai
 //export const ORDERS_FULFIL_URL = "http://192.168.13.198:8090/platform-srms/md/order-fulfilment";
 
 
-export const ORDERS_FULFIL_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-fulfilment";
-export const ORDERS_SUMMARY_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-summary";//API_URL+"/order-summary";
-export const ORDERS_CUT_OFF_TIME_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-details/level1";//"/platform-srms/md/order-details/level1";//TI
-export const ORDERS_PER_PBT_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-details/level2";
-export const ORDERLINES_PER_ORDER_URL = "http://192.168.13.198:8080/api-gateway/sr-service/platform-srms/md/order-details/level3";//API_URL+"/order-details/level3";
+// export const ORDERS_FULFIL_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-fulfilment";
+// export const ORDERS_SUMMARY_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-summary";//API_URL+"/order-summary";
+// export const ORDERS_CUT_OFF_TIME_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-details/level1";//"/platform-srms/md/order-details/level1";//TI
+// export const ORDERS_PER_PBT_URL = "http://192.168.9.142:8080/api-gateway/sr-service/platform-srms/md/order-details/level2";
+// export const ORDERLINES_PER_ORDER_URL = "http://192.168.13.198:8080/api-gateway/sr-service/platform-srms/md/order-details/level3";//API_URL+"/order-details/level3";
 
 
-// export const ORDERS_FULFIL_URL = TIME_ZONE_URL; //API_URL+"/order-fulfilment";
-// export const ORDERS_SUMMARY_URL = TIME_ZONE_URL;//API_URL+"/order-summary";
-// export const ORDERS_CUT_OFF_TIME_URL = TIME_ZONE_URL;//"/platform-srms/md/order-details/level1";//TIME_ZONE_URL;//API_URL+"/order-details/level1";
-// export const ORDERS_PER_PBT_URL = TIME_ZONE_URL;//API_URL+"/order-details/level2";
-// export const ORDERLINES_PER_ORDER_URL = TIME_ZONE_URL;//API_URL+"/order-details/level3";
+export const ORDERS_FULFIL_URL = TIME_ZONE_URL; //API_URL+"/order-fulfilment";
+export const ORDERS_SUMMARY_URL = TIME_ZONE_URL;//API_URL+"/order-summary";
+export const ORDERS_CUT_OFF_TIME_URL = TIME_ZONE_URL;//"/platform-srms/md/order-details/level1";//TIME_ZONE_URL;//API_URL+"/order-details/level1";
+export const ORDERS_PER_PBT_URL = TIME_ZONE_URL;//API_URL+"/order-details/level2";
+export const ORDERLINES_PER_ORDER_URL = TIME_ZONE_URL;//API_URL+"/order-details/level3";

@@ -55,38 +55,7 @@ import {
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-const messages=defineMessages({
-    inProgressStatus: {
-        id: 'orderList.progress.status',
-        description: "In 'progress message' for orders",
-        defaultMessage: "In Progress"
-    },
 
-    completedStatus: {
-        id: "orderList.completed.status",
-        description: " 'Completed' status",
-        defaultMessage: "Completed"
-    },
-
-    exceptionStatus: {
-        id: "orderList.exception.status",
-        description: " 'Exception' status",
-        defaultMessage: "Exception"
-    },
-
-    unfulfillableStatus: {
-        id: "orderList.Unfulfillable.status",
-        description: " 'Unfulfillable' status",
-        defaultMessage: "Unfulfillable"
-    },
-    orderListRefreshedat: {
-        id: 'orderlist.Refreshed.at',
-        description: " 'Refreshed' status",
-        defaultMessage: 'Last Updated '
-    }
-});
-
-var storage = [];
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -113,8 +82,8 @@ var storage = [];
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
-            startDate: new Date (new Date() - 1000*3600*24).toISOString(),
-            endDate: new Date().toISOString(),
+            //startDate: new Date (new Date() - 1000*3600*24).toISOString(),
+            //endDate: new Date().toISOString(),
         }
     }
 
@@ -129,10 +98,8 @@ var storage = [];
     }
 
     componentDidMount(){
-        // let startDate =  "2017-03-27T11:53:30.084Z";
-        // let endDate = "3017-03-27T11:53:30.084Z";
-        let startDate =  this.state.startDate;
-        let endDate = this.state.endDate;
+        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+        let endDate = new Date().toISOString();
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
        
     }
@@ -174,7 +141,7 @@ var storage = [];
             if(query.cutOffTime){
                 // setStartDate = new Date(new Date().toISOString().split("T")[0] + " " + "00:00:00").toISOString();
                 // setEndDate = new Date(new Date().toISOString().split("T")[0] + " " + "23:59:00").toISOString();
-                 setStartDate = "2018-04-10T09:53:03.550Z";
+                setStartDate = "2018-04-10T09:53:03.550Z";
                 setEndDate = "2018-04-10T09:53:03.550Z";
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
                 console.log("setStartDate" + setStartDate, "setEndDate" + setEndDate, "cut off time===> " + cutOffTimeFromFilter); 
@@ -369,7 +336,7 @@ var storage = [];
 
         let params={
             'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':POST,
+            'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause':ORDERS_CUT_OFF_TIME_FETCH,
@@ -377,13 +344,15 @@ var storage = [];
         }
         this.props.makeAjaxCall(params);
         //call other http calls
-        this._reqOrdersFulfilment(startDate, endDate);
-        this._reqOrdersSummary(startDate, endDate);
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(startDate, endDate), POLLING_INTERVAL);
+        //this._reqOrdersFulfilment(startDate, endDate);
+        //this._reqOrdersSummary(startDate, endDate);
+        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+        let newEndendDate = new Date().toISOString();
+        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime = ()=> {
-        this._reqCutOffTime(this.state.startDate, this.state.endDate);
+        this._reqCutOffTime( new Date (new Date() - 1000*3600*24).toISOString(), new Date().toISOString() );
     }
 
     _stopPollingCutOffTime = (intervalId) => {
@@ -494,8 +463,8 @@ var storage = [];
 
                             <div>
                                 <OrderTile 
-                                        startDate={this.state.startDate}
-                                        endDate={this.state.endDate} 
+                                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
+                                        endDate={new Date().toISOString()} 
                                         pbtsData={this.props.pbts} 
                                         date={todayDate} 
                                         orderFulfilData={this.props.orderFulfilment}
@@ -578,8 +547,8 @@ var storage = [];
                 {this.props.pbts.length> 0 ?
                     (<OrderListTable 
                         pbts={this.props.pbts}
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
+                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
+                        endDate={new Date().toISOString()}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
                         startPollingCutOffTime={this._startPollingCutOffTime}
                         stopPollingCutOffTime={this._stopPollingCutOffTime}
