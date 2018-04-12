@@ -1,0 +1,46 @@
+.gor-butler-bots{
+	.gor-bots-table{
+		.row{
+			background:#f7f7f7;
+		}
+		.cell{
+			padding-left:15px;
+			height: 40px;
+    		width: 240px;
+		}
+
+		}
+	.gor-filterBtn-btn {
+	    .ico-wrap{
+	    	display:inline-block;
+	    	width:20%;
+	    }
+	    .ico-txt-wrp{
+	    	display:inline-block;
+	    	width:80%;
+	    }
+	    
+	}
+	.gor-ol-paginate-wrap{
+		width:95%;
+		.gor-ol-paginate-left{
+			display:inline-block;
+			width:50%;
+			vertical-align: middle;
+		}
+		.gor-ol-paginate-right{
+			display:inline-block;
+			width:50%;
+			vertical-align: middle;
+		}
+		.gor-paginate-wrap{
+			float:right;
+		}
+		.gor-dropdown-wrapper{
+			width: 10%;
+		    margin-left: 4%;
+		    background: #fff;
+		    margin-top:2rem;
+		}
+	}
+}
