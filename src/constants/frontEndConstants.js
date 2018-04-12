@@ -11,6 +11,7 @@ export const SET_USERNAME="SET_USERNAME";
 export const SET_TIME_OFFSET="SET_TIME_OFFSET";
 export const RECIEVE_TIME_OFFSET="RECIEVE_TIME_OFFSET";
 export const LOGIN_ERROR="LOGIN_ERROR";
+export const SETAUDIT_CHECKED="SETAUDIT_CHECKED";
 /*Constants for Web Sockets*/
 export const WS_CONNECT="WS_CONNECT";
 export const WS_CONNECTED="WS_CONNECTED";
@@ -30,6 +31,10 @@ export const PROGRESS="progress";
 export const NOT_FOUND="not_found";
 export const IN_PROGRESS="in_progress";
 export const SYSTEM_GENERATED="system";
+export const SETAUDIT_PPS_CHECKED="SETAUDIT_PPS_CHECKED";
+export const SETOTHER_PPS_CHECKED="SETOTHER_PPS_CHECKED";
+
+
 
 
 /*Constants for Notification Web Sockets*/
@@ -100,7 +105,7 @@ export const BAR_D3_COMPONENT="BAR_D3_COMPONENT";
 export const OVERVIEW="OVERVIEW";
 export const SYSTEM="SYSTEM";
 export const ORDERS="ORDERS";
-export const NEWORDERS="NEWORDERS";
+export const AUDITLISTING="AUDITLISTING";
 export const INVENTORY="INVENTORY";
 export const USERS="USERS";
 export const AUDIT="AUDIT";
@@ -120,6 +125,7 @@ export const PPS="pps";
 export const ORDERLIST="ORDERLIST";
 export const DOWNLOAD_REPORT="downloadReport";
 export const STORAGE_SPACE="storageSpace";
+export const MISC="misc";
 export const TAB_CLASS={
 	overview:"gorMainBlock", 
 	system:"gorMainBlock",
@@ -359,6 +365,8 @@ export const NO_LOCATION_VALIDATION="NO_LOCATION_VALIDATION";
 export const WATING_FOR_VALIDATION="WATING_FOR_VALIDATION";
 export const AUDIT_ISSUES_STATUS="Issues found";
 export const AUDIT_BY_PDFA="pdfa";
+export const AUDIT_BY_LOCATION="location";
+export const AUDIT_BY_SKU="sku";
 export const BREACHED="breached"
 /*Inventory parsing constants*/
 export const INVENTORY_DATA_TODAY='INVENTORY_DATA_TODAY'
@@ -530,6 +538,8 @@ export const AUDIT_REJECTED_STATUS="Rejected";
 export const AUDIT_REAUDITED_STATUS="Re-audited";
 export const AUDIT_RESOLVED_STATUS="Resolved";
 export const AUDIT_PARAM_TYPE='audit_param_type';
+export const AUDIT_START_TIME='start_time';
+export const AUDIT_END_TIME='end_time';
 export const AUDIT_PARAM_VALUE='audit_param_value';
 export const AUDIT_STATUS='audit_status';
 export const AUDIT_TYPE="AUDIT TYPE";
@@ -773,6 +783,56 @@ export const STORAGE_SPACE_FETCH = "STORAGE_SPACE_FETCH";
 /*COnstants for audit query*/
 export const SET_ORDER_QUERY = "SET_ORDER_QUERY";
 export const SET_AUDIT_QUERY = "SET_AUDIT_QUERY";
+export const GET_AUDIT_DETAILS = "GET_AUDIT_DETAILS";
+export const SETAUDIT_DETAILS = "SETAUDIT_DETAILS";
+export const AUDITDETAIL_URL = "AUDITDETAIL_URL";
+export const UPDATE_STATUS = "UPDATE_STATUS";
+export const PAUSE_AUDIT = "PAUSE_AUDIT";
+export const AUDIT_DUPLICATE = "AUDIT_DUPLICATE";
+export const FROM_DATE = "FROM DATE";
+export const TO_DATE = "TO DATE";
+export const NOT_YET_STARTED = "audit_created";
+export const TO_BE_RESOLVED = "to_be_resolved";//pending
+export const AUDIT_PAUSED = "audit_paused";
+export const AUDIT_DUPLICATED = "duplicated";
+export const AUDIT_DELETED = "audit_deleted";
+export const SPECIFIC_PPS_ID = "SPECIFIC PPS ID";
+export const AUDIT_USERLIST = "AUDIT_USERLIST";
+export const SETAUDIT_USER = "SETAUDIT_USER";
+export const FILTER_PPS_ID="pps_id";
+export const AUDIT_CREATEDBY='audit_created_by';
+export const AUDIT_EDIT='AUDIT_EDIT';
+export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
+export const START_AUDIT_TASK='START_AUDIT_TASK';
+export const CHANGE_PPS_TASK='CHANGE_PPS_TASK';
+//FeedBack Notification
+export const NOTIFY_FEEDBACK='NOTIFY_FEEDBACK';
+export const AUDIT_EDIT_REQUEST='AUDIT_EDIT_REQUEST';
+export const CREATE_DUPLICATE_REQUEST='CREATE_DUPLICATE_REQUEST';
+export const WARNING='WARNING';
+export const SET_NOTIFICATION='SET_NOTIFICATION';
+export const SET_NOTIFICATION_NULL='SET_NOTIFICATION_NULL';
+export const NOTIFY_MSG_HIDE='NOTIFY_MSG_HIDE';
+
+
+
+
+/*Constants for seller recall*/
+
+export const SELLER_RECALL="SELLER_RECALL";
+export const VALIDATE_SKU_ITEM_RECALL = "VALIDATE_SKU_ITEM_RECALL";
+export const POLLING_INTERVAL = 300000;
+
+
+
+
+ 
+
+
+
+
+
+
 
 export const PICK_BEFORE_TIME = "PICK_BEFORE_TIME";
 export const ORDER_ID = "ORDER ID";

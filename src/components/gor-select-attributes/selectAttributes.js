@@ -1,7 +1,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AttributeList} from './attributeList.js'
+import {FormattedMessage} from 'react-intl';
+import {AttributeList} from './attributeList.js';
 
 
 export default class SelectAttributes extends React.Component {
@@ -19,29 +20,36 @@ export default class SelectAttributes extends React.Component {
         this._getInitialState=this._getInitialState.bind(this);
         this._isInViewport=this._isInViewport.bind(this);
         this.state = this._getInitialState();
+        
     }
     _getInitialState(){
         return{
             dropdownVisible:false,
             data:this.props.attributeList,
+            selectedSets:this.props.prefilledData||{},
             nonMutatedData:this.props.attributeList,
             selectedAttributes:{},
-            selectedSets:{},
             showAttrList:false,
             selectionApplied:false,
             editedIndex:"-1",
-            placeHolder:"Select Attributes"
+            placeHolder:"Select Attributes",
+            selectedSetCount:0
         }
+
     }
 
 
-
+    componentWillMount(){
+        if(this.props.prefilledData)
+        this._applySelectionFirstTime();
+    }
 
       componentDidMount(){
           document.addEventListener('click',this._handleDocumentClick,false);
       }
 
       componentWillUnmount() {
+
           document.removeEventListener("click", this._handleDocumentClick,false)
       }
       _handleDocumentClick() {
@@ -83,7 +91,8 @@ export default class SelectAttributes extends React.Component {
         if(checked){
             let updatedData={
                 "text":data[idx].attributeList[attribute].text,
-                "category":category
+                "category":category,
+                "excludeFromSet":data[idx].attributeList[attribute].excludeFromSet
             }
             selectedAttributes[attribute] = updatedData;
             data[idx].attributeList[attribute].checked = true;
@@ -99,12 +108,27 @@ export default class SelectAttributes extends React.Component {
         })
 
     }
-   
+     _applySelectionFirstTime(index){
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
+        selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        this.setState({
+            selectedAttributes:{},
+            selectionApplied:true,
+            editedIndex:"-1",
+            selectedSets,
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected",
+            selectedSetCount:Object.keys(selectedSets).length
+        }
+        
+        )
+    }
+    
     _applySelection(e,index){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
-        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets)),
-        selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        var selectedSets =  JSON.parse(JSON.stringify(this.state.selectedSets));
+        let selectedAttributes =  JSON.parse(JSON.stringify(this.state.selectedAttributes));
+        
         if(Object.keys(selectedAttributes).length){
             if(this.state.editedIndex === "-1"){
                 selectedSets[Object.keys(selectedSets).length] = selectedAttributes;
@@ -112,17 +136,20 @@ export default class SelectAttributes extends React.Component {
         else{
             selectedSets[this.state.editedIndex] = selectedAttributes
         }
+
         this.setState({
             selectedAttributes:{},
             selectionApplied:true,
             editedIndex:"-1",
             selectedSets,
-            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected"
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected",
+            selectedSetCount:Object.keys(selectedSets).length
         },function(){
             this.props.applyCallBack(selectedSets,index);
         })
     }
-    }
+}
+    
     _showAttrList(e){
         e.stopPropagation();
         e.nativeEvent.stopImmediatePropagation();
@@ -143,7 +170,8 @@ export default class SelectAttributes extends React.Component {
         this.setState({
             selectedSets,
             showAttrList:false,
-            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected"
+            placeHolder:(Object.keys(selectedSets).length)+" sets of Attributes selected",
+            selectedSetCount:Object.keys(selectedSets).length
         },function(){
             this.props.applyCallBack(selectedSets,skuIndex);
         })
@@ -213,7 +241,13 @@ export default class SelectAttributes extends React.Component {
         return <div className="gor-sel-att-wrap">
         <div className="gor-sel-att-placeholder" ref={(elem) => { this.placeHolderEl = elem; }} onClick={_this._toggleDrop}>
         <div className="gor-sel-att-pholder-text">
-            <p>{_this.state.placeHolder}</p>
+            <p>{_this.state.selectedSetCount ? <FormattedMessage id="selectAttribute.placeholderSelected.text" description='Text for placeholder in select attribute' 
+            defaultMessage='{selectedSetCount} sets of Attributes selected'
+            values={{
+                selectedSetCount:_this.state.selectedSetCount
+            }}
+            /> : <FormattedMessage id="selectAttribute.placeholder.text" description='Text for placeholder in select attribute' 
+            defaultMessage='Select Attributes'/>}</p>
         </div>
         <div className="gor-sel-att-arr-cont">
         <span className={this.state.dropdownVisible ? "gor-sel-att-arr up" : "gor-sel-att-arr down"}></span>
@@ -275,18 +309,21 @@ export default class SelectAttributes extends React.Component {
              <div className={"attribute-cont"}>
              <div className={"header"}>Selected Set of Attributes</div>
              <AttributeList>
-            {Object.keys(this.state.selectedSets).map((key, index) => (
+            {Object.keys(_this.state.selectedSets).map((key, index) => (
+                
                 <section key={key+index} className="attribute-row">
                 <div className="category">
                    <span className={"setName"}> {"Set "+(index+1)}</span>
                    <span className={"actions-icons"}> <i className={"gor-edit-icon"} onClick={(e)=>this._editSet(e,key)}/> <i className={"gor-del-icon"} onClick={(e)=>this._deleteSet(e,key,_this.props.index)}/></span>
                 </div>
                 <div className="values">
-                    {Object.keys(this.state.selectedSets[key]).map((key2, idx) => (
-                           <span key={key2+idx} className={"set"}>{this.state.selectedSets[key][key2].text}</span>
-                        
-
-                    ))}
+                    {Object.keys(_this.state.selectedSets[key]).map((key2, idx) => {
+                        let tuples=[];
+                        if(!_this.state.selectedSets[key][key2].excludeFromSet){
+                            tuples.push((<span key={key2+idx} className={"set"}>{_this.state.selectedSets[key][key2].text}</span>));
+                        }
+                        return tuples;
+                    })}
                   
                 </div>
 

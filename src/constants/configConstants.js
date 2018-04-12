@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = 'localhost'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -15,8 +15,12 @@ export const AUDIT_URL=API_URL+"/audit";
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
-export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?start_time=";
-export const PPSLIST_URL=API_URL+"/pps/available_pps"
+export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
+
+export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
+export const PPSLIST_URL=API_URL+"/audit/pps_info";
+export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
+
 export const ORDER_PAGE="?page=";
 export const EXCEPTION_TRUE="exception";
 export const WAREHOUSE_STATUS_SINGLE="search=state";
@@ -31,22 +35,21 @@ export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
 export const ORDER_ID_FILTER_PARAM_WITHOUT_STATUS= "search=externalServiceRequestId";
 export const  ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
-export const FILTER_AUDIT_ID="display_id";
+export const FILTER_AUDIT_ID="audit_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
 export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";
 export const AUDIT_VALIDATION_URL=API_URL+"/audit/validate";
-export const AUDIT_CREATION_URL=API_URL+"/audit/";//TIME_ZONE_URL;//API_URL + "api/audit/validate";
+export const AUDIT_CREATION_URL=API_URL+"/audit/";
 export const VALIDATION_LIST=API_URL + "/system/remove_emergency/validation_list";
 export const VALIDATE_SAFETY=API_URL + "/system/validate_and_remove_emergency";
 export const GET_SHIFT_START_TIME_URL=API_URL + "/system/shift_start_time";
-export const INVENTORY_REPORT_URL=API_URL + "/inventories/get_inventory_report_v2";
 export const GET_ITEM_RECALL=API_URL + "/orders/wrapper/generate_orders";
-export const GR_REPORT_URL=API_URL + "/components/generate_gr_report";
-export const MASTER_UPLOAD_URL=API_URL + "/products/csv";
+export const MASTER_UPLOAD_URL=API_URL + "/api-gateway/dashboard-service/platform-dashboard/report/processItems";
 export const STOCK_LEDGER_REPORT_DOWNLOAD_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/agg-stock-ledger"; //Mapping needs to be there in ngnix config
 export const STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL=API_URL + "/api-gateway/inventory-service/platform-inventory/report/stock-ledger/"; //Mapping needs to be there in ngnix config
-export const UPLOAD_HISTORY_URL=API_URL+ "/components/mdm_info";
+export const UPLOAD_HISTORY_URL=API_URL + "/api-gateway/mdm-service/wms-masterdata/csv";
+
 export const REPORTS_HISTORY_URL=API_URL+"/components/reports_info"
 export const GET_MD_CONFIG_URL=API_URL + "/components/get_md_config";
 export const GET_MAXSIZE_FILE_URL=API_URL + "/components/get_mdm_file_size";
@@ -88,3 +91,13 @@ export const ORDERS_SUMMARY_URL = API_URL+"/api-gateway/sr-service/platform-srms
 export const ORDERS_CUT_OFF_TIME_URL = API_URL+"/api-gateway/sr-service/platform-srms/md/order-details/level1";
 export const ORDERS_PER_PBT_URL = API_URL+"/api-gateway/sr-service/platform-srms/md/order-details/level2";
 export const ORDERLINES_PER_ORDER_URL = API_URL+"/api-gateway/sr-service/platform-srms/md/order-details/level3";
+
+export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
+export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report/{invoice}";
+
+export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
+export const AUDIT_DUPLICATE_URL=API_URL+"";
+export const USERLIST_URL=API_URL+"/audit/users";
+export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
+
+

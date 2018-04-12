@@ -53,6 +53,7 @@ import {SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID,AUDIT_TASK_ID}from '../constants/fr
             else if (value=== "location") {
                 mappingArray.push(SPECIFIC_LOCATION_ID)
             }
+           
 
         });
         if(!flag)

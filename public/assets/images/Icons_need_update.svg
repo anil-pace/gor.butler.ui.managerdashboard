@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="74px" viewBox="0 0 200 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="warning---material-copy" fill="#EC1C2D" points="47 68 59 48 71 68"></polygon>
+        <polygon id="Path-Copy" fill="#FFFFFF" points="60 62 60 57 58 57 58 62"></polygon>
+        <polygon id="Path-Copy-2" fill="#FFFFFF" points="60 66 60 64 58 64 58 66"></polygon>
+        <path d="M20,48 C13.372583,48 8,53.372583 8,60 C8,66.627417 13.372583,72 20,72 C26.627417,72 32,66.627417 32,60 C32,53.372583 26.627417,48 20,48 Z" id="Shape-Copy-13" fill="#3CB669" fill-rule="nonzero"></path>
+        <path d="M19.0629855,61.8300399 L16.7148347,59.7301087 C16.4610695,59.5030728 16.0911988,59.4144051 15.7445491,59.497506 C15.3978995,59.5806069 15.1271353,59.8228514 15.0342508,60.1329882 C14.9413664,60.443125 15.0404729,60.7740371 15.2942381,61.001073 L18.1324551,63.540339 L18.3516952,63.7364864 C18.5401729,63.9052062 18.795867,64 19.0624895,64 C19.329112,64 19.5848061,63.9052062 19.7732838,63.7364864 L26.6848034,57.552961 C26.9509428,57.3282352 27.0594984,56.9918385 26.9681922,56.6747842 C26.876886,56.35773 26.600154,56.1101463 26.2457726,56.0284574 C25.8913911,55.9467686 25.5153899,56.04389 25.2642069,56.2819967 L19.0629855,61.8300399 Z" id="Shape-Copy-34" fill="#FFFFFF" fill-rule="nonzero"></path>
+        <path d="M104.5,48 C97.5964406,48 92,53.5964406 92,60.5 C92,67.4035594 97.5964406,73 104.5,73 C111.403559,73 117,67.4035594 117,60.5 C117,53.5964406 111.403559,48 104.5,48 Z" id="Shape-Copy-26" fill="#F7941D" fill-rule="nonzero"></path>
+        <rect id="Rectangle-path-Copy-9" fill="#FFFFFF" fill-rule="nonzero" x="103" y="59" width="3" height="7"></rect>
+        <rect id="Rectangle-path-Copy-10" fill="#FFFFFF" fill-rule="nonzero" x="103" y="55" width="3" height="3"></rect>
+        <path d="M19.5,2 C9.83501688,2 2,9.83501688 2,19.5 C2,29.1649831 9.83501688,37 19.5,37 C29.1649831,37 37,29.1649831 37,19.5 C37,9.83501688 29.1649831,2 19.5,2 Z" id="Shape-Copy-10" fill="#3CB669" fill-rule="nonzero"></path>
+        <path d="M17.7558961,21.7450599 L14.4293491,18.595163 C14.0698485,18.2546091 13.5458649,18.1216077 13.0547779,18.246259 C12.563691,18.3709104 12.1801084,18.7342771 12.048522,19.1994823 C11.9169357,19.6646876 12.0573367,20.1610556 12.4168373,20.5016095 L16.4376447,24.3105085 L16.7482349,24.6047296 C17.0152449,24.8578093 17.3774782,25 17.7551934,25 C18.1329086,25 18.4951419,24.8578093 18.762152,24.6047296 L28.5534715,15.3294416 C28.9305023,14.9923529 29.0842894,14.4877578 28.954939,14.0121764 C28.8255885,13.5365949 28.4335516,13.1652195 27.9315111,13.0426862 C27.4294707,12.9201529 26.8968024,13.065835 26.5409598,13.4229951 L17.7558961,21.7450599 Z" id="Shape-Copy-14" fill="#FFFFFF" fill-rule="nonzero"></path>
+        <circle id="Oval-4-Copy-2" fill="#EC1C24" cx="131.5" cy="19.5" r="17.5"></circle>
+        <polygon id="Path" fill="#FFFFFF" points="134 20 134 12 130 12 130 20"></polygon>
+        <polygon id="Path" fill="#FFFFFF" points="134 27 134 23 130 23 130 27"></polygon>
+        <circle id="Oval-4-Copy-2" fill="#F99405" cx="179.5" cy="19.5" r="17.5"></circle>
+        <polygon id="Path" fill="#FFFFFF" points="182 20 182 12 178 12 178 20"></polygon>
+        <polygon id="Path" fill="#FFFFFF" points="182 27 182 23 178 23 178 27"></polygon>
+        <g id="Group" transform="translate(51.000000, 2.000000)">
+            <polygon id="warning---material" fill="#EC1C2D" points="0 35 20.5 0 41 35"></polygon>
+            <polygon id="Path" fill="#FFFFFF" points="23 23 23 15 19 15 19 23"></polygon>
+            <polygon id="Path" fill="#FFFFFF" points="23 30 23 26 19 26 19 30"></polygon>
+        </g>
+    </g>
+</svg>

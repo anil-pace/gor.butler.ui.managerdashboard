@@ -12,14 +12,16 @@ import {
     auditValidatedAttributesSKU,
     auditValidatedAttributesLocation,
     auditValidatedAttributesLocationCsv,
-    createAuditAction
+    createAuditAction,
+    setAuditEditData,
+    attributeValidationItemRecall
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit} from "../actions/auditActions";
+import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {
@@ -36,7 +38,8 @@ import {
 	modalStatus,
 	getSafetyList,
 	getSafetyErrorList,
-	getErrorBotList
+    getErrorBotList,
+    notifyfeedback
 } from "../actions/validationActions";
 import {
     ERROR,
@@ -54,6 +57,7 @@ import {
     CREATE_AUDIT,
     AUDIT_RETRIEVE,
     GET_PPSLIST,
+    GET_AUDIT_DETAILS,
     START_AUDIT,
     DELETE_AUDIT,
     AUDIT_RESOLVE_LINES,
@@ -101,7 +105,8 @@ import {
     ORDERS_PER_PBT_FETCH,
     ORDERS_PER_PBT_FETCH_1,
     ORDERLINES_PER_ORDER_FETCH,
-    WHITELISTED_ROLES
+    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -120,6 +125,7 @@ import {
     g024,
     REQUEST_REPORT_SUCCESS,
     REQUEST_REPORT_FAILURE,
+    ITEM_RECALL_SUCCESS,
     INVALID_SKUID
 } from "../constants/messageConstants";
 import {ShowError} from "./showError";
@@ -156,7 +162,8 @@ import {
     recieveNotificationData,
     notificationReadIntimation,
     recieveAllNotifications,
-    recieveAllSearchedNotifications
+    recieveAllSearchedNotifications,
+    setNotification
 } from "../actions/notificationAction";
 import {
     receivePPSProfiles,
@@ -231,75 +238,89 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case EDIT_USER:
             stringInfo = codeToString(res.alert_data[0]);
             if (stringInfo.type) {
-                store.dispatch(notifySuccess(stringInfo.msg));
+                store.dispatch(notifyfeedback(stringInfo.msg));
             } else {
-                store.dispatch(notifyFail(stringInfo.msg));
+                store.dispatch(setNotification(stringInfo));
             }
             break;
-        case CREATE_AUDIT:
-            if (res.alert_data) {
-                if (res.alert_data[0].code === CODE_E027) {
-                    var skuInfo = {type: ERROR, msg: INVALID_SKUID};
-                    store.dispatch(validateSKU(skuInfo));
-                } else {
-                    stringInfo = codeToString(res.alert_data[0]);
-                    store.dispatch(notifyFail(stringInfo.msg));
-                    store.dispatch(setAuditRefresh(false)); //reset refresh flag
-                }
-            } else {
-                store.dispatch(notifySuccess(AS001));
-                store.dispatch(setAuditRefresh(true)); //set refresh flag
+        case CREATE_AUDIT_REQUEST:
+                    if (res.audit_id) {
+                        values={id:res.audit_id}
+                        msg = getFormattedMessages("CREATEAUDIT", values);  
+                        store.dispatch(notifyfeedback(msg));
+                        store.dispatch(setValidationAuditSpinner(false));
+                        store.dispatch(setAuditRefresh(true)); //set refresh flag
+                 
+                } 
+             else {
+               stringInfo = codeToString(res.alert_data[0]);
+            store.dispatch(setNotification(stringInfo));
+            store.dispatch(setValidationAuditSpinner(false));
+            store.dispatch(setAuditRefresh(true)); //set refresh flag
             }
             break;
+            //feedback notification
+       
         case DELETE_AUDIT:
-            stringInfo = codeToString(res.alert_data[0]);
-            if (stringInfo.type) {
-                store.dispatch(notifyDelete(stringInfo.msg));
+       
+        if(res.alert_data[0].code!=="as002")
+        {
+                values={id:res.alert_data[0].details.audit_id},
+                stringInfo = codeToString(res.alert_data[0]);
+                store.dispatch(setNotification(stringInfo));
+                store.dispatch(setAuditRefresh(true));
+            }
+            else{
+                values={id:res.alert_data[0].details.audit_id};
+                msg = getFormattedMessages("DELETEAUDIT", values);
+                store.dispatch(notifyfeedback(msg));
+                store.dispatch(setAuditRefresh(true)); //reset refresh flag
+            }
+            break;
+
+        case PAUSE_AUDIT:
+        if (res.alert_data[0].code=="as006") {
+            values={id:res.alert_data[0].details.audit_id},
+            msg = getFormattedMessages("PAUSEAUDIT", values);
+            store.dispatch(notifyfeedback(msg));
+            store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            }
+            else{
+                values={id:res.alert_data[0].details.audit_id},
+                stringInfo = codeToString(res.alert_data[0]);
+                store.dispatch(setNotification(stringInfo));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
-            } else {
-                store.dispatch(notifyFail(stringInfo.msg));
-                store.dispatch(setAuditRefresh(false)); //reset refresh flag
             }
             break;
+
+          
+            
         case CANCEL_AUDIT:
-            if (res.alert_data && res.alert_data.length > 0) {
-                //ERROR
-                switch (res.alert_data[0].code) {
-                    case "g020":
-                        store.dispatch(notifySuccess(g020));
-                        break;
+        if (res.alert_data[0].code=="g027") {
+            values={id:res.alert_data[0].details.audit_id};
+            stringInfo = codeToString(res.alert_data[0]);
+            store.dispatch(setNotification(stringInfo));
+            store.dispatch(setAuditRefresh(true)); //set refresh flag
+        }
+        else{
+            values={id:res.alert_data[0].details.audit_id},
+            msg = getFormattedMessages("CANCELLED", values);
+            store.dispatch(notifyfeedback(msg));
+            store.dispatch(setAuditRefresh(false)); //reset refresh flag
+        }
 
-                    case "g021":
-                        store.dispatch(notifySuccess(g021));
-                        break;
-
-                    case "g023":
-                        store.dispatch(notifySuccess(g023));
-                        break;
-
-                    case "g024":
-                        store.dispatch(notifySuccess(g024));
-                        break;
-
-                    default:
-                        store.dispatch(
-                            notifySuccess(res.alert_data[0].description)
-                        );
-                        break;
-                }
-            } else {
-                //SUCCESS
-                store.dispatch(notifySuccess(res.data));
+            case AUDIT_USERLIST:
+            //let auditpps = [];
+            if (res) {
+            store.dispatch(getAuditUserList(res.users));
             }
-            store.dispatch(setAuditSpinner(false));
-            store.dispatch(setAuditRefresh(true));
             break;
+            
         case GET_PPSLIST:
             let auditpps = [];
-            if (res.data.audit) {
-                auditpps = res.data.audit;
+            if (res) {
+            store.dispatch(getPPSAudit(res));
             }
-            store.dispatch(getPPSAudit(auditpps));
             break;
         // case START_AUDIT:
         // if(res.successful.length>1 || res.unsuccessful.length>1 || (res.successful.length===1 && res.unsuccessful.length===1))
@@ -329,6 +350,64 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         // }
         //     break;
         
+        case CHANGE_PPS_TASK:
+        if(res){
+        store.dispatch(
+            notifyfeedback(res.alert_data[0].description)
+        );
+    }
+            break;
+        case GET_AUDIT_DETAILS:
+            let auditdetails = {};
+            if (res) {
+                auditdetails = res;
+                store.dispatch(getAuditDetails(auditdetails));
+            }
+            else{
+                stringInfo = codeToString(res.alert_data[0].code);
+				store.dispatch(notifyfeedback(stringInfo.msg));
+            }//put it in notification
+            
+            break;
+           
+        case START_AUDIT_TASK:
+        if(res.successful.length>=1 || res.unsuccessful.length>=1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        {
+           var successCount = res.successful.length,
+                unsuccessfulCount = Object.keys(res.unsuccessful).length,
+                values = {
+                    successful: successCount,
+                    totalCount: successCount + unsuccessfulCount,
+                    fail:unsuccessfulCount
+                   
+                };
+                if(successCount>=1){
+                msg = getFormattedMessages("BulkAudit", values);
+                store.dispatch(notifyfeedback(msg));
+                store.dispatch(resetaudit(res.successful));
+                }
+                if(res.unsuccessful.length>=1){
+                    stringInfo = getFormattedMessages("STARTFAIL", values);
+                    store.dispatch(setNotification(stringInfo));
+                }
+
+                store.dispatch(setAuditRefresh(true));
+        }
+        else if(res.alert_data[0].code== "as007"){//to do
+                stringInfo = codeToString(res.alert_data[0]);
+				store.dispatch(notifyfeedback(stringInfo.msg)); 
+        }
+        else if(res.alert_data[0].code== "g028"){
+            stringInfo = codeToString(res.alert_data[0]);
+            store.dispatch(setNotification(stringInfo));
+        }
+        else
+        {
+            stringInfo = getFormattedMessages("STARTFAILALL", values);
+            store.dispatch(setNotification(stringInfo));
+        }
+        break;
+
         case RECIEVE_HEADER:
             if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
                 endSession(store);
@@ -359,13 +438,55 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case VALIDATE_SKU_ID:
             store.dispatch(auditValidatedAttributesSKU(res));
             break;
+        case VALIDATE_SKU_ITEM_RECALL:
+            store.dispatch(attributeValidationItemRecall(res));
+            break;
         case VALIDATE_LOCATION_ID:
             store.dispatch(auditValidatedAttributesLocation(res));
             store.dispatch(validateLocationcodeSpinner(false));
             break;
-        case CREATE_AUDIT_REQUEST:
-            store.dispatch(createAuditAction(res));
-            break;
+
+        case AUDIT_EDIT:    
+        if(res){
+            store.dispatch(setAuditEditData(res));
+        }else{
+                stringInfo = codeToString(res.alert_data[0].code);
+				store.dispatch(notifyfeedback(stringInfo.msg));
+        }//put it in notification
+            break; 
+
+            case AUDIT_EDIT_REQUEST:    
+            if (res.audit_id) {
+                values={id:res.audit_id},
+                msg = getFormattedMessages("EDITED", values);  
+                store.dispatch(notifyfeedback(msg));
+                store.dispatch(setValidationAuditSpinner(false));
+                store.dispatch(setAuditRefresh(true)); //set refresh flag
+             } 
+          else {
+            stringInfo = codeToString(res.alert_data[0]);
+            store.dispatch(setNotification(stringInfo));
+            store.dispatch(setValidationAuditSpinner(false));
+            store.dispatch(setAuditRefresh(true)); //set refresh flag
+         }
+         break; 
+
+      case CREATE_DUPLICATE_REQUEST:
+      if (res.audit_id) {
+        values={id:res.audit_id},
+        msg = getFormattedMessages("DUPLICATED", values);
+        store.dispatch(notifyfeedback(msg));
+        store.dispatch(setValidationAuditSpinner(false));
+        store.dispatch(setAuditRefresh(false)); //reset refresh flag
+      }
+      else{
+        stringInfo = codeToString(res.alert_data[0]);
+        store.dispatch(setNotification(stringInfo));
+        store.dispatch(setValidationAuditSpinner(false));
+        store.dispatch(setAuditRefresh(true)); //set refresh flag
+      }
+      break;
+               
         case VALIDATE_LOCATION_ID_CSV:
             if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
                 store.dispatch(auditValidatedAttributesLocationCsv(res));
@@ -583,6 +704,14 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));
+            break;
+        case SELLER_RECALL:
+            if(status !== 202){
+                ShowError(store, cause, status);
+            }
+            else{
+                store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
+            }
             break;
         default:
             ShowError(store, cause, status);

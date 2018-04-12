@@ -7,7 +7,7 @@ class FilterInputField extends React.Component{
     
 	render(){
 		return (
-			<div>
+			<div className={this.props.by2value?'dividebyTwo':""}>
                 <div className="gor-filter-input-text"> {this.props.inputText.label} </div>
                 <input className={!this.props.flag?"gor-filter-input-wrap":"gor-filter-input-wrap gor-filter-disable"} placeholder={this.props.placeholder} disabled={this.props.flag}   type="text" onChange={this._textSubmit.bind(this)} ref={node=> { this.pageNum=node }} value={this.props.inputValue||""}/>
             </div>

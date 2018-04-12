@@ -1793,6 +1793,30 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "commonDataTable.auditview.button",
+    "description": "View Details",
+    "defaultMessage": "View Details",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
+    "id": "commonDataTable.startAudit.button",
+    "description": "start button",
+    "defaultMessage": "Start audit",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
+    "id": "audit.data.subheading",
+    "description": "Text for user delete",
+    "defaultMessage": "Information will be lost",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
+    "id": "audit.data.data2",
+    "description": "user delete",
+    "defaultMessage": "Information lost",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
     "id": "widget.audit.heading.value",
     "description": "Total Items Audited",
     "defaultMessage": "None",
@@ -2038,6 +2062,12 @@
     "description": "filter heading",
     "defaultMessage": "Apply filter",
     "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "orders.orderId",
+    "description": "Heading for view orderline",
+    "defaultMessage": "Order ID",
+    "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
     "id": "audit.placeholder",
@@ -2457,6 +2487,18 @@
     "description": "Text for go back button",
     "defaultMessage": "Go Back",
     "filepath": "./src/containers/auditTab/startAudit.js"
+  },
+  {
+    "id": "orders.orderId",
+    "description": "Heading for view orderline",
+    "defaultMessage": "Order ID",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
+    "id": "orders.orderdetails",
+    "description": "Heading for Order details",
+    "defaultMessage": "Order details",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
     "id": "emergency.heading",

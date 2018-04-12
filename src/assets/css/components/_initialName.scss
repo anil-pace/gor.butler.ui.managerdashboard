@@ -1,0 +1,42 @@
+.gor-IN-wrapper{
+   width:28px;
+   height: 24px;
+   display: inline-block;
+   margin-bottom: 7px;
+   margin-top:15px;
+   .gor-IN-round{
+        border-radius: 14px;
+        float: left;
+        width:24px;
+        height: 24px;
+        text-align: center;
+        background-color: #dfdfdf;
+        .got-IN-initial{
+            display: inline-block;
+            margin-top: 3px;
+            padding: 3px;
+            font-size: 12px;
+	        font-weight: 600;
+        }
+        .gor-login-user{
+        background-position: -205px -77px;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        }
+    }
+    .gor-IN-square{
+        width:24px;
+        height: 24px;
+        text-align: center;
+        background-color: #dfdfdf;
+        .got-IN-initial{
+            display: inline-block;
+            padding: 3px;
+            font-size: 12px;
+	        font-weight: 600;
+        }
+    }
+}
+
+

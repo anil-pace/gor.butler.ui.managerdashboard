@@ -105,7 +105,12 @@ class NotificationsWrapper extends React.Component{
 		
 	render(){
 		var notificationData = this.props.searchApplied ? this.props.searchedNotificationData : this.props.wsNotificationData ;
-		return (
+        // var notificationData=[{'type':'WARNING','title':'OPERATION RESUMED','description':'All operation resumed to the normal state','createTime':'Fri, 16 Feb 2018 06:07:43 GMT'},
+        // {'type':'INFO','title':'fire emergency activated','description':'Follow evacuation procedure immediately','createTime':'Fri, 10 March 2018 06:07:43 GMT'},
+        // {'type':'WARNING','title':'Butler Zone 1 - Entry Gate 2002','description':'12 orderswave breached till 11:00AM ','createTime':'Fri, 10 March 2018 06:07:43 GMT'},
+        // {'type':'ERROR','title':'Network communication lost','description':'Network issue','createTime':'Fri, 10 March 2018 06:07:43 GMT'}
+        // ]
+        return (
 			<div className="notificationWrap">
 				<Notification onScrollHandler={this._onScrollHandler.bind(this)} 
                 unreadCount={this.props.unreadCount} 

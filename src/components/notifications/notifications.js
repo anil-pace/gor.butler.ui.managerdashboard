@@ -7,6 +7,7 @@ import ResultPane from './resultPane';
 import ReactDOM  from 'react-dom';
 import NotificationSearchPanel from './notificationSearchPanel';
 import { FormattedRelative , FormattedMessage} from 'react-intl';
+import { connect } from 'react-redux'; 
 
 
 
@@ -62,12 +63,12 @@ class Notification extends React.Component{
 					{this.props.notificationData.length ? this.props.notificationData.map((tuple, index) => (
 				        <section className="row" key={index}>
 							<div className="content">
-								<p className="title">{tuple.title}</p>
-								<p className="message">{tuple.description}</p>
-								<p><span className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></span></p>
-							</div>
-							<div className="status">
-								
+								<span className={tuple.type+'-icon'}></span>
+								<div className="containerText">
+								<div className="title">{tuple.title.toUpperCase()}</div>
+								<div className="message">{tuple.description}</div>
+								<div className="time"><FormattedRelative updateInterval={10000} value={new Date(tuple.createTime)}/></div>
+								</div>
 							</div>
 						</section>
 				    )):<section className="row" >
@@ -91,6 +92,11 @@ class Notification extends React.Component{
 	}
 }
 
+function mapStateToProps(state, ownProps) {
+    return {
+         "timeOffset":state.authLogin.timeOffset,
+     }
+ }
 Notification.propTypes={
 	unreadCount: React.PropTypes.number,
 	onPaneSearch: React.PropTypes.func.isRequired,
@@ -100,4 +106,4 @@ Notification.propTypes={
 	searchApplied:React.PropTypes.bool
 }
 
-export default Notification ;
+export default connect(mapStateToProps)(Notification);

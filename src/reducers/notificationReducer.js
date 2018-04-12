@@ -7,7 +7,7 @@ import {
   RESET_NOTIFICATION_TABLE_DATA,
   SET_NOTIFICATION_SPINNER,
   SEARCHED_NOTIFICATIONS_DATA_ALL,
-  SET_INFINITE_SPINNER
+  SET_INFINITE_SPINNER,SET_NOTIFICATION,SET_NOTIFICATION_NULL
 } from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
@@ -92,6 +92,19 @@ export  function notificationReducer(state={},action){
             "hasDataChanged":!state.hasDataChanged,
             "searchAppliedAllNotifications":true
           })
+    case SET_NOTIFICATION:  
+          return Object.assign({}, state, { 
+            "noticationData":action.data
+          })    
+    case SET_NOTIFICATION_NULL:  
+          return Object.assign({}, state, { 
+            "noticationData":null
+          })     
+    case "SET_NOTIFICATION_STATUS":  
+          return Object.assign({}, state, { 
+            "notificationFilterState" : action.data
+          })     
+                
 
     default:
       return state
