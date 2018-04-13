@@ -1325,26 +1325,6 @@ body {
   margin: 0;
 }
 
-.gor-tile .gor-footer-left {
-  font-family: 'Source Sans Pro regular', sans-serif;
-  font-size: 1rem;
-  padding: 0;
-  margin: 0;
-  width: 45%;
-  display: inline-block;
-  border: 1px solid red;
-}
-
-.gor-tile .gor-footer-right {
-  font-family: 'Source Sans Pro regular', sans-serif;
-  font-size: 1rem;
-  padding: 0;
-  margin: 0;
-  width: 45%;
-  display: inline-block;
-  border: 1px solid red;
-}
-
 .gor-tile .gor-success {
   color: #10C469;
 }
@@ -9667,13 +9647,6 @@ button:disabled {
   font-size: 30px;
 }
 
-.gor-progress-bar-wrapper {
-  width: 100%;
-  background: #eeeeee;
-  height: 12px;
-  border-radius: 12px;
-}
-
 .gor-AuditDetails-modal-content {
   background-color: #fefefe;
   margin: auto;
@@ -9950,66 +9923,6 @@ checkmark1 for indeterminate state*/
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-.searchBarWrapper {
-  width: 19.375rem;
-  border-radius: 3px;
-  border: 1px solid #aaaaaa;
-  background-color: #fff;
-}
-
-.searchBarWrapper .searchIconWrap {
-  display: inline-block;
-  padding-left: 0.625rem;
-  vertical-align: middle;
-}
-
-.searchBarWrapper .searchIconWrap .gor-search-icon {
-  background-position: -1px -93px;
-  width: 14px;
-  height: 14px;
-}
-
-.searchBarWrapper .inputWrapper {
-  display: inline-block;
-  width: 80%;
-}
-
-.searchBarWrapper .inputWrapper .gor-search-input-wrap {
-  padding: .625rem;
-  border: none;
-  color: #aaaaaa;
-  width: 100%;
-}
-
-.searchBarWrapper.animated {
-  -webkit-transition: width 1s ease-in-out;
-  -moz-transition: width 1s ease-in-out;
-  -o-transition: width 1s ease-in-out;
-  transition: width 1s ease-in-out;
-}
-
-.searchBarWrapper.animated .inputWrapper {
-  width: 0;
-}
-
-.searchBarWrapper.animated .gor-search-input-wrap {
-  padding: 0;
-  width: 0;
-}
-
-.searchBarWrapper.animated.opened {
-  width: 150px;
-}
-
-.searchBarWrapper.animated.opened .inputWrapper {
-  width: 120px;
-}
-
-.searchBarWrapper.animated.opened .gor-search-input-wrap {
-  padding: 0;
-  width: 120px;
 }
 
 .gor-auditActionModal {

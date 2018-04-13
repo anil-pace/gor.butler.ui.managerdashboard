@@ -22,10 +22,6 @@ class FilterDateTimeFieldWrap extends React.Component{
  return inputFieldWrap;
 }
 render(){
-  console.log("==================================>");
-  console.log("==================================>");
-  console.log("coming inside FilterDateFieldWrap component");
-
   var inputFields=this._processInputField()
   return (
           <div>

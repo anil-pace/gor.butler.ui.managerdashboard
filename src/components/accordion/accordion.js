@@ -24,13 +24,6 @@ class Accordion extends React.Component{
 
     if(index === -1){
         storage.push(this.props.cutOffTimeIndex);
-        /*when more than one cut off time is in expanded state */
-        // if(storage.length > 1){
-        //   for(let i =0; i< storage.length -1 ; i++){
-        //     this.props.stopPollingOrders(this.props.intervalIdForOrders);
-        //   }
-        // }
-        /*END */
         this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
     }
     else{
@@ -47,13 +40,11 @@ class Accordion extends React.Component{
     }
 
     if(this.state.open) {
-      console.log("===========================.           INSIDE OPEN FALSE");
       this.setState({
         open: false,
         class: "panel"
       });
     }else{
-      console.log("===========================.           INSIDE OPEN TRUE");
       this.setState({
         open: true,
         class: "panel open"

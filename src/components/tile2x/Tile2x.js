@@ -5,32 +5,14 @@ class Tile2x extends React.Component{
     	super(props);
     }
 	render(){
-		const pageId = this.props.items.pageId;
-		let renderThisDiv = null;
-		if(pageId === "orders"){
-			renderThisDiv = (
-				<div className="gor-up-tile">
-					<span className="gor-heading">{this.props.items.headingleft}</span>
-					<div className="gor-footer-status"> 
-						<p className="gor-footer-left"><span>{this.props.items.textleft}</span></p>
-						<p className="gor-footer-right"><span>{this.props.items.statusleft}</span></p>
-					</div>
-			 	</div>
-			)
-		}
-		else{
-			renderThisDiv = (
+		return (
+		<div className="gor-tile gor-double">
+			<div className="gor-tile-one">		 
 				<div className="gor-up-tile">
 					<span className="gor-heading">{this.props.items.headingleft}</span>
 					<p className="gor-heading-value"><span className={this.props.items.valueLeftStatus}>{this.props.items.textleft}</span></p>
 					<p className="gor-status"><span className={this.props.items.statusLogo}></span><span className={this.props.items.statusClass}>{  this.props.items.statusleft}</span></p>
 			 	</div>
-			)
-		}
-		return (
-		<div className="gor-tile gor-double">
-			<div className="gor-tile-one">		 
-				{renderThisDiv}
 			 	<div className="gor-low-tile">
 			  		<span>{this.props.items.lowleft}</span>
 			 	</div>

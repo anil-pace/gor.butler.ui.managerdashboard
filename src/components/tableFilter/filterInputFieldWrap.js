@@ -2,8 +2,10 @@ import React  from 'react';
 import FilterInputField from './filterInputField';
 
 class FilterInputFieldWrap extends React.Component{
-	
- 
+  
+ _textSubmit(e) {
+   this.props.handleInputText(this.pageNum.value,this.props.inputText.value);
+ }
  _processInputField() {
   var totalInput=this.props.inputText, inputFieldWrap=[],  by2value=false,type="text";
   var textboxStatus=this.props.textboxStatus ||{};
@@ -18,7 +20,7 @@ class FilterInputFieldWrap extends React.Component{
      flag=((textboxStatus.name).indexOf(totalInput[i].value))!==-1?false:true;
    }
    var inputValue=(flag?"":this.props.inputValue[totalInput[i].value]);
-   var inputField=<FilterInputField key={i} by2value={by2value} inputText={totalInput[i]} placeholder={this.props.placeholder} handleInputText={this.props.handleInputText} inputValue={inputValue} flag={flag}/>;
+   var inputField=<FilterInputField key={i} by2value={by2value} placeholder={this.props.placeholder} type={type} inputText={totalInput[i]} handleInputText={this.props.handleInputText} inputValue={inputValue} flag={flag}/>;
    inputFieldWrap.push(inputField)
  }
  return inputFieldWrap;
@@ -34,6 +36,7 @@ render(){
 }; 
 
 export default FilterInputFieldWrap;
+
 
 
 
