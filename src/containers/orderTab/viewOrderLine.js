@@ -98,8 +98,6 @@ class ViewOrderLine extends React.Component{
   }
   
   _getOrdersLines = (orderId) =>  {
-        console.log('%c ==================>!  ', 'background: red; color: white');
-        console.log("LEVEL 3 ORDER LINES REQUESTED WITH ORDER ID ===>" + orderId);
         let params={
             'url':ORDERLINES_PER_ORDER_URL+"/"+orderId,
             'method':GET,
