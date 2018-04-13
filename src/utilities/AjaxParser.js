@@ -98,6 +98,11 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    ORDERS_FULFIL_FETCH,
+    ORDERS_SUMMARY_FETCH,
+    ORDERS_CUT_OFF_TIME_FETCH,
+    ORDERS_PER_PBT_FETCH,
+    ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,CREATE_DUPLICATE_REQUEST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,AUDIT_EDIT_REQUEST
 } from "../constants/frontEndConstants";
@@ -171,6 +176,8 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
+import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData,receiveOrdersPerPbtData_1, receiveOrdersLinesData} from './../actions/norderDetailsAction';
+
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -709,6 +716,21 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
+            break;
+        case ORDERS_FULFIL_FETCH:
+            store.dispatch(receiveOrderFulfilmentData(res));
+            break;
+        case ORDERS_SUMMARY_FETCH:
+            store.dispatch(receiveOrderSummaryData(res));
+            break;
+        case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(receiveCufOffTimeData(res));
+            break;
+        case ORDERS_PER_PBT_FETCH:
+            store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+        case ORDERLINES_PER_ORDER_FETCH:
+            store.dispatch(receiveOrdersLinesData(res));
             break;
         case SELLER_RECALL:
             if(status !== 202){

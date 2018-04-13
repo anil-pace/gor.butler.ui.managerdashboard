@@ -112,6 +112,11 @@ export const SYSTEM_BUTLERS_DETAILS="butlers";
 export const HISTOGRAM_DETAILS="histogram";
 export const USER_DATA="users";
 export const ORDERLIST="ORDERLIST";
+export const ORDERS_FULFIL_URL="ORDERS_FULFIL_URL";
+export const ORDERS_SUMMARY_URL = "ORDERS_SUMMARY_URL";
+export const ORDERS_CUT_OFF_TIME_URL="ORDERS_CUT_OFF_TIME_URL";
+export const ORDERS_PER_PBT_URL = "ORDERS_PER_PBT_URL";
+export const ORDERLINES_PER_ORDER_URL="ORDERLINES_PER_ORDER_URL";
 
 
 /*Constants for type of AJAX call*/

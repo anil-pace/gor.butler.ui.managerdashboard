@@ -180,7 +180,11 @@ export const EMERGENCY="emergency";
 export const NOTIFY_EMERGENCY_END="NOTIFY_EMERGENCY_END";
 export const SYSTEM_EMERGENCY="system_emergency";
 export const SET_EMERGENCY_MODAL_STATUS = "SET_EMERGENCY_MODAL_STATUS";
-
+export const ORDERS_FULFIL_FETCH = "ORDERS_FULFIL_FETCH";
+export const ORDERS_SUMMARY_FETCH = "ORDERS_SUMMARY_FETCH";
+export const ORDERS_CUT_OFF_TIME_FETCH = "ORDERS_CUT_OFF_TIME_FETCH";
+export const ORDERS_PER_PBT_FETCH = "ORDERS_PER_PBT_FETCH";
+export const ORDERLINES_PER_ORDER_FETCH = "ORDERLINES_PER_ORDER_FETCH";
 
 
 /*Constants for type of AJAX call*/
@@ -817,13 +821,27 @@ export const CREATE_DUPLICATE_REQUEST='CREATE_DUPLICATE_REQUEST';
 export const WARNING='WARNING';
 
 
-
-
- 
-
-
-
-
+export const PICK_BEFORE_TIME = "PICK_BEFORE_TIME";
+export const ORDER_ID = "ORDER ID";
+export const PPS_ID = "PPS ID";
+export const SKU_ID = "SKU ID";
+export const FROM_TIME = "FROM TIME";
+export const TO_TIME = "TO TIME";
+export const URGENT_ORDER_TAG = "URGENT";
+export const EXPRESS_ORDER_TAG = "EXPRESS";
+export const PENDING_STATUS = "PENDING";
+export const BREACH_RISK_STATUS ="BREACH_RISK";
+export const BREACHED_STATUS ="BREACHED";
+export const BREACHED_COMPLETED_STATUS ="BREACHED COMPLETED";
+export const PRODUCT_SHORT_STATUS ="PRODUCT SHORT";
+export const OUT_OF_STOCK_STATUS ="OUT OF STOCK";
+export const COMPLETED_STATUS ="COMPLETED";
+export const REJECTED_STATUS ="REJECTED";
+export const CANCELLED_STATUS ="CANCELLED";
+export const ABANDONED_STATUS ="ABANDONED";
+export const ORDER_TAGS = "ORDER TAGS";
+export const STATUS = "STATUS";
+export const ORDERS_POLLING_INTERVAL = 60000;//60000;
 
 
 

@@ -149,7 +149,7 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,neworder, newordersClass, newordersStatus,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
@@ -164,7 +164,6 @@ class Tabs extends React.Component{
               
     order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
               defaultMessage="ORDERS"/>;
-              
     users=<FormattedMessage id="users.tab.heading" description="users tab" 
               defaultMessage="USERS"/> ;
     inventory=<FormattedMessage id="inventory.tab.heading" description="inventory tab" 
@@ -339,7 +338,7 @@ singleNotification=<GorToastify key={1}>
 			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
+		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
