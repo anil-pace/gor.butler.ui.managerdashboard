@@ -15,7 +15,7 @@ class OperationsLogTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.data && nextProps.data.length !== 0) {
+        if (nextProps.data && (nextProps.data.length !== 0 || nextProps.forceUpdate)) {
             this.setState({list: nextProps.data})
         }
     }

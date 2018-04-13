@@ -92,7 +92,8 @@ class OperationsLogTab extends React.Component {
         this._requestReportDownload = this._requestReportDownload.bind(this);
         this._setFilter = this._setFilter.bind(this)
         this.subscription = null
-        this.state = {query: null}
+        this.state = {query: null, page: 1}
+
 
     }
 
@@ -106,7 +107,7 @@ class OperationsLogTab extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if ((!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.removeSubscription()
             this.setState({query: nextProps.location.query})
             this._setFilterState(nextProps.location.query)
@@ -131,8 +132,8 @@ class OperationsLogTab extends React.Component {
                                 userId: nextProps.location.query.user_id,
                                 skuId: nextProps.location.query.sku_id,
                                 ppsId: nextProps.location.query.pps_id,
-                                operatingMode: Array.isArray(nextProps.location.query.operatingMode) ? nextProps.location.query.operatingMode : [nextProps.location.query.operatingMode],
-                                status: Array.isArray(nextProps.location.query.status) ? nextProps.location.query.status : [nextProps.location.query.status],
+                                operatingMode: nextProps.location.query.operatingMode ? (Array.isArray(nextProps.location.query.operatingMode) ? nextProps.location.query.operatingMode : [nextProps.location.query.operatingMode]) : null,
+                                status: nextProps.location.query.status ? (Array.isArray(nextProps.location.query.status) ? nextProps.location.query.status : [nextProps.location.query.status]) : null,
                                 timePeriod: {value: 1, unit: 'd'},
                                 page: 0,
                                 PAGE_SIZE: 100
@@ -189,6 +190,36 @@ class OperationsLogTab extends React.Component {
 
     _setFilter() {
         this.props.showOperationsLogFilter(!this.props.showFilter);
+    }
+
+
+    fetchNextResults() {
+        let self = this
+        self.props.data.fetchMore({
+            variables: (function () {
+                return {
+                    input: {
+                        requestId: self.props.location.query.request_id,
+                        userId: self.props.location.query.user_id,
+                        skuId: self.props.location.query.sku_id,
+                        ppsId: self.props.location.query.pps_id,
+                        operatingMode: self.props.location.query.operatingMode ? ( Array.isArray(self.props.location.query.operatingMode) ? self.props.location.query.operatingMode : [self.props.location.query.operatingMode]) : null,
+                        status: self.props.location.query.status ? (Array.isArray(self.props.location.query.status) ? self.props.location.query.status : [self.props.location.query.status]) : null,
+                        timePeriod: self.props.location.query.time_period ? {
+                            value: self.props.location.query.time_period.split("_")[0],
+                            unit: self.props.location.query.time_period.split("_")[1]
+                        } : {value: 1, unit: 'd'},
+                        page: self.state.page++,
+                        PAGE_SIZE: 25
+                    }
+                }
+            }()),
+            updateQuery: (previousResult, newResult) => {
+                return Object.assign({}, {
+                    OperationLogList: {list: [...previousResult.OperationLogList.list, ...newResult.fetchMoreResult.OperationLogList.list]}
+                })
+            },
+        })
     }
 
     _requestReportDownload() {
@@ -274,7 +305,7 @@ class OperationsLogTab extends React.Component {
 
 
                 </div>
-                {this.props.location.query.time_period !== REALTIME ?
+                {this.props.location.query.time_period !== REALTIME && JSON.stringify(this.props.location.query) !== '{}' ?
                     <FilterSummary
                         noResults={data_list.length === 0}
                         total={data_list.length}
@@ -288,7 +319,8 @@ class OperationsLogTab extends React.Component {
                                                        description="button label for show all"
                                                        defaultMessage="Show all Operations"/>}/>
                     : null}
-                <OperationsLogTable data={data_list} timeOffset={_this.props.timeOffset}/>
+                <OperationsLogTable forceUpdate={JSON.stringify(this.props.location.query) === '{}'} data={data_list}
+                                    timeOffset={_this.props.timeOffset}/>
 
             </div>
         );
