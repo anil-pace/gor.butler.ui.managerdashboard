@@ -145,7 +145,7 @@ class MsuConfigFilter extends React.Component{
         //     _query.current_task=filterState.tokenSelected["MODE"]
         // }
 
-        hashHistory.push({pathname: "/system/msuConfigurationTab", query: _query})
+        hashHistory.push({pathname: "/system/msuConfiguration", query: _query})
     }
 
     _clearFilter() {
@@ -154,7 +154,7 @@ class MsuConfigFilter extends React.Component{
                 "MSU ID":null
             },
         });
-        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
         
     }
     

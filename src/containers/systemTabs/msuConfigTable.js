@@ -9,8 +9,6 @@ import {
 } from '../../constants/frontEndConstants';
 import {debounce} from '../../utilities/debounce';
 
-// import OrderFilter from './orderFilter';
-// import Dropdown from '../../components/dropdown/dropdown'
 // import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -31,31 +29,15 @@ import {wsOverviewData} from './../../constants/initData.js';
 
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
-import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH
-} from '../../constants/frontEndConstants';
 
 import {
-    FETCH_MSU_CONFIG_LIST
+    APP_JSON, POST, GET,
+    FETCH_MSU_CONFIG_LIST,
+    MSU_RECONFIG_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
-
-import {
-    API_URL,
-    ORDERS_URL,
-    PAGE_SIZE_URL,
-    PROTOCOL,
-    ORDER_PAGE,
-    UPDATE_TIME_UNIT, UPDATE_TIME,
-    EXCEPTION_TRUE,
-    WAREHOUSE_STATUS_SINGLE,
-    WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
-    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
-} from '../../constants/configConstants';
 
 import {
     MSU_CONFIG_URL,
-    MSU_CONFIG_LIST_FETCH
 } from '../../constants/configConstants';
 
 const messages=defineMessages({
@@ -119,6 +101,10 @@ class MsuConfigTable extends React.Component {
         this._changeDestinationType = this._changeDestinationType.bind(this);
     }
 
+    componentWillUnmount(){
+        this.clearTimeout(this._intervalIdForMsuList);
+    }
+
     componentDidMount(){
         this._requestMsuList();
     }
@@ -134,6 +120,7 @@ class MsuConfigTable extends React.Component {
             //'formdata':formData,
         }
         this.props.makeAjaxCall(params);
+        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_RECONFIG_POLLING_INTERVAL);
     }
 
      _changeDestinationType = (orderId) =>  {

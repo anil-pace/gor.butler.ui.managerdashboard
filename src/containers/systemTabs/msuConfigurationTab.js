@@ -13,7 +13,11 @@ import {
     INITIAL_HEADER_SORT,
     INITIAL_HEADER_ORDER,
     GOR_PERIPHERAL_ONLINE,
-    GOR_PERIPHERAL_OFFLINE,WS_ONSEND
+    GOR_PERIPHERAL_OFFLINE,WS_ONSEND,
+    APP_JSON, POST, GET,
+    FETCH_MSU_CONFIG_LIST,
+    MSU_RECONFIG_POLLING_INTERVAL,
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
 } from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import {setButlerSpinner} from  '../../actions/spinnerAction';
@@ -29,6 +33,12 @@ import {modal} from 'react-redux-modal';
 import ChangeRackType from './changeRackType';
 import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
+import {
+    MSU_CONFIG_URL,
+    MSU_CONFIG_FILTER_URL,
+} from '../../constants/configConstants';
+import { makeAjaxCall } from '../../actions/ajaxActions';
+
 //Mesages for internationalization
 const messages=defineMessages({
     butlerPrefix: {
@@ -219,6 +229,31 @@ class MsuConfigTab extends React.Component {
         this.props.butlerBotsRefreshed()
     }
 
+    componentDidMount(url){
+        this._requestMsuList();
+    }
+
+    _requestMsuList = (filterUrl) => {
+        console.log(new Date() + "P O L L I N G    H A P P E N I N G  ...........................");
+        let url;
+        if(filterUrl){
+            url = filterUrl;
+            clearTimeout(this._intervalIdForMsuList); // clear polling when any Filter has been applied
+            console.log(new Date() + "P O L L I N G    S T O P P E D ...........................");
+        }
+        else url = MSU_CONFIG_URL;
+        let params={
+            'url': url,
+            'method':GET,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause' : FETCH_MSU_CONFIG_LIST
+            //'formdata':formData,
+        }
+        this.props.makeAjaxCall(params);
+        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_RECONFIG_POLLING_INTERVAL);
+    }
+
 
     _handleRefreshData = () => {
         // console.log("inside _handleRefreshData function");
@@ -246,28 +281,41 @@ class MsuConfigTab extends React.Component {
      * @private
      */
     _refreshList(query) {
-        this.props.setButlerSpinner(true)
-        let filterSubsData={}
-        if (query.location) {
-            filterSubsData["location"]=['contains',query.location]
+        let filterUrl;
+        if(query.rack_id && query.destination_type){
+            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +",racktype="+query.destination_type;
+            //'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
         }
-        if (query.butler_id) {
-            filterSubsData["butler_id"]=['=',query.butler_id]
+        else if(query.destination_type){
+            filterUrl = MSU_CONFIG_FILTER_URL+"?racktype="+query.destination_type;
         }
-        if (query.status) {
-            filterSubsData["state"]=['in',query.status.constructor===Array?query.status:[query.status]]
+        else if (query.rack_id){
+            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
         }
-        if (query.current_task) {
-            filterSubsData["current_task"]=['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
-        }
+        this._requestMsuList(filterUrl);
 
-        if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
-            this.props.toggleBotButton(true);
-            this.props.filterApplied(true);
-        } else {
-            this.props.toggleBotButton(false);
-            this.props.filterApplied(false);
-        }
+        this.props.setButlerSpinner(true);
+        let filterSubsData={}
+        // if (query.location) {
+        //     filterSubsData["location"]=['contains',query.location]
+        // }
+        // if (query.butler_id) {
+        //     filterSubsData["butler_id"]=['=',query.butler_id]
+        // }
+        // if (query.status) {
+        //     filterSubsData["state"]=['in',query.status.constructor===Array?query.status:[query.status]]
+        // }
+        // if (query.current_task) {
+        //     filterSubsData["current_task"]=['in',query.current_task.constructor===Array?query.current_task:[query.current_task]]
+        // }
+
+        // if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
+        //     this.props.toggleBotButton(true);
+        //     this.props.filterApplied(true);
+        // } else {
+        //     this.props.toggleBotButton(false);
+        //     this.props.filterApplied(false);
+        // }
 
         let updatedWsSubscription=this.props.wsSubscriptionData;
         updatedWsSubscription["system"].data[0].details["filter_params"]=filterSubsData;
@@ -502,7 +550,11 @@ var mapDispatchToProps=function (dispatch) {
             dispatch(butlerfilterState(data));
         },
         initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        butlerBotsRefreshed:function(data){dispatch(butlerBotsRefreshed(data))}
+        butlerBotsRefreshed:function(data){dispatch(butlerBotsRefreshed(data))},
+
+        makeAjaxCall: function(params){
+            dispatch(makeAjaxCall(params))
+        },
     };
 }
 
