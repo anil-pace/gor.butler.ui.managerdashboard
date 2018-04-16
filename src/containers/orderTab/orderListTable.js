@@ -108,6 +108,21 @@ const messages=defineMessages({
         id: 'orderlist.cutOffTime.time',
         description: " cut off time in hrs",
         defaultMessage: 'Cut off time {cutOffTime} hrs'
+    },
+    orderId:{
+        id: 'orders.order.orderId',
+        description: "order id",
+        defaultMessage: 'Order {orderId}'
+    },
+    ppsId:{
+        id: 'orders.order.ppsId',
+        description: "pps id",
+        defaultMessage: 'PPS {ppsId}'
+    },
+    binId:{
+        id: 'orders.order.binId',
+        description: "bin id",
+        defaultMessage: 'Bin {binId}'
     }
 });
 
@@ -380,9 +395,14 @@ class OrderListTable extends React.Component {
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
 
-                formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
-                formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
-                formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
+                // formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
+                // formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
+                // formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
+
+                let formatOrderId = (orderData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "null");
+                let formatPpsId =   (orderData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: orderData[i].pps_id}): "null");
+                let formatBinId =   (orderData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: orderData[i].pps_bin_id}): "null");
+                let formatStartDate = "null";
 
                 //Create time need to be add
                     if (orderData[i].start_date) {
