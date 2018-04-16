@@ -8,8 +8,9 @@ class searchFilter extends React.Component{
       this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(){
-    this.props.handleChange(this.inputText.value);
+  handleChange(e){
+    this.props.handleChange(e.target.value);
+    //this.props.handleChange(this.inputText.value);
   }
   
 

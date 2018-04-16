@@ -691,7 +691,7 @@ body {
 .gor-expand-icon {
   background-position: -401px -53px;
   width: 24px;
-  height: 24px;
+  height: 23px;
   display: inline-block;
 }
 
@@ -9155,10 +9155,12 @@ button:disabled {
 
 .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent {
   margin-top: 10px;
+  width: 60%;
 }
 
 .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft {
-  width: 60%;
+  width: 100%;
+  float: left;
 }
 
 .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn {
@@ -9196,10 +9198,12 @@ button:disabled {
 }
 
 .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsSearchWrap {
+  margin-top: 70px;
   float: right;
 }
 
 .gor-modal-content .gor-modal-body .orderDetailsListWrapper {
+  clear: both;
   margin-left: -20px;
 }
 
@@ -9620,36 +9624,6 @@ button:disabled {
   font-size: 14px;
   font-weight: 600;
   text-align: left;
-}
-
-.orderDetailsColumn {
-  width: 33%;
-  display: inline-block;
-}
-
-.orderDetailsColumn .orderDetailsRow {
-  padding: 10px;
-  line-height: 25px;
-}
-
-.orderDetailsColumn .orderDetailsRow .spanKey {
-  font-size: 0.875rem;
-  font-weight: 600;
-  display: inline-block;
-  color: #4a4a4a;
-}
-
-.orderDetailsColumn .orderDetailsRow .spanValue {
-  font-size: 0.875rem;
-  font-weight: 400;
-  display: inline-block;
-  color: #4a4a4a;
-  text-align: left;
-  margin-left: 10px;
-}
-
-.width-auto {
-  width: auto;
 }
 
 .gor-actionDropDown {

@@ -41,6 +41,8 @@ import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INI
 } from '../../constants/frontEndConstants';
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 
+import {unSetAllActivePbts} from '../../actions/norderDetailsAction'
+
 import {
     API_URL,
     ORDERS_URL,
@@ -98,11 +100,20 @@ import {
     componentDidMount(){
         let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
         let endDate = new Date().toISOString();
+        this.props.setOrderListSpinner(true);
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
        
     }
 
+
+
     componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+            
+        }
         if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
@@ -112,6 +123,7 @@ import {
     }
 
     _refreshList(query) {
+        
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
         if( (query.fromDate && query.toDate) && (query.toDate && query.toTime) ){
@@ -155,7 +167,6 @@ import {
                 
             }
         }
-        this.props.setOrderQuery({query:query});
 
         // if (Object.keys(query).filter(function (el) {
         //     return el !== 'page'
@@ -319,6 +330,7 @@ import {
             'cause':ORDERS_CUT_OFF_TIME_FETCH,
             'formdata':formData,
         }
+        
         this.props.makeAjaxCall(params);
         //call other http calls
         this._reqOrdersFulfilment(startDate, endDate);
@@ -372,10 +384,7 @@ import {
     }
 
     _handleCollapseAll(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
+        this.props.unSetAllActivePbts()
     }
 
     render() {
@@ -417,7 +426,6 @@ import {
                 <div className="gor-Orderlist-table">
 
                     {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
-                    { true ? 
                         <div>
                             <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
                                 <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
@@ -452,7 +460,7 @@ import {
 
                                         <div className="orderButtonWrapper">
                                             <div className="gorButtonWrap">
-                                              <button disabled={this.state.collapseAllBtnState} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
+                                              <button disabled={this.props.pbts.filter((pbt)=>pbt.opened).length<1} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
                                               <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
                                               </button>
                                             </div>
@@ -481,7 +489,7 @@ import {
                     description="button label for show all"
                     defaultMessage="Show all orders"/>}/>
 
-                </div> : null}
+                </div> 
 
                 {this.props.pbts.length> 0 ?
                     (<OrderListTable 
@@ -592,6 +600,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
+        },
+        unSetAllActivePbts:function(){
+            dispatch(unSetAllActivePbts())
         },
         setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
 
