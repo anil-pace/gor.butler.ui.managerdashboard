@@ -5,6 +5,7 @@ import React from 'react';
 import {FormattedMessage, FormattedDate, injectIntl, intlShape, defineMessages} from 'react-intl';
 import GTable from './../../components/gor-table-component'
 import {GTableHeader, GTableHeaderCell, GTableBody, GTableRow} from './../../components/gor-table-component'
+import Spinner from '../../components/spinner/Spinner';
 class OperationsLogTable extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +58,9 @@ class OperationsLogTable extends React.Component {
                                                              defaultMessage="TIMESTAMP"/></GTableHeaderCell>
 
                     </GTableHeader>
-                    <GTableBody data={data_list}>
+                    <GTableBody data={data_list} onScrollHandler={this.props.onScrollHandler}>
+
+
                         {data_list.map(function (row, idx) {
                             return (<GTableRow key={idx} index={idx} data={data_list}>
                                 <div className="cell">
@@ -104,6 +107,9 @@ class OperationsLogTable extends React.Component {
                                 </div>
                             </GTableRow>)
                         })}
+                        <Spinner isLoading={this.props.loading} utilClassNames={"infinite-scroll"}>
+                            <div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
+                        </Spinner>
                     </GTableBody>
                 </GTable>
             </div>

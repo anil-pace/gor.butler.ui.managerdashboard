@@ -27,6 +27,7 @@ import {hashHistory} from 'react-router';
 import gql from 'graphql-tag'
 import {REQUEST_REPORT_SUCCESS} from './../../constants/messageConstants'
 
+
 /*Intl Messages*/
 const messages = defineMessages({
     genRepTooltip: {
@@ -211,35 +212,6 @@ class OperationsLogTab extends React.Component {
     }
 
 
-    fetchNextResults() {
-        let self = this
-        self.props.data.fetchMore({
-            variables: (function () {
-                return {
-                    input: {
-                        requestId: self.props.location.query.request_id,
-                        userId: self.props.location.query.user_id,
-                        skuId: self.props.location.query.sku_id,
-                        ppsId: self.props.location.query.pps_id,
-                        operatingMode: self.props.location.query.operatingMode ? ( Array.isArray(self.props.location.query.operatingMode) ? self.props.location.query.operatingMode : [self.props.location.query.operatingMode]) : null,
-                        status: self.props.location.query.status ? (Array.isArray(self.props.location.query.status) ? self.props.location.query.status : [self.props.location.query.status]) : null,
-                        timePeriod: self.props.location.query.time_period ? {
-                            value: self.props.location.query.time_period.split("_")[0],
-                            unit: self.props.location.query.time_period.split("_")[1]
-                        } : {value: 1, unit: 'd'},
-                        page: self.state.page++,
-                        PAGE_SIZE: 25
-                    }
-                }
-            }()),
-            updateQuery: (previousResult, newResult) => {
-                return Object.assign({}, {
-                    OperationLogList: {list: [...previousResult.OperationLogList.list, ...newResult.fetchMoreResult.OperationLogList.list]}
-                })
-            },
-        })
-    }
-
     _requestReportDownload() {
         this.props.client.query({
             query: GENERATE_REPORT_QUERY,
@@ -266,14 +238,65 @@ class OperationsLogTab extends React.Component {
     }
 
 
+    fetchNextResults(page) {
+        let self = this
+        return self.props.data.fetchMore({
+            variables: (function () {
+                return {
+                    input: {
+                        requestId: self.props.location.query.request_id,
+                        userId: self.props.location.query.user_id,
+                        skuId: self.props.location.query.sku_id,
+                        ppsId: self.props.location.query.pps_id,
+                        operatingMode: self.props.location.query.operatingMode ? ( Array.isArray(self.props.location.query.operatingMode) ? self.props.location.query.operatingMode : [self.props.location.query.operatingMode]) : null,
+                        status: self.props.location.query.status ? (Array.isArray(self.props.location.query.status) ? self.props.location.query.status : [self.props.location.query.status]) : null,
+                        timePeriod: self.props.location.query.time_period ? {
+                            value: self.props.location.query.time_period.split("_")[0],
+                            unit: self.props.location.query.time_period.split("_")[1]
+                        } : {value: 1, unit: 'd'},
+                        page: page,
+                        PAGE_SIZE: 25
+                    }
+                }
+            }()),
+            updateQuery: self.props.updateQuery
+        })
+    }
+
+    _onScrollHandler(event) {
+
+        let self = this;
+        let page_num = self.state.page;
+        if ((Math.floor(event.target.scrollHeight) - Math.floor(event.target.scrollTop)) === Math.floor(event.target.clientHeight)) {
+            let total, data_list = []
+            try {
+                total = this.props.data.OperationLogList.total
+                data_list = this.props.data.OperationLogList.list
+            } catch (ex) {
+            }
+            if (data_list.length < total) {
+                let next_page = page_num + 1
+                self.fetchNextResults(next_page).then(function () {
+                    self.setState({page: next_page});
+                })
+            }
+
+
+        }
+
+    }
+
+
     render() {
         var _this = this;
         var filterHeight = screen.height - 190 - 50;
-        let data_list = []
+        let data_list = [], total = 0
         try {
+            total = this.props.data.OperationLogList.total
             data_list = this.props.data.OperationLogList.list
         } catch (ex) {
         }
+        let FETCH_REAL_TIME_DATA = this.props.location.query.time_period !== REALTIME && JSON.stringify(this.props.location.query) !== '{}'
         return (
             <div className="gorTesting wrapper gor-operations-log">
                 <div className="gor-filter-wrap"
@@ -318,21 +341,23 @@ class OperationsLogTab extends React.Component {
 
 
                 </div>
-                {this.props.location.query.time_period !== REALTIME && JSON.stringify(this.props.location.query) !== '{}' ?
+                { FETCH_REAL_TIME_DATA ?
                     <FilterSummary
-                        noResults={data_list.length === 0}
-                        total={data_list.length}
+                        noResults={total === 0}
+                        total={total}
                         isFilterApplied={this.props.isFilterApplied}
                         filterText={<FormattedMessage id="operationsLog.filter.search.bar"
                                                       description='total waves for filter search bar'
                                                       defaultMessage='{total} Results found'
-                                                      values={{total: data_list.length}}/>}
+                                                      values={{total: total}}/>}
                         refreshList={this._clearFilter}
                         refreshText={<FormattedMessage id="operationsLog.filter.search.bar.showall"
                                                        description="button label for show all"
                                                        defaultMessage="Show all Operations"/>}/>
                     : null}
-                <OperationsLogTable forceUpdate={JSON.stringify(this.props.location.query) === '{}'} data={data_list}
+                <OperationsLogTable loading={this.props.data.loading}
+                                    onScrollHandler={FETCH_REAL_TIME_DATA ? _this._onScrollHandler.bind(_this) : false}
+                                    forceUpdate={JSON.stringify(this.props.location.query) === '{}'} data={data_list}
                                     timeOffset={_this.props.timeOffset}/>
 
             </div>
@@ -406,14 +431,20 @@ const OPS_LOG_QUERY = gql`
                     type
                 }
             }
-            total 
+            total
         }
     }
 `;
 
 const withQuery = graphql(OPS_LOG_QUERY, {
     props: function (data) {
-        return {...data, refreshedAt: new Date().getTime()}
+        return {
+            ...data, updateQuery: (previousResult, newResult) => {
+                return Object.assign({}, {
+                    OperationLogList: {list: [...previousResult.OperationLogList.list, ...newResult.fetchMoreResult.OperationLogList.list]}
+                })
+            }, refreshedAt: new Date().getTime()
+        }
     },
     options: ({match, location}) => ({
         variables: (function () {
@@ -432,6 +463,7 @@ const withQuery = graphql(OPS_LOG_QUERY, {
                 }
             }
         }()),
+        notifyOnNetworkStatusChange: true,
         fetchPolicy: 'network-only'
     }),
 });
