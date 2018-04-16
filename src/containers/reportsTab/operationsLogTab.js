@@ -244,7 +244,18 @@ class OperationsLogTab extends React.Component {
         this.props.client.query({
             query: GENERATE_REPORT_QUERY,
             variables: {
-                input: {size: this.props.data.OperationLogList.total}
+                input: {
+                    size: this.props.data.OperationLogList.total, requestId: this.props.location.query.request_id,
+                    userId: this.props.location.query.user_id,
+                    skuId: this.props.location.query.sku_id,
+                    ppsId: this.props.location.query.pps_id,
+                    operatingMode: this.props.location.query.operatingMode,
+                    status: this.props.location.query.status,
+                    timePeriod: this.props.location.query.time_period ? {
+                        value: this.props.location.query.time_period.split("_")[0],
+                        unit: this.props.location.query.time_period.split("_")[1]
+                    } : {value: 1, unit: 'd'}
+                }
             },
             fetchPolicy: 'network-only'
         }).then((data) => {
@@ -338,8 +349,6 @@ OperationsLogTab.propTypes = {
 function mapStateToProps(state, ownProps) {
     return {
         timeOffset: state.authLogin.timeOffset,
-        username: state.authLogin.username
-
     };
 }
 function mapDispatchToProps(dispatch) {
