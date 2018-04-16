@@ -298,8 +298,10 @@
     		}
     		.orderDetailsContent{
     			margin-top: 10px;
+    			width: 60%;
     			.orderDetailsLeft{
-    				width: 60%;
+    				width: 100%;
+    				float: left;
     				.orderDetailsColumn{
     					width: 33%;
     					display: inline-block;
@@ -332,10 +334,12 @@
     			}
     		}
     		.orderDetailsSearchWrap{
+    			margin-top: 70px;
     			float: right;
 			}
     	}
     	.orderDetailsListWrapper{
+    		clear: both;
     		margin-left: -20px;
     		.DotSeparatorWrapper{
 				margin-left: 30px

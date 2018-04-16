@@ -330,7 +330,7 @@ class ViewOrderLine extends React.Component{
                   </div>
 
                   <div className="orderDetailsSearchWrap"> 
-                      <SearchFilter handleChange={this.handleChange} />
+                      <SearchFilter placeHolder="Search product" handleChange={this.handleChange} />
                   </div>
                   
               </div>
