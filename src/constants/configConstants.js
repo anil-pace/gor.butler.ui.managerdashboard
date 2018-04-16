@@ -100,6 +100,7 @@ export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
 export const MSU_CONFIG_URL = TIME_ZONE_URL;
 export const MSU_CONFIG_DEST_TYPE_URL = TIME_ZONE_URL;
 export const MSU_CONFIG_FILTER_URL = TIME_ZONE_URL;
+export const MSU_CONFIG_RACK_STRUCTURE_URL = TIME_ZONE_URL;
 
 
 

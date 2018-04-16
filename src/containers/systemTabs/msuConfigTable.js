@@ -33,7 +33,7 @@ import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentP
 import {
     APP_JSON, POST, GET,
     FETCH_MSU_CONFIG_LIST,
-    MSU_RECONFIG_POLLING_INTERVAL
+    MSU_CONFIG_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 
 import {
@@ -110,17 +110,15 @@ class MsuConfigTable extends React.Component {
     }
 
     _requestMsuList(){
-        console.log("_requestMsuList get called");
         let params={
             'url': MSU_CONFIG_URL,
             'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause' : FETCH_MSU_CONFIG_LIST
-            //'formdata':formData,
         }
         this.props.makeAjaxCall(params);
-        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_RECONFIG_POLLING_INTERVAL);
+        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_CONFIG_POLLING_INTERVAL);
     }
 
      _changeDestinationType = (orderId) =>  {
@@ -142,45 +140,73 @@ class MsuConfigTable extends React.Component {
         if(msuDataLen){
             for(let i =0 ; i < msuDataLen; i++){
                 let msuRow = [];
-                msuRow.push(<div className="msuIdWrapper"> 
-                                <div className="msuId">
-                                    <FormattedMessage 
-                                        id="msuConfig.table.msuText" 
-                                        description="label for Msu Text" 
-                                        defaultMessage="MSU {msuId}" 
-                                        values={{msuId: msuData[i].rack_id}} />
-                                </div>
-                                <div className="sourceType">
-                                    <FormattedMessage 
-                                        id="msuConfig.table.sourceType" 
-                                        description="label for Source type" 
-                                        defaultMessage="Source Type:{sourceType}" 
-                                        values={{sourceType: msuData[i].source_type}} />
-                                </div>
+
+                if(msuData[i].id && msuData[i].racktype){
+                    clearTimeout(this._intervalIdForMsuList);
+                    msuRow.push(<div className="msuIdWrapper"> 
+                                    <div className="msuId">
+                                        <FormattedMessage 
+                                            id="msuConfig.table.msuText" 
+                                            description="label for Msu Text" 
+                                            defaultMessage="MSU {msuId}" 
+                                            values={{msuId: msuData[i].id}} />
+                                    </div>
+                                    <div className="sourceType">
+                                        <FormattedMessage 
+                                            id="msuConfig.table.sourceType" 
+                                            description="label for Source type" 
+                                            defaultMessage="Source Type:{sourceType}" 
+                                            values={{sourceType: msuData[i].racktype}} />
+                                    </div>
                              </div>);
 
-                msuRow.push(<div className="msuIdWrapper">
-                                <FormattedMessage 
-                                    id="msuConfig.table.destType" 
-                                    description="label for Destination Type" 
-                                    defaultMessage="Selected destination type: {destType}"
-                                    values={{destType: msuData[i].destination_type}} />
-                             </div>);
+                    msuRow.push(<div key={i} style={{textAlign:"center"}}>
+                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].id)}>
+                            <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
+                        </button>
+                    </div>);
 
-                msuRow.push(<div className="msuIdWrapper">
-                                <FormattedMessage 
-                                                id="msuConfig.table.msuStatus" 
-                                                description="label for MSU status" 
-                                                defaultMessage="{status}"
-                                                values={{status: this.state.statusMapping[msuData[i].status]}} />
-                                </div>);
+                    msuRows.push(msuRow);
+                }
 
-                // msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                //         <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].msu_id)}>
-                //             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
-                //         </button>
-                //     </div>);
-                msuRows.push(msuRow);
+                else{
+                    msuRow.push(<div className="msuIdWrapper"> 
+                            <div className="msuId">
+                                <FormattedMessage 
+                                    id="msuConfig.table.msuText" 
+                                    description="label for Msu Text" 
+                                    defaultMessage="MSU {msuId}" 
+                                    values={{msuId: msuData[i].rack_id}} />
+                            </div>
+                            <div className="sourceType">
+                                <FormattedMessage 
+                                    id="msuConfig.table.sourceType" 
+                                    description="label for Source type" 
+                                    defaultMessage="Source Type:{sourceType}" 
+                                    values={{sourceType: msuData[i].source_type}} />
+                            </div>
+                         </div>);
+
+                    msuRow.push(<div className="msuIdWrapper">
+                                    <FormattedMessage 
+                                        id="msuConfig.table.destType" 
+                                        description="label for Destination Type" 
+                                        defaultMessage="Selected destination type: {destType}"
+                                        values={{destType: msuData[i].destination_type}} />
+                                 </div>);
+
+                    msuRow.push(<div className="msuIdWrapper">
+                                    <FormattedMessage 
+                                                    id="msuConfig.table.msuStatus" 
+                                                    description="label for MSU status" 
+                                                    defaultMessage="{status}"
+                                                    values={{status: this.state.statusMapping[msuData[i].status]}} />
+                                    </div>);
+
+                    
+                    msuRows.push(msuRow);
+                }
+                
             }
             processedData.msuData = msuRows;
         }
@@ -190,8 +216,6 @@ class MsuConfigTable extends React.Component {
     }
 
     render() {
-        console.log("===================>");
-        console.log(this.props.msuList);
         const processedMsuData = this._processMSUs(this.props.msuList);
         
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;

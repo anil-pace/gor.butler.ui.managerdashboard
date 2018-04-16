@@ -1,6 +1,7 @@
 import { FETCH_MSU_CONFIG_LIST, 
 		FETCH_MSU_CONFIG_DEST_TYPE_LIST,
-        FETCH_MSU_CONFIG_LIST_VIA_FILTER
+        FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+        FETCH_MSU_CONFIG_RACK_STRUCTURE
 	} from './../constants/frontEndConstants'
 
 export function receiveMsuConfigList(data){
@@ -27,34 +28,10 @@ export function receiveMsuConfigListViaFilter(data){
     }
 }
 
-// export function receiveOrderSummaryData(data){
-// 	console.log("coming inside norderDetailsAction => receiveOrderSummaryData => ORDERS_SUMMARY_FETCH");
-// 	return {
-// 		type: ORDERS_SUMMARY_FETCH,
-// 		data
-// 	}
-// }
+export function receiveMsuConfigRackStructure(data){
+    return {
+        type: FETCH_MSU_CONFIG_RACK_STRUCTURE,
+        data
+    }
+}
 
-// export function receiveCufOffTimeData(data){
-// 	console.log("coming inside norderDetailsAction => receiveOrderSummaryData => ORDERS_CUT_OFF_TIME_FETCH");
-// 	return {
-// 		type: ORDERS_CUT_OFF_TIME_FETCH,
-// 		data
-// 	}
-// }
-
-// export function receiveOrdersPerPbtData(data){
-// 	console.log("coming inside norderDetailsAction => receiveOrderSummaryData => ORDERS_PER_PBT_FETCH");
-// 	return {
-// 		type: ORDERS_PER_PBT_FETCH,
-// 		data
-// 	}
-// }
-
-// export function receiveOrdersLinesData(data){
-// 	console.log("coming inside norderDetailsAction => receiveOrdersLinesData => ORDERLINES_PER_ORDER_FETCH");
-// 	return {
-// 		type: ORDERLINES_PER_ORDER_FETCH,
-// 		data
-// 	}
-// }

@@ -103,8 +103,10 @@ import {
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
     FETCH_MSU_CONFIG_DEST_TYPE_LIST,
-    FETCH_MSU_CONFIG_LIST_VIA_FILTER
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_RACK_STRUCTURE
 } from "../constants/frontEndConstants";
+
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
     UE002,
@@ -175,7 +177,11 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
-import { receiveMsuConfigList, receiveMsuConfigDestTypesList,receiveMsuConfigListViaFilter } from './../actions/msuConfigAction';
+import { receiveMsuConfigList, 
+        receiveMsuConfigDestTypesList,
+        receiveMsuConfigListViaFilter,
+        receiveMsuConfigRackStructure 
+    }from './../actions/msuConfigAction';
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -665,10 +671,6 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case FETCH_MSU_CONFIG_LIST:
-            // let res=[
-            //   {'msu_id':"177"},
-            //   {'msu_id':"178"}
-            // ];
             let res_1 = [{"rack_id":"021","source_type":"11","destination_type":"19","status":"progress"},{"rack_id":"022","source_type":"11","destination_type":"19","status":"progress"},{"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}];
             store.dispatch(receiveMsuConfigList(res_1));
             break;
@@ -681,6 +683,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
             let res_3 = [{"id":"041","direction":2,"position":"023.033","last_store_position":"023.033","is_stored":true,"reserved_store_position":"undefined","lifted_butler_id":null,"racktype":"11","upcoming_pps_list":[],"type":"msu"}];
             store.dispatch(receiveMsuConfigListViaFilter(res_3));
+            break;
+
+        case FETCH_MSU_CONFIG_RACK_STRUCTURE:
+            store.dispatch(receiveMsuConfigRackStructure(res));
+            break;
+
         default:
             ShowError(store, cause, status);
             break;

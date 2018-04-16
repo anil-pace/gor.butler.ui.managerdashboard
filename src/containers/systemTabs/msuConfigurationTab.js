@@ -16,9 +16,11 @@ import {
     GOR_PERIPHERAL_OFFLINE,WS_ONSEND,
     APP_JSON, POST, GET,
     FETCH_MSU_CONFIG_LIST,
-    MSU_RECONFIG_POLLING_INTERVAL,
+    MSU_CONFIG_POLLING_INTERVAL,
     FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_RACK_STRUCTURE
 } from '../../constants/frontEndConstants';
+
 import Spinner from '../../components/spinner/Spinner';
 import {setButlerSpinner} from  '../../actions/spinnerAction';
 import {butlerHeaderSort, butlerHeaderSortOrder, butlerFilterDetail} from '../../actions/sortHeaderActions';
@@ -229,29 +231,15 @@ class MsuConfigTab extends React.Component {
         this.props.butlerBotsRefreshed()
     }
 
-    componentDidMount(url){
-        this._requestMsuList();
-    }
-
-    _requestMsuList = (filterUrl) => {
-        console.log(new Date() + "P O L L I N G    H A P P E N I N G  ...........................");
-        let url;
-        if(filterUrl){
-            url = filterUrl;
-            clearTimeout(this._intervalIdForMsuList); // clear polling when any Filter has been applied
-            console.log(new Date() + "P O L L I N G    S T O P P E D ...........................");
-        }
-        else url = MSU_CONFIG_URL;
+    _requestMsuListViaFilter(){
         let params={
-            'url': url,
+            'url': MSU_CONFIG_FILTER_URL,
             'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST
-            //'formdata':formData,
+            'cause' : FETCH_MSU_CONFIG_LIST_VIA_FILTER
         }
         this.props.makeAjaxCall(params);
-        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_RECONFIG_POLLING_INTERVAL);
     }
 
 
@@ -275,12 +263,15 @@ class MsuConfigTab extends React.Component {
         }
     }
 
+
+
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
     _refreshList(query) {
+        clearTimeout(this._intervalIdForMsuList);
         let filterUrl;
         if(query.rack_id && query.destination_type){
             filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +",racktype="+query.destination_type;
@@ -292,7 +283,7 @@ class MsuConfigTab extends React.Component {
         else if (query.rack_id){
             filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
         }
-        this._requestMsuList(filterUrl);
+        this._requestMsuListViaFilter();
 
         this.props.setButlerSpinner(true);
         let filterSubsData={}
@@ -336,7 +327,7 @@ class MsuConfigTab extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
     }
 
 
@@ -515,7 +506,10 @@ function mapStateToProps(state, ownProps) {
         filterState: state.filterInfo.butlerFilterState,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        butlerBotsRefreshed:state.butlersInfo.butlerBotsRefreshed
+        butlerBotsRefreshed:state.butlersInfo.butlerBotsRefreshed,
+
+        msuList: state.msuInfo.msuList,
+        timeZone:state.authLogin.timeOffset
     };
 }
 
