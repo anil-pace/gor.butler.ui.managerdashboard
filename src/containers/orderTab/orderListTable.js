@@ -103,6 +103,11 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    cutOffTime:{
+        id: 'orderlist.cutOffTime.time',
+        description: " cut off time in hrs",
+        defaultMessage: 'Cut off time {cutOffTime} hrs'
     }
 });
 
@@ -253,16 +258,16 @@ class OrderListTable extends React.Component {
         if(cutOffTimeFromBK){
             d1 = new Date();
             d2= new Date(cutOffTimeFromBK);
-            diff = d1 - d2;
+            diff = d2 - d1;
 
             if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+                timeLeft = Math.floor (diff / 3600000) + " hrs left";
             }
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + "mins left";
+                timeLeft = Math.floor(diff / 60000) + " mins left";
             }
             else {  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + "seconds left";
+                timeLeft = Math.floor(diff / 1000) + " seconds left";
             }
             return timeLeft;
         }
@@ -329,24 +334,21 @@ class OrderListTable extends React.Component {
                         }
                     }
                 /* END => when cut off time is not there */
-                
-                let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" 
-                         values={{cutOffTime:<FormattedTime
-                                     value={pbtData[i].cut_off_time}
-                                     hour= "numeric"
-                                     minute= "numeric"
-                                     timeZone= {this.props.timeOffset}
-                                     hour12= {false}/>
-                                 }} /> : "NO CUT OFF TIME");
+                let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
+                                     hour:"numeric",
+                                     minute:"numeric",
+                                     timeZone:this.props.timeOffset,
+                                     hour12: false});
+
+                let formatPbtTime = (pbtData[i].cut_off_time ? 
+                                        this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
+
                 let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
                 let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
                 let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
                 pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                {formatTimeLeft!== "" ?
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
-                                }
+                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/>
                             </div>);
                 pbtRow.push(<div>
                                 <div className="ProgressBarWrapper">
