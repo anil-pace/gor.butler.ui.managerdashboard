@@ -18,13 +18,14 @@ import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
     REQUEST_REPORT_DOWNLOAD
 } from '../../constants/configConstants';
-import {makeAjaxCall} from '../../actions/ajaxActions';
+import {notifySuccess} from '../../actions/validationActions';
 import OperationsLogTable from './operationsLogTable'
 
-import {graphql, compose} from "react-apollo";
+import {graphql, compose, withApollo} from "react-apollo";
 import {hashHistory} from 'react-router';
 
 import gql from 'graphql-tag'
+import {REQUEST_REPORT_SUCCESS} from './../../constants/messageConstants'
 
 /*Intl Messages*/
 const messages = defineMessages({
@@ -85,6 +86,23 @@ const OPS_LOG_SUBSCRIPTION_QUERY = gql`
         }
     }
 `;
+
+const GENERATE_REPORT_QUERY = gql`
+    query GenerateOperationsLogReport($input:GenerateOperationsLogReportParams){
+        GenerateOperationsLogReport(input:$input){
+            id
+            requestedBy
+            completionTime
+            query
+            fileName
+            type
+            requestedTime
+            status
+            lastDownloaded
+            storageId
+        }
+    }
+`
 
 class OperationsLogTab extends React.Component {
     constructor(props, context) {
@@ -223,33 +241,17 @@ class OperationsLogTab extends React.Component {
     }
 
     _requestReportDownload() {
-        let derivedFilters = JSON.parse(this.state.derivedFilters);
-        let formData = {
-            "report": {
-                "requestedBy": this.props.username,
-                "type": REPORT_NAME_OPERATOR_LOGS
-            }
-        }
-
-        formData.searchRequest = Object.assign(derivedFilters, {
-            page: {
-                size: this.state.totalSize ? parseInt(this.state.totalSize, 10) : null,
-                from: 0
-            }
+        this.props.client.query({
+            query: GENERATE_REPORT_QUERY,
+            variables: {
+                input: {size: this.props.data.OperationLogList.total}
+            },
+            fetchPolicy: 'network-only'
+        }).then((data) => {
+            this.props.notifySuccess(REQUEST_REPORT_SUCCESS)
         })
 
 
-        let params = {
-            'url': REQUEST_REPORT_DOWNLOAD,
-            'method': POST,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'formdata': formData,
-            'cause': DOWNLOAD_REPORT_REQUEST
-        }
-
-
-        this.props.makeAjaxCall(params);
     }
 
 
@@ -342,8 +344,8 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        makeAjaxCall: function (params) {
-            dispatch(makeAjaxCall(params));
+        notifySuccess: function (data) {
+            dispatch(notifySuccess(data));
         }
     }
 };
@@ -395,6 +397,7 @@ const OPS_LOG_QUERY = gql`
                     type
                 }
             }
+            total 
         }
     }
 `;
@@ -510,7 +513,6 @@ const setFilterState = graphql(SET_FILTER_STATE, {
     }),
 });
 
-
-export default compose(withQuery, withClientData, setVisibilityFilter, setFilterApplied, setFilterState)(connect(mapStateToProps, mapDispatchToProps)(Dimensions()(withRouter(injectIntl(OperationsLogTab)))))
+export default compose(withQuery, withClientData, setVisibilityFilter, setFilterApplied, setFilterState, withApollo)(connect(mapStateToProps, mapDispatchToProps)(Dimensions()(withRouter(injectIntl(OperationsLogTab)))))
 
 
