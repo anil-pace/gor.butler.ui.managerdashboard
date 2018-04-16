@@ -103,6 +103,16 @@ export function getFormattedMessages(action,values){
 				  }
 				  return startFailAllstringInfo;
 			break;
+			case "RESOLVEFAIL":
+			let resolveFailstringInfo={
+                type:'WARNING',
+                msg:(<FormattedMessage id="audit.resolve.fail" description='audit resolve fail' 
+            defaultMessage='AUDIT RESOLVE FAIL'/>),
+            desc:(<FormattedMessage id="audit.resolve.fail_desc" description='audit resolve fail all description' 
+            defaultMessage='Audit resolve failed due to network issue '/>)
+				  }
+				  return resolveFailstringInfo;
+			break;
 
 
 			default:

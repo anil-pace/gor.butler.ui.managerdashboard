@@ -27,7 +27,7 @@ import {
     AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CANCELLED,AUDIT_CREATED,PENDING,INPROGRESS,
     AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE,AUDIT_USERLIST,APP_JSON,GET
 }from '../../constants/frontEndConstants';
-import {USERLIST_URL,PPSLIST_URL} from '../../constants/configConstants';
+import {USERLIST_URL} from '../../constants/configConstants';
 import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
@@ -62,9 +62,8 @@ class AuditFilter extends React.Component {
         this.props.userRequest(userData);
 
   }
-
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (!nextProps.pollTimerId)) {
+        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (this.props.pollTimerId!==nextProps.pollTimerId)) {
             this.setState(nextProps.auditFilterState)
         }
         /**
@@ -281,7 +280,7 @@ class AuditFilter extends React.Component {
                             <div className="gor-filter-body-filterToken-section1">
                                 {auditFilterToken.column2token}
                             </div>
-                            <div className="gor-filter-body-filterToken-section2">
+                            <div className="gor-filter-body-filterToken-section1">
                                 {auditFilterToken.column3token}
                             </div>
 

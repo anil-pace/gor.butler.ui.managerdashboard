@@ -6,7 +6,6 @@ import { getAuditData, setAuditRefresh, auditListRefreshed, setTextBoxStatus, ca
 import AuditTable from './auditListingTab';
 import { getPageData } from '../actions/paginationAction';
 import { userRequest } from '../actions/userActions';
-import StartAudit from './auditTab/startAudit';
 import { GTableHeader, GTableHeaderCell } from '../components/gor-table-component/tableHeader';
 import { GTable } from '../components/gor-table-component/index'
 import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
@@ -52,7 +51,7 @@ import { auditHeaderSortOrder, setCheckedAudit } from '../actions/sortHeaderActi
 import { getDaysDiff } from '../utilities/getDaysDiff';
 import { addDateOffSet } from '../utilities/processDate';
 import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
-import { showTableFilter, filterApplied, auditfilterState, toggleAuditFilter } from '../actions/filterAction';
+import { showTableFilter, filterApplied, auditfilterState, toggleAuditFilter, setClearIntervalFlag } from '../actions/filterAction';
 import { hashHistory } from 'react-router'
 import { updateSubscriptionPacket, setWsAction } from './../actions/socketActions'
 import { wsOverviewData } from './../constants/initData.js';
@@ -141,6 +140,11 @@ class AuditTab extends React.Component {
          */
         this.polling();
         this.props.auditListRefreshed()
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.timerId);
+        this.props.setClearIntervalFlag(true);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
@@ -346,6 +350,11 @@ class AuditTab extends React.Component {
         })
         this.props.setAuditQuery({ query: query })
         this.props.getPageData(paginationData);
+        if(Object.keys(query).length)
+                {
+                clearInterval(this.state.timerId);
+                this.props.setClearIntervalFlag(true);
+                }
     }
     /**
      *
@@ -801,7 +810,10 @@ var mapDispatchToProps = function (dispatch) {
         },
         userRequest: function (data) {
             dispatch(userRequest(data))
-        }
+        },
+        setClearIntervalFlag: function (data) {
+            dispatch(setClearIntervalFlag(data))
+        } 
 
     }
 };

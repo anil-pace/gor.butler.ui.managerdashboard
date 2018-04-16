@@ -19,6 +19,8 @@ export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
 
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
 export const PPSLIST_URL=API_URL+"/audit/pps_info";
+export const PPSLIST_ALL_URL=PPSLIST_URL+"?mode=any";
+export const PPSLIST_ACTIVE_AUDIT_URL=PPSLIST_URL+"?mode=audit_active";
 export const AUDITDETAIL_URL=API_URL+"/audit/audit_details";
 
 export const ORDER_PAGE="?page=";
@@ -86,11 +88,15 @@ export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboa
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
-export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report/{invoice}";
+export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
 
 export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
 export const AUDIT_DUPLICATE_URL=API_URL+"";
 export const USERLIST_URL=API_URL+"/audit/users";
 export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
+
+/*URL for seller recall*/
+export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/item-recall";
+export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
 
 

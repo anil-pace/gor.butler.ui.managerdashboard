@@ -189,13 +189,13 @@ class EditAudit extends React.Component{
         skuAttributes ={};
         validatedSKUs =[];
         activeTabIndex=1;
-        this.kqCheck.checked=locationAttributes.kq
+        this.kqCheck.checked=locationAttributes.kq;
       }
       else{
         if(this.props.auditEditData!==nextProps.auditEditData){
        skuAttributes =JSON.parse(JSON.stringify(nextProps.auditEditData));
        attrList=nextProps.auditEditData.outerObj;
-       this.kqCheck.checked=skuAttributes.kq
+       this.kqCheck.checked=skuAttributes.kq;
         }
         else
         {
@@ -226,6 +226,13 @@ class EditAudit extends React.Component{
 
     },function(){
       this._onAttributeSelectionFirstTime();
+      if(activeTabIndex==1){
+          this.auditNameLoc.value=locationAttributes.audit_name;
+          }
+          else
+          {
+            this.auditNameSKU.value=skuAttributes.audit_name;
+          }
     })
   }
     if(this.props.auditSpinner !== nextProps.auditSpinner){
@@ -365,7 +372,7 @@ _onAttributeSelectionFirstTime(){
 
   _validateSKU(type) {
     let validSKUData={
-      "audit_param_name":"name",
+      "audit_param_name":this.auditNameSKU.value,
       "audit_param_type":"sku"
     };
     let arrSKU=this.state.copyPasteSKU.data.slice(0);
@@ -454,7 +461,7 @@ _onAttributeSelectionFirstTime(){
     }
    
     validLocationData={
-      "audit_param_name":"name",
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
      
       "audit_param_value":{
@@ -464,6 +471,7 @@ _onAttributeSelectionFirstTime(){
     
     if(this.props.auditId &&  this.props.param!=='duplicate' && type !== "validate"){
     validLocationDataCreateAudit={
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
       "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
@@ -476,6 +484,7 @@ _onAttributeSelectionFirstTime(){
   else
   {
     validLocationDataCreateAudit={
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":'duplicate',
       "kq":this.kqCheck.checked,
@@ -1021,7 +1030,7 @@ _onAttributeSelectionFirstTime(){
        button= <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.edit.password.button" description='Text for add audit button' 
        defaultMessage='UPDATE'/></button>
 }else if(this.props.param=='duplicate'){
-   header=<div className='gor-usr-add'><FormattedMessage id='audit.duplicate.heading' description='Heading for duplicate audit' 
+   header=<div className='gor-usr-add'><FormattedMessage id='audit.createduplicate.heading' description='Heading for duplicate audit' 
        defaultMessage='Duplicate audit'/></div>
          button=  <button onClick={()=>{this._createAudit("duplicate")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
          defaultMessage='Create audit'/></button>
@@ -1053,7 +1062,7 @@ _onAttributeSelectionFirstTime(){
                           <div>
                           <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
                           <div>
-                          <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
+                          <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
                           <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
@@ -1240,7 +1249,7 @@ _onAttributeSelectionFirstTime(){
                          
                       <div>
                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.value" description='Name of audit' defaultMessage='Enter audit name:'/></div>
-                        <input className="gor-audit-name-wrap" type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
+                        <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameLoc = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
                         <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
