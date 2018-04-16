@@ -103,6 +103,26 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    cutOffTime:{
+        id: 'orderlist.cutOffTime.time',
+        description: " cut off time in hrs",
+        defaultMessage: 'Cut off time {cutOffTime} hrs'
+    },
+    orderId:{
+        id: 'orders.order.orderId',
+        description: "order id",
+        defaultMessage: 'Order {orderId}'
+    },
+    ppsId:{
+        id: 'orders.order.ppsId',
+        description: "pps id",
+        defaultMessage: 'PPS {ppsId}'
+    },
+    binId:{
+        id: 'orders.order.binId',
+        description: "bin id",
+        defaultMessage: 'Bin {binId}'
     }
 });
 
@@ -253,16 +273,16 @@ class OrderListTable extends React.Component {
         if(cutOffTimeFromBK){
             d1 = new Date();
             d2= new Date(cutOffTimeFromBK);
-            diff = d1 - d2;
+            diff = d2 - d1;
 
             if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+                timeLeft = Math.floor (diff / 3600000) + " hrs left";
             }
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + "mins left";
+                timeLeft = Math.floor(diff / 60000) + " mins left";
             }
             else {  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + "seconds left";
+                timeLeft = Math.floor(diff / 1000) + " seconds left";
             }
             return timeLeft;
         }
@@ -330,14 +350,14 @@ class OrderListTable extends React.Component {
                     }
                 /* END => when cut off time is not there */
                 
-                let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" 
-                         values={{cutOffTime:<FormattedTime
-                                     value={pbtData[i].cut_off_time}
-                                     hour= "numeric"
-                                     minute= "numeric"
-                                     timeZone= {this.props.timeOffset}
-                                     hour12= {false}/>
-                                 }} /> : "NO CUT OFF TIME");
+                let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
+                                     hour:"numeric",
+                                     minute:"numeric",
+                                     timeZone:this.props.timeOffset,
+                                     hour12: false});
+
+                let formatPbtTime = (pbtData[i].cut_off_time ? 
+                                        this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
                 let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
                 let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
                 let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
@@ -378,9 +398,10 @@ class OrderListTable extends React.Component {
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
 
-                formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
-                formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
-                formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
+                let formatOrderId = (orderData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "null");
+                let formatPpsId =   (orderData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: orderData[i].pps_id}): "null");
+                let formatBinId =   (orderData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: orderData[i].pps_bin_id}): "null");
+                let formatStartDate = "null";
 
                 //Create time need to be add
                     if (orderData[i].start_date) {

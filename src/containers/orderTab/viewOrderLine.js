@@ -52,6 +52,16 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    totalOrderLines: {
+        id: 'orders.orderlines.total',
+        description: "total orderlines",
+        defaultMessage: 'Total {totalOrderlines}'
+    },
+    orderLineId:{
+        id: 'orders.orderlines.skuId',
+        description: "sku id",
+        defaultMessage: 'SKU -  {skuId}'
     }
 });
 
@@ -151,8 +161,7 @@ class ViewOrderLine extends React.Component{
 
 
         let olineHeader = [];
-        let formatOLTotal = (<FormattedMessage id="orders.orderlines.total" description="total orderlines" defaultMessage="Total {totalOrderlines}"
-                                        values={{totalOrderlines:arg.total_orderlines}} />)
+        let formatOLTotal = (arg.total_orderlines ? this.props.intl.formatMessage(messages.totalOrderLines, {totalOrderlines: arg.total_orderlines}): "null");
 
         olineHeader.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
                         <DotSeparatorContent header={["Order Lines"]} subHeader={[formatOLTotal]}/>
@@ -184,7 +193,7 @@ class ViewOrderLine extends React.Component{
       for(let i=0; i < olDataLen; i++){
 
         let olineRow = [];
-        let formatSkuId = (arg[i].orderline_id ? <FormattedMessage id="orders.orderlines.skuId" description="sku id" defaultMessage="SKU -  {skuId}" values={{skuId: arg[i].orderline_id}} />: "null")
+        let formatSkuId = (arg[i].orderline_id ? this.props.intl.formatMessage(messages.orderLineId, {skuId: arg[i].orderline_id}): "null");
 
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
                         <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1)]}/>
