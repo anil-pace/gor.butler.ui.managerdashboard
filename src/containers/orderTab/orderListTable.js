@@ -478,7 +478,7 @@ class OrderListTable extends React.Component {
                         }
                     }
                     else {
-                        formatCompleteDate = "--";
+                        formatCompleteDate = "null";
                     }
 
                 formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
