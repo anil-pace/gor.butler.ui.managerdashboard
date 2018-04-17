@@ -426,7 +426,7 @@ class AuditTab extends React.Component {
                 auditData.status = waitingOperator;
             }
 
-            else if ((data[i].start_actual_time && data[i].completion_time) || (data[i].audit_status == "audit_aborted")) {
+            else if ((data[i].start_request_time && data[i].completion_time) || (data[i].audit_status == "audit_aborted")) {
                 auditData.status = completed;
 
             }
@@ -435,7 +435,9 @@ class AuditTab extends React.Component {
                 auditData.progressBarflag = true;
                 auditData.status = data[i].audit_progress.completed + completedOutof + data[i].audit_progress.total;
             }
-
+            else{
+                auditData.status = data[i].audit_status;
+            }
 
             auditData.progressStatus = data[i].audit_progress;
 
@@ -457,14 +459,14 @@ class AuditTab extends React.Component {
             }
 
             //Create time need to be add
-            if (data[i].start_actual_time) {
+            if (data[i].start_request_time) {
 
-                if (getDaysDiff(data[i].start_actual_time) < 2) {
-                    auditData.startTime = nProps.context.intl.formatRelative(data[i].start_actual_time, {
+                if (getDaysDiff(data[i].start_request_time) < 2) {
+                    auditData.startTime = nProps.context.intl.formatRelative(data[i].start_request_time, {
                         timeZone: timeOffset,
                         units: 'day'
                     }) +
-                        ", " + nProps.context.intl.formatTime(data[i].start_actual_time, {
+                        ", " + nProps.context.intl.formatTime(data[i].start_request_time, {
                             timeZone: timeOffset,
                             hour: 'numeric',
                             minute: 'numeric',
@@ -472,7 +474,7 @@ class AuditTab extends React.Component {
                         });
                 }
                 else {
-                    auditData.startTime = nProps.context.intl.formatDate(data[i].start_actual_time,
+                    auditData.startTime = nProps.context.intl.formatDate(data[i].start_request_time,
                         {
                             timeZone: timeOffset,
                             month: 'short',
@@ -486,7 +488,7 @@ class AuditTab extends React.Component {
 
                 if (data[i].completion_time) {
 
-                    if ((getDaysDiff(data[i].completion_time) == getDaysDiff(data[i].start_actual_time))) {
+                    if ((getDaysDiff(data[i].completion_time) == getDaysDiff(data[i].start_request_time))) {
                         auditData.endTime = nProps.context.intl.formatTime(data[i].completion_time, {
                             timeZone: timeOffset,
                             hour: 'numeric',
