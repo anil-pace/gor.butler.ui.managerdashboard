@@ -268,7 +268,7 @@ class OrderListTable extends React.Component {
     }
 
     _calculateTimeLeft(cutOffTimeFromBK){
-         let timeLeft, d1, d2, diff;
+        let timeLeft, d1, d2, diff;
 
         if(cutOffTimeFromBK){
             d1 = new Date();
@@ -281,17 +281,14 @@ class OrderListTable extends React.Component {
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
                 timeLeft = Math.floor(diff / 60000) + " mins left";
             }
-            else {  // 1000 milliseconds is for 1 sec
+            else if(diff > 1000){  // 1000 milliseconds is for 1 sec
                 timeLeft = Math.floor(diff / 1000) + " seconds left";
+            }
+            else{
+                timeLeft = "";
             }
             return timeLeft;
         }
-        else 
-        {
-            timeLeft = "";
-            return timeLeft;
-        }
-        
     }
 
     _processPBTs = (arg, nProps) => {

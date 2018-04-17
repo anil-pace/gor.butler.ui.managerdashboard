@@ -227,27 +227,25 @@ class ViewOrderLine extends React.Component{
   }
 
   _calculateTimeLeft(cutOffTimeFromBK){
-         let timeLeft, d1, d2, diff;
+        let timeLeft, d1, d2, diff;
 
         if(cutOffTimeFromBK){
             d1 = new Date();
             d2= new Date(cutOffTimeFromBK);
-            diff = d1 - d2;
+            diff = d2 - d1;
 
             if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+                timeLeft = Math.floor (diff / 3600000) + " hrs left";
             }
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + "mins left";
+                timeLeft = Math.floor(diff / 60000) + " mins left";
             }
-            else {  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + "seconds left";
+            else if(diff > 1000){  // 1000 milliseconds is for 1 sec
+                timeLeft = Math.floor(diff / 1000) + " seconds left";
             }
-            return timeLeft;
-        }
-        else 
-        {
-            timeLeft = "-";
+            else{
+                timeLeft = "";
+            }
             return timeLeft;
         }
     }
