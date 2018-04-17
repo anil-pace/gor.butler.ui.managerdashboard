@@ -338,7 +338,7 @@ class AuditStart extends React.Component {
     var tableData = [
       { id: 1, text: "SKU CODE", sortable: true, width: 35 },
       { id: 2, text: "NAME", sortable: true, width: 32 },
-      { id: 3, text: "OPENING STOCK", searchable: false, width: 32 }
+      { id: 3, text: "OPENING STOCK", searchable: false, width: 32}
     ];
     var tableDataother = [
       { id: 1, text: "SKU CODE", sortable: true, width: 35 },
@@ -374,30 +374,9 @@ class AuditStart extends React.Component {
             {tablerowdataAudit.length > 0 ? (
               <GTable options={["table-bordered", "auditStart"]}>
                 <GTableHeader options={["auditTable"]}>
-                  <GTableHeaderCell
-                    key={1}
-                    header="Audit"
-                    className="audittable"
-                  >
-                    <label
-                      className="container"
-                      style={{ "margin-left": "10px" }}
-                    >
-                      {" "}
-                      <input
-                        type="checkbox"
-                        checked={
-                          this.props.checkedAuditPPSList.length == 0 ? "" : true
-                        }
-                        onChange={me.headerCheckChange.bind(me, "Audit")}
-                      />
-                      <span
-                        className={
-                          totalAuditPPSCount == checkedAuditPPSCount
-                            ? "checkmark"
-                            : "checkmark1"
-                        }
-                      />
+                  <GTableHeaderCell key={1}header="Audit"className="audittable">
+                    <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={ this.props.checkedAuditPPSList.length == 0 ? "" : true} onChange={me.headerCheckChange.bind(me, "Audit")}/>
+                      <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark": "checkmark1"}/>
                     </label>
                     <span>
                       {tablerowdataAudit.length}
@@ -406,33 +385,20 @@ class AuditStart extends React.Component {
                   </GTableHeaderCell>
                 </GTableHeader>
 
-                <GTableBody data={tableData}>
-                  {tablerowdataAudit
-                    ? tablerowdataAudit.map(function(row, idx) {
+                <GTableBody data={tablerowdataAudit}>
+                  {tablerowdataAudit? tablerowdataAudit.map(function(row, idx) {
                         return (
                           <GTableRow
                             key={idx}
                             index={idx}
-                            offset={tableData.offset}
-                            max={tableData.max}
-                            data={tableData}
+                            data={tablerowdataAudit}
                           >
                             {Object.keys(row).map(function(text, index) {
                               return (
                                 <div
                                   key={index}
                                   style={
-                                    tableData[index].width
-                                      ? {
-                                          flex:
-                                            "1 0 " +
-                                            tableData[index].width +
-                                            "%"
-                                        }
-                                      : {}
-                                  }
-                                  className="cell"
-                                >
+                                    tableData[index].width ? {flex:"1 0 " +tableData[index].width +"%"}: {}} className="cell" >
                                   {index == 0 ? (
                                     <label
                                       className="container"
@@ -553,16 +519,14 @@ class AuditStart extends React.Component {
                   </GTableHeaderCell>
                 </GTableHeader>
 
-                <GTableBody data={tableData}>
+                <GTableBody data={tablerowdataOther}>
                   {tablerowdataOther
                     ? tablerowdataOther.map(function(row, idx) {
                         return (
                           <GTableRow
                             key={idx}
                             index={idx}
-                            offset={tableData.offset}
-                            max={tableData.max}
-                            data={tableData}
+                            data={tablerowdataOther}
                           >
                             {Object.keys(row).map(function(text, index) {
                               return (

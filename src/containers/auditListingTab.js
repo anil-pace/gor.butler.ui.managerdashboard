@@ -342,7 +342,7 @@ render(){
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
 
-    <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
+    <GTableRow key={idx} index={idx} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton?'visible':'hidden';
