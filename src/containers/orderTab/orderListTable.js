@@ -64,6 +64,7 @@ import {
     FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
+import {setActivePbtIndex} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
     fulfillableStatus: {
@@ -146,7 +147,8 @@ class OrderListTable extends React.Component {
                 "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
                 "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
-            }
+            },
+            orderState: ""
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -217,7 +219,7 @@ class OrderListTable extends React.Component {
             }
             this.props.makeAjaxCall(params);
         }
-        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
+        ///this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime(){
@@ -376,15 +378,17 @@ class OrderListTable extends React.Component {
                 pbtRows.push(pbtRow);
             }
             processedData.pbtData = pbtRows;
+
         }
         processedData.offset = 0;
         processedData.max= pbtRows.length;
+
         return processedData;
     }
 
     _processOrders = (orderData, nProps) => {
         nProps = this;
-        orderData  = nProps.props.ordersPerPbt;
+       // orderData  = orderData;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
 
         let orderDataLen = orderData.length;
@@ -540,7 +544,7 @@ class OrderListTable extends React.Component {
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
-        const processedOrderData = this._processOrders(this.props.ordersPerPbt);
+       // const processedOrderData = this._processOrders(this.props.ordersPerPbt);
         return (
             <div>
                 <div className="waveListWrapper">
@@ -549,6 +553,8 @@ class OrderListTable extends React.Component {
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
                                 return self.props.pbts[idx].total_orders ? 
                                 (<Accordion 
+                                    key={idx}
+                                    setActivePbtIndex={self.props.setActivePbtIndex}
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
@@ -567,30 +573,30 @@ class OrderListTable extends React.Component {
                                             })}
                                         </GTableRow>}>
 
-                                        {self.props.isPanelOpen === true ?
-                                            (<GTableBody data={processedOrderData.orderData} >
-                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
-                                                    return (
-                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
-                                                            {Object.keys(row).map(function (text, index) {
-                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                                    {row[text]}
-                                                                </div>
-                                                            })}
-                                                        </GTableRow>
-                                                    )
-                                                }):""}
-                                            </GTableBody>): null
-                                        }
+                                    {/* START=> While clicking on Accordion */} 
+                                    {self.props.pbts[idx].ordersPerPbt && <GTableBody ordersForWhichPbt = {idx} ordata={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData} >
+                                        {self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData.map(function (row_1, idx_1) {
+                                            return (
+                                                <GTableRow key={idx_1} index={idx_1} offset={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).offset} max={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).max} data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData}>
+                                                    {Object.keys(row_1).map(function (text, index) {
+                                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                            {row_1[text]}
+                                                        </div>
+                                                    })}
+                                                </GTableRow>
+                                            )
+                                        })}
+                                    </GTableBody>}
+                                    {/* END=> */} 
                                 </Accordion>)
 
                                 :<GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
-                                        {row.map(function (text, index) {
-                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                {text}
-                                            </div>
-                                        })}
-                                    </GTableRow>
+                                    {row.map(function (text, index) {
+                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                            {text}
+                                        </div>
+                                    })}
+                                </GTableRow>
                             }):""}
                         </GTableBody>
                     </GTable>
@@ -619,7 +625,7 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
-
+        pbts:state.orderDetails.pbts,
         totalPages: state.orderDetails.totalPages,
         totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,
@@ -670,7 +676,8 @@ var mapDispatchToProps=function (dispatch) {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
-        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
+        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));},
+        setActivePbtIndex:function(data){dispatch(setActivePbtIndex(data));}
 
 
     }

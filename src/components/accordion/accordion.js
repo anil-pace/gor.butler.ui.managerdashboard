@@ -1,4 +1,3 @@
-//source: https://codepen.io/adamaoc/pen/wBGGQv?editors=1010
 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -21,23 +20,9 @@ class Accordion extends React.Component{
   handleClick(e){
 
     const index = storage.indexOf(this.props.cutOffTimeIndex);
-
-    if(index === -1){
-        storage.push(this.props.cutOffTimeIndex);
-        this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
-    }
-    else{
-      storage.splice(index, 1);
-      this.props.stopPollingOrders(this.props.intervalIdForOrders);
-    }
-
-
-    if(storage.length >= 1){
-      this.props.enableCollapseAllBtn();
-    }
-    else{
-      this.props.disableCollapseAllBtn();
-    }
+    this.props.setActivePbtIndex(this.props.cutOffTimeIndex)
+    this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
+   
 
     if(this.state.open) {
       this.setState({
@@ -64,11 +49,11 @@ class Accordion extends React.Component{
       return (
         <div className="main">
           <div className={this.state.class}>
-            <div className="panelHeader" onClick={this.handleClick}>{this.props.title}
+            <div key={this.props.key} className="panelHeader" onClick={this.handleClick}>{this.props.title}
               <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
              
-            <div className="panelWrapper">
+            <div key={this.props.ordersForWhichPbt} className="panelWrapper">
                     <Spinner isLoading={this.props.isInfiniteLoading} utilClassNames={"infinite-scroll"}>
                       <div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
                     </Spinner>
@@ -76,6 +61,7 @@ class Accordion extends React.Component{
                 {(this.state.class === "panel open") ? this.props.children : null}
               </div>
             </div>
+
           </div>
         </div>
       );

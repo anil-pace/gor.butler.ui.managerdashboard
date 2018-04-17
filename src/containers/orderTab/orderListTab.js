@@ -67,7 +67,7 @@ import {
         this._stopPollingCutOffTime = this._stopPollingCutOffTime.bind(this);
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
-        this._handleCollapseAll = this._handleCollapseAll.bind(this);
+        //this._handleCollapseAll = this._handleCollapseAll.bind(this);
     }
 
     _getInitialState(){
@@ -325,7 +325,7 @@ import {
         this._reqOrdersSummary(startDate, endDate);
         let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
         let newEndendDate = new Date().toISOString();
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
+       // this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime = ()=> {
@@ -371,12 +371,12 @@ import {
         })
     }
 
-    _handleCollapseAll(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
-    }
+    // _handleCollapseAll(){
+    //     this.setState({
+    //         collapseAllBtnState: true,
+    //         isPanelOpen: false
+    //     })
+    // }
 
     render() {
 
