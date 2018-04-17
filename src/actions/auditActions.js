@@ -51,11 +51,12 @@ export function getAuditData(params) {
     }
 }
 
-export function recieveAuditData(data) {
+export function recieveAuditData(data,saltParams) {
     
     return {
         type: RECIEVE_AUDIT_DATA,
-        data
+        data,
+        saltParams
     }
 }
 

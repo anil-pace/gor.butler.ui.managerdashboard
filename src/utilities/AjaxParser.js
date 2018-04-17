@@ -188,7 +188,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
-            store.dispatch(recieveAuditData(res));
+            store.dispatch(recieveAuditData(res,saltParams));
             store.dispatch(setAuditSpinner(false));
             break;
         case GET_ROLES:

@@ -97,6 +97,7 @@ input, select {
   z-index: 998;
   height: 100vh;
   top: 0px;
+  background-size: 3%;
 }
 
 input:focus {
@@ -5736,6 +5737,7 @@ button:disabled {
   background-color: #ffffff;
   border-top: 1px solid lightgrey;
   float: left;
+  bottom: -30px;
 }
 
 .gor-auditlist-paginate-right {
@@ -5775,8 +5777,8 @@ button:disabled {
 }
 
 .table-auditListing .table-body {
-  max-height: none !important;
-  min-height: 60vh;
+  max-height: 75vh !important;
+  min-height: 75vh;
   overflow: auto;
   background-color: white;
 }
@@ -9189,7 +9191,7 @@ button:disabled {
 }
 
 .gor-actionDropDown {
-  position: absolute;
+  position: relative;
 }
 
 .gor-actionDropDown .gor-add-flyoutWrapper {

@@ -39,7 +39,7 @@ import {
     sortAuditHead,
     sortOrder, POST, START_AUDIT_TASK,
     ALL, FILTER_PPS_ID, AUDIT_START_TIME, AUDIT_END_TIME, AUDIT_CREATEDBY,
-    ANY, WS_ONSEND, toggleOrder, CANCEL_AUDIT, SYSTEM_GENERATED, POLLING_INTERVAL
+    ANY, WS_ONSEND, toggleOrder, CANCEL_AUDIT, SYSTEM_GENERATED, POLLING_INTERVAL,PAGE_DEFAULT_LIMIT
 } from '../constants/frontEndConstants';
 import {
     SEARCH_AUDIT_URL,
@@ -123,7 +123,7 @@ class AuditTab extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={selected_page: 1,query:null,auditListRefreshed:null,timerId:0};
+        this.state={selected_page: 1,query:null,auditListRefreshed:null,timerId:0,intervalPage:1};
           this._handelClick = this._handelClick.bind(this);
           this.polling=this.polling.bind(this);
 
@@ -147,7 +147,7 @@ class AuditTab extends React.Component {
         this.props.setClearIntervalFlag(true);
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
+        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query ||( (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query))&&(JSON.stringify(nextProps.location.query) !== JSON.stringify(this.props.location.query))) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.props.showFilter;
             let obj = {}, selectedToken;
             if (!this.state.pollTimerId) {
@@ -158,7 +158,6 @@ class AuditTab extends React.Component {
             this.setState({ query: JSON.parse(JSON.stringify(nextProps.location.query)) });
             this.setState({ auditListRefreshed: nextProps.auditListRefreshed });
             this._subscribeData();
-
             this._refreshList(nextProps.location.query, nextProps.auditSortHeaderState.colSortDirs);
         }
     }
@@ -179,7 +178,7 @@ class AuditTab extends React.Component {
         self = this;
         let timerId = 0;
         timerId = setInterval(function () {
-            self._refreshList({}, undefined);
+            self._refreshList({}, 'polling');
         }, POLLING_INTERVAL);
         self.setState({ timerId: timerId });
     }
@@ -234,8 +233,13 @@ class AuditTab extends React.Component {
      * and will fetch the data from the socket.
      * @private
      */
+
+    _findPageSize(){
+
+    }
     _refreshList(query, auditParam) {
-        var auditbyUrl;
+        var pageSize=10,pageNo=1;
+        var auditbyUrl="",saltParams;
         let _query_params = [], _auditParamValue = [], _auditStatuses = [], _auditCretedBy = [], url = "";
         if (query.fromDate) {
             url = SEARCH_AUDIT_URL + AUDIT_START_TIME + "=" + query.fromDate;
@@ -294,43 +298,40 @@ class AuditTab extends React.Component {
         if (query.ppsId) {
             _query_params.push([FILTER_PPS_ID, query.ppsId].join("="))
         }
-
-        _query_params.push([GIVEN_PAGE, query.page || 1].join("="))
-        _query_params.push([GIVEN_PAGE_SIZE, 20].join("="))
-
-        if (auditParam && auditParam.sortDir) {
-            _query_params.push(['order', toggleOrder(auditParam.sortDir)].join("="));
-            auditbyUrl = sortAuditHead[auditParam["columnKey"]];
-
+        if(auditParam=='polling'){
+        var current_page_no=this.props.auditFilterState.PAGE||1;
+            pageNo=this.state.intervalPage;
+            pageSize=current_page_no*pageSize;
         }
-        else {
-            if (auditParam) {
-                _query_params.push(['order', toggleOrder(auditParam[Object.keys(auditParam)])].join("="));
-                auditbyUrl = sortAuditHead[Object.keys(auditParam)[0]];
-            } else {
-                auditbyUrl = "";
-            }
+        else{
+            pageSize=PAGE_DEFAULT_LIMIT;
+            pageNo=query.page||1;
+            this.props.setAuditSpinner(true);
         }
-
+        _query_params.push([GIVEN_PAGE, pageNo].join("="))
+        _query_params.push([GIVEN_PAGE_SIZE, pageSize].join("="))
         url = [url, _query_params.join("&")].join("&")
         url += auditbyUrl;
 
-        if (Object.keys(query).filter(function (el) { return el !== 'page' }).length !== 0) {
+        if (Object.keys(query).filter(function (el) { return el !== 'page' && el !== 'saltParams' }).length !== 0) {
             this.props.toggleAuditFilter(true);
             this.props.filterApplied(true);
         } else {
             this.props.toggleAuditFilter(false);
             this.props.filterApplied(false);
         }
-
+        saltParams=query.saltParams?query.saltParams:{lazyData:false}
         let paginationData = {
             'url': url,
             'method': GET,
             'cause': AUDIT_RETRIEVE,
             'token': this.props.auth_token,
-            'contentType': APP_JSON
+            'contentType': APP_JSON,
+            'saltParams':saltParams,
         }
-        this.props.setAuditSpinner(true);
+
+        
+
         this.props.auditfilterState({
             tokenSelected: {
                 "AUDIT TYPE": query.auditType ? query.auditType.constructor === Array ? query.auditType : [query.auditType] : [ANY],
@@ -345,16 +346,17 @@ class AuditTab extends React.Component {
                 'FROM DATE': query.fromDate || '',
                 'TO DATE': query.toDate || ''
             },
-            "PAGE": query.page || 1,
+            "PAGE": auditParam=='polling'? this.props.auditFilterState.PAGE:query.page,
             defaultToken: { "AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY": [ALL] }
         })
         this.props.setAuditQuery({ query: query })
         this.props.getPageData(paginationData);
-        if(Object.keys(query).length)
+        if (Object.keys(query).filter(function (el) { return el !== 'page' && el !== 'saltParams' }).length !== 0)
                 {
                 clearInterval(this.state.timerId);
                 this.props.setClearIntervalFlag(true);
                 }
+            
     }
     /**
      *
@@ -646,7 +648,16 @@ class AuditTab extends React.Component {
         var auditData = this._processAuditData();
 
 
-        renderTab = <AuditTable  items={auditData} setCheckedAudit={this.props.setCheckedAudit} checkedAudit={this.props.checkedAudit} userRequest={this.props.userRequest} />
+        renderTab = <AuditTable refreshCallback={this._refreshList.bind(this)}  
+        items={auditData} 
+        setCheckedAudit={this.props.setCheckedAudit} 
+        checkedAudit={this.props.checkedAudit} 
+        userRequest={this.props.userRequest} 
+        location={this.props.location} 
+        currentPage={this.props.location ? this.props.location.query.page : 1} 
+        totalPage= {this.props.totalPage || 0}  
+        totalAudits={this.props.totalAudits||0}  
+        />
 
         let toolbar = <div>
             <div className="gor-filter-wrap"
@@ -718,14 +729,7 @@ class AuditTab extends React.Component {
                         {renderTab}
                     </div>
                 </div>
-                {auditData.length && this.state.query ?
-                    <div className="gor-auditlist-paginate-wrap">
-                        <div className="gor-audit-paginate-left">
-                        </div>
-                        <div className="gor-auditlist-paginate-right">
-                            <GorPaginateV2 location={this.props.location} currentPage={this.state.query ? this.state.query.page : 1} totalPage={this.props.totalPage} />
-                        </div>
-                    </div> : ""}
+                
             </div>
         );
     }

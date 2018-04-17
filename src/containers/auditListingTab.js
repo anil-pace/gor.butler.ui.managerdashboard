@@ -21,7 +21,8 @@
  import EditAudit from '../containers/auditTab/editAudit';  
  import {
     APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT,
+    PAGE_DEFAULT_LIMIT
 } from '../constants/frontEndConstants';
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
@@ -194,7 +195,17 @@ startAuditAuto(auditId){
             }
       this.props.userRequest(auditData);
 } 
-
+_onScrollHandler(event){
+console.log("scrollHeight:"+event.target.scrollHeight,"scrollTop:"+event.target.scrollTop,"clientHeight"+event.target.clientHeight)
+if(event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight && Math.ceil(this.props.totalAudits/PAGE_DEFAULT_LIMIT)!==Number(this.props.currentPage)){
+    let page=this.props.currentPage?Number(this.props.currentPage)+1:this.props.items.length!==0?2:"";    
+    let _query=this.props.location.query || {}
+        _query.page=page.toString();
+        _query.saltParams={lazyData:true};
+    this.props.refreshCallback(_query);
+    
+}
+}
 
 
 _pauseAudit(auditId){
@@ -336,7 +347,7 @@ render(){
    <GTable options={['table-bordered','table-auditListing']}>
 
 {tablerowdata && tablerowdata.length>=1?
-   <GTableBody data={tablerowdata} >
+    <GTableBody data={tablerowdata}   onScrollHandler={me._onScrollHandler.bind(this)}>
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
 
@@ -350,16 +361,16 @@ render(){
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:autoAssignPPS,value:'autoassignpps'},{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:autoAssignPPS,value:'autoassignpps'},{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       {startButton}
        <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
-       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
+       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button" style={{float:'left'}}>
     {reauditButton}
       </button>:""}
       {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" style={{float:'right'}} id={tablerowdata[idx]['auditDetails']['header'][0]}   onClick={me._handelResolveAudit}>
+      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['header'][0]} style={{float:'right'}}   onClick={me._handelResolveAudit}>
       {resolveButton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
