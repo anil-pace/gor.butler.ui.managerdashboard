@@ -403,7 +403,7 @@ return tableData;
                        {processedTableData ? processedTableData.map(function (row, idx) {
                            return (
                                
-                               <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tableData} >
+                               <GTableRow key={idx} index={idx}  data={processedTableData} >
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
