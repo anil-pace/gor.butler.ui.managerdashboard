@@ -9084,7 +9084,7 @@ button:disabled {
   margin-right: 1em;
 }
 
-.gor-modal-content {
+.gor-order-modal .gor-modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
@@ -9093,7 +9093,7 @@ button:disabled {
   color: #4a4a4a;
 }
 
-.gor-modal-content .gor-modal-head {
+.gor-order-modal .gor-modal-content .gor-modal-head {
   position: relative;
   font-size: 1.25rem;
   font-weight: 600;
@@ -9110,13 +9110,13 @@ button:disabled {
   z-index: 100;
 }
 
-.gor-modal-content .gor-modal-head .orderIdWrapper {
+.gor-order-modal .gor-modal-content .gor-modal-head .orderIdWrapper {
   font-size: 1.625rem;
   font-weight: 400;
   color: #000000;
 }
 
-.gor-modal-content .gor-modal-head .close {
+.gor-order-modal .gor-modal-content .gor-modal-head .close {
   background: #f2f2f2;
   color: #AAAAAA;
   float: right;
@@ -9128,86 +9128,86 @@ button:disabled {
   border-radius: 50%;
 }
 
-.gor-modal-content .gor-modal-head .close:hover {
+.gor-order-modal .gor-modal-content .gor-modal-head .close:hover {
   color: #333333;
 }
 
-.gor-modal-content .gor-modal-head .close:focus {
+.gor-order-modal .gor-modal-content .gor-modal-head .close:focus {
   color: #666666;
 }
 
-.gor-modal-content .gor-modal-body {
+.gor-order-modal .gor-modal-content .gor-modal-body {
   margin: 82px 30px 0px 55px;
   border-bottom: 2px solid #dddddd;
   width: 92%;
   color: #4a4a4a;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper {
   margin-top: 120px;
   height: 10rem;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsHeader {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsHeader {
   font-size: 1.25rem;
   font-weight: 600;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent {
   margin-top: 10px;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft {
   width: 60%;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn {
   width: 33%;
   display: inline-block;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow {
   margin-top: 10px;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey {
   font-size: 0.875rem;
   font-weight: 600;
   width: 6.5625rem;
   display: inline-block;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-1-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-1-span-key {
   width: 4.375rem;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-2-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-2-span-key {
   width: 7.1875rem;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-3-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-3-span-key {
   width: 5.625rem;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanValue {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanValue {
   font-size: 0.875rem;
   font-weight: 400;
   display: inline-block;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsSearchWrap {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsSearchWrap {
   float: right;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsListWrapper {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper {
   margin-left: -20px;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsListWrapper .DotSeparatorWrapper {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper .DotSeparatorWrapper {
   margin-left: 30px;
 }
 
-.gor-modal-content .gor-modal-body .orderDetailsListWrapper .ProgressBarWrapper {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper .ProgressBarWrapper {
   width: 7.5rem;
   margin-top: 5px;
 }
