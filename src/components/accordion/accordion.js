@@ -19,9 +19,6 @@ class Accordion extends React.Component{
 
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.cutOffTimeIndex===5){
-      console.log("IN 5")
-    }
     if(nextProps.isOpened!==this.props.isOpened){
       console.log("INdex"+nextProps.cutOffTimeIndex+" opened"+nextProps.isOpened)
        this.setState({open:nextProps.isOpened,class:['panel',nextProps.isOpened?'open':''].join(" ")})
@@ -34,7 +31,9 @@ class Accordion extends React.Component{
   handleClick(e){
 
     const index = storage.indexOf(this.props.cutOffTimeIndex);
-    this.props.setActivePbtIndex({index:this.props.cutOffTimeIndex})
+    const timeIndex = this.props.pbts[this.props.cutOffTimeIndex].cut_off_time;
+    //this.props.setActivePbtIndex({index:this.props.cutOffTimeIndex})
+    this.props.setActivePbtIndex({index:timeIndex})
     this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
    
   }

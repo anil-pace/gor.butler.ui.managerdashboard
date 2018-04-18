@@ -544,6 +544,8 @@ class OrderListTable extends React.Component {
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
+        console.log("this.props.pbts=============>")
+        console.log(JSON.stringify(this.props.pbts));
        // const processedOrderData = this._processOrders(this.props.ordersPerPbt);
         return (
             <div>
@@ -551,10 +553,10 @@ class OrderListTable extends React.Component {
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
-                                console.log(idx)
                                 return self.props.pbts[idx].total_orders ? 
                                 (<Accordion 
                                     key={idx}
+                                    pbts={self.props.pbts}
                                     setActivePbtIndex={self.props.setActivePbtIndex}
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     startPollingCutOffTime={self._startPollingCutOffTime}
