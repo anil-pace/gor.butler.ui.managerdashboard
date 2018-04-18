@@ -302,9 +302,6 @@ _tableBodyData(itemsData){
        if(itemsData[i].button['audit_duplicate_button']=='enable'){
       rowObject.butoonToSHow.push({name:alDuplicate,value:'duplicate'});
       }
-       if(itemsData[i].button['audit_resolve_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alResolve,value:'resolve'});
-      }
       if(itemsData[i].button['audit_pause_button']=='enable'){
       rowObject.butoonToSHow.push({name:alPause,value:'pause'});
       }
