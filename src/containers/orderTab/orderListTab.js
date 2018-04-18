@@ -325,7 +325,7 @@ import {
         this._reqOrdersSummary(startDate, endDate);
         let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
         let newEndendDate = new Date().toISOString();
-       // this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
+        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime = ()=> {

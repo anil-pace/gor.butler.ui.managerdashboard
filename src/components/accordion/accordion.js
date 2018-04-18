@@ -17,24 +17,26 @@ class Accordion extends React.Component{
       
   }
 
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.cutOffTimeIndex===5){
+      console.log("IN 5")
+    }
+    if(nextProps.isOpened!==this.props.isOpened){
+      console.log("INdex"+nextProps.cutOffTimeIndex+" opened"+nextProps.isOpened)
+       this.setState({open:nextProps.isOpened,class:['panel',nextProps.isOpened?'open':''].join(" ")})
+    }
+
+
+    
+  }
+
   handleClick(e){
 
     const index = storage.indexOf(this.props.cutOffTimeIndex);
-    this.props.setActivePbtIndex(this.props.cutOffTimeIndex)
+    this.props.setActivePbtIndex({index:this.props.cutOffTimeIndex})
     this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
    
-
-    if(this.state.open) {
-      this.setState({
-        open: false,
-        class: "panel"
-      });
-    }else{
-      this.setState({
-        open: true,
-        class: "panel open"
-      });
-    }
   }
 
   render()
@@ -49,11 +51,11 @@ class Accordion extends React.Component{
       return (
         <div className="main">
           <div className={this.state.class}>
-            <div key={this.props.key} className="panelHeader" onClick={this.handleClick}>{this.props.title}
+            <div  className="panelHeader" onClick={this.handleClick}>{this.props.title}
               <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
              
-            <div key={this.props.ordersForWhichPbt} className="panelWrapper">
+            <div className="panelWrapper">
                     <Spinner isLoading={this.props.isInfiniteLoading} utilClassNames={"infinite-scroll"}>
                       <div className="infinite-content"><p><FormattedMessage id="notification.infinite.message" description='Infinite scroll message' defaultMessage='Loading More'/></p></div>
                     </Spinner>

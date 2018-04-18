@@ -219,7 +219,7 @@ class OrderListTable extends React.Component {
             }
             this.props.makeAjaxCall(params);
         }
-        ///this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
+        //this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime(){
@@ -551,6 +551,7 @@ class OrderListTable extends React.Component {
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
+                                console.log(idx)
                                 return self.props.pbts[idx].total_orders ? 
                                 (<Accordion 
                                     key={idx}
@@ -564,6 +565,7 @@ class OrderListTable extends React.Component {
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
                                     disableCollapseAllBtn={self._disableCollapseAllBtn} 
+                                    isOpened={self.props.pbts[idx].opened}
                                     title={
                                         <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                             {row.map(function (text, index) {
@@ -574,7 +576,7 @@ class OrderListTable extends React.Component {
                                         </GTableRow>}>
 
                                     {/* START=> While clicking on Accordion */} 
-                                    {self.props.pbts[idx].ordersPerPbt && <GTableBody ordersForWhichPbt = {idx} ordata={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData} >
+                                    {self.props.pbts[idx].ordersPerPbt && <GTableBody  data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData} >
                                         {self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData.map(function (row_1, idx_1) {
                                             return (
                                                 <GTableRow key={idx_1} index={idx_1} offset={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).offset} max={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).max} data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData}>
