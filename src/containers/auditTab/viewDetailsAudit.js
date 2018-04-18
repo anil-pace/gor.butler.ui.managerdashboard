@@ -239,7 +239,7 @@ _timeFormat(UTCtime){
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
 
     let tile1Data={},tile2Data={},tile3Data={};
-    tile1Data[vdhCreatedBy]=data.audit_created_by;
+    tile1Data[vdhCreatedBy]=data.audit_creator_name;
     tile1Data[vdhOperator]=data.operator_assigned;
     if(data.audit_param_type=="sku"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiSKU:vdSingleSKU;

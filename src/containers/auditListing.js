@@ -37,7 +37,7 @@ import {
     AUDIT_TASK_ID,
     AUDIT_STATUS,
     sortAuditHead,
-    sortOrder, POST, START_AUDIT_TASK,
+    sortOrder, POST, START_AUDIT_TASK,AUDIT_CREATOR_NAME,
     ALL, FILTER_PPS_ID, AUDIT_START_TIME, AUDIT_END_TIME, AUDIT_CREATEDBY,
     ANY, WS_ONSEND, toggleOrder, CANCEL_AUDIT, SYSTEM_GENERATED, POLLING_INTERVAL
 } from '../constants/frontEndConstants';
@@ -284,7 +284,7 @@ class AuditTab extends React.Component {
                 _flattened_createdBy.push(createdBy.split("__"))
             })
             _auditCretedBy = [].concat.apply([], _flattened_createdBy)
-            _query_params.push([AUDIT_CREATEDBY, "['" + _auditCretedBy.join("','") + "']"].join("="))
+            _query_params.push([AUDIT_CREATOR_NAME, "['" + _auditCretedBy.join("','") + "']"].join("="))
         }
         if (query.taskId) {
             _query_params.push([FILTER_AUDIT_ID, query.taskId].join("="))
@@ -563,7 +563,7 @@ class AuditTab extends React.Component {
             auditData.duplicateButton = data[i].audit_button_data.audit_duplicate_button === 'enable' ? true : false;
             auditData.detailsButton = true;
 
-            auditData.system_created_audit = data[i].audit_created_by === SYSTEM_GENERATED ? true : data[i].audit_created_by;
+            auditData.system_created_audit = data[i].audit_created_by === SYSTEM_GENERATED ? true : data[i].audit_creator_name;
 
             auditDetails.push(auditData);
             auditData = {};
