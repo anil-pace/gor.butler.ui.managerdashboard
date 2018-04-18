@@ -314,6 +314,7 @@ class CreateAudit extends React.Component{
       validSKUData.audit_param_value.attributes_list = [];
       validSKUData.kq = this.kqCheck.checked;
       validSKUData.action=(type === "create" || type === "confirm")?'create':'';
+      validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       let {selectedSKUList} = this.state;
       let skuList = this.state.copyPasteSKU.data;
       for(let i=0,len=skuList.length; i<len ;i++){
@@ -1330,6 +1331,7 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo,
       locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
+      username: state.authLogin.username,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,

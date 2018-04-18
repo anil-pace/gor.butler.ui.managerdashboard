@@ -383,10 +383,12 @@ _onAttributeSelectionFirstTime(){
     if(this.props.auditId && type !== "validate" && this.props.param!=='duplicate'){
       validSKUData.audit_id=this.props.auditId;
       validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
+      validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       validSKUData.kq = this.kqCheck.checked;
     }
     if(this.props.param=='duplicate' && type !== "validate"){
       validSKUData.action='duplicate';
+      validSKUData.audit_creator_name=this.props.username;
       validSKUData.kq = this.kqCheck.checked;
     }
     
@@ -474,6 +476,7 @@ _onAttributeSelectionFirstTime(){
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
+      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'',
       "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -487,6 +490,7 @@ _onAttributeSelectionFirstTime(){
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":'duplicate',
+      "audit_creator_name":this.props.username,
       "kq":this.kqCheck.checked,
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -1471,6 +1475,7 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo,
       locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
+      username: state.authLogin.username,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
