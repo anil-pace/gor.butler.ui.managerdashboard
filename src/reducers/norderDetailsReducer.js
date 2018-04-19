@@ -66,35 +66,22 @@ export  function orderDetails(state={},action){
     case ORDERS_PER_PBT_FETCH:
       let res = action.data;
       let target_cut_off_time=action.saltParams.cut_off_time
+      let isLazyData= action.saltParams.lazyData
 
 
-
-
-      var findByCutOffTime=function(cut_off_time){
-        let found=state.pbts.filter(function(pbt){
-          return pbt.cut_off_time===cut_off_time
-        })
-        if(found.length>0){
-            return found[0]
-        }else{
-          return null
-        }
-      }
       state.pbts.map(function(pbt, idx){
 
         if(pbt.cut_off_time===target_cut_off_time){
+          let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
           pbt.ordersPerPbt={
-              "orders": res.serviceRequests,
+              "orders": ordersData,
               "isInfiniteLoading":false,
               "dataFound":res.serviceRequests.length < 1,
               "totalPages" : res.totalPages,
               "totalOrders" : res.totaElements
             } 
         }
-        
         return pbt
-
-
       })
       return Object.assign({},state,{});
       break;
