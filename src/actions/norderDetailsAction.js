@@ -3,7 +3,7 @@ import {ORDERS_FULFIL_FETCH,
 		ORDERS_CUT_OFF_TIME_FETCH, 
 		ORDERS_PER_PBT_FETCH,
 		ORDERLINES_PER_ORDER_FETCH,
-		SET_ACTIVE_PBT_INDEX
+		TOGGLE_ACTIVE_PBT
 	} from './../constants/frontEndConstants'
 
 export function receiveOrderFulfilmentData(data){
@@ -35,9 +35,9 @@ export function receiveOrdersPerPbtData(data, saltParams){
 	}
 }
 
-export function setActivePbtIndex(data){
+export function setActivePbt(data){
 	return {
-		type: SET_ACTIVE_PBT_INDEX,
+		type: TOGGLE_ACTIVE_PBT,
 		data,
 	}
 }

@@ -23,18 +23,14 @@ class Accordion extends React.Component{
       console.log("INdex"+nextProps.cutOffTimeIndex+" opened"+nextProps.isOpened)
        this.setState({open:nextProps.isOpened,class:['panel',nextProps.isOpened?'open':''].join(" ")})
     }
-
-
-    
   }
 
-  handleClick(e){
+  handleClick(pbtData,e){
 
     const index = storage.indexOf(this.props.cutOffTimeIndex);
-    const timeIndex = this.props.pbts[this.props.cutOffTimeIndex].cut_off_time;
-    //this.props.setActivePbtIndex({index:this.props.cutOffTimeIndex})
-    this.props.setActivePbtIndex({index:timeIndex})
-    this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
+    const timeIndex = pbtData.cut_off_time;
+    this.props.setActivePbt({pbt:pbtData})
+    this.props.getOrderPerPbt(pbtData);
    
   }
 
@@ -50,7 +46,7 @@ class Accordion extends React.Component{
       return (
         <div className="main">
           <div className={this.state.class}>
-            <div  className="panelHeader" onClick={this.handleClick}>{this.props.title}
+            <div  className="panelHeader" onClick={this.handleClick.bind(this,this.props.pbts[this.props.cutOffTimeIndex])}>{this.props.title}
               <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
              

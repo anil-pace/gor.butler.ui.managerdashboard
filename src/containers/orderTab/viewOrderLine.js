@@ -87,8 +87,8 @@ class ViewOrderLine extends React.Component{
   }
 
   componentWillUnmount(){
-    clearInterval(this._intervalIdViewOrderLines);
-    this.props.startPollingCutOffTime();
+    //clearInterval(this._intervalIdViewOrderLines);
+    //this.props.startPollingCutOffTime();
     //this.props.startPollingOrders(this.props.cutOffTimeIndex);
   }
 
@@ -116,7 +116,7 @@ class ViewOrderLine extends React.Component{
             'cause':ORDERLINES_PER_ORDER_FETCH,
         }
         this.props.makeAjaxCall(params);
-        this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), ORDERS_POLLING_INTERVAL);
+        //this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), ORDERS_POLLING_INTERVAL);
     }
 
   _removeThisModal() {

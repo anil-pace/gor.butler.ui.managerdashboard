@@ -1,4 +1,4 @@
-import {ORDERS_FULFIL_FETCH, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDER_LIST_REFRESHED, SET_ACTIVE_PBT_INDEX} from '../constants/frontEndConstants';
+import {ORDERS_FULFIL_FETCH, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDER_LIST_REFRESHED, TOGGLE_ACTIVE_PBT} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -34,14 +34,16 @@ export  function orderDetails(state={},action){
         });
       break;
 
-    case SET_ACTIVE_PBT_INDEX:
+    case TOGGLE_ACTIVE_PBT:
+      let target_cut_off_time_2=action.data.pbt.cut_off_time
       let pbts=state.pbts;
       pbts.map(function(pbt, idx){
-        if(state.pbts && state.pbts[idx]){
-          if(pbt.cut_off_time === action.data.index){
-            pbts[idx].opened=!pbts[idx].opened;
+        
+          if(pbt.cut_off_time === target_cut_off_time_2){
+            pbt.opened=!pbt.opened;
           }
-        }
+          return pbt
+        
       })
       
       return Object.assign({}, state, {
@@ -52,19 +54,36 @@ export  function orderDetails(state={},action){
 
     case ORDERS_PER_PBT_FETCH:
       let res = action.data;
+      let target_cut_off_time=action.saltParams.cut_off_time
+
+
+
+
+      var findByCutOffTime=function(cut_off_time){
+        let found=state.pbts.filter(function(pbt){
+          return pbt.cut_off_time===cut_off_time
+        })
+        if(found.length>0){
+            return found[0]
+        }else{
+          return null
+        }
+      }
       state.pbts.map(function(pbt, idx){
-        if(state.pbts && state.pbts[idx]){
-          if(pbt.cut_off_time === state.activePbtIndex){
-            console.log("cut off time is present at index ========>" + idx);
-            state.pbts[idx].ordersPerPbt={
+
+        if(pbt.cut_off_time===target_cut_off_time){
+          pbt.ordersPerPbt={
               "orders": res.serviceRequests,
               "isInfiniteLoading":false,
               "dataFound":res.serviceRequests.length < 1,
               "totalPages" : res.totalPages,
               "totalOrders" : res.totaElements
-            }  
-          }
+            } 
         }
+        
+        return pbt
+
+
       })
       return Object.assign({},state,{});
       break;

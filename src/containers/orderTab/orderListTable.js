@@ -64,7 +64,7 @@ import {
     FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
-import {setActivePbtIndex} from '../../actions/norderDetailsAction';
+import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
     fulfillableStatus: {
@@ -178,12 +178,12 @@ class OrderListTable extends React.Component {
             });
     }
 
-    _reqOrderPerPbt(cutOffTimeIndex, saltParams={}){
-        this.setState({
-            cutOffTimeIndex: cutOffTimeIndex
-        });
+    _reqOrderPerPbt(pbtData, saltParams={}){
+        // this.setState({
+        //     cutOffTimeIndex: cutOffTimeIndex
+        // });
 
-        let cutOffTime = this.props.pbts[cutOffTimeIndex].cut_off_time;
+        let cutOffTime = pbtData.cut_off_time;
         const index = storage.indexOf(cutOffTime);
 
         let formData={
@@ -192,7 +192,9 @@ class OrderListTable extends React.Component {
             "cut_off_time" : cutOffTime
         };
 
-        if(JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
+        saltParams.cut_off_time=cutOffTime
+
+        if(saltParams.lazyData ){  // Accordion already open and infinite scroll
             let params={
                 'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
                 'method':POST,
@@ -216,10 +218,11 @@ class OrderListTable extends React.Component {
                 'accept':APP_JSON,
                 'cause':ORDERS_PER_PBT_FETCH,
                 'formdata':formData,
+                saltParams:saltParams
             }
             this.props.makeAjaxCall(params);
         }
-        //this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), ORDERS_POLLING_INTERVAL);
+        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime(){
@@ -362,7 +365,7 @@ class OrderListTable extends React.Component {
                 let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
                 pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                {formatTimeLeft!== "" ?
+                                {formatTimeLeft ?
                                     <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
                                     <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
                                 }
@@ -526,14 +529,14 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
-    _onScrollHandler(event, cutOffTimeIndex){
+    _onScrollHandler(event, pbtData){
             if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
                 let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
                 this.setState({
                         page
                     },function(){
                         this.props.setInfiniteSpinner(false);
-                        this._reqOrderPerPbt(cutOffTimeIndex, {lazyData:true});
+                        this._reqOrderPerPbt(pbtData, {lazyData:true});
                     })
         }
         else {
@@ -544,8 +547,6 @@ class OrderListTable extends React.Component {
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
-        console.log("this.props.pbts=============>")
-        console.log(JSON.stringify(this.props.pbts));
        // const processedOrderData = this._processOrders(this.props.ordersPerPbt);
         return (
             <div>
@@ -557,13 +558,13 @@ class OrderListTable extends React.Component {
                                 (<Accordion 
                                     key={idx}
                                     pbts={self.props.pbts}
-                                    setActivePbtIndex={self.props.setActivePbtIndex}
+                                    setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
-                                    onScrollHandler={self._onScrollHandler} 
-                                    getOrderPerPbt={self._reqOrderPerPbt} 
+                                    onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
+                                    getOrderPerPbt={self._reqOrderPerPbt.bind(self)} 
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
                                     disableCollapseAllBtn={self._disableCollapseAllBtn} 
@@ -681,7 +682,7 @@ var mapDispatchToProps=function (dispatch) {
             dispatch(makeAjaxCall(params))
         },
         setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));},
-        setActivePbtIndex:function(data){dispatch(setActivePbtIndex(data));}
+        setActivePbt:function(data){dispatch(setActivePbt(data));}
 
 
     }
