@@ -843,7 +843,7 @@ export const CANCELLED_STATUS ="CANCELLED";
 export const ABANDONED_STATUS ="ABANDONED";
 export const ORDER_TAGS = "ORDER TAGS";
 export const STATUS = "STATUS";
-export const ORDERS_POLLING_INTERVAL = 20000;//60000;
+export const ORDERS_POLLING_INTERVAL = 60000;
 
 
 

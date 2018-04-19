@@ -100,11 +100,20 @@ import {
     componentDidMount(){
         let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
         let endDate = new Date().toISOString();
+        this.props.setOrderListSpinner(true);
         this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
        
     }
 
+
+
     componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+            
+        }
         if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
@@ -114,6 +123,7 @@ import {
     }
 
     _refreshList(query) {
+        
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
         if( (query.fromDate && query.toDate) && (query.toDate && query.toTime) ){
@@ -157,7 +167,6 @@ import {
                 
             }
         }
-        this.props.setOrderQuery({query:query});
 
         // if (Object.keys(query).filter(function (el) {
         //     return el !== 'page'
@@ -321,6 +330,7 @@ import {
             'cause':ORDERS_CUT_OFF_TIME_FETCH,
             'formdata':formData,
         }
+        
         this.props.makeAjaxCall(params);
         //call other http calls
         this._reqOrdersFulfilment(startDate, endDate);
@@ -416,7 +426,6 @@ import {
                 <div className="gor-Orderlist-table">
 
                     {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
-                    { true ? 
                         <div>
                             <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
                                 <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
@@ -480,7 +489,7 @@ import {
                     description="button label for show all"
                     defaultMessage="Show all orders"/>}/>
 
-                </div> : null}
+                </div> 
 
                 {this.props.pbts.length> 0 ?
                     (<OrderListTable 

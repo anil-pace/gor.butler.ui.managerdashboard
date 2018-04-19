@@ -529,7 +529,7 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
-    _onScrollHandler(event, pbtData){
+    _onScrollHandler(pbtData, event){
             if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
                 let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
                 this.setState({
