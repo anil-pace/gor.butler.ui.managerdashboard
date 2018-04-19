@@ -344,7 +344,7 @@ render(){
    <GTable options={['table-bordered','table-auditListing']}>
 
 {tablerowdata && tablerowdata.length>=1?
-    <GTableBody data={tablerowdata}   onScrollHandler={me._onScrollHandler.bind(this)}>
+  <GTableBody data={tablerowdata}   onScrollHandler={me._onScrollHandler.bind(this)}>
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
 
