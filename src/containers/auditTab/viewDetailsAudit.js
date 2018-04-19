@@ -119,7 +119,15 @@ defaultMessage: "End time"
 vdhProgress: {
 id: "viewDetais.audit.progress",
 defaultMessage: "Progress"
-}
+},
+trueStatus:{
+    id: "viewDetais.audit.true",
+    defaultMessage: "True"
+  },
+falseStatus:{
+    id: "viewDetais.audit.false",
+    defaultMessage: "False"
+   }
 });
 
 class ViewDetailsAudit extends React.Component {
@@ -237,6 +245,8 @@ _timeFormat(UTCtime){
     let vdhStartTime = this.context.intl.formatMessage(messages.vdhStartTime);
     let vdhEndTime = this.context.intl.formatMessage(messages.vdhEndTime);
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
+    let trueStatus=this.context.intl.formatMessage(messages.trueStatus);
+    let falseStatus=this.context.intl.formatMessage(messages.falseStatus);
 
     let tile1Data={},tile2Data={},tile3Data={};
     tile1Data[vdhCreatedBy]=data.audit_creator_name;
@@ -247,7 +257,7 @@ _timeFormat(UTCtime){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
     tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
-    tile3Data[vdhShowKQ]=data.kq;
+    tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
     tile3Data[vdhReminder]=data.reminder!==""?data.reminder:'-';
 
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
@@ -379,7 +389,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {tiledata[2]["PPS ID"]!=='-'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
