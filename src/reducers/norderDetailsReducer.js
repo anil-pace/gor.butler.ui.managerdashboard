@@ -1,4 +1,4 @@
-import {ORDERS_FULFIL_FETCH, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDER_LIST_REFRESHED, TOGGLE_ACTIVE_PBT} from '../constants/frontEndConstants';
+import {ORDERS_FULFIL_FETCH, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDER_LIST_REFRESHED, TOGGLE_ACTIVE_PBT,UNSET_ALL_ACTIVE_PBT} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -49,6 +49,17 @@ export  function orderDetails(state={},action){
       return Object.assign({}, state, {
         activePbtIndex: action.data.index,
         pbts:pbts
+      });
+      break;
+
+      case UNSET_ALL_ACTIVE_PBT:
+
+      let pbts_list= state.pbts;
+      pbts_list.map(function(pbt){
+          pbt.opened=false
+      })
+      return Object.assign({}, state, {
+        pbts:pbts_list
       });
       break;
 

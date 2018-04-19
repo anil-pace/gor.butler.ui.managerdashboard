@@ -41,6 +41,8 @@ import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INI
 } from '../../constants/frontEndConstants';
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 
+import {unSetAllActivePbts} from '../../actions/norderDetailsAction'
+
 import {
     API_URL,
     ORDERS_URL,
@@ -67,7 +69,7 @@ import {
         this._stopPollingCutOffTime = this._stopPollingCutOffTime.bind(this);
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
-        //this._handleCollapseAll = this._handleCollapseAll.bind(this);
+        this._handleCollapseAll = this._handleCollapseAll.bind(this);
     }
 
     _getInitialState(){
@@ -371,12 +373,9 @@ import {
         })
     }
 
-    // _handleCollapseAll(){
-    //     this.setState({
-    //         collapseAllBtnState: true,
-    //         isPanelOpen: false
-    //     })
-    // }
+    _handleCollapseAll(){
+        this.props.unSetAllActivePbts()
+    }
 
     render() {
 
@@ -452,7 +451,7 @@ import {
 
                                         <div className="orderButtonWrapper">
                                             <div className="gorButtonWrap">
-                                              <button disabled={this.state.collapseAllBtnState} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
+                                              <button disabled={this.props.pbts.filter((pbt)=>pbt.opened).length<1} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
                                               <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
                                               </button>
                                             </div>
@@ -592,6 +591,9 @@ var mapDispatchToProps=function (dispatch) {
         },
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
+        },
+        unSetAllActivePbts:function(){
+            dispatch(unSetAllActivePbts())
         },
         setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
 
