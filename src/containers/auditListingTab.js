@@ -297,7 +297,7 @@ _tableBodyData(itemsData){
       if(itemsData[i].button['audit_pause_button']=='enable'){
       rowObject.butoonToSHow.push({name:alPause,value:'pause'});
       }
-      if(itemsData[i].button['audit_start_button']=='enable'){
+      if(itemsData[i].button['audit_edit_button']=='enable'){
       rowObject.butoonToSHow.push({name:alEdit,value:'edit'});
       }
       

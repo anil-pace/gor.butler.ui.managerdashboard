@@ -38,7 +38,8 @@ class AuditFilter extends React.Component {
         super(props);
         this.state={
             tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]}, searchQuery: {},
-            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]}
+            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]},
+            filterDataMessageFlag:false
         };
          this._applyFilter =  this._applyFilter.bind(this);
         this._closeFilter = this._closeFilter.bind(this);
@@ -48,6 +49,7 @@ class AuditFilter extends React.Component {
     _closeFilter() {
         var filterState=!this.props.showFilter;
         this.props.showTableFilter(filterState);
+        this.setState({filterDataMessageFlag:false});
     }
 
      componentDidMount(){
@@ -62,7 +64,6 @@ class AuditFilter extends React.Component {
         this.props.userRequest(userData);
 
   }
-
     componentWillReceiveProps(nextProps) {
         if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (this.props.pollTimerId!==nextProps.pollTimerId)) {
             this.setState(nextProps.auditFilterState)
@@ -76,6 +77,7 @@ class AuditFilter extends React.Component {
         }
 
     }
+
 
     _processAuditSearchField() {
         const filterInputFields=[{
@@ -232,10 +234,11 @@ class AuditFilter extends React.Component {
          if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
             _query.toDate=filterState.searchQuery[TO_DATE]
         }
-
-        hashHistory.push({pathname: "/auditlisting", query: _query});
+       this.setState({filterDataMessageFlag:true});
+        hashHistory.push({pathname: "/auditlisting", query: _query})
         clearInterval(this.props.pollTimerId);
         this.props.setClearIntervalFlag(true);
+
     }
 
     _clearFilter() {
@@ -265,7 +268,7 @@ class AuditFilter extends React.Component {
                             defaultMessage="Hide"/>
                     </div>
                  </div>
-                    <div>{noOrder?
+                    <div>{noOrder && this.state.filterDataMessageFlag?
                             <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/></div>:""}
                     </div>
@@ -344,8 +347,8 @@ var mapDispatchToProps=function (dispatch) {
             dispatch(setAuditSpinner(data))
         },
         setClearIntervalFlag: function (data) {
-                        dispatch(setClearIntervalFlag(data))
-                    },        
+            dispatch(setClearIntervalFlag(data))
+        },
         userRequest: function(data){ dispatch(userRequest(data)); }
 
     }

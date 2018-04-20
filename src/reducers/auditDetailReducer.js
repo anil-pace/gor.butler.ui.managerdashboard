@@ -14,9 +14,9 @@ export  function recieveAuditDetail(state={},action){
             totalAudit=Number(res.total_results);
             if(res.audit_list) {
                 return Object.assign({}, state, {
-                    "auditDetail" : res.audit_list.length>0?res.audit_list:state.auditDetail,
-                    "totalPage" : res.audit_list.length>0?totalPage:state.totalPage,
-                    "totalAudits" : res.audit_list.length>0?totalAudit:state.totalAudits,
+                    "auditDetail" :res.audit_list.length>0?res.audit_list:state.auditDetail,
+                    "totalPage" :res.audit_list.length>0?totalPage:state.totalPage,
+                    "totalAudits" :res.audit_list.length>0?totalAudit:state.totalAudits,
                     "successQuery":res.audit_list.length>0?state.query:state.successQuery,
                     "noResultFound":res.audit_list.length<1
                 })
