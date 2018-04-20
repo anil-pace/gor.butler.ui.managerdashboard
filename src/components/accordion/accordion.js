@@ -1,4 +1,3 @@
-//source: https://codepen.io/adamaoc/pen/wBGGQv?editors=1010
 
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -18,38 +17,24 @@ class Accordion extends React.Component{
       
   }
 
-  handleClick(e){
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.isOpened!==this.props.isOpened){
+       this.setState({open:nextProps.isOpened,class:['panel',nextProps.isOpened?'open':''].join(" ")})
+    }
+  }
+
+  handleClick(pbtData,e){
+  
+    if(!pbtData.opened){
+    this.props.setOrderListSpinner(true);
     const index = storage.indexOf(this.props.cutOffTimeIndex);
-
-    if(index === -1){
-        storage.push(this.props.cutOffTimeIndex);
-        this.props.getOrderPerPbt(this.props.cutOffTimeIndex);
+    const timeIndex = pbtData.cut_off_time;
+    
+    this.props.getOrderPerPbt(pbtData);
     }
-    else{
-      storage.splice(index, 1);
-      this.props.stopPollingOrders(this.props.intervalIdForOrders);
-    }
-
-
-    if(storage.length >= 1){
-      this.props.enableCollapseAllBtn();
-    }
-    else{
-      this.props.disableCollapseAllBtn();
-    }
-
-    if(this.state.open) {
-      this.setState({
-        open: false,
-        class: "panel"
-      });
-    }else{
-      this.setState({
-        open: true,
-        class: "panel open"
-      });
-    }
+    this.props.setActivePbt({pbt:pbtData})
+    
   }
 
   render()
@@ -64,7 +49,7 @@ class Accordion extends React.Component{
       return (
         <div className="main">
           <div className={this.state.class}>
-            <div className="panelHeader" onClick={this.handleClick}>{this.props.title}
+            <div  className="panelHeader" onClick={this.handleClick.bind(this,this.props.pbts[this.props.cutOffTimeIndex])}>{this.props.title}
               <span className="accordionIconWrapper"> <i className={arrowClassName}></i> </span>
             </div>
              
@@ -76,6 +61,7 @@ class Accordion extends React.Component{
                 {(this.state.class === "panel open") ? this.props.children : null}
               </div>
             </div>
+
           </div>
         </div>
       );

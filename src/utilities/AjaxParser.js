@@ -14,7 +14,7 @@ import {
     auditValidatedAttributesLocationCsv,
     createAuditAction,
     setAuditEditData,
-    attributeValidationItemRecall
+    attributeValidationItemRecall,
 } from "../actions/auditActions";
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
@@ -724,9 +724,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveOrderSummaryData(res));
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(setOrderListSpinner(false))
             store.dispatch(receiveCufOffTimeData(res));
             break;
         case ORDERS_PER_PBT_FETCH:
+            store.dispatch(setOrderListSpinner(false));
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
             break;
         case ORDERLINES_PER_ORDER_FETCH:

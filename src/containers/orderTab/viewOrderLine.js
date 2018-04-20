@@ -52,6 +52,16 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    totalOrderLines: {
+        id: 'orders.orderlines.total',
+        description: "total orderlines",
+        defaultMessage: 'Total {totalOrderlines}'
+    },
+    orderLineId:{
+        id: 'orders.orderlines.skuId',
+        description: "sku id",
+        defaultMessage: 'SKU -  {skuId}'
     }
 });
 
@@ -76,25 +86,17 @@ class ViewOrderLine extends React.Component{
       this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillUnmount(){
-    clearInterval(this._intervalIdViewOrderLines);
-    this.props.startPollingCutOffTime();
-    //this.props.startPollingOrders(this.props.cutOffTimeIndex);
-  }
-
   componentDidMount(){
     this._getOrdersLines(this.props.orderId);
   }
 
   componentWillReceiveProps(nextProps){
-    //if(JSON.stringify(this.props.orderLines.orderlines)!== JSON.stringify(nextProps.orderLines.orderlines)){
       let olineHeaderData = nextProps.orderLines || [];
       let olineData= nextProps.orderLines.orderlines || []; 
       this.setState({
         headerItems: olineHeaderData,
         items: olineData
       });
-    //}
   }
   
   _getOrdersLines = (orderId) =>  {
@@ -106,7 +108,6 @@ class ViewOrderLine extends React.Component{
             'cause':ORDERLINES_PER_ORDER_FETCH,
         }
         this.props.makeAjaxCall(params);
-        this._intervalIdViewOrderLines = setTimeout(() => this._getOrdersLines(orderId), ORDERS_POLLING_INTERVAL);
     }
 
   _removeThisModal() {
@@ -151,8 +152,7 @@ class ViewOrderLine extends React.Component{
 
 
         let olineHeader = [];
-        let formatOLTotal = (<FormattedMessage id="orders.orderlines.total" description="total orderlines" defaultMessage="Total {totalOrderlines}"
-                                        values={{totalOrderlines:arg.total_orderlines}} />)
+        let formatOLTotal = (arg.total_orderlines ? this.props.intl.formatMessage(messages.totalOrderLines, {totalOrderlines: arg.total_orderlines}): "null");
 
         olineHeader.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
                         <DotSeparatorContent header={["Order Lines"]} subHeader={[formatOLTotal]}/>
@@ -184,7 +184,7 @@ class ViewOrderLine extends React.Component{
       for(let i=0; i < olDataLen; i++){
 
         let olineRow = [];
-        let formatSkuId = (arg[i].orderline_id ? <FormattedMessage id="orders.orderlines.skuId" description="sku id" defaultMessage="SKU -  {skuId}" values={{skuId: arg[i].orderline_id}} />: "null")
+        let formatSkuId = (arg[i].orderline_id ? this.props.intl.formatMessage(messages.orderLineId, {skuId: arg[i].orderline_id}): "null");
 
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
                         <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1)]}/>
@@ -218,27 +218,25 @@ class ViewOrderLine extends React.Component{
   }
 
   _calculateTimeLeft(cutOffTimeFromBK){
-         let timeLeft, d1, d2, diff;
+        let timeLeft, d1, d2, diff;
 
         if(cutOffTimeFromBK){
             d1 = new Date();
             d2= new Date(cutOffTimeFromBK);
-            diff = d1 - d2;
+            diff = d2 - d1;
 
             if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+                timeLeft = Math.floor (diff / 3600000) + " hrs left";
             }
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + "mins left";
+                timeLeft = Math.floor(diff / 60000) + " mins left";
             }
-            else {  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + "seconds left";
+            else if(diff > 1000){  // 1000 milliseconds is for 1 sec
+                timeLeft = Math.floor(diff / 1000) + " seconds left";
             }
-            return timeLeft;
-        }
-        else 
-        {
-            timeLeft = "-";
+            else{
+                timeLeft = "";
+            }
             return timeLeft;
         }
     }
@@ -260,7 +258,7 @@ class ViewOrderLine extends React.Component{
       let formatTimeLeft = this._calculateTimeLeft(this.props.orderLines.cut_off_time);
 
        return (
-        <div>
+        <div className="gor-order-modal">
           <div className="gor-modal-content">
             <div className='gor-modal-head'>
               <span className='orderIdWrapper'>
@@ -321,7 +319,7 @@ class ViewOrderLine extends React.Component{
                   </div>
 
                   <div className="orderDetailsSearchWrap"> 
-                      <SearchFilter handleChange={this.handleChange} />
+                      <SearchFilter placeHolder="Search product" handleChange={this.handleChange} />
                   </div>
                   
               </div>

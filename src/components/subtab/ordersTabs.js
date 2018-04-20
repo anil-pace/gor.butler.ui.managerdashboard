@@ -33,7 +33,7 @@ class OrderSubTab extends React.Component{
   				break;
 
   				default:
-  				this.props.setOrderListSpinner(false);
+  			//	this.props.setOrderListSpinner(false);
   				this.props.setWavesSpinner(false);
   			}
     }

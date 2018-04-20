@@ -73,7 +73,7 @@ class Routes extends React.Component {
 
 
                     default:
-                        this.props.setOrderListSpinner(false);
+                        //this.props.setOrderListSpinner(false);
                         this.props.setWavesSpinner(false);
                         this.props.setButlerSpinner(false);
                         this.props.setPpsSpinner(false);

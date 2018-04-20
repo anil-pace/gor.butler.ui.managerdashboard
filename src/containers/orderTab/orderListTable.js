@@ -64,6 +64,7 @@ import {
     FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
     ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
+import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
     fulfillableStatus: {
@@ -103,6 +104,26 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    cutOffTime:{
+        id: 'orderlist.cutOffTime.time',
+        description: " cut off time in hrs",
+        defaultMessage: 'Cut off time {cutOffTime} hrs'
+    },
+    orderId:{
+        id: 'orders.order.orderId',
+        description: "order id",
+        defaultMessage: 'Order {orderId}'
+    },
+    ppsId:{
+        id: 'orders.order.ppsId',
+        description: "pps id",
+        defaultMessage: 'PPS {ppsId}'
+    },
+    binId:{
+        id: 'orders.order.binId',
+        description: "bin id",
+        defaultMessage: 'Bin {binId}'
     }
 });
 
@@ -116,8 +137,6 @@ class OrderListTable extends React.Component {
         this.state={
             cutOffTimeIndex:"",
             isPanelOpen:true,
-            page:1,
-            size:10,
             statusMapping:{
                 "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
                 "complete": this.props.intl.formatMessage(messages.completeStatus),
@@ -126,7 +145,8 @@ class OrderListTable extends React.Component {
                 "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
                 "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
-            }
+            },
+            orderState: ""
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -156,13 +176,17 @@ class OrderListTable extends React.Component {
             });
     }
 
-    _reqOrderPerPbt(cutOffTimeIndex, saltParams={}){
-        this.setState({
-            cutOffTimeIndex: cutOffTimeIndex
-        });
-
-        let cutOffTime = this.props.pbts[cutOffTimeIndex].cut_off_time;
+    _reqOrderPerPbt(pbtData, saltParams={}){
+        let cutOffTime = pbtData.cut_off_time;
         const index = storage.indexOf(cutOffTime);
+        let page
+        let size=10;
+        let need_to_fetch_more=false
+        try{
+            need_to_fetch_more=pbtData.ordersPerPbt.order.length < pbtData.ordersPerPbt.total_orders
+        }catch(ex){
+
+        }
 
         let formData={
             "start_date": this.props.startDate,
@@ -170,9 +194,17 @@ class OrderListTable extends React.Component {
             "cut_off_time" : cutOffTime
         };
 
-        if(JSON.stringify(saltParams) === JSON.stringify({lazyData:true}) ){  // Accordion already open and infinite scroll
+        saltParams.cut_off_time=cutOffTime
+
+        if(saltParams.lazyData && need_to_fetch_more){  // Accordion already open and infinite scroll
+            try{
+                page=(pbtData.ordersPerPbt.orders.length/size)+1
+            }catch(ex){
+                page=1
+            }
+            
             let params={
-                'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+                'url':ORDERS_PER_PBT_URL+"?page="+page+"&size="+size,
                 'method':POST,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
@@ -181,23 +213,26 @@ class OrderListTable extends React.Component {
                 'saltParams':saltParams,
             }
             this.props.makeAjaxCall(params);
-            this.setState({
-                page: 1,
-                size: this.props.ordersPerPbt.length
-            })
         }
         else{
+            try{
+                size=pbtData.ordersPerPbt.orders.length
+            }catch(ex){
+
+            }
             let params={
-                'url':ORDERS_PER_PBT_URL+"?page="+this.state.page+"&size="+this.state.size,
+                'url':ORDERS_PER_PBT_URL+"?page=1&size="+size,
                 'method':POST,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'cause':ORDERS_PER_PBT_FETCH,
                 'formdata':formData,
+                saltParams:saltParams
             }
             this.props.makeAjaxCall(params);
         }
-        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(cutOffTimeIndex), POLLING_INTERVAL);
+
+        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
     _startPollingCutOffTime(){
@@ -248,37 +283,33 @@ class OrderListTable extends React.Component {
     }
 
     _calculateTimeLeft(cutOffTimeFromBK){
-         let timeLeft, d1, d2, diff;
+        let timeLeft, d1, d2, diff;
 
         if(cutOffTimeFromBK){
             d1 = new Date();
             d2= new Date(cutOffTimeFromBK);
-            diff = d1 - d2;
+            diff = d2 - d1;
 
             if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + "hrs left";
+                timeLeft = Math.floor (diff / 3600000) + " hrs left";
             }
             else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + "mins left";
+                timeLeft = Math.floor(diff / 60000) + " mins left";
             }
-            else {  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + "seconds left";
+            else if(diff > 1000){  // 1000 milliseconds is for 1 sec
+                timeLeft = Math.floor(diff / 1000) + " seconds left";
+            }
+            else{
+                timeLeft = "";
             }
             return timeLeft;
         }
-        else 
-        {
-            timeLeft = "";
-            return timeLeft;
-        }
-        
     }
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
         let pbtData  = nProps.props.pbts;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
-        //let pbtData = arg;
         let pbtDataLen = pbtData.length; 
         let pbtRows = []; 
         let processedData = {};
@@ -329,45 +360,48 @@ class OrderListTable extends React.Component {
                         }
                     }
                 /* END => when cut off time is not there */
+                    else{
                 
-                let formatPbtTime = (pbtData[i].cut_off_time ? <FormattedMessage id="orders.pbt.cutofftime" description="cut off time" defaultMessage=" Cut off time {cutOffTime} hrs" 
-                         values={{cutOffTime:<FormattedTime
-                                     value={pbtData[i].cut_off_time}
-                                     hour= "numeric"
-                                     minute= "numeric"
-                                     timeZone= {this.props.timeOffset}
-                                     hour12= {false}/>
-                                 }} /> : "NO CUT OFF TIME");
-                let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
-                let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
-                let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
+                    let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
+                                         hour:"numeric",
+                                         minute:"numeric",
+                                         timeZone:this.props.timeOffset,
+                                         hour12: false});
 
-                pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                {formatTimeLeft!== "" ?
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
-                                    <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
-                                }
-                            </div>);
-                pbtRow.push(<div>
-                                <div className="ProgressBarWrapper">
-                                    <ProgressBar progressWidth={formatProgressBar.width}/>
-                                </div>
-                                <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
-                             </div>);
+                    let formatPbtTime = (pbtData[i].cut_off_time ? 
+                                            this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
+                    let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
+                    let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+                    let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
-                pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
-                pbtRows.push(pbtRow);
+                    pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                    {formatTimeLeft ?
+                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
+                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                    }
+                                </div>);
+                    pbtRow.push(<div>
+                                    <div className="ProgressBarWrapper">
+                                        <ProgressBar progressWidth={formatProgressBar.width}/>
+                                    </div>
+                                    <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
+                                 </div>);
+
+                    pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
+                    pbtRows.push(pbtRow);
+                }
             }
             processedData.pbtData = pbtRows;
+
         }
         processedData.offset = 0;
         processedData.max= pbtRows.length;
+
         return processedData;
     }
 
     _processOrders = (orderData, nProps) => {
         nProps = this;
-        orderData  = nProps.props.ordersPerPbt;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
 
         let orderDataLen = orderData.length;
@@ -378,9 +412,10 @@ class OrderListTable extends React.Component {
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
 
-                formatOrderId = (orderData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: orderData[i].order_id}} />: "null")
-                formatPpsId = (orderData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: orderData[i].pps_id}} /> : "null")
-                formatBinId = (orderData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: orderData[i].pps_bin_id}} /> : "null")
+                let formatOrderId = (orderData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "null");
+                let formatPpsId =   (orderData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: orderData[i].pps_id}): "null");
+                let formatBinId =   (orderData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: orderData[i].pps_bin_id}): "null");
+                let formatStartDate = "null";
 
                 //Create time need to be add
                     if (orderData[i].start_date) {
@@ -460,7 +495,7 @@ class OrderListTable extends React.Component {
                         }
                     }
                     else {
-                        formatCompleteDate = "--";
+                        formatCompleteDate = "null";
                     }
 
                 formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
@@ -504,25 +539,23 @@ class OrderListTable extends React.Component {
         return processedData;
     }
 
-    _onScrollHandler(event, cutOffTimeIndex){
-            if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
-                let page = this.state.dataFound === false ? this.state.page: this.state.page + 1;
-                this.setState({
-                        page
-                    },function(){
-                        this.props.setInfiniteSpinner(false);
-                        this._reqOrderPerPbt(cutOffTimeIndex, {lazyData:true});
-                    })
+    _onScrollHandler(pbtData, event){
+        if(pbtData.ordersPerPbt &&  pbtData.ordersPerPbt.total_orders > pbtData.ordersPerPbt.orders.length){
+if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
+                this.props.setInfiniteSpinner(false);
+                this._reqOrderPerPbt(pbtData, {lazyData:true});
         }
-        else {
+                else {
             this.props.setInfiniteSpinner(false);
         }
+
+        }
+            
     }
 
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
-        const processedOrderData = this._processOrders(this.props.ordersPerPbt);
         return (
             <div>
                 <div className="waveListWrapper">
@@ -531,15 +564,20 @@ class OrderListTable extends React.Component {
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
                                 return self.props.pbts[idx].total_orders ? 
                                 (<Accordion 
+                                    key={idx}
+                                    pbts={self.props.pbts}
+                                    setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
-                                    onScrollHandler={self._onScrollHandler} 
-                                    getOrderPerPbt={self._reqOrderPerPbt} 
+                                    onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
+                                    getOrderPerPbt={self._reqOrderPerPbt.bind(self)} 
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
                                     disableCollapseAllBtn={self._disableCollapseAllBtn} 
+                                    isOpened={self.props.pbts[idx].opened}
+                                    setOrderListSpinner={self.props.setOrderListSpinner}
                                     title={
                                         <GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
                                             {row.map(function (text, index) {
@@ -549,30 +587,30 @@ class OrderListTable extends React.Component {
                                             })}
                                         </GTableRow>}>
 
-                                        {self.props.isPanelOpen === true ?
-                                            (<GTableBody data={processedOrderData.orderData} >
-                                                {processedOrderData.orderData ? processedOrderData.orderData.map(function (row, idx) {
-                                                    return (
-                                                        <GTableRow key={idx} index={idx} offset={processedOrderData.offset} max={processedOrderData.max} data={processedOrderData.orderData}>
-                                                            {Object.keys(row).map(function (text, index) {
-                                                                return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                                    {row[text]}
-                                                                </div>
-                                                            })}
-                                                        </GTableRow>
-                                                    )
-                                                }):""}
-                                            </GTableBody>): null
-                                        }
+                                    {/* START=> While clicking on Accordion */} 
+                                    {self.props.pbts[idx].ordersPerPbt && <GTableBody  data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData} >
+                                        {self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData.map(function (row_1, idx_1) {
+                                            return (
+                                                <GTableRow key={idx_1} index={idx_1} offset={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).offset} max={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).max} data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData}>
+                                                    {Object.keys(row_1).map(function (text, index) {
+                                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                            {row_1[text]}
+                                                        </div>
+                                                    })}
+                                                </GTableRow>
+                                            )
+                                        })}
+                                    </GTableBody>}
+                                    {/* END=> */} 
                                 </Accordion>)
 
                                 :<GTableRow style={{background: "#fafafa"}} key={idx} index={idx} offset={processedPbtData.offset} max={processedPbtData.max} data={processedPbtData.pbtData}>
-                                        {row.map(function (text, index) {
-                                            return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
-                                                {text}
-                                            </div>
-                                        })}
-                                    </GTableRow>
+                                    {row.map(function (text, index) {
+                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                            {text}
+                                        </div>
+                                    })}
+                                </GTableRow>
                             }):""}
                         </GTableBody>
                     </GTable>
@@ -601,7 +639,7 @@ function mapStateToProps(state, ownProps) {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
-
+        pbts:state.orderDetails.pbts,
         totalPages: state.orderDetails.totalPages,
         totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,
@@ -652,7 +690,8 @@ var mapDispatchToProps=function (dispatch) {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
-        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));}
+        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));},
+        setActivePbt:function(data){dispatch(setActivePbt(data));}
 
 
     }
