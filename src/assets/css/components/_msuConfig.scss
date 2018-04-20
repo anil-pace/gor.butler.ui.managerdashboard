@@ -1,3 +1,32 @@
+.filterWrapper{
+    .gorToolBarDropDown{
+        padding-left: 0px;
+        .gor-button-wrap{
+            .gor-msuConfig-btn{
+                font-family: 'Source Sans Pro Bold', sans-serif;
+                min-width: calculateRem(145px);
+                height: 2.1875rem;
+                font-size: 0.875rem;
+                border-radius: 3px;
+                display: inline-block;
+                cursor: pointer;
+                font-weight: 600;
+                margin-left: 30px;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                vertical-align: sub;
+                color: #ffffff;
+                &.grey{
+                    background-color: #4d5055;
+                }
+                &.orange{
+                    background: #f36f36;
+                }
+            }
+
+        }
+    }
+}
+
 .noDataWrapper{
     font-weight: 600;
     height: 70vh;
@@ -153,6 +182,11 @@
             .destWrapper{
                 height: 100%;
                  width: 50%;
+                 .gor-utility-dropDown-wrap{
+                    height: 12%;
+                    width: 70%;
+                    margin-left: calculateRem(58px);
+                 }
                 .Order-Stats-Drop{
                     height: 15%;
                     width: 100%;
@@ -216,6 +250,26 @@
         }
         .gor-button-wrap{
             padding-right: 5%;
+            .gor-msuConfig-btn{
+                font-family: 'Source Sans Pro Bold', sans-serif;
+                min-width: calculateRem(145px);
+                height: 2.1875rem;
+                font-size: 0.875rem;
+                border-radius: 3px;
+                display: inline-block;
+                cursor: pointer;
+                font-weight: 600;
+                margin-left: 30px;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+                vertical-align: sub;
+                color: #ffffff;
+                &.grey{
+                    background-color: #4d5055;
+                }
+                &.orange{
+                    background: #f36f36;
+                }
+            }
         }
     }
 }

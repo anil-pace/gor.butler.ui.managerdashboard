@@ -2,7 +2,7 @@ import {SHOW_FILTER, IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILTE
   WAVE_FILTER_STATE,USER_FILTER_STATE,TOGGLE_BUTTON,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,
   WAVE_FILTER_VALUE,USER_FILTER_VALUE,SET_DEFAULT_RANGE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,
   ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,
-  USER_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,FILTER_APPLY_FLAG, MSU_FILTER_STATE} from '../constants/frontEndConstants'; 
+  USER_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,FILTER_APPLY_FLAG, MSU_CONFIG_FILTER_STATE} from '../constants/frontEndConstants'; 
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -116,9 +116,9 @@ case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFil
       "butlerFilterState" : action.data
     })
 
-    case MSU_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
+    case MSU_CONFIG_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
     return Object.assign({}, state, { 
-      "msuFilterState" : action.data
+      "msuConfigFilterState" : action.data
     })
        
 

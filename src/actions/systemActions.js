@@ -28,7 +28,7 @@ export function ppsConfigurationTabRefreshed(params){
     }
 }
 
-export function msuRefreshed(params){
+export function msuConfigRefreshed(params){
     return {
         type: MSU_CONFIGURATION_REFRESHED,
         params

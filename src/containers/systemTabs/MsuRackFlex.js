@@ -52,29 +52,29 @@ class MsuRackFlex extends React.Component {
       var newBarcodes = []; // for storing post data manipulation
       var selectedSlotIds = "";
 
-      this.props.slotBarcodes.map(function(slotBarcodes,idx){
-          var str = slotBarcodes,
-          delimiter = '.',
-          start = 2,
-          result,
-          tokens = str.split(delimiter).slice(start);
-          if(tokens.length > 1) result = tokens.join("."); //take extra care when we have 3rd "." as delimiter
-          else result = tokens.toString();
+      // this.props.slotBarcodes.map(function(slotBarcodes,idx){
+      //     var str = slotBarcodes,
+      //     delimiter = '.',
+      //     start = 2,
+      //     result,
+      //     tokens = str.split(delimiter).slice(start);
+      //     if(tokens.length > 1) result = tokens.join("."); //take extra care when we have 3rd "." as delimiter
+      //     else result = tokens.toString();
 
-          newBarcodes.push(result);
-      });
-      selectedSlotIds = newBarcodes.join(', ');
+      //     newBarcodes.push(result);
+      // });
+      // selectedSlotIds = newBarcodes.join(', ');
     
 
-      vSlots.map(function(eachSlot, index){
-        var eachSlotBarcodes = eachSlot.barcodes;
-        if(!eachSlotBarcodes) return;
-        if(eachSlotBarcodes.length === newBarcodes.length){
-          if( JSON.stringify(newBarcodes)==JSON.stringify(eachSlotBarcodes) ){
-             selectedSlotIndex = index;
-          }
-        }
-      });
+      // vSlots.map(function(eachSlot, index){
+      //   var eachSlotBarcodes = eachSlot.barcodes;
+      //   if(!eachSlotBarcodes) return;
+      //   if(eachSlotBarcodes.length === newBarcodes.length){
+      //     if( JSON.stringify(newBarcodes)==JSON.stringify(eachSlotBarcodes) ){
+      //        selectedSlotIndex = index;
+      //     }
+      //   }
+      // });
     
       lastHSlot = vSlots.reduce(function(prevSlot,currSlot){
           if (prevSlot.orig_coordinates[0] < currSlot.orig_coordinates[0]){

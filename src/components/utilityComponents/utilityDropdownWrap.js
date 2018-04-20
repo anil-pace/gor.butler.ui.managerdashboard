@@ -10,7 +10,7 @@ class UtilityDropDown extends React.Component{
 	render(){
 		return (
 			<div className="gor-utility-dropDown-wrap">
-    			<div className="gor-utility-dropDown-h1"> {this.props.dropdownLabel}:</div>
+    			{this.props.dropdownLabel ? <div className="gor-utility-dropDown-h1"> {this.props.dropdownLabel}:</div> : null}
     		    <DropdownTable styleClass={'gorDataTableDrop'} placeholder={this.props.placeHolderText} items={this.props.items} changeMode={this.props.changeMode} currentState={this.props.currentState}/>
     		</div>
 		);

@@ -3,13 +3,7 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {FormattedMessage, defineMessages, FormattedRelative, injectIntl} from 'react-intl';
 
-import {
-    GOR_TABLE_HEADER_HEIGHT,
-    DEBOUNCE_TIMER
-} from '../../constants/frontEndConstants';
-import {debounce} from '../../utilities/debounce';
 
-// import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
@@ -22,18 +16,15 @@ import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} fro
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
-import {getDaysDiff} from '../../utilities/getDaysDiff';
-
-import {stringConfig} from '../../constants/backEndConstants';
 import {wsOverviewData} from './../../constants/initData.js';
-
-import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
+import {msuConfigRefreshed} from './../../actions/systemActions';
 
 
 import {
     APP_JSON, POST, GET,
     FETCH_MSU_CONFIG_LIST,
-    MSU_CONFIG_POLLING_INTERVAL
+    MSU_CONFIG_POLLING_INTERVAL,
+    FETCH_MSU_CONFIG_RELEASE_MSU
 } from '../../constants/frontEndConstants';
 
 import {
@@ -51,34 +42,18 @@ const messages=defineMessages({
         id: "msuConfig.putBlocked.status",
         description: "Put blocked status",
         defaultMessage: "Put Blocked"
+    },
+    reconfigReadyStatus: {
+        id: "msuConfig.reconfigReady.status",
+        description: "Msu empty status",
+        defaultMessage: "Msu empty"
+    },
+    completeStatus: {
+        id: "msuConfig.complete.status",
+        description: "reconfiguration complete for Msu",
+        defaultMessage: "Reconfiguration complete "
     }
-
-    // cancelledStatus: {
-    //     id: "msuConfig.cancelled.status",
-    //     description: " 'Cancelled' status",
-    //     defaultMessage: "Cancelled"
-    // },
-
-    // createdStatus: {
-    //     id: "msuConfig.created.status",
-    //     description: " 'created' status",
-    //     defaultMessage: "Created"
-    // },
-    // badRequestStatus: {
-    //     id: 'msuConfig.badRequest.status',
-    //     description: " 'Bad Request' status",
-    //     defaultMessage: 'Bad request'
-    // },
-    // notFulfillableStatus: {
-    //     id: 'msuConfig.notFulfillale.status',
-    //     description: " 'Refreshed' status",
-    //     defaultMessage: 'Not fulfillable'
-    // },
-    // acceptedStatus: {
-    //     id: 'msuConfig.accepted.status',
-    //     description: " 'accepted' status",
-    //     defaultMessage: 'Accepted'
-    // }
+    
 });
 
 
@@ -90,39 +65,30 @@ class MsuConfigTable extends React.Component {
             statusMapping: {
                 "progress": this.props.intl.formatMessage(messages.progressStatus),
                 "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
-                // "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
-                // "CREATED": this.props.intl.formatMessage(messages.createdStatus),
-                // "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
-                // "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-                // "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
+                "reconfig_ready": this.props.intl.formatMessage(messages.reconfigReadyStatus),
+                "complete": this.props.intl.formatMessage(messages.completeStatus)
             }
 
         };
         this._changeDestinationType = this._changeDestinationType.bind(this);
+        this._processMSUs = this._processMSUs.bind(this);
+        //this._updateMsuList = this._updateMsuList.bind(this);
+
     }
 
-    componentWillUnmount(){
-        this.clearTimeout(this._intervalIdForMsuList);
+     componentDidMount(){
+        
     }
 
-    componentDidMount(){
-        this._requestMsuList();
-    }
+    // _updateMsuList(destType){
+    //     this.props.msuConfigRefreshed();
+    //     this._processMSUs(destType);
+    // }
 
-    _requestMsuList(){
-        let params={
-            'url': MSU_CONFIG_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST
-        }
-        this.props.makeAjaxCall(params);
-        this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_CONFIG_POLLING_INTERVAL);
-    }
-
-     _changeDestinationType = (orderId) =>  {
+     _changeDestinationType(){
         modal.add(ChangeRackType, {
+            msuList: this.props.msuList,
+            //updateMsuList: this._updateMsuList,
             title: '',
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -131,9 +97,9 @@ class MsuConfigTable extends React.Component {
         });
     }
 
-    _processMSUs = (arg) => {
-        let msuData = arg;
-        let msuDataLen = msuData.length; 
+    _processMSUs = (destType) => {
+        let msuData = this.props.msuList;
+        let msuDataLen = msuData.length || 0; 
         let msuRows = []; 
         let processedData = {};
 
@@ -142,7 +108,6 @@ class MsuConfigTable extends React.Component {
                 let msuRow = [];
 
                 if(msuData[i].id && msuData[i].racktype){
-                    clearTimeout(this._intervalIdForMsuList);
                     msuRow.push(<div className="msuIdWrapper"> 
                                     <div className="msuId">
                                         <FormattedMessage 
@@ -160,8 +125,33 @@ class MsuConfigTable extends React.Component {
                                     </div>
                              </div>);
 
+                     msuRow.push(<div className="msuIdWrapper">
+                                {false ? 
+                                    <div>
+                                        <FormattedMessage 
+                                            id="msuConfig.table.destType" 
+                                            description="label for Destination Type" 
+                                            defaultMessage="Selected destination type: {destType}"
+                                            values={{destType: "TBD"}} />
+                                    </div>: <div> </div>
+                                    }
+                                 </div>);
+
+                    msuRow.push(<div className="msuIdWrapper">
+                                {false ? 
+                                    <div>
+                                        <FormattedMessage 
+                                            id="msuConfig.table.msuStatus" 
+                                            description="label for MSU status" 
+                                            defaultMessage="{status}"
+                                            values={{status: "TBD"}} />
+                                    </div>:<div> </div>
+                                }
+                                    </div>);
+
+
                     msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].id)}>
+                        <button className="changeDestTypeBtn" onClick={this._changeDestinationType}>
                             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
                         </button>
                     </div>);
@@ -203,7 +193,6 @@ class MsuConfigTable extends React.Component {
                                                     values={{status: this.state.statusMapping[msuData[i].status]}} />
                                     </div>);
 
-                    
                     msuRows.push(msuRow);
                 }
                 
@@ -216,7 +205,7 @@ class MsuConfigTable extends React.Component {
     }
 
     render() {
-        const processedMsuData = this._processMSUs(this.props.msuList);
+        const processedMsuData = this._processMSUs();
         
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
 
@@ -248,10 +237,6 @@ class MsuConfigTable extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        orderFilter: state.sortHeaderState.orderFilter || "",
-        orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
-        orderListSpinner: state.spinner.orderListSpinner || false,
-        filterOptions: state.filterOptions || {},
         orderData: state.getOrderDetail || {},
         statusFilter: state.filterOptions.statusFilter || null,
         intlMessages: state.intl.messages,
@@ -259,71 +244,36 @@ function mapStateToProps(state, ownProps) {
         auth_token: state.authLogin.auth_token,
         showFilter: state.filterInfo.filterState || false,
         isFilterApplied: state.filterInfo.isFilterApplied || false,
-        orderFilterStatus: state.filterInfo.orderFilterStatus,
-        orderFilterState: state.filterInfo.orderFilterState || {},
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        orderListRefreshed: state.ordersInfo.orderListRefreshed,
-        pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
-
         msuList: state.msuInfo.msuList,
-
-        // pbts: state.orderDetails.pbts,
-        // ordersPerPbt:state.orderDetails.ordersPerPbt,
-        timeZone:state.authLogin.timeOffset
+        timeZone:state.authLogin.timeOffset,
+        msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
     };
 }
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        orderFilterDetail: function (data) {
-            dispatch(orderFilterDetail(data))
-        },
-        orderHeaderSort: function (data) {
-            dispatch(orderHeaderSort(data))
-        },
-        orderHeaderSortOrder: function (data) {
-            dispatch(orderHeaderSortOrder(data))
-        },
-
-        setOrderListSpinner: function (data) {
-            dispatch(setOrderListSpinner(data))
-        },
-        
         showTableFilter: function (data) {
             dispatch(showTableFilter(data));
         },
         filterApplied: function (data) {
             dispatch(filterApplied(data));
         },
-        orderfilterState: function (data) {
-            dispatch(orderfilterState(data));
-        },
-        toggleOrderFilter: function (data) {
-            dispatch(toggleOrderFilter(data));
-        },
-        orderListRefreshed: function (data) {
-            dispatch(orderListRefreshed(data))
-        },
         updateSubscriptionPacket: function (data) {
             dispatch(updateSubscriptionPacket(data));
-        },
-        
-        setOrderQuery: function (data) {
-            dispatch(setOrderQuery(data));
         },
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
+        msuConfigRefreshed:function(data){dispatch(msuConfigRefreshed(data))},
 
 
     }
 };
 
 MsuConfigTable.defaultProps = {
-    pbts: [],
     msuList: [],
-    ordersPerPbt: []
 }
 
 MsuConfigTable.PropTypes={

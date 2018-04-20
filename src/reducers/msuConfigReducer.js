@@ -27,7 +27,7 @@ export  function msuInfo(state={},action){
 
     case MSU_CONFIGURATION_REFRESHED:
         return Object.assign({}, state, {
-            "msuRefreshed": action.data
+            "msuConfigRefreshed": action.data
         });
         break;
 
@@ -45,10 +45,10 @@ export  function msuInfo(state={},action){
 
     case FETCH_MSU_CONFIG_RACK_STRUCTURE: 
         return Object.assign({}, state, {
-            "racKStructure": action.data
+            "rackStructure": action.data
         });
         break;
-    
+
     default:
       return state
   }
