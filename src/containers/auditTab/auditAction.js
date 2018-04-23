@@ -52,8 +52,8 @@ class AuditAction extends React.Component{
     {
       let button='';
       if(this.props.param==CANCEL_AUDIT){
-button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
-                        defaultMessage="PROCEDED" description="Text for proceed button"/></button>
+button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.proced' 
+                        defaultMessage="PROCEED" description="Text for proceed button"/></button>
       }else if(this.props.param==DELETE_AUDIT){
 button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
                         defaultMessage="DELETE" description="Text for delte button"/></button>
@@ -75,7 +75,7 @@ button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMess
                 <button className='gor-cancel-btn' onClick={this._removeThisModal}><FormattedMessage id='audit.cancel.cancel' 
                         defaultMessage="CLOSE" description="Text for close"/></button>
                 <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
-                        defaultMessage="PROCEDED" description="Text for proceed button"/></button>
+                        defaultMessage="PROCEED" description="Text for proceed button"/></button>
              
           </div>
         </div>
