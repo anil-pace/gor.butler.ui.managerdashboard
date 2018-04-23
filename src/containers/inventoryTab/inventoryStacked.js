@@ -7,7 +7,7 @@ class InventoryStacked extends React.Component{
 
    return (
            <div>
-           <StackedChartHorizontal hasDataChanged={this.props.hasDataChanged} snapshotData={this.props.snapshotData} />
+           <StackedChartHorizontal snapshotData={this.props.snapshotData} />
            </div>
            )
  }
