@@ -2,7 +2,7 @@ import { FETCH_MSU_CONFIG_LIST,
 		FETCH_MSU_CONFIG_DEST_TYPE_LIST,
         FETCH_MSU_CONFIG_LIST_VIA_FILTER,
         FETCH_MSU_CONFIG_RACK_STRUCTURE,
-        MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+        FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
         FETCH_MSU_CONFIG_START_RECONFIG,
         FETCH_MSU_CONFIG_STOP_RECONFIG,
         FETCH_MSU_CONFIG_RELEASE_MSU
@@ -62,7 +62,7 @@ export function msuConfigReleaseMsu(data){
 
 export function msuConfigBlockAndPutChangeType(data){
     return {
-        type: MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+        type: FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
         data
     }
 }

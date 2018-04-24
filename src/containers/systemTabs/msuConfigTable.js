@@ -32,10 +32,10 @@ import {
 } from '../../constants/configConstants';
 
 const messages=defineMessages({
-    progressStatus: {
-        id: 'msuConfig.progress.status',
-        description: "In progrss for msus",
-        defaultMessage: "Progress"
+    readyForReconfigurationStatus: {
+        id: 'msuConfig.readyForReconfiguration.status',
+        description: "Ready For Reconfiguration",
+        defaultMessage: "Ready For Reconfiguration"
     },
 
     putBlockedStatus: {
@@ -52,6 +52,21 @@ const messages=defineMessages({
         id: "msuConfig.complete.status",
         description: "reconfiguration complete for Msu",
         defaultMessage: "Reconfiguration complete "
+    },
+    waitingStatus: {
+        id: "msuConfig.waiting.status",
+        description: "Dropping MSU at config area",
+        defaultMessage: "Dropping MSU at reconfig area ..."
+    },
+    droppedStatus: {
+        id: "msuConfig.dropped.status",
+        description: "Dropping MSU at config area",
+        defaultMessage: "MSU dropped at the reconfig area"
+    },
+    storingBackStatus: {
+        id: "msuConfig.storingBack.status",
+        description: "Storing Back",
+        defaultMessage: "Storing MSU back"
     }
     
 });
@@ -63,16 +78,19 @@ class MsuConfigTable extends React.Component {
         super(props);
         this.state={
             statusMapping: {
-                "progress": this.props.intl.formatMessage(messages.progressStatus),
+                "ready_for_reconfiguration": this.props.intl.formatMessage(messages.readyForReconfigurationStatus),
                 "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
                 "reconfig_ready": this.props.intl.formatMessage(messages.reconfigReadyStatus),
-                "complete": this.props.intl.formatMessage(messages.completeStatus)
+                "complete": this.props.intl.formatMessage(messages.completeStatus),
+                "waiting": this.props.intl.formatMessage(messages.waitingStatus),
+                "dropped": this.props.intl.formatMessage(messages.droppedStatus),
+                "storing_back": this.props.intl.formatMessage(messages.storingBackStatus) 
             }
 
         };
         this._changeDestinationType = this._changeDestinationType.bind(this);
         this._processMSUs = this._processMSUs.bind(this);
-        //this._updateMsuList = this._updateMsuList.bind(this);
+        this._blockPutAndChangeTypeCallback = this._blockPutAndChangeTypeCallback.bind(this);
 
     }
 
@@ -80,15 +98,17 @@ class MsuConfigTable extends React.Component {
         
     }
 
-    // _updateMsuList(destType){
-    //     this.props.msuConfigRefreshed();
-    //     this._processMSUs(destType);
-    // }
+    _blockPutAndChangeTypeCallback(){
+        this.props.blockPutAndChangeTypeCallback();
+    }
 
-     _changeDestinationType(){
+    _changeDestinationType(index){
+        let getRackType = this.props.msuList[index].racktype;
+        //let getSourceType = this.props.msuList[index].racktype;
         modal.add(ChangeRackType, {
             msuList: this.props.msuList,
-            //updateMsuList: this._updateMsuList,
+            rackType: getRackType,
+            blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
             title: '',
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -151,7 +171,7 @@ class MsuConfigTable extends React.Component {
 
 
                     msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                        <button className="changeDestTypeBtn" onClick={this._changeDestinationType}>
+                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(i)}>
                             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
                         </button>
                     </div>);

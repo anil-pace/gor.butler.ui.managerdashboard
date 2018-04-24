@@ -679,27 +679,18 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case FETCH_MSU_CONFIG_LIST:
-            // let res_1 = [
-            //     {"rack_id":"021","source_type":"11","destination_type":"19","status":"progress"},
-            //     {"rack_id":"022","source_type":"11","destination_type":"19","status":"progress"},
-            //     {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-            //];
             store.dispatch(receiveMsuConfigList(res));
             break;
 
         case FETCH_MSU_CONFIG_DEST_TYPE_LIST: 
-            //let res_2 = ["33","15","24","16","12","27","26","14","11","22","19","17","21","MSU-KERRY-D","23","20","MSU-H","100","25","28","18","13"];
             store.dispatch(receiveMsuConfigDestTypesList(res));
             break;
 
         case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
-            //let res_3 = [{"id":"041","direction":2,"position":"023.033","last_store_position":"023.033","is_stored":true,"reserved_store_position":"undefined","lifted_butler_id":null,"racktype":"11","upcoming_pps_list":[],"type":"msu"}];
             store.dispatch(receiveMsuConfigListViaFilter(res));
             break;
 
         case FETCH_MSU_CONFIG_RACK_STRUCTURE:
-            // let res_4 =
-            //     {"rack_type_rec":[{"barcodes":["A.05","A.06"],"length":32,"orig_coordinates":[0,5],"height":33},{"barcodes":["A.03","A.04"],"length":32,"orig_coordinates":[32,5],"height":33},{"barcodes":["A.01","A.02"],"length":32,"orig_coordinates":[64,5],"height":33},{"barcodes":["B.05","B.06"],"length":32,"orig_coordinates":[0,43],"height":33},{"barcodes":["B.03","B.04"],"length":32,"orig_coordinates":[32,43],"height":33},{"barcodes":["B.01","B.02"],"length":32,"orig_coordinates":[64,43],"height":33},{"barcodes":["C.05","C.06"],"length":32,"orig_coordinates":[0,81],"height":33},{"barcodes":["C.03","C.04"],"length":32,"orig_coordinates":[32,81],"height":33},{"barcodes":["C.01","C.02"],"length":32,"orig_coordinates":[64,81],"height":33},{"barcodes":["D.05","D.06"],"length":32,"orig_coordinates":[0,119],"height":33},{"barcodes":["D.03","D.04"],"length":32,"orig_coordinates":[32,119],"height":33},{"barcodes":["D.01","D.02"],"length":32,"orig_coordinates":[64,119],"height":33},{"barcodes":["E.05","E.06"],"length":32,"orig_coordinates":[0,157],"height":33},{"barcodes":["E.03","E.04"],"length":32,"orig_coordinates":[32,157],"height":33},{"barcodes":["E.01","E.02"],"length":32,"orig_coordinates":[64,157],"height":33}],"slot_type":"slot","rack_width":96,"slot_barcodes":["038.1.B.01","038.1.B.02"]};
            store.dispatch(receiveMsuConfigRackStructure(res));
             break;
 

@@ -11,7 +11,7 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {
     MSU_CONFIG_DEST_TYPE_URL,
     MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL,
-    MSU_CONFIG_RACK_STRUCTURE_URL
+    MSU_CONFIG_LIST_RACK_STRUCTURE_URL
 } from '../../constants/configConstants';
 
 import {
@@ -38,13 +38,16 @@ class ChangeRackType extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+          sourceType: "",
           destType: null,
           blockPutChangeTypeBtnState: false
         };
         this._blockPutAndChangeType = this._blockPutAndChangeType.bind(this);
         this._changeDestType = this._changeDestType.bind(this);
         this._removeThisModal = this._removeThisModal.bind(this);
+        this._reqRackStructure = this._reqRackStructure.bind(this);
     }
+
 
     _blockPutAndChangeType(){
         let formData={         
@@ -61,7 +64,8 @@ class ChangeRackType extends React.Component {
             'formdata':formData,
         }
         this.props.makeAjaxCall(params);
-        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
+        this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+        this.props.blockPutAndChangeTypeCallback();
     }
 
     _removeThisModal() {
@@ -69,23 +73,18 @@ class ChangeRackType extends React.Component {
     }
 
     componentDidMount() {
-       this._reqRackStructure(this.props.msuList.id, this.props.msuList.racktype); // request Rack structure for EXISTING SOURCE TYPE
+       this._reqRackStructure(this.props.rackType); // request Rack structure for EXISTING SOURCE TYPE
        this._reqDestinationTypes(); // request available destination types from backend
     }
 
-    _reqRackStructure(rackId, rackType){
-        let formData={         
-            "rack_id": rackId,
-            "destination_type": rackType
-        };
+    _reqRackStructure(rackType){
 
         let params={
-            'url': MSU_CONFIG_RACK_STRUCTURE_URL,
+            'url': MSU_CONFIG_LIST_RACK_STRUCTURE_URL+"/"+rackType,
             'method':GET,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause' : FETCH_MSU_CONFIG_RACK_STRUCTURE,
-            'formdata':formData,
         }
         this.props.makeAjaxCall(params);
     }
@@ -101,12 +100,16 @@ class ChangeRackType extends React.Component {
         this.props.makeAjaxCall(params);
     }
 
+    _reqRackStructureOnDestTypeChange(){
+        this._reqRackStructure(this.state.destType);
+    }
+
     _changeDestType(data) {
         this.setState({ 
             destType: data.value,
             blockPutChangeTypeBtnState: false
         },
-        this._reqRackStructure("023", this.state.destType));
+        this._reqRackStructureOnDestTypeChange);
     }
 
     _getCurrentDropDownState(fileType, currentValue) {
@@ -120,10 +123,20 @@ class ChangeRackType extends React.Component {
 
 
     render() {
-        let msuList, rackStructure, destTypeList, labelC1;
-         rackStructure = this.props.rackStructure;
-         destTypeList = this.props.destType;
-         msuList = this.props.msuList[0];
+
+        let msuList, rackStructure, destTypeList, labelC1, destTypeStructure, sourceTypeStructure;
+        rackStructure = this.props.rackStructure;
+        destTypeList = this.props.destType;
+        msuList = this.props.msuList[0];
+        // if(rackStructure){
+        //     if(this.state.destType){
+        //         destTypeStructure = this.props.rackStructure[0];
+        //     }
+        //     else{
+        //         sourceTypeStructure = this.props.rackStructure[0];
+        //     }
+        // }
+
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
         if(destTypeList){
@@ -159,12 +172,13 @@ class ChangeRackType extends React.Component {
                                         values={{sourceType:msuList.racktype}}
                                         />
                                 </div>
-                                {/*{rackStructure.rack_type_rec? 
+                                {/*
+                                {sourceTypeStructure? 
                                     <div className="rackWrapper">
-                                        <MsuRackFlex rackDetails={rackStructure.rack_type_rec} 
-                                                      slotBarcodes={rackStructure.slot_barcodes} 
-                                                      rackWidth={rackStructure.rack_width} />
-                                    </div> : null}*/}
+                                        <MsuRackFlex rackDetails={sourceTypeStructure[0].rack_json} 
+                                                      rackWidth={sourceTypeStructure[0].rack_width} />
+                                    </div> : null}
+                                */}
 
                             </div>
 
@@ -177,16 +191,17 @@ class ChangeRackType extends React.Component {
                                 />
 
                                 <div className="rackWrapper">
-                                    {/*{this.state.destType ? 
-                                        <MsuRackFlex rackDetails={rackStructure.rack_type_rec}
-                                                     slotBarcodes={rackStructure.slot_barcodes}
-                                                     rackWidth={rackStructure.rack_width} /> 
+                                {/*
+                                    {destTypeStructure && this.state.destType ? 
+                                        <MsuRackFlex rackDetails={destTypeStructure[0].rack_json}
+                                                     rackWidth={destTypeStructure[0].rack_width} /> 
                                         :(<div className="parent-container" style={{width: "100%"}}>
                                                 <div className="slotsFlexContainer">
                                                     <div className="legsSpaceContainer"> </div>
                                                  </div>
                                         </div>)
-                                    }*/}
+                                    }
+                                */}
                                 </div>
 
                             </div>

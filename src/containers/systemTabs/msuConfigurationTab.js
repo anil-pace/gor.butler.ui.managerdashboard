@@ -4,39 +4,38 @@
  */
 import React  from 'react';
 import {connect} from 'react-redux';
-import {FormattedMessage, defineMessages, FormattedRelative, injectIntl} from 'react-intl';
-import {stringConfig} from '../../constants/backEndConstants';
-//import {butlerBotsRefreshed} from './../../actions/systemActions';
+import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 import {msuConfigRefreshed} from './../../actions/systemActions';
 import {hashHistory} from 'react-router';
-import {
-    WS_ONSEND,
-    APP_JSON, POST, GET,
-    FETCH_MSU_CONFIG_LIST,
-    MSU_CONFIG_POLLING_INTERVAL,
-    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
-    FETCH_MSU_CONFIG_RACK_STRUCTURE,
-    FETCH_MSU_CONFIG_START_RECONFIG,
-    FETCH_MSU_CONFIG_STOP_RECONFIG,
-    FETCH_MSU_CONFIG_RELEASE_MSU,
-    
-} from '../../constants/frontEndConstants';
+import {modal} from 'react-redux-modal';
+
+import { makeAjaxCall } from '../../actions/ajaxActions';
 
 import Spinner from '../../components/spinner/Spinner';
-//import {setButlerSpinner} from  '../../actions/spinnerAction';
 import {setMsuConfigSpinner} from  '../../actions/spinnerAction';
 import {butlerFilterDetail} from '../../actions/sortHeaderActions';
 import {showTableFilter, filterApplied, toggleBotButton, butlerfilterState, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
-//import ButlerBotFilter from './butlerBotFilter';
 import MsuConfigFilter from './msuConfigFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary';
-import {modal} from 'react-redux-modal';
 import ChangeRackType from './changeRackType';
 import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 import MsuConfigConfirmation from './msuConfigConfirmation';
+
+import {
+    WS_ONSEND,
+    APP_JSON, POST, GET,
+    FETCH_MSU_CONFIG_LIST,
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_RACK_STRUCTURE,
+    FETCH_MSU_CONFIG_START_RECONFIG,
+    FETCH_MSU_CONFIG_STOP_RECONFIG,
+    FETCH_MSU_CONFIG_RELEASE_MSU,
+    MSU_CONFIG_POLLING_INTERVAL
+} from '../../constants/frontEndConstants';
+
 import {
     MSU_CONFIG_URL,
     MSU_CONFIG_FILTER_URL,
@@ -44,46 +43,10 @@ import {
     MSU_CONFIG_STOP_RECONFIG_URL,
     MSU_CONFIG_RELEASE_MSU_URL,
 } from '../../constants/configConstants';
-import { makeAjaxCall } from '../../actions/ajaxActions';
 
-//Mesages for internationalization
-const messages=defineMessages({
-    progressStatus: {
-        id: 'msuConfig.progress.status',
-        description: "In progrss for msus",
-        defaultMessage: "Progress"
-    },
 
-    putBlockedStatus: {
-        id: "msuConfig.putBlocked.status",
-        description: "Put blocked status",
-        defaultMessage: "Put Blocked"
-    },
-    reconfigReadyStatus: {
-        id: "msuConfig.reconfigReady.status",
-        description: "Msu empty status",
-        defaultMessage: "Msu empty"
-    },
-    completeStatus: {
-        id: "msuConfig.complete.status",
-        description: "reconfiguration complete for Msu",
-        defaultMessage: "Reconfiguration complete "
-    },
-    waitingStatus: {
-        id: "msuConfig.waiting.status",
-        description: "Dropping MSU at config area",
-        defaultMessage: "Dropping MSU at config area"
-    },
-    droppedStatus: {
-        id: "msuConfig.dropped.status",
-        description: "Dropping MSU at config area",
-        defaultMessage: "MSU dropped at the reconfig area"
-    }
-    
-});
 
 class MsuConfigTab extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -92,14 +55,7 @@ class MsuConfigTab extends React.Component {
             startStopBtnState: true,
             startStopBtnText: "START RECONFIG",
             releaseMsuBtnState: true,
-            statusMapping: {
-                "progress": this.props.intl.formatMessage(messages.progressStatus),
-                "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
-                "reconfig_ready": this.props.intl.formatMessage(messages.reconfigReadyStatus),
-                "complete": this.props.intl.formatMessage(messages.completeStatus),
-                "waiting": this.props.intl.formatMessage(messages.waitingStatus),
-                "dropped": this.props.intl.formatMessage(messages.droppedStatus) 
-            }
+            flag: true
         };
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
@@ -107,6 +63,7 @@ class MsuConfigTab extends React.Component {
         this._setFilterAction = this._setFilterAction.bind(this);
         this._handleStartStopReconfig = this._handleStartStopReconfig.bind(this);
         this._handleReleaseMsuBtn = this._handleReleaseMsuBtn.bind(this);
+        this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
 
     componentWillMount() {
@@ -120,7 +77,12 @@ class MsuConfigTab extends React.Component {
     }
 
     componentDidMount(){
-        this._requestMsuList();
+       // this._requestMsuList();
+    }
+
+    componentWillUnmount(){
+      this.clearPolling()
+
     }
 
     _requestMsuList(){
@@ -131,9 +93,18 @@ class MsuConfigTab extends React.Component {
             'accept':APP_JSON,
             'cause' : FETCH_MSU_CONFIG_LIST
         }
-        this.props.makeAjaxCall(params);
-       
-        //this._intervalIdForMsuList = setTimeout(() => this._requestMsuList(), MSU_CONFIG_POLLING_INTERVAL);
+        //this.props.makeAjaxCall(params);
+        // this._intervalIdForMsuList = setTimeout(() => 
+        //         this._requestMsuList(), 
+        //         MSU_CONFIG_POLLING_INTERVAL);
+
+        let self=this;
+        if(!this._intervalIdForMsuList){
+           self.props.makeAjaxCall(params) 
+        }
+        this._intervalIdForMsuList= setInterval(function(){
+            self.props.makeAjaxCall(params)
+        },MSU_CONFIG_POLLING_INTERVAL)
     }
 
     _requestMsuListViaFilter(filterUrl){
@@ -150,8 +121,16 @@ class MsuConfigTab extends React.Component {
 
 
     _refreshMsuDataAction = () => {
-        this.props.filterApplied(false);
-        this._requestMsuList();
+        if(this._intervalIdForMsuList){
+            this.clearPolling()
+        }
+      this._refreshList(this.props.location.query);
+    }
+
+    clearPolling(){
+        clearInterval(this._intervalIdForMsuList)
+        this._intervalIdForMsuList=null
+
     }
 
     _releaseMsuAction = () => {
@@ -166,20 +145,37 @@ class MsuConfigTab extends React.Component {
     }
 
     
-    _triggerStartReconfig(){
-        let params={
-            'url': MSU_CONFIG_START_RECONFIG_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_START_RECONFIG
+    _startStopActionInitiated(){
+        if(this.state.startStopBtnText === "START RECONFIG"){
+            let params={
+                'url': MSU_CONFIG_START_RECONFIG_URL,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause' : FETCH_MSU_CONFIG_START_RECONFIG
+            }
+            this.props.makeAjaxCall(params);
+            this.setState({
+                startStopBtnState: false,
+                startStopBtnText: "STOP RECONFIG"
+            })
         }
-        this.props.makeAjaxCall(params);
+        else{
+            let params={
+                'url': MSU_CONFIG_STOP_RECONFIG_URL,
+                'method':POST,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause' : FETCH_MSU_CONFIG_STOP_RECONFIG
+            }
+            this.props.makeAjaxCall(params);
+            
+            this.setState({
+                startStopBtnState: false,
+                startStopBtnText: "START RECONFIG"
+            })
+        }
         this._requestMsuList();  // refresh page post YES to start reconfig 
-        this.setState({
-            startStopBtnState: false,
-            startStopBtnText: "STOP RECONFIG"
-        })
     }
 
     _startStopReconfigAction = () => {
@@ -188,37 +184,46 @@ class MsuConfigTab extends React.Component {
             size: 'large', // large, medium or small,
             closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-            triggerStartReconfig:this._triggerStartReconfig,
+            startStopActionInitiated:this._startStopActionInitiated,
             activeBtnText: this.state.startStopBtnText
 
         });
     }
 
     componentWillReceiveProps(nextProps) {
-        
         if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
         }
 
+        if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
+            this._refreshList(nextProps.location.query)
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForMsuList && JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+            this.clearPolling()
+
+            }
+
         if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+
+             // clear the ongoing interval
+
             let result = nextProps.msuList.filter(function(eachMsu){
                         return (eachMsu.status === "reconfig_ready")
                     });
-                    if(!nextProps.isFilterApplied && result.length>0){
+                    if(!nextProps.isFilterApplied && result.length>0){ // when filtered has been applied and any filtered item is there
                         this._handleStartStopReconfig(false);
-                    }else{
-                        this._handleStartStopReconfig(true);
                     }
 
             let result_1 = nextProps.msuList.filter(function(eachMsu){
-                        return (eachMsu.status === "dropped")
+                        return (eachMsu.status === "ready_for_reconfiguration")
                     });
                     if(result_1.length>0){
                         this._handleReleaseMsuBtn(false);
                     }else{
                         this._handleReleaseMsuBtn(true);
-                    }
+                   }
         } 
     }
 
@@ -264,6 +269,11 @@ class MsuConfigTab extends React.Component {
         });
     }
 
+    _blockPutAndChangeTypeCallback(){
+        this.props.filterApplied(false);
+        this._requestMsuList();
+    }
+
 
     _clearFilter() {
         hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
@@ -271,7 +281,7 @@ class MsuConfigTab extends React.Component {
 
     _setFilterAction() {
         var newState=!this.props.showFilter;
-        this.props.showTableFilter(newState)
+        this.props.showTableFilter(newState);
     }
 
     _handleStartStopReconfig(isDisabled){
@@ -391,7 +401,7 @@ class MsuConfigTab extends React.Component {
                             botFilterStatus={this.props.botFilterStatus}
                             butlerState={this.props.filterState}
                             refreshList={this._clearFilter.bind(this)}
-                           // handleStartStopReconfig= {this._handleStartStopReconfig.bind(this)}
+                            blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
                         />
                     </div>
                 </div>

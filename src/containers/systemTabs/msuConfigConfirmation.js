@@ -7,17 +7,16 @@ class MsuConfigConfirmation extends React.Component {
 
     constructor(props) {
         super(props);
-        this._triggerStartReconfig = this._triggerStartReconfig.bind(this);
-        this._cancelStartReconfig = this._cancelStartReconfig.bind(this);
+        this._triggerStartStopReconfig = this._triggerStartStopReconfig.bind(this);
+        this._cancelStartStopReconfig = this._cancelStartStopReconfig.bind(this);
     }
 
-    _triggerStartReconfig() {
+    _triggerStartStopReconfig() {
         this.props.removeModal();
-        this.props.triggerStartReconfig();
-        
+        this.props.startStopActionInitiated();
     }
 
-    _cancelStartReconfig(){
+    _cancelStartStopReconfig(){
         this.props.removeModal();
     }
 
@@ -45,12 +44,12 @@ class MsuConfigConfirmation extends React.Component {
                 </div>
 
                 <div className='gor-create-profile-action-button'>
-                    <button className='gor-cancel-btn' onClick={this._cancelStartReconfig}>
+                    <button className='gor-cancel-btn' onClick={this._cancelStartStopReconfig}>
                             <FormattedMessage id="msu.configuration.confirm.no"
                             description="Close the confirmation box"
                             defaultMessage="CLOSE"/>
                     </button>
-                    <button onClick={this._triggerStartReconfig} className='gor-save-profile-btn'>
+                    <button onClick={this._triggerStartStopReconfig} className='gor-save-profile-btn'>
                         <FormattedMessage id="msu.configuration.confirm.yes"
                             description="yes and proceed further"
                             defaultMessage="PROCEED"/>
