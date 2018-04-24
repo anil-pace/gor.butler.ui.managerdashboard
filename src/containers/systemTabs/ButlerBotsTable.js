@@ -14,10 +14,10 @@ class ButlerBotsTable extends React.Component {
         this.state = {
             header: [{id: 0, text: "BOTS", key: 'id', sortable: true},
                 {id: 1, text: "STATUS", key: 'status', sortable: true},
-                {id: 2, text: "CURRENT TASK", key: 'current_task', sortable: true},
-                {id: 3, text: "MSU MOUNTED", key: 'msu_mounted', sortable: true},
-                {id: 4, text: "LOCATION", key: 'location', sortable: true},
-                {id: 5, text: "POWER", key: 'power', sortable: true}
+                {id: 2, text: "CURRENT TASK", key: 'current', sortable: true},
+                {id: 3, text: "MSU MOUNTED", key: 'msu', sortable: true},
+                {id: 4, text: "LOCATION", key: 'position', sortable: true},
+                {id: 5, text: "POWER", key: 'voltage', sortable: true}
                 
             ],
             butlerBotsList:props.data
@@ -166,7 +166,7 @@ class ButlerBotsTable extends React.Component {
                                     <div
                                         style={self.state.header[1].width ? {flex: '1 0 ' + self.state.header[1].width + "%"} : {}}
                                         className="cell">
-                                        {row.status}
+                                        <div className={row.status}>{row.status}</div>
                                     </div>
                                     <div
                                         style={self.state.header[2].width ? {flex: '1 0 ' + self.state.header[2].width + "%"} : {}}

@@ -391,6 +391,7 @@ class ButlerBot extends React.Component {
 
         var data=this.props.butlerBotsList;
 
+        //Mock data
         data = 
   [
         {
@@ -400,7 +401,7 @@ class ButlerBot extends React.Component {
           "tasktype": null,
           "power": "13",
           "display_msu_id": "1345",
-          "position": "020.076",
+          "position": "020.075",
           "current_subtask": null
         },
         {
@@ -420,7 +421,7 @@ class ButlerBot extends React.Component {
           "tasktype": null,
           "power": undefined,
           "display_msu_id": null,
-          "position": "020.076",
+          "position": "020.078",
           "current_subtask": null
         },
         {
@@ -430,7 +431,7 @@ class ButlerBot extends React.Component {
           "tasktype": null,
           "power": undefined,
           "display_msu_id": null,
-          "position": "020.076",
+          "position": "020.079",
           "current_subtask": null
         }
       ]
@@ -498,7 +499,7 @@ class ButlerBot extends React.Component {
                 <div>
                     <div className="gorTesting wrapper gor-butler-bots">
                         
-                        {butlerData?<div><div className="gor-filter-wrap"
+                        {butlerData?<div><div><div className="gor-filter-wrap"
                                          style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
                                 <ButlerBotFilter butlerFilterState={this.props.butlerFilterState} isFilterApplied={this.props.isFilterApplied} showBotsFilter={this.props.showBotsFilter} butlerfilterState={this.props.butlerfilterState} butlerData={butlerData} responseFlag={this.props.responseFlag}/>
                             </div>
@@ -538,25 +539,18 @@ class ButlerBot extends React.Component {
                             refreshText={<FormattedMessage id="botList.filter.search.bar.showall"
                                                            description="button label for show all"
                                                            defaultMessage="Show all Bots"/>}/>
-                       </div>:null}
+                                                           <ButlerBotsTable data={butlerData} parameters={taskDetail}/>
+                       </div></div>:null}
                         
 
 
-            <ButlerBotsTable data={butlerData} parameters={taskDetail}/>
+            
             
                        
                     </div>
                 </div>
             </div>
         
-
-
-
-
-
-
-
-
             
             );
         }
@@ -640,9 +634,6 @@ ButlerBot.PropTypes={
     showBotsFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func
 };
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ButlerBot) ;
-
 
 const withQuery = graphql(BUTLER_BOTS_QUERY, {
     props: function(data){
