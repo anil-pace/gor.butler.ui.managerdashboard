@@ -24,9 +24,8 @@ var exec = require('child_process').exec,child,child2;
    var fontmin = new Fontmin()
     .src('public/assets/fonts/**/*.ttf')
     .dest('build/assets/fonts/')
-    .use(Fontmin.glyph({ 
-        text: '天地玄黄 宇宙洪荒',
-        hinting: false         // keep ttf hint info (fpgm, prep, cvt). default = true
+    .use(Fontmin.ttf2woff({
+        deflate: true           // deflate woff. default = false
     }));
  
 fontmin.run(function (err, files) {

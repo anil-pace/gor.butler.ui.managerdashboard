@@ -21,8 +21,7 @@ import {
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
-import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
-import {withSpinner} from '../../HOC/withSpinner';
+import {setDownloadReportSpinner} from '../../actions/downloadReportsActions'
 
 
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -119,7 +118,7 @@ class DownloadReportTab extends React.Component{
     }
     shouldComponentUpdate(nextProps,nextState){
         
-        var shouldUpdate = ((nextProps.hasDataChanged !== this.props.hasDataChanged) || (nextProps.downloadReportsSpinner !== this.props.downloadReportsSpinner));
+        var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged);
         return shouldUpdate;
         
     }
@@ -179,7 +178,6 @@ class DownloadReportTab extends React.Component{
                 'accept':APP_JSON,
                 'cause':REPORTS_FETCH
             }
-        _props.setDownloadReportSpinner(true);
         _props.makeAjaxCall(params);
         
     }
@@ -212,12 +210,10 @@ class DownloadReportTab extends React.Component{
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
         var location = JSON.parse(JSON.stringify(this.props.location));
-        //console.log(this.props.downloadReportsSpinner);
-        //<Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/>
+        
         return (
-            
             <div className="gorTesting wrapper gor-download-rpts">
-                
+               <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/> 
        
              <div className="gorToolBar">
                     <div className="gorToolBarWrap">
@@ -380,8 +376,7 @@ DownloadReportTab.defaultProps = {
   socketAuthorized:false,
   hasDataChanged:false,
   timeOffset:"",
-  downloadReportsSpinner:true,
-  isLoading:true
+  downloadReportsSpinner:true
 }
 
 function mapStateToProps(state, ownProps) {
@@ -390,8 +385,7 @@ function mapStateToProps(state, ownProps) {
         reportsData:state.downloadReportsReducer.reportsData,
         hasDataChanged:state.downloadReportsReducer.hasDataChanged,
         timeOffset: state.authLogin.timeOffset,
-        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner,
-        isLoading:state.downloadReportsReducer.downloadReportsSpinner
+        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
 
     };
 }
@@ -404,5 +398,4 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(withSpinner(Dimensions()(withRouter(DownloadReportTab))));
-
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab)));
