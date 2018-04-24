@@ -70,13 +70,13 @@ const messages=defineMessages({
     fulfillableStatus: {
         id: 'orderList.fulfillable.status',
         description: "In 'fulfillable' for orders",
-        defaultMessage: "Fulfillable"
+        defaultMessage: "In progress"
     },
 
     completeStatus: {
         id: "orderList.complete.status",
         description: " 'complete' status",
-        defaultMessage: "Complete"
+        defaultMessage: "Completed"
     },
 
     cancelledStatus: {
@@ -93,7 +93,7 @@ const messages=defineMessages({
     badRequestStatus: {
         id: 'orderlist.badRequest.status',
         description: " 'Bad Request' status",
-        defaultMessage: 'Bad request'
+        defaultMessage: 'Rejected'
     },
     notFulfillableStatus: {
         id: 'orderlist.notFulfillale.status',
@@ -104,6 +104,11 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    abandonedStatus: {
+        id: 'orderlist.abandoned.status',
+        description: " 'abandoned' status",
+        defaultMessage: 'Abandoned'
     },
     cutOffTime:{
         id: 'orderlist.cutOffTime.time',
@@ -144,9 +149,9 @@ class OrderListTable extends React.Component {
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-                "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
-            },
-            orderState: ""
+                "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
+                "abandoned": this.props.intl.formatMessage(messages.abandonedStatus)
+            }
         }
 
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
@@ -263,19 +268,24 @@ class OrderListTable extends React.Component {
 
     _formatProgressBar(nr, dr){
         let x = {};
-        
-        if(nr === 0 && dr === 0){
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
+        if(nr === 0 && dr === 0){ // when nothing has started
+            x.message = (<FormattedMessage id="orders.pending.status" description="status" defaultMessage="Pending"/>);
             x.action = false;
         }
-        else if(nr === 0){
-            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
+
+        else if(nr === dr){ // when ALL orders has been processed
+            x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
+                      values={{total:dr}} />);
+            x.action = true;
+        }
+        else if(nr === 0){ // when ALL are remaining to be picked
+            x.message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{current} products to be picked"
                       values={{current:dr}} />);
-            x.action = false;
+            x.action = true;
         }
         else{
-            x.width = (nr/dr)*100;
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
+            x.width = (nr/dr)*100; 
+            x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
                             values={{current:nr, total: dr}} />);
             x.action  = true;
         }
@@ -333,9 +343,11 @@ class OrderListTable extends React.Component {
 
                         pbtRow.push(<div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
                                         <div style={{width: "35%"}}>
-                                            <div className="ProgressBarWrapper">
-                                                <ProgressBar progressWidth={formatProgressBar.width}/>
-                                            </div>
+                                            {formatProgressBar.width ?
+                                                <div className="ProgressBarWrapper">
+                                                    <ProgressBar progressWidth={formatProgressBar.width}/>
+                                                </div>: null
+                                            }
                                             <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                         </div>
                                         <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
@@ -381,9 +393,11 @@ class OrderListTable extends React.Component {
                                     }
                                 </div>);
                     pbtRow.push(<div>
-                                    <div className="ProgressBarWrapper">
-                                        <ProgressBar progressWidth={formatProgressBar.width}/>
-                                    </div>
+                                    {formatProgressBar.width ?
+                                        <div className="ProgressBarWrapper">
+                                            <ProgressBar progressWidth={formatProgressBar.width}/>
+                                        </div>: null
+                                    }
                                     <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
                                  </div>);
 
@@ -506,9 +520,11 @@ class OrderListTable extends React.Component {
 
                 orderRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
                                     <div style={{width: "35%"}}>
-                                        <div className="ProgressBarWrapper">
-                                            <ProgressBar progressWidth={formatProgressBar.width}/>
-                                        </div>
+                                        {formatProgressBar.width ?
+                                            <div className="ProgressBarWrapper">
+                                                <ProgressBar progressWidth={formatProgressBar.width}/>
+                                            </div>: null
+                                        }
                                         <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                     </div>
                                     <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
