@@ -7314,6 +7314,10 @@ button:disabled {
   position: relative;
 }
 
+.gor-dropdown.gor-enabled {
+  color: initial;
+}
+
 .gor-white-background {
   background-color: #FFFFFF;
 }
