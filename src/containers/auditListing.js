@@ -666,7 +666,8 @@ class AuditTab extends React.Component {
                                 description="button label for audit"
                                 defaultMessage="Audits" /></span>
                     </div>
-                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name: autoAssignpps, value: 'autoassignpps' }, { name:  manualAssignpps, value: 'mannualassignpps' }]}>
+                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}>
+                    <ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[ { name:  manualAssignpps, value: 'mannualassignpps' }]}>
                         <button className="gor-add-btn gor-listing-button">
                         <FormattedMessage id="audit.start.Audit"
                                 description="button label for start"
