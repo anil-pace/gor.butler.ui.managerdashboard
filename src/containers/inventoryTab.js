@@ -23,11 +23,36 @@ const moment = require("moment-timezone")
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
 
+const InventoryHistorySubscription = gql`
+    subscription InventoryHistoryList {
+        InventoryHistory {
+            list {
+                cbm_used
+                items_put
+                total_skus
+                opening_stock
+                warehouse_utilization
+                exception_qty
+                items_picked
+                items_put
+                date
+                category_data {
+                    days_on_hand
+                    category_type
+                    cbm_used
+                    warehouse_utilization
+                }
+            }
+        }
+    }
+`;
+
 
 class InventoryTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {formattedData: null, selectedData: null}
+        this.subscription = null
     }
 
     _onClickCallBack(data) {
@@ -39,7 +64,31 @@ class InventoryTab extends React.Component {
         if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
             this.formatData(nextProps.data)
         }
+
+        if (!this.subscription && nextProps.subscribeToMore) {
+            this.updateSubscription(nextProps.subscribeToMore, {})
+        }
     }
+
+
+    updateSubscription(subscription, variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = subscription({
+            variables: variables,
+            document: InventoryHistorySubscription,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                return Object.assign({}, previousResult, {
+                    InventoryHistory: {
+                        list: newResult.subscriptionData.data.InventoryHistory.list
+                    }
+                });
+            },
+        });
+    }
+
 
     formatData(data) {
         let return_data = {}
@@ -215,7 +264,8 @@ const withNetworkData = graphql(InventoryHistoryQuery, {
             return null
         }
         return {
-            data: result.data.InventoryHistory.list
+            data: result.data.InventoryHistory.list,
+            subscribeToMore: result.data.subscribeToMore
         }
     },
     options: ({match, location}) => ({
