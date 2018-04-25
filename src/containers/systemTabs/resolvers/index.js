@@ -3,5 +3,6 @@
  */
 import merge from 'lodash.merge'
 import ppsConfigurationState from './ppsConfigurations'
-let pps_resolvers=merge(ppsConfigurationState,{})
+import butlerFilterState from './butlerBots'
+let pps_resolvers=merge(ppsConfigurationState,butlerFilterState)
 export default pps_resolvers

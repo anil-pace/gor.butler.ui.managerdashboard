@@ -1,9 +1,5 @@
-/**
- * Container for Overview tab
- * This will be switched based on tab click
- */
-import React  from 'react';
-import ButlerBotTable from './butlerbotTable';
+   import React  from 'react';
+import ButlerBotsTable from './ButlerBotsTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants';
@@ -24,17 +20,14 @@ import {updateSubscriptionPacket,setWsAction} from './../../actions/socketAction
 import {wsOverviewData} from './../../constants/initData.js';
 import ButlerBotFilter from './butlerBotFilter';
 import FilterSummary from '../../components/tableFilter/filterSummary'
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 //Mesages for internationalization
 const messages=defineMessages({
     butlerPrefix: {
         id: "butlerDetail.name.prefix",
         description: "prefix for butler id",
         defaultMessage: "BOT - {botId}"
-    },
-    ppsPrefix: {
-        id: "pps.name.prefix",
-        description: "prefix for pps id",
-        defaultMessage: "PPS {ppsId}"
     },
     chargerPrefix: {
         id: "charger.name.prefix",
@@ -46,6 +39,13 @@ const messages=defineMessages({
         description: "prefix for msu id",
         defaultMessage: "MSU - {msuId}"
     },
+    /*
+     ppsPrefix: {
+        id: "pps.name.prefix",
+        description: "prefix for pps id",
+        defaultMessage: "PPS {ppsId}"
+    },
+    */
     audit: {
         id: "audit.name.prefix",
         description: "prefix for audit",
@@ -94,14 +94,110 @@ const messages=defineMessages({
 });
 
 
+const BUTLER_BOTS_QUERY = gql`
+    query ButlerBotsList($input: ButlerBotsListParams) {
+        ButlerBotsList(input:$input){
+            list {
+                id
+                charger_id
+                current_subtask
+                tasktype
+                display_msu_id
+                position
+                state
+                power
+
+            }
+        }
+    }
+`;
+
+
+const SUBSCRIPTION_QUERY = gql`subscription BUTLER_CHANNEL($id: Int){
+    ButlerBotsList(input:{id:$id}){
+        list{
+            id
+            charger_id
+            current_subtask
+            tasktype
+            display_msu_id
+            position
+            state
+            power
+
+
+
+        }
+    }
+}
+`
+
+
+
+
 class ButlerBot extends React.Component {
 
+     constructor(props) {
+        super(props);
+        this.state = {query: null}
+        // keep track of subscription handle to not subscribe twice.
+        // we don't need to unsubscribe on unmount, because the subscription
+        // gets stopped when the query stops.
+        this.subscription = null;
+        this.linked = false,
+            this.showBotsFilter = this.props.showBotsFilter.bind(this)
+    }
 
-    _processButlersData() {
-        var nProps=this,
-            data=nProps.props.butlerDetail.butlerDetail;
+
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+
+            this._refreshList(nextProps.location.query)
+        }
+
+
+        if (this.props.data && (!this.props.data.ButlerBotsList && nextProps.data.ButlerBotsList && !this.subscription && !nextProps.data.loading)) {
+            this.updateSubscription(nextProps.location.query)
+        }
+
+    }
+
+
+
+    componentWillUnMount() {
+        if (this.subscription) {
+            this.subscription()
+        }
+    }
+
+
+
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: SUBSCRIPTION_QUERY,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                console.log(newResult)
+
+                return Object.assign({}, {
+                    ButlerBotsList: {list: newResult.subscriptionData.data.ButlerBotsList.list}
+                })
+            },
+        });
+    }
+
+
+    _processButlersData(butler_data) {
+        var nProps=this;
         var butlerData=[], butlerDetail={};
-
+         var data = this._filterList(butler_data, nProps.props.location.query)
         var currentTask={
             0: nProps.context.intl.formatMessage(messages.pick),
             1: nProps.context.intl.formatMessage(messages.put),
@@ -128,10 +224,10 @@ class ButlerBot extends React.Component {
         let BOT, PPS, CS, MSU;
 
         for (var i=data.length - 1; i >= 0; i--) {
-            var botId=data[i].butler_id, msuId=data[i].display_msu_id, csId=data[i].charger_id,
-                ppsId=data[i].pps_id;
+            var botId=data[i].id, msuId=data[i].display_msu_id, csId=data[i].charger_id;
+            //ppsId=data[i].pps_id;
             BOT=nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
-            PPS=nProps.context.intl.formatMessage(messages.ppsPrefix, {"ppsId": ppsId});
+            //PPS=nProps.context.intl.formatMessage(messages.ppsPrefix, {"ppsId": ppsId});
             CS=nProps.context.intl.formatMessage(messages.chargerPrefix, {"csId": csId});
             MSU=nProps.context.intl.formatMessage(messages.msuPrefix, {"msuId": msuId});
             butlerDetail={};
@@ -145,11 +241,11 @@ class ButlerBot extends React.Component {
                 butlerDetail.status=data[i].state;
             }
             butlerDetail.statusPriority=priStatus[data[i].state];
-            if (data[i].location) {
-                butlerDetail.location=data[i].location;
+            if (data[i].position) {
+                butlerDetail.position=data[i].position;
             }
             else {
-                butlerDetail.location="--";
+                butlerDetail.position="--";
             }
             if (data[i].power || data[i].power=== 0) {
                 butlerDetail.voltage=data[i].power + " %";
@@ -158,9 +254,9 @@ class ButlerBot extends React.Component {
                 butlerDetail.voltage="--";
             }
             butlerDetail.butlerAvgVoltage=data[i].power;
-            butlerDetail.taskNum=currentTask[data[i].current_task];
-            butlerDetail.taskNumClass=currentTaskClass[data[i].current_task];
-            butlerDetail.taskType=data[i].current_task;
+            butlerDetail.taskNum=currentTask[data[i].tasktype];
+            butlerDetail.taskNumClass=currentTaskClass[data[i].tasktype];
+            butlerDetail.taskType=data[i].tasktype;
             if (data[i].display_msu_id=== null) {
                 butlerDetail.msu="--";
             }
@@ -168,16 +264,16 @@ class ButlerBot extends React.Component {
                 butlerDetail.msu=MSU;
             }
 
-            if (data[i].current_task !== null) {
-                butlerDetail.current=currentTask[data[i].current_task];
+            if (data[i].tasktype !== null) {
+                butlerDetail.current=currentTask[data[i].tasktype];
                 if (data[i].current_subtask !== null) {
                     butlerDetail.current=butlerDetail.current + " - " + currentSubtask[data[i].current_subtask];
                     if (data[i].charger_id !== null) {
                         butlerDetail.current=butlerDetail.current + " CS " + data[i].charger_id;
                     }
 
-                    else if (data[i].msu_id !== null) {
-                        butlerDetail.current=butlerDetail.current + " MSU " + data[i].msu_id;
+                    else if (data[i].display_msu_id !== null) {
+                        butlerDetail.current=butlerDetail.current + " MSU " + data[i].display_msu_id;
                     }
 
                     else {
@@ -196,34 +292,43 @@ class ButlerBot extends React.Component {
         return butlerData;
     }
 
-    constructor(props) {
-        super(props);
-        this.state={query:null}
-    }
-
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-        this.props.butlerBotsRefreshed()
-    }
-
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: nextProps.location.query})
-            this._refreshList(nextProps.location.query)
+    _filterList(init_data, query) {
+        let filtered_data = init_data
+        
+        if (query.butler_id) {
+            query.butler_id=query.butler_id.substring(6);   
+            query.butler_id = query.butler_id.constructor === Array ? query.butler_id : [query.butler_id]
+            filtered_data = filtered_data.filter(function (bot) {
+                return query.butler_id.indexOf(bot.id)>-1
+            })
         }
+
+        if(query.location) {
+             query.location = query.location.constructor === Array ? query.location : [query.location]
+            filtered_data = filtered_data.filter(function (bot) {
+                return query.location.indexOf(bot.position)>-1
+            })
+        }
+        
+        
+        if(query.status){
+            query.status = query.status.constructor === Array ? query.status : [query.status]
+            filtered_data = filtered_data.filter(function (bot) {
+                return query.status.indexOf(bot.state)>-1
+            })
+        }
+         if(query.current_task){
+            query.current_task = query.current_task.constructor === Array ? query.current_task : [query.current_task]
+            filtered_data = filtered_data.filter(function (bot) {
+                return query.current_task.indexOf(bot.tasktype)>-1
+            })
+        }
+
+
+        return filtered_data
     }
 
-    /**
-     * The method will update the subscription packet
-     * and will fetch the data from the socket.
-     * @private
-     */
+
     _refreshList(query) {
         this.props.setButlerSpinner(true)
         let filterSubsData={}
@@ -248,11 +353,6 @@ class ButlerBot extends React.Component {
             this.props.filterApplied(false);
         }
 
-        let updatedWsSubscription=this.props.wsSubscriptionData;
-        updatedWsSubscription["system"].data[0].details["filter_params"]=filterSubsData;
-        updatedWsSubscription["butlerbots"].data[0].details["filter_params"]=filterSubsData;
-        this.props.initDataSentCall(updatedWsSubscription["butlerbots"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.butlerfilterState({
             tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"], "MODE": query.current_task?query.current_task.constructor===Array?query.current_task:[query.current_task]:["any"]}, searchQuery: {
                 "SPECIFIC LOCATION/ZONE":query.location||null,
@@ -260,21 +360,23 @@ class ButlerBot extends React.Component {
             },
             defaultToken: {"STATUS": ["any"], "MODE": ["any"]}
         });
+
     }
 
 
-    /**
-     *
-     */
-    _clearFilter() {
+
+   
+
+    componentWillMount() {
+       
+        this.props.butlerBotsRefreshed()
+    }
+
+     _clearFilter() {
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
     }
 
 
-    _setFilter() {
-        var newState=!this.props.showFilter;
-        this.props.showTableFilter(newState)
-    }
 
     render() {
         var filterHeight=screen.height - 190 - 50;
@@ -287,8 +389,60 @@ class ButlerBot extends React.Component {
             "offline": 0
         };
 
-        if (this.props.butlerDetail.butlerDetail !== undefined) {
-            butlerData=this._processButlersData();
+        var data=this.props.butlerBotsList;
+
+        //Mock data
+        data = 
+  [
+        {
+          "id": 230,
+          "charger_id": null,
+          "state": "offline",
+          "tasktype": null,
+          "power": "13",
+          "display_msu_id": "1345",
+          "position": "020.075",
+          "current_subtask": null
+        },
+        {
+          "id": 500,
+          "charger_id": null,
+          "state": "online",
+          "tasktype": null,
+          "power": undefined,
+          "display_msu_id": null,
+          "position": "020.076",
+          "current_subtask": null
+        },
+        {
+          "id": 270,
+          "charger_id": null,
+          "state": "offline",
+          "tasktype": null,
+          "power": undefined,
+          "display_msu_id": null,
+          "position": "020.078",
+          "current_subtask": null
+        },
+        {
+          "id": 250,
+          "charger_id": null,
+          "state": "online",
+          "tasktype": null,
+          "power": undefined,
+          "display_msu_id": null,
+          "position": "020.079",
+          "current_subtask": null
+        }
+      ]
+    
+      
+    
+  
+
+
+        if (data !== undefined) {
+            butlerData=this._processButlersData(data);
             let activeBotsCount=0;
             if (butlerData && butlerData.length) {
                 for (var i=butlerData.length - 1; i >= 0; i--) {
@@ -298,7 +452,6 @@ class ButlerBot extends React.Component {
                         taskDetail["Idle"]++;
                     }
                     else {
-
                         taskDetail[butlerData[i].taskNumClass]++;
                     }
 
@@ -306,7 +459,7 @@ class ButlerBot extends React.Component {
                         taskDetail["msuMounted"]++;
                     }
 
-                    if (butlerData[i].location !== null) {
+                    if (butlerData[i].position !== null) {
                         taskDetail["location"]++;
                     }
 
@@ -336,16 +489,20 @@ class ButlerBot extends React.Component {
                 };
             }
         }
+        
+        if(!data){
+            return null;
+        }
+        else{
         return (
-            <div>
+              <div>
                 <div>
-                    <div className="gorTesting">
-                        <Spinner isLoading={this.props.butlerSpinner} setSpinner={this.props.setButlerSpinner}/>
-                        {butlerData?<div><div className="gor-filter-wrap"
+                    <div className="gorTesting wrapper gor-butler-bots">
+                        
+                        {butlerData?<div><div><div className="gor-filter-wrap"
                                          style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <ButlerBotFilter butlerData={butlerData} responseFlag={this.props.responseFlag}/>
+                                <ButlerBotFilter butlerFilterState={this.props.butlerFilterState} isFilterApplied={this.props.isFilterApplied} showBotsFilter={this.props.showBotsFilter} butlerfilterState={this.props.butlerfilterState} butlerData={butlerData} responseFlag={this.props.responseFlag}/>
                             </div>
-
 
                             <div className="gorToolBar">
                             <div className="gorToolBarWrap">
@@ -360,21 +517,20 @@ class ButlerBot extends React.Component {
                             <div className="filterWrapper">
                             <div className="gorToolBarDropDown">
                             <div className="gor-button-wrap">
-                            <div
-                            className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
+                            
                             <button
-                            className={this.props.botFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                            onClick={this._setFilter.bind(this)}>
+                            className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this.showBotsFilter.bind(this, true)}>
                             <div className="gor-manage-task"/>
                             <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
                             defaultMessage="Filter data"/>
                             </button>
+
                             </div>
                             </div>
                             </div>
                             </div>
                         {/*Filter Summary*/}
-                            <FilterSummary total={butlerData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                         <FilterSummary total={butlerData.length||0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
                             filterText={<FormattedMessage id="botList.filter.search.bar"
                                                           description='total bots for filter search bar'
                                                           defaultMessage='{total} Bots found'
@@ -382,29 +538,24 @@ class ButlerBot extends React.Component {
                             refreshList={this._clearFilter.bind(this)}
                             refreshText={<FormattedMessage id="botList.filter.search.bar.showall"
                                                            description="button label for show all"
-                                                           defaultMessage="Show all Bots"/>}/></div>:null}
+                                                           defaultMessage="Show all Bots"/>}/>
+                                                           <ButlerBotsTable data={butlerData} parameters={taskDetail}/>
+                       </div></div>:null}
+                        
 
-                        <ButlerBotTable items={butlerData} itemNumber={itemNumber} parameters={taskDetail}
-                                        intlMessg={this.props.intlMessages}
-                                        sortHeaderState={this.props.butlerHeaderSort}
-                                        currentSortState={this.props.butlerSortHeader}
-                                        sortHeaderOrder={this.props.butlerHeaderSortOrder}
-                                        currentHeaderOrder={this.props.butlerSortHeaderState}
-                                        setButlerFilter={this.props.butlerFilterDetail}
-                                        getButlerFilter={this.props.butlerFilter}
-                                        showFilter={this.props.showFilter}
-                                        isFilterApplied={this.props.isFilterApplied}
-                                        setFilter={this.props.showTableFilter}
-                                        botFilterStatus={this.props.botFilterStatus}
-                                        lastUpdatedText={updateStatusIntl}
-                                        lastUpdated={updateStatusIntl}
-                                        butlerState={this.props.filterState}
-                                        refreshList={this._clearFilter.bind(this)}
-                        />
+
+            
+            
+                       
                     </div>
                 </div>
             </div>
-        );
+        
+            
+            );
+        }
+
+       
     }
 }
 ;
@@ -417,7 +568,7 @@ function mapStateToProps(state, ownProps) {
         butlerSpinner: state.spinner.butlerSpinner || false,
         butlerDetail: state.butlerDetail || [],
         intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
+        
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         botFilterStatus: state.filterInfo.botFilterStatus || false,
         filterState: state.filterInfo.butlerFilterState,
@@ -463,7 +614,8 @@ var mapDispatchToProps=function (dispatch) {
 }
 
 ButlerBot.contextTypes={
-    intl: React.PropTypes.object.isRequired
+    intl: React.PropTypes.object.isRequired,
+    client: React.PropTypes.object.isRequired
 }
 ButlerBot.PropTypes={
     butlerFilter: React.PropTypes.string,
@@ -479,10 +631,109 @@ ButlerBot.PropTypes={
     setButlerSpinner: React.PropTypes.func,
     butlerHeaderSort: React.PropTypes.func,
     butlerHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
+    showBotsFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ButlerBot) ;
+const withQuery = graphql(BUTLER_BOTS_QUERY, {
+    props: function(data){
+        if(!data || !data.data.ButlerBotsList || !data.data.ButlerBotsList.list){
+            return {}
+        }
+        return {
+            butlerBotsList: data.data.ButlerBotsList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+
+
+const botsClientData = gql`
+    query  {
+    todos @client
+    botsFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+                MODE
+            }
+            searchQuery{
+                BOT ID
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+            }
+        }
+    }
+    }
+`;
+
+
+const SET_VISIBILITY = gql`
+    mutation setBotsFiler($filter: String!) {
+        setShowBotsFilter(filter: $filter) @client
+    }
+`;
+
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setBotsFilterState(state: $state) @client
+    }
+`;
+
+
+const withClientData = graphql(botsClientData, {
+    props: (data) => ({
+        todos: data.data.todos,
+        showFilter: data.data.botsFilter.display,
+        isFilterApplied: data.data.botsFilter.isFilterApplied,
+        botsFilterStatus: JSON.parse(JSON.stringify(data.data.botsFilter.filterState))
+    })
+})
+
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        showBotsFilter: function (show) {
+            mutate({variables: {filter: show}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        butlerfilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+
+
+export default compose(
+    withClientData,
+    setVisibilityFilter,
+    setFilterApplied,
+    setFilterState,
+    withQuery
+)(connect(mapStateToProps, mapDispatchToProps)(ButlerBot));
 
 

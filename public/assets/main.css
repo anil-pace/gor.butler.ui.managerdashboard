@@ -8867,6 +8867,16 @@ button:disabled {
   padding-right: 15px;
 }
 
+.gor-download-rpts .gor-download-report-table .row {
+  background: #f7f7f7;
+}
+
+.gor-download-rpts .gor-download-report-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
 .gor-download-rpts .gor-rpt-dwnld {
   min-width: 60%;
   border-radius: 3px;
@@ -8937,6 +8947,16 @@ button:disabled {
   margin-top: 2rem;
 }
 
+.gor-storage-space .gor-storage-table .row {
+  background: #f7f7f7;
+}
+
+.gor-storage-space .gor-storage-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
 .gor-storage-space .gor-ol-paginate-wrap {
   width: 100%;
 }
@@ -8988,6 +9008,83 @@ button:disabled {
   padding-right: 0.875rem;
   vertical-align: sub;
   cursor: pointer;
+}
+
+.gor-butler-bots .gor-bots-table .row {
+  background: #f7f7f7;
+}
+
+.gor-butler-bots .gor-bots-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
+.gor-butler-bots .gor-bots-table .offline {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-butler-bots .gor-bots-table .online {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-butler-bots .gor-filterBtn-btn .ico-wrap {
+  display: inline-block;
+  width: 20%;
+}
+
+.gor-butler-bots .gor-filterBtn-btn .ico-txt-wrp {
+  display: inline-block;
+  width: 80%;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap {
+  width: 95%;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
 }
 
 .gor-IN-wrapper {
