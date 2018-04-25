@@ -75,7 +75,7 @@ button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMess
                 <button className='gor-cancel-btn' onClick={this._removeThisModal}><FormattedMessage id='audit.cancel.cancel' 
                         defaultMessage="CLOSE" description="Text for close"/></button>
                 <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
-                        defaultMessage="PROCEDED" description="Text for proceed button"/></button>
+                        defaultMessage="PROCEED" description="Text for proceed button"/></button>
              
           </div>
         </div>

@@ -401,6 +401,7 @@ class AuditTab extends React.Component {
         var i, limit = data.length;
         for (i = 0; i <= limit - 1; i++) {
             auditData.id = data[i].audit_id;
+            auditData.display_id = data[i].display_id;
             auditData.progressBarflag = false;
             if (data[i].audit_name) {
                 auditData.audit_name = data[i].audit_name;
