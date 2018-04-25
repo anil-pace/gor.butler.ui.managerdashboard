@@ -363,9 +363,9 @@ render(){
        <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
-       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button" style={{float:'left'}}>
+       {/* {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
     {reauditButton}
-      </button>:""}
+      </button>:""} */}
       {index==4 && tablerowdata[idx][text].resolveButton?
       <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['header'][0]} style={{float:'right'}}   onClick={me._handelResolveAudit}>
       {resolveButton}
