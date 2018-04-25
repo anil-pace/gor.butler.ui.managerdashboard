@@ -556,8 +556,6 @@ class AuditTab extends React.Component {
 
 
             auditData.button = data[i].audit_button_data;
-
-
             auditData.startButton = data[i].audit_button_data.audit_start_button === 'enable' ? true : false;
             auditData.resolveButton = data[i].audit_button_data.audit_resolve_button === 'enable' ? true : false;
             auditData.reauditButton = data[i].audit_button_data.audit_reaudit_button === 'enable' ? true : false;
