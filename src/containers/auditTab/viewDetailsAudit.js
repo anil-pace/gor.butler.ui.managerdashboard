@@ -52,6 +52,10 @@ const messages = defineMessages({
       id: "viewDetais.missing.status",
       defaultMessage: " missing out of "
   },
+  vdExtraFound:{
+    id: "viewDetais.extra.status",
+    defaultMessage: " extra entitiy found"
+  },
   vdItems: {
       id: "viewDetais.items.status",
       defaultMessage: " items"
@@ -284,6 +288,7 @@ _timeFormat(UTCtime){
     let vdNoAttrSelected = this.context.intl.formatMessage(messages.vdNoAttrSelected);
     let vdNoInventory = this.context.intl.formatMessage(messages.vdNoInventory);
     let vdMissingOut = this.context.intl.formatMessage(messages.vdMissingOut);
+    let vdExtraFound=  this.context.intl.formatMessage(messages.vdExtraFound);  
     let vdItems = this.context.intl.formatMessage(messages.vdItems);
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
@@ -309,7 +314,15 @@ _timeFormat(UTCtime){
          }
          else{
          let items=itemsData[i].result;
-         rowObject.status=(items && items.total>=1)?items.missing+vdMissingOut+items.total+vdItems:"";
+         let diff =items.expected_quantity-items.actual_quantity;
+         if(diff>0)
+         {
+          rowObject.status=diff+vdMissingOut+items.expected_quantity;
+         }
+         else
+         {
+          rowObject.status=(diff!==0)?Math.abs(diff)+vdExtraFound:"";
+         }
          }
          tableData.push(rowObject);
          rowObject={};

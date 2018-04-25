@@ -179,7 +179,7 @@ class DownloadReportTab extends React.Component{
                         </div>
                         
                         <DownloadReportTable data={data} onScrollHandler={self._onScrollHandler.bind(self)}/>
-                    
+
                     </div>
                 </div>
             </div>

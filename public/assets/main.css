@@ -8821,6 +8821,52 @@ button:disabled {
   cursor: pointer;
 }
 
+.gor-operations-log .ops-log-table .status {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-operations-log .ops-log-table .success {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-operations-log .ops-log-table .table-body .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-body .row .cell:last-child {
+  padding-right: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-header .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-header .row .cell:last-child {
+  padding-right: 15px;
+}
+
 .gor-download-rpts .gor-download-report-table .row {
   background: #f7f7f7;
 }

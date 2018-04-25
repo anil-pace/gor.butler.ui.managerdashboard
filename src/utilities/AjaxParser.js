@@ -399,9 +399,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case AUDIT_RESOLVE_CONFIRMED:
             if (res.successful.status) {
                 stringInfo = statusToString(res.successful);
-                store.dispatch(notifySuccess(stringInfo.msg));
+               // store.dispatch(notifySuccess(stringInfo.msg));
+               store.dispatch(notifyfeedback(stringInfo.msg));
             } else {
-                ShowError(store, cause, status);
+                //ShowError(store, cause, status);
+                stringInfo = getFormattedMessages("RESOLVEFAIL", values);
+                store.dispatch(setNotification(stringInfo));
             }
             break;
 

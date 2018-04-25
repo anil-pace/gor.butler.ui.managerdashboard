@@ -12,7 +12,13 @@ import {
     requestLink,
 } from './links';
 import resolvers from './resolvers'
-const cache = new InMemoryCache();
+/**
+ * Refer https://github.com/apollographql/react-apollo/issues/1558
+ * @type {InMemoryCache}
+ */
+const cache = new InMemoryCache({
+    dataIdFromObject: o => {o.id ? `${o.__typename}-${o.id}`: `${o.__typename}-${o.cursor}`},}
+    );
 console.log(resolvers)
 let state_link = withClientState({...resolvers, cache})
 let client = new ApolloClient({

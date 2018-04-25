@@ -5,20 +5,20 @@ import React  from 'react';
 
 class FilterSummary extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            total:props.total
+        this.state = {
+            total: props.total
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.total && nextProps.total!==0){
-            this.setState({total:nextProps.total})
+    componentWillReceiveProps(nextProps) {
+        if ((nextProps.total && nextProps.total !== 0) || nextProps.forceUpdate) {
+            this.setState({total: nextProps.total})
         }
     }
 
-    shouldComponentUpdate(nextProps){
+    shouldComponentUpdate(nextProps) {
         return !nextProps.noResults
     }
 
@@ -37,7 +37,7 @@ class FilterSummary extends React.Component {
     }
 }
 
-FilterSummary.propTypes={
+FilterSummary.propTypes = {
     refreshList: React.PropTypes.func.isRequired
 }
 

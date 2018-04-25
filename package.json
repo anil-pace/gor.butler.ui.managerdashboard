@@ -19,9 +19,12 @@
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
     "lodash.merge": "^4.6.1",
+    "moment": "^2.22.1",
+    "moment-timezone": "^0.5.16",
     "node-fetch": "^1.7.3",
     "react": "15.5.4",
     "react-apollo": "^2.0.4",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "15.5.4",
     "react-plyr": "^1.7.0",
     "subscriptions-transport-ws": "^0.9.5"
