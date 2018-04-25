@@ -293,7 +293,12 @@ export const ENTITY_BREACHED = {
 export const ITEM_RECALL_SUCCESS = (<FormattedMessage id="itemRecall.message.success" description='Status text for zone' 
       defaultMessage='Items recalled successfully'/>)
 
-
+export const ITEM_RECALL_FAILURE = {
+      "DUPLICATE_KEY":(<FormattedMessage id="itemRecall.message.failure.duplicate_key" description='Message for duplicate order id' 
+      defaultMessage='Order id already exists'/>),
+      "NO_ITEM_EXIST":(<FormattedMessage id="itemRecall.message.failure.no_item" description='Message for duplicate order id' 
+      defaultMessage='No Item Exists'/>)
+}
 
 
 

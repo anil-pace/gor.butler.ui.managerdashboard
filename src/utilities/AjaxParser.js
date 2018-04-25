@@ -736,7 +736,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case SELLER_RECALL:
             if(status !== 202){
-                ShowError(store, cause, status);
+                ShowError(store, cause, status,res);
             }
             else{
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
