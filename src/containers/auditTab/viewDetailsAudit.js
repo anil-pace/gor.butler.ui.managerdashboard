@@ -373,7 +373,7 @@ return tableData;
                      <FormattedMessage id="audit.audittask" description='Heading for view orderline' defaultMessage='Audit Task' />
                   </span>
                   <span className='AuditIDWrapper'>
-                     - {allData.audit_id}
+                     - {this.props.displayId}
                   </span>
                   <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
