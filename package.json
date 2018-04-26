@@ -50,11 +50,10 @@
     "watch-css": "npm run build-css && node-sass src/assets/css/main.scss -o public/assets/ --watch --recursive --output-style expanded",
     "start-js": "react-scripts start",
     "build-dev": " npm-run-all -p watch-css start-js",
-    "build-prod": "npm run build-css && npm run post-css && react-scripts build && npm run compress-images",
+    "build-prod": "npm run build-css && npm run post-css && react-scripts build",
     "start": "npm run translate && REACT_APP_FILE_EXT= npm run build-dev",
     "build": "REACT_APP_FILE_EXT=.min npm run build-prod",
     "test": "react-scripts test --env=jsdom --coverage",
-    "compress-images": "node scripts/compress-images.js",
     "eject": "react-scripts eject",
     "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json'"
   },
