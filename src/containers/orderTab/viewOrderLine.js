@@ -18,13 +18,13 @@ const messages=defineMessages({
     fulfillableStatus: {
         id: 'orderList.fulfillable.status',
         description: "In 'fulfillable' for orders",
-        defaultMessage: "Fulfillable"
+        defaultMessage: "In progress"
     },
 
     completeStatus: {
         id: "orderList.complete.status",
         description: " 'complete' status",
-        defaultMessage: "Complete"
+        defaultMessage: "Completed"
     },
 
     cancelledStatus: {
@@ -41,7 +41,7 @@ const messages=defineMessages({
     badRequestStatus: {
         id: 'orderlist.badRequest.status',
         description: " 'Bad Request' status",
-        defaultMessage: 'Bad request'
+        defaultMessage: 'Rejected'
     },
     notFulfillableStatus: {
         id: 'orderlist.notFulfillale.status',
@@ -52,6 +52,11 @@ const messages=defineMessages({
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
         defaultMessage: 'Accepted'
+    },
+    abandonedStatus: {
+        id: 'orderlist.abandoned.status',
+        description: " 'abandoned' status",
+        defaultMessage: 'Abandoned'
     },
     totalOrderLines: {
         id: 'orders.orderlines.total',
@@ -80,7 +85,8 @@ class ViewOrderLine extends React.Component{
             "CREATED": this.props.intl.formatMessage(messages.createdStatus),
             "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
             "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-            "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus)
+            "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
+            "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
         }
       }
       this.handleChange = this.handleChange.bind(this);
@@ -126,23 +132,28 @@ class ViewOrderLine extends React.Component{
 
   _formatProgressBar(nr, dr){
       let x = {};
-      
-      if(nr === 0 && dr === 0){
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
+      if(nr === 0 && dr === 0){ // when nothing has started
+            x.message = (<FormattedMessage id="orders.pending.status" description="status" defaultMessage="Pending"/>);
             x.action = false;
         }
-        else if(nr === 0){
-            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
+
+        else if(nr === dr){ // when ALL orders has been processed
+            x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
+                      values={{total:dr}} />);
+            x.action = true;
+        }
+        else if(nr === 0){ // when ALL are remaining to be picked
+            x.message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{current} products to be picked"
                       values={{current:dr}} />);
-            x.action = false;
+            x.action = true;
         }
         else{
-        x.width = (nr/dr)*100;
-        x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
+            x.width = (nr/dr)*100; 
+            x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
                             values={{current:nr, total: dr}} />);
             x.action  = true;
-      }
-      return x;
+        }
+        return x;
     }
 
   _processOLHeader = (arg) => {
@@ -160,9 +171,11 @@ class ViewOrderLine extends React.Component{
 
         let formatProgressBar = this._formatProgressBar(arg.picked_products_count, arg.total_products_count);
         olineHeader.push( <div>
-                          <div className="ProgressBarWrapper">
-                            <ProgressBar progressWidth={formatProgressBar.width}/>
-                          </div>
+                          {formatProgressBar.width ?
+                              <div className="ProgressBarWrapper">
+                                  <ProgressBar progressWidth={formatProgressBar.width}/>
+                              </div>: null
+                          }
                           <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                      </div>);
 
@@ -193,9 +206,6 @@ class ViewOrderLine extends React.Component{
         let formatProgressBar = this._formatProgressBar(arg[i].pick_products_count, arg[i].total_products_count);
         olineRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
                                     <div style={{width: "100%"}}>
-                                        <div className="ProgressBarWrapper">
-                                            <ProgressBar progressWidth={formatProgressBar.width}/>
-                                        </div>
                                         <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                     </div>
                              </div>);
@@ -276,43 +286,43 @@ class ViewOrderLine extends React.Component{
                   <div className="orderDetailsContent">
                       <div className="orderDetailsLeft"> 
                           <div className="orderDetailsColumn">
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.ppsId" description='pps id' defaultMessage='PPS ID:'/> </span>
-                                <span className="spanValue"> {this.props.orderLines.pps_id} </span> 
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.ppsId" description='pps id' defaultMessage='PPS ID:'/> </span>
+                                <span className="spanValues"> {this.props.orderLines.pps_id} </span> 
                               </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
-                                <span className="spanValue"> {this.props.orderLines.pps_bin_id} </span> 
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
+                                <span className="spanValues"> {this.props.orderLines.pps_bin_id} </span> 
                               </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
-                                <span className="spanValue"> {this.props.orderLines.username} </span> 
-                              </div>
-                          </div>
-
-                          <div className="orderDetailsColumn">
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.pending" description='lines received' defaultMessage='Lines received:'/> </span> 
-                                <span className="spanValue"> {this.props.orderLines.total_orderlines}  </span> 
-                              </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linesinprogress" description='lines in progress' defaultMessage='Lines in progress:'/> </span> 
-                                <span className="spanValue"> {this.props.orderLines.pending_orderlines} </span> 
-                              </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-2-span-key"> <FormattedMessage id="orders.oLines.linescompleted" description='lines completed' defaultMessage='Lines completed:'/> </span> 
-                                <span className="spanValue"> {this.props.orderLines.completed_orderlines} </span> 
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
+                                <span className="spanValues"> {this.props.orderLines.username} </span> 
                               </div>
                           </div>
 
                           <div className="orderDetailsColumn">
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.cutofftime" description='cut off time' defaultMessage='Cut off time:'/> </span> 
-                                <span className="spanValue"> {formatCutOffTime} </span> 
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-2-span-key"> <FormattedMessage id="orders.oLines.pending" description='lines received' defaultMessage='Lines received:'/> </span> 
+                                <span className="spanValues"> {this.props.orderLines.total_orderlines}  </span> 
                               </div>
-                              <div className="orderDetailsRow"> 
-                                <span className="spanKey col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
-                                <span className="spanValue"> {formatTimeLeft} </span> 
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-2-span-key"> <FormattedMessage id="orders.oLines.linesinprogress" description='lines in progress' defaultMessage='Lines in progress:'/> </span> 
+                                <span className="spanValues"> {this.props.orderLines.pending_orderlines} </span> 
+                              </div>
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-2-span-key"> <FormattedMessage id="orders.oLines.linescompleted" description='lines completed' defaultMessage='Lines completed:'/> </span> 
+                                <span className="spanValues"> {this.props.orderLines.completed_orderlines} </span> 
+                              </div>
+                          </div>
+
+                          <div className="orderDetailsColumn">
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-3-span-key"> <FormattedMessage id="orders.oLines.cutofftime" description='cut off time' defaultMessage='Cut off time:'/> </span> 
+                                <span className="spanValues"> {formatCutOffTime} </span> 
+                              </div>
+                              <div className="orderDetailsRows"> 
+                                <span className="spanKeys col-3-span-key"> <FormattedMessage id="orders.oLines.timeleft" description='time left' defaultMessage='Time left:'/> </span> 
+                                <span className="spanValues"> {formatTimeLeft} </span> 
                               </div>
                           </div>
                       </div>

@@ -305,9 +305,9 @@
     				.orderDetailsColumn{
     					width: 33%;
     					display: inline-block;
-    					.orderDetailsRow{
+    					.orderDetailsRows{
     						margin-top: 10px;
-    						.spanKey{
+    						.spanKeys{
     							font-size: calculateRem(14px);
     							font-weight: 600;
     							width: calculateRem(105px);
@@ -322,9 +322,7 @@
 	    							width: calculateRem(90px);
 	    						}
     						}
-    						
-    						
-    						.spanValue{
+    						.spanValues{
     							font-size: calculateRem(14px);
     							font-weight: 400;
     							display: inline-block;

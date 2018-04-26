@@ -9198,30 +9198,30 @@ button:disabled {
   display: inline-block;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows {
   margin-top: 10px;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys {
   font-size: 0.875rem;
   font-weight: 600;
   width: 6.5625rem;
   display: inline-block;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-1-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-1-span-key {
   width: 4.375rem;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-2-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-2-span-key {
   width: 7.1875rem;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanKey.col-3-span-key {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-3-span-key {
   width: 5.625rem;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRow .spanValue {
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanValues {
   font-size: 0.875rem;
   font-weight: 400;
   display: inline-block;
