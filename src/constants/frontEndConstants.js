@@ -802,6 +802,7 @@ export const AUDIT_USERLIST = "AUDIT_USERLIST";
 export const SETAUDIT_USER = "SETAUDIT_USER";
 export const FILTER_PPS_ID="pps_id";
 export const AUDIT_CREATEDBY='audit_created_by';
+export const AUDIT_CREATOR_NAME='audit_creator_name';
 export const AUDIT_EDIT='AUDIT_EDIT';
 export const SET_AUDIT_EDIT_DATA='SET_AUDIT_EDIT_DATA';
 export const START_AUDIT_TASK='START_AUDIT_TASK';
@@ -818,11 +819,13 @@ export const NOTIFY_MSG_HIDE='NOTIFY_MSG_HIDE';
 
 
 
+
 /*Constants for seller recall*/
 
 export const SELLER_RECALL="SELLER_RECALL";
 export const VALIDATE_SKU_ITEM_RECALL = "VALIDATE_SKU_ITEM_RECALL";
-export const POLLING_INTERVAL = 300000;
+export const POLLING_INTERVAL = 60000;
+export const PAGE_DEFAULT_LIMIT = 10; 
 
 
 

@@ -188,7 +188,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
-            store.dispatch(recieveAuditData(res));
+            store.dispatch(recieveAuditData(res,saltParams));
             store.dispatch(setAuditSpinner(false));
             break;
         case GET_ROLES:
@@ -662,7 +662,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case SELLER_RECALL:
             if(status !== 202){
-                ShowError(store, cause, status);
+                ShowError(store, cause, status,res);
             }
             else{
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));

@@ -3432,12 +3432,7 @@ var messages = [
     "defaultMessage": "{onlineBots} Online",
     "filepath": "./src/containers/systemTabs/butlerbotTable.js"
   },
-  {
-    "id": "butlerBot.table.currentTask",
-    "description": "Current task for butlerbot",
-    "defaultMessage": "CURRENT TASK",
-    "filepath": "./src/containers/systemTabs/butlerbotTable.js"
-  },
+  
   {
     "id": "ButlerBotTable.botState",
     "description": "bot state for ButlerBotTable",

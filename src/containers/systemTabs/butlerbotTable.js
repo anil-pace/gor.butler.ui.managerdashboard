@@ -227,8 +227,8 @@ class ButlerBotTable extends React.Component {
                                             sortDir={colSortDirs.current}>
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="butlerBot.table.currentTask"
-                                                      description="Current task for butlerbot"
-                                                      defaultMessage="CURRENT TASK"/>
+                                                      description="Modefor butlerbot"
+                                                      defaultMessage="MODE"/>
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="ButlerBotTable.botState"
                                                           description='bot state for ButlerBotTable'
@@ -299,7 +299,7 @@ class ButlerBotTable extends React.Component {
                                             sortDir={colSortDirs.voltage}>
                                 <div className="gorToolHeaderEl">
                                     <FormattedMessage id="butlerBot.table.power" description="power for butlerbot"
-                                                      defaultMessage="POWER"/>
+                                                      defaultMessage="CHARGE LEVEL"/>
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="ButlerBotTable.avgVoltage"
                                                           description='avgVoltage for ButlerBotTable'

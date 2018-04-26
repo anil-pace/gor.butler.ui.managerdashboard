@@ -1,6 +1,9 @@
 .gor-dropdown{
     cursor: pointer;
     position:relative;
+    &.gor-enabled{
+        color: initial;
+    }
 }
 
 .gor-white-background{

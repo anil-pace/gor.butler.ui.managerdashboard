@@ -4328,7 +4328,7 @@
   {
     "id": "butlerBot.table.currentTask",
     "description": "Current task for butlerbot",
-    "defaultMessage": "CURRENT TASK",
+    "defaultMessage": "MODE",
     "filepath": "./src/containers/systemTabs/butlerbotTable.js"
   },
   {
