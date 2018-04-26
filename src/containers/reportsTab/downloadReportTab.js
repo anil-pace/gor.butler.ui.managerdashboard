@@ -213,8 +213,7 @@ class DownloadReportTab extends React.Component{
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
         var location = JSON.parse(JSON.stringify(this.props.location));
-        //console.log(this.props.downloadReportsSpinner);
-        //<Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/>
+        
         return (
             
             <div className="gorTesting wrapper gor-download-rpts">
