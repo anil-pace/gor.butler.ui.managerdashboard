@@ -22,7 +22,8 @@ import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
-import {withSpinner} from '../../HOC/withSpinner';
+
+
 
 
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -217,7 +218,7 @@ class DownloadReportTab extends React.Component{
         return (
             
             <div className="gorTesting wrapper gor-download-rpts">
-                
+                <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/>
        
              <div className="gorToolBar">
                     <div className="gorToolBarWrap">
@@ -404,5 +405,5 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(withSpinner(Dimensions()(withRouter(DownloadReportTab))));
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab)));
 
