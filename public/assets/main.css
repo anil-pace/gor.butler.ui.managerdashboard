@@ -175,7 +175,7 @@ body {
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
-.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr,
+.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-exp-coll
 .gor-exp-coll {
   background-image: url(./images/icons.svg);
 }
@@ -688,6 +688,26 @@ body {
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.gor-search-icon {
+  background-position: -1px -94px;
+  width: 14px;
+  height: 14px;
+}
+
+.gor-expand-icon {
+  background-position: -401px -53px;
+  width: 24px;
+  height: 23px;
+  display: inline-block;
+}
+
+.gor-collapse-icon {
+  background-position: -425px -53px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
 }
 
 .got-add-notch {
@@ -5964,6 +5984,12 @@ button:disabled {
   float: left;
 }
 
+.gor-filter-body-filterToken-section2 {
+  width: 45%;
+  display: inline-block;
+  float: left;
+}
+
 .gor-filter-token-container {
   padding-bottom: 15px;
 }
@@ -8947,6 +8973,520 @@ button:disabled {
   padding-right: 0.875rem;
   vertical-align: sub;
   cursor: pointer;
+}
+
+.noOrdersPresent {
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 76vh;
+  font-size: 30px;
+  color: #666666;
+}
+
+.orderButtonWrapper {
+  float: right;
+}
+
+.orderButtonWrapper .gorButtonWrap {
+  display: inline-block;
+}
+
+.orderButtonWrapper .gorButtonWrap .gor-filterBtn-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 8.125rem;
+  height: 35px;
+  font-size: 14px;
+  color: #666666;
+  margin-left: 30px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #aaaaaa;
+  cursor: pointer;
+}
+
+.orderButtonWrapper .gorButtonWrap .gor-filterBtn-btn .gor-manage-task {
+  background-position: -477px -80px;
+  width: 16px;
+  height: 11px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
+.orderButtonWrapper .viewOrderLineBtn {
+  width: 8.5625rem;
+  min-width: 113px;
+  height: 35px;
+  font-size: 14px;
+  color: #ec6520;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ec6520;
+}
+
+.orderTopWrapper {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+}
+
+.orderTopWrapper .orderLeftWrapper {
+  color: #4a4a4a;
+  display: inline-block;
+  width: 36%;
+}
+
+.orderTopWrapper .orderLeftWrapper .orderLeftContent {
+  padding: 30px 30px 30px 45px;
+  width: 74%;
+}
+
+.orderTopWrapper .orderLeftWrapper .orderLeftContent .dateTimeWrapper {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.orderTopWrapper .orderLeftWrapper .orderLeftContent .orderLeftHeader {
+  margin: 20px 0px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+.orderTopWrapper .orderLeftWrapper .orderLeftContent .orderLeftStatus {
+  margin-top: 20px;
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.orderTopWrapper .orderLeftWrapper .orderLeftContent .orderLeftStatus .dataStyle {
+  color: #000000;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.orderTopWrapper .orderCenterWrapper {
+  display: inline-block;
+  height: 70px;
+  border: 2px solid #d3d3d3;
+  position: relative;
+  top: 75px;
+  border-radius: 10px;
+}
+
+.orderTopWrapper .orderRightWrapper {
+  color: #4a4a4a;
+  display: inline-block;
+  width: 65%;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent {
+  padding: 66px 30px 30px 85px;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderRightHeader {
+  clear: both;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderButtonWrapper {
+  float: right;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderButtonWrapper .gorButtonWrap {
+  display: inline-block;
+  margin-top: 30px;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderButtonWrapper .gorButtonWrap .ordersCollapseAll {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 113px;
+  width: 8.125rem;
+  height: 35px;
+  font-size: 14px;
+  color: #666666;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #aaaaaa;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderButtonWrapper .gorButtonWrap .ordersFilterData {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 8.125rem;
+  height: 35px;
+  font-size: 14px;
+  color: #666666;
+  margin-left: 30px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #aaaaaa;
+  cursor: pointer;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderButtonWrapper .gorButtonWrap .ordersFilterData .gor-manage-task {
+  background-position: -477px -80px;
+  width: 16px;
+  height: 11px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderRightStatusWrapper {
+  display: flex;
+  font-size: 0.875rem;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderRightStatusWrapper .summaryColumn {
+  flex: 1;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderRightStatusWrapper .summaryColumn .liItem {
+  margin-top: 20px;
+  color: #4a4a4a;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.orderTopWrapper .orderRightWrapper .orderRightContent .orderRightStatusWrapper .summaryColumn .liItem .dataStyle {
+  color: #000000;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.waveListWrapper {
+  height: auto;
+  width: 100%;
+  background: #ffffff;
+}
+
+.waveListWrapper .DotSeparatorWrapper {
+  margin-left: 30px;
+}
+
+.waveListWrapper .ProgressBarWrapper {
+  width: 7.5rem;
+  margin-top: 5px;
+}
+
+.waveListWrapper .totalOrderWrapper {
+  position: absolute;
+  margin-left: 8.375rem;
+  line-height: 3em;
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.waveListWrapper .viewOrderLineBtn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 8.5625rem;
+  min-width: 113px;
+  height: 35px;
+  font-size: 14px;
+  color: #ec6520;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ec6520;
+}
+
+.paginateWrapper {
+  background-color: #ffffff;
+  box-shadow: -1px 0 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.paginateWrapper .paginateLeft {
+  margin-left: 1em;
+}
+
+.paginateWrapper .paginateRight {
+  margin-right: 1em;
+}
+
+.gor-order-modal .gor-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
+  color: #4a4a4a;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-head {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid #AAAAAA;
+  min-height: 3.75rem;
+  width: 92%;
+  padding-top: 40px;
+  margin: auto;
+  margin-left: 30px;
+  margin-right: 30px;
+  position: fixed;
+  top: 0;
+  background: #ffffff;
+  z-index: 100;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-head .orderIdWrapper {
+  font-size: 1.625rem;
+  font-weight: 400;
+  color: #000000;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-head .close {
+  background: #f2f2f2;
+  color: #AAAAAA;
+  float: right;
+  text-align: center;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-head .close:hover {
+  color: #333333;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-head .close:focus {
+  color: #666666;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body {
+  margin: 82px 30px 0px 55px;
+  border-bottom: 2px solid #dddddd;
+  width: 92%;
+  color: #4a4a4a;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper {
+  margin-top: 120px;
+  height: 10rem;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent {
+  margin-top: 10px;
+  width: 60%;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft {
+  width: 100%;
+  float: left;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn {
+  width: 33%;
+  display: inline-block;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows {
+  margin-top: 10px;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys {
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: 6.5625rem;
+  display: inline-block;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-1-span-key {
+  width: 4.375rem;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-2-span-key {
+  width: 7.1875rem;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanKeys.col-3-span-key {
+  width: 5.625rem;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsContent .orderDetailsLeft .orderDetailsColumn .orderDetailsRows .spanValues {
+  font-size: 0.875rem;
+  font-weight: 400;
+  display: inline-block;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsWrapper .orderDetailsSearchWrap {
+  margin-top: 70px;
+  float: right;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper {
+  clear: both;
+  margin-left: -20px;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper .DotSeparatorWrapper {
+  margin-left: 30px;
+}
+
+.gor-order-modal .gor-modal-content .gor-modal-body .orderDetailsListWrapper .ProgressBarWrapper {
+  width: 7.5rem;
+  margin-top: 5px;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.main .title {
+  color: #fff;
+  background: grey;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2em;
+  padding: 1em;
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  background: #fafafa;
+}
+
+.panel button {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  width: 8.5625rem;
+  min-width: 113px;
+  height: 35px;
+  font-size: 14px;
+  color: #ec6520;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #ec6520;
+}
+
+.panel button:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 12px;
+  width: 4px;
+  border-radius: .3em;
+  background: #fff;
+  transform-origin: 50%;
+  top: 50%;
+  left: 50%;
+  transition: all .25s ease-in-out;
+  transform: translate(75%, -50%) rotate(45deg);
+}
+
+.panel button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 12px;
+  width: 4px;
+  border-radius: .3em;
+  background: #fff;
+  transform-origin: 50%;
+  top: 50%;
+  left: 50%;
+  transition: all .25s ease-in-out;
+  transform: translate(-75%, -50%) rotate(-45deg);
+}
+
+.panel.open button:before, .panel.open button:after {
+  height: 14px;
+}
+
+.panel.open button:before {
+  transform: translate(0%, -50%) rotate(-45deg);
+}
+
+.panel.open button:after {
+  transform: translate(0%, -50%) rotate(45deg);
+}
+
+.panel.open .panelWrapper {
+  height: auto;
+}
+
+.panelWrapper {
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
+}
+
+.panelWrapper .loader {
+  background-image: url(./images/loading.gif);
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  /* bottom: 0; */
+  /* left: 0; */
+  display: none;
+  /* z-index: 998; */
+  height: 0;
+  /* top: 0px; */
+  top: 410px;
+}
+
+.panelWrapper .infinite-content {
+  position: relative;
+  bottom: 10%;
+  width: 100%;
+}
+
+.panelHeader {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  font-weight: 700;
+  color: #888;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 2.1em;
+}
+
+.accordionIconWrapper {
+  position: absolute;
+  right: 3.4375rem;
+  top: 1.5625rem;
+}
+
+.panelContent {
+  color: #333;
+  max-height: 334px;
+  overflow: auto;
+}
+
+.panelContent .table-body {
+  max-height: 334px;
 }
 
 .gor-IN-wrapper {

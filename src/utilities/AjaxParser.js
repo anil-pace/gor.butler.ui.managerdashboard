@@ -99,6 +99,11 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    ORDERS_FULFIL_FETCH,
+    ORDERS_SUMMARY_FETCH,
+    ORDERS_CUT_OFF_TIME_FETCH,
+    ORDERS_PER_PBT_FETCH,
+    ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL
 } from "../constants/frontEndConstants";
@@ -170,7 +175,11 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
-
+import {receiveOrderFulfilmentData, 
+        receiveOrderSummaryData,
+        receiveCufOffTimeData, 
+        receiveOrdersPerPbtData,
+        receiveOrdersLinesData} from './../actions/norderDetailsAction';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -660,6 +669,25 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
             break;
+
+        case ORDERS_FULFIL_FETCH:
+            store.dispatch(receiveOrderFulfilmentData(res));
+            break;
+        case ORDERS_SUMMARY_FETCH:
+            store.dispatch(receiveOrderSummaryData(res));
+            break;
+        case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(setOrderListSpinner(false))
+            store.dispatch(receiveCufOffTimeData(res));
+            break;
+        case ORDERS_PER_PBT_FETCH:
+            store.dispatch(setOrderListSpinner(false));
+            store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+        case ORDERLINES_PER_ORDER_FETCH:
+            store.dispatch(receiveOrdersLinesData(res));
+            break;
+            
         case SELLER_RECALL:
             if(status !== 202){
                 ShowError(store, cause, status,res);

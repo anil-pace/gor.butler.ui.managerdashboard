@@ -73,7 +73,7 @@ class Routes extends React.Component {
 
 
                     default:
-                        this.props.setOrderListSpinner(false);
+                        //this.props.setOrderListSpinner(false);
                         this.props.setWavesSpinner(false);
                         this.props.setButlerSpinner(false);
                         this.props.setPpsSpinner(false);
@@ -225,35 +225,11 @@ class Routes extends React.Component {
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
-                                   callback(null, require('../containers/ordersTab').default);
+                                   callback(null, require('../containers/orderTab/orderListTab').default);
                                }, "orders");
                            }}
-                    >
-                        <IndexRoute
-                            getComponent={(location, callback)=> {
-                                require.ensure([], function (require) {
-                                    callback(null, require('../containers/orderTab/waveTab').default);
-                                }, "indexWave");
-                            }}
-                        />
-
-                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="waves" path="/orders/waves"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/orderTab/waveTab').default);
-                                   }, "waveTab");
-                               }}
-                        />
-
-                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="orderlist" path="/orders/orderlist"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/orderTab/orderListTab').default);
-                                   }, "orderList");
-                               }}
-                        />
-                    </Route>
-
+                    />
+                        
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="auditlisting" path="/auditlisting"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
@@ -262,10 +238,6 @@ class Routes extends React.Component {
 
                            }}
                     />
-
-
-
-       
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
                            getComponent={(location, callback)=> {
