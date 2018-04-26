@@ -381,8 +381,7 @@ DownloadReportTab.defaultProps = {
   socketAuthorized:false,
   hasDataChanged:false,
   timeOffset:"",
-  downloadReportsSpinner:true,
-  isLoading:true
+  downloadReportsSpinner:true
 }
 
 function mapStateToProps(state, ownProps) {
@@ -391,8 +390,7 @@ function mapStateToProps(state, ownProps) {
         reportsData:state.downloadReportsReducer.reportsData,
         hasDataChanged:state.downloadReportsReducer.hasDataChanged,
         timeOffset: state.authLogin.timeOffset,
-        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner,
-        isLoading:state.downloadReportsReducer.downloadReportsSpinner
+        downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner
 
     };
 }
