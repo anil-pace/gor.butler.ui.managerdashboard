@@ -152,7 +152,7 @@ class ButlerBot extends React.Component {
                 butlerDetail.location="--";
             }
             if (data[i].power || data[i].power=== 0) {
-                butlerDetail.voltage=data[i].power + " %";
+                butlerDetail.voltage=data[i].power||0;
             }
             else {
                 butlerDetail.voltage="--";

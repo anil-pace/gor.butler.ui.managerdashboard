@@ -70,7 +70,7 @@ class StorageSpaceTab extends React.Component{
                 rowObj.dimension = rowData.slot_dimensions+ " cm";
                 rowObj.totalSlots = rowData.number_of_slots;
                 rowObj.emptySlots = rowData.number_of_empty_slots;
-                rowObj.slotUtilization = rowData.utilization*100;
+                rowObj.slotUtilization = Math.floor(rowData.utilization*100);
                 processedData.push(rowObj);
             }
         }

@@ -11,7 +11,8 @@ import {
     StatusCell,
     filterIndex,
     DataListWrapper,
-    sortData
+    sortData,
+    ProgressCell
 } from '../../components/commonFunctionsDataTable';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
 
@@ -309,7 +310,7 @@ class ButlerBotTable extends React.Component {
                                 </div>
                             </SortHeaderCell>
                         }
-                        cell={<TextCell data={sortedDataList}/>}
+                        cell={<ProgressCell data={sortedDataList} setClass={"destinationId"}> </ProgressCell>}
                         fixed={true}
                         width={columnWidths.voltage}
                         isResizable={true}
