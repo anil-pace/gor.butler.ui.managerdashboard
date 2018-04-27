@@ -11,8 +11,8 @@ class NameInitial extends React.Component{
 
 render()
 {
-    let type=this.props.type;
-    let originalName=this.props.name;
+    let type=this.props.type?this.props.type:'';
+    let originalName=this.props.name?this.props.name:'';
     let shape=this.props.shape?this.props.shape:'round';
     let name=originalName.split(' ');
     let firStNameInitial=name[0]?name[0].charAt(0):'';

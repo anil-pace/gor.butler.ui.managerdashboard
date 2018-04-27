@@ -99,6 +99,11 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    ORDERS_FULFIL_FETCH,
+    ORDERS_SUMMARY_FETCH,
+    ORDERS_CUT_OFF_TIME_FETCH,
+    ORDERS_PER_PBT_FETCH,
+    ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
@@ -155,10 +160,8 @@ import {
     recievePendingMSU,
     resetCheckedPPSList
 } from "../actions/ppsModeChangeAction";
-
-
 import {
-    resetaudit
+    resetaudit,setCheckedAudit
 } from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
@@ -191,6 +194,11 @@ import { receiveMsuConfigList,
         msuConfigBlockAndPutChangeType
     }from './../actions/msuConfigAction';
 
+import {receiveOrderFulfilmentData, 
+        receiveOrderSummaryData,
+        receiveCufOffTimeData, 
+        receiveOrdersPerPbtData,
+        receiveOrdersLinesData} from './../actions/norderDetailsAction';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -208,7 +216,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
-            store.dispatch(recieveAuditData(res));
+            store.dispatch(recieveAuditData(res,saltParams));
             store.dispatch(setAuditSpinner(false));
             break;
         case GET_ROLES:
@@ -286,6 +294,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 msg = getFormattedMessages("DELETEAUDIT", values);
                 store.dispatch(notifyfeedback(msg));
                 store.dispatch(setAuditRefresh(true)); //reset refresh flag
+                store.dispatch(setCheckedAudit([]));
             }
             break;
 
@@ -295,6 +304,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("PAUSEAUDIT", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
             }
             else{
                 values={id:res.alert_data[0].details.audit_id},
@@ -318,6 +328,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("CANCELLED", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
         }
 
             case AUDIT_USERLIST:
@@ -354,7 +365,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
            
         case START_AUDIT_TASK:
-        if(res.successful.length>=1 || res.unsuccessful.length>=1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        
+        if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
         {
            var successCount = res.successful.length,
                 unsuccessfulCount = Object.keys(res.unsuccessful).length,
@@ -373,21 +385,24 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     stringInfo = getFormattedMessages("STARTFAIL", values);
                     store.dispatch(setNotification(stringInfo));
                 }
-
+                store.dispatch(setCheckedAudit([]));
                 store.dispatch(setAuditRefresh(true));
         }
         else if(res.alert_data[0].code== "as007"){//to do
                 stringInfo = codeToString(res.alert_data[0]);
-				store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(setCheckedAudit([]));
         }
         else if(res.alert_data[0].code== "g028"){
             stringInfo = codeToString(res.alert_data[0]);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         else
         {
             stringInfo = getFormattedMessages("STARTFAILALL", values);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         break;
 
@@ -412,9 +427,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case AUDIT_RESOLVE_CONFIRMED:
             if (res.successful.status) {
                 stringInfo = statusToString(res.successful);
-                store.dispatch(notifySuccess(stringInfo.msg));
+               // store.dispatch(notifySuccess(stringInfo.msg));
+               store.dispatch(notifyfeedback(stringInfo.msg));
             } else {
-                ShowError(store, cause, status);
+                //ShowError(store, cause, status);
+                stringInfo = getFormattedMessages("RESOLVEFAIL", values);
+                store.dispatch(setNotification(stringInfo));
             }
             break;
 
@@ -670,9 +688,28 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
             break;
+
+        case ORDERS_FULFIL_FETCH:
+            store.dispatch(receiveOrderFulfilmentData(res));
+            break;
+        case ORDERS_SUMMARY_FETCH:
+            store.dispatch(receiveOrderSummaryData(res));
+            break;
+        case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(setOrderListSpinner(false))
+            store.dispatch(receiveCufOffTimeData(res));
+            break;
+        case ORDERS_PER_PBT_FETCH:
+            store.dispatch(setOrderListSpinner(false));
+            store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+        case ORDERLINES_PER_ORDER_FETCH:
+            store.dispatch(receiveOrdersLinesData(res));
+            break;
+            
         case SELLER_RECALL:
             if(status !== 202){
-                ShowError(store, cause, status);
+                ShowError(store, cause, status,res);
             }
             else{
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));

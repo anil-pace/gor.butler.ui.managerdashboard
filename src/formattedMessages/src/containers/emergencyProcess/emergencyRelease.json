@@ -6,8 +6,8 @@
   },
   {
     "id": "operation.alert.release.text",
-    "description": "Text for emergency stop button release",
-    "defaultMessage": "Emergency Stop button has been released."
+    "description": "Text for System stop button release",
+    "defaultMessage": "System Stop button has been released."
   },
   {
     "id": "operation.alert.release.subtext",

@@ -260,7 +260,7 @@ var messages = [
   {
     "id": "header.option.release",
     "description": "release operation option",
-    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order\n                              to resume operation.",
+    "defaultMessage": "Release the System Stop button from the Zigbee box in order\n                              to resume operation.",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -1615,13 +1615,13 @@ var messages = [
   {
     "id": "zoning.status.emergencyStop",
     "description": "Status text for zone",
-    "defaultMessage": "EMERGENCY STOP",
+    "defaultMessage": "SYSTEM STOP",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "zoning.status.emergencyPause",
     "description": "Status text for zone",
-    "defaultMessage": "EMERGENCY PAUSE",
+    "defaultMessage": "SYSTEM PAUSE",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1651,13 +1651,13 @@ var messages = [
   {
     "id": "zoning.action.emergency_stop",
     "description": "Status text for zone",
-    "defaultMessage": "Emergency stop activated",
+    "defaultMessage": "System stop activated",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "zoning.action.emergency_pause",
     "description": "Status text for zone",
-    "defaultMessage": "Emergency pause activated",
+    "defaultMessage": "System pause activated",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -1675,13 +1675,13 @@ var messages = [
   {
     "id": "zoning.action.emergency_stop_button_press",
     "description": "Status text for zone",
-    "defaultMessage": "Emergency stop button pressed",
+    "defaultMessage": "System stop button pressed",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
     "id": "zoning.action.emergency_pause_button_press",
     "description": "Status text for zone",
-    "defaultMessage": "Emergency pause button pressed",
+    "defaultMessage": "System pause button pressed",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2252,7 +2252,7 @@ var messages = [
   {
     "id": "emergency.heading",
     "description": "Text for emergency heading",
-    "defaultMessage": "Systemwide emergency stop",
+    "defaultMessage": "Systemwide System stop",
     "filepath": "./src/containers/Emergency.js"
   },
   {
@@ -2269,7 +2269,7 @@ var messages = [
   },
   {
     "id": "emergency.stop",
-    "description": "Text for emergency stop",
+    "description": "Text for System stop",
     "defaultMessage": "Stoppped:",
     "filepath": "./src/containers/Emergency.js"
   },
@@ -2294,13 +2294,13 @@ var messages = [
   {
     "id": "operation.alert.release",
     "description": "Text for emergency button release heading",
-    "defaultMessage": "All Emergency-stop buttons released",
+    "defaultMessage": "All System-stop buttons released",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
     "id": "operation.alert.release.text",
-    "description": "Text for emergency stop button release",
-    "defaultMessage": "All Emergency-stop buttons have been released.",
+    "description": "Text for System stop button release",
+    "defaultMessage": "All System-stop buttons have been released.",
     "filepath": "./src/containers/emergencyProcess/emergencyRelease.js"
   },
   {
@@ -2372,7 +2372,7 @@ var messages = [
   {
     "id": "operation.alert.pause.subtext",
     "description": "Subtext for pause alert",
-    "defaultMessage": "You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse",
+    "defaultMessage": "You must check the emergency situation and release the System Pause button in order to resume the operation in warehouse",
     "filepath": "./src/containers/emergencyProcess/OperationPause.js"
   },
   {
@@ -3432,12 +3432,7 @@ var messages = [
     "defaultMessage": "{onlineBots} Online",
     "filepath": "./src/containers/systemTabs/butlerbotTable.js"
   },
-  {
-    "id": "butlerBot.table.currentTask",
-    "description": "Current task for butlerbot",
-    "defaultMessage": "CURRENT TASK",
-    "filepath": "./src/containers/systemTabs/butlerbotTable.js"
-  },
+  
   {
     "id": "ButlerBotTable.botState",
     "description": "bot state for ButlerBotTable",
