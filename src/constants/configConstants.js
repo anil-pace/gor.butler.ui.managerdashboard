@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.9.136'; 
+export const BASE_URL = 'localhost'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -109,14 +109,14 @@ export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platfor
 export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
 
 
-export const MSU_CONFIG_URL = API_URL + "/api/msu_reconfig/all?details=true";  
-export const MSU_CONFIG_DEST_TYPE_URL = API_URL + "/api/racktypes/all";   
-export const MSU_CONFIG_FILTER_URL = API_URL + "/api/racks/search";
-export const MSU_CONFIG_LIST_RACK_STRUCTURE_URL = API_URL + "/api/racktypes/index/json";
-export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_URL + "/api/reconfig_msu/block";
-export const MSU_CONFIG_START_RECONFIG_URL = API_URL+ "/api/reconfig_msu/start";
-export const MSU_CONFIG_STOP_RECONFIG_URL = API_URL+ "/api/reconfig_msu/stop";
-export const MSU_CONFIG_RELEASE_MSU_URL = API_URL+ "/api/reconfig_msu/release";
+export const MSU_CONFIG_URL = API_URL + "/msu_reconfig/all?details=true";  
+export const MSU_CONFIG_DEST_TYPE_URL = API_URL + "/racktypes/all";   
+export const MSU_CONFIG_FILTER_URL = API_URL + "/racks/search";
+export const MSU_CONFIG_LIST_RACK_STRUCTURE_URL = API_URL + "/racktypes/index/json";
+export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_URL + "/reconfig_msu/block";
+export const MSU_CONFIG_START_RECONFIG_URL = API_URL+ "/reconfig_msu/start";
+export const MSU_CONFIG_STOP_RECONFIG_URL = API_URL+ "/reconfig_msu/stop";
+export const MSU_CONFIG_RELEASE_MSU_URL = API_URL+ "/reconfig_msu/release";
 
 
 
