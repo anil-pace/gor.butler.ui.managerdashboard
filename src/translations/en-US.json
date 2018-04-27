@@ -1663,7 +1663,7 @@
   {
     "id": "zoning.status.emergencyPause",
     "description": "Status text for zone",
-    "defaultMessage": "EMERGENCY PAUSE",
+    "defaultMessage": "SYSTEM PAUSE",
     "filepath": "./src/constants/messageConstants.js"
   },
   {

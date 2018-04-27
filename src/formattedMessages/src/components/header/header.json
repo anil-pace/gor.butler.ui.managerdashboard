@@ -47,7 +47,7 @@
   {
     "id": "header.option.release",
     "description": "release operation option",
-    "defaultMessage": "Release the Emergency Stop button from the Zigbee box in order \n        \t\t\t\t\t\tto resume operation."
+    "defaultMessage": "Release the System Stop button from the Zigbee box in order \n        \t\t\t\t\t\tto resume operation."
   },
   {
     "id": "header.option.resume",

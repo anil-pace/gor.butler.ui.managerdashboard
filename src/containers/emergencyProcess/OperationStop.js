@@ -43,7 +43,7 @@ class OperationStop extends React.Component{
                     </div>
                       <span className='gor-text-sm'>
                         <FormattedMessage id='operation.alert.stop.subtext' 
-                          defaultMessage='You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse'
+                          defaultMessage='You must check the emergency situation and release the System Stop button in order to resume the operation in warehouse'
                             description="Subtext for pause alert"/>
                       </span>
                     </div>           

@@ -12,7 +12,7 @@
   {
     "id": "operation.alert.stop.text",
     "description": "Text for emergency button press",
-    "defaultMessage": "Emergency Stop button has been pressed."
+    "defaultMessage": "System Stop button has been pressed."
   },
   {
     "id": "operation.alert.pause.text",
@@ -22,6 +22,6 @@
   {
     "id": "operation.alert.pause.subtext",
     "description": "Subtext for pause alert",
-    "defaultMessage": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse"
+    "defaultMessage": "You must check the emergency situation and release the System Stop button in order to resume the operation in warehouse"
   }
 ]

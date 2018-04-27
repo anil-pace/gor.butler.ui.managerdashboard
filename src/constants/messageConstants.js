@@ -229,9 +229,9 @@ export const ZONE_STATUS_INTL_MESSAGE ={
       zone_clear_deactivated:(<FormattedMessage id="zoning.status.clearDeactivated" description='Status text for zone' 
       defaultMessage='CLEAR DEACTIVATED'/>),
       emergency_stop:(<FormattedMessage id="zoning.status.emergencyStop" description='Status text for zone' 
-      defaultMessage='EMERGENCY STOP ACTIVATED'/>),
+      defaultMessage='SYSTEM STOP ACTIVATED'/>),
       emergency_pause:(<FormattedMessage id="zoning.status.emergencyPause" description='Status text for zone' 
-      defaultMessage='EMERGENCY PAUSE'/>),
+      defaultMessage='SYSTEM PAUSE'/>),
       stopped:(<FormattedMessage id="zoning.status.stopped" description='Status text for zone' 
       defaultMessage='STOPPED'/>),
       paused:(<FormattedMessage id="zoning.status.paused" description='Status text for zone' 
@@ -244,9 +244,9 @@ export const CONTROLLER_ACTION_TRIGGERED_MESSAGES={
       zone_clear:(<FormattedMessage id="zoning.action.zone_clear" description='Status text for zone' 
       defaultMessage='Zone clear activated'/>),
       emergency_stop:(<FormattedMessage id="zoning.action.emergency_stop" description='Status text for zone' 
-      defaultMessage='Emergency stop activated'/>),
+      defaultMessage='System stop activated'/>),
       emergency_pause:(<FormattedMessage id="zoning.action.emergency_pause" description='Status text for zone' 
-      defaultMessage='Emergency pause activated'/>),
+      defaultMessage='System pause activated'/>),
       none:(<FormattedMessage id="zoning.action.none" description='Status text for zone' 
       defaultMessage='Standard'/>)
 }
@@ -254,9 +254,9 @@ export const CONTROLLER_SENSOR_TRIGGERED_MESSAGES={
       button_press:(<FormattedMessage id="zoning.action.button_press" description='Status text for zone' 
       defaultMessage='Button pressed'/>),
       emergency_stop_button_press:(<FormattedMessage id="zoning.action.emergency_stop_button_press" description='Status text for zone' 
-      defaultMessage='Emergency stop button pressed'/>),
+      defaultMessage='System stop button pressed'/>),
       emergency_pause_button_press:(<FormattedMessage id="zoning.action.emergency_pause_button_press" description='Status text for zone' 
-      defaultMessage='Emergency pause button pressed'/>),
+      defaultMessage='System pause button pressed'/>),
       latch_gate:(<FormattedMessage id="zoning.action.latch_gate" description='Status text for zone' 
       defaultMessage='Entry gate breached'/>),
       light_curtain:(<FormattedMessage id="zoning.action.light_curtain" description='Status text for zone' 
@@ -276,9 +276,9 @@ export const ZONE_SUB_STATUS_INTL_MESSAGE={
       zone_clear:(<FormattedMessage id="zoning.substatus.action.zone_clear" description='Status text for zone' 
       defaultMessage='Zone clear activated'/>),
       emergency_stop:(<FormattedMessage id="zoning.substatus.action.emergency_stop" description='Status text for zone' 
-      defaultMessage='Emergency stop activated'/>),
+      defaultMessage='System stop activated'/>),
       emergency_pause:(<FormattedMessage id="zoning.substatus.action.emergency_pause" description='Status text for zone' 
-      defaultMessage='Emergency pause activated'/>)
+      defaultMessage='System pause activated'/>)
 }
 
 export const ENTITY_BREACHED = {

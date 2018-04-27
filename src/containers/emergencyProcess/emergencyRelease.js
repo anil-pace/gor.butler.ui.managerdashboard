@@ -49,12 +49,12 @@ class EmergencyRelease extends React.Component{
             </div>
             <div className='gor-operation-body'>
               <div className='gor-text-bold'>{(!this.props.releaseState || this.props.releaseState === HARD)?<FormattedMessage id='operation.alert.release.text' 
-                    defaultMessage="All Emergency-stop buttons have been released."
-                            description="Text for emergency stop button release"/>:(!this.props.breached ? <FormattedMessage id='operation.alert.releaseSoft.text' 
+                    defaultMessage="All System-stop buttons have been released."
+                            description="Text for System stop button release"/>:(!this.props.breached ? <FormattedMessage id='operation.alert.releaseSoft.text' 
                     defaultMessage="All Emergency-pause buttons have been released."
-                            description="Text for emergency pause button release"/> : <FormattedMessage id='operation.alert.releaseSoft.textBreached' 
-                    defaultMessage="Emergency pause button in {zone} has been released"
-                    description="Text for emergency pause button release"
+                            description="Text for System pause button release"/> : <FormattedMessage id='operation.alert.releaseSoft.textBreached' 
+                    defaultMessage="System pause button in {zone} has been released"
+                    description="Text for System pause button release"
                     values={{
                             zone:this.props.zone
                     }}/>)}
