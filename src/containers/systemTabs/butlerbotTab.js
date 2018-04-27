@@ -157,7 +157,7 @@ class ButlerBot extends React.Component {
             else {
                 butlerDetail.voltage="--";
             }
-            butlerDetail.butlerAvgVoltage=data[i].power;
+            butlerDetail.butlerAvgVoltage=data[i].power||0;
             butlerDetail.taskNum=currentTask[data[i].current_task];
             butlerDetail.taskNumClass=currentTaskClass[data[i].current_task];
             butlerDetail.taskType=data[i].current_task;
@@ -320,7 +320,7 @@ class ButlerBot extends React.Component {
                     }
 
                 }
-                avgVoltage=((avgVoltage / (activeBotsCount)).toFixed(1));
+                avgVoltage=avgVoltage!==0?((avgVoltage / (activeBotsCount)).toFixed(1)):0;
                 taskDetail["avgVoltage"]=avgVoltage + "%";
             }
             else {
