@@ -199,6 +199,7 @@ class ButlerBot extends React.Component {
     constructor(props) {
         super(props);
         this.state={query:null}
+        this.props.showTableFilter(false)
     }
 
     componentWillMount() {

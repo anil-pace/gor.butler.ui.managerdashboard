@@ -357,7 +357,7 @@ render(){
       let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div className='systemGenerated'></div>:""}
+      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}

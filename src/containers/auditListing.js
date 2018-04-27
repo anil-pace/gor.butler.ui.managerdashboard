@@ -123,9 +123,10 @@ class AuditTab extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={selected_page: 1,query:null,auditListRefreshed:null,timerId:0,intervalPage:1};
-          this._handelClick = this._handelClick.bind(this);
-          this.polling=this.polling.bind(this);
+        this.state = {selected_page: 1, query: null, auditListRefreshed: null, timerId: 0, intervalPage: 1};
+        this._handelClick = this._handelClick.bind(this);
+        this.polling = this.polling.bind(this);
+        this.props.showTableFilter(false);
 
     }
 

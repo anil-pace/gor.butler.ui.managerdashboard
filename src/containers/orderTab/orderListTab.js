@@ -70,6 +70,7 @@ import {
         this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
         this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
+        this.props.showTableFilter(false)
     }
 
     _getInitialState(){
