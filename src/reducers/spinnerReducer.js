@@ -61,10 +61,7 @@ export function spinner(state = {}, action) {
                 "csFilterSpinner": action.data
             })
 
-        case DISPLAY_AUDIT_SPINNER:
-            return Object.assign({}, state, {
-                "auditSpinner": action.data
-            })
+       
 
         case DISPLAY_ORDER_LIST_SPINNER:
             return Object.assign({}, state, {

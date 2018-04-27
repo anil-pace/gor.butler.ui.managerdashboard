@@ -1,4 +1,4 @@
-import {RECIEVE_AUDIT_DATA,REFRESH_AUDIT,SET_AUDIT_ORDERLINES,SET_AUDIT_QUERY} from '../constants/frontEndConstants';
+import {RECIEVE_AUDIT_DATA,REFRESH_AUDIT,SET_AUDIT_ORDERLINES,SET_AUDIT_QUERY,DISPLAY_AUDIT_SPINNER} from '../constants/frontEndConstants';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -20,7 +20,7 @@ export  function recieveAuditDetail(state={},action){
                     "totalAudits" : res.audit_list.length>=0?totalAudit:state.totalAudits,
                     "successQuery":res.audit_list.length>=0?state.query:state.successQuery,
                     "noResultFound":res.audit_list.length<1,
-                    "hasDataChanged": !state.hasDataChanged
+                    "auditSpinner":false
                 })
             }
             break;
@@ -30,6 +30,10 @@ export  function recieveAuditDetail(state={},action){
                 "auditRefresh" : new Date()
             })
             break;
+        case DISPLAY_AUDIT_SPINNER:
+            return Object.assign({}, state, {
+                "auditSpinner": action.data
+            })
 
         case SET_AUDIT_ORDERLINES:
             return Object.assign({}, state, {

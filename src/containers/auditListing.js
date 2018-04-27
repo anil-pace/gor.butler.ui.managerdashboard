@@ -158,8 +158,7 @@ class AuditTab extends React.Component {
             }
             this.setState({ 
                 query: JSON.parse(JSON.stringify(nextProps.location.query)),
-                auditListRefreshed: nextProps.auditListRefreshed,
-                hasDataChanged : nextProps.hasDataChanged !== this.props.hasDataChanged
+                auditListRefreshed: nextProps.auditListRefreshed
             });
             
             this._subscribeData();
@@ -710,7 +709,7 @@ class AuditTab extends React.Component {
                 </div>
             </div>
             {/*Filter Summary*/}
-            <FilterSummary total={this.props.totalAudits || 0} isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+            <FilterSummary total={this.props.totalAudits || 0} isFilterApplied={this.props.isFilterApplied && !this.props.auditSpinner} responseFlag={this.props.responseFlag}
                 filterText={<FormattedMessage id="auditList.filter.search.bar"
                     description='total results for filter search bar'
                     defaultMessage='{total} results found'
@@ -749,10 +748,9 @@ function mapStateToProps(state, ownProps) {
         checkedAudit: state.sortHeaderState.checkedAudit || [],
         auditSortHeaderState: state.sortHeaderState.auditHeaderSortOrder || [],
         totalAudits: state.recieveAuditDetail.totalAudits || 0,
-        auditSpinner: state.spinner.auditSpinner || false,
+        auditSpinner: state.recieveAuditDetail.auditSpinner || false,
         auditDetail: state.recieveAuditDetail.auditDetail || [],
         totalPage: state.recieveAuditDetail.totalPage || 0,
-        hasDataChanged:state.recieveAuditDetail.hasDataChanged,
         auditRefresh: state.recieveAuditDetail.auditRefresh || null,
         intlMessages: state.intl.messages,
         auth_token: state.authLogin.auth_token,
