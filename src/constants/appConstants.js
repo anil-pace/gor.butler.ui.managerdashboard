@@ -64,6 +64,7 @@ export const NOTIFICATION="NOTIFICATION";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
+export const MSU="msu";
 export const PPS_PERFORMANCE="PPS_PERFORMANCE";
 export const USER_DETAILS="USER_DETAILS";
 export const ORDER_RECIEVED="ORDER_RECIEVED";

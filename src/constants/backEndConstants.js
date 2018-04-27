@@ -27,6 +27,9 @@ export const PPS_CONFIGURATION="ppsConfiguration";
 export const PPS="pps";
 export const SYS_OVERVIEW="sysOverview";
 export const SYS_CONTROLLERS = "sysControllers";
+export const MSU="msu";
+export const MSU_CONFIGURATION="msuConfiguration";
+
 
 /*Constants for response type */
 export const PPS_DETAIL="pps";

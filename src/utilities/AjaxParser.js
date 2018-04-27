@@ -104,7 +104,15 @@ import {
     ORDERS_PER_PBT_FETCH,
     ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,CREATE_DUPLICATE_REQUEST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,AUDIT_EDIT_REQUEST
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,AUDIT_EDIT_REQUEST,
+    FETCH_MSU_CONFIG_LIST,
+    FETCH_MSU_CONFIG_DEST_TYPE_LIST,
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_RACK_STRUCTURE,
+    FETCH_MSU_CONFIG_START_RECONFIG,
+    FETCH_MSU_CONFIG_STOP_RECONFIG,
+    FETCH_MSU_CONFIG_RELEASE_MSU,
+    FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
 } from "../constants/frontEndConstants";
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
@@ -177,7 +185,15 @@ import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
 import {receiveOrderFulfilmentData, receiveOrderSummaryData ,receiveCufOffTimeData, receiveOrdersPerPbtData,receiveOrdersPerPbtData_1, receiveOrdersLinesData} from './../actions/norderDetailsAction';
-
+import { receiveMsuConfigList, 
+        receiveMsuConfigDestTypesList,
+        receiveMsuConfigListViaFilter,
+        receiveMsuConfigRackStructure,
+        msuConfigStartReconfig,
+        msuConfigStopReconfig,
+        msuConfigReleaseMsu,
+        msuConfigBlockAndPutChangeType
+    }from './../actions/msuConfigAction';
 
 
 export function AjaxParse(store, res, cause, status, saltParams) {
@@ -742,6 +758,38 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
             }
             break;
+        case FETCH_MSU_CONFIG_LIST:
+            store.dispatch(receiveMsuConfigList(res));
+            break;
+
+        case FETCH_MSU_CONFIG_DEST_TYPE_LIST: 
+            store.dispatch(receiveMsuConfigDestTypesList(res));
+            break;
+
+        case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
+            store.dispatch(receiveMsuConfigListViaFilter(res));
+            break;
+
+        case FETCH_MSU_CONFIG_RACK_STRUCTURE:
+           store.dispatch(receiveMsuConfigRackStructure(res));
+            break;
+
+        case FETCH_MSU_CONFIG_START_RECONFIG:
+            store.dispatch(msuConfigStartReconfig(res));
+            break;
+
+        case FETCH_MSU_CONFIG_STOP_RECONFIG:
+            store.dispatch(msuConfigStopReconfig(res));
+            break;
+
+        case FETCH_MSU_CONFIG_RELEASE_MSU:
+            store.dispatch(msuConfigReleaseMsu(res));
+            break;
+
+        case FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE:
+            store.dispatch(msuConfigBlockAndPutChangeType(res));
+            break;
+            
         default:
             ShowError(store, cause, status);
             break;

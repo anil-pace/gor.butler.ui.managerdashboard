@@ -11,7 +11,7 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner} from '../actions/spinnerAction';
-import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER} from '../constants/appConstants';
+import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER, MSU} from '../constants/appConstants';
 import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY} from '../constants/frontEndConstants';
 import {translationMessages} from '../utilities/i18n';
 import {updateIntl} from 'react-intl-redux';
@@ -63,6 +63,12 @@ class Routes extends React.Component {
                         this.props.setPpsSpinner(true);
                         break;
 
+
+                    case MSU.toUpperCase():
+                        this.props.setPpsSpinner(true);
+                        //this.props.setMsuSpinner(true);
+                        break;
+
                     case CHARGING.toUpperCase():
                         this.props.setCsSpinner(true);
                         break;
@@ -73,12 +79,13 @@ class Routes extends React.Component {
 
 
                     default:
-                        //this.props.setOrderListSpinner(false);
+                        this.props.setOrderListSpinner(false);
                         this.props.setWavesSpinner(false);
                         this.props.setButlerSpinner(false);
                         this.props.setPpsSpinner(false);
                         this.props.setCsSpinner(false);
                         this.props.setWavesSpinner(false);
+                        //this.props.setMsuSpinner(true);
 
 
                 }
@@ -220,6 +227,15 @@ class Routes extends React.Component {
                                    }, "ppsConfiguration");
                                }}
                         />
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="msuConfiguration" path="/system/msuConfiguration"
+                               getComponent={(location, callback)=> {
+                                   require.ensure([], function (require) {
+                                       callback(null, require('../containers/systemTabs/msuConfigurationTab').default);
+                                   }, "msuConfiguration");
+                               }}
+                        />
+                        
                     </Route>
 
 

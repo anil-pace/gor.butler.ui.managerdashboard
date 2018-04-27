@@ -2,7 +2,7 @@ import { SHOW_FILTER ,IS_FILTER_APPLIED,BUTLER_FILTER_STATE,CHARGINGSTATION_FILT
 	USER_FILTER_STATE,TOGGLE_BUTTON_BOT,PPS_FILTER_VALUE,CHARGING_FILTER_VALUE,WAVE_FILTER_VALUE,
 	USER_FILTER_VALUE,AUDIT_FILTER_STATE,AUDIT_FILTER_VALUE,ORDER_FILTER_STATE,ORDER_FILTER_VALUE,BOT_TOGGLE_FILTER,
 	PPS_TOGGLE_FILTER,CS_TOGGLE_FILTER,WAVES_TOGGLE_FILTER,ORDERS_TOGGLE_FILTER,AUDIT_TOGGLE_FILTER,USER_TOGGLE_FILTER,
-FILTER_APPLY_FLAG} from '../constants/frontEndConstants'
+FILTER_APPLY_FLAG,MSU_CONFIG_FILTER_STATE} from '../constants/frontEndConstants'
 
 //This action is use to update the filter state
 export function showTableFilter(data){
@@ -148,6 +148,13 @@ export function auditfilterState(data){
 export function orderfilterState(data){
 	return {
 		type: ORDER_FILTER_STATE,
+		data
+  	}
+}
+
+export function msuConfigFilterState(data){
+	return {
+		type: MSU_CONFIG_FILTER_STATE,
 		data
   	}
 }
