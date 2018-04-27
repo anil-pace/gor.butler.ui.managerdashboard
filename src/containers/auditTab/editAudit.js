@@ -89,6 +89,7 @@ class EditAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         copyPasteLocation:{
@@ -100,6 +101,7 @@ class EditAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         filterApplied:false,
@@ -211,11 +213,13 @@ class EditAudit extends React.Component{
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -311,7 +315,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
       copyPasteSKU:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteSKU.focusedEl
+        focusedEl:this.state.copyPasteSKU.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -319,7 +324,8 @@ _onAttributeSelectionFirstTime(){
        this.setState({
       copyPasteLocation:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteLocation.focusedEl
+        focusedEl:this.state.copyPasteLocation.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -552,7 +558,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
         copyPasteSKU:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -561,7 +568,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
         copyPasteLocation:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -574,7 +582,8 @@ _onAttributeSelectionFirstTime(){
         filterApplied:false,
         copyPasteSKU:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -583,7 +592,8 @@ _onAttributeSelectionFirstTime(){
         filterApplied:false,
         copyPasteLocation:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -606,7 +616,8 @@ _onAttributeSelectionFirstTime(){
     this.setState({
       copyPasteLocation:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.selectionStart
       }
     })
   }
@@ -614,7 +625,8 @@ _onAttributeSelectionFirstTime(){
     this.setState({
       copyPasteSKU:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.selectionStart
       }
     })
   }
@@ -622,6 +634,7 @@ _onAttributeSelectionFirstTime(){
   _updateInput(event,id) {
    
    var input = event.target.value.trim(),
+   selectionStart = event.target.selectionStart,
    inputList = input.split(/[\s,;\t\n]+/),
    processedList=[],
    activeTabIndex = this.state.activeTabIndex,
@@ -653,6 +666,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteLocation:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -662,6 +676,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteSKU:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -710,7 +725,8 @@ _onAttributeSelectionFirstTime(){
          this.setState({
           copyPasteSKU:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -718,7 +734,8 @@ _onAttributeSelectionFirstTime(){
          this.setState({
           copyPasteLocation:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -772,7 +789,8 @@ _onAttributeSelectionFirstTime(){
         this.setState({
               copyPasteSKU:{
               data:processedData,
-              focusedEl:this.state.copyPasteSKU.focusedEl
+              focusedEl:this.state.copyPasteSKU.focusedEl,
+              selectionStart:this.state.selectionStart
             },
             filterSelectionState
            })
@@ -781,7 +799,8 @@ _onAttributeSelectionFirstTime(){
         this.setState({
             copyPasteLocation:{
             data:processedData,
-            focusedEl:this.state.copyPasteLocation.focusedEl
+            focusedEl:this.state.copyPasteLocation.focusedEl,
+            selectionStart:this.state.selectionStart
           },
           filterSelectionState
          })
@@ -836,7 +855,8 @@ _onAttributeSelectionFirstTime(){
             _this.setState({
               copyPasteLocation:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -849,7 +869,8 @@ _onAttributeSelectionFirstTime(){
              _this.setState({
               copyPasteSKU:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -884,7 +905,8 @@ _onAttributeSelectionFirstTime(){
         skuAttributes:{},
         copyPasteSKU:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -897,7 +919,8 @@ _onAttributeSelectionFirstTime(){
         locationAttributes:{},
         copyPasteLocation:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -922,7 +945,8 @@ _onAttributeSelectionFirstTime(){
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -932,7 +956,8 @@ _onAttributeSelectionFirstTime(){
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
