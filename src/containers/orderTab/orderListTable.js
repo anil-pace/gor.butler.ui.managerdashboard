@@ -100,6 +100,11 @@ const messages=defineMessages({
         description: " 'Refreshed' status",
         defaultMessage: 'Not fulfillable'
     },
+    temporyUnFulfillableStatus: {
+        id: 'orderlist.tempnotFulfillale.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'On Hold'
+    },
     acceptedStatus: {
         id: 'orderlist.accepted.status',
         description: " 'accepted' status",
@@ -150,7 +155,8 @@ class OrderListTable extends React.Component {
                 "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
                 "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
-                "abandoned": this.props.intl.formatMessage(messages.abandonedStatus)
+                "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
+                "tempory_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
             }
         }
 
