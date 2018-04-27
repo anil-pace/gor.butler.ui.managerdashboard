@@ -16,10 +16,11 @@ export  function recieveAuditDetail(state={},action){
                 let auditDetailData = action.saltParams.lazyData ? (state.auditDetail || []) : [];
                 return Object.assign({}, state, {
                     "auditDetail" : auditDetailData.concat(res.audit_list),
-                    "totalPage" : res.audit_list.length>0?totalPage:state.totalPage,
-                    "totalAudits" : res.audit_list.length>0?totalAudit:state.totalAudits,
-                    "successQuery":res.audit_list.length>0?state.query:state.successQuery,
-                    "noResultFound":res.audit_list.length<1
+                    "totalPage" : res.audit_list.length>=0?totalPage:state.totalPage,
+                    "totalAudits" : res.audit_list.length>=0?totalAudit:state.totalAudits,
+                    "successQuery":res.audit_list.length>=0?state.query:state.successQuery,
+                    "noResultFound":res.audit_list.length<1,
+                    "hasDataChanged": !state.hasDataChanged
                 })
             }
             break;

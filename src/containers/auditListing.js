@@ -146,8 +146,9 @@ class AuditTab extends React.Component {
         clearInterval(this.state.timerId);
         this.props.setClearIntervalFlag(true);
     }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.auditListRefreshed && nextProps.location.query && (!this.state.query ||( (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query))&&(JSON.stringify(nextProps.location.query) !== JSON.stringify(this.props.location.query))) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
+        if (nextProps.socketAuthorized  && nextProps.location.query && (!this.state.query ||( (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query))&&(JSON.stringify(nextProps.location.query) !== JSON.stringify(this.props.location.query))) || nextProps.auditRefresh !== this.props.auditRefresh)) { //Changes to refresh the table after creating audit
             this.props.showFilter;
             let obj = {}, selectedToken;
             if (!this.state.pollTimerId) {
@@ -155,8 +156,12 @@ class AuditTab extends React.Component {
                 obj.name = mappingArray(selectedToken);
                 this.props.setTextBoxStatus(obj);
             }
-            this.setState({ query: JSON.parse(JSON.stringify(nextProps.location.query)) });
-            this.setState({ auditListRefreshed: nextProps.auditListRefreshed });
+            this.setState({ 
+                query: JSON.parse(JSON.stringify(nextProps.location.query)),
+                auditListRefreshed: nextProps.auditListRefreshed,
+                hasDataChanged : nextProps.hasDataChanged !== this.props.hasDataChanged
+            });
+            
             this._subscribeData();
             this._refreshList(nextProps.location.query, nextProps.auditSortHeaderState.colSortDirs);
         }
@@ -747,6 +752,7 @@ function mapStateToProps(state, ownProps) {
         auditSpinner: state.spinner.auditSpinner || false,
         auditDetail: state.recieveAuditDetail.auditDetail || [],
         totalPage: state.recieveAuditDetail.totalPage || 0,
+        hasDataChanged:state.recieveAuditDetail.hasDataChanged,
         auditRefresh: state.recieveAuditDetail.auditRefresh || null,
         intlMessages: state.intl.messages,
         auth_token: state.authLogin.auth_token,
