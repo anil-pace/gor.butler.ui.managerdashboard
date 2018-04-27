@@ -10049,6 +10049,10 @@ checkmark1 for indeterminate state*/
   background-position: 2px -107px;
 }
 
+.gor-audit-create .gor-audit-upload-file input[type='file'] {
+  cursor: pointer;
+}
+
 .gor-audit-create .gor-csv-upl-msg {
   width: 78%;
   vertical-align: middle;
@@ -10438,6 +10442,7 @@ checkmark1 for indeterminate state*/
   background-color: #ffffff;
   margin-top: 10px;
   margin-left: 10px;
+  display: block;
 }
 
 .gor-audit-create .gor-audit-input-wrap.after-validation {

@@ -1,4 +1,10 @@
 .gor-audit-create{
+
+  .gor-audit-upload-file{
+    input[type='file']{
+      cursor:pointer;
+    }
+  }
   .gor-csv-upl-msg{
     width: 78%;
     vertical-align: middle;
@@ -345,6 +351,7 @@
     background-color: #ffffff;
     margin-top: 10px;
     margin-left:10px;
+    display:block;
     &.after-validation{
       display:inline-block;
       vertical-align:middle;

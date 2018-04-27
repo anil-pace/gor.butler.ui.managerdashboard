@@ -691,11 +691,12 @@ class CreateAudit extends React.Component{
     
     var _this =this;
     var textType = /text.*/;
-      if (fileObject.type.match(textType)) {
+    var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
+      if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split("\n");
+          let data = reader.result.split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -967,14 +968,17 @@ class CreateAudit extends React.Component{
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
                         
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error"> 
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1237,14 +1241,17 @@ class CreateAudit extends React.Component{
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
                         
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error">  
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>

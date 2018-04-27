@@ -8,6 +8,7 @@ class CSVUpload extends React.Component{
       this._renderChildren = this._renderChildren.bind(this);
       this.dragOverHandler= this.dragOverHandler.bind(this);
       this.dragEndHandler= this.dragEndHandler.bind(this);
+      this.resetFileInput = this.resetFileInput.bind(this);
   }
 
   _renderChildren() {
@@ -40,6 +41,9 @@ class CSVUpload extends React.Component{
       event.dataTransfer.clearData();
     }
   }
+  resetFileInput(){
+    this.fileUploadInput.value = null;
+  }
 
   render()
   {
@@ -54,7 +58,7 @@ class CSVUpload extends React.Component{
                     <FormattedMessage id="gor.audit.uploadcsv" description='Text for upload csv file' 
             defaultMessage='Upload .CSV file'/>
  </span> </a>
-                    <input type="file" id="uploadCSVFile"  size="50" onChange={this.props.onFileUpload}/>
+                    <input type="file" id="uploadCSVFile" ref={node=> {this.fileUploadInput=node}} onClick={this.resetFileInput}  size="50" onChange={this.props.onFileUpload}/>
                 </div>
               </div>
               <pre id="displayCSVFile"></pre>
