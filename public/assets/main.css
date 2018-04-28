@@ -1004,7 +1004,7 @@ body {
   top: 2.75rem;
   display: block;
   padding-right: 3px;
-  width: 193px;
+  width: 251px;
   box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
 }
 
@@ -1012,7 +1012,7 @@ body {
   color: #666666;
   background-color: white;
   padding: 0.75rem 1rem;
-  font-size: 10px;
+  font-size: 14px;
   text-decoration: none;
   padding: 1em 3em;
   display: block;
@@ -1084,7 +1084,7 @@ body {
   line-height: 0rem;
   text-align: left;
   padding-right: 1.25rem;
-  padding-top: 0.5625rem;
+  padding-top: 0.6875rem;
 }
 
 .gorHeader .block {

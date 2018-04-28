@@ -155,7 +155,7 @@ class ButlerBot extends React.Component {
                 butlerDetail.voltage=data[i].power||0;
             }
             else {
-                butlerDetail.voltage="--";
+                butlerDetail.voltage=0;
             }
             butlerDetail.butlerAvgVoltage=data[i].power||0;
             butlerDetail.taskNum=currentTask[data[i].current_task];
