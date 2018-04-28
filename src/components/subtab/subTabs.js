@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import {setButlerSpinner, setPpsSpinner, setCsSpinner} from '../../actions/spinnerAction';
 import {subTabSelected} from '../../actions/tabSelectAction'
 import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
-import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS,PPS_CONFIGURATION} from '../../constants/backEndConstants'
+import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS,PPS_CONFIGURATION, MSU_CONFIGURATION} from '../../constants/backEndConstants';
 
 
 class SystemTab extends React.Component{
@@ -60,10 +60,12 @@ class SystemTab extends React.Component{
 		let ppsConfiguration=<FormattedMessage id="ppsConfiguration.tab.heading" description="pps configuration tab"
               defaultMessage="PPS Configuration"/>
 
+      	let msuConfiguration=<FormattedMessage id="msuConfiguration.tab.heading" description="msu configuration tab" defaultMessage="MSU Configuration"/>
+
         let sysControllers = <FormattedMessage id="sysControllers.tab.heading" description="Syatem controllers Tab"
               defaultMessage="System Controllers"/>
 
-		var selectClass={sysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block'};
+		var selectClass={sysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block', msuConfiguration: 'gor-main-block'};
 
 		if(this.props.subTab.length) {
 			selectClass[this.props.subTab]="gor-main-blockSelect";
@@ -93,6 +95,9 @@ class SystemTab extends React.Component{
 					</Link>
 					<Link to="/system/ppsConfiguration" onClick={this.handleSysSubTabClick.bind(this,PPS_CONFIGURATION)}>
 						<SubTab item={ppsConfiguration} changeClass={selectClass[PPS_CONFIGURATION]}/>
+					</Link>
+					<Link to="/system/msuConfiguration" onClick={this.handleSysSubTabClick.bind(this,MSU_CONFIGURATION)}>
+						<SubTab item={msuConfiguration} changeClass={selectClass[MSU_CONFIGURATION]}/>
 					</Link>
 				</div>
 			</div>

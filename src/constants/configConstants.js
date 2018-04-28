@@ -36,8 +36,8 @@ export const GIVEN_PAGE="page";
 export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
 export const ORDER_ID_FILTER_PARAM_WITHOUT_STATUS= "search=externalServiceRequestId";
-export const  ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
-export const FILTER_AUDIT_ID="display_id";
+export const ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
+export const FILTER_AUDIT_ID="audit_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
 export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";
@@ -107,5 +107,30 @@ export const AUDIT_EDIT_URL=API_URL+'/audit/get_audit';
 /*URL for seller recall*/
 export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/item-recall";
 export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
+
+
+export const MSU_CONFIG_URL = API_URL + "/msu_reconfig/all?details=true";  
+export const MSU_CONFIG_DEST_TYPE_URL = API_URL + "/racktypes/all";   
+export const MSU_CONFIG_FILTER_URL = API_URL + "/racks/search";
+export const MSU_CONFIG_LIST_RACK_STRUCTURE_URL = API_URL + "/racktypes/index/json";
+export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_URL + "/reconfig_msu/block";
+export const MSU_CONFIG_START_RECONFIG_URL = API_URL+ "/reconfig_msu/start";
+export const MSU_CONFIG_STOP_RECONFIG_URL = API_URL+ "/reconfig_msu/stop";
+export const MSU_CONFIG_RELEASE_MSU_URL = API_URL+ "/reconfig_msu/release";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

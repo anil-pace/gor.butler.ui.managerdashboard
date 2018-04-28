@@ -136,8 +136,7 @@ class ButlerBotFilter extends React.Component{
                  <Filter>
                 <div className="gor-filter-header">
                     <div className="gor-filter-header-h1">
-                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" 
-            defaultMessage="Filter data"/>
+                         <FormattedMessage id="gor.filter.filterLabel" description="label for filter" defaultMessage="Filter data"/>
                     </div>
                     <div className="gor-filter-header-h2" onClick={this._closeFilter}>
                         <FormattedMessage id="gor.filter.hide" description="label for hide" 

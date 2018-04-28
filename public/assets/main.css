@@ -12084,3 +12084,293 @@ checkmark1 for indeterminate state*/
   cursor: pointer;
   pointer-events: none;
 }
+
+.filterWrapper .gorToolBarDropDown {
+  padding-left: 0px;
+}
+
+.filterWrapper .gorToolBarDropDown .gor-button-wrap .gor-msuConfig-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 9.0625rem;
+  height: 2.1875rem;
+  font-size: 0.875rem;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 30px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  vertical-align: sub;
+  color: #ffffff;
+}
+
+.filterWrapper .gorToolBarDropDown .gor-button-wrap .gor-msuConfig-btn.grey {
+  background-color: #4d5055;
+}
+
+.filterWrapper .gorToolBarDropDown .gor-button-wrap .gor-msuConfig-btn.orange {
+  background: #f36f36;
+}
+
+.noDataWrapper {
+  font-weight: 600;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.875rem;
+  color: #aaaaaa;
+}
+
+.changeDestTypeBtn {
+  width: 15.625rem;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border: 1px solid #ec6520;
+  color: #ec6520;
+  height: 35px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.msuConfigTableWrapper {
+  height: auto;
+  width: 100%;
+  background: #ffffff;
+  border-top: 2px solid #dddddd;
+}
+
+.msuConfigTableWrapper .DotSeparatorWrapper {
+  margin-left: 30px;
+}
+
+.msuConfigTableWrapper .ProgressBarWrapper {
+  width: 7.5rem;
+  margin-top: 5px;
+}
+
+.msuConfigTableWrapper .totalOrderWrapper {
+  position: absolute;
+  margin-left: 8.375rem;
+  line-height: 3em;
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.msuConfigTableWrapper .msuIdWrapper {
+  padding-left: 7%;
+}
+
+.msuConfigTableWrapper .msuIdWrapper .msuId {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.msuConfigTableWrapper .msuIdWrapper .sourceType {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #333333;
+}
+
+.gor-smmodal-content {
+  border-radius: 0.5%;
+  margin-top: 15vh;
+  width: 55vw;
+  background: #fff;
+  margin: 0 auto;
+}
+
+.gor-smmodal-content .gor-smmodal-head {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #666666;
+}
+
+.gor-smmodal-content .gor-smmodal-head .gor-usr-add {
+  padding-left: 5%;
+  font-size: 1.5rem;
+}
+
+.gor-smmodal-content .gor-smmodal-head .close {
+  margin-right: 2%;
+  background: #f2f2f2;
+  color: #AAAAAA;
+  float: right;
+  text-align: center;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.gor-smmodal-content .gor-smmodal-body {
+  margin: auto;
+  height: 60vh;
+  border-bottom: 1px solid #666666;
+  width: 100%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper {
+  height: 100%;
+  width: 50%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .sourceTypeHeading {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper {
+  height: 85%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer {
+  display: flex;
+  flex-flow: column;
+  height: 85%;
+  width: 70%;
+  background: #979797;
+  position: relative;
+  float: left;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
+  position: absolute;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {
+  position: relative;
+  top: 100%;
+  height: 20%;
+  margin-left: 0%;
+  border-left: 0.625vw solid #939598;
+  border-right: 0.625vw solid #939598;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper {
+  height: 100%;
+  width: 50%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .gor-utility-dropDown-wrap {
+  height: 12%;
+  width: 70%;
+  margin-left: 3.625rem;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .Order-Stats-Drop {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .Order-Stats-Drop .ddown {
+  border: 1px solid #888888;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .Order-Stats-Drop .ddown .Dropdown-control {
+  background: transparent;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper {
+  height: 85%;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer {
+  display: flex;
+  flex-flow: column;
+  height: 85%;
+  width: 70%;
+  background: #979797;
+  position: relative;
+  float: left;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
+  position: absolute;
+}
+
+.gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {
+  position: relative;
+  top: 100%;
+  height: 20%;
+  margin-left: 0%;
+  border-left: 0.625vw solid #939598;
+  border-right: 0.625vw solid #939598;
+}
+
+.gor-smmodal-content .gor-smmodal-footer {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gor-smmodal-content .gor-smmodal-footer .gor-footer-msg {
+  padding-left: 5%;
+}
+
+.gor-smmodal-content .gor-smmodal-footer .gor-button-wrap {
+  padding-right: 5%;
+}
+
+.gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn {
+  font-family: 'Source Sans Pro Bold', sans-serif;
+  min-width: 9.0625rem;
+  height: 2.1875rem;
+  font-size: 0.875rem;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 30px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  vertical-align: sub;
+  color: #ffffff;
+}
+
+.gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn.grey {
+  background-color: #4d5055;
+}
+
+.gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn.orange {
+  background: #f36f36;
+}
