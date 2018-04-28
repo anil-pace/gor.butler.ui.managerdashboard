@@ -43,12 +43,10 @@ export  function orderDetails(state={},action){
       let target_cut_off_time_2=action.data.pbt.cut_off_time
       let pbts=state.pbts;
       pbts.map(function(pbt, idx){
-        
           if(pbt.cut_off_time === target_cut_off_time_2){
             pbt.opened=!pbt.opened;
           }
           return pbt
-        
       })
       
       return Object.assign({}, state, {
@@ -77,14 +75,16 @@ export  function orderDetails(state={},action){
       state.pbts.map(function(pbt, idx){
 
         if(pbt.cut_off_time===target_cut_off_time){
-          let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
-          pbt.ordersPerPbt={
-              "orders": ordersData,
-              "isInfiniteLoading":false,
-              "dataFound":res.serviceRequests.length < 1,
-              "totalPages" : res.totalPages,
-              "totalOrders" : res.totaElements
-            } 
+          if(res.serviceRequests){
+            let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
+            pbt.ordersPerPbt={
+                "orders": ordersData,
+                "isInfiniteLoading":false,
+                "dataFound":res.serviceRequests.length < 1,
+                "totalPages" : res.totalPages,
+                "totalOrders" : res.totaElements
+            }
+          }
         }
         return pbt
       })

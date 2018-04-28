@@ -77,7 +77,6 @@ import {
             isPanelOpen:true,
             collapseAllBtnState: true, 
             date: new Date(),
-            //query:this.props.location.query,
             pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             queryApplied:Object.keys(this.props.location.query).length ? true :false,
             totalSize:this.props.totalSize || null,
@@ -125,12 +124,26 @@ import {
         
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
-        if( (query.fromDate && query.toDate) && (query.toDate && query.toTime) ){
+        //When Time Range is mentioned.
+        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
-             if( query.cutOffTime){
+
+            // when DATE Range  + Order Id selected
+            if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // for fetching orders by giving cut off time
+                this._reqCutOffTime(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                this.props.filterApplied(true);
+            }
+            // when cut off time is not there but order Id is there ....send null as cut off time
+            else if (!query.cutOffTime && query.orderId){
+                cutOffTimeFromFilter = null;
+                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // fetch list of orders using cutOffTime = null
+                this.props.filterApplied(true);
+            }
+            // when only DATE Range is mentioned, NO cut off time, no OrderId 
+            else{
+                this._reqCutOffTime(startDateFromFilter, endDateFromFilter); 
                 this.props.filterApplied(true);
             }
         }
@@ -163,6 +176,7 @@ import {
                 }
                 
             }
+
         }
 
     }
@@ -378,6 +392,8 @@ import {
         
         var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
         var orderDetail, alertNum=0, orderInfo;
+
+        let orderDetails = this.props.pbts;
         
         return (
             <div>
@@ -386,26 +402,15 @@ import {
                     {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
                         <div>
                             <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-                                <OrderFilter ordersDetail={orderDetail} responseFlag={this.props.responseFlag}/>
+                                <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag}/>
                             </div>
 
                             <div>
                                 <OrderTile 
-                                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
-                                        endDate={new Date().toISOString()} 
                                         pbtsData={this.props.pbts} 
                                         date={todayDate} 
                                         orderFulfilData={this.props.orderFulfilment}
                                         orderSummaryData={this.props.orderSummary}
-                                        collapseState={this.state.collapseState}
-                                        disableCollapse={this.disableCollapse}
-                                        callBack = {this.callBack}
-                                        orderListSpinner={this.props.orderListSpinner}
-                                        showFilter={this.props.showFilter}
-                                        filterOptions={this.props.filterOptions}
-                                        orderData={this.props.orderData}
-                                        timeOffset={this.props.timeOffset}
-                                        showTableFilter={this.showTableFilter}
                                         />
 
 
@@ -436,16 +441,17 @@ import {
                             </div>
                     </div>
                 {/*Filter Summary*/}
-                <FilterSummary total={this.props.pbts.length || 0} isFilterApplied={this.props.isFilterApplied}
+                <FilterSummary total={orderDetails.length || 0} 
+                    isFilterApplied={this.props.isFilterApplied}
                     responseFlag={this.props.responseFlag}
                     filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                    description='total order for filter search bar'
-                    defaultMessage='{total} Orders found'
-                    values={{total: orderDetail ? orderDetail.length : '0'}}/>}
+                                    description='total order for filter search bar'
+                                    defaultMessage='{total} Orders found'
+                                    values={{total: orderDetails ? orderDetails.length : '0'}}/>}
                     refreshList={this._clearFilter.bind(this)}
                     refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                    description="button label for show all"
-                    defaultMessage="Show all orders"/>}/>
+                                    description="button label for show all"
+                                    defaultMessage="Show all orders"/>}/>
 
                 </div> 
 
@@ -572,7 +578,8 @@ var mapDispatchToProps=function (dispatch) {
 OrderListTab.defaultProps = {
     orderFulfilment: {},
     orderSummary: {},
-    pbts: []
+    pbts: [],
+    ordersPerPbt: []
 }
 
 OrderListTab.PropTypes={
