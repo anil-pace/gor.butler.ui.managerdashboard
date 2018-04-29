@@ -38,9 +38,9 @@ class ChangeRackType extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          sourceType: "",
+          sourceType: true,
           destType: null,
-          blockPutChangeTypeBtnState: false
+          blockPutChangeTypeBtnState: false,
         };
         this._blockPutAndChangeType = this._blockPutAndChangeType.bind(this);
         this._changeDestType = this._changeDestType.bind(this);
@@ -107,7 +107,7 @@ class ChangeRackType extends React.Component {
     _changeDestType(data) {
         this.setState({ 
             destType: data.value,
-            blockPutChangeTypeBtnState: false
+            blockPutChangeTypeBtnState: false,
         },
         this._reqRackStructureOnDestTypeChange);
     }
@@ -124,18 +124,21 @@ class ChangeRackType extends React.Component {
 
     render() {
 
-        let msuList, rackStructure, destTypeList, labelC1, destTypeStructure, sourceTypeStructure;
+        let msuList, rackStructure, destTypeList, labelC1, destTypeStructure, sourceTypeStructure, sourceTypeWidth, destTypeWidth;
         rackStructure = this.props.rackStructure;
         destTypeList = this.props.destType;
         msuList = this.props.msuList[0];
-        // if(rackStructure){
-        //     if(this.state.destType){
-        //         destTypeStructure = this.props.rackStructure[0];
-        //     }
-        //     else{
-        //         sourceTypeStructure = this.props.rackStructure[0];
-        //     }
-        // }
+        if(rackStructure){
+            if(this.state.destType){
+                destTypeStructure = this.props.rackStructure[0].rack_json;
+                destTypeWidth = this.props.rackStructure[0].rack_width;
+            }
+            /*destType = null */
+            else{ 
+                sourceTypeStructure = this.props.rackStructure[0].rack_json;
+                sourceTypeWidth = this.props.rackStructure[0].rack_width;
+            }
+        }
 
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
@@ -172,13 +175,11 @@ class ChangeRackType extends React.Component {
                                         values={{sourceType:msuList.racktype}}
                                         />
                                 </div>
-                                {/*
-                                {sourceTypeStructure? 
+                                {this.props.rackStructure && this.state.sourceType?
                                     <div className="rackWrapper">
-                                        <MsuRackFlex rackDetails={sourceTypeStructure[0].rack_json} 
-                                                      rackWidth={sourceTypeStructure[0].rack_width} />
-                                    </div> : null}
-                                */}
+                                        <MsuRackFlex rackDetails={this.props.rackStructure? sourceTypeStructure: ""} 
+                                                      rackWidth={this.props.rackStructure?  sourceTypeWidth: ""} />
+                                    </div> : ""}
 
                             </div>
 
@@ -191,17 +192,16 @@ class ChangeRackType extends React.Component {
                                 />
 
                                 <div className="rackWrapper">
-                                {/*
-                                    {destTypeStructure && this.state.destType ? 
-                                        <MsuRackFlex rackDetails={destTypeStructure[0].rack_json}
-                                                     rackWidth={destTypeStructure[0].rack_width} /> 
+
+                                    {this.props.rackStructure && this.state.destType ? 
+                                        <MsuRackFlex rackDetails={this.props.rackStructure ? destTypeStructure: ""}
+                                                     rackWidth={this.props.rackStructure ? destTypeWidth: ""} /> 
                                         :(<div className="parent-container" style={{width: "100%"}}>
                                                 <div className="slotsFlexContainer">
                                                     <div className="legsSpaceContainer"> </div>
                                                  </div>
                                         </div>)
                                     }
-                                */}
                                 </div>
 
                             </div>
