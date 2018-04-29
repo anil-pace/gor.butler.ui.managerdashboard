@@ -3,6 +3,8 @@ export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
+export const API_GATEWAY = API_URL+"/api-gateway";
+export const API_INTEGRATION_SERVICE= API_GATEWAY+"/integration-service/wms-integration/butler-core/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
 export const PPS_MODE_CHANGE_URL=API_URL+"/pps/change_mode";
@@ -79,21 +81,22 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be cha
  * URLs for Operations Log Report
  */
 
-export const OPERATIONS_LOG_URL =  API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/search";
+export const OPERATIONS_LOG_URL =  API_GATEWAY+"/dashboard-service/platform-dashboard/operator/logs/search";
 export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";//An arbitrary count has to be passed in this API
-export const REPORTS_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
-export const DOWNLOAD_REPORT = API_URL+"/api-gateway/dashboard-service/platform-dashboard/report/download/";
-export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/platform-dashboard/operator/logs/generate-report";
-export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
+export const REPORTS_URL = API_GATEWAY+"/dashboard-service/platform-dashboard/report/find-by-page";
+export const DOWNLOAD_REPORT = API_GATEWAY+"/dashboard-service/platform-dashboard/report/download/";
+export const REQUEST_REPORT_DOWNLOAD = API_GATEWAY+"/dashboard-service/platform-dashboard/operator/logs/generate-report";
+export const ORDERS_URL= API_GATEWAY+"dashboard-service/platform-dashboard/api/orders";
+
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 
 
-export const ORDERS_FULFIL_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-fulfilment";
-export const ORDERS_SUMMARY_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-summary";
-export const ORDERS_CUT_OFF_TIME_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level1";
-export const ORDERS_PER_PBT_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level2";
-export const ORDERLINES_PER_ORDER_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level3";
+export const ORDERS_FULFIL_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-fulfilment";
+export const ORDERS_SUMMARY_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-summary";
+export const ORDERS_CUT_OFF_TIME_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-details/level1";
+export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level2";
+export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
 
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
@@ -109,14 +112,14 @@ export const SELLER_RECALL_URL = API_URL+"/api-gateway/dashboard-service/platfor
 export const SELLER_RECALL_EXPIRY_URL = API_URL+"/api-gateway/dashboard-service/platform-dashboard/inventory/expiry-recall";
 
 
-export const MSU_CONFIG_URL = API_URL + "/msu_reconfig/all?details=true";  
-export const MSU_CONFIG_DEST_TYPE_URL = API_URL + "/racktypes/all";   
-export const MSU_CONFIG_FILTER_URL = API_URL + "/racks/search";
-export const MSU_CONFIG_LIST_RACK_STRUCTURE_URL = API_URL + "/racktypes/index/json";
-export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_URL + "/reconfig_msu/block";
-export const MSU_CONFIG_START_RECONFIG_URL = API_URL+ "/reconfig_msu/start";
-export const MSU_CONFIG_STOP_RECONFIG_URL = API_URL+ "/reconfig_msu/stop";
-export const MSU_CONFIG_RELEASE_MSU_URL = API_URL+ "/reconfig_msu/release";
+export const MSU_CONFIG_URL = API_INTEGRATION_SERVICE + "/msu_reconfig/all?details=true";  
+export const MSU_CONFIG_DEST_TYPE_URL = API_INTEGRATION_SERVICE + "/racktypes/all";   
+export const MSU_CONFIG_FILTER_URL = API_INTEGRATION_SERVICE + "/racks/search";
+export const MSU_CONFIG_LIST_RACK_STRUCTURE_URL = API_INTEGRATION_SERVICE + "/racktypes/index/json";
+export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_INTEGRATION_SERVICE + "/reconfig_msu/block";
+export const MSU_CONFIG_START_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/start";
+export const MSU_CONFIG_STOP_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/stop";
+export const MSU_CONFIG_RELEASE_MSU_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/release";
 
 
 
