@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.8.103';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -37,7 +37,7 @@ export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
 export const ORDER_ID_FILTER_PARAM_WITHOUT_STATUS= "search=externalServiceRequestId";
 export const  ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
-export const FILTER_AUDIT_ID="audit_id";
+export const FILTER_AUDIT_ID="display_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
 export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";
@@ -87,6 +87,15 @@ export const REQUEST_REPORT_DOWNLOAD = API_URL+"/api-gateway/dashboard-service/p
 export const ORDERS_URL=API_URL+"/api-gateway/dashboard-service/platform-dashboard/api/orders";
 export const STORAGE_SPACE_URL=API_URL+"/orders/put/storage_availability";
 export const STORAGE_SPACE_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
+
+
+export const ORDERS_FULFIL_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-fulfilment";
+export const ORDERS_SUMMARY_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-summary";
+export const ORDERS_CUT_OFF_TIME_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level1";
+export const ORDERS_PER_PBT_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level2";
+export const ORDERLINES_PER_ORDER_URL = API_URL + "/api-gateway/sr-service/platform-srms/md/order-details/level3";
+
+
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
 
