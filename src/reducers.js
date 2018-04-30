@@ -11,6 +11,7 @@ import {butlersInfo}  from './reducers/butlerReducer'
 import {chargerInfo}  from './reducers/chargerReducer'
 import {auditInfo}  from './reducers/auditReducer'
 import {ppsInfo}  from './reducers/ppsReducer'
+import {msuInfo}  from './reducers/msuConfigReducer'
 import {putInfo}  from './reducers/putReducer'
 import {inventoryInfo}  from './reducers/inventoryReducer'
 import {ordersInfo}  from './reducers/ordersReducer'
@@ -49,6 +50,7 @@ import {ppsConfiguration} from './reducers/ppsConfigurationReducer'
 import {operationsLogsReducer} from './reducers/operationLogsReducer';
 import {downloadReportsReducer} from './reducers/downloadReportsReducer';
 import {storageSpaceReducer} from './reducers/storageSpaceReducer';
+import {orderDetails} from './reducers/norderDetailsReducer';
 
 const rootReducer=combineReducers({
   intl:intlReducer,
@@ -64,6 +66,7 @@ const rootReducer=combineReducers({
   auditInfo,
   putInfo,
   ppsInfo,
+  msuInfo,
   throughputInfo,
   inventoryInfo,
   ordersInfo,
@@ -98,7 +101,8 @@ const rootReducer=combineReducers({
   ppsConfiguration,
   operationsLogsReducer,
   downloadReportsReducer,
-  storageSpaceReducer
+  storageSpaceReducer,
+  orderDetails
    })
 
 export default rootReducer

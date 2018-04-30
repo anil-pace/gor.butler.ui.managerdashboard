@@ -187,7 +187,7 @@ class Header extends React.Component {
                                             defaultMessage='No zones in operation'
                                             />}</p>
                                 <p><FormattedMessage id="header.option.release" description='release operation option'
-                              defaultMessage='Release the Emergency Stop button from the Zigbee box in order
+                              defaultMessage='Release the System Stop button from the Zigbee box in order
                               to resume operation.'/></p>
                                 
                             </section>)

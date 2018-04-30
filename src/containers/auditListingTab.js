@@ -21,7 +21,8 @@
  import EditAudit from '../containers/auditTab/editAudit';  
  import {
     APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT
+    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT,
+    PAGE_DEFAULT_LIMIT
 } from '../constants/frontEndConstants';
 import {
    AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
@@ -100,13 +101,14 @@ resolveButton: {
  }
 
 
- viewAuditDetails(auditId) {
+ viewAuditDetails(auditId,displayId) {
   modal.add(ViewDetailsAudit, {
     title: '',
     size: 'large',
        	            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
        	            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-       	            auditId:auditId
+       	            auditId:auditId,
+                    displayId:displayId
                     //.. all what you put in here you will get access in the modal props ;),
                   });
 }
@@ -121,16 +123,16 @@ startAudit(auditID) {
                       });
 }  
 
-_handelClick(field) {
-  let auditId=field.currentTarget.id;
+_handelClick(field,id,displayId) {
+  let auditId=id;//field.currentTarget.id;
   if(field.target.value=='viewdetails'){
-    this.viewAuditDetails(auditId);
+    this.viewAuditDetails(auditId,displayId);
   }else if(field.target.value=='pause'){
   this._pauseAudit(auditId,'pause');
   }else if(field.target.value=='cancel'){
-    this._auditAction(auditId,CANCEL_AUDIT);
+    this._auditAction(auditId,CANCEL_AUDIT,displayId);
      }else if(field.target.value=='delete'){
-    this._auditAction(auditId,DELETE_AUDIT);
+    this._auditAction(auditId,DELETE_AUDIT,displayId);
   }else if(field.target.value=='duplicate'){
     this._duplicateAudit(auditId,'duplicate');
   }else if(field.target.value=='edit'){
@@ -194,7 +196,17 @@ startAuditAuto(auditId){
             }
       this.props.userRequest(auditData);
 } 
+_onScrollHandler(event){
 
+if(event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight && Math.ceil(this.props.totalAudits/PAGE_DEFAULT_LIMIT)!==Number(this.props.currentPage)){
+    let page=this.props.currentPage?Number(this.props.currentPage)+1:this.props.items.length!==0?2:"";    
+    let _query=this.props.location.query || {}
+        _query.page=page.toString();
+        _query.saltParams={lazyData:true};
+    this.props.refreshCallback(_query);
+    
+}
+}
 
 
 _pauseAudit(auditId){
@@ -210,14 +222,14 @@ _pauseAudit(auditId){
       this.props.userRequest(auditData);
 } 
 
- _auditAction(auditId,param){
+ _auditAction(auditId,param,displayId){
   let data;
   let URL;
   let formdata={};
 if(param==CANCEL_AUDIT){
   data=<FormattedMessage id='audit.cancel' 
                         defaultMessage="Are you sure want to cancel {auditId} audit?" description="Text for cancel"
-                        values={{auditId:auditId}}/>
+                        values={{auditId:displayId}}/>
                       URL=CANCEL_AUDIT_URL;
                       formdata=auditId;
                       }
@@ -225,7 +237,7 @@ if(param==CANCEL_AUDIT){
                       {
   data=<FormattedMessage id='audit.delete' 
                         defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
-                        values={{auditId:auditId}}/>
+                        values={{auditId:displayId}}/>
                       URL=DELETE_AUDIT_URL;
                       formdata=auditId;
                       }              
@@ -265,9 +277,11 @@ _tableBodyData(itemsData){
     'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
     'flag':itemsData[i].system_created_audit
   }
+  
   rowObject.auditDetails={
-      "header":[itemsData[i].id,itemsData[i].audit_name],
-      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime]
+      "header":[itemsData[i].display_id,itemsData[i].audit_name],
+      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime],
+      "audit_id":itemsData[i].id
       }
   rowObject.auditProgress={
    "percentage": this._findStatus(itemsData[i].progressStatus),
@@ -291,13 +305,10 @@ _tableBodyData(itemsData){
        if(itemsData[i].button['audit_duplicate_button']=='enable'){
       rowObject.butoonToSHow.push({name:alDuplicate,value:'duplicate'});
       }
-       if(itemsData[i].button['audit_resolve_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alResolve,value:'resolve'});
-      }
       if(itemsData[i].button['audit_pause_button']=='enable'){
       rowObject.butoonToSHow.push({name:alPause,value:'pause'});
       }
-      if(itemsData[i].button['audit_start_button']=='enable'){
+      if(itemsData[i].button['audit_edit_button']=='enable'){
       rowObject.butoonToSHow.push({name:alEdit,value:'edit'});
       }
       
@@ -336,33 +347,33 @@ render(){
    <GTable options={['table-bordered','table-auditListing']}>
 
 {tablerowdata && tablerowdata.length>=1?
-   <GTableBody data={tablerowdata} >
+  <GTableBody data={tablerowdata}   onScrollHandler={me._onScrollHandler.bind(this)}>
    {tablerowdata ? tablerowdata.map(function (row, idx) {
     return (
 
-    <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tablerowdata} >
+    <GTableRow key={idx} index={idx} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
-      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['header'][0]} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div className='systemGenerated'></div>:""}
+      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['header'][0])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['header'][0]} style={{right:0}} clickOptionBack={me._handelClick} data={[{name:autoAssignPPS,value:'autoassignpps'},{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       {startButton}
        <div className="got-add-notch"></div>
       </button>      
       </ActionDropDown></div>:""}
-       {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
+       {/* {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
     {reauditButton}
-      </button>:""}
+      </button>:""} */}
       {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" style={{float:'right'}} id={tablerowdata[idx]['auditDetails']['header'][0]}   onClick={me._handelResolveAudit}>
+      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}}   onClick={me._handelResolveAudit}>
       {resolveButton}
       </button>:""}
-       {index==5?<ActionDropDown style={{right:0}} id={tablerowdata[idx]['auditDetails']['header'][0]} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+       {index==5?<ActionDropDown style={{right:0}} displayId = {tablerowdata[idx]['auditDetails']['header'][0]} id={tablerowdata[idx]['auditDetails']['audit_id']} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
       <div className='embeddedImage'></div>    
       </ActionDropDown>:""}
 

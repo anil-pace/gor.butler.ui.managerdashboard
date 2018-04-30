@@ -88,6 +88,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         copyPasteLocation:{
@@ -99,6 +100,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         filterApplied:false,
@@ -168,11 +170,13 @@ class CreateAudit extends React.Component{
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -223,7 +227,8 @@ class CreateAudit extends React.Component{
       this.setState({
       copyPasteSKU:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteSKU.focusedEl
+        focusedEl:this.state.copyPasteSKU.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -231,7 +236,8 @@ class CreateAudit extends React.Component{
        this.setState({
       copyPasteLocation:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteLocation.focusedEl
+        focusedEl:this.state.copyPasteLocation.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -314,6 +320,7 @@ class CreateAudit extends React.Component{
       validSKUData.audit_param_value.attributes_list = [];
       validSKUData.kq = this.kqCheck.checked;
       validSKUData.action=(type === "create" || type === "confirm")?'create':'';
+      validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       let {selectedSKUList} = this.state;
       let skuList = this.state.copyPasteSKU.data;
       for(let i=0,len=skuList.length; i<len ;i++){
@@ -369,6 +376,7 @@ class CreateAudit extends React.Component{
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "kq":this.kqCheck.checked,
+      "audit_creator_name":this.props.username,
       "action":(type === "create" || type === "confirm")?'create':'',
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -428,7 +436,8 @@ class CreateAudit extends React.Component{
       this.setState({
         copyPasteSKU:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -437,7 +446,8 @@ class CreateAudit extends React.Component{
       this.setState({
         copyPasteLocation:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -450,7 +460,8 @@ class CreateAudit extends React.Component{
         filterApplied:false,
         copyPasteSKU:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -459,7 +470,8 @@ class CreateAudit extends React.Component{
         filterApplied:false,
         copyPasteLocation:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -490,7 +502,8 @@ class CreateAudit extends React.Component{
     this.setState({
       copyPasteSKU:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.selectionStart
       }
     })
   }
@@ -498,6 +511,7 @@ class CreateAudit extends React.Component{
   _updateInput(event,id) {
    
    var input = event.target.value.trim(),
+   selectionStart = event.target.selectionStart,
    inputList = input.split(/[\s,;\t\n]+/),
    processedList=[],
    activeTabIndex = this.state.activeTabIndex,
@@ -529,6 +543,7 @@ class CreateAudit extends React.Component{
       copyPasteLocation:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -538,6 +553,7 @@ class CreateAudit extends React.Component{
       copyPasteSKU:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -586,7 +602,8 @@ class CreateAudit extends React.Component{
          this.setState({
           copyPasteSKU:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -594,7 +611,8 @@ class CreateAudit extends React.Component{
          this.setState({
           copyPasteLocation:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -648,7 +666,8 @@ class CreateAudit extends React.Component{
         this.setState({
               copyPasteSKU:{
               data:processedData,
-              focusedEl:this.state.copyPasteSKU.focusedEl
+              focusedEl:this.state.copyPasteSKU.focusedEl,
+              selectionStart:this.state.selectionStart
             },
             filterSelectionState
            })
@@ -657,7 +676,8 @@ class CreateAudit extends React.Component{
         this.setState({
             copyPasteLocation:{
             data:processedData,
-            focusedEl:this.state.copyPasteLocation.focusedEl
+            focusedEl:this.state.copyPasteLocation.focusedEl,
+            selectionStart:this.state.selectionStart
           },
           filterSelectionState
          })
@@ -690,11 +710,12 @@ class CreateAudit extends React.Component{
     
     var _this =this;
     var textType = /text.*/;
-      if (fileObject.type.match(textType)) {
+    var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
+      if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split("\n");
+          let data = reader.result.split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -711,7 +732,8 @@ class CreateAudit extends React.Component{
             _this.setState({
               copyPasteLocation:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -724,7 +746,8 @@ class CreateAudit extends React.Component{
              _this.setState({
               copyPasteSKU:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -759,7 +782,8 @@ class CreateAudit extends React.Component{
         skuAttributes:{},
         copyPasteSKU:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -772,7 +796,8 @@ class CreateAudit extends React.Component{
         locationAttributes:{},
         copyPasteLocation:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -796,7 +821,8 @@ class CreateAudit extends React.Component{
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -806,7 +832,8 @@ class CreateAudit extends React.Component{
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -948,8 +975,9 @@ class CreateAudit extends React.Component{
                         <InputComponent.CopyPaste
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         updateInput={self._updateInput} 
-                        index={i}  
+                        index={i} 
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
               }) }
@@ -966,14 +994,17 @@ class CreateAudit extends React.Component{
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
                         
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error"> 
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1049,6 +1080,7 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         allRowValid={allSKUsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
@@ -1138,6 +1170,7 @@ class CreateAudit extends React.Component{
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
                         index={i}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
@@ -1196,6 +1229,7 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
                         allRowValid={allLocationsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
@@ -1236,14 +1270,17 @@ class CreateAudit extends React.Component{
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
                         
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error">  
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1330,6 +1367,7 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo,
       locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
+      username: state.authLogin.username,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
