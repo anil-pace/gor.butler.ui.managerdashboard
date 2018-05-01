@@ -191,7 +191,15 @@ class MsuConfigTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+            
+        }
+
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
         }
@@ -269,6 +277,12 @@ class MsuConfigTab extends React.Component {
         });
     }
 
+    _subscribeData() {
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
     _blockPutAndChangeTypeCallback(){
         this.props.filterApplied(false);
         this._requestMsuList();
@@ -329,7 +343,7 @@ class MsuConfigTab extends React.Component {
                                         <div className="gor-button-wrap">
                                             <button className="gor-msuConfig-btn grey" 
                                                 onClick={this._refreshMsuDataAction}>
-                                                <div className="gor-refresh-icon"/>
+                                                <div className="gor-refresh-whiteIcon"/>
                                                 <FormattedMessage id="gor.msuConfig.refreshData" 
                                                     description="button label for refresh data" 
                                                     defaultMessage="REFRESH DATA"/>
