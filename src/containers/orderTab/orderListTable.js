@@ -156,7 +156,7 @@ class OrderListTable extends React.Component {
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
                 "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
                 "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
-                "tempory_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
+                "temporary_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
             }
         }
 
