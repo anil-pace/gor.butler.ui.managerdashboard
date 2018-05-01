@@ -261,13 +261,12 @@ class PPStable extends React.Component {
                 for(let i=0,len = this.props.items.length ;i < len ; i++){
                     checkedPPS[this.props.items[i]["ppsId"]]=this.props.items[i];
                 }
-                
+                this.props.setCheckAll(true);
             }
             else{
                  checkedPPS={};
             }
-
-       
+        
         this.props.setCheckedPps(checkedPPS)
         this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false); 
         })
@@ -279,6 +278,7 @@ class PPStable extends React.Component {
         let {sortedDataList, colSortDirs, columnWidths, headerChecked}=this.state,
             checkedPPS=[];
         let checkState=this.handleChange.bind(this);
+        headerChecked = this.props.getCheckAll===false ? false : headerChecked;
         let ppsTotal=sortedDataList.getSize();
         let pick=this.props.operationMode.pick;
         let put=this.props.operationMode.put;
@@ -318,7 +318,7 @@ class PPStable extends React.Component {
                         header={
                             <div>
                                 <div className="gor-header-check">
-                                    <input type="checkbox" checked={headerChecked}
+                                    <input type="checkbox" checked={headerChecked} 
                                            onChange={this.headerCheckChange.bind(this)}/>
                                 </div>
                                 <div className="gor-header-id">
