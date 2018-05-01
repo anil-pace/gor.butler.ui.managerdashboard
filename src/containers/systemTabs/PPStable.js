@@ -116,7 +116,7 @@ class PPStable extends React.Component {
         };
         this.props.updateSortedDataList(this._dataList)
 
-
+        
         this._onSortChange=this._onSortChange.bind(this);
         this._onFilterChange=this._onFilterChange.bind(this);
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);

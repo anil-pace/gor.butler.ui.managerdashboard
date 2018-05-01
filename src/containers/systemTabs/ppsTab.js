@@ -19,7 +19,7 @@ import {
     setCheckedPps,
     setDropDisplay,
     setCheckAll,
-    ppsFilterDetail
+    ppsFilterDetail,
 } from '../../actions/sortHeaderActions';
 import {
     INITIAL_HEADER_SORT,
@@ -102,6 +102,7 @@ class PPS extends React.Component {
         }
          
         this._processCheckedPPS(nextProps)
+
     
     }
 
@@ -366,6 +367,7 @@ class PPS extends React.Component {
 
         this.props.changePPSmode(ppsStatusChange);
         this.props.setCheckAll(false);
+         this.props.setCheckedPps({});
         this.props.setDropDisplay(false);
         
         }
@@ -387,6 +389,7 @@ class PPS extends React.Component {
 
         this.props.changePPSmode(ppsModeChange);
         this.props.setCheckAll(false);
+        this.props.setCheckedPps({});
         this.props.setDropDisplay(false);
         
 
@@ -573,7 +576,7 @@ class PPS extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         ppsFilter: state.sortHeaderState.ppsFilter || "",
-        getCheckAll: state.sortHeaderState.checkAll || false,
+        getCheckAll: state.sortHeaderState.checkAll,
         bDropRender: state.sortHeaderState.renderDropD || false,
         checkedPps: state.sortHeaderState.checkedPps,
         ppsSortHeader: state.sortHeaderState.ppsHeaderSort || INITIAL_HEADER_SORT,
