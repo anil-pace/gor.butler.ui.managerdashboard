@@ -547,13 +547,12 @@ class AuditTab extends React.Component {
                 auditData.completedTime = "--";
             }
             auditData.resolved = data[i].resolved;
-            if (data[i].audit_button_data.audit_resolve_button == 'disable') {
+            if (data[i].audit_button_data.audit_resolve_button == 'enable') {
                 auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestobeResolved) : "";
             }
-            else if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +linestobeReaudited) : "";
+            if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
+                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linestobeReaudited) : "";
             }
-
 
             auditData.button = data[i].audit_button_data;
             auditData.startButton = data[i].audit_button_data.audit_start_button === 'enable' ? true : false;
