@@ -196,7 +196,7 @@ import { receiveMsuConfigList,
 
 import {receiveOrderFulfilmentData, 
         receiveOrderSummaryData,
-        receiveCufOffTimeData, 
+        receiveCutOffTimeData, 
         receiveOrdersPerPbtData,
         receiveOrdersLinesData} from './../actions/norderDetailsAction';
 
@@ -696,8 +696,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveOrderSummaryData(res));
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
-            store.dispatch(setOrderListSpinner(false))
-            store.dispatch(receiveCufOffTimeData(res));
+            store.dispatch(setOrderListSpinner(false));
+            if(res !== []){
+                store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            }
+            else{
+                store.dispatch(receiveCutOffTimeData(res));
+            }
             break;
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(setOrderListSpinner(false));

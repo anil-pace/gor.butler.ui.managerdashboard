@@ -336,9 +336,14 @@ class OrderListTable extends React.Component {
                 
                 /* START => when cut off time is not there */
                     if(pbtData[i].order_id){
-                        formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
-                        formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
-                        formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
+
+                        formatOrderId = (pbtData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: pbtData[i].order_id}): "null");
+                        formatPpsId =   (pbtData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: pbtData[i].pps_id}): "null");
+                        formatBinId =   (pbtData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: pbtData[i].pps_bin_id}): "null");
+
+    //formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
+    // formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
+    // formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
                         formatStartDate = (pbtData[i].start_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].start_date} timeZone={this.props.timeZone}/> : "null");
                         formatCompleteDate = (pbtData[i].completion_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
                         formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
@@ -376,38 +381,39 @@ class OrderListTable extends React.Component {
                         else{
                             pbtRow.push(<div> </div>);
                         }
+                        pbtRows.push(pbtRow);
                     }
                 /* END => when cut off time is not there */
                     else{
                 
-                    let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
-                                         hour:"numeric",
-                                         minute:"numeric",
-                                         timeZone:this.props.timeOffset,
-                                         hour12: false});
+                        let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
+                                             hour:"numeric",
+                                             minute:"numeric",
+                                             timeZone:this.props.timeOffset,
+                                             hour12: false});
 
-                    let formatPbtTime = (pbtData[i].cut_off_time ? 
-                                            this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
-                    let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
-                    let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
-                    let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
+                        let formatPbtTime = (pbtData[i].cut_off_time ? 
+                                                this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
+                        let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
+                        let formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+                        let formatTotalOrders = (<FormattedMessage id="orders.total" description="total orders" defaultMessage="Total {total} orders" values={{total:pbtData[i].total_orders}} />);
 
-                    pbtRow.push(<div className="DotSeparatorWrapper"> 
-                                    {formatTimeLeft ?
-                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
-                                        <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
-                                    }
-                                </div>);
-                    pbtRow.push(<div>
-                                    {formatProgressBar.width ?
-                                        <div className="ProgressBarWrapper">
-                                            <ProgressBar progressWidth={formatProgressBar.width}/>
-                                        </div>: null
-                                    }
-                                    <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
-                                 </div>);
+                        pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                        {formatTimeLeft ?
+                                            <DotSeparatorContent header={[formatPbtTime]} subHeader={[formatTimeLeft]}/> :
+                                            <DotSeparatorContent header={[formatPbtTime]} subHeader={[]}/>
+                                        }
+                                    </div>);
+                        pbtRow.push(<div>
+                                        {formatProgressBar.width ?
+                                            <div className="ProgressBarWrapper">
+                                                <ProgressBar progressWidth={formatProgressBar.width}/>
+                                            </div>: null
+                                        }
+                                        <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div>
+                                     </div>);
 
-                    pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
+                        pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
                     pbtRows.push(pbtRow);
                 }
             }
@@ -563,15 +569,15 @@ class OrderListTable extends React.Component {
 
     _onScrollHandler(pbtData, event){
         if(pbtData.ordersPerPbt &&  pbtData.ordersPerPbt.total_orders > pbtData.ordersPerPbt.orders.length){
-if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
-                this.props.setInfiniteSpinner(false);
-                this._reqOrderPerPbt(pbtData, {lazyData:true});
-        }
-                else {
-            this.props.setInfiniteSpinner(false);
-        }
+        if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
+                        this.props.setInfiniteSpinner(false);
+                        this._reqOrderPerPbt(pbtData, {lazyData:true});
+                }
+                        else {
+                    this.props.setInfiniteSpinner(false);
+                }
 
-        }
+                }
             
     }
 

@@ -72,22 +72,41 @@ export  function orderDetails(state={},action){
       let isLazyData= action.saltParams.lazyData
 
 
-      state.pbts.map(function(pbt, idx){
-
-        if(pbt.cut_off_time===target_cut_off_time){
-          if(res.serviceRequests){
-            let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
-            pbt.ordersPerPbt={
-                "orders": ordersData,
-                "isInfiniteLoading":false,
-                "dataFound":res.serviceRequests.length < 1,
-                "totalPages" : res.totalPages,
-                "totalOrders" : res.totaElements
+      if(state.pbts){
+        console.log("coming inside IF case");
+        state.pbts.map(function(pbt, idx){
+          if(pbt.cut_off_time===target_cut_off_time){
+            if(res.serviceRequests){
+              let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
+              pbt.ordersPerPbt={
+                  "orders": ordersData,
+                  "isInfiniteLoading":false,
+                  "dataFound":res.serviceRequests.length < 1,
+                  "totalPages" : res.totalPages,
+                  "totalOrders" : res.totaElements
+              }
             }
           }
-        }
-        return pbt
-      })
+          return pbt
+        })
+      }
+      else{
+        console.log("coming inside ELSE case");
+        let expected_pbts=[{}]; // create one empty pbt list...which is mandatory
+          if(res.serviceRequests){
+            expected_pbts[0].ordersPerPbt={
+                  "orders": res.serviceRequests,
+                  "isInfiniteLoading":false,
+                  "dataFound":res.serviceRequests.length < 1,
+                  "totalPages" : res.totalPages,
+                  "totalOrders" : res.totaElements,
+                  "groupById": false
+              }
+          }
+          state.pbts=expected_pbts
+
+      }
+      
       return Object.assign({},state,{});
       break;
 

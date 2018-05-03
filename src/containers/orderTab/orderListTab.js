@@ -459,6 +459,7 @@ import {
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
                         pbts={this.props.pbts}
+                        groupById={this.props.groupById}
                         startDate={new Date (new Date() - 1000*3600*24).toISOString()}
                         endDate={new Date().toISOString()}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
@@ -504,6 +505,7 @@ function mapStateToProps(state, ownProps) {
         pbts: state.orderDetails.pbts,
         orderLines: state.orderDetails.orderLines,
         orderData: state.getOrderDetail || {},
+        groupById: state.orderDetails.groupById
     };
 }
 
@@ -614,7 +616,7 @@ OrderListTab.PropTypes={
     pbts: React.PropTypes.array,
     getPageSizeOrders: React.PropTypes.func,
     showFilter: React.PropTypes.bool,
-    ordersPerPbt: []
+    ordersPerPbt: React.PropTypes.array
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderListTab) ;
