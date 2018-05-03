@@ -114,6 +114,9 @@ import {
     FETCH_MSU_CONFIG_STOP_RECONFIG,
     FETCH_MSU_CONFIG_RELEASE_MSU,
     FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+    GET,
+    POST,
+    APP_JSON
 } from "../constants/frontEndConstants";
 
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
@@ -199,6 +202,14 @@ import {receiveOrderFulfilmentData,
         receiveCutOffTimeData, 
         receiveOrdersPerPbtData,
         receiveOrdersLinesData} from './../actions/norderDetailsAction';
+
+
+import {
+     ORDERS_PER_PBT_URL
+} from './../constants/configConstants';
+
+import { makeAjaxCall } from './../actions/ajaxActions';
+
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -697,11 +708,26 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
             store.dispatch(setOrderListSpinner(false));
-            if(res !== []){
-                store.dispatch(receiveOrdersPerPbtData(res, saltParams));
-            }
-            else{
-                store.dispatch(receiveCutOffTimeData(res));
+            let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+            let endDate = new Date().toISOString();
+            
+            // If length of response from Level 1 http call is empty, call Level 2 http request
+            if(res.length !== 0){
+                let formData={
+                    "start_date": startDate,
+                    "end_date": endDate,
+                    "cut_off_time": null
+                };
+
+                let params={
+                    'url':ORDERS_PER_PBT_URL,
+                    'method':POST,
+                    'contentType':APP_JSON,
+                    'accept':APP_JSON,
+                    'cause':ORDERS_PER_PBT_FETCH,
+                    'formdata':formData,
+                }
+                store.dispatch(makeAjaxCall(params));
             }
             break;
         case ORDERS_PER_PBT_FETCH:
