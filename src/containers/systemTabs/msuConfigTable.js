@@ -226,9 +226,6 @@ class MsuConfigTable extends React.Component {
 
     render() {
         const processedMsuData = this._processMSUs();
-        
-        let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
-
         return (
             <div>
             {this.props.msuList.length? 
@@ -248,7 +245,7 @@ class MsuConfigTable extends React.Component {
                             }):""}
                         </GTableBody>
                     </GTable>
-                </div>): <div className="noDataWrapper"> {noData} </div>
+                </div>): ""
             }
             </div>
         );
