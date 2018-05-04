@@ -38,10 +38,15 @@ const  messages= defineMessages({
         description: 'text for audit name placeholder',
         defaultMessage: 'Time, place or products'
     },
-    auditinputplaceholder: {
+    auditskuinputplaceholder: {
         id: 'audit.inputplaceholder.text',
         description: 'text for audit input placeholder',
         defaultMessage: 'e.g: 012678ABC'
+    },
+    auditlocationinputplaceholder: {
+        id: 'audit.inputplaceholder.text',
+        description: 'text for audit input placeholder',
+        defaultMessage: 'e.g: 132.0.A.47'
     },
     searchPlaceholderSKU:{
         id: 'audit.searchinputplaceholder.text',
@@ -978,7 +983,7 @@ class CreateAudit extends React.Component{
                         selectionStart = {self.state.copyPasteSKU.selectionStart}
                         updateInput={self._updateInput} 
                         index={i} 
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditskuinputplaceholder)}/>
                       </div>:null) 
               }) }
                </div>
@@ -1085,7 +1090,7 @@ class CreateAudit extends React.Component{
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
                         errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditskuinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
                           attributeList={attributeList}
@@ -1172,7 +1177,7 @@ class CreateAudit extends React.Component{
                         updateInput={self._updateInput} 
                         selectionStart = {self.state.copyPasteLocation.selectionStart}
                         index={i}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditlocationinputplaceholder)}/>
                       </div>:null) 
               }) }
               </div>
@@ -1234,7 +1239,7 @@ class CreateAudit extends React.Component{
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
                         errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditlocationinputplaceholder)}/>
                       </div>)
                   }
                     
