@@ -235,7 +235,7 @@ if(param==CANCEL_AUDIT){
                       }
                       else if(param==DELETE_AUDIT)
                       {
-  data=<FormattedMessage id='audit.delete' 
+  data=<FormattedMessage id='audit.deleteAudit' 
                         defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
                         values={{auditId:displayId}}/>
                       URL=DELETE_AUDIT_URL;

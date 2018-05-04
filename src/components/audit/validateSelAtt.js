@@ -354,7 +354,7 @@ class ValidateSelAtt extends React.Component{
                       </div>:null) 
               }) }
                <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.auditAdd" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                </div>
@@ -438,7 +438,7 @@ class ValidateSelAtt extends React.Component{
               }
               )}
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.Validation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>

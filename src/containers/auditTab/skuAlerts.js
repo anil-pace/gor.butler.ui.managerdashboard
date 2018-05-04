@@ -23,19 +23,19 @@ class SkuAlerts extends React.Component{
     {
       let button,text;
       if(this.props.param=="edit"){
-        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.update' 
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.update' 
         defaultMessage="Update Audit" description="Text for logout button"/></button>;
         text= <FormattedMessage id='audit.sku.alert.update' 
         defaultMessage="Do you wish to update Audit?" description="Text for logout question"/>;
       }
       else if(this.props.param=="duplicate"){
-        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.duplicate' 
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.duplicate' 
         defaultMessage="Duplicate Audit" description="Text for logout button"/></button>;
         text= <FormattedMessage id='audit.sku.alert.duplicate' 
         defaultMessage="Do you wish to duplicate Audit?" description="Text for logout question"/>;
       }else
       {
-        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.alert.create' 
+        button= <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.sku.create.audit' 
         defaultMessage="Create Audit" description="Text for logout button"/></button>;
         text= <FormattedMessage id='audit.sku.alert.create' 
         defaultMessage="Do you wish to create Audit?" description="Text for logout question"/>;
