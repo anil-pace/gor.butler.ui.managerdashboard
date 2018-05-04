@@ -41,7 +41,7 @@ const  messages= defineMessages({
     auditinputplaceholder: {
         id: 'audit.inputplaceholder.text',
         description: 'text for audit input placeholder',
-        defaultMessage: 'e.g: 012678ABC'
+        defaultMessage: 'e.g: 132.0.A.47'
     },
     searchPlaceholderSKU:{
         id: 'audit.searchinputplaceholder.text',
