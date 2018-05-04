@@ -1095,7 +1095,7 @@ _onAttributeSelectionFirstTime(){
                           <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
-                          <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
+                          <FormattedMessage id="audit.select.sku.modeinput" description='Text for sku mode' defaultMessage='Select mode of input:'/>
                           </div>
                           
                          
@@ -1127,7 +1127,7 @@ _onAttributeSelectionFirstTime(){
                       </div>:null) 
               }) }
                <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addAuditSkuCP" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                </div>
@@ -1219,7 +1219,7 @@ _onAttributeSelectionFirstTime(){
 
 
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addAuditSkuValid" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>
@@ -1284,7 +1284,7 @@ _onAttributeSelectionFirstTime(){
                         <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameLoc = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
                             <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
@@ -1320,7 +1320,7 @@ _onAttributeSelectionFirstTime(){
               }) }
               
                <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addAuditLocationCP" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
                         </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >

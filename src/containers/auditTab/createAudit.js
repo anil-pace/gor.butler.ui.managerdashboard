@@ -945,7 +945,7 @@ class CreateAudit extends React.Component{
                           <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
-                          <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
+                          <FormattedMessage id="audit.select.sku.modeNew" description='Text for sku mode' defaultMessage='Select mode of input:'/>
                           </div>
                           
                          
@@ -985,7 +985,7 @@ class CreateAudit extends React.Component{
 
              
               </div>
-              <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+              <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addSku" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                
@@ -1101,7 +1101,7 @@ class CreateAudit extends React.Component{
               }
               )}
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addsku2" description='Text for adding a location' 
                         defaultMessage='+ ADD NEW'/></button>
               </div>}
                </div>
@@ -1140,7 +1140,7 @@ class CreateAudit extends React.Component{
                         <input className="gor-audit-name-wrap" ref={(input) => { this.auditNameLoc = input; }} type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.inputmode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
                             <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
@@ -1177,7 +1177,7 @@ class CreateAudit extends React.Component{
               }) }
               </div>
                <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addAuditLocation2" description='Text for adding a location' 
                         defaultMessage='+ ADD NEW'/></button>
                         </div>
               </div>:<div className="gor-audit-location-wrap" >
