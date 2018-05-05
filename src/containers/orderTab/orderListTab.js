@@ -6,7 +6,6 @@ import {modal} from 'react-redux-modal';
 
 import OrderFilter from './orderFilter';
 import OrderListTable from './orderListTable';
-import Dropdown from '../../components/dropdown/dropdown'
 import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -15,7 +14,6 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import OrderTile from '../../containers/orderTab/OrderTile';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
@@ -26,35 +24,28 @@ import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} fro
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
-import {getDaysDiff} from '../../utilities/getDaysDiff';
 
-import {stringConfig} from '../../constants/backEndConstants';
 import {wsOverviewData} from './../../constants/initData.js';
 
-
-
-import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
-
-import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH,
-    ORDERS_POLLING_INTERVAL
+import {WS_ONSEND, ANY, 
+        APP_JSON, POST, GET,
+        ORDERS_FULFIL_FETCH, 
+        ORDERS_SUMMARY_FETCH, 
+        ORDERS_CUT_OFF_TIME_FETCH, 
+        ORDERS_PER_PBT_FETCH, 
+        ORDERLINES_PER_ORDER_FETCH,
+        ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
-import { setInfiniteSpinner } from '../../actions/notificationAction';
 
-import {unSetAllActivePbts} from '../../actions/norderDetailsAction'
+import { setInfiniteSpinner } from '../../actions/notificationAction';
+import { unSetAllActivePbts } from '../../actions/norderDetailsAction'
 
 import {
-    API_URL,
-    ORDERS_URL,
-    PAGE_SIZE_URL,
-    PROTOCOL,
-    ORDER_PAGE,
-    UPDATE_TIME_UNIT, UPDATE_TIME,
-    EXCEPTION_TRUE,
-    WAREHOUSE_STATUS_SINGLE,
-    WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
-    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
+        ORDERS_FULFIL_URL,
+        ORDERS_SUMMARY_URL, 
+        ORDERS_CUT_OFF_TIME_URL, 
+        ORDERS_PER_PBT_URL, 
+        ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
 
@@ -65,12 +56,7 @@ import {
         this.state = this._getInitialState();
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
-        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
-        this._stopPollingCutOffTime = this._stopPollingCutOffTime.bind(this);
-        this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
-        this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
-        this.props.showTableFilter(false)
     }
 
     _getInitialState(){
@@ -78,7 +64,6 @@ import {
             isPanelOpen:true,
             collapseAllBtnState: true, 
             date: new Date(),
-            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             queryApplied:Object.keys(this.props.location.query).length ? true :false,
             totalSize:this.props.totalSize || null,
             selected_page: 1, 
@@ -210,22 +195,6 @@ import {
         clearInterval(this._intervalId);
     }
 
-    enableCollapse(){
-        this.setState({
-            collapseState: true,
-            isPanelOpen: true
-        })
-    }
-
-    disableCollapse(){
-        this.setState({
-            collapseState: false,
-            isPanelOpen: false
-        })
-    }
-
-     
-
     _subscribeData() {
         let updatedWsSubscription=this.props.wsSubscriptionData;
         this.props.initDataSentCall(updatedWsSubscription["default"])
@@ -245,10 +214,6 @@ import {
     _setFilter() {
         var newState=!this.props.showFilter;
         this.props.showTableFilter(newState)
-    }
-
-    onPageSizeChange(arg) {
-        this.refresh(null, arg);
     }
 
     _viewOrderLine = (orderId) =>  {
@@ -330,49 +295,6 @@ import {
         let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
         let newEndendDate = new Date().toISOString();
         this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-    }
-
-    _startPollingCutOffTime = ()=> {
-        this._reqCutOffTime( new Date (new Date() - 1000*3600*24).toISOString(), new Date().toISOString() );
-    }
-
-    _stopPollingCutOffTime = (intervalId) => {
-        clearTimeout(intervalId);
-    }
-
-    _formatProgressBar(nr, dr){
-        let x = {};
-        
-        if(nr === 0 && dr === 0){
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
-            x.action = false;
-        }
-        else if(nr === 0){
-            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
-                      values={{current:dr}} />);
-            x.action = false;
-        }
-        else{
-            x.width = (nr/dr)*100;
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
-                            values={{current:nr, total: dr}} />);
-            x.action  = true;
-        }
-        return x;
-    }
-
-    _enableCollapseAllBtn(){
-        this.setState({
-            collapseAllBtnState: false,
-            isPanelOpen: true
-        })
-    }
-
-    _disableCollapseAllBtn(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
     }
 
     _handleCollapseAll(){
@@ -462,8 +384,6 @@ import {
                         startDate={new Date (new Date() - 1000*3600*24).toISOString()}
                         endDate={new Date().toISOString()}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
-                        startPollingCutOffTime={this._startPollingCutOffTime}
-                        stopPollingCutOffTime={this._stopPollingCutOffTime}
                         isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}
                         disableCollapseAllBtn={this._disableCollapseAllBtn}
@@ -481,7 +401,6 @@ import {
 function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.orderFilter || "",
-        orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT,
         orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
         orderListSpinner: state.spinner.orderListSpinner || false,
         filterOptions: state.filterOptions || {},
@@ -509,33 +428,6 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        orderFilterDetail: function (data) {
-            dispatch(orderFilterDetail(data))
-        },
-        orderHeaderSort: function (data) {
-            dispatch(orderHeaderSort(data))
-        },
-        orderHeaderSortOrder: function (data) {
-            dispatch(orderHeaderSortOrder(data))
-        },
-        getPageData: function (data) {
-            dispatch(getPageData(data));
-        },
-        getStatusFilter: function (data) {
-            dispatch(getStatusFilter(data));
-        },
-        getTimeFilter: function (data) {
-            dispatch(getTimeFilter(data));
-        },
-        getPageSizeOrders: function (data) {
-            dispatch(getPageSizeOrders(data));
-        },
-        currentPage: function (data) {
-            dispatch(currentPageOrders(data));
-        },
-        lastRefreshTime: function (data) {
-            dispatch(lastRefreshTime(data));
-        },
         setOrderListSpinner: function (data) {
             dispatch(setOrderListSpinner(data))
         },
