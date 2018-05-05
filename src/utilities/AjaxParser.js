@@ -711,8 +711,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
             let endDate = new Date().toISOString();
             
-            // If length of response from Level 1 http call is empty, call Level 2 http request
-            if(res.length !== 0){
+            // If length of response from Level 1 http call is empty i.e. res === [], call Level 2 http request
+            if(res.length === 0){
                 let formData={
                     "start_date": startDate,
                     "end_date": endDate,
@@ -729,11 +729,16 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 }
                 store.dispatch(makeAjaxCall(params));
             }
+            else{
+                store.dispatch(receiveCutOffTimeData(res));
+            }
             break;
+
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(setOrderListSpinner(false));
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
             break;
+
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));
             break;

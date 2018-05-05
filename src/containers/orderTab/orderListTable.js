@@ -1,23 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
-import {Table, Column} from 'fixed-data-table';
-import Dimensions from 'react-dimensions'
 import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
-import {
-    SortHeaderCell,
-    tableRenderer,
-    TextCell,
-    StatusCell
-} from '../../components/commonFunctionsDataTable';
-import {
-    GOR_TABLE_HEADER_HEIGHT,
-    DEBOUNCE_TIMER
-} from '../../constants/frontEndConstants';
-import {debounce} from '../../utilities/debounce';
 
 import OrderFilter from './orderFilter';
-import Dropdown from '../../components/dropdown/dropdown'
 import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -26,8 +12,6 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import OrderTile from '../../containers/orderTab/OrderTile';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
-import FilterSummary from '../../components/tableFilter/filterSummary';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
@@ -39,7 +23,6 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 
 import {getDaysDiff} from '../../utilities/getDaysDiff';
 
-import {stringConfig} from '../../constants/backEndConstants';
 import {wsOverviewData} from './../../constants/initData.js';
 
 import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
@@ -146,7 +129,6 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             cutOffTimeIndex:"",
-            isPanelOpen:true,
             statusMapping:{
                 "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
                 "complete": this.props.intl.formatMessage(messages.completeStatus),
@@ -160,8 +142,6 @@ class OrderListTable extends React.Component {
             }
         }
 
-        this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
-        this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
@@ -254,24 +234,6 @@ class OrderListTable extends React.Component {
         clearTimeout(intervalIdForOrders);
     }
 
-    
-
-    _enableCollapseAllBtn(){
-        this.props.enableCollapseAllBtn();
-        this.setState({
-            collapseAllBtnState: false,
-            isPanelOpen: true
-        })
-    }
-
-    _disableCollapseAllBtn(){
-        this.props.disableCollapseAllBtn();
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
-    }
-
     _formatProgressBar(nr, dr){
         let x = {};
         if(nr === 0 && dr === 0){ // when nothing has started
@@ -323,10 +285,13 @@ class OrderListTable extends React.Component {
     }
 
     _processPBTs = (arg, nProps) => {
+        console.log("coming inside _processPBTs function ====>>>>>>>>>>>>>>>");
         nProps = this;
         let pbtData  = nProps.props.pbts;
+        let isGroupedById = nProps.props.isGroupedById;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
         let pbtDataLen = pbtData.length; 
+        let timeOffset = nProps.props.timeOffset || "";
         let pbtRows = []; 
         let processedData = {};
 
@@ -334,19 +299,105 @@ class OrderListTable extends React.Component {
             for(let i =0 ; i < pbtDataLen; i++){
                 let pbtRow = [];
                 
-                /* START => when cut off time is not there */
-                    if(pbtData[i].order_id){
+                    /* START => case #3 when cut off time NOT at all there for any of the orders */
+                    //if(pbtData[i].order_id){
+                    if(!isGroupedById && Object.keys(pbtData[0]).length){
+                        console.log(Object.keys(pbtData)[0].length);
+                        console.log("=====>>>>>>coming inside WHEN THERE IS NO CUT OF TIME AT ALL");
+                        formatOrderId = ((pbtData[i].order_id && pbtData[i] !== "") ?
+                                        this.props.intl.formatMessage(messages.orderId, {orderId: pbtData[i].order_id}): "");
 
-                        formatOrderId = (pbtData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: pbtData[i].order_id}): "null");
-                        formatPpsId =   (pbtData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: pbtData[i].pps_id}): "null");
-                        formatBinId =   (pbtData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: pbtData[i].pps_bin_id}): "null");
+                        formatPpsId =   ((pbtData[i].pps_id && pbtData[i].pps_id !== "") ? 
+                                                this.props.intl.formatMessage(messages.ppsId, {ppsId: pbtData[i].pps_id}): "");
 
-    //formatOrderId = (pbtData[i].order_id ? <FormattedMessage id="orders.order.orderId" description="order id" defaultMessage="Order {orderId}" values={{orderId: pbtData[i].order_id}} />: "null")
-    // formatPpsId = (pbtData[i].pps_id ? <FormattedMessage id="orders.order.ppsId" description="pps id" defaultMessage="PPS {ppsId}" values={{ppsId: pbtData[i].pps_id}} /> : "null")
-    // formatBinId = (pbtData[i].pps_bin_id ? <FormattedMessage id="orders.order.binId" description="bin id" defaultMessage="Bin {binId}" values={{binId: pbtData[i].pps_bin_id}} /> : "null")
-                        formatStartDate = (pbtData[i].start_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].start_date} timeZone={this.props.timeZone}/> : "null");
-                        formatCompleteDate = (pbtData[i].completion_date ? <FormattedRelative updateInterval={ORDERS_POLLING_INTERVAL} value={pbtData[i].completion_date} timeZone={this.props.timeZone}/> : "null");
+                        formatBinId =   ((pbtData[i].pps_bin_id && pbtData[i].pps_bin_id !=="") ?
+                                         this.props.intl.formatMessage(messages.binId, {binId: pbtData[i].pps_bin_id}): "");
+
                         formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+
+
+                        formatStartDate = "";
+
+                        //Create time need to be add
+                        if (pbtData[i].start_date) {
+                            if (getDaysDiff(pbtData[i].start_date) < 2) {
+                                formatStartDate = nProps.context.intl.formatRelative(pbtData[i].start_date, {
+                                    timeZone: timeOffset,
+                                    units: 'day'
+                                }) +
+                                    ", " + nProps.context.intl.formatTime(pbtData[i].start_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                            }
+                            else {
+                                formatStartDate = nProps.context.intl.formatDate(pbtData[i].start_date,
+                                    {
+                                        timeZone: timeOffset,
+                                        month: 'short',
+                                        day: '2-digit',
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false
+                                    });
+                            }
+
+                            if (pbtData[i].completion_date) {
+                                if ((getDaysDiff(pbtData[i].completion_date) == getDaysDiff(pbtData[i].start_date))) {
+                                    formatCompleteDate = nProps.context.intl.formatTime(pbtData[i].completion_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                                }
+                                else {
+                                    formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
+                                        {
+                                            timeZone: timeOffset,
+                                            month: 'short',
+                                            day: '2-digit',
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false
+                                        });
+                                }
+                            }
+                            else
+                                formatCompleteDate = "";
+                        }
+
+                        if (pbtData[i].completion_date) {
+                            if (getDaysDiff(pbtData[i].completion_date) < 2) {
+                                formatCompleteDate = nProps.context.intl.formatRelative(pbtData[i].completion_date, {
+                                    timeZone: timeOffset,
+                                    units: 'day'
+                                }) +
+                                    ", " + nProps.context.intl.formatTime(pbtData[i].completion_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                            }
+                            else {
+                                formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
+                                    {
+                                        timeZone: timeOffset,
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: '2-digit',
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false
+                                    });
+                            }
+                        }
+                        else {
+                            formatCompleteDate = "";
+                        }
 
                         pbtRow.push(<div className="DotSeparatorWrapper"> 
                                     <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
@@ -381,11 +432,13 @@ class OrderListTable extends React.Component {
                         else{
                             pbtRow.push(<div> </div>);
                         }
+
                         pbtRows.push(pbtRow);
                     }
-                /* END => when cut off time is not there */
-                    else{
-                
+
+                    /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
+                    else if(isGroupedById){
+                        console.log("=====>>>>>>coming inside WHEN THERE CUT OFF TIME IS PRESENT");
                         let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
                                              hour:"numeric",
                                              minute:"numeric",
@@ -414,9 +467,15 @@ class OrderListTable extends React.Component {
                                      </div>);
 
                         pbtRow.push(<div className="totalOrderWrapper">{formatTotalOrders}</div>);
-                    pbtRows.push(pbtRow);
+                        pbtRows.push(pbtRow);
+                    }
+                    else{
+                        pbtRow.push(<div className="noOrdersPresent"> No orders available </div>);
+                        pbtRows.push(pbtRow);
+                        /* When even case #3 holds false means no order at all */
+                        console.log("all is going well");
+                    }
                 }
-            }
             processedData.pbtData = pbtRows;
 
         }
@@ -427,21 +486,30 @@ class OrderListTable extends React.Component {
     }
 
     _processOrders = (orderData, nProps) => {
+        console.log("coming inside _processOrders function ====>>>>>>>>>>>>>>>");
         nProps = this;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
 
         let orderDataLen = orderData.length;
         let orderRows = [];
         let processedData = {};
-        var timeOffset = nProps.props.timeOffset || "";
+        let timeOffset = nProps.props.timeOffset || "";
         if(orderDataLen){
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
 
-                let formatOrderId = (orderData[i].order_id ? this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "null");
-                let formatPpsId =   (orderData[i].pps_id ? this.props.intl.formatMessage(messages.ppsId, {ppsId: orderData[i].pps_id}): "null");
-                let formatBinId =   (orderData[i].pps_bin_id ? this.props.intl.formatMessage(messages.binId, {binId: orderData[i].pps_bin_id}): "null");
-                let formatStartDate = "null";
+                formatOrderId = ((orderData[i].order_id && orderData[i] !== "") ?
+                                        this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "---");
+
+                formatPpsId =   ((orderData[i].pps_id && orderData[i].pps_id !== "") ? 
+                                        this.props.intl.formatMessage(messages.ppsId, {ppsId: orderData[i].pps_id}): "---");
+
+                formatBinId =   ((orderData[i].pps_bin_id && orderData[i].pps_bin_id !=="") ?
+                                         this.props.intl.formatMessage(messages.binId, {binId: orderData[i].pps_bin_id}): "---");
+
+                formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
+
+                formatStartDate = "---";
 
                 //Create time need to be add
                     if (orderData[i].start_date) {
@@ -524,10 +592,11 @@ class OrderListTable extends React.Component {
                         formatCompleteDate = "null";
                     }
 
-                formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
+                
                  
                 orderRow.push(<div className="DotSeparatorWrapper"> 
-                                <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
+                                <DotSeparatorContent header={[formatOrderId]} 
+                                    subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
                             </div>);
 
                 orderRow.push( <div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
@@ -548,6 +617,7 @@ class OrderListTable extends React.Component {
                                         <span> {orderData[i].missing_count > 0 ? orderData[i].missing_count : ""} </span>
                                     </div>
                              </div>);
+
                 if(formatProgressBar.action === true){
                     orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
                       <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
@@ -558,6 +628,7 @@ class OrderListTable extends React.Component {
                 else{
                     orderRow.push(<div> </div>);
                 }
+
                 orderRows.push(orderRow);
             }
             processedData.orderData = orderRows;
@@ -569,28 +640,28 @@ class OrderListTable extends React.Component {
 
     _onScrollHandler(pbtData, event){
         if(pbtData.ordersPerPbt &&  pbtData.ordersPerPbt.total_orders > pbtData.ordersPerPbt.orders.length){
-        if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
+            if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
                         this.props.setInfiniteSpinner(false);
                         this._reqOrderPerPbt(pbtData, {lazyData:true});
                 }
-                        else {
+                else {
                     this.props.setInfiniteSpinner(false);
                 }
-
-                }
-            
+            }
     }
 
     render() {
         var self=this;
         const processedPbtData = this._processPBTs(this.props.pbts);
+        let isGroupedById = this.props.isGroupedById;
         return (
             <div>
                 <div className="waveListWrapper">
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedPbtData.pbtData}>
                             {processedPbtData.pbtData ? processedPbtData.pbtData.map(function (row, idx) {
-                                return self.props.pbts[idx].total_orders ? 
+                                //return self.props.pbts[idx].total_orders ? 
+                                return isGroupedById ?
                                 (<Accordion 
                                     key={idx}
                                     pbts={self.props.pbts}
@@ -651,7 +722,6 @@ class OrderListTable extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.orderFilter || "",
-        orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
         orderListSpinner: state.spinner.orderListSpinner || false,
         filterOptions: state.filterOptions || {},
         orderData: state.getOrderDetail || {},
@@ -672,8 +742,8 @@ function mapStateToProps(state, ownProps) {
         totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,
         timeZone:state.authLogin.timeOffset,
-        isInfiniteLoading:state.notificationReducer.isInfiniteLoading
-
+        isInfiniteLoading:state.notificationReducer.isInfiniteLoading,
+        isGroupedById: state.orderDetails.isGroupedById
     };
 }
 
@@ -718,10 +788,12 @@ var mapDispatchToProps=function (dispatch) {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
         },
-        setInfiniteSpinner:function(data){dispatch(setInfiniteSpinner(data));},
-        setActivePbt:function(data){dispatch(setActivePbt(data));}
-
-
+        setInfiniteSpinner:function(data)
+            {dispatch(setInfiniteSpinner(data))
+        },
+        setActivePbt:function(data){
+            dispatch(setActivePbt(data))
+        }
     }
 };
 
@@ -736,19 +808,13 @@ OrderListTable.contextTypes = {
 }
 
 OrderListTable.PropTypes={
-    items: React.PropTypes.array,
-    containerWidth: React.PropTypes.number,
-    itemNumber: React.PropTypes.number,
-    currentHeaderOrder: React.PropTypes.object,
     setOrderFilter: React.PropTypes.func,
-    sortHeaderState: React.PropTypes.func,
-    refreshOption: React.PropTypes.func,
-    lastUpdatedText: React.PropTypes.string,
     isFilterApplied: React.PropTypes.bool,
     timeZoneString: React.PropTypes.string,
     lastUpdated: React.PropTypes.string,
     responseFlag: React.PropTypes.bool,
-    timeOffset: React.PropTypes.number
+    timeOffset: React.PropTypes.number,
+    isGroupedById: React.PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(OrderListTable));
