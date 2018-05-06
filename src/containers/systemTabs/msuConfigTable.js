@@ -41,12 +41,12 @@ const messages=defineMessages({
     putBlockedStatus: {
         id: "msuConfig.putBlocked.status",
         description: "Put blocked status",
-        defaultMessage: "Put Blocked"
+        defaultMessage: "Put blocked"
     },
     reconfigReadyStatus: {
         id: "msuConfig.reconfigReady.status",
         description: "Msu empty status",
-        defaultMessage: "Msu empty"
+        defaultMessage: "MSU empty"
     },
     completeStatus: {
         id: "msuConfig.complete.status",
@@ -56,7 +56,7 @@ const messages=defineMessages({
     waitingStatus: {
         id: "msuConfig.waiting.status",
         description: "Dropping MSU at config area",
-        defaultMessage: "Dropping MSU at reconfig area ..."
+        defaultMessage: "Dropping MSU at reconfig area"
     },
     droppedStatus: {
         id: "msuConfig.dropped.status",
