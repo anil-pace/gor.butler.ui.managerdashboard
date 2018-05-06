@@ -12272,6 +12272,7 @@ checkmark1 for indeterminate state*/
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
   position: absolute;
+  box-sizing: border-box;
 }
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {
@@ -12335,6 +12336,7 @@ checkmark1 for indeterminate state*/
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
   position: absolute;
+  box-sizing: border-box;
 }
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {
