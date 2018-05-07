@@ -44,7 +44,7 @@ const  messages= defineMessages({
         defaultMessage: 'e.g: 012678ABC'
     },
     auditlocationinputplaceholder: {
-        id: 'audit.inputplaceholder.text',
+        id: 'audit.locationInputPlaceholder.text',
         description: 'text for audit input placeholder',
         defaultMessage: 'e.g: 132.0.A.47'
     },

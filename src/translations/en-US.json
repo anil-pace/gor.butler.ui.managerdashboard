@@ -2493,6 +2493,12 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.locationInputPlaceholder.text",
+    "description": "text for audit input placeholder",
+    "defaultMessage": "e.g: 132.0.A.47",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.searchinputplaceholder.text",
     "description": "text for search audit input placeholder",
     "defaultMessage": "Search SKU",
@@ -2525,7 +2531,7 @@
   {
     "id": "audit.auditbysku.text",
     "description": "text for Enter SKU and validate",
-    "defaultMessage": "Enter SKU and validate",
+    "defaultMessage": "Audit by SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -5377,6 +5383,12 @@
     "filepath": "./src/containers/systemTabs/changeRackType.js"
   },
   {
+    "id": "gor.msuConfig.destSelection",
+    "description": "label for select destination type",
+    "defaultMessage": "Select a destination type in order to block put.",
+    "filepath": "./src/containers/systemTabs/changeRackType.js"
+  },
+  {
     "id": "gor.msuConfig.blockPutChangeType",
     "description": "button label for block put & change type",
     "defaultMessage": "BLOCK PUT AND CHANGE TYPE",
@@ -5770,7 +5782,7 @@
     "id": "msuConfig.table.noMsuData",
     "description": "Heading for no Msu Data",
     "defaultMessage": "No MSUs with blocked puts",
-    "filepath": "./src/containers/systemTabs/msuConfigTable.js"
+    "filepath": "./src/containers/systemTabs/msuConfigurationTab.js"
   },
   {
     "id": "msuConfig.table.heading",
