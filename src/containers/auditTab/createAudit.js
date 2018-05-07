@@ -44,7 +44,7 @@ const  messages= defineMessages({
         defaultMessage: 'e.g: 012678ABC'
     },
     auditlocationinputplaceholder: {
-        id: 'audit.inputplaceholder.text',
+        id: 'audit.locationInputPlaceholder.text',
         description: 'text for audit input placeholder',
         defaultMessage: 'e.g: 132.0.A.47'
     },
@@ -720,7 +720,7 @@ class CreateAudit extends React.Component{
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split(/[\s,;\t\n]+/);
+          let data = reader.result.trim().split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -869,7 +869,7 @@ class CreateAudit extends React.Component{
   render()
   {
       let self=this;
-      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Enter SKU and validate'/>;
+      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Audit by SKU'/>;
       let enterSkuMessg=<FormattedMessage id="audit.auditbysku.enterSKU" description='text for audit by sku' defaultMessage='Enter SKU and validate'/>;
       let enterCSVMessg=<FormattedMessage id="audit.auditbysku.enterCSV" description='text for audit by sku' defaultMessage='Upload CSV and validate'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;

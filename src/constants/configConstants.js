@@ -39,7 +39,7 @@ export const GIVEN_PAGE_SIZE="PAGE_SIZE";
 export const FILTER_ORDER_ID= "&order_id~=";
 export const ORDER_ID_FILTER_PARAM_WITHOUT_STATUS= "search=externalServiceRequestId";
 export const ORDER_ID_FILTER_PARAM = "externalServiceRequestId";
-export const FILTER_AUDIT_ID="audit_id";
+export const FILTER_AUDIT_ID="display_id";
 export const PENDING_ORDERLINES="/pending_auditlines";
 export const AUDIT_ANAMOLY="/anamoly_auditlines";
 export const SKU_VALIDATION_URL=API_URL + "/sku/audit_attributes_configured/";

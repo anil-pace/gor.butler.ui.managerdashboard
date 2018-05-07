@@ -24,18 +24,20 @@ class MsuConfigConfirmation extends React.Component {
     render() {
         let msgToDisplay;
         if(this.props.activeBtnText === "START RECONFIG"){
-             msgToDisplay = "Are you sure you want to start re-configuring empty MSUs?"
+            msgToDisplay = <FormattedMessage id="msuConfig.startDialog.message"
+                            description="msu config start dialog box"
+                            defaultMessage="Are you sure you want to start re-configuring empty MSUs?"/>
         }
         else{
-            msgToDisplay = "Are you sure you want to stop re-configuring empty MSUs?"
+            msgToDisplay = <FormattedMessage id="msuConfig.stopDialog.message"
+                            description="msu config stop dialog box"
+                            defaultMessage="Are you sure you want to stop re-configuring empty MSUs?"/>
         }
         return <div>
             <div className='gor-create-profile'>
                 <div className='gor-create-profile-header'>
                     <div className='gor-question gor-align-middle'></div>
-                    <div><span><FormattedMessage id="msu.configuration.confirm.saveAndapply.profile"
-                            description="Save and ppply Profile to PPS"
-                            defaultMessage={msgToDisplay}/></span>
+                    <div><span>{msgToDisplay}</span>
                     </div>
                 </div>
 
