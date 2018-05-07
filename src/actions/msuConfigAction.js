@@ -9,7 +9,6 @@ import { FETCH_MSU_CONFIG_LIST,
 	} from './../constants/frontEndConstants'
 
 export function receiveMsuConfigList(data){
-	console.log("coming inside msuConfigAction => receiveMsuConfigList => FETCH_MSU_CONFIG_LIST");
     return {
         type: FETCH_MSU_CONFIG_LIST,
         data
@@ -17,7 +16,6 @@ export function receiveMsuConfigList(data){
 }
 
 export function receiveMsuConfigDestTypesList(data){
-	console.log("coming inside msuConfigAction => receiveDestTypes => FETCH_MSU_CONFIG_LIST");
     return {
         type: FETCH_MSU_CONFIG_DEST_TYPE_LIST,
         data
@@ -25,7 +23,6 @@ export function receiveMsuConfigDestTypesList(data){
 }
 
 export function receiveMsuConfigListViaFilter(data){
-    console.log("coming inside msuConfigAction => receiveMsuConfigListViaFilter => FETCH_MSU_CONFIG_LIST_VIA_FILTER");
     return {
         type: FETCH_MSU_CONFIG_LIST_VIA_FILTER,
         data

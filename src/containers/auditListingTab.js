@@ -235,7 +235,7 @@ if(param==CANCEL_AUDIT){
                       }
                       else if(param==DELETE_AUDIT)
                       {
-  data=<FormattedMessage id='audit.delete' 
+  data=<FormattedMessage id='audit.deleteAudit' 
                         defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
                         values={{auditId:displayId}}/>
                       URL=DELETE_AUDIT_URL;
@@ -288,7 +288,12 @@ _tableBodyData(itemsData){
    "flag":(itemsData[i].progressBarflag)?true:false,
    "status":itemsData[i].status
   }
-  rowObject.resolvedState=itemsData[i].lineResolveState;
+
+  rowObject.Status={
+  "resolveStatus":itemsData[i].lineResolveState||"",
+  "reAuditStatus":itemsData[i].lineReAuditState||""
+  }
+  
   rowObject.button={
     "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
     "resolveButton":itemsData[i].button['audit_resolve_button']=='enable'?true:false,
@@ -335,7 +340,7 @@ render(){
   {sd:1,text: "INITIL NAME", sortable: true,width:7}, 
   {sd:2,text: "SKU CODE", sortable: true,width:25}, 
   {yd:3, text: "NAME",sortable: true, width:16,progressWidth:10}, 
-  {td:4,text: "OPENING STOCK", searchable: false,width:20},
+  {td:4,text: "OPENING STOCK", searchable: false,width:20,style:{'flex':'1 0 20%','overflow':'visible','display':'flex','justify-content':'center','flex-direction':'column'}},
   {rd:5,text: "PURCHAGE QTY", searchable: false,width:20},
   {ed:6,text: "PURCHAGE QTY", searchable: false,width:8}
   ];
@@ -355,12 +360,12 @@ render(){
 
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
-      return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{}} className="cell" >
+      return <div key={index} style={tableData[index].style?(tableData[index].style):(tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{})} className="cell" >
       {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
-      {index==3?<div style={{'text-align':'center','padding-top': '18px','font-weight':'600','color':'#333333'}}>{tablerowdata[idx][text]}</div>:""}
+      {index==3?<div style={{'text-align':'center','font-size':'14px','font-weight':'bold','color':'#333333','line-height':'20px'}}><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div></div>:""}
       {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       {startButton}
        <div className="got-add-notch"></div>

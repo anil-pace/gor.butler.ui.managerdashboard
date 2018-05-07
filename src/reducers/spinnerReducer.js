@@ -125,7 +125,7 @@ export function spinner(state = {}, action) {
 
         case DISPLAY_MSU_CONFIG_SPINNER:
             return Object.assign({}, state, {
-                "setMsuConfigSpinner": action.data
+                "msuConfigSpinner": action.data
             })
 
         case DISPLAY_MSU_CONFIG_FILTER_SPINNER:

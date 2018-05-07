@@ -313,7 +313,7 @@ class MsuConfigTab extends React.Component {
     render() {
         var filterHeight=screen.height - 190 - 50;
         let msuListData=this.props.msuList;
-        
+        let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
                 <div>
@@ -328,7 +328,7 @@ class MsuConfigTab extends React.Component {
 
 
                                 <div className="gorToolBar">
-                                    <div className="gorToolBarWrap">
+                                    <div style={{width: "auto"}} className="gorToolBarWrap">
                                         <div className="gorToolBarElements">
                                             <FormattedMessage id="msuConfig.table.heading" 
                                                 description="Heading for msu Configuration" 
@@ -405,18 +405,21 @@ class MsuConfigTab extends React.Component {
                                                     defaultMessage="Show all MSUs with blocked puts"/>}/>
                         </div>:null}
 
-                        <MsuConfigTable items={msuListData} 
-                            intlMessg={this.props.intlMessages}
-                            setButlerFilter={this.props.butlerFilterDetail}
-                            getButlerFilter={this.props.butlerFilter}
-                            showFilter={this.props.showFilter}
-                            isFilterApplied={this.props.isFilterApplied}
-                            setFilter={this.props.showTableFilter}
-                            botFilterStatus={this.props.botFilterStatus}
-                            butlerState={this.props.filterState}
-                            refreshList={this._clearFilter.bind(this)}
-                            blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
-                        />
+                        {this.props.msuList.length > 0 && 
+                            (<MsuConfigTable items={msuListData} 
+                                intlMessg={this.props.intlMessages}
+                                setButlerFilter={this.props.butlerFilterDetail}
+                                getButlerFilter={this.props.butlerFilter}
+                                showFilter={this.props.showFilter}
+                                isFilterApplied={this.props.isFilterApplied}
+                                setFilter={this.props.showTableFilter}
+                                botFilterStatus={this.props.botFilterStatus}
+                                butlerState={this.props.filterState}
+                                refreshList={this._clearFilter.bind(this)}
+                                blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
+                            />)}
+                        {!this.props.msuConfigSpinner && this.props.msuList.length===0 && <div className="noDataWrapper"> {noData} </div>}
+                        {this.props.msuConfigSpinner && <div className="noDataWrapper"></div>}
                     </div>
                 </div>
             </div>

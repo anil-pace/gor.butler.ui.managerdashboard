@@ -24,6 +24,7 @@ import {
 import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
+import {setMsuConfigSpinner} from  '../actions/spinnerAction';
 import {
 	notifySuccess,
 	notifyFail,
@@ -716,14 +717,17 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case FETCH_MSU_CONFIG_LIST:
+            store.dispatch(setMsuConfigSpinner(false));
             store.dispatch(receiveMsuConfigList(res));
             break;
 
         case FETCH_MSU_CONFIG_DEST_TYPE_LIST: 
+            store.dispatch(setMsuConfigSpinner(false));
             store.dispatch(receiveMsuConfigDestTypesList(res));
             break;
 
         case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
+            store.dispatch(setMsuConfigSpinner(false));
             store.dispatch(receiveMsuConfigListViaFilter(res));
             break;
 
