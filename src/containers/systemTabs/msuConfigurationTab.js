@@ -369,9 +369,14 @@ class MsuConfigTab extends React.Component {
                                                     style={{minWidth: "145px"}} 
                                                     className="gor-msuConfig-btn orange"
                                                     onClick={this._startStopReconfigAction}>
-                                                <FormattedMessage id="gor.msuConfig.startStopReconfig" 
-                                                    description="button label for start Stop reconfig" 
-                                                    defaultMessage={this.state.startStopBtnText}/>
+                                               {this.state.startStopBtnText === "START RECONFIG" ? 
+                                                        <FormattedMessage id="gor.msuConfig.startReconfig" 
+                                                            description="button label for start reconfig" 
+                                                            defaultMessage={"START RECONFIG"}/>:
+                                                         <FormattedMessage id="gor.msuConfig.StopReconfig" 
+                                                        description="button label for Stop reconfig" 
+                                                        defaultMessage={"STOP RECONFIG"}/>
+                                                }
                                             </button>
                                         </div>
                                     </div>  

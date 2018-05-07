@@ -344,17 +344,17 @@ import {
         let x = {};
         
         if(nr === 0 && dr === 0){
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
+            x.message = (<FormattedMessage id="orders.pending.status" description="pending" defaultMessage="Pending"/>);
             x.action = false;
         }
         else if(nr === 0){
-            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
+            x.message=(<FormattedMessage id="orders.toBePicked.status" description="pending" defaultMessage="{current} products to be picked"
                       values={{current:dr}} />);
             x.action = false;
         }
         else{
             x.width = (nr/dr)*100;
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
+            x.message = (<FormattedMessage id="orders.productsPicked.status" description="pending" defaultMessage="{current} of {total} products picked"
                             values={{current:nr, total: dr}} />);
             x.action  = true;
         }
