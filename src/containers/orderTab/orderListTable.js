@@ -472,7 +472,7 @@ class OrderListTable extends React.Component {
                         pbtRows.push(pbtRow);
                     }
                     else{
-                        return false;
+                        return [];
                     }
                 }
             processedData.pbtData = pbtRows;
@@ -710,7 +710,12 @@ class OrderListTable extends React.Component {
                                 </GTableRow>
                             }):""}
                         </GTableBody>
-                    : <div className="noOrdersPresent"> No orders available </div>}
+                    : <div className="noOrdersPresent"> 
+                            <FormattedMessage id="orders.noOrders.noOrders" 
+                                description="display no orders" 
+                                defaultMessage="No orders available"/>
+                        </div>
+                    }
                     </GTable>
                 </div>
             </div>
