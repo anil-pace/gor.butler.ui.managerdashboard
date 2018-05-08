@@ -1,12 +1,14 @@
 import {setLoginSpinner} from '../actions/loginAction';
 import {uploadMasterDataProcessing} from '../actions/utilityActions';
-import {AUTH_LOGIN,MASTER_FILE_UPLOAD,DOWNLOAD_STOCK_LEDGER_REPORT,DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,PPS_PROFILE_REQUESTED} from '../constants/frontEndConstants';
-import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502,NO_NET} from '../constants/messageConstants';
+import {AUTH_LOGIN,MASTER_FILE_UPLOAD,DOWNLOAD_STOCK_LEDGER_REPORT,
+	DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
+	PPS_PROFILE_REQUESTED,SELLER_RECALL} from '../constants/frontEndConstants';
+import {ERR_CONNECT,ERR_400,ERR_401,ERR_403,ERR_405,ERR_408,ERR_409,ERR_500,ERR_502,NO_NET,ITEM_RECALL_FAILURE} from '../constants/messageConstants';
 import {notifyFail,loginError} from '../actions/validationActions';
 import {setStockLedgerSpinner,setStockLedgerRawTransactionsSpinner} from '../actions/spinnerAction'
 import {profileRequested} from './../actions/ppsConfigurationActions'
 
-export function ShowError(store,cause,status)
+export function ShowError(store,cause,status,response)
 {
 	console.log('In Error utility');
 	switch(status)
@@ -49,13 +51,16 @@ export function ShowError(store,cause,status)
 	if(cause=== MASTER_FILE_UPLOAD){
 		store.dispatch(uploadMasterDataProcessing(false));
 	}
-	if(cause===DOWNLOAD_STOCK_LEDGER_REPORT){
+	else if(cause===DOWNLOAD_STOCK_LEDGER_REPORT){
 		store.dispatch(setStockLedgerSpinner(false))
 	}
-	if(cause===DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT){
+	else if(cause===DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT){
 		store.dispatch(setStockLedgerRawTransactionsSpinner(false))
 	}
-	if(cause===PPS_PROFILE_REQUESTED){
+	else if(cause===PPS_PROFILE_REQUESTED){
 		store.dispatch(profileRequested({}))
+	}
+	else if(cause === SELLER_RECALL){
+		store.dispatch(notifyFail((ITEM_RECALL_FAILURE[response.reason]) || ERR_400));
 	}
 }  

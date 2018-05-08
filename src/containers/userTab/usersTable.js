@@ -94,7 +94,7 @@ class UsersTable extends React.Component {
                         <GTableHeaderCell header={self.state.header[0]} onClick={self._onSortChange.bind(self, this.state.header[0])}>
                             <span><FormattedMessage id="user.table.usersCount" description="Users Column"
                                                     defaultMessage="{rowsCount} USERS"
-                                                    values={{rowsCount: this.props.data.length}}/> {}</span>
+                                                    values={{rowsCount: this.state.userList.length}}/> {}</span>
                         </GTableHeaderCell>
                         <GTableHeaderCell header={self.state.header[1]} onClick={self._onSortChange.bind(self, this.state.header[1])}>
                         <span><FormattedMessage id="user.table.status" description="Users Status"

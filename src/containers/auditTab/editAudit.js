@@ -89,6 +89,7 @@ class EditAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         copyPasteLocation:{
@@ -100,6 +101,7 @@ class EditAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         filterApplied:false,
@@ -211,11 +213,13 @@ class EditAudit extends React.Component{
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -311,7 +315,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
       copyPasteSKU:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteSKU.focusedEl
+        focusedEl:this.state.copyPasteSKU.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -319,7 +324,8 @@ _onAttributeSelectionFirstTime(){
        this.setState({
       copyPasteLocation:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteLocation.focusedEl
+        focusedEl:this.state.copyPasteLocation.focusedEl,
+        selectionStart:this.state.selectionStart
       }
     })
     }
@@ -383,10 +389,12 @@ _onAttributeSelectionFirstTime(){
     if(this.props.auditId && type !== "validate" && this.props.param!=='duplicate'){
       validSKUData.audit_id=this.props.auditId;
       validSKUData.action=(type === "create" || type === "confirm")?'edit':'';
+      validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       validSKUData.kq = this.kqCheck.checked;
     }
     if(this.props.param=='duplicate' && type !== "validate"){
       validSKUData.action='duplicate';
+      validSKUData.audit_creator_name=this.props.username;
       validSKUData.kq = this.kqCheck.checked;
     }
     
@@ -474,6 +482,7 @@ _onAttributeSelectionFirstTime(){
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
+      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'',
       "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -487,6 +496,7 @@ _onAttributeSelectionFirstTime(){
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":'duplicate',
+      "audit_creator_name":this.props.username,
       "kq":this.kqCheck.checked,
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -548,7 +558,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
         copyPasteSKU:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -557,7 +568,8 @@ _onAttributeSelectionFirstTime(){
       this.setState({
         copyPasteLocation:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         filterApplied:true
       })
@@ -570,7 +582,8 @@ _onAttributeSelectionFirstTime(){
         filterApplied:false,
         copyPasteSKU:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -579,7 +592,8 @@ _onAttributeSelectionFirstTime(){
         filterApplied:false,
         copyPasteLocation:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -602,7 +616,8 @@ _onAttributeSelectionFirstTime(){
     this.setState({
       copyPasteLocation:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.selectionStart
       }
     })
   }
@@ -610,7 +625,8 @@ _onAttributeSelectionFirstTime(){
     this.setState({
       copyPasteSKU:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.selectionStart
       }
     })
   }
@@ -618,6 +634,7 @@ _onAttributeSelectionFirstTime(){
   _updateInput(event,id) {
    
    var input = event.target.value.trim(),
+   selectionStart = event.target.selectionStart,
    inputList = input.split(/[\s,;\t\n]+/),
    processedList=[],
    activeTabIndex = this.state.activeTabIndex,
@@ -649,6 +666,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteLocation:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -658,6 +676,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteSKU:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -706,7 +725,8 @@ _onAttributeSelectionFirstTime(){
          this.setState({
           copyPasteSKU:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -714,7 +734,8 @@ _onAttributeSelectionFirstTime(){
          this.setState({
           copyPasteLocation:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
       }
@@ -768,7 +789,8 @@ _onAttributeSelectionFirstTime(){
         this.setState({
               copyPasteSKU:{
               data:processedData,
-              focusedEl:this.state.copyPasteSKU.focusedEl
+              focusedEl:this.state.copyPasteSKU.focusedEl,
+              selectionStart:this.state.selectionStart
             },
             filterSelectionState
            })
@@ -777,7 +799,8 @@ _onAttributeSelectionFirstTime(){
         this.setState({
             copyPasteLocation:{
             data:processedData,
-            focusedEl:this.state.copyPasteLocation.focusedEl
+            focusedEl:this.state.copyPasteLocation.focusedEl,
+            selectionStart:this.state.selectionStart
           },
           filterSelectionState
          })
@@ -810,11 +833,12 @@ _onAttributeSelectionFirstTime(){
     
     var _this =this;
     var textType = /text.*/;
-      if (fileObject.type.match(textType)) {
+    var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
+      if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split("\n");
+          let data = reader.result.split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -831,7 +855,8 @@ _onAttributeSelectionFirstTime(){
             _this.setState({
               copyPasteLocation:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -844,7 +869,8 @@ _onAttributeSelectionFirstTime(){
              _this.setState({
               copyPasteSKU:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -879,7 +905,8 @@ _onAttributeSelectionFirstTime(){
         skuAttributes:{},
         copyPasteSKU:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -892,7 +919,8 @@ _onAttributeSelectionFirstTime(){
         locationAttributes:{},
         copyPasteLocation:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -917,7 +945,8 @@ _onAttributeSelectionFirstTime(){
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -927,7 +956,8 @@ _onAttributeSelectionFirstTime(){
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.selectionStart
         }
       })
     }
@@ -1214,14 +1244,16 @@ _onAttributeSelectionFirstTime(){
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
-                        
+                       {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error"> 
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1378,14 +1410,16 @@ _onAttributeSelectionFirstTime(){
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
                         {!self.state.isValidCsv?
-                        
+                  <div className="gor-global-notification"> 
+                  <div className="message error"> 
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1471,6 +1505,7 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo,
       locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
+      username: state.authLogin.username,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,

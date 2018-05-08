@@ -81,6 +81,7 @@ class PPS extends React.Component {
                 "audit":0
             }
         }
+        this.props.showTableFilter(false)
     }
 
     componentWillMount() {

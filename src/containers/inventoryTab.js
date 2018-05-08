@@ -61,7 +61,7 @@ class InventoryTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data)) {
+        if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data) || !this.subscription ) {
             this.formatData(nextProps.data)
         }
 

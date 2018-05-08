@@ -2,7 +2,7 @@
   {
     "id": "emergency.heading",
     "description": "Text for emergency heading",
-    "defaultMessage": "Systemwide emergency stop"
+    "defaultMessage": "Systemwide System stop"
   },
   {
     "id": "emergency.type",
@@ -16,7 +16,7 @@
   },
   {
     "id": "emergency.stop",
-    "description": "Text for emergency stop",
+    "description": "Text for System stop",
     "defaultMessage": "Stoppped:"
   },
   {

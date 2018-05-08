@@ -119,6 +119,14 @@ defaultMessage: "End time"
 vdhProgress: {
 id: "viewDetais.audit.progress",
 defaultMessage: "Progress"
+},
+trueStatus:{
+  id: "viewDetais.audit.true",
+  defaultMessage: "True"
+},
+falseStatus:{
+  id: "viewDetais.audit.false",
+  defaultMessage: "False"
 }
 });
 
@@ -237,9 +245,11 @@ _timeFormat(UTCtime){
     let vdhStartTime = this.context.intl.formatMessage(messages.vdhStartTime);
     let vdhEndTime = this.context.intl.formatMessage(messages.vdhEndTime);
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
+    let trueStatus=this.context.intl.formatMessage(messages.trueStatus);
+    let falseStatus=this.context.intl.formatMessage(messages.falseStatus);
 
     let tile1Data={},tile2Data={},tile3Data={};
-    tile1Data[vdhCreatedBy]=data.audit_created_by;
+    tile1Data[vdhCreatedBy]=data.audit_creator_name;
     tile1Data[vdhOperator]=data.operator_assigned;
     if(data.audit_param_type=="sku"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiSKU:vdSingleSKU;
@@ -247,10 +257,9 @@ _timeFormat(UTCtime){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
     tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
-    tile3Data[vdhShowKQ]=data.kq;
+    tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
     tile3Data[vdhReminder]=data.reminder!==""?data.reminder:'-';
-
-    tile2Data[vdhStartTime]=this._timeFormat(data.start_actual_time);
+    tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
     tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +vdLinesCompleted+data.progress.total:"-";
     return [tile1Data,tile2Data,tile3Data];
@@ -364,7 +373,7 @@ return tableData;
                      <FormattedMessage id="audit.audittask" description='Heading for view orderline' defaultMessage='Audit Task' />
                   </span>
                   <span className='AuditIDWrapper'>
-                     - {allData.audit_id}
+                     - {this.props.displayId}
                   </span>
                   <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
                </div>
@@ -379,7 +388,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {tiledata[2]["PPS ID"]!=='-'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
@@ -403,7 +412,7 @@ return tableData;
                        {processedTableData ? processedTableData.map(function (row, idx) {
                            return (
                                
-                               <GTableRow key={idx} index={idx} offset={tableData.offset} max={tableData.max} data={tableData} >
+                               <GTableRow key={idx} index={idx}  data={processedTableData} >
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  

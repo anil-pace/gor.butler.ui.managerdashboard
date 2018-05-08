@@ -13,8 +13,9 @@ export  function recieveAuditDetail(state={},action){
             totalPage=Number(res.total_pages);
             totalAudit=Number(res.total_results);
             if(res.audit_list) {
+                let auditDetailData = action.saltParams.lazyData ? (state.auditDetail || []) : [];
                 return Object.assign({}, state, {
-                    "auditDetail" : res.audit_list.length>0?res.audit_list:state.auditDetail,
+                    "auditDetail" : auditDetailData.concat(res.audit_list),
                     "totalPage" : res.audit_list.length>0?totalPage:state.totalPage,
                     "totalAudits" : res.audit_list.length>0?totalAudit:state.totalAudits,
                     "successQuery":res.audit_list.length>0?state.query:state.successQuery,
@@ -22,6 +23,7 @@ export  function recieveAuditDetail(state={},action){
                 })
             }
             break;
+
         case REFRESH_AUDIT:
             return Object.assign({}, state, {
                 "auditRefresh" : new Date()
