@@ -174,7 +174,8 @@ class DownloadReportTab extends React.Component{
         var page = query.page || 1;
 
         var params={
-                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize,
+                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize+
+                '&sort=requestedTime&order=DESC',
                 'method':GET,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
