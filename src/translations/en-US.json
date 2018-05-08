@@ -2531,7 +2531,7 @@
   {
     "id": "audit.auditbysku.text",
     "description": "text for Enter SKU and validate",
-    "defaultMessage": "Enter SKU and validate",
+    "defaultMessage": "Audit by SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

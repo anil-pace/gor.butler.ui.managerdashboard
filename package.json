@@ -56,7 +56,8 @@
     "build": "REACT_APP_FILE_EXT=.min npm run build-prod",
     "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
-    "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json'"
+    "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json' && node translate.js"
+    
   },
   "homepage": "./"
 }
