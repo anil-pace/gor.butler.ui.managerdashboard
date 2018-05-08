@@ -20,7 +20,7 @@ export function receiveOrderSummaryData(data){
 	}
 }
 
-export function receiveCufOffTimeData(data){
+export function receiveCutOffTimeData(data){
 	return {
 		type: ORDERS_CUT_OFF_TIME_FETCH,
 		data

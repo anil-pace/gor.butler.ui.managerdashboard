@@ -115,6 +115,9 @@ import {
     FETCH_MSU_CONFIG_STOP_RECONFIG,
     FETCH_MSU_CONFIG_RELEASE_MSU,
     FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+    GET,
+    POST,
+    APP_JSON
 } from "../constants/frontEndConstants";
 
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
@@ -197,9 +200,15 @@ import { receiveMsuConfigList,
 
 import {receiveOrderFulfilmentData, 
         receiveOrderSummaryData,
-        receiveCufOffTimeData, 
+        receiveCutOffTimeData, 
         receiveOrdersPerPbtData,
         receiveOrdersLinesData} from './../actions/norderDetailsAction';
+
+import {
+     ORDERS_PER_PBT_URL
+} from './../constants/configConstants';
+
+import { makeAjaxCall } from './../actions/ajaxActions';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -697,13 +706,38 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveOrderSummaryData(res));
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
-            store.dispatch(setOrderListSpinner(false))
-            store.dispatch(receiveCufOffTimeData(res));
+            store.dispatch(setOrderListSpinner(false));
+            let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+            let endDate = new Date().toISOString();
+            
+            // If length of response from Level 1 http call is 1 with no cut off time, call Level 2 http request with cut off time: null
+            if(res.length === 1 && res[0].cut_off_time === null){
+                let formData={
+                    "start_date": startDate,
+                    "end_date": endDate,
+                    "cut_off_time": null
+                };
+
+                let params={
+                    'url':ORDERS_PER_PBT_URL,
+                    'method':POST,
+                    'contentType':APP_JSON,
+                    'accept':APP_JSON,
+                    'cause':ORDERS_PER_PBT_FETCH,
+                    'formdata':formData,
+                }
+                store.dispatch(makeAjaxCall(params));
+            }
+            else{
+                store.dispatch(receiveCutOffTimeData(res));
+            }
             break;
+
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(setOrderListSpinner(false));
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
             break;
+
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));
             break;
