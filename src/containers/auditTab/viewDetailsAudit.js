@@ -303,11 +303,11 @@ _timeFormat(UTCtime){
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
   rowObject.auditDetails={
-      "header":[itemsData[i].id],
+      "header":[itemsData[i].id||""],
       "subHeader":[itemsData[i].name||""]
       };
     
-      if(itemsData[i].entity_list!=0){
+      if(itemsData[i].attributes_list!=0){
         rowObject.attrDetails={
       "header":[itemsData[i].attributes_list.length +vdAttrSelected],
       "subHeader":itemsData[i].attributes_list
@@ -315,7 +315,7 @@ _timeFormat(UTCtime){
     }else{
       rowObject.attrDetails={
       "header":[vdNoAttrSelected],
-      "subHeader":[]
+      "subHeader":[""]
       }
     }
     if(itemsData[i].result.sku_status=='inventory_empty'){
@@ -360,9 +360,9 @@ return tableData;
 		];
 
 		var tableData=[
-			{id:1,text: "SKU CODE", sortable: true, width:30}, 
-			{id:2, text: "NAME",sortable: true,  width:30}, 
-      {id:3,text: "OPENING STOCK", searchable: false, width:30}
+			{class:"centerAligned columnStyle"}, 
+			{class:"centerAligned columnStyle"}, 
+      {class:"centerAligned columnStyle"}
 
 		];
       return (
@@ -407,7 +407,7 @@ return tableData;
                                    </GTableHeaderCell>
                           
                        </GTableHeader>
-
+                       {processedTableData.length>0?
                        <GTableBody data={processedTableData} >
                        {processedTableData ? processedTableData.map(function (row, idx) {
                            return (
@@ -415,9 +415,9 @@ return tableData;
                                <GTableRow key={idx} index={idx}  data={processedTableData} >
                              
                                    {Object.keys(row).map(function (text, index) {
-                                       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
-                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'} />:""} 
-                                          {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'} />:""}     
+                                       return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"} >  
+                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
+                                          {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} headerClassName="viewDetailsSeparatorHeader" subheaderClassName="viewDetailsSeparatorSubHeader" separator={<div className="dotImage"></div>} />:""}     
                                           {index==2?<div className="missing-item">{processedTableData[idx][text]}</div>:""} 
 
                                        </div>
@@ -426,14 +426,13 @@ return tableData;
                                </GTableRow>
                            )
                        }):""}
-                   </GTableBody>
+                   </GTableBody>:<div className="gor-Audit-no-dataview" style={{'background-color':'white'}}>
+  <div>
+  <FormattedMessage id='audit.nonresult'  defaultMessage="No result found." description="audit not found"/>
+  </div>
+  </div>}
                   
                </GTable>
-
-
-
-
-
 
             </div>:<div>{noDataToShow}</div>}
 

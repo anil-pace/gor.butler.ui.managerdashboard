@@ -167,7 +167,7 @@ class AuditStart extends React.Component {
     let arr = []; // this.props.checkedAudit
     if (type == "Audit") {
       if (e.currentTarget.checked) {
-        Object.keys(ppslist).forEach(function(key) {
+        Object.keys(ppslist).forEach(function (key) {
           if (ppslist[key].pps_mode == "audit") arr.push(ppslist[key].pps_id);
         });
         this.props.setCheckedAuditpps(arr);
@@ -176,7 +176,7 @@ class AuditStart extends React.Component {
       }
     } else {
       if (e.currentTarget.checked) {
-        Object.keys(ppslist).forEach(function(key) {
+        Object.keys(ppslist).forEach(function (key) {
           if (ppslist[key].pps_mode !== "audit") arr.push(ppslist[key].pps_id);
         });
         this.props.setCheckedOtherpps(arr);
@@ -201,11 +201,11 @@ class AuditStart extends React.Component {
     }
   }
   componentDidMount() {
-      let urlStr = "";
-    if (this.props.param === "CHANGE_PPS"){
-        urlStr = PPSLIST_ACTIVE_AUDIT_URL
-    }else{
-        urlStr = PPSLIST_ALL_URL
+    let urlStr = "";
+    if (this.props.param === "CHANGE_PPS") {
+      urlStr = PPSLIST_ACTIVE_AUDIT_URL
+    } else {
+      urlStr = PPSLIST_ALL_URL
     }
 
     let userData = {
@@ -240,16 +240,16 @@ class AuditStart extends React.Component {
     this.setState({ checkedAuditPPS: nextProps.checkedAuditPPSList });
     this.setState({ checkedOtherPPS: nextProps.checkedOtherPPSList });
 
-   
+
   }
   handleChange(input) {
     var updatedList = this.props.ppsList.pps_list;
     let data = input.toLowerCase();
     var queryResult = [];
-    Object.keys(updatedList).forEach(function(key) {
+    Object.keys(updatedList).forEach(function (key) {
       if (
         updatedList[key]["operator_assigned"].toLowerCase().indexOf(data) !=
-          -1 ||
+        -1 ||
         updatedList[key]["pps_mode"].toLowerCase().indexOf(data) != -1
       ) {
         queryResult.push(updatedList[key]);
@@ -263,12 +263,12 @@ class AuditStart extends React.Component {
     console.log(this.props.auditID);
     let me = this;
     let items = this.state.items || [];
-    let changePPSHeader=( <FormattedMessage
+    let changePPSHeader = (<FormattedMessage
       id="audit.audittask.headerchangeppd"
       description="Heading for change pps"
       defaultMessage="Change PPS"
     />);
-    let startAuditHeader=( <FormattedMessage
+    let startAuditHeader = (<FormattedMessage
       id="audit.audittask.headerstartaudit"
       description="Heading for start audit"
       defaultMessage="Start Audit"
@@ -277,21 +277,21 @@ class AuditStart extends React.Component {
       <FormattedMessage
         id="audit.startaudit.auditmodepps"
         description="PPS in audit mode"
-        defaultMessage="PPS in audit mode"
+        defaultMessage="PPS in audit mode(s)"
       />
     );
     let otherModePPS = (
       <FormattedMessage
         id="audit.startaudit.othermodepps"
         description="PPS in other mode"
-        defaultMessage="PPS in other mode"
+        defaultMessage="PPS in other mode(s)"
       />
     );
     let operatorAssign = (
       <FormattedMessage
         id="audit.startaudit.operatorassign"
-        description="Operator Assigned"
-        defaultMessage="Operator Assigned"
+        description="Operator"
+        defaultMessage="Operator"
       />
     );
     let startButton = (
@@ -316,7 +316,7 @@ class AuditStart extends React.Component {
     let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
     let totalAuditPPSCount = 0;
     let totalOtherPPSCount = 0;
-    Object.keys(items).forEach(function(key) {
+    Object.keys(items).forEach(function (key) {
       if (items[key].pps_mode == "audit") totalAuditPPSCount++;
       else {
         totalOtherPPSCount++;
@@ -325,7 +325,7 @@ class AuditStart extends React.Component {
 
     let auditPPS = [],
       otherPPS = [];
-    Object.keys(items).map(function(key) {
+    Object.keys(items).map(function (key) {
       if (items[key].pps_mode === "audit") {
         auditPPS.push(items[key]);
       } else {
@@ -336,14 +336,14 @@ class AuditStart extends React.Component {
     var tablerowdataOther = this._tableotherPPSData(otherPPS);
 
     var tableData = [
-      { id: 1, text: "SKU CODE", sortable: true, width: 35 },
-      { id: 2, text: "NAME", sortable: true, width: 32 },
-      { id: 3, text: "OPENING STOCK", searchable: false, width: 32}
+      {class:'auditppscolumn1style' },
+      { class: "auditppscolumn2style" },
+      { class: "auditppscolumn2style" }
     ];
     var tableDataother = [
-      { id: 1, text: "SKU CODE", sortable: true, width: 35 },
-      { id: 2, text: "NAME", sortable: true, width: 65 },
-      { id: 3, text: "OPENING STOCK", searchable: false }
+      {class:'otherppscolumn1Style' },
+      {class: "otherppscolumn2Style" },
+      { class: "otherppscolumn2Style" }
     ];
 
     return (
@@ -351,7 +351,7 @@ class AuditStart extends React.Component {
         <div className="gor-AuditDetails-modal-content">
           <div className="gor-auditDetails-modal-head">
             <span className="AuditIDWrapper">
-              {this.props.param == "CHANGE_PPS"?changePPSHeader:startAuditHeader}
+              {this.props.param == "CHANGE_PPS" ? changePPSHeader : startAuditHeader}
             </span>
 
             <span className="close" onClick={this._removeThisModal.bind(this)}>
@@ -371,12 +371,13 @@ class AuditStart extends React.Component {
                 />
               </div>
             </div>
+
             {tablerowdataAudit.length > 0 ? (
               <GTable options={["table-bordered", "auditStart"]}>
                 <GTableHeader options={["auditTable"]}>
-                  <GTableHeaderCell key={1}header="Audit"className="audittable">
-                    <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={ this.props.checkedAuditPPSList.length == 0 ? "" : true} onChange={me.headerCheckChange.bind(me, "Audit")}/>
-                      <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark": "checkmark1"}/>
+                  <GTableHeaderCell key={1} header="Audit" className="audittable">
+                    <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} onChange={me.headerCheckChange.bind(me, "Audit")} />
+                      <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
                     </label>
                     <span>
                       {tablerowdataAudit.length}
@@ -386,107 +387,101 @@ class AuditStart extends React.Component {
                 </GTableHeader>
 
                 <GTableBody data={tablerowdataAudit}>
-                  {tablerowdataAudit? tablerowdataAudit.map(function(row, idx) {
-                        return (
-                          <GTableRow
-                            key={idx}
-                            index={idx}
-                            data={tablerowdataAudit}
-                          >
-                            {Object.keys(row).map(function(text, index) {
-                              return (
-                                <div
-                                  key={index}
-                                  style={
-                                    tableData[index].width ? {flex:"1 0 " +tableData[index].width +"%"}: {}} className="cell" >
-                                  {index == 0 ? (
-                                    <label
-                                      className="container"
-                                      style={{
-                                        "margin-top": "15px",
-                                        "margin-left": "10px"
-                                      }}
-                                    >
-                                      {" "}
-                                      <input
-                                        type="checkbox"
-                                        id={
-                                          tablerowdataAudit[idx]["ppsDetails"][
-                                            "header"
-                                          ][0]
-                                        }
-                                        checked={
-                                          me.state.checkedAuditPPS.indexOf(
-                                            tablerowdataAudit[idx][
-                                              "ppsDetails"
-                                            ]["header"][0]
-                                          ) == -1
-                                            ? ""
-                                            : true
-                                        }
-                                        onChange={me.CheckChange.bind(
-                                          me,
-                                          "Audit"
-                                        )}
-                                      />
-                                      <span className="checkmark" />
-                                    </label>
-                                  ) : (
-                                    ""
-                                  )}
-                                  {index == 0 ? (
-                                    <DotSeparatorContent
-                                      header={
-                                        tablerowdataAudit[idx][text]["header"]
-                                      }
-                                      subHeader={
-                                        tablerowdataAudit[idx][text][
-                                          "subHeader"
-                                        ]
-                                      }
-                                      separator={"."}
-                                    />
-                                  ) : (
-                                    ""
-                                  )}
-                                  {index == 1 ? (
-                                    <div>
-                                      {operatorAssign}:{" "}
-                                      {tablerowdataAudit[idx][text]}
-                                    </div>
-                                  ) : (
-                                    ""
-                                  )}
-                                  {index == 2 ? (
-                                    <DotSeparatorContent
-                                      header={
-                                        tablerowdataAudit[idx][text]["header"]
-                                      }
-                                      subHeader={
-                                        tablerowdataAudit[idx][text][
-                                          "subHeader"
-                                        ]
-                                      }
-                                      separator={"."}
-                                    />
-                                  ) : (
-                                    ""
-                                  )}
+
+                  {tablerowdataAudit ? tablerowdataAudit.map(function (row, idx) {
+                    return (
+                      <GTableRow
+                        key={idx}
+                        index={idx}
+                        data={tablerowdataAudit}
+                      >
+                        {Object.keys(row).map(function (text, index) {
+                          return (
+                            <div
+                              key={index}
+                              style={tableData[index].style} className={tableData[index].class ? tableData[index].class + " cell" : "" + "cell"} >
+                              {index == 0 ? (
+                                <label
+                                  className="container marginAlign"
+                                  
+                                >
+                                  {" "}
+                                  <input
+                                    type="checkbox"
+                                    id={
+                                      tablerowdataAudit[idx]["ppsDetails"][
+                                      "header"
+                                      ][0]
+                                    }
+                                    checked={
+                                      me.state.checkedAuditPPS.indexOf(
+                                        tablerowdataAudit[idx][
+                                        "ppsDetails"
+                                        ]["header"][0]
+                                      ) == -1
+                                        ? ""
+                                        : true
+                                    }
+                                    onChange={me.CheckChange.bind(
+                                      me,
+                                      "Audit"
+                                    )}
+                                  />
+                                  <span className="checkmark" />
+                                </label>
+                              ) : (
+                                  ""
+                                )}
+                              {index == 0 ? (
+                                <DotSeparatorContent
+                                  header={
+                                    tablerowdataAudit[idx][text]["header"]
+                                  }
+                                  subHeader={
+                                    tablerowdataAudit[idx][text][
+                                    "subHeader"
+                                    ]
+                                  }
+                                  separator={<div className="dotImage"></div>}
+                                />
+                              ) : (
+                                  ""
+                                )}
+                              {index == 1 ? (
+                                <div>
+                                  {operatorAssign}:{" "}
+                                  {tablerowdataAudit[idx][text]}
                                 </div>
-                              );
-                            })}
-                          </GTableRow>
-                        );
-                      })
-                    : ""}
+                              ) : (
+                                  ""
+                                )}
+                              {index == 2 ? (
+                                <DotSeparatorContent
+                                  header={
+                                    tablerowdataAudit[idx][text]["header"]
+                                  }
+                                  subHeader={
+                                    tablerowdataAudit[idx][text][
+                                    "subHeader"
+                                    ]
+                                  }
+                                  headerClassName="viewDetailsSeparatorHeader" subheaderClassName="viewDetailsSeparatorSubHeader"
+                                  separator={<div className="dotImage"></div>}
+                                />
+                              ) : (
+                                  ""
+                                )}
+                            </div>
+                          );
+                        })}
+                      </GTableRow>
+                    );
+                  }) : ""}
                 </GTableBody>
-              </GTable>
-            ) : (
-              ""
-            )}
+              </GTable>) : ("")}
 
             {tablerowdataOther.length > 0 ? (
-              <GTable options={["table-bordered"]}>
+              <GTable options={["table-bordered", "auditOther"]}>
                 <GTableHeader options={["auditTable"]}>
                   <GTableHeaderCell
                     key={1}
@@ -521,106 +516,101 @@ class AuditStart extends React.Component {
 
                 <GTableBody data={tablerowdataOther}>
                   {tablerowdataOther
-                    ? tablerowdataOther.map(function(row, idx) {
-                        return (
-                          <GTableRow
-                            key={idx}
-                            index={idx}
-                            data={tablerowdataOther}
-                          >
-                            {Object.keys(row).map(function(text, index) {
-                              return (
-                                <div
-                                  key={index}
-                                  style={
-                                    tableDataother[index].width
-                                      ? {
-                                          flex:
-                                            "1 0 " +
-                                            tableDataother[index].width +
-                                            "%"
-                                        }
-                                      : {}
-                                  }
-                                  className="cell"
-                                >
-                                  {index == 0 ? (
-                                    <label
-                                      className="container"
-                                      style={{
-                                        "margin-top": "15px",
-                                        "margin-left": "10px"
-                                      }}
-                                    >
-                                      {" "}
-                                      <input
-                                        type="checkbox"
-                                        id={
-                                          tablerowdataOther[idx]["ppsDetails"][
-                                            "header"
-                                          ][0]
-                                        }
-                                        checked={
-                                          me.state.checkedOtherPPS.indexOf(
-                                            tablerowdataOther[idx][
-                                              "ppsDetails"
-                                            ]["header"][0]
-                                          ) == -1
-                                            ? ""
-                                            : true
-                                        }
-                                        onChange={me.CheckChange.bind(
-                                          me,
-                                          "Other"
-                                        )}
-                                      />
-                                      <span className="checkmark" />
-                                    </label>
-                                  ) : (
-                                    ""
-                                  )}
-                                  {index == 0 ? (
-                                    <DotSeparatorContent
-                                      header={
-                                        tablerowdataOther[idx][text]["header"]
+                    ? tablerowdataOther.map(function (row, idx) {
+                      return (
+                        <GTableRow
+                          key={idx}
+                          index={idx}
+                          data={tablerowdataOther}
+                        >
+                          {Object.keys(row).map(function (text, index) {
+                            return (
+                              <div
+                                key={index}
+                                style={tableDataother[index].style}
+                                className={tableDataother[index].class ? tableDataother[index].class + " cell" : "" + "cell"}
+                              >
+                                {index == 0 ? (
+                                  <label
+                                  className="container marginAlign"
+                                    
+                                  >
+                                    {" "}
+                                    <input
+                                      type="checkbox"
+                                      id={
+                                        tablerowdataOther[idx]["ppsDetails"][
+                                        "header"
+                                        ][0]
                                       }
-                                      subHeader={
-                                        tablerowdataOther[idx][text][
-                                          "subHeader"
-                                        ]
+                                      checked={
+                                        me.state.checkedOtherPPS.indexOf(
+                                          tablerowdataOther[idx][
+                                          "ppsDetails"
+                                          ]["header"][0]
+                                        ) == -1
+                                          ? ""
+                                          : true
                                       }
-                                      separator={"."}
+                                      onChange={me.CheckChange.bind(
+                                        me,
+                                        "Other"
+                                      )}
                                     />
-                                  ) : (
+                                    <span className="checkmark" />
+                                  </label>
+                                ) : (
                                     ""
                                   )}
-                                  {index == 1 ? (
-                                    <div>
-                                      {operatorAssign}:{" "}
-                                      {tablerowdataOther[idx][text]}
-                                    </div>
-                                  ) : (
+                                {index == 0 ? (
+                                  <DotSeparatorContent
+                                    header={
+                                      tablerowdataOther[idx][text]["header"]
+                                    }
+                                    subHeader={
+                                      tablerowdataOther[idx][text][
+                                      "subHeader"
+                                      ]
+                                    }
+                                    separator={<div className="dotImage"></div>}
+                                  />
+                                ) : (
                                     ""
                                   )}
-                                </div>
-                              );
-                            })}
-                          </GTableRow>
-                        );
-                      })
+                                {index == 1 ? (
+                                  <div>
+                                    {operatorAssign}:{" "}
+                                    {tablerowdataOther[idx][text]}
+                                  </div>
+                                ) : (
+                                    ""
+                                  )}
+                              </div>
+                            );
+                          })}
+                        </GTableRow>
+                      );
+                    })
                     : ""}
                 </GTableBody>
               </GTable>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
-          <button
+          {tablerowdataAudit.length==0 && tablerowdataOther.length==0?<div className="gor-Audit-no-dataview" style={{'background-color':'white'}}>
+  <div>
+  <FormattedMessage id='audit.nonresultstart'  defaultMessage="No result found." description="audit not found"/>
+  </div>
+  </div>:<button
             className="gor-add-btn gor-listing-button rightMargin"
             onClick={this._handlestartaudit.bind(this)}
           >
             {startButton}
-          </button>
+          </button>}
+
+          
+
         </div>
       </div>
     );
@@ -639,15 +629,15 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    userRequest: function(data) {
+    userRequest: function (data) {
       dispatch(userRequest(data));
     },
-    setCheckedAuditpps: function(data) {
+    setCheckedAuditpps: function (data) {
       dispatch(setCheckedAuditpps(data));
     },
-    setCheckedOtherpps: function(data) {
+    setCheckedOtherpps: function (data) {
       dispatch(setCheckedOtherpps(data));
     }
   };

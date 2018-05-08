@@ -82,10 +82,10 @@
   font-weight: 600;
   text-align: left;
   color: #ffffff;
-  padding-left: 14px;
-    padding-right: 14px;
+  padding-left: 15px;
     vertical-align: sub;
     cursor: pointer;
+    width:141px;
 }
 
 .gor-audit-filter-create-wrap {
@@ -128,9 +128,18 @@ display:inline-block;
   text-align: center;
   padding-top: 200px;
   font-size: 20px;
-  font-weight: bold;
-  color: #4d5055;
+  font-weight: 600;
+  color: #666666;
   height: 400px;
+}
+.gor-Audit-no-dataview{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-top: 200px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #666666;
 }
 .gor-audit-cancelling-text{
   font-size:12px;
@@ -157,6 +166,27 @@ display:inline-block;
         min-height: 75vh;
         overflow: auto;
         background-color: white;
+        .auditListColumn1Style{
+          @extend .flexContent;
+          flex:1 0 7%;
+          }
+          .auditListColumn2Style{
+            @extend .flexContent;
+            flex:1 0 25%;
+            }
+            .auditListColumn3Style{
+              @extend .flexContent,.centerAligned;
+              flex:1 0 16%;
+              }
+              .auditListColumn4Style{
+                @extend .flexContent;
+                flex:1 0 20%;
+                overflow:visible
+                }
+                .auditListColumn6Style{
+                  flex:1 0 8%;
+                  }
+
       }
 }
 .gor-auditlist-paginate-right {
@@ -175,4 +205,119 @@ display:inline-block;
     &:hover{
     cursor:pointer;
   }
+  }  
+.centerAligned {
+  justify-content:center;
+  flex-direction:column
+}
+.bothAligned{
+justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+}
+.auditStart{
+  display:inline!important;
+}
+.audittable{
+  padding: 15px 5px;
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
+  background-color: #fafafa;
+  width: 100%;
+}
+.auditOther .table-body{
+  max-height:30vh;
+  overflow: auto;
+  .auditppsTableColumnstyle{
+  overflow: visible;
+  display: flex;
+  padding: 7px 5px;
   }
+  .otherppscolumn1Style{
+    &.cell{
+    @extend .auditppsTableColumnstyle,;
+    flex: 1 0 35%;
+    }
+    .marginAlign{
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+  }
+  .otherppscolumn2Style{
+    &.cell{
+    @extend .auditppsTableColumnstyle, .centerAligned;
+    flex: 1 0 65%;
+    font-size:14px;
+    font-weight: 600;
+  }
+}
+  
+
+}
+.auditStart .table-body{
+  max-height:30vh;
+  overflow: auto;
+  .auditppsTableColumnstyle{
+    overflow: visible;
+    display: flex;
+    padding: 7px 5px;
+    }
+  .auditppscolumn1style{
+    &.cell{
+    @extend .auditppsTableColumnstyle;
+    flex: 1 0 35%;
+    padding: 7px 5px;
+    }
+    .marginAlign{
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+  }
+  .auditppscolumn2style{
+    &.cell{
+    @extend .auditppsTableColumnstyle, .centerAligned;
+    flex: 1 0 32%;
+    padding: 7px 5px;
+    font-size:14px;
+    font-weight: 600;
+    }
+  }
+}
+.gorToolBar {
+  &.auditListingToolbar{
+    height:80px;
+    background-color: rgba(242, 242, 242, 0.6);
+    border-bottom:2px solid #dddddd; 
+     padding-left: 25px;
+    }
+    }
+
+    .gorToolBarWrap {
+    &.auditListingToolbarWrap{
+      margin-top: 18px;
+      width:21%;
+  }
+  .auditHeaderContainer{
+  display:inline-block;
+  padding-top:7px;
+  }
+}
+
+.flexContent{
+  overflow:visible;
+  display:flex;
+}
+        .fontstyleColumn{
+          font-size:14px;
+          color:#333333;
+        }
+.column4Style{
+  @extend .fontstyleColumn;
+  text-align:center;
+  font-weight:bold
+}        
+.checkBoxalign{
+  margin-top: 12px;
+  margin-left:20px;
+}     
+

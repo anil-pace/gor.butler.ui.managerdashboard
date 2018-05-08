@@ -2172,7 +2172,13 @@
   {
     "id": "audit.notfound",
     "description": "audit not found",
-    "defaultMessage": "There are no audit to view. Create audit",
+    "defaultMessage": "There are no audit to view.",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
+    "id": "audit.notfoundcreate",
+    "description": "Create audit",
+    "defaultMessage": "Create audit",
     "filepath": "./src/containers/auditListingTab.js"
   },
   {
@@ -2417,19 +2423,19 @@
   {
     "id": "audit.startaudit.auditmodepps",
     "description": "PPS in audit mode",
-    "defaultMessage": "PPS in audit mode",
+    "defaultMessage": "PPS in audit mode(s)",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
     "id": "audit.startaudit.othermodepps",
     "description": "PPS in other mode",
-    "defaultMessage": "PPS in other mode",
+    "defaultMessage": "PPS in other mode(s)",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
     "id": "audit.startaudit.operatorassign",
-    "description": "Operator Assigned",
-    "defaultMessage": "Operator Assigned",
+    "description": "Operator",
+    "defaultMessage": "Operator",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
@@ -2442,6 +2448,12 @@
     "id": "audit.startaudit.Foraudit",
     "description": "For audit",
     "defaultMessage": "For audit",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.nonresultstart",
+    "description": "audit not found",
+    "defaultMessage": "No result found.",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
@@ -3433,6 +3445,12 @@
     "id": "audit.auditdetails",
     "description": "Heading for audit details",
     "defaultMessage": "Basic details",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
+    "id": "audit.nonresult",
+    "description": "audit not found",
+    "defaultMessage": "No result found.",
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {

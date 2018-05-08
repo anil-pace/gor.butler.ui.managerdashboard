@@ -4,7 +4,7 @@
       margin: auto;
       padding: 20px;
       width: 100%;
-      min-height:100vh;
+      min-height:105vh;
       color: #4a4a4a;
       .gor-auditDetails-modal-body{
        margin: 0px 0px 0px 17px;
@@ -13,12 +13,12 @@
          padding-top: 30px;
         color: #4a4a4a;
         .AuditDetailsWrapper{
-          height: calculateRem(160px);
-          margin-top:20px;
+          height: calculateRem(180px);
+          margin-top:25px;
           .AuditDetailsHeader{
             font-size: calculateRem(20px);
             font-weight: 600;
-            padding: 10px 10px 0px 10px;
+            padding: 18px 10px 0px 10px;
             color:#4a4a4a;
           }
           .auditDetailsContent{
@@ -56,7 +56,7 @@
           font-size: calculateRem(20px);
           font-weight: 600;
           border-bottom:1px solid #AAAAAA;
-          min-height:calculateRem(50px);
+          min-height:3.8rem;
           width:97%;
           position:absolute;
           padding-top:10px;
@@ -96,13 +96,22 @@ width:94%;
 margin-left:20px;
 .auditDetailsSearchWrap{
   float:right;
+  padding-right: 20px;
+}
+.table-body {
+.columnStyle{
+  flex:1 0 30%;
+  overflow:visible;
+  display:flex;
+  padding:7px 5px;
+}
 }
 }
 .auditTable 
 {
-border-bottom:2px solid #dddddd;
+border-bottom:1px solid #dddddd;
 .cell{
-background-color:#dddddd;
+background-color:#fafafa;
 }
 }
  .missing-item{
@@ -113,5 +122,16 @@ background-color:#dddddd;
   text-align: left;
  }
 }
+.gor-separator{
+.viewDetailsSeparatorHeader{
+  font-size: 14px ;
+  font-weight: 600;
+}
+.viewDetailsSeparatorSubHeader{
+  font-size: 14px ;
+  font-weight: 400;
+}
+}
+
 
 

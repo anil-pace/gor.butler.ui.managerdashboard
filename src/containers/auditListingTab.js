@@ -337,12 +337,12 @@ render(){
   var itemsData=me.props.items;
   var tablerowdata=this._tableBodyData(itemsData);
   var tableData=[
-  {sd:1,text: "INITIL NAME", sortable: true,width:7}, 
-  {sd:2,text: "SKU CODE", sortable: true,width:25}, 
-  {yd:3, text: "NAME",sortable: true, width:16,progressWidth:10}, 
-  {td:4,text: "OPENING STOCK", searchable: false,width:20,style:{'flex':'1 0 20%','overflow':'visible','display':'flex','justify-content':'center','flex-direction':'column'}},
-  {rd:5,text: "PURCHAGE QTY", searchable: false,width:20},
-  {ed:6,text: "PURCHAGE QTY", searchable: false,width:8}
+  {class:"auditListColumn1Style"}, 
+  {class:"auditListColumn2Style"}, 
+  {class:"auditListColumn3Style",progressWidth:80}, 
+  {class:"centerAligned auditListColumn4Style"},
+  {class:"bothAligned auditListColumn4Style"},
+  {class:"auditListColumn6Style"}
   ];
   return(
 
@@ -360,12 +360,12 @@ render(){
 
     {Object.keys(row).map(function (text, index) {
       let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
-      return <div key={index} style={tableData[index].style?(tableData[index].style):(tableData[index].width?{flex:'1 0 '+tableData[index].width+"%",'overflow':'visible'}:{})} className="cell" >
-      {index==0?<label className="container" style={{'margin-top': '15px','margin-left': '20px','visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
-      {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={'.'} />:""} 
-      {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'center','margin-top':'10px','font-size':'14px','color':'#333333'}}><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'center','padding-top':'15px'}}>{tablerowdata[idx][text]['status']}</div>:""}
-      {index==3?<div style={{'text-align':'center','font-size':'14px','font-weight':'bold','color':'#333333','line-height':'20px'}}><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div></div>:""}
+      return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"}>
+      {index==0?<label className="container checkBoxalign" style={{'visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
+      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='  '></div>:""}
+      {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
+      {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'left'}} className="fontstyleColumn"><ProgressBar progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'left'}}>{tablerowdata[idx][text]['status']}</div>:""}
+      {index==3?<div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div></div>:""}
       {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       {startButton}
        <div className="got-add-notch"></div>
@@ -389,8 +389,12 @@ render(){
     )
   }):""}
   </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>
-  <FormattedMessage id='audit.notfound'  defaultMessage="There are no audit to view. Create audit" description="audit not found"/>
-  
+  <div>
+  <FormattedMessage id='audit.notfound'  defaultMessage="There are no audit to view." description="audit not found"/>
+  </div>
+  <div>
+  <FormattedMessage id='audit.notfoundcreate'  defaultMessage="Create audit" description="Create audit"/>
+  </div>
   </div>}
 
   </GTable>
