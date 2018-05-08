@@ -22,7 +22,6 @@
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.16",
     "node-fetch": "^1.7.3",
-
     "react": "15.5.4",
     "react-apollo": "^2.0.4",
     "react-d3-basic": "^1.6.11",

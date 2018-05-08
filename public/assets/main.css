@@ -6186,12 +6186,12 @@ button:disabled {
   width: 100%;
   border-radius: 6px;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-rail {
@@ -6373,12 +6373,12 @@ button:disabled {
   top: -9999px;
   visibility: visible;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-tooltip * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-tooltip-hidden {
