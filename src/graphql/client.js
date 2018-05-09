@@ -5,6 +5,7 @@ import ApolloClient from 'apollo-client';
 import {ApolloLink} from 'apollo-link';
 import {withClientState} from 'apollo-link-state';
 import {InMemoryCache} from 'apollo-cache-inmemory';
+import {createUploadLink} from 'apollo-upload-client'
 import {
     errorLink,
     queryOrMutationLink,
@@ -27,7 +28,7 @@ let client = new ApolloClient({
         errorLink, state_link,
         requestLink({
             queryOrMutationLink: queryOrMutationLink({
-                fetch: require('node-fetch'),
+                fetch: require('cross-fetch'),
                 uri: "http://localhost:3010/graphql",
                 credentials: 'same-origin'
 

@@ -7,6 +7,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { onError } from 'apollo-link-error';
 import { getMainDefinition } from 'apollo-utilities';
 import { setContext } from 'apollo-link-context';
+import {createUploadLink} from 'apollo-upload-client'
 
 export const errorLink = onError(({ graphQLErrors, networkError }) => {
     /*
@@ -54,7 +55,6 @@ export const subscriptionLink = (config = {}) =>
     });
 
 
-
 export const queryOrMutationLink = (config = {}) =>
     new ApolloLink((operation, forward) => {
         /*
@@ -74,9 +74,7 @@ export const queryOrMutationLink = (config = {}) =>
 
         return forward(operation);
     }).concat(
-        new HttpLink({
-            ...config,
-        })
+        createUploadLink({...config})
     );
 
 export const requestLink = ({ queryOrMutationLink, subscriptionLink }) =>
