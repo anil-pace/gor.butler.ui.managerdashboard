@@ -5673,8 +5673,8 @@
     "filepath": "./src/containers/systemTabs/msuConfigFilter.js"
   },
   {
-    "id": "butletbot.tokenfield.STATUS",
-    "defaultMessage": "STATUS",
+    "id": "butletbot.tokenfield.SOURCETYPE",
+    "defaultMessage": "SOURCE TYPE",
     "filepath": "./src/containers/systemTabs/msuConfigFilter.js"
   },
   {
@@ -5721,13 +5721,13 @@
   {
     "id": "msuConfig.putBlocked.status",
     "description": "Put blocked status",
-    "defaultMessage": "Put Blocked",
+    "defaultMessage": "Put blocked",
     "filepath": "./src/containers/systemTabs/msuConfigTable.js"
   },
   {
     "id": "msuConfig.reconfigReady.status",
     "description": "Msu empty status",
-    "defaultMessage": "Msu empty",
+    "defaultMessage": "MSU empty",
     "filepath": "./src/containers/systemTabs/msuConfigTable.js"
   },
   {
@@ -5739,7 +5739,7 @@
   {
     "id": "msuConfig.waiting.status",
     "description": "Dropping MSU at config area",
-    "defaultMessage": "Dropping MSU at reconfig area ...",
+    "defaultMessage": "Dropping MSU at reconfig area",
     "filepath": "./src/containers/systemTabs/msuConfigTable.js"
   },
   {

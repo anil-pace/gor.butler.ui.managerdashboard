@@ -93,11 +93,7 @@ class MsuConfigTab extends React.Component {
             'accept':APP_JSON,
             'cause' : FETCH_MSU_CONFIG_LIST
         }
-        //this.props.makeAjaxCall(params);
-        // this._intervalIdForMsuList = setTimeout(() => 
-        //         this._requestMsuList(), 
-        //         MSU_CONFIG_POLLING_INTERVAL);
-
+        this.props.makeAjaxCall(params);
         let self=this;
         if(!this._intervalIdForMsuList){
            self.props.makeAjaxCall(params) 
@@ -196,7 +192,6 @@ class MsuConfigTab extends React.Component {
             this.setState({subscribed: true},function(){
                 this._subscribeData(nextProps)
             })
-            
         }
 
         if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
@@ -208,26 +203,38 @@ class MsuConfigTab extends React.Component {
             this._refreshList(nextProps.location.query)
         }
 
-        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForMsuList && JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-            this.clearPolling()
-
+        if(Object.keys(nextProps.location.query).length>0 &&
+            this._intervalIdForMsuList && 
+            JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+                this.clearPolling();
             }
 
         if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
 
-             // clear the ongoing interval
-
-            let result = nextProps.msuList.filter(function(eachMsu){
+            /* condition deciding when should Start Reconfig is Enabled */
+            let checkForStartReconfigBtn = nextProps.msuList.filter(function(eachMsu){
                         return (eachMsu.status === "reconfig_ready")
                     });
-                    if(!nextProps.isFilterApplied && result.length>0){ // when filtered has been applied and any filtered item is there
+                    /*  when ANY of the msu is in msu empty state...ENABLE the START RECONFIG BUTTON */
+                    if(!nextProps.isFilterApplied && checkForStartReconfigBtn.length>0){
                         this._handleStartStopReconfig(false);
+                        this.setState({
+                            startStopBtnText: "START RECONFIG",
+                        })
+                    }
+                    else{
+                        if(this.state.startStopBtnText === "STOP RECONFIG"){
+                            this.setState({
+                                startStopBtnState: false,
+                            })
+                        }
                     }
 
-            let result_1 = nextProps.msuList.filter(function(eachMsu){
+            /* condition deciding when should Relase Msu be Enabled */
+            let checkForReleaseMsuBtn = nextProps.msuList.filter(function(eachMsu){
                         return (eachMsu.status === "ready_for_reconfiguration")
                     });
-                    if(result_1.length>0){
+                    if(checkForReleaseMsuBtn.length>0){
                         this._handleReleaseMsuBtn(false);
                     }else{
                         this._handleReleaseMsuBtn(true);
@@ -243,6 +250,7 @@ class MsuConfigTab extends React.Component {
      * @private
      */
     _refreshList(query) {
+
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
         if(query.rack_id && query.status){
@@ -284,6 +292,7 @@ class MsuConfigTab extends React.Component {
     }
 
     _blockPutAndChangeTypeCallback(){
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
         this.props.filterApplied(false);
         this._requestMsuList();
     }
