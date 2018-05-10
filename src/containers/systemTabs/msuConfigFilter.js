@@ -90,7 +90,7 @@ class MsuConfigFilter extends React.Component{
         const labelC1=[
                     { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }
                     ];
-        if(destTypeList){
+        if(destTypeList.length){
             destTypeList.forEach((data)=>{
              labelC1.push(
              {
@@ -101,7 +101,7 @@ class MsuConfigFilter extends React.Component{
             });
         }
         else{
-            return false;
+            return [];
         }
         
         let selectedToken= this.state.tokenSelected;
