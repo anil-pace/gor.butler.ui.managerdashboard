@@ -1,4 +1,12 @@
-import {ORDERS_FULFIL_FETCH, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, ORDER_LIST_REFRESHED, TOGGLE_ACTIVE_PBT,UNSET_ALL_ACTIVE_PBT} from '../constants/frontEndConstants';
+import {ORDERS_FULFIL_FETCH, 
+        ORDERS_SUMMARY_FETCH,
+        ORDERS_CUT_OFF_TIME_FETCH, 
+        ORDERS_PER_PBT_FETCH, 
+        ORDERLINES_PER_ORDER_FETCH, 
+        ORDER_LIST_REFRESHED, 
+        TOGGLE_ACTIVE_PBT,
+        UNSET_ALL_ACTIVE_PBT
+} from '../constants/frontEndConstants';
 /**
  * @param  {State Object}
  * @param  {Action object}
@@ -33,11 +41,13 @@ export  function orderDetails(state={},action){
       })
         return Object.assign({}, state, {
           pbts: pbts_data,
-          activePbtIndex:state.activePbtIndex||null
+          activePbtIndex:state.activePbtIndex||null,
+          isGroupedById: true
         });  
       }
       
       break;
+
 
     case TOGGLE_ACTIVE_PBT:
       let target_cut_off_time_2=action.data.pbt.cut_off_time
@@ -55,16 +65,18 @@ export  function orderDetails(state={},action){
       });
       break;
 
+
       case UNSET_ALL_ACTIVE_PBT:
 
-      let pbts_list= state.pbts;
-      pbts_list.map(function(pbt){
-          pbt.opened=false
-      })
-      return Object.assign({}, state, {
-        pbts:pbts_list
-      });
-      break;
+          let pbts_list= state.pbts;
+          pbts_list.map(function(pbt){
+              pbt.opened=false
+          })
+          return Object.assign({}, state, {
+            pbts:pbts_list
+          });
+          break;
+
 
     case ORDERS_PER_PBT_FETCH:
       let res = action.data;
@@ -72,30 +84,48 @@ export  function orderDetails(state={},action){
       let isLazyData= action.saltParams.lazyData
 
 
-      state.pbts.map(function(pbt, idx){
-
-        if(pbt.cut_off_time===target_cut_off_time){
-          if(res.serviceRequests){
-            let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
-            pbt.ordersPerPbt={
-                "orders": ordersData,
-                "isInfiniteLoading":false,
-                "dataFound":res.serviceRequests.length < 1,
-                "totalPages" : res.totalPages,
-                "totalOrders" : res.totaElements
+      if(state.pbts){
+        state.pbts.map(function(pbt, idx){
+          if(pbt.cut_off_time===target_cut_off_time){
+            if(res.serviceRequests){
+              let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
+              pbt.ordersPerPbt={
+                  "orders": ordersData,
+                  "isInfiniteLoading":false,
+                  "dataFound":res.serviceRequests.length < 1,
+                  "totalPages" : res.totalPages,
+                  "totalOrders" : res.totaElements
+              }
             }
           }
-        }
-        return pbt
-      })
+          return pbt
+        })
+      }
+      else{
+        let expected_pbts=[{}]; // create one empty pbt list...which is mandatory as per our json structure
+          if(res.serviceRequests){
+            expected_pbts[0].ordersPerPbt={
+                  "orders": res.serviceRequests,
+                  "isInfiniteLoading":false,
+                  "dataFound":res.serviceRequests.length < 1,
+                  "totalPages" : res.totalPages,
+                  "totalOrders" : res.totaElements,
+                  "isGroupedById": false
+              }
+          }
+          state.pbts=expected_pbts
+      }
+      
       return Object.assign({},state,{});
       break;
+
 
     case ORDERLINES_PER_ORDER_FETCH:
       return Object.assign({}, state, {
         orderLines: action.data || []
       });
       break;
+      
 
     case ORDER_LIST_REFRESHED:
         return Object.assign({}, state, {

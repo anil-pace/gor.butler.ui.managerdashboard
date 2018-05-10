@@ -2531,7 +2531,7 @@
   {
     "id": "audit.auditbysku.text",
     "description": "text for Enter SKU and validate",
-    "defaultMessage": "Enter SKU and validate",
+    "defaultMessage": "Audit by SKU",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -4198,24 +4198,6 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "orders.pending.status",
-    "description": "pending",
-    "defaultMessage": "Pending",
-    "filepath": "./src/containers/orderTab/orderListTab.js"
-  },
-  {
-    "id": "orders.toBePicked.status",
-    "description": "pending",
-    "defaultMessage": "{current} products to be picked",
-    "filepath": "./src/containers/orderTab/orderListTab.js"
-  },
-  {
-    "id": "orders.productsPicked.status",
-    "description": "pending",
-    "defaultMessage": "{current} of {total} products picked",
-    "filepath": "./src/containers/orderTab/orderListTab.js"
-  },
-  {
     "id": "orders.action.collapseAll",
     "description": "button label for collapse all",
     "defaultMessage": "COLLAPSE ALL",
@@ -4351,6 +4333,12 @@
     "id": "orders.inProgress.status",
     "description": "status",
     "defaultMessage": "{current} of {total} products picked",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.noOrders.noOrders",
+    "description": "display no orders",
+    "defaultMessage": "No orders available",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
