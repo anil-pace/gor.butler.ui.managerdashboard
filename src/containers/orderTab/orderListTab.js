@@ -69,6 +69,7 @@ import {
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
+            isPollingEnabled: true
         }
     }
 
@@ -90,6 +91,33 @@ import {
        
     }
 
+    _reqCutOffTime(startDate, endDate){
+        let formData={
+            "start_date": startDate,
+            "end_date": endDate
+        };
+
+        let params={
+            'url':ORDERS_CUT_OFF_TIME_URL,
+            'method':POST,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERS_CUT_OFF_TIME_FETCH,
+            'formdata':formData,
+        }
+        
+        this.props.makeAjaxCall(params);
+        //call other http calls
+        this._reqOrdersFulfilment(startDate, endDate);
+        this._reqOrdersSummary(startDate, endDate);
+        if(this.state.isPollingEnabled){
+            console.log("%c cut off time fucntion being called again and agains...", 'background: blue');
+            let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+            let newEndendDate = new Date().toISOString();
+            this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
+        }
+    }
+
 
 
     componentWillReceiveProps(nextProps) {
@@ -106,8 +134,9 @@ import {
         }
     }
 
-    _refreshList(query) {
-        
+    _refreshListCallback(query){
+        console.log("%c RE POLLING DISABLED ...",'background: red');
+
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
         //When Time Range is mentioned.
@@ -115,16 +144,16 @@ import {
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
 
-            // when DATE Range  + Order Id selected
+            // DATE Range  + Cut off time => call level 2 
             if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            // when cut off time is not there but order Id is there ....send null as cut off time
+            // DATE Range  + Order id => call level 3
             else if (!query.cutOffTime && query.orderId){
-                cutOffTimeFromFilter = null;
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // fetch list of orders using cutOffTime = null
+                //cutOffTimeFromFilter = null;
+                this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
             // when only DATE Range is mentioned, NO cut off time, no OrderId 
@@ -142,29 +171,38 @@ import {
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
-                let params={
-                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                    'method':GET,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'cause':ORDERLINES_PER_ORDER_FETCH,
-                }
-                this.props.makeAjaxCall(params);
-                    if(this.props.orderLines){
-                        modal.add(ViewOrderLine, {
-                        orderId: query.orderId,
-                        title: '',
-                        size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                                               //.. all what you put in here you will get access in the modal props ;),
-                        });
-                }
+                 this._viewOrderLine(query.orderId);
+                // let params={
+                //     'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
+                //     'method':GET,
+                //     'contentType':APP_JSON,
+                //     'accept':APP_JSON,
+                //     'cause':ORDERLINES_PER_ORDER_FETCH,
+                // }
+                // this.props.makeAjaxCall(params);
+                //     if(this.props.orderLines){
+                //         modal.add(ViewOrderLine, {
+                //         orderId: query.orderId,
+                //         title: '',
+                //         size: 'large',
+                //         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                //         hideCloseButton: true      // (optional) if you don't wanna show the top right close button
+                //                                //.. all what you put in here you will get access in the modal props ;),
+                //         });
+                // }
                 
             }
 
         }
+    }
 
+    _refreshList(query) {
+        if(Object.keys(query).length && this._intervalIdForCutOffTime){
+            this._intervalIdForCutOffTime = null;
+            this.setState({
+                isPollingEnabled: false
+            }, this._refreshListCallback(query));
+        }
     }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
@@ -186,9 +224,20 @@ import {
             this.props.makeAjaxCall(params);
     }
 
-    _clearFilter() {
+    _clearFilterCallback(){
+        console.log("%c RE POLLING ENABLED AGAIN...", 'background: green');
         this.props.filterApplied(false);
         hashHistory.push({pathname: "/orders", query: {}});
+        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+        let newEndDate = new Date().toISOString();
+        this._reqCutOffTime(newStartDate, newEndDate);
+    }
+
+
+    _clearFilter() {
+        this.setState({
+            isPollingEnabled: true
+        }, this._clearFilterCallback);
     }
 
     componentWillUnmount() {
@@ -217,7 +266,7 @@ import {
     }
 
     _viewOrderLine = (orderId) =>  {
-        clearInterval(this._intervalId);  // #stop ongoing polling.
+        //clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
             startPolling: this._restartPolling,
             orderId: orderId,
@@ -273,29 +322,7 @@ import {
         this.props.makeAjaxCall(params);
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
-            "start_date": startDate,
-            "end_date": endDate
-        };
-
-        let params={
-            'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':ORDERS_CUT_OFF_TIME_FETCH,
-            'formdata':formData,
-        }
-        
-        this.props.makeAjaxCall(params);
-        //call other http calls
-        this._reqOrdersFulfilment(startDate, endDate);
-        this._reqOrdersSummary(startDate, endDate);
-        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        let newEndendDate = new Date().toISOString();
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-    }
+    
 
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()
