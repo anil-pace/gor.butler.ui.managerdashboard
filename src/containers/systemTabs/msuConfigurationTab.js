@@ -53,15 +53,14 @@ class MsuConfigTab extends React.Component {
         this.state={
             query:null,
             startStopBtnState: true,
-            startStopBtnText: "START RECONFIG",
+            startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
-            flag: true
         };
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
         this._setFilterAction = this._setFilterAction.bind(this);
-        this._handleStartStopReconfig = this._handleStartStopReconfig.bind(this);
+        this._enableStartStopReconfig = this._enableStartStopReconfig.bind(this);
         this._handleReleaseMsuBtn = this._handleReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
@@ -77,7 +76,7 @@ class MsuConfigTab extends React.Component {
     }
 
     componentDidMount(){
-       // this._requestMsuList();
+       this._requestMsuList();
     }
 
     componentWillUnmount(){
@@ -142,7 +141,7 @@ class MsuConfigTab extends React.Component {
 
     
     _startStopActionInitiated(){
-        if(this.state.startStopBtnText === "START RECONFIG"){
+        if(this.state.startStopBtnText === "startReconfig"){
             let params={
                 'url': MSU_CONFIG_START_RECONFIG_URL,
                 'method':POST,
@@ -152,8 +151,8 @@ class MsuConfigTab extends React.Component {
             }
             this.props.makeAjaxCall(params);
             this.setState({
-                startStopBtnState: false,
-                startStopBtnText: "STOP RECONFIG"
+                startStopBtnState: true,
+                startStopBtnText: "stopReconfig"
             })
         }
         else{
@@ -167,11 +166,11 @@ class MsuConfigTab extends React.Component {
             this.props.makeAjaxCall(params);
             
             this.setState({
-                startStopBtnState: false,
-                startStopBtnText: "START RECONFIG"
+                startStopBtnState: true,
+                startStopBtnText: "startReconfig"
             })
         }
-        this._requestMsuList();  // refresh page post YES to start reconfig 
+        //this._requestMsuList();  // refresh page post YES to start reconfig 
     }
 
     _startStopReconfigAction = () => {
@@ -187,6 +186,12 @@ class MsuConfigTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+
+        let isAnyMsuEmpty = [];
+        let isAnyMsuDropping = [];
+        let isAnyMsuDropped = [];
+        let isAnyMsuReadyForReconfig =[];
+
 
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
@@ -207,39 +212,52 @@ class MsuConfigTab extends React.Component {
             this._intervalIdForMsuList && 
             JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
                 this.clearPolling();
+        }
+
+        if(nextProps.msuList && Array.isArray(nextProps.msuList)){
+
+            if(nextProps.msuList.length){
+                nextProps.msuList.forEach((eachMsu)=>{
+                    if(eachMsu.status === "reconfig_ready")  isAnyMsuEmpty.push(eachMsu.status);
+                    else if (eachMsu.status === "waiting")  isAnyMsuDropping.push(eachMsu.status);
+                    else if (eachMsu.status === "dropped")  isAnyMsuDropped.push(eachMsu.status);
+                    else if (eachMsu.status === "ready_for_reconfiguration")  isAnyMsuReadyForReconfig.push(eachMsu.status);
+                });
+            };
+
+            let checkAnyEmptyMsuFound = (isAnyMsuEmpty.length > 0 ? true : false);
+            let checkAnyMsuInProgressFound = ( (isAnyMsuDropping.length  > 0 ? true : false) ||
+                                                (isAnyMsuDropped.length > 0 ? true : false) || 
+                                                (isAnyMsuReadyForReconfig.length > 0 ? true : false) );
+
+            // atleast 1 MSU is Empty and no MSU is in progress
+            if( checkAnyEmptyMsuFound && !checkAnyMsuInProgressFound){
+                 // START button should be enabled
+                this._enableStartStopReconfig(false);
+                this.setState({
+                    startStopBtnText: "startReconfig"
+                })
+            }
+            else if(checkAnyMsuInProgressFound){
+                // STOP button should be enabled
+                this._enableStartStopReconfig(false);
+                this.setState({
+                    startStopBtnText: "stopReconfig"
+                })
+            }
+            else{
+                // START/STOP button should be DISABLED
+                this._enableStartStopReconfig(true);
             }
 
-        if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
 
-            /* condition deciding when should Start Reconfig is Enabled */
-            let checkForStartReconfigBtn = nextProps.msuList.filter(function(eachMsu){
-                        return (eachMsu.status === "reconfig_ready")
-                    });
-                    /*  when ANY of the msu is in msu empty state...ENABLE the START RECONFIG BUTTON */
-                    if(!nextProps.isFilterApplied && checkForStartReconfigBtn.length>0){
-                        this._handleStartStopReconfig(false);
-                        this.setState({
-                            startStopBtnText: "START RECONFIG",
-                        })
-                    }
-                    else{
-                        if(this.state.startStopBtnText === "STOP RECONFIG"){
-                            this.setState({
-                                startStopBtnState: false,
-                            })
-                        }
-                    }
-
-            /* condition deciding when should Relase Msu be Enabled */
-            let checkForReleaseMsuBtn = nextProps.msuList.filter(function(eachMsu){
-                        return (eachMsu.status === "ready_for_reconfiguration")
-                    });
-                    if(checkForReleaseMsuBtn.length>0){
-                        this._handleReleaseMsuBtn(false);
-                    }else{
-                        this._handleReleaseMsuBtn(true);
-                   }
-        } 
+           /* check for handling Release Button */
+            if(isAnyMsuReadyForReconfig.length > 0){
+                this._handleReleaseMsuBtn(false);
+            }else{
+                this._handleReleaseMsuBtn(true);
+           }
+       }
     }
 
 
@@ -307,7 +325,7 @@ class MsuConfigTab extends React.Component {
         this.props.showTableFilter(newState);
     }
 
-    _handleStartStopReconfig(isDisabled){
+    _enableStartStopReconfig(isDisabled){
         this.setState({
             startStopBtnState: isDisabled||false,
         })
@@ -379,13 +397,13 @@ class MsuConfigTab extends React.Component {
                                                     className="gor-msuConfig-btn orange"
                                                     onClick={this._startStopReconfigAction}>
 
-                                                    {this.state.startStopBtnText === "START RECONFIG" ? 
+                                                    {this.state.startStopBtnText === "startReconfig" ? 
                                                             <FormattedMessage id="gor.msuConfig.startReconfig" 
                                                                 description="button label for start reconfig" 
-                                                                defaultMessage={"START RECONFIG"}/>:
+                                                                defaultMessage="START RECONFIG"/>:
                                                              <FormattedMessage id="gor.msuConfig.StopReconfig" 
                                                             description="button label for Stop reconfig" 
-                                                            defaultMessage={"STOP RECONFIG"}/>
+                                                            defaultMessage="STOP RECONFIG"/>
                                                     }
                                                     
                                             </button>
