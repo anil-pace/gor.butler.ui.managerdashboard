@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
-import {FormattedMessage, defineMessages, FormattedRelative, injectIntl} from 'react-intl';
+import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
 
 import {GTable} from '../../components/gor-table-component/index'
@@ -10,9 +10,7 @@ import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import ChangeRackType from './changeRackType';
 
-import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
-import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
-import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
+import {showTableFilter, filterApplied} from '../../actions/filterAction';
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
@@ -53,7 +51,7 @@ const messages=defineMessages({
         description: "reconfiguration complete for Msu",
         defaultMessage: "Reconfiguration complete "
     },
-    waitingStatus: {
+    droppingStatus: {
         id: "msuConfig.waiting.status",
         description: "Dropping MSU at config area",
         defaultMessage: "Dropping MSU at reconfig area"
@@ -82,7 +80,7 @@ class MsuConfigTable extends React.Component {
                 "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
                 "reconfig_ready": this.props.intl.formatMessage(messages.reconfigReadyStatus),
                 "complete": this.props.intl.formatMessage(messages.completeStatus),
-                "waiting": this.props.intl.formatMessage(messages.waitingStatus),
+                "waiting": this.props.intl.formatMessage(messages.droppingStatus),
                 "dropped": this.props.intl.formatMessage(messages.droppedStatus),
                 "storing_back": this.props.intl.formatMessage(messages.storingBackStatus) 
             }
