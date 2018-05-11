@@ -60,28 +60,15 @@ class MsuConfigTab extends React.Component {
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
         this._setFilterAction = this._setFilterAction.bind(this);
-        this._enableStartStopReconfig = this._enableStartStopReconfig.bind(this);
-        this._handleReleaseMsuBtn = this._handleReleaseMsuBtn.bind(this);
+        this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
+        this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-        this.props.msuConfigRefreshed();
-    }
+    
 
     componentDidMount(){
        this._requestMsuList();
-    }
-
-    componentWillUnmount(){
-      this.clearPolling()
-
     }
 
     _requestMsuList(){
@@ -170,7 +157,6 @@ class MsuConfigTab extends React.Component {
                 startStopBtnText: "startReconfig"
             })
         }
-        //this._requestMsuList();  // refresh page post YES to start reconfig 
     }
 
     _startStopReconfigAction = () => {
@@ -216,14 +202,12 @@ class MsuConfigTab extends React.Component {
 
         if(nextProps.msuList && Array.isArray(nextProps.msuList)){
 
-            if(nextProps.msuList.length){
                 nextProps.msuList.forEach((eachMsu)=>{
-                    if(eachMsu.status === "reconfig_ready")  isAnyMsuEmpty.push(eachMsu.status);
-                    else if (eachMsu.status === "waiting")  isAnyMsuDropping.push(eachMsu.status);
-                    else if (eachMsu.status === "dropped")  isAnyMsuDropped.push(eachMsu.status);
-                    else if (eachMsu.status === "ready_for_reconfiguration")  isAnyMsuReadyForReconfig.push(eachMsu.status);
+                    if(eachMsu.status === "reconfig_ready"){  isAnyMsuEmpty.push(eachMsu.status);}
+                    else if (eachMsu.status === "waiting"){  isAnyMsuDropping.push(eachMsu.status);}
+                    else if (eachMsu.status === "dropped") { isAnyMsuDropped.push(eachMsu.status);}
+                    else if (eachMsu.status === "ready_for_reconfiguration")  {isAnyMsuReadyForReconfig.push(eachMsu.status);}
                 });
-            };
 
             let checkAnyEmptyMsuFound = (isAnyMsuEmpty.length > 0 ? true : false);
             let checkAnyMsuInProgressFound = ( (isAnyMsuDropping.length  > 0 ? true : false) ||
@@ -233,29 +217,31 @@ class MsuConfigTab extends React.Component {
             // atleast 1 MSU is Empty and no MSU is in progress
             if( checkAnyEmptyMsuFound && !checkAnyMsuInProgressFound){
                  // START button should be enabled
-                this._enableStartStopReconfig(false);
-                this.setState({
+                 this.setState({
                     startStopBtnText: "startReconfig"
-                })
+                });
+                this._disableStartStopReconfig(false);
+                
             }
             else if(checkAnyMsuInProgressFound){
                 // STOP button should be enabled
-                this._enableStartStopReconfig(false);
                 this.setState({
                     startStopBtnText: "stopReconfig"
-                })
+                });
+                this._disableStartStopReconfig(false);
+                
             }
             else{
                 // START/STOP button should be DISABLED
-                this._enableStartStopReconfig(true);
+                this._disableStartStopReconfig(true);
             }
 
 
            /* check for handling Release Button */
             if(isAnyMsuReadyForReconfig.length > 0){
-                this._handleReleaseMsuBtn(false);
+                this._disableReleaseMsuBtn(false);
             }else{
-                this._handleReleaseMsuBtn(true);
+                this._disableReleaseMsuBtn(true);
            }
        }
     }
@@ -325,13 +311,13 @@ class MsuConfigTab extends React.Component {
         this.props.showTableFilter(newState);
     }
 
-    _enableStartStopReconfig(isDisabled){
+    _disableStartStopReconfig(isDisabled){
         this.setState({
             startStopBtnState: isDisabled||false,
         })
     }
 
-    _handleReleaseMsuBtn(isDisabled){
+    _disableReleaseMsuBtn(isDisabled){
         this.setState({
             releaseMsuBtnState: isDisabled||false,
         })
