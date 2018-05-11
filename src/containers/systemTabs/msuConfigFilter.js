@@ -1,7 +1,7 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,toggleBotButton, msuConfigFilterState} from '../../actions/filterAction';
+import {showTableFilter,filterApplied, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -42,7 +42,6 @@ class MsuConfigFilter extends React.Component{
     }
 
     _requestDestTypeList(){
-        console.log("__requestDestTypeList get called");
         let params={
             'url': MSU_CONFIG_DEST_TYPE_URL,
             'method':GET,
@@ -90,15 +89,18 @@ class MsuConfigFilter extends React.Component{
         const labelC1=[
                     { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }
                     ];
-        if(destTypeList.length){
-            destTypeList.forEach((data)=>{
-             labelC1.push(
-             {
-                value:data,
-                label:data
-             }
-                )   
-            });
+        if(destTypeList){
+            if(destTypeList.length){
+                destTypeList.forEach((data)=>{
+                 labelC1.push(
+                 {
+                    value:data,
+                    label:data
+                 }
+                    )   
+                });
+            }
+            else if(Object.keys(destTypeList).length) return [];
         }
         else{
             return [];
