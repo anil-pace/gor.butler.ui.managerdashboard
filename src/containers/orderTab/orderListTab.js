@@ -47,7 +47,7 @@ import {
         ORDERS_PER_PBT_URL, 
         ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
-
+var moment = require('moment-timezone');
 
 
  class OrderListTab extends React.Component {
@@ -72,27 +72,55 @@ import {
         }
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-         this.props.orderListRefreshed();
+
+    _clearPolling(){
+        clearInterval(this._intervalIdForCutOffTime);
+        this._intervalIdForCutOffTime=null;
     }
 
-    componentDidMount(){
-        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-        let endDate = new Date().toISOString();
-        this.props.setOrderListSpinner(true);
-        this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-       
+    _reqCutOffTime(startDate, endDate){
+        let formData={
+            "start_date": startDate,
+            "end_date": endDate
+        };
+
+        let params={
+            'url':ORDERS_CUT_OFF_TIME_URL,
+            'method':POST,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERS_CUT_OFF_TIME_FETCH,
+            'formdata':formData,
+        }
+        
+        this.props.makeAjaxCall(params);
+        //call other http calls
+        this._reqOrdersFulfilment(startDate, endDate);
+        this._reqOrdersSummary(startDate, endDate);
+
+        let self=this;
+        this._intervalIdForCutOffTime= setInterval(function(){
+            self.props.makeAjaxCall(params);
+            self._reqOrdersFulfilment(startDate, endDate);
+            self._reqOrdersSummary(startDate, endDate);
+        },ORDERS_POLLING_INTERVAL)
     }
 
 
 
     componentWillReceiveProps(nextProps) {
+
+        if(this.props.timeOffset !== nextProps.timeOffset){
+            let startDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            let endDate = moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(startDate, endDate);
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            this._clearPolling();
+        }
+
+
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
                 this._subscribeData(nextProps)
@@ -106,8 +134,9 @@ import {
         }
     }
 
-    _refreshList(query) {
+    _refreshList(query){
         
+
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
         //When Time Range is mentioned.
@@ -115,16 +144,16 @@ import {
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
 
-            // when DATE Range  + Order Id selected
+            // DATE Range  + Cut off time => call level 2 
             if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            // when cut off time is not there but order Id is there ....send null as cut off time
+            // DATE Range  + Order id => call level 3
             else if (!query.cutOffTime && query.orderId){
-                cutOffTimeFromFilter = null;
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // fetch list of orders using cutOffTime = null
+                //cutOffTimeFromFilter = null;
+                this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
             // when only DATE Range is mentioned, NO cut off time, no OrderId 
@@ -142,29 +171,29 @@ import {
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
-                let params={
-                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                    'method':GET,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'cause':ORDERLINES_PER_ORDER_FETCH,
-                }
-                this.props.makeAjaxCall(params);
-                    if(this.props.orderLines){
-                        modal.add(ViewOrderLine, {
-                        orderId: query.orderId,
-                        title: '',
-                        size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                                               //.. all what you put in here you will get access in the modal props ;),
-                        });
-                }
+                 this._viewOrderLine(query.orderId);
+                // let params={
+                //     'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
+                //     'method':GET,
+                //     'contentType':APP_JSON,
+                //     'accept':APP_JSON,
+                //     'cause':ORDERLINES_PER_ORDER_FETCH,
+                // }
+                // this.props.makeAjaxCall(params);
+                //     if(this.props.orderLines){
+                //         modal.add(ViewOrderLine, {
+                //         orderId: query.orderId,
+                //         title: '',
+                //         size: 'large',
+                //         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                //         hideCloseButton: true      // (optional) if you don't wanna show the top right close button
+                //                                //.. all what you put in here you will get access in the modal props ;),
+                //         });
+                // }
                 
             }
 
         }
-
     }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
@@ -189,10 +218,13 @@ import {
     _clearFilter() {
         this.props.filterApplied(false);
         hashHistory.push({pathname: "/orders", query: {}});
+        let startDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+        let endDate = moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        this._reqCutOffTime(startDate, endDate);
     }
 
     componentWillUnmount() {
-        clearInterval(this._intervalId);
+        this._clearPolling();
     }
 
     _subscribeData() {
@@ -217,7 +249,7 @@ import {
     }
 
     _viewOrderLine = (orderId) =>  {
-        clearInterval(this._intervalId);  // #stop ongoing polling.
+        //clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
             startPolling: this._restartPolling,
             orderId: orderId,
@@ -273,29 +305,7 @@ import {
         this.props.makeAjaxCall(params);
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
-            "start_date": startDate,
-            "end_date": endDate
-        };
-
-        let params={
-            'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':ORDERS_CUT_OFF_TIME_FETCH,
-            'formdata':formData,
-        }
-        
-        this.props.makeAjaxCall(params);
-        //call other http calls
-        this._reqOrdersFulfilment(startDate, endDate);
-        this._reqOrdersSummary(startDate, endDate);
-        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        let newEndendDate = new Date().toISOString();
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-    }
+    
 
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()

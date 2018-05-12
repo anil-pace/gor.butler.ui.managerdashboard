@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "babel-plugin-react-intl": "^2.4.0",
+    "moment-timezone": "^0.5.17",
     "react": "15.5.4",
     "react-dom": "15.5.4"
   },
