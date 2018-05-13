@@ -48,7 +48,7 @@ import {
         ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-
+var moment = require('moment-timezone');
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -69,29 +69,13 @@ import {
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
-            isPollingEnabled: true
+            setStartDateForOrders: null,
+            setEndDateForOrders: null
         }
     }
 
-    // componentWillMount() {
-    //     *
-    //      * It will update the last refreshed property of
-    //      * overview details, so that updated subscription
-    //      * packet can be sent to the server for data
-    //      * update.
-         
-    //      this.props.orderListRefreshed();
-    // }
 
-    // componentDidMount(){
-    //     let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-    //     let endDate = new Date().toISOString();
-    //     this.props.setOrderListSpinner(true);
-    //     this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-       
-    // }
-
-    clearPolling(){
+    _clearPolling(){
         clearInterval(this._intervalIdForCutOffTime);
         this._intervalIdForCutOffTime=null;
         console.log("%c ...POLLING CLEARED", 'background: red');
@@ -118,40 +102,38 @@ import {
         this._reqOrdersSummary(startDate, endDate);
 
         let self=this;
-        // if(!this._intervalIdForCutOffTime){
-        //    self.props.makeAjaxCall(params);
-        //    self._reqOrdersFulfilment(startDate, endDate);
-        //    self._reqOrdersSummary(startDate, endDate);
-        // }
         this._intervalIdForCutOffTime= setInterval(function(){
-            console.log("%c POLLING FUCNTION CALLED" , 'background: green');
+            console.log("%c POLLING (TIME INTERVAL) FUCNTION BEING CALLED " , 'background: green');
             self.props.makeAjaxCall(params);
-            let startDate = new Date (new Date() - 1000*3600*24).toISOString();
-            let endDate = new Date().toISOString();
             self._reqOrdersFulfilment(startDate, endDate);
             self._reqOrdersSummary(startDate, endDate);
-        },ORDERS_POLLING_INTERVAL)
-
-        // if(this.state.isPollingEnabled){
-        //     console.log("%c cut off time fucntion being called again and agains...", 'background: blue');
-        //     let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        //     let newEndendDate = new Date().toISOString();
-        //     this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-        // }
+        },ORDERS_POLLING_INTERVAL);
     }
 
 
 
     componentWillReceiveProps(nextProps) {
+        console.log("COMING INSIDE componentWillReceiveProps =============>")
+        let setMomentStartDate, setMomentEndDate;
 
-        if(this.props.timeOffset !== nextProps.timeOffset){
-            let startDate = new Date (new Date() - 1000*3600*24).toISOString();
-            let endDate = new Date().toISOString();
-            this._reqCutOffTime(startDate, endDate);
+        /* when coming on orders page for first time OR coming after traversing from other tabs */
+        if( (this.props.timeOffset !== nextProps.timeOffset) ||
+                (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+            console.log("%c coming for the first time when this.props.timeOffset is ===>", 'color: green', this.props.timeOffset);
+            console.log("%c coming after traversing from other tabs is ===>", 'color: green', this._intervalIdForCutOffTime);
+            this.props.setOrderListSpinner(true);
+            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+            this.setState({
+                setStartDateForOrders: setMomentStartDate,
+                setEndDateForOrders: setMomentEndDate
+            })
         }
 
         if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
-            this.clearPolling();
+            console.log("%c filter has been applied ===========>", 'color: green');
+            this._clearPolling();
         }
 
 
@@ -161,7 +143,7 @@ import {
             })
             
         }
-        if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._refreshList(nextProps.location.query);
@@ -169,39 +151,65 @@ import {
     }
 
     _refreshList(query){
-        
 
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
+        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
+            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
 
-        //When Time Range is mentioned.
+        /* 'Date & Time Filter' === PRESENT  */
         if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
 
-            // DATE Range  + Cut off time => call level 2 
+            /* 'Date & Time Filter'  + Cut off time => call level 2  */
             if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
                 this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            // DATE Range  + Order id => call level 3
+            /*  'Date & Time Filter'  + Order id => call level 3 */
             else if (!query.cutOffTime && query.orderId){
                 //cutOffTimeFromFilter = null;
                 this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
-            // when only DATE Range is mentioned, NO cut off time, no OrderId 
+            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
             else{
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter); 
+                
+                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
+                let momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+                let momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+                console.log(momentStartDateFromFilter);
+                console.log(momentEndDateFromFilter);
+
+                this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
                 this.props.filterApplied(true);
+
+                this.setState({
+                    setStartDateForOrders: momentStartDateFromFilter,
+                    setEndDateForOrders: momentEndDateFromFilter
+                })
             }
         }
+        /* 'Date & Time Filter' === NOT PRESENT  */
         else{
+            /*Only CUT OFF TIME => send present start date & present end date along with cut off time. */
             if(query.cutOffTime){
-                setStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-                setEndDate = new Date().toISOString();
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+                momentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+                momentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();    
+                todayDateWithTime = moment().startOf('day').tz(this.props.timeOffset).format(); //"2018-05-13T00:00:00+05:30"
+                todayDateSansTime = todayDateWithTime.split("T")[0];
+                todayDateWithCutOffTime = todayDateSansTime + " " + query.cutOffTime;
+                momentCutOffTime = moment.tz(todayDateWithCutOffTime, this.props.timeOffset).toISOString();  
+
+                console.log("============================================");
+                console.log(momentStartDate);
+                console.log(momentEndDate);
+                console.log(momentCutOffTime);
+
+                this._reqOrderPerPbt(momentStartDate, momentEndDate, momentCutOffTime);
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
@@ -230,15 +238,6 @@ import {
         }
     }
 
-    // _refreshList(query) {
-    //     if(Object.keys(query).length && !this._intervalIdForCutOffTime){
-    //         this.clearPolling();
-    //         this.setState({
-    //             isPollingEnabled: false
-    //         }, this._refreshListCallback(query));
-    //     }
-    // }
-
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
     _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
             let formData={
@@ -258,24 +257,18 @@ import {
             this.props.makeAjaxCall(params);
     }
 
-    _clearFilterCallback(){
-        console.log("%c RE POLLING ENABLED AGAIN...", 'background: green');
+    _clearFilter() {
+        console.log("%c FILTER HAS BEEN CLEARED...", 'background: green');
         this.props.filterApplied(false);
         hashHistory.push({pathname: "/orders", query: {}});
-        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        let newEndDate = new Date().toISOString();
-        this._reqCutOffTime(newStartDate, newEndDate);
-    }
-
-
-    _clearFilter() {
-        this.setState({
-            isPollingEnabled: true
-        }, this._clearFilterCallback);
+        let setMomentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+        let setMomentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
     }
 
     componentWillUnmount() {
-        clearInterval(this._intervalId);
+        console.log("COMPONENT WILL UNMOUNT CALLED ===========>");
+        this._clearPolling();
     }
 
     _subscribeData() {
@@ -363,7 +356,6 @@ import {
     }
 
     render() {
-
         const todayDate = this._getTodayDate();
         let isPanelOpen = this.state.isPanelOpen;
 
@@ -378,7 +370,7 @@ import {
         var orderDetail, alertNum=0, orderInfo;
 
         let orderDetails = this.props.pbts;
-        
+                
         return (
             <div>
                 <div className="gor-Orderlist-table">
@@ -442,8 +434,8 @@ import {
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
                         pbts={this.props.pbts}
-                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
-                        endDate={new Date().toISOString()}
+                        startDate={this.state.setStartDateForOrders}
+                        endDate={this.state.setEndDateForOrders}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
                         isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}
