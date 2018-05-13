@@ -73,22 +73,28 @@ import {
         }
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-         this.props.orderListRefreshed();
-    }
+    // componentWillMount() {
+    //     *
+    //      * It will update the last refreshed property of
+    //      * overview details, so that updated subscription
+    //      * packet can be sent to the server for data
+    //      * update.
+         
+    //      this.props.orderListRefreshed();
+    // }
 
-    componentDidMount(){
-        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-        let endDate = new Date().toISOString();
-        this.props.setOrderListSpinner(true);
-        this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
+    // componentDidMount(){
+    //     let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+    //     let endDate = new Date().toISOString();
+    //     this.props.setOrderListSpinner(true);
+    //     this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
        
+    // }
+
+    clearPolling(){
+        clearInterval(this._intervalIdForCutOffTime);
+        this._intervalIdForCutOffTime=null;
+        console.log("%c ...POLLING CLEARED", 'background: red');
     }
 
     _reqCutOffTime(startDate, endDate){
@@ -110,17 +116,45 @@ import {
         //call other http calls
         this._reqOrdersFulfilment(startDate, endDate);
         this._reqOrdersSummary(startDate, endDate);
-        if(this.state.isPollingEnabled){
-            console.log("%c cut off time fucntion being called again and agains...", 'background: blue');
-            let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-            let newEndendDate = new Date().toISOString();
-            this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-        }
+
+        let self=this;
+        // if(!this._intervalIdForCutOffTime){
+        //    self.props.makeAjaxCall(params);
+        //    self._reqOrdersFulfilment(startDate, endDate);
+        //    self._reqOrdersSummary(startDate, endDate);
+        // }
+        this._intervalIdForCutOffTime= setInterval(function(){
+            console.log("%c POLLING FUCNTION CALLED" , 'background: green');
+            self.props.makeAjaxCall(params);
+            let startDate = new Date (new Date() - 1000*3600*24).toISOString();
+            let endDate = new Date().toISOString();
+            self._reqOrdersFulfilment(startDate, endDate);
+            self._reqOrdersSummary(startDate, endDate);
+        },ORDERS_POLLING_INTERVAL)
+
+        // if(this.state.isPollingEnabled){
+        //     console.log("%c cut off time fucntion being called again and agains...", 'background: blue');
+        //     let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
+        //     let newEndendDate = new Date().toISOString();
+        //     this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
+        // }
     }
 
 
 
     componentWillReceiveProps(nextProps) {
+
+        if(this.props.timeOffset !== nextProps.timeOffset){
+            let startDate = new Date (new Date() - 1000*3600*24).toISOString();
+            let endDate = new Date().toISOString();
+            this._reqCutOffTime(startDate, endDate);
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            this.clearPolling();
+        }
+
+
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
                 this._subscribeData(nextProps)
@@ -134,8 +168,8 @@ import {
         }
     }
 
-    _refreshListCallback(query){
-        console.log("%c RE POLLING DISABLED ...",'background: red');
+    _refreshList(query){
+        
 
         let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
 
@@ -196,14 +230,14 @@ import {
         }
     }
 
-    _refreshList(query) {
-        if(Object.keys(query).length && this._intervalIdForCutOffTime){
-            this._intervalIdForCutOffTime = null;
-            this.setState({
-                isPollingEnabled: false
-            }, this._refreshListCallback(query));
-        }
-    }
+    // _refreshList(query) {
+    //     if(Object.keys(query).length && !this._intervalIdForCutOffTime){
+    //         this.clearPolling();
+    //         this.setState({
+    //             isPollingEnabled: false
+    //         }, this._refreshListCallback(query));
+    //     }
+    // }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
     _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
