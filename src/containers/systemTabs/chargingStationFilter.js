@@ -28,8 +28,8 @@ class ChargingStationFilter extends React.Component {
 
 
     _closeFilter() {
-        let filterState=!this.props.showFilter;
-        this.props.showTableFilter(false);
+        //let filterState=!this.props.showFilter;
+        this.props.showChargingStationFilter(false);
     }
 
 
@@ -46,7 +46,7 @@ class ChargingStationFilter extends React.Component {
          * Hide the filter as soon as data in the list get updated.
          */
         if (nextProps.chargersData.length > 0 && JSON.stringify(nextProps.chargersData) !== JSON.stringify(this.props.chargersData)) {
-            this.props.showTableFilter(false);
+            this.props.showChargingStationFilter(false);
         }
     }
 
@@ -111,10 +111,10 @@ class ChargingStationFilter extends React.Component {
         }
 
         if (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== 'all') {
-            _query.charger_status=filterState.tokenSelected["DOCKING STATUS"]
+            _query.status=filterState.tokenSelected["DOCKING STATUS"]
         }
         if (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== 'all') {
-            _query.charger_mode=filterState.tokenSelected["OPERATING MODE"]
+            _query.mode=filterState.tokenSelected["OPERATING MODE"]
         }
 
         hashHistory.push({pathname: "/system/chargingstation", query: _query})
@@ -135,9 +135,6 @@ class ChargingStationFilter extends React.Component {
 
     render() {
         let chargingDetails=this.props.chargerData;
-        let noOrder=chargingDetails.noResultFound
-
-
         let chargingSearchField=this._processChargingSearchField();
         let chargingFilterToken=this._processFilterToken();
         return (
@@ -153,7 +150,7 @@ class ChargingStationFilter extends React.Component {
                             defaultMessage="Hide"/>
                     </div>
                  </div>
-                    <div>{noOrder?
+                    <div>{this.props.noResults?
                             <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/></div>:""}
                     </div>
@@ -245,7 +242,8 @@ ChargingStationFilter.PropTypes={
     filterApplied: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     chargingstationfilterState: React.PropTypes.func,
-    toggleChargingFilter: React.PropTypes.func
+    toggleChargingFilter: React.PropTypes.func,
+    showChargingStationFilter: React.PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChargingStationFilter) ;
