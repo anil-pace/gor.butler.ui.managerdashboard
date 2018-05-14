@@ -2903,6 +2903,12 @@
   {
     "id": "audit.auditbysku.text",
     "description": "text for Enter SKU and validate",
+    "defaultMessage": "Audit by SKU",
+    "filepath": "./src/containers/auditTab/editAudit.js"
+  },
+  {
+    "id": "audit.auditbysku.editEnterSKU",
+    "description": "text for audit by sku",
     "defaultMessage": "Enter SKU and validate",
     "filepath": "./src/containers/auditTab/editAudit.js"
   },

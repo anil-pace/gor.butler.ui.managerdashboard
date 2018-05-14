@@ -62,7 +62,8 @@ class ItemRecall extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
-          isInputEmpty:true
+          isInputEmpty:true,
+          selectionStart:0
     },
     validationDoneSKU:false,
     allTuplesValid:false,
@@ -87,7 +88,8 @@ class ItemRecall extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
-          isInputEmpty:true
+          isInputEmpty:true,
+          selectionStart:0
     },
     validationDoneSKU:false,
     skuDetails:{}
@@ -193,7 +195,8 @@ class ItemRecall extends React.Component{
       this.setState({
          copyPasteData:{
           data:validatedSKUs,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:0
         },
         validationDoneSKU,
         allTuplesValid
