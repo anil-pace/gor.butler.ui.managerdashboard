@@ -48,7 +48,7 @@ import {
         ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-
+const moment = require('moment-timezone');
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -69,102 +69,143 @@ import {
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
+            setStartDateForOrders: null,
+            setEndDateForOrders: null
         }
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-         this.props.orderListRefreshed();
+    componentDidMount(){
+        this.props.setOrderListSpinner(true);
     }
 
-    componentDidMount(){
-        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-        let endDate = new Date().toISOString();
-        this.props.setOrderListSpinner(true);
-        this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-       
+    _clearPolling(){
+        clearInterval(this._intervalIdForCutOffTime);
+        this._intervalIdForCutOffTime=null;
+    }
+
+    _reqCutOffTime(startDate, endDate){
+        let formData={
+            "start_date": startDate,
+            "end_date": endDate
+        };
+
+        let params={
+            'url':ORDERS_CUT_OFF_TIME_URL,
+            'method':POST,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERS_CUT_OFF_TIME_FETCH,
+            'formdata':formData,
+        }
+        
+        this.props.makeAjaxCall(params);
+        //call other http calls
+        this._reqOrdersFulfilment(startDate, endDate);
+        this._reqOrdersSummary(startDate, endDate);
+
+        let self=this;
+        this._intervalIdForCutOffTime= setInterval(function(){
+            self.props.makeAjaxCall(params);
+            self._reqOrdersFulfilment(startDate, endDate);
+            self._reqOrdersSummary(startDate, endDate);
+        },ORDERS_POLLING_INTERVAL);
     }
 
 
 
     componentWillReceiveProps(nextProps) {
+        let setMomentStartDate, setMomentEndDate;
+
+        /* when coming on orders page for first time OR coming after traversing from other tabs */
+        if( (this.props.timeOffset !== nextProps.timeOffset) ||
+                (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+            this.props.setOrderListSpinner(true);
+            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+            this.setState({
+                setStartDateForOrders: setMomentStartDate,
+                setEndDateForOrders: setMomentEndDate
+            })
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            this._clearPolling();
+        }
+
+
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
                 this._subscribeData(nextProps)
             })
             
         }
-        if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._refreshList(nextProps.location.query);
         }
     }
 
-    _refreshList(query) {
-        
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
+    _refreshList(query){
 
-        //When Time Range is mentioned.
+        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
+            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
+
+        /* 'Date & Time Filter' === PRESENT  */
         if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
 
-            // when DATE Range  + Order Id selected
+            /* 'Date & Time Filter'  + Cut off time => call level 2  */
             if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            // when cut off time is not there but order Id is there ....send null as cut off time
+            /*  'Date & Time Filter'  + Order id => call level 3 */
             else if (!query.cutOffTime && query.orderId){
-                cutOffTimeFromFilter = null;
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // fetch list of orders using cutOffTime = null
+                //cutOffTimeFromFilter = null;
+                this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
-            // when only DATE Range is mentioned, NO cut off time, no OrderId 
+            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
             else{
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter); 
+                
+                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
+                let momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+                let momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+                this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
                 this.props.filterApplied(true);
+
+                this.setState({
+                    setStartDateForOrders: momentStartDateFromFilter,
+                    setEndDateForOrders: momentEndDateFromFilter
+                })
             }
         }
+        /* 'Date & Time Filter' === NOT PRESENT  */
         else{
+            /*Only CUT OFF TIME => send present start date & present end date along with cut off time. */
             if(query.cutOffTime){
-                setStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-                setEndDate = new Date().toISOString();
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+                momentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+                momentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();    
+                todayDateWithTime = moment().startOf('day').tz(this.props.timeOffset).format(); //"2018-05-13T00:00:00+05:30"
+                todayDateSansTime = todayDateWithTime.split("T")[0];
+                todayDateWithCutOffTime = todayDateSansTime + " " + query.cutOffTime;
+                momentCutOffTime = moment.tz(todayDateWithCutOffTime, this.props.timeOffset).toISOString();  
+
+                this._reqOrderPerPbt(momentStartDate, momentEndDate, momentCutOffTime);
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
-                let params={
-                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                    'method':GET,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'cause':ORDERLINES_PER_ORDER_FETCH,
-                }
-                this.props.makeAjaxCall(params);
-                    if(this.props.orderLines){
-                        modal.add(ViewOrderLine, {
-                        orderId: query.orderId,
-                        title: '',
-                        size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                                               //.. all what you put in here you will get access in the modal props ;),
-                        });
-                }
-                
+                 this._viewOrderLine(query.orderId);
             }
 
         }
-
     }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
@@ -189,10 +230,13 @@ import {
     _clearFilter() {
         this.props.filterApplied(false);
         hashHistory.push({pathname: "/orders", query: {}});
+        let setMomentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+        let setMomentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
     }
 
     componentWillUnmount() {
-        clearInterval(this._intervalId);
+        this._clearPolling();
     }
 
     _subscribeData() {
@@ -217,7 +261,6 @@ import {
     }
 
     _viewOrderLine = (orderId) =>  {
-        clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
             startPolling: this._restartPolling,
             orderId: orderId,
@@ -273,36 +316,12 @@ import {
         this.props.makeAjaxCall(params);
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
-            "start_date": startDate,
-            "end_date": endDate
-        };
-
-        let params={
-            'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':ORDERS_CUT_OFF_TIME_FETCH,
-            'formdata':formData,
-        }
-        
-        this.props.makeAjaxCall(params);
-        //call other http calls
-        this._reqOrdersFulfilment(startDate, endDate);
-        this._reqOrdersSummary(startDate, endDate);
-        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        let newEndendDate = new Date().toISOString();
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-    }
-
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()
     }
+    
 
     render() {
-
         const todayDate = this._getTodayDate();
         let isPanelOpen = this.state.isPanelOpen;
 
@@ -317,7 +336,7 @@ import {
         var orderDetail, alertNum=0, orderInfo;
 
         let orderDetails = this.props.pbts;
-        
+                
         return (
             <div>
                 <div className="gor-Orderlist-table">
@@ -381,8 +400,8 @@ import {
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
                         pbts={this.props.pbts}
-                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
-                        endDate={new Date().toISOString()}
+                        startDate={this.state.setStartDateForOrders}
+                        endDate={this.state.setEndDateForOrders}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
                         isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}

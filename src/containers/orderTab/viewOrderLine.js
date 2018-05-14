@@ -13,6 +13,7 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import { makeAjaxCall } from '../../actions/ajaxActions';
 import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, ORDERS_POLLING_INTERVAL} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
+import {hashHistory} from 'react-router';
 
 const messages=defineMessages({
     fulfillableStatus: {
@@ -124,7 +125,8 @@ class ViewOrderLine extends React.Component{
     }
 
   _removeThisModal() {
-    this.props.removeModal();
+      this.props.removeModal();
+      hashHistory.push({pathname: "/orders", query: {}});
   }
 
   handleChange(event) {
