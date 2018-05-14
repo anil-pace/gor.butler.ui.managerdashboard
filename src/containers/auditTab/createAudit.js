@@ -176,12 +176,12 @@ class CreateAudit extends React.Component{
       copyPasteLocation:{
         data:validatedLocations,
         focusedEl:"0",
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteLocation.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
         focusedEl:"0",
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -233,7 +233,7 @@ class CreateAudit extends React.Component{
       copyPasteSKU:{
         data:copyPasteLocation,
         focusedEl:this.state.copyPasteSKU.focusedEl,
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
     }
@@ -242,7 +242,7 @@ class CreateAudit extends React.Component{
       copyPasteLocation:{
         data:copyPasteLocation,
         focusedEl:this.state.copyPasteLocation.focusedEl,
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
     }
@@ -442,7 +442,7 @@ class CreateAudit extends React.Component{
         copyPasteSKU:{
           data:data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         filterApplied:true
       })
@@ -452,7 +452,7 @@ class CreateAudit extends React.Component{
         copyPasteLocation:{
           data:data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         filterApplied:true
       })
@@ -466,7 +466,7 @@ class CreateAudit extends React.Component{
         copyPasteSKU:{
           data:filteredData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
@@ -476,7 +476,7 @@ class CreateAudit extends React.Component{
         copyPasteLocation:{
           data:filteredData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
     }
@@ -499,7 +499,8 @@ class CreateAudit extends React.Component{
     this.setState({
       copyPasteLocation:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
   }
@@ -508,7 +509,7 @@ class CreateAudit extends React.Component{
       copyPasteSKU:{
         data:stateInputList,
         focusedEl:(stateInputList.length -1).toString(),
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
   }
@@ -608,7 +609,7 @@ class CreateAudit extends React.Component{
           copyPasteSKU:{
           data:selectedTuples,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
       }
@@ -617,7 +618,7 @@ class CreateAudit extends React.Component{
           copyPasteLocation:{
           data:selectedTuples,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
       }
@@ -672,7 +673,7 @@ class CreateAudit extends React.Component{
               copyPasteSKU:{
               data:processedData,
               focusedEl:this.state.copyPasteSKU.focusedEl,
-              selectionStart:this.state.selectionStart
+              selectionStart:this.state.copyPasteSKU.selectionStart
             },
             filterSelectionState
            })
@@ -682,7 +683,7 @@ class CreateAudit extends React.Component{
             copyPasteLocation:{
             data:processedData,
             focusedEl:this.state.copyPasteLocation.focusedEl,
-            selectionStart:this.state.selectionStart
+            selectionStart:this.state.copyPasteLocation.selectionStart
           },
           filterSelectionState
          })
@@ -738,7 +739,7 @@ class CreateAudit extends React.Component{
               copyPasteLocation:{
                 data:processedList,
                 focusedEl:"0",
-                selectionStart:_this.state.selectionStart
+                selectionStart:_this.state.copyPasteLocation.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -752,7 +753,7 @@ class CreateAudit extends React.Component{
               copyPasteSKU:{
                 data:processedList,
                 focusedEl:"0",
-                selectionStart:_this.state.selectionStart
+                selectionStart:_this.state.copyPasteSKU.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -788,7 +789,7 @@ class CreateAudit extends React.Component{
         copyPasteSKU:{
           data:resetData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -802,7 +803,7 @@ class CreateAudit extends React.Component{
         copyPasteLocation:{
           data:resetData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -827,7 +828,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -838,7 +839,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
