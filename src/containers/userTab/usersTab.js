@@ -505,7 +505,7 @@ const SET_VISIBILITY = gql`
 
 const SET_FILTER_APPLIED = gql`
     mutation setFilterApplied($isFilterApplied: String!) {
-        setFilterApplied(isFilterApplied: $isFilterApplied) @client
+        setUserFilterApplied(isFilterApplied: $isFilterApplied) @client
     }
 `;
 const SET_FILTER_STATE = gql`

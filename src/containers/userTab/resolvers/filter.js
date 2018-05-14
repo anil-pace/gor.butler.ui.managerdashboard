@@ -30,7 +30,7 @@ const userFilterState = {
                 return null;
 
             },
-            setFilterApplied: (_, {isFilterApplied}, {cache}) => {
+            setUserFilterApplied: (_, {isFilterApplied}, {cache}) => {
                 let query = gql`
                     query  {
                         userFilter @client{
