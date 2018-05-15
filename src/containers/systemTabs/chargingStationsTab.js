@@ -12,14 +12,9 @@ import {
     GOR_CONNECTED_STATUS,
     WS_ONSEND,GOR_MANUAL_MODE
 } from '../../constants/frontEndConstants';
-import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
-import {
-    showTableFilter,
-    filterApplied,
-    chargingstationfilterState,
-    toggleChargingFilter
-} from '../../actions/filterAction';
-import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
+
+
+import { setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import {hashHistory} from 'react-router'
 import ChargingStationFilter from './chargingStationFilter';
@@ -208,20 +203,21 @@ class ChargingStations extends React.Component {
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
-            this.props.toggleChargingFilter(true);
             this.props.filterApplied(true);
         } else {
-            this.props.toggleChargingFilter(false);
             this.props.filterApplied(false);
         }
 
         this.props.chargingstationfilterState({
             tokenSelected: {
-                "DOCKING STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : ["all"],
-                "OPERATING MODE": query.mode ? query.mode.constructor=== Array ? query.mode : [query.mode] : ["all"]
+                __typename:"ChargingStationTokenSelected",
+                "DOCKING_STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : ["all"],
+                "OPERATING_MODE": query.mode ? query.mode.constructor=== Array ? query.mode : [query.mode] : ["all"]
             }, searchQuery: {
-                "CHARGING STATION ID": query.charger_id || ''
-            }
+                __typename:"ChargingStationSearchQuery",
+                "CHARGING_STATION_ID": query.charger_id || ''
+            },
+            defaultToken: {"DOCKING_STATUS": ["all"], "OPERATING_MODE": ["all"],__typename:"ChargingStationDefaultToken"}
         });
     }
 
@@ -280,7 +276,7 @@ class ChargingStations extends React.Component {
                         
                         {chargersData?<div><div><div className="gor-filter-wrap"
                                          style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <ChargingStationFilter chargersData={chargersData} responseFlag={this.props.responseFlag} showChargingStationFilter={this.props.showChargingStationFilter} noResults={chargersData.length === 0}/>
+                                <ChargingStationFilter isFilterApplied={this.props.isFilterApplied}  filterState={this.props.chargingStationFilterStatus} chargingstationfilterState={this.props.chargingstationfilterState} chargersData={chargersData} responseFlag={this.props.responseFlag} showChargingStationFilter={this.showChargingStationFilter} noResults={chargersData.length === 0}/>
                             </div>
 
                             <div className="gorToolBar">
@@ -327,7 +323,7 @@ class ChargingStations extends React.Component {
                         
 
 
-            
+                
             
                        
                     </div>
@@ -342,47 +338,17 @@ function mapStateToProps(state, ownProps) {
 
     return {
         csSpinner: state.spinner.csSpinner || false,
-        chargersDetail: state.chargersDetail || [],
-        intlMessages: state.intl.messages,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        chargingFilterStatus: state.filterInfo.chargingFilterStatus || false
+        intlMessages: state.intl.messages
     };
 }
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        csFilterDetail: function (data) {
-            dispatch(csFilterDetail(data))
-        },
+        
         setCsSpinner: function (data) {
             dispatch(setCsSpinner(data));
-        },
-        csHeaderSort: function (data) {
-            dispatch(csHeaderSort(data))
-        },
-        csHeaderSortOrder: function (data) {
-            dispatch(csHeaderSortOrder(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        chargingstationfilterState: function (data) {
-            dispatch(chargingstationfilterState(data));
-        },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
-        },
-        initDataSentCall: function (data) {
-            dispatch(setWsAction({type: WS_ONSEND, data: data}));
-        },
-
+        }
+        
     };
 }
 
@@ -431,16 +397,16 @@ const chargingStationClientData = gql`
         isFilterApplied
         filterState{
             tokenSelected{
-               DOCKING STATUS
-               OPERATING MODE
+               DOCKING_STATUS
+               OPERATING_MODE
             }
             searchQuery{
-                CHARGING STATION ID
+                CHARGING_STATION_ID
 
             }
             defaultToken{
-                DOCKING STATUS
-                OPERATING MODE
+                DOCKING_STATUS
+                OPERATING_MODE
             }
         }
     }
@@ -456,7 +422,7 @@ const SET_VISIBILITY = gql`
 
 const SET_FILTER_APPLIED = gql`
     mutation setFilterApplied($isFilterApplied: String!) {
-        setFilterApplied(isFilterApplied: $isFilterApplied) @client
+        setChargingStationFilterApplied(isFilterApplied: $isFilterApplied) @client
     }
 `;
 const SET_FILTER_STATE = gql`
@@ -467,12 +433,15 @@ const SET_FILTER_STATE = gql`
 
 
 const withClientData = graphql(chargingStationClientData, {
-    props: (data) => ({
-        todos: data.data.todos,
-        showFilter: data.data.chargingStationFilter.display,
-        isFilterApplied: data.data.chargingStationFilter.isFilterApplied,
-        chargingStationFilterStatus: JSON.parse(JSON.stringify(data.data.chargingStationFilter.filterState))
-    })
+    
+    props:function(data){
+        return {
+          showFilter: data.data.chargingStationFilter ?data.data.chargingStationFilter.display:false,
+        isFilterApplied:data.data.chargingStationFilter?data.data.chargingStationFilter.isFilterApplied:false,
+        chargingStationFilterStatus: data.data.chargingStationFilter ?JSON.parse(JSON.stringify(data.data.chargingStationFilter.filterState)):null,
+        chargingStationFilter:data.data.chargingStationFilter  
+        }
+    }
 })
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {

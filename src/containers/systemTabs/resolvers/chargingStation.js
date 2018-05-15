@@ -16,8 +16,25 @@ const chargingStationFilterState = {
                         chargingStationFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                            filterState{
+                                tokenSelected{
+               DOCKING_STATUS
+               OPERATING_MODE
+               __typename
+            }
+            searchQuery{
+                CHARGING_STATION_ID
+                __typename
+
+            }
+            defaultToken{
+                DOCKING_STATUS
+                OPERATING_MODE
+                __typename
+            }
+                            }
                             __typename
+                            
                         }
                     }
                 `;
@@ -27,14 +44,31 @@ const chargingStationFilterState = {
                 return null;
 
             },
-            setFilterApplied: (_, {isFilterApplied}, {cache}) => {
+            setChargingStationFilterApplied: (_, {isFilterApplied}, {cache}) => {
                 let query = gql`
                     query  {
                         chargingStationFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                            filterState{
+                                 tokenSelected{
+               DOCKING_STATUS
+               OPERATING_MODE
+               __typename
+            }
+            searchQuery{
+                CHARGING_STATION_ID
+                __typename
+
+            }
+            defaultToken{
+                DOCKING_STATUS
+                OPERATING_MODE
+                __typename
+            }
+                            }
                             __typename
+                            
                         }
                     }
                 `;
@@ -50,14 +84,31 @@ const chargingStationFilterState = {
                         chargingStationFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                            filterState{
+                                 tokenSelected{
+               DOCKING_STATUS
+               OPERATING_MODE
+               __typename
+            }
+            searchQuery{
+                CHARGING_STATION_ID
+                __typename
+
+            }
+            defaultToken{
+                DOCKING_STATUS
+                OPERATING_MODE
+                __typename
+            }
+                            }
                             __typename
+                            
                         }
                     }
                 `;
                 let previous = cache.readQuery({query}).chargingStationFilter
                 previous.filterState = state
-                previous.filterState.__typename="ChargingStationFilterState"
+                 previous.filterState.__typename="ChargingStationFilterState"
                 cache.writeData({data: {chargingStationFilter: previous}});
                 return null;
 
