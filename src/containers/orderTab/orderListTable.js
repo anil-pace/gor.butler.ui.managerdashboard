@@ -286,7 +286,7 @@ class OrderListTable extends React.Component {
      _processPBTsPostFilter = (arg, nProps) => {
         nProps = this;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
-        pbtData = nProps.props.ordersPerPbtPostFilter;
+        pbtData = nProps.props.pbts;
         
         let pbtDataLen = pbtData.length; 
         let timeOffset = nProps.props.timeOffset || "";
@@ -805,13 +805,18 @@ class OrderListTable extends React.Component {
     render() {
         var self=this;
         let processedPbtData;
-        if(this.props.ordersPerPbtPostFilter){
-            processedPbtData = this._processPBTsPostFilter(this.props.ordersPerPbtPostFilter);
+        // if(this.props.ordersPerPbtPostFilter){
+        //     processedPbtData = this._processPBTsPostFilter(this.props.ordersPerPbtPostFilter);
+        // }
+        // else{
+        //     processedPbtData = this._processPBTs(this.props.pbts);
+        // }
+        if(this.props.pbts[0].order_id){
+            processedPbtData = this._processPBTsPostFilter(this.props.pbts);
         }
         else{
             processedPbtData = this._processPBTs(this.props.pbts);
         }
-        
         let isGroupedById = this.props.isGroupedById;
         return (
             <div>

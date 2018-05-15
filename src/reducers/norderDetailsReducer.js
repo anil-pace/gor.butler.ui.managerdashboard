@@ -126,7 +126,7 @@ export  function orderDetails(state={},action){
       let res_post_filter = action.data;
 
       return Object.assign({}, state, {
-        ordersPerPbtPostFilter: res_post_filter.serviceRequests || [],
+        pbts: res_post_filter.serviceRequests || [],
         "isGroupedById": false
       });
       break;

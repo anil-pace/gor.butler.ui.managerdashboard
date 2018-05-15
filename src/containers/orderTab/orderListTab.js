@@ -71,7 +71,8 @@ const moment = require('moment-timezone');
             query: null, 
             orderListRefreshed: null,
             setStartDateForOrders: null,
-            setEndDateForOrders: null
+            setEndDateForOrders: null,
+            setOrdersPerPbtCount: this.props.ordersPerPbtPostFilter
         }
     }
 
@@ -136,6 +137,10 @@ const moment = require('moment-timezone');
         }
 
         if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            console.log("%c filter has been applied ===========>", 'color: green');
+            this._clearPolling();
+        }
+        if(Object.keys(nextProps.location.query).length>0){
             console.log("%c filter has been applied ===========>", 'color: green');
             this._clearPolling();
         }
@@ -354,13 +359,13 @@ const moment = require('moment-timezone');
         var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
         let orderDetails, alertNum=0, orderInfo;
 
-        if(this.props.ordersPerPbtPostFilter){
-             orderDetails = this.props.ordersPerPbtPostFilter;
-        }
-        else{
-             orderDetails = this.props.pbts;
-        }
-        
+        // if(this.props.ordersPerPbtPostFilter){
+        //      orderDetails = this.props.ordersPerPbtPostFilter;
+        // }
+        // else{
+        //      orderDetails = this.props.pbts;
+        // }
+        orderDetails = this.props.pbts;
         
                 
         return (
@@ -423,10 +428,7 @@ const moment = require('moment-timezone');
 
                 </div> 
 
-                {this.props.ordersPerPbtPostFilter.length> 0  &&
-                    (<OrderListTable 
-                        pbts={this.props.ordersPerPbtPostFilter}
-                        />)}
+                
 
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
