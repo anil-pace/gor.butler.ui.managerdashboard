@@ -11,9 +11,7 @@ export  function downloadReportsReducer(state={},action){
 	    	hasDataChanged:!state.hasDataChanged,
 	    	downloadReportsSpinner:false
       })
-	  case GET_REPORT:
-	  	console.log(action.data);
-	  	break
+	  
 	  case SET_DOWNLOAD_REPORT_SPINNER:
 	  	return Object.assign({}, state, {
 	    	downloadReportsSpinner:action.data
