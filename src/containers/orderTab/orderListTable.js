@@ -283,6 +283,165 @@ class OrderListTable extends React.Component {
         }
     }
 
+     _processPBTsPostFilter = (arg, nProps) => {
+        nProps = this;
+        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
+        pbtData = nProps.props.ordersPerPbtPostFilter;
+        
+        let pbtDataLen = pbtData.length; 
+        let timeOffset = nProps.props.timeOffset || "";
+        let pbtRows = []; 
+        let processedData = {};
+
+
+
+        if(pbtDataLen){
+            for(let i =0 ; i < pbtDataLen; i++){
+                let pbtRow = [];
+                
+                        formatOrderId = ((pbtData[i].order_id && pbtData[i] !== "") ?
+                                        this.props.intl.formatMessage(messages.orderId, {orderId: pbtData[i].order_id}): "");
+
+                        formatPpsId =   ((pbtData[i].pps_id && pbtData[i].pps_id !== "") ? 
+                                                this.props.intl.formatMessage(messages.ppsId, {ppsId: pbtData[i].pps_id}): "");
+
+                        formatBinId =   ((pbtData[i].pps_bin_id && pbtData[i].pps_bin_id !=="") ?
+                                         this.props.intl.formatMessage(messages.binId, {binId: pbtData[i].pps_bin_id}): "");
+
+                        formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
+
+
+                        formatStartDate = "";
+
+                        //Create time need to be add
+                        if (pbtData[i].start_date) {
+                            if (getDaysDiff(pbtData[i].start_date) < 2) {
+                                formatStartDate = nProps.context.intl.formatRelative(pbtData[i].start_date, {
+                                    timeZone: timeOffset,
+                                    units: 'day'
+                                }) +
+                                    ", " + nProps.context.intl.formatTime(pbtData[i].start_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                            }
+                            else {
+                                formatStartDate = nProps.context.intl.formatDate(pbtData[i].start_date,
+                                    {
+                                        timeZone: timeOffset,
+                                        month: 'short',
+                                        day: '2-digit',
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false
+                                    });
+                            }
+
+                            if (pbtData[i].completion_date) {
+                                if ((getDaysDiff(pbtData[i].completion_date) == getDaysDiff(pbtData[i].start_date))) {
+                                    formatCompleteDate = nProps.context.intl.formatTime(pbtData[i].completion_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                                }
+                                else {
+                                    formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
+                                        {
+                                            timeZone: timeOffset,
+                                            month: 'short',
+                                            day: '2-digit',
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false
+                                        });
+                                }
+                            }
+                            else
+                                formatCompleteDate = "";
+                        }
+
+                        if (pbtData[i].completion_date) {
+                            if (getDaysDiff(pbtData[i].completion_date) < 2) {
+                                formatCompleteDate = nProps.context.intl.formatRelative(pbtData[i].completion_date, {
+                                    timeZone: timeOffset,
+                                    units: 'day'
+                                }) +
+                                    ", " + nProps.context.intl.formatTime(pbtData[i].completion_date, {
+                                        timeZone: timeOffset,
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        hour12: false
+                                    });
+                            }
+                            else {
+                                formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
+                                    {
+                                        timeZone: timeOffset,
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: '2-digit',
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: false
+                                    });
+                            }
+                        }
+                        else {
+                            formatCompleteDate = "";
+                        }
+
+                        pbtRow.push(<div className="DotSeparatorWrapper"> 
+                                    <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
+                                </div>);
+
+                        pbtRow.push(<div style={{display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                        <div style={{width: "35%"}}>
+                                            {formatProgressBar.width ?
+                                                <div className="ProgressBarWrapper">
+                                                    <ProgressBar progressWidth={formatProgressBar.width}/>
+                                                </div>: null
+                                            }
+                                            <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
+                                        </div>
+                                        <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                            <span>{pbtData[i].status}</span>
+                                            <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                            <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
+                                            <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
+                                            <span>{pbtData[i].unfulfillable_count > 0 ? pbtData[i].unfulfillable_count : ""}</span>
+                                            <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
+                                        </div>
+                                    </div>);
+
+                        if(formatProgressBar.action === true){
+                            pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
+                              <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
+                                <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                              </button>
+                            </div>);
+                        }
+                        else{
+                            pbtRow.push(<div> </div>);
+                        }
+
+                        pbtRows.push(pbtRow);
+                    
+                }
+            processedData.pbtData = pbtRows;
+
+        }
+        processedData.offset = 0;
+        processedData.max= pbtRows.length;
+
+        return processedData;
+    }
+
+
+
     _processPBTs = (arg, nProps) => {
         nProps = this;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
@@ -645,7 +804,14 @@ class OrderListTable extends React.Component {
 
     render() {
         var self=this;
-        const processedPbtData = this._processPBTs(this.props.pbts);
+        let processedPbtData;
+        if(this.props.ordersPerPbtPostFilter){
+            processedPbtData = this._processPBTsPostFilter(this.props.ordersPerPbtPostFilter);
+        }
+        else{
+            processedPbtData = this._processPBTs(this.props.pbts);
+        }
+        
         let isGroupedById = this.props.isGroupedById;
         return (
             <div>
@@ -737,6 +903,7 @@ function mapStateToProps(state, ownProps) {
         orderListRefreshed: state.ordersInfo.orderListRefreshed,
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
         pbts:state.orderDetails.pbts,
+        ordersPerPbtPostFilter:state.orderDetails.ordersPerPbtPostFilter,
         totalPages: state.orderDetails.totalPages,
         totalOrders: state.orderDetails.totalOrders,
         ordersPerPbt:state.orderDetails.ordersPerPbt,

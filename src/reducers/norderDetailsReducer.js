@@ -2,6 +2,7 @@ import {ORDERS_FULFIL_FETCH,
         ORDERS_SUMMARY_FETCH,
         ORDERS_CUT_OFF_TIME_FETCH, 
         ORDERS_PER_PBT_FETCH, 
+        ORDERS_PER_PBT_FETCH_POST_FILTER,
         ORDERLINES_PER_ORDER_FETCH, 
         ORDER_LIST_REFRESHED, 
         TOGGLE_ACTIVE_PBT,
@@ -118,6 +119,18 @@ export  function orderDetails(state={},action){
       
       return Object.assign({},state,{});
       break;
+
+
+    case ORDERS_PER_PBT_FETCH_POST_FILTER:
+
+      let res_post_filter = action.data;
+
+      return Object.assign({}, state, {
+        ordersPerPbtPostFilter: res_post_filter.serviceRequests || [],
+        "isGroupedById": false
+      });
+      break;
+
 
 
     case ORDERLINES_PER_ORDER_FETCH:

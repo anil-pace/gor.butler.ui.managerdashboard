@@ -33,6 +33,7 @@ import {WS_ONSEND, ANY,
         ORDERS_SUMMARY_FETCH, 
         ORDERS_CUT_OFF_TIME_FETCH, 
         ORDERS_PER_PBT_FETCH, 
+        ORDERS_PER_PBT_FETCH_POST_FILTER,
         ORDERLINES_PER_ORDER_FETCH,
         ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
@@ -48,7 +49,7 @@ import {
         ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-var moment = require('moment-timezone');
+const moment = require('moment-timezone');
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -74,6 +75,9 @@ var moment = require('moment-timezone');
         }
     }
 
+    componentDidMount(){
+        this.props.setOrderListSpinner(true);
+    }
 
     _clearPolling(){
         clearInterval(this._intervalIdForCutOffTime);
@@ -152,29 +156,32 @@ var moment = require('moment-timezone');
 
     _refreshList(query){
 
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
-            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
+        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter,
+         momentEndDateFromFilter, momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
 
-        /* 'Date & Time Filter' === PRESENT  */
+        /* 'Date & Time Filter' ======> PRESENT  */
         if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
-            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
-            endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
+                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
 
-            /* 'Date & Time Filter'  + Cut off time => call level 2  */
+                momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+                momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+            /* ==============> 'Date & Time Filter'  + Cut off time => call level 2  */
             if(query.cutOffTime && !query.orderId){
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                //momentCutOffTime = query.cutOffTime;//moment.tz(query.cutOffTime, this.props.timeOffset).toISOString();
+                cutOffTimeFromFilter = moment.tz(query.cutOffTime, this.props.timeOffset);
+                //cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
+                this._reqOrderPerPbt(momentStartDateFromFilter, momentEndDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            /*  'Date & Time Filter'  + Order id => call level 3 */
+            /*  =============> 'Date & Time Filter'  + Order id => call level 3 */
             else if (!query.cutOffTime && query.orderId){
-                //cutOffTimeFromFilter = null;
                 this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
-            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
+            /* ONLY 'Date & Time Filter'  => send only start date & end date after momentization */
             else{
-                
                 startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
                 endDateFromFilter = new Date(query.toDate + " " + query.toTime);
 
@@ -183,7 +190,6 @@ var moment = require('moment-timezone');
 
                 console.log(momentStartDateFromFilter);
                 console.log(momentEndDateFromFilter);
-
                 this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
                 this.props.filterApplied(true);
 
@@ -214,25 +220,6 @@ var moment = require('moment-timezone');
             }
             else if(query.orderId){
                  this._viewOrderLine(query.orderId);
-                // let params={
-                //     'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                //     'method':GET,
-                //     'contentType':APP_JSON,
-                //     'accept':APP_JSON,
-                //     'cause':ORDERLINES_PER_ORDER_FETCH,
-                // }
-                // this.props.makeAjaxCall(params);
-                //     if(this.props.orderLines){
-                //         modal.add(ViewOrderLine, {
-                //         orderId: query.orderId,
-                //         title: '',
-                //         size: 'large',
-                //         closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                //         hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                //                                //.. all what you put in here you will get access in the modal props ;),
-                //         });
-                // }
-                
             }
 
         }
@@ -251,7 +238,7 @@ var moment = require('moment-timezone');
                 'method':POST,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH,
+                'cause':ORDERS_PER_PBT_FETCH_POST_FILTER,
                 'formdata':formData,
             }
             this.props.makeAjaxCall(params);
@@ -293,7 +280,6 @@ var moment = require('moment-timezone');
     }
 
     _viewOrderLine = (orderId) =>  {
-        //clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
             startPolling: this._restartPolling,
             orderId: orderId,
@@ -349,11 +335,10 @@ var moment = require('moment-timezone');
         this.props.makeAjaxCall(params);
     }
 
-    
-
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()
     }
+    
 
     render() {
         const todayDate = this._getTodayDate();
@@ -367,9 +352,16 @@ var moment = require('moment-timezone');
         var itemNumber=6, table, pages;
         
         var currentPage=this.props.filterOptions.currentPage, totalPage=this.props.orderData.totalPage;
-        var orderDetail, alertNum=0, orderInfo;
+        let orderDetails, alertNum=0, orderInfo;
 
-        let orderDetails = this.props.pbts;
+        if(this.props.ordersPerPbtPostFilter){
+             orderDetails = this.props.ordersPerPbtPostFilter;
+        }
+        else{
+             orderDetails = this.props.pbts;
+        }
+        
+        
                 
         return (
             <div>
@@ -431,6 +423,11 @@ var moment = require('moment-timezone');
 
                 </div> 
 
+                {this.props.ordersPerPbtPostFilter.length> 0  &&
+                    (<OrderListTable 
+                        pbts={this.props.ordersPerPbtPostFilter}
+                        />)}
+
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
                         pbts={this.props.pbts}
@@ -442,8 +439,10 @@ var moment = require('moment-timezone');
                         disableCollapseAllBtn={this._disableCollapseAllBtn}
                         isPanelOpen={this.state.isPanelOpen}
                         />)}
-                    {!this.props.orderListSpinner && this.props.pbts.length===0 && <div className="noOrdersPresent"> No orders available </div>}
-                    {this.props.orderListSpinner && <div className="noOrdersPresent"></div>}
+
+                
+                {!this.props.orderListSpinner && this.props.pbts.length===0 && <div className="noOrdersPresent"> No orders available </div>}
+                {this.props.orderListSpinner && <div className="noOrdersPresent"></div>}
                 
                 </div>
             </div>
@@ -476,6 +475,7 @@ function mapStateToProps(state, ownProps) {
         pbts: state.orderDetails.pbts,
         orderLines: state.orderDetails.orderLines,
         orderData: state.getOrderDetail || {},
+        ordersPerPbtPostFilter: state.orderDetails.ordersPerPbtPostFilter
     };
 }
 
@@ -524,7 +524,8 @@ var mapDispatchToProps=function (dispatch) {
 OrderListTab.defaultProps = {
     orderFulfilment: {},
     orderSummary: {},
-    pbts: []
+    pbts: [],
+    ordersPerPbtPostFilter: []
 }
 
 OrderListTab.PropTypes={
