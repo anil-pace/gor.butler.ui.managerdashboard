@@ -29,6 +29,7 @@ import {
     GRN_HISTORY,
     GET_MAX_FILE_SIZE,
     WS_ONSEND,
+    POST,
 } from "../../constants/frontEndConstants";
 
 import {defineMessages} from "react-intl";
@@ -93,7 +94,7 @@ class UtilityTab extends React.Component {
         let url = INVENTORY_REPORT_URL + "?sync=false&format=" + fileType;
         let data = {
             url: url,
-            method: GET,
+            method: POST,
             token: this.props.auth_token,
             responseType: "arraybuffer",
             cause: INVENTORY_REPORT_RESPONSE
