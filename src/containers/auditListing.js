@@ -402,7 +402,7 @@ class AuditTab extends React.Component {
         var auditDetails = [], auditData = {};
         var i, limit = data.length;
         for (i = 0; i <= limit - 1; i++) {
-            auditData.id = data[i].audit_id;
+            auditData.id = data[i].display_id;
             auditData.display_id = data[i].display_id;
             auditData.progressBarflag = false;
             if (data[i].audit_name) {
@@ -577,7 +577,7 @@ class AuditTab extends React.Component {
         if (e.currentTarget.checked) {
             for (let i = 0, len = checkedAudit.length; i < len; i++) {
                 if (checkedAudit[i].audit_button_data.audit_start_button === 'enable')
-                    arr.push(checkedAudit[i].audit_id)
+                    arr.push(checkedAudit[i].display_id.toString())
             }
             this.props.setCheckedAudit(arr);
         }

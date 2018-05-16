@@ -54,10 +54,12 @@ class AuditStart extends React.Component {
     this.state = {
       checkedAuditPPS: [],
       checkedOtherPPS: [],
+      visiblePopUp:false,
       auditId: this.props.auditID,
       items: []
     };
     this.handleChange = this.handleChange.bind(this);
+    console.log(this.props.auditID.length);
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -110,9 +112,7 @@ class AuditStart extends React.Component {
       this.props.checkedOtherPPSList
     );
     allAuditId =
-      this.state.auditId.constructor.name !== "Array"
-        ? [this.state.auditId]
-        : this.state.auditId;
+      this.state.auditId.constructor.name !== "Array"? [this.state.auditId]: this.state.auditId;
     if (this.props.param == "CHANGE_PPS") {
       URL = START_CHANGE_PPS_URL;
       param = CHANGE_PPS_TASK;
@@ -160,6 +160,10 @@ class AuditStart extends React.Component {
     }
 
     // this.props.setCheckedAudit({});
+  }
+
+  openPopup(e){
+  this.setState({"visiblePopUp":"true"});
   }
 
   headerCheckChange(type, e) {
@@ -260,8 +264,12 @@ class AuditStart extends React.Component {
   }
 
   render() {
-    console.log(this.props.auditID);
     let me = this;
+    let idList=[];
+    var arr=this.state.auditId
+    for(var i=0;i<arr.length;i++){
+      idList.push(<div >{arr[i]}</div>);
+    } 
     let items = this.state.items || [];
     let changePPSHeader = (<FormattedMessage
       id="audit.audittask.headerchangeppd"
@@ -362,8 +370,11 @@ class AuditStart extends React.Component {
           <div className="gor-auditDetails-modal-body">
             <div className="content-body">
               <span className="left-float">
-                {forAudit} - {this.state.auditId}
+                {this.state.auditId.length>1?<div className="auditIdInfo"><span>{"For "+this.state.auditId.length+" Audits  | "}</span> <button className="" onClick={this.openPopup.bind(this)}>View</button></div>:<div>{forAudit} {this.state.auditId[0]}</div>}
               </span>
+             { this.state.visiblePopUp?<div className="tooltipText">
+              {idList}
+              </div>:"" }
               <div className="ppsSearchWrap">
                 <SearchFilter
                   handleChange={this.handleChange}

@@ -9767,6 +9767,18 @@ button:disabled {
   float: right;
 }
 
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .auditIdInfo {
+  display: inline-block;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .tooltipText {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px solid red;
+  display: inline-block;
+}
+
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
   font-size: 1.25rem;
   font-weight: 600;

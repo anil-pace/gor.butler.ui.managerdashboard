@@ -138,9 +138,9 @@ _handelClick(field,id,displayId) {
   }else if(field.target.value=='edit'){
     this._editAudit(auditId,'edit');
   }else if(field.target.value=='mannualassignpps'){
-    this.startAudit(auditId);
+    this.startAudit([auditId]);
   }else if(field.target.value=='autoassignpps'){
-    this.startAuditAuto(auditId);
+    this.startAuditAuto([auditId]);
   }
 }
 
@@ -281,7 +281,7 @@ _tableBodyData(itemsData){
   rowObject.auditDetails={
       "header":[itemsData[i].display_id,itemsData[i].audit_name],
       "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime],
-      "audit_id":itemsData[i].id
+      "audit_id":itemsData[i].display_id.toString()
       }
   rowObject.auditProgress={
    "percentage": this._findStatus(itemsData[i].progressStatus),

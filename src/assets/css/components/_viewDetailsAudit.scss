@@ -50,6 +50,16 @@
             .ppsSearchWrap{
             float:right;
             }
+            .auditIdInfo{
+              display: inline-block;
+            }
+            .tooltipText{
+              position: absolute;
+              width:40px;
+              height: 40px;
+              border:1px solid red;
+              display: inline-block;
+            }
         }
         }
       .gor-auditDetails-modal-head{
