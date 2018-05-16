@@ -176,7 +176,8 @@ class MsuConfigTab extends React.Component {
         let isAnyMsuEmpty = [];
         let isAnyMsuDropping = [];
         let isAnyMsuDropped = [];
-        let isAnyMsuReadyForReconfig =[];
+        let isAnyMsuReadyForReconfig = [];
+        let isAnyMsuStoringBack = [];
 
 
         if (nextProps.socketAuthorized && !this.state.subscribed) {
@@ -207,12 +208,15 @@ class MsuConfigTab extends React.Component {
                     else if (eachMsu.status === "waiting"){  isAnyMsuDropping.push(eachMsu.status);}
                     else if (eachMsu.status === "dropped") { isAnyMsuDropped.push(eachMsu.status);}
                     else if (eachMsu.status === "ready_for_reconfiguration")  {isAnyMsuReadyForReconfig.push(eachMsu.status);}
+                    else if (eachMsu.status === "storing_back") { isAnyMsuStoringBack.push(eachMsu.status);}
                 });
 
             let checkAnyEmptyMsuFound = (isAnyMsuEmpty.length > 0 ? true : false);
             let checkAnyMsuInProgressFound = ( (isAnyMsuDropping.length  > 0 ? true : false) ||
                                                 (isAnyMsuDropped.length > 0 ? true : false) || 
-                                                (isAnyMsuReadyForReconfig.length > 0 ? true : false) );
+                                                (isAnyMsuReadyForReconfig.length > 0 ? true : false) ||
+                                                (isAnyMsuStoringBack.length > 0 ? true : false)
+                                            );
 
             // atleast 1 MSU is Empty and no MSU is in progress
             if( checkAnyEmptyMsuFound && !checkAnyMsuInProgressFound){
