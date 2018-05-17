@@ -873,12 +873,20 @@ export const BREACHED_STATUS ="BREACHED";
 export const BREACHED_COMPLETED_STATUS ="BREACHED COMPLETED";
 export const PRODUCT_SHORT_STATUS ="PRODUCT SHORT";
 export const OUT_OF_STOCK_STATUS ="OUT OF STOCK";
-export const COMPLETED_STATUS ="COMPLETED";
 export const REJECTED_STATUS ="REJECTED";
-export const CANCELLED_STATUS ="CANCELLED";
-export const ABANDONED_STATUS ="ABANDONED";
 export const ORDER_TAGS = "ORDER TAGS";
 export const STATUS = "STATUS";
+export const FULFILLABLE_STATUS = "fulfillable";
+export const PICK_STARTED_STATUS = "pick_started";
+export const CANCELLATION_LOCKED_STATUS = "cancellation_locked";
+export const COMPLETED_STATUS ="complete";
+export const CANCELLED_STATUS ="cancelled";
+export const ACCEPTED_STATUS = "ACCEPTED";
+export const CREATED_STATUS = "created";
+export const BAD_REQUEST_STATUS = "BAD_REQUEST";
+export const NOT_FULFILLABLE_STATUS = "not_fulfillable";
+export const TEMPORARY_UNAVILABLE_STATUS = "temporary_unavailable";
+export const ABANDONED_STATUS = "abandoned";
 export const ORDERS_POLLING_INTERVAL = 60000;
 
 

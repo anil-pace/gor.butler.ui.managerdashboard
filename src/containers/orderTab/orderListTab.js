@@ -76,6 +76,7 @@ const moment = require('moment-timezone');
 
     componentDidMount(){
         this.props.setOrderListSpinner(true);
+        this.props.filterApplied(false);
     }
 
     _clearPolling(){
