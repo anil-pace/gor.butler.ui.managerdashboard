@@ -5,7 +5,8 @@
 import React  from 'react';
 
 import Inventory from '../components/inventory/inventory';
-import Spinner from '../components/spinner/Spinner';
+//import Spinner from '../components/spinner/Spinner';
+import {withSpinner} from '../HOC/withSpinner';
 import { setInventorySpinner ,inventoryRefreshed} from '../actions/inventoryActions';
 import { FormattedMessage} from 'react-intl';
 import { connect } from 'react-redux';
@@ -33,7 +34,7 @@ class InventoryTab extends React.Component{
 
     _setSpinner(bShow) {
         var _bShow=bShow ? bShow:false;
-        this.props.setInventorySpinner(_bShow);
+        this.props.setSpinner(_bShow);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -68,7 +69,7 @@ class InventoryTab extends React.Component{
         snapshotData=this.props.recreatedData[dateTodayState] ? this.props.recreatedData[dateTodayState].otherInfo: {}
         return (
             <div className="gorInventory wrapper">
-                <Spinner isLoading={this.props.inventorySpinner} setSpinner={this.props.setInventorySpinner}/>
+                {/*<Spinner isLoading={this.props.inventorySpinner} setSpinner={this.props.setInventorySpinner}/>*/}
                 <Inventory noData={this.props.noData} 
                 recreatedData={this.props.recreatedData} 
                 currentDate={this.props.dateTodayState} 
@@ -98,6 +99,7 @@ function mapStateToProps(state, ownProps) {
     return {
         "inventoryData": state.inventoryInfo.inventoryDataHistory || [],
         "inventorySpinner": state.spinner.inventorySpinner || false,
+        "isLoading":state.spinner.inventorySpinner || false,
         "isPrevDateSelected": state.inventoryInfo.isPrevDateSelected || false,
         "inventoryDataPrevious": state.inventoryInfo.inventoryDataPrevious || {},
         "hasDataChanged": state.inventoryInfo.hasDataChanged,
@@ -111,7 +113,7 @@ function mapStateToProps(state, ownProps) {
 }
     function mapDispatchToProps(dispatch){
         return{
-            setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
+            setSpinner:function(data){dispatch(setInventorySpinner(data));},
             initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
             updateSubscriptionPacket: function (data) {
                 dispatch(updateSubscriptionPacket(data));
@@ -123,4 +125,4 @@ function mapStateToProps(state, ownProps) {
     };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(InventoryTab);
+export default connect(mapStateToProps,mapDispatchToProps)(withSpinner(InventoryTab));

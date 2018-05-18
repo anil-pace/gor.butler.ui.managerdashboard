@@ -4,7 +4,7 @@ import UserDataTable from './userTab/userTabTable';
 import { connect } from 'react-redux'; 
 import { defineMessages } from 'react-intl';
 import {stringConfig} from '../constants/backEndConstants'
-import Spinner from '../../components/spinner/Spinner';
+import {withSpinner} from '../../HOC/withSpinner';
 import { setUserSpinner } from  '../../actions/spinnerAction';
 import {userHeaderSort,userHeaderSortOrder,userFilterDetail} from '../actions/sortHeaderActions';
 import {INITIAL_HEADER_SORT,INITIAL_HEADER_ORDER} from '../constants/frontEndConstants';
@@ -61,10 +61,7 @@ const messages=defineMessages({
 
 
 class UsersTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }
+	
   _processUserDetails() {
   var nProps=this,
   data=nProps.props.userdetails ||{};
@@ -138,7 +135,7 @@ class UsersTab extends React.Component{
 			<div>
 				<div>
 					<div className="gor-User-Table">
-          <Spinner isLoading={this.props.userSpinner} setSpinner={this.props.setUserSpinner}/>
+          
 						<UserDataTable items={userData} itemNumber={itemNumber} intlMessg={this.props.intlMessages} 
                            mid={this.props.manager.users?this.props.manager.users[0].id:''} 
                            sortHeaderState={this.props.userHeaderSort} sortHeaderOrder={this.props.userHeaderSortOrder} 
@@ -162,9 +159,9 @@ function mapStateToProps(state, ownProps){
     manager:state.headerData.headerInfo||[],
     userSortHeader: state.sortHeaderState.userHeaderSort || "role" ,
     userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
-    userSpinner:state.spinner.userSpinner || false
+    isLoading:state.spinner.userSpinner || false
 
-  };
+  }
 }
 
 var mapDispatchToProps=function(dispatch){
@@ -172,7 +169,7 @@ var mapDispatchToProps=function(dispatch){
     userFilterDetail: function(data){dispatch(userFilterDetail(data))},
     userHeaderSort: function(data){dispatch(userHeaderSort(data))},
     userHeaderSortOrder: function(data){dispatch(userHeaderSortOrder(data))},
-    setUserSpinner:function(data){dispatch(setUserSpinner(data))}
+    setSpinner:function(data){dispatch(setUserSpinner(data))}
   };
 }
 
@@ -195,6 +192,6 @@ userSpinner:React.PropTypes.bool
 };
 
 
-export  default connect(mapStateToProps,mapDispatchToProps)(UsersTab);
+export  default connect(mapStateToProps,mapDispatchToProps)(withSpinner(UsersTab));
 
 

@@ -83,23 +83,6 @@ input, select {
   vertical-align: middle;
 }
 
-.loader {
-  background-image: url(./images/loading.gif);
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  background-position: center center;
-  background-repeat: no-repeat;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: none;
-  z-index: 998;
-  height: 100vh;
-  top: 0px;
-  background-size: 3%;
-}
-
 input:focus {
   outline: none;
 }
@@ -190,6 +173,27 @@ body {
 .WARNING-Biggericon, .ERROR-Biggericon, .INFO-Biggericon,
 .WARNING-icon, .INFO-icon, .ERROR-icon {
   background-image: url(./images/Icons_need_update.svg);
+}
+
+.loader {
+  background-image: url(./images/loading.gif);
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  z-index: 998;
+  height: 100vh;
+  top: 0px;
+  background-size: 3%;
+}
+
+.withSpinner {
+  position: relative;
 }
 
 .gor-login-user {

@@ -1,7 +1,7 @@
 import React  from 'react';
 import LoginForm from './loginForm';
 import Footer from '../footer/Footer';
-import Spinner from '../../components/spinner/Spinner';
+import {withSpinner} from '../../HOC/withSpinner';
 import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
@@ -79,7 +79,7 @@ class Login extends React.Component{
               <TopNotifications />
             <div className='gor-login-form'>
             
-            <Spinner isLoading={this.props.loginSpinner} setSpinner={this.props.setLoginSpinner}/>
+            
                 <div className='gor-login-lang'>
                     <div className='gor-lang-text'>
                     <FormattedMessage id='login.butler.language' 
@@ -118,7 +118,7 @@ function mapStateToProps(state, ownProps){
 	return {
         loginAuthorized:state.authLogin.loginAuthorized ,
         sLang: state.intl.locale || null,
-        loginSpinner:state.spinner.loginSpinner         
+        isLoading:state.spinner.loginSpinner         
     };
 }
 /**
@@ -132,9 +132,9 @@ var mapDispatchToProps=function(dispatch){
     return {
         updateIntl: function(params){ dispatch(updateIntl(params));},
         resetForm:   function(){ dispatch(resetForm()); },
-        setLoginSpinner: function(params) { dispatch(setLoginSpinner(params));}
+        setSpinner: function(params) { dispatch(setLoginSpinner(params));}
     }
 };
 
 
-export 	default connect(mapStateToProps,mapDispatchToProps)(Login);
+export 	default connect(mapStateToProps,mapDispatchToProps)(withSpinner(Login));
