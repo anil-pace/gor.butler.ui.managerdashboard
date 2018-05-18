@@ -436,7 +436,7 @@ class AuditTab extends React.Component {
             else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_waiting" || data[i].audit_status == "audit_conflicting" ||
                 data[i].audit_status == "audit_started" || data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || data[i].audit_status == "audit_pending_approval") {
                 auditData.progressBarflag = true;
-                auditData.status = data[i].audit_progress.completed + completedOutof + data[i].audit_progress.total;
+                auditData.status = data[i].audit_progress.completed +" "+completedOutof +" "+data[i].audit_progress.total;
             }
             else{
                 auditData.status = data[i].audit_status;

@@ -138,7 +138,7 @@ _handelClick(field,id,displayId) {
   }else if(field.target.value=='edit'){
     this._editAudit(auditId,'edit');
   }else if(field.target.value=='mannualassignpps'){
-    this.startAudit(auditId);
+    this.startAudit([auditId]);
   }else if(field.target.value=='autoassignpps'){
     this.startAuditAuto(auditId);
   }
