@@ -181,10 +181,11 @@ display:inline-block;
               .auditListColumn4Style{
                 @extend .flexContent;
                 flex:1 0 20%;
-                overflow:visible
+                overflow:visible;
                 }
                 .auditListColumn6Style{
                   flex:1 0 8%;
+                  overflow:visible;
                   }
 
       }

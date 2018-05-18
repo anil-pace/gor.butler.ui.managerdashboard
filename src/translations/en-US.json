@@ -2451,6 +2451,24 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
+    "id": "audit.startaudit.listauditid",
+    "description": "List of Audits",
+    "defaultMessage": "List of Audits",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.startaudit.for",
+    "description": "For",
+    "defaultMessage": "For",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.startaudit.View",
+    "description": "View",
+    "defaultMessage": "View",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
     "id": "audit.nonresultstart",
     "description": "audit not found",
     "defaultMessage": "No result found.",

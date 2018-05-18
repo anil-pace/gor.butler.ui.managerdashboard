@@ -5826,6 +5826,7 @@ button:disabled {
 
 .table-auditListing .table-body .auditListColumn6Style {
   flex: 1 0 8%;
+  overflow: visible;
 }
 
 .gor-auditlist-paginate-right .gor-paginate-wrap {
@@ -9696,7 +9697,6 @@ button:disabled {
 }
 
 .gor-progress-bar-wrapper {
-  width: 150px;
   background: #eeeeee;
   height: 10px;
   border-radius: 12px;
@@ -9765,6 +9765,67 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .ppsSearchWrap {
   float: right;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .auditIdInfo {
+  display: inline-block;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .viewButton {
+  font-size: 20px;
+  font-weight: normal;
+  color: #419bf9;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper {
+  position: fixed;
+  width: 326px;
+  max-height: 275px;
+  left: 35%;
+  top: 35%;
+  display: inline-block;
+  border-radius: 2px 2px 0 0;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.3);
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader {
+  background-color: #AAAAAA;
+  height: 43px;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader .closeTooltip {
+  float: right;
+  font-size: 25px;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipText {
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  max-height: 228px;
+  overflow: scroll;
+  background-color: #FFFFFF;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipText .auditnameLine {
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: left;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
