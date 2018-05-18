@@ -43,6 +43,12 @@ class ButlerBotsTable extends React.Component {
         this.setState({header: updated_header,butlerBotsList:updated_list})
     }
 
+     componentWillReceiveProps(nextProps){
+        if(nextProps.data && nextProps.data.length!==0){
+            this.setState({butlerBotsList:nextProps.data})
+        }
+    }
+
 
     render() {
         let self = this;

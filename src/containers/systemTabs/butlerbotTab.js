@@ -678,7 +678,7 @@ const botsClientData = gql`
 
 
 const SET_VISIBILITY = gql`
-    mutation setBotsFiler($filter: String!) {
+    mutation setBotsFilter($filter: String!) {
         setShowBotsFilter(filter: $filter) @client
     }
 `;
