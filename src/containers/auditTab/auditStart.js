@@ -55,6 +55,7 @@ class AuditStart extends React.Component {
       checkedAuditPPS: [],
       checkedOtherPPS: [],
       auditId: this.props.auditID,
+      visiblePopUp:false,
       items: []
     };
     this.handleChange = this.handleChange.bind(this);
@@ -62,6 +63,24 @@ class AuditStart extends React.Component {
   _removeThisModal() {
     this.props.removeModal();
   }
+
+    openPopup(e){
+      this.setState({"visiblePopUp":!this.state.visiblePopUp});
+      }
+    _findDisplayidName(arrId)
+    {
+      var resultantArr=[];
+      var dataSet=this.props.auditDetail;
+      dataSet.forEach(function(entry){
+        arrId.forEach(function(content){
+          if(content==entry.audit_id){
+            resultantArr.push({id:entry.audit_id,dislayID:entry.display_id,name:entry.audit_name});
+          }
+        })
+        entry.audit_id,entry.display_id,entry.audit_name
+      })
+      return resultantArr;
+    }
 
   _tableAuditPPSData(itemsData) {
     let pendingAudit = this.context.intl.formatMessage(messages.pendingAudit);
@@ -79,7 +98,7 @@ class AuditStart extends React.Component {
       rowObject.assignOperator = itemsData[i].operator_assigned;
       rowObject.auditStatus = {
         header: [itemsData[i].audits_pending + pendingAudit],
-        subHeader: [itemsData[i].auditlines_pending + linesRemaining]
+        subHeader: [itemsData[i].auditlines_pending +" "+ linesRemaining]
       };
       tableData.push(rowObject);
       rowObject = {};
@@ -260,7 +279,11 @@ class AuditStart extends React.Component {
   }
 
   render() {
-    console.log(this.props.auditID);
+    var dispId_Name=this._findDisplayidName(this.state.auditId);
+    let idList=[];
+    for(var i=0;i<dispId_Name.length;i++){
+      idList.push(<div className="auditnameLine">{dispId_Name[i].name +" ("+dispId_Name[i].dislayID+") "}</div>);
+    }
     let me = this;
     let items = this.state.items || [];
     let changePPSHeader = (<FormattedMessage
@@ -311,6 +334,27 @@ class AuditStart extends React.Component {
         defaultMessage="For audit"
       />
     );
+        let auditlistinfo = (
+          <FormattedMessage
+            id="audit.startaudit.listauditid"
+            description="List of Audits"
+            defaultMessage="List of Audits"
+          />
+        );
+        let fortext = (
+          <FormattedMessage
+            id="audit.startaudit.for"
+            description="For"
+            defaultMessage="For "
+          />
+        );
+        let view = (
+          <FormattedMessage
+            id="audit.startaudit.View"
+            description="View"
+            defaultMessage="View"
+          />
+        );
 
     let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
     let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
@@ -362,8 +406,21 @@ class AuditStart extends React.Component {
           <div className="gor-auditDetails-modal-body">
             <div className="content-body">
               <span className="left-float">
-                {forAudit} - {this.state.auditId}
+              {this.state.auditId.length>1?<div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length+" Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div>:<span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name?" - "+dispId_Name[0].name:""}</span>}
               </span>
+              { this.state.visiblePopUp?
+              
+              <div className="outerWrapper">
+              <div className="tooltipHeader"> 
+             {auditlistinfo}
+              <span className="closeTooltip" onClick={this.openPopup.bind(this)}> × </span>
+              </div>
+              <div className="tooltipText">
+              {idList}
+             
+              </div>
+              </div>
+              :"" }
               <div className="ppsSearchWrap">
                 <SearchFilter
                   handleChange={this.handleChange}
@@ -380,7 +437,7 @@ class AuditStart extends React.Component {
                       <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
                     </label>
                     <span>
-                      {tablerowdataAudit.length}
+                    {tablerowdataAudit.length+" "}
                       {auditModePPS}
                     </span>
                   </GTableHeaderCell>
@@ -509,7 +566,7 @@ class AuditStart extends React.Component {
                       />
                     </label>
                     <span>
-                      {tablerowdataOther.length} {otherModePPS}
+                    {tablerowdataOther.length+" "} {otherModePPS}
                     </span>
                   </GTableHeaderCell>
                 </GTableHeader>
@@ -625,7 +682,8 @@ function mapStateToProps(state, ownProps) {
     ppsList: state.auditInfo.ppsList || [],
     auth_token: state.authLogin.auth_token,
     checkedAuditPPSList: state.auditInfo.checkedAuditPPSList || [],
-    checkedOtherPPSList: state.auditInfo.checkedOtherPPSList || []
+    checkedOtherPPSList: state.auditInfo.checkedOtherPPSList || [],
+    auditDetail: state.recieveAuditDetail.auditDetail
   };
 }
 

@@ -527,5 +527,3 @@ MsuConfigTab.PropTypes={
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)); ;
-
-

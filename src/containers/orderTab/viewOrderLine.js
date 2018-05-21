@@ -405,4 +405,4 @@ var mapDispatchToProps=function (dispatch) {
     }
 };
 
-  export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ViewOrderLine)) ;
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(ViewOrderLine)) ;
