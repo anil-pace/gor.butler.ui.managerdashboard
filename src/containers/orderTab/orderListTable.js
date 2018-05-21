@@ -55,19 +55,16 @@ const messages=defineMessages({
         description: "In 'fulfillable' for orders",
         defaultMessage: "In progress"
     },
-
     completeStatus: {
         id: "orderList.complete.status",
         description: " 'complete' status",
         defaultMessage: "Completed"
     },
-
     cancelledStatus: {
         id: "orderList.cancelled.status",
         description: " 'Cancelled' status",
         defaultMessage: "Cancelled"
     },
-
     createdStatus: {
         id: "orderList.created.status",
         description: " 'created' status",
@@ -86,7 +83,7 @@ const messages=defineMessages({
     temporyUnFulfillableStatus: {
         id: 'orderlist.tempnotFulfillale.status',
         description: " 'Refreshed' status",
-        defaultMessage: 'On Hold'
+        defaultMessage: 'On hold'
     },
     acceptedStatus: {
         id: 'orderlist.accepted.status',
@@ -131,9 +128,12 @@ class OrderListTable extends React.Component {
             cutOffTimeIndex:"",
             statusMapping:{
                 "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
+                "cancellation_locked": this.props.intl.formatMessage(messages.fulfillableStatus),
+                "pick_started": this.props.intl.formatMessage(messages.fulfillableStatus),
                 "complete": this.props.intl.formatMessage(messages.completeStatus),
                 "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
+                "created": this.props.intl.formatMessage(messages.createdStatus),
                 "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
                 "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
                 "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
