@@ -64,6 +64,7 @@ class ValidateSelAtt extends React.Component{
    this._searchCallBack = this._searchCallBack.bind(this);
    this._resetStateData = this._resetStateData.bind(this);
    this._onBackClick = this._onBackClick.bind(this);
+   this._togglePanel = this._togglePanel.bind(this);
    this.state=this._getInitialState()
  } 
  _getInitialState(){
@@ -71,7 +72,8 @@ class ValidateSelAtt extends React.Component{
   return {
     ...this.props,
     filterSelectionState:"none",
-    isInputEmpty:true
+    isInputEmpty:true,
+    panelClass:'collapsed'
   }
  }
 
@@ -79,6 +81,7 @@ class ValidateSelAtt extends React.Component{
    
    var input = event.target.value.trim(),
    inputList = input.split(/[\s,;\t\n]+/),
+   selectionStart = event.target.selectionStart,
    processedList=[],
    stateInputList = JSON.parse(JSON.stringify(this.state.copyPasteData.data)),
    focusedEl = id ? id.toString() : "0";
@@ -106,6 +109,7 @@ class ValidateSelAtt extends React.Component{
    this.setState({
       copyPasteData:{
         data:stateInputList,
+        selectionStart,
         focusedEl
       },
       isInputEmpty: stateInputList[0].value.trim() !=='' ? false : true
@@ -125,7 +129,8 @@ class ValidateSelAtt extends React.Component{
     this.setState({
       copyPasteData:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.copyPasteData.selectionStart
       }
     })
   }
@@ -189,7 +194,8 @@ class ValidateSelAtt extends React.Component{
         this.setState({
             copyPasteData:{
             data:processedData,
-            focusedEl:this.state.copyPasteData.focusedEl
+            focusedEl:this.state.copyPasteData.focusedEl,
+            selectionStart:this.state.copyPasteData.selectionStart
           },
           filterSelectionState
          })
@@ -207,7 +213,8 @@ class ValidateSelAtt extends React.Component{
          this.setState({
           copyPasteData:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteData.selectionStart
         }
       })
      
@@ -241,7 +248,8 @@ class ValidateSelAtt extends React.Component{
           data:data,
           focusedEl:"0"
         },
-        filterApplied:true
+        filterApplied:true,
+        selectionStart:this.state.copyPasteData.selectionStart
       })
   }
   else{
@@ -250,7 +258,8 @@ class ValidateSelAtt extends React.Component{
         filterApplied:false,
         copyPasteData:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteData.selectionStart
         }
       })
   }
@@ -271,11 +280,17 @@ class ValidateSelAtt extends React.Component{
       skuAttributes:{},
       copyPasteData:{
         data:resetData,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.copyPasteData.selectionStart
       }
     })
     
     
+  }
+  _togglePanel(){
+     this.setState({
+        panelClass:this.state.panelClass === 'expanded' ? 'collapsed' : 'expanded'
+      })
   }
 
   componentWillReceiveProps(nextProps){
@@ -294,8 +309,8 @@ class ValidateSelAtt extends React.Component{
     render(){
       var {validationDoneSKU,copyPasteData,allTuplesValid} = this.state;
       let searchSKUPH = this.props.intl.formatMessage(messages.searchPlaceholderSKU);
-      let auditBySkuMessg=<FormattedMessage id="ValidateSelAtt.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
-      let skuSelectAttributes = <FormattedMessage id="ValidateSelAtt.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
+      let auditBySkuMessg=<FormattedMessage id="ValidateSelAtt.auditbysku.text" description='text for Enter SKU and validate ' defaultMessage='Enter SKU and validate'/>;
+      let skuSelectAttributes = <FormattedMessage id="ValidateSelAtt.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="ValidateSelAtt.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="ValidateSelAtt.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>
@@ -343,11 +358,12 @@ class ValidateSelAtt extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}  
+                        selectionStart={self.state.copyPasteData.selectionStart}
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
               }) }
                <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.auditAdd" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                </div>
@@ -364,7 +380,7 @@ class ValidateSelAtt extends React.Component{
                  <div className="gor-sku-validation-btn-wrap">
                  <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editSKUText" description='Text for editing a location' 
                         defaultMessage='BACK TO EDIT'/></button>
-                <div className="sku-search"> <SearchFilterComponent callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
+                <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
 
                  </div>
                  <div className={"message success"}>
@@ -395,7 +411,8 @@ class ValidateSelAtt extends React.Component{
              
                 
               </div>
-          {validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+          {validationDoneSKU && <div><div className="gor-audit-inputlist-wrap" >
+          <div className={"gor-audit-inputlist-cont "+self.state.panelClass}>
           <div className={"note-message"}>
                   <FormattedMessage id="audit.skuValidation.note" description='Audit location verification error message'
                                                               defaultMessage='Note: Not setting any attributes will result in auditing the entire SKU with all attributes'
@@ -430,11 +447,14 @@ class ValidateSelAtt extends React.Component{
               }
               )}
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.Validation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>
-              
+              </div>
+              </div>
+              <div className="gor-audit-excol-wrap"> <span onClick={this._togglePanel} className={"gor-exp-coll "+self.state.panelClass}></span>
+              </div>
               </div>}
              
             </Tab>

@@ -2,7 +2,7 @@ import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
 import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
-import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_PDFA,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column} from 'fixed-data-table';
 import {tableRenderer,TextCell,ResolveCell,AuditPackingSlotIdCell,AuditPackingQuantityCell,AuditPackingStatusCell,AuditPackingResolveCell} from '../../components/commonFunctionsDataTable';
@@ -20,19 +20,22 @@ class ResolveAudit extends React.Component{
       auditDataList: this._dataList,
       checkedState: [],
       totalMismatch: 0,
+      auditParamType:""
       } 
   }
 
   componentWillReceiveProps(nextProps){
 
-     var data=nextProps.auditLines.auditlines || [], processedData;
+     var data=nextProps.auditLines.auditlines || [], processedData,auditType;
       processedData=this._processData(data,nextProps);
+      auditType=nextProps.auditLines.audit_param_type;
       this._dataList=new tableRenderer(data ? data.length : 0);
       this._dataList.newData=processedData;
       this.state={
       auditDataList: this._dataList,
       checkedState: [],
       totalMismatch: 0,
+      auditParamType:auditType
       }
   }
   _removeThisModal() {
@@ -92,7 +95,7 @@ class ResolveAudit extends React.Component{
 
   _checkAuditStatus(rowIndex,state,auditLineId) {
     var newAuditLineId;
-    if(this.props.auditMethod===AUDIT_BY_PDFA) {
+    if(this.state.auditParamType===AUDIT_BY_SKU) {
       var newAuditLineIndex=this.actualMapping[auditLineId]; //in case of pdfa rowindex wont work so using actual index
       newAuditLineId=this.state.auditDataList.newData[newAuditLineIndex].auditLineId;
     }
@@ -343,8 +346,8 @@ class ResolveAudit extends React.Component{
   
   render()
   {
-      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType, auditId=this.props.displayId;
-      var auditbysku=(this.props.auditMethod==="pdfa"?false:true), resolveTable=<div/>;
+      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType, auditId=this.props.auditId;
+      var auditbysku=(this.state.auditParamType===AUDIT_BY_SKU?false:true), resolveTable=<div/>;
       var totalLines=auditDataList.getSize()?auditDataList.getSize():0;
       if(auditbysku) {
         resolveTable=this._renderSkutable();
@@ -371,8 +374,8 @@ class ResolveAudit extends React.Component{
             <Spinner isLoading={this.props.auditResolveSpinner} setSpinner={this.props.setResolveAuditSpinner}/>
               <div className='gor-usr-form'>
                 <div className="gor-auditResolve-h1"> 
-                  <FormattedMessage id="audit.missing.information" description='missing information for audit' 
-                                    defaultMessage='Audit task #{auditId} - {auditType}' 
+                  <FormattedMessage id="audit.header.information" description='missing information for audit' 
+                                    defaultMessage='Audit task #{auditId}' 
                                     values={{missingAudit: this.state.totalMismatch, auditId:auditId,auditType: auditType}}/> 
                 </div>
                 <div className="gor-auditResolve-h2">

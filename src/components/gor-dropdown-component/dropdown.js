@@ -97,8 +97,7 @@ class Dropdown extends Component {
     
     return (
           <div className="gor-dropdown-wrapper" onClick={!this.props.disabled ? this._toggleDropdown.bind(this) : null}>
-
-            <span className={'gor-dropdown'}   >{!this.props.resetOnSelect ? this.state.placeholder : this.state.defaultPlaceHolder}</span>
+            <span className={this.props.disabled?'gor-dropdown':'gor-dropdown gor-enabled'}   >{!this.props.resetOnSelect ? this.state.placeholder : this.state.defaultPlaceHolder}</span>
             <span className={this.state.dropDownVisible ? "gor-dropdown-arrow up" : "gor-dropdown-arrow"}></span>
             <List data={this.props.options} selectedOption={this.props.selectedOption} optionAction={this._onSelect.bind(this)}
               dropDownVisible={this.state.dropDownVisible} />

@@ -60,6 +60,7 @@ class OperationsLogTab extends React.Component{
         this._setFilter= this._setFilter.bind(this);
         this._handlePageChange= this._handlePageChange.bind(this);
         this._requestReportDownload = this._requestReportDownload.bind(this);
+        this.props.showTableFilter(false);
         
     }
 

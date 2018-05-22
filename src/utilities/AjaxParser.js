@@ -24,6 +24,7 @@ import {
 import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
+import {setMsuConfigSpinner} from  '../actions/spinnerAction';
 import {
 	notifySuccess,
 	notifyFail,
@@ -99,9 +100,26 @@ import {
     OPERATION_LOG_FETCH,REPORTS_FETCH,GET_REPORT,
     DOWNLOAD_REPORT_REQUEST,
     STORAGE_SPACE_FETCH,
+    ORDERS_FULFIL_FETCH,
+    ORDERS_SUMMARY_FETCH,
+    ORDERS_CUT_OFF_TIME_FETCH,
+    ORDERS_PER_PBT_FETCH,
+    ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL
+    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
+    FETCH_MSU_CONFIG_LIST,
+    FETCH_MSU_CONFIG_DEST_TYPE_LIST,
+    FETCH_MSU_CONFIG_LIST_VIA_FILTER,
+    FETCH_MSU_CONFIG_RACK_STRUCTURE,
+    FETCH_MSU_CONFIG_START_RECONFIG,
+    FETCH_MSU_CONFIG_STOP_RECONFIG,
+    FETCH_MSU_CONFIG_RELEASE_MSU,
+    FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+    GET,
+    POST,
+    APP_JSON
 } from "../constants/frontEndConstants";
+
 import {BUTLER_UI, CODE_E027} from "../constants/backEndConstants";
 import {
     UE002,
@@ -146,10 +164,8 @@ import {
     recievePendingMSU,
     resetCheckedPPSList
 } from "../actions/ppsModeChangeAction";
-
-
 import {
-    resetaudit
+    resetaudit,setCheckedAudit
 } from "../actions/sortHeaderActions";
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
@@ -172,7 +188,27 @@ import {
 import {recieveOLData} from './../actions/operationsLogsActions';
 import {recieveReportsData} from './../actions/downloadReportsActions';
 import {recieveStorageSpaceData} from './../actions/storageSpaceActions';
+import { receiveMsuConfigList, 
+        receiveMsuConfigDestTypesList,
+        receiveMsuConfigListViaFilter,
+        receiveMsuConfigRackStructure,
+        msuConfigStartReconfig,
+        msuConfigStopReconfig,
+        msuConfigReleaseMsu,
+        msuConfigBlockAndPutChangeType
+    }from './../actions/msuConfigAction';
 
+import {receiveOrderFulfilmentData, 
+        receiveOrderSummaryData,
+        receiveCutOffTimeData, 
+        receiveOrdersPerPbtData,
+        receiveOrdersLinesData} from './../actions/norderDetailsAction';
+
+import {
+     ORDERS_PER_PBT_URL
+} from './../constants/configConstants';
+
+import { makeAjaxCall } from './../actions/ajaxActions';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
     let stringInfo = {};
@@ -190,7 +226,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             break;
         case AUDIT_RETRIEVE:
-            store.dispatch(recieveAuditData(res));
+            store.dispatch(recieveAuditData(res,saltParams));
             store.dispatch(setAuditSpinner(false));
             break;
         case GET_ROLES:
@@ -268,6 +304,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 msg = getFormattedMessages("DELETEAUDIT", values);
                 store.dispatch(notifyfeedback(msg));
                 store.dispatch(setAuditRefresh(true)); //reset refresh flag
+                store.dispatch(setCheckedAudit([]));
             }
             break;
 
@@ -277,6 +314,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("PAUSEAUDIT", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
             }
             else{
                 values={id:res.alert_data[0].details.audit_id},
@@ -300,6 +338,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             msg = getFormattedMessages("CANCELLED", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
+            store.dispatch(setCheckedAudit([]));
         }
 
             case AUDIT_USERLIST:
@@ -336,7 +375,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
            
         case START_AUDIT_TASK:
-        if(res.successful.length>=1 || res.unsuccessful.length>=1 || (res.successful.length===1 && res.unsuccessful.length===1))
+        
+        if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
         {
            var successCount = res.successful.length,
                 unsuccessfulCount = Object.keys(res.unsuccessful).length,
@@ -355,21 +395,24 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     stringInfo = getFormattedMessages("STARTFAIL", values);
                     store.dispatch(setNotification(stringInfo));
                 }
-
+                store.dispatch(setCheckedAudit([]));
                 store.dispatch(setAuditRefresh(true));
         }
         else if(res.alert_data[0].code== "as007"){//to do
                 stringInfo = codeToString(res.alert_data[0]);
-				store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(notifyfeedback(stringInfo.msg)); 
+                store.dispatch(setCheckedAudit([]));
         }
         else if(res.alert_data[0].code== "g028"){
             stringInfo = codeToString(res.alert_data[0]);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         else
         {
             stringInfo = getFormattedMessages("STARTFAILALL", values);
             store.dispatch(setNotification(stringInfo));
+            store.dispatch(setCheckedAudit([]));
         }
         break;
 
@@ -394,9 +437,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case AUDIT_RESOLVE_CONFIRMED:
             if (res.successful.status) {
                 stringInfo = statusToString(res.successful);
-                store.dispatch(notifySuccess(stringInfo.msg));
+               // store.dispatch(notifySuccess(stringInfo.msg));
+               store.dispatch(notifyfeedback(stringInfo.msg));
             } else {
-                ShowError(store, cause, status);
+                //ShowError(store, cause, status);
+                stringInfo = getFormattedMessages("RESOLVEFAIL", values);
+                store.dispatch(setNotification(stringInfo));
             }
             break;
 
@@ -652,14 +698,93 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case STORAGE_SPACE_FETCH:
             store.dispatch(recieveStorageSpaceData(res));
             break;
+
+        case ORDERS_FULFIL_FETCH:
+            store.dispatch(receiveOrderFulfilmentData(res));
+            break;
+        case ORDERS_SUMMARY_FETCH:
+            store.dispatch(receiveOrderSummaryData(res));
+            break;
+        case ORDERS_CUT_OFF_TIME_FETCH:
+            store.dispatch(setOrderListSpinner(false));
+            let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
+            let endDate = new Date().toISOString();
+            
+            // If length of response from Level 1 http call is 1 with no cut off time, call Level 2 http request with cut off time: null
+            if(res.length === 1 && res[0].cut_off_time === null){
+                let formData={
+                    "start_date": startDate,
+                    "end_date": endDate,
+                    "cut_off_time": null
+                };
+
+                let params={
+                    'url':ORDERS_PER_PBT_URL,
+                    'method':POST,
+                    'contentType':APP_JSON,
+                    'accept':APP_JSON,
+                    'cause':ORDERS_PER_PBT_FETCH,
+                    'formdata':formData,
+                }
+                store.dispatch(makeAjaxCall(params));
+            }
+            else{
+                store.dispatch(receiveCutOffTimeData(res));
+            }
+            break;
+
+        case ORDERS_PER_PBT_FETCH:
+            store.dispatch(setOrderListSpinner(false));
+            store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+
+        case ORDERLINES_PER_ORDER_FETCH:
+            store.dispatch(receiveOrdersLinesData(res));
+            break;
+            
         case SELLER_RECALL:
             if(status !== 202){
-                ShowError(store, cause, status);
+                ShowError(store, cause, status,res);
             }
             else{
                 store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
             }
             break;
+        case FETCH_MSU_CONFIG_LIST:
+            store.dispatch(setMsuConfigSpinner(false));
+            store.dispatch(receiveMsuConfigList(res));
+            break;
+
+        case FETCH_MSU_CONFIG_DEST_TYPE_LIST: 
+            store.dispatch(setMsuConfigSpinner(false));
+            store.dispatch(receiveMsuConfigDestTypesList(res));
+            break;
+
+        case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
+            store.dispatch(setMsuConfigSpinner(false));
+            store.dispatch(receiveMsuConfigListViaFilter(res));
+            break;
+
+        case FETCH_MSU_CONFIG_RACK_STRUCTURE:
+           store.dispatch(receiveMsuConfigRackStructure(res));
+            break;
+
+        case FETCH_MSU_CONFIG_START_RECONFIG:
+            store.dispatch(msuConfigStartReconfig(res));
+            break;
+
+        case FETCH_MSU_CONFIG_STOP_RECONFIG:
+            store.dispatch(msuConfigStopReconfig(res));
+            break;
+
+        case FETCH_MSU_CONFIG_RELEASE_MSU:
+            store.dispatch(msuConfigReleaseMsu(res));
+            break;
+
+        case FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE:
+            store.dispatch(msuConfigBlockAndPutChangeType(res));
+            break;
+
         default:
             ShowError(store, cause, status);
             break;

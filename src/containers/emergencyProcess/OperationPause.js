@@ -9,7 +9,7 @@ const  messages= defineMessages({
         description: 'Text for latch_gate sensor',
         defaultMessage: 'Latch Gate'
     },
-buttonPressSensor: {
+buttonSensor: {
         id: 'operationPause.sensor.buttonSensor',
         description: 'Text for button_press sensor',
         defaultMessage: 'Button'
@@ -83,7 +83,7 @@ class OperationPause extends React.Component{
                     </div>
                       <span className='gor-text-sm'>
                         <FormattedMessage id='operation.alert.pause.subtext' 
-                          defaultMessage='You must check the emergency situation and release the Emergency Pause button in order to resume the operation in warehouse'
+                          defaultMessage='You must check the emergency situation and release the System Pause button in order to resume the operation in warehouse'
                             description="Subtext for pause alert"/>
                       </span>
                     </div>           

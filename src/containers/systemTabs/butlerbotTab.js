@@ -152,12 +152,12 @@ class ButlerBot extends React.Component {
                 butlerDetail.location="--";
             }
             if (data[i].power || data[i].power=== 0) {
-                butlerDetail.voltage=data[i].power + " %";
+                butlerDetail.voltage=data[i].power||0;
             }
             else {
-                butlerDetail.voltage="--";
+                butlerDetail.voltage=0;
             }
-            butlerDetail.butlerAvgVoltage=data[i].power;
+            butlerDetail.butlerAvgVoltage=data[i].power||0;
             butlerDetail.taskNum=currentTask[data[i].current_task];
             butlerDetail.taskNumClass=currentTaskClass[data[i].current_task];
             butlerDetail.taskType=data[i].current_task;
@@ -199,6 +199,7 @@ class ButlerBot extends React.Component {
     constructor(props) {
         super(props);
         this.state={query:null}
+        this.props.showTableFilter(false)
     }
 
     componentWillMount() {
@@ -267,7 +268,7 @@ class ButlerBot extends React.Component {
      *
      */
     _clearFilter() {
-        hashHistory.push({pathname: "/system/butlerbots", query: {}})
+        hashHistory.push({pathname: "/system/msuConfigurationTab", query: {}})
     }
 
 
@@ -319,7 +320,7 @@ class ButlerBot extends React.Component {
                     }
 
                 }
-                avgVoltage=((avgVoltage / (activeBotsCount)).toFixed(1));
+                avgVoltage=avgVoltage!==0?((avgVoltage / (activeBotsCount)).toFixed(1)):0;
                 taskDetail["avgVoltage"]=avgVoltage + "%";
             }
             else {

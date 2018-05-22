@@ -64,6 +64,7 @@ export const NOTIFICATION="NOTIFICATION";
 export const BUTLERBOTS="butlerbots";
 export const CHARGING="chargingstation";
 export const PPS="pps";
+export const MSU="msu";
 export const PPS_PERFORMANCE="PPS_PERFORMANCE";
 export const USER_DETAILS="USER_DETAILS";
 export const ORDER_RECIEVED="ORDER_RECIEVED";
@@ -81,6 +82,7 @@ export const USERS="USERS";
 export const AUDIT="AUDIT";
 export const NOTIFICATION_TAB="Notification";
 export const BUTLERBOTS_TAB="Butler Bots";
+export const MSUCONFIG_TAB="MSU configuration";
 export const CHARGING_TAB="Charging Station";
 export const PPS_TAB="Pick Put Stations";
 export const ORDER_LIST="Order List";
@@ -96,6 +98,7 @@ export const TAB_CLASS={
 
 /*Constants for response type */
 export const PPS_DATA="pps";
+export const MSU_DATA="msu";
 export const BUTLERS_DATA="BUTLERS_DATA";
 export const AUDIT_DATA="AUDIT_DATA";
 export const PUT_DATA="PUT_DATA";
@@ -112,7 +115,11 @@ export const SYSTEM_BUTLERS_DETAILS="butlers";
 export const HISTOGRAM_DETAILS="histogram";
 export const USER_DATA="users";
 export const ORDERLIST="ORDERLIST";
-
+export const ORDERS_FULFIL_URL="ORDERS_FULFIL_URL";
+export const ORDERS_SUMMARY_URL = "ORDERS_SUMMARY_URL";
+export const ORDERS_CUT_OFF_TIME_URL="ORDERS_CUT_OFF_TIME_URL";
+export const ORDERS_PER_PBT_URL = "ORDERS_PER_PBT_URL";
+export const ORDERLINES_PER_ORDER_URL="ORDERLINES_PER_ORDER_URL";
 
 /*Constants for type of AJAX call*/
 export const AUTH_LOGIN="AUTH_LOGIN";

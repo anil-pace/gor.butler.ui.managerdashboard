@@ -21,7 +21,9 @@ import {
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
-import {setDownloadReportSpinner} from '../../actions/downloadReportsActions'
+import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
+
+
 
 
 const pageSize = [ {value: "25", disabled:false,label: <FormattedMessage id="operationLog.page.twentyfive" description="Page size 25"
@@ -117,8 +119,10 @@ class DownloadReportTab extends React.Component{
         return processedData;
     }
     shouldComponentUpdate(nextProps,nextState){
-        var shouldUpdate = (nextProps.hasDataChanged !== this.props.hasDataChanged);
+        
+        var shouldUpdate = ((nextProps.hasDataChanged !== this.props.hasDataChanged) || (nextProps.downloadReportsSpinner !== this.props.downloadReportsSpinner));
         return shouldUpdate;
+        
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.socketAuthorized && !this.state.subscribed) {
@@ -128,7 +132,10 @@ class DownloadReportTab extends React.Component{
             })
             
         }
-        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
+        else if(JSON.stringify(this.props.location.query) !== JSON.stringify(nextProps.location.query)){
+            this._getReportsData(nextProps);
+        }
+        else if(this.props.hasDataChanged !== nextProps.hasDataChanged){
             let rawData = nextProps.reportsData.slice(0);
             let data = this._processData(rawData);
             let dataList = new tableRenderer(data.length)
@@ -167,12 +174,14 @@ class DownloadReportTab extends React.Component{
         var page = query.page || 1;
 
         var params={
-                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize,
+                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize+
+                '&sort=requestedTime&order=DESC',
                 'method':GET,
                 'contentType':APP_JSON,
                 'accept':APP_JSON,
                 'cause':REPORTS_FETCH
             }
+        _props.setDownloadReportSpinner(true);
         _props.makeAjaxCall(params);
         
     }
@@ -204,10 +213,12 @@ class DownloadReportTab extends React.Component{
         var _this = this;
         var dataSize = dataList.getSize();
         var noData = !dataSize ;
+        var location = JSON.parse(JSON.stringify(this.props.location));
         
         return (
+            
             <div className="gorTesting wrapper gor-download-rpts">
-               <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/> 
+                <Spinner isLoading={this.props.downloadReportsSpinner} setSpinner={this.props.setDownloadReportSpinner}/>
        
              <div className="gorToolBar">
                     <div className="gorToolBarWrap">
@@ -351,7 +362,7 @@ class DownloadReportTab extends React.Component{
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={false} location={this.props.location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
                 </div>
                 </div>   
             </div>

@@ -38,10 +38,15 @@ const  messages= defineMessages({
         description: 'text for audit name placeholder',
         defaultMessage: 'Time, place or products'
     },
-    auditinputplaceholder: {
+    auditskuinputplaceholder: {
         id: 'audit.inputplaceholder.text',
         description: 'text for audit input placeholder',
         defaultMessage: 'e.g: 012678ABC'
+    },
+    auditlocationinputplaceholder: {
+        id: 'audit.locationInputPlaceholder.text',
+        description: 'text for audit input placeholder',
+        defaultMessage: 'e.g: 132.0.A.47'
     },
     searchPlaceholderSKU:{
         id: 'audit.searchinputplaceholder.text',
@@ -88,6 +93,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         copyPasteLocation:{
@@ -99,6 +105,7 @@ class CreateAudit extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
+          selectionStart:0,
           isInputEmpty:true
         },
         filterApplied:false,
@@ -114,7 +121,8 @@ class CreateAudit extends React.Component{
         activeTabIndex:0,
         validateclicked:false,
         selectedSKUList:{},
-        auditSpinner:this.props.auditSpinner
+        auditSpinner:this.props.auditSpinner,
+        panelClass:'collapsed'
       };
       
       
@@ -136,9 +144,11 @@ class CreateAudit extends React.Component{
       this._invokeAlert = this._invokeAlert.bind(this);
       this._searchCallBack = this._searchCallBack.bind(this);
       this._createAudit=this._createAudit.bind(this);
+      this._togglePanel = this._togglePanel.bind(this);
       
       
   }
+  
   componentWillUnmount()
   {
     
@@ -155,8 +165,8 @@ class CreateAudit extends React.Component{
       this._removeThisModal();
     }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-      let locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes)),
-      skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes)),
+      let locationAttributes =this.props.locationDataChanged !== nextProps.locationDataChanged?JSON.parse(JSON.stringify(nextProps.locationAttributes)):{},
+      skuAttributes = this.props.skuDataChanged !== nextProps.skuDataChanged?JSON.parse(JSON.stringify(nextProps.skuAttributes)):{},
       validatedLocations = this.state.activeTabIndex === 0 ? this.state.copyPasteLocation.data : this._processLocationAttributes(locationAttributes.data || []),
       validatedSKUs = this.state.activeTabIndex === 0 ? this._processSkuAttributes(skuAttributes.data || []) : this.state.copyPasteSKU.data,
       validationDone = Object.keys(locationAttributes).length ? true : false,
@@ -165,11 +175,13 @@ class CreateAudit extends React.Component{
       this.setState({
       copyPasteLocation:{
         data:validatedLocations,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.copyPasteLocation.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.copyPasteSKU.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -220,7 +232,8 @@ class CreateAudit extends React.Component{
       this.setState({
       copyPasteSKU:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteSKU.focusedEl
+        focusedEl:this.state.copyPasteSKU.focusedEl,
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
     }
@@ -228,7 +241,8 @@ class CreateAudit extends React.Component{
        this.setState({
       copyPasteLocation:{
         data:copyPasteLocation,
-        focusedEl:this.state.copyPasteLocation.focusedEl
+        focusedEl:this.state.copyPasteLocation.focusedEl,
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
     }
@@ -311,6 +325,7 @@ class CreateAudit extends React.Component{
       validSKUData.audit_param_value.attributes_list = [];
       validSKUData.kq = this.kqCheck.checked;
       validSKUData.action=(type === "create" || type === "confirm")?'create':'';
+      validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       let {selectedSKUList} = this.state;
       let skuList = this.state.copyPasteSKU.data;
       for(let i=0,len=skuList.length; i<len ;i++){
@@ -341,9 +356,6 @@ class CreateAudit extends React.Component{
     this.props.setAuditSpinner(true);
     this.props.makeAjaxCall(urlData);
   }
-  
-  
-    
   }
 
 
@@ -366,8 +378,10 @@ class CreateAudit extends React.Component{
     }
 
     validLocationDataCreateAudit={
+      "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "kq":this.kqCheck.checked,
+      "audit_creator_name":this.props.username,
       "action":(type === "create" || type === "confirm")?'create':'',
       "audit_param_value":{
         "locations_list":auditParamValue
@@ -416,7 +430,7 @@ class CreateAudit extends React.Component{
     if(value !== ""){
     //Traversing the list
     for(let i=0,len=data.length;i<len;i++){
-      if(data[i].value.indexOf(value) > -1){
+      if(data[i].value.toLowerCase().indexOf(value) > -1){
         data[i].visible = true;
       }
       else{
@@ -427,7 +441,8 @@ class CreateAudit extends React.Component{
       this.setState({
         copyPasteSKU:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         filterApplied:true
       })
@@ -436,7 +451,8 @@ class CreateAudit extends React.Component{
       this.setState({
         copyPasteLocation:{
           data:data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         filterApplied:true
       })
@@ -449,7 +465,8 @@ class CreateAudit extends React.Component{
         filterApplied:false,
         copyPasteSKU:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
@@ -458,7 +475,8 @@ class CreateAudit extends React.Component{
         filterApplied:false,
         copyPasteLocation:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
     }
@@ -481,7 +499,8 @@ class CreateAudit extends React.Component{
     this.setState({
       copyPasteLocation:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
   }
@@ -489,7 +508,8 @@ class CreateAudit extends React.Component{
     this.setState({
       copyPasteSKU:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
   }
@@ -497,6 +517,7 @@ class CreateAudit extends React.Component{
   _updateInput(event,id) {
    
    var input = event.target.value.trim(),
+   selectionStart = event.target.selectionStart,
    inputList = input.split(/[\s,;\t\n]+/),
    processedList=[],
    activeTabIndex = this.state.activeTabIndex,
@@ -528,6 +549,7 @@ class CreateAudit extends React.Component{
       copyPasteLocation:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -537,6 +559,7 @@ class CreateAudit extends React.Component{
       copyPasteSKU:{
         data:stateInputList,
         focusedEl,
+        selectionStart,
         isInputEmpty:false
       }
     })
@@ -585,7 +608,8 @@ class CreateAudit extends React.Component{
          this.setState({
           copyPasteSKU:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
       }
@@ -593,7 +617,8 @@ class CreateAudit extends React.Component{
          this.setState({
           copyPasteLocation:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
       }
@@ -647,7 +672,8 @@ class CreateAudit extends React.Component{
         this.setState({
               copyPasteSKU:{
               data:processedData,
-              focusedEl:this.state.copyPasteSKU.focusedEl
+              focusedEl:this.state.copyPasteSKU.focusedEl,
+              selectionStart:this.state.copyPasteSKU.selectionStart
             },
             filterSelectionState
            })
@@ -656,7 +682,8 @@ class CreateAudit extends React.Component{
         this.setState({
             copyPasteLocation:{
             data:processedData,
-            focusedEl:this.state.copyPasteLocation.focusedEl
+            focusedEl:this.state.copyPasteLocation.focusedEl,
+            selectionStart:this.state.copyPasteLocation.selectionStart
           },
           filterSelectionState
          })
@@ -689,11 +716,12 @@ class CreateAudit extends React.Component{
     
     var _this =this;
     var textType = /text.*/;
-      if (fileObject.type.match(textType)) {
+    var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
+      if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split("\n");
+          let data = reader.result.trim().split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -710,7 +738,8 @@ class CreateAudit extends React.Component{
             _this.setState({
               copyPasteLocation:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.copyPasteLocation.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -723,7 +752,8 @@ class CreateAudit extends React.Component{
              _this.setState({
               copyPasteSKU:{
                 data:processedList,
-                focusedEl:"0"
+                focusedEl:"0",
+                selectionStart:_this.state.copyPasteSKU.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -758,7 +788,8 @@ class CreateAudit extends React.Component{
         skuAttributes:{},
         copyPasteSKU:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -771,7 +802,8 @@ class CreateAudit extends React.Component{
         locationAttributes:{},
         copyPasteLocation:{
           data:resetData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -795,7 +827,8 @@ class CreateAudit extends React.Component{
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -805,7 +838,8 @@ class CreateAudit extends React.Component{
             visible:true,
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
@@ -827,12 +861,19 @@ class CreateAudit extends React.Component{
         this._validateLocation("create");
       }
     }
+    _togglePanel(){
+      this.setState({
+        panelClass:this.state.panelClass === 'expanded' ? 'collapsed' : 'expanded'
+      })
+    }
 
   render()
   {
       let self=this;
-      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for audit by sku' defaultMessage='Audit by SKU'/>;
-      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for audit by sku' defaultMessage='Select Attributes'/>;
+      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Audit by SKU'/>;
+      let enterSkuMessg=<FormattedMessage id="audit.auditbysku.enterSKU" description='text for audit by sku' defaultMessage='Enter SKU and validate'/>;
+      let enterCSVMessg=<FormattedMessage id="audit.auditbysku.enterCSV" description='text for audit by sku' defaultMessage='Upload CSV and validate'/>;
+      let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
                                           defaultMessage="Select All"/>
@@ -852,6 +893,7 @@ class CreateAudit extends React.Component{
       let allLocationsValid = (self.state.locationAttributes && !self.state.locationAttributes.totalInvalid) ? true : false;
       let allSKUsValid = (self.state.skuAttributes && self.state.skuAttributes.totalInvalid === 0) ? true : false;
       let enableCreateAudit;
+      let skuCSVSelected = self.state.skuMode === "sku_csv";
       if(activeTabIndex === 0){
         if(validationDoneSKU && allSKUsValid){
           enableCreateAudit = true;
@@ -909,25 +951,29 @@ class CreateAudit extends React.Component{
                           <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
-                          <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
+                          <FormattedMessage id="audit.select.sku.modeNew" description='Text for sku mode' defaultMessage='Select mode of input:'/>
                           </div>
                           
                          
 
               <div className='gor-audit-button-wrap'>
-                            <button onClick={()=>(self._onSkuModeSelection('sku'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterSKU" description='Button for entering skus' defaultMessage='Enter Sku'/></button>
+                            <button onClick={()=>(self._onSkuModeSelection('sku'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterSKU" description='Button for entering skus' defaultMessage='Enter SKU'/></button>
                             <button onClick={()=>(self._onSkuModeSelection('sku_csv'))} className={`gor-loc-mode-btn ${self.state.skuMode === 'sku_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
                           </div>
                                
-            <div className={`sku-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
+            <div className={`sku-mode`}>
             <GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 :1} disabledTabIndex={validationDoneSKU ? 0 :1} tabClass={"sub-tabs-audit"}>
-            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+
+            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{skuCSVSelected ?enterCSVMessg: enterSkuMessg}</span>} iconClassName={'icon-class-0'}
+
                                  linkClassName={'link-class-0'}  >
-          {!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
-              <div>
+          {!validationDoneSKU && !skuCSVSelected && <div>
+            <div>
                <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.sku.subheading" description='Subtext for enter sku' 
             defaultMessage='Use copy and paste if you have muktiple sku numbers'/></div>
             </div>
+            <div className="gor-audit-inputlist-wrap" >
+              <div className="gor-audit-inputlist-cont">
               <div>
                {copyPasteSKU.data.map(function(tuple, i){
                     let focus = (self.state.copyPasteSKU.focusedEl === i.toString()) ? true : false;
@@ -935,20 +981,52 @@ class CreateAudit extends React.Component{
                         <InputComponent.CopyPaste
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         updateInput={self._updateInput} 
-                        index={i}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        index={i} 
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditskuinputplaceholder)}/>
                       </div>:null) 
               }) }
-               <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
-              </div>
                </div>
 
              
-              
+              </div>
+              <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addSku" description='Text for adding a location' 
+                        defaultMessage='+ Add New'/></button>
+              </div>
+               
               </div>}
+            {!validationDoneSKU && skuCSVSelected && <div className={'sku-mode active-mode'}>
+
+          <div >
+      <div className="gor-audit-csvupload-wrap">
+                        
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error"> 
+                  <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
+                                                             />
+                  </div>
+                  </div>
+                :""
+              }
+
+                <div className='gor-audit-drag-drop-container'> 
+                  <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
+                    <div className={"file-drop"} >
+
+                      <div className="gor-file-upload"></div>
+                      <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
+                        defaultMessage='Drag and drop'/></p>
+                      <h1 className="gor-csv-upl-msg"><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
+                        defaultMessage='OR'/></span></h1>
+                    </div>
+                  </CSVUpload>
+                </div>
+            </div>
+                 </div> 
+                        </div>}
             </Tab>
             <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>2</i>{skuSelectAttributes}</span>} iconClassName={'icon-class-1'}
                                  linkClassName={'link-class-1'}  >
@@ -958,10 +1036,10 @@ class CreateAudit extends React.Component{
                  <div className="gor-sku-validation-btn-wrap">
                  <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editSKUText" description='Text for editing a location' 
                         defaultMessage='BACK TO EDIT'/></button>
-                <div className="sku-search"> <SearchFilterComponent callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
+                <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
 
                  </div>
-                 <div className={"message success"}>
+                 <div ref={(erMsg)=>{this.erMsg=erMsg}} className={"message success"}>
                   <FormattedMessage id="audit.skuValidation.success" description='Audit sku verification success message'
                                                               defaultMessage='{valid} out of {total} SKUs valid'
                                                               values={
@@ -974,8 +1052,9 @@ class CreateAudit extends React.Component{
                 <span className="gor-delete-outline">
               <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
               </span>
+              <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchSKUPH} searchCallBack={this._searchCallBack}/></div>
               </div>
-              <div className={"message error"}>
+              <div ref={(erMsg)=>{this.erMsg=erMsg}} className={"message error"}>
                   <FormattedMessage id="audit.skuValidation.error" description='Audit sku verification error message'
                                                               defaultMessage='{invalid} Error found out of {total} SKUs, Please rectify or enter valid SKUs'
                                                               values={
@@ -989,7 +1068,8 @@ class CreateAudit extends React.Component{
              
                 
               </div>
-          {validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
+          {validationDoneSKU && <div><div className={"gor-audit-inputlist-wrap"} >
+          <div className={"gor-audit-inputlist-cont "+self.state.panelClass}>
           <div className={"note-message"}>
                   <FormattedMessage id="audit.skuValidation.note" description='Audit location verification error message'
                                                               defaultMessage='Note: Not setting any attributes will result in auditing the entire SKU with all attributes'
@@ -1006,11 +1086,12 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         allRowValid={allSKUsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
                         errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditskuinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
                           attributeList={attributeList}
@@ -1026,54 +1107,31 @@ class CreateAudit extends React.Component{
               }
               )}
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addsku2" description='Text for adding a location' 
+                        defaultMessage='+ ADD NEW'/></button>
               </div>}
                </div>
 
              
-              
-              </div>}
+             </div>
+              </div>
+              <div className="gor-audit-excol-wrap"> <span onClick={this._togglePanel} className={"gor-exp-coll "+self.state.panelClass}></span>
+              </div>
+              </div>
+            }
              
             </Tab>
             </GorTabs>
 
 
 
-              {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
+              {!allSKUsValid && !skuCSVSelected && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}</button>
+                        defaultMessage='VALIDATE'/>}</button>
               </div>}
                
                   </div>
-          <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
 
-          <div >
-      <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
-                        
-                  <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
-                                                             />
-                :""
-              }</div>
-
-                <div className='gor-audit-drag-drop-container'> 
-                  <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
-                    <div className={"file-drop"} >
-
-                      <div className="gor-file-upload"></div>
-                      <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
-                        defaultMessage='Drag and drop'/></p>
-                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
-                        defaultMessage='OR'/></span></h1>
-                    </div>
-                  </CSVUpload>
-                </div>
-            </div>
-                 </div> 
-                        </div>
             
                           </div>  
                                 
@@ -1088,7 +1146,7 @@ class CreateAudit extends React.Component{
                         <input className="gor-audit-name-wrap" ref={(input) => { this.auditNameLoc = input; }} type="text" placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.inputmode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
                             <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
@@ -1105,11 +1163,11 @@ class CreateAudit extends React.Component{
                           
              
               
-            {!validationDone?<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
+            {!validationDone?<div className="gor-audit-location-wrap" >
             <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.add.location.subheading" description='Subtext for enter location' 
             defaultMessage='Use copy and paste if you have multiple MSU and Slot numbers'/></div>
 
-            
+            <div className="gor-audit-location-list">
               
                {copyPasteLocation.data.map(function(tuple, i){
                     let focus = (self.state.copyPasteLocation.focusedEl === i.toString()) ? true : false;
@@ -1118,16 +1176,17 @@ class CreateAudit extends React.Component{
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
                         index={i}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditlocationinputplaceholder)}/>
                       </div>:null) 
               }) }
-              
+              </div>
                <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addAuditLocation2" description='Text for adding a location' 
+                        defaultMessage='+ ADD NEW'/></button>
                         </div>
-              </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
+              </div>:<div className="gor-audit-location-wrap" >
               <div className={"gor-global-notification"}>
               {allLocationsValid?
                  <div className={"gor-audit-att-ribbon"}>
@@ -1140,22 +1199,23 @@ class CreateAudit extends React.Component{
                                                               defaultMessage='{valid} out of {total} locations valid'
                                                               values={
                                                                 {
-                                                                  valid: self.state.locationAttributes.totalValid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                  valid: self.state.locationAttributes.totalValid?self.state.locationAttributes.totalValid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>:<div><div className="gor-sku-validation-btn-wrap"><Filter options={filterOptions} checkState={self.state.filterSelectionState} onSelectHandler={this._onFilterSelection} />
                 <span className="gor-delete-outline">
               <span className={self.state.filterSelectionState==="none"?"gor-delete-location-disabled":"gor-delete-location"} onClick={this._deleteTuples}></span>
               </span>
+              <div className="sku-search"> <SearchFilterComponent animate={true} callBackDelay={300} placeHolder={searchLocPH} searchCallBack={this._searchCallBack}/></div>
               </div>
               <div className={"message error"}>
                   <FormattedMessage id="audit.locationValidation.error" description='Audit location verification error message'
                                                               defaultMessage='{invalid} Error found out of {total} Locations, Please rectify or enter valid Location'
                                                               values={
                                                                 {
-                                                                  invalid: self.state.locationAttributes.totalInvalid.toString(),
-                                                                  total: self.state.locationAttributes.totalLocations.toString()
+                                                                  invalid:self.state.locationAttributes.totalInvalid? self.state.locationAttributes.totalInvalid.toString():'0',
+                                                                  total: self.state.locationAttributes.totalLocations?self.state.locationAttributes.totalLocations.toString():'0'
                                                                 }
                                                               }/>
                 </div></div>}
@@ -1165,6 +1225,7 @@ class CreateAudit extends React.Component{
               </div>
                   <div className='gor-sub-head-audit-input'><FormattedMessage id="audit.locationValidation.subheading" description='Subtext for enter location' 
             defaultMessage='MSU will always supercede and all slots in the MSU will be audited'/></div>
+             <div className="gor-audit-location-list">
             {copyPasteLocation.data.map((tuple,i)=>{
                     let tuples=[];
                     if(tuple.visible){
@@ -1174,20 +1235,22 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
                         allRowValid={allLocationsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
                         errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
-                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
+                        value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditlocationinputplaceholder)}/>
                       </div>)
                   }
                     
                     
                     return(tuples) 
               })}
+            </div>
             <div>
-            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
-                        defaultMessage='+ Add New'/></button>
+            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
+                        defaultMessage='+ ADD NEW'/></button>
                         </div>
                         
               </div>
@@ -1196,7 +1259,7 @@ class CreateAudit extends React.Component{
                 <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
                 <label>
                 {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
-                        defaultMessage='Validate'/>}
+                        defaultMessage='VALIDATE'/>}
                         
             
             </label>
@@ -1213,14 +1276,17 @@ class CreateAudit extends React.Component{
 
           <div >
       <div className="gor-audit-csvupload-wrap">
-                        <div className="gor-global-notification">
-                        {!self.state.isValidCsv?
                         
+                        {!self.state.isValidCsv?
+                  <div className="gor-global-notification"> 
+                  <div className="message error">  
                   <FormattedMessage id="audit.csvupload.error" description='Audit location Csv upload error message'
-                                                              defaultMessage='Error found, Please try again'
+                                                              defaultMessage='Error found, Please upload a valid .csv file'
                                                              />
+                  </div>
+                  </div>
                 :""
-              }</div>
+              }
 
                 <div className='gor-audit-drag-drop-container'> 
                   <CSVUpload onDrop={this._dropHandler} onFileUpload={this._onFileUpload}>
@@ -1229,7 +1295,7 @@ class CreateAudit extends React.Component{
                       <div className="gor-file-upload"></div>
                       <p><FormattedMessage id="audits.draganddrop.text" description='Text for csv Drag and Drop' 
                         defaultMessage='Drag and drop'/></p>
-                      <h1><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
+                      <h1 className="gor-csv-upl-msg"><span className="gor-audit-csvupload-or"><FormattedMessage id="audits.draganddropor.text" description='Text for or' 
                         defaultMessage='OR'/></span></h1>
                     </div>
                   </CSVUpload>
@@ -1259,7 +1325,7 @@ class CreateAudit extends React.Component{
             </div>
             <div className={"audit-footer"}>
              <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
-            defaultMessage='Create audit'/></button>
+            defaultMessage='CREATE AUDIT'/></button>
             </div>
             </div>
           </div>
@@ -1294,6 +1360,8 @@ CreateAudit.defaultProps = {
   skuAttributes:{},
   locationAttributes:{},
   hasDataChanged:false,
+  locationDataChanged:false,
+  skuDataChanged:false,
   auditSpinner:false
 };
 function mapStateToProps(state, ownProps){
@@ -1305,9 +1373,12 @@ function mapStateToProps(state, ownProps){
       skuCheck: state.appInfo.skuInfo,
       locCheck: state.appInfo.locInfo,
       auth_token:state.authLogin.auth_token,
+      username: state.authLogin.username,
       skuAttributes: state.auditInfo.skuAttributes,
       locationAttributes:state.auditInfo.locationAttributes,
       hasDataChanged:state.auditInfo.hasDataChanged,
+      locationDataChanged:state.auditInfo.locationDataChanged,
+      skuDataChanged:state.auditInfo.skuDataChanged,
       auditSpinner: state.auditInfo.auditValidationSpinner 
   };
 }

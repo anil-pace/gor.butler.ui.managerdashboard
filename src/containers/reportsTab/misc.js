@@ -29,6 +29,7 @@ import {
     GRN_HISTORY,
     GET_MAX_FILE_SIZE,
     WS_ONSEND,
+    POST,
 } from "../../constants/frontEndConstants";
 
 import {defineMessages} from "react-intl";
@@ -93,7 +94,7 @@ class UtilityTab extends React.Component {
         let url = INVENTORY_REPORT_URL + "?sync=false&format=" + fileType;
         let data = {
             url: url,
-            method: GET,
+            method: POST,
             token: this.props.auth_token,
             responseType: "arraybuffer",
             cause: INVENTORY_REPORT_RESPONSE
@@ -201,63 +202,53 @@ class UtilityTab extends React.Component {
         let show_inventory_report = false;
 
         try {
-            if (!this.props.config.utility_tab.enabled) {
-                return null;
-            }
-        } catch (ex) {
-            //Do nothing
-        }
-
-        try {
             show_gr_report = this.props.config.utility_tab.widgets.gr_report;
         } catch (ex) {
             //Do nothing
         }
         
         try {
-            show_inventory_report = this.props.config.utility_tab.widgets
-                .reports.inventory_report;
+            show_inventory_report = this.props.config.utility_tab.widgets.reports.inventory_report;
         } catch (ex) {
             //Do nothing
         }
 
         return (
             <div>
-                {show_inventory_report
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.downloadReportsHead
-                        )}
-                        showHeaderIcon={true}
-                        onRefresh={this._onInvRprtRefresh.bind(this)}
-                        >
-                        <DownloadReportTile
-                            generateReport={this._generateReport.bind(
-                                this
+                {show_inventory_report && show_gr_report? 
+                    (<div>
+                        <UtilityTile
+                            tileHead={this.context.intl.formatMessage(
+                                messages.downloadReportsHead
                             )}
-                            reportsHistory={this.props.reportsHistory}
-                            timeOffset={this.props.timeOffset}
-                        />
-                    </UtilityTile>
-                    : null}
+                            showHeaderIcon={true}
+                            onRefresh={this._onInvRprtRefresh.bind(this)}
+                            >
+                            <DownloadReportTile
+                                generateReport={this._generateReport.bind(
+                                    this
+                                )}
+                                reportsHistory={this.props.reportsHistory}
+                                timeOffset={this.props.timeOffset}
+                            />
+                        </UtilityTile>
 
-                {show_gr_report
-                    ? <UtilityTile
-                        tileHead={this.context.intl.formatMessage(
-                            messages.goodsRcvdNotesHead
-                        )}
-                        showFooter={false}
-                        showHeaderIcon={true}
-                        onRefresh={this._onGRNRefresh.bind(this)}
-                    >
+                        <UtilityTile
+                            tileHead={this.context.intl.formatMessage(
+                                messages.goodsRcvdNotesHead
+                            )}
+                            showFooter={false}
+                            showHeaderIcon={true}
+                            onRefresh={this._onGRNRefresh.bind(this)}
+                        >
                         <DownloadGRNTile
                             validatedInvoice={this.props.validatedInvoice}
                             generateReport={this._generateGRN.bind(this)}
                             grnHistory={this.props.grnHistory}
                             timeOffset={this.props.timeOffset}
                         />
-                    </UtilityTile>
-                    : null}
+                        </UtilityTile>
+                    </div>): null}
             </div>
         );
     }

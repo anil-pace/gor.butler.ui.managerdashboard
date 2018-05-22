@@ -161,8 +161,9 @@ class Tabs extends React.Component{
   }
   _parseStatus()
   {
-    let overview,system,neworder, newordersClass, newordersStatus,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
-        inventory,audit,analytics,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
+
+    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+        inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
     offline=<FormattedMessage id="tabs.offline" description="offline" 
@@ -224,7 +225,7 @@ class Tabs extends React.Component{
         systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
               defaultMessage="STOPPED"/>; 
       }
-      else if(this.props.system_emergency && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+      else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
         systemClass = 'gor-alert';
         systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
               defaultMessage="PAUSED"/>; 
@@ -369,7 +370,7 @@ else
 			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
 		</Link>
 
-		<Link to="/orders/waves" onClick={this.handleTabClick.bind(this,ORDERS)}>
+		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
 			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 

@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import { FormattedMessage } from 'react-intl'; 
 import {userRequest} from '../../actions/userActions';
-import {PPSLIST_URL, GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST ,DELETE_AUDIT,CANCEL_AUDIT} from '../../constants/frontEndConstants';       
+import { GET_PPSLIST,START_AUDIT,GET,APP_JSON,POST ,DELETE_AUDIT,CANCEL_AUDIT} from '../../constants/frontEndConstants';       
 
 
 class AuditAction extends React.Component{
@@ -52,14 +52,14 @@ class AuditAction extends React.Component{
     {
       let button='';
       if(this.props.param==CANCEL_AUDIT){
-button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
-                        defaultMessage="PROCEDED" description="Text for proceed button"/></button>
+button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.proced' 
+                        defaultMessage="PROCEED" description="Text for proceed button"/></button>
       }else if(this.props.param==DELETE_AUDIT){
-button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
-                        defaultMessage="DELET" description="Text for delte button"/></button>
+button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.deleteButton' 
+                        defaultMessage="DELETE" description="Text for delte button"/></button>
       }else if(this.props.param=='ppsChangeStart'){
-button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.delete' 
-                        defaultMessage="CONFIRM" description="Text for delte button"/></button>
+button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.confirm' 
+                        defaultMessage="CONFIRM" description="Text for delete button"/></button>
       }      
       return (
         
@@ -75,7 +75,7 @@ button=<button className='gor-logout-btn' onClick={this._confirm}><FormattedMess
                 <button className='gor-cancel-btn' onClick={this._removeThisModal}><FormattedMessage id='audit.cancel.cancel' 
                         defaultMessage="CLOSE" description="Text for close"/></button>
                 <button className='gor-logout-btn' onClick={this._confirm}><FormattedMessage id='audit.procedd' 
-                        defaultMessage="PROCEDED" description="Text for proceed button"/></button>
+                        defaultMessage="PROCEED" description="Text for proceed button"/></button>
              
           </div>
         </div>
