@@ -2445,6 +2445,24 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
+    "id": "audit.startaudit.listauditid",
+    "description": "List of Audits",
+    "defaultMessage": "List of Audits",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.startaudit.for",
+    "description": "For",
+    "defaultMessage": "For",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.startaudit.View",
+    "description": "View",
+    "defaultMessage": "View",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
     "id": "Audit.selectAttribute.apply",
     "description": "Texts for select attribute component",
     "defaultMessage": "Apply",
@@ -4266,7 +4284,7 @@
   {
     "id": "orderlist.tempnotFulfillale.status",
     "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
