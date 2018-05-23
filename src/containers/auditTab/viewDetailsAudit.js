@@ -189,7 +189,7 @@ class ViewDetailsAudit extends React.Component {
     size: 'large',
    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
    hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-   auditID: this.props.auditId,
+   auditID:[this.props.auditId],
    param:param
    //.. all what you put in here you will get access in the modal props ;),
                       });

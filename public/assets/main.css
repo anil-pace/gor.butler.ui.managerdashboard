@@ -9720,6 +9720,15 @@ button:disabled {
   color: #4a4a4a;
 }
 
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .ppsUnavailable {
+  position: fixed;
+  top: 50%;
+  left: 45%;
+  font-size: 20px;
+  font-weight: normal;
+  color: #000000;
+}
+
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper {
   height: 11.25rem;
   margin-top: 25px;

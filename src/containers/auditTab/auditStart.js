@@ -336,27 +336,34 @@ class AuditStart extends React.Component {
         defaultMessage="For audit"
       />
     );
-    let auditlistinfo = (
-      <FormattedMessage
-        id="audit.startaudit.listauditid"
-        description="List of Audits"
-        defaultMessage="List of Audits"
-      />
-    );
-    let fortext = (
-      <FormattedMessage
-        id="audit.startaudit.for"
-        description="For"
-        defaultMessage="For "
-      />
-    );
-    let view = (
-      <FormattedMessage
-        id="audit.startaudit.View"
-        description="View"
-        defaultMessage="View"
-      />
-    );
+        let auditlistinfo = (
+          <FormattedMessage
+            id="audit.startaudit.listauditid"
+            description="List of Audits"
+            defaultMessage="List of Audits"
+          />
+        );
+        let fortext = (
+          <FormattedMessage
+            id="audit.startaudit.for"
+            description="For"
+            defaultMessage="For "
+          />
+        );
+        let view = (
+          <FormattedMessage
+            id="audit.startaudit.View"
+            description="View"
+            defaultMessage="View"
+          />
+        );
+        let ppsunavaible = (
+          <FormattedMessage
+            id="audit.startaudit.ppsunavaible"
+            description="PPS not available"
+            defaultMessage="PPS Not Available"
+          />
+        );
 
     let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
     let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
@@ -404,8 +411,10 @@ class AuditStart extends React.Component {
               ×
             </span>
           </div>
-
+         
           <div className="gor-auditDetails-modal-body">
+          {tablerowdataAudit.length==0 && tablerowdataOther.length==0?<div className="ppsUnavailable">{ppsunavaible}</div>:
+          <div>
             <div className="content-body">
               <span className="left-float">
               {this.state.auditId.length>1?<div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length+" Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div>:<span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name?" - "+dispId_Name[0].name:""}</span>}
@@ -657,19 +666,17 @@ class AuditStart extends React.Component {
                 ""
               )}
           </div>
-          {tablerowdataAudit.length==0 && tablerowdataOther.length==0?<div className="gor-Audit-no-dataview" style={{'background-color':'white'}}>
-  <div>
-  <FormattedMessage id='audit.nonresultstart'  defaultMessage="No result found." description="audit not found"/>
-  </div>
-  </div>:<button
+         
+          }
+           </div>
+           {tablerowdataAudit.length==0 && tablerowdataOther.length==0?"":
+          <button
             className="gor-add-btn gor-listing-button rightMargin"
             onClick={this._handlestartaudit.bind(this)}
           >
             {startButton}
-          </button>}
-
-          
-
+          </button>
+           }
         </div>
       </div>
     );

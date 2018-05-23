@@ -2469,9 +2469,9 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
-    "id": "audit.nonresultstart",
-    "description": "audit not found",
-    "defaultMessage": "No result found.",
+    "id": "audit.startaudit.ppsunavaible",
+    "description": "PPS not available",
+    "defaultMessage": "PPS Not Available",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
@@ -4302,7 +4302,7 @@
   {
     "id": "orderlist.tempnotFulfillale.status",
     "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
