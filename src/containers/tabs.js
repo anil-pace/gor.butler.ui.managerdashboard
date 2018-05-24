@@ -162,7 +162,7 @@ class Tabs extends React.Component{
   _parseStatus()
   {
 
-    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
+    let overview,system,order,analytics,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
         inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
         offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 

@@ -97,10 +97,7 @@ input, select {
   z-index: 998;
   height: 100vh;
   top: 0px;
-<<<<<<< HEAD
-=======
   background-size: 3%;
->>>>>>> develop
 }
 
 input:focus {
@@ -173,22 +170,15 @@ body {
 .embeddedImage,
 .systemGenerated,
 .gor-filter-add-token-white,
-<<<<<<< HEAD
-=======
 .dotImage,
 .gor-search-icon,
->>>>>>> develop
 .gor-image-status, .gor-shutter-image-status,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
-<<<<<<< HEAD
-.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr {
-=======
 .dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-refresh-whiteIcon,
 .gor-exp-coll {
->>>>>>> develop
   background-image: url(./images/icons.svg);
 }
 
@@ -529,10 +519,7 @@ body {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
-<<<<<<< HEAD
-=======
   padding-right: 10px;
->>>>>>> develop
 }
 
 .gor-filter-checked-token {
@@ -574,8 +561,6 @@ body {
   margin-right: 5px;
 }
 
-<<<<<<< HEAD
-=======
 .gor-refresh-whiteIcon {
   background-position: -392px -79px;
   width: 16px;
@@ -585,7 +570,6 @@ body {
   margin-right: 5px;
 }
 
->>>>>>> develop
 .gor-manage-task {
   background-position: -476px -77px;
   width: 16px;
@@ -718,8 +702,6 @@ body {
   transform: rotate(90deg);
 }
 
-<<<<<<< HEAD
-=======
 .gor-search-icon {
   background-position: -1px -94px;
   width: 14px;
@@ -740,7 +722,6 @@ body {
   display: inline-block;
 }
 
->>>>>>> develop
 .got-add-notch {
   width: 5px;
   height: 5px;
@@ -1035,11 +1016,7 @@ body {
   top: 2.75rem;
   display: block;
   padding-right: 3px;
-<<<<<<< HEAD
-  width: 193px;
-=======
   width: 251px;
->>>>>>> develop
   box-shadow: 0em 0.1em 0.2em 0em rgba(0, 0, 0, 0.2);
 }
 
@@ -1047,11 +1024,7 @@ body {
   color: #666666;
   background-color: white;
   padding: 0.75rem 1rem;
-<<<<<<< HEAD
-  font-size: 10px;
-=======
   font-size: 14px;
->>>>>>> develop
   text-decoration: none;
   padding: 1em 3em;
   display: block;
@@ -1123,11 +1096,7 @@ body {
   line-height: 0rem;
   text-align: left;
   padding-right: 1.25rem;
-<<<<<<< HEAD
-  padding-top: 0.5625rem;
-=======
   padding-top: 0.6875rem;
->>>>>>> develop
 }
 
 .gorHeader .block {
@@ -2028,27 +1997,12 @@ body {
   text-align: right;
 }
 
-<<<<<<< HEAD
-.embeddedImage {
-  width: 20px;
-  height: 20px;
-  float: right;
-  margin-top: 15px;
-  background-position: -596px -77px;
-}
-
-=======
->>>>>>> develop
 .systemGenerated {
   background-position: -326px -56px;
   width: 25px;
   height: 20px;
   display: inline-block;
-<<<<<<< HEAD
-  margin-top: 17px;
-=======
   margin-top: 14px;
->>>>>>> develop
 }
 
 .fixedDataTableCellGroupLayout_cellGroup {
@@ -3416,16 +3370,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-left: 20px;
 }
 
-<<<<<<< HEAD
-.gorToolBar.auditListingToolbar {
-  height: 80px;
-  background: #f2f2f2;
-  border-bottom: 2px solid #dddddd;
-  padding-left: 25px;
-}
-
-=======
->>>>>>> develop
 .gorFilter {
   float: right;
   vertical-align: middle;
@@ -3475,19 +3419,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-top: 6px;
 }
 
-<<<<<<< HEAD
-.gorToolBarWrap.auditListingToolbarWrap {
-  margin-top: 18px;
-  width: 18%;
-}
-
-.gorToolBarWrap .auditHeaderContainer {
-  display: inline-block;
-  padding-top: 7px;
-}
-
-=======
->>>>>>> develop
 .fixedDataTableLayout_main .gorToolHeaderEl {
   display: inline-block;
   float: left;
@@ -3925,10 +3856,6 @@ input[type="checkbox"] {
   background: #ffffff;
   color: #ec6520;
   width: 100px;
-<<<<<<< HEAD
-  margin-top: 6px;
-=======
->>>>>>> develop
 }
 
 .gor-add-btn.rightMargin {
@@ -5731,10 +5658,6 @@ button:disabled {
   height: 35px;
   border-radius: 3px;
   border: solid 1px #aaaaaa;
-<<<<<<< HEAD
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-=======
->>>>>>> develop
   background-color: #ffffff;
   padding-left: 10px;
   margin-top: 20px;
@@ -5793,17 +5716,10 @@ button:disabled {
   font-weight: 600;
   text-align: left;
   color: #ffffff;
-<<<<<<< HEAD
-  padding-left: 14px;
-  padding-right: 14px;
-  vertical-align: sub;
-  cursor: pointer;
-=======
   padding-left: 15px;
   vertical-align: sub;
   cursor: pointer;
   width: 141px;
->>>>>>> develop
 }
 
 .gor-Auditlist-table .gor-audit-filter-create-wrap {
@@ -5829,8 +5745,6 @@ button:disabled {
   float: right;
 }
 
-<<<<<<< HEAD
-=======
 .gor-auditlist-paginate-wrap {
   width: 100%;
   position: relative;
@@ -5865,7 +5779,6 @@ button:disabled {
   color: #666666;
 }
 
->>>>>>> develop
 .gor-audit-cancelling-text {
   font-size: 12px;
   text-align: center;
@@ -5887,8 +5800,6 @@ button:disabled {
   font-weight: normal;
 }
 
-<<<<<<< HEAD
-=======
 .table-auditListing .table-body {
   max-height: 75vh !important;
   min-height: 75vh;
@@ -6050,7 +5961,6 @@ button:disabled {
   margin-left: 20px;
 }
 
->>>>>>> develop
 .gor-filter-wrap {
   width: 350px;
   height: 614px;
@@ -6214,15 +6124,12 @@ button:disabled {
   float: left;
 }
 
-<<<<<<< HEAD
-=======
 .gor-filter-body-filterToken-section2 {
   width: 45%;
   display: inline-block;
   float: left;
 }
 
->>>>>>> develop
 .gor-filter-token-container {
   padding-bottom: 15px;
 }
@@ -6264,10 +6171,7 @@ button:disabled {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #aaaaaa;
   cursor: pointer;
-<<<<<<< HEAD
-=======
   width: 131px;
->>>>>>> develop
 }
 
 .gor-filterBtn-applied {
@@ -6282,10 +6186,7 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
-<<<<<<< HEAD
-=======
   width: 131px;
->>>>>>> develop
 }
 
 .gor-download-button {
@@ -7457,20 +7358,6 @@ button:disabled {
   box-sizing: border-box;
 }
 
-<<<<<<< HEAD
-.auditStart {
-  display: inline !important;
-}
-
-.audittable {
-  padding: 15px 5px;
-  border-bottom: 1px solid lightgrey;
-  background-color: silver;
-  width: 100%;
-}
-
-=======
->>>>>>> develop
 .table-container .cell {
   overflow: hidden;
 }
@@ -7584,13 +7471,10 @@ button:disabled {
   position: relative;
 }
 
-<<<<<<< HEAD
-=======
 .gor-dropdown.gor-enabled {
   color: initial;
 }
 
->>>>>>> develop
 .gor-white-background {
   background-color: #FFFFFF;
 }
@@ -9222,48 +9106,6 @@ button:disabled {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-.gor-IN-wrapper {
-  width: 28px;
-  height: 24px;
-  display: inline-block;
-  margin-bottom: 7px;
-  margin-top: 15px;
-}
-
-.gor-IN-wrapper .gor-IN-round {
-  border-radius: 14px;
-  float: left;
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  background-color: #dfdfdf;
-}
-
-.gor-IN-wrapper .gor-IN-round .got-IN-initial {
-  display: inline-block;
-  margin-top: 3px;
-  padding: 3px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.gor-IN-wrapper .gor-IN-round .gor-login-user {
-  background-position: -205px -77px;
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-}
-
-.gor-IN-wrapper .gor-IN-square {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  background-color: #dfdfdf;
-}
-
-.gor-IN-wrapper .gor-IN-square .got-IN-initial {
-=======
 .noOrdersPresent {
   background: #ffffff;
   display: flex;
@@ -9819,7 +9661,6 @@ button:disabled {
 }
 
 .gor-IN-wrapper .gor-IN-square .got-IN-initial {
->>>>>>> develop
   display: inline-block;
   padding: 3px;
   font-size: 12px;
@@ -9828,30 +9669,15 @@ button:disabled {
 
 .gor-separator {
   display: inline-block;
-<<<<<<< HEAD
-  line-height: 20px;
-}
-
-.gor-separator .headerName {
-=======
   line-height: 22px;
 }
 
 .gor-separator .headerName,
 .gor-separator .viewDetailsSeparatorHeader {
->>>>>>> develop
   padding: 7px;
   font-size: 16px;
   font-weight: 600;
   text-align: left;
-<<<<<<< HEAD
-  color: #383838;
-}
-
-.gor-separator .subheaderName {
-  padding: 7px;
-  font-size: 14px;
-=======
   color: #333333;
 }
 
@@ -9859,26 +9685,10 @@ button:disabled {
 .gor-separator .viewDetailsSeparatorSubHeader {
   padding: 7px;
   font-size: 13px;
->>>>>>> develop
   text-align: left;
   color: #333333;
 }
 
-<<<<<<< HEAD
-.gor-separator .headerSeparation {
-  font-size: 30px;
-}
-
-.gor-separator .subHeaderSeparation {
-  font-size: 30px;
-}
-
-.gor-progress-bar-wrapper {
-  width: 100%;
-  background: #eeeeee;
-  height: 12px;
-  border-radius: 12px;
-=======
 .dotImage {
   background-position: -48px -111px;
   display: inline-block;
@@ -9891,7 +9701,6 @@ button:disabled {
   height: 10px;
   border-radius: 12px;
   margin-right: auto;
->>>>>>> develop
 }
 
 .gor-AuditDetails-modal-content {
@@ -9899,11 +9708,7 @@ button:disabled {
   margin: auto;
   padding: 20px;
   width: 100%;
-<<<<<<< HEAD
-  min-height: 100vh;
-=======
   min-height: 105vh;
->>>>>>> develop
   color: #4a4a4a;
 }
 
@@ -9916,23 +9721,14 @@ button:disabled {
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper {
-<<<<<<< HEAD
-  height: 10rem;
-  margin-top: 20px;
-=======
   height: 11.25rem;
   margin-top: 25px;
->>>>>>> develop
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .AuditDetailsHeader {
   font-size: 1.25rem;
   font-weight: 600;
-<<<<<<< HEAD
-  padding: 10px 10px 0px 10px;
-=======
   padding: 18px 10px 0px 10px;
->>>>>>> develop
   color: #4a4a4a;
 }
 
@@ -9948,19 +9744,11 @@ button:disabled {
   display: inline-block;
   vertical-align: top;
   margin-top: 13px;
-<<<<<<< HEAD
-  cursor: pointer;
-}
-
-.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft .details-changepps:hover {
-  color: #0389eb;
-=======
   color: #0389eb;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .auditDetailsContent .auditDetailsLeft .details-changepps:hover {
   cursor: pointer;
->>>>>>> develop
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body {
@@ -9979,8 +9767,6 @@ button:disabled {
   float: right;
 }
 
-<<<<<<< HEAD
-=======
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .auditIdInfo {
   display: inline-block;
 }
@@ -10042,16 +9828,11 @@ button:disabled {
   padding-left: 10px;
 }
 
->>>>>>> develop
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
   font-size: 1.25rem;
   font-weight: 600;
   border-bottom: 1px solid #AAAAAA;
-<<<<<<< HEAD
-  min-height: 3.125rem;
-=======
   min-height: 3.8rem;
->>>>>>> develop
   width: 97%;
   position: absolute;
   padding-top: 10px;
@@ -10099,16 +9880,6 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .viewDetailsTable .auditDetailsSearchWrap {
   float: right;
-<<<<<<< HEAD
-}
-
-.gor-AuditDetails-modal-content .auditTable {
-  border-bottom: 2px solid #dddddd;
-}
-
-.gor-AuditDetails-modal-content .auditTable .cell {
-  background-color: #dddddd;
-=======
   padding-right: 20px;
 }
 
@@ -10125,7 +9896,6 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .auditTable .cell {
   background-color: #fafafa;
->>>>>>> develop
 }
 
 .gor-AuditDetails-modal-content .missing-item {
@@ -10136,8 +9906,6 @@ button:disabled {
   text-align: left;
 }
 
-<<<<<<< HEAD
-=======
 .gor-separator .viewDetailsSeparatorHeader {
   font-size: 14px;
   font-weight: 600;
@@ -10148,7 +9916,6 @@ button:disabled {
   font-weight: 400;
 }
 
->>>>>>> develop
 .orderDetailsColumn {
   width: 33%;
   display: inline-block;
@@ -10161,11 +9928,7 @@ button:disabled {
 
 .orderDetailsColumn .orderDetailsRow .spanKey {
   font-size: 0.875rem;
-<<<<<<< HEAD
-  font-weight: 600;
-=======
   font-weight: normal;
->>>>>>> develop
   display: inline-block;
   color: #4a4a4a;
 }
@@ -10192,21 +9955,6 @@ button:disabled {
   z-index: 100;
   background: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-<<<<<<< HEAD
-  width: 160px;
-}
-
-.gor-actionDropDown .gor-add-flyoutWrapper .headerName {
-  padding: 10px;
-  border-bottom: 2px solid #d8d8d8;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: left;
-  color: #666666;
-=======
   width: 180px;
   right: 0;
   border-radius: 4px;
@@ -10220,7 +9968,6 @@ button:disabled {
   font-weight: normal;
   text-align: left;
   color: #000000;
->>>>>>> develop
 }
 
 /* The container */
@@ -10253,11 +10000,7 @@ button:disabled {
   height: 15px;
   width: 15px;
   background-color: white;
-<<<<<<< HEAD
-  border: 2px solid #333333;
-=======
   border: 2px solid #aaaaaa;
->>>>>>> develop
   border-radius: 2px;
 }
 
@@ -10271,12 +10014,8 @@ button:disabled {
 }
 
 .container input:checked ~ .checkmark, .container input:checked ~ .checkmark1 {
-<<<<<<< HEAD
-  background-color: #333333;
-=======
   background-color: #666;
   border: 2px solid #666;
->>>>>>> develop
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -10334,13 +10073,10 @@ checkmark1 for indeterminate state*/
   vertical-align: middle;
 }
 
-<<<<<<< HEAD
-=======
 .searchBarWrapper .searchIconWrap .gor-search-icon {
   cursor: pointer;
 }
 
->>>>>>> develop
 .searchBarWrapper .inputWrapper {
   display: inline-block;
   width: 80%;
@@ -10353,8 +10089,6 @@ checkmark1 for indeterminate state*/
   width: 100%;
 }
 
-<<<<<<< HEAD
-=======
 .searchBarWrapper.animated {
   -webkit-transition: width 1s ease-in-out;
   -moz-transition: width 1s ease-in-out;
@@ -10384,7 +10118,6 @@ checkmark1 for indeterminate state*/
   width: 120px;
 }
 
->>>>>>> develop
 .gor-auditActionModal {
   width: 30%;
   min-height: 13.25rem;
@@ -10528,10 +10261,6 @@ checkmark1 for indeterminate state*/
   background-position: 2px -107px;
 }
 
-<<<<<<< HEAD
-.gor-audit-create .audit-sub-footer {
-  padding: 12px 0;
-=======
 .gor-audit-create .gor-audit-upload-file input[type='file'] {
   cursor: pointer;
 }
@@ -10586,7 +10315,6 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .audit-sub-footer {
   padding: 30px 0;
->>>>>>> develop
 }
 
 .gor-audit-create .audit-sub-footer input {
@@ -10645,14 +10373,9 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .sku-search {
   float: right;
-<<<<<<< HEAD
-  padding: 5px 8px;
-  border: 1px solid #eee;
-=======
   padding: 7px 10px;
   border: 1px solid #BEBEBE;
   border-radius: 3px;
->>>>>>> develop
 }
 
 .gor-audit-create .sku-search input {
@@ -10705,14 +10428,11 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .gor-option-wrapper {
   width: 130px;
-<<<<<<< HEAD
-=======
   top: 34px;
 }
 
 .gor-audit-create .gor-option-wrapper .gor-dropdown-option {
   font-size: 0.875rem;
->>>>>>> develop
 }
 
 .gor-audit-create .gor-modal-head {
@@ -10720,11 +10440,7 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .gor-audit-form {
-<<<<<<< HEAD
-  width: 45%;
-=======
   width: 42%;
->>>>>>> develop
   margin: auto;
 }
 
@@ -10754,22 +10470,14 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .tab {
   display: inline-block;
   text-align: center;
-<<<<<<< HEAD
-  padding: 15px 20px;
-=======
   padding: 12px 20px;
->>>>>>> develop
   color: #666666;
   width: 46%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
   font-family: 'Source Sans Pro';
-<<<<<<< HEAD
-  font-size: 16px;
-=======
   font-size: 14px;
->>>>>>> develop
   font-weight: 600;
 }
 
@@ -10821,11 +10529,7 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .sku-mode {
-<<<<<<< HEAD
-  width: 92%;
-=======
   width: 100%;
->>>>>>> develop
 }
 
 .gor-audit-create .sku-mode.active-mode {
@@ -10861,14 +10565,8 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-sku-validation-btn-wrap {
   display: inline-block;
   border-bottom: solid 1px #dddddd;
-<<<<<<< HEAD
-  border-top: solid 1px #dddddd;
-  padding-bottom: 8px;
-  padding-top: 8px;
-=======
   padding-bottom: 10px;
   padding-top: 10px;
->>>>>>> develop
   width: 100%;
   background-color: #ffffff;
 }
@@ -10949,22 +10647,14 @@ checkmark1 for indeterminate state*/
 }
 
 .gor-audit-create .gor-audit-input-wrap {
-<<<<<<< HEAD
-  width: 50%;
-  padding: 7px 5px;
-=======
   width: 43%;
   padding: 1px 12px;
->>>>>>> develop
   border-radius: 3px;
   border: solid 1px #aaaaaa;
   background-color: #ffffff;
   margin-top: 10px;
   margin-left: 10px;
-<<<<<<< HEAD
-=======
   display: block;
->>>>>>> develop
 }
 
 .gor-audit-create .gor-audit-input-wrap.after-validation {
@@ -10981,10 +10671,7 @@ checkmark1 for indeterminate state*/
   height: 18px;
   width: 18px;
   display: block;
-<<<<<<< HEAD
-=======
   margin-top: 5px;
->>>>>>> develop
   vertical-align: middle;
   background-position: -17px -76px;
   float: right;
@@ -11031,14 +10718,6 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-audit-inputlist-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
-<<<<<<< HEAD
-  max-height: 210px;
-  overflow: auto;
-}
-
-.gor-audit-create .gor-audit-inputlist-wrap .gor-audit-location-wrap {
-  margin-top: 10px;
-=======
   border-bottom: 1px solid #DCDCDC;
 }
 
@@ -11067,17 +10746,13 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-audit-location-list {
   max-height: 210px;
   overflow: auto;
->>>>>>> develop
 }
 
 .gor-audit-create .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
   border-top: 1px solid #DDDDDD;
-<<<<<<< HEAD
-=======
   margin-top: 12px;
->>>>>>> develop
 }
 
 .gor-audit-create .gor-audit-name-wrap {
@@ -11285,11 +10960,7 @@ checkmark1 for indeterminate state*/
   margin-left: 10px;
   font-weight: 600;
   font-family: 'Source Sans Pro';
-<<<<<<< HEAD
-  font-size: 13px;
-=======
   font-size: 12px;
->>>>>>> develop
   font-weight: bold;
 }
 
@@ -11329,11 +11000,7 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .gor-create-audit-btn {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-<<<<<<< HEAD
-  min-width: 133px;
-=======
   min-width: 120px;
->>>>>>> develop
   height: 35px;
   font-size: 14px;
   margin-top: 10px;
@@ -11372,10 +11039,6 @@ checkmark1 for indeterminate state*/
   font-weight: 600;
   color: #333333;
   margin-top: 25px;
-<<<<<<< HEAD
-  display: inline-block;
-=======
->>>>>>> develop
   width: 40%;
 }
 
@@ -11383,11 +11046,8 @@ checkmark1 for indeterminate state*/
   color: #AAAAAA;
   font-size: 10px;
   font-weight: 600;
-<<<<<<< HEAD
-=======
   background: #fff;
   padding: 0 5px;
->>>>>>> develop
 }
 
 .gor-audit-create .gor-auditCreate-btn {
@@ -11431,11 +11091,7 @@ checkmark1 for indeterminate state*/
   border-radius: 50%;
   display: inline-block;
   height: 25px;
-<<<<<<< HEAD
-  line-height: 22px;
-=======
   line-height: 24px;
->>>>>>> develop
   width: 25px;
   color: #fff;
   text-decoration: none;
@@ -11452,15 +11108,6 @@ checkmark1 for indeterminate state*/
 .gor-audit-create .sub-tabs-audit .active {
   background: none;
   border: none;
-<<<<<<< HEAD
-  border-bottom: 5px solid #659AF6;
-  box-sizing: border-box;
-  color: #666666;
-}
-
-.gor-audit-create .sub-tabs-audit .active .sub-tab-index {
-  background: #659AF6;
-=======
   border-bottom: 5px solid #419BF9;
   box-sizing: border-box;
   color: #333333;
@@ -11468,7 +11115,6 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .sub-tabs-audit .active .sub-tab-index {
   background: #419BF9;
->>>>>>> develop
 }
 
 .gor-sel-att-wrap {
@@ -11734,10 +11380,6 @@ checkmark1 for indeterminate state*/
   line-height: 15px;
 }
 
-<<<<<<< HEAD
-.validate-sel-att .searchBarWrapper {
-  width: auto;
-=======
 .validate-sel-att .gor-audit-input-wrap {
   display: block;
 }
@@ -11812,7 +11454,6 @@ checkmark1 for indeterminate state*/
   display: inline-block;
   width: 80%;
   vertical-align: middle;
->>>>>>> develop
 }
 
 .validate-sel-att .note-message {
@@ -11842,14 +11483,9 @@ checkmark1 for indeterminate state*/
 
 .validate-sel-att .sku-search {
   float: right;
-<<<<<<< HEAD
-  width: 25%;
-  border: 1px solid #eee;
-=======
   padding: 7px 10px;
   border: 1px solid #BEBEBE;
   border-radius: 3px;
->>>>>>> develop
 }
 
 .validate-sel-att .sku-search input {
@@ -11902,14 +11538,11 @@ checkmark1 for indeterminate state*/
 
 .validate-sel-att .gor-option-wrapper {
   width: 130px;
-<<<<<<< HEAD
-=======
   top: 34px;
 }
 
 .validate-sel-att .gor-option-wrapper .gor-dropdown-option {
   font-size: 0.875rem;
->>>>>>> develop
 }
 
 .validate-sel-att .gor-modal-head {
@@ -11917,11 +11550,7 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .gor-audit-form {
-<<<<<<< HEAD
-  width: 45%;
-=======
   width: 42%;
->>>>>>> develop
   margin: auto;
 }
 
@@ -11951,22 +11580,14 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .tab {
   display: inline-block;
   text-align: center;
-<<<<<<< HEAD
-  padding: 15px 20px;
-=======
   padding: 12px 20px;
->>>>>>> develop
   color: #666666;
   width: 46%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
   font-family: 'Source Sans Pro';
-<<<<<<< HEAD
-  font-size: 16px;
-=======
   font-size: 14px;
->>>>>>> develop
   font-weight: 600;
 }
 
@@ -12018,11 +11639,7 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .sku-mode {
-<<<<<<< HEAD
-  width: 92%;
-=======
   width: 100%;
->>>>>>> develop
 }
 
 .validate-sel-att .sku-mode.active-mode {
@@ -12058,14 +11675,8 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-sku-validation-btn-wrap {
   display: inline-block;
   border-bottom: solid 1px #dddddd;
-<<<<<<< HEAD
-  border-top: solid 1px #dddddd;
-  padding-bottom: 8px;
-  padding-top: 8px;
-=======
   padding-bottom: 10px;
   padding-top: 10px;
->>>>>>> develop
   width: 100%;
   background-color: #ffffff;
 }
@@ -12146,13 +11757,8 @@ checkmark1 for indeterminate state*/
 }
 
 .validate-sel-att .gor-audit-input-wrap {
-<<<<<<< HEAD
-  width: 50%;
-  padding: 7px 5px;
-=======
   width: 43%;
   padding: 1px 12px;
->>>>>>> develop
   border-radius: 3px;
   border: solid 1px #aaaaaa;
   background-color: #ffffff;
@@ -12174,10 +11780,7 @@ checkmark1 for indeterminate state*/
   height: 18px;
   width: 18px;
   display: block;
-<<<<<<< HEAD
-=======
   margin-top: 5px;
->>>>>>> develop
   vertical-align: middle;
   background-position: -17px -76px;
   float: right;
@@ -12224,14 +11827,6 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-audit-inputlist-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
-<<<<<<< HEAD
-  max-height: 210px;
-  overflow: auto;
-}
-
-.validate-sel-att .gor-audit-inputlist-wrap .gor-audit-location-wrap {
-  margin-top: 10px;
-=======
   border-bottom: 1px solid #DCDCDC;
 }
 
@@ -12260,17 +11855,13 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-audit-location-list {
   max-height: 210px;
   overflow: auto;
->>>>>>> develop
 }
 
 .validate-sel-att .gor-audit-csvupload-wrap {
   background-color: #FBFBFB;
   padding-bottom: 10px;
   border-top: 1px solid #DDDDDD;
-<<<<<<< HEAD
-=======
   margin-top: 12px;
->>>>>>> develop
 }
 
 .validate-sel-att .gor-audit-name-wrap {
@@ -12478,11 +12069,7 @@ checkmark1 for indeterminate state*/
   margin-left: 10px;
   font-weight: 600;
   font-family: 'Source Sans Pro';
-<<<<<<< HEAD
-  font-size: 13px;
-=======
   font-size: 12px;
->>>>>>> develop
   font-weight: bold;
 }
 
@@ -12522,11 +12109,7 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .gor-create-audit-btn {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-<<<<<<< HEAD
-  min-width: 133px;
-=======
   min-width: 120px;
->>>>>>> develop
   height: 35px;
   font-size: 14px;
   margin-top: 10px;
@@ -12565,10 +12148,6 @@ checkmark1 for indeterminate state*/
   font-weight: 600;
   color: #333333;
   margin-top: 25px;
-<<<<<<< HEAD
-  display: inline-block;
-=======
->>>>>>> develop
   width: 40%;
 }
 
@@ -12619,11 +12198,7 @@ checkmark1 for indeterminate state*/
   border-radius: 50%;
   display: inline-block;
   height: 25px;
-<<<<<<< HEAD
-  line-height: 22px;
-=======
   line-height: 24px;
->>>>>>> develop
   width: 25px;
   color: #fff;
   text-decoration: none;
@@ -12640,15 +12215,6 @@ checkmark1 for indeterminate state*/
 .validate-sel-att .sub-tabs-audit .active {
   background: none;
   border: none;
-<<<<<<< HEAD
-  border-bottom: 5px solid #659AF6;
-  box-sizing: border-box;
-  color: #666666;
-}
-
-.validate-sel-att .sub-tabs-audit .active .sub-tab-index {
-  background: #659AF6;
-=======
   border-bottom: 5px solid #419BF9;
   box-sizing: border-box;
   color: #333333;
@@ -12656,7 +12222,6 @@ checkmark1 for indeterminate state*/
 
 .validate-sel-att .sub-tabs-audit .active .sub-tab-index {
   background: #419BF9;
->>>>>>> develop
 }
 
 .item-recall-wrapper li {
@@ -12731,8 +12296,6 @@ checkmark1 for indeterminate state*/
   cursor: pointer;
   pointer-events: none;
 }
-<<<<<<< HEAD
-=======
 
 .filterWrapper .gorToolBarDropDown {
   padding-left: 0px;
@@ -13025,4 +12588,3 @@ checkmark1 for indeterminate state*/
 .gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn.orange {
   background: #f36f36;
 }
->>>>>>> develop

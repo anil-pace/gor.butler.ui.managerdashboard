@@ -4302,7 +4302,7 @@
   {
     "id": "orderlist.tempnotFulfillale.status",
     "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -6512,6 +6512,12 @@
     "id": "reports.tab.heading",
     "description": "reports tab",
     "defaultMessage": "REPORTS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "analytics.tab.heading",
+    "description": "reports tab",
+    "defaultMessage": "ANALYTICS",
     "filepath": "./src/containers/tabs.js"
   },
   {

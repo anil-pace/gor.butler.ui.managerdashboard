@@ -16,7 +16,7 @@ class AnalyticsTab extends React.Component{
   render(){
 		return (
 			<div>
-				<iframe ref={(ifrm) => { this.ifrm = ifrm; }} width="100%" height="500px" src="http://localhost:3000/d/NQm9Ozkiz/demo-dashboard?refresh=5s&orgId=1&from=1505980105945&to=1521618505946&theme=light"></iframe>
+				<iframe ref={(ifrm) => { this.ifrm = ifrm; }} width="100%" height="500px" src="http://localhost:3000/d/NQm9Ozkiz/demo-dashboard?refresh=5s&orgId=2"></iframe>
 			</div>
 		);
 	}
