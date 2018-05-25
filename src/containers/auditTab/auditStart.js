@@ -37,11 +37,11 @@ import { modal } from "react-redux-modal";
 const messages = defineMessages({
   pendingAudit: {
     id: "audit.startaudit.pendingAudit",
-    defaultMessage: " Audits pending"
+    defaultMessage: "Audits pending"
   },
   linesRemaining: {
     id: "audit.startaudit.linesRemaining",
-    defaultMessage: " lines remaining to be Audited"
+    defaultMessage: "lines remaining to be Audited"
   },
   searchPlaceholder: {
     id: "audit.startaudit.searchPlaceholder",
@@ -98,7 +98,7 @@ class AuditStart extends React.Component {
       };
       rowObject.assignOperator = itemsData[i].operator_assigned;
       rowObject.auditStatus = {
-        header: [itemsData[i].audits_pending + pendingAudit],
+        header: [itemsData[i].audits_pending +" "+pendingAudit],
         subHeader: [itemsData[i].auditlines_pending +" "+ linesRemaining]
       };
       tableData.push(rowObject);
@@ -347,7 +347,7 @@ class AuditStart extends React.Component {
           <FormattedMessage
             id="audit.startaudit.for"
             description="For"
-            defaultMessage="For "
+            defaultMessage="For"
           />
         );
         let view = (

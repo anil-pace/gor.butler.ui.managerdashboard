@@ -34,11 +34,11 @@ const messages = defineMessages({
   },
   vdLinesCompleted: {
       id: "viewDetais.linescompleted.status",
-      defaultMessage: " lines completed out of "
+      defaultMessage: "lines completed out of"
   },
   vdAttrSelected: {
       id: "viewDetais.attrselected.status",
-      defaultMessage: " attributes selected"
+      defaultMessage: "attributes selected"
   },
   vdNoAttrSelected: {
       id: "viewDetais.noattrselected.status",
@@ -50,15 +50,15 @@ const messages = defineMessages({
   },
   vdMissingOut: {
       id: "viewDetais.missing.status",
-      defaultMessage: " missing out of "
+      defaultMessage: "missing out of"
   },
   vdExtraFound:{
     id: "viewDetais.extra.status",
-    defaultMessage: " extra entitiy found"
+    defaultMessage: "extra entitiy found"
   },
   vdItems: {
       id: "viewDetais.items.status",
-      defaultMessage: " items"
+      defaultMessage: "items"
   },
   vdChangePPS: {
     id: "viewDetais.changepps.status",
@@ -261,7 +261,7 @@ _timeFormat(UTCtime){
     tile3Data[vdhReminder]=data.reminder!==""?data.reminder:'-';
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
-    tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +vdLinesCompleted+data.progress.total:"-";
+    tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +" "+vdLinesCompleted+" "+data.progress.total:"-";
     return [tile1Data,tile2Data,tile3Data];
   }
 
@@ -309,7 +309,7 @@ _timeFormat(UTCtime){
     
       if(itemsData[i].attributes_list!=0){
         rowObject.attrDetails={
-      "header":[itemsData[i].attributes_list.length +vdAttrSelected],
+      "header":[itemsData[i].attributes_list.length +" "+vdAttrSelected],
       "subHeader":itemsData[i].attributes_list
       }
     }else{
@@ -326,11 +326,11 @@ _timeFormat(UTCtime){
          let diff =items.expected_quantity-items.actual_quantity;
          if(diff>0)
          {
-          rowObject.status=diff+vdMissingOut+items.expected_quantity;
+          rowObject.status=diff+" "+vdMissingOut+" "+items.expected_quantity;
          }
          else
          {
-          rowObject.status=(diff!==0)?Math.abs(diff)+vdExtraFound:"";
+          rowObject.status=(diff!==0)?Math.abs(diff)+" "+vdExtraFound:"";
          }
          }
          tableData.push(rowObject);
