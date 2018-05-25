@@ -114,6 +114,14 @@ const messages = defineMessages({
    linestobeReaudited: {
     id: "auditdetail.label.linestobereaudited",
     defaultMessage: " lines to be re-audited "
+},
+auditConflictingOperatorStatus: {
+    id: "auditdetail.auditConflictingOperatorStatus.status",
+    defaultMessage: "Concerned MSU is in use"
+},
+auditwaitingStatus: {
+    id: "auditdetail.auditwaitingStatus.status",
+    defaultMessage: "Processing audit task"
 }
 
 });
@@ -395,6 +403,10 @@ class AuditTab extends React.Component {
         let completedOutof = nProps.context.intl.formatMessage(messages.completedOutof);
           let linestobeResolved = nProps.context.intl.formatMessage(messages.linestobeResolved);
           let linestobeReaudited = nProps.context.intl.formatMessage(messages.linestobeReaudited);
+          let auditWaiting = nProps.context.intl.formatMessage(messages.auditwaitingStatus);
+          let auditConflicting = nProps.context.intl.formatMessage(messages.auditConflictingOperatorStatus);
+          
+          
         var timeOffset = nProps.props.timeOffset || "";
         var checkedAudit = nProps.props.checkedAudit || {};
 
@@ -428,13 +440,20 @@ class AuditTab extends React.Component {
             else if (data[i].audit_status == "audit_accepted") {
                 auditData.status = waitingOperator;
             }
+            else if (data[i].audit_status == "audit_conflicting") {
+                auditData.status = auditConflicting;
+            }
+            else if (data[i].audit_status == "audit_waiting") {
+                auditData.status = auditWaiting;
+            }
 
             else if ((data[i].start_request_time && data[i].completion_time) || (data[i].audit_status == "audit_aborted")) {
                 auditData.status = completed;
 
             }
-            else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_waiting" || data[i].audit_status == "audit_conflicting" ||
-                data[i].audit_status == "audit_started" || data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || data[i].audit_status == "audit_pending_approval") {
+            else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_started" || 
+                data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || 
+                data[i].audit_status == "audit_pending_approval") {
                 auditData.progressBarflag = true;
                 auditData.status = data[i].audit_progress.completed +" "+completedOutof +" "+data[i].audit_progress.total;
             }
