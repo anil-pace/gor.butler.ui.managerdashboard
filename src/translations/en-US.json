@@ -2463,6 +2463,12 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
+    "id": "audit.startaudit.ppsunavaible",
+    "description": "PPS not available",
+    "defaultMessage": "PPS Not Available",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
     "id": "Audit.selectAttribute.apply",
     "description": "Texts for select attribute component",
     "defaultMessage": "Apply",
