@@ -141,7 +141,7 @@ const moment = require('moment-timezone');
             })
             
         }
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (Object.keys(nextProps.location.query).length && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._refreshList(nextProps.location.query);
@@ -150,62 +150,46 @@ const moment = require('moment-timezone');
 
     _refreshList(query){
 
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
-            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
+        let startDateFromFilter, endDateFromFilter, momentStartDateFromFilter, momentEndDateFromFilter, momentTodayStartDate, momentTodayEndDate;
 
-        /* 'Date & Time Filter' === PRESENT  */
-        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
-            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
-            endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
-
-            /* 'Date & Time Filter'  + Cut off time => call level 2  */
-            if(query.cutOffTime && !query.orderId){
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
-                this.props.filterApplied(true);
-            }
-            /*  'Date & Time Filter'  + Order id => call level 3 */
-            else if (!query.cutOffTime && query.orderId){
-                //cutOffTimeFromFilter = null;
-                this._viewOrderLine(query.orderId); 
-                this.props.filterApplied(true);
-            }
-            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
-            else{
-                
-                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
-                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
-
-                let momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
-                let momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
-
-                this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
-                this.props.filterApplied(true);
-
-                this.setState({
-                    setStartDateForOrders: momentStartDateFromFilter,
-                    setEndDateForOrders: momentEndDateFromFilter
-                })
-            }
+        /* filter based on ORDER ID only */
+        if (query.orderId){
+            console.log(" ======== only Order Id is present ==============> ");
+            this._viewOrderLine(query.orderId); 
+            this.props.filterApplied(false);
         }
-        /* 'Date & Time Filter' === NOT PRESENT  */
-        else{
-            /*Only CUT OFF TIME => send present start date & present end date along with cut off time. */
-            if(query.cutOffTime){
-                momentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
-                momentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();    
-                todayDateWithTime = moment().startOf('day').tz(this.props.timeOffset).format(); //"2018-05-13T00:00:00+05:30"
-                todayDateSansTime = todayDateWithTime.split("T")[0];
-                todayDateWithCutOffTime = todayDateSansTime + " " + query.cutOffTime;
-                momentCutOffTime = moment.tz(todayDateWithCutOffTime, this.props.timeOffset).toISOString();  
 
-                this._reqOrderPerPbt(momentStartDate, momentEndDate, momentCutOffTime);
-                this.props.filterApplied(true);
-            }
-            else if(query.orderId){
-                 this._viewOrderLine(query.orderId);
-            }
+        /* filter based on ORDER STATUS only => send selected order statuses along with present day start time & end time */
+        if(!query.orderId && (!query.fromDate && !query.toDate) && (!query.fromTime && !query.toTime) && query.status){
+            console.log(" ========  only ORDER STATUS is present ==============> ");
+            momentTodayStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+            momentTodayEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
 
+            this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate); 
+            this.props.filterApplied(true);
+
+            this.setState({
+                setStartDateForOrders: momentTodayStartDate,
+                setEndDateForOrders: momentTodayEndDate
+            });
+        }
+
+        /* filter based on ORDER STATUS + Date time filter => send selected order statuses along with selected start date and end time from filter */
+        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) && query.status ){
+            console.log(" ========  Filter Date and Time + ORDER STATUS is present ==============> ");
+            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+            endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
+            momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+            momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+            this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
+            this.props.filterApplied(true);
+
+            this.setState({
+                setStartDateForOrders: momentStartDateFromFilter,
+                setEndDateForOrders: momentEndDateFromFilter
+            });
         }
     }
 
