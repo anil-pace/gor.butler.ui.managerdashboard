@@ -84,11 +84,36 @@ const moment = require('moment-timezone');
         this._intervalIdForCutOffTime=null;
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
-            "start_date": startDate,
-            "end_date": endDate
-        };
+    _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus){
+        let formData;
+        if(filteredPpsId && filteredOrderStatus){
+            formData={
+                "start_date": startDate,
+                "end_date": endDate,
+                "filtered_ppsId": filteredPpsId,
+                "filtered_order_status": filteredOrderStatus
+            };
+        }
+        else if(filteredPpsId){
+            formData={
+                "start_date": startDate,
+                "end_date": endDate,
+                "filtered_ppsId": filteredPpsId
+            };
+        }
+        else if(filteredOrderStatus){
+            formData={
+                "start_date": startDate,
+                "end_date": endDate,
+                "filtered_order_status": filteredOrderStatus
+            };
+        }
+        else{
+            formData={
+                "start_date": startDate,
+                "end_date": endDate,
+            };
+        }
 
         let params={
             'url':ORDERS_CUT_OFF_TIME_URL,
@@ -152,44 +177,72 @@ const moment = require('moment-timezone');
 
         let startDateFromFilter, endDateFromFilter, momentStartDateFromFilter, momentEndDateFromFilter, momentTodayStartDate, momentTodayEndDate;
 
-        /* filter based on ORDER ID only */
-        if (query.orderId){
-            console.log(" ======== only Order Id is present ==============> ");
-            this._viewOrderLine(query.orderId); 
-            this.props.filterApplied(false);
-        }
-
-        /* filter based on ORDER STATUS only => send selected order statuses along with present day start time & end time */
-        if(!query.orderId && (!query.fromDate && !query.toDate) && (!query.fromTime && !query.toTime) && query.status){
-            console.log(" ========  only ORDER STATUS is present ==============> ");
-            momentTodayStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
-            momentTodayEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
-
-            this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate); 
-            this.props.filterApplied(true);
-
-            this.setState({
-                setStartDateForOrders: momentTodayStartDate,
-                setEndDateForOrders: momentTodayEndDate
-            });
-        }
-
-        /* filter based on ORDER STATUS + Date time filter => send selected order statuses along with selected start date and end time from filter */
-        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) && query.status ){
-            console.log(" ========  Filter Date and Time + ORDER STATUS is present ==============> ");
+        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
             endDateFromFilter = new Date(query.toDate + " " + query.toTime);
 
             momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
             momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
 
-            this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
-            this.props.filterApplied(true);
+            if(query.orderId){
+                console.log(" ======== Date filter + only Order Id ==============> ");
+                this._viewOrderLine(query.orderId); 
+                this.props.filterApplied(false);
+            }
+            else{
+                if(query.ppsId && query.status){
+                    console.log(" ======== Date filter + ppsId + order status ==============> ");
+                    this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, query.status); 
+                }
+                else if(query.ppsId){
+                    console.log(" ======== Date filter + ppsId + null ==============> ");
+                    this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, null); 
+                }
+                else if(query.status){
+                    console.log(" ======== Date filter + null  + order status ==============> ");
+                    this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, null, query.status); 
+                }
+                else{
+                    console.log(" ======== only Date filter ==============> ");
+                    this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter);
+                }
+                this.props.filterApplied(true);
 
-            this.setState({
-                setStartDateForOrders: momentStartDateFromFilter,
-                setEndDateForOrders: momentEndDateFromFilter
-            });
+                this.setState({
+                    setStartDateForOrders: momentStartDateFromFilter,
+                    setEndDateForOrders: momentEndDateFromFilter
+                });
+            }
+        }
+        else if( (!query.fromDate && !query.toDate) && (!query.fromTime && !query.toTime) ){
+            momentTodayStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+            momentTodayEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+
+           if(query.orderId){
+                console.log(" ======== only Order Id  ==============> ");
+                this._viewOrderLine(query.orderId); 
+                this.props.filterApplied(false);
+            }
+            else{
+                if(query.ppsId && query.status){
+                    console.log(" ========  ppsId + order status ==============> ");
+                    this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, query.ppsId, query.status); 
+                }
+                else if(query.ppsId){
+                    console.log(" ========  ppsId + null ==============> ");
+                    this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, query.ppsId, null); 
+                }
+                else if(query.status){
+                    console.log(" ========  null  + order status ==============> ");
+                    this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, null, query.status); 
+                }
+                this.props.filterApplied(true);
+
+                this.setState({
+                    setStartDateForOrders: momentTodayStartDate,
+                    setEndDateForOrders: momentTodayEndDate
+                });
+            }
         }
     }
 

@@ -4087,6 +4087,11 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
+    "id": "order.inputField.ppsId",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
     "id": "order.token.status",
     "defaultMessage": "STATUS",
     "filepath": "./src/containers/orderTab/orderFilter.js"

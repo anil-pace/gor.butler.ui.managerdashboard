@@ -84,6 +84,23 @@ class OrderFilter extends React.Component{
 
     }
 
+    _processPpsIdSearchField(){
+      const filterInputFields=
+        [{
+            value: "PPS ID",
+            label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
+        }];
+
+        var inputValue=this.state.searchQuery;
+        var textboxStatus=this.props.textboxStatus || {};
+        var inputField=<FilterInputFieldWrap 
+                             inputText={filterInputFields}
+                             inputValue={inputValue} 
+                             handleInputText={this._handleInputQuery.bind(this)}
+                             textboxStatus={textboxStatus}/>  
+        return inputField;       
+    }
+
     componentWillMount(){
         if(this.props.orderFilterState) {
             this.setState(this.props.orderFilterState)
@@ -184,6 +201,10 @@ class OrderFilter extends React.Component{
             _query.orderId=filterState.searchQuery[ORDER_ID]
         }
 
+        if (filterState.searchQuery[PPS_ID]) {
+            _query.ppsId=filterState.searchQuery[PPS_ID]
+        }
+
         if (filterState.searchQuery[FROM_DATE]) {
             _query.fromDate=filterState.searchQuery[FROM_DATE]
         }
@@ -219,6 +240,7 @@ class OrderFilter extends React.Component{
     render(){
         var noOrder=this.props.orderData.noResultFound;
         var orderIdSearchField=this._processOrderIdSearchField();
+        var ppsIdSearchField = this._processPpsIdSearchField();
         var orderFilterToken=this._processFilterToken();
         var orderDateField = this._processOrderDateField();
         var orderTimeField = this._processOrderTimeField();
@@ -243,6 +265,10 @@ class OrderFilter extends React.Component{
                    <div className="gor-filter-body">
                       <div className="gor-filter-body-input-wrap"> 
                           {orderIdSearchField}
+                       </div>
+
+                       <div className="gor-filter-body-input-wrap"> 
+                          {ppsIdSearchField}
                        </div>
 
                        <div style={{height:"10em", paddingTop: "1em"}} className="gor-filter-body-input-wrap">
