@@ -50,14 +50,14 @@ import {
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
-    fulfillableStatus: {
-        id: 'orderList.fulfillable.status',
-        description: "In 'fulfillable' for orders",
+    inProgressStatus: {
+        id: 'orderList.inProgress.status',
+        description: "In 'inProgress' for orders",
         defaultMessage: "In progress"
     },
-    completeStatus: {
-        id: "orderList.complete.status",
-        description: " 'complete' status",
+    completedStatus: {
+        id: "orderList.completed.status",
+        description: " 'completed' status",
         defaultMessage: "Completed"
     },
     cancelledStatus: {
@@ -70,30 +70,16 @@ const messages=defineMessages({
         description: " 'created' status",
         defaultMessage: "Created"
     },
-    badRequestStatus: {
-        id: 'orderlist.badRequest.status',
-        description: " 'Bad Request' status",
-        defaultMessage: 'Rejected'
+    
+    onHoldStatus: {
+        id: 'orderlist.onHold.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'On hold'
     },
     notFulfillableStatus: {
         id: 'orderlist.notFulfillale.status',
         description: " 'Refreshed' status",
         defaultMessage: 'Not fulfillable'
-    },
-    temporyUnFulfillableStatus: {
-        id: 'orderlist.tempnotFulfillale.status',
-        description: " 'Refreshed' status",
-        defaultMessage: 'On hold'
-    },
-    acceptedStatus: {
-        id: 'orderlist.accepted.status',
-        description: " 'accepted' status",
-        defaultMessage: 'Accepted'
-    },
-    abandonedStatus: {
-        id: 'orderlist.abandoned.status',
-        description: " 'abandoned' status",
-        defaultMessage: 'Abandoned'
     },
     cutOffTime:{
         id: 'orderlist.cutOffTime.time',
@@ -121,24 +107,18 @@ const messages=defineMessages({
 
 var storage = [];
 class OrderListTable extends React.Component {
-
     constructor(props) {
         super(props);
         this.state={
             cutOffTimeIndex:"",
             statusMapping:{
-                "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
-                "cancellation_locked": this.props.intl.formatMessage(messages.fulfillableStatus),
-                "pick_started": this.props.intl.formatMessage(messages.fulfillableStatus),
-                "complete": this.props.intl.formatMessage(messages.completeStatus),
-                "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
-                "created": this.props.intl.formatMessage(messages.createdStatus),
-                "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
-                "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-                "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
-                "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
-                "temporary_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
+                "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
+                "PROCESSED": this.props.intl.formatMessage(messages.completedStatus),
+                "FAILED": this.props.intl.formatMessage(messages.notFulfillableStatus),
+                "CANCELED": this.props.intl.formatMessage(messages.cancelledStatus),
+                "CANCELLED": this.props.intl.formatMessage(messages.cancelledStatus),
+                "WAITING": this.props.intl.formatMessage(messages.onHoldStatus)
             }
         }
 
@@ -411,7 +391,7 @@ class OrderListTable extends React.Component {
                                             <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                         </div>
                                         <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
-                                            <span>{pbtData[i].status}</span>
+                                            <span> {this.state.statusMapping[pbtData[i].status] ? this.state.statusMapping[pbtData[i].status] : pbtData[i].status} </span>
                                             <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
                                             <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
                                             <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
