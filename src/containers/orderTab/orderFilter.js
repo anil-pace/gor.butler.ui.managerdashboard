@@ -19,17 +19,12 @@ import {
     TO_DATE,
     FROM_TIME,
     TO_TIME,
-    FULFILLABLE_STATUS,
-    PICK_STARTED_STATUS,
-    CANCELLATION_LOCKED_STATUS,
-    COMPLETED_STATUS,
-    CANCELLED_STATUS,
-    ACCEPTED_STATUS,
     CREATED_STATUS,
-    BAD_REQUEST_STATUS,
-    NOT_FULFILLABLE_STATUS,
-    TEMPORARY_UNAVILABLE_STATUS,
-    ABANDONED_STATUS
+    PROCESSING_STATUS,
+    PROCESSED_STATUS,
+    FAILED_STATUS, 
+    CANCELLED_STATUS,
+    WAITING_STATUS
 }from '../../constants/frontEndConstants';
 
 class OrderFilter extends React.Component{
@@ -112,17 +107,12 @@ class OrderFilter extends React.Component{
         
         var labelC2=[
                       { value: ANY, label: <FormattedMessage id="order.status.any" defaultMessage="Any"/>},
-                      { value: FULFILLABLE_STATUS, label: <FormattedMessage id="order.status.fulfillable" defaultMessage="Fulfillable"/>},
-                      { value: PICK_STARTED_STATUS, label: <FormattedMessage id="order.status.pickStarted" defaultMessage="Pick Started"/>},
-                      { value: CANCELLATION_LOCKED_STATUS, label: <FormattedMessage id="order.status.cancellationLocked" defaultMessage="Cancellation Locked"/>},
-                      { value: COMPLETED_STATUS, label: <FormattedMessage id="order.status.completed" defaultMessage="Completed"/>}, 
+                      { value: CREATED_STATUS, label: <FormattedMessage id="order.status.created" defaultMessage="Created"/>},
+                      { value: PROCESSING_STATUS, label: <FormattedMessage id="order.status.processing" defaultMessage="In progress"/>},
+                      { value: WAITING_STATUS, label: <FormattedMessage id="order.status.waiting" defaultMessage="On hold"/>},
+                      { value: PROCESSED_STATUS, label: <FormattedMessage id="order.status.processed" defaultMessage="Completed"/>},
                       { value: CANCELLED_STATUS, label: <FormattedMessage id="order.status.cancelled" defaultMessage="Cancelled"/>},
-                      { value: ACCEPTED_STATUS, label: <FormattedMessage id="order.status.accepted" defaultMessage="Accepted"/>},
-                      { value: CREATED_STATUS, label: <FormattedMessage id="order.status.Created" defaultMessage="Created"/>},
-                      { value: BAD_REQUEST_STATUS, label: <FormattedMessage id="order.status.rejected" defaultMessage="Rejected"/>},
-                      { value: NOT_FULFILLABLE_STATUS, label: <FormattedMessage id="order.status.notFulfillable" defaultMessage="Not Fulfillable"/>},
-                      { value: TEMPORARY_UNAVILABLE_STATUS, label: <FormattedMessage id="order.status.onHold" defaultMessage="On hold"/>},
-                      { value: ABANDONED_STATUS, label: <FormattedMessage id="order.status.abandoned" defaultMessage="Abandoned"/>},
+                      { value: FAILED_STATUS, label: <FormattedMessage id="order.status.failed" defaultMessage="Not Fulfillable"/>}
                     ];
 
         var selectedToken= this.state.tokenSelected;
