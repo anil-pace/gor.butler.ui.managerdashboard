@@ -185,25 +185,20 @@ const moment = require('moment-timezone');
             momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
 
             if(query.orderId){
-                console.log(" ======== Date filter + only Order Id ==============> ");
                 this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(false);
             }
             else{
                 if(query.ppsId && query.status){
-                    console.log(" ======== Date filter + ppsId + order status ==============> ");
                     this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, query.status); 
                 }
                 else if(query.ppsId){
-                    console.log(" ======== Date filter + ppsId + null ==============> ");
                     this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, null); 
                 }
                 else if(query.status){
-                    console.log(" ======== Date filter + null  + order status ==============> ");
                     this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, null, query.status); 
                 }
                 else{
-                    console.log(" ======== only Date filter ==============> ");
                     this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter);
                 }
                 this.props.filterApplied(true);
@@ -219,21 +214,17 @@ const moment = require('moment-timezone');
             momentTodayEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
 
            if(query.orderId){
-                console.log(" ======== only Order Id  ==============> ");
                 this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(false);
             }
             else{
                 if(query.ppsId && query.status){
-                    console.log(" ========  ppsId + order status ==============> ");
                     this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, query.ppsId, query.status); 
                 }
                 else if(query.ppsId){
-                    console.log(" ========  ppsId + null ==============> ");
                     this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, query.ppsId, null); 
                 }
                 else if(query.status){
-                    console.log(" ========  null  + order status ==============> ");
                     this._reqCutOffTime(momentTodayStartDate, momentTodayEndDate, null, query.status); 
                 }
                 this.props.filterApplied(true);

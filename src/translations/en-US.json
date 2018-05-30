@@ -4102,22 +4102,22 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.fulfillable",
-    "defaultMessage": "Fulfillable",
+    "id": "order.status.created",
+    "defaultMessage": "Created",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.pickStarted",
-    "defaultMessage": "Pick Started",
+    "id": "order.status.processing",
+    "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.cancellationLocked",
-    "defaultMessage": "Cancellation Locked",
+    "id": "order.status.waiting",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.completed",
+    "id": "order.status.processed",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
@@ -4127,33 +4127,8 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.accepted",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.Created",
-    "defaultMessage": "Created",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.rejected",
-    "defaultMessage": "Rejected",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.notFulfillable",
+    "id": "order.status.failed",
     "defaultMessage": "Not Fulfillable",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.onHold",
-    "defaultMessage": "On hold",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.abandoned",
-    "defaultMessage": "Abandoned",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {

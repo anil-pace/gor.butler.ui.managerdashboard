@@ -126,7 +126,6 @@ class ViewOrderLine extends React.Component{
 
   _removeThisModal() {
       this.props.removeModal();
-      hashHistory.push({pathname: "/orders", query: {}});
   }
 
   handleChange(event) {
