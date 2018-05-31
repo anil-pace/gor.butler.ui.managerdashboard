@@ -81,6 +81,7 @@ class ValidateSelAtt extends React.Component{
    
    var input = event.target.value.trim(),
    inputList = input.split(/[\s,;\t\n]+/),
+   selectionStart = event.target.selectionStart,
    processedList=[],
    stateInputList = JSON.parse(JSON.stringify(this.state.copyPasteData.data)),
    focusedEl = id ? id.toString() : "0";
@@ -108,6 +109,7 @@ class ValidateSelAtt extends React.Component{
    this.setState({
       copyPasteData:{
         data:stateInputList,
+        selectionStart,
         focusedEl
       },
       isInputEmpty: stateInputList[0].value.trim() !=='' ? false : true
@@ -127,7 +129,8 @@ class ValidateSelAtt extends React.Component{
     this.setState({
       copyPasteData:{
         data:stateInputList,
-        focusedEl:(stateInputList.length -1).toString()
+        focusedEl:(stateInputList.length -1).toString(),
+        selectionStart:this.state.copyPasteData.selectionStart
       }
     })
   }
@@ -191,7 +194,8 @@ class ValidateSelAtt extends React.Component{
         this.setState({
             copyPasteData:{
             data:processedData,
-            focusedEl:this.state.copyPasteData.focusedEl
+            focusedEl:this.state.copyPasteData.focusedEl,
+            selectionStart:this.state.copyPasteData.selectionStart
           },
           filterSelectionState
          })
@@ -209,7 +213,8 @@ class ValidateSelAtt extends React.Component{
          this.setState({
           copyPasteData:{
           data:selectedTuples,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteData.selectionStart
         }
       })
      
@@ -243,7 +248,8 @@ class ValidateSelAtt extends React.Component{
           data:data,
           focusedEl:"0"
         },
-        filterApplied:true
+        filterApplied:true,
+        selectionStart:this.state.copyPasteData.selectionStart
       })
   }
   else{
@@ -252,7 +258,8 @@ class ValidateSelAtt extends React.Component{
         filterApplied:false,
         copyPasteData:{
           data:filteredData,
-          focusedEl:"0"
+          focusedEl:"0",
+          selectionStart:this.state.copyPasteData.selectionStart
         }
       })
   }
@@ -273,7 +280,8 @@ class ValidateSelAtt extends React.Component{
       skuAttributes:{},
       copyPasteData:{
         data:resetData,
-        focusedEl:"0"
+        focusedEl:"0",
+        selectionStart:this.state.copyPasteData.selectionStart
       }
     })
     
@@ -350,11 +358,12 @@ class ValidateSelAtt extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}  
+                        selectionStart={self.state.copyPasteData.selectionStart}
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
               }) }
                <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.auditAdd" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                </div>
@@ -438,7 +447,7 @@ class ValidateSelAtt extends React.Component{
               }
               )}
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={this._addNewInput}><FormattedMessage id="audits.Validation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>

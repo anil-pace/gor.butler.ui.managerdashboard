@@ -740,7 +740,7 @@ export const TAG_ADDED_TO_LIST="TAG_ADDED_TO_LIST"
 /**
  * Constants for MSU Configuration Tab
  */
-export const MSU_CONFIG_POLLING_INTERVAL = 10000;
+export const MSU_CONFIG_POLLING_INTERVAL = 3600000;
 export const FETCH_MSU_CONFIG_LIST="FETCH_MSU_CONFIG_LIST"
 export const FETCH_MSU_CONFIG_DEST_TYPE_LIST = "FETCH_MSU_CONFIG_DEST_TYPE_LIST"
 export const FETCH_MSU_CONFIG_LIST_VIA_FILTER = "FETCH_MSU_CONFIG_LIST_VIA_FILTER"
@@ -817,8 +817,6 @@ export const TO_DATE = "TO DATE";
 export const NOT_YET_STARTED = "audit_created";
 export const TO_BE_RESOLVED = "to_be_resolved";//pending
 export const AUDIT_PAUSED = "audit_paused";
-export const AUDIT_DUPLICATED = "duplicated";
-export const AUDIT_DELETED = "audit_deleted";
 export const SPECIFIC_PPS_ID = "SPECIFIC PPS ID";
 export const AUDIT_USERLIST = "AUDIT_USERLIST";
 export const SETAUDIT_USER = "SETAUDIT_USER";

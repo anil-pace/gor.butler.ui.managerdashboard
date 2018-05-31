@@ -87,7 +87,7 @@ const ajaxMiddleware=(function(){
             httpRequest.withCredentials = true;
         }
         httpRequest.setRequestHeader('Accept', params.accept || "text/html");
-        if(params.cause!==AUTH_LOGIN)
+        if(params.cause!==AUTH_LOGIN && params.token)
         {
             httpRequest.setRequestHeader('Authentication-Token', params.token);
         }

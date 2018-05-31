@@ -171,12 +171,14 @@ body {
 .embeddedImage,
 .systemGenerated,
 .gor-filter-add-token-white,
+.dotImage,
+.gor-search-icon,
 .gor-image-status, .gor-shutter-image-status,
 .statusOl, .statusAl, .iStock, .iAudit, .iPick, .gor-login-user, .gor-login-password, .gor-login-error, .gor-tick, .gor-question, .gor-tick-white, .gor-remove-white, .gor-error-white, .gor-login-user-error, .gor-login-password-error, .gor-question-2, .gor-operation-tick, .gor-alert-lg,
 .gor-dropdown-open, .gor-dropdown-close, .gor-caution, .gor-delay-icon,
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
-.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon,
+.dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-refresh-whiteIcon,
 .gor-exp-coll {
   background-image: url(./images/icons.svg);
 }
@@ -518,6 +520,7 @@ body {
   height: 16px;
   display: inline-block;
   vertical-align: middle;
+  padding-right: 10px;
 }
 
 .gor-filter-checked-token {
@@ -556,6 +559,15 @@ body {
   cursor: pointer;
   display: inline-block;
   vertical-align: bottom;
+  margin-right: 5px;
+}
+
+.gor-refresh-whiteIcon {
+  background-position: -392px -79px;
+  width: 16px;
+  height: 12px;
+  cursor: pointer;
+  display: inline-block;
   margin-right: 5px;
 }
 
@@ -1991,7 +2003,7 @@ body {
   width: 25px;
   height: 20px;
   display: inline-block;
-  margin-top: 17px;
+  margin-top: 14px;
 }
 
 .fixedDataTableCellGroupLayout_cellGroup {
@@ -3359,13 +3371,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-left: 20px;
 }
 
-.gorToolBar.auditListingToolbar {
-  height: 80px;
-  background: #f2f2f2;
-  border-bottom: 2px solid #dddddd;
-  padding-left: 25px;
-}
-
 .gorFilter {
   float: right;
   vertical-align: middle;
@@ -3413,16 +3418,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   display: inline-block;
   vertical-align: middle;
   padding-top: 6px;
-}
-
-.gorToolBarWrap.auditListingToolbarWrap {
-  margin-top: 18px;
-  width: 18%;
-}
-
-.gorToolBarWrap .auditHeaderContainer {
-  display: inline-block;
-  padding-top: 7px;
 }
 
 .fixedDataTableLayout_main .gorToolHeaderEl {
@@ -3862,7 +3857,6 @@ input[type="checkbox"] {
   background: #ffffff;
   color: #ec6520;
   width: 100px;
-  margin-top: 6px;
 }
 
 .gor-add-btn.rightMargin {
@@ -5723,10 +5717,10 @@ button:disabled {
   font-weight: 600;
   text-align: left;
   color: #ffffff;
-  padding-left: 14px;
-  padding-right: 14px;
+  padding-left: 15px;
   vertical-align: sub;
   cursor: pointer;
+  width: 141px;
 }
 
 .gor-Auditlist-table .gor-audit-filter-create-wrap {
@@ -5771,9 +5765,19 @@ button:disabled {
   text-align: center;
   padding-top: 200px;
   font-size: 20px;
-  font-weight: bold;
-  color: #4d5055;
+  font-weight: 600;
+  color: #666666;
   height: 400px;
+}
+
+.gor-Audit-no-dataview {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-top: 200px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #666666;
 }
 
 .gor-audit-cancelling-text {
@@ -5804,6 +5808,28 @@ button:disabled {
   background-color: white;
 }
 
+.table-auditListing .table-body .auditListColumn1Style {
+  flex: 1 0 7%;
+}
+
+.table-auditListing .table-body .auditListColumn2Style {
+  flex: 1 0 25%;
+}
+
+.table-auditListing .table-body .auditListColumn3Style {
+  flex: 1 0 16%;
+}
+
+.table-auditListing .table-body .auditListColumn4Style {
+  flex: 1 0 20%;
+  overflow: visible;
+}
+
+.table-auditListing .table-body .auditListColumn6Style {
+  flex: 1 0 8%;
+  overflow: visible;
+}
+
 .gor-auditlist-paginate-right .gor-paginate-wrap {
   padding-top: 1rem;
   margin-right: 20px;
@@ -5820,6 +5846,120 @@ button:disabled {
 
 .embeddedImage:hover {
   cursor: pointer;
+}
+
+.centerAligned, .table-auditListing .table-body .auditListColumn3Style, .auditOther .table-body .otherppscolumn2Style.cell, .auditStart .table-body .auditppscolumn2style.cell {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bothAligned {
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.auditStart {
+  display: inline !important;
+}
+
+.audittable {
+  padding: 15px 5px;
+  border-bottom: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
+  background-color: #fafafa;
+  width: 100%;
+}
+
+.auditOther .table-body {
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.auditOther .table-body .auditppsTableColumnstyle, .auditOther .table-body .otherppscolumn1Style.cell, .auditOther .table-body .otherppscolumn2Style.cell, .auditOther .auditStart .table-body .auditppscolumn1style.cell, .auditStart .auditOther .table-body .auditppscolumn1style.cell, .auditOther .auditStart .table-body .auditppscolumn2style.cell, .auditStart .auditOther .table-body .auditppscolumn2style.cell {
+  overflow: visible;
+  display: flex;
+  padding: 7px 5px;
+}
+
+.auditOther .table-body .otherppscolumn1Style.cell {
+  flex: 1 0 35%;
+}
+
+.auditOther .table-body .otherppscolumn1Style .marginAlign {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.auditOther .table-body .otherppscolumn2Style.cell {
+  flex: 1 0 65%;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auditStart .table-body {
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.auditStart .table-body .auditppsTableColumnstyle, .auditStart .auditOther .table-body .otherppscolumn1Style.cell, .auditOther .auditStart .table-body .otherppscolumn1Style.cell, .auditStart .auditOther .table-body .otherppscolumn2Style.cell, .auditOther .auditStart .table-body .otherppscolumn2Style.cell, .auditStart .table-body .auditppscolumn1style.cell, .auditStart .table-body .auditppscolumn2style.cell {
+  overflow: visible;
+  display: flex;
+  padding: 7px 5px;
+}
+
+.auditStart .table-body .auditppscolumn1style.cell {
+  flex: 1 0 35%;
+  padding: 7px 5px;
+}
+
+.auditStart .table-body .auditppscolumn1style .marginAlign {
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.auditStart .table-body .auditppscolumn2style.cell {
+  flex: 1 0 32%;
+  padding: 7px 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gorToolBar.auditListingToolbar {
+  height: 80px;
+  background-color: rgba(242, 242, 242, 0.6);
+  border-bottom: 2px solid #dddddd;
+  padding-left: 25px;
+}
+
+.gorToolBarWrap.auditListingToolbarWrap {
+  margin-top: 18px;
+  width: 21%;
+}
+
+.gorToolBarWrap .auditHeaderContainer {
+  display: inline-block;
+  padding-top: 7px;
+}
+
+.flexContent, .table-auditListing .table-body .auditListColumn1Style, .table-auditListing .table-body .auditListColumn2Style, .table-auditListing .table-body .auditListColumn3Style, .table-auditListing .table-body .auditListColumn4Style {
+  overflow: visible;
+  display: flex;
+}
+
+.fontstyleColumn, .column4Style {
+  font-size: 14px;
+  color: #333333;
+}
+
+.column4Style {
+  text-align: center;
+  font-weight: bold;
+}
+
+.checkBoxalign {
+  margin-top: 12px;
+  margin-left: 20px;
 }
 
 .gor-filter-wrap {
@@ -6032,6 +6172,7 @@ button:disabled {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #aaaaaa;
   cursor: pointer;
+  width: 131px;
 }
 
 .gor-filterBtn-applied {
@@ -6046,6 +6187,7 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
+  width: 131px;
 }
 
 .gor-download-button {
@@ -7215,17 +7357,6 @@ button:disabled {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-.auditStart {
-  display: inline !important;
-}
-
-.audittable {
-  padding: 15px 5px;
-  border-bottom: 1px solid lightgrey;
-  background-color: silver;
-  width: 100%;
 }
 
 .table-container .cell {
@@ -9714,8 +9845,7 @@ button:disabled {
   width: 28px;
   height: 24px;
   display: inline-block;
-  margin-bottom: 7px;
-  margin-top: 15px;
+  margin-top: 9px;
 }
 
 .gor-IN-wrapper .gor-IN-round {
@@ -9724,7 +9854,8 @@ button:disabled {
   width: 24px;
   height: 24px;
   text-align: center;
-  background-color: #dfdfdf;
+  background-color: #ffffff;
+  border: 2px solid #666;
 }
 
 .gor-IN-wrapper .gor-IN-round .got-IN-initial {
@@ -9733,6 +9864,7 @@ button:disabled {
   padding: 3px;
   font-size: 12px;
   font-weight: 600;
+  color: #666;
 }
 
 .gor-IN-wrapper .gor-IN-round .gor-login-user {
@@ -9758,37 +9890,38 @@ button:disabled {
 
 .gor-separator {
   display: inline-block;
-  line-height: 20px;
+  line-height: 22px;
 }
 
-.gor-separator .headerName {
+.gor-separator .headerName,
+.gor-separator .viewDetailsSeparatorHeader {
   padding: 7px;
   font-size: 16px;
   font-weight: 600;
   text-align: left;
-  color: #383838;
+  color: #333333;
 }
 
-.gor-separator .subheaderName {
+.gor-separator .subheaderName,
+.gor-separator .viewDetailsSeparatorSubHeader {
   padding: 7px;
-  font-size: 14px;
+  font-size: 13px;
   text-align: left;
   color: #333333;
 }
 
-.gor-separator .headerSeparation {
-  font-size: 30px;
-}
-
-.gor-separator .subHeaderSeparation {
-  font-size: 30px;
+.dotImage {
+  background-position: -48px -111px;
+  display: inline-block;
+  height: 5px;
+  width: 5px;
 }
 
 .gor-progress-bar-wrapper {
-  width: 100%;
   background: #eeeeee;
-  height: 12px;
+  height: 10px;
   border-radius: 12px;
+  margin-right: auto;
 }
 
 .gor-AuditDetails-modal-content {
@@ -9796,7 +9929,7 @@ button:disabled {
   margin: auto;
   padding: 20px;
   width: 100%;
-  min-height: 100vh;
+  min-height: 105vh;
   color: #4a4a4a;
 }
 
@@ -9808,15 +9941,24 @@ button:disabled {
   color: #4a4a4a;
 }
 
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .ppsUnavailable {
+  font-size: 20px;
+  font-weight: normal;
+  color: #000000;
+  width: 14%;
+  padding: 20%;
+  margin: auto;
+}
+
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper {
-  height: 10rem;
-  margin-top: 20px;
+  height: 11.25rem;
+  margin-top: 25px;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper .AuditDetailsHeader {
   font-size: 1.25rem;
   font-weight: 600;
-  padding: 10px 10px 0px 10px;
+  padding: 18px 10px 0px 10px;
   color: #4a4a4a;
 }
 
@@ -9855,11 +9997,72 @@ button:disabled {
   float: right;
 }
 
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .auditIdInfo {
+  display: inline-block;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .viewButton {
+  font-size: 20px;
+  font-weight: normal;
+  color: #419bf9;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper {
+  position: fixed;
+  width: 326px;
+  max-height: 275px;
+  left: 35%;
+  top: 35%;
+  display: inline-block;
+  border-radius: 2px 2px 0 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.3);
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader {
+  background-color: #aaaaaa;
+  height: 43px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader .closeTooltip {
+  float: right;
+  font-size: 25px;
+  color: #ffffff;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipText {
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  max-height: 228px;
+  overflow: scroll;
+  background-color: #ffffff;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipText .auditnameLine {
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: left;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
   font-size: 1.25rem;
   font-weight: 600;
-  border-bottom: 1px solid #AAAAAA;
-  min-height: 3.125rem;
+  border-bottom: 1px solid #aaaaaa;
+  min-height: 3.8rem;
   width: 97%;
   position: absolute;
   padding-top: 10px;
@@ -9873,7 +10076,7 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close {
   background: #f2f2f2;
-  color: #AAAAAA;
+  color: #aaaaaa;
   float: right;
   text-align: center;
   font-size: 28px;
@@ -9907,14 +10110,22 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .viewDetailsTable .auditDetailsSearchWrap {
   float: right;
+  padding-right: 20px;
+}
+
+.gor-AuditDetails-modal-content .viewDetailsTable .table-body .columnStyle {
+  flex: 1 0 30%;
+  overflow: visible;
+  display: flex;
+  padding: 7px 5px;
 }
 
 .gor-AuditDetails-modal-content .auditTable {
-  border-bottom: 2px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 
 .gor-AuditDetails-modal-content .auditTable .cell {
-  background-color: #dddddd;
+  background-color: #fafafa;
 }
 
 .gor-AuditDetails-modal-content .missing-item {
@@ -9923,6 +10134,16 @@ button:disabled {
   font-size: 14px;
   font-weight: 600;
   text-align: left;
+}
+
+.gor-separator .viewDetailsSeparatorHeader {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gor-separator .viewDetailsSeparatorSubHeader {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .orderDetailsColumn {
@@ -9937,7 +10158,7 @@ button:disabled {
 
 .orderDetailsColumn .orderDetailsRow .spanKey {
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: normal;
   display: inline-block;
   color: #4a4a4a;
 }
@@ -9964,20 +10185,19 @@ button:disabled {
   z-index: 100;
   background: #ffffff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-  width: 160px;
+  width: 180px;
   right: 0;
+  border-radius: 4px;
 }
 
 .gor-actionDropDown .gor-add-flyoutWrapper .headerName {
-  padding: 10px;
-  border-bottom: 2px solid #d8d8d8;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 16px;
+  border-bottom: 1px solid #d8d8d8;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: normal;
   text-align: left;
-  color: #666666;
+  color: #000000;
 }
 
 /* The container */
@@ -10010,7 +10230,7 @@ button:disabled {
   height: 15px;
   width: 15px;
   background-color: white;
-  border: 2px solid #333333;
+  border: 2px solid #aaaaaa;
   border-radius: 2px;
 }
 
@@ -10024,7 +10244,8 @@ button:disabled {
 }
 
 .container input:checked ~ .checkmark, .container input:checked ~ .checkmark1 {
-  background-color: #333333;
+  background-color: #666;
+  border: 2px solid #666;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -12484,6 +12705,7 @@ checkmark1 for indeterminate state*/
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
   position: absolute;
+  box-sizing: border-box;
 }
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .sourceWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {
@@ -12547,6 +12769,7 @@ checkmark1 for indeterminate state*/
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .subSlot {
   position: absolute;
+  box-sizing: border-box;
 }
 
 .gor-smmodal-content .gor-smmodal-body .gor-body-content .destWrapper .rackWrapper .parent-container .slotsFlexContainer .legsSpaceContainer {

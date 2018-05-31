@@ -22,8 +22,6 @@ import {
     NOT_YET_STARTED,
     TO_BE_RESOLVED,
     AUDIT_PAUSED,
-    AUDIT_DUPLICATED,
-    AUDIT_DELETED,
     AUDIT_TYPE,AUDIT_COMPLETED,AUDIT_CANCELLED,AUDIT_CREATED,PENDING,INPROGRESS,
     AUDIT_RESOLVED,AUDIT_LINE_REJECTED,SINGLE,AUDIT_USERLIST,APP_JSON,GET
 }from '../../constants/frontEndConstants';
@@ -155,8 +153,7 @@ class AuditFilter extends React.Component {
             {value: AUDIT_CANCELLED, label: <FormattedMessage id="audit.token2.cancelled" defaultMessage="Cancelled"/>},
             {value: AUDIT_COMPLETED, label: <FormattedMessage id="audit.token2.completed" defaultMessage="Completed"/>},
             {value: AUDIT_PAUSED, label: <FormattedMessage id="audit.token2.paused" defaultMessage="Paused"/>},
-            {value: AUDIT_DUPLICATED, label: <FormattedMessage id="audit.token2.duplicated" defaultMessage="Duplicated"/>},
-            {value: AUDIT_DELETED, label: <FormattedMessage id="audit.token2.deleted" defaultMessage="Deleted"/>}
+            
 
         ];
       

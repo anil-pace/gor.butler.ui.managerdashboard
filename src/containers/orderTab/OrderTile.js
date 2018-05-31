@@ -34,7 +34,7 @@ class OrderTile extends React.Component{
                       {fromDate && toDate ? fromDate + " - " +  toDate : this.props.date}
                   </div>
                   <div className="orderLeftHeader"> 
-                    <FormattedMessage id="orders.fulfil" description="header of orders fulfilment" defaultMessage="Order fulfuilment progress "/>
+                    <FormattedMessage id="orders.fulfil" description="header of orders fulfilment" defaultMessage="Order fulfilment progress "/>
                   </div>
                   <ProgressBar progressWidth={ progressWidth ? progressWidth : 0}/>
                   <div className="orderLeftStatus">

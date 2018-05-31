@@ -27,7 +27,7 @@
   height: 15px;
   width: 15px;
   background-color: white;
-  border: 2px solid #333333;
+  border: 2px solid #aaaaaa;
   border-radius: 2px;
 }
 
@@ -40,8 +40,9 @@
   }
 /* When the checkbox is checked, add a blue background */  
   input:checked ~ {
-    .checkmark, .checkmark1 {
-      background-color: #333333;
+    .checkmark, .checkmark1 { 
+      background-color: #666;
+      border: 2px solid #666;
     }
   }
 }

@@ -6,7 +6,6 @@ import {modal} from 'react-redux-modal';
 
 import OrderFilter from './orderFilter';
 import OrderListTable from './orderListTable';
-import Dropdown from '../../components/dropdown/dropdown'
 import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
@@ -15,7 +14,6 @@ import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import OrderTile from '../../containers/orderTab/OrderTile';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
-import GorPaginateV2 from '../../components/gorPaginate/gorPaginateV2';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
@@ -26,38 +24,31 @@ import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} fro
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
-import {getDaysDiff} from '../../utilities/getDaysDiff';
 
-import {stringConfig} from '../../constants/backEndConstants';
 import {wsOverviewData} from './../../constants/initData.js';
 
-
-
-import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
-
-import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH,
-    ORDERS_POLLING_INTERVAL
+import {WS_ONSEND, ANY, 
+        APP_JSON, POST, GET,
+        ORDERS_FULFIL_FETCH, 
+        ORDERS_SUMMARY_FETCH, 
+        ORDERS_CUT_OFF_TIME_FETCH, 
+        ORDERS_PER_PBT_FETCH, 
+        ORDERLINES_PER_ORDER_FETCH,
+        ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
-import { setInfiniteSpinner } from '../../actions/notificationAction';
 
-import {unSetAllActivePbts} from '../../actions/norderDetailsAction'
+import { setInfiniteSpinner } from '../../actions/notificationAction';
+import { unSetAllActivePbts } from '../../actions/norderDetailsAction'
 
 import {
-    API_URL,
-    ORDERS_URL,
-    PAGE_SIZE_URL,
-    PROTOCOL,
-    ORDER_PAGE,
-    UPDATE_TIME_UNIT, UPDATE_TIME,
-    EXCEPTION_TRUE,
-    WAREHOUSE_STATUS_SINGLE,
-    WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
-    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
+        ORDERS_FULFIL_URL,
+        ORDERS_SUMMARY_URL, 
+        ORDERS_CUT_OFF_TIME_URL, 
+        ORDERS_PER_PBT_URL, 
+        ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
-
+const moment = require('moment-timezone');
 
  class OrderListTab extends React.Component {
     constructor(props) {
@@ -65,12 +56,7 @@ import {
         this.state = this._getInitialState();
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
-        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
-        this._stopPollingCutOffTime = this._stopPollingCutOffTime.bind(this);
-        this._enableCollapseAllBtn = this._enableCollapseAllBtn.bind(this);
-        this._disableCollapseAllBtn = this._disableCollapseAllBtn.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
-        this.props.showTableFilter(false)
     }
 
     _getInitialState(){
@@ -78,108 +64,148 @@ import {
             isPanelOpen:true,
             collapseAllBtnState: true, 
             date: new Date(),
-            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
             queryApplied:Object.keys(this.props.location.query).length ? true :false,
             totalSize:this.props.totalSize || null,
             selected_page: 1, 
             query: null, 
             orderListRefreshed: null,
+            setStartDateForOrders: null,
+            setEndDateForOrders: null
         }
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-         this.props.orderListRefreshed();
+    componentDidMount(){
+        this.props.setOrderListSpinner(true);
     }
 
-    componentDidMount(){
-        let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-        let endDate = new Date().toISOString();
-        this.props.setOrderListSpinner(true);
-        this._reqCutOffTime(startDate, endDate); // for Instant load at First time;
-       
+    _clearPolling(){
+        clearInterval(this._intervalIdForCutOffTime);
+        this._intervalIdForCutOffTime=null;
+    }
+
+    _reqCutOffTime(startDate, endDate){
+        let formData={
+            "start_date": startDate,
+            "end_date": endDate
+        };
+
+        let params={
+            'url':ORDERS_CUT_OFF_TIME_URL,
+            'method':POST,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause':ORDERS_CUT_OFF_TIME_FETCH,
+            'formdata':formData,
+        }
+        
+        this.props.makeAjaxCall(params);
+        //call other http calls
+        this._reqOrdersFulfilment(startDate, endDate);
+        this._reqOrdersSummary(startDate, endDate);
+
+        let self=this;
+        this._intervalIdForCutOffTime= setInterval(function(){
+            self.props.makeAjaxCall(params);
+            self._reqOrdersFulfilment(startDate, endDate);
+            self._reqOrdersSummary(startDate, endDate);
+        },ORDERS_POLLING_INTERVAL);
     }
 
 
 
     componentWillReceiveProps(nextProps) {
+        let setMomentStartDate, setMomentEndDate;
+
+        /* when coming on orders page for first time OR coming after traversing from other tabs */
+        if( (this.props.timeOffset !== nextProps.timeOffset) ||
+                (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+            this.props.setOrderListSpinner(true);
+            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+            this.setState({
+                setStartDateForOrders: setMomentStartDate,
+                setEndDateForOrders: setMomentEndDate
+            })
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            this._clearPolling();
+        }
+
+
         if (nextProps.socketAuthorized && !this.state.subscribed) {
             this.setState({subscribed: true},function(){
                 this._subscribeData(nextProps)
             })
             
         }
-        if (nextProps.orderListRefreshed && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
             this.setState({orderListRefreshed: nextProps.orderListRefreshed})
             this._refreshList(nextProps.location.query);
         }
     }
 
-    _refreshList(query) {
-        
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter;
+    _refreshList(query){
 
-        //When Time Range is mentioned.
+        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
+            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
+
+        /* 'Date & Time Filter' === PRESENT  */
         if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
             startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
             endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
 
-            // when DATE Range  + Order Id selected
+            /* 'Date & Time Filter'  + Cut off time => call level 2  */
             if(query.cutOffTime && !query.orderId){
                 cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
+                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
                 this.props.filterApplied(true);
             }
-            // when cut off time is not there but order Id is there ....send null as cut off time
+            /*  'Date & Time Filter'  + Order id => call level 3 */
             else if (!query.cutOffTime && query.orderId){
-                cutOffTimeFromFilter = null;
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter); // fetch list of orders using cutOffTime = null
+                //cutOffTimeFromFilter = null;
+                this._viewOrderLine(query.orderId); 
                 this.props.filterApplied(true);
             }
-            // when only DATE Range is mentioned, NO cut off time, no OrderId 
+            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
             else{
-                this._reqCutOffTime(startDateFromFilter, endDateFromFilter); 
+                
+                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
+                let momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+                let momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+                this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
                 this.props.filterApplied(true);
+
+                this.setState({
+                    setStartDateForOrders: momentStartDateFromFilter,
+                    setEndDateForOrders: momentEndDateFromFilter
+                })
             }
         }
+        /* 'Date & Time Filter' === NOT PRESENT  */
         else{
+            /*Only CUT OFF TIME => send present start date & present end date along with cut off time. */
             if(query.cutOffTime){
-                setStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-                setEndDate = new Date().toISOString();
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(setStartDate, setEndDate, cutOffTimeFromFilter); 
+                momentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+                momentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();    
+                todayDateWithTime = moment().startOf('day').tz(this.props.timeOffset).format(); //"2018-05-13T00:00:00+05:30"
+                todayDateSansTime = todayDateWithTime.split("T")[0];
+                todayDateWithCutOffTime = todayDateSansTime + " " + query.cutOffTime;
+                momentCutOffTime = moment.tz(todayDateWithCutOffTime, this.props.timeOffset).toISOString();  
+
+                this._reqOrderPerPbt(momentStartDate, momentEndDate, momentCutOffTime);
                 this.props.filterApplied(true);
             }
             else if(query.orderId){
-                let params={
-                    'url':ORDERLINES_PER_ORDER_URL+"/"+query.orderId,
-                    'method':GET,
-                    'contentType':APP_JSON,
-                    'accept':APP_JSON,
-                    'cause':ORDERLINES_PER_ORDER_FETCH,
-                }
-                this.props.makeAjaxCall(params);
-                    if(this.props.orderLines){
-                        modal.add(ViewOrderLine, {
-                        orderId: query.orderId,
-                        title: '',
-                        size: 'large',
-                        closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                        hideCloseButton: true      // (optional) if you don't wanna show the top right close button
-                                               //.. all what you put in here you will get access in the modal props ;),
-                        });
-                }
-                
+                 this._viewOrderLine(query.orderId);
             }
 
         }
-
     }
 
     /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
@@ -204,27 +230,14 @@ import {
     _clearFilter() {
         this.props.filterApplied(false);
         hashHistory.push({pathname: "/orders", query: {}});
+        let setMomentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+        let setMomentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
     }
 
     componentWillUnmount() {
-        clearInterval(this._intervalId);
+        this._clearPolling();
     }
-
-    enableCollapse(){
-        this.setState({
-            collapseState: true,
-            isPanelOpen: true
-        })
-    }
-
-    disableCollapse(){
-        this.setState({
-            collapseState: false,
-            isPanelOpen: false
-        })
-    }
-
-     
 
     _subscribeData() {
         let updatedWsSubscription=this.props.wsSubscriptionData;
@@ -247,12 +260,7 @@ import {
         this.props.showTableFilter(newState)
     }
 
-    onPageSizeChange(arg) {
-        this.refresh(null, arg);
-    }
-
     _viewOrderLine = (orderId) =>  {
-        clearInterval(this._intervalId);  // #stop ongoing polling.
         modal.add(ViewOrderLine, {
             startPolling: this._restartPolling,
             orderId: orderId,
@@ -308,79 +316,12 @@ import {
         this.props.makeAjaxCall(params);
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
-            "start_date": startDate,
-            "end_date": endDate
-        };
-
-        let params={
-            'url':ORDERS_CUT_OFF_TIME_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':ORDERS_CUT_OFF_TIME_FETCH,
-            'formdata':formData,
-        }
-        
-        this.props.makeAjaxCall(params);
-        //call other http calls
-        this._reqOrdersFulfilment(startDate, endDate);
-        this._reqOrdersSummary(startDate, endDate);
-        let newStartDate = new Date (new Date() - 1000*3600*24).toISOString();
-        let newEndendDate = new Date().toISOString();
-        this._intervalIdForCutOffTime = setTimeout(() => this._reqCutOffTime(newStartDate, newEndendDate), ORDERS_POLLING_INTERVAL);
-    }
-
-    _startPollingCutOffTime = ()=> {
-        this._reqCutOffTime( new Date (new Date() - 1000*3600*24).toISOString(), new Date().toISOString() );
-    }
-
-    _stopPollingCutOffTime = (intervalId) => {
-        clearTimeout(intervalId);
-    }
-
-    _formatProgressBar(nr, dr){
-        let x = {};
-        
-        if(nr === 0 && dr === 0){
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="Pending"/>);
-            x.action = false;
-        }
-        else if(nr === 0){
-            x.message=(<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} products to be picked"
-                      values={{current:dr}} />);
-            x.action = false;
-        }
-        else{
-            x.width = (nr/dr)*100;
-            x.message = (<FormattedMessage id="orders.progress.pending" description="pending" defaultMessage="{current} of {total} products picked"
-                            values={{current:nr, total: dr}} />);
-            x.action  = true;
-        }
-        return x;
-    }
-
-    _enableCollapseAllBtn(){
-        this.setState({
-            collapseAllBtnState: false,
-            isPanelOpen: true
-        })
-    }
-
-    _disableCollapseAllBtn(){
-        this.setState({
-            collapseAllBtnState: true,
-            isPanelOpen: false
-        })
-    }
-
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()
     }
+    
 
     render() {
-
         const todayDate = this._getTodayDate();
         let isPanelOpen = this.state.isPanelOpen;
 
@@ -395,7 +336,7 @@ import {
         var orderDetail, alertNum=0, orderInfo;
 
         let orderDetails = this.props.pbts;
-        
+                
         return (
             <div>
                 <div className="gor-Orderlist-table">
@@ -459,11 +400,9 @@ import {
                 {this.props.pbts.length> 0  &&
                     (<OrderListTable 
                         pbts={this.props.pbts}
-                        startDate={new Date (new Date() - 1000*3600*24).toISOString()}
-                        endDate={new Date().toISOString()}
+                        startDate={this.state.setStartDateForOrders}
+                        endDate={this.state.setEndDateForOrders}
                         intervalIdForCutOffTime={this._intervalIdForCutOffTime}
-                        startPollingCutOffTime={this._startPollingCutOffTime}
-                        stopPollingCutOffTime={this._stopPollingCutOffTime}
                         isFilterApplied={this.props.isFilterApplied}
                         enableCollapseAllBtn={this._enableCollapseAllBtn}
                         disableCollapseAllBtn={this._disableCollapseAllBtn}
@@ -481,7 +420,6 @@ import {
 function mapStateToProps(state, ownProps) {
     return {
         orderFilter: state.sortHeaderState.orderFilter || "",
-        orderSortHeader: state.sortHeaderState.orderHeaderSort || INITIAL_HEADER_SORT,
         orderSortHeaderState: state.sortHeaderState.orderHeaderSortOrder || [],
         orderListSpinner: state.spinner.orderListSpinner || false,
         filterOptions: state.filterOptions || {},
@@ -509,33 +447,6 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        orderFilterDetail: function (data) {
-            dispatch(orderFilterDetail(data))
-        },
-        orderHeaderSort: function (data) {
-            dispatch(orderHeaderSort(data))
-        },
-        orderHeaderSortOrder: function (data) {
-            dispatch(orderHeaderSortOrder(data))
-        },
-        getPageData: function (data) {
-            dispatch(getPageData(data));
-        },
-        getStatusFilter: function (data) {
-            dispatch(getStatusFilter(data));
-        },
-        getTimeFilter: function (data) {
-            dispatch(getTimeFilter(data));
-        },
-        getPageSizeOrders: function (data) {
-            dispatch(getPageSizeOrders(data));
-        },
-        currentPage: function (data) {
-            dispatch(currentPageOrders(data));
-        },
-        lastRefreshTime: function (data) {
-            dispatch(lastRefreshTime(data));
-        },
         setOrderListSpinner: function (data) {
             dispatch(setOrderListSpinner(data))
         },

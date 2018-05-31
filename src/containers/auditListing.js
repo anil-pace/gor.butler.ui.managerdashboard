@@ -114,6 +114,14 @@ const messages = defineMessages({
    linestobeReaudited: {
     id: "auditdetail.label.linestobereaudited",
     defaultMessage: " lines to be re-audited "
+},
+auditConflictingOperatorStatus: {
+    id: "auditdetail.auditConflictingOperatorStatus.status",
+    defaultMessage: "Concerned MSU is in use"
+},
+auditwaitingStatus: {
+    id: "auditdetail.auditwaitingStatus.status",
+    defaultMessage: "Processing audit task"
 }
 
 });
@@ -395,6 +403,10 @@ class AuditTab extends React.Component {
         let completedOutof = nProps.context.intl.formatMessage(messages.completedOutof);
           let linestobeResolved = nProps.context.intl.formatMessage(messages.linestobeResolved);
           let linestobeReaudited = nProps.context.intl.formatMessage(messages.linestobeReaudited);
+          let auditWaiting = nProps.context.intl.formatMessage(messages.auditwaitingStatus);
+          let auditConflicting = nProps.context.intl.formatMessage(messages.auditConflictingOperatorStatus);
+          
+          
         var timeOffset = nProps.props.timeOffset || "";
         var checkedAudit = nProps.props.checkedAudit || {};
 
@@ -428,15 +440,22 @@ class AuditTab extends React.Component {
             else if (data[i].audit_status == "audit_accepted") {
                 auditData.status = waitingOperator;
             }
+            else if (data[i].audit_status == "audit_conflicting") {
+                auditData.status = auditConflicting;
+            }
+            else if (data[i].audit_status == "audit_waiting") {
+                auditData.status = auditWaiting;
+            }
 
             else if ((data[i].start_request_time && data[i].completion_time) || (data[i].audit_status == "audit_aborted")) {
                 auditData.status = completed;
 
             }
-            else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_waiting" || data[i].audit_status == "audit_conflicting" ||
-                data[i].audit_status == "audit_started" || data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || data[i].audit_status == "audit_pending_approval") {
+            else if (data[i].audit_status == "audit_pending" || data[i].audit_status == "audit_started" || 
+                data[i].audit_status == "audit_tasked" || data[i].audit_status == "audit_rejected" || 
+                data[i].audit_status == "audit_pending_approval") {
                 auditData.progressBarflag = true;
-                auditData.status = data[i].audit_progress.completed + completedOutof + data[i].audit_progress.total;
+                auditData.status = data[i].audit_progress.completed +" "+completedOutof +" "+data[i].audit_progress.total;
             }
             else{
                 auditData.status = data[i].audit_status;
@@ -547,13 +566,12 @@ class AuditTab extends React.Component {
                 auditData.completedTime = "--";
             }
             auditData.resolved = data[i].resolved;
-            if (data[i].audit_button_data.audit_resolve_button == 'disable') {
+            if (data[i].audit_button_data.audit_resolve_button == 'enable') {
                 auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestobeResolved) : "";
             }
-            else if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +linestobeReaudited) : "";
+            if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
+                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linestobeReaudited) : "";
             }
-
 
             auditData.button = data[i].audit_button_data;
             auditData.startButton = data[i].audit_button_data.audit_start_button === 'enable' ? true : false;
@@ -673,8 +691,7 @@ class AuditTab extends React.Component {
                                 description="button label for audit"
                                 defaultMessage="Audits" /></span>
                     </div>
-                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '2px solid #ffffff', 'margin-left': '25px', 'float': 'right' }}
-                    ><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[ { name:  manualAssignpps, value: 'mannualassignpps' }]}>
+                    {(this.props.checkedAudit.length > 1) ? <div style={{ display: 'inline', 'border-left': '1px solid #aaaaaa', 'float': 'right' }}><ActionDropDown style={{ width: '115px', display: 'inline', float: 'right', 'padding-left': '25px' }} clickOptionBack={this._handelClick} data={[{ name:  manualAssignpps, value: 'mannualassignpps' }]}>
                         <button className="gor-add-btn gor-listing-button">
                         <FormattedMessage id="audit.start.Audit"
                                 description="button label for start"

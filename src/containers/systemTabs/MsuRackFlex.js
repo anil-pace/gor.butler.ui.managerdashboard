@@ -9,39 +9,20 @@ class MsuRackFlex extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this._getMaxXMaxYCoords(this.props.rackDetails);
+        this._getMaxXMaxYCoords(nextProps.rackDetails);
     }
       
-    componentDidMount() {
-      /*
-          Calling the line function only if the drawerLineDrawn is false 
-          and the slot type is drawer.
-          drawerLineDrawn is set true once the line is created
-       */
-
-      //  var lines = document.getElementsByClassName("connectingLine");
-      //  if(lines.length===0){
-      //     var strEl = document.querySelectorAll("#selectedSlot")[0];
-      //     strEl = strEl ? strEl.parentNode : null;
-      //     var endEl  = document.querySelectorAll("#slotDisplayArea")[0];
-      //     if(strEl && endEl){
-      //      this.connect(strEl, endEl, "#626262", 3);
-      //     }
-      // }
-    }
-
-    componentWillUnmount(){
-      var lines = document.getElementsByClassName("connectingLine");
-      if(lines.length){
-        lines[0].remove();
-      }
-    }
-
     _getMaxXMaxYCoords(vSlots){
       if (!vSlots || (vSlots.constructor !== Array && vSlots.length < 1)){
         //no slots found
-        return;
-    }
+        return {
+          vSlots:null,
+          lastHSlot:null,
+          lastVSlot: null,
+          selectedSlotIndex: null,
+          selectedSlotIds: null
+        };
+      }
 
       var totalSlots = vSlots.length;
       var totalWidth =0, totalHeight=0;
@@ -52,29 +33,6 @@ class MsuRackFlex extends React.Component {
       var newBarcodes = []; // for storing post data manipulation
       var selectedSlotIds = "";
 
-      // this.props.slotBarcodes.map(function(slotBarcodes,idx){
-      //     var str = slotBarcodes,
-      //     delimiter = '.',
-      //     start = 2,
-      //     result,
-      //     tokens = str.split(delimiter).slice(start);
-      //     if(tokens.length > 1) result = tokens.join("."); //take extra care when we have 3rd "." as delimiter
-      //     else result = tokens.toString();
-
-      //     newBarcodes.push(result);
-      // });
-      // selectedSlotIds = newBarcodes.join(', ');
-    
-
-      // vSlots.map(function(eachSlot, index){
-      //   var eachSlotBarcodes = eachSlot.barcodes;
-      //   if(!eachSlotBarcodes) return;
-      //   if(eachSlotBarcodes.length === newBarcodes.length){
-      //     if( JSON.stringify(newBarcodes)==JSON.stringify(eachSlotBarcodes) ){
-      //        selectedSlotIndex = index;
-      //     }
-      //   }
-      // });
     
       lastHSlot = vSlots.reduce(function(prevSlot,currSlot){
           if (prevSlot.orig_coordinates[0] < currSlot.orig_coordinates[0]){
@@ -96,13 +54,13 @@ class MsuRackFlex extends React.Component {
           }
       });
 
-      return{
-          vSlots:vSlots,
-          lastHSlot:lastHSlot,
-          lastVSlot: lastVSlot,
-          selectedSlotIndex: selectedSlotIndex,
-          selectedSlotIds: selectedSlotIds
-      }
+      this.setState({
+        vSlots:vSlots,
+        lastHSlot:lastHSlot,
+        lastVSlot: lastVSlot,
+        selectedSlotIndex: selectedSlotIndex,
+        selectedSlotIds: selectedSlotIds
+      });
     }
 
     connect(startEl, endEl, color, thickness) {
@@ -123,7 +81,7 @@ class MsuRackFlex extends React.Component {
       var angle = Math.atan2((y1-y2),(x1-x2))*(180/Math.PI);
       // make hr
 
-      var htmlLine = "<div class='connectingLine' style='padding:0px; margin:0px; height:" + thickness + "px; background-color:" + color + "; line-height:1px; position:absolute; left:" + cx + "px; top:" + cy + "px; width:" + length + "px; -moz-transform:rotate(" + angle + "deg); -webkit-transform:rotate(" + angle + "deg); -o-transform:rotate(" + angle + "deg); -ms-transform:rotate(" + angle + "deg); transform:rotate(" + angle + "deg);' />";
+      var htmlLine = "<div class='connectingLine' style='padding:0px; margin:0px; height:" + thickness + "px; background-color:" + color + "; line-height:5px; position:absolute; left:" + cx + "px; top:" + cy + "px; width:" + length + "px; -moz-transform:rotate(" + angle + "deg); -webkit-transform:rotate(" + angle + "deg); -o-transform:rotate(" + angle + "deg); -ms-transform:rotate(" + angle + "deg); transform:rotate(" + angle + "deg);' />";
       document.getElementById('app').innerHTML += htmlLine; 
     }
 
@@ -138,9 +96,9 @@ class MsuRackFlex extends React.Component {
     }
 
       _createSlotLayouts(vSlots, lastHSlot, lastVSlot, selectedSlotIndex, selectedSlotIds) {
-        if ((vSlots.constructor !== Array && vSlots.length < 1) || !(lastHSlot.length) || !(lastVSlot.length)){
+        if (!vSlots || ((vSlots.constructor !== Array && vSlots.length < 1) || !(lastHSlot.length) || !(lastVSlot.length))){
             //no bins found
-            return;
+            return [];
         }
         var vHTMLSlots =[];
          // since the total width would be 100% but the bins would be divided into
@@ -227,29 +185,7 @@ class MsuRackFlex extends React.Component {
                                                this.state.selectedSlotIds
                                              );
 
-    //         if(putDirection){
-    //     nestable_count=putDirection.nestable_count;
-    //     nestable_direction=putDirection.nestable_direction;
-    //     stackCount=putDirection.stacking_count? putDirection.stacking_count[putDirection.stacking_count.length-1]:0;
-    //      if(putDirection.orientation_preference && nestable_count>1){
-    //     orientation="orientation";
-    //     orientationClass = './assets/images/'+ putDirection.nestable_direction+'Nesting.gif?q='+Math.random();
-    //     }
-    //     else if(putDirection.orientation_preference && stackCount>=1){
-    //     orientation="orientation";  
-    //     orientationClass=stackCount>1?'./assets/images/'+ putDirection.stacking+'Stackable.gif?q='+Math.random():'./assets/images/' + putDirection.stacking+'nonStackable.svg';
-    //     }
-    //     else
-    //     {
-    //        orientation="containerHide";
-    //     }             
-    //     stackText=nestable_count>1? _("NEST MAX") : stackCount>1?_("STACK MAX") : _("DO NOT STACK");
-    //     stackicon=nestable_count>1? "stackicons nestingicon" : stackCount>1?"stackicons stackingicon" : "stackicons nonstackingicon";
-    //     fragileClass=putDirection.fragile?"fragile":"containerHide";
-    //     stackClass=nestable_count>1? "stackSize" :stackCount>=1?"stackSize":"containerHide";
-    //     count=nestable_count>1?nestable_count:stackCount>1?stackCount:""
-
-    // }
+    
       return(
         <div  style={{width: "100%"}} className="parent-container">
           <div className="slotsFlexContainer">
@@ -260,5 +196,4 @@ class MsuRackFlex extends React.Component {
     }
 };
 
-//module.exports = MsuRackFlex;
 export default MsuRackFlex;

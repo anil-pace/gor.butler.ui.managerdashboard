@@ -13,55 +13,49 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import { makeAjaxCall } from '../../actions/ajaxActions';
 import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, ORDERS_POLLING_INTERVAL} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
+import {hashHistory} from 'react-router';
 
 const messages=defineMessages({
-    fulfillableStatus: {
-        id: 'orderList.fulfillable.status',
-        description: "In 'fulfillable' for orders",
+    inProgressStatus: {
+        id: 'orderList.inProgress.status',
+        description: "In 'inProgress' for orders",
         defaultMessage: "In progress"
     },
-
-    completeStatus: {
-        id: "orderList.complete.status",
-        description: " 'complete' status",
+    completedStatus: {
+        id: "orderList.completed.status",
+        description: " 'completed' status",
         defaultMessage: "Completed"
     },
-
     cancelledStatus: {
         id: "orderList.cancelled.status",
         description: " 'Cancelled' status",
         defaultMessage: "Cancelled"
     },
-
     createdStatus: {
         id: "orderList.created.status",
         description: " 'created' status",
         defaultMessage: "Created"
     },
-    badRequestStatus: {
-        id: 'orderlist.badRequest.status',
-        description: " 'Bad Request' status",
-        defaultMessage: 'Rejected'
+    
+    onHoldStatus: {
+        id: 'orderlist.onHold.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'On hold'
     },
     notFulfillableStatus: {
         id: 'orderlist.notFulfillale.status',
         description: " 'Refreshed' status",
         defaultMessage: 'Not fulfillable'
     },
-    temporyUnFulfillableStatus: {
-        id: 'orderlist.tempnotFulfillale.status',
-        description: " 'Refreshed' status",
-        defaultMessage: 'On Hold'
+    cutOffTime:{
+        id: 'orderlist.cutOffTime.time',
+        description: " cut off time in hrs",
+        defaultMessage: 'Cut off time {cutOffTime} hrs'
     },
-    acceptedStatus: {
-        id: 'orderlist.accepted.status',
-        description: " 'accepted' status",
-        defaultMessage: 'Accepted'
-    },
-    abandonedStatus: {
-        id: 'orderlist.abandoned.status',
-        description: " 'abandoned' status",
-        defaultMessage: 'Abandoned'
+    orderId:{
+        id: 'orders.order.orderId',
+        description: "order id",
+        defaultMessage: 'Order {orderId}'
     },
     totalOrderLines: {
         id: 'orders.orderlines.total',
@@ -84,15 +78,13 @@ class ViewOrderLine extends React.Component{
         headerItems: [],
         items: [],
         statusMapping:{
-            "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
-            "complete": this.props.intl.formatMessage(messages.completeStatus),
-            "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
             "CREATED": this.props.intl.formatMessage(messages.createdStatus),
-            "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
-            "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-            "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
-            "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
-            "tempory_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
+            "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
+            "PROCESSED": this.props.intl.formatMessage(messages.completedStatus),
+            "FAILED": this.props.intl.formatMessage(messages.notFulfillableStatus),
+            "CANCELED": this.props.intl.formatMessage(messages.cancelledStatus),
+            "CANCELLED": this.props.intl.formatMessage(messages.cancelledStatus),
+            "WAITING": this.props.intl.formatMessage(messages.onHoldStatus)
 
         }
       }
@@ -124,7 +116,8 @@ class ViewOrderLine extends React.Component{
     }
 
   _removeThisModal() {
-    this.props.removeModal();
+      this.props.removeModal();
+      hashHistory.push({pathname: "/orders", query: {}});
   }
 
   handleChange(event) {

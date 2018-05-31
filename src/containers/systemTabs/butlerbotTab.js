@@ -1,4 +1,4 @@
-   import React  from 'react';
+import React  from 'react';
 import ButlerBotsTable from './ButlerBotsTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
@@ -363,6 +363,14 @@ class ButlerBot extends React.Component {
 
     }
 
+
+
+    /**
+     *
+     */
+    _clearFilter() {
+        hashHistory.push({pathname: "/system/butlerbots", query: {}})
+    }
 
 
    

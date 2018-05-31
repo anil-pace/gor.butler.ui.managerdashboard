@@ -1,7 +1,7 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter,filterApplied,toggleBotButton, msuConfigFilterState} from '../../actions/filterAction';
+import {showTableFilter,filterApplied, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket} from '../../actions/socketActions';
 import { connect } from 'react-redux'; 
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
@@ -42,7 +42,6 @@ class MsuConfigFilter extends React.Component{
     }
 
     _requestDestTypeList(){
-        console.log("__requestDestTypeList get called");
         let params={
             'url': MSU_CONFIG_DEST_TYPE_URL,
             'method':GET,
@@ -77,8 +76,6 @@ class MsuConfigFilter extends React.Component{
     }   
 
     _processMsuConfigSearchField(){
-        //const temp=[{value:"MSU ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage="MSU ID"/>}, 
-                    //{value:"SPECIFIC LOCATION/ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage="SPECIFIC LOCATION/ZONE"/>}];
         const temp=[{value:"MSU ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
@@ -86,35 +83,31 @@ class MsuConfigFilter extends React.Component{
     }
  
     _processMsuConfigFilterToken() {
-        let tokenFieldC1={value:"STATUS", label:<FormattedMessage id="butletbot.tokenfield.STATUS" defaultMessage="STATUS"/>};
+        let tokenFieldC1={value:"STATUS", label:<FormattedMessage id="butletbot.tokenfield.SOURCETYPE" defaultMessage="SOURCE TYPE"/>};
         let destTypeList = this.props.destType;
 
-        //let tokenFieldC2={value:"MODE", label:<FormattedMessage id="butletbot.tokenfield.MODE" defaultMessage="MODE"/>}; 
         const labelC1=[
                     { value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }
                     ];
         if(destTypeList){
-            destTypeList.forEach((data)=>{
-             labelC1.push(
-             {
-                value:data,
-                label:data
-             }
-                )   
-            });
+            if(destTypeList.length){
+                destTypeList.forEach((data)=>{
+                 labelC1.push(
+                 {
+                    value:data,
+                    label:data
+                 }
+                    )   
+                });
+            }
+            else if(Object.keys(destTypeList).length) return [];
         }
-        // const labelC2=[
-        //             { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage="Any"/> },
-        //             { value: '0', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage="Pick"/>},
-        //             { value: '1', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
-        //             { value: '2', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
-        //             { value: '3', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
-        //             { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
-        //             ];
+        else{
+            return [];
+        }
+        
         let selectedToken= this.state.tokenSelected;
         let column1=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        //let column2=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
-        //let columnDetail={column1token:column1, column2token:column2};
         let columnDetail={column1token:column1};
         return columnDetail;
     }
@@ -132,19 +125,13 @@ class MsuConfigFilter extends React.Component{
         /**
          * for query generation
          */
-        // if (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]) {
-        //     _query.location=filterState.searchQuery["SPECIFIC LOCATION/ZONE"]
-        // }
+        
         if (filterState.searchQuery["MSU ID"]) {
             _query.rack_id=filterState.searchQuery["MSU ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
         }
-        // if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !=='any') {
-        //     _query.current_task=filterState.tokenSelected["MODE"]
-        // }
-
         hashHistory.push({pathname: "/system/msuConfiguration", query: _query})
     }
 

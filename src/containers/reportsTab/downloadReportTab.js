@@ -107,6 +107,7 @@ class DownloadReportTab extends React.Component{
         this.props.setDownloadReportSpinner(true);
         this.props.makeAjaxCall(params);
    }
+
    
     _onScrollHandler(event){
        
@@ -121,6 +122,25 @@ class DownloadReportTab extends React.Component{
             
                 
         }
+    }
+
+    _getReportsData(props){
+        var _props = props || this.props;
+        var query = _props.location.query;
+        var pageSize = query.pageSize || 25;
+        var page = query.page || 1;
+
+        var params={
+                'url':REPORTS_URL+"?page="+(parseInt(page) -1)+"&size="+pageSize+
+                '&sort=requestedTime&order=DESC',
+                'method':GET,
+                'contentType':APP_JSON,
+                'accept':APP_JSON,
+                'cause':REPORTS_FETCH
+            }
+        _props.setDownloadReportSpinner(true);
+        _props.makeAjaxCall(params);
+
         
     }
 

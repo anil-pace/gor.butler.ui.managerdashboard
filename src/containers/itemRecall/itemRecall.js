@@ -65,7 +65,8 @@ class ItemRecall extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
-          isInputEmpty:true
+          isInputEmpty:true,
+          selectionStart:0
     },
     validationDoneSKU:false,
     allTuplesValid:false,
@@ -90,7 +91,8 @@ class ItemRecall extends React.Component{
             errorMessage:""
           }],
           focusedEl:"0",
-          isInputEmpty:true
+          isInputEmpty:true,
+          selectionStart:0
     },
     validationDoneSKU:false,
     skuDetails:{}
@@ -143,19 +145,28 @@ class ItemRecall extends React.Component{
         })
  }
  _processSkuAttributes(data) {
-    var processedData=[]
+    var processedData=[],skuDetails={}
     for(let i=0,len=data.length; i<len ;i++){
-      let tuple={};
+      let tuple={},skuDetail={};
       let error_code = data[i].status===true ? "" :data[i].status.error_code;
       tuple.checked=false;
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
       tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      if(error_code === ""){
+        skuDetail["productSku"] = data[i].skuName;
+        skuDetail["productAttributes"] =[]
+        skuDetails[data[i].skuName] = skuDetail;
+      }
       processedData.push(tuple);
     }
-    return processedData
+    return {
+      processedData:processedData,
+      skuDetails:skuDetails
+    }
   }
+  
   _onAttributeSelection(selectedAttributes,sku,copyPasteData){
     
   var skuDetails = JSON.parse(JSON.stringify(this.state.skuDetails))
@@ -175,9 +186,13 @@ class ItemRecall extends React.Component{
     productAttributes.push(set);
     
   }
+  tuple.productAttributes = productAttributes;
 }
-
-    tuple.productAttributes = productAttributes;
+else{
+  tuple.productAttributes = (skuDetails[skuValue]["productAttributes"]).constructor === Array ? (skuDetails[skuValue]["productAttributes"]).slice(0) : []
+}
+    
+    
     skuDetails[skuValue] = tuple;
   }
   this.setState({
@@ -221,11 +236,13 @@ class ItemRecall extends React.Component{
       let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
       this.setState({
          copyPasteData:{
-          data:validatedSKUs,
-          focusedEl:"0"
+          data:validatedSKUs.processedData,
+          focusedEl:"0",
+          selectionStart:0
         },
         validationDoneSKU,
-        allTuplesValid
+        allTuplesValid,
+        skuDetails:validatedSKUs.skuDetails
       })
     }
   }
