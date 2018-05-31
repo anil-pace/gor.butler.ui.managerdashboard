@@ -3,9 +3,12 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import ValidateSelAtt from '../../components/audit/validateSelAtt';
-import {makeAjaxCall} from '../../actions/ajaxActions';
+//import {makeAjaxCall} from '../../actions/ajaxActions';
+import {VALIDATE_SKU_QUERY} from './query';
 import { APP_JSON,POST, GET, VALIDATE_SKU_ITEM_RECALL,CREATE_AUDIT_REQUEST,SELLER_RECALL } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,SELLER_RECALL_URL,SELLER_RECALL_EXPIRY_URL} from '../../constants/configConstants';
+import { withApollo, compose} from "react-apollo";
+import {processValidationDataSKU} from './utilityFunctions';
 
 const messages = defineMessages({
     e026: {
@@ -95,7 +98,7 @@ class ItemRecall extends React.Component{
   })
  }
  _validateSKU(data){
-    let validSKUData={
+    /*let validSKUData={
       "audit_param_name":"name",
       "audit_param_type":"sku",
       "audit_param_value":{}
@@ -111,7 +114,33 @@ class ItemRecall extends React.Component{
           'token':this.props.auth_token
       }
     
-    this.props.makeAjaxCall(urlData);
+    this.props.makeAjaxCall(urlData);*/
+    let skuList = {
+        "sku":{
+          "sku":data
+        }
+      }
+    this.props.client.query({
+            query:VALIDATE_SKU_QUERY,
+            variables:skuList,
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+
+          let skuAttributes = processValidationDataSKU(JSON.parse(data.data.SKUList.list));
+          let validatedSKUs = this._processSkuAttributes(skuAttributes.data);
+          let validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
+          let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
+          this.setState({
+             copyPasteData:{
+              data:validatedSKUs,
+              focusedEl:"0"
+            },
+            validationDoneSKU,
+            allTuplesValid,
+            skuAttributes
+          })
+
+        })
  }
  _processSkuAttributes(data) {
     var processedData=[]
@@ -226,7 +255,7 @@ class ItemRecall extends React.Component{
            validationCallBack={this._validateSKU} 
            validationDoneSKU={this.state.validationDoneSKU}
            allTuplesValid={this.state.allTuplesValid}
-           skuAttributes={this.props.skuAttributes}
+           skuAttributes={this.state.skuAttributes}
            copyPasteData={this.state.copyPasteData}
            onAttributeSelection={this._onAttributeSelection}
            tabMessages={tabMessages}
@@ -246,11 +275,7 @@ ItemRecall.propTypes={
   hasDataChanged:React.PropTypes.bool,
   skuAttributes:React.PropTypes.object
 }
-function mapDispatchToProps(dispatch){
-  return {
-    makeAjaxCall: function (data) {dispatch(makeAjaxCall(data))},
-  }
-};
+
 function mapStateToProps(state, ownProps){
   return {
       auth_token:state.authLogin.auth_token,
@@ -259,7 +284,8 @@ function mapStateToProps(state, ownProps){
       timeOffset:state.authLogin.timeOffset
   };
 };
-export  default connect(mapStateToProps,mapDispatchToProps)(injectIntl(ItemRecall));            
+
+export  default compose(withApollo)(connect(mapStateToProps,null)(injectIntl(ItemRecall)));            
 
 
            
