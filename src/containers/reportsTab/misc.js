@@ -75,23 +75,6 @@ class UtilityTab extends React.Component {
   }
 
 
-  _generateReport(reqFileType) {
-    let fileType = "csv";
-    if (reqFileType) {
-      fileType = reqFileType;
-    }
-    let url = INVENTORY_REPORT_URL + "?sync=false&format=" + fileType;
-    let data = {
-      url: url,
-      method: GET,
-      token: this.props.auth_token,
-      responseType: "arraybuffer",
-      cause: INVENTORY_REPORT_RESPONSE
-    };
-    this.props.setInventoryReportSpinner(true);
-    this.props.getGRdata(data);
-  }
-
   _generateGRN(reqFileType, invoiceId) {
     var fileType = "csv";
     if (reqFileType) {
