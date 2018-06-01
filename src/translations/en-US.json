@@ -4228,14 +4228,14 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
@@ -4252,33 +4252,15 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
     "id": "orderlist.notFulfillale.status",
     "description": "'Refreshed' status",
     "defaultMessage": "Not fulfillable",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On hold",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -4350,7 +4332,7 @@
   {
     "id": "orders.fulfil",
     "description": "header of orders fulfilment",
-    "defaultMessage": "Order fulfuilment progress",
+    "defaultMessage": "Order fulfilment progress",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
@@ -4414,14 +4396,14 @@
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
@@ -4438,9 +4420,9 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
@@ -4450,21 +4432,15 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "id": "orderlist.cutOffTime.time",
+    "description": "cut off time in hrs",
+    "defaultMessage": "Cut off time {cutOffTime} hrs",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/viewOrderLine.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
+    "id": "orders.order.orderId",
+    "description": "order id",
+    "defaultMessage": "Order {orderId}",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {

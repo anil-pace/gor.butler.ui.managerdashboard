@@ -62,7 +62,7 @@ const messages=defineMessages({
         description: "total orderlines",
         defaultMessage: 'Total {totalOrderlines}'
     },
-    orderLineId:{
+    skuId:{
         id: 'orders.orderlines.skuId',
         description: "sku id",
         defaultMessage: 'SKU -  {skuId}'
@@ -197,10 +197,10 @@ class ViewOrderLine extends React.Component{
       for(let i=0; i < olDataLen; i++){
 
         let olineRow = [];
-        let formatSkuId = (arg[i].orderline_id ? this.props.intl.formatMessage(messages.orderLineId, {skuId: arg[i].orderline_id}): "null");
+        let formatSkuId = this.props.intl.formatMessage(messages.skuId, {skuId: arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1).split("=")[1] });
 
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
-                        <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1)]}/>
+                        <DotSeparatorContent header={[formatSkuId]} subHeader={[]}/>
                     </div>);
 
         let formatProgressBar = this._formatProgressBar(arg[i].pick_products_count, arg[i].total_products_count);
