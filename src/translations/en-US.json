@@ -3844,6 +3844,30 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
+    "id": "inventory.histogram.legend",
+    "description": "Inventory Histogram Legend",
+    "defaultMessage": "Items Stocked",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.linechart.legendPicked",
+    "description": "Inventory Linechart Legend for picked",
+    "defaultMessage": "Items Picked",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.linechart.legendPut",
+    "description": "Inventory Linechart Legend for put",
+    "defaultMessage": "Items Put",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.header",
+    "description": "Inventory Header Message",
+    "defaultMessage": "Inventory",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
     "id": "inventory.histogram.header",
     "description": "Inventory Histogram Header Message",
     "defaultMessage": "Stock level history",
@@ -4228,14 +4252,14 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
@@ -4252,33 +4276,15 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
     "id": "orderlist.notFulfillale.status",
     "description": "'Refreshed' status",
     "defaultMessage": "Not fulfillable",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On hold",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -4350,7 +4356,7 @@
   {
     "id": "orders.fulfil",
     "description": "header of orders fulfilment",
-    "defaultMessage": "Order fulfuilment progress",
+    "defaultMessage": "Order fulfilment progress",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
@@ -4414,14 +4420,14 @@
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
@@ -4438,9 +4444,9 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
@@ -4450,21 +4456,15 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "id": "orderlist.cutOffTime.time",
+    "description": "cut off time in hrs",
+    "defaultMessage": "Cut off time {cutOffTime} hrs",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/viewOrderLine.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
+    "id": "orders.order.orderId",
+    "description": "order id",
+    "defaultMessage": "Order {orderId}",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
@@ -4750,24 +4750,6 @@
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
-    "id": "operationLog.page.twentyfive",
-    "description": "Page size 25",
-    "defaultMessage": "25",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
-    "id": "operationLog.page.fifty",
-    "description": "Page size 50",
-    "defaultMessage": "50",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
-    "id": "operationLog.page.hundred",
-    "description": "Page size 100",
-    "defaultMessage": "100",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
     "id": "downloadReport.type.operationsLog",
     "description": "Heading for PPS",
     "defaultMessage": "Operations Logs",
@@ -4793,7 +4775,7 @@
   },
   {
     "id": "downloadReport.table.heading",
-    "description": "Heading for PPS",
+    "description": "Heading for Download Report",
     "defaultMessage": "Download Report",
     "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
@@ -4804,40 +4786,40 @@
     "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
   {
-    "id": "downloadReport.table.reportName",
-    "description": "REPORT NAME",
+    "id": "downloadreport.table.reportname",
+    "description": "Download report name",
     "defaultMessage": "REPORT NAME",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.reportType",
+    "id": "downloadreport.table.reporttype",
     "description": "REPORT TYPE",
     "defaultMessage": "REPORT TYPE",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.requestedBy",
-    "description": "Request ID",
+    "id": "downloadreport.table.requestedby",
+    "description": "REQUESTED BY",
     "defaultMessage": "REQUESTED BY",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.completionTime",
-    "description": "Status for PPS",
+    "id": "downloadreport.table.completiontime",
+    "description": "COMPLETION TIME",
     "defaultMessage": "COMPLETION TIME",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.status",
-    "description": "Status for PPS",
+    "id": "downloadreport.table.generationprogress",
+    "description": "GENERATION PROGRESS",
     "defaultMessage": "GENERATION PROGRESS",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "operationsLog.table.noData",
-    "description": "No data message for operations logs",
-    "defaultMessage": "No Data Found",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
     "id": "utility.downloadReport.head",
@@ -4885,19 +4867,109 @@
     "id": "operationLog.page.twentyfive",
     "description": "Page size 25",
     "defaultMessage": "25",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.page.fifty",
     "description": "Page size 50",
     "defaultMessage": "50",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.page.hundred",
     "description": "Page size 100",
     "defaultMessage": "100",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.genRep.tooltip",
+    "description": "Tooltip to display Generate button",
+    "defaultMessage": "Reports not available for Realtime filter",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.downloadBtn",
+    "description": "button label for download report",
+    "defaultMessage": "Generate Report",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Results found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Operations",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.status",
+    "description": "STATUS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.skuId",
+    "description": "Status for PPS",
+    "defaultMessage": "SKU ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.sourceId",
+    "description": "Status for PPS",
+    "defaultMessage": "SOURCE ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.destinationId",
+    "description": "Status for PPS",
+    "defaultMessage": "DESTINATION ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.userId",
+    "description": "Status for PPS",
+    "defaultMessage": "USER ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.timestamp",
+    "description": "Status for PPS",
+    "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.genRep.tooltip",
@@ -4939,55 +5011,55 @@
     "id": "operationLog.table.operatingMode",
     "description": "OPERATING MODE",
     "defaultMessage": "OPERATING MODE",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.status",
     "description": "STATUS",
     "defaultMessage": "STATUS",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.requestId",
     "description": "Request ID",
     "defaultMessage": "REQUEST ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.skuId",
     "description": "Status for PPS",
     "defaultMessage": "SKU ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.sourceId",
     "description": "Status for PPS",
     "defaultMessage": "SOURCE ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.destinationId",
     "description": "Status for PPS",
     "defaultMessage": "DESTINATION ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.userId",
     "description": "Status for PPS",
     "defaultMessage": "USER ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.timestamp",
     "description": "Status for PPS",
     "defaultMessage": "TIMESTAMP",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
-    "id": "operationsLog.table.noData",
-    "description": "No data message for operations logs",
-    "defaultMessage": "No Data Found",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "reportsTab.operationsLog",
@@ -5014,6 +5086,42 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
+    "id": "slot.table.slotType",
+    "description": "Slot Type column",
+    "defaultMessage": "SLOT TYPE",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.slotVolume",
+    "description": "SlotVolume",
+    "defaultMessage": "SLOT VOLUME",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.dimension",
+    "description": "DIMENSION(L*B*H)",
+    "defaultMessage": "DIMENSION(L*B*H)",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.totalSlots",
+    "description": "TOTAL SLOTS",
+    "defaultMessage": "TOTAL SLOTS",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.emptySlots",
+    "description": "Empty Slots",
+    "defaultMessage": "EMPTY SLOTS",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.slotUtilization",
+    "description": "Slot Utilization",
+    "defaultMessage": "SLOT UTILIZATION",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
     "id": "storageSpace.report.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
@@ -5021,7 +5129,7 @@
   },
   {
     "id": "storageSpace.table.heading",
-    "description": "Heading for PPS",
+    "description": "Heading for Storage Space",
     "defaultMessage": "Storage space information",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
@@ -5029,48 +5137,6 @@
     "id": "storageSpace.table.downloadBtn",
     "description": "button label for download report",
     "defaultMessage": "GENERATE REPORT",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotType",
-    "description": "slot type",
-    "defaultMessage": "SLOT TYPE",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotVolume",
-    "description": "slot volume",
-    "defaultMessage": "SLOT VOLUME",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.dimension",
-    "description": "Dimension",
-    "defaultMessage": "DIMENSION (L*B*H)",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.totalSlots",
-    "description": "Status for total slots",
-    "defaultMessage": "TOTAL SLOTS",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.emptySlots",
-    "description": "Status for empty slots",
-    "defaultMessage": "EMPTY SLOTS",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotUtilization",
-    "description": "Status for PPS",
-    "defaultMessage": "SLOT UTILIZATION",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.noData",
-    "description": "No data message for Storage space",
-    "defaultMessage": "No Data Found",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
@@ -5174,15 +5240,87 @@
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {
+    "id": "butlerbot.table.noData",
+    "description": "No data message for butlerbot table",
+    "defaultMessage": "No Butler Bot Found",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.bots",
+    "description": "Bots id Column",
+    "defaultMessage": "BOTS",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "sub text for totalbot ButlerBotTable",
+    "defaultMessage": "Total: {totalBot}",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.status",
+    "description": "Bots Status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.status",
+    "description": "status for ButlerBotTable",
+    "defaultMessage": "{onlineBots} Online",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.currentTask",
+    "description": "Bots current task",
+    "defaultMessage": "CURRENT TASK",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.botState",
+    "description": "bot state for ButlerBotTable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.msuMounted",
+    "description": "MSU Mounted",
+    "defaultMessage": "MSU MOUNTED",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.mounted",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{msuMounted} Mounted",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.location",
+    "description": "Location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.locations",
+    "description": "msu Location for ButlerBotTable",
+    "defaultMessage": "{locations} Locations",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.power",
+    "description": "Power",
+    "defaultMessage": "POWER",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.avgVoltage",
+    "description": "avgVoltage for ButlerBotTable",
+    "defaultMessage": "Avg {voltage}",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
     "id": "butlerDetail.name.prefix",
     "description": "prefix for butler id",
     "defaultMessage": "BOT - {botId}",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
-  },
-  {
-    "id": "pps.name.prefix",
-    "description": "prefix for pps id",
-    "defaultMessage": "PPS {ppsId}",
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
@@ -5514,7 +5652,7 @@
   {
     "id": "ChargingStationsTable.SubstationID",
     "description": "total SubStationID for ChargingStationsTable",
-    "defaultMessage": "Total:{rowsCount}",
+    "defaultMessage": "Total: {rowsCount}",
     "filepath": "./src/containers/systemTabs/chargingStationsTable.js"
   },
   {
@@ -6938,6 +7076,21 @@
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
+    "id": "userDetails.userAdmin",
+    "defaultMessage": "Admin",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "userDetails.qc_operator",
+    "defaultMessage": "QC Operator",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "userDetails.packing_operator",
+    "defaultMessage": "Packing Operator",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
     "id": "userDetails.manager",
     "defaultMessage": "Manager",
     "filepath": "./src/containers/userTab/usersTab.js"
@@ -7016,6 +7169,54 @@
     "description": "button label for show all",
     "defaultMessage": "Show all Users",
     "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "user.table.usersCount",
+    "description": "Users Column",
+    "defaultMessage": "{rowsCount} USERS",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.role",
+    "description": "User Role",
+    "defaultMessage": "ROLE",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "User Workmode",
+    "defaultMessage": "WORKMODE",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.location",
+    "description": "User location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "User log in time",
+    "defaultMessage": "LOG IN TIME",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "commonDataTable.edit.button",
+    "description": "edit button",
+    "defaultMessage": "Edit",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "commonDataTable.Delete.button",
+    "description": "Delete button",
+    "defaultMessage": "Delete",
+    "filepath": "./src/containers/userTab/usersTable.js"
   },
   {
     "id": "user.table.noData",

@@ -7,3 +7,16 @@ export const VALIDATE_SKU_QUERY = gql`
 		}
 }
 `;
+
+export const RECALL_ITEM = gql`
+    query ItemRecall($params:ItemRecallParams){
+		ItemRecall(input:$params){
+		  status{
+		    status
+		    code
+		    message
+		    reason
+		  }
+		}
+}
+`;

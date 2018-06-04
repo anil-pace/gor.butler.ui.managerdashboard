@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import ValidateSelAtt from '../../components/audit/validateSelAtt';
 //import {makeAjaxCall} from '../../actions/ajaxActions';
-import {VALIDATE_SKU_QUERY} from './query';
+import {VALIDATE_SKU_QUERY,RECALL_ITEM} from './query';
 import { APP_JSON,POST, GET, VALIDATE_SKU_ITEM_RECALL,CREATE_AUDIT_REQUEST,SELLER_RECALL } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,SELLER_RECALL_URL,SELLER_RECALL_EXPIRY_URL} from '../../constants/configConstants';
 import { withApollo, compose} from "react-apollo";
 import {processValidationDataSKU} from './utilityFunctions';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../actions/validationActions";
+import {ITEM_RECALL_SUCCESS,ITEM_RECALL_FAILURE} from "../../constants/messageConstants";
 
 const messages = defineMessages({
     e026: {
@@ -201,6 +206,7 @@ else{
   }
   _recallItems(){
     var formData = {};
+    var _this = this;
     formData.orderId=this.orderInput.value;
     formData.timeZone=this.props.timeOffset;
     if(this.state.selectedOption === "specific_item"){
@@ -216,16 +222,19 @@ else{
     
     formData.isExpired= true
   }
-    let urlData={
-                  'url': this.state.selectedOption === "specific_item" ? SELLER_RECALL_URL : SELLER_RECALL_EXPIRY_URL,
-                  'formdata': formData,
-                  'method':POST,
-                  'cause':SELLER_RECALL,
-                  'contentType':APP_JSON,
-                  'accept':APP_JSON
+
+      let parameters = {
+        "params":formData
       }
-    //this.props.setAuditSpinner(true);
-    this.props.makeAjaxCall(urlData);
+    _this.props.client.query({
+            query:RECALL_ITEM,
+            variables:parameters,
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+          _this.props.notifyFail(ITEM_RECALL_FAILURE[data.data.ItemRecall.status.reason])
+        })
+    
+    
 
   }
   componentWillReceiveProps(nextProps){
@@ -293,7 +302,7 @@ ItemRecall.propTypes={
   skuAttributes:React.PropTypes.object
 }
 
-function mapStateToProps(state, ownProps){
+const mapStateToProps = (state, ownProps)=>{
   return {
       auth_token:state.authLogin.auth_token,
       skuAttributes: state.auditInfo.skuAttributes,
@@ -301,8 +310,18 @@ function mapStateToProps(state, ownProps){
       timeOffset:state.authLogin.timeOffset
   };
 };
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    notifySuccess: function (data) {
+            dispatch(notifySuccess(data));
+    },
+        notifyFail: function (data) {
+            dispatch(notifyFail(data));
+    }
+  }
+}
 
-export  default compose(withApollo)(connect(mapStateToProps,null)(injectIntl(ItemRecall)));            
+export  default compose(withApollo)(connect(mapStateToProps,mapDispatchToProps)(injectIntl(ItemRecall)));            
 
 
            
