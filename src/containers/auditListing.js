@@ -93,7 +93,7 @@ const messages = defineMessages({
     },
     pps: {
         id: "auditdetail.pps.prefix",
-        defaultMessage: "PPS "
+        defaultMessage: "PPS"
     },
     autoAssignpps: {
         id: "auditdetail.label.autoassignpps",
@@ -105,11 +105,11 @@ const messages = defineMessages({
     },
     completedOutof: {
        id: "auditdetail.label.completedoutof",
-       defaultMessage: " completed out of "
+       defaultMessage: "completed out of"
     },
    linestobeResolved: {
        id: "auditdetail.label.linestoberesolved",
-       defaultMessage: " lines to be resolved "
+       defaultMessage: "lines to be resolved"
    },
    linesRejected: {
     id: "auditdetail.label.linesrejected",
@@ -429,7 +429,7 @@ class AuditTab extends React.Component {
                 auditData.audit_name = "";
             }
             auditData.auditBased = data[i].audit_type ? data[i].audit_type : "";
-            auditData.pps_id = data[i].audit_status == 'audit_created' ? "" : (data[i].pps_id ? pps + data[i].pps_id : "");
+            auditData.pps_id = data[i].audit_status == 'audit_created' ? "" : (data[i].pps_id ? pps+" "+ data[i].pps_id : "");
 
 
             if (data[i].audit_status == "audit_created") {
@@ -572,7 +572,7 @@ class AuditTab extends React.Component {
             }
             auditData.resolved = data[i].resolved;
             if (data[i].audit_button_data.audit_resolve_button == 'enable') {
-                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestobeResolved) : "";
+                auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +" "+linestobeResolved) : "";
             }
             if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
                 auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linesRejected) : "";

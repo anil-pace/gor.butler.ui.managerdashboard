@@ -43,7 +43,8 @@ class ResolveAudit extends React.Component{
   }
 
   componentDidMount() {
-        let url=AUDIT_URL + "/" + this.props.auditId + PENDING_ORDERLINES; 
+   let audit_id= this._findDisplayidName(this.props.auditId);
+        let url=AUDIT_URL + "/" + audit_id[0] + PENDING_ORDERLINES; 
         let paginationData={
          'url':url,
          'method':GET,
@@ -343,10 +344,15 @@ class ResolveAudit extends React.Component{
    return resolveTable;                 
 
   }
+  _findDisplayidName(rawString)
+  {
+    return rawString.split(',');
+  }
   
   render()
   {
-      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType, auditId=this.props.auditId;
+      var {auditDataList}=this.state, screenId=this.props.screenId, auditType=this.props.auditType;
+      var auditData=this._findDisplayidName(this.props.auditId);
       var auditbysku=(this.state.auditParamType===AUDIT_BY_SKU?false:true), resolveTable=<div/>;
       var totalLines=auditDataList.getSize()?auditDataList.getSize():0;
       if(auditbysku) {
@@ -376,7 +382,7 @@ class ResolveAudit extends React.Component{
                 <div className="gor-auditResolve-h1"> 
                   <FormattedMessage id="audit.header.information" description='missing information for audit' 
                                     defaultMessage='Audit task #{auditId}' 
-                                    values={{missingAudit: this.state.totalMismatch, auditId:auditId,auditType: auditType}}/> 
+                                    values={{missingAudit: this.state.totalMismatch, auditId:auditData[1],auditType: auditType}}/> 
                 </div>
                 <div className="gor-auditResolve-h2">
                   <FormattedMessage id="audit.missing.auditType" description='missing information for audit type' 
