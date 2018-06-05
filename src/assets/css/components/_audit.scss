@@ -314,8 +314,9 @@ justify-content: space-around;
         }
 .column4Style{
   @extend .fontstyleColumn;
-  text-align:center;
-  font-weight:bold
+  text-align: right;
+  font-weight: 600;
+  line-height: 17px;
 }        
 .checkBoxalign{
   margin-top: 12px;

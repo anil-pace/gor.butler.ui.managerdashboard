@@ -111,9 +111,13 @@ const messages = defineMessages({
        id: "auditdetail.label.linestoberesolved",
        defaultMessage: " lines to be resolved "
    },
-   linestobeReaudited: {
-    id: "auditdetail.label.linestobereaudited",
-    defaultMessage: " lines to be re-audited "
+   linesRejected: {
+    id: "auditdetail.label.linesrejected",
+    defaultMessage: " lines rejected"
+},
+linesApproved:{
+    id: "auditdetail.label.linesapproved",
+    defaultMessage: " lines approved"
 },
 auditConflictingOperatorStatus: {
     id: "auditdetail.auditConflictingOperatorStatus.status",
@@ -402,7 +406,8 @@ class AuditTab extends React.Component {
         let pps = nProps.context.intl.formatMessage(messages.pps);
         let completedOutof = nProps.context.intl.formatMessage(messages.completedOutof);
           let linestobeResolved = nProps.context.intl.formatMessage(messages.linestobeResolved);
-          let linestobeReaudited = nProps.context.intl.formatMessage(messages.linestobeReaudited);
+          let linesRejected = nProps.context.intl.formatMessage(messages.linesRejected);
+          let linesApproved = nProps.context.intl.formatMessage(messages.linesApproved);
           let auditWaiting = nProps.context.intl.formatMessage(messages.auditwaitingStatus);
           let auditConflicting = nProps.context.intl.formatMessage(messages.auditConflictingOperatorStatus);
           
@@ -570,8 +575,10 @@ class AuditTab extends React.Component {
                 auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +  linestobeResolved) : "";
             }
             if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linestobeReaudited) : "";
+                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linesRejected) : "";
             }
+            auditData.lineApprovedState = data[i].approved > 0 ? (data[i].approved +linesApproved) : "";
+            
 
             auditData.button = data[i].audit_button_data;
             auditData.startButton = data[i].audit_button_data.audit_start_button === 'enable' ? true : false;

@@ -4336,18 +4336,6 @@
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orders.fulfil.ppsCount",
-    "description": "pps count",
-    "defaultMessage": "{current} PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.noPpsCount",
-    "description": "no pps count",
-    "defaultMessage": "No PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
     "id": "orders.fulfil.status",
     "description": "order status",
     "defaultMessage": "{picked} of {totalItems} products picked",

@@ -291,7 +291,8 @@ _tableBodyData(itemsData){
 
   rowObject.Status={
   "resolveStatus":itemsData[i].lineResolveState||"",
-  "reAuditStatus":itemsData[i].lineReAuditState||""
+  "reAuditStatus":itemsData[i].lineReAuditState||"",
+  "approvedState":itemsData[i].lineApprovedState||""
   }
   
   rowObject.button={
@@ -365,7 +366,7 @@ render(){
       {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
       {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'left'}} className="fontstyleColumn"><ProgressBar progressBarWrapperWidth="150px" progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'left'}}>{tablerowdata[idx][text]['status']}</div>:""}
-      {index==3?<div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div></div>:""}
+      {index==3?<div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div><div>{tablerowdata[idx][text]['approvedState']}</div></div>:""}
       {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
       {startButton}
        <div className="got-add-notch"></div>
