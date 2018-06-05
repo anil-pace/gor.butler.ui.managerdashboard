@@ -4057,13 +4057,8 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.inputField.pickBeforeTime",
-    "defaultMessage": "CUT OFF TIME",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.token.orderTags",
-    "defaultMessage": "ORDER TAGS",
+    "id": "order.inputField.ppsId",
+    "defaultMessage": "PPS ID",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -4072,73 +4067,38 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.orderTags.any",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.orderTags.urgent",
-    "defaultMessage": "Urgent",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.orderTags.express",
-    "defaultMessage": "Express",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
     "id": "order.status.any",
     "defaultMessage": "Any",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.pending",
-    "defaultMessage": "Pending",
+    "id": "order.status.created",
+    "defaultMessage": "Created",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breachRish",
-    "defaultMessage": "Breach risk",
+    "id": "order.status.processing",
+    "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breached",
-    "defaultMessage": "Breached",
+    "id": "order.status.waiting",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breach&Completed",
-    "defaultMessage": "Breach&Completed",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.productshort",
-    "defaultMessage": "Product Short",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.outofstock",
-    "defaultMessage": "Out of Stock",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.completed",
+    "id": "order.status.processed",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.rejected",
-    "defaultMessage": "Rejected",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.abandoned",
-    "defaultMessage": "Abandoned",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.cancelled&Completed",
+    "id": "order.status.cancelled",
     "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.status.failed",
+    "defaultMessage": "Not Fulfillable",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -4321,18 +4281,6 @@
     "id": "orders.fulfil",
     "description": "header of orders fulfilment",
     "defaultMessage": "Order fulfilment progress",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.ppsCount",
-    "description": "pps count",
-    "defaultMessage": "{current} PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.noPpsCount",
-    "description": "no pps count",
-    "defaultMessage": "No PPS running",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {

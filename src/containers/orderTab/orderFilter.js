@@ -11,28 +11,20 @@ import {hashHistory} from 'react-router';
 import {
     ANY,
     ALL,
-    ORDER_TAGS,
     STATUS,
-    URGENT_ORDER_TAG,
-    EXPRESS_ORDER_TAG,
-    PENDING_STATUS,
-    BREACH_RISK_STATUS,
-    BREACHED_STATUS,
-    BREACHED_COMPLETED_STATUS,
-    PRODUCT_SHORT_STATUS,
-    OUT_OF_STOCK_STATUS,
-    COMPLETED_STATUS,
-    REJECTED_STATUS,
-    CANCELLED_STATUS,
-    ABANDONED_STATUS,
-    PICK_BEFORE_TIME,
     ORDER_ID,
     PPS_ID,
     SKU_ID,
     FROM_DATE,
     TO_DATE,
     FROM_TIME,
-    TO_TIME
+    TO_TIME,
+    CREATED_STATUS,
+    PROCESSING_STATUS,
+    PROCESSED_STATUS,
+    FAILED_STATUS, 
+    CANCELLED_STATUS,
+    WAITING_STATUS
 }from '../../constants/frontEndConstants';
 
 class OrderFilter extends React.Component{
@@ -59,16 +51,9 @@ class OrderFilter extends React.Component{
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
         }
-
-        /**
-         * Hide the filter as soon as data in the list get updated.
-         */
-        // if(nextProps.ordersDetail.length>0 && JSON.stringify(nextProps.ordersDetail)!==JSON.stringify(this.props.ordersDetail)){
-        //     this.props.showTableFilter(false);
-        // }
     }
 
-    _processOrderSearchField(){
+    _processOrderIdSearchField(){
 
         const filterInputFields=
         [{
@@ -87,59 +72,46 @@ class OrderFilter extends React.Component{
 
     }
 
-    _processCutOffTimeSearchField(){
+    _processPpsIdSearchField(){
       const filterInputFields=
         [{
-            value: "PICK BEFORE TIME",
-            label: <FormattedMessage id="order.inputField.pickBeforeTime" defaultMessage="CUT OFF TIME"/>
+            value: "PPS ID",
+            label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
         }];
 
         var inputValue=this.state.searchQuery;
         var textboxStatus=this.props.textboxStatus || {};
         var inputField=<FilterInputFieldWrap 
-                             placeholder="Enter time in hh:mm format e.g:09:30"
                              inputText={filterInputFields}
                              inputValue={inputValue} 
                              handleInputText={this._handleInputQuery.bind(this)}
                              textboxStatus={textboxStatus}/>  
-        return inputField;
+        return inputField;       
     }
 
-  componentWillMount(){
+    componentWillMount(){
         if(this.props.orderFilterState) {
             this.setState(this.props.orderFilterState)
         }
     } 
 
     _processFilterToken() {
-        var tokenField1={value:"ORDER TAGS", label:<FormattedMessage id="order.token.orderTags" defaultMessage="ORDER TAGS"/>};
         var tokenField2={value:"STATUS", label:<FormattedMessage id="order.token.status" defaultMessage="STATUS"/>}; 
         
-        var labelC1=[
-                      { value: ANY, label: <FormattedMessage id="order.orderTags.any" defaultMessage="Any"/>},
-                      { value: URGENT_ORDER_TAG, label: <FormattedMessage id="order.orderTags.urgent" defaultMessage="Urgent"/>},
-                      { value: EXPRESS_ORDER_TAG, label: <FormattedMessage id="order.orderTags.express" defaultMessage="Express"/>}
-                    ];
-
         var labelC2=[
                       { value: ANY, label: <FormattedMessage id="order.status.any" defaultMessage="Any"/>},
-                      { value: PENDING_STATUS, label: <FormattedMessage id="order.status.pending" defaultMessage="Pending"/>},
-                      { value: BREACH_RISK_STATUS, label: <FormattedMessage id="order.status.breachRish" defaultMessage="Breach risk"/>},
-                      { value: BREACHED_STATUS, label: <FormattedMessage id="order.status.breached" defaultMessage="Breached"/>},
-                      { value: BREACHED_COMPLETED_STATUS, label: <FormattedMessage id="order.status.breach&Completed" defaultMessage="Breach&Completed"/>},
-                      { value: PRODUCT_SHORT_STATUS, label: <FormattedMessage id="order.status.productshort" defaultMessage="Product Short"/>},
-                      { value: OUT_OF_STOCK_STATUS, label: <FormattedMessage id="order.status.outofstock" defaultMessage="Out of Stock"/>},
-                      { value: COMPLETED_STATUS, label: <FormattedMessage id="order.status.completed" defaultMessage="Completed"/>},
-                      { value: REJECTED_STATUS, label: <FormattedMessage id="order.status.rejected" defaultMessage="Rejected"/>},
-                      { value: ABANDONED_STATUS, label: <FormattedMessage id="order.status.abandoned" defaultMessage="Abandoned"/>},
-                      { value: CANCELLED_STATUS, label: <FormattedMessage id="order.status.cancelled&Completed" defaultMessage="Cancelled"/>}
+                      { value: CREATED_STATUS, label: <FormattedMessage id="order.status.created" defaultMessage="Created"/>},
+                      { value: PROCESSING_STATUS, label: <FormattedMessage id="order.status.processing" defaultMessage="In progress"/>},
+                      { value: WAITING_STATUS, label: <FormattedMessage id="order.status.waiting" defaultMessage="On hold"/>},
+                      { value: PROCESSED_STATUS, label: <FormattedMessage id="order.status.processed" defaultMessage="Completed"/>},
+                      { value: CANCELLED_STATUS, label: <FormattedMessage id="order.status.cancelled" defaultMessage="Cancelled"/>},
+                      { value: FAILED_STATUS, label: <FormattedMessage id="order.status.failed" defaultMessage="Not Fulfillable"/>}
                     ];
 
         var selectedToken= this.state.tokenSelected;
-        var column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;
         var column2=<FilterTokenWrap field={tokenField2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
 
-        var columnDetail={column1token:column1, column2token:column2};
+        var columnDetail={column2token:column2};
 
         return columnDetail;
     }
@@ -204,16 +176,8 @@ class OrderFilter extends React.Component{
         this._closeFilter();
         var filterState=this.state, _query={};
 
-        /*if (filterState.tokenSelected[ORDER_TAGS] && filterState.tokenSelected[ORDER_TAGS][0] !== ANY) {
-            _query.orderTags=filterState.tokenSelected[ORDER_TAGS]
-        }
-
         if (filterState.tokenSelected[STATUS] && filterState.tokenSelected[STATUS][0] !== ANY) {
             _query.status=filterState.tokenSelected[STATUS]
-        }*/
-
-        if (filterState.searchQuery["PICK BEFORE TIME"]) {
-            _query.cutOffTime=filterState.searchQuery["PICK BEFORE TIME"]
         }
 
         if (filterState.searchQuery[ORDER_ID]) {
@@ -222,10 +186,6 @@ class OrderFilter extends React.Component{
 
         if (filterState.searchQuery[PPS_ID]) {
             _query.ppsId=filterState.searchQuery[PPS_ID]
-        }
-
-        if (filterState.searchQuery[SKU_ID]) {
-            _query.skuId=filterState.searchQuery[SKU_ID]
         }
 
         if (filterState.searchQuery[FROM_DATE]) {
@@ -250,6 +210,7 @@ class OrderFilter extends React.Component{
     }
 
     _clearFilter() {
+      this.props.filterApplied(false);
         this.props.orderfilterState({
           tokenSelected: {
               "ORDER TAGS": [ANY],
@@ -262,9 +223,9 @@ class OrderFilter extends React.Component{
 
     render(){
         var noOrder=this.props.orderData.noResultFound;
-        var orderCutOffTimeSearchField = this._processCutOffTimeSearchField();
-        var orderSearchField=this._processOrderSearchField();
-        //var orderFilterToken=this._processFilterToken();
+        var orderIdSearchField=this._processOrderIdSearchField();
+        var ppsIdSearchField = this._processPpsIdSearchField();
+        var orderFilterToken=this._processFilterToken();
         var orderDateField = this._processOrderDateField();
         var orderTimeField = this._processOrderTimeField();
 
@@ -286,11 +247,12 @@ class OrderFilter extends React.Component{
                     </div>
 
                    <div className="gor-filter-body">
-                       <div className="gor-filter-body-input-wrap"> 
-                          {orderCutOffTimeSearchField}
-                       </div>
                       <div className="gor-filter-body-input-wrap"> 
-                          {orderSearchField}
+                          {orderIdSearchField}
+                       </div>
+
+                       <div className="gor-filter-body-input-wrap"> 
+                          {ppsIdSearchField}
                        </div>
 
                        <div style={{height:"10em", paddingTop: "1em"}} className="gor-filter-body-input-wrap">
@@ -302,17 +264,15 @@ class OrderFilter extends React.Component{
                           </div>
                        </div>
 
-                       {/*
                        <div className="gor-filter-body-filterToken-wrap"> 
-                          <div className="gor-filter-body-filterToken-section1">
+                          {/*<div className="gor-filter-body-filterToken-section1">
                               {orderFilterToken.column1token}
-                          </div>
+                          </div>*/}
                           <div className="gor-filter-body-filterToken-section1">
                               {orderFilterToken.column2token}
                           </div>
 
                        </div>
-                     */}
                        
                    </div>
                    <div className="gor-filter-footer"> 
