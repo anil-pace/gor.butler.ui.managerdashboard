@@ -14,7 +14,6 @@ import {
     STATUS,
     ORDER_ID,
     PPS_ID,
-    SKU_ID,
     FROM_DATE,
     TO_DATE,
     FROM_TIME,
@@ -57,7 +56,7 @@ class OrderFilter extends React.Component{
 
         const filterInputFields=
         [{
-            value: "ORDER ID",
+            value: ORDER_ID,
             label: <FormattedMessage id="order.inputField.orderId" defaultMessage="ORDER ID"/>
         }];
 
@@ -75,7 +74,7 @@ class OrderFilter extends React.Component{
     _processPpsIdSearchField(){
       const filterInputFields=
         [{
-            value: "PPS ID",
+            value: PPS_ID,
             label: <FormattedMessage id="order.inputField.ppsId" defaultMessage="PPS ID"/>
         }];
 
@@ -216,7 +215,7 @@ class OrderFilter extends React.Component{
               "ORDER TAGS": [ANY],
               "STATUS": [ANY]
           },
-          searchQuery: {"ORDER ID": '', "SKU ID": '', "PICK BEFORE TIME": '', "PPS ID": ''},
+          searchQuery: {"ORDER ID": '', "PPS ID": ''},
         });
         hashHistory.push({pathname: "/orders", query: {}})
     }
