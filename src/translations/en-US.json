@@ -2021,8 +2021,13 @@
     "filepath": "./src/containers/auditListing.js"
   },
   {
-    "id": "auditdetail.label.linestobereaudited",
-    "defaultMessage": "lines to be re-audited",
+    "id": "auditdetail.label.linesrejected",
+    "defaultMessage": "lines rejected",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
+    "id": "auditdetail.label.linesapproved",
+    "defaultMessage": "lines approved",
     "filepath": "./src/containers/auditListing.js"
   },
   {

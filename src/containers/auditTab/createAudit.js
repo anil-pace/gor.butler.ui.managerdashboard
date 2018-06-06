@@ -323,7 +323,7 @@ class CreateAudit extends React.Component{
       else{
       validSKUData.audit_param_value = {};
       validSKUData.audit_param_value.attributes_list = [];
-      validSKUData.kq = this.kqCheck.checked;
+      validSKUData.kq = this.kqCheckSKU.checked;
       validSKUData.action=(type === "create" || type === "confirm")?'create':'';
       validSKUData.audit_creator_name=(type === "create" || type === "confirm")?this.props.username:'';
       let {selectedSKUList} = this.state;
@@ -380,7 +380,7 @@ class CreateAudit extends React.Component{
     validLocationDataCreateAudit={
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
-      "kq":this.kqCheck.checked,
+      "kq":this.kqCheckLocation.checked,
       "audit_creator_name":this.props.username,
       "action":(type === "create" || type === "confirm")?'create':'',
       "audit_param_value":{
@@ -842,6 +842,8 @@ class CreateAudit extends React.Component{
           selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
+      tabIndex===1?this.kqCheckSKU.checked=false:this.kqCheckLocation.checked=false;
+     
     }
     _invokeAlert(additionalProps){
       modal.add(SkuAlerts, {
@@ -1134,7 +1136,21 @@ class CreateAudit extends React.Component{
 
             
                           </div>  
-                                
+                          <div className={"audit-sub-footer"}>
+           <section className={"set-kq-wrp"}>
+              <div className={"kq-check-wrp"}>
+              <span><input type="checkbox" ref={(input) => { this.kqCheckSKU = input; }} /></span>
+              </div>
+              <div className={"kq-check-label"}>
+                <p className={"kq-check-msg"}> <FormattedMessage id="audit.kqsku.label.msg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Show KQ on Butler Operator Interface'
+                                                             /></p>
+                <p className={"kq-check-submsg"}> <FormattedMessage id="audit.kqsku.label.submsg" description='Audit location Csv upload error message'
+                                                              defaultMessage='Selecting this will enable key in quantity for this audit task'
+                                                             /></p>
+              </div>
+           </section>
+           </div>           
                
                     </Tab> 
 
@@ -1304,24 +1320,25 @@ class CreateAudit extends React.Component{
                  </div> 
                         </div>
                         </div>
-                    </Tab>
-
-            </GorTabs>
-           <div className={"audit-sub-footer"}>
+                        <div className={"audit-sub-footer"}>
            <section className={"set-kq-wrp"}>
               <div className={"kq-check-wrp"}>
-              <span><input type="checkbox" ref={(input) => { this.kqCheck = input; }} /></span>
+              <span><input type="checkbox" ref={(input) => { this.kqCheckLocation = input; }} /></span>
               </div>
               <div className={"kq-check-label"}>
-                <p className={"kq-check-msg"}> <FormattedMessage id="audit.kq.label.msg" description='Audit location Csv upload error message'
+                <p className={"kq-check-msg"}> <FormattedMessage id="audit.kqlocation.label.msg" description='Audit location Csv upload error message'
                                                               defaultMessage='Show KQ on Butler Operator Interface'
                                                              /></p>
-                <p className={"kq-check-submsg"}> <FormattedMessage id="audit.kq.label.submsg" description='Audit location Csv upload error message'
+                <p className={"kq-check-submsg"}> <FormattedMessage id="audit.kqlocation.label.submsg" description='Audit location Csv upload error message'
                                                               defaultMessage='Selecting this will enable key in quantity for this audit task'
                                                              /></p>
               </div>
            </section>
            </div>
+                    </Tab>
+
+            </GorTabs>
+  
             </div>
             <div className={"audit-footer"}>
              <button onClick={()=>{this._createAudit("create")}} className={enableCreateAudit ? "gor-create-audit-btn" : "gor-create-audit-btn disabled"}><FormattedMessage id="audits.add.password.button" description='Text for add audit button' 
