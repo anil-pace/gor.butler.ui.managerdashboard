@@ -28,29 +28,29 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {wsOverviewData} from './../../constants/initData.js';
 
 import {WS_ONSEND, ANY, 
-        APP_JSON, POST, GET,
-        ORDERS_FULFIL_FETCH, 
-        ORDERS_SUMMARY_FETCH, 
-        ORDERS_CUT_OFF_TIME_FETCH, 
-        ORDERS_PER_PBT_FETCH, 
-        ORDERLINES_PER_ORDER_FETCH,
-        ORDERS_POLLING_INTERVAL
+    APP_JSON, POST, GET,
+    ORDERS_FULFIL_FETCH, 
+    ORDERS_SUMMARY_FETCH, 
+    ORDERS_CUT_OFF_TIME_FETCH, 
+    ORDERS_PER_PBT_FETCH, 
+    ORDERLINES_PER_ORDER_FETCH,
+    ORDERS_POLLING_INTERVAL
 } from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import { unSetAllActivePbts } from '../../actions/norderDetailsAction'
 
 import {
-        ORDERS_FULFIL_URL,
-        ORDERS_SUMMARY_URL, 
-        ORDERS_CUT_OFF_TIME_URL, 
-        ORDERS_PER_PBT_URL, 
-        ORDERLINES_PER_ORDER_URL
+    ORDERS_FULFIL_URL,
+    ORDERS_SUMMARY_URL, 
+    ORDERS_CUT_OFF_TIME_URL, 
+    ORDERS_PER_PBT_URL, 
+    ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
 
 const moment = require('moment-timezone');
 
- class OrderListTab extends React.Component {
+class OrderListTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = this._getInitialState();
@@ -76,6 +76,7 @@ const moment = require('moment-timezone');
 
     componentDidMount(){
         this.props.setOrderListSpinner(true);
+        this.props.filterApplied(false);
     }
 
     _clearPolling(){
@@ -83,11 +84,17 @@ const moment = require('moment-timezone');
         this._intervalIdForCutOffTime=null;
     }
 
-    _reqCutOffTime(startDate, endDate){
-        let formData={
+    _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus){
+        let formData = {
             "start_date": startDate,
-            "end_date": endDate
+            "end_date": endDate,
         };
+        if(filteredPpsId){
+            formData["filtered_ppsId"] = filteredPpsId;
+        }
+        if(filteredOrderStatus){
+            formData["filtered_order_status"] = filteredOrderStatus;
+        }
 
         let params={
             'url':ORDERS_CUT_OFF_TIME_URL,
@@ -118,144 +125,113 @@ const moment = require('moment-timezone');
 
         /* when coming on orders page for first time OR coming after traversing from other tabs */
         if( (this.props.timeOffset !== nextProps.timeOffset) ||
-                (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+            (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
             this.props.setOrderListSpinner(true);
-            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
-            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
-            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
-            this.setState({
-                setStartDateForOrders: setMomentStartDate,
-                setEndDateForOrders: setMomentEndDate
-            })
-        }
-
-        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
-            this._clearPolling();
-        }
-
-
-        if (nextProps.socketAuthorized && !this.state.subscribed) {
-            this.setState({subscribed: true},function(){
-                this._subscribeData(nextProps)
-            })
-            
-        }
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-            this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-            this._refreshList(nextProps.location.query);
-        }
-    }
-
-    _refreshList(query){
-
-        let startDateFromFilter, endDateFromFilter, setStartDate, setEndDate, cutOffTimeFromFilter, momentStartDateFromFilter, momentEndDateFromFilter,
-            momentStartDate, momentEndDate, todayDateWithTime, todayDateSansTime, todayDateWithCutOffTime, momentCutOffTime;
-
-        /* 'Date & Time Filter' === PRESENT  */
-        if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
-            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime).toISOString();
-            endDateFromFilter = new Date(query.toDate + " " + query.toTime).toISOString();
-
-            /* 'Date & Time Filter'  + Cut off time => call level 2  */
-            if(query.cutOffTime && !query.orderId){
-                cutOffTimeFromFilter = new Date(new Date().toISOString().split("T")[0] + " " + query.cutOffTime).toISOString();
-                this._reqOrderPerPbt(startDateFromFilter, endDateFromFilter, cutOffTimeFromFilter);
-                this.props.filterApplied(true);
-            }
-            /*  'Date & Time Filter'  + Order id => call level 3 */
-            else if (!query.cutOffTime && query.orderId){
-                //cutOffTimeFromFilter = null;
-                this._viewOrderLine(query.orderId); 
-                this.props.filterApplied(true);
-            }
-            /* only 'Date & Time Filter'  => send only start date & end date after momentization */
-            else{
-                
-                startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
-                endDateFromFilter = new Date(query.toDate + " " + query.toTime);
-
-                let momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
-                let momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
-
-                this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter); 
-                this.props.filterApplied(true);
-
-                this.setState({
-                    setStartDateForOrders: momentStartDateFromFilter,
-                    setEndDateForOrders: momentEndDateFromFilter
-                })
-            }
-        }
-        /* 'Date & Time Filter' === NOT PRESENT  */
-        else{
-            /*Only CUT OFF TIME => send present start date & present end date along with cut off time. */
-            if(query.cutOffTime){
-                momentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
-                momentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();    
-                todayDateWithTime = moment().startOf('day').tz(this.props.timeOffset).format(); //"2018-05-13T00:00:00+05:30"
-                todayDateSansTime = todayDateWithTime.split("T")[0];
-                todayDateWithCutOffTime = todayDateSansTime + " " + query.cutOffTime;
-                momentCutOffTime = moment.tz(todayDateWithCutOffTime, this.props.timeOffset).toISOString();  
-
-                this._reqOrderPerPbt(momentStartDate, momentEndDate, momentCutOffTime);
-                this.props.filterApplied(true);
-            }
-            else if(query.orderId){
-                 this._viewOrderLine(query.orderId);
-            }
-
-        }
-    }
-
-    /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
-    _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
-            let formData={
-                "start_date": fromDateTime,
-                "end_date": toDateTime,
-                "cut_off_time" : cutOffTime
-            };
-
-            let params={
-                'url':ORDERS_PER_PBT_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH,
-                'formdata':formData,
-            }
-            this.props.makeAjaxCall(params);
-    }
-
-    _clearFilter() {
-        this.props.filterApplied(false);
-        hashHistory.push({pathname: "/orders", query: {}});
-        let setMomentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
-        let setMomentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+        setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
         this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+        this.setState({
+            setStartDateForOrders: setMomentStartDate,
+            setEndDateForOrders: setMomentEndDate
+        })
     }
 
-    componentWillUnmount() {
+    if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
         this._clearPolling();
     }
 
-    _subscribeData() {
-        let updatedWsSubscription=this.props.wsSubscriptionData;
-        this.props.initDataSentCall(updatedWsSubscription["default"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
+
+    if (nextProps.socketAuthorized && !this.state.subscribed) {
+        this.setState({subscribed: true},function(){
+            this._subscribeData(nextProps)
+        })
+
+    }
+    if (Object.keys(nextProps.location.query).length && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
+        this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+        this._refreshList(nextProps.location.query);
+    }
+}
+
+_refreshList(query){
+
+    let startDateFromFilter, endDateFromFilter, momentStartDateFromFilter, momentEndDateFromFilter;
+
+    if(query.orderId){
+        this._viewOrderLine(query.orderId); 
+        this.props.filterApplied(false);
+    }
+    if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
+        startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+        endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
+        momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
+        momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
+    }
+    else{
+        momentStartDateFromFilter = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+        momentEndDateFromFilter =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
     }
 
+    this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, query.status);
+    this.props.filterApplied(true);
 
-    _handleClickRefreshButton(){
-        this._refreshList(this.state.query,(this.props.orderSortHeaderState?this.props.orderSortHeaderState.colSortDirs:null))
+    this.setState({
+        setStartDateForOrders: momentStartDateFromFilter,
+        setEndDateForOrders: momentEndDateFromFilter
+    });
+}
+
+/* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
+_reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
+    let formData={
+        "start_date": fromDateTime,
+        "end_date": toDateTime,
+        "cut_off_time" : cutOffTime
+    };
+
+    let params={
+        'url':ORDERS_PER_PBT_URL,
+        'method':POST,
+        'contentType':APP_JSON,
+        'accept':APP_JSON,
+        'cause':ORDERS_PER_PBT_FETCH,
+        'formdata':formData,
     }
+    this.props.makeAjaxCall(params);
+}
+
+_clearFilter() {
+    this.props.filterApplied(false);
+    hashHistory.push({pathname: "/orders", query: {}});
+    let setMomentStartDate = moment().startOf('day').tz(this.props.timeOffset).toISOString();
+    let setMomentEndDate =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+    this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+}
+
+componentWillUnmount() {
+    this._clearPolling();
+}
+
+_subscribeData() {
+    let updatedWsSubscription=this.props.wsSubscriptionData;
+    this.props.initDataSentCall(updatedWsSubscription["default"])
+    this.props.updateSubscriptionPacket(updatedWsSubscription);
+}
+
+
+_handleClickRefreshButton(){
+    this._refreshList(this.state.query,(this.props.orderSortHeaderState?this.props.orderSortHeaderState.colSortDirs:null))
+}
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
 
-    _setFilter() {
+     _setFilter() {
         var newState=!this.props.showFilter;
         this.props.showTableFilter(newState)
     }
@@ -269,16 +245,16 @@ const moment = require('moment-timezone');
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true      // (optional) if you don't wanna show the top right close button
                                        //.. all what you put in here you will get access in the modal props ;),
-            });
+                                   });
     }
 
     _getTodayDate(){
         const todayDate = (<FormattedDate 
-                          value={new Date()}
-                          day='2-digit'
-                          month='short'
-                          year='numeric'
-                        />);
+          value={new Date()}
+          day='2-digit'
+          month='short'
+          year='numeric'
+          />);
         return todayDate;
     }
 
@@ -336,84 +312,84 @@ const moment = require('moment-timezone');
         var orderDetail, alertNum=0, orderInfo;
 
         let orderDetails = this.props.pbts;
-                
+
         return (
             <div>
-                <div className="gor-Orderlist-table">
+            <div className="gor-Orderlist-table">
 
-                    {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
-                        <div>
-                            <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-                                <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag}/>
-                            </div>
-
-                            <div>
-                                <OrderTile 
-                                        pbtsData={this.props.pbts} 
-                                        date={todayDate} 
-                                        orderFulfilData={this.props.orderFulfilment}
-                                        orderSummaryData={this.props.orderSummary}
-                                        />
-
-
-                            <div style={{position: "absolute", right:"0", top:"7px"}} className="filterWrapper">
-                                <div className="gorToolBarDropDown">
-                                    <div className="gor-button-wrap">
-                                        <div className="gor-button-sub-status">
-                                            {this.props.lastUpdatedText} {this.props.lastUpdated}
-                                        </div>
-
-                                        <div className="orderButtonWrapper">
-                                            <div className="gorButtonWrap">
-                                              <button disabled={this.props.pbts.filter((pbt)=>pbt.opened).length<1} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
-                                              <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
-                                              </button>
-                                            </div>
-                                            <div className="gorButtonWrap">
-                                                <button className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
-                                                    <div className="gor-manage-task"/>
-                                                        <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
-                                                    </button>
-                                            </div>
-                                        </div>
-
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                {/*Filter Summary*/}
-                <FilterSummary total={orderDetails.length || 0} 
-                    isFilterApplied={this.props.isFilterApplied}
-                    responseFlag={this.props.responseFlag}
-                    filterText={<FormattedMessage id="orderlist.filter.search.bar"
-                                    description='total order for filter search bar'
-                                    defaultMessage='{total} Orders found'
-                                    values={{total: orderDetails ? orderDetails.length : '0'}}/>}
-                    refreshList={this._clearFilter.bind(this)}
-                    refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-                                    description="button label for show all"
-                                    defaultMessage="Show all orders"/>}/>
-
-                </div> 
-
-                {this.props.pbts.length> 0  &&
-                    (<OrderListTable 
-                        pbts={this.props.pbts}
-                        startDate={this.state.setStartDateForOrders}
-                        endDate={this.state.setEndDateForOrders}
-                        intervalIdForCutOffTime={this._intervalIdForCutOffTime}
-                        isFilterApplied={this.props.isFilterApplied}
-                        enableCollapseAllBtn={this._enableCollapseAllBtn}
-                        disableCollapseAllBtn={this._disableCollapseAllBtn}
-                        isPanelOpen={this.state.isPanelOpen}
-                        />)}
-                    {!this.props.orderListSpinner && this.props.pbts.length===0 && <div className="noOrdersPresent"> No orders available </div>}
-                    {this.props.orderListSpinner && <div className="noOrdersPresent"></div>}
-                
-                </div>
+            {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
+            <div>
+            <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
+            <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag}/>
             </div>
-        );
+
+            <div>
+            <OrderTile 
+            pbtsData={this.props.pbts} 
+            date={todayDate} 
+            orderFulfilData={this.props.orderFulfilment}
+            orderSummaryData={this.props.orderSummary}
+            />
+
+
+            <div style={{position: "absolute", right:"0", top:"7px"}} className="filterWrapper">
+            <div className="gorToolBarDropDown">
+            <div className="gor-button-wrap">
+            <div className="gor-button-sub-status">
+            {this.props.lastUpdatedText} {this.props.lastUpdated}
+            </div>
+
+            <div className="orderButtonWrapper">
+            <div className="gorButtonWrap">
+            <button disabled={this.props.pbts.filter((pbt)=>pbt.opened).length<1} className="gor-filterBtn-btn" onClick={this._handleCollapseAll}>
+            <FormattedMessage id="orders.action.collapseAll" description="button label for collapse all" defaultMessage="COLLAPSE ALL "/>
+            </button>
+            </div>
+            <div className="gorButtonWrap">
+            <button className={this.props.orderFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this._setFilter.bind(this)}>
+            <div className="gor-manage-task"/>
+            <FormattedMessage id="orders.action.filterLabel" description="button label for filter" defaultMessage="FILTER DATA"/>
+            </button>
+            </div>
+            </div>
+
+
+            </div>
+            </div>
+            </div>
+            </div>
+        {/*Filter Summary*/}
+        <FilterSummary total={orderDetails.length || 0} 
+        isFilterApplied={this.props.isFilterApplied}
+        responseFlag={this.props.responseFlag}
+        filterText={<FormattedMessage id="orderlist.filter.search.bar"
+        description='total order for filter search bar'
+        defaultMessage='{total} Orders found'
+        values={{total: orderDetails ? orderDetails.length : '0'}}/>}
+        refreshList={this._clearFilter.bind(this)}
+        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+        description="button label for show all"
+        defaultMessage="Show all orders"/>}/>
+
+        </div> 
+
+        {this.props.pbts.length> 0  &&
+            (<OrderListTable 
+                pbts={this.props.pbts}
+                startDate={this.state.setStartDateForOrders}
+                endDate={this.state.setEndDateForOrders}
+                intervalIdForCutOffTime={this._intervalIdForCutOffTime}
+                isFilterApplied={this.props.isFilterApplied}
+                enableCollapseAllBtn={this._enableCollapseAllBtn}
+                disableCollapseAllBtn={this._disableCollapseAllBtn}
+                isPanelOpen={this.state.isPanelOpen}
+                />)}
+            {!this.props.orderListSpinner && this.props.pbts.length===0 && <div className="noOrdersPresent"> No orders available </div>}
+            {this.props.orderListSpinner && <div className="noOrdersPresent"></div>}
+
+            </div>
+            </div>
+            );
     }
 }
 
