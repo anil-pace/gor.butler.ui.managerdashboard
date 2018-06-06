@@ -215,7 +215,7 @@ class OrderFilter extends React.Component{
               "ORDER TAGS": [ANY],
               "STATUS": [ANY]
           },
-          searchQuery: {"ORDER ID": '', "PPS ID": ''},
+          searchQuery: {ORDER_ID: '', PPS_ID: ''},
         });
         hashHistory.push({pathname: "/orders", query: {}})
     }
@@ -264,9 +264,6 @@ class OrderFilter extends React.Component{
                        </div>
 
                        <div className="gor-filter-body-filterToken-wrap"> 
-                          {/*<div className="gor-filter-body-filterToken-section1">
-                              {orderFilterToken.column1token}
-                          </div>*/}
                           <div className="gor-filter-body-filterToken-section1">
                               {orderFilterToken.column2token}
                           </div>
@@ -282,7 +279,6 @@ class OrderFilter extends React.Component{
                       <div className="gor-filter-btn-wrap"> 
                           <button className='gor-add-btn' onClick={this._applyFilter}>
                               {<FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/>}
-                             {/* {!this.props.orderListSpinner? <FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/> :<div className='spinnerImage'></div>} */}
                           </button>
                       </div> 
                    </div>
