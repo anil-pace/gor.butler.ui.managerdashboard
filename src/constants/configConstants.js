@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost'; 
+export const BASE_URL = '192.168.9.41'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";

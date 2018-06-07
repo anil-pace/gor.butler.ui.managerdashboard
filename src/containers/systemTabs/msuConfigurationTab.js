@@ -24,6 +24,9 @@ import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 import MsuConfigConfirmation from './msuConfigConfirmation';
 
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+
 import {
     WS_ONSEND,
     APP_JSON, POST, GET,
@@ -44,6 +47,19 @@ import {
     MSU_CONFIG_RELEASE_MSU_URL,
 } from '../../constants/configConstants';
 
+
+const SLOTS_QUERY = gql`
+    query($input:MsuListParams){
+        MsuList(input:$input){
+             list{
+                  rack_id
+                  source_type
+                  destination_type
+                  status
+            }
+        }
+    }
+`;
 
 
 class MsuConfigTab extends React.Component {
@@ -82,29 +98,29 @@ class MsuConfigTab extends React.Component {
 
     componentWillUnmount(){
       this.clearPolling()
-
+      
     }
 
     _requestMsuList(){
-        let params={
-            'url': MSU_CONFIG_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST
-        }
-        //this.props.makeAjaxCall(params);
+        // let params={
+        //     'url': MSU_CONFIG_URL,
+        //     'method':GET,
+        //     'contentType':APP_JSON,
+        //     'accept':APP_JSON,
+        //     'cause' : FETCH_MSU_CONFIG_LIST
+        // }
+        // this.props.makeAjaxCall(params);
         // this._intervalIdForMsuList = setTimeout(() => 
         //         this._requestMsuList(), 
         //         MSU_CONFIG_POLLING_INTERVAL);
 
-        let self=this;
-        if(!this._intervalIdForMsuList){
-           self.props.makeAjaxCall(params) 
-        }
-        this._intervalIdForMsuList= setInterval(function(){
-            self.props.makeAjaxCall(params)
-        },MSU_CONFIG_POLLING_INTERVAL)
+        // let self=this;
+        // if(!this._intervalIdForMsuList){
+        //    self.props.makeAjaxCall(params) 
+        // }
+        // this._intervalIdForMsuList= setInterval(function(){
+        //     self.props.makeAjaxCall(params)
+        // },MSU_CONFIG_POLLING_INTERVAL)
     }
 
     _requestMsuListViaFilter(filterUrl){
@@ -190,42 +206,42 @@ class MsuConfigTab extends React.Component {
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-            this.setState({query: nextProps.location.query})
-            this._refreshList(nextProps.location.query)
-        }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+    //         this.setState({query: nextProps.location.query})
+    //         this._refreshList(nextProps.location.query)
+    //     }
 
-        if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
-            this._refreshList(nextProps.location.query)
-        }
+    //     if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
+    //         this._refreshList(nextProps.location.query)
+    //     }
 
-        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForMsuList && JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-            this.clearPolling()
+    //     if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForMsuList && JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+    //         this.clearPolling()
 
-            }
+    //         }
 
-        if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+    //     if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
 
-             // clear the ongoing interval
+    //          // clear the ongoing interval
 
-            let result = nextProps.msuList.filter(function(eachMsu){
-                        return (eachMsu.status === "reconfig_ready")
-                    });
-                    if(!nextProps.isFilterApplied && result.length>0){ // when filtered has been applied and any filtered item is there
-                        this._handleStartStopReconfig(false);
-                    }
+    //         let result = nextProps.msuList.filter(function(eachMsu){
+    //                     return (eachMsu.status === "reconfig_ready")
+    //                 });
+    //                 if(!nextProps.isFilterApplied && result.length>0){ // when filtered has been applied and any filtered item is there
+    //                     this._handleStartStopReconfig(false);
+    //                 }
 
-            let result_1 = nextProps.msuList.filter(function(eachMsu){
-                        return (eachMsu.status === "ready_for_reconfiguration")
-                    });
-                    if(result_1.length>0){
-                        this._handleReleaseMsuBtn(false);
-                    }else{
-                        this._handleReleaseMsuBtn(true);
-                   }
-        } 
-    }
+    //         let result_1 = nextProps.msuList.filter(function(eachMsu){
+    //                     return (eachMsu.status === "ready_for_reconfiguration")
+    //                 });
+    //                 if(result_1.length>0){
+    //                     this._handleReleaseMsuBtn(false);
+    //                 }else{
+    //                     this._handleReleaseMsuBtn(true);
+    //                }
+    //     } 
+    // }
 
 
 
@@ -299,6 +315,7 @@ class MsuConfigTab extends React.Component {
     render() {
         var filterHeight=screen.height - 190 - 50;
         let msuListData=this.props.msuList;
+        console.log("asjdfljlskadfjklajsdflkjklsd " + msuListData);
         
         return (
             <div>
@@ -407,9 +424,24 @@ class MsuConfigTab extends React.Component {
                 </div>
             </div>
         );
-    }P
-}
-;
+    }
+};
+
+const withQuery = graphql(SLOTS_QUERY, {
+    props: function(data){
+        if(!data || !data.data.MsuList || !data.data.MsuList.list){
+            return {}
+        }
+        return {
+            msuList: data.data.MsuList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
 
 function mapStateToProps(state, ownProps) {
     return {
@@ -426,7 +458,7 @@ function mapStateToProps(state, ownProps) {
         msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
         msuConfigSpinner: state.spinner.msuConfigSpinner || false,
 
-        msuList: state.msuInfo.msuList||[],
+        //msuList: state.msuInfo.msuList||[],
         timeZone:state.authLogin.timeOffset
     };
 }
@@ -485,6 +517,9 @@ MsuConfigTab.PropTypes={
     msuConfigSpinner: React.PropTypes.bool,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)); ;
+//export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)); ;
+export default compose(
+    withQuery
+)(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));
 
 
