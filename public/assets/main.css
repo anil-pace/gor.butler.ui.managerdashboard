@@ -10354,7 +10354,7 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .audit-sub-footer .kq-check-wrp {
   display: inline-block;
-  width: 10%;
+  width: 8%;
   vertical-align: middle;
 }
 
@@ -10402,6 +10402,70 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .new-audit > .tabs {
   margin-top: 40px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer {
+  margin-top: 20px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .audittypecontainer {
+  background-color: #FBFBFB;
+  padding: 10px;
+  border-bottom: 1px solid #DDDDDD;
+  border-top: 1px solid #DDDDDD;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .audittypecontainer .subHeader {
+  color: #333333;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer label {
+  cursor: pointer;
+  position: relative;
+  padding-left: 20px;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer input[type=radio] {
+  display: none;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer label:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  background-color: #fff;
+  border: 1px solid #333333;
+  border-radius: 50%;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .radio label:before {
+  border-radius: 8px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer input[type=radio]:checked + label:before {
+  content: "\2022";
+  color: #333333;
+  font-size: 30px;
+  text-align: center;
+  line-height: 7px;
+}
+
+.gor-audit-create .new-audit .tabs-active-content {
+  padding-bottom: 10px;
 }
 
 .gor-audit-create .gor-orange-spinner {
@@ -10490,7 +10554,7 @@ checkmark1 for indeterminate state*/
   text-align: center;
   padding: 12px 20px;
   color: #666666;
-  width: 46%;
+  width: 33%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;

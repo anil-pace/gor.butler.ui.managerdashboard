@@ -22,7 +22,8 @@ import {
   APP_JSON,
   POST,
   START_AUDIT_TASK,
-  CHANGE_PPS_TASK
+  CHANGE_PPS_TASK,
+  WALL_TO_WALL
 } from "../../constants/frontEndConstants";
 import {
   PPSLIST_ACTIVE_AUDIT_URL,
@@ -58,6 +59,7 @@ class AuditStart extends React.Component {
       checkedOtherPPS: [],
       auditId: this.props.auditID,
       visiblePopUp:false,
+      type:[],
       items: []
     };    
     this.handleChange = this.handleChange.bind(this);
@@ -76,11 +78,12 @@ class AuditStart extends React.Component {
     dataSet.forEach(function(entry){
       arrId.forEach(function(content){
         if(content==entry.audit_id){
-          resultantArr.push({id:entry.audit_id,dislayID:entry.display_id,name:entry.audit_name});
+          resultantArr.push({id:entry.audit_id,dislayID:entry.display_id,name:entry.audit_name,type:entry.audit_type});
         }
       })
-      entry.audit_id,entry.display_id,entry.audit_name
-    })
+
+     })
+    this.setState({'type':resultantArr})
     return resultantArr;
   }
   _tableAuditPPSData(itemsData) {
@@ -228,6 +231,7 @@ class AuditStart extends React.Component {
       urlStr = PPSLIST_ALL_URL
     }
 
+  var resultantArr=this._findDisplayidName(this.state.auditId);
     let userData = {
       url: urlStr,
       method: GET,
@@ -237,10 +241,23 @@ class AuditStart extends React.Component {
       token: sessionStorage.getItem("auth_token")
     };
     this.props.userRequest(userData);
-    let attributeData = this.props.ppsList.pps_list
+    let attributeData = this.props
       ? this.props.ppsList.pps_list
       : [];
     this.setState({ items: attributeData });
+    let auditList=[],otherList=[];
+    if(this.props.ppsList.pps_list && this.props.ppsList.pps_list.length>1)
+    if(resultantArr[0].type==WALL_TO_WALL){
+      for(var i=0;i<this.props.ppsList.pps_list.length;i++){
+        if(this.props.ppsList.pps_list[i].pps_mode=='audit')
+        auditList.push(this.props.ppsList.pps_list[i].pps_id);
+        else
+        otherList.push(this.props.ppsList.pps_list[i].pps_id);
+      }
+      this.props.setCheckedAuditpps(auditList);
+      this.props.setCheckedOtherpps(otherList);
+      }
+
   }
 
   componentWillUnmount() {
@@ -249,17 +266,25 @@ class AuditStart extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
-      JSON.stringify(this.props.ppsList.pps_list) !==
-      JSON.stringify(nextProps.ppsList.pps_list)
-    ) {
+    if (JSON.stringify(this.props.ppsList.pps_list) !==JSON.stringify(nextProps.ppsList.pps_list)) {
       let attributeData = nextProps.ppsList.pps_list || [];
       this.setState({ items: attributeData });
+      let auditList=[],otherList=[];
+      if(this.state.type[0].type==WALL_TO_WALL){
+        for(var i=0;i<nextProps.ppsList.pps_list.length;i++){
+          if(nextProps.ppsList.pps_list[i].pps_mode=='audit')
+          auditList.push(nextProps.ppsList.pps_list[i].pps_id);
+          else
+          otherList.push(nextProps.ppsList.pps_list[i].pps_id);
+        }
+        this.props.setCheckedAuditpps(auditList);
+        this.props.setCheckedOtherpps(otherList);
+        }
     }
 
     this.setState({ checkedAuditPPS: nextProps.checkedAuditPPSList });
     this.setState({ checkedOtherPPS: nextProps.checkedOtherPPSList });
-
+   
 
   }
   handleChange(input) {
@@ -280,7 +305,7 @@ class AuditStart extends React.Component {
   }
 
   render() {
-    var dispId_Name=this._findDisplayidName(this.state.auditId);
+   var dispId_Name=this.state.type;
     let idList=[];
     for(var i=0;i<dispId_Name.length;i++){
       idList.push(<div className="auditnameLine">{dispId_Name[i].name +" ("+dispId_Name[i].dislayID+") "}</div>);
@@ -364,6 +389,13 @@ class AuditStart extends React.Component {
             defaultMessage="PPS Not Available"
           />
         );
+        let audit = (
+          <FormattedMessage
+            id="audit.startaudit.audittext"
+            description="audit"
+            defaultMessage="audit"
+          />
+        );
 
     let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
     let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
@@ -417,7 +449,7 @@ class AuditStart extends React.Component {
           <div>
             <div className="content-body">
               <span className="left-float">
-              {this.state.auditId.length>1?<div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length+" Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div>:<span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name?" - "+dispId_Name[0].name:""}</span>}
+              {this.state.type[0].type==WALL_TO_WALL?<div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div>: this.state.auditId.length>1?<div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length+" Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div>:<span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name?" - "+dispId_Name[0].name:""}</span>}
               </span>
               { this.state.visiblePopUp?
               
@@ -444,7 +476,7 @@ class AuditStart extends React.Component {
               <GTable options={["table-bordered", "auditStart"]}>
                 <GTableHeader options={["auditTable"]}>
                   <GTableHeaderCell key={1} header="Audit" className="audittable">
-                    <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} onChange={me.headerCheckChange.bind(me, "Audit")} />
+                    <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type==WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Audit")} />
                       <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
                     </label>
                     <span>
@@ -490,6 +522,7 @@ class AuditStart extends React.Component {
                                         ? ""
                                         : true
                                     }
+                                    disabled={me.state.type[0].type==WALL_TO_WALL}
                                     onChange={me.CheckChange.bind(
                                       me,
                                       "Audit"
@@ -566,6 +599,7 @@ class AuditStart extends React.Component {
                         checked={
                           this.props.checkedOtherPPSList.length == 0 ? "" : true
                         }
+                        disabled={me.state.type[0].type==WALL_TO_WALL}
                         onChange={me.headerCheckChange.bind(me, "other")}
                       />
                       <span
@@ -624,6 +658,7 @@ class AuditStart extends React.Component {
                                         me,
                                         "Other"
                                       )}
+                                      disabled={me.state.type[0].type==WALL_TO_WALL}
                                     />
                                     <span className="checkmark" />
                                   </label>

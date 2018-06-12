@@ -1996,11 +1996,6 @@
     "filepath": "./src/containers/auditListing.js"
   },
   {
-    "id": "auditdetail.pps.prefix",
-    "defaultMessage": "PPS",
-    "filepath": "./src/containers/auditListing.js"
-  },
-  {
     "id": "auditdetail.label.autoassignpps",
     "defaultMessage": "Auto Assign PPS",
     "filepath": "./src/containers/auditListing.js"
@@ -2444,6 +2439,12 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
+    "id": "audit.startaudit.audittext",
+    "description": "audit",
+    "defaultMessage": "audit",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
     "id": "Audit.selectAttribute.apply",
     "description": "Texts for select attribute component",
     "defaultMessage": "Apply",
@@ -2510,6 +2511,12 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.walltowallSubheaderAudit.text",
+    "description": "Audit all locations; no order fulfillment can happen during this audit operation",
+    "defaultMessage": "Audit all locations; no order fulfillment can happen during this audit operation",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.locationdoesnotexist.text",
     "description": "text for audit location does not exist error",
     "defaultMessage": "Location does not exist",
@@ -2555,6 +2562,12 @@
     "id": "audit.auditbylocation.text",
     "description": "text for audit by location",
     "defaultMessage": "Audit by Location",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.auditother.text",
+    "description": "text for other audits",
+    "defaultMessage": "Other Audits",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2759,6 +2772,12 @@
     "id": "audit.kqlocation.label.submsg",
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Selecting this will enable key in quantity for this audit task",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "createaudit.other",
+    "description": "Wall-to-Wall Audit",
+    "defaultMessage": "Wall-to-Wall Audit",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {

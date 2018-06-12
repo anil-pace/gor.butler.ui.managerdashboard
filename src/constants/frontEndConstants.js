@@ -881,6 +881,8 @@ export const FAILED_STATUS = "FAILED";
 export const CANCELLED_STATUS = "CANCELED";
 export const WAITING_STATUS  = "WAITING"
 export const ORDERS_POLLING_INTERVAL = 60000;
+//Wall to wall audit
+export const WALL_TO_WALL = "Wall-to-Wall"; 
 
 
  

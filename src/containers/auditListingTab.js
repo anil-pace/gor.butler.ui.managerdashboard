@@ -361,7 +361,7 @@ render(){
     <GTableRow key={idx} index={idx} data={tablerowdata} >
 
     {Object.keys(row).map(function (text, index) {
-      let visibilityStatus=tablerowdata[idx]['button'].startButton? 'visible':'hidden';
+      let visibilityStatus=tablerowdata[idx]['button'].startButton && tablerowdata[idx]['auditDetails']['subHeader'][1]!=="Wall-to-Wall"? 'visible':'hidden';
       return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"}>
       {index==0?<label className="container checkBoxalign" style={{'visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
       {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
@@ -369,6 +369,7 @@ render(){
       {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'left'}} className="fontstyleColumn"><ProgressBar progressBarWrapperWidth="150px" progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'left'}}>{tablerowdata[idx][text]['status']}</div>:""}
       {index==3?<div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div><div>{tablerowdata[idx][text]['approvedState']}</div></div>:""}
       {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+
       {startButton}
        <div className="got-add-notch"></div>
       </button>      

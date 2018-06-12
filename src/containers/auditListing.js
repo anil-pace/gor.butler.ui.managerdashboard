@@ -91,10 +91,6 @@ const messages = defineMessages({
         id: "auditdetail.location.prefix",
         defaultMessage: "Location"
     },
-    pps: {
-        id: "auditdetail.pps.prefix",
-        defaultMessage: "PPS"
-    },
     autoAssignpps: {
         id: "auditdetail.label.autoassignpps",
         defaultMessage: "Auto Assign PPS"
@@ -113,11 +109,11 @@ const messages = defineMessages({
    },
    linesRejected: {
     id: "auditdetail.label.linesrejected",
-    defaultMessage: " lines rejected"
+    defaultMessage: "lines rejected"
 },
 linesApproved:{
     id: "auditdetail.label.linesapproved",
-    defaultMessage: " lines approved"
+    defaultMessage: "lines approved"
 },
 auditConflictingOperatorStatus: {
     id: "auditdetail.auditConflictingOperatorStatus.status",
@@ -403,7 +399,6 @@ class AuditTab extends React.Component {
         let completed = nProps.context.intl.formatMessage(messages.auditCompletedStatus);
         let sku = nProps.context.intl.formatMessage(messages.auditSKU);
         let location = nProps.context.intl.formatMessage(messages.auditLocation);
-        let pps = nProps.context.intl.formatMessage(messages.pps);
         let completedOutof = nProps.context.intl.formatMessage(messages.completedOutof);
           let linestobeResolved = nProps.context.intl.formatMessage(messages.linestobeResolved);
           let linesRejected = nProps.context.intl.formatMessage(messages.linesRejected);
@@ -429,7 +424,7 @@ class AuditTab extends React.Component {
                 auditData.audit_name = "";
             }
             auditData.auditBased = data[i].audit_type ? data[i].audit_type : "";
-            auditData.pps_id = data[i].audit_status == 'audit_created' ? "" : (data[i].pps_id ? pps+" "+ data[i].pps_id : "");
+            auditData.pps_id = data[i].audit_status == 'audit_created' ? "" : (data[i].pps_id ? data[i].pps_id : "");
 
 
             if (data[i].audit_status == "audit_created") {
@@ -575,9 +570,9 @@ class AuditTab extends React.Component {
                 auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +" "+linestobeResolved) : "";
             }
             if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linesRejected) : "";
+                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +" "+linesRejected) : "";
             }
-            auditData.lineApprovedState = data[i].approved > 0 ? (data[i].approved +linesApproved) : "";
+            auditData.lineApprovedState = data[i].approved > 0 ? (data[i].approved +" "+linesApproved) : "";
             
 
             auditData.button = data[i].audit_button_data;
