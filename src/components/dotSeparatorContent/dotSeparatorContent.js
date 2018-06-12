@@ -30,11 +30,11 @@ render()
     let headerClassName=this.props.headerClassName?this.props.headerClassName:"headerName";
     let subheaderClassName=this.props.subheaderClassName?this.props.subheaderClassName:"subheaderName";
     header.map(function(item, i){
-                (header.length==i+1)?finalHeader.push(<span className={headerClassName}>{item}</span>):finalHeader.push(<span><span className={headerClassName}>{item}</span><span className='headerSeparation'>{separator}</span></span>)   
+                (header.length==i+1)?finalHeader.push(<span title={item} className={headerClassName}>{item}</span>):finalHeader.push(<span><span title={item} className={headerClassName}>{item}</span><span className='headerSeparation'>{separator}</span></span>)   
     })
 
     subHeader.map(function(item, i){
-        (subHeader.length==i+1)?finalSubHeader.push(<span className={subheaderClassName}>{item}</span>):finalSubHeader.push(<span><span  className={subheaderClassName}>{item}</span><span className='subHeaderSeparation'>{separator}</span></span>)   
+        (subHeader.length==i+1)?finalSubHeader.push(<span title={item} className={subheaderClassName}>{item}</span>):finalSubHeader.push(<span><span title={item}  className={subheaderClassName}>{item}</span><span className='subHeaderSeparation'>{separator}</span></span>)   
 })    
     return (
        <div className="gor-separator">

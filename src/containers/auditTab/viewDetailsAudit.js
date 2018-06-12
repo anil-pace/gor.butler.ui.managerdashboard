@@ -303,7 +303,7 @@ _timeFormat(UTCtime){
   let rowObject={};
   rowObject.auditDetails={
       "header":[itemsData[i].id||""],
-      "subHeader":[itemsData[i].name||""]
+      "subHeader":[itemsData[i].description||""]
       };
     
       if(itemsData[i].attributes_list!=0){
@@ -415,7 +415,7 @@ return tableData;
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"} >  
-                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
+                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} subheaderClassName="subheaderName viewDetailslimitsSubHeader" />:""} 
                                           {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} headerClassName="viewDetailsSeparatorHeader" subheaderClassName="viewDetailsSeparatorSubHeader" separator={<div className="dotImage"></div>} />:""}     
                                           {index==2?<div className="missing-item">{processedTableData[idx][text]}</div>:""} 
 

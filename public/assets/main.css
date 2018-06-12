@@ -9690,6 +9690,14 @@ button:disabled {
   color: #333333;
 }
 
+.gor-separator .viewDetailslimitsSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+  display: block;
+}
+
 .dotImage {
   background-position: -48px -111px;
   display: inline-block;

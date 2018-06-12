@@ -2678,6 +2678,18 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.kqsku.label.msg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Show KQ on Butler Operator Interface",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.kqsku.label.submsg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Selecting this will enable key in quantity for this audit task",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.select.sku.inputmode",
     "description": "Text for location mode",
     "defaultMessage": "Select mode of input:",
@@ -2738,13 +2750,13 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.kq.label.msg",
+    "id": "audit.kqlocation.label.msg",
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Show KQ on Butler Operator Interface",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.kq.label.submsg",
+    "id": "audit.kqlocation.label.submsg",
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Selecting this will enable key in quantity for this audit task",
     "filepath": "./src/containers/auditTab/createAudit.js"
