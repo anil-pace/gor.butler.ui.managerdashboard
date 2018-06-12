@@ -9572,6 +9572,14 @@ button:disabled {
   font-size: 30px;
 }
 
+.gor-separator .viewDetailslimitsSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+  display: block;
+}
+
 .gor-progress-bar-wrapper {
   width: 100%;
   background: #eeeeee;

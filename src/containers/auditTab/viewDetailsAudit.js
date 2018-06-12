@@ -302,8 +302,8 @@ _timeFormat(UTCtime){
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
   rowObject.auditDetails={
-      "header":[itemsData[i].id],
-      "subHeader":[itemsData[i].name||""]
+      "header":[itemsData[i].id||""],
+      "subHeader":[itemsData[i].description||""]
       };
     
       if(itemsData[i].entity_list!=0){
@@ -414,9 +414,9 @@ return tableData;
                                <GTableRow key={idx} index={idx}  data={processedTableData} >
                              
                                    {Object.keys(row).map(function (text, index) {
-                                       return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >  
-                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'} />:""} 
-                                          {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'} />:""}     
+                                        return <div key={index} style={tableData[index].width?{flex:'1 0 '+tableData[index].width+"%"}:{}} className="cell" >   
+                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'} subheaderClassName="subheaderName viewDetailslimitsSubHeader" />:""} 
+                                          {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={'.'}  />:""}     
                                           {index==2?<div className="missing-item">{processedTableData[idx][text]}</div>:""} 
 
                                        </div>
