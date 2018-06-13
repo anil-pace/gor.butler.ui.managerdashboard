@@ -1,0 +1,5664 @@
+# Himanshu Saraswat <himanshusara@gmail.com>, 2018. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-09 08:50+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"Language-Team: none\n"
+"X-Generator: Zanata 4.3.1\n"
+"PO-Revision-Date: 2018-03-13 01:04+0000\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: notification.infinite.message
+msgctxt "notification.infinite.message"
+msgid "Loading More"
+msgstr "さらにロードすること"
+
+#: ValidateSelAtt.nameplaceholder.text
+msgctxt "ValidateSelAtt.nameplaceholder.text"
+msgid "Time, place or products"
+msgstr "時間、場所または製品"
+
+#: ValidateSelAtt.inputplaceholder.text
+msgctxt "ValidateSelAtt.inputplaceholder.text"
+msgid "e.g: 012678ABC"
+msgstr "例：012678ABC"
+
+#: ValidateSelAtt.searchinputplaceholder.text
+msgctxt "ValidateSelAtt.searchinputplaceholder.text"
+msgid "Search SKU"
+msgstr "SKUを検索"
+
+#: ValidateSelAtt.locinputplaceholder.text
+msgctxt "ValidateSelAtt.locinputplaceholder.text"
+msgid "Search Location"
+msgstr "検索場所"
+
+#: Audit.selectAttribute.apply
+msgctxt "Audit.selectAttribute.apply"
+msgid "Apply"
+msgstr "適用"
+
+#: Audit.selectAttribute.addSetofAttributes
+msgctxt "Audit.selectAttribute.addSetofAttributes"
+msgid "+ ADD SET OF ATTRIBUTES"
+msgstr "+属性のセットを追加する"
+
+#: Audit.selectAttribute.footerMessage
+msgctxt "Audit.selectAttribute.footerMessage"
+msgid "Note: You can add multiple sets of attributes"
+msgstr "注：複数の属性セットを追加することができます"
+
+#: Audit.selectAttribute.back
+msgctxt "Audit.selectAttribute.back"
+msgid "Back"
+msgstr "バック"
+
+#: Audit.selectAttribute.clearAll
+msgctxt "Audit.selectAttribute.clearAll"
+msgid "Clear All"
+msgstr "すべてをクリアしてください"
+
+#: Audit.selectAttribute.addMoreSets
+msgctxt "Audit.selectAttribute.addMoreSets"
+msgid "Add more Sets of Attributes"
+msgstr "属性のセットを増えて追加する"
+
+#: ValidateSelAtt.auditbysku.text
+msgctxt "ValidateSelAtt.auditbysku.text"
+msgid "Enter SKU and validate"
+msgstr "SKUを入力して検証する"
+
+#: ValidateSelAtt.auditbysku.selectAttributes
+msgctxt "ValidateSelAtt.auditbysku.selectAttributes"
+msgid "Select Attributes"
+msgstr "属性を選択する"
+
+#: ValidateSelAtt.auditbylocation.text
+msgctxt "ValidateSelAtt.auditbylocation.text"
+msgid "Audit by Location"
+msgstr "場所による棚卸"
+
+#: ValidateSelAtt.inputCheckbox.selectAllLabel
+msgctxt "ValidateSelAtt.inputCheckbox.selectAllLabel"
+msgid "Select All"
+msgstr "すべてを選択してください"
+
+#: ValidateSelAtt.inputCheckbox.selectAllInvalidLabel
+msgctxt "ValidateSelAtt.inputCheckbox.selectAllInvalidLabel"
+msgid "Select all invalid"
+msgstr "すべて無効を選択してください"
+
+#: ValidateSelAtt.inputCheckbox.selectAllValidLabel
+msgctxt "ValidateSelAtt.inputCheckbox.selectAllValidLabel"
+msgid "Select all valid"
+msgstr "すべての有効なを選択してください"
+
+#: ValidateSelAtt.inputCheckbox.deselectAllLabel
+msgctxt "ValidateSelAtt.inputCheckbox.deselectAllLabel"
+msgid "Deselect All"
+msgstr "すべての選択を解除"
+
+#: audit.add.sku.subheading
+msgctxt "audit.add.sku.subheading"
+msgid "Use copy and paste if you have muktiple sku numbers"
+msgstr "Sku番号が複数ある場合は、コピー＆ペーストを使用する"
+
+#: audits.auditAdd
+msgctxt "audits.auditAdd"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audits.editSKUText
+msgctxt "audits.editSKUText"
+msgid "BACK TO EDIT"
+msgstr "編集に戻る"
+
+#: audit.skuValidation.success
+msgctxt "audit.skuValidation.success"
+msgid "{valid} out of {total} SKUs valid"
+msgstr "{valid}うち{total}有効なSKU"
+
+#: audit.skuValidation.error
+msgctxt "audit.skuValidation.error"
+msgid ""
+"{invalid} Error found out of {total} SKUs, Please rectify or enter valid "
+"SKUs"
+msgstr "{invalid} SKUの{total}エラーが見つかりました。有効なSKUを修正または入力してください"
+
+#: audit.skuValidation.note
+msgctxt "audit.skuValidation.note"
+msgid ""
+"Note: Not setting any attributes will result in auditing the entire SKU with "
+"all attributes"
+msgstr "注：属性を設定しないと、SKU全体をすべての属性で棚卸します"
+
+#: audits.Validation
+msgctxt "audits.Validation"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audits.validateSKU
+msgctxt "audits.validateSKU"
+msgid "Validate"
+msgstr "検証"
+
+#: audit.table.duplicateTask
+msgctxt "audit.table.duplicateTask"
+msgid "Duplicate task"
+msgstr "重複タスク"
+
+#: audit.table.deleteRecord
+msgctxt "audit.table.deleteRecord"
+msgid "Delete record"
+msgstr "レコードを削除"
+
+#: audit.table.cancelTask
+msgctxt "audit.table.cancelTask"
+msgid "Cancel Task"
+msgstr "タスクをキャンセルします"
+
+#: commonDataTable.edit.button
+msgctxt "commonDataTable.edit.button"
+msgid "Edit"
+msgstr "編集"
+
+#: commonDataTable.Delete.button
+msgctxt "commonDataTable.Delete.button"
+msgid "Delete"
+msgstr "削除"
+
+#: audit.table.pack.outer.label
+msgctxt "audit.table.pack.outer.label"
+msgid "Outer"
+msgstr "外"
+
+#: audit.table.pack.inner.label
+msgctxt "audit.table.pack.inner.label"
+msgid "Inner"
+msgstr "インナー"
+
+#: commonDataTable.attributesType.itemSelectedText
+msgctxt "commonDataTable.attributesType.itemSelectedText"
+msgid "{count} items selected"
+msgstr "{count} 選択されたアイテム"
+
+#: commonDataTable.attributesType.heading
+msgctxt "commonDataTable.attributesType.heading"
+msgid "Box Id"
+msgstr "ボックス Id"
+
+#: audit.resolveUnresolve
+msgctxt "audit.resolveUnresolve"
+msgid "{resolvedCount} issues, {unresolvedCount} unresolved"
+msgstr "{resolvedCount} の問題、 {unresolvedCount} は未解決"
+
+#: audit.resolveIssues
+msgctxt "audit.resolveIssues"
+msgid "{resolvedCount} issues"
+msgstr "{resolvedCount} の問題"
+
+#: audit.unresolveIssues
+msgctxt "audit.unresolveIssues"
+msgid ""
+"{unresolvedCount} {unresolvedCount, plural, one {unresolved issue} other "
+"{unresolved issues}}"
+msgstr ""
+"{unresolvedCount} {unresolvedCount, plural, one {未解決の問題} other {未解決の問題}}"
+
+#: commonDataTable.resolveAudit.approve
+msgctxt "commonDataTable.resolveAudit.approve"
+msgid "Approve"
+msgstr "承認"
+
+#: commonDataTable.resolveAudit.reject
+msgctxt "commonDataTable.resolveAudit.reject"
+msgid "Reject"
+msgstr "却下"
+
+#: commonDataTable.startAudit.button
+msgctxt "commonDataTable.startAudit.button"
+msgid "Start audit"
+msgstr "棚卸開始"
+
+#: commonDataTable.resolveAudit.button
+msgctxt "commonDataTable.resolveAudit.button"
+msgid "Resolve"
+msgstr "解決"
+
+#: commonDataTable.viewIssues.button
+msgctxt "commonDataTable.viewIssues.button"
+msgid "View issues"
+msgstr "問題を表示"
+
+#: pps.configuration.profile.requestedText
+msgctxt "pps.configuration.profile.requestedText"
+msgid "Requested Profile: {requestedProfile}"
+msgstr "依頼されたプロファイル:{requestedProfile}"
+
+#: audit.resolveUnresolve.tooltip.header
+msgctxt "audit.resolveUnresolve.tooltip.header"
+msgid "{resolvedCount} audit lines, {unresolvedCount} audit lines"
+msgstr "{resolvedCount} 解決, {unresolvedCount} 未解決"
+
+#: audit.resolveUnresolve.tooltip.content
+msgctxt "audit.resolveUnresolve.tooltip.content"
+msgid "Approve or reject audit line with issues"
+msgstr "問題がある棚卸を承認、または、却下します"
+
+#: audit.unresolveIssues.tooltip.header
+msgctxt "audit.unresolveIssues.tooltip.header"
+msgid ""
+"{unresolvedCount} {unresolvedCount, plural, one {unresolved audit line} "
+"other {unresolved audit lines}}"
+msgstr ""
+"{unresolvedCount} {unresolvedCount, plural, one {未棚卸の棚卸行} other {未棚卸の棚卸行}}"
+
+#: audit.unresolveIssues.tooltip.content
+msgctxt "audit.unresolveIssues.tooltip.content"
+msgid "Approve or reject audit line with issues"
+msgstr "問題がある棚卸結果を承認、または、却下します"
+
+#: audit.rejected.tooltip.header
+msgctxt "audit.rejected.tooltip.header"
+msgid ""
+"{rejected_lines}/{total_lines} {rejected_lines, plural, one {audit line} "
+"other {audit lines}} were rejected"
+msgstr ""
+"{rejected_lines}/{total_lines} {rejected_lines, plural, one {棚卸ライン} other "
+"{棚卸ライン}} が拒否されました"
+
+#: audit.rejected.tooltip.content
+msgctxt "audit.rejected.tooltip.content"
+msgid "Re-audit the rejected audit lines"
+msgstr "却下された棚卸を再棚卸します"
+
+#: audit.created.tooltip.header
+msgctxt "audit.created.tooltip.header"
+msgid "Assign PPS to start audit task"
+msgstr "棚卸タスクを開始するためにPPSを割当"
+
+#: audit.created.tooltip.content
+msgctxt "audit.created.tooltip.content"
+msgid "Click on \"Start Audit\" to assign PPS"
+msgstr "PPSを割り当てるには、「棚卸の開始」をクリックします。"
+
+#: utility.fileSize.message
+msgctxt "utility.fileSize.message"
+msgid "Maximum File Size: {maxSize}"
+msgstr "最大ファイルサイズ: {maxSize}"
+
+#: utility.fileSize.errorline
+msgctxt "utility.fileSize.errorline"
+msgid "{errorLine}"
+msgstr "{errorLine}"
+
+#: footer.text
+msgctxt "footer.text"
+msgid "Copyright @ {dtYear} GreyOrange Pte Ltd"
+msgstr "Copyright @ {dtYear} GreyOrange Pte Ltd"
+
+#: gor.audit.uploadcsv
+msgctxt "gor.audit.uploadcsv"
+msgid "Upload .CSV file"
+msgstr ".CSVファイルをアップロードする"
+
+#: selectAttribute.placeholderSelected.text
+msgctxt "selectAttribute.placeholderSelected.text"
+msgid "{selectedSetCount} sets of Attributes selected"
+msgstr "{selectedSetCount}属性のセットが選択されました"
+
+#: selectAttribute.placeholder.text
+msgctxt "selectAttribute.placeholder.text"
+msgid "Select Attributes"
+msgstr "属性を選択する"
+
+#: paginate.page.heading
+msgctxt "paginate.page.heading"
+msgid "Page"
+msgstr "ページ"
+
+#: paginate.page.pageNum
+msgctxt "paginate.page.pageNum"
+msgid "of {totalPage}"
+msgstr "{totalPage}の"
+
+#: graph.noData
+msgctxt "graph.noData"
+msgid "No Data"
+msgstr "データなし"
+
+#: horizontal.graph.noData
+msgctxt "horizontal.graph.noData"
+msgid "No Data"
+msgstr "データなし"
+
+#: snapshot.inventory.usedSpace
+msgctxt "snapshot.inventory.usedSpace"
+msgid "{utilisedSpace}% space utilized"
+msgstr "{utilisedSpace}% スペース使用"
+
+#: header.zones.inOperation2
+msgctxt "header.zones.inOperation2"
+msgid "{activeZones} zones in operation"
+msgstr "{activeZones}操作中のゾーン"
+
+#: header.zones.noOperation
+msgctxt "header.zones.noOperation"
+msgid "No zones in operation"
+msgstr "操作中のゾーンはありません"
+
+#: header.zones.inactiveZones
+msgctxt "header.zones.inactiveZones"
+msgid ""
+"{inactiveZones} {inactiveZones, plural, one {zone} other {zones}} paused"
+msgstr ""
+"{inactiveZones} {inactiveZones, plural, one {zone} other {zones}}が 休止されました"
+
+#: header.button.resume
+msgctxt "header.button.resume"
+msgid "Resume System"
+msgstr "続行"
+
+#: header.zones.status
+msgctxt "header.zones.status"
+msgid "SYSTEM NORMAL"
+msgstr "システム正常"
+
+#: header.zones.inOperation
+msgctxt "header.zones.inOperation"
+msgid "{activeZones}/{totalZones} zones in operation"
+msgstr "{activeZones}/{totalZones}操作中のゾーン"
+
+#: header.zones.emergency
+msgctxt "header.zones.emergency"
+msgid "SYSTEM STOPPED"
+msgstr "システムが停止されました"
+
+#: header.zones.inOperation1
+msgctxt "header.zones.inOperation1"
+msgid "{activeZones} zones in operation"
+msgstr "{activeZones}操作中のゾーン"
+
+#: header.option.release
+msgctxt "header.option.release"
+msgid ""
+"Release the System Stop button from the Zigbee box in order                  "
+"             to resume operation."
+msgstr "操作の再開の_________為にジグビーボックスからシステム停止ボタンを解除して下さい。"
+
+#: header.zones.emergency.stopped
+msgctxt "header.zones.emergency.stopped"
+msgid "SYSTEM STOPPED"
+msgstr "システムが停止されました"
+
+#: header.zones.emergency.paused
+msgctxt "header.zones.emergency.paused"
+msgid "SYSTEM PAUSED"
+msgstr "システムが休止されました"
+
+#: header.butler
+msgctxt "header.butler"
+msgid "Butler"
+msgstr "Butler"
+
+#: header.start
+msgctxt "header.start"
+msgid "Start time:{time}"
+msgstr "開始時刻:{time}"
+
+#: header.zones.count
+msgctxt "header.zones.count"
+msgid "{activeZones}/{totalZones} Zones"
+msgstr "{activeZones}/{totalZones}ゾーン"
+
+#: header.zones.viewAll
+msgctxt "header.zones.viewAll"
+msgid "View system details"
+msgstr "システムの詳細を見る"
+
+#: header.logout
+msgctxt "header.logout"
+msgid "Logout"
+msgstr "ログアウト"
+
+#: healthTab.status.on
+msgctxt "healthTab.status.on"
+msgid "Open"
+msgstr "オン"
+
+#: healthTab.status.off
+msgctxt "healthTab.status.off"
+msgid "Close"
+msgstr "オフ"
+
+#: inventory.histogram.legend
+msgctxt "inventory.histogram.legend"
+msgid "Items Stocked"
+msgstr "在庫商品"
+
+#: inventory.linechart.legendPicked
+msgctxt "inventory.linechart.legendPicked"
+msgid "Items Picked"
+msgstr "出庫済商品"
+
+#: inventory.linechart.legendPut
+msgctxt "inventory.linechart.legendPut"
+msgid "Items Put"
+msgstr "入庫済商品"
+
+#: inventory.header
+msgctxt "inventory.header"
+msgid "Inventory"
+msgstr "在庫"
+
+#: itemTable.categoryType.category
+msgctxt "itemTable.categoryType.category"
+msgid "Category"
+msgstr "カテゴリ"
+
+#: itemTable.cbmUsed.cbm
+msgctxt "itemTable.cbmUsed.cbm"
+msgid "CBM Used"
+msgstr "使用済CBM"
+
+#: itemTable.daysInHand.count
+msgctxt "itemTable.daysInHand.count"
+msgid "Days in Hand"
+msgstr "保管日数"
+
+#: inventory.linechart.toolTipPut
+msgctxt "inventory.linechart.toolTipPut"
+msgid "Put"
+msgstr "入庫"
+
+#: inventory.linechart.toolTipPick
+msgctxt "inventory.linechart.toolTipPick"
+msgid "Picked"
+msgstr "出庫"
+
+#: inventory.linechart.toolTipEntity
+msgctxt "inventory.linechart.toolTipEntity"
+msgid "Items"
+msgstr "品目"
+
+#: inventory.linechart.noDataText
+msgctxt "inventory.linechart.noDataText"
+msgid "No Item Movement"
+msgstr "商品移動なし"
+
+#: inventory.linechart.today
+msgctxt "inventory.linechart.today"
+msgid "Today's"
+msgstr "本日の在庫"
+
+#: inventory.snaphot.date
+msgctxt "inventory.snaphot.date"
+msgid "Today's"
+msgstr "本日の在庫"
+
+#: inventory.snaphot.currentStock
+msgctxt "inventory.snaphot.currentStock"
+msgid "Current Stock"
+msgstr "在庫数"
+
+#: inventory.snaphot.closingStock
+msgctxt "inventory.snaphot.closingStock"
+msgid "Closing Stock"
+msgstr "最終在庫"
+
+#: inventory.snaphot.header
+msgctxt "inventory.snaphot.header"
+msgid "stock snapshot"
+msgstr "在庫状況"
+
+#: inventory.snaphot.itemsPut
+msgctxt "inventory.snaphot.itemsPut"
+msgid "Items Put"
+msgstr "入庫数"
+
+#: inventory.snaphot.itemsPick
+msgctxt "inventory.snaphot.itemsPick"
+msgid "Items Pick"
+msgstr "出庫数"
+
+#: inventory.snaphot.openingStock
+msgctxt "inventory.snaphot.openingStock"
+msgid "Opening Stock"
+msgstr "初期在庫"
+
+#: inventory.snaphot.sku
+msgctxt "inventory.snaphot.sku"
+msgid "SKUs"
+msgstr "SKU数"
+
+#: inventory.snaphot.cbmUsed
+msgctxt "inventory.snaphot.cbmUsed"
+msgid "CBM Used"
+msgstr "CBM"
+
+#: login.butler.language
+msgctxt "login.butler.language"
+msgid "Language"
+msgstr "言語"
+
+#: login.butler.manageInterface
+msgctxt "login.butler.manageInterface"
+msgid "Management Interface"
+msgstr "マネージメント・インターフェース"
+
+#: login.butler.error.username
+msgctxt "login.butler.error.username"
+msgid "Please enter your username"
+msgstr "ユーザ名を入れてください。"
+
+#: login.butler.error.password
+msgctxt "login.butler.error.password"
+msgid "Please enter your password"
+msgstr "パスワードを入れてください。"
+
+#: login.form.username
+msgctxt "login.form.username"
+msgid "Username"
+msgstr "ユーザ名"
+
+#: login.form.password
+msgctxt "login.form.password"
+msgid "Password"
+msgstr "パスワード"
+
+#: login.form.button
+msgctxt "login.form.button"
+msgid "Login"
+msgstr "ログイン"
+
+#: pps.dropdown.placeholder
+msgctxt "pps.dropdown.placeholder"
+msgid "Change PPS mode"
+msgstr "PPSモード変更"
+
+#: table.filter.placeholder
+msgctxt "table.filter.placeholder"
+msgid "Filter by keywords"
+msgstr "キーワードで検索"
+
+#: notifications.read.message
+msgctxt "notifications.read.message"
+msgid "You have no unread Notifications"
+msgstr "未読の通知はありません"
+
+#: notifications.read.noresult
+msgctxt "notifications.read.noresult"
+msgid "No Result Found"
+msgstr "結果は見つかりません"
+
+#: notification.all.link
+msgctxt "notification.all.link"
+msgid "VIEW ALL NOTIFICATIONS"
+msgstr "すべての通知を見る"
+
+#: OrderSubTab.waves
+msgctxt "OrderSubTab.waves"
+msgid "Waves"
+msgstr "ウェーブ"
+
+#: OrderSubTab.orderlist
+msgctxt "OrderSubTab.orderlist"
+msgid "Order List"
+msgstr "注文リスト"
+
+#: sysOverview.tab.heading
+msgctxt "sysOverview.tab.heading"
+msgid "Overview"
+msgstr "概要"
+
+#: butlerBot.tab.heading
+msgctxt "butlerBot.tab.heading"
+msgid "Butler Bots"
+msgstr "Butler Bots"
+
+#: pps.tab.heading
+msgctxt "pps.tab.heading"
+msgid "Pick Put Stations"
+msgstr "PPS"
+
+#: chargingstation.tab.heading
+msgctxt "chargingstation.tab.heading"
+msgid "Charging Station"
+msgstr "充電器"
+
+#: ppsConfiguration.tab.heading
+msgctxt "ppsConfiguration.tab.heading"
+msgid "PPS Configuration"
+msgstr "PPS構成"
+
+#: msuConfiguration.tab.heading
+msgctxt "msuConfiguration.tab.heading"
+msgid "MSU Configuration"
+msgstr "MSU 構成"
+
+#: sysControllers.tab.heading
+msgctxt "sysControllers.tab.heading"
+msgid "System Controllers"
+msgstr "システムコントローラ"
+
+#: utility.uploadHist.fileName
+msgctxt "utility.uploadHist.fileName"
+msgid "File {fileName}"
+msgstr "ファイル {fileName}"
+
+#: utility.uploadHist.success
+msgctxt "utility.uploadHist.success"
+msgid "Status: {status} % completed"
+msgstr "ステータス: {status} % 完了"
+
+#: utility.uploadHist.recAdded
+msgctxt "utility.uploadHist.recAdded"
+msgid "Records added"
+msgstr "レコードが追加されました"
+
+#: utility.uploadHist.recUpdated
+msgctxt "utility.uploadHist.recUpdated"
+msgid "Records updated"
+msgstr "レコードが更新されました"
+
+#: utility.uploadHist.recDeleted
+msgctxt "utility.uploadHist.recDeleted"
+msgid "Records deleted"
+msgstr "レコードが削除されました"
+
+#: utility.uploadHist.errors
+msgctxt "utility.uploadHist.errors"
+msgid "Errors"
+msgstr "エラー"
+
+#: utility.uploadHist.uploadFile
+msgctxt "utility.uploadHist.uploadFile"
+msgid "Upload File:"
+msgstr "ファイルアップロード:"
+
+#: utility.uploadHist.download
+msgctxt "utility.uploadHist.download"
+msgid "Download"
+msgstr "ダウンロード"
+
+#: utility.uploadHist.resultFile
+msgctxt "utility.uploadHist.resultFile"
+msgid "Result File:"
+msgstr "ファイルの結果:"
+
+#: utility.downloadGRN.status.heading
+msgctxt "utility.downloadGRN.status.heading"
+msgid "GRN Status"
+msgstr "GRNステータス"
+
+#: utility.downloadGRN.stnPlaceholder
+msgctxt "utility.downloadGRN.stnPlaceholder"
+msgid "Enter STN Number"
+msgstr "STN数字を入力します"
+
+#: utility.downloadGRN.formatPlaceholder
+msgctxt "utility.downloadGRN.formatPlaceholder"
+msgid "Select File type"
+msgstr "ファイルの種類を選択します"
+
+#: utility.reportsHistory.clickToDownload
+msgctxt "utility.reportsHistory.clickToDownload"
+msgid "Click here to download"
+msgstr "ダウンロードするためにここでクリックしてください"
+
+#: utility.uploadHist.noresultfound
+msgctxt "utility.uploadHist.noresultfound"
+msgid "No Result Found"
+msgstr "結果が見つかりません"
+
+#: utility.downloadGRN.label
+msgctxt "utility.downloadGRN.label"
+msgid "STN number:"
+msgstr "STN 数字:"
+
+#: utility.downloadGRN.stnError
+msgctxt "utility.downloadGRN.stnError"
+msgid "Please enter correct STN number"
+msgstr "正解のSTN 数字を入力してください"
+
+#: utility.downloadGRN.head
+msgctxt "utility.downloadGRN.head"
+msgid "Generate Report"
+msgstr "レポートを生成します"
+
+#: utility.downloadGRN.history
+msgctxt "utility.downloadGRN.history"
+msgid "Report History"
+msgstr "レポートの履歴"
+
+#: utility.downloadReport.head
+msgctxt "utility.downloadReport.head"
+msgid "Download Reports"
+msgstr "レポートをダウンロードします"
+
+#: utility.downloadReport.Status.heading
+msgctxt "utility.downloadReport.Status.heading"
+msgid "Reports Status"
+msgstr "レポートのステータス"
+
+#: utility.downloadRprts.CategoryLabel
+msgctxt "utility.downloadRprts.CategoryLabel"
+msgid "Category"
+msgstr "カテゴリー"
+
+#: utility.downloadRprts.CategoryPlchldr
+msgctxt "utility.downloadRprts.CategoryPlchldr"
+msgid "Select Category"
+msgstr "カテゴリーを選択します"
+
+#: utility.downloadRprts.CategoryInventory
+msgctxt "utility.downloadRprts.CategoryInventory"
+msgid "Inventory"
+msgstr "在庫"
+
+#: utility.downloadRprts.FileFormatPlchldr
+msgctxt "utility.downloadRprts.FileFormatPlchldr"
+msgid "Select File Format"
+msgstr "ファイルフォーマットを選択します"
+
+#: utility.downloadRprts.FileFormatLabel
+msgctxt "utility.downloadRprts.FileFormatLabel"
+msgid "File Format"
+msgstr "ファイルフォーマット"
+
+#: utility.downloadRports.csvFormat
+msgctxt "utility.downloadRports.csvFormat"
+msgid "Comma separated values (csv)"
+msgstr "カンマ区切り値(csv)"
+
+#: utiltiy.downloadRports.xlsFormat
+msgctxt "utiltiy.downloadRports.xlsFormat"
+msgid "ExceL Spreadsheet (xlsx)"
+msgstr "エクセルスプレッドシート(xlsx)"
+
+#: utility.grnHistory.clickToDownload
+msgctxt "utility.grnHistory.clickToDownload"
+msgid "Click here to download"
+msgstr "ダウンロードするためにここをクリックしてください"
+
+#: utility.downloadReports.head
+msgctxt "utility.downloadReports.head"
+msgid "Generate Report"
+msgstr "レポートを生成します"
+
+#: utility.downloadReports.history
+msgctxt "utility.downloadReports.history"
+msgid "Report History"
+msgstr "レポートの履歴"
+
+#: utility.uploadHistory.head
+msgctxt "utility.uploadHistory.head"
+msgid "Upload History"
+msgstr "履歴をアップロードします"
+
+#: utility.itemRecall.head
+msgctxt "utility.itemRecall.head"
+msgid "Expired Items"
+msgstr "期限切れ商品"
+
+#: utility.itemRecall.subHead
+msgctxt "utility.itemRecall.subHead"
+msgid "(Recall all the expired items)"
+msgstr "(期限切れ商品を呼び出す)"
+
+#: utility.itemRecall.buttonText
+msgctxt "utility.itemRecall.buttonText"
+msgid "RECALL"
+msgstr "呼び出す"
+
+#: utility.downDlabel
+msgctxt "utility.downDlabel"
+msgid "DOWNLOAD"
+msgstr "ダウンロード"
+
+#: stringConfig.open
+msgctxt "stringConfig.open"
+msgid "Open"
+msgstr "開放"
+
+#: stringConfig.off
+msgctxt "stringConfig.off"
+msgid "Close"
+msgstr "オフ"
+
+#: stringConfig.fclose
+msgctxt "stringConfig.fclose"
+msgid "Force Close"
+msgstr "強制終了"
+
+#: stringConfig.per_hour
+msgctxt "stringConfig.per_hour"
+msgid "per_hour"
+msgstr "1時間当たり"
+
+#: stringConfig.pick
+msgctxt "stringConfig.pick"
+msgid "pick"
+msgstr "出庫"
+
+#: stringConfig.put
+msgctxt "stringConfig.put"
+msgid "put"
+msgstr "入庫"
+
+#: stringConfig.audit
+msgctxt "stringConfig.audit"
+msgid "audit"
+msgstr "棚卸"
+
+#: stringConfig.soft
+msgctxt "stringConfig.soft"
+msgid "soft"
+msgstr "ソフト"
+
+#: stringConfig.hard
+msgctxt "stringConfig.hard"
+msgid "hard"
+msgstr "ハード"
+
+#: stringConfig.soft_manual
+msgctxt "stringConfig.soft_manual"
+msgid "soft_manual"
+msgstr "ソフトマニュアル"
+
+#: stringConfig.pending
+msgctxt "stringConfig.pending"
+msgid "In Progress"
+msgstr "処理中"
+
+#: stringConfig.wave.pending
+msgctxt "stringConfig.wave.pending"
+msgid "Pending"
+msgstr "保留"
+
+#: stringConfig.disconnected
+msgctxt "stringConfig.disconnected"
+msgid "Disconnected"
+msgstr "切断"
+
+#: stringConfig.connected
+msgctxt "stringConfig.connected"
+msgid "Connected"
+msgstr "接続"
+
+#: stringConfig.complete
+msgctxt "stringConfig.complete"
+msgid "completed"
+msgstr "完了"
+
+#: stringConfig.completed
+msgctxt "stringConfig.completed"
+msgid "completed"
+msgstr "完了"
+
+#: stringConfig.rejected
+msgctxt "stringConfig.rejected"
+msgid "Rejected"
+msgstr "却下されました"
+
+#: stringConfig.in_progress
+msgctxt "stringConfig.in_progress"
+msgid "In Progress"
+msgstr "処理中"
+
+#: stringConfig.breached
+msgctxt "stringConfig.breached"
+msgid "Breached"
+msgstr "未達成"
+
+#: stringConfig.fulfillable
+msgctxt "stringConfig.fulfillable"
+msgid "In Progress"
+msgstr "処理中"
+
+#: stringConfig.abandoned
+msgctxt "stringConfig.abandoned"
+msgid "Abandoned"
+msgstr "中断"
+
+#: stringConfig.created
+msgctxt "stringConfig.created"
+msgid "Created"
+msgstr "作成した"
+
+#: stringConfig.accepted
+msgctxt "stringConfig.accepted"
+msgid "Accepted"
+msgstr "受け入れられた"
+
+#: stringConfig.internal_server_error
+msgctxt "stringConfig.internal_server_error"
+msgid "Internal Error"
+msgstr "内部エラー"
+
+#: stringConfig.manual
+msgctxt "stringConfig.manual"
+msgid "Manual"
+msgstr "マニュアル"
+
+#: stringConfig.auto
+msgctxt "stringConfig.auto"
+msgid "Auto"
+msgstr "オート"
+
+#: stringConfig.notFulfillable
+msgctxt "stringConfig.notFulfillable"
+msgid "Unfulfillable"
+msgstr "引当不可"
+
+#: stringConfig.exception
+msgctxt "stringConfig.exception"
+msgid "Exception"
+msgstr "例外"
+
+#: stringConfig.online
+msgctxt "stringConfig.online"
+msgid "online"
+msgstr "オンライン"
+
+#: stringConfig.offline
+msgctxt "stringConfig.offline"
+msgid "offline"
+msgstr "オフライン"
+
+#: stringConfig.error
+msgctxt "stringConfig.error"
+msgid "error"
+msgstr "エラー"
+
+#: stringConfig.received
+msgctxt "stringConfig.received"
+msgid "In Progress"
+msgstr "受信済"
+
+#: stringConfig.cancelled
+msgctxt "stringConfig.cancelled"
+msgid "Cancelled"
+msgstr "キャンセル"
+
+#: stringConfig.butler_supervisor
+msgctxt "stringConfig.butler_supervisor"
+msgid "Manager"
+msgstr "マネージャー"
+
+#: stringConfig.butler_ui
+msgctxt "stringConfig.butler_ui"
+msgid "Operator"
+msgstr "オペレーター"
+
+#: stringConfig.admin
+msgctxt "stringConfig.admin"
+msgid "Admin"
+msgstr "管理者"
+
+#: stringConfig.qc
+msgctxt "stringConfig.qc"
+msgid "QC Operator"
+msgstr "QC オペレーター"
+
+#: stringConfig.packing_operator
+msgctxt "stringConfig.packing_operator"
+msgid "Packing Operator"
+msgstr "梱包オペレーター"
+
+#: stringConfig.temporary_unfulfillable
+msgctxt "stringConfig.temporary_unfulfillable"
+msgid "On hold"
+msgstr "保留"
+
+#: stringConfig.audit_resolved
+msgctxt "stringConfig.audit_resolved"
+msgid "Resolved"
+msgstr "解決されました"
+
+#: stringConfig.audit_pending_approval
+msgctxt "stringConfig.audit_pending_approval"
+msgid "Unresolved"
+msgstr "解決されていません"
+
+#: stringConfig.audit_rejected
+msgctxt "stringConfig.audit_rejected"
+msgid "Rejected"
+msgstr "却下されました"
+
+#: stringConfig.md001
+msgctxt "stringConfig.md001"
+msgid "No personnel are present in the no-man zone."
+msgstr "ノーマンゾーンには人はいません。"
+
+#: stringConfig.md002
+msgctxt "stringConfig.md002"
+msgid "All Butler and MSU positions have been corrected."
+msgstr "全バトラーとMSUが確認されました。"
+
+#: stringConfig.md003
+msgctxt "stringConfig.md003"
+msgid "All no-man zone gates are properly closed."
+msgstr "全てのノーマンゲートは正常に閉鎖されました。"
+
+#: stringConfig.md004
+msgctxt "stringConfig.md004"
+msgid "All no-man gate limit switches are active and working."
+msgstr "全てのノーマンゲートの制限スイッチは動作しています。"
+
+#: stringConfig.md005
+msgctxt "stringConfig.md005"
+msgid "All Hard Emergency buttons are released."
+msgstr "全ての緊急非常ボタンは解放されました。"
+
+#: stringConfig.md006
+msgctxt "stringConfig.md006"
+msgid "All Zigbee boxes are online."
+msgstr "全ジグビーボックスはオンラインです。"
+
+#: stringConfig.md007
+msgctxt "stringConfig.md007"
+msgid "Peripherals status known."
+msgstr "[手動] 周辺機器のステータスが確認されました。"
+
+#: stringConfig.md008
+msgctxt "stringConfig.md008"
+msgid "Physical inventory verified."
+msgstr "[手動] 在庫が確認されました。"
+
+#: stringConfig.md009
+msgctxt "stringConfig.md009"
+msgid "No Emergency buttons in 'Pressed' state."
+msgstr "[自動] 押された状態の緊急ボタンはありません"
+
+#: stringConfig.md010
+msgctxt "stringConfig.md010"
+msgid "All shutters open  in active zones."
+msgstr "[手動] 全シャッターは解放されています。"
+
+#: stringConfig.md011
+msgctxt "stringConfig.md011"
+msgid "No humans in operations area."
+msgstr "[手動] 操作領域に人はいません。"
+
+#: stringConfig.md012
+msgctxt "stringConfig.md012"
+msgid "All paths cleared of any debris."
+msgstr "[手動] 全パスの残留物は排除されました。"
+
+#: stringConfig.md013
+msgctxt "stringConfig.md013"
+msgid ""
+"Move bots to the PPS location and do an \"init\" after all bots are moved."
+msgstr "ボットをPPSの場所に移動し、すべてのボットを移動した後に \"init\"を実行します。"
+
+#: stringConfig.md014
+msgctxt "stringConfig.md014"
+msgid "No bots require to be moved to PPS."
+msgstr "PPSへボットを移動する必要はありません。"
+
+#: stringConfig.audit_reaudited
+msgctxt "stringConfig.audit_reaudited"
+msgid "Re-audited"
+msgstr "再棚卸"
+
+#: roleDesc.butler_supervisor
+msgctxt "roleDesc.butler_supervisor"
+msgid ""
+"Grant access to the Management Interface and Operator Interface to all "
+"systems"
+msgstr "全システムの管理インターフェイスとオペレーター画面にアクセスを許可します"
+
+#: roleDesc.butler_ui
+msgctxt "roleDesc.butler_ui"
+msgid ""
+"Grant access to the Operator Interface at each Pick Put Station in the "
+"Butler system"
+msgstr "バトラーシステムの各PPSでオペレーター画面にアクセスを許可します"
+
+#: pwdDesc.butler_supervisor
+msgctxt "pwdDesc.butler_supervisor"
+msgid ""
+"A password of at least 8 alphanumeric characters will be required for "
+"logging into the Management Interface and Operator Interface."
+msgstr "管理インターフェイスとオペレーター画面にログインするために８英数字以上のパスワードが必要です。"
+
+#: pwdDesc.butler_ui
+msgctxt "pwdDesc.butler_ui"
+msgid ""
+"A password of 6 digits will be required for logging into the Operator "
+"Interface."
+msgstr "オペレーター画面にログインするために６桁数以上のパスワードが必要です。"
+
+#: login.lang.english
+msgctxt "login.lang.english"
+msgid "English (United States)"
+msgstr "English (United States)"
+
+#: login.lang.japanese
+msgctxt "login.lang.japanese"
+msgid "日本語"
+msgstr "日本語"
+
+#: login.lang.spanish
+msgctxt "login.lang.spanish"
+msgid "Español"
+msgstr "Español"
+
+#: login.lang.chinese
+msgctxt "login.lang.chinese"
+msgid "中文"
+msgstr "中文"
+
+#: login.lang.german
+msgctxt "login.lang.german"
+msgid "Deutsche"
+msgstr "Deutsche"
+
+#: login.lang.french
+msgctxt "login.lang.french"
+msgid "Français"
+msgstr "Français"
+
+#: login.autologout.message
+msgctxt "login.autologout.message"
+msgid "Due to session expiry, Auto Logout has been triggered!"
+msgstr "セッションが切断されたため、ログアウトされました。"
+
+#: login.butler.fail
+msgctxt "login.butler.fail"
+msgid "Invalid username and/or password, please try again"
+msgstr "無効なユーザ名またはパスワード。"
+
+#: login.butler.connection.fail
+msgctxt "login.butler.connection.fail"
+msgid "Connection failure"
+msgstr "接続失敗"
+
+#: login.butler.unauthorized
+msgctxt "login.butler.unauthorized"
+msgid "You are not authorized"
+msgstr "許可されていません"
+
+#: notify.success.edit
+msgctxt "notify.success.edit"
+msgid "User details updated successfully"
+msgstr "ユーザ詳細は正常に更新されました"
+
+#: ppsDetail.modeChange.success
+msgctxt "ppsDetail.modeChange.success"
+msgid "PPS Mode Change Request Processed"
+msgstr "PPSモード変更要求が処理されました"
+
+#: ppsDetail.modeChange.isAlreadyRequested
+msgctxt "ppsDetail.modeChange.isAlreadyRequested"
+msgid "PPS is already in requested mode"
+msgstr "PPSは既に要求されたモードです"
+
+#: ppsDetail.modeChange.tryLater
+msgctxt "ppsDetail.modeChange.tryLater"
+msgid ""
+"Previous request of changing mode is already pending, Please try later!"
+msgstr "モード変更が保留中のため、後で実施してください。"
+
+#: notify.error.usernameExists
+msgctxt "notify.error.usernameExists"
+msgid "An account has already been created with this User ID"
+msgstr "本ユーザIDで既にアカウントが作成されています"
+
+#: notify.error.passwordMissing
+msgctxt "notify.error.passwordMissing"
+msgid "Password not provided!"
+msgstr "パスワードを入力してください！"
+
+#: notify.error.passwordMatch
+msgctxt "notify.error.passwordMatch"
+msgid "Passwords do not match!"
+msgstr "パスワードが一致しません！"
+
+#: notify.error.username
+msgctxt "notify.error.username"
+msgid "Username is a required field!"
+msgstr "ユーザ名は必須項目です！"
+
+#: notify.error.role
+msgctxt "notify.error.role"
+msgid "Role is a required field!"
+msgstr "役割は必須項目です！"
+
+#: appInfo.success
+msgctxt "appInfo.success"
+msgid "Successfull"
+msgstr "成功"
+
+#: user.invalid.id
+msgctxt "user.invalid.id"
+msgid "Please enter a valid User ID"
+msgstr "有効なユーザIDを入力してください"
+
+#: user.invalid.format
+msgctxt "user.invalid.format"
+msgid "Please use only letters (a-z), numbers, and periods"
+msgstr "半角英数小文字とピリオドのみ使用してください"
+
+#: login.empty.password
+msgctxt "login.empty.password"
+msgid "Please enter a password"
+msgstr "パスワードを入力してください"
+
+#: user.empty.name
+msgctxt "user.empty.name"
+msgid "Please enter a user name"
+msgstr "ユーザ名を入力してください"
+
+#: user.invalid.name
+msgctxt "user.invalid.name"
+msgid "Special characters like \"~\",\"@\",\"%\" are not allowed"
+msgstr "「~」、「@」、「%」などの特殊文字は許可されません"
+
+#: user.invalid.password.operator
+msgctxt "user.invalid.password.operator"
+msgid "Please enter a password of at least 6 alphanumeric characters"
+msgstr "パスワードは6文字以上の英数字で入力してください"
+
+#: user.invalid.password.manager
+msgctxt "user.invalid.password.manager"
+msgid "Please enter a password of at least 8 alphanumeric characters"
+msgstr "パスワードは8文字以上の英数字で入力してください"
+
+#: user.match.password
+msgctxt "user.match.password"
+msgid "Both password entered do not match. Please try again"
+msgstr "パスワードが一致しません！"
+
+#: msu.name.prefix
+msgctxt "msu.name.prefix"
+msgid "MSU"
+msgstr "MSU"
+
+#: chargingStation.name.prefix
+msgctxt "chargingStation.name.prefix"
+msgid "CS"
+msgstr "CS"
+
+#: pps.name.prefix
+msgctxt "pps.name.prefix"
+msgid "PPS"
+msgstr "PPS"
+
+#: audit.invalid.sku
+msgctxt "audit.invalid.sku"
+msgid "Invalid SKU"
+msgstr "有効なSKU番号を入力してください"
+
+#: audit.invalid.location
+msgctxt "audit.invalid.location"
+msgid "Invalid Location"
+msgstr "有効なロケーション番号を入力してください"
+
+#: notify.error.audit.location
+msgctxt "notify.error.audit.location"
+msgid "Location does not exist"
+msgstr "ロケーションは存在しません"
+
+#: notify.error.audit.sku
+msgctxt "notify.error.audit.sku"
+msgid "SKU does not exist"
+msgstr "SKUは存在しません"
+
+#: notify.error.audit.g016
+msgctxt "notify.error.audit.g016"
+msgid "Given audit does not exists"
+msgstr "定められた棚卸は存在しません"
+
+#: notify.error.audit.AE001
+msgctxt "notify.error.audit.AE001"
+msgid "Audit Id does not exists"
+msgstr "棚卸IDは存在しません"
+
+#: notify.error.audit.AE002
+msgctxt "notify.error.audit.AE002"
+msgid "Valid PPS not found for Audit"
+msgstr "棚卸用の有効なPPSが見つかりません"
+
+#: notify.error.audit.AE004
+msgctxt "notify.error.audit.AE004"
+msgid "Audit of location already under process"
+msgstr "ロケーションの棚卸が処理中です"
+
+#: notify.error.audit.AE005
+msgctxt "notify.error.audit.AE005"
+msgid "Audit of sku already under process"
+msgstr "SKUの棚卸が処理中です"
+
+#: notify.error.audit.AE006
+msgctxt "notify.error.audit.AE006"
+msgid "Audit ID already processed"
+msgstr "既に処理された棚卸ID"
+
+#: notify.create.audit.success
+msgctxt "notify.create.audit.success"
+msgid "New audit task created successfully"
+msgstr "棚卸タスクが作成されました"
+
+#: notify.start.audit.success
+msgctxt "notify.start.audit.success"
+msgid "PPS assigned successfully. Audit task started"
+msgstr "棚卸タスクが開始されました"
+
+#: notify.delete.audit.processed
+msgctxt "notify.delete.audit.processed"
+msgid "Audit already processed. Cannot delete"
+msgstr "既に処理された棚卸ID"
+
+#: notify.Location.audit.pending
+msgctxt "notify.Location.audit.pending"
+msgid "Location of audit pending for approval"
+msgstr "棚卸が承認のために保留されています。"
+
+#: notify.Location.currently.processed
+msgctxt "notify.Location.currently.processed"
+msgid "Location of audit currently being processed"
+msgstr "現在処理中にある棚卸"
+
+#: notify.error.user.fail
+msgctxt "notify.error.user.fail"
+msgid "Error in updating user"
+msgstr "ユーザの更新中にエラーが発生しました"
+
+#: notify.error.user.response
+msgctxt "notify.error.user.response"
+msgid "Error in response"
+msgstr "エラーが発生しました"
+
+#: notify.error.audit.create
+msgctxt "notify.error.audit.create"
+msgid "Error in creating audit"
+msgstr "棚卸作成でエラーが発生しました"
+
+#: notify.error.api
+msgctxt "notify.error.api"
+msgid "API response not registered"
+msgstr "APIの応答が登録されていません"
+
+#: notify.error.connection
+msgctxt "notify.error.connection"
+msgid "Network Failure"
+msgstr "ネットワーク失敗"
+
+#: notify.error.400
+msgctxt "notify.error.400"
+msgid "Network error: 400 Bad Request"
+msgstr "ネットワークエラー：400 Bad Request"
+
+#: notify.error.401
+msgctxt "notify.error.401"
+msgid "Network error: 401 Unauthorized"
+msgstr "ネットワークエラー：401 Unauthorized"
+
+#: notify.error.403
+msgctxt "notify.error.403"
+msgid "Network error: 403 Forbidden"
+msgstr "ネットワークエラー：403 Forbidden"
+
+#: notify.error.405
+msgctxt "notify.error.405"
+msgid "Network error: 405 Method Not Allowed"
+msgstr "ネットワークエラー：405 Method Not Allowed"
+
+#: notify.error.408
+msgctxt "notify.error.408"
+msgid "Network error: 408 Request Time-out"
+msgstr "ネットワークエラー：408 Request Time-out"
+
+#: notify.error.409
+msgctxt "notify.error.409"
+msgid "Network error: 409 Conflict"
+msgstr "ネットワークエラー：409 Conflict"
+
+#: notify.error.500
+msgctxt "notify.error.500"
+msgid "Network error: 500 Internal Servor Error"
+msgstr "ネットワークエラー：500 Internal Servor Error"
+
+#: notify.error.502
+msgctxt "notify.error.502"
+msgid "Network error: 502 Bad Gateway"
+msgstr "ネットワークエラー：502 Bad Gateway"
+
+#: inventory.histogram.noDataText
+msgctxt "inventory.histogram.noDataText"
+msgid "No Stock Found"
+msgstr "在庫がありません"
+
+#: users.add.password.subheading.manager
+msgctxt "users.add.password.subheading.manager"
+msgid ""
+"A password of at least 8 alphanumeric characters will be required for "
+"logging into the Management Interface and Operator Interface"
+msgstr "マネージメント・インターフェイスとオペレーター・インターフェイスにログインするには、最低8文字の英数字のパスワードが必要です"
+
+#: users.add.password.subheading.operator
+msgctxt "users.add.password.subheading.operator"
+msgid ""
+"A password of 6 digits will be required for logging into the Operator "
+"Interface."
+msgstr "オペレーター・インターフェースにログインするには、6桁のパスワードが必要です。"
+
+#: emergency.resume.coreerror
+msgctxt "emergency.resume.coreerror"
+msgid "Cannot connect to butler core"
+msgstr "バトラーコアに接続がてきない"
+
+#: emergency.resume.statuserror
+msgctxt "emergency.resume.statuserror"
+msgid "Emergency status not soft_manual"
+msgstr "緊急ステータスはソフトマニュアル状態でないこと"
+
+#: emergency.resume.Softemergency
+msgctxt "emergency.resume.Softemergency"
+msgid "Soft emergency still there"
+msgstr "まだソフト緊急状態です"
+
+#: emergency.resume.success
+msgctxt "emergency.resume.success"
+msgid "Operation resumed"
+msgstr "操作が続行されました"
+
+#: masterdata.maxlimit.records
+msgctxt "masterdata.maxlimit.records"
+msgid "Records in file should not be greater than"
+msgstr "ファイルのレコードはこれ以上なってはいけません"
+
+#: masterdata.maxlimit.filesize
+msgctxt "masterdata.maxlimit.filesize"
+msgid "File size should not be greater than"
+msgstr "ファイルのサイズはこれ以上なってはいけません"
+
+#: audit.cancellation.error.g020
+msgctxt "audit.cancellation.error.g020"
+msgid "Internal server error while requesting for audit cancel"
+msgstr "棚卸解除を要求するときに内部サーバーエラーがあります"
+
+#: audit.cancellation.error.g021
+msgctxt "audit.cancellation.error.g021"
+msgid "Audit Id already sent for cancellation"
+msgstr "棚卸Idは既にキャンセルとして送信されました"
+
+#: audit.cancellation.error.g023
+msgctxt "audit.cancellation.error.g023"
+msgid "Audit Id already successfully cancelled"
+msgstr "棚卸Idが既にキャンセルされました"
+
+#: audit.cancellation.error.g024
+msgctxt "audit.cancellation.error.g024"
+msgid "Audit cancellation request denied"
+msgstr "棚卸Idのキャンセル要求が処理中で、解除ができません"
+
+#: pps.statusChange.allStatusSuccess
+msgctxt "pps.statusChange.allStatusSuccess"
+msgid "Status change request successful"
+msgstr "状態変更要求が有効です"
+
+#: pps.modeChange.allModeSuccess
+msgctxt "pps.modeChange.allModeSuccess"
+msgid "Mode change request successful"
+msgstr "モード変更要求が有効です"
+
+#: audit.subheading
+msgctxt "audit.subheading"
+msgid "System Generated"
+msgstr "システム生成"
+
+#: zoning.status.normal
+msgctxt "zoning.status.normal"
+msgid "OPERATING"
+msgstr "操作中"
+
+#: zoning.status.pauseInit
+msgctxt "zoning.status.pauseInit"
+msgid "PAUSE INITIATED"
+msgstr "休止が開始されました"
+
+#: zoning.status.pauseActivated
+msgctxt "zoning.status.pauseActivated"
+msgid "PAUSE ACTIVATED"
+msgstr "休止が活性されました"
+
+#: zoning.status.pauseDeactive
+msgctxt "zoning.status.pauseDeactive"
+msgid "PAUSE DEACTIVATED"
+msgstr "休止が不活性されました"
+
+#: zoning.status.clearInit
+msgctxt "zoning.status.clearInit"
+msgid "CLEAR INITIATED"
+msgstr "クリアが開始されました"
+
+#: zoning.status.clearActive
+msgctxt "zoning.status.clearActive"
+msgid "CLEAR ACTIVATED"
+msgstr "クリアが活性されました"
+
+#: zoning.status.clearDeactivated
+msgctxt "zoning.status.clearDeactivated"
+msgid "CLEAR DEACTIVATED"
+msgstr "クリアが不活性されました"
+
+#: zoning.status.emergencyStop
+msgctxt "zoning.status.emergencyStop"
+msgid "SYSTEM STOP ACTIVATED"
+msgstr "システムストップ活性化されました"
+
+#: zoning.status.emergencyPause
+msgctxt "zoning.status.emergencyPause"
+msgid "SYSTEM PAUSE"
+msgstr "システムの一時停止"
+
+#: zoning.status.stopped
+msgctxt "zoning.status.stopped"
+msgid "STOPPED"
+msgstr "停止されました"
+
+#: zoning.status.paused
+msgctxt "zoning.status.paused"
+msgid "PAUSED"
+msgstr "休止されました"
+
+#: zoning.action.zone_pause
+msgctxt "zoning.action.zone_pause"
+msgid "Zone pause activated"
+msgstr "ゾーン休止が活性されました"
+
+#: zoning.action.zone_clear
+msgctxt "zoning.action.zone_clear"
+msgid "Zone clear activated"
+msgstr "ゾーンクリアが活性されました"
+
+#: zoning.action.emergency_stop
+msgctxt "zoning.action.emergency_stop"
+msgid "System stop activated"
+msgstr "システムストップ活性化されました"
+
+#: zoning.action.emergency_pause
+msgctxt "zoning.action.emergency_pause"
+msgid "System pause activated"
+msgstr "システム一時停止活性化されました"
+
+#: zoning.action.none
+msgctxt "zoning.action.none"
+msgid "Standard"
+msgstr "基準"
+
+#: zoning.action.button_press
+msgctxt "zoning.action.button_press"
+msgid "Button pressed"
+msgstr "ボタンが押されました"
+
+#: zoning.action.emergency_stop_button_press
+msgctxt "zoning.action.emergency_stop_button_press"
+msgid "System stop button pressed"
+msgstr "システムストップボタンが押されました"
+
+#: zoning.action.emergency_pause_button_press
+msgctxt "zoning.action.emergency_pause_button_press"
+msgid "System pause button pressed"
+msgstr "システム一時停止ボタンが押されました"
+
+#: zoning.action.latch_gate
+msgctxt "zoning.action.latch_gate"
+msgid "Entry gate breached"
+msgstr "入力の門が破壊されました"
+
+#: zoning.action.light_curtain
+msgctxt "zoning.action.light_curtain"
+msgid "Light curtains breached"
+msgstr "ライトカーテン が破壊されました"
+
+#: zoning.action.noneSensor
+msgctxt "zoning.action.noneSensor"
+msgid "Standard"
+msgstr "基準"
+
+#: operationsLog.reportRequest.success
+msgctxt "operationsLog.reportRequest.success"
+msgid "Request successfully generated. Kindly check the Download Tab"
+msgstr "要求が効果的に発生されました。ダウンロードのタブを確認してください"
+
+#: operationsLog.reportRequest.failure
+msgctxt "operationsLog.reportRequest.failure"
+msgid "Error creating request"
+msgstr "リクエストの作成中にエラーが発生されました"
+
+#: zoning.substatus.action.zone_pause
+msgctxt "zoning.substatus.action.zone_pause"
+msgid "Zone pause activated"
+msgstr "ゾーン休止が活性されました"
+
+#: zoning.substatus.action.zone_clear
+msgctxt "zoning.substatus.action.zone_clear"
+msgid "Zone clear activated"
+msgstr "ゾーンクリアが活性されました"
+
+#: zoning.substatus.action.emergency_stop
+msgctxt "zoning.substatus.action.emergency_stop"
+msgid "System stop activated"
+msgstr "システムストップ活性化されました\n"
+
+#: zoning.substatus.action.emergency_pause
+msgctxt "zoning.substatus.action.emergency_pause"
+msgid "System pause activated"
+msgstr "システムの停止が有効になりました"
+
+#: zoning.entity.lightCurtains
+msgctxt "zoning.entity.lightCurtains"
+msgid "Light Curtain"
+msgstr "ライトカーテン"
+
+#: zoning.entity.latchGate
+msgctxt "zoning.entity.latchGate"
+msgid "Latch Gate"
+msgstr "ラッチゲート"
+
+#: itemRecall.message.success
+msgctxt "itemRecall.message.success"
+msgid "Items recalled successfully"
+msgstr "項目が正常に想起された"
+
+#: itemRecall.message.failure.duplicate_key
+msgctxt "itemRecall.message.failure.duplicate_key"
+msgid "Order id already exists"
+msgstr "注文IDは既に存在します"
+
+#: itemRecall.message.failure.no_item
+msgctxt "itemRecall.message.failure.no_item"
+msgid "No Item Exists"
+msgstr "項目が存在しない"
+
+#: auditdetail.notyetstatus.status
+msgctxt "auditdetail.notyetstatus.status"
+msgid "Not yet started"
+msgstr "未着手"
+
+#: auditdetail.waitingoperator.status
+msgctxt "auditdetail.waitingoperator.status"
+msgid "Waiting for the operator to login"
+msgstr "オペレータがログインするのを待っている"
+
+#: auditdetail.auditCancelled.prefix
+msgctxt "auditdetail.auditCancelled.prefix"
+msgid "Cancelled"
+msgstr "キャンセルされました"
+
+#: auditdetail.paused.status
+msgctxt "auditdetail.paused.status"
+msgid "Paused"
+msgstr "休止されました"
+
+#: auditdetail.complete.status
+msgctxt "auditdetail.complete.status"
+msgid "Completed"
+msgstr "完了"
+
+#: auditdetail.sku.prefix
+msgctxt "auditdetail.sku.prefix"
+msgid "SKU"
+msgstr "SKU"
+
+#: auditdetail.location.prefix
+msgctxt "auditdetail.location.prefix"
+msgid "Location"
+msgstr "ロケーション"
+
+#: auditdetail.pps.prefix
+msgctxt "auditdetail.pps.prefix"
+msgid "PPS"
+msgstr "PPS"
+
+#: auditdetail.label.autoassignpps
+msgctxt "auditdetail.label.autoassignpps"
+msgid "Auto Assign PPS"
+msgstr "PPSの自動割り当て"
+
+#: auditdetail.label.manualassignpps
+msgctxt "auditdetail.label.manualassignpps"
+msgid "Manually-Assign PPS"
+msgstr "手動でPPSを割り当てる"
+
+#: auditdetail.label.completedoutof
+msgctxt "auditdetail.label.completedoutof"
+msgid "completed out of"
+msgstr "完了した"
+
+#: auditdetail.label.linestoberesolved
+msgctxt "auditdetail.label.linestoberesolved"
+msgid "lines to be resolved"
+msgstr "解決すべき線"
+
+#: auditdetail.label.linestobereaudited
+msgctxt "auditdetail.label.linestobereaudited"
+msgid "lines to be re-audited"
+msgstr "再棚卸される線"
+
+#: audit.header.Audit
+msgctxt "audit.header.Audit"
+msgid "Audits"
+msgstr "棚卸"
+
+#: audit.start.Audit
+msgctxt "audit.start.Audit"
+msgid "START"
+msgstr "開始"
+
+#: audit.table.createAudit
+msgctxt "audit.table.createAudit"
+msgid "CREATE AUDIT"
+msgstr "棚卸を作成してください"
+
+#: audit.filter.filterLabel
+msgctxt "audit.filter.filterLabel"
+msgid "FILTER DATA"
+msgstr "フィルタデータ"
+
+#: auditList.filter.search.bar
+msgctxt "auditList.filter.search.bar"
+msgid "{total} results found"
+msgstr "{total} 結果が見つかりました"
+
+#: auditList.filter.search.bar.showall
+msgctxt "auditList.filter.search.bar.showall"
+msgid "Show all results"
+msgstr "全結果を表示します。"
+
+#: auditlisting.cancel.status
+msgctxt "auditlisting.cancel.status"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: auditlisting.delete.status
+msgctxt "auditlisting.delete.status"
+msgid "Delete"
+msgstr "削除"
+
+#: auditlisting.duplicate.prefix
+msgctxt "auditlisting.duplicate.prefix"
+msgid "Duplicate"
+msgstr "重複"
+
+#: auditlisting.resolve.status
+msgctxt "auditlisting.resolve.status"
+msgid "Resolve"
+msgstr "解決"
+
+#: auditlisting.pause.status
+msgctxt "auditlisting.pause.status"
+msgid "Pause"
+msgstr "休止"
+
+#: auditlisting.edit.status
+msgctxt "auditlisting.edit.status"
+msgid "Edit"
+msgstr "編集"
+
+#: auditlisting.viewdetails.status
+msgctxt "auditlisting.viewdetails.status"
+msgid "View Details"
+msgstr "詳細を見る"
+
+#: auditlisting.label.autoassignpps
+msgctxt "auditlisting.label.autoassignpps"
+msgid "Auto Assign PPS"
+msgstr "PPSの自動割り当て"
+
+#: auditlisting.label.manualassignpps
+msgctxt "auditlisting.label.manualassignpps"
+msgid "Manually-Assign PPS"
+msgstr "手動でPPSを割り当てる"
+
+#: auditlisting.label.startbutton
+msgctxt "auditlisting.label.startbutton"
+msgid "START"
+msgstr "開始"
+
+#: auditlisting.label.reauditbutton
+msgctxt "auditlisting.label.reauditbutton"
+msgid "RE-AUDIT"
+msgstr "再棚卸"
+
+#: auditlisting.label.reolvebutton
+msgctxt "auditlisting.label.reolvebutton"
+msgid "RESOLVE"
+msgstr "解決"
+
+#: audit.cancel
+msgctxt "audit.cancel"
+msgid "Are you sure want to cancel {auditId} audit?"
+msgstr "{auditId}棚卸をキャンセルしてもよろしいですか？"
+
+#: audit.deleteAudit
+msgctxt "audit.deleteAudit"
+msgid "Are you sure want to delete {auditId} audit?"
+msgstr "{auditId}棚卸を削除してもよろしいですか？"
+
+#: audit.notfound
+msgctxt "audit.notfound"
+msgid "There are no audit to view. Create audit"
+msgstr "表示する棚卸はありません。 棚卸を作成します。"
+
+#: widget.audit.heading.value
+msgctxt "widget.audit.heading.value"
+msgid "None"
+msgstr "なし"
+
+#: widget.audit.status.idle
+msgctxt "widget.audit.status.idle"
+msgid "{count} idle PPS (Audit mode)"
+msgstr "{count} 待機 PPS (棚卸モード)"
+
+#: widget.audit.throughput
+msgctxt "widget.audit.throughput"
+msgid "{pps_count} PPS auditing {throughput} items/hr"
+msgstr "{pps_count} PPS 棚卸 {throughput} 商品/時間"
+
+#: widget.audit.offline
+msgctxt "widget.audit.offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: widget.audit.emergency
+msgctxt "widget.audit.emergency"
+msgid "--"
+msgstr "--"
+
+#: widget.audit.heading
+msgctxt "widget.audit.heading"
+msgid "Items audited"
+msgstr "棚卸済商品"
+
+#: audit.proced
+msgctxt "audit.proced"
+msgid "PROCEED"
+msgstr "続ける"
+
+#: audit.deleteButton
+msgctxt "audit.deleteButton"
+msgid "DELETE"
+msgstr "削除"
+
+#: audit.confirm
+msgctxt "audit.confirm"
+msgid "CONFIRM"
+msgstr "確認"
+
+#: audit.cancel.cancel
+msgctxt "audit.cancel.cancel"
+msgid "CLOSE"
+msgstr "閉じる"
+
+#: audit.procedd
+msgctxt "audit.procedd"
+msgid "PROCEED"
+msgstr "続ける"
+
+#: audit.inputField.id
+msgctxt "audit.inputField.id"
+msgid "AUDIT ID"
+msgstr "棚卸ID"
+
+#: audit.inputField.pps
+msgctxt "audit.inputField.pps"
+msgid "PPS ID"
+msgstr "PPS ID"
+
+#: audit.inputField.sku
+msgctxt "audit.inputField.sku"
+msgid "SKU ID"
+msgstr "SKU ID"
+
+#: audit.inputField.location
+msgctxt "audit.inputField.location"
+msgid "LOCATION ID"
+msgstr "場所 ID"
+
+#: audit.inputField.fromdate
+msgctxt "audit.inputField.fromdate"
+msgid "FROM DATE"
+msgstr "日付から"
+
+#: audit.inputField.todate
+msgctxt "audit.inputField.todate"
+msgid "TO DATE"
+msgstr "日付まで"
+
+#: audit.tokenfield.typeAudit
+msgctxt "audit.tokenfield.typeAudit"
+msgid "AUDIT TYPE"
+msgstr "棚卸の種類"
+
+#: audit.token3.all
+msgctxt "audit.token3.all"
+msgid "Any"
+msgstr "どれか"
+
+#: audit.tokenfield.STATUS
+msgctxt "audit.tokenfield.STATUS"
+msgid "STATUS"
+msgstr "状態"
+
+#: audit.tokenfield.createdby
+msgctxt "audit.tokenfield.createdby"
+msgid "CREATED BY"
+msgstr "	\n"
+"登録者"
+
+#: audit.token1.all
+msgctxt "audit.token1.all"
+msgid "Any"
+msgstr "すべて"
+
+#: audit.token1.sku
+msgctxt "audit.token1.sku"
+msgid "SKU"
+msgstr "SKU"
+
+#: audit.token1.location
+msgctxt "audit.token1.location"
+msgid "Location"
+msgstr "ロケーション"
+
+#: audit.token2.all
+msgctxt "audit.token2.all"
+msgid "Any"
+msgstr "すべて"
+
+#: audit.token2.notyetstarted
+msgctxt "audit.token2.notyetstarted"
+msgid "Not yet started"
+msgstr "未着手"
+
+#: audit.token2.inProgress
+msgctxt "audit.token2.inProgress"
+msgid "In progress"
+msgstr "進行中"
+
+#: audit.token2.toberesolved
+msgctxt "audit.token2.toberesolved"
+msgid "To be resolved"
+msgstr "解決される"
+
+#: audit.token2.cancelled
+msgctxt "audit.token2.cancelled"
+msgid "Cancelled"
+msgstr "キャンセル"
+
+#: audit.token2.completed
+msgctxt "audit.token2.completed"
+msgid "Completed"
+msgstr "完了"
+
+#: audit.token2.paused
+msgctxt "audit.token2.paused"
+msgid "Paused"
+msgstr "休止されました"
+
+#: audit.token2.duplicated
+msgctxt "audit.token2.duplicated"
+msgid "Duplicated"
+msgstr "重複した"
+
+#: audit.token2.deleted
+msgctxt "audit.token2.deleted"
+msgid "Deleted"
+msgstr "削除されました"
+
+#: gor.filter.filterLabel
+msgctxt "gor.filter.filterLabel"
+msgid "Filter data"
+msgstr "フィルタデータ"
+
+#: gor.filter.hide
+msgctxt "gor.filter.hide"
+msgid "Hide"
+msgstr "隠す"
+
+#: gor.filter.noResult
+msgctxt "gor.filter.noResult"
+msgid "No results found, please try again"
+msgstr "結果は見つかりませんでした。もう一度お試しください"
+
+#: gor.filter.reset
+msgctxt "gor.filter.reset"
+msgid "Reset"
+msgstr "リセット"
+
+#: gor.filter.heading
+msgctxt "gor.filter.heading"
+msgid "Apply filter"
+msgstr "フィルタを適用します"
+
+#: audit.startaudit.pendingAudit
+msgctxt "audit.startaudit.pendingAudit"
+msgid "Audits pending"
+msgstr "棚卸保留中"
+
+#: audit.startaudit.linesRemaining
+msgctxt "audit.startaudit.linesRemaining"
+msgid "lines remaining to be Audited"
+msgstr "棚卸対象の線"
+
+#: audit.startaudit.searchPlaceholder
+msgctxt "audit.startaudit.searchPlaceholder"
+msgid "Search PPS by opertor name or mode"
+msgstr "オペレータ名またはモードでPPSを検索する"
+
+#: audit.ppschangeStart
+msgctxt "audit.ppschangeStart"
+msgid ""
+"A mode change request will be sent for PPS that are not in Audit mode.Do you "
+"still wish to proceed?"
+msgstr "棚卸モードではないPPSに対してモード変更要求が送信されます。まだ進めていますか？"
+
+#: audit.audittask.headerchangeppd
+msgctxt "audit.audittask.headerchangeppd"
+msgid "Change PPS"
+msgstr "PPS を変化する"
+
+#: audit.audittask.headerstartaudit
+msgctxt "audit.audittask.headerstartaudit"
+msgid "Start Audit"
+msgstr "棚卸を開始する"
+
+#: audit.startaudit.auditmodepps
+msgctxt "audit.startaudit.auditmodepps"
+msgid "PPS in audit mode"
+msgstr "棚卸モードのPPS"
+
+#: audit.startaudit.othermodepps
+msgctxt "audit.startaudit.othermodepps"
+msgid "PPS in other mode"
+msgstr "他のモードのPPS"
+
+#: audit.startaudit.operatorassign
+msgctxt "audit.startaudit.operatorassign"
+msgid "Operator Assigned"
+msgstr "オペレータ割り当て済み"
+
+#: audit.startaudit.startButton
+msgctxt "audit.startaudit.startButton"
+msgid "START"
+msgstr "開始"
+
+#: audit.startaudit.Foraudit
+msgctxt "audit.startaudit.Foraudit"
+msgid "For audit"
+msgstr "棚卸のため"
+
+#: audit.nameplaceholder.text
+msgctxt "audit.nameplaceholder.text"
+msgid "Time, place or products"
+msgstr "時間、場所または製品"
+
+#: audit.inputplaceholder.text
+msgctxt "audit.inputplaceholder.text"
+msgid "e.g: 012678ABC"
+msgstr "e.g: 012678ABC"
+
+#: audit.locationInputPlaceholder.text
+msgctxt "audit.locationInputPlaceholder.text"
+msgid "e.g: 132.0.A.47"
+msgstr "e.g: 132.0.A.47"
+
+#: audit.searchinputplaceholder.text
+msgctxt "audit.searchinputplaceholder.text"
+msgid "Search SKU"
+msgstr "SKUを検索"
+
+#: audit.locinputplaceholder.text
+msgctxt "audit.locinputplaceholder.text"
+msgid "Search Location"
+msgstr "検索場所"
+
+#: audit.locationdoesnotexist.text
+msgctxt "audit.locationdoesnotexist.text"
+msgid "Location does not exist"
+msgstr "場所が存在しません"
+
+#: audit.skudoesnotexist.text
+msgctxt "audit.skudoesnotexist.text"
+msgid "SKU does not exist"
+msgstr "SKUは存在しません"
+
+#: audit.duplicatelocation.text
+msgctxt "audit.duplicatelocation.text"
+msgid "Duplicate entry"
+msgstr "重複エントリ"
+
+#: audit.auditbysku.text
+msgctxt "audit.auditbysku.text"
+msgid "Audit by SKU"
+msgstr "SKUによる棚卸"
+
+#: audit.auditbysku.enterSKU
+msgctxt "audit.auditbysku.enterSKU"
+msgid "Enter SKU and validate"
+msgstr "SKUを入力して検証する"
+
+#: audit.auditbysku.enterCSV
+msgctxt "audit.auditbysku.enterCSV"
+msgid "Upload CSV and validate"
+msgstr "CSVをアップロードして検証する"
+
+#: audit.auditbysku.selectAttributes
+msgctxt "audit.auditbysku.selectAttributes"
+msgid "Select Attributes"
+msgstr "属性を選択する"
+
+#: audit.auditbylocation.text
+msgctxt "audit.auditbylocation.text"
+msgid "Audit by Location"
+msgstr "場所による棚卸"
+
+#: Audit.inputCheckbox.selectAllLabel
+msgctxt "Audit.inputCheckbox.selectAllLabel"
+msgid "Select All"
+msgstr "すべて選択"
+
+#: Audit.inputCheckbox.selectAllInvalidLabel
+msgctxt "Audit.inputCheckbox.selectAllInvalidLabel"
+msgid "Select all invalid"
+msgstr "すべて無効を選択"
+
+#: Audit.inputCheckbox.selectAllValidLabel
+msgctxt "Audit.inputCheckbox.selectAllValidLabel"
+msgid "Select all valid"
+msgstr "すべて選択有効"
+
+#: Audit.inputCheckbox.deselectAllLabel
+msgctxt "Audit.inputCheckbox.deselectAllLabel"
+msgid "Deselect All"
+msgstr "すべての選択を解除"
+
+#: audit.add.heading
+msgctxt "audit.add.heading"
+msgid "Create new audit"
+msgstr "棚卸タスクを作成"
+
+#: audit.select.sku.value
+msgctxt "audit.select.sku.value"
+msgid "Enter audit name:"
+msgstr "監査名を入力："
+
+#: audit.select.sku.modeNew
+msgctxt "audit.select.sku.modeNew"
+msgid "Select mode of input:"
+msgstr "入力モードの選択："
+
+#: audits.enterSKU
+msgctxt "audits.enterSKU"
+msgid "Enter SKU"
+msgstr "SKUを入力してください"
+
+#: audits.csvUpload
+msgctxt "audits.csvUpload"
+msgid "Upload CSV file"
+msgstr "CSVファイルをアップロードする"
+
+#: audits.addSku
+msgctxt "audits.addSku"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audit.csvupload.error
+msgctxt "audit.csvupload.error"
+msgid "Error found, Please upload a valid .csv file"
+msgstr "エラーが見つかりました。有効な.csvファイルをアップロードしてください"
+
+#: audits.draganddrop.text
+msgctxt "audits.draganddrop.text"
+msgid "Drag and drop"
+msgstr "ドラッグアンドドロップ"
+
+#: audits.draganddropor.text
+msgctxt "audits.draganddropor.text"
+msgid "OR"
+msgstr "OR"
+
+#: audits.addsku2
+msgctxt "audits.addsku2"
+msgid "+ ADD NEW"
+msgstr "+新規追加"
+
+#: audit.select.sku.inputmode
+msgctxt "audit.select.sku.inputmode"
+msgid "Select mode of input:"
+msgstr "入力モードの選択："
+
+#: audits.enterLocation
+msgctxt "audits.enterLocation"
+msgid "Enter Location"
+msgstr "場所を入力してください"
+
+#: audit.add.location.heading
+msgctxt "audit.add.location.heading"
+msgid "Enter Location and validate"
+msgstr "ロケーションを入力してください"
+
+#: audit.add.location.subheading
+msgctxt "audit.add.location.subheading"
+msgid "Use copy and paste if you have multiple MSU and Slot numbers"
+msgstr "形式： (XXX.X.X.XX)"
+
+#: audits.addAuditLocation2
+msgctxt "audits.addAuditLocation2"
+msgid "+ ADD NEW"
+msgstr "+新規追加"
+
+#: audits.editLocation
+msgctxt "audits.editLocation"
+msgid "BACK TO EDIT"
+msgstr "編集に戻る"
+
+#: audit.locationValidation.success
+msgctxt "audit.locationValidation.success"
+msgid "{valid} out of {total} locations valid"
+msgstr "{total}有効な場所の内{valid}\n"
+
+#: audit.locationValidation.error
+msgctxt "audit.locationValidation.error"
+msgid ""
+"{invalid} Error found out of {total} Locations, Please rectify or enter "
+"valid Location"
+msgstr "{invalid} 場所の{total}エラーが見つかりました。有効な場所を修正または入力してください"
+
+#: audit.locationValidation.subheading
+msgctxt "audit.locationValidation.subheading"
+msgid "MSU will always supercede and all slots in the MSU will be audited"
+msgstr "MSUが常に置き換えされ、MSUの全スロットが棚卸されます。"
+
+#: audits.locationValidation.addLocation
+msgctxt "audits.locationValidation.addLocation"
+msgid "+ ADD NEW"
+msgstr "+新規追加"
+
+#: audit.kq.label.msg
+msgctxt "audit.kq.label.msg"
+msgid "Show KQ on Butler Operator Interface"
+msgstr "バトラーオペレータインターフェイスでKQを見せて下さい。"
+
+#: audit.kq.label.submsg
+msgctxt "audit.kq.label.submsg"
+msgid "Selecting this will enable key in quantity for this audit task"
+msgstr "これを選択すると、この棚卸タスクのキーが有効になります"
+
+#: audits.add.password.button
+msgctxt "audits.add.password.button"
+msgid "CREATE AUDIT"
+msgstr "棚卸を作成してください"
+
+#: audit.delete.heading
+msgctxt "audit.delete.heading"
+msgid "Are you sure you would like to delete audit task {task_name} ?"
+msgstr "棚卸タスク{task_name}を削除してもよろしいですか？"
+
+#: audit.duplicate.heading
+msgctxt "audit.duplicate.heading"
+msgid "Are you sure you would like to duplicate audit task {task_name} ?"
+msgstr "棚卸タスク{task_name}を複製してもよろしいですか？"
+
+#: audit.valid.sku
+msgctxt "audit.valid.sku"
+msgid "SKU confirmed"
+msgstr "SKUが確認されました"
+
+#: audit.valid.location
+msgctxt "audit.valid.location"
+msgid "Location valid"
+msgstr "有効な場所"
+
+#: audit.noAtrributes.sku
+msgctxt "audit.noAtrributes.sku"
+msgid "SKU confirmed but no Box Id found"
+msgstr "SKUは確認済みですがボックスIDは見つかりませんでした"
+
+#: audit.uploadcsv.text
+msgctxt "audit.uploadcsv.text"
+msgid "Upload CSV and validate"
+msgstr "CSVをアップロードして検証する"
+
+#: audit.selectattributes.text
+msgctxt "audit.selectattributes.text"
+msgid "Select attributes"
+msgstr "属性を選択してください"
+
+#: audit.edit.heading
+msgctxt "audit.edit.heading"
+msgid "Edit audit"
+msgstr "棚卸を編集してください"
+
+#: audits.edit.password.button
+msgctxt "audits.edit.password.button"
+msgid "UPDATE"
+msgstr "更新"
+
+#: audit.createduplicate.heading
+msgctxt "audit.createduplicate.heading"
+msgid "Duplicate audit"
+msgstr "重複棚卸"
+
+#: audit.select.sku.modeinput
+msgctxt "audit.select.sku.modeinput"
+msgid "Select mode of input:"
+msgstr "入力モードの選択："
+
+#: audits.addAuditSkuCP
+msgctxt "audits.addAuditSkuCP"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audits.addAuditSkuValid
+msgctxt "audits.addAuditSkuValid"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audit.select.mode
+msgctxt "audit.select.mode"
+msgid "Select mode of input:"
+msgstr "入力モードの選択："
+
+#: audits.addAuditLocationCP
+msgctxt "audits.addAuditLocationCP"
+msgid "+ Add New"
+msgstr "+新規追加"
+
+#: audit.start.auditdetails.subheading2
+msgctxt "audit.start.auditdetails.subheading2"
+msgid "There are currently no PPS in audit mode."
+msgstr "現在、PPSが棚卸モードではありません。"
+
+#: audit.start.auditdetails.please
+msgctxt "audit.start.auditdetails.please"
+msgid "Please"
+msgstr "お願いします"
+
+#: audit.start.auditdetails.hyperlink
+msgctxt "audit.start.auditdetails.hyperlink"
+msgid "go to the PPS mode"
+msgstr "PPSモード移動"
+
+#: audit.start.auditdetails.operations
+msgctxt "audit.start.auditdetails.operations"
+msgid "change PPS operations."
+msgstr "PPSを変更してください。"
+
+#: resolveAudit.table.batchID
+msgctxt "resolveAudit.table.batchID"
+msgid "BOX ID."
+msgstr "ボックスID."
+
+#: resolveAudit.table.expectedItems
+msgctxt "resolveAudit.table.expectedItems"
+msgid "EXPECTED QUANTITY"
+msgstr "予定数"
+
+#: resolveAudit.table.actualQuantity
+msgctxt "resolveAudit.table.actualQuantity"
+msgid "ACTUAL QUANTITY"
+msgstr "実数"
+
+#: resolveAudit.table.STATUS
+msgctxt "resolveAudit.table.STATUS"
+msgid "STATUS"
+msgstr "状態"
+
+#: resolveAudit.table.resolve
+msgctxt "resolveAudit.table.resolve"
+msgid "RESOLVE"
+msgstr "解決"
+
+#: audit.inSlot.text
+msgctxt "audit.inSlot.text"
+msgid "In slot"
+msgstr "スロット内"
+
+#: resolveAudit.table.slot
+msgctxt "resolveAudit.table.slot"
+msgid "SLOT ID"
+msgstr "スロットID"
+
+#: audit.resolve.heading
+msgctxt "audit.resolve.heading"
+msgid "Resolve issues"
+msgstr "問題を解決します"
+
+#: audit.viewIssues.heading
+msgctxt "audit.viewIssues.heading"
+msgid "View issues"
+msgstr "問題を表示"
+
+#: audit.header.information
+msgctxt "audit.header.information"
+msgid "Audit task #{auditId}"
+msgstr "棚卸タスク＃{auditId}"
+
+#: audit.missing.auditType
+msgctxt "audit.missing.auditType"
+msgid "Mismatch found in {totalLines} slot"
+msgstr "スロットにミスマッチが見つかりました {totalLines} "
+
+#: resolveAudit.cancelLabel
+msgctxt "resolveAudit.cancelLabel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: resolveAudit.confirmLabel
+msgctxt "resolveAudit.confirmLabel"
+msgid "Confirm"
+msgstr "確認"
+
+#: resolveAudit.closeLabel
+msgctxt "resolveAudit.closeLabel"
+msgid "Close"
+msgstr "閉じる"
+
+#: audit.sku.update
+msgctxt "audit.sku.update"
+msgid "Update Audit"
+msgstr "棚卸更新してください"
+
+#: audit.sku.alert.update
+msgctxt "audit.sku.alert.update"
+msgid "Do you wish to update Audit?"
+msgstr "棚卸を更新しますか？"
+
+#: audit.sku.duplicate
+msgctxt "audit.sku.duplicate"
+msgid "Duplicate Audit"
+msgstr "重複棚卸"
+
+#: audit.sku.alert.duplicate
+msgctxt "audit.sku.alert.duplicate"
+msgid "Do you wish to duplicate Audit?"
+msgstr "棚卸を重複しますか？"
+
+#: audit.sku.create.audit
+msgctxt "audit.sku.create.audit"
+msgid "Create Audit"
+msgstr "棚卸を作成する"
+
+#: audit.sku.alert.create
+msgctxt "audit.sku.alert.create"
+msgid "Do you wish to create Audit?"
+msgstr "棚卸を作成しますか？"
+
+#: audit.sku.alert.noneSelected
+msgctxt "audit.sku.alert.noneSelected"
+msgid ""
+"Since you haven't selected any attributes, Audit will happen on all "
+"attributes of the SKU's"
+msgstr "属性を選択していないため、棚卸はSKUのすべての属性で行われます"
+
+#: audit.sku.alert.someSelected
+msgctxt "audit.sku.alert.someSelected"
+msgid ""
+"Since you haven't selected {missingSKUCount} of {totalSKUCount} attributes, "
+"Audit will happen on all attributes of the SKU's"
+msgstr "{totalSKUCount}属性の{missingSKUCount}を選択されていないので、棚卸はSKUの全ての属性で行われます。"
+
+#: audit.sku.alert.cancel
+msgctxt "audit.sku.alert.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: viewDetais.multisku.status
+msgctxt "viewDetais.multisku.status"
+msgid "Multi SKU"
+msgstr "マルチSKU"
+
+#: viewDetais.singlesku.status
+msgctxt "viewDetais.singlesku.status"
+msgid "Single SKU"
+msgstr "シングルSKU"
+
+#: viewDetais.multilocation.prefix
+msgctxt "viewDetais.multilocation.prefix"
+msgid "Multi Location"
+msgstr "マルチ ロケーション"
+
+#: viewDetais.singlelocation.status
+msgctxt "viewDetais.singlelocation.status"
+msgid "Single Location"
+msgstr "シングル ロケーション"
+
+#: viewDetais.linescompleted.status
+msgctxt "viewDetais.linescompleted.status"
+msgid "lines completed out of"
+msgstr "線のうちに完了"
+
+#: viewDetais.attrselected.status
+msgctxt "viewDetais.attrselected.status"
+msgid "attributes selected"
+msgstr "属性を選択された"
+
+#: viewDetais.noattrselected.status
+msgctxt "viewDetais.noattrselected.status"
+msgid "No attributes selected"
+msgstr " 属性を選択していません"
+
+#: viewDetais.noinventory.status
+msgctxt "viewDetais.noinventory.status"
+msgid "No inventory found"
+msgstr "在庫が見つかりません"
+
+#: viewDetais.missing.status
+msgctxt "viewDetais.missing.status"
+msgid "missing out of"
+msgstr "の内欠けている"
+
+#: viewDetais.extra.status
+msgctxt "viewDetais.extra.status"
+msgid "extra entitiy found"
+msgstr "余分なエンティティが見つかりました"
+
+#: viewDetais.items.status
+msgctxt "viewDetais.items.status"
+msgid "items"
+msgstr "項目"
+
+#: viewDetais.changepps.status
+msgctxt "viewDetais.changepps.status"
+msgid "Change PPS"
+msgstr "PPSを変更する"
+
+#: viewDetais.searchbysku.status
+msgctxt "viewDetais.searchbysku.status"
+msgid "Search by SKU or PDFA"
+msgstr "SKUまたはPDFAで検索します"
+
+#: viewDetais.pps.prefix
+msgctxt "viewDetais.pps.prefix"
+msgid "PPS"
+msgstr "PPS"
+
+#: viewDetais.audit.header
+msgctxt "viewDetais.audit.header"
+msgid "Audit"
+msgstr "棚卸"
+
+#: viewDetais.audit.audittask
+msgctxt "viewDetais.audit.audittask"
+msgid "in this Audit task"
+msgstr "この棚卸タスクで"
+
+#: viewDetais.audit.nodatashow
+msgctxt "viewDetais.audit.nodatashow"
+msgid "No data to show"
+msgstr "表示するデータがありません"
+
+#: viewDetais.createdby.status
+msgctxt "viewDetais.createdby.status"
+msgid "Created By"
+msgstr "作成者"
+
+#: viewDetais.operator.status
+msgctxt "viewDetais.operator.status"
+msgid "Operator"
+msgstr "オペレーター"
+
+#: viewDetais.audittype.status
+msgctxt "viewDetais.audittype.status"
+msgid "Audit Type"
+msgstr "棚卸タイプ"
+
+#: viewDetais.ppsid.status
+msgctxt "viewDetais.ppsid.status"
+msgid "PPS ID"
+msgstr "PPS ID"
+
+#: viewDetais.showkq.status
+msgctxt "viewDetais.showkq.status"
+msgid "Show KQ"
+msgstr "ショー KQ"
+
+#: viewDetais.audit.Reminder
+msgctxt "viewDetais.audit.Reminder"
+msgid "Reminder"
+msgstr "リマインダー"
+
+#: viewDetais.audit.starttime
+msgctxt "viewDetais.audit.starttime"
+msgid "Start time"
+msgstr "開始時間"
+
+#: viewDetais.audit.endtime
+msgctxt "viewDetais.audit.endtime"
+msgid "End time"
+msgstr "終了時間"
+
+#: viewDetais.audit.progress
+msgctxt "viewDetais.audit.progress"
+msgid "Progress"
+msgstr "進捗"
+
+#: viewDetais.audit.true
+msgctxt "viewDetais.audit.true"
+msgid "True"
+msgstr "真"
+
+#: viewDetais.audit.false
+msgctxt "viewDetais.audit.false"
+msgid "False"
+msgstr "偽"
+
+#: audit.audittask
+msgctxt "audit.audittask"
+msgid "Audit Task"
+msgstr "棚卸タスク"
+
+#: audit.auditdetails
+msgctxt "audit.auditdetails"
+msgid "Basic details"
+msgstr "基本的な詳細"
+
+#: emergency.heading
+msgctxt "emergency.heading"
+msgid "Systemwide System stop"
+msgstr "システムワイドシステム停止"
+
+#: emergency.type
+msgctxt "emergency.type"
+msgid "The butler system is now stopped by a {type} emergency."
+msgstr "バトラーシステムは現在、{type}の緊急事態で停止されています。"
+
+#: emergency.action
+msgctxt "emergency.action"
+msgid "System reset required before returning to operation"
+msgstr "操作に戻る前にシステムリセットが必要です"
+
+#: emergency.stop
+msgctxt "emergency.stop"
+msgid "Stoppped:"
+msgstr "停止："
+
+#: emergency.trigger
+msgctxt "emergency.trigger"
+msgid "Triggered at:"
+msgstr "トリガー："
+
+#: emergency.operator
+msgctxt "emergency.operator"
+msgid "Operator:"
+msgstr "オペレーター："
+
+#: emergency.button
+msgctxt "emergency.button"
+msgid "Close"
+msgstr "閉じる"
+
+#: operation.alert.release
+msgctxt "operation.alert.release"
+msgid "All Emergency-stop buttons released"
+msgstr "停止ボタンが解放されました"
+
+#: operation.alert.releaseSoft
+msgctxt "operation.alert.releaseSoft"
+msgid "All Emergency-pause buttons released"
+msgstr "全緊急休止ボタンが解放されました"
+
+#: operation.alert.releaseSoftBreached
+msgctxt "operation.alert.releaseSoftBreached"
+msgid "Pause button released"
+msgstr "休止ボタンが解放されました"
+
+#: operation.alert.release.text
+msgctxt "operation.alert.release.text"
+msgid "All System-stop buttons have been released."
+msgstr "すべてのシステム停止ボタンがリリースされました。"
+
+#: operation.alert.releaseSoft.text
+msgctxt "operation.alert.releaseSoft.text"
+msgid "All Emergency-pause buttons have been released."
+msgstr "全緊急休止ボタンが解放されました"
+
+#: operation.alert.releaseSoft.textBreached
+msgctxt "operation.alert.releaseSoft.textBreached"
+msgid "System pause button in {zone} has been released"
+msgstr "{zone}のシステムポーズボタンがリリースされました"
+
+#: operation.alert.release.subtext
+msgctxt "operation.alert.release.subtext"
+msgid ""
+"You will be required to enter your password in order to view the checklist.  "
+"             Approving all the items on checklist will resume the warehouse "
+"operation"
+msgstr ""
+"チェックリストを表示する為にパスワードの入力が必要となります。\n"
+"__________チェックリストでの全ての項目の承認は倉庫操作を再開する。"
+
+#: operation.alert.release.button
+msgctxt "operation.alert.release.button"
+msgid "Resume operation"
+msgstr "操作を続行します"
+
+#: operation.fire.shutter
+msgctxt "operation.fire.shutter"
+msgid "Clearing all shutters"
+msgstr "全シャッターをクリアしています"
+
+#: operation.fire.failshutter
+msgctxt "operation.fire.failshutter"
+msgid "Failed to clear shutters"
+msgstr "シャッターをクリアできませんでした"
+
+#: operation.fire.clearedshutter
+msgctxt "operation.fire.clearedshutter"
+msgid "Cleared all shutters"
+msgstr "すべてのシャッターをクリア"
+
+#: operation.fire.escapecleared
+msgctxt "operation.fire.escapecleared"
+msgid "Cleared escape path"
+msgstr "エスケープパスをクリアしました"
+
+#: operation.fire.escapeprogress
+msgctxt "operation.fire.escapeprogress"
+msgid "Clearing escape path"
+msgstr "エスケープパスのクリア"
+
+#: operation.fire.escapefail
+msgctxt "operation.fire.escapefail"
+msgid "Failed to clear escape path"
+msgstr "エスケープパスをクリアできませんでした"
+
+#: operation.fire.header
+msgctxt "operation.fire.header"
+msgid "FIRE EMERGENCY"
+msgstr "火災緊急"
+
+#: operation.fire.cautionText
+msgctxt "operation.fire.cautionText"
+msgid ""
+"Fire emergency has been triggered and system has started its safety measures."
+""
+msgstr "火災緊急が起動し、システムの安全性の処置が開始されました。"
+
+#: operation.fire.evacuation
+msgctxt "operation.fire.evacuation"
+msgid "Please follow evacuation procedures immediately."
+msgstr "すぐに避難手続きを行ってください。"
+
+#: operationPause.sensor.latchGate
+msgctxt "operationPause.sensor.latchGate"
+msgid "Latch Gate"
+msgstr "ラッチゲート"
+
+#: operationPause.sensor.buttonSensor
+msgctxt "operationPause.sensor.buttonSensor"
+msgid "Button"
+msgstr "ボタン"
+
+#: operationPause.sensor.lightCurtain
+msgctxt "operationPause.sensor.lightCurtain"
+msgid "Light Curtain"
+msgstr "ライト カーテン"
+
+#: operation.alert.pause
+msgctxt "operation.alert.pause"
+msgid "Butler System - Operation Paused"
+msgstr "操作が休止されました"
+
+#: operation.alert.pause.breach.text
+msgctxt "operation.alert.pause.breach.text"
+msgid ""
+"Emergency-Pause activated due to SOP breach at {sensor} {controller} in "
+"{zone}."
+msgstr "{zone}の{controller}経由のSOPの破棄によって緊急停止が活性化されました."
+
+#: operation.alert.pause.text
+msgctxt "operation.alert.pause.text"
+msgid "Emergency-Pause activated via Controller {controller} in {zone}."
+msgstr "Butler 管理ダッシュボードで操作が一時停止しました"
+
+#: operation.alert.pause.nonPOE
+msgctxt "operation.alert.pause.nonPOE"
+msgid "Operation Paused"
+msgstr "操作が休止されました"
+
+#: operation.alert.pause.subtext
+msgctxt "operation.alert.pause.subtext"
+msgid ""
+"You must check the emergency situation and release the System Pause button "
+"in order to resume the operation in warehouse"
+msgstr "倉庫で作業を再開するには、緊急事態をチェックし、システム一時停止ボタンを放してください"
+
+#: operation.alert.stop
+msgctxt "operation.alert.stop"
+msgid "Butler System - Operation Stopped"
+msgstr "操作が停止されました"
+
+#: operation.alert.stop.text
+msgctxt "operation.alert.stop.text"
+msgid "Emergency-Stop activated via Conroller {controller} in {zone}."
+msgstr "緊急停止ボタンが押されました。"
+
+#: operation.alert.stop.nonPOE
+msgctxt "operation.alert.stop.nonPOE"
+msgid "Operation Stopped"
+msgstr "操作が停止されました"
+
+#: operation.alert.stop.subtext
+msgctxt "operation.alert.stop.subtext"
+msgid ""
+"You must check the emergency situation and release the System Stop button in "
+"order to resume the operation in warehouse"
+msgstr "倉庫で作業を再開するには、緊急事態をチェックし、システム停止ボタンを放してください"
+
+#: operation.pause.heading
+msgctxt "operation.pause.heading"
+msgid "Pause Operation"
+msgstr "操作を休止します"
+
+#: operation.pause.text
+msgctxt "operation.pause.text"
+msgid ""
+"All Butler bots, PPS and other sysytem components will be paused once        "
+"       completed the last action"
+msgstr "最終アクションが完了________次第、全てのバトラーボット、PPS、他のシステム部品が休止されます。"
+
+#: operation.pause.error
+msgctxt "operation.pause.error"
+msgid "The entered input does not match. Please try again."
+msgstr "入力されたデータが一致していません。もう一度お試しください。"
+
+#: operation.pause.cancel
+msgctxt "operation.pause.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: operation.pause.button
+msgctxt "operation.pause.button"
+msgid "Pause Operation"
+msgstr "操作を休止します"
+
+#: operation.resume.heading
+msgctxt "operation.resume.heading"
+msgid "Resume Operation"
+msgstr "操作を続行します"
+
+#: operation.resume.text
+msgctxt "operation.resume.text"
+msgid ""
+"To resume operation, you will be required to go through a safety             "
+"    checklist to make sure that the Butler system is ready"
+msgstr "操作を再開するには、安全_______チェックリストを読んでバトラーシステムは準備が出来ている事の確認が必要となります。\n"
+
+#: operation.resume.error
+msgctxt "operation.resume.error"
+msgid "The entered input does not match. Please try again."
+msgstr "入力されたデータが一致していません。もう一度お試しください。"
+
+#: operation.cancel
+msgctxt "operation.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: operation.resume.view
+msgctxt "operation.resume.view"
+msgid "View safety checklist"
+msgstr "安全チェックリストを見る"
+
+#: operation.safety.steperror
+msgctxt "operation.safety.steperror"
+msgid "(Check again)"
+msgstr "(もう一度確認してください)"
+
+#: misplaced.botId
+msgctxt "misplaced.botId"
+msgid "{botid}"
+msgstr "{botid}"
+
+#: misplaced.rackId
+msgctxt "misplaced.rackId"
+msgid "{rackid}"
+msgstr "{rackid}"
+
+#: misplaced.racklocation
+msgctxt "misplaced.racklocation"
+msgid "{racklocation}"
+msgstr "{racklocation}"
+
+#: misplaced.rackface
+msgctxt "misplaced.rackface"
+msgid "{rackface}"
+msgstr "{rackface}"
+
+#: misplaced.ppsid
+msgctxt "misplaced.ppsid"
+msgid "{ppsid}"
+msgstr "{ppsid}"
+
+#: misplaced.ppslocation
+msgctxt "misplaced.ppslocation"
+msgid "{ppslocation}"
+msgstr "{ppslocation}"
+
+#: operation.firesafety.heading
+msgctxt "operation.firesafety.heading"
+msgid "Resume Checklist"
+msgstr "チェックリストを続行します"
+
+#: operation.safety.heading
+msgctxt "operation.safety.heading"
+msgid "Safety Checklist"
+msgstr "安全チェックリスト"
+
+#: operation.safety.steps
+msgctxt "operation.safety.steps"
+msgid "Check approval steps"
+msgstr "承認手順を確認してください"
+
+#: operation.safety.text
+msgctxt "operation.safety.text"
+msgid ""
+"Tick every item to confirm that the system is safe to resume operation."
+msgstr "システムは操作を続行するために安全かどうかを確認して全ての項目をチェックしてください。"
+
+#: operation.safetychecklist.errors
+msgctxt "operation.safetychecklist.errors"
+msgid ""
+"System has detected that one or more of the required conditions have not "
+"been fulfilled.                      Please try again or contact service "
+"engineer for support"
+msgstr ""
+"システムは、１つ以上の要求条件が満たされていない事を検出しています。_______もう一度お試し下さい、又はサポートするサービスエンジニアに連絡して下さい。"
+
+#: operation.safetychecklistTable.botid
+msgctxt "operation.safetychecklistTable.botid"
+msgid "Bot ID"
+msgstr "ボットID"
+
+#: operation.safetychecklistTable.rockid
+msgctxt "operation.safetychecklistTable.rockid"
+msgid "Rack ID"
+msgstr "ラックID"
+
+#: operation.safetychecklistTable.rocklocation
+msgctxt "operation.safetychecklistTable.rocklocation"
+msgid "Rack location"
+msgstr "ラックロケーション"
+
+#: operation.safetychecklistTable.rackface
+msgctxt "operation.safetychecklistTable.rackface"
+msgid "Rack face"
+msgstr "ラックフェイス"
+
+#: operation.safetychecklistTable.ppsid
+msgctxt "operation.safetychecklistTable.ppsid"
+msgid "PPS ID"
+msgstr "PPS ID"
+
+#: operation.safetychecklistTable.ppslocation
+msgctxt "operation.safetychecklistTable.ppslocation"
+msgid "PPS location"
+msgstr "PPS ロケーション"
+
+#: operation.firesafety.confirm
+msgctxt "operation.firesafety.confirm"
+msgid "Resume Operation"
+msgstr "操作を続行します"
+
+#: operation.safety.confirm
+msgctxt "operation.safety.confirm"
+msgid "Confirm"
+msgstr "確認"
+
+#: inventory.histogram.header
+msgctxt "inventory.histogram.header"
+msgid "Stock level history"
+msgstr "在庫レベル履歴"
+
+#: inventory.linechart.header
+msgctxt "inventory.linechart.header"
+msgid "Item Movements"
+msgstr "商品の移動"
+
+#: inventory.histogram.today
+msgctxt "inventory.histogram.today"
+msgid "Today's"
+msgstr "本日の在庫"
+
+#: itemCat.category.heading
+msgctxt "itemCat.category.heading"
+msgid "Category"
+msgstr "カテゴリ"
+
+#: itemCat.CBM.heading
+msgctxt "itemCat.CBM.heading"
+msgid "CBM Used"
+msgstr "使用済CBM"
+
+#: itemCat.daysOnHand.heading
+msgctxt "itemCat.daysOnHand.heading"
+msgid "Days on Hand"
+msgstr "保管日数"
+
+#: ValidateSelAtt.locationdoesnotexist.text
+msgctxt "ValidateSelAtt.locationdoesnotexist.text"
+msgid "Location does not exist"
+msgstr "場所が存在しません"
+
+#: ValidateSelAtt.skudoesnotexist.text
+msgctxt "ValidateSelAtt.skudoesnotexist.text"
+msgid "SKU does not exist"
+msgstr "SKUは存在しません"
+
+#: ValidateSelAtt.duplicatelocation.text
+msgctxt "ValidateSelAtt.duplicatelocation.text"
+msgid "Duplicate entry"
+msgstr "重複エントリ"
+
+#: itemRecall.tab.sku
+msgctxt "itemRecall.tab.sku"
+msgid "Enter SKU & Validate"
+msgstr "SKU＆検証を入力"
+
+#: itemRecall.tab.att
+msgctxt "itemRecall.tab.att"
+msgid "Select Attributes"
+msgstr "属性の選択"
+
+#: itemRecall.order.label
+msgctxt "itemRecall.order.label"
+msgid "Order Id"
+msgstr "注文ID"
+
+#: itemRecall.recall.button
+msgctxt "itemRecall.recall.button"
+msgid "Recall"
+msgstr "想起"
+
+#: logout.question
+msgctxt "logout.question"
+msgid "Are you sure you would like to log out now?"
+msgstr "ログアウトしてもよろしいですか？"
+
+#: logout.cancel
+msgctxt "logout.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: logout.done
+msgctxt "logout.done"
+msgid "Log out now"
+msgstr "ログアウト"
+
+#: audit.inputField.notification
+msgctxt "audit.inputField.notification"
+msgid "NOTIFICATION"
+msgstr "お知らせ"
+
+#: audit.tokenfield.component
+msgctxt "audit.tokenfield.component"
+msgid "COMPONENT"
+msgstr "成分"
+
+#: audit.token2.emergency
+msgctxt "audit.token2.emergency"
+msgid "Emergency"
+msgstr "緊急"
+
+#: audit.token2.order
+msgctxt "audit.token2.order"
+msgid "Order"
+msgstr "注文"
+
+#: audit.token2.system
+msgctxt "audit.token2.system"
+msgid "System"
+msgstr "システム"
+
+#: notification.table.description
+msgctxt "notification.table.description"
+msgid "Description"
+msgstr "記述"
+
+#: notification.table.time
+msgctxt "notification.table.time"
+msgid "Time"
+msgstr "時間"
+
+#: notification.all.head
+msgctxt "notification.all.head"
+msgid "Notifications"
+msgstr "通知"
+
+#: gor.filter.filterLabelcaps
+msgctxt "gor.filter.filterLabelcaps"
+msgid "FILTER DATA"
+msgstr "フィルタデータ"
+
+#: pickPerformance.dropdown
+msgctxt "pickPerformance.dropdown"
+msgid "PPS Pick Performance"
+msgstr "PPS - 出庫生産性"
+
+#: putPerformance.dropdown
+msgctxt "putPerformance.dropdown"
+msgid "PPS Put Performance"
+msgstr "PPS - 入庫生産性"
+
+#: auditPerformance.dropdown
+msgctxt "auditPerformance.dropdown"
+msgid "PPS Audit Performance"
+msgstr "PPS - 棚卸生産性"
+
+#: order.inputField.orderId
+msgctxt "order.inputField.orderId"
+msgid "ORDER ID"
+msgstr "注文 ID"
+
+#: order.inputField.pickBeforeTime
+msgctxt "order.inputField.pickBeforeTime"
+msgid "CUT OFF TIME"
+msgstr "遮断 時間"
+
+#: order.token.orderTags
+msgctxt "order.token.orderTags"
+msgid "ORDER TAGS"
+msgstr "注文タグ"
+
+#: order.token.status
+msgctxt "order.token.status"
+msgid "STATUS"
+msgstr "状態"
+
+#: order.orderTags.any
+msgctxt "order.orderTags.any"
+msgid "Any"
+msgstr "どれか"
+
+#: order.orderTags.urgent
+msgctxt "order.orderTags.urgent"
+msgid "Urgent"
+msgstr "緊急"
+
+#: order.orderTags.express
+msgctxt "order.orderTags.express"
+msgid "Express"
+msgstr "エクスプレス"
+
+#: order.status.any
+msgctxt "order.status.any"
+msgid "Any"
+msgstr "どれか"
+
+#: order.status.pending
+msgctxt "order.status.pending"
+msgid "Pending"
+msgstr "保留中"
+
+#: order.status.breachRish
+msgctxt "order.status.breachRish"
+msgid "Breach risk"
+msgstr "違反リスク"
+
+#: order.status.breached
+msgctxt "order.status.breached"
+msgid "Breached"
+msgstr "違反された"
+
+#: order.status.breach&Completed
+msgctxt "order.status.breach&Completed"
+msgid "Breach&Completed"
+msgstr "違反と完了"
+
+#: order.status.productshort
+msgctxt "order.status.productshort"
+msgid "Product Short"
+msgstr "製品のショート"
+
+#: order.status.outofstock
+msgctxt "order.status.outofstock"
+msgid "Out of Stock"
+msgstr "在庫切れ"
+
+#: order.status.completed
+msgctxt "order.status.completed"
+msgid "Completed"
+msgstr "完了"
+
+#: order.status.rejected
+msgctxt "order.status.rejected"
+msgid "Rejected"
+msgstr "拒否された"
+
+#: order.status.abandoned
+msgctxt "order.status.abandoned"
+msgid "Abandoned"
+msgstr "放棄された"
+
+#: order.status.cancelled&Completed
+msgctxt "order.status.cancelled&Completed"
+msgid "Cancelled"
+msgstr "キャンセル"
+
+#: order.inputField.fromDate
+msgctxt "order.inputField.fromDate"
+msgid "FROM DATE"
+msgstr "日付から"
+
+#: order.inputField.toDate
+msgctxt "order.inputField.toDate"
+msgid "TO DATE"
+msgstr "日付まで"
+
+#: order.inputField.fromTime
+msgctxt "order.inputField.fromTime"
+msgid "TIME"
+msgstr "時間"
+
+#: order.inputField.toTime
+msgctxt "order.inputField.toTime"
+msgid "TIME"
+msgstr "時間"
+
+#: orders.pending.status
+msgctxt "orders.pending.status"
+msgid "Pending"
+msgstr "保留中"
+
+#: orders.toBePicked.status
+msgctxt "orders.toBePicked.status"
+msgid "{current} products to be picked"
+msgstr "{current}製品を選択する"
+
+#: orders.productsPicked.status
+msgctxt "orders.productsPicked.status"
+msgid "{current} of {total} products picked"
+msgstr "選択された{total}製品の{current}"
+
+#: orders.action.collapseAll
+msgctxt "orders.action.collapseAll"
+msgid "COLLAPSE ALL"
+msgstr "すべてを潰す"
+
+#: orders.action.filterLabel
+msgctxt "orders.action.filterLabel"
+msgid "FILTER DATA"
+msgstr "フィルタデータ"
+
+#: orderlist.filter.search.bar
+msgctxt "orderlist.filter.search.bar"
+msgid "{total} Orders found"
+msgstr "{total} オーダーが見つかりました"
+
+#: orderlist.filter.search.bar.showall
+msgctxt "orderlist.filter.search.bar.showall"
+msgid "Show all orders"
+msgstr "全てのオーダーを表示します"
+
+#: orderList.fulfillable.status
+msgctxt "orderList.fulfillable.status"
+msgid "In progress"
+msgstr "進行中"
+
+#: orderList.complete.status
+msgctxt "orderList.complete.status"
+msgid "Completed"
+msgstr "完了"
+
+#: orderList.cancelled.status
+msgctxt "orderList.cancelled.status"
+msgid "Cancelled"
+msgstr "キャンセル"
+
+#: orderList.created.status
+msgctxt "orderList.created.status"
+msgid "Created"
+msgstr "作成した"
+
+#: orderlist.badRequest.status
+msgctxt "orderlist.badRequest.status"
+msgid "Rejected"
+msgstr "拒否された"
+
+#: orderlist.notFulfillale.status
+msgctxt "orderlist.notFulfillale.status"
+msgid "Not fulfillable"
+msgstr "充足できない"
+
+#: orderlist.tempnotFulfillale.status
+msgctxt "orderlist.tempnotFulfillale.status"
+msgid "On Hold"
+msgstr "保留"
+
+#: orderlist.accepted.status
+msgctxt "orderlist.accepted.status"
+msgid "Accepted"
+msgstr "容認されました"
+
+#: orderlist.abandoned.status
+msgctxt "orderlist.abandoned.status"
+msgid "Abandoned"
+msgstr "放棄された"
+
+#: orderlist.cutOffTime.time
+msgctxt "orderlist.cutOffTime.time"
+msgid "Cut off time {cutOffTime} hrs"
+msgstr "カットオフ時間{cutOffTime}時"
+
+#: orders.order.orderId
+msgctxt "orders.order.orderId"
+msgid "Order {orderId}"
+msgstr "注文{orderId}"
+
+#: orders.order.ppsId
+msgctxt "orders.order.ppsId"
+msgid "PPS {ppsId}"
+msgstr "PPS {ppsId}"
+
+#: orders.order.binId
+msgctxt "orders.order.binId"
+msgid "Bin {binId}"
+msgstr "Bin {binId}"
+
+#: orders.view.orderLines
+msgctxt "orders.view.orderLines"
+msgid "VIEW ORDERLINES"
+msgstr "注文書を見る"
+
+#: orders.total
+msgctxt "orders.total"
+msgid "Total {total} orders"
+msgstr "合計{total}注文"
+
+#: orders.inProgress.status
+msgctxt "orders.inProgress.status"
+msgid "{current} of {total} products picked"
+msgstr "選択された{total}製品の{current}"
+
+#: orders.fulfil
+msgctxt "orders.fulfil"
+msgid "Order fulfuilment progress"
+msgstr "注文達成進捗"
+
+#: orders.fulfil.ppsCount
+msgctxt "orders.fulfil.ppsCount"
+msgid "{current} PPS running"
+msgstr "{current}実行中PPS"
+
+#: orders.fulfil.noPpsCount
+msgctxt "orders.fulfil.noPpsCount"
+msgid "No PPS running"
+msgstr "実行中PPSはありません"
+
+#: orders.fulfil.status
+msgctxt "orders.fulfil.status"
+msgid "{picked} of {totalItems} products picked"
+msgstr "{totalItems}の{picked}商品が選択されました"
+
+#: orders.fulfil.noProducts
+msgctxt "orders.fulfil.noProducts"
+msgid "No products to be picked"
+msgstr "選択されました商品がありません"
+
+#: orders.summary
+msgctxt "orders.summary"
+msgid "Order summary"
+msgstr "注文の概要"
+
+#: orders.summary.ordersDone
+msgctxt "orders.summary.ordersDone"
+msgid "{picked} Order(s) completed of {totalItems}"
+msgstr "{totalItems}の注文が{picked}完了しました"
+
+#: orders.summary.ordersProg
+msgctxt "orders.summary.ordersProg"
+msgid "{current} currently in progress"
+msgstr "{currently}現在進行中です"
+
+#: orders.summary.olinesDone
+msgctxt "orders.summary.olinesDone"
+msgid "{picked} Orderline(s) completed of {totalItems}"
+msgstr "{totalItems}の注文線が{picked}完了しました"
+
+#: orders.summary.olinesProg
+msgctxt "orders.summary.olinesProg"
+msgid "{current} currently in progress"
+msgstr "{currently}現在進行中です"
+
+#: orders.summary.breached
+msgctxt "orders.summary.breached"
+msgid "{current} Breached orders"
+msgstr "{current}違反した注文"
+
+#: orders.orderlines.total
+msgctxt "orders.orderlines.total"
+msgid "Total {totalOrderlines}"
+msgstr "全部{totalOrderlines}"
+
+#: orders.orderlines.skuId
+msgctxt "orders.orderlines.skuId"
+msgid "SKU -  {skuId}"
+msgstr "SKU -  {skuId}"
+
+#: orders.orderlines.cutofftime
+msgctxt "orders.orderlines.cutofftime"
+msgid "{cutOffTime} hrs"
+msgstr "{cutOffTime} 時間"
+
+#: orders.oLines.orderId
+msgctxt "orders.oLines.orderId"
+msgid "Order ID"
+msgstr "注文ID"
+
+#: orders.oLines.oDetails
+msgctxt "orders.oLines.oDetails"
+msgid "Order details"
+msgstr "注文詳細"
+
+#: orders.oLines.ppsId
+msgctxt "orders.oLines.ppsId"
+msgid "PPS ID:"
+msgstr "PPS ID:"
+
+#: orders.oLines.binNo
+msgctxt "orders.oLines.binNo"
+msgid "Bin no:"
+msgstr "Bin番号："
+
+#: orders.oLines.operator
+msgctxt "orders.oLines.operator"
+msgid "Operator:"
+msgstr "オペレーター："
+
+#: orders.oLines.pending
+msgctxt "orders.oLines.pending"
+msgid "Lines received:"
+msgstr "受け取った線："
+
+#: orders.oLines.linesinprogress
+msgctxt "orders.oLines.linesinprogress"
+msgid "Lines in progress:"
+msgstr "進行中の線："
+
+#: orders.oLines.linescompleted
+msgctxt "orders.oLines.linescompleted"
+msgid "Lines completed:"
+msgstr "線を完了した："
+
+#: orders.oLines.cutofftime
+msgctxt "orders.oLines.cutofftime"
+msgid "Cut off time:"
+msgstr "カットオフ時間："
+
+#: orders.oLines.timeleft
+msgctxt "orders.oLines.timeleft"
+msgid "Time left:"
+msgstr "残り時間"
+
+#: performanceParam.graph
+msgctxt "performanceParam.graph"
+msgid "items/hr"
+msgstr "商品/時間"
+
+#: health.pps
+msgctxt "health.pps"
+msgid "PPS"
+msgstr "PPS"
+
+#: health.Butler
+msgctxt "health.Butler"
+msgid "Butler bots"
+msgstr "Butler Bots"
+
+#: health.ChargingStation
+msgctxt "health.ChargingStation"
+msgid "Charging Stations"
+msgstr "充電器"
+
+#: systemHealth.dropdown
+msgctxt "systemHealth.dropdown"
+msgid "System Health"
+msgstr "システム状態"
+
+#: PPSpickPerformance.dropdown
+msgctxt "PPSpickPerformance.dropdown"
+msgid "PPS Pick Performance"
+msgstr "PPS - 出庫生産性"
+
+#: PPSputPerformance.dropdown
+msgctxt "PPSputPerformance.dropdown"
+msgid "PPS Put Performance"
+msgstr "PPS - 入庫生産性"
+
+#: PPSauditPerformance.dropdown
+msgctxt "PPSauditPerformance.dropdown"
+msgid "PPS Audit Performance"
+msgstr "PPS - 棚卸生産性"
+
+#: health.noData
+msgctxt "health.noData"
+msgid "No Data"
+msgstr "データなし"
+
+#: widget.pick.headingleft
+msgctxt "widget.pick.headingleft"
+msgid "Orders to fullfill"
+msgstr "処理中注文"
+
+#: widget.pick.completed
+msgctxt "widget.pick.completed"
+msgid "COMPLETED"
+msgstr "完了"
+
+#: widget.pick.none
+msgctxt "widget.pick.none"
+msgid "None"
+msgstr "なし"
+
+#: widget.pick.idle
+msgctxt "widget.pick.idle"
+msgid "{count} idle PPS (Pick mode)"
+msgstr "{count} 待機PPS (出庫モード)"
+
+#: widget.pick.throughput
+msgctxt "widget.pick.throughput"
+msgid "{count} PPS fullfilling at {throughput} items/hr"
+msgstr "{count} PPS 棚卸 {throughput} 商品/時間"
+
+#: widget.pick.lowright
+msgctxt "widget.pick.lowright"
+msgid "Estimated to complete in {eta}"
+msgstr "{eta}で完了見込みです"
+
+#: widget.pick.headingright
+msgctxt "widget.pick.headingright"
+msgid "Time to cut-off"
+msgstr "切離の時間"
+
+#: widget.pick.textright
+msgctxt "widget.pick.textright"
+msgid "{cut_off}"
+msgstr "{cut_off}"
+
+#: widget.pick.statusleft.onschedule
+msgctxt "widget.pick.statusleft.onschedule"
+msgid "On Schedule"
+msgstr "予定通り"
+
+#: widget.pick.statusleft.atrisk
+msgctxt "widget.pick.statusleft.atrisk"
+msgid "{count_risk} {count_risk, plural, one {order} other {orders}} at risk"
+msgstr "{count_risk} {count_risk, plural, one {注文} other {注文}} のリスク"
+
+#: widget.pick.emergency
+msgctxt "widget.pick.emergency"
+msgid "--"
+msgstr "--"
+
+#: widget.pick.statusleft.delay
+msgctxt "widget.pick.statusleft.delay"
+msgid "Delayed"
+msgstr "遅延"
+
+#: widget.pick.lowright.emergency
+msgctxt "widget.pick.lowright.emergency"
+msgid "Estimated to complete in --"
+msgstr " --に完了されると推測jしています"
+
+#: widget.pick.offline
+msgctxt "widget.pick.offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: widget.put.heading.value
+msgctxt "widget.put.heading.value"
+msgid "None"
+msgstr "なし"
+
+#: widget.put.status.idle
+msgctxt "widget.put.status.idle"
+msgid "{count} idle PPS (Put mode)"
+msgstr "{count} 待機 PPS (入庫モード)"
+
+#: widget.put.count
+msgctxt "widget.put.count"
+msgid "{count} {count, plural, one {PPS} other {PPS}}"
+msgstr "{count} {count, plural, one {PPS} other {PPS}}"
+
+#: widget.put.throughput
+msgctxt "widget.put.throughput"
+msgid "{pluralMsg} stocking {throughput} items/hr"
+msgstr "{count} {pluralMsg} 棚卸 {throughput} 商品/時間"
+
+#: widget.put.offline
+msgctxt "widget.put.offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: widget.put.emergency
+msgctxt "widget.put.emergency"
+msgid "--"
+msgstr "--"
+
+#: widget.put.heading
+msgctxt "widget.put.heading"
+msgid "Items stocked"
+msgstr "在庫商品"
+
+#: operationLog.page.twentyfive
+msgctxt "operationLog.page.twentyfive"
+msgid "25"
+msgstr "25"
+
+#: operationLog.page.fifty
+msgctxt "operationLog.page.fifty"
+msgid "50"
+msgstr "50"
+
+#: operationLog.page.hundred
+msgctxt "operationLog.page.hundred"
+msgid "100"
+msgstr "100"
+
+#: downloadReport.type.operationsLog
+msgctxt "downloadReport.type.operationsLog"
+msgid "Operations Logs"
+msgstr "操作ログ"
+
+#: downloadReport.status.pending
+msgctxt "downloadReport.status.pending"
+msgid "Generating report..."
+msgstr "レポートを作成しています..."
+
+#: downloadReport.status.failed
+msgctxt "downloadReport.status.failed"
+msgid "Report failed!"
+msgstr "レポートが失敗しました!"
+
+#: downloadReport.status.completed
+msgctxt "downloadReport.status.completed"
+msgid "DOWNLOAD"
+msgstr "ダウンロード"
+
+#: downloadReport.table.heading
+msgctxt "downloadReport.table.heading"
+msgid "Download Report"
+msgstr "ダウンロードレポート"
+
+#: downloadReport.table.refresh
+msgctxt "downloadReport.table.refresh"
+msgid "Refresh"
+msgstr "リフレッシュ"
+
+#: downloadReport.table.reportName
+msgctxt "downloadReport.table.reportName"
+msgid "REPORT NAME"
+msgstr "レポート名"
+
+#: downloadReport.table.reportType
+msgctxt "downloadReport.table.reportType"
+msgid "REPORT TYPE"
+msgstr "レポートタイプ"
+
+#: downloadReport.table.requestedBy
+msgctxt "downloadReport.table.requestedBy"
+msgid "REQUESTED BY"
+msgstr "要求された"
+
+#: downloadReport.table.completionTime
+msgctxt "downloadReport.table.completionTime"
+msgid "COMPLETION TIME"
+msgstr "完了時間"
+
+#: downloadReport.table.status
+msgctxt "downloadReport.table.status"
+msgid "GENERATION PROGRESS"
+msgstr "ジェネレーション処理"
+
+#: operationsLog.table.noData
+msgctxt "operationsLog.table.noData"
+msgid "No Data Found"
+msgstr "何もデータが見つかりませんでした"
+
+#: utility.goodsRcvdNotes.head
+msgctxt "utility.goodsRcvdNotes.head"
+msgid "Goods Received Notes"
+msgstr "入庫記録"
+
+#: operationLog.genRep.tooltip
+msgctxt "operationLog.genRep.tooltip"
+msgid "Reports not available for Realtime filter"
+msgstr "リアルタイムフィルタではレポートがありませんでした"
+
+#: operationLog.table.heading
+msgctxt "operationLog.table.heading"
+msgid "Operations Log"
+msgstr "操作ログ"
+
+#: operationLog.table.downloadBtn
+msgctxt "operationLog.table.downloadBtn"
+msgid "Generate Report"
+msgstr "ダウンロードレポート"
+
+#: operationsLog.filter.search.bar
+msgctxt "operationsLog.filter.search.bar"
+msgid "{total} Results found"
+msgstr "{total} 結果が見つかりました"
+
+#: operationsLog.filter.search.bar.showall
+msgctxt "operationsLog.filter.search.bar.showall"
+msgid "Show all Operations"
+msgstr "すべての操作を表示"
+
+#: operationLog.table.operatingMode
+msgctxt "operationLog.table.operatingMode"
+msgid "OPERATING MODE"
+msgstr "動作モード"
+
+#: operationLog.table.status
+msgctxt "operationLog.table.status"
+msgid "STATUS"
+msgstr "状態"
+
+#: operationLog.table.requestId
+msgctxt "operationLog.table.requestId"
+msgid "REQUEST ID"
+msgstr "要求ID"
+
+#: operationLog.table.skuId
+msgctxt "operationLog.table.skuId"
+msgid "SKU ID"
+msgstr "SKU ID"
+
+#: operationLog.table.sourceId
+msgctxt "operationLog.table.sourceId"
+msgid "SOURCE ID"
+msgstr "ソースID"
+
+#: operationLog.table.destinationId
+msgctxt "operationLog.table.destinationId"
+msgid "DESTINATION ID"
+msgstr "DESTINATION ID"
+
+#: operationLog.table.userId
+msgctxt "operationLog.table.userId"
+msgid "USER ID"
+msgstr "ユーザーID"
+
+#: operationLog.table.timestamp
+msgctxt "operationLog.table.timestamp"
+msgid "TIMESTAMP"
+msgstr "TIMESTAMP"
+
+#: reportsTab.operationsLog
+msgctxt "reportsTab.operationsLog"
+msgid "Operations Log"
+msgstr "操作ログ"
+
+#: reportsTab.storageSpace
+msgctxt "reportsTab.storageSpace"
+msgid "Storage Space"
+msgstr "収納スペース"
+
+#: reportsTab.misc
+msgctxt "reportsTab.misc"
+msgid "Misc"
+msgstr "Misc"
+
+#: reportsTab.downloadReport
+msgctxt "reportsTab.downloadReport"
+msgid "Download"
+msgstr "ダウンロード"
+
+#: storageSpace.report.tooltip
+msgctxt "storageSpace.report.tooltip"
+msgid "Reports not available for Realtime filter"
+msgstr "リアルタイムフィルタでは使用できないレポート"
+
+#: storageSpace.table.heading
+msgctxt "storageSpace.table.heading"
+msgid "Storage space information"
+msgstr "ストレージスペース情報"
+
+#: storageSpace.table.downloadBtn
+msgctxt "storageSpace.table.downloadBtn"
+msgid "GENERATE REPORT"
+msgstr "報告を作成する"
+
+#: storageSpace.table.slotType
+msgctxt "storageSpace.table.slotType"
+msgid "SLOT TYPE"
+msgstr "スロットタイプ"
+
+#: storageSpace.table.slotVolume
+msgctxt "storageSpace.table.slotVolume"
+msgid "SLOT VOLUME"
+msgstr "スロットボリューム"
+
+#: storageSpace.table.dimension
+msgctxt "storageSpace.table.dimension"
+msgid "DIMENSION (L*B*H)"
+msgstr "寸法（L * B * H）"
+
+#: storageSpace.table.totalSlots
+msgctxt "storageSpace.table.totalSlots"
+msgid "TOTAL SLOTS"
+msgstr "全スロット"
+
+#: storageSpace.table.emptySlots
+msgctxt "storageSpace.table.emptySlots"
+msgid "EMPTY SLOTS"
+msgstr "スロットを空ける"
+
+#: storageSpace.table.slotUtilization
+msgctxt "storageSpace.table.slotUtilization"
+msgid "SLOT UTILIZATION"
+msgstr "スロット使用率"
+
+#: storageSpace.table.noData
+msgctxt "storageSpace.table.noData"
+msgid "No Data Found"
+msgstr "データが見つかりません"
+
+#: butletbot.inputField.id
+msgctxt "butletbot.inputField.id"
+msgid "BOT ID"
+msgstr "ボットID"
+
+#: butletbot.inputField.sku
+msgctxt "butletbot.inputField.sku"
+msgid "SPECIFIC LOCATION/ZONE"
+msgstr "特定 ロケーション/ゾーン"
+
+#: butletbot.tokenfield.STATUS
+msgctxt "butletbot.tokenfield.STATUS"
+msgid "STATUS"
+msgstr "状態"
+
+#: butletbot.tokenfield.MODE
+msgctxt "butletbot.tokenfield.MODE"
+msgid "MODE"
+msgstr "モード"
+
+#: butletbot.token1.all
+msgctxt "butletbot.token1.all"
+msgid "Any"
+msgstr "すべて"
+
+#: butletbot.token1.error
+msgctxt "butletbot.token1.error"
+msgid "Error"
+msgstr "エラー"
+
+#: butletbot.token1.Online
+msgctxt "butletbot.token1.Online"
+msgid "Online"
+msgstr "オンライン"
+
+#: butletbot.token1.Offline
+msgctxt "butletbot.token1.Offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: butletbot.token2.any
+msgctxt "butletbot.token2.any"
+msgid "Any"
+msgstr "すべて"
+
+#: butletbot.token2.pick
+msgctxt "butletbot.token2.pick"
+msgid "Pick"
+msgstr "出庫"
+
+#: butletbot.token2.put
+msgctxt "butletbot.token2.put"
+msgid "Put"
+msgstr "入庫"
+
+#: butletbot.token2.audit
+msgctxt "butletbot.token2.audit"
+msgid "Audit"
+msgstr "棚卸"
+
+#: butletbot.token2.charging
+msgctxt "butletbot.token2.charging"
+msgid "Charging"
+msgstr "充電"
+
+#: butletbot.token2.notSet
+msgctxt "butletbot.token2.notSet"
+msgid "Not set"
+msgstr "未設定"
+
+#: butlerDetail.name.prefix
+msgctxt "butlerDetail.name.prefix"
+msgid "BOT - {botId}"
+msgstr "BOT - {botId}"
+
+#: charger.name.prefix
+msgctxt "charger.name.prefix"
+msgid "CS - {csId}"
+msgstr "充電器 - {csId}"
+
+#: audit.name.prefix
+msgctxt "audit.name.prefix"
+msgid "Audit"
+msgstr "棚卸"
+
+#: pick.name.prefix
+msgctxt "pick.name.prefix"
+msgid "Pick"
+msgstr "出庫"
+
+#: Put.name.prefix
+msgctxt "Put.name.prefix"
+msgid "Put"
+msgstr "入庫"
+
+#: Charging.name.prefix
+msgctxt "Charging.name.prefix"
+msgid "Charging"
+msgstr "充電"
+
+#: Move.name.prefix
+msgctxt "Move.name.prefix"
+msgid "Move"
+msgstr "移動"
+
+#: moving.task
+msgctxt "moving.task"
+msgid "Moving to"
+msgstr "へ移動"
+
+#: movingMount.task
+msgctxt "movingMount.task"
+msgid "Moving to mount"
+msgstr "搭載へ移動中"
+
+#: movingDismount.task
+msgctxt "movingDismount.task"
+msgid "Moving to dismount"
+msgstr "降しに移動中"
+
+#: docked.task
+msgctxt "docked.task"
+msgid "Docked at"
+msgstr "で接続済"
+
+#: butlerBot.table.heading
+msgctxt "butlerBot.table.heading"
+msgid "Butler Bots"
+msgstr "Butler Bots"
+
+#: botList.filter.search.bar
+msgctxt "botList.filter.search.bar"
+msgid "{total} Bots found"
+msgstr "{total}ボットが見つかりました"
+
+#: botList.filter.search.bar.showall
+msgctxt "botList.filter.search.bar.showall"
+msgid "Show all Bots"
+msgstr "全てのボットを表示します"
+
+#: butlerbot.table.noData
+msgctxt "butlerbot.table.noData"
+msgid "No Butler Bot Found"
+msgstr "バトラーは見つかりません"
+
+#: ButlerBotTable.TotalBot
+msgctxt "ButlerBotTable.TotalBot"
+msgid "BOTS"
+msgstr "BOT"
+
+#: ButlerBotTable.subTotalBot
+msgctxt "ButlerBotTable.subTotalBot"
+msgid "Total: {totalBot}"
+msgstr "合計: {totalBot}"
+
+#: butlerBot.table.status
+msgctxt "butlerBot.table.status"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: ButlerBotTable.status
+msgctxt "ButlerBotTable.status"
+msgid "{onlineBots} Online"
+msgstr "{onlineBots} オンライン"
+
+#: butlerBot.table.currentTask
+msgctxt "butlerBot.table.currentTask"
+msgid "MODE"
+msgstr "モード"
+
+#: ButlerBotTable.botState
+msgctxt "ButlerBotTable.botState"
+msgid "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
+msgstr "出庫 ({pick}) . 入庫 ({put}) . 充電 ({charging}) . 待機 ({idle})"
+
+#: butlerBot.table.msu
+msgctxt "butlerBot.table.msu"
+msgid "MSU MOUNTED"
+msgstr "MSU"
+
+#: ButlerBotTable.mounted
+msgctxt "ButlerBotTable.mounted"
+msgid "{msuMounted} Mounted"
+msgstr "{msuMounted} 搭載"
+
+#: butlerBot.table.location
+msgctxt "butlerBot.table.location"
+msgid "LOCATION"
+msgstr "ロケーション"
+
+#: ButlerBotTable.locations
+msgctxt "ButlerBotTable.locations"
+msgid "{locations} Locations"
+msgstr "{locations} ロケーション"
+
+#: butlerBot.table.power
+msgctxt "butlerBot.table.power"
+msgid "CHARGE LEVEL"
+msgstr "料金レベル"
+
+#: ButlerBotTable.avgVoltage
+msgctxt "ButlerBotTable.avgVoltage"
+msgid "Avg {voltage}"
+msgstr "平均電圧 {voltage}"
+
+#: msuConfig.destType.destTypeDdownPlcHldr
+msgctxt "msuConfig.destType.destTypeDdownPlcHldr"
+msgid "Select destination type"
+msgstr "宛先タイプを選択する"
+
+#: msuConfig.token1.all
+msgctxt "msuConfig.token1.all"
+msgid "Any"
+msgstr "どれか"
+
+#: msuConfig.add.heading
+msgctxt "msuConfig.add.heading"
+msgid "Change destination type"
+msgstr "宛先タイプを変更する"
+
+#: msuConfig.sourceType.heading
+msgctxt "msuConfig.sourceType.heading"
+msgid "Source type: {sourceType}"
+msgstr "ソースタイプ：{sourceType}"
+
+#: gor.msuConfig.destSelection
+msgctxt "gor.msuConfig.destSelection"
+msgid "Select a destination type in order to block put."
+msgstr "プットをブロックするには、宛先タイプを選択します。"
+
+#: gor.msuConfig.blockPutChangeType
+msgctxt "gor.msuConfig.blockPutChangeType"
+msgid "BLOCK PUT AND CHANGE TYPE"
+msgstr "ブロックプットと変更タイプ"
+
+#: charging.inputField.id
+msgctxt "charging.inputField.id"
+msgid "CHARGING STATION ID"
+msgstr "充電器ID"
+
+#: charging.token.status
+msgctxt "charging.token.status"
+msgid "DOCKING STATUS"
+msgstr "接続ステータス"
+
+#: charging.token.timePeriod
+msgctxt "charging.token.timePeriod"
+msgid "OPERATING MODE"
+msgstr "操作のモード"
+
+#: charging.STATUS.all
+msgctxt "charging.STATUS.all"
+msgid "Any"
+msgstr "すべて"
+
+#: charging.STATUS.breach
+msgctxt "charging.STATUS.breach"
+msgid "Connected"
+msgstr "接続"
+
+#: charging.STATUS.pending
+msgctxt "charging.STATUS.pending"
+msgid "Disconnected"
+msgstr "切断"
+
+#: charging.timePeriod.all
+msgctxt "charging.timePeriod.all"
+msgid "Any"
+msgstr "すべて"
+
+#: charging.timePeriod.oneHr
+msgctxt "charging.timePeriod.oneHr"
+msgid "Manual"
+msgstr "マニュアル"
+
+#: charging.timePeriod.twoHR
+msgctxt "charging.timePeriod.twoHR"
+msgid "Auto"
+msgstr "オート"
+
+#: chargersDetail.name.prefix
+msgctxt "chargersDetail.name.prefix"
+msgid "Charging Stations - {csId}"
+msgstr "充電器 - {csId}"
+
+#: chargersDetail.butler.prefix
+msgctxt "chargersDetail.butler.prefix"
+msgid "Butler - {botId}"
+msgstr "バトラー - {botId}"
+
+#: ChargingStations.table.heading
+msgctxt "ChargingStations.table.heading"
+msgid "Charging Stations"
+msgstr "Charging Stations"
+
+#: ChargingStationsTable.filter.search.bar
+msgctxt "ChargingStationsTable.filter.search.bar"
+msgid "{total} Stations found"
+msgstr "{total} 充電器が見つかりました"
+
+#: ChargingStationsTable.filter.search.bar.showall
+msgctxt "ChargingStationsTable.filter.search.bar.showall"
+msgid "Show all Stations"
+msgstr "全ての充電器を表示します"
+
+#: ChargingStations.table.noData
+msgctxt "ChargingStations.table.noData"
+msgid "No Charging Stations Found"
+msgstr "充電器が見つかりません"
+
+#: ChargingStationsTable.stationID.heading
+msgctxt "ChargingStationsTable.stationID.heading"
+msgid "STATION ID"
+msgstr "充電器ID"
+
+#: ChargingStationsTable.SubstationID
+msgctxt "ChargingStationsTable.SubstationID"
+msgid "Total:{rowsCount}"
+msgstr "合計:{rowsCount}"
+
+#: ChargingStations.table.STATUS
+msgctxt "ChargingStations.table.STATUS"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: csTable.status
+msgctxt "csTable.status"
+msgid "{csConnected} connected"
+msgstr "{csConnected}接続されました"
+
+#: ChargingStations.table.operatingMode
+msgctxt "ChargingStations.table.operatingMode"
+msgid "OPERATING MODE"
+msgstr "オペレーションモード"
+
+#: ChargingStationsTable.mode
+msgctxt "ChargingStationsTable.mode"
+msgid "Manual ({manual}) . Auto ({auto})"
+msgstr "手動 ({manual}) . 自動 ({auto})"
+
+#: ChargingStations.table.connectedBots
+msgctxt "ChargingStations.table.connectedBots"
+msgid "BOTS CONNECTED"
+msgstr "接続済"
+
+#: ChargingStationsTable.totalBots
+msgctxt "ChargingStationsTable.totalBots"
+msgid "{totalBots} bots connected"
+msgstr "{totalBots} 接続済"
+
+#: ppsclose.tblhead1.text
+msgctxt "ppsclose.tblhead1.text"
+msgid "SLOT ID"
+msgstr "スロットID"
+
+#: ppsclose.tblhead2.text
+msgctxt "ppsclose.tblhead2.text"
+msgid "MSU Pending"
+msgstr "MSUが保留しています"
+
+#: ppsclose.tblhead3.text
+msgctxt "ppsclose.tblhead3.text"
+msgid "ACTION"
+msgstr "アクション"
+
+#: pps.close.cancel
+msgctxt "pps.close.cancel"
+msgid "CANCEL"
+msgstr "キャンセル"
+
+#: pps.close.confirm
+msgctxt "pps.close.confirm"
+msgid "CONFIRM"
+msgstr "確認"
+
+#: pps.configuration.confirm.apply.profile
+msgctxt "pps.configuration.confirm.apply.profile"
+msgid "Are you sure you want to change the profile?"
+msgstr "プロファイルを変更してもよろしいですか"
+
+#: pps.configuration.confirm.apply.profile.description
+msgctxt "pps.configuration.confirm.apply.profile.description"
+msgid "PPS Configuration will be changed"
+msgstr "PPS構成が変更されます"
+
+#: pps.configuration.confirm.apply.cancel
+msgctxt "pps.configuration.confirm.apply.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: pps.configuration.confirm.change.profile
+msgctxt "pps.configuration.confirm.change.profile"
+msgid "Change"
+msgstr "変更"
+
+#: pps.configuration.create.profile.header
+msgctxt "pps.configuration.create.profile.header"
+msgid "Save a new profile"
+msgstr "新規のプロファイルを保存します"
+
+#: pps.configuration.create.profile.name.label
+msgctxt "pps.configuration.create.profile.name.label"
+msgid "New Profile Name"
+msgstr "新規のプロファイル名"
+
+#: pps.configuration.create.profile.cancel
+msgctxt "pps.configuration.create.profile.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: pps.configuration.create.profile.button.text
+msgctxt "pps.configuration.create.profile.button.text"
+msgid "Save A New Profile"
+msgstr "新規のプロファイルを保存します"
+
+#: msuConfig.startDialog.message
+msgctxt "msuConfig.startDialog.message"
+msgid "Are you sure you want to start re-configuring empty MSUs?"
+msgstr "空のMSUの再設定を開始してもよろしいですか？"
+
+#: msuConfig.stopDialog.message
+msgctxt "msuConfig.stopDialog.message"
+msgid "Are you sure you want to stop re-configuring empty MSUs?"
+msgstr "空のMSUの再設定を停止してもよろしいですか？"
+
+#: msu.configuration.confirm.no
+msgctxt "msu.configuration.confirm.no"
+msgid "CLOSE"
+msgstr "閉じる"
+
+#: msu.configuration.confirm.yes
+msgctxt "msu.configuration.confirm.yes"
+msgid "PROCEED"
+msgstr "続ける"
+
+#: msuConfig.inputField.id
+msgctxt "msuConfig.inputField.id"
+msgid "MSU ID"
+msgstr "MSU ID"
+
+#: msuConfig.readyForReconfiguration.status
+msgctxt "msuConfig.readyForReconfiguration.status"
+msgid "Ready For Reconfiguration"
+msgstr "再構成の準備"
+
+#: msuConfig.putBlocked.status
+msgctxt "msuConfig.putBlocked.status"
+msgid "Put Blocked"
+msgstr "プットブロック"
+
+#: msuConfig.reconfigReady.status
+msgctxt "msuConfig.reconfigReady.status"
+msgid "Msu empty"
+msgstr "MSUの空"
+
+#: msuConfig.complete.status
+msgctxt "msuConfig.complete.status"
+msgid "Reconfiguration complete"
+msgstr "再構成完了"
+
+#: msuConfig.waiting.status
+msgctxt "msuConfig.waiting.status"
+msgid "Dropping MSU at reconfig area ..."
+msgstr "再構成エリアでのMSUドロップ..."
+
+#: msuConfig.dropped.status
+msgctxt "msuConfig.dropped.status"
+msgid "MSU dropped at the reconfig area"
+msgstr "リコンフィギアエリアでMSUが落ちた"
+
+#: msuConfig.storingBack.status
+msgctxt "msuConfig.storingBack.status"
+msgid "Storing MSU back"
+msgstr "MSUを元に保管"
+
+#: msuConfig.table.msuText
+msgctxt "msuConfig.table.msuText"
+msgid "MSU {msuId}"
+msgstr "MSU {msuId}"
+
+#: msuConfig.table.sourceType
+msgctxt "msuConfig.table.sourceType"
+msgid "Source Type:{sourceType}"
+msgstr "ソースタイプ：{sourceType}"
+
+#: msuConfig.table.destType
+msgctxt "msuConfig.table.destType"
+msgid "Selected destination type: {destType}"
+msgstr "選択した宛先タイプ：{destType}"
+
+#: msuConfig.table.msuStatus
+msgctxt "msuConfig.table.msuStatus"
+msgid "{status}"
+msgstr "{status}"
+
+#: msuConfig.table.changeDestType
+msgctxt "msuConfig.table.changeDestType"
+msgid "CHANGE DESTINATION TYPE"
+msgstr "変更宛先タイプ"
+
+#: msuConfig.table.noMsuData
+msgctxt "msuConfig.table.noMsuData"
+msgid "No MSUs with blocked puts"
+msgstr "ブロックされたプットを持つMSUはありません"
+
+#: msuConfig.table.heading
+msgctxt "msuConfig.table.heading"
+msgid "MSU Configuration"
+msgstr "MSU設定"
+
+#: gor.msuConfig.refreshData
+msgctxt "gor.msuConfig.refreshData"
+msgid "REFRESH DATA"
+msgstr "リフレッシュデータ"
+
+#: gor.msuConfig.releaseMsu
+msgctxt "gor.msuConfig.releaseMsu"
+msgid "RELEASE MSU(S)"
+msgstr "リリースMSU（S）"
+
+#: gor.msuConfig.startReconfig
+msgctxt "gor.msuConfig.startReconfig"
+msgid "START RECONFIG"
+msgstr "再構成を開始する"
+
+#: gor.msuConfig.StopReconfig
+msgctxt "gor.msuConfig.StopReconfig"
+msgid "STOP RECONFIG"
+msgstr "リコンフィギャンを停止"
+
+#: gor.msuConfig.filterLabel
+msgctxt "gor.msuConfig.filterLabel"
+msgid "FILTER DATA"
+msgstr "フィルタデータ"
+
+#: msuConfig.filter.search.bar
+msgctxt "msuConfig.filter.search.bar"
+msgid "{total} MSU found"
+msgstr "{total} MSUが見つかりました"
+
+#: msuConfig.filter.search.bar.showall
+msgctxt "msuConfig.filter.search.bar.showall"
+msgid "Show all MSUs with blocked puts"
+msgstr "ブロックされたputsを持つすべてのMSUを表示する"
+
+#: NotificationTable.table.heading
+msgctxt "NotificationTable.table.heading"
+msgid "Notifications"
+msgstr "通知"
+
+#: NotificationTable.table.component
+msgctxt "NotificationTable.table.component"
+msgid "COMPONENT"
+msgstr "単位"
+
+#: Notifications.table.status
+msgctxt "Notifications.table.status"
+msgid "EVENT TYPE"
+msgstr "イベント種類"
+
+#: NotificationTable.table.description
+msgctxt "NotificationTable.table.description"
+msgid "DESCRIPTION"
+msgstr "説明"
+
+#: NotificationTable.table.remark
+msgctxt "NotificationTable.table.remark"
+msgid "REMARKS"
+msgstr "備考"
+
+#: NotificationTable.table.location
+msgctxt "NotificationTable.table.location"
+msgid "TIME"
+msgstr "時間"
+
+#: pps.configuration.bins.selection.label
+msgctxt "pps.configuration.bins.selection.label"
+msgid "Select a bin to manage tags"
+msgstr "タグを管理するためにビンを選択します"
+
+#: pps.configuration.bins.direction.label
+msgctxt "pps.configuration.bins.direction.label"
+msgid "Current PPS Selection"
+msgstr "PPSの現在の選択"
+
+#: pps.configuration.bins.direction.left
+msgctxt "pps.configuration.bins.direction.left"
+msgid "LEFT"
+msgstr "左"
+
+#: pps.configuration.bins.direction.right
+msgctxt "pps.configuration.bins.direction.right"
+msgid "RIGHT"
+msgstr "右"
+
+#: pps.configuration.bins.selection.count
+msgctxt "pps.configuration.bins.selection.count"
+msgid ""
+"Select a bin to activate or deactivate ({deactivated}/{total} bins "
+"deactivated)"
+msgstr "活性又は不活性のためにビンを選択します ({deactivated}/{total} ビンが不活性されました)"
+
+#: pps.configuration.bins.group.selection.count
+msgctxt "pps.configuration.bins.group.selection.count"
+msgid ""
+"Select a bin group to enable or disable ({disabled}/{total} groups disabled)"
+msgstr "有効にする又は無効にするためにビングループを選択します ({disabled}/{total}グループが無効されました)"
+
+#: pps.configuration.bins.tagCount.text
+msgctxt "pps.configuration.bins.tagCount.text"
+msgid "Tag"
+msgstr "タッグ"
+
+#: pps.configuration.bins.activation.button.text
+msgctxt "pps.configuration.bins.activation.button.text"
+msgid "ACTIVATE"
+msgstr "活性"
+
+#: pps.configuration.bins.deactivation.button.text
+msgctxt "pps.configuration.bins.deactivation.button.text"
+msgid "DEACTIVATE"
+msgstr "不活性"
+
+#: pps.configuration.bins.group.enable.button.text
+msgctxt "pps.configuration.bins.group.enable.button.text"
+msgid "ENABLE"
+msgstr "有効にする"
+
+#: pps.configuration.bins.group.disable.button.text
+msgctxt "pps.configuration.bins.group.disable.button.text"
+msgid "DISABLE"
+msgstr "無効にする"
+
+#: pps.configuration.header.text
+msgctxt "pps.configuration.header.text"
+msgid "PPS Configurations"
+msgstr "PPSの構成"
+
+#: pps.configuration.applied.text
+msgctxt "pps.configuration.applied.text"
+msgid "Applied"
+msgstr "適用されました"
+
+#: pps.configuration.requested.text
+msgctxt "pps.configuration.requested.text"
+msgid "Requested"
+msgstr "要求されました"
+
+#: pps.configuration.profileAplied.text
+msgctxt "pps.configuration.profileAplied.text"
+msgid "profile applied"
+msgstr "プロファイルが適用されました"
+
+#: pps.configuration.bins.tags.label
+msgctxt "pps.configuration.bins.tags.label"
+msgid "Assign tags to bin"
+msgstr "ビンにタッグを割り当てます"
+
+#: pps.configuration.bins.activation.label
+msgctxt "pps.configuration.bins.activation.label"
+msgid "Bin activate/deactivate"
+msgstr "ビン活性する/不活性する"
+
+#: pps.configuration.group.activation.label
+msgctxt "pps.configuration.group.activation.label"
+msgid "Bin group enable/disable"
+msgstr "ビングループ有効にする/無効にする"
+
+#: pps.configuration.bins.frontView.label
+msgctxt "pps.configuration.bins.frontView.label"
+msgid "Front View"
+msgstr "正面ビュー"
+
+#: pps.configuration.buttons.cancel.text
+msgctxt "pps.configuration.buttons.cancel.text"
+msgid "CANCEL"
+msgstr "キャンセル"
+
+#: pps.configuration.buttons.next.text
+msgctxt "pps.configuration.buttons.next.text"
+msgid "NEXT"
+msgstr "次"
+
+#: pps.configuration.buttons.saveApply.text
+msgctxt "pps.configuration.buttons.saveApply.text"
+msgid "SAVE AND APPLY"
+msgstr "保存して適用"
+
+#: pps.configuration.buttons.back.text
+msgctxt "pps.configuration.buttons.back.text"
+msgid "BACK"
+msgstr "戻る"
+
+#: pps.configuration.buttons.saveNewProfile.text
+msgctxt "pps.configuration.buttons.saveNewProfile.text"
+msgid "SAVE AS NEW PROFILE"
+msgstr "新規プロファイルとして保存"
+
+#: pps.configuration.buttons.save.text
+msgctxt "pps.configuration.buttons.save.text"
+msgid "SAVE"
+msgstr "保存"
+
+#: pps.inputField.id
+msgctxt "pps.inputField.id"
+msgid "PPS ID"
+msgstr "PPS ID"
+
+#: pps.inputField.oprator
+msgctxt "pps.inputField.oprator"
+msgid "OPERATOR ASSIGNED"
+msgstr "オペレーターを割り当てました"
+
+#: pps.token.status
+msgctxt "pps.token.status"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: pps.token.timePeriod
+msgctxt "pps.token.timePeriod"
+msgid "MODE"
+msgstr "モード"
+
+#: pps.STATUS.all
+msgctxt "pps.STATUS.all"
+msgid "Any"
+msgstr "すべて"
+
+#: pps.STATUS.stopped
+msgctxt "pps.STATUS.stopped"
+msgid "Open"
+msgstr "開放"
+
+#: pps.STATUS.error
+msgctxt "pps.STATUS.error"
+msgid "Close"
+msgstr "終了"
+
+#: pps.STATUS.fclose
+msgctxt "pps.STATUS.fclose"
+msgid "Force Close"
+msgstr "強制終了"
+
+#: pps.MODE.all
+msgctxt "pps.MODE.all"
+msgid "Any"
+msgstr "すべて"
+
+#: pps.MODE.pick
+msgctxt "pps.MODE.pick"
+msgid "Pick"
+msgstr "出庫"
+
+#: pps.MODE.put
+msgctxt "pps.MODE.put"
+msgid "Put"
+msgstr "入庫"
+
+#: pps.MODE.audit
+msgctxt "pps.MODE.audit"
+msgid "Audit"
+msgstr "棚卸"
+
+#: v.MODE.notset
+msgctxt "v.MODE.notset"
+msgid "Not set"
+msgstr "未設定"
+
+#: ppsDetail.name.prefix
+msgctxt "ppsDetail.name.prefix"
+msgid "PPS-{ppsId}"
+msgstr "PPS-{ppsId}"
+
+#: ppsDetail.performance.prefix.items
+msgctxt "ppsDetail.performance.prefix.items"
+msgid "{performance} items/hr"
+msgstr "{performance} 時間当たり項目"
+
+#: pps.close.heading
+msgctxt "pps.close.heading"
+msgid "Close PPS"
+msgstr "PPSをクローズ"
+
+#: PPS.table.pickDrop
+msgctxt "PPS.table.pickDrop"
+msgid "Put"
+msgstr "入庫"
+
+#: PPS.table.putDrop
+msgctxt "PPS.table.putDrop"
+msgid "Pick"
+msgstr "出庫"
+
+#: PPS.table.auditDrop
+msgctxt "PPS.table.auditDrop"
+msgid "Audit"
+msgstr "棚卸"
+
+#: PPS.table.openStatusLabel
+msgctxt "PPS.table.openStatusLabel"
+msgid "Open Selected PPS"
+msgstr "選択したPPSを開放します"
+
+#: PPS.table.closeStatusLabel
+msgctxt "PPS.table.closeStatusLabel"
+msgid "Close Selected PPS"
+msgstr "選択したPPSをクローズします"
+
+#: PPS.table.statusPlaceholder
+msgctxt "PPS.table.statusPlaceholder"
+msgid "Change PPS Status"
+msgstr "PPSの状態を変更します"
+
+#: PPS.table.modePlaceholder
+msgctxt "PPS.table.modePlaceholder"
+msgid "Change PPS Mode"
+msgstr "PPSのモードを変更します"
+
+#: pps.table.heading
+msgctxt "pps.table.heading"
+msgid "Pick Put Stations"
+msgstr "PPS"
+
+#: PPStable.selected
+msgctxt "PPStable.selected"
+msgid "{selected} selected"
+msgstr "{selected}が選択されました"
+
+#: ppsList.filter.search.bar
+msgctxt "ppsList.filter.search.bar"
+msgid "{total} Stations found"
+msgstr "{total} PPSが見つかりました"
+
+#: ppsList.filter.search.bar.showall
+msgctxt "ppsList.filter.search.bar.showall"
+msgid "Show all Stations"
+msgstr "全てのPPSを表示します"
+
+#: PPStable.table.noData
+msgctxt "PPStable.table.noData"
+msgid "No PPS Found"
+msgstr "PPSが見つかりません"
+
+#: PPStable.ppsColumn.heading
+msgctxt "PPStable.ppsColumn.heading"
+msgid "PPS"
+msgstr "PPS"
+
+#: PPStable.Subpps
+msgctxt "PPStable.Subpps"
+msgid "Total: {ppsTotal}"
+msgstr "合計: {ppsTotal}"
+
+#: PPS.table.status
+msgctxt "PPS.table.status"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: PPStable.status
+msgctxt "PPStable.status"
+msgid "{ppsOnState} Open"
+msgstr "{ppsOnState} 開放"
+
+#: PPS.table.operatingMode
+msgctxt "PPS.table.operatingMode"
+msgid "CURRENT MODE"
+msgstr "操作モード"
+
+#: PPStable.ppsState
+msgctxt "PPStable.ppsState"
+msgid "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})"
+msgstr "出庫 ({pick}) . 入庫 ({put}) . 棚卸 ({audit}) . 未設定 ({notSet})"
+
+#: PPStable.requestedMode.text
+msgctxt "PPStable.requestedMode.text"
+msgid "Requested Mode:"
+msgstr "要求されたモード:"
+
+#: PPS.table.requestedStatus
+msgctxt "PPS.table.requestedStatus"
+msgid "REQUESTED STATUS"
+msgstr "要求された状態"
+
+#: PPS.table.performance
+msgctxt "PPS.table.performance"
+msgid "PERFORMANCE"
+msgstr "生産性"
+
+#: PPStable.avgThroughput
+msgctxt "PPStable.avgThroughput"
+msgid "Avg {avgThroughput} items/hr"
+msgstr "平均 {avgThroughput} 時間当たり項目"
+
+#: PPS.table.operatorAssigned
+msgctxt "PPS.table.operatorAssigned"
+msgid "OPERATOR ASSIGNED"
+msgstr "配置オペレーター"
+
+#: PPStable.totalOperator
+msgctxt "PPStable.totalOperator"
+msgid "{operatorNum} operators"
+msgstr "{operatorNum} オペレーター"
+
+#: PPS.table.profiles
+msgctxt "PPS.table.profiles"
+msgid "PROFILES USED"
+msgstr "使用されているプロファイル"
+
+#: pps.configuration.confirm.saveAndapply.profile
+msgctxt "pps.configuration.confirm.saveAndapply.profile"
+msgid "Are you sure you want to save and apply the profile?"
+msgstr "プロファイルを保存して適用してもいいですか。"
+
+#: pps.configuration.confirm.saveAndapply.profile.description
+msgctxt "pps.configuration.confirm.saveAndapply.profile.description"
+msgid "Profile will be applied after pending tasks are completed"
+msgstr "保留中のタスクが完了されたあとプロファイルが適用されます"
+
+#: pps.configuration.confirm.saveAndApply.profile
+msgctxt "pps.configuration.confirm.saveAndApply.profile"
+msgid "SAVE AND APPLY"
+msgstr "保存して適用"
+
+#: sysController.table.heading
+msgctxt "sysController.table.heading"
+msgid "System Controllers"
+msgstr "システムコントローラ"
+
+#: sysController.summary.showall
+msgctxt "sysController.summary.showall"
+msgid "Show all Zones"
+msgstr "全てのゾーンを表示"
+
+#: sysControllers.idColumn.heading
+msgctxt "sysControllers.idColumn.heading"
+msgid "CONTROLLER ID"
+msgstr "コントローラID"
+
+#: sysControllers.totalControllers
+msgctxt "sysControllers.totalControllers"
+msgid "Total:{count}"
+msgstr "合計:{count}"
+
+#: sysController.table.status
+msgctxt "sysController.table.status"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: sysController.table.location
+msgctxt "sysController.table.location"
+msgid "LOCATION"
+msgstr "ロケーション"
+
+#: sysController.table.conDetails
+msgctxt "sysController.table.conDetails"
+msgid "CONNECTION DETAILS"
+msgstr "接続詳細"
+
+#: sysController.table.ethernetStatus
+msgctxt "sysController.table.ethernetStatus"
+msgid "Ethernet Network:"
+msgstr "イーサネットネットワーク:"
+
+#: sysController.table.zigbeeStatus
+msgctxt "sysController.table.zigbeeStatus"
+msgid "Zigbee Network:"
+msgstr "ジグビーネットワーク:"
+
+#: sysController.table.operatingMode
+msgctxt "sysController.table.operatingMode"
+msgid "OPERATING MODE"
+msgstr "操作モード"
+
+#: sysControllers.table.noData
+msgctxt "sysControllers.table.noData"
+msgid "No Controllers Found"
+msgstr "コントローラが見つかりません"
+
+#: sysOverView.zones.count
+msgctxt "sysOverView.zones.count"
+msgid "{activeZones}/{totalZones} Operating Zones"
+msgstr "{activeZones}/{totalZones} 操作中のゾーン"
+
+#: sysOverView.zones.breached.subText
+msgctxt "sysOverView.zones.breached.subText"
+msgid "{entityBreached} breached"
+msgstr "{entityBreached} 破棄されました"
+
+#: sysOverView.zones.subText
+msgctxt "sysOverView.zones.subText"
+msgid "{subStatus} via Controller"
+msgstr "{subStatus} コントローラ経由で"
+
+#: pps.configuration.tag.search.placeholder
+msgctxt "pps.configuration.tag.search.placeholder"
+msgid "Enter a tag..."
+msgstr "タッグを入力してください。。。"
+
+#: pps.configuration.tags.label
+msgctxt "pps.configuration.tags.label"
+msgid "Tags"
+msgstr "タッグ"
+
+#: pps.configuration.tags.searchResults.text
+msgctxt "pps.configuration.tags.searchResults.text"
+msgid "Search Results"
+msgstr "検索結果"
+
+#: pps.configuration.tags.all.text
+msgctxt "pps.configuration.tags.all.text"
+msgid "All Tags"
+msgstr "全てのタッグ"
+
+#: pps.configuration.tags.add.text
+msgctxt "pps.configuration.tags.add.text"
+msgid "Add"
+msgstr "追加"
+
+#: tabs.offline
+msgctxt "tabs.offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: overview.tab.heading
+msgctxt "overview.tab.heading"
+msgid "OVERVIEW"
+msgstr "概要"
+
+#: system.tab.heading
+msgctxt "system.tab.heading"
+msgid "SYSTEM"
+msgstr "システム"
+
+#: orders.tab.heading
+msgctxt "orders.tab.heading"
+msgid "ORDERS"
+msgstr "注文"
+
+#: users.tab.heading
+msgctxt "users.tab.heading"
+msgid "USERS"
+msgstr "ユーザ"
+
+#: inventory.tab.heading
+msgctxt "inventory.tab.heading"
+msgid "INVENTORY"
+msgstr "在庫"
+
+#: audit.tab.heading
+msgctxt "audit.tab.heading"
+msgid "AUDIT"
+msgstr "棚卸"
+
+#: utilities.tab.heading
+msgctxt "utilities.tab.heading"
+msgid "UTILITIES"
+msgstr "ユーティリティ"
+
+#: reports.tab.heading
+msgctxt "reports.tab.heading"
+msgid "REPORTS"
+msgstr "レポート"
+
+#: newaudit.tab.heading
+msgctxt "newaudit.tab.heading"
+msgid "NEW AUDIT"
+msgstr "新しいタスク"
+
+#: overviewStatus.tab.fulfilling
+msgctxt "overviewStatus.tab.fulfilling"
+msgid "Fulfilling orders"
+msgstr "処理中の注文"
+
+#: overviewStatus.tab.default
+msgctxt "overviewStatus.tab.default"
+msgid "None"
+msgstr "なし"
+
+#: overviewStatus.tab.stop
+msgctxt "overviewStatus.tab.stop"
+msgid "STOPPED"
+msgstr "操作が停止されました"
+
+#: overviewStatus.tab.paused
+msgctxt "overviewStatus.tab.paused"
+msgid "PAUSED"
+msgstr "休止されました"
+
+#: overviewStatus.tab.breached
+msgctxt "overviewStatus.tab.breached"
+msgid "BREACHED"
+msgstr "破棄されました"
+
+#: systemStatus.tab.online
+msgctxt "systemStatus.tab.online"
+msgid "Online"
+msgstr "オンライン"
+
+#: ordersStatus.tab.heading
+msgctxt "ordersStatus.tab.heading"
+msgid "{count}% fulfilled"
+msgstr "{count}% 処理済み注文"
+
+#: usersStatus.tab.heading#
+msgctxt "usersStatus.tab.heading#"
+msgid "{count} {count, plural, =0 {user} one {user} other {users}} online"
+msgstr "{count} {count, plural, =0 {ユーザー} one {ユーザー} other {ユーザー}} オンライン"
+
+#: inventoryStatus.tab.heading
+msgctxt "inventoryStatus.tab.heading"
+msgid "{count}% space utilized"
+msgstr "{count}% スペース使用"
+
+#: auditStatus.tab.heading
+msgctxt "auditStatus.tab.heading"
+msgid "{count} in progress"
+msgstr "{count} 処理中"
+
+#: auditStatus.tab.alert.heading
+msgctxt "auditStatus.tab.alert.heading"
+msgid "{count} {count, plural, one {alert} other {alerts}}"
+msgstr "{count} {count, plural, one {アラート} other {アラート}}"
+
+#: operation.alert.resumed
+msgctxt "operation.alert.resumed"
+msgid "All operation has been resumed to normal state."
+msgstr "全ての操作が正常の状態に続行されました."
+
+#: operation.alert.triggeremergency
+msgctxt "operation.alert.triggeremergency"
+msgid "Fire emergency triggered. Follow evacuation procedures immediately"
+msgstr "火災の緊急事態が発生しました.すぐに避難手順に従ってください"
+
+#: operation.alert.toastifydetails
+msgctxt "operation.alert.toastifydetails"
+msgid "VIEW DETAILS"
+msgstr "詳細を表示"
+
+#: userDetails.operator
+msgctxt "userDetails.operator"
+msgid "Operator"
+msgstr "オペレーター"
+
+#: userDetails.manager
+msgctxt "userDetails.manager"
+msgid "Manager"
+msgstr "マネージャー"
+
+#: userDetails.pick.status
+msgctxt "userDetails.pick.status"
+msgid "Pick"
+msgstr "出庫"
+
+#: auditdetail.completed.status
+msgctxt "auditdetail.completed.status"
+msgid "Audited"
+msgstr "完了"
+
+#: userDetails.put.status
+msgctxt "userDetails.put.status"
+msgid "Put"
+msgstr "入庫"
+
+#: userDetails.audit.status
+msgctxt "userDetails.audit.status"
+msgid "Audit"
+msgstr "棚卸"
+
+#: userDetails.front.status
+msgctxt "userDetails.front.status"
+msgid "Front"
+msgstr "フロント"
+
+#: userDetails.back.status
+msgctxt "userDetails.back.status"
+msgid "Back"
+msgstr "バック"
+
+#: userDetails.online.status
+msgctxt "userDetails.online.status"
+msgid "Online"
+msgstr "オンライン"
+
+#: userDetails.offline.status
+msgctxt "userDetails.offline.status"
+msgid "Offline"
+msgstr "オフライン"
+
+#: userDetails.location
+msgctxt "userDetails.location"
+msgid "PPS {ppsId}"
+msgstr "PPS {ppsId}"
+
+#: users.add.heading
+msgctxt "users.add.heading"
+msgid "Add new user"
+msgstr "ユーザを追加"
+
+#: users.add.subheading
+msgctxt "users.add.subheading"
+msgid "All the fields are mandatory"
+msgstr "全項目が必須項目です"
+
+#: users.add.userdetails.heading
+msgctxt "users.add.userdetails.heading"
+msgid "Enter User details"
+msgstr "ユーザ詳細を入力してください"
+
+#: users.add.userdetails.subheading
+msgctxt "users.add.userdetails.subheading"
+msgid "A User ID will be required to log into the system"
+msgstr "システムにログインするにはユーザIDが必要です"
+
+#: users.add.userdetails.userid
+msgctxt "users.add.userdetails.userid"
+msgid "User ID"
+msgstr "ユーザID"
+
+#: users.add.userdetails.firstname
+msgctxt "users.add.userdetails.firstname"
+msgid "First Name"
+msgstr "氏名"
+
+#: users.add.userdetails.lastname
+msgctxt "users.add.userdetails.lastname"
+msgid "Last Name"
+msgstr "苗字"
+
+#: users.add.password.heading
+msgctxt "users.add.password.heading"
+msgid "Create password"
+msgstr "パスワードを作成する"
+
+#: users.add.password.field1
+msgctxt "users.add.password.field1"
+msgid "Password"
+msgstr "パスワード"
+
+#: users.add.password.field2
+msgctxt "users.add.password.field2"
+msgid "Confirm Password"
+msgstr "パスワードを確認してください"
+
+#: users.add.password.button
+msgctxt "users.add.password.button"
+msgid "Add new user"
+msgstr "ユーザを追加"
+
+#: users.delete.heading
+msgctxt "users.delete.heading"
+msgid "Are you sure you would like to delete \"{user_name}\" ?"
+msgstr "「{user_name}」を削除してもよろしいですか？"
+
+#: users.delete.subheading
+msgctxt "users.delete.subheading"
+msgid "Information related to the user will be lost"
+msgstr "ユーザに関する情報が失われます"
+
+#: users.delete.cancel
+msgctxt "users.delete.cancel"
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: users.delete.confirm
+msgctxt "users.delete.confirm"
+msgid "Delete"
+msgstr "削除"
+
+#: users.edit.heading
+msgctxt "users.edit.heading"
+msgid "Edit user"
+msgstr "ユーザを編集する"
+
+#: users.edit.subheading
+msgctxt "users.edit.subheading"
+msgid "All the fields are mandatory"
+msgstr "全項目が必須項目です"
+
+#: users.edit.userdetails.heading
+msgctxt "users.edit.userdetails.heading"
+msgid "Enter User details"
+msgstr "ユーザ詳細を入力してください"
+
+#: users.edit.userdetails.subheading
+msgctxt "users.edit.userdetails.subheading"
+msgid "A User ID will be required to log into the system"
+msgstr "システムにログインするにはユーザIDが必要です"
+
+#: users.edit.userdetails.userid
+msgctxt "users.edit.userdetails.userid"
+msgid "User ID"
+msgstr "ユーザID"
+
+#: users.edit.userdetails.firstname
+msgctxt "users.edit.userdetails.firstname"
+msgid "First Name"
+msgstr "氏名"
+
+#: users.edit.userdetails.lastname
+msgctxt "users.edit.userdetails.lastname"
+msgid "Last Name"
+msgstr "苗字"
+
+#: users.edit.changepassword.heading
+msgctxt "users.edit.changepassword.heading"
+msgid "Change password"
+msgstr "パスワードを変更する"
+
+#: users.edit.changepassword.subheading
+msgctxt "users.edit.changepassword.subheading"
+msgid "New password will be effective when user log-in next time"
+msgstr "マネージメント・インターフェイスとオペレーター・インターフェイスにログインするには、最低8文字の英数字のパスワードが必要です"
+
+#: users.edit.password.field1
+msgctxt "users.edit.password.field1"
+msgid "Password"
+msgstr "パスワード"
+
+#: users.edit.password.field2
+msgctxt "users.edit.password.field2"
+msgid "Confirm Password"
+msgstr "パスワードを確認してください"
+
+#: users.edit.password.
+msgctxt "users.edit.password."
+msgid "New Password"
+msgstr "パスワード"
+
+#: users.edit.password.query
+msgctxt "users.edit.password.query"
+msgid "Change Password"
+msgstr "パスワードを変更する"
+
+#: users.edit.password.button
+msgctxt "users.edit.password.button"
+msgid "Save"
+msgstr "保存"
+
+#: users.add.roledetails.heading
+msgctxt "users.add.roledetails.heading"
+msgid "Choose a role"
+msgstr "役割を選択する"
+
+#: users.add.roledetails.subheading
+msgctxt "users.add.roledetails.subheading"
+msgid ""
+"User will be given a specific level of control over the Butler system "
+"depending on the designated role"
+msgstr "役割毎にユーザをバトラーシステムに対して権限制御が可能です。"
+
+#: user.inputField.id
+msgctxt "user.inputField.id"
+msgid "USER NAME"
+msgstr "ユーザー名"
+
+#: user.role.all
+msgctxt "user.role.all"
+msgid "Any"
+msgstr "すべて"
+
+#: user.tokenfield.status
+msgctxt "user.tokenfield.status"
+msgid "STATUS"
+msgstr "ステータス"
+
+#: user.tokenfield.role
+msgctxt "user.tokenfield.role"
+msgid "ROLE"
+msgstr "役割"
+
+#: user.tokenfield.mode
+msgctxt "user.tokenfield.mode"
+msgid "WORK MODE"
+msgstr "作業モード"
+
+#: user.status.all
+msgctxt "user.status.all"
+msgid "Any"
+msgstr "すべて"
+
+#: user.status.online
+msgctxt "user.status.online"
+msgid "Online"
+msgstr "オンライン"
+
+#: user.status.offline
+msgctxt "user.status.offline"
+msgid "Offline"
+msgstr "オフライン"
+
+#: user.workmode.all
+msgctxt "user.workmode.all"
+msgid "Any"
+msgstr "すべて"
+
+#: user.workmode.pickfront
+msgctxt "user.workmode.pickfront"
+msgid "Pick Front"
+msgstr "出庫フロント"
+
+#: user.workmode.pickback
+msgctxt "user.workmode.pickback"
+msgid "Pick Back"
+msgstr "出庫バック"
+
+#: user.workmode.putfront
+msgctxt "user.workmode.putfront"
+msgid "Put Front"
+msgstr "入庫フロント"
+
+#: user.workmode.putback
+msgctxt "user.workmode.putback"
+msgid "Put Back"
+msgstr "入庫バック"
+
+#: user.workmode.audit
+msgctxt "user.workmode.audit"
+msgid "Audit"
+msgstr "棚卸"
+
+#: user.workmode.management
+msgctxt "user.workmode.management"
+msgid "Management"
+msgstr "管理"
+
+#: users.roles.info.heading
+msgctxt "users.roles.info.heading"
+msgid "Role definitions"
+msgstr "役割の定義"
+
+#: user.table.heading
+msgctxt "user.table.heading"
+msgid "Users"
+msgstr "ユーザ"
+
+#: user.button.heading
+msgctxt "user.button.heading"
+msgid "Add new user"
+msgstr "ユーザを追加"
+
+#: userList.filter.search.bar
+msgctxt "userList.filter.search.bar"
+msgid "{totalUsers} Users found"
+msgstr "{totalUsers} ユーザーが見つかりました"
+
+#: userList.filter.search.bar.showall
+msgctxt "userList.filter.search.bar.showall"
+msgid "Show all Users"
+msgstr "全てのユーザーを表示します"
+
+#: user.table.noData
+msgctxt "user.table.noData"
+msgid "No User Found"
+msgstr "ユーザが見つかりません"
+
+#: user.table.usersCount
+msgctxt "user.table.usersCount"
+msgid "{rowsCount} USERS"
+msgstr "{rowsCount}ユーザー"
+
+#: user.table.status
+msgctxt "user.table.status"
+msgid "STATUS"
+msgstr "{count} ユーザのオンライン"
+
+#: user.table.role
+msgctxt "user.table.role"
+msgid "ROLE"
+msgstr "役割"
+
+#: user.table.workMode
+msgctxt "user.table.workMode"
+msgid "WORKMODE"
+msgstr "作業モード"
+
+#: user.table.location
+msgctxt "user.table.location"
+msgid "LOCATION"
+msgstr "ロケーション"
+
+#: user.table.logInTime
+msgctxt "user.table.logInTime"
+msgid "LOG IN TIME"
+msgstr "ログイン時間"
+
+#: user.table.action
+msgctxt "user.table.action"
+msgid "ACTIONS"
+msgstr "アクション"
+
+#: utility.masterData.head
+msgctxt "utility.masterData.head"
+msgid "Master data upload"
+msgstr "マスターデータをアップロードします"
+
+#: utility.stockLedgerHead.head
+msgctxt "utility.stockLedgerHead.head"
+msgid "Inventory Stock Ledger"
+msgstr "在庫一覧"
+
+#: utility.stockLedgerRawTransactionHead.head
+msgctxt "utility.stockLedgerRawTransactionHead.head"
+msgid "Stock Ledger Raw Transactions"
+msgstr "受払一覧"
+
+#: utility.uploadBtn.label
+msgctxt "utility.uploadBtn.label"
+msgid "Upload Master Data"
+msgstr "マスターデータをアップロードしてください"
+
+#: utility.itemsRecall.head
+msgctxt "utility.itemsRecall.head"
+msgid "Recall Items"
+msgstr "Recall Items"
+
+#: utility.stockLedger.category.all
+msgctxt "utility.stockLedger.category.all"
+msgid "All"
+msgstr "全て"
+
+#: utility.stockLedger.category.sku
+msgctxt "utility.stockLedger.category.sku"
+msgid "Specific SKU"
+msgstr "特定のSKU"
+
+#: utility.stockLedger.incorrectSku
+msgctxt "utility.stockLedger.incorrectSku"
+msgid "Please enter correct SKU"
+msgstr "正しいSKUを入力してください"
+
+#: utility.stockLedger.duration.label
+msgctxt "utility.stockLedger.duration.label"
+msgid "Time Duration:"
+msgstr "期間:"
+
+#: utility.stockLedger.duration.today
+msgctxt "utility.stockLedger.duration.today"
+msgid "Today"
+msgstr "今日"
+
+#: utility.stockLedger.duration.yesterday
+msgctxt "utility.stockLedger.duration.yesterday"
+msgid "Yesterday"
+msgstr "昨日"
+
+#: utility.stockLedgerRawTransaction.duration.today
+msgctxt "utility.stockLedgerRawTransaction.duration.today"
+msgid "Today"
+msgstr "今日"
+
+#: butlerDetail.online.status
+msgctxt "butlerDetail.online.status"
+msgid "Online"
+msgstr "オンライン"
+
+#: butlerDetail.offline.status
+msgctxt "butlerDetail.offline.status"
+msgid "Offline"
+msgstr "オフライン"
+
+#: notify.success.add
+msgctxt "notify.success.add"
+msgid "New user \"{first} {last}\" added successfully"
+msgstr "ユーザ「{first} {last}」が追加されました"
+
+#: notify.success.delete
+msgctxt "notify.success.delete"
+msgid "User \"{first} {last}\" deleted successfully"
+msgstr "ユーザ「{first} {last}」が削除されました"
+
+#: notify.success.auditPaused
+msgctxt "notify.success.auditPaused"
+msgid "Audit \"{id}\" has been paused"
+msgstr "監査「{id}」が停止されました"
+
+#: audit.paused.fail
+msgctxt "audit.paused.fail"
+msgid "AUDIT NOT PAUSED"
+msgstr "監査は停止されていません"
+
+#: audit.paused.fail_desc
+msgctxt "audit.paused.fail_desc"
+msgid "Audit {id} could not be paused due to intenal issue"
+msgstr "監査{ID}は、内部問題に一時停止することができませんでした"
+
+#: audit.delete.fail
+msgctxt "audit.delete.fail"
+msgid "AUDIT NOT DELETED"
+msgstr "棚卸は削除されません"
+
+#: audit.delete.fail_desc
+msgctxt "audit.delete.fail_desc"
+msgid "Audit {id} does not exist"
+msgstr "棚卸{id}は存在しません"
+
+#: audit.notDelete.fail
+msgctxt "audit.notDelete.fail"
+msgid "AUDIT NOT DELETED"
+msgstr "棚卸は削除されません"
+
+#: audit.notDelete.fail_desc
+msgctxt "audit.notDelete.fail_desc"
+msgid "Audit {id} already processed  could not be deleted"
+msgstr "既に処理された棚卸{id}を削除できませんでした"
+
+#: audit.fail.fail
+msgctxt "audit.fail.fail"
+msgid "AUDIT PROCESS FAILED"
+msgstr "監査プロセスが失敗しました"
+
+#: audit.fail.fail_desc
+msgctxt "audit.fail.fail_desc"
+msgid "Audit process failed due to internal error"
+msgstr "棚卸プロセスは、内部エラーのため失敗しました。"
+
+#: audit.create.fail
+msgctxt "audit.create.fail"
+msgid "AUDIT CREATION FAILED"
+msgstr "棚卸作成が失敗しました"
+
+#: audit.create.fail_desc
+msgctxt "audit.create.fail_desc"
+msgid "No audit task has been created"
+msgstr "棚卸タスクが作成されていません"
+
+#: audit.edit.fail
+msgctxt "audit.edit.fail"
+msgid "AUDIT EDIT FAILED"
+msgstr "棚卸の編集に失敗しました"
+
+#: audit.EDIT.fail_desc
+msgctxt "audit.EDIT.fail_desc"
+msgid "Audit {id} could not be edited due to network issue"
+msgstr "ネットワークの問題により{id}の棚卸を編集できませんでした"
+
+#: audit.not.duplicated
+msgctxt "audit.not.duplicated"
+msgid "AUDIT NOT DUPLICATED"
+msgstr "棚卸は重複しない"
+
+#: audit.fail.duplicated
+msgctxt "audit.fail.duplicated"
+msgid "Audit could not be duplicated due to network issue"
+msgstr "ネットワークの問題により棚卸を複製できませんでした"
+
+#: audit.Cancellation.fail
+msgctxt "audit.Cancellation.fail"
+msgid "AUDIT NOT CANCELLED"
+msgstr "棚卸をキャンセルしない"
+
+#: audit.duplicate.fail_desc
+msgctxt "audit.duplicate.fail_desc"
+msgid "Audit {id} could not be cancelled due to network issue"
+msgstr "ネットワークの問題により{id}の棚卸をキャンセルできませんでした"
+
+#: audit.start.changepps
+msgctxt "audit.start.changepps"
+msgid "PPS CHANGE FAILED"
+msgstr "PPSの変更が失敗しました"
+
+#: audit.start.changePpsdesc
+msgctxt "audit.start.changePpsdesc"
+msgid "PPS change failed due to internal error"
+msgstr "PPSの変化は、内部エラーのために失敗しました"
+
+#: audit.ppschange.success
+msgctxt "audit.ppschange.success"
+msgid "PPS change request sent"
+msgstr "PPS変更要求が送信されました"
+
+#: pps.mode.reject
+msgctxt "pps.mode.reject"
+msgid "{unsuccessful}/{totalCount} mode change request rejected"
+msgstr "{unsuccessful}/{totalCount}モード変更の要求が拒否されました"
+
+#: pps.mode.success
+msgctxt "pps.mode.success"
+msgid "Mode change request successful"
+msgstr "モード変更の要求が成功です"
+
+#: utility.bulkaudit.successMessage
+msgctxt "utility.bulkaudit.successMessage"
+msgid "{successful}/{totalCount} audits started successfully"
+msgstr "{successful}/{totalCount}　棚卸が効果的に開始されました"
+
+#: pps.status.reject
+msgctxt "pps.status.reject"
+msgid "{unsuccessful}/{totalCount} status change request rejected"
+msgstr "{unsuccessful}/{totalCount}状態変更の要求が拒否されました"
+
+#: pps.status.success
+msgctxt "pps.status.success"
+msgid "Status change request successfull"
+msgstr "状態変更の要求が成功です"
+
+#: utility.downloadGRN.generateSuccess
+msgctxt "utility.downloadGRN.generateSuccess"
+msgid "GRN Request submitted successfully"
+msgstr "GRNの要求が効果的に提出されました"
+
+#: utility.downloadInventory.generateSuccess
+msgctxt "utility.downloadInventory.generateSuccess"
+msgid "Inventory Report Request submitted successfully"
+msgstr "在庫レポートの要求が効果的に提出されました"
+
+#: utility.downloadGRN.refreshed
+msgctxt "utility.downloadGRN.refreshed"
+msgid "GRN History Refreshed!"
+msgstr "GRNの履歴がリフレッシュされました!"
+
+#: utility.downloadReprt.refreshed
+msgctxt "utility.downloadReprt.refreshed"
+msgid "Reports History Refreshed!"
+msgstr "レポートの履歴がリフレッシュされました!"
+
+#: audit.delete.success
+msgctxt "audit.delete.success"
+msgid "Audit {id} has been deleted"
+msgstr "棚卸{id}が削除されました"
+
+#: audit.delete.reject
+msgctxt "audit.delete.reject"
+msgid "Audit {id} failed to delete"
+msgstr "棚卸{id}を削除できませんでした"
+
+#: audit.create.success
+msgctxt "audit.create.success"
+msgid "Audit {id} created successfully"
+msgstr "棚卸{id}が正常に作成されました"
+
+#: audit.pause.success
+msgctxt "audit.pause.success"
+msgid "Audit {id} has been paused"
+msgstr "棚卸が停止されました"
+
+#: audit.edit.success
+msgctxt "audit.edit.success"
+msgid "Audit {id} updated successfully"
+msgstr "棚卸{id}が正常に更新されました"
+
+#: audit.duplicate.success
+msgctxt "audit.duplicate.success"
+msgid "Audit {id} successfully duplicated"
+msgstr "棚卸{id}が正常に複製されました"
+
+#: audit.cancel.success
+msgctxt "audit.cancel.success"
+msgid "Audit {id} successfully cancelled"
+msgstr "棚卸{id}が正常にキャンセルされました"
+
+#: audit.start.fail
+msgctxt "audit.start.fail"
+msgid "AUDIT NOT STARTED"
+msgstr "棚卸開始しない"
+
+#: audit.start.fail_desc
+msgctxt "audit.start.fail_desc"
+msgid "{fail} audit failed due to location/sku of audit currently in process"
+msgstr "{fail}場所が原因で棚卸が失敗しました/現在進行中の監査のスキュー"
+
+#: audit.start.failall
+msgctxt "audit.start.failall"
+msgid "AUDIT NOT STARTED"
+msgstr "棚卸開始しない"
+
+#: audit.start.failall_desc
+msgctxt "audit.start.failall_desc"
+msgid "No audit has been started due to network issue"
+msgstr "ネットワークの問題により棚卸が開始されていない"
+
+#: audit.resolve.fail
+msgctxt "audit.resolve.fail"
+msgid "AUDIT RESOLVE FAIL"
+msgstr "解決の失敗を棚卸する"
+
+#: audit.resolve.fail_desc
+msgctxt "audit.resolve.fail_desc"
+msgid "Audit resolve failed due to network issue"
+msgstr "ネットワークの問題により棚卸の解決に失敗しました"
+
+#: audit.resolve.succedd
+msgctxt "audit.resolve.succedd"
+msgid "Audit task {auditId} with {auditType} has been approved"
+msgstr "{auditType}の棚卸タスク{auditId}が承認されました"
+
+#: audit.resolve.reject
+msgctxt "audit.resolve.reject"
+msgid "Audit task {auditId} with {auditType} has been rejected"
+msgstr "{auditType}の棚卸タスク{auditId}が拒否されました"
+
+#: utility.item.recall
+msgctxt "utility.item.recall"
+msgid "{itemCount} expired items recalled"
+msgstr "{itemCount}完了した商品が呼び出されました"
+
