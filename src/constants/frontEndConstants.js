@@ -497,6 +497,7 @@ export const ES='es';
 export const ZH='zh'; 
 export const DE='de'; 
 export const FR='fr'; 
+export const NL='nl';
 export const HR='h ';
 export const MM='m ';
 export const SS='s ';
