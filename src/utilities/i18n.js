@@ -11,6 +11,7 @@ import zhLocaleData from 'react-intl/locale-data/zh'; //chinese
 import deLocaleData from 'react-intl/locale-data/de'; //german
 import frLocaleData from 'react-intl/locale-data/fr'; //french
 import esLocaleData from 'react-intl/locale-data/es'; //spanish
+import nlLocaleData from 'react-intl/locale-data/nl'; //Dutch
 
 import enTranslationMessages from '../translations/en-US.json';
 import jaTranslationMessages from '../translations/ja-JP.json';
@@ -18,6 +19,7 @@ import deTranslationMessages from '../translations/de-DE.json';
 import frTranslationMessages from '../translations/fr-FR.json';
 import esTranslationMessages from '../translations/es-ES.json';
 import zhTranslationMessages from '../translations/zh-ZH.json';
+import nlTranslationMessages from '../translations/nl.json';
 
 addLocaleData([...enLocaleData, 
               ...jaLocaleData, 
@@ -25,12 +27,14 @@ addLocaleData([...enLocaleData,
               ...deLocaleData, 
               ...frLocaleData,
               ...esLocaleData,
+              ...nlLocaleData,
               ...enTranslationMessages, 
               ...jaTranslationMessages,
               ...deTranslationMessages,
               ...frTranslationMessages,
               ...esTranslationMessages,
-              ...zhTranslationMessages
+              ...zhTranslationMessages,
+              ...nlTranslationMessages
 	]);
 
 export const formatTranslationMessages=(messages)=> {
@@ -48,5 +52,6 @@ export const translationMessages={
   de: formatTranslationMessages(deTranslationMessages),
   fr: formatTranslationMessages(frTranslationMessages),
   es: formatTranslationMessages(esTranslationMessages),
-  zh: formatTranslationMessages(zhTranslationMessages)
+  zh: formatTranslationMessages(zhTranslationMessages),
+  nl: formatTranslationMessages(nlTranslationMessages)
 };

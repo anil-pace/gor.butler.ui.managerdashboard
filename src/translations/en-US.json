@@ -1349,6 +1349,12 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "login.lang.dutch",
+    "description": "Dutch option in the language drop down",
+    "defaultMessage": "Nederlands",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "login.autologout.message",
     "description": "Auto logout message",
     "defaultMessage": "Due to session expiry, Auto Logout has been triggered!",

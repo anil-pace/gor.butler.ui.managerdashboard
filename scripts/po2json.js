@@ -27,7 +27,7 @@ for(let i=0,len = res.length;i < len ; i++){
     	let msgObj = tuple[Object.keys(tuple)[0]];
     	let obj = {};
     	obj["id"] = k;
-    	obj["defaultMessage"] = msgObj.msgid
+    	obj["defaultMessage"] = msgObj.msgstr[0]
     	processedData.push(obj)
     }
     }

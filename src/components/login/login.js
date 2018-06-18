@@ -5,8 +5,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {EN, JA, ES, ZH, DE, FR,FILL_BACK} from '../../constants/frontEndConstants'; 
-import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH} from '../../constants/messageConstants'; 
+import {EN, JA, ES, ZH, DE, FR, NL,FILL_BACK} from '../../constants/frontEndConstants'; 
+import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH,DUTCH} from '../../constants/messageConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 
@@ -27,7 +27,8 @@ class Login extends React.Component{
         { value: ES, label: SPANISH},
         { value: ZH, label: CHINESE},
         { value: DE, label: GERMAN},
-        { value: FR, label: FRENCH}
+        { value: FR, label: FRENCH},
+        { value: NL, label: DUTCH}
       ]};
     }
     componentWillMount()

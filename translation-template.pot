@@ -698,11 +698,6 @@ msgstr ""
 		msgid "Click here to download"
 		msgstr ""
 
-		#: utility.uploadHist.noresultfound
-		msgctxt "utility.uploadHist.noresultfound"
-		msgid "No Result Found"
-		msgstr ""
-
 		#: utility.downloadGRN.label
 		msgctxt "utility.downloadGRN.label"
 		msgid "STN number:"
@@ -716,11 +711,6 @@ msgstr ""
 		#: utility.downloadGRN.head
 		msgctxt "utility.downloadGRN.head"
 		msgid "Generate Report"
-		msgstr ""
-
-		#: utility.downloadGRN.history
-		msgctxt "utility.downloadGRN.history"
-		msgid "Report History"
 		msgstr ""
 
 		#: utility.downloadReport.head
@@ -778,9 +768,9 @@ msgstr ""
 		msgid "Generate Report"
 		msgstr ""
 
-		#: utility.downloadReports.history
-		msgctxt "utility.downloadReports.history"
-		msgid "Report History"
+		#: utility.uploadHist.noresultfound
+		msgctxt "utility.uploadHist.noresultfound"
+		msgid "No Result Found"
 		msgstr ""
 
 		#: utility.uploadHistory.head
@@ -1141,6 +1131,11 @@ msgstr ""
 		#: login.lang.french
 		msgctxt "login.lang.french"
 		msgid "Français"
+		msgstr ""
+
+		#: login.lang.dutch
+		msgctxt "login.lang.dutch"
+		msgid "Nederlands"
 		msgstr ""
 
 		#: login.autologout.message
@@ -1713,9 +1708,14 @@ msgstr ""
 		msgid "lines to be resolved"
 		msgstr ""
 
-		#: auditdetail.label.linestobereaudited
-		msgctxt "auditdetail.label.linestobereaudited"
-		msgid "lines to be re-audited"
+		#: auditdetail.label.linesrejected
+		msgctxt "auditdetail.label.linesrejected"
+		msgid "lines rejected"
+		msgstr ""
+
+		#: auditdetail.label.linesapproved
+		msgctxt "auditdetail.label.linesapproved"
+		msgid "lines approved"
 		msgstr ""
 
 		#: audit.header.Audit
@@ -2066,6 +2066,26 @@ msgstr ""
 		#: audit.startaudit.Foraudit
 		msgctxt "audit.startaudit.Foraudit"
 		msgid "For audit"
+		msgstr ""
+
+		#: audit.startaudit.listauditid
+		msgctxt "audit.startaudit.listauditid"
+		msgid "List of Audits"
+		msgstr ""
+
+		#: audit.startaudit.for
+		msgctxt "audit.startaudit.for"
+		msgid "For"
+		msgstr ""
+
+		#: audit.startaudit.View
+		msgctxt "audit.startaudit.View"
+		msgid "View"
+		msgstr ""
+
+		#: audit.startaudit.ppsunavaible
+		msgctxt "audit.startaudit.ppsunavaible"
+		msgid "PPS Not Available"
 		msgstr ""
 
 		#: audit.nameplaceholder.text
@@ -3108,14 +3128,9 @@ msgstr ""
 		msgid "ORDER ID"
 		msgstr ""
 
-		#: order.inputField.pickBeforeTime
-		msgctxt "order.inputField.pickBeforeTime"
-		msgid "CUT OFF TIME"
-		msgstr ""
-
-		#: order.token.orderTags
-		msgctxt "order.token.orderTags"
-		msgid "ORDER TAGS"
+		#: order.inputField.ppsId
+		msgctxt "order.inputField.ppsId"
+		msgid "PPS ID"
 		msgstr ""
 
 		#: order.token.status
@@ -3123,74 +3138,39 @@ msgstr ""
 		msgid "STATUS"
 		msgstr ""
 
-		#: order.orderTags.any
-		msgctxt "order.orderTags.any"
-		msgid "Any"
-		msgstr ""
-
-		#: order.orderTags.urgent
-		msgctxt "order.orderTags.urgent"
-		msgid "Urgent"
-		msgstr ""
-
-		#: order.orderTags.express
-		msgctxt "order.orderTags.express"
-		msgid "Express"
-		msgstr ""
-
 		#: order.status.any
 		msgctxt "order.status.any"
 		msgid "Any"
 		msgstr ""
 
-		#: order.status.pending
-		msgctxt "order.status.pending"
-		msgid "Pending"
+		#: order.status.created
+		msgctxt "order.status.created"
+		msgid "Created"
 		msgstr ""
 
-		#: order.status.breachRish
-		msgctxt "order.status.breachRish"
-		msgid "Breach risk"
+		#: order.status.processing
+		msgctxt "order.status.processing"
+		msgid "In progress"
 		msgstr ""
 
-		#: order.status.breached
-		msgctxt "order.status.breached"
-		msgid "Breached"
+		#: order.status.waiting
+		msgctxt "order.status.waiting"
+		msgid "On hold"
 		msgstr ""
 
-		#: order.status.breach&Completed
-		msgctxt "order.status.breach&Completed"
-		msgid "Breach&Completed"
-		msgstr ""
-
-		#: order.status.productshort
-		msgctxt "order.status.productshort"
-		msgid "Product Short"
-		msgstr ""
-
-		#: order.status.outofstock
-		msgctxt "order.status.outofstock"
-		msgid "Out of Stock"
-		msgstr ""
-
-		#: order.status.completed
-		msgctxt "order.status.completed"
+		#: order.status.processed
+		msgctxt "order.status.processed"
 		msgid "Completed"
 		msgstr ""
 
-		#: order.status.rejected
-		msgctxt "order.status.rejected"
-		msgid "Rejected"
-		msgstr ""
-
-		#: order.status.abandoned
-		msgctxt "order.status.abandoned"
-		msgid "Abandoned"
-		msgstr ""
-
-		#: order.status.cancelled&Completed
-		msgctxt "order.status.cancelled&Completed"
+		#: order.status.cancelled
+		msgctxt "order.status.cancelled"
 		msgid "Cancelled"
+		msgstr ""
+
+		#: order.status.failed
+		msgctxt "order.status.failed"
+		msgid "Not Fulfillable"
 		msgstr ""
 
 		#: order.inputField.fromDate
@@ -3233,13 +3213,13 @@ msgstr ""
 		msgid "Show all orders"
 		msgstr ""
 
-		#: orderList.fulfillable.status
-		msgctxt "orderList.fulfillable.status"
+		#: orderList.inProgress.status
+		msgctxt "orderList.inProgress.status"
 		msgid "In progress"
 		msgstr ""
 
-		#: orderList.complete.status
-		msgctxt "orderList.complete.status"
+		#: orderList.completed.status
+		msgctxt "orderList.completed.status"
 		msgid "Completed"
 		msgstr ""
 
@@ -3253,29 +3233,14 @@ msgstr ""
 		msgid "Created"
 		msgstr ""
 
-		#: orderlist.badRequest.status
-		msgctxt "orderlist.badRequest.status"
-		msgid "Rejected"
+		#: orderlist.onHold.status
+		msgctxt "orderlist.onHold.status"
+		msgid "On hold"
 		msgstr ""
 
 		#: orderlist.notFulfillale.status
 		msgctxt "orderlist.notFulfillale.status"
 		msgid "Not fulfillable"
-		msgstr ""
-
-		#: orderlist.tempnotFulfillale.status
-		msgctxt "orderlist.tempnotFulfillale.status"
-		msgid "On Hold"
-		msgstr ""
-
-		#: orderlist.accepted.status
-		msgctxt "orderlist.accepted.status"
-		msgid "Accepted"
-		msgstr ""
-
-		#: orderlist.abandoned.status
-		msgctxt "orderlist.abandoned.status"
-		msgid "Abandoned"
 		msgstr ""
 
 		#: orderlist.cutOffTime.time
@@ -3335,17 +3300,7 @@ msgstr ""
 
 		#: orders.fulfil
 		msgctxt "orders.fulfil"
-		msgid "Order fulfuilment progress"
-		msgstr ""
-
-		#: orders.fulfil.ppsCount
-		msgctxt "orders.fulfil.ppsCount"
-		msgid "{current} PPS running"
-		msgstr ""
-
-		#: orders.fulfil.noPpsCount
-		msgctxt "orders.fulfil.noPpsCount"
-		msgid "No PPS running"
+		msgid "Order fulfilment progress"
 		msgstr ""
 
 		#: orders.fulfil.status
