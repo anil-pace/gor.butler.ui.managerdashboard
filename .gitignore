@@ -10,3 +10,4 @@
 *.orig
 *.swp
 yarn-error.log
+package-lock.json
