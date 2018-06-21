@@ -111,6 +111,7 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             cutOffTimeIndex:"",
+            /*
             statusMapping:{
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
@@ -120,6 +121,7 @@ class OrderListTable extends React.Component {
                 "CANCELLED": this.props.intl.formatMessage(messages.cancelledStatus),
                 "WAITING": this.props.intl.formatMessage(messages.onHoldStatus)
             }
+            */
         }
 
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
@@ -391,7 +393,9 @@ class OrderListTable extends React.Component {
                                             <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                         </div>
                                         <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                        {/*
                                             <span> {this.state.statusMapping[pbtData[i].status] ? this.state.statusMapping[pbtData[i].status] : pbtData[i].status} </span>
+                                        */}
                                             <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
                                             <span>{pbtData[i].damaged_count > 0 ? pbtData[i].damaged_count : ""}</span>
                                             <span>{pbtData[i].physically_damaged_count > 0 ? pbtData[i].physically_damaged_count : ""}</span>
@@ -582,7 +586,9 @@ class OrderListTable extends React.Component {
                                         <div style={{paddingTop: "10px", color: "#333333", fontSize: "14px"}}> {formatProgressBar.message}</div> 
                                     </div>
                                     <div style={{fontSize: "14px", width: "65%", display: "flex", alignItems: "center", justifyContent:"center"}}>
+                                    {/*
                                         <span> {this.state.statusMapping[orderData[i].status] ? this.state.statusMapping[orderData[i].status] : orderData[i].status} </span>
+                                    */}
                                         <span> {orderData[i].missing_count > 0 ? orderData[i].missing_count : ""} </span>
                                         <span> {orderData[i].damaged_count > 0 ? orderData[i].damaged_count : ""} </span>
                                         <span> {orderData[i].physically_damaged_count > 0 ? orderData[i].physically_damaged_count : ""} </span>
