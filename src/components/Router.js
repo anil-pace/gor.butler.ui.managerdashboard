@@ -16,6 +16,12 @@ import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY} from '../constants/frontEndConstants
 import {translationMessages} from '../utilities/i18n';
 import {updateIntl} from 'react-intl-redux';
 
+ //start of Google analytics tracker
+ import ReactGA from 'react-ga';
+ ReactGA.initialize('UA-121229812-2');
+ 
+ //-- end of Google analytics tracker
+
 class Routes extends React.Component {
 
 
@@ -117,6 +123,7 @@ class Routes extends React.Component {
     }
 
     _handleNavigationChanges(context, replace) {
+        
         let pathname=context.location.pathname
 
         pathname=pathname.substring(1, pathname.length)
@@ -132,17 +139,18 @@ class Routes extends React.Component {
         }
 
         this.props.tabSelected(navigator[0]);
-
-
+        ReactGA.pageview(context.location.pathname + window.location.hash);
     }
 
     render() {
+      
         return (
             <Router history={hashHistory}>
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="default" path="/"
                        getComponent={(location, callback)=> {
                            require.ensure([], function (require) {
                                callback(null, require('../App').default);
+                               
                            }, "defaultApp");
                        }}
                 />
@@ -164,6 +172,7 @@ class Routes extends React.Component {
                         getComponent={(location, callback)=> {
                             require.ensure([], function (require) {
                                 callback(null, require('../containers/OverviewTab').default);
+                             
                             }, "indexOverview");
                         }}
                     />
