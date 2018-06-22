@@ -281,7 +281,8 @@ _tableBodyData(itemsData){
   rowObject.auditDetails={
       "header":[itemsData[i].display_id,itemsData[i].audit_name],
       "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime],
-      "audit_id":itemsData[i].id
+      "audit_id":itemsData[i].id,
+      "display_id":itemsData[i].display_id
       }
   rowObject.auditProgress={
    "percentage": this._findStatus(itemsData[i].progressStatus),
@@ -376,7 +377,7 @@ render(){
     {reauditButton}
       </button>:""} */}
       {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}}   onClick={me._handelResolveAudit}>
+      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']+","+tablerowdata[idx]['auditDetails']['display_id']} style={{float:'right'}}   onClick={me._handelResolveAudit}>
       {resolveButton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} displayId = {tablerowdata[idx]['auditDetails']['header'][0]} id={tablerowdata[idx]['auditDetails']['audit_id']} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
