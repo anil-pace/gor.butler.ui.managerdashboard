@@ -184,24 +184,6 @@ _refreshList(query){
     });
 }
 
-/* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */ 
-_reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime){
-    let formData={
-        "start_date": fromDateTime,
-        "end_date": toDateTime,
-        "cut_off_time" : cutOffTime
-    };
-
-    let params={
-        'url':ORDERS_PER_PBT_URL,
-        'method':POST,
-        'contentType':APP_JSON,
-        'accept':APP_JSON,
-        'cause':ORDERS_PER_PBT_FETCH,
-        'formdata':formData,
-    }
-    this.props.makeAjaxCall(params);
-}
 
 _clearFilter() {
     this.props.filterApplied(false);
