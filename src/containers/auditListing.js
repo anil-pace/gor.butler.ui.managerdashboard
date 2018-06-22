@@ -113,11 +113,11 @@ const messages = defineMessages({
    },
       linesRejected: {
         id: "auditdetail.label.linesrejected",
-        defaultMessage: " lines rejected "
+        defaultMessage: "lines rejected "
     },
     linesApproved:{
         id: "auditdetail.label.linesapproved",
-        defaultMessage: " lines approved "
+        defaultMessage: "lines approved "
      },
 
 });
@@ -556,9 +556,9 @@ class AuditTab extends React.Component {
                 auditData.lineResolveState = data[i].unresolved > 0 ? (data[i].unresolved +" "+linestobeResolved) : "";
             }
             if (data[i].audit_button_data.audit_reaudit_button == 'enable') {
-                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected +linesRejected) : "";
+                auditData.lineReAuditState = data[i].rejected > 0 ? (data[i].rejected+" "+linesRejected) : "";
             }
-            auditData.lineApprovedState = data[i].approved > 0 ? (data[i].approved +linesApproved) : "";
+            auditData.lineApprovedState = data[i].approved > 0 ? (data[i].approved+" "+linesApproved) : "";
             
 
             auditData.button = data[i].audit_button_data;
