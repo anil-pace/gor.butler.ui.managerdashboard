@@ -173,16 +173,6 @@ msgstr ""
         msgid "Delete"
         msgstr ""
 
-        #: audit.table.pack.outer.label
-        msgctxt "audit.table.pack.outer.label"
-        msgid "Outer"
-        msgstr ""
-
-        #: audit.table.pack.inner.label
-        msgctxt "audit.table.pack.inner.label"
-        msgid "Inner"
-        msgstr ""
-
         #: commonDataTable.attributesType.itemSelectedText
         msgctxt "commonDataTable.attributesType.itemSelectedText"
         msgid "{count} items selected"

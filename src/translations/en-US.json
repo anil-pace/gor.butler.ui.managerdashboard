@@ -186,18 +186,6 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
-    "id": "audit.table.pack.outer.label",
-    "description": "audit.table.pack.outer.label",
-    "defaultMessage": "Outer",
-    "filepath": "./src/components/commonFunctionsDataTable.js"
-  },
-  {
-    "id": "audit.table.pack.inner.label",
-    "description": "audit.table.pack.inner.label",
-    "defaultMessage": "Inner",
-    "filepath": "./src/components/commonFunctionsDataTable.js"
-  },
-  {
     "id": "commonDataTable.attributesType.itemSelectedText",
     "description": "heading for attribute",
     "defaultMessage": "{count} items selected",
