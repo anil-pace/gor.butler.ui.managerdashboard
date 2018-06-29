@@ -267,9 +267,9 @@ class OrderListTable extends React.Component {
         nProps = this;
         let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
-        pbtData = isGroupedById ? nProps.props.pbts : nProps.props.pbts[0].ordersPerPbt.orders;
-        
+        pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
+        if(pbtDataLen === 0) return false;
         let timeOffset = nProps.props.timeOffset || "";
         let pbtRows = []; 
         let processedData = {};
