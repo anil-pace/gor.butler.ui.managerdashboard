@@ -4332,21 +4332,39 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
+    "id": "orders.fulfil.noProducts",
+    "description": "default picked message",
+    "defaultMessage": "No products to be picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
+    "id": "orders.productsPicked.status",
+    "description": "status",
+    "defaultMessage": "{total} products picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
+    "id": "orders.inProgress.status",
+    "description": "status",
+    "defaultMessage": "{current} of {total} products picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
     "id": "orders.fulfil",
     "description": "header of orders fulfilment",
     "defaultMessage": "Order fulfilment progress",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orders.fulfil.status",
-    "description": "order status",
-    "defaultMessage": "{picked} of {totalItems} products picked",
+    "id": "orders.fulfil.ppsRunning",
+    "description": "pps running",
+    "defaultMessage": "{pps_count} PPS running",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orders.fulfil.noProducts",
-    "description": "default picked message",
-    "defaultMessage": "No products to be picked",
+    "id": "orders.fulfil.noPPSRunning",
+    "description": "no pps running",
+    "defaultMessage": "No PPS running",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
