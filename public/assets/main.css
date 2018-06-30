@@ -9682,6 +9682,13 @@ button:disabled {
   color: #333333;
 }
 
+.gor-separator .viewOrderLinesHeader {
+  position: relative;
+  left: 5px;
+  top: 5px;
+  vertical-align: middle;
+}
+
 .gor-separator .subheaderName,
 .gor-separator .viewDetailsSeparatorSubHeader {
   padding: 7px;
@@ -9696,6 +9703,15 @@ button:disabled {
   text-overflow: ellipsis;
   width: 300px;
   display: block;
+}
+
+.gor-separator .viewOrderLinesSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .dotImage {
