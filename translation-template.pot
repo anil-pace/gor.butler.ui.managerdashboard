@@ -173,16 +173,6 @@ msgstr ""
 		msgid "Delete"
 		msgstr ""
 
-		#: audit.table.pack.outer.label
-		msgctxt "audit.table.pack.outer.label"
-		msgid "Outer"
-		msgstr ""
-
-		#: audit.table.pack.inner.label
-		msgctxt "audit.table.pack.inner.label"
-		msgid "Inner"
-		msgstr ""
-
 		#: commonDataTable.attributesType.itemSelectedText
 		msgctxt "commonDataTable.attributesType.itemSelectedText"
 		msgid "{count} items selected"
@@ -3298,19 +3288,24 @@ msgstr ""
 		msgid "No orders available"
 		msgstr ""
 
+		#: orders.fulfil.noProducts
+		msgctxt "orders.fulfil.noProducts"
+		msgid "No products to be picked"
+		msgstr ""
+
 		#: orders.fulfil
 		msgctxt "orders.fulfil"
 		msgid "Order fulfilment progress"
 		msgstr ""
 
-		#: orders.fulfil.status
-		msgctxt "orders.fulfil.status"
-		msgid "{picked} of {totalItems} products picked"
+		#: orders.fulfil.ppsRunning
+		msgctxt "orders.fulfil.ppsRunning"
+		msgid "{pps_count} PPS running"
 		msgstr ""
 
-		#: orders.fulfil.noProducts
-		msgctxt "orders.fulfil.noProducts"
-		msgid "No products to be picked"
+		#: orders.fulfil.noPPSRunning
+		msgctxt "orders.fulfil.noPPSRunning"
+		msgid "No PPS running"
 		msgstr ""
 
 		#: orders.summary
