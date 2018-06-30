@@ -707,9 +707,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
             store.dispatch(setOrderListSpinner(false));
-            let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-            let endDate = new Date().toISOString();
-            
+            let startDate = sessionStorage.getItem("startDate");
+            let endDate = sessionStorage.getItem("endDate");
             // If length of response from Level 1 http call is 1 with no cut off time, call Level 2 http request with cut off time: null
             if(res.length === 1 && res[0].cut_off_time === null){
                 let formData={
