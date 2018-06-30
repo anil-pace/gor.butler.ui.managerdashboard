@@ -89,6 +89,8 @@ class OrderListTab extends React.Component {
             "start_date": startDate,
             "end_date": endDate,
         };
+        sessionStorage.setItem("startDate", startDate);
+        sessionStorage.setItem("endDate", endDate);
         if(filteredPpsId){
             formData["filtered_ppsId"] = filteredPpsId;
         }
