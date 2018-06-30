@@ -9546,30 +9546,31 @@ button:disabled {
 
 .gor-separator {
   display: inline-block;
-  line-height: 20px;
+  line-height: 22px;
 }
 
-.gor-separator .headerName {
+.gor-separator .headerName,
+.gor-separator .viewDetailsSeparatorHeader {
   padding: 7px;
   font-size: 16px;
   font-weight: 600;
   text-align: left;
-  color: #383838;
-}
-
-.gor-separator .subheaderName {
-  padding: 7px;
-  font-size: 14px;
-  text-align: left;
   color: #333333;
 }
 
-.gor-separator .headerSeparation {
-  font-size: 30px;
+.gor-separator .viewOrderLinesHeader {
+  position: relative;
+  left: 5px;
+  top: 5px;
+  vertical-align: middle;
 }
 
-.gor-separator .subHeaderSeparation {
-  font-size: 30px;
+.gor-separator .subheaderName,
+.gor-separator .viewDetailsSeparatorSubHeader {
+  padding: 7px;
+  font-size: 13px;
+  text-align: left;
+  color: #333333;
 }
 
 .gor-separator .viewDetailslimitsSubHeader {
@@ -9578,6 +9579,22 @@ button:disabled {
   text-overflow: ellipsis;
   width: 300px;
   display: block;
+}
+
+.gor-separator .viewOrderLinesSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dotImage {
+  background-position: -48px -111px;
+  display: inline-block;
+  height: 5px;
+  width: 5px;
 }
 
 .gor-progress-bar-wrapper {

@@ -191,15 +191,21 @@ class ViewOrderLine extends React.Component{
     let olDataLen = arg.length;
     let olineRows = [];
     let processedData = {};
-
+    let subHeaderData = [];
     if(olDataLen){
       for(let i=0; i < olDataLen; i++){
-
         let olineRow = [];
-        let formatSkuId = this.props.intl.formatMessage(messages.skuId, {skuId: arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1).split("=")[1] });
-
+        let pdfa_values_split = arg[i].pdfa_values[0].substring(1,arg[i].pdfa_values[0].length-1).split(","); // converts to string and then splits
+        let pdfa_values_split_sku = pdfa_values_split[0].split("="); // splits first element to extract sku id
+        let skuId = pdfa_values_split_sku[1].substring(2,pdfa_values_split_sku[1].length-1);
+        let formatSkuId = this.props.intl.formatMessage(messages.skuId, {skuId: skuId });
+        /* create content for subHeader */
+        for(let k = 1; k< pdfa_values_split.length; k++){
+          subHeaderData.push(pdfa_values_split[k]);
+        } 
+        
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
-                        <DotSeparatorContent header={[formatSkuId]} subHeader={[]}/>
+                        <DotSeparatorContent header={[formatSkuId]} headerClassName="viewOrderLinesHeader" subHeader={subHeaderData} subheaderClassName="subheaderName viewOrderLinesSubHeader" separator={<span className="straightLine">|</span>}/>
                     </div>);
 
         let formatProgressBar = this._formatProgressBar(arg[i].pick_products_count, arg[i].total_products_count);

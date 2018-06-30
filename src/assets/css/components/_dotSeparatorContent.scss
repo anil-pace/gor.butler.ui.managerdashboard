@@ -1,26 +1,27 @@
-.gor-separator{
+.gor-separator {
     display: inline-block;
-    line-height: 20px;
-    
-    
-    .headerName{
-padding: 7px;
-font-size: 16px;
-	font-weight: 600;
-	text-align: left;
-	color: #383838;
-    }
-    .subheaderName{
+    line-height: 22px;
+    .headerName,
+    .viewDetailsSeparatorHeader {
         padding: 7px;
-        font-size: 14px;
-	text-align: left;
-	color: #333333;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: left;
+        color: #333333;
     }
-    .headerSeparation{
-        font-size: 30px;
+    .viewOrderLinesHeader{
+        position: relative;
+        left: 5px;
+        top: 5px;
+        vertical-align: middle;
     }
-    .subHeaderSeparation{
-        font-size: 30px;
+
+    .subheaderName,
+    .viewDetailsSeparatorSubHeader {
+        padding: 7px;
+        font-size: 13px;
+        text-align: left;
+        color: #333333;
     }
     .viewDetailslimitsSubHeader{
         white-space: nowrap;
@@ -29,4 +30,19 @@ font-size: 16px;
         width:300px;
         display: block;
     }
+    .viewOrderLinesSubHeader{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width:100px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.dotImage {
+    background-position: -48px -111px;
+    display: inline-block;
+    height: 5px;
+    width: 5px;
 }
