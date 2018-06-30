@@ -1,6 +1,6 @@
 {
   "extends": "react-app",
   "rules":{
-    "no-restricted-globals": ["warn", "event", "fdescribe"]
+    "no-restricted-globals": ["warn", "event"]
   }
 }

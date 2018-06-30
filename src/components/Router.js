@@ -11,8 +11,8 @@ import {setInventorySpinner} from '../actions/inventoryActions';
 import {setAuditSpinner} from '../actions/auditActions';
 import {setOrderListSpinner} from '../actions/orderListActions';
 import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner} from '../actions/spinnerAction';
-import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER, MSU} from '../constants/appConstants';
-import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY} from '../constants/frontEndConstants';
+import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, MSU} from '../constants/appConstants';
+import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY,  USERS} from '../constants/frontEndConstants';
 import {translationMessages} from '../utilities/i18n';
 import {updateIntl} from 'react-intl-redux';
 
@@ -23,7 +23,6 @@ import {updateIntl} from 'react-intl-redux';
  //-- end of Google analytics tracker
 
 class Routes extends React.Component {
-
 
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
@@ -41,7 +40,7 @@ class Routes extends React.Component {
                 case AUDIT:
                     this.props.setAuditSpinner(true);
                     break;
-                case USER:
+                case USERS:
                     this.props.setUserSpinner(true);
                     break;
 

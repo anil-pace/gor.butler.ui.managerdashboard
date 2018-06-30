@@ -35,6 +35,9 @@ export const E028=(<FormattedMessage id="ppsDetail.modeChange.isAlreadyRequested
 export const E029=(<FormattedMessage id="ppsDetail.modeChange.tryLater" description="Previous Change request is pending"
       defaultMessage="Previous request of changing mode is already pending, Please try later!"/>);
 
+export const UE001=(<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
+      defaultMessage="An account has already been created with this User ID"/>);
+
 export const UE002=(<FormattedMessage id="notify.error.usernameExists" description='Text for already registered username' 
       defaultMessage="An account has already been created with this User ID"/>);
 

@@ -11,7 +11,6 @@ import {
     setPendingAuditLines,
     auditValidatedAttributesSKU,
     auditValidatedAttributesLocation,
-    auditValidatedAttributesLocationCsv,
     createAuditAction,
     setAuditEditData,
     attributeValidationItemRecall
@@ -499,9 +498,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
       break;
                
         case VALIDATE_LOCATION_ID_CSV:
-            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
-                store.dispatch(auditValidatedAttributesLocationCsv(res));
-            }
+            // if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
+            //     store.dispatch(auditValidatedAttributesLocationCsv(res));
+            // }
             store.dispatch(validateLocationcodeSpinnerCsv(false));
             break;
 

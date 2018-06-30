@@ -6,6 +6,7 @@
     "babel-plugin-react-intl": "2.4.0",
     "moment-timezone": "0.5.17",
     "react": "15.5.4",
+    "react-app-rewire-eslint": "0.2.3",
     "react-dom": "15.5.4",
     "react-ga": "2.5.3"
   },
@@ -65,7 +66,7 @@
     "build-css": "node-sass src/assets/css/main.scss -o public/assets/ --output-style expanded ",
     "post-css": "postcss  --no-map --use autoprefixer -b 'last 2 versions' < public/assets/main.css | postcss  --no-map --use cssnano  > public/assets/main.min.css",
     "watch-css": "npm run build-css && node-sass src/assets/css/main.scss -o public/assets/ --watch --recursive --output-style expanded",
-    "start-js": "react-scripts start",
+    "start-js": "react-app-rewired start && ",
     "build-dev": " npm-run-all -p watch-css start-js",
     "build-prod": "npm run build-css && npm run post-css && react-app-rewired build",
     "start": "npm run translate && REACT_APP_FILE_EXT= npm run build-dev",
