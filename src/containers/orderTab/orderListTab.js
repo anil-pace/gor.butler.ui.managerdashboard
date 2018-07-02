@@ -93,9 +93,11 @@ class OrderListTab extends React.Component {
         sessionStorage.setItem("endDate", endDate);
         if(filteredPpsId){
             formData["filtered_ppsId"] = filteredPpsId;
+            sessionStorage.setItem("filtered_ppsId", filteredPpsId);
         }
         if(filteredOrderStatus){
             formData["filtered_order_status"] = filteredOrderStatus;
+            sessionStorage.setItem("filtered_order_status", JSON.stringify(filteredOrderStatus));
         }
 
         let params={
@@ -361,7 +363,7 @@ _handleClickRefreshButton(){
             </div>
             </div>
         {/*Filter Summary*/}
-        <FilterSummary total={orderDetails.length || 0} 
+        <FilterSummary total={orderDetails.length || 0}  
         isFilterApplied={this.props.isFilterApplied}
         responseFlag={this.props.responseFlag}
         filterText={<FormattedMessage id="orderlist.filter.search.bar"
