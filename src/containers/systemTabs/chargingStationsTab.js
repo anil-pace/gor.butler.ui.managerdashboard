@@ -276,7 +276,14 @@ class ChargingStations extends React.Component {
                         
                         {chargersData?<div><div><div className="gor-filter-wrap"
                                          style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <ChargingStationFilter isFilterApplied={this.props.isFilterApplied}  filterState={this.props.chargingStationFilterStatus} chargingstationfilterState={this.props.chargingstationfilterState} chargersData={chargersData} responseFlag={this.props.responseFlag} showChargingStationFilter={this.showChargingStationFilter} noResults={chargersData.length === 0}/>
+                                <ChargingStationFilter 
+                                isFilterApplied={this.props.isFilterApplied}  
+                                filterState={this.props.chargingStationFilterStatus} 
+                                chargingstationfilterState={this.props.chargingstationfilterState} 
+                                chargersData={chargersData} 
+                                responseFlag={this.props.responseFlag} 
+                                showChargingStationFilter={this.showChargingStationFilter} 
+                                noResults={chargersData.length === 0}/>
                             </div>
 
                             <div className="gorToolBar">

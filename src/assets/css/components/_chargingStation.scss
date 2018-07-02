@@ -2,6 +2,9 @@
 	.gor-chergingstation-table{
 		.row{
 			background:#f7f7f7;
+			&:hover{
+                    background:#DDDDDD;
+                }
 		}
 		.cell{
 			padding-left:15px;

@@ -11,11 +11,12 @@ class ProgressBar extends React.Component{
   
   render()
   {
-      return (
-        <div className="gor-progress-bar-wrapper">
+      
+         return (
+          <div className="gor-progress-bar-wrapper">
           <div style={{height: "12px", background: "#4a4a4a", borderRadius: "12px", width:this.props.progressWidth+"%"}}> </div>
         </div>
-      );
+         );
     }
   }
 
