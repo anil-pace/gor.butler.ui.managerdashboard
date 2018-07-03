@@ -48,6 +48,9 @@ class DownloadReportTab extends React.Component{
         var data=this._processData(this.props.reportsData);
         var dataList = new tableRenderer(data.length);
         dataList.newData=data;
+        var pageSize = this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL;
+        var totalElements = this.props.totalElements || 0;
+        var totalPage = Math.ceil(totalElements/pageSize);
         return {
             columnWidths: {
                 reportName: this.props.containerWidth * 0.2,
@@ -59,8 +62,10 @@ class DownloadReportTab extends React.Component{
             dataList:dataList,
             query:this.props.location.query,
             subscribed:false,
-            pageSize:this.props.location.query.pageSize || DEFAULT_PAGE_SIZE_OL,
-            dataFetchedOnLoad:false
+            pageSize,
+            dataFetchedOnLoad:false,
+            totalPage,
+            totalElements
         }
     }
 
@@ -140,8 +145,14 @@ class DownloadReportTab extends React.Component{
             let data = this._processData(rawData);
             let dataList = new tableRenderer(data.length)
             dataList.newData=data;
+            let pageSize = nextProps.location.query.pageSize || DEFAULT_PAGE_SIZE_OL;
+            let totalElements = nextProps.totalElements || 0;
+            let totalPage = Math.ceil(totalElements/pageSize);
             this.setState({
-                dataList
+                dataList,
+                pageSize,
+                totalElements,
+                totalPage
             })
         }
     }
@@ -362,7 +373,7 @@ class DownloadReportTab extends React.Component{
                     selectedOption={DEFAULT_PAGE_SIZE_OL}/>
                 </div>
                 <div className="gor-ol-paginate-right">
-                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={10}/>
+                <GorPaginateV2 disabled={false} location={location} currentPage={this.state.query.page||1} totalPage={this.state.totalPage}/>
                 </div>
                 </div>   
             </div>
@@ -388,6 +399,7 @@ function mapStateToProps(state, ownProps) {
     return {
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         reportsData:state.downloadReportsReducer.reportsData,
+        totalElements:state.downloadReportsReducer.totalElements,
         hasDataChanged:state.downloadReportsReducer.hasDataChanged,
         timeOffset: state.authLogin.timeOffset,
         downloadReportsSpinner:state.downloadReportsReducer.downloadReportsSpinner

@@ -57,7 +57,7 @@ class GorPaginateV2 extends React.Component {
 
     render() {
         var paginateButton={firstPg: "|<", lastPg: ">|", prevPg: "<", nextPg: ">"}
-        var currentPage=+this.state.currentQuery;
+        var currentPage=this.state.currentQuery;
         var totalPage=+this.state.totalPage;
         var disabled = this.props.disabled;
         return (
