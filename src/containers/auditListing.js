@@ -113,11 +113,11 @@ const messages = defineMessages({
    },
       linesRejected: {
         id: "auditdetail.label.linesrejected",
-        defaultMessage: "lines rejected "
+        defaultMessage: "lines rejected"
     },
     linesApproved:{
         id: "auditdetail.label.linesapproved",
-        defaultMessage: "lines approved "
+        defaultMessage: "lines approved"
      },
 
 });
