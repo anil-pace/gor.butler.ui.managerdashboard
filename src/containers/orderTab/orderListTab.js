@@ -57,6 +57,7 @@ class OrderListTab extends React.Component {
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
+        this.callBack = this.callBack.bind(this);
     }
 
     _getInitialState(){
@@ -70,13 +71,19 @@ class OrderListTab extends React.Component {
             query: null, 
             orderListRefreshed: null,
             setStartDateForOrders: null,
-            setEndDateForOrders: null
+            setEndDateForOrders: null,
+            isFirstTimeRun: false,
+            isFilterApplied: false,
+            isPageRefreshed: false
         }
     }
 
     componentDidMount(){
         this.props.setOrderListSpinner(true);
         this.props.filterApplied(false);
+        // this.setState({
+        //     isPageFreshed: true
+        // })
     }
 
     _clearPolling(){
@@ -133,34 +140,49 @@ class OrderListTab extends React.Component {
         let setMomentStartDate, setMomentEndDate;
 
         /* when coming on orders page for first time OR coming after traversing from other tabs */
-        if( (this.props.timeOffset !== nextProps.timeOffset) ||
-            (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+        // if( (this.props.timeOffset !== nextProps.timeOffset) ||
+        //     (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+        if(Object.keys(nextProps.location.query).length === 0 && !this.state.isPageRefreshed){
+            console.log(" ========called on first time or refresh =========");
             this.props.setOrderListSpinner(true);
-        setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
-        setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
-        this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
-        this.setState({
-            setStartDateForOrders: setMomentStartDate,
-            setEndDateForOrders: setMomentEndDate
-        })
-    }
+            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+            this.setState({
+                setStartDateForOrders: setMomentStartDate,
+                setEndDateForOrders: setMomentEndDate,
+                isPageRefreshed: true
+            })
+        }
 
-    if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
-        this._clearPolling();
-    }
+        if( Object.keys(nextProps.location.query).length > 0 && !this.state.isPageRefreshed ){
+            console.log(" ========called on filter applied =========");
+            this.setState({
+                query: JSON.parse(JSON.stringify(nextProps.location.query)),
+                orderListRefreshed: nextProps.orderListRefreshed,
+                isPageRefreshed: true
+                
+            });
+            this._refreshList(nextProps.location.query);
+        }
+        
+
+        // if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+        //     this._clearPolling();
+        // }
 
 
-    if (nextProps.socketAuthorized && !this.state.subscribed) {
-        this.setState({subscribed: true},function(){
-            this._subscribeData(nextProps)
-        })
+        // if (nextProps.socketAuthorized && !this.state.subscribed) {
+        //     this.setState({subscribed: true},function(){
+        //         this._subscribeData(nextProps)
+        //     })
 
-    }
-    if (Object.keys(nextProps.location.query).length && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-        this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-        this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-        this._refreshList(nextProps.location.query);
-    }
+        // }
+        // if (Object.keys(nextProps.location.query).length && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        //     this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
+        //     this.setState({orderListRefreshed: nextProps.orderListRefreshed})
+        //     this._refreshList(nextProps.location.query);
+        // }
 }
 
 _refreshList(query){
@@ -189,7 +211,8 @@ _refreshList(query){
 
     this.setState({
         setStartDateForOrders: momentStartDateFromFilter,
-        setEndDateForOrders: momentEndDateFromFilter
+        setEndDateForOrders: momentEndDateFromFilter,
+        
     });
 }
 
@@ -304,6 +327,12 @@ _handleClickRefreshButton(){
     _handleCollapseAll(){
         this.props.unSetAllActivePbts()
     }
+
+    callBack(){
+        this.setState({
+            isPageRefreshed: false
+        })
+    }
     
 
     render() {
@@ -329,7 +358,7 @@ _handleClickRefreshButton(){
             {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
             <div>
             <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-            <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag}/>
+            <OrderFilter orderDetails={orderDetails} isPageRefreshed={this.state.isPageRefreshed} callBack={this.callBack}/>
             </div>
 
             <div>

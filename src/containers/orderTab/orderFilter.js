@@ -171,6 +171,7 @@ class OrderFilter extends React.Component{
         this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})
     }
 
+
     _applyFilter() {
         this._closeFilter();
         var filterState=this.state, _query={};
@@ -203,9 +204,10 @@ class OrderFilter extends React.Component{
         if (filterState.searchQuery[TO_TIME]) {
             _query.toTime=filterState.searchQuery[TO_TIME]
         }
+
+        this.props.callBack();
         
        hashHistory.push({pathname: "/orders", query: _query});
-       
     }
 
     _clearFilter() {
