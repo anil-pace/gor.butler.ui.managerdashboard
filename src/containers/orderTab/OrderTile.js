@@ -54,18 +54,6 @@ class OrderTile extends React.Component{
                   </div>
                   <ProgressBar progressWidth={ progressWidth ? progressWidth : 0}/>
                   <div className="orderLeftStatus">
-                    <div className="statusLeft">
-                      {
-                        (orderFulfilData.pps_count > 0) ?
-                        (<div>
-                          <FormattedMessage id="orders.fulfil.ppsRunning" description="pps running" defaultMessage="{pps_count} PPS running" 
-                            values={{
-                              pps_count:<span style={{fontWeight: "bold"}}>{orderFulfilData.pps_count}</span>,
-                            }}
-                          />
-                        </div>) : <FormattedMessage id="orders.fulfil.noPPSRunning" description="no pps running" defaultMessage="No PPS running"/>
-                      }
-                    </div>
                     <div className="statusRight">
                         <div> {formatProgressBarMessage}</div>
                     </div>
