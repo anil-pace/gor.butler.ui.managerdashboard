@@ -57,6 +57,7 @@ class OrderListTab extends React.Component {
 
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._handleCollapseAll = this._handleCollapseAll.bind(this);
+        this.callBack = this.callBack.bind(this);
     }
 
     _getInitialState(){
@@ -70,8 +71,15 @@ class OrderListTab extends React.Component {
             query: null, 
             orderListRefreshed: null,
             setStartDateForOrders: null,
-            setEndDateForOrders: null
+            setEndDateForOrders: null,
+            isPageRefreshed: false
         }
+    }
+
+    callBack(){
+        this.setState({
+            isPageRefreshed: false
+        })
     }
 
     componentDidMount(){
@@ -133,16 +141,17 @@ class OrderListTab extends React.Component {
         let setMomentStartDate, setMomentEndDate;
 
         /* when coming on orders page for first time OR coming after traversing from other tabs */
-        if( (this.props.timeOffset !== nextProps.timeOffset) ||
-            (!Object.keys(nextProps.location.query).length && !this._intervalIdForCutOffTime) ){
+        if( Object.keys(nextProps.location.query).length === 0 && !this.state.isPageRefreshed ){
+            console.log(" ========called on first time or refresh =========");
             this.props.setOrderListSpinner(true);
-        setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
-        setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
-        this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
-        this.setState({
-            setStartDateForOrders: setMomentStartDate,
-            setEndDateForOrders: setMomentEndDate
-        })
+            setMomentStartDate = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+            setMomentEndDate =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
+            this._reqCutOffTime(setMomentStartDate, setMomentEndDate);
+            this.setState({
+                setStartDateForOrders: setMomentStartDate,
+                setEndDateForOrders: setMomentEndDate,
+                isPageRefreshed: true
+            })
     }
 
     if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
@@ -156,14 +165,17 @@ class OrderListTab extends React.Component {
         })
 
     }
-    if (Object.keys(nextProps.location.query).length && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+    if ( Object.keys(nextProps.location.query).length > 0 && !this.state.isPageRefreshed ) {
         this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-        this.setState({orderListRefreshed: nextProps.orderListRefreshed})
-        this._refreshList(nextProps.location.query);
+        this.setState({orderListRefreshed: nextProps.orderListRefreshed});
+        this.setState({
+            isPageRefreshed: true
+        });
+        this._refreshList(nextProps, nextProps.location.query);
     }
 }
 
-_refreshList(query){
+_refreshList(nextProps, query){
 
     let startDateFromFilter, endDateFromFilter, momentStartDateFromFilter, momentEndDateFromFilter;
 
@@ -175,13 +187,13 @@ _refreshList(query){
         startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
         endDateFromFilter = new Date(query.toDate + " " + query.toTime);
 
-        momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
-        momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+        momentStartDateFromFilter = moment.tz(startDateFromFilter, nextProps.timeOffset).toISOString();
+        momentEndDateFromFilter = moment.tz(endDateFromFilter, nextProps.timeOffset).toISOString();
 
     }
     else{
-        momentStartDateFromFilter = moment().startOf('day').tz(this.props.timeOffset).toISOString();
-        momentEndDateFromFilter =   moment().endOf('day').tz(this.props.timeOffset).toISOString();
+        momentStartDateFromFilter = moment().startOf('day').tz(nextProps.timeOffset).toISOString();
+        momentEndDateFromFilter =   moment().endOf('day').tz(nextProps.timeOffset).toISOString();
     }
 
     this._reqCutOffTime(momentStartDateFromFilter, momentEndDateFromFilter, query.ppsId, query.status);
@@ -329,7 +341,7 @@ _handleClickRefreshButton(){
             {!this.props.showFilter ? <Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner}/> : ""}
             <div>
             <div className="gor-filter-wrap" style={{'width': '400px','display': this.props.showFilter ? 'block' : 'none', height: filterHeight}}>
-            <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag}/>
+            <OrderFilter orderDetails={orderDetails} responseFlag={this.props.responseFlag} callBack = {this.callBack}/>
             </div>
 
             <div>

@@ -203,6 +203,8 @@ class OrderFilter extends React.Component{
         if (filterState.searchQuery[TO_TIME]) {
             _query.toTime=filterState.searchQuery[TO_TIME]
         }
+
+        this.props.callBack();
         
        hashHistory.push({pathname: "/orders", query: _query});
        
