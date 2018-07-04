@@ -709,6 +709,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setOrderListSpinner(false));
             let startDate = sessionStorage.getItem("startDate");
             let endDate = sessionStorage.getItem("endDate");
+            let filteredPpsId = sessionStorage.getItem("filtered_ppsId");
+            let filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"));
             // If length of response from Level 1 http call is 1 with no cut off time, call Level 2 http request with cut off time: null
             if(res.length === 1 && res[0].cut_off_time === null){
                 let formData={
@@ -716,6 +718,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     "end_date": endDate,
                     "cut_off_time": null
                 };
+                if(filteredPpsId){
+                    formData["filtered_ppsId"] = filteredPpsId;
+                }
+                if(filteredOrderStatus){
+                    formData["filtered_order_status"] = filteredOrderStatus;
+                }
 
                 let params={
                     'url':ORDERS_PER_PBT_URL,
@@ -726,6 +734,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     'formdata':formData,
                 }
                 store.dispatch(makeAjaxCall(params));
+                sessionStorage.removeItem("filtered_ppsId");
+                sessionStorage.removeItem("filtered_order_status");
             }
             else{
                 store.dispatch(receiveCutOffTimeData(res));
