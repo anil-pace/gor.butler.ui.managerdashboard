@@ -3298,16 +3298,6 @@ msgstr ""
 		msgid "Order fulfilment progress"
 		msgstr ""
 
-		#: orders.fulfil.ppsRunning
-		msgctxt "orders.fulfil.ppsRunning"
-		msgid "{pps_count} PPS running"
-		msgstr ""
-
-		#: orders.fulfil.noPPSRunning
-		msgctxt "orders.fulfil.noPPSRunning"
-		msgid "No PPS running"
-		msgstr ""
-
 		#: orders.summary
 		msgctxt "orders.summary"
 		msgid "Order summary"

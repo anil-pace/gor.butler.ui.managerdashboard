@@ -4301,18 +4301,6 @@
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orders.fulfil.ppsRunning",
-    "description": "pps running",
-    "defaultMessage": "{pps_count} PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.noPPSRunning",
-    "description": "no pps running",
-    "defaultMessage": "No PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
     "id": "orders.summary",
     "description": "header of orders summary",
     "defaultMessage": "Order summary",
