@@ -8,6 +8,7 @@ import FilterDateTimeFieldWrap from '../../components/tableFilter/filterDateTime
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {hashHistory} from 'react-router';
+import {setOrderListSpinner} from '../../actions/orderListActions';
 import {
     ANY,
     ALL,
@@ -172,6 +173,8 @@ class OrderFilter extends React.Component{
     }
 
     _applyFilter() {
+        this.props.filterApplied(false);
+        this.props.setOrderListSpinner(true);
         this._closeFilter();
         var filterState=this.state, _query={};
 
@@ -305,7 +308,10 @@ var mapDispatchToProps=function(dispatch){
     showTableFilter: function(data){dispatch(showTableFilter(data));},
     filterApplied: function(data){dispatch(filterApplied(data));},
     orderfilterState: function(data){dispatch(orderfilterState(data));},
-    toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));}
+    toggleOrderFilter: function(data){dispatch(toggleOrderFilter(data));},
+    setOrderListSpinner: function (data) {
+            dispatch(setOrderListSpinner(data))
+        },
   }
 };
 
