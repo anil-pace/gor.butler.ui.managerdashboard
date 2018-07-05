@@ -152,27 +152,27 @@ class OrderListTab extends React.Component {
                 setEndDateForOrders: setMomentEndDate,
                 isPageRefreshed: true
             })
-    }
+        }
 
-    if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
-        this._clearPolling();
-    }
+        if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForCutOffTime){
+            this._clearPolling();
+        }
 
 
-    if (nextProps.socketAuthorized && !this.state.subscribed) {
-        this.setState({subscribed: true},function(){
-            this._subscribeData(nextProps)
-        })
-
-    }
-    if ( Object.keys(nextProps.location.query).length > 0 && !this.state.isPageRefreshed ) {
-        this.setState({query: JSON.parse(JSON.stringify(nextProps.location.query))});
-        this.setState({orderListRefreshed: nextProps.orderListRefreshed});
-        this.setState({
-            isPageRefreshed: true
-        });
-        this._refreshList(nextProps, nextProps.location.query);
-    }
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+        }
+        
+        if ( Object.keys(nextProps.location.query).length > 0 && !this.state.isPageRefreshed ) {
+            this.setState({
+                query: JSON.parse(JSON.stringify(nextProps.location.query)),
+                orderListRefreshed: nextProps.orderListRefreshed,
+                isPageRefreshed: true
+            });
+            this._refreshList(nextProps, nextProps.location.query);
+        }
 }
 
 _refreshList(nextProps, query){
