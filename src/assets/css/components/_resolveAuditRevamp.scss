@@ -1,0 +1,49 @@
+.gor-modal-content{
+.gor-modal-headResolve{
+    min-height:4.75rem;
+}
+}
+.gor-audit-resolve{
+    display:inline-block;
+    width:100%;
+}
+.divider{
+    float: left;
+    border-left: 2px solid gray;
+    height: 40px;
+    margin-top: 10px;
+   
+}
+
+.gor-auditResolve-header{
+    float: left;
+    width: 18%;
+    .resolveHeader{
+        color: #000000;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 31px;
+        text-align: left;
+    }
+    .headerInfo{
+        color: #000000;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        text-align: left;
+    }
+}
+.resolveInfoTile{
+    float: left;
+    margin-left: 5%;
+    .infoHeader{
+        color: #333333;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+        text-align: left;
+    }
+    .infoText{
+        font-weight: 400;
+    }
+}

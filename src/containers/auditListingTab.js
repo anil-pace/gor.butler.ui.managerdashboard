@@ -9,7 +9,8 @@
  import {GTableBody} from "../components/gor-table-component/tableBody";
  import {GTableRow} from "../components/gor-table-component/tableRow";
  import {FormattedMessage,defineMessages} from 'react-intl';
- import ResolveAudit from './auditTab/resolveAudit';
+ //import ResolveAudit from './auditTab/resolveAudit';
+ import ResolveAudit from './auditTab/resolveAuditRevamp';
  import NameInitial from '../components/NameInitial/nameInitial';
  import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
  import ProgressBar from '../components/progressBar/progressBar.js';
@@ -171,10 +172,9 @@ _handelResolveAudit(event){
   modal.add(ResolveAudit, {
     title: '',
     size: 'large', // large, medium or small,
-    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+    //closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
     hideCloseButton: true,
     auditId: auditId,
-    screenId: "APPROVE_AUDIT",
     auditType: auditId,
     auditMethod: 'pdfa'//"location or pdfa"
 });
@@ -377,8 +377,8 @@ render(){
        {/* {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
     {reauditButton}
       </button>:""} */}
-      {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']+","+tablerowdata[idx]['auditDetails']['display_id']} style={{float:'right'}}   onClick={me._handelResolveAudit}>
+      {index==4 && !tablerowdata[idx][text].resolveButton?
+      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']+","+tablerowdata[idx]['auditDetails']['display_id']+","+tablerowdata[idx]['auditDetails']['header'][1]} style={{float:'right'}}   onClick={me._handelResolveAudit}>
       {resolveButton}
       </button>:""}
        {index==5?<ActionDropDown style={{right:0}} displayId = {tablerowdata[idx]['auditDetails']['header'][0]} id={tablerowdata[idx]['auditDetails']['audit_id']} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>

@@ -12686,3 +12686,57 @@ checkmark1 for indeterminate state*/
 .gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn.orange {
   background: #f36f36;
 }
+
+.gor-modal-content .gor-modal-headResolve {
+  min-height: 4.75rem;
+}
+
+.gor-audit-resolve {
+  display: inline-block;
+  width: 100%;
+}
+
+.divider {
+  float: left;
+  border-left: 2px solid gray;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.gor-auditResolve-header {
+  float: left;
+  width: 18%;
+}
+
+.gor-auditResolve-header .resolveHeader {
+  color: #000000;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 31px;
+  text-align: left;
+}
+
+.gor-auditResolve-header .headerInfo {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+}
+
+.resolveInfoTile {
+  float: left;
+  margin-left: 5%;
+}
+
+.resolveInfoTile .infoHeader {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: left;
+}
+
+.resolveInfoTile .infoText {
+  font-weight: 400;
+}
