@@ -1,49 +1,71 @@
-.gor-modal-content{
-.gor-modal-headResolve{
-    min-height:4.75rem;
-}
-}
-.gor-audit-resolve{
-    display:inline-block;
-    width:100%;
-}
-.divider{
-    float: left;
-    border-left: 2px solid gray;
-    height: 40px;
-    margin-top: 10px;
-   
-}
+    .gor-modal-resolve-content{
+        
+    .gor-modal-headResolve{
+        min-height:4.75rem;
+        @extend .close;
+    }
+    .gor-modal-resolve-body{
+        margin: 0px 0px 0px 17px;
+        width: 92%;
+        clear: both;
+        padding-top: 100px;
+        color: #4a4a4a;
+   .gor-tabSelector{
+    overflow: auto;
+    margin-left: 40%;
 
-.gor-auditResolve-header{
-    float: left;
-    width: 18%;
-    .resolveHeader{
-        color: #000000;
-        font-size: 26px;
-        font-weight: 400;
-        line-height: 31px;
-        text-align: left;
+       .tabs{
+        background-color: #419BF9;
+        border-radius: 3px 0 0 3px;
+        width: 100px;
+        height: 50px;
+        float: left;
+       
+       }
+   }
     }
-    .headerInfo{
-        color: #000000;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 19px;
-        text-align: left;
     }
-}
-.resolveInfoTile{
-    float: left;
-    margin-left: 5%;
-    .infoHeader{
-        color: #333333;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 22px;
-        text-align: left;
+    .gor-audit-resolve{
+        display:inline-block;
+        width:100%;
     }
-    .infoText{
-        font-weight: 400;
+    .divider{
+        float: left;
+        border-left: 2px solid gray;
+        height: 40px;
+        margin-top: 10px;
+    
     }
-}
+
+    .gor-auditResolve-header{
+        float: left;
+        width: 18%;
+        .resolveHeader{
+            color: #000000;
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 31px;
+            text-align: left;
+        }
+        .headerInfo{
+            color: #000000;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            text-align: left;
+        }
+    }
+    .resolveInfoTile{
+        float: left;
+        margin-left: 5%;
+        line-height: 15px;
+        .infoHeader{
+            color: #333333;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .infoText{
+            font-weight: 400;
+        }
+    }

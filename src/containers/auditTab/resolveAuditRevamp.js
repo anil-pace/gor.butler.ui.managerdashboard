@@ -39,8 +39,8 @@ class ResolveAudit extends React.Component{
          'token': this.props.auth_token,
          'contentType':APP_JSON
         } 
-        this.props.setResolveAuditSpinner(true);
-       this.props.getAuditOrderLines(paginationData);  
+      //   this.props.setResolveAuditSpinner(true);
+      //  this.props.getAuditOrderLines(paginationData);  
   }
   
 
@@ -93,7 +93,7 @@ class ResolveAudit extends React.Component{
     let tiledata=this._processDataTile();
       return (
         <div>
-        <div className="gor-modal-content">
+        <div className="gor-modal-content gor-modal-resolve-content">
             <div className='gor-modal-head gor-modal-headResolve'>
               <div className='gor-audit-resolve'>
                 <div className="gor-auditResolve-header"> 
@@ -112,10 +112,14 @@ class ResolveAudit extends React.Component{
                 <span className="close" onClick={this._removeThisModal.bind(this)}>×</span>
               </div>
             </div>
-            <div className='gor-modal-body'>
-           
+            <div className='gor-modal-resolve-body'>
+                 <div className='gor-tabSelector'>
+                      <span className="tabs"></span>
+                      <span className="tabs"></span>
+                </div>
             </div>
           </div>
+          
         </div>
       );
     }

@@ -3,6 +3,12 @@
     "id": "notification.infinite.message",
     "description": "Infinite scroll message",
     "defaultMessage": "Loading More",
+    "filepath": "./src/components/accordian/accordion.js"
+  },
+  {
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
     "filepath": "./src/components/accordion/accordion.js"
   },
   {
@@ -3270,6 +3276,22 @@
     "description": "button label for close",
     "defaultMessage": "Close",
     "filepath": "./src/containers/auditTab/resolveAudit.js"
+  },
+  {
+    "id": "resolveaudit.manager",
+    "defaultMessage": "Manager:",
+    "filepath": "./src/containers/auditTab/resolveAuditRevamp.js"
+  },
+  {
+    "id": "resolveaudit.operatorassign",
+    "defaultMessage": "Operator assigned:",
+    "filepath": "./src/containers/auditTab/resolveAuditRevamp.js"
+  },
+  {
+    "id": "auditresolve.header.information",
+    "description": "missing information for audit",
+    "defaultMessage": "For Audit {auditName} ({auditId})",
+    "filepath": "./src/containers/auditTab/resolveAuditRevamp.js"
   },
   {
     "id": "audit.sku.update",

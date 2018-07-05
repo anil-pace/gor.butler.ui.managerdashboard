@@ -2498,6 +2498,21 @@ msgstr ""
         msgid "Close"
         msgstr ""
 
+        #: resolveaudit.manager
+        msgctxt "resolveaudit.manager"
+        msgid "Manager:"
+        msgstr ""
+
+        #: resolveaudit.operatorassign
+        msgctxt "resolveaudit.operatorassign"
+        msgid "Operator assigned:"
+        msgstr ""
+
+        #: auditresolve.header.information
+        msgctxt "auditresolve.header.information"
+        msgid "For Audit {auditName} ({auditId})"
+        msgstr ""
+
         #: audit.sku.update
         msgctxt "audit.sku.update"
         msgid "Update Audit"

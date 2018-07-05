@@ -2456,7 +2456,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.off .public_fixedDataTableCell_cellContent, .close .public_fixedDataTableCell_cellContent, .force_close .public_fixedDataTableCell_cellContent {
+.off .public_fixedDataTableCell_cellContent, .close .public_fixedDataTableCell_cellContent, .gor-modal-resolve-content .gor-modal-headResolve .public_fixedDataTableCell_cellContent, .force_close .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -3969,7 +3969,7 @@ input[type="checkbox"] {
   z-index: 100;
 }
 
-.gor-modal-content .gor-modal-head .close {
+.gor-modal-content .gor-modal-head .close, .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve, .gor-modal-resolve-content .gor-modal-content .gor-modal-head .gor-modal-headResolve {
   background: #f2f2f2;
   color: #AAAAAA;
   float: right;
@@ -3981,11 +3981,11 @@ input[type="checkbox"] {
   border-radius: 50%;
 }
 
-.gor-modal-content .gor-modal-head .close:hover {
+.gor-modal-content .gor-modal-head .close:hover, .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve:hover, .gor-modal-resolve-content .gor-modal-content .gor-modal-head .gor-modal-headResolve:hover {
   color: #333333;
 }
 
-.gor-modal-content .gor-modal-head .close:focus {
+.gor-modal-content .gor-modal-head .close:focus, .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve:focus, .gor-modal-resolve-content .gor-modal-content .gor-modal-head .gor-modal-headResolve:focus {
   color: #666666;
 }
 
@@ -5010,7 +5010,7 @@ input[type="checkbox"] {
   color: #666666;
 }
 
-.close {
+.close, .gor-modal-resolve-content .gor-modal-headResolve {
   float: right;
   font-size: 40px;
   color: #666666;
@@ -7346,7 +7346,7 @@ button:disabled {
   vertical-align: middle;
 }
 
-.pps-table .close {
+.pps-table .close, .pps-table .gor-modal-resolve-content .gor-modal-headResolve, .gor-modal-resolve-content .pps-table .gor-modal-headResolve {
   float: none;
   font-size: inherit;
   color: inherit;
@@ -9386,7 +9386,7 @@ button:disabled {
   color: #000000;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-head .close {
+.gor-order-modal .gor-modal-content .gor-modal-head .close, .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve, .gor-modal-resolve-content .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-headResolve {
   background: #f2f2f2;
   color: #AAAAAA;
   float: right;
@@ -9398,11 +9398,11 @@ button:disabled {
   border-radius: 50%;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-head .close:hover {
+.gor-order-modal .gor-modal-content .gor-modal-head .close:hover, .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve:hover, .gor-modal-resolve-content .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-headResolve:hover {
   color: #333333;
 }
 
-.gor-order-modal .gor-modal-content .gor-modal-head .close:focus {
+.gor-order-modal .gor-modal-content .gor-modal-head .close:focus, .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-resolve-content .gor-modal-headResolve:focus, .gor-modal-resolve-content .gor-order-modal .gor-modal-content .gor-modal-head .gor-modal-headResolve:focus {
   color: #666666;
 }
 
@@ -9878,7 +9878,7 @@ button:disabled {
   color: #000000;
 }
 
-.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close {
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close, .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-resolve-content .gor-modal-headResolve, .gor-modal-resolve-content .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-headResolve {
   background: #f2f2f2;
   color: #aaaaaa;
   float: right;
@@ -9890,11 +9890,11 @@ button:disabled {
   border-radius: 50%;
 }
 
-.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:hover {
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:hover, .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-resolve-content .gor-modal-headResolve:hover, .gor-modal-resolve-content .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-headResolve:hover {
   color: #333333;
 }
 
-.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:focus {
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close:focus, .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-resolve-content .gor-modal-headResolve:focus, .gor-modal-resolve-content .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .gor-modal-headResolve:focus {
   color: #666666;
 }
 
@@ -12509,7 +12509,7 @@ checkmark1 for indeterminate state*/
   font-size: 1.5rem;
 }
 
-.gor-smmodal-content .gor-smmodal-head .close {
+.gor-smmodal-content .gor-smmodal-head .close, .gor-smmodal-content .gor-smmodal-head .gor-modal-resolve-content .gor-modal-headResolve, .gor-modal-resolve-content .gor-smmodal-content .gor-smmodal-head .gor-modal-headResolve {
   margin-right: 2%;
   background: #f2f2f2;
   color: #AAAAAA;
@@ -12687,8 +12687,29 @@ checkmark1 for indeterminate state*/
   background: #f36f36;
 }
 
-.gor-modal-content .gor-modal-headResolve {
+.gor-modal-resolve-content .gor-modal-headResolve {
   min-height: 4.75rem;
+}
+
+.gor-modal-resolve-content .gor-modal-resolve-body {
+  margin: 0px 0px 0px 17px;
+  width: 92%;
+  clear: both;
+  padding-top: 100px;
+  color: #4a4a4a;
+}
+
+.gor-modal-resolve-content .gor-modal-resolve-body .gor-tabSelector {
+  overflow: auto;
+  margin-left: 40%;
+}
+
+.gor-modal-resolve-content .gor-modal-resolve-body .gor-tabSelector .tabs {
+  background-color: #419BF9;
+  border-radius: 3px 0 0 3px;
+  width: 100px;
+  height: 50px;
+  float: left;
 }
 
 .gor-audit-resolve {
@@ -12727,13 +12748,13 @@ checkmark1 for indeterminate state*/
 .resolveInfoTile {
   float: left;
   margin-left: 5%;
+  line-height: 15px;
 }
 
 .resolveInfoTile .infoHeader {
   color: #333333;
   font-size: 16px;
   font-weight: 600;
-  line-height: 22px;
   text-align: left;
 }
 
