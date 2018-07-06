@@ -4,7 +4,7 @@ import Spinner from '../../components/spinner/Spinner';
 
 var storage = [];
 
-class Accordion extends React.Component{
+class Accordian extends React.Component{
   constructor(props) 
   {
       super(props); 
