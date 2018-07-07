@@ -452,7 +452,7 @@
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language",
-    "filepath": "./src/components/login/login.js"
+    "filepath": "./src/components/login/loginContainer.js"
   },
   {
     "id": "login.butler.manageInterface",
