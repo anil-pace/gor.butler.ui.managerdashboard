@@ -143,7 +143,7 @@ class Routes extends React.Component {
                 <Route name="login" path="/login" onEnter={this._refreshPage.bind(this)}
                        getComponent={(location, callback)=> {
                            require.ensure([], function (require) {
-                               callback(null, require('./login/login.js').default);
+                               callback(null, require('../components/login/login.js').default);
                            }, "login");
                        }}
                 />
