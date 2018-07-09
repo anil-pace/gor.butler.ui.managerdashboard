@@ -191,10 +191,10 @@ class ViewOrderLine extends React.Component{
     let olDataLen = arg.length;
     let olineRows = [];
     let processedData = {};
-    let subHeaderData = [];
     if(olDataLen){
       for(let i=0; i < olDataLen; i++){
         let olineRow = [];
+        let subHeaderData = [];
         let pdfa_values_split = arg[i].pdfa_values[0].substring(1,arg[i].pdfa_values[0].length-1).split(","); // converts to string and then splits
         let pdfa_values_split_sku = pdfa_values_split[0].split("="); // splits first element to extract sku id
         let skuId = pdfa_values_split_sku[1].substring(2,pdfa_values_split_sku[1].length-1);
