@@ -170,17 +170,6 @@ class ViewDetailsAudit extends React.Component {
   let attributeData= this.props.auditDetails.entity_list?this.props.auditDetails.entity_list:[];
    this.setState({items: attributeData});
   }
-  _PPSstring(list){
-    let pps = this.context.intl.formatMessage(messages.pps);
-    
-    let finalstring="";
-    if(list && list.length!=0){
-    for(let i=0,len=list.length;i<len;i++){
-       finalstring=len>i+1?finalstring+pps+list[i]+", ":finalstring+pps+list[i];
-    }
-  }
-    return finalstring!==""?finalstring:"-";
-  }
 
   ppsChange(e){
     let param="CHANGE_PPS";
@@ -256,7 +245,7 @@ _timeFormat(UTCtime){
     }else if(data.audit_param_type=="location"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
-    tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
+    tile3Data[vdhPPSid]=data.pps_id||"";
     tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
