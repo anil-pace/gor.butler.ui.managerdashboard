@@ -1,8 +1,8 @@
-.gor-charging-station{
-	.gor-chergingstation-table{
+.gor-sys-controller{
+	.gor-syscontroller-table{
 		.row{
 			background:#f7f7f7;
-			&:hover{
+            &:hover{
                     background:#DDDDDD;
                 }
 		}
@@ -11,7 +11,7 @@
 			height: 40px;
     		width: 240px;
 		}
-		 .Disconnected {
+		 .disconnected {
     	border-radius: 15px;
     	text-align: center;
     	width: 90px;
@@ -26,7 +26,7 @@
     	padding: 5px 8px 8px;
 
   		}
-  		.Connected {
+  		.connected {
     	border-radius: 15px;
     	text-align: center;
     	width: 90px;
@@ -43,39 +43,5 @@
 
 	}
 
-		
-		
-	.gor-filterBtn-btn {
-	    .ico-wrap{
-	    	display:inline-block;
-	    	width:20%;
-	    }
-	    .ico-txt-wrp{
-	    	display:inline-block;
-	    	width:80%;
-	    }
-	    
-	}
-	.gor-ol-paginate-wrap{
-		width:95%;
-		.gor-ol-paginate-left{
-			display:inline-block;
-			width:50%;
-			vertical-align: middle;
-		}
-		.gor-ol-paginate-right{
-			display:inline-block;
-			width:50%;
-			vertical-align: middle;
-		}
-		.gor-paginate-wrap{
-			float:right;
-		}
-		.gor-dropdown-wrapper{
-			width: 10%;
-		    margin-left: 4%;
-		    background: #fff;
-		    margin-top:2rem;
-		}
-	}
-}
+	}	
+	

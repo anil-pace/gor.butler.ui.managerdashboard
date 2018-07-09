@@ -21,13 +21,7 @@ class ButlerBotFilter extends React.Component{
         this._applyFilter = this._applyFilter.bind(this);
         this._clearFilter = this._clearFilter.bind(this);
     }
-/*
-    componentWillMount(){
-        if(this.props.filterState) {
-            this.setState(this.props.filterState)
-        }
-    }
-*/
+
     componentWillReceiveProps(nextProps){
 
 
@@ -49,13 +43,12 @@ class ButlerBotFilter extends React.Component{
         }
     }
     _closeFilter() {
-       // let filterState=!this.props.showFilter;
         this.props.showBotsFilter(false);
     }	
 
-    _processButlerSearchField(){
-        const temp=[{value:"BOT ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage="BOT ID"/>}, 
-                    {value:"SPECIFIC LOCATION/ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage="SPECIFIC LOCATION/ZONE"/>}];
+    _processButlerSearchField(){    
+        const temp=[{value:"BOT_ID", label:<FormattedMessage id="butletbot.inputField.id" defaultMessage="BOT ID"/>}, 
+                    {value:"SPECIFIC_LOCATION_ZONE", label:<FormattedMessage id="butletbot.inputField.sku" defaultMessage="SPECIFIC LOCATION/ZONE"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -72,10 +65,10 @@ class ButlerBotFilter extends React.Component{
                     ];
         const labelC2=[
                     { value: 'any', label:<FormattedMessage id="butletbot.token2.any" defaultMessage="Any"/> },
-                    { value: '0', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage="Pick"/>},
-                    { value: '1', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
-                    { value: '2', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
-                    { value: '3', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
+                    { value: 'picktask', label:<FormattedMessage id="butletbot.token2.pick" defaultMessage="Pick"/>},
+                    { value: 'puttask', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
+                    { value: 'audittask', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
+                    { value: 'chargetask', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
                     { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
                     ];
         let selectedToken= this.state.tokenSelected;
@@ -98,11 +91,11 @@ class ButlerBotFilter extends React.Component{
         /**
          * for query generation
          */
-        if (filterState.searchQuery["SPECIFIC LOCATION/ZONE"]) {
-            _query.location=filterState.searchQuery["SPECIFIC LOCATION/ZONE"]
+        if (filterState.searchQuery["SPECIFIC_LOCATION_ZONE"]) {
+            _query.location=filterState.searchQuery["SPECIFIC_LOCATION_ZONE"]
         }
-        if (filterState.searchQuery["BOT ID"]) {
-            _query.butler_id=filterState.searchQuery["BOT ID"]
+        if (filterState.searchQuery["BOT_ID"]) {
+            _query.butler_id=filterState.searchQuery["BOT_ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
@@ -116,10 +109,13 @@ class ButlerBotFilter extends React.Component{
 
     _clearFilter() {
         this.props.butlerfilterState({
-            tokenSelected: {"STATUS": ["any"], "MODE": ["any"]}, searchQuery: {
-                "SPECIFIC LOCATION/ZONE":null,
-                "BOT ID":null
+            tokenSelected: {"STATUS": ["any"], "MODE": ["any"],__typename:"ButlerBotsTokenSelected"},
+             searchQuery: {
+                "SPECIFIC_LOCATION_ZONE":'',
+                "BOT_ID":'',
+                 __typename:"ButlerBotsSearchQuery"
             },
+            defaultToken: {"STATUS": ["any"], "MODE": ["any"],__typename:"ButlerBotsDefaultToken"}
         });
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
         
@@ -188,16 +184,9 @@ class ButlerBotFilter extends React.Component{
 };
 
 
-function mapStateToProps(state, ownProps){
-  return {
-  
-  };
-}
-
 
 ButlerBotFilter.PropTypes={
-  butlerDetail: React.PropTypes.array,
-
+butlerDetail: React.PropTypes.array,
 wsSubscriptionData:React.PropTypes.object,
 filterState: React.PropTypes.object,
 isFilterApplied:React.PropTypes.bool,
@@ -205,4 +194,4 @@ showBotsFilter: React.PropTypes.func,
 
 };
 
-export default connect(mapStateToProps)(ButlerBotFilter) ;
+export default connect()(ButlerBotFilter) ;
