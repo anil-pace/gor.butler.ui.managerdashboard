@@ -95,6 +95,7 @@ class OrderListTab extends React.Component {
             formData["filtered_ppsId"] = filteredPpsId;
             sessionStorage.setItem("filtered_ppsId", filteredPpsId);
         }
+      
         if(filteredOrderStatus){
             /*Need to convert filteredOrderStatus into string as 
             react-router provides single query in string*/
@@ -171,13 +172,17 @@ _refreshList(query){
         this._viewOrderLine(query.orderId); 
         this.props.filterApplied(false);
     }
-    if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
-        startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
-        endDateFromFilter = new Date(query.toDate + " " + query.toTime);
-
+    if( (query.fromDate && query.toDate) ){
+        if(!query.fromTime && !query.toTime){
+            startDateFromFilter = new Date(query.fromDate + " " + "00:00:00");
+            endDateFromFilter = new Date(query.toDate + " " + "00:00:00"); 
+        }
+        else{
+            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+            endDateFromFilter = new Date(query.toDate + " " + query.toTime); 
+        }
         momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
         momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
-
     }
     else{
         momentStartDateFromFilter = moment().startOf('day').tz(this.props.timeOffset).toISOString();
@@ -369,16 +374,13 @@ _handleClickRefreshButton(){
             </div>
         {/*Filter Summary*/}
         <FilterSummary total={orderDetails.length || 0}  
-        isFilterApplied={this.props.isFilterApplied}
-        responseFlag={this.props.responseFlag}
-        filterText={<FormattedMessage id="orderlist.filter.search.bar"
-        description='total order for filter search bar'
-        defaultMessage='{total} Orders found'
-        values={{total: orderDetails ? orderDetails.length : '0'}}/>}
-        refreshList={this._clearFilter.bind(this)}
-        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-        description="button label for show all"
-        defaultMessage="Show all orders"/>}/>
+            isFilterApplied={this.props.isFilterApplied}
+            responseFlag={this.props.responseFlag}
+            refreshList={this._clearFilter.bind(this)}
+            refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+            description="button label for show all"
+            defaultMessage="Show all Orders"/>}
+        />
 
         </div> 
 
