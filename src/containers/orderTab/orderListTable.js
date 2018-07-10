@@ -246,11 +246,10 @@ class OrderListTable extends React.Component {
     }
 
     _calculateTimeLeft(cutOffTimeFromBK){
-        let timeLeft, intlLeft, getLocale;
+        let timeLeft, intlLeft;
         intlLeft =   this.props.intl.formatMessage(messages.left);
-        getLocale = moment.locale();
         if(cutOffTimeFromBK){
-            moment.lang(getLocale);
+            moment.locale(this.props.intl.locale);
             timeLeft = moment(cutOffTimeFromBK).fromNow(true) + intlLeft;
             return timeLeft;
         }
