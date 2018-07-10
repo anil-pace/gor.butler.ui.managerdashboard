@@ -3,12 +3,6 @@
     "id": "notification.infinite.message",
     "description": "Infinite scroll message",
     "defaultMessage": "Loading More",
-    "filepath": "./src/components/accordian/accordion.js"
-  },
-  {
-    "id": "notification.infinite.message",
-    "description": "Infinite scroll message",
-    "defaultMessage": "Loading More",
     "filepath": "./src/components/accordion/accordion.js"
   },
   {

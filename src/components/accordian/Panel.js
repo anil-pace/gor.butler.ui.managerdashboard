@@ -7,23 +7,25 @@ const styles = {
     display: 'none'
   }
 };
-class Accordion extends React.Component {
+class Panel extends React.Component {  
   constructor (props) {
     super(props);
     this.state = {
       active: false
     };
-   
+    
   }
     render() {
-      
       const stateStyle = this.state.active ? styles.active: styles.inactive;
+      console.log("PANEL: ", this.props.stateStyle);
       return (      
-        <h2  className="accordion">{this.props.title}
-           {this.props.children} 
-        </h2>      
+        <div className="panel"  style = { this.props.stateStyle } >
+           <span>{this.props.title}</span>  
+           <div>
+              {this.props.children}
+           </div>
+        </div>
       );
     }
   }
-
-export default Accordion;
+  export default Panel;

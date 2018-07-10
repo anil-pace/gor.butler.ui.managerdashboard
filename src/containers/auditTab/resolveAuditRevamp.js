@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import Tile from '../../components/tile/tile.js';
 import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
+import AccordionMenu from '../../components/accordian/AccordionMenu';
+import Accordion from '../../components/accordian/Accordion';
+import Panel from '../../components/accordian/Panel';
 const messages = defineMessages({
     raManager: {
         id: "resolveaudit.manager",
@@ -119,7 +122,28 @@ class ResolveAudit extends React.Component{
                 </div>
             </div>
           </div>
-          
+          <AccordionMenu title="AccordionMenu">
+     <Accordion title="Accordion 1">
+       <Panel title="Panel 1">
+           <h3>This is within panel 1</h3>
+           <div>
+               This is panel body.
+           </div>
+       </Panel>
+       <Panel title="Panel 2">
+       </Panel>
+     </Accordion>
+      <Accordion title="Accordion 2">
+      <Accordion title="Accordian Inside">
+      <Panel title="Panel inside">
+       </Panel>
+      </Accordion>
+       <Panel title="Panel 3">
+       </Panel>
+       <Panel title="Panel 4">
+       </Panel>
+     </Accordion>
+   </AccordionMenu>
         </div>
       );
     }
