@@ -37,7 +37,7 @@ class AnalyticsTab extends React.Component{
   render(){
 		return (
 			<div>
-				<iframe ref={(ifrm) => { this.ifrm = ifrm; }} width="100%" height="500px" src="http://localhost/grafana/d-solo/NQm9Ozkiz/demo-dashboard?refresh=5s&orgId=2&panelId=4&from=1512982506925&to=1528707306925"></iframe>
+				<iframe ref={(ifrm) => { this.ifrm = ifrm; }} width="100%" height="500px" src="http://localhost/grafana/d/P6RDpGdiz/gfc-butler-dashboard?orgId=1&from=1527656142366&to=1528766999509&var-ButlerId=1274"></iframe>
 			</div>
 		);
 	}
