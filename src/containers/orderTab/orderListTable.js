@@ -401,12 +401,7 @@ class OrderListTable extends React.Component {
 
                     /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
                     else if(isGroupedById){
-                        let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
-                                             hour:"numeric",
-                                             minute:"numeric",
-                                             timeZone:this.props.timeOffset,
-                                             hour12: false});
-
+                        let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
                         let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
