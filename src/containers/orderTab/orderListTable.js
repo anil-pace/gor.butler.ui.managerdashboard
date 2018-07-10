@@ -101,6 +101,11 @@ const messages=defineMessages({
         id: 'orders.order.binId',
         description: "bin id",
         defaultMessage: 'Bin {binId}'
+    },
+    left:{
+        id: 'orders.order.left',
+        description: "left",
+        defaultMessage: ' left'
     }
 });
 
@@ -241,9 +246,12 @@ class OrderListTable extends React.Component {
     }
 
     _calculateTimeLeft(cutOffTimeFromBK){
-        let timeLeft;
+        let timeLeft, intlLeft, getLocale;
+        intlLeft =   this.props.intl.formatMessage(messages.left);
+        getLocale = moment.locale();
         if(cutOffTimeFromBK){
-            let timeLeft = moment(cutOffTimeFromBK).fromNow(true) + " left";
+            moment.lang(getLocale);
+            timeLeft = moment(cutOffTimeFromBK).fromNow(true) + intlLeft;
             return timeLeft;
         }
     }
