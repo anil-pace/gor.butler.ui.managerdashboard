@@ -33,6 +33,7 @@ import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INI
 } from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
+import moment from 'moment-timezone';
 
 import {
     API_URL,
@@ -100,6 +101,11 @@ const messages=defineMessages({
         id: 'orders.order.binId',
         description: "bin id",
         defaultMessage: 'Bin {binId}'
+    },
+    left:{
+        id: 'orders.order.left',
+        description: "left",
+        defaultMessage: ' left'
     }
 });
 
@@ -126,6 +132,7 @@ class OrderListTable extends React.Component {
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
         this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
+        this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
     }
 
     _showAllOrder() {
@@ -240,27 +247,16 @@ class OrderListTable extends React.Component {
     }
 
     _calculateTimeLeft(cutOffTimeFromBK){
-        let timeLeft, d1, d2, diff;
-
+        let timeLeft=null, intlLeft,currentLocalTime,cutOffTime;
         if(cutOffTimeFromBK){
-            d1 = new Date();
-            d2= new Date(cutOffTimeFromBK);
-            diff = d2 - d1;
-
-            if(diff > 3600000){ // 3600 * 1000 milliseconds is for 1 hr
-                timeLeft = Math.floor (diff / 3600000) + " hrs left";
-            }
-            else if(diff > 60000){ // 60 *1000 milliseconds is for 1 min
-                timeLeft = Math.floor(diff / 60000) + " mins left";
-            }
-            else if(diff > 1000){  // 1000 milliseconds is for 1 sec
-                timeLeft = Math.floor(diff / 1000) + " seconds left";
-            }
-            else{
-                timeLeft = "";
-            }
-            return timeLeft;
+            intlLeft =   this.props.intl.formatMessage(messages.left);
+            moment.locale(this.props.intl.defaultLocale);
+            currentLocalTime = moment().tz(this.props.timeZone);
+            cutOffTime = moment(cutOffTimeFromBK).tz(this.props.timeZone);
+            timeLeft = currentLocalTime.from(cutOffTime,true) + intlLeft;
+            
         }
+        return timeLeft;
     }
 
     _processPBTs = (arg, nProps) => {
@@ -416,12 +412,8 @@ class OrderListTable extends React.Component {
 
                     /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
                     else if(isGroupedById){
-                        let formatIntlPbt = this.props.intl.formatTime(pbtData[i].cut_off_time,{
-                                             hour:"numeric",
-                                             minute:"numeric",
-                                             timeZone:this.props.timeOffset,
-                                             hour12: false});
-
+                        
+                        let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
                         let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);

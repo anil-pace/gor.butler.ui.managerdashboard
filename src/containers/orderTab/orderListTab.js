@@ -47,8 +47,7 @@ import {
     ORDERS_PER_PBT_URL, 
     ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
-
-const moment = require('moment-timezone');
+import moment from 'moment-timezone';
 
 class OrderListTab extends React.Component {
     constructor(props) {
@@ -172,17 +171,13 @@ _refreshList(query){
         this._viewOrderLine(query.orderId); 
         this.props.filterApplied(false);
     }
-    if( (query.fromDate && query.toDate) ){
-        if(!query.fromTime && !query.toTime){
-            startDateFromFilter = new Date(query.fromDate + " " + "00:00:00");
-            endDateFromFilter = new Date(query.toDate + " " + "00:00:00"); 
-        }
-        else{
-            startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
-            endDateFromFilter = new Date(query.toDate + " " + query.toTime); 
-        }
+    if( (query.fromDate && query.toDate) && (query.fromTime && query.toTime) ){
+        startDateFromFilter = new Date(query.fromDate + " " + query.fromTime);
+        endDateFromFilter = new Date(query.toDate + " " + query.toTime);
+
         momentStartDateFromFilter = moment.tz(startDateFromFilter, this.props.timeOffset).toISOString();
         momentEndDateFromFilter = moment.tz(endDateFromFilter, this.props.timeOffset).toISOString();
+
     }
     else{
         momentStartDateFromFilter = moment().startOf('day').tz(this.props.timeOffset).toISOString();
@@ -373,7 +368,7 @@ _handleClickRefreshButton(){
             </div>
             </div>
         {/*Filter Summary*/}
-        <FilterSummary total={orderDetails.length || 0}  
+         <FilterSummary total={orderDetails.length || 0}  
             isFilterApplied={this.props.isFilterApplied}
             responseFlag={this.props.responseFlag}
             refreshList={this._clearFilter.bind(this)}
