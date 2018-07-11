@@ -92,6 +92,7 @@ class ResolveAudit extends React.Component{
   
   render()
   {
+    
     var auditData=this._findDisplayidName(this.props.auditId);
     let tiledata=this._processDataTile();
       return (
@@ -121,9 +122,9 @@ class ResolveAudit extends React.Component{
                       <span className="tabs"></span>
                 </div>
             </div>
-          </div>
-          <AccordionMenu title="AccordionMenu">
-     <Accordion title="Accordion 1">
+            <AccordionMenu title="AccordionMenu">
+     <Accordion id="1" title="Accordion 1">
+     <div>
        <Panel title="Panel 1">
            <h3>This is within panel 1</h3>
            <div>
@@ -132,18 +133,25 @@ class ResolveAudit extends React.Component{
        </Panel>
        <Panel title="Panel 2">
        </Panel>
+       </div>
      </Accordion>
-      <Accordion title="Accordion 2">
-      <Accordion title="Accordian Inside">
+      <Accordion id="2" title="Accordion 2">
+      <div>
+      <Accordion id="3" title="Accordian Inside">
+      <div>
       <Panel title="Panel inside">
        </Panel>
+       </div>
       </Accordion>
        <Panel title="Panel 3">
        </Panel>
        <Panel title="Panel 4">
        </Panel>
+       </div>
      </Accordion>
    </AccordionMenu>
+          </div>
+          
         </div>
       );
     }

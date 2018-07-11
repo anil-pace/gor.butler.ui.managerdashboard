@@ -11,17 +11,33 @@ class Accordion extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      active: false
+      activeid: []
     };
+    this.toggleItem = this.toggleItem.bind(this);
+  }
+
+  toggleItem(e) {
+   let arr = this.state.activeid;
+   let a= arr.indexOf(e.target.id);
+   (a==-1)?arr.push(e.target.id): arr.splice(a,1);
+   this.setState({activeid:arr});
+    // if(e.target.id==this.state.activeid){
+    //   this.setState({activeid:""});
+    // }else{
    
+    //}
+    // this.setState({
+    //   active: !this.state.active 
+    // });
   }
     render() {
       
-      const stateStyle = this.state.active ? styles.active: styles.inactive;
+      //const stateStyle = this.state.active ? styles.active: styles.inactive;
       return (      
-        <h2  className="accordion">{this.props.title}
-           {this.props.children} 
-        </h2>      
+        <div id={this.props.id} className="accordion"  onClick= {this.toggleItem}>{this.props.title}
+         {(this.state.activeid).indexOf(this.props.id)==-1?this.props.children:""}
+         
+        </div>      
       );
     }
   }
