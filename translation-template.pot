@@ -3248,14 +3248,9 @@ msgstr ""
         msgid "FILTER DATA"
         msgstr ""
 
-        #: orderlist.filter.search.bar
-        msgctxt "orderlist.filter.search.bar"
-        msgid "{total} Orders found"
-        msgstr ""
-
         #: orderlist.filter.search.bar.showall
         msgctxt "orderlist.filter.search.bar.showall"
-        msgid "Show all orders"
+        msgid "Show all Orders"
         msgstr ""
 
         #: orderList.inProgress.status
@@ -3306,6 +3301,11 @@ msgstr ""
         #: orders.order.binId
         msgctxt "orders.order.binId"
         msgid "Bin {binId}"
+        msgstr ""
+
+        #: orders.order.left
+        msgctxt "orders.order.left"
+        msgid "left"
         msgstr ""
 
         #: orders.view.orderLines
@@ -3880,7 +3880,7 @@ msgstr ""
 
         #: butletbot.token2.notSet
         msgctxt "butletbot.token2.notSet"
-        msgid "Not set"
+        msgid "Idle"
         msgstr ""
 
         #: butlerDetail.name.prefix

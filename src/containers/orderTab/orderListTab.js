@@ -47,8 +47,7 @@ import {
     ORDERS_PER_PBT_URL, 
     ORDERLINES_PER_ORDER_URL
 } from '../../constants/configConstants';
-
-const moment = require('moment-timezone');
+import moment from 'moment-timezone';
 
 class OrderListTab extends React.Component {
     constructor(props) {
@@ -95,6 +94,7 @@ class OrderListTab extends React.Component {
             formData["filtered_ppsId"] = filteredPpsId;
             sessionStorage.setItem("filtered_ppsId", filteredPpsId);
         }
+      
         if(filteredOrderStatus){
             /*Need to convert filteredOrderStatus into string as 
             react-router provides single query in string*/
@@ -368,17 +368,14 @@ _handleClickRefreshButton(){
             </div>
             </div>
         {/*Filter Summary*/}
-        <FilterSummary total={orderDetails.length || 0}  
-        isFilterApplied={this.props.isFilterApplied}
-        responseFlag={this.props.responseFlag}
-        filterText={<FormattedMessage id="orderlist.filter.search.bar"
-        description='total order for filter search bar'
-        defaultMessage='{total} Orders found'
-        values={{total: orderDetails ? orderDetails.length : '0'}}/>}
-        refreshList={this._clearFilter.bind(this)}
-        refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
-        description="button label for show all"
-        defaultMessage="Show all orders"/>}/>
+         <FilterSummary total={orderDetails.length || 0}  
+            isFilterApplied={this.props.isFilterApplied}
+            responseFlag={this.props.responseFlag}
+            refreshList={this._clearFilter.bind(this)}
+            refreshText={<FormattedMessage id="orderlist.filter.search.bar.showall"
+            description="button label for show all"
+            defaultMessage="Show all Orders"/>}
+        />
 
         </div> 
 
