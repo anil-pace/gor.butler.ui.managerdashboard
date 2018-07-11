@@ -5112,7 +5112,7 @@
   },
   {
     "id": "butletbot.token2.notSet",
-    "defaultMessage": "Not set",
+    "defaultMessage": "Idle",
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {

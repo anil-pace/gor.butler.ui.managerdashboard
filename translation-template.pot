@@ -3880,7 +3880,7 @@ msgstr ""
 
         #: butletbot.token2.notSet
         msgctxt "butletbot.token2.notSet"
-        msgid "Not set"
+        msgid "Idle"
         msgstr ""
 
         #: butlerDetail.name.prefix
