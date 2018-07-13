@@ -111,12 +111,27 @@ const messages=defineMessages({
         id: 'orders.order.ago',
         description: "ago",
         defaultMessage: ' ago'
+    },
+    today:{
+        id: 'orders.order.today',
+        description: "Today",
+        defaultMessage: 'Today'
+    },
+    tomorrow:{
+        id: 'orders.order.tomorrow',
+        description: "tomorrow",
+        defaultMessage: 'Tomorrow'
+    },
+    yesterday:{
+        id: 'orders.order.yesterday',
+        description: "yesterday",
+        defaultMessage: 'Yesterday'
     }
 });
 
 
 
-var storage = [];
+
 class OrderListTable extends React.Component {
     constructor(props) {
         super(props);
@@ -138,7 +153,7 @@ class OrderListTable extends React.Component {
         this._onScrollHandler = this._onScrollHandler.bind(this);
         this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
-        moment.locale(props.intl.locale);
+        //moment.locale('zh')
     }
 
     _showAllOrder() {
@@ -161,8 +176,7 @@ class OrderListTable extends React.Component {
 
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time;
-        const index = storage.indexOf(cutOffTime);
-        let page
+        let page;
         let size=10;
         let need_to_fetch_more=false
         try{
@@ -255,7 +269,7 @@ class OrderListTable extends React.Component {
     _calculateTimeLeft(cutOffTimeFromBK){
         let timeLeft=null, intlLeft,currentLocalTime,cutOffTime;
         if(cutOffTimeFromBK){
-            moment.locale(this.props.intl.locale);
+            //moment.locale(this.props.intl.locale);
             currentLocalTime = moment().tz(this.props.timeZone);
             cutOffTime = moment(cutOffTimeFromBK).tz(this.props.timeZone);
             intlLeft =   this.props.intl.formatMessage((currentLocalTime > cutOffTime
@@ -298,20 +312,25 @@ class OrderListTable extends React.Component {
                         formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
 
 
-                        try{
+                        
+
+                        //Create time need to be add
+                         try{
+                            //moment.locale('fr');
+                            console.log(moment.locale());
                             if(pbtData[i].start_date){
-                                let startDate = pbtData[i].start_date;
+                                
+                                let startDate = pbtData[i].start_date+"Z";
                                 formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
                                     moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                             }
                             if(pbtData[i].completion_date){
-                                let completionDate = pbtData[i].completion_date;
+                                let completionDate = pbtData[i].completion_date+"Z";
                                 formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
                                     moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                             }
-                        }
-                        catch(ex){}
-
+                }
+                catch(ex){}
                         pbtRow.push(<div className="DotSeparatorWrapper"> 
                                     <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
                                 </div>);
@@ -394,10 +413,10 @@ class OrderListTable extends React.Component {
     _calculateRelativeTime(referenceDate,currentDate){
         
         return moment(referenceDate).calendar(currentDate, {
-            sameDay: '[Today]',
-            nextDay: '[Tomorrow]',
+            sameDay: '['+this.props.intl.formatMessage(messages.today)+']',
+            nextDay: '['+this.props.intl.formatMessage(messages.tomorrow)+']',
             nextWeek: 'DD MMM',
-            lastDay: '[Yesterday]',
+            lastDay: '['+this.props.intl.formatMessage(messages.yesterday)+']',
             lastWeek: 'DD MMM',
             sameElse: 'DD MMM'
         });
@@ -433,12 +452,12 @@ class OrderListTable extends React.Component {
                 //Create time need to be add
                 try{
                     if(orderData[i].start_date){
-                        let startDate = orderData[i].start_date;
+                        let startDate = orderData[i].start_date+"Z";
                         formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
                             moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                     }
                     if(orderData[i].completion_date){
-                        let completionDate = orderData[i].completion_date;
+                        let completionDate = orderData[i].completion_date+"Z";
                         formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
                             moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                     }
