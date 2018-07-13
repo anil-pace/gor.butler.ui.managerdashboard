@@ -131,7 +131,6 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
-        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
     }
 
@@ -142,7 +141,6 @@ class OrderListTable extends React.Component {
     _viewOrderLine = (orderId) =>  {
         modal.add(ViewOrderLine, {
             startPollingOrders: this._reqOrderPerPbt,
-            startPollingCutOffTime: this.props.startPollingCutOffTime,
             cutOffTimeIndex: this.state.cutOffTimeIndex,
             orderId: orderId,
             title: '',
@@ -212,9 +210,7 @@ class OrderListTable extends React.Component {
         this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
-    _startPollingCutOffTime(){
-        this.props.startPollingCutOffTime();
-    }
+    
 
     _stopPollingOrders(intervalIdForOrders){
         clearTimeout(intervalIdForOrders);
@@ -261,7 +257,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -412,7 +408,9 @@ class OrderListTable extends React.Component {
 
                     /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
                     else if(isGroupedById){
-                        
+                        if (!pbtData[i]){
+                            continue;
+                        }
                         let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
@@ -632,7 +630,6 @@ class OrderListTable extends React.Component {
                                     pbts={self.props.pbts}
                                     setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
-                                    startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
                                     onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
