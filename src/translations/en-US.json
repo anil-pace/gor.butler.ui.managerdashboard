@@ -4218,6 +4218,12 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
+    "id": "orderlist.filter.search.count",
+    "description": "total orders for filter search bar",
+    "defaultMessage": "{total} Orders found",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
     "id": "orderlist.filter.search.bar.showall",
     "description": "button label for show all",
     "defaultMessage": "Show all Orders",
@@ -4287,6 +4293,12 @@
     "id": "orders.order.left",
     "description": "left",
     "defaultMessage": "left",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.ago",
+    "description": "ago",
+    "defaultMessage": "ago",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
