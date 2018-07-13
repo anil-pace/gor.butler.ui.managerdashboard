@@ -138,6 +138,7 @@ class OrderListTable extends React.Component {
         this._onScrollHandler = this._onScrollHandler.bind(this);
         this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
+        moment.locale(props.intl.locale);
     }
 
     _showAllOrder() {
@@ -254,7 +255,7 @@ class OrderListTable extends React.Component {
     _calculateTimeLeft(cutOffTimeFromBK){
         let timeLeft=null, intlLeft,currentLocalTime,cutOffTime;
         if(cutOffTimeFromBK){
-            moment.locale(this.props.intl.defaultLocale);
+            moment.locale(this.props.intl.locale);
             currentLocalTime = moment().tz(this.props.timeZone);
             cutOffTime = moment(cutOffTimeFromBK).tz(this.props.timeZone);
             intlLeft =   this.props.intl.formatMessage((currentLocalTime > cutOffTime
