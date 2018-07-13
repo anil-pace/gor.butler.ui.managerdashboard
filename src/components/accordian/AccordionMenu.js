@@ -27,10 +27,7 @@ class AccordionMenu extends React.Component {
   //   });
   // }
   render() {
-    const stateStyle = this.state.active ? styles.active: styles.inactive;
-    var childrenWithProps = React.Children.map(this.props.children, function(child)  {
-          return React.cloneElement(child, { stateStyle: stateStyle });
-    });
+    
 
     return (      
       <div className="accordion-menu" onClick= {this.toggleItem}>

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import Tile from '../../components/tile/tile.js';
 import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
 import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
-import AccordionMenu from '../../components/accordian/AccordionMenu';
-import Accordion from '../../components/accordian/Accordion';
+//import AccordionMenu from '../../components/accordian/AccordionMenu';
+import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
+import Accordion from '../../components/accordian/accordion';
 import Panel from '../../components/accordian/Panel';
 const messages = defineMessages({
     raManager: {
@@ -17,11 +18,11 @@ const messages = defineMessages({
         defaultMessage: "Operator assigned:"
     }
 });
+const receiveMock=[{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": { "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } } }, { "header": { "slot": "002.0.d.02.04", "totalmismatch": [15, 30], "comment": "My comments here", "noofauditline": "3" }, "body": { "Motorola-SKU-24323432": { "pdfa": "color:Black|16 GB", "operatorname": "Anil kumar", "mismatch": [2, 4], "comments": "anils commnets", "status": "approve" }, "LG-SKU-24342212": { "pdfa": "color:White|32 GB", "operatorname": "Sumit", "mismatch": [1, 3], "comments": "sumit's commnets", "status": "reject" }, "laptop-SKU-24342212": { "pdfa": "color:White|1 TB", "operatorname": "Hemant", "mismatch": [12, 34], "comments": "hemant's commnets", "status": "approve" } } }];
 class ResolveAudit extends React.Component{
   constructor(props) 
   {
-      super(props); 
-      
+      super(props);    
   }
 
   componentWillReceiveProps(nextProps){
@@ -92,9 +93,15 @@ class ResolveAudit extends React.Component{
   
   render()
   {
-    
+
     var auditData=this._findDisplayidName(this.props.auditId);
     let tiledata=this._processDataTile();
+    let headerData=<div id="raja" className='gor-modal-resolve-bodyRaja' style={{'border':'1px solid red','width':'50px','height':'50px'}}>
+    <div className='gor-tabSelectorRaja'>
+         <span className="tabsRaja"></span>
+         <span className="tabsRaja"></span>
+   </div>
+</div>;
       return (
         <div>
         <div className="gor-modal-content gor-modal-resolve-content">
@@ -121,37 +128,52 @@ class ResolveAudit extends React.Component{
                       <span className="tabs"></span>
                       <span className="tabs"></span>
                 </div>
+{
+receiveMock.map(function(row,index){
+  var headerObject="",contentObject="";
+  return (
+   Object.keys(row).map(function(name,id){
+    console.log(row,row[name]);
+   if(name=="header"){
+   headerObject=<div> 
+      <DotSeparatorContent header={["SLOT "+row[name].slot]}/>
+      <DotSeparatorContent header={[(row[name].totalmismatch).join(' missing out of ')]}/>
+      <div style={{'display':'inline'}}>{row[name].comment}</div>
+      <div style={{'display':'inline'}}>{row[name].noofauditline +" unresoled line"}</div>
+    </div>;}
+    else{
+    Object.keys(row[name]).map(function(lineName,id){
+      contentObject=<div>
+      <DotSeparatorContent header={[Object.keys(row[name])[id]]} subHeader={[row[name][lineName].pdfa]}/>
+      <DotSeparatorContent header={[row[name][lineName].operatorname]}/>
+      <DotSeparatorContent header={[[(row[name].mismatch).join(' missing out of ')]]} />
+      <div style={{'display':'inline'}}>{row[name][lineName].comments}</div>
+     </div>
+    })
+  }
+    
+   })
+  )
+})
+
+}
+              <Accordion id="1" title="Accordion 1" header={headerData}>
+                  <Panel title="Panel 1">
+                    <h3>This is within panel 1</h3>
+                    This is panel body.
+                  </Panel>
+                  <Panel title="Panel 2">
+                  </Panel>
+                <Accordion id="2" title="Accordion 2">
+                  <Panel title="Panel 3">
+                  </Panel>
+                </Accordion>
+              </Accordion>
             </div>
-            <AccordionMenu title="AccordionMenu">
-     <Accordion id="1" title="Accordion 1">
-     <div>
-       <Panel title="Panel 1">
-           <h3>This is within panel 1</h3>
-           <div>
-               This is panel body.
-           </div>
-       </Panel>
-       <Panel title="Panel 2">
-       </Panel>
-       </div>
-     </Accordion>
-      <Accordion id="2" title="Accordion 2">
-      <div>
-      <Accordion id="3" title="Accordian Inside">
-      <div>
-      <Panel title="Panel inside">
-       </Panel>
-       </div>
-      </Accordion>
-       <Panel title="Panel 3">
-       </Panel>
-       <Panel title="Panel 4">
-       </Panel>
-       </div>
-     </Accordion>
-   </AccordionMenu>
+
+           
+     
           </div>
-          
         </div>
       );
     }
