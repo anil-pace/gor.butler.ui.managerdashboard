@@ -9,10 +9,14 @@ class AnalyticsTab extends React.Component{
     	let _this = this;
     	this.ifrm.onload= function(){
     		let sideMenu = _this.ifrm.contentDocument.getElementsByClassName('sidemenu')[0];
+            let settingsIcons = _this.ifrm.contentDocument.getElementsByClassName('navbar-buttons--actions')[0]
             let body = _this.ifrm.contentDocument.body;
             
     		if(sideMenu){
                 sideMenu.style.display="none";
+            }
+            if(settingsIcons){
+                settingsIcons.style.display="none";
             }
             if(body){
                 let  observerOptions = {
@@ -24,8 +28,8 @@ class AnalyticsTab extends React.Component{
                     mutationList.forEach((mutation) => {
                         //console.log(mutation.addedNodes[0].nodeName.toLowerCase());
                         if(mutation.addedNodes[0] && mutation.addedNodes[0].nodeName && mutation.addedNodes[0].nodeName.toLowerCase() === "dashnav"){
-                            //mutation.addedNodes[0].style.display = "none";
-                            console.log("Hi "+mutation.addedNodes[0]);
+                            mutation.addedNodes[0].style.display = "none";
+                            console.log("Found");
                     }
                     })
                 });
