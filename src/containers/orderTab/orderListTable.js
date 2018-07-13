@@ -268,7 +268,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -282,6 +282,7 @@ class OrderListTable extends React.Component {
         if(pbtDataLen){
             for(let i =0 ; i < pbtDataLen; i++){
                 let pbtRow = [];
+                let formatStartDate=null, formatCompleteDate=null;
                 
                     /* START => case #3 when cut off time NOT at all there for any of the orders */
                     if(!isGroupedById && Object.keys(pbtData[0]).length){
@@ -297,88 +298,19 @@ class OrderListTable extends React.Component {
                         formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
 
 
-                        formatStartDate = "";
-
-                        //Create time need to be add
-                        if (pbtData[i].start_date) {
-                            if (getDaysDiff(pbtData[i].start_date) < 2) {
-                                formatStartDate = nProps.context.intl.formatRelative(pbtData[i].start_date, {
-                                    timeZone: timeOffset,
-                                    units: 'day'
-                                }) +
-                                    ", " + nProps.context.intl.formatTime(pbtData[i].start_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
+                        try{
+                            if(pbtData[i].start_date){
+                                let startDate = pbtData[i].start_date;
+                                formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
+                                    moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                             }
-                            else {
-                                formatStartDate = nProps.context.intl.formatDate(pbtData[i].start_date,
-                                    {
-                                        timeZone: timeOffset,
-                                        month: 'short',
-                                        day: '2-digit',
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false
-                                    });
-                            }
-
-                            if (pbtData[i].completion_date) {
-                                if ((getDaysDiff(pbtData[i].completion_date) == getDaysDiff(pbtData[i].start_date))) {
-                                    formatCompleteDate = nProps.context.intl.formatTime(pbtData[i].completion_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
-                                }
-                                else {
-                                    formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
-                                        {
-                                            timeZone: timeOffset,
-                                            month: 'short',
-                                            day: '2-digit',
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                            hour12: false
-                                        });
-                                }
-                            }
-                            else
-                                formatCompleteDate = "";
-                        }
-
-                        if (pbtData[i].completion_date) {
-                            if (getDaysDiff(pbtData[i].completion_date) < 2) {
-                                formatCompleteDate = nProps.context.intl.formatRelative(pbtData[i].completion_date, {
-                                    timeZone: timeOffset,
-                                    units: 'day'
-                                }) +
-                                    ", " + nProps.context.intl.formatTime(pbtData[i].completion_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
-                            }
-                            else {
-                                formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
-                                    {
-                                        timeZone: timeOffset,
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: '2-digit',
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false
-                                    });
+                            if(pbtData[i].completion_date){
+                                let completionDate = pbtData[i].completion_date;
+                                formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
+                                    moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                             }
                         }
-                        else {
-                            formatCompleteDate = "";
-                        }
+                        catch(ex){}
 
                         pbtRow.push(<div className="DotSeparatorWrapper"> 
                                     <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
