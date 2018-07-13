@@ -4290,6 +4290,12 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
+    "id": "orders.order.ago",
+    "description": "ago",
+    "defaultMessage": "ago",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
     "id": "orders.view.orderLines",
     "description": "button label for view orderlines",
     "defaultMessage": "VIEW ORDERLINES",

@@ -3308,6 +3308,11 @@ msgstr ""
         msgid "left"
         msgstr ""
 
+        #: orders.order.ago
+        msgctxt "orders.order.ago"
+        msgid "ago"
+        msgstr ""
+
         #: orders.view.orderLines
         msgctxt "orders.view.orderLines"
         msgid "VIEW ORDERLINES"
