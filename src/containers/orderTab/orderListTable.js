@@ -261,7 +261,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -412,7 +412,9 @@ class OrderListTable extends React.Component {
 
                     /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
                     else if(isGroupedById){
-                        
+                        if (!pbtData[i]){
+                            continue;
+                        }
                         let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");

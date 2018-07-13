@@ -1,5 +1,5 @@
 import React  from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage,injectIntl } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
 import {showTableFilter, filterApplied,orderfilterState,toggleOrderFilter} from '../../actions/filterAction';
 import { connect } from 'react-redux'; 
@@ -10,7 +10,6 @@ import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/t
 import {hashHistory} from 'react-router';
 import {
     ANY,
-    ALL,
     STATUS,
     ORDER_ID,
     PPS_ID,
@@ -25,30 +24,53 @@ import {
     CANCELLED_STATUS,
     WAITING_STATUS
 }from '../../constants/frontEndConstants';
+import moment from 'moment-timezone';
 
 class OrderFilter extends React.Component{
     constructor(props) 
     {
         super(props);
+
+       
         this.state={
           tokenSelected: {"ORDER TAGS":[ANY], "STATUS":[ANY]},
-          searchQuery: {},
+          searchQuery: {
+            "FROM DATE":null,
+            "FROM TIME":null,
+            "TO DATE":null,
+            "TO TIME":null
+          },
           defaultToken: {"ORDER TAGS":[ANY], "STATUS":[ANY]}
         }; 
 
         this._applyFilter =  this._applyFilter.bind(this);
         this._closeFilter = this._closeFilter.bind(this);
         this._clearFilter = this._clearFilter.bind(this);
+        moment.locale(props.intl.locale);
+
     }
 
 
     _closeFilter() {
         this.props.showTableFilter(false);
     }
-
     componentWillReceiveProps(nextProps){
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
+        }
+        if (nextProps.timeOffset !== this.props.timeOffset){
+            let dtFrom = moment().tz(nextProps.timeOffset).startOf('day').format("YYYY-MM-DD");
+            let dtTo = moment().tz(nextProps.timeOffset).endOf('day').format("YYYY-MM-DD");
+            let timeFrom =  moment().tz(nextProps.timeOffset).startOf('day').format("HH:mm:ss");
+            let timeTo =  moment().tz(nextProps.timeOffset).endOf('day').format("HH:mm:ss");
+            this.setState({
+                searchQuery: {
+                    "FROM DATE":dtFrom,
+                    "FROM TIME":timeFrom,
+                    "TO DATE":dtTo,
+                    "TO TIME":timeTo
+                  },
+            }, ()=>{this._applyFilter(true)})   
         }
     }
 
@@ -171,7 +193,8 @@ class OrderFilter extends React.Component{
         this.setState({searchQuery:handleInputQuery(inputQuery,queryField,this.state)})
     }
 
-    _applyFilter() {
+   
+    _applyFilter(doNotShowFilterStatus) {
         this._closeFilter();
         var filterState=this.state, _query={};
 
@@ -205,6 +228,10 @@ class OrderFilter extends React.Component{
         }
         
        hashHistory.push({pathname: "/orders", query: _query});
+       // Since we do not want to display the Filtered status on the initial load.
+       // hence the param doNotShowFilterStatus is used
+       if (!doNotShowFilterStatus){
+       this.props.filterApplied(true)}
        
     }
 
@@ -277,7 +304,9 @@ class OrderFilter extends React.Component{
                               defaultMessage="Reset"/>
                       </span>
                       <div className="gor-filter-btn-wrap"> 
-                          <button className='gor-add-btn' onClick={this._applyFilter}>
+                          <button className='gor-add-btn' onClick={
+                              ()=>{this._applyFilter(false)}
+                              }>
                               {<FormattedMessage id="gor.filter.heading" description="filter heading"  defaultMessage="Apply filter"/>}
                           </button>
                       </div> 
@@ -294,6 +323,7 @@ function mapStateToProps(state, ownProps){
     showFilter: state.filterInfo.filterState || false,
     orderData: state.getOrderDetail || {},
     orderListSpinner: state.spinner.orderListSpinner || false,
+    timeOffset: state.authLogin.timeOffset,
     orderFilterState: state.filterInfo.orderFilterState,
   };
 }
@@ -318,4 +348,4 @@ OrderFilter.PropTypes={
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(OrderFilter) ;
+export default connect(mapStateToProps,mapDispatchToProps)(injectIntl(OrderFilter)) ;

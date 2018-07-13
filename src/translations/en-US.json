@@ -4218,15 +4218,9 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "orderlist.filter.search.bar",
-    "description": "total order for filter search bar",
-    "defaultMessage": "{total} Orders found",
-    "filepath": "./src/containers/orderTab/orderListTab.js"
-  },
-  {
     "id": "orderlist.filter.search.bar.showall",
     "description": "button label for show all",
-    "defaultMessage": "Show all orders",
+    "defaultMessage": "Show all Orders",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
@@ -4287,6 +4281,12 @@
     "id": "orders.order.binId",
     "description": "bin id",
     "defaultMessage": "Bin {binId}",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.left",
+    "description": "left",
+    "defaultMessage": "left",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
