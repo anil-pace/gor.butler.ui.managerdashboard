@@ -3183,6 +3183,11 @@ msgstr ""
 		msgid "FILTER DATA"
 		msgstr ""
 
+		#: orderlist.filter.search.count
+		msgctxt "orderlist.filter.search.count"
+		msgid "{total} Orders found"
+		msgstr ""
+
 		#: orderlist.filter.search.bar.showall
 		msgctxt "orderlist.filter.search.bar.showall"
 		msgid "Show all Orders"
@@ -3241,6 +3246,11 @@ msgstr ""
 		#: orders.order.left
 		msgctxt "orders.order.left"
 		msgid "left"
+		msgstr ""
+
+		#: orders.order.ago
+		msgctxt "orders.order.ago"
+		msgid "ago"
 		msgstr ""
 
 		#: orders.view.orderLines

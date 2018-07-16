@@ -106,6 +106,26 @@ const messages=defineMessages({
         id: 'orders.order.left',
         description: "left",
         defaultMessage: ' left'
+    },
+    ago:{
+        id: 'orders.order.ago',
+        description: "ago",
+        defaultMessage: ' ago'
+    },
+    today:{
+        id: 'orders.order.today',
+        description: "Today",
+        defaultMessage: 'Today'
+    },
+    tomorrow:{
+        id: 'orders.order.tomorrow',
+        description: "tomorrow",
+        defaultMessage: 'Tomorrow'
+    },
+    yesterday:{
+        id: 'orders.order.yesterday',
+        description: "yesterday",
+        defaultMessage: 'Yesterday'
     }
 });
 
@@ -133,6 +153,7 @@ class OrderListTable extends React.Component {
         this._onScrollHandler = this._onScrollHandler.bind(this);
         this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
+        //moment.locale('zh')
     }
 
     _showAllOrder() {
@@ -249,11 +270,12 @@ class OrderListTable extends React.Component {
     _calculateTimeLeft(cutOffTimeFromBK){
         let timeLeft=null, intlLeft,currentLocalTime,cutOffTime;
         if(cutOffTimeFromBK){
-            intlLeft =   this.props.intl.formatMessage(messages.left);
-            moment.locale(this.props.intl.defaultLocale);
+            //moment.locale(this.props.intl.locale);
             currentLocalTime = moment().tz(this.props.timeZone);
             cutOffTime = moment(cutOffTimeFromBK).tz(this.props.timeZone);
-            timeLeft = currentLocalTime.from(cutOffTime,true) + intlLeft;
+            intlLeft =   this.props.intl.formatMessage((currentLocalTime > cutOffTime
+?messages.ago:messages.left));
+            timeLeft = currentLocalTime.from(cutOffTime,true) +" "+ intlLeft;
             
         }
         return timeLeft;
@@ -261,7 +283,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -275,6 +297,7 @@ class OrderListTable extends React.Component {
         if(pbtDataLen){
             for(let i =0 ; i < pbtDataLen; i++){
                 let pbtRow = [];
+                let formatStartDate=null, formatCompleteDate=null;
                 
                     /* START => case #3 when cut off time NOT at all there for any of the orders */
                     if(!isGroupedById && Object.keys(pbtData[0]).length){
@@ -290,89 +313,25 @@ class OrderListTable extends React.Component {
                         formatProgressBar = this._formatProgressBar(pbtData[i].picked_products_count, pbtData[i].total_products_count);
 
 
-                        formatStartDate = "";
+                        
 
                         //Create time need to be add
-                        if (pbtData[i].start_date) {
-                            if (getDaysDiff(pbtData[i].start_date) < 2) {
-                                formatStartDate = nProps.context.intl.formatRelative(pbtData[i].start_date, {
-                                    timeZone: timeOffset,
-                                    units: 'day'
-                                }) +
-                                    ", " + nProps.context.intl.formatTime(pbtData[i].start_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
+                         try{
+                            //moment.locale('fr');
+                            console.log(moment.locale());
+                            if(pbtData[i].start_date){
+                                
+                                let startDate = pbtData[i].start_date+"Z";
+                                formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
+                                    moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                             }
-                            else {
-                                formatStartDate = nProps.context.intl.formatDate(pbtData[i].start_date,
-                                    {
-                                        timeZone: timeOffset,
-                                        month: 'short',
-                                        day: '2-digit',
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false
-                                    });
+                            if(pbtData[i].completion_date){
+                                let completionDate = pbtData[i].completion_date+"Z";
+                                formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
+                                    moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                             }
-
-                            if (pbtData[i].completion_date) {
-                                if ((getDaysDiff(pbtData[i].completion_date) == getDaysDiff(pbtData[i].start_date))) {
-                                    formatCompleteDate = nProps.context.intl.formatTime(pbtData[i].completion_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
-                                }
-                                else {
-                                    formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
-                                        {
-                                            timeZone: timeOffset,
-                                            month: 'short',
-                                            day: '2-digit',
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                            hour12: false
-                                        });
-                                }
-                            }
-                            else
-                                formatCompleteDate = "";
-                        }
-
-                        if (pbtData[i].completion_date) {
-                            if (getDaysDiff(pbtData[i].completion_date) < 2) {
-                                formatCompleteDate = nProps.context.intl.formatRelative(pbtData[i].completion_date, {
-                                    timeZone: timeOffset,
-                                    units: 'day'
-                                }) +
-                                    ", " + nProps.context.intl.formatTime(pbtData[i].completion_date, {
-                                        timeZone: timeOffset,
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        hour12: false
-                                    });
-                            }
-                            else {
-                                formatCompleteDate = nProps.context.intl.formatDate(pbtData[i].completion_date,
-                                    {
-                                        timeZone: timeOffset,
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: '2-digit',
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false
-                                    });
-                            }
-                        }
-                        else {
-                            formatCompleteDate = "";
-                        }
-
+                }
+                catch(ex){}
                         pbtRow.push(<div className="DotSeparatorWrapper"> 
                                     <DotSeparatorContent header={[formatOrderId]} subHeader={[formatPpsId, formatBinId, formatStartDate, formatCompleteDate]}/>
                                 </div>);
@@ -412,7 +371,9 @@ class OrderListTable extends React.Component {
 
                     /* START => handles case#1(when all have group id) & case #2 (some group Id + some not group id) */
                     else if(isGroupedById){
-                        
+                        if (!pbtData[i]){
+                            continue;
+                        }
                         let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
@@ -450,10 +411,22 @@ class OrderListTable extends React.Component {
 
         return processedData;
     }
+    _calculateRelativeTime(referenceDate,currentDate){
+        
+        return moment(referenceDate).calendar(currentDate, {
+            sameDay: '['+this.props.intl.formatMessage(messages.today)+']',
+            nextDay: '['+this.props.intl.formatMessage(messages.tomorrow)+']',
+            nextWeek: 'DD MMM',
+            lastDay: '['+this.props.intl.formatMessage(messages.yesterday)+']',
+            lastWeek: 'DD MMM',
+            sameElse: 'DD MMM'
+        });
+   
+    }
 
     _processOrders = (orderData, nProps) => {
         nProps = this;
-        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar;
+        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatProgressBar;
 
         let orderDataLen = orderData.length;
         let orderRows = [];
@@ -462,6 +435,7 @@ class OrderListTable extends React.Component {
         if(orderDataLen){
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
+                let formatStartDate = null,formatCompleteDate=null;
 
                 formatOrderId = ((orderData[i].order_id && orderData[i] !== "") ?
                                         this.props.intl.formatMessage(messages.orderId, {orderId: orderData[i].order_id}): "");
@@ -474,90 +448,22 @@ class OrderListTable extends React.Component {
 
                 formatProgressBar = this._formatProgressBar(orderData[i].picked_products_count, orderData[i].total_products_count);
 
-                formatStartDate = "";
+                
 
                 //Create time need to be add
-                    if (orderData[i].start_date) {
-                        if (getDaysDiff(orderData[i].start_date) < 2) {
-                            formatStartDate = nProps.context.intl.formatRelative(orderData[i].start_date, {
-                                timeZone: timeOffset,
-                                units: 'day'
-                            }) +
-                                ", " + nProps.context.intl.formatTime(orderData[i].start_date, {
-                                    timeZone: timeOffset,
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    hour12: false
-                                });
-                        }
-                        else {
-                            formatStartDate = nProps.context.intl.formatDate(orderData[i].start_date,
-                                {
-                                    timeZone: timeOffset,
-                                    month: 'short',
-                                    day: '2-digit',
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    hour12: false
-                                });
-                        }
-
-                        if (orderData[i].completion_date) {
-                            if ((getDaysDiff(orderData[i].completion_date) == getDaysDiff(orderData[i].start_date))) {
-                                formatCompleteDate = nProps.context.intl.formatTime(orderData[i].completion_date, {
-                                    timeZone: timeOffset,
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    hour12: false
-                                });
-                            }
-                            else {
-                                formatCompleteDate = nProps.context.intl.formatDate(orderData[i].completion_date,
-                                    {
-                                        timeZone: timeOffset,
-                                        month: 'short',
-                                        day: '2-digit',
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false
-                                    });
-                            }
-                        }
-                        else
-                            formatCompleteDate = "";
+                try{
+                    if(orderData[i].start_date){
+                        let startDate = orderData[i].start_date+"Z";
+                        formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
+                            moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                     }
-
-                    if (orderData[i].completion_date) {
-                        if (getDaysDiff(orderData[i].completion_date) < 2) {
-                            formatCompleteDate = nProps.context.intl.formatRelative(orderData[i].completion_date, {
-                                timeZone: timeOffset,
-                                units: 'day'
-                            }) +
-                                ", " + nProps.context.intl.formatTime(orderData[i].completion_date, {
-                                    timeZone: timeOffset,
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    hour12: false
-                                });
-                        }
-                        else {
-                            formatCompleteDate = nProps.context.intl.formatDate(orderData[i].completion_date,
-                                {
-                                    timeZone: timeOffset,
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: '2-digit',
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    hour12: false
-                                });
-                        }
+                    if(orderData[i].completion_date){
+                        let completionDate = orderData[i].completion_date+"Z";
+                        formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
+                            moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                     }
-                    else {
-                        formatCompleteDate = "";
-                    }
-
-                
+                }
+                catch(ex){}
                  
                 orderRow.push(<div className="DotSeparatorWrapper"> 
                                 <DotSeparatorContent header={[formatOrderId]} 
