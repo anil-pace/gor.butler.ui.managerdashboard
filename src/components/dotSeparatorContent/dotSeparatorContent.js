@@ -11,7 +11,7 @@ class DotSeparator extends React.Component{
         result = [];
 
     while (++index < arr_length) {
-        var value = actualArray[index].toString().trim();
+        var value = actualArray[index] ? actualArray[index].toString().trim():"";
 
         if (value) {
             result[++resIndex] = value;

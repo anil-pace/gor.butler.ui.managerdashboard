@@ -69,6 +69,7 @@ class OrderListTab extends React.Component {
     this._viewOrderLine = this._viewOrderLine.bind(this);
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
     this._setPolling = this._setPolling.bind(this);
+    this._clearFilter = this._clearFilter.bind(this);
     moment.locale(props.intl.locale);
   }
 
@@ -456,7 +457,11 @@ class OrderListTab extends React.Component {
               total={orderDetails.length || 0}
               isFilterApplied={this.props.isFilterApplied}
               responseFlag={this.props.responseFlag}
-              refreshList={this._clearFilter.bind(this)}
+              refreshList={this._clearFilter}
+              filterText={<FormattedMessage id="orderlist.filter.search.count"
+                                                          description='total orders for filter search bar'
+                                                          defaultMessage='{total} Records found'
+                                                          values={{total: orderDetails.length || 0}}/>}
               refreshText={
                 <FormattedMessage
                   id="orderlist.filter.search.bar.showall"
