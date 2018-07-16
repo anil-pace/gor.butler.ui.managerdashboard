@@ -71,11 +71,11 @@ export const WS_PLATFORM_HEADER_ORDER_URL = "/dashboard/api/header-data/live";
  * URLs or PPS Configurations
  */
 
-export const PPS_LIST_URL=API_URL+"/pps"//TODO: URL need to be changed accrodingly
-export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
-export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
+export const PPS_LIST_URL=API_URL+"/pps"
+export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"
+export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"
+export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"
+export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"
 
 /**
  * URLs for Operations Log Report
@@ -120,8 +120,6 @@ export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_INTEGRATION_SERVICE + "/r
 export const MSU_CONFIG_START_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/start";
 export const MSU_CONFIG_STOP_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/stop";
 export const MSU_CONFIG_RELEASE_MSU_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/release";
- 
-
 
 
 
