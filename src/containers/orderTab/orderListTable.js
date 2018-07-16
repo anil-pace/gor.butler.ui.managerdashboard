@@ -151,7 +151,6 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
-        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
         //moment.locale('zh')
     }
@@ -163,7 +162,6 @@ class OrderListTable extends React.Component {
     _viewOrderLine = (orderId) =>  {
         modal.add(ViewOrderLine, {
             startPollingOrders: this._reqOrderPerPbt,
-            startPollingCutOffTime: this.props.startPollingCutOffTime,
             cutOffTimeIndex: this.state.cutOffTimeIndex,
             orderId: orderId,
             title: '',
@@ -233,9 +231,7 @@ class OrderListTable extends React.Component {
         this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
-    _startPollingCutOffTime(){
-        this.props.startPollingCutOffTime();
-    }
+    
 
     _stopPollingOrders(intervalIdForOrders){
         clearTimeout(intervalIdForOrders);
@@ -283,7 +279,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatOrderId, formatPpsId, formatBinId, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -538,7 +534,6 @@ class OrderListTable extends React.Component {
                                     pbts={self.props.pbts}
                                     setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
-                                    startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
                                     onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
