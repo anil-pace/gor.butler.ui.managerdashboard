@@ -13,7 +13,7 @@ import { updateIntl } from 'react-intl-redux';
 import Dropdown from '../../components/dropdown/dropdown.js';
 import TopNotifications from '../../components/topnotify/topnotify';
 import { translationMessages } from '../../utilities/i18n';
-import '../../../public/assets/components/login/_login.css';
+import '../../../public/assets/components/login/_login.'+(process.env.NODE_ENV === 'production' ? 'min.css':'css');
 
 
 
