@@ -460,7 +460,7 @@ class OrderListTab extends React.Component {
               refreshList={this._clearFilter}
               filterText={<FormattedMessage id="orderlist.filter.search.count"
                                                           description='total orders for filter search bar'
-                                                          defaultMessage='{total} Records found'
+                                                          defaultMessage='{total} Orders found'
                                                           values={{total: orderDetails.length || 0}}/>}
               refreshText={
                 <FormattedMessage
