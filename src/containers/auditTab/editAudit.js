@@ -832,7 +832,7 @@ _onAttributeSelectionFirstTime(){
     _parseCSVFile(fileObject){
     
     var _this =this;
-    var textType = /text.*/; 
+    var textType = /(text.*|vnd.ms-excel)/;
     var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
       if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
