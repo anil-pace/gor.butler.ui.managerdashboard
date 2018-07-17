@@ -2,15 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
-
-import OrderFilter from './orderFilter';
-import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
-import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
-import OrderTile from '../../containers/orderTab/OrderTile';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
@@ -21,11 +16,8 @@ import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} fro
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
-import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 import {wsOverviewData} from './../../constants/initData.js';
-
-import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
 import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
     ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL,
@@ -131,7 +123,7 @@ const messages=defineMessages({
 
 
 
-
+var storage = [];
 class OrderListTable extends React.Component {
     constructor(props) {
         super(props);
@@ -151,9 +143,8 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._onScrollHandler = this._onScrollHandler.bind(this);
-        this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
-        //moment.locale('zh')
+        
     }
 
     _showAllOrder() {
@@ -163,7 +154,6 @@ class OrderListTable extends React.Component {
     _viewOrderLine = (orderId) =>  {
         modal.add(ViewOrderLine, {
             startPollingOrders: this._reqOrderPerPbt,
-            startPollingCutOffTime: this.props.startPollingCutOffTime,
             cutOffTimeIndex: this.state.cutOffTimeIndex,
             orderId: orderId,
             title: '',
@@ -176,7 +166,8 @@ class OrderListTable extends React.Component {
 
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time;
-        let page;
+        const index = storage.indexOf(cutOffTime);
+        let page
         let size=10;
         let need_to_fetch_more=false
         try{
@@ -232,9 +223,7 @@ class OrderListTable extends React.Component {
         this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
-    _startPollingCutOffTime(){
-        this.props.startPollingCutOffTime();
-    }
+    
 
     _stopPollingOrders(intervalIdForOrders){
         clearTimeout(intervalIdForOrders);
@@ -282,7 +271,7 @@ class OrderListTable extends React.Component {
 
     _processPBTs = (arg, nProps) => {
         nProps = this;
-        let formatOrderId, formatPpsId, formatBinId, formatProgressBar, pbtData;
+        let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
         pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
@@ -537,7 +526,6 @@ class OrderListTable extends React.Component {
                                     pbts={self.props.pbts}
                                     setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
-                                    startPollingCutOffTime={self._startPollingCutOffTime}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
                                     onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 

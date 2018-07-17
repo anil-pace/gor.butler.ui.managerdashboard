@@ -65,9 +65,10 @@ class OrderListTab extends React.Component {
   constructor(props) {
     super(props);
     this.state = this._getInitialState();
-
+    this.props.showTableFilter(false);
     this._viewOrderLine = this._viewOrderLine.bind(this);
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
+    this._setPolling = this._setPolling.bind(this);
     this._clearFilter = this._clearFilter.bind(this);
     moment.locale(props.intl.locale);
   }
@@ -82,20 +83,12 @@ class OrderListTab extends React.Component {
       query: null,
       orderListRefreshed: null,
       setStartDateForOrders: null,
-      setEndDateForOrders: null
+      setEndDateForOrders: null,
+      timerId:null
     };
   }
 
-  componentDidMount() {
-    this.props.setOrderListSpinner(true);
-    this.props.filterApplied(false);
-  }
-
-  _clearPolling() {
-    clearInterval(this._intervalIdForCutOffTime);
-    this._intervalIdForCutOffTime = null;
-  }
-
+  
   _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
     let formData = {
       start_date: startDate,
@@ -133,7 +126,10 @@ class OrderListTab extends React.Component {
 
     this.props.makeAjaxCall(params);
   }
-
+  componentWillMount() {
+    this.props.orderListRefreshed();
+  }
+  
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
       this.setState({ subscribed: true }, function() {
@@ -153,40 +149,53 @@ class OrderListTab extends React.Component {
         this._refreshList(nextProps.location.query)
       );
     }
+    if (!this.state.timerId && !this.props.isFilterApplied){
+      this._setPolling()
+    }else if (this.props.isFilterApplied && this.state.timerId){
+      clearInterval(this.state.timerId)
+      this.setState({
+        timerId:null
+      })
+    }
   }
 
   _refreshList(query) {
+    this.props.setOrderListSpinner(true);
     if (query.orderId) {
       this._viewOrderLine(query.orderId);
       this.props.filterApplied(false);
     }
-
+    let timeOffset=null;
     if (this.props.timeOffset) {
+      timeOffset = this.props.timeOffset;
+    }else{
+      timeOffset = "";
+    }
       if (!query.fromDate) {
-        query.fromDate = moment()
-          .tz(this.props.timeOffset)
+        query.fromDate = moment
+          .tz(timeOffset)
           .startOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.toDate) {
-        query.toDate = moment()
-          .tz(this.props.timeOffset)
+        query.toDate = moment
+          .tz(timeOffset)
           .endOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.fromTime) {
-        query.fromTime = moment()
-          .tz(this.props.timeOffset)
+        query.fromTime = moment
+          .tz(timeOffset)
           .startOf("day")
           .format("HH:mm:ss");
       }
       if (!query.toTime) {
-        query.toTime = moment()
-          .tz(this.props.timeOffset)
+        query.toTime = moment
+          .tz(timeOffset)
           .endOf("day")
           .format("HH:mm:ss");
       }
-    }
+    
 
     let startDateFilter = moment(
       query.fromDate + " " + query.fromTime
@@ -206,37 +215,17 @@ class OrderListTab extends React.Component {
       {
         setStartDateForOrders: startDateFilter,
         setEndDateForOrders: endDateFilter
-      },
-      this._setPollingInterval.bind(this)
-    );
+      });
   }
 
-  _setPollingInterval() {
-    if (!this.props.isFilterApplied) {
+  _setPolling() {
       //set interval for polling
       let self = this;
-      this._intervalIdForCutOffTime = setInterval(function() {
-        self._reqCutOffTime(
-          self.state.setStartDateForOrders,
-          self.state.setEndDateForOrders,
-          self.state.query.ppsId,
-          self.state.query.status
-        ); // Check the format how the date time is propagating
-        self._reqOrdersFulfillment(
-          self.state.setStartDateForOrders,
-          self.state.setEndDateForOrders
-        );
-        self._reqOrdersSummary(
-          self.state.setStartDateForOrders,
-          self.state.setEndDateForOrders
-        );
+      let timerId = 0;
+      timerId = setInterval(function() {
+        self._refreshList({});
       }, ORDERS_POLLING_INTERVAL);
-    } else {
-      //if filter is applied clear polling
-      if (this._intervalIdForCutOffTime) {
-        this._clearPolling();
-      }
-    }
+      self.setState({ timerId: timerId });
   }
 
   /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */
@@ -261,12 +250,18 @@ class OrderListTab extends React.Component {
 
   _clearFilter() {
     this.props.filterApplied(false);
+    if (!this.state.timerId){
+      this._setPolling()
+    }    
     hashHistory.push({ pathname: "/orders", query: {} });
     this._refreshList(this.state.query);
   }
 
   componentWillUnmount() {
-    this._clearPolling();
+    clearInterval(this.state.timerId)
+    this.setState({
+      timerId:null
+    })
   }
 
   _subscribeData() {
@@ -296,8 +291,7 @@ class OrderListTab extends React.Component {
 
   _viewOrderLine = orderId => {
     modal.add(ViewOrderLine, {
-      startPolling: this._restartPolling,
-      orderId: orderId,
+     orderId: orderId,
       title: "",
       size: "large",
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -487,7 +481,7 @@ class OrderListTab extends React.Component {
               pbts={this.props.pbts}
               startDate={this.state.setStartDateForOrders}
               endDate={this.state.setEndDateForOrders}
-              intervalIdForCutOffTime={this._intervalIdForCutOffTime}
+              intervalIdForCutOffTime={this.state.timerId}
               isFilterApplied={this.props.isFilterApplied}
               enableCollapseAllBtn={this._enableCollapseAllBtn}
               disableCollapseAllBtn={this._disableCollapseAllBtn}
