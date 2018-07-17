@@ -160,33 +160,37 @@ class OrderListTab extends React.Component {
       this._viewOrderLine(query.orderId);
       this.props.filterApplied(false);
     }
-
+    let timeOffset=null
     if (this.props.timeOffset) {
+      timeOffset = this.props.timeOffset
+    }else{
+      timeOffset = ""
+    }
       if (!query.fromDate) {
-        query.fromDate = moment()
-          .tz(this.props.timeOffset)
+        query.fromDate = moment
+          .tz(timeOffset)
           .startOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.toDate) {
-        query.toDate = moment()
-          .tz(this.props.timeOffset)
+        query.toDate = moment
+          .tz(timeOffset)
           .endOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.fromTime) {
-        query.fromTime = moment()
-          .tz(this.props.timeOffset)
+        query.fromTime = moment
+          .tz(timeOffset)
           .startOf("day")
           .format("HH:mm:ss");
       }
       if (!query.toTime) {
-        query.toTime = moment()
-          .tz(this.props.timeOffset)
+        query.toTime = moment
+          .tz(timeOffset)
           .endOf("day")
           .format("HH:mm:ss");
       }
-    }
+    
 
     let startDateFilter = moment(
       query.fromDate + " " + query.fromTime
