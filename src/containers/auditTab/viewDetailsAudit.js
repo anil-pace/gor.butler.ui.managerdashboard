@@ -127,6 +127,10 @@ trueStatus:{
 falseStatus:{
   id: "viewDetais.audit.false",
   defaultMessage: "False"
+},
+multiPPS:{
+  id: "viewDetais.audit.multiPPS",
+  defaultMessage: "Multi PPS"
 }
 });
 
@@ -236,8 +240,11 @@ _timeFormat(UTCtime){
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
     let trueStatus=this.context.intl.formatMessage(messages.trueStatus);
     let falseStatus=this.context.intl.formatMessage(messages.falseStatus);
+    let multiPPS=this.context.intl.formatMessage(messages.multiPPS);
+    
 
     let tile1Data={},tile2Data={},tile3Data={};
+    var ppsList="";
     tile1Data[vdhCreatedBy]=data.audit_creator_name;
     tile1Data[vdhOperator]=data.operator_assigned;
     if(data.audit_param_type=="sku"){
@@ -245,7 +252,14 @@ _timeFormat(UTCtime){
     }else if(data.audit_param_type=="location"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
-    tile3Data[vdhPPSid]=data.pps_id||"";
+    if(data.pps_id && data.pps_id.length>1){
+     ppsList=<span><span>{multiPPS}</span><span title={data.pps_id} className="gor-view-details-info-icon"></span></span>
+    }
+    else
+    {
+      ppsList=data.pps_id||"";
+    }
+    tile3Data[vdhPPSid]=ppsList||"";
     tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
@@ -376,7 +390,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {this.props.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button!=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
