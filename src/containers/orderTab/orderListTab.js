@@ -172,25 +172,25 @@ class OrderListTab extends React.Component {
       timeOffset="";
     }
       if (!query.fromDate) {
-        query.fromDate = moment()
+        query.fromDate = moment
           .tz(timeOffset)
           .startOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.toDate) {
-        query.toDate = moment()
+        query.toDate = moment
           .tz(timeOffset)
           .endOf("day")
           .format("YYYY-MM-DD");
       }
       if (!query.fromTime) {
-        query.fromTime = moment()
+        query.fromTime = moment
           .tz(timeOffset)
           .startOf("day")
           .format("HH:mm:ss");
       }
       if (!query.toTime) {
-        query.toTime = moment()
+        query.toTime = moment
           .tz(timeOffset)
           .endOf("day")
           .format("HH:mm:ss");

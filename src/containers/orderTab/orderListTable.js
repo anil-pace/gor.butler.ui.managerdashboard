@@ -313,8 +313,6 @@ class OrderListTable extends React.Component {
 
                         //Create time need to be add
                          try{
-                            //moment.locale('fr');
-                            console.log(moment.locale());
                             if(pbtData[i].start_date){
                                 
                                 let startDate = pbtData[i].start_date;
