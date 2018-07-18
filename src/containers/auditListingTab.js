@@ -282,7 +282,7 @@ _tableBodyData(itemsData){
     'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
     'flag':itemsData[i].system_created_audit
   }
- list=(itemsData[i].pps_id).length>1?multiPPS:itemsData[i].pps_id;
+ list=itemsData[i].pps_id?(itemsData[i].pps_id).length>1?multiPPS:itemsData[i].pps_id:"";
   rowObject.auditDetails={
       "header":[itemsData[i].display_id,itemsData[i].audit_name],
       "subHeader":[list,itemsData[i].auditBased,itemsData[i].totalTime],
