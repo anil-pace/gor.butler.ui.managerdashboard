@@ -3185,7 +3185,7 @@ msgstr ""
 
 		#: orderlist.filter.search.count
 		msgctxt "orderlist.filter.search.count"
-		msgid "{total} Orders found"
+		msgid "{total} Records found"
 		msgstr ""
 
 		#: orderlist.filter.search.bar.showall
@@ -3251,6 +3251,21 @@ msgstr ""
 		#: orders.order.ago
 		msgctxt "orders.order.ago"
 		msgid "ago"
+		msgstr ""
+
+		#: orders.order.today
+		msgctxt "orders.order.today"
+		msgid "Today"
+		msgstr ""
+
+		#: orders.order.tomorrow
+		msgctxt "orders.order.tomorrow"
+		msgid "Tomorrow"
+		msgstr ""
+
+		#: orders.order.yesterday
+		msgctxt "orders.order.yesterday"
+		msgid "Yesterday"
 		msgstr ""
 
 		#: orders.view.orderLines

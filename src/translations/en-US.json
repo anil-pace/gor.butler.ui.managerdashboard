@@ -4155,7 +4155,7 @@
   {
     "id": "orderlist.filter.search.count",
     "description": "total orders for filter search bar",
-    "defaultMessage": "{total} Orders found",
+    "defaultMessage": "{total} Records found",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
@@ -4234,6 +4234,24 @@
     "id": "orders.order.ago",
     "description": "ago",
     "defaultMessage": "ago",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.today",
+    "description": "Today",
+    "defaultMessage": "Today",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.tomorrow",
+    "description": "tomorrow",
+    "defaultMessage": "Tomorrow",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.yesterday",
+    "description": "yesterday",
+    "defaultMessage": "Yesterday",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
