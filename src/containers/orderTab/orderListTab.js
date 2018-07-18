@@ -490,7 +490,9 @@ class OrderListTab extends React.Component {
           )}
           {!this.props.orderListSpinner &&
             this.props.pbts.length === 0 && (
-              <div className="noOrdersPresent"> No orders available </div>
+              <div className="noOrdersPresent"> <FormattedMessage id="orders.noOrders.noOrders" 
+                                description="display no orders" 
+                                defaultMessage="No orders available"/> </div>
             )}
           {this.props.orderListSpinner && <div className="noOrdersPresent" />}
         </div>

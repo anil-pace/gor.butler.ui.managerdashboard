@@ -10645,6 +10645,7 @@ checkmark1 for indeterminate state*/
   text-align: center;
   padding: 10px 5px;
   width: 29%;
+  background: #fff;
   margin-top: 10px;
   margin-right: 10px;
   cursor: pointer;
