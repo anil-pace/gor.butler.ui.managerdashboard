@@ -277,7 +277,6 @@ _tableBodyData(itemsData){
     'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
     'flag':itemsData[i].system_created_audit
   }
-  
   rowObject.auditDetails={
       "header":[itemsData[i].display_id,itemsData[i].audit_name],
       "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime],
