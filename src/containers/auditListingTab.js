@@ -76,6 +76,10 @@ reauditButton: {
 resolveButton: {
   id: "auditlisting.label.reolvebutton",
   defaultMessage: "RESOLVE"
+},
+multiPPS:{
+  id: "viewDetais.audit.multiPPS",
+  defaultMessage: "Multi PPS"
 }
 });
 
@@ -268,18 +272,20 @@ _tableBodyData(itemsData){
   let alPause = this.context.intl.formatMessage(messages.alPause);
   let alEdit = this.context.intl.formatMessage(messages.alEdit);
   let alViewDetails = this.context.intl.formatMessage(messages.alViewDetails);
-
+ let multiPPS=this.context.intl.formatMessage(messages.multiPPS);
  
   let tableData=[];
   for(var i=0;i<itemsData.length;i++){
   let rowObject={};
+  var list="";
   rowObject.initialName={
     'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
     'flag':itemsData[i].system_created_audit
   }
+ list=(itemsData[i].pps_id).length>1?multiPPS:itemsData[i].pps_id;
   rowObject.auditDetails={
       "header":[itemsData[i].display_id,itemsData[i].audit_name],
-      "subHeader":[itemsData[i].pps_id,itemsData[i].auditBased,itemsData[i].totalTime],
+      "subHeader":[list,itemsData[i].auditBased,itemsData[i].totalTime],
       "audit_id":itemsData[i].id,
       "display_id":itemsData[i].display_id
       }
