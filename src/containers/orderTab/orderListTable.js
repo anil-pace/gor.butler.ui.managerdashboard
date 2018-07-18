@@ -317,12 +317,12 @@ class OrderListTable extends React.Component {
                             console.log(moment.locale());
                             if(pbtData[i].start_date){
                                 
-                                let startDate = pbtData[i].start_date+"Z";
+                                let startDate = pbtData[i].start_date;
                                 formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
                                     moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                             }
                             if(pbtData[i].completion_date){
-                                let completionDate = pbtData[i].completion_date+"Z";
+                                let completionDate = pbtData[i].completion_date;
                                 formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
                                     moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                             }
@@ -449,12 +449,12 @@ class OrderListTable extends React.Component {
                 //Create time need to be add
                 try{
                     if(orderData[i].start_date){
-                        let startDate = orderData[i].start_date+"Z";
+                        let startDate = orderData[i].start_date;
                         formatStartDate= this._calculateRelativeTime(moment(startDate).tz(timeOffset),
                             moment().tz(timeOffset))+", "+moment(startDate).tz(timeOffset).format("HH:mm");
                     }
                     if(orderData[i].completion_date){
-                        let completionDate = orderData[i].completion_date+"Z";
+                        let completionDate = orderData[i].completion_date;
                         formatCompleteDate= this._calculateRelativeTime(moment(completionDate).tz(timeOffset),
                             moment().tz(timeOffset))+", "+moment(completionDate).tz(timeOffset).format("HH:mm");
                     }
