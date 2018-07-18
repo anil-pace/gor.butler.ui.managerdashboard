@@ -8,6 +8,7 @@ import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/conf
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 import Accordion from '../../components/accordian/accordion';
 import Panel from '../../components/accordian/Panel';
+import { isArray } from 'util';
 const messages = defineMessages({
     raManager: {
         id: "resolveaudit.manager",
@@ -93,7 +94,7 @@ class ResolveAudit extends React.Component{
   
   render()
   {
-
+    var finalArr=[]
     var auditData=this._findDisplayidName(this.props.auditId);
     let tiledata=this._processDataTile();
     let headerData=<div id="raja" className='gor-modal-resolve-bodyRaja' style={{'border':'1px solid red','width':'50px','height':'50px'}}>
@@ -130,34 +131,58 @@ class ResolveAudit extends React.Component{
                 </div>
 {
 receiveMock.map(function(row,index){
-  var headerObject="",contentObject="";
-  return (
+  var headerObject="";//,contentObject=[];
+  var data={contentObject:[]};
+  //return (
    Object.keys(row).map(function(name,id){
-    console.log(row,row[name]);
+   // console.log(row,row[name]);
    if(name=="header"){
-   headerObject=<div> 
-      <DotSeparatorContent header={["SLOT "+row[name].slot]}/>
+   data.headerObject=<div id={id}> 
+      <DotSeparatorContent header={["SLOT "+row[name].slot]} id={id}/>
       <DotSeparatorContent header={[(row[name].totalmismatch).join(' missing out of ')]}/>
       <div style={{'display':'inline'}}>{row[name].comment}</div>
       <div style={{'display':'inline'}}>{row[name].noofauditline +" unresoled line"}</div>
     </div>;}
     else{
     Object.keys(row[name]).map(function(lineName,id){
-      contentObject=<div>
+     var obj=<div>
       <DotSeparatorContent header={[Object.keys(row[name])[id]]} subHeader={[row[name][lineName].pdfa]}/>
       <DotSeparatorContent header={[row[name][lineName].operatorname]}/>
-      <DotSeparatorContent header={[[(row[name].mismatch).join(' missing out of ')]]} />
+      <DotSeparatorContent header={[[(row[name][lineName].mismatch).join(' missing out of ')]]} />
       <div style={{'display':'inline'}}>{row[name][lineName].comments}</div>
      </div>
+     data.contentObject.push(obj);
     })
   }
-    
+ 
    })
-  )
+  //)
+  finalArr.push(data);
 })
 
 }
-              <Accordion id="1" title="Accordion 1" header={headerData}>
+
+{
+finalArr.map(function(obj,id){
+
+  return(
+
+  <Accordion id="1" title="Accordion 1" header={obj.headerObject}> 
+      {
+    (obj.contentObject).map(function(obj1,id1){
+    return (
+      <Panel title="Panel 1">
+      {obj1}
+      </Panel>
+  )
+ })
+  }
+  </Accordion>
+)
+})
+}
+
+              <Accordion id="1"  header={headerData}>
                   <Panel title="Panel 1">
                     <h3>This is within panel 1</h3>
                     This is panel body.
@@ -169,6 +194,7 @@ receiveMock.map(function(row,index){
                   </Panel>
                 </Accordion>
               </Accordion>
+              
             </div>
 
            
