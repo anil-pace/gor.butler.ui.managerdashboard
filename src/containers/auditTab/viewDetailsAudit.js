@@ -433,7 +433,7 @@ return tableData;
                   
                </GTable>
 
-            </div>:<div>{noDataToShow}</div>}
+            </div>
 
          </div>
       );
