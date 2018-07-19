@@ -120,20 +120,3 @@ export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_INTEGRATION_SERVICE + "/r
 export const MSU_CONFIG_START_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/start";
 export const MSU_CONFIG_STOP_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/stop";
 export const MSU_CONFIG_RELEASE_MSU_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/release";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
