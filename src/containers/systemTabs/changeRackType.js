@@ -66,7 +66,7 @@ class ChangeRackType extends React.Component {
             }
         } 
         else{
-            if(nextProps.rackStructure){
+            if(this.state.sourceType && nextProps.rackStructure){
                 this.setState({
                     sourceTypeStructure: nextProps.rackStructure[0].rack_json,
                     sourceTypeWidth: nextProps.rackStructure[0].rack_width
