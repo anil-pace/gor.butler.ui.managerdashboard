@@ -20,8 +20,88 @@ const messages = defineMessages({
   }
 });
 //const receiveMock = [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": { "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } } }, { "header": { "slot": "002.0.d.02.04", "totalmismatch": [15, 30], "comment": "My comments here", "noofauditline": "3" }, "body": { "Motorola-SKU-24323432": { "pdfa": "color:Black|16 GB", "operatorname": "Anil kumar", "mismatch": [2, 4], "comments": "anils commnets", "status": "approve" }, "LG-SKU-24342212": { "pdfa": "color:White|32 GB", "operatorname": "Sumit", "mismatch": [1, 3], "comments": "sumit's commnets", "status": "reject" }, "laptop-SKU-24342212": { "pdfa": "color:White|1 TB", "operatorname": "Hemant", "mismatch": [12, 34], "comments": "hemant's commnets", "status": "approve" } } }];
-const receiveMock = [{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }] }];
-
+const receiveMock = [{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }] }];// nested
+//const receiveMock=[{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }, { "header": { "slot": "001.0.c.01.03", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-10-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-10-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] } ] }];
+const mockData={
+  "auditlines": [{
+          "actual_quantity": 0,
+          "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+          "expected_quantity": 42,
+          "k_deep_audit": false,
+          "pdfa_audit_attributes": {},
+          "slot_id": "031.1.A.01-A.02",
+          "status": "audit_pending_approval/audit_approved/audit_rejected",
+          "operator": "operator_name",
+          "comment": "conmment"
+      },
+      {
+        "actual_quantity": 0,
+        "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+        "expected_quantity": 48,
+        "k_deep_audit": false,
+        "pdfa_audit_attributes": {},
+        "slot_id": "031.1.A.01-A.02",
+        "status": "audit_pending_approval/audit_approved/audit_rejected",
+        "operator": "operator_name",
+        "comment": "conmment"
+    },
+    {
+      "actual_quantity": 0,
+      "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+      "expected_quantity": 48,
+      "k_deep_audit": false,
+      "pdfa_audit_attributes": {},
+      "slot_id": "031.1.A.01-A.05",
+      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "operator": "operator_name",
+      "comment": "conmment"
+  },
+    {
+      "actual_quantity": 0,
+      "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+      "expected_quantity": 45,
+      "k_deep_audit": false,
+      "pdfa_audit_attributes": {},
+      "slot_id": "033.1.A.01-A.04",
+      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "operator": "operator_name",
+      "comment": "conmment"
+  },
+      {
+          "actual_quantity": 0,
+          "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+          "expected_quantity": 42,
+          "k_deep_audit": false,
+          "pdfa_audit_attributes": {},
+          "slot_id": "031.1.A.01-A.03",
+          "status": "audit_pending_approval/audit_approved/audit_rejected",
+          "operator": "operator_name",
+          "comment": "conmment"
+      },
+      {
+        "actual_quantity": 0,
+        "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+        "expected_quantity": 42,
+        "k_deep_audit": false,
+        "pdfa_audit_attributes": {},
+        "slot_id": "032.1.A.01-A.02",
+        "status": "audit_pending_approval/audit_approved/audit_rejected",
+        "operator": "operator_name",
+        "comment": "conmment"
+    },
+    {
+      "actual_quantity": 0,
+      "auditline_id": "660d4370-43fb-436d-ab15-86c6172b3eb1",
+      "expected_quantity": 42,
+      "k_deep_audit": false,
+      "pdfa_audit_attributes": {},
+      "slot_id": "032.1.A.01-A.02",
+      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "operator": "operator_name",
+      "comment": "conmment"
+  }
+  ]
+} 
 class ResolveAudit extends React.Component {
   constructor(props) {
     super(props);
@@ -133,6 +213,43 @@ class ResolveAudit extends React.Component {
     //   finalArr.push(data);
 
     // })
+    
+
+    //direct
+//     var arrObj={}
+//     for(var i=0;i<mockData.auditlines.length;i++){
+//       var msuobj={body:[]};
+// if(Object.keys(arrObj).indexOf((mockData.auditlines[i].slot_id).split('.')[0])!==-1)
+// {
+//   let slotObj={};
+//   if(Object.keys(slotObj).indexOf(mockData.auditlines[i].slot_id)!==-1)
+//   {
+//     slotObj.body=mockData.auditlines[i].expected_quantity;
+//   }else
+//   {
+//     slotObj.name=mockData.auditlines[i].slot_id;
+//     slotObj.body=mockData.auditlines[i].expected_quantity;
+//   }
+
+// arrObj[(mockData.auditlines[i].slot_id).split('.')[0]].body.push(slotObj);
+//         }
+// else{
+//       msuobj.name=(mockData.auditlines[i].slot_id).split('.')[0];
+//       let slotObj={};
+//       if(Object.keys(slotObj).indexOf(mockData.auditlines[i].slot_id)!==-1)
+//       {
+//         slotObj.body=mockData.auditlines[i].expected_quantity;
+//       }else
+//       {
+//         slotObj.name=mockData.auditlines[i].slot_id;
+//         slotObj.body=mockData.auditlines[i].expected_quantity;
+//       }
+//       msuobj.body.push(slotObj);
+
+//       arrObj[(mockData.auditlines[i].slot_id).split('.')[0]]=msuobj;
+// } 
+     
+//     }
 
     receiveMock.map(function (row, index) {
       var outerData = { outerContentObect: [] };
@@ -181,6 +298,7 @@ class ResolveAudit extends React.Component {
       })
       mainfinalArr.push(outerData);
     })
+
 
 
 
@@ -283,3 +401,64 @@ export default connect(mapStateToProps, mapDispatchToProps)(ResolveAudit);
 //     )
 //   })
 // }
+
+
+// [{
+//   "outerheader": {
+//     "MSU": "01.02",
+//     "totalmismatch": [20, 60],
+//     "comment": "My comments here",
+//     "noofauditline": "2"
+//   },
+//   "outerbody": [{
+//     "header": {
+//       "slot": "001.0.c.01.02",
+//       "totalmismatch": [10, 20],
+//       "comment": "My comments here",
+//       "noofauditline": "2"
+//     },
+//     "body": [{
+//       "IPhone-7-SKU-24323432": {
+//         "pdfa": "color:blue|64 GB",
+//         "operatorname": "raja dey",
+//         "mismatch": [4, 7],
+//         "comments": "my commnets",
+//         "status": "reject"
+//       },
+//       "IPhone-4-SKU-24322212": {
+//         "pdfa": "color:blue|16 GB",
+//         "operatorname": "Satish",
+//         "mismatch": [3, 5],
+//         "comments": "satish's commnets",
+//         "status": "approve"
+//       }
+//     }]
+
+//   },
+//   {
+//     "header": {
+//       "slot": "001.0.c.01.03",
+//       "totalmismatch": [10, 20],
+//       "comment": "My comments here",
+//       "noofauditline": "2"
+//     },
+//     "body": [{
+//       "IPhone-10-SKU-24323432": {
+//         "pdfa": "color:blue|64 GB",
+//         "operatorname": "raja dey",
+//         "mismatch": [4, 7],
+//         "comments": "my commnets",
+//         "status": "reject"
+//       },
+//       "IPhone-10-SKU-24322212": {
+//         "pdfa": "color:blue|16 GB",
+//         "operatorname": "Satish",
+//         "mismatch": [3, 5],
+//         "comments": "satish's commnets",
+//         "status": "approve"
+//       }
+//     }]
+
+//   }
+// ]
+// }]
