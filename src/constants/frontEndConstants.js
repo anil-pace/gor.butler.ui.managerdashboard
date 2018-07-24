@@ -90,6 +90,7 @@ export const PICK_PPS_PERFORMANCE="PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE="PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE="AUDIT_PPS_PERFORMANCE";
 export const UTILITY002="utility002";
+export const UTILITY001="utility001";
 export const MB=1000000;
 export const KB=1024;
 

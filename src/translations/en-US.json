@@ -306,6 +306,12 @@
     "filepath": "./src/components/fileUpload/fileUpload.js"
   },
   {
+    "id": "masterdata.maxlimit.uiCheck.filesize",
+    "description": "File size error on UI check",
+    "defaultMessage": "File size can not be greater than",
+    "filepath": "./src/components/fileUpload/fileUpload.js"
+  },
+  {
     "id": "utility.fileSize.errorline",
     "description": "Line or size",
     "defaultMessage": "{errorLine}",
@@ -2126,6 +2132,11 @@
     "filepath": "./src/containers/auditListingTab.js"
   },
   {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
     "id": "audit.cancel",
     "description": "Text for cancel",
     "defaultMessage": "Are you sure want to cancel {auditId} audit?",
@@ -3466,6 +3477,11 @@
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
     "id": "audit.audittask",
     "description": "Heading for view orderline",
     "defaultMessage": "Audit Task",
@@ -4227,6 +4243,12 @@
     "id": "orderlist.filter.search.bar.showall",
     "description": "button label for show all",
     "defaultMessage": "Show all Orders",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
+    "id": "orders.noOrders.noOrders",
+    "description": "display no orders",
+    "defaultMessage": "No orders available",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
