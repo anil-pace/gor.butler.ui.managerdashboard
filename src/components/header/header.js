@@ -112,13 +112,14 @@ class Header extends React.Component {
          * Hard coded start time is replaced
          * with the time fetched in API.
          */
+        if (this.props.shift_start_time){
          headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
             hour: 'numeric',
             minute: 'numeric',
             timeZone: this.props.timeOffset,
             timeZoneName: 'long',
             hour12: false
-        })
+        })}
          return headerInfo
      }
 
