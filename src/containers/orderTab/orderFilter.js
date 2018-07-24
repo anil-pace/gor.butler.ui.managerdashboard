@@ -58,20 +58,20 @@ class OrderFilter extends React.Component{
         if(nextProps.orderFilterState && JSON.stringify(this.state)!==JSON.stringify(nextProps.orderFilterState)){
             this.setState(nextProps.orderFilterState)
         }
-        if (nextProps.timeOffset !== this.props.timeOffset){
-                        let dtFrom = moment().tz(nextProps.timeOffset).startOf('day').format("YYYY-MM-DD");
-                        let dtTo = moment().tz(nextProps.timeOffset).endOf('day').format("YYYY-MM-DD");
-                        let timeFrom =  moment().tz(nextProps.timeOffset).startOf('day').format("HH:mm:ss");
-                        let timeTo =  moment().tz(nextProps.timeOffset).endOf('day').format("HH:mm:ss");
-                        this.setState({
-                            searchQuery: {
-                                "FROM DATE":dtFrom,
-                                "FROM TIME":timeFrom,
-                            "TO DATE":dtTo,
-                                "TO TIME":timeTo
-                              },
-                        }, ()=>{this._applyFilter(true)})   
-                }
+        if ((nextProps.timeOffset !== this.props.timeOffset) && (this.props.timeOffset)){
+            let dtFrom = moment().tz(nextProps.timeOffset).startOf('day').format("YYYY-MM-DD");
+            let dtTo = moment().tz(nextProps.timeOffset).endOf('day').format("YYYY-MM-DD");
+            let timeFrom =  moment().tz(nextProps.timeOffset).startOf('day').format("HH:mm:ss");
+            let timeTo =  moment().tz(nextProps.timeOffset).endOf('day').format("HH:mm:ss");
+            this.setState({
+                searchQuery: {
+                    "FROM DATE":dtFrom,
+                    "FROM TIME":timeFrom,
+                    "TO DATE":dtTo,
+                    "TO TIME":timeTo
+                  },
+            }, ()=>{this._applyFilter(true)})   
+        }
     }
 
     _processOrderIdSearchField(){

@@ -138,7 +138,6 @@ class OrderListTable extends React.Component {
 
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
-        this._onScrollHandler = this._onScrollHandler.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
         
     }
@@ -518,9 +517,7 @@ class OrderListTable extends React.Component {
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
-                                    onScrollHandler={()=> {
-                                      self._onScrollHandler(self.props.pbts[idx])
-                                    }} 
+                                    onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
                                     getOrderPerPbt={self._reqOrderPerPbt.bind(self)} 
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
