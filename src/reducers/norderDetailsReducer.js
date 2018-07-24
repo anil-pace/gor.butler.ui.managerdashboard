@@ -83,9 +83,9 @@ export  function orderDetails(state={},action){
       let target_cut_off_time=action.saltParams.cut_off_time
       let isLazyData= action.saltParams.lazyData
 
-
-      if(state.pbts){
-        state.pbts.map(function(pbt, idx){
+      let expected_pbts=[{}]; // create one empty pbt list...which is mandatory as per our json structure
+      if(state.pbts && state.pbts.length>1){
+        expected_pbts = state.pbts.map(function(pbt, idx){
           if(pbt.cut_off_time===target_cut_off_time){
             if(res.serviceRequests){
               let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
@@ -102,7 +102,6 @@ export  function orderDetails(state={},action){
         })
       }
       else{
-        let expected_pbts=[{}]; // create one empty pbt list...which is mandatory as per our json structure
           if(res.serviceRequests){
             expected_pbts[0].ordersPerPbt={
                   "orders": res.serviceRequests,
@@ -113,10 +112,11 @@ export  function orderDetails(state={},action){
                   "isGroupedById": false
               }
           }
-          state.pbts=expected_pbts
       }
       
-      return Object.assign({},state,{});
+      return Object.assign({},state,{
+        pbts: expected_pbts
+      });
       break;
 
 

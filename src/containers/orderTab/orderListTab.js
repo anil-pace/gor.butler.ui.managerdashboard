@@ -365,17 +365,10 @@ class OrderListTab extends React.Component {
     } else {
       duration = moment(this.state.setStartDateForOrders).format("DD MMM YYYY");
     }
-
-    let isPanelOpen = this.state.isPanelOpen;
-
     var filterHeight = screen.height - 150;
-    var updateStatus, timeOffset, headerTimeZone;
-    let updateStatusIntl, updateStatusText;
-
     var itemNumber = 6,
       table,
       pages;
-
     var currentPage = this.props.filterOptions.currentPage,
       totalPage = this.props.orderData.totalPage;
     var orderDetail,
@@ -383,6 +376,14 @@ class OrderListTab extends React.Component {
       orderInfo;
 
     let orderDetails = this.props.pbts;
+    let noOfRecords = 0
+    if (orderDetails.length>1){
+      // get the total number of orders filtered
+      noOfRecords = orderDetails.length
+    }else if (orderDetails && orderDetails.length>0){
+      // get the total number of orders filtered
+      noOfRecords = orderDetails[0].ordersPerPbt.totalOrders ||0;
+    }
 
     return (
       <div>
@@ -474,8 +475,8 @@ class OrderListTab extends React.Component {
               refreshList={this._clearFilter}
               filterText={<FormattedMessage id="orderlist.filter.search.count"
                                                           description='total orders for filter search bar'
-                                                          defaultMessage='{total} Orders found'
-                                                          values={{total: orderDetails.length || 0}}/>}
+                                                          defaultMessage='{total} Records found'
+                                                          values={{total: noOfRecords || 0}}/>}
               refreshText={
                 <FormattedMessage
                   id="orderlist.filter.search.bar.showall"
