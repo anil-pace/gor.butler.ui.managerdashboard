@@ -5,8 +5,8 @@ import Spinner from '../../components/spinner/Spinner';
 import { setLoginSpinner } from '../../actions/loginAction';
 import {resetForm} from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import {EN, JA, ES, ZH, DE, FR,FILL_BACK} from '../../constants/frontEndConstants'; 
-import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH} from '../../constants/messageConstants'; 
+import {EN, JA, ES, ZH, DE, FR, NL,FILL_BACK} from '../../constants/frontEndConstants'; 
+import {ENG, JAP, SPANISH, CHINESE, GERMAN, FRENCH,DUTCH} from '../../constants/messageConstants'; 
 import { FormattedMessage } from 'react-intl';
 import { updateIntl } from 'react-intl-redux';
 
@@ -18,16 +18,17 @@ import { translationMessages } from '../../utilities/i18n';
 
 
 class Login extends React.Component{
-	 constructor(props) 
-	 {
-    	super(props);      
+   constructor(props) 
+   {
+      super(props);      
       this.state={sel:0, items :[
         { value: EN, label: ENG },
         { value: JA, label: JAP },
         { value: ES, label: SPANISH},
         { value: ZH, label: CHINESE},
         { value: DE, label: GERMAN},
-        { value: FR, label: FRENCH}
+        { value: FR, label: FRENCH},
+        { value: NL, label: DUTCH}
       ]};
     }
     componentWillMount()
@@ -73,7 +74,7 @@ class Login extends React.Component{
         sessionStorage.setItem('localLanguage', sLocale);
         this._changeDropdown();
     }
- 	render(){
+  render(){
         return (
           <div>
               <TopNotifications />
@@ -101,8 +102,8 @@ class Login extends React.Component{
                 <Footer />
             </div>
           </div>
-		);
-	}
+    );
+  }
 
 };
 /**
@@ -115,7 +116,7 @@ Login.contextTypes={
 
 
 function mapStateToProps(state, ownProps){
-	return {
+  return {
         loginAuthorized:state.authLogin.loginAuthorized ,
         sLang: state.intl.locale || null,
         loginSpinner:state.spinner.loginSpinner         
@@ -137,4 +138,4 @@ var mapDispatchToProps=function(dispatch){
 };
 
 
-export 	default connect(mapStateToProps,mapDispatchToProps)(Login);
+export  default connect(mapStateToProps,mapDispatchToProps)(Login);

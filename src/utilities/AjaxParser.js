@@ -273,8 +273,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             }
             break;
         case CREATE_AUDIT_REQUEST:
-                    if (res.audit_id) {
-                        values={id:res.audit_id}
+                    if (res.display_id) {
+                        values={id:res.display_id}
                         msg = getFormattedMessages("CREATEAUDIT", values);  
                         store.dispatch(notifyfeedback(msg));
                         store.dispatch(setValidationAuditSpinner(false));
@@ -294,13 +294,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
        
         if(res.alert_data[0].code!=="as002")
         {
-                values={id:res.alert_data[0].details.audit_id},
+                values={id:res.alert_data[0].details.display_id},
                 stringInfo = codeToString(res.alert_data[0]);
                 store.dispatch(setNotification(stringInfo));
                 store.dispatch(setAuditRefresh(true));
             }
             else{
-                values={id:res.alert_data[0].details.audit_id};
+                values={id:res.alert_data[0].details.display_id};
                 msg = getFormattedMessages("DELETEAUDIT", values);
                 store.dispatch(notifyfeedback(msg));
                 store.dispatch(setAuditRefresh(true)); //reset refresh flag
@@ -310,14 +310,14 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
         case PAUSE_AUDIT:
         if (res.alert_data[0].code=="as006") {
-            values={id:res.alert_data[0].details.audit_id},
+            values={id:res.alert_data[0].details.display_id},
             msg = getFormattedMessages("PAUSEAUDIT", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
             store.dispatch(setCheckedAudit([]));
             }
             else{
-                values={id:res.alert_data[0].details.audit_id},
+                values={id:res.alert_data[0].details.display_id},
                 stringInfo = codeToString(res.alert_data[0]);
                 store.dispatch(setNotification(stringInfo));
                 store.dispatch(setAuditRefresh(true)); //set refresh flag
@@ -328,13 +328,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             
         case CANCEL_AUDIT:
         if (res.alert_data[0].code=="g027") {
-            values={id:res.alert_data[0].details.audit_id};
+            values={id:res.alert_data[0].details.display_id};
             stringInfo = codeToString(res.alert_data[0]);
             store.dispatch(setNotification(stringInfo));
             store.dispatch(setAuditRefresh(true)); //set refresh flag
         }
         else{
-            values={id:res.alert_data[0].details.audit_id},
+            values={id:res.alert_data[0].details.display_id},
             msg = getFormattedMessages("CANCELLED", values);
             store.dispatch(notifyfeedback(msg));
             store.dispatch(setAuditRefresh(false)); //reset refresh flag
@@ -467,8 +467,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break; 
 
             case AUDIT_EDIT_REQUEST:    
-            if (res.audit_id) {
-                values={id:res.audit_id},
+            if (res.display_id) {
+                values={id:res.display_id},
                 msg = getFormattedMessages("EDITED", values);  
                 store.dispatch(notifyfeedback(msg));
                 store.dispatch(setValidationAuditSpinner(false));
@@ -483,8 +483,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
          break; 
 
       case CREATE_DUPLICATE_REQUEST:
-      if (res.audit_id) {
-        values={id:res.audit_id},
+      if (res.display_id) {
+        values={id:res.display_id},
         msg = getFormattedMessages("DUPLICATED", values);
         store.dispatch(notifyfeedback(msg));
         store.dispatch(setValidationAuditSpinner(false));
@@ -707,9 +707,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
             store.dispatch(setOrderListSpinner(false));
-            let startDate =  new Date (new Date() - 1000*3600*24).toISOString();
-            let endDate = new Date().toISOString();
-            
+            let startDate = sessionStorage.getItem("startDate");
+            let endDate = sessionStorage.getItem("endDate");
+            let filteredPpsId = sessionStorage.getItem("filtered_ppsId");
+            let filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"));
             // If length of response from Level 1 http call is 1 with no cut off time, call Level 2 http request with cut off time: null
             if(res.length === 1 && res[0].cut_off_time === null){
                 let formData={
@@ -717,6 +718,12 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     "end_date": endDate,
                     "cut_off_time": null
                 };
+                if(filteredPpsId){
+                    formData["filtered_ppsId"] = filteredPpsId;
+                }
+                if(filteredOrderStatus){
+                    formData["filtered_order_status"] = filteredOrderStatus;
+                }
 
                 let params={
                     'url':ORDERS_PER_PBT_URL,
@@ -727,6 +734,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     'formdata':formData,
                 }
                 store.dispatch(makeAjaxCall(params));
+                sessionStorage.removeItem("filtered_ppsId");
+                sessionStorage.removeItem("filtered_order_status");
             }
             else{
                 store.dispatch(receiveCutOffTimeData(res));

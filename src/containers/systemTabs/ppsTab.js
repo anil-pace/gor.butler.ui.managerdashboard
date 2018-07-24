@@ -208,7 +208,7 @@ class PPS extends React.Component {
     }
 
     _processPPSData() {
-        //TODO: codes need to be replaced after checking with backend
+        
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
         var data=nProps.props.PPSDetail.PPStypeDetail;

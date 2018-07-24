@@ -34,11 +34,11 @@ const messages = defineMessages({
   },
   vdLinesCompleted: {
       id: "viewDetais.linescompleted.status",
-      defaultMessage: " lines completed out of "
+      defaultMessage: "lines completed out of"
   },
   vdAttrSelected: {
       id: "viewDetais.attrselected.status",
-      defaultMessage: " attributes selected"
+      defaultMessage: "attributes selected"
   },
   vdNoAttrSelected: {
       id: "viewDetais.noattrselected.status",
@@ -50,15 +50,15 @@ const messages = defineMessages({
   },
   vdMissingOut: {
       id: "viewDetais.missing.status",
-      defaultMessage: " missing out of "
+      defaultMessage: "missing out of"
   },
   vdExtraFound:{
     id: "viewDetais.extra.status",
-    defaultMessage: " extra entitiy found"
+    defaultMessage: "extra entitiy found"
   },
   vdItems: {
       id: "viewDetais.items.status",
-      defaultMessage: " items"
+      defaultMessage: "items"
   },
   vdChangePPS: {
     id: "viewDetais.changepps.status",
@@ -127,6 +127,10 @@ trueStatus:{
 falseStatus:{
   id: "viewDetais.audit.false",
   defaultMessage: "False"
+},
+multiPPS:{
+  id: "viewDetais.audit.multiPPS",
+  defaultMessage: "Multi PPS"
 }
 });
 
@@ -170,17 +174,6 @@ class ViewDetailsAudit extends React.Component {
   let attributeData= this.props.auditDetails.entity_list?this.props.auditDetails.entity_list:[];
    this.setState({items: attributeData});
   }
-  _PPSstring(list){
-    let pps = this.context.intl.formatMessage(messages.pps);
-    
-    let finalstring="";
-    if(list && list.length!=0){
-    for(let i=0,len=list.length;i<len;i++){
-       finalstring=len>i+1?finalstring+pps+list[i]+", ":finalstring+pps+list[i];
-    }
-  }
-    return finalstring!==""?finalstring:"-";
-  }
 
   ppsChange(e){
     let param="CHANGE_PPS";
@@ -189,7 +182,7 @@ class ViewDetailsAudit extends React.Component {
     size: 'large',
    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
    hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-   auditID: this.props.auditId,
+   auditID:[this.props.auditId],
    param:param
    //.. all what you put in here you will get access in the modal props ;),
                       });
@@ -247,8 +240,11 @@ _timeFormat(UTCtime){
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
     let trueStatus=this.context.intl.formatMessage(messages.trueStatus);
     let falseStatus=this.context.intl.formatMessage(messages.falseStatus);
+    let multiPPS=this.context.intl.formatMessage(messages.multiPPS);
+    
 
     let tile1Data={},tile2Data={},tile3Data={};
+    var ppsList="";
     tile1Data[vdhCreatedBy]=data.audit_creator_name;
     tile1Data[vdhOperator]=data.operator_assigned;
     if(data.audit_param_type=="sku"){
@@ -256,12 +252,18 @@ _timeFormat(UTCtime){
     }else if(data.audit_param_type=="location"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
-    tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
+    if(data.pps_id && data.pps_id.length>1){
+     ppsList=<span><span>{multiPPS}</span><span title={data.pps_id} className="gor-view-details-info-icon"></span></span>
+    }
+    else
+    {
+      ppsList=data.pps_id||"";
+    }
+    tile3Data[vdhPPSid]=ppsList||"";
     tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
-    tile3Data[vdhReminder]=data.reminder!==""?data.reminder:'-';
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
-    tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +vdLinesCompleted+data.progress.total:"-";
+    tile2Data[vdhProgress]=data.progress && data.progress.total>1? data.progress.completed +" "+vdLinesCompleted+" "+data.progress.total:"-";
     return [tile1Data,tile2Data,tile3Data];
   }
 
@@ -304,12 +306,12 @@ _timeFormat(UTCtime){
   let rowObject={};
   rowObject.auditDetails={
       "header":[itemsData[i].id||""],
-      "subHeader":[itemsData[i].name||""]
+      "subHeader":[itemsData[i].description||""]
       };
     
       if(itemsData[i].attributes_list!=0){
         rowObject.attrDetails={
-      "header":[itemsData[i].attributes_list.length +vdAttrSelected],
+      "header":[itemsData[i].attributes_list.length +" "+vdAttrSelected],
       "subHeader":itemsData[i].attributes_list
       }
     }else{
@@ -326,11 +328,11 @@ _timeFormat(UTCtime){
          let diff =items.expected_quantity-items.actual_quantity;
          if(diff>0)
          {
-          rowObject.status=diff+vdMissingOut+items.expected_quantity;
+          rowObject.status=diff+" "+vdMissingOut+" "+items.expected_quantity;
          }
          else
          {
-          rowObject.status=(diff!==0)?Math.abs(diff)+vdExtraFound:"";
+          rowObject.status=(diff!==0)?Math.abs(diff)+" "+vdExtraFound:"";
          }
          }
          tableData.push(rowObject);
@@ -388,7 +390,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {this.props.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button!=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
@@ -416,7 +418,7 @@ return tableData;
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"} >  
-                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
+                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} subheaderClassName="subheaderName viewDetailslimitsSubHeader" />:""} 
                                           {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} headerClassName="viewDetailsSeparatorHeader" subheaderClassName="viewDetailsSeparatorSubHeader" separator={<div className="dotImage"></div>} />:""}     
                                           {index==2?<div className="missing-item">{processedTableData[idx][text]}</div>:""} 
 

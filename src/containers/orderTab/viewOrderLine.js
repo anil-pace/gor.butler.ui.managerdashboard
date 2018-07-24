@@ -16,60 +16,53 @@ import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
 import {hashHistory} from 'react-router';
 
 const messages=defineMessages({
-    fulfillableStatus: {
-        id: 'orderList.fulfillable.status',
-        description: "In 'fulfillable' for orders",
+    inProgressStatus: {
+        id: 'orderList.inProgress.status',
+        description: "In 'inProgress' for orders",
         defaultMessage: "In progress"
     },
-
-    completeStatus: {
-        id: "orderList.complete.status",
-        description: " 'complete' status",
+    completedStatus: {
+        id: "orderList.completed.status",
+        description: " 'completed' status",
         defaultMessage: "Completed"
     },
-
     cancelledStatus: {
         id: "orderList.cancelled.status",
         description: " 'Cancelled' status",
         defaultMessage: "Cancelled"
     },
-
     createdStatus: {
         id: "orderList.created.status",
         description: " 'created' status",
         defaultMessage: "Created"
     },
-    badRequestStatus: {
-        id: 'orderlist.badRequest.status',
-        description: " 'Bad Request' status",
-        defaultMessage: 'Rejected'
+    
+    onHoldStatus: {
+        id: 'orderlist.onHold.status',
+        description: " 'Refreshed' status",
+        defaultMessage: 'On hold'
     },
     notFulfillableStatus: {
         id: 'orderlist.notFulfillale.status',
         description: " 'Refreshed' status",
         defaultMessage: 'Not fulfillable'
     },
-    temporyUnFulfillableStatus: {
-        id: 'orderlist.tempnotFulfillale.status',
-        description: " 'Refreshed' status",
-        defaultMessage: 'On Hold'
+    cutOffTime:{
+        id: 'orderlist.cutOffTime.time',
+        description: " cut off time in hrs",
+        defaultMessage: 'Cut off time {cutOffTime} hrs'
     },
-    acceptedStatus: {
-        id: 'orderlist.accepted.status',
-        description: " 'accepted' status",
-        defaultMessage: 'Accepted'
-    },
-    abandonedStatus: {
-        id: 'orderlist.abandoned.status',
-        description: " 'abandoned' status",
-        defaultMessage: 'Abandoned'
+    orderId:{
+        id: 'orders.order.orderId',
+        description: "order id",
+        defaultMessage: 'Order {orderId}'
     },
     totalOrderLines: {
         id: 'orders.orderlines.total',
         description: "total orderlines",
         defaultMessage: 'Total {totalOrderlines}'
     },
-    orderLineId:{
+    skuId:{
         id: 'orders.orderlines.skuId',
         description: "sku id",
         defaultMessage: 'SKU -  {skuId}'
@@ -85,15 +78,13 @@ class ViewOrderLine extends React.Component{
         headerItems: [],
         items: [],
         statusMapping:{
-            "fulfillable": this.props.intl.formatMessage(messages.fulfillableStatus),
-            "complete": this.props.intl.formatMessage(messages.completeStatus),
-            "cancelled": this.props.intl.formatMessage(messages.cancelledStatus),
             "CREATED": this.props.intl.formatMessage(messages.createdStatus),
-            "BAD_REQUEST": this.props.intl.formatMessage(messages.badRequestStatus),
-            "not_fulfillable": this.props.intl.formatMessage(messages.notFulfillableStatus),
-            "ACCEPTED": this.props.intl.formatMessage(messages.acceptedStatus),
-            "abandoned": this.props.intl.formatMessage(messages.abandonedStatus),
-            "temporary_unfulfillable": this.props.intl.formatMessage(messages.temporyUnFulfillableStatus)
+            "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
+            "PROCESSED": this.props.intl.formatMessage(messages.completedStatus),
+            "FAILED": this.props.intl.formatMessage(messages.notFulfillableStatus),
+            "CANCELED": this.props.intl.formatMessage(messages.cancelledStatus),
+            "CANCELLED": this.props.intl.formatMessage(messages.cancelledStatus),
+            "WAITING": this.props.intl.formatMessage(messages.onHoldStatus)
 
         }
       }
@@ -126,14 +117,13 @@ class ViewOrderLine extends React.Component{
 
   _removeThisModal() {
       this.props.removeModal();
-      hashHistory.push({pathname: "/orders", query: {}});
   }
 
   handleChange(event) {
     var updatedList = this.props.orderLines.orderlines;
     var queryResult=[];
     updatedList.forEach(function(item){
-            if(item.orderline_id.toLowerCase().indexOf(event)!=-1)
+            if(item.pdfa_values[0].toLowerCase().indexOf(event)!=-1)
               queryResult.push(item);
     });
     this.setState({items: queryResult});
@@ -201,15 +191,21 @@ class ViewOrderLine extends React.Component{
     let olDataLen = arg.length;
     let olineRows = [];
     let processedData = {};
-
     if(olDataLen){
       for(let i=0; i < olDataLen; i++){
-
         let olineRow = [];
-        let formatSkuId = (arg[i].orderline_id ? this.props.intl.formatMessage(messages.orderLineId, {skuId: arg[i].orderline_id}): "null");
-
+        let subHeaderData = [];
+        let pdfa_values_split = arg[i].pdfa_values[0].substring(1,arg[i].pdfa_values[0].length-1).split(","); // converts to string and then splits
+        let pdfa_values_split_sku = pdfa_values_split[0].split("="); // splits first element to extract sku id
+        let skuId = pdfa_values_split_sku[1].substring(2,pdfa_values_split_sku[1].length-1);
+        let formatSkuId = this.props.intl.formatMessage(messages.skuId, {skuId: skuId });
+        /* create content for subHeader */
+        for(let k = 1; k< pdfa_values_split.length; k++){
+          subHeaderData.push(pdfa_values_split[k]);
+        } 
+        
         olineRow.push(<div style={{marginLeft: "20px"}} className="DotSeparatorWrapper">
-                        <DotSeparatorContent header={[formatSkuId]} subHeader={[arg[i].pdfa_values[0].substring(1, arg[i].pdfa_values[0].length-1)]}/>
+                        <DotSeparatorContent header={[formatSkuId]} headerClassName="viewOrderLinesHeader" subHeader={subHeaderData} subheaderClassName="subheaderName viewOrderLinesSubHeader" separator={<span className="straightLine">|</span>}/>
                     </div>);
 
         let formatProgressBar = this._formatProgressBar(arg[i].pick_products_count, arg[i].total_products_count);

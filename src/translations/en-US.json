@@ -186,18 +186,6 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
-    "id": "audit.table.pack.outer.label",
-    "description": "audit.table.pack.outer.label",
-    "defaultMessage": "Outer",
-    "filepath": "./src/components/commonFunctionsDataTable.js"
-  },
-  {
-    "id": "audit.table.pack.inner.label",
-    "description": "audit.table.pack.inner.label",
-    "defaultMessage": "Inner",
-    "filepath": "./src/components/commonFunctionsDataTable.js"
-  },
-  {
     "id": "commonDataTable.attributesType.itemSelectedText",
     "description": "heading for attribute",
     "defaultMessage": "{count} items selected",
@@ -827,18 +815,6 @@
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
-    "id": "utility.uploadHist.success",
-    "description": "Status",
-    "defaultMessage": "Status: {status}",
-    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
-  },
-  {
-    "id": "utility.uploadHist.noresultfound",
-    "description": "Status",
-    "defaultMessage": "No Result Found",
-    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
-  },
-  {
     "id": "utility.downloadGRN.label",
     "description": "STN number:",
     "defaultMessage": "STN number:",
@@ -854,12 +830,6 @@
     "id": "utility.downloadGRN.head",
     "description": "Generate Report",
     "defaultMessage": "Generate Report",
-    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
-  },
-  {
-    "id": "utility.downloadGRN.history",
-    "description": "Report History",
-    "defaultMessage": "Report History",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
@@ -923,27 +893,9 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
-    "id": "utility.uploadHist.success",
-    "description": "Status",
-    "defaultMessage": "Status: {status}",
-    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
-  },
-  {
-    "id": "utility.uploadHist.noresultfound",
-    "description": "Status",
-    "defaultMessage": "No Result Found",
-    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
-  },
-  {
     "id": "utility.downloadReports.head",
     "description": "Generate Report",
     "defaultMessage": "Generate Report",
-    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
-  },
-  {
-    "id": "utility.downloadReports.history",
-    "description": "Report History",
-    "defaultMessage": "Report History",
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
@@ -1382,6 +1334,12 @@
     "id": "login.lang.french",
     "description": "French option in the language drop down",
     "defaultMessage": "Français",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "login.lang.dutch",
+    "description": "Dutch option in the language drop down",
+    "defaultMessage": "Nederlands",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -2032,11 +1990,6 @@
     "filepath": "./src/containers/auditListing.js"
   },
   {
-    "id": "auditdetail.pps.prefix",
-    "defaultMessage": "PPS",
-    "filepath": "./src/containers/auditListing.js"
-  },
-  {
     "id": "auditdetail.label.autoassignpps",
     "defaultMessage": "Auto Assign PPS",
     "filepath": "./src/containers/auditListing.js"
@@ -2057,8 +2010,23 @@
     "filepath": "./src/containers/auditListing.js"
   },
   {
-    "id": "auditdetail.label.linestobereaudited",
-    "defaultMessage": "lines to be re-audited",
+    "id": "auditdetail.label.linesrejected",
+    "defaultMessage": "lines rejected",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
+    "id": "auditdetail.label.linesapproved",
+    "defaultMessage": "lines approved",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
+    "id": "auditdetail.auditConflictingOperatorStatus.status",
+    "defaultMessage": "Concerned MSU is in use",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
+    "id": "auditdetail.auditwaitingStatus.status",
+    "defaultMessage": "Processing audit task",
     "filepath": "./src/containers/auditListing.js"
   },
   {
@@ -2155,6 +2123,11 @@
   {
     "id": "auditlisting.label.reolvebutton",
     "defaultMessage": "RESOLVE",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
     "filepath": "./src/containers/auditListingTab.js"
   },
   {
@@ -2348,16 +2321,6 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
-    "id": "audit.token2.duplicated",
-    "defaultMessage": "Duplicated",
-    "filepath": "./src/containers/auditTab/auditFilter.js"
-  },
-  {
-    "id": "audit.token2.deleted",
-    "defaultMessage": "Deleted",
-    "filepath": "./src/containers/auditTab/auditFilter.js"
-  },
-  {
     "id": "gor.filter.filterLabel",
     "description": "label for filter",
     "defaultMessage": "Filter data",
@@ -2469,9 +2432,15 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
-    "id": "audit.nonresultstart",
-    "description": "audit not found",
-    "defaultMessage": "No result found.",
+    "id": "audit.startaudit.ppsunavaible",
+    "description": "PPS not available",
+    "defaultMessage": "PPS Not Available",
+    "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "audit.startaudit.audittext",
+    "description": "audit",
+    "defaultMessage": "audit",
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
@@ -2541,6 +2510,12 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.walltowallSubHeaderAudit.text",
+    "description": "Audit all locations; no order fulfilment can happen during this audit operation",
+    "defaultMessage": "Audit all locations; no order fulfilment can happen during this audit operation",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.locationdoesnotexist.text",
     "description": "text for audit location does not exist error",
     "defaultMessage": "Location does not exist",
@@ -2586,6 +2561,12 @@
     "id": "audit.auditbylocation.text",
     "description": "text for audit by location",
     "defaultMessage": "Audit by Location",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.auditother.text",
+    "description": "text for other audits",
+    "defaultMessage": "Other Audits",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
@@ -2709,6 +2690,18 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
+    "id": "audit.kqsku.label.msg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Show KQ on Butler Operator Interface",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.kqsku.label.submsg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Selecting this will enable key in quantity for this audit task",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
     "id": "audit.select.sku.inputmode",
     "description": "Text for location mode",
     "defaultMessage": "Select mode of input:",
@@ -2769,13 +2762,31 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.kq.label.msg",
+    "id": "audit.kqlocation.label.msg",
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Show KQ on Butler Operator Interface",
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.kq.label.submsg",
+    "id": "audit.kqlocation.label.submsg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Selecting this will enable key in quantity for this audit task",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "createaudit.other",
+    "description": "Wall-to-Wall Audit",
+    "defaultMessage": "Wall-to-Wall Audit",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.kqotherlocation.label.msg",
+    "description": "Audit location Csv upload error message",
+    "defaultMessage": "Show KQ on Butler Operator Interface",
+    "filepath": "./src/containers/auditTab/createAudit.js"
+  },
+  {
+    "id": "audit.kqotherlocation.label.submsg",
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Selecting this will enable key in quantity for this audit task",
     "filepath": "./src/containers/auditTab/createAudit.js"
@@ -3460,6 +3471,11 @@
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
     "id": "audit.audittask",
     "description": "Heading for view orderline",
     "defaultMessage": "Audit Task",
@@ -4105,13 +4121,8 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.inputField.pickBeforeTime",
-    "defaultMessage": "CUT OFF TIME",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.token.orderTags",
-    "defaultMessage": "ORDER TAGS",
+    "id": "order.inputField.ppsId",
+    "defaultMessage": "PPS ID",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -4120,73 +4131,38 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.orderTags.any",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.orderTags.urgent",
-    "defaultMessage": "Urgent",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.orderTags.express",
-    "defaultMessage": "Express",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
     "id": "order.status.any",
     "defaultMessage": "Any",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.pending",
-    "defaultMessage": "Pending",
+    "id": "order.status.created",
+    "defaultMessage": "Created",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breachRish",
-    "defaultMessage": "Breach risk",
+    "id": "order.status.processing",
+    "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breached",
-    "defaultMessage": "Breached",
+    "id": "order.status.waiting",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.breach&Completed",
-    "defaultMessage": "Breach&Completed",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.productshort",
-    "defaultMessage": "Product Short",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.outofstock",
-    "defaultMessage": "Out of Stock",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.completed",
+    "id": "order.status.processed",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
-    "id": "order.status.rejected",
-    "defaultMessage": "Rejected",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.abandoned",
-    "defaultMessage": "Abandoned",
-    "filepath": "./src/containers/orderTab/orderFilter.js"
-  },
-  {
-    "id": "order.status.cancelled&Completed",
+    "id": "order.status.cancelled",
     "defaultMessage": "Cancelled",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.status.failed",
+    "defaultMessage": "Not Fulfillable",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -4252,26 +4228,26 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "orderlist.filter.search.bar",
-    "description": "total order for filter search bar",
+    "id": "orderlist.filter.search.count",
+    "description": "total orders for filter search bar",
     "defaultMessage": "{total} Orders found",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
     "id": "orderlist.filter.search.bar.showall",
     "description": "button label for show all",
-    "defaultMessage": "Show all orders",
+    "defaultMessage": "Show all Orders",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
@@ -4288,33 +4264,15 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
     "id": "orderlist.notFulfillale.status",
     "description": "'Refreshed' status",
     "defaultMessage": "Not fulfillable",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On hold",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -4339,6 +4297,18 @@
     "id": "orders.order.binId",
     "description": "bin id",
     "defaultMessage": "Bin {binId}",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.left",
+    "description": "left",
+    "defaultMessage": "left",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.ago",
+    "description": "ago",
+    "defaultMessage": "ago",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
@@ -4384,33 +4354,27 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orders.fulfil",
-    "description": "header of orders fulfilment",
-    "defaultMessage": "Order fulfuilment progress",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.ppsCount",
-    "description": "pps count",
-    "defaultMessage": "{current} PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.noPpsCount",
-    "description": "no pps count",
-    "defaultMessage": "No PPS running",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
-    "id": "orders.fulfil.status",
-    "description": "order status",
-    "defaultMessage": "{picked} of {totalItems} products picked",
-    "filepath": "./src/containers/orderTab/OrderTile.js"
-  },
-  {
     "id": "orders.fulfil.noProducts",
     "description": "default picked message",
     "defaultMessage": "No products to be picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
+    "id": "orders.productsPicked.status",
+    "description": "status",
+    "defaultMessage": "{total} products picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
+    "id": "orders.inProgress.status",
+    "description": "status",
+    "defaultMessage": "{current} of {total} products picked",
+    "filepath": "./src/containers/orderTab/OrderTile.js"
+  },
+  {
+    "id": "orders.fulfil",
+    "description": "header of orders fulfilment",
+    "defaultMessage": "Order fulfilment progress",
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
@@ -4450,14 +4414,14 @@
     "filepath": "./src/containers/orderTab/OrderTile.js"
   },
   {
-    "id": "orderList.fulfillable.status",
-    "description": "In 'fulfillable' for orders",
+    "id": "orderList.inProgress.status",
+    "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderList.complete.status",
-    "description": "'complete' status",
+    "id": "orderList.completed.status",
+    "description": "'completed' status",
     "defaultMessage": "Completed",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
@@ -4474,9 +4438,9 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.badRequest.status",
-    "description": "'Bad Request' status",
-    "defaultMessage": "Rejected",
+    "id": "orderlist.onHold.status",
+    "description": "'Refreshed' status",
+    "defaultMessage": "On hold",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
@@ -4486,21 +4450,15 @@
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.tempnotFulfillale.status",
-    "description": "'Refreshed' status",
-    "defaultMessage": "On Hold",
+    "id": "orderlist.cutOffTime.time",
+    "description": "cut off time in hrs",
+    "defaultMessage": "Cut off time {cutOffTime} hrs",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
-    "id": "orderlist.accepted.status",
-    "description": "'accepted' status",
-    "defaultMessage": "Accepted",
-    "filepath": "./src/containers/orderTab/viewOrderLine.js"
-  },
-  {
-    "id": "orderlist.abandoned.status",
-    "description": "'abandoned' status",
-    "defaultMessage": "Abandoned",
+    "id": "orders.order.orderId",
+    "description": "order id",
+    "defaultMessage": "Order {orderId}",
     "filepath": "./src/containers/orderTab/viewOrderLine.js"
   },
   {
@@ -5176,7 +5134,7 @@
   },
   {
     "id": "butletbot.token2.notSet",
-    "defaultMessage": "Not set",
+    "defaultMessage": "Idle",
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {

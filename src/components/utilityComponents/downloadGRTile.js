@@ -62,71 +62,6 @@ class DownloadGRNTile extends React.Component {
     }
   }
 
-  _renderDownloadGRN(reportsHistory) {
-    var result = [];
-
-    // pushing then the list items
-    if (reportsHistory.constructor !== Array && reportsHistory.length < 0) {
-      //no history of files present from the backend
-      return result;
-    }
-    for (let i = 0; i<reportsHistory.length ; i++) {
-      let listItem = (
-        <ListItem index={i} key={"listItem" + i}>
-          <div className="gor-inline">
-            <div className="gor-utility-master-h1">
-              {reportsHistory[i].file_url
-                ? <a href={reportsHistory[i].file_url} download>
-                    {this.context.intl.formatMessage(messages.downloadGrnLink)}
-                  </a>
-                : ""}
-            </div>
-            <div className="gor-inline gor-utility-master-h2">
-              <FormattedMessage
-                id="utility.uploadHist.success"
-                description="Status "
-                defaultMessage="Status: {status}"
-                values={{ status: reportsHistory[i].status }}
-              />
-            </div>
-          </div>
-          <div className="gor-inline gor-utility-master-h2">
-            <FormattedDate
-              value={new Date(reportsHistory[i].create_time)}
-              month="short"
-              day="2-digit"
-              hour="2-digit"
-              minute="2-digit"
-              timeZone={this.props.timeOffset}
-            />
-          </div>
-        </ListItem>
-      );
-      result.push(listItem);
-    }
-    if(result.length===0){
-      let listItem=<ListItem index={0} key={"listItem" + 0}>
-        <div className="gor-inline">
-          <div className="gor-utility-master-h1">
-            <div className="gor-utility-no-history-found">
-              <FormattedMessage
-                  id="utility.uploadHist.noresultfound"
-                  description="Status "
-                  defaultMessage="No Result Found"
-              />
-            </div>
-
-          </div>
-          <div className="gor-inline gor-utility-master-h2"/>
-
-        </div>
-        <div className="gor-inline gor-utility-master-h2"/>
-
-      </ListItem>
-        result.push(listItem)
-    }
-    return <div className="gor-utility-history-container">{result}</div>;
-  }
   shouldComponentUpdate(nextProps, nextState) {
     if (
       JSON.stringify(this.props.reportsHistory) ===
@@ -150,7 +85,6 @@ class DownloadGRNTile extends React.Component {
     let currenFileType = this.state.fileType
       ? this._getCurrentDropDownState(fileType, this.state.fileType)
       : null;
-    let reportsHistory = this._renderDownloadGRN(this.props.grnHistory);
     return (
       <div>
         <div className="gor-utility-invoice-h1">
@@ -211,17 +145,6 @@ class DownloadGRNTile extends React.Component {
             </label>
           </button>
         </div>
-        <div className="gor-utility-body-header">
-          <FormattedMessage
-            id="utility.downloadGRN.history"
-            description="Report History"
-            defaultMessage="Report History"
-          />
-        </div>
-        <h1>
-          {this.context.intl.formatMessage(messages.downloadRprtsStatusHead)}
-        </h1>
-        {reportsHistory}
       </div>
     );
   }

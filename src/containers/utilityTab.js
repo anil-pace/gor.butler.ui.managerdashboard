@@ -426,7 +426,7 @@ class UtilityTab extends React.Component {
 
     _onMDMRefresh() {
         var params = {
-            url: UPLOAD_HISTORY_URL + "?&order_by=create_time",
+            url: UPLOAD_HISTORY_URL + "?sort=CreateTime,desc",
             method: GET,
             token: this.props.auth_token,
             cause: UPLOAD_HISTORY,

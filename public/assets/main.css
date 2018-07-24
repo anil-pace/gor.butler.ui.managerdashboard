@@ -178,7 +178,7 @@ body {
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
 .dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-refresh-whiteIcon,
-.gor-exp-coll {
+.gor-exp-coll, .gor-view-details-info-icon {
   background-image: url(./images/icons.svg);
 }
 
@@ -190,6 +190,16 @@ body {
 .WARNING-Biggericon, .ERROR-Biggericon, .INFO-Biggericon,
 .WARNING-icon, .INFO-icon, .ERROR-icon {
   background-image: url(./images/Icons_need_update.svg);
+}
+
+.gor-view-details-info-icon {
+  background-position: -509px -1px;
+  width: 55px;
+  height: 52px;
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 0.3;
+  margin-left: 25px;
 }
 
 .gor-login-user {
@@ -5328,7 +5338,7 @@ button:disabled {
 
 .gor-audit-detail {
   font-family: 'Source Sans Pro', sans-serif;
-  width: 80%;
+  width: 84%;
   margin: auto;
 }
 
@@ -5952,8 +5962,9 @@ button:disabled {
 }
 
 .column4Style {
-  text-align: center;
-  font-weight: bold;
+  text-align: right;
+  font-weight: 600;
+  line-height: 17px;
 }
 
 .checkBoxalign {
@@ -9681,12 +9692,36 @@ button:disabled {
   color: #333333;
 }
 
+.gor-separator .viewOrderLinesHeader {
+  position: relative;
+  left: 5px;
+  top: 5px;
+  vertical-align: middle;
+}
+
 .gor-separator .subheaderName,
 .gor-separator .viewDetailsSeparatorSubHeader {
   padding: 7px;
   font-size: 13px;
   text-align: left;
   color: #333333;
+}
+
+.gor-separator .viewDetailslimitsSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+  display: block;
+}
+
+.gor-separator .viewOrderLinesSubHeader {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .dotImage {
@@ -9718,6 +9753,15 @@ button:disabled {
   clear: both;
   padding-top: 30px;
   color: #4a4a4a;
+}
+
+.gor-AuditDetails-modal-content .gor-auditDetails-modal-body .ppsUnavailable {
+  font-size: 20px;
+  font-weight: normal;
+  color: #000000;
+  width: 14%;
+  padding: 20%;
+  margin: auto;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .AuditDetailsWrapper {
@@ -9787,14 +9831,14 @@ button:disabled {
   top: 35%;
   display: inline-block;
   border-radius: 2px 2px 0 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.3);
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader {
-  background-color: #AAAAAA;
+  background-color: #aaaaaa;
   height: 43px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 700;
   text-align: left;
@@ -9805,7 +9849,7 @@ button:disabled {
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipHeader .closeTooltip {
   float: right;
   font-size: 25px;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   padding-right: 5px;
 }
@@ -9815,7 +9859,7 @@ button:disabled {
   box-sizing: border-box;
   max-height: 228px;
   overflow: scroll;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body .content-body .outerWrapper .tooltipText .auditnameLine {
@@ -9831,7 +9875,7 @@ button:disabled {
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head {
   font-size: 1.25rem;
   font-weight: 600;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #aaaaaa;
   min-height: 3.8rem;
   width: 97%;
   position: absolute;
@@ -9846,7 +9890,7 @@ button:disabled {
 
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-head .close {
   background: #f2f2f2;
-  color: #AAAAAA;
+  color: #aaaaaa;
   float: right;
   text-align: center;
   font-size: 28px;
@@ -9944,6 +9988,7 @@ button:disabled {
 
 .width-auto {
   width: auto;
+  vertical-align: top;
 }
 
 .gor-actionDropDown {
@@ -10336,7 +10381,7 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .audit-sub-footer .kq-check-wrp {
   display: inline-block;
-  width: 10%;
+  width: 8%;
   vertical-align: middle;
 }
 
@@ -10384,6 +10429,70 @@ checkmark1 for indeterminate state*/
 
 .gor-audit-create .new-audit > .tabs {
   margin-top: 40px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer {
+  margin-top: 20px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .audittypecontainer {
+  background-color: #FBFBFB;
+  padding: 10px;
+  border-bottom: 1px solid #DDDDDD;
+  border-top: 1px solid #DDDDDD;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .audittypecontainer .subHeader {
+  color: #333333;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 25px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer label {
+  cursor: pointer;
+  position: relative;
+  padding-left: 20px;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer input[type=radio] {
+  display: none;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer label:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  background-color: #fff;
+  border: 1px solid #333333;
+  border-radius: 50%;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer .radio label:before {
+  border-radius: 8px;
+}
+
+.gor-audit-create .new-audit > .tabs .auditOtherContainer input[type=radio]:checked + label:before {
+  content: "\2022";
+  color: #333333;
+  font-size: 30px;
+  text-align: center;
+  line-height: 7px;
+}
+
+.gor-audit-create .new-audit .tabs-active-content {
+  padding-bottom: 10px;
 }
 
 .gor-audit-create .gor-orange-spinner {
@@ -10472,7 +10581,7 @@ checkmark1 for indeterminate state*/
   text-align: center;
   padding: 12px 20px;
   color: #666666;
-  width: 46%;
+  width: 33%;
   cursor: pointer;
   border: 1px solid #aaaaaa;
   box-sizing: border-box;
@@ -10547,6 +10656,7 @@ checkmark1 for indeterminate state*/
   text-align: center;
   padding: 10px 5px;
   width: 29%;
+  background: #fff;
   margin-top: 10px;
   margin-right: 10px;
   cursor: pointer;

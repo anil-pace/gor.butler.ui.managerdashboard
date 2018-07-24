@@ -45,8 +45,6 @@ import { FormattedMessage,FormattedNumber } from 'react-intl';
               'url': GET_MD_CONFIG_URL,
               'method': GET,
               'cause': GET_CONFIGS,
-              'contentType': APP_JSON,
-              'accept': APP_JSON,
               'token': this.props.auth_token,
               'sync':true
           }
