@@ -87,14 +87,14 @@ export  function orderDetails(state={},action){
       if(state.pbts && state.pbts.length>1){
         expected_pbts = state.pbts.map(function(pbt, idx){
           if(pbt.cut_off_time===target_cut_off_time){
-            if(res.serviceRequests){
+            if(res.serviceRequests.constructor === Array && res.serviceRequests.length>0){
               let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
               pbt.ordersPerPbt={
                   "orders": ordersData,
                   "isInfiniteLoading":false,
                   "dataFound":res.serviceRequests.length < 1,
                   "totalPages" : res.totalPages,
-                  "totalOrders" : res.totaElements
+                  "totalOrders" : res.totalElements
               }
             }
           }
@@ -102,13 +102,13 @@ export  function orderDetails(state={},action){
         })
       }
       else{
-          if(res.serviceRequests){
+          if(res.serviceRequests.constructor === Array && res.serviceRequests.length>0){
             expected_pbts[0].ordersPerPbt={
                   "orders": res.serviceRequests,
                   "isInfiniteLoading":false,
                   "dataFound":res.serviceRequests.length < 1,
                   "totalPages" : res.totalPages,
-                  "totalOrders" : res.totaElements,
+                  "totalOrders" : res.totalElements,
                   "isGroupedById": false
               }
           }
