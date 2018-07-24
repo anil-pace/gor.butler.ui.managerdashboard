@@ -716,7 +716,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 let formData={
                     "start_date": startDate,
                     "end_date": endDate,
-                    "cut_off_time": null
+                    "cut_off_time": null,
+                    "page":"1",
+                    "size":"10"
                 };
                 if(filteredPpsId){
                     formData["filtered_ppsId"] = filteredPpsId;

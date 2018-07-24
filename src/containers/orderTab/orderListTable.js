@@ -128,10 +128,6 @@ const messages=defineMessages({
         defaultMessage: 'Yesterday'
     }
 });
-
-
-
-var storage = [];
 class OrderListTable extends React.Component {
     constructor(props) {
         super(props);
@@ -173,62 +169,57 @@ class OrderListTable extends React.Component {
     }
 
     _reqOrderPerPbt(pbtData, saltParams={}){
-        let cutOffTime = pbtData.cut_off_time;
-        const index = storage.indexOf(cutOffTime);
-        let page
-        let size=10;
+        let cutOffTime = pbtData.cut_off_time
+        let page="1"
+        let size="10";
         let need_to_fetch_more=false
         try{
-            need_to_fetch_more=pbtData.ordersPerPbt.order.length < pbtData.ordersPerPbt.total_orders
+            need_to_fetch_more=pbtData.ordersPerPbt.order.length < pbtData.ordersPerPbt.totalOrders
         }catch(ex){
 
         }
-
-        let formData={
-            "start_date": this.props.startDate,
-            "end_date": this.props.endDate,
-            "cut_off_time" : cutOffTime
-        };
-
-        saltParams.cut_off_time=cutOffTime
+    
 
         if(saltParams.lazyData && need_to_fetch_more){  // Accordion already open and infinite scroll
             try{
                 page=(pbtData.ordersPerPbt.orders.length/size)+1
+                page=page.toString();
             }catch(ex){
-                page=1
+                page="1"
             }
-            
-            let params={
-                'url':ORDERS_PER_PBT_URL+"?page="+page+"&size="+size,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH,
-                'formdata':formData,
-                'saltParams':saltParams,
-            }
-            this.props.makeAjaxCall(params);
         }
         else{
             try{
                 size=pbtData.ordersPerPbt.orders.length
+                size = size.toString()
             }catch(ex){
-
+              size = "10"
             }
-            let params={
-                'url':ORDERS_PER_PBT_URL+"?page=1&size="+size,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause':ORDERS_PER_PBT_FETCH,
-                'formdata':formData,
-                saltParams:saltParams
-            }
-            this.props.makeAjaxCall(params);
+            
         }
 
-        this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
+        let formData={
+          "start_date": this.props.startDate,
+          "end_date": this.props.endDate,
+          "cut_off_time" : cutOffTime,
+          "page": page,
+          "size": size
+      };
+
+
+        saltParams.cut_off_time=cutOffTime
+        let params={
+          'url':ORDERS_PER_PBT_URL,
+          'method':POST,
+          'contentType':APP_JSON,
+          'accept':APP_JSON,
+          'cause':ORDERS_PER_PBT_FETCH,
+          'formdata':formData,
+          saltParams:saltParams
+      }
+      this.props.makeAjaxCall(params);
+
+      this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
     }
 
     
@@ -368,7 +359,7 @@ class OrderListTable extends React.Component {
                         if (!pbtData[i]){
                             continue;
                         }
-                        let formatIntlPbt = (pbtData[i].cut_off_time ? (pbtData[i].cut_off_time.split("T")[1]).substr(0,5): "");
+                        let formatIntlPbt = (pbtData[i].cut_off_time ?moment(pbtData[i].cut_off_time).tz(timeOffset).format("HH:mm"): "");
                         let formatPbtTime = (pbtData[i].cut_off_time ? 
                                                 this.props.intl.formatMessage(messages.cutOffTime, {cutOffTime: formatIntlPbt}): "NO CUT OFF TIME");
                         let formatTimeLeft = this._calculateTimeLeft(pbtData[i].cut_off_time);
@@ -504,7 +495,7 @@ class OrderListTable extends React.Component {
     }
 
     _onScrollHandler(pbtData, event){
-        if(pbtData.ordersPerPbt &&  pbtData.ordersPerPbt.total_orders > pbtData.ordersPerPbt.orders.length){
+        if(pbtData.ordersPerPbt &&  pbtData.ordersPerPbt.totalOrders > pbtData.ordersPerPbt.orders.length){
             if( Math.round(event.target.scrollTop) + Number(event.target.clientHeight) ===  Number(event.target.scrollHeight) ){
                         this.props.setInfiniteSpinner(false);
                         this._reqOrderPerPbt(pbtData, {lazyData:true});
@@ -534,7 +525,9 @@ class OrderListTable extends React.Component {
                                     intervalIdForOrders={self._intervalIdForOrders}
                                     stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
-                                    onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
+                                    onScrollHandler={()=> {
+                                      self._onScrollHandler(self.props.pbts[idx])
+                                    }} 
                                     getOrderPerPbt={self._reqOrderPerPbt.bind(self)} 
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
