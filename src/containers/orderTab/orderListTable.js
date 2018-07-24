@@ -131,11 +131,8 @@ class OrderListTable extends React.Component {
 
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
-<<<<<<< HEAD
         this._onScrollHandler = this._onScrollHandler.bind(this);
         this._startPollingCutOffTime = this._startPollingCutOffTime.bind(this);
-=======
->>>>>>> c0098b7... BSS-9582 [MD] - Order data not displayed
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
         moment.locale(props.intl.locale);
     }
