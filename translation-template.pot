@@ -268,9 +268,19 @@ msgstr ""
 		msgid "Click on "Start Audit" to assign PPS"
 		msgstr ""
 
+		#: utility.max.lines
+		msgctxt "utility.max.lines"
+		msgid "lines"
+		msgstr ""
+
 		#: utility.fileSize.message
 		msgctxt "utility.fileSize.message"
 		msgid "Maximum File Size: {maxSize}"
+		msgstr ""
+
+		#: masterdata.maxlimit.uiCheck.filesize
+		msgctxt "masterdata.maxlimit.uiCheck.filesize"
+		msgid "File size can not be greater than"
 		msgstr ""
 
 		#: utility.fileSize.errorline
@@ -3193,6 +3203,11 @@ msgstr ""
 		msgid "Show all Orders"
 		msgstr ""
 
+		#: orders.noOrders.noOrders
+		msgctxt "orders.noOrders.noOrders"
+		msgid "No orders available"
+		msgstr ""
+
 		#: orderList.inProgress.status
 		msgctxt "orderList.inProgress.status"
 		msgid "In progress"
@@ -3296,11 +3311,6 @@ msgstr ""
 		#: orders.inProgress.status
 		msgctxt "orders.inProgress.status"
 		msgid "{current} of {total} products picked"
-		msgstr ""
-
-		#: orders.noOrders.noOrders
-		msgctxt "orders.noOrders.noOrders"
-		msgid "No orders available"
 		msgstr ""
 
 		#: orders.fulfil.noProducts

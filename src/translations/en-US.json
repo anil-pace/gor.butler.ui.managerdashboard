@@ -4165,6 +4165,12 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
+    "id": "orders.noOrders.noOrders",
+    "description": "display no orders",
+    "defaultMessage": "No orders available",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
     "id": "orderList.inProgress.status",
     "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
