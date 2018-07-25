@@ -300,6 +300,12 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "utility.max.lines",
+    "description": "lines internationalization",
+    "defaultMessage": "lines",
+    "filepath": "./src/components/fileUpload/fileUpload.js"
+  },
+  {
     "id": "utility.fileSize.message",
     "description": "Maximum File Size:  MB",
     "defaultMessage": "Maximum File Size: {maxSize}",
