@@ -189,6 +189,8 @@ class OrderListTable extends React.Component {
           "start_date": this.props.startDate,
           "end_date": this.props.endDate,
           "cut_off_time" : cutOffTime,
+          "filtered_ppsId": this.props.ppsIdFilter,
+          "filtered_order_status":this.props.statusFilter,
           "page": page,
           "size": size
       };
@@ -205,17 +207,12 @@ class OrderListTable extends React.Component {
           saltParams:saltParams
       }
       this.props.makeAjaxCall(params);
-
-      this._intervalIdForOrders = setTimeout(() => this._reqOrderPerPbt(pbtData), ORDERS_POLLING_INTERVAL);
-    }
+   }
 
     _startPollingCutOffTime(){
         this.props.startPollingCutOffTime();
     }
 
-    _stopPollingOrders(intervalIdForOrders){
-        clearTimeout(intervalIdForOrders);
-    }
 
     _formatProgressBar(nr, dr){
         let x = {};
@@ -509,11 +506,9 @@ class OrderListTable extends React.Component {
                                     pbts={self.props.pbts}
                                     setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
-                                    startPollingCutOffTime={self._startPollingCutOffTime}
-                                    stopPollingOrders={self._stopPollingOrders}
                                     isInfiniteLoading={self.props.isInfiniteLoading}
                                     onScrollHandler={self._onScrollHandler.bind(self,self.props.pbts[idx])} 
-                                    getOrderPerPbt={self._reqOrderPerPbt.bind(self)} 
+                                    getOrderPerPbt={self._reqOrderPerPbt} 
                                     cutOffTimeIndex={idx} 
                                     enableCollapseAllBtn={self._enableCollapseAllBtn}
                                     disableCollapseAllBtn={self._disableCollapseAllBtn} 

@@ -16,7 +16,7 @@ const ajaxMiddleware=(function(){
 
        var params=action.params;
        var saltParams = action.params.saltParams ? action.params.saltParams : {};
-       var formData = params.formdata || params || null,httpData;
+       var formData = params.formdata || params || null, httpData;
 
        if(params.cause !== MASTER_FILE_UPLOAD){
           httpData=params.formdata? JSON.stringify(params.formdata):null;
