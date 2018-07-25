@@ -23,7 +23,7 @@ class MsuConfigConfirmation extends React.Component {
 
     render() {
         let msgToDisplay;
-        if(this.props.activeBtnText === "START RECONFIG"){
+        if(this.props.activeBtnText === "startReconfig"){
             msgToDisplay = <FormattedMessage id="msuConfig.startDialog.message"
                             description="msu config start dialog box"
                             defaultMessage="Are you sure you want to start re-configuring empty MSUs?"/>
