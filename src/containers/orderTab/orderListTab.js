@@ -226,11 +226,11 @@ class OrderListTab extends React.Component {
       let self = this;
       let timerId = 0;
       timerId = setInterval(function() {
-        let query=null
-        query.startDate = sessionStorage.getItem("startDate");
-        query.endDate = sessionStorage.getItem("endDate");
-        query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
-        query.filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"));
+        let query={}
+        query.startDate = sessionStorage.getItem("startDate")||null;
+        query.endDate = sessionStorage.getItem("endDate")||null;
+        query.filteredPpsId = sessionStorage.getItem("filtered_ppsId")||null;
+        query.filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"))||null;
         self._refreshList(query);
       }, ORDERS_POLLING_INTERVAL);
       self.setState({ timerId: timerId });
