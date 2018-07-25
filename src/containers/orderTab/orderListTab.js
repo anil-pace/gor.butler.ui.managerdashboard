@@ -226,7 +226,7 @@ class OrderListTab extends React.Component {
       let self = this;
       let timerId = 0;
       timerId = setInterval(function() {
-        let query={}
+        let query={}  
         query.startDate = sessionStorage.getItem("startDate")||null;
         query.endDate = sessionStorage.getItem("endDate")||null;
         query.filteredPpsId = sessionStorage.getItem("filtered_ppsId")||null;
