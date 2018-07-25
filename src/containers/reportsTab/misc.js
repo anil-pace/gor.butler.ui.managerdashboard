@@ -56,7 +56,8 @@ class UtilityTab extends React.Component {
         if (reqFileType) {
             fileType = reqFileType;
         }
-        let url = INVENTORY_REPORT_URL + "?sync=false&format=" + fileType;
+        
+        let url = INVENTORY_REPORT_URL + "?user="+this.props.username+"&sync=false&format=" + fileType;
         let data = {
             url: url,
             method: POST,
@@ -176,6 +177,7 @@ function mapStateToProps(state, ownProps) {
     wsSubscriptionData:
       state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    username: state.authLogin.username,
     config: state.config || {}
   };
 }
