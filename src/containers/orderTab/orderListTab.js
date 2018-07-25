@@ -56,8 +56,7 @@ import { unSetAllActivePbts } from "../../actions/norderDetailsAction";
 import {
   ORDERS_FULFIL_URL,
   ORDERS_SUMMARY_URL,
-  ORDERS_CUT_OFF_TIME_URL,
-  ORDERS_PER_PBT_URL
+  ORDERS_CUT_OFF_TIME_URL
 } from "../../constants/configConstants";
 import moment from "moment-timezone";
 
@@ -82,8 +81,10 @@ class OrderListTab extends React.Component {
       selected_page: 1,
       query: null,
       orderListRefreshed: null,
-      setStartDateForOrders: null,
-      setEndDateForOrders: null,
+      startDateForOrders: null,
+      endDateForOrders: null,
+      ppsIdFilterForOrders: null,
+      statusFilterForOrders: null,
       timerId:null
     };
   }
@@ -213,8 +214,10 @@ class OrderListTab extends React.Component {
     this._reqOrdersSummary(startDateFilter, endDateFilter);
     this.setState(
       {
-        setStartDateForOrders: startDateFilter,
-        setEndDateForOrders: endDateFilter
+        startDateForOrders: startDateFilter,
+        endDateForOrders: endDateFilter,
+        statusFilterForOrders: query.status || null,
+        ppsIdFilterForOrders: query.ppsId || null
       });
   }
 
@@ -223,30 +226,17 @@ class OrderListTab extends React.Component {
       let self = this;
       let timerId = 0;
       timerId = setInterval(function() {
-        self._refreshList({});
+        let query=null
+        query.startDate = sessionStorage.getItem("startDate");
+        query.endDate = sessionStorage.getItem("endDate");
+        query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
+        query.filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"));
+        self._refreshList(query);
       }, ORDERS_POLLING_INTERVAL);
       self.setState({ timerId: timerId });
   }
 
-  /* START ===> THIS REQUEST IS ONLY WHEN CUT OFF TIME IS REQUESTED FROM FILTER */
-
-  _reqOrderPerPbt(fromDateTime, toDateTime, cutOffTime) {
-    let formData = {
-      start_date: fromDateTime,
-      end_date: toDateTime,
-      cut_off_time: cutOffTime
-    };
-
-    let params = {
-      url: ORDERS_PER_PBT_URL,
-      method: POST,
-      contentType: APP_JSON,
-      accept: APP_JSON,
-      cause: ORDERS_PER_PBT_FETCH,
-      formdata: formData
-    };
-    this.props.makeAjaxCall(params);
-  }
+  
 
   _clearFilter() {
     this.props.filterApplied(false);
@@ -342,18 +332,18 @@ class OrderListTab extends React.Component {
     let duration = null;
     const durDiff = moment
       .duration(
-        moment(this.state.setEndDateForOrders).diff(
-          moment(this.state.setStartDateForOrders)
+        moment(this.state.endDateForOrders).diff(
+          moment(this.state.startDateForOrders)
         )
       )
       .asDays();
     if (Math.floor(durDiff) > 0) {
       duration =
-        moment(this.state.setStartDateForOrders).format("DD MMM") +
+        moment(this.state.startDateForOrders).format("DD MMM") +
         "-" +
-        moment(this.state.setEndDateForOrders).format("DD MMM YYYY");
+        moment(this.state.endDateForOrders).format("DD MMM YYYY");
     } else {
-      duration = moment(this.state.setStartDateForOrders).format("DD MMM YYYY");
+      duration = moment(this.state.startDateForOrders).format("DD MMM YYYY");
     }
     var filterHeight = screen.height - 150;
     var itemNumber = 6,
@@ -370,7 +360,7 @@ class OrderListTab extends React.Component {
     if (orderDetails.length>1){
       // get the total number of orders filtered
       noOfRecords = orderDetails.length
-    }else if (orderDetails && orderDetails.length>0){
+    }else if (orderDetails && orderDetails.length>0 && orderDetails[0].ordersPerPbt){
       // get the total number of orders filtered
       noOfRecords = orderDetails[0].ordersPerPbt.totalOrders ||0;
     }
@@ -480,8 +470,10 @@ class OrderListTab extends React.Component {
           {this.props.pbts.length > 0 && (
             <OrderListTable
               pbts={this.props.pbts}
-              startDate={this.state.setStartDateForOrders}
-              endDate={this.state.setEndDateForOrders}
+              startDate={this.state.startDateForOrders}
+              endDate={this.state.endDateForOrders}
+              ppsIdFilter = {this.state.ppsIdFilterForOrders}
+              statusFilter = {this.state.statusFilterForOrders}            
               intervalIdForCutOffTime={this.state.timerId}
               isFilterApplied={this.props.isFilterApplied}
               enableCollapseAllBtn={this._enableCollapseAllBtn}

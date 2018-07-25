@@ -300,9 +300,21 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "utility.max.lines",
+    "description": "lines internationalization",
+    "defaultMessage": "lines",
+    "filepath": "./src/components/fileUpload/fileUpload.js"
+  },
+  {
     "id": "utility.fileSize.message",
     "description": "Maximum File Size:  MB",
     "defaultMessage": "Maximum File Size: {maxSize}",
+    "filepath": "./src/components/fileUpload/fileUpload.js"
+  },
+  {
+    "id": "masterdata.maxlimit.uiCheck.filesize",
+    "description": "File size error on UI check",
+    "defaultMessage": "File size can not be greater than",
     "filepath": "./src/components/fileUpload/fileUpload.js"
   },
   {

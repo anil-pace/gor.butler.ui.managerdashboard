@@ -60,7 +60,7 @@ export  function orderDetails(state={},action){
       })
       
       return Object.assign({}, state, {
-        activePbtIndex: action.data.index,
+        activePbtIndex: action.data.index || null,
         pbts:pbts
       });
       break;
