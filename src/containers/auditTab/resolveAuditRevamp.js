@@ -30,9 +30,11 @@ const mockData={
           "k_deep_audit": false,
           "pdfa_audit_attributes": {},
           "slot_id": "031.1.A.01-A.02",
-          "status": "audit_pending_approval/audit_approved/audit_rejected",
+          "status": "audit_pending_approval",
           "operator": "operator_name",
-          "comment": "conmment"
+          "comment": "conmment",
+          "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
       },
       {
         "actual_quantity": 0,
@@ -41,9 +43,11 @@ const mockData={
         "k_deep_audit": false,
         "pdfa_audit_attributes": {},
         "slot_id": "031.1.A.01-A.02",
-        "status": "audit_pending_approval/audit_approved/audit_rejected",
+        "status": "audit_pending_approval",
         "operator": "operator_name",
-        "comment": "conmment"
+        "comment": "conmment",
+        "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
     },
     {
       "actual_quantity": 0,
@@ -52,9 +56,11 @@ const mockData={
       "k_deep_audit": false,
       "pdfa_audit_attributes": {},
       "slot_id": "031.1.A.01-A.05",
-      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "status": "audit_pending_approval",
       "operator": "operator_name",
-      "comment": "conmment"
+      "comment": "conmment",
+      "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
   },
     {
       "actual_quantity": 0,
@@ -63,9 +69,11 @@ const mockData={
       "k_deep_audit": false,
       "pdfa_audit_attributes": {},
       "slot_id": "033.1.A.01-A.04",
-      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "status": "audit_pending_approval",
       "operator": "operator_name",
-      "comment": "conmment"
+      "comment": "conmment",
+      "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
   },
       {
           "actual_quantity": 0,
@@ -74,9 +82,11 @@ const mockData={
           "k_deep_audit": false,
           "pdfa_audit_attributes": {},
           "slot_id": "031.1.A.01-A.03",
-          "status": "audit_pending_approval/audit_approved/audit_rejected",
+          "status": "audit_pending_approval",
           "operator": "operator_name",
-          "comment": "conmment"
+          "comment": "conmment",
+          "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
       },
       {
         "actual_quantity": 0,
@@ -85,9 +95,11 @@ const mockData={
         "k_deep_audit": false,
         "pdfa_audit_attributes": {},
         "slot_id": "032.1.A.01-A.02",
-        "status": "audit_pending_approval/audit_approved/audit_rejected",
+        "status": "audit_pending_approval",
         "operator": "operator_name",
-        "comment": "conmment"
+        "comment": "conmment",
+        "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
     },
     {
       "actual_quantity": 0,
@@ -96,9 +108,11 @@ const mockData={
       "k_deep_audit": false,
       "pdfa_audit_attributes": {},
       "slot_id": "032.1.A.01-A.02",
-      "status": "audit_pending_approval/audit_approved/audit_rejected",
+      "status": "audit_pending_approval",
       "operator": "operator_name",
-      "comment": "conmment"
+      "comment": "conmment",
+      "pdfa":"Color:blue | 64gb",
+          "noofaudit":"2"
   }
   ]
 } 
@@ -215,89 +229,149 @@ class ResolveAudit extends React.Component {
     // })
     
 
-    //direct
+    //direct 3 level
 //     var arrObj={}
 //     for(var i=0;i<mockData.auditlines.length;i++){
-//       var msuobj={body:[]};
+//       var msuobj={body:{}};
 // if(Object.keys(arrObj).indexOf((mockData.auditlines[i].slot_id).split('.')[0])!==-1)
 // {
-//   let slotObj={};
-//   if(Object.keys(slotObj).indexOf(mockData.auditlines[i].slot_id)!==-1)
+//   let slotObj={body:[]};
+//   if(Object.keys(arrObj[(mockData.auditlines[i].slot_id).split('.')[0]].body).indexOf(mockData.auditlines[i].slot_id)!==-1)
 //   {
-//     slotObj.body=mockData.auditlines[i].expected_quantity;
+//     ((arrObj[(mockData.auditlines[i].slot_id).split('.')[0]].body[mockData.auditlines[i].slot_id]).body).push(<div><DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+//       <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div></div>);
 //   }else
 //   {
-//     slotObj.name=mockData.auditlines[i].slot_id;
-//     slotObj.body=mockData.auditlines[i].expected_quantity;
+//     slotObj.name=<div>
+//     <DotSeparatorContent header={["SLOT " + mockData.auditlines[i].slot_id]} />
+//     <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]} />
+//     <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//     <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].noofauditline + " unresoled line"}</div>
+//   </div>;
+//     (slotObj.body).push(<div>
+//       <DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+//       <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+//     </div>);
+//     arrObj[(mockData.auditlines[i].slot_id).split('.')[0]].body[mockData.auditlines[i].slot_id]=slotObj;
 //   }
-
-// arrObj[(mockData.auditlines[i].slot_id).split('.')[0]].body.push(slotObj);
 //         }
 // else{
-//       msuobj.name=(mockData.auditlines[i].slot_id).split('.')[0];
-//       let slotObj={};
+//       msuobj.name=<div>
+//       <DotSeparatorContent header={["MSU " + (mockData.auditlines[i].slot_id).split('.')[0]]} />
+//       <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]} />
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//       <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].noofauditline + " unresoled line"}</div>
+//     </div>;;
+//       let slotObj={body:[]};
 //       if(Object.keys(slotObj).indexOf(mockData.auditlines[i].slot_id)!==-1)
 //       {
-//         slotObj.body=mockData.auditlines[i].expected_quantity;
+//         (slotObj.body).push(<div>
+//           <DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+//           <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+//           <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//           <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+//         </div>)
 //       }else
 //       {
-//         slotObj.name=mockData.auditlines[i].slot_id;
-//         slotObj.body=mockData.auditlines[i].expected_quantity;
+//         slotObj.name=<div>
+//         <DotSeparatorContent header={["SLOT " + mockData.auditlines[i].slot_id]} />
+//         <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]} />
+//         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].noofauditline + " unresoled line"}</div>
+//       </div>;
+//         slotObj.body.push(<div>
+//           <DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+//           <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]} />
+//           <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+//           <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+//         </div>);
 //       }
-//       msuobj.body.push(slotObj);
+//       msuobj.body[mockData.auditlines[i].slot_id]=slotObj;
 
 //       arrObj[(mockData.auditlines[i].slot_id).split('.')[0]]=msuobj;
 // } 
      
 //     }
+var flag=true;
+var arrObj={}
+  //direct 2 level
+  for(var i=0;i<mockData.auditlines.length;i++){
+    let slotObj={body:[]};
+    if(Object.keys(arrObj).indexOf(mockData.auditlines[i].slot_id)!==-1)
+    {
+      (arrObj[mockData.auditlines[i].slot_id]).body.push(<div><DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+        <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div></div>);
+    }else
+    {
+      slotObj.name=<div>
+      <DotSeparatorContent header={["SLOT " + mockData.auditlines[i].slot_id]} />
+      <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]} />
+      <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+      <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].noofauditline + " unresoled line"}</div>
+    </div>;
+      (slotObj.body).push(<div>
+        <DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
+        <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
+        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+      </div>);
+      arrObj[mockData.auditlines[i].slot_id]=slotObj;
+    }
+  }
 
-    receiveMock.map(function (row, index) {
-      var outerData = { outerContentObect: [] };
+    // receiveMock.map(function (row, index) {
+    //   var outerData = { outerContentObect: [] };
 
-      Object.keys(row).map(function (outername, id) {
-        var headerObject = "";
-        var data = { contentObject: [] };
-        if (outername == "outerheader") {
-          outerData.headerObject = <div>
-            <DotSeparatorContent header={['"SLOT " + row[outername][i][name].slot']} id={id} />
-            <DotSeparatorContent header={["(row[outername][i][name].totalmismatch).join(' missing out of ')"]} />
-            <div style={{ 'display': 'inline' }}>{'row[outername][i][name].comment'}</div>
-            <div style={{ 'display': 'inline' }}>{'row[outername][i][name].noofauditline + " unresoled line"'}</div>
-          </div>;
-        } else {
-          for (var i = 0; i < row[outername].length; i++) {
-            Object.keys(row[outername][i]).map(function (name, id) {
-              if (name == "header") {
-                data.headerObject = <div id={id}>
-                  <DotSeparatorContent header={["SLOT " + row[outername][i][name].slot]} id={id} />
-                  <DotSeparatorContent header={[(row[outername][i][name].totalmismatch).join(' missing out of ')]} />
-                  <div style={{ 'display': 'inline' }}>{row[outername][i][name].comment}</div>
-                  <div style={{ 'display': 'inline' }}>{row[outername][i][name].noofauditline + " unresoled line"}</div>
-                </div>;
-              }
-              else {
-                for (var j = 0; j < row[outername][i][name].length; j++) {
-                  Object.keys(row[outername][i][name][j]).map(function (lineName, id) {
-                    var obj = <div>
-                      <DotSeparatorContent header={[Object.keys(row[outername][i][name][j])[id]]} subHeader={[row[outername][i][name][j][lineName].pdfa]} />
-                      <DotSeparatorContent header={[row[outername][i][name][j][lineName].operatorname]} />
-                      <DotSeparatorContent header={[[(row[outername][i][name][j][lineName].mismatch).join(' missing out of ')]]} />
-                      <div style={{ 'display': 'inline' }}>{row[outername][i][name][j][lineName].comments}</div>
-                    </div>
-                    data.contentObject.push(obj);
-                  })
-                }
-              }
+    //   Object.keys(row).map(function (outername, id) {
+    //     var headerObject = "";
+    //     var data = { contentObject: [] };
+    //     if (outername == "outerheader") {
+    //       outerData.headerObject = <div>
+    //         <DotSeparatorContent header={['"SLOT " + row[outername][i][name].slot']} id={id} />
+    //         <DotSeparatorContent header={["(row[outername][i][name].totalmismatch).join(' missing out of ')"]} />
+    //         <div style={{ 'display': 'inline' }}>{'row[outername][i][name].comment'}</div>
+    //         <div style={{ 'display': 'inline' }}>{'row[outername][i][name].noofauditline + " unresoled line"'}</div>
+    //       </div>;
+    //     } else {
+    //       for (var i = 0; i < row[outername].length; i++) {
+    //         Object.keys(row[outername][i]).map(function (name, id) {
+    //           if (name == "header") {
+    //             data.headerObject = <div id={id}>
+    //               <DotSeparatorContent header={["SLOT " + row[outername][i][name].slot]} id={id} />
+    //               <DotSeparatorContent header={[(row[outername][i][name].totalmismatch).join(' missing out of ')]} />
+    //               <div style={{ 'display': 'inline' }}>{row[outername][i][name].comment}</div>
+    //               <div style={{ 'display': 'inline' }}>{row[outername][i][name].noofauditline + " unresoled line"}</div>
+    //             </div>;
+    //           }
+    //           else {
+    //             for (var j = 0; j < row[outername][i][name].length; j++) {
+    //               Object.keys(row[outername][i][name][j]).map(function (lineName, id) {
+    //                 var obj = <div>
+    //                   <DotSeparatorContent header={[Object.keys(row[outername][i][name][j])[id]]} subHeader={[row[outername][i][name][j][lineName].pdfa]} />
+    //                   <DotSeparatorContent header={[row[outername][i][name][j][lineName].operatorname]} />
+    //                   <DotSeparatorContent header={[[(row[outername][i][name][j][lineName].mismatch).join(' missing out of ')]]} />
+    //                   <div style={{ 'display': 'inline' }}>{row[outername][i][name][j][lineName].comments}</div>
+    //                 </div>
+    //                 data.contentObject.push(obj);
+    //               })
+    //             }
+    //           }
 
-            })
-            finalArr.push(data);
-          }
-          outerData.outerContentObect.push(finalArr);
-        }
+    //         })
+    //         finalArr.push(data);
+    //       }
+    //       outerData.outerContentObect.push(finalArr);
+    //     }
 
-      })
-      mainfinalArr.push(outerData);
-    })
+    //   })
+    //   mainfinalArr.push(outerData);
+    // })
 
 
 
@@ -328,17 +402,32 @@ class ResolveAudit extends React.Component {
               <span className="tabs"></span>
               <span className="tabs"></span>
             </div>
-            {
-              mainfinalArr.map(function (obj, id) {
+            {flag?
+              Object.keys(arrObj).map(function (obj1, id1) {
                 return (
-                  <Accordion id="1" title="Accordion 1" header={obj.headerObject}>
+                  <Accordion id="1" title="Accordion 1" header={arrObj[obj1].name}>
                     {
-                      (obj.outerContentObect[0]).map(function (obj1, id1) {
-
+                      (arrObj[obj1].body).map(function (obj2, id1) {
                         return (
-                          <Accordion id="1" title="Accordion 1" header={obj1.headerObject}>
+                          <Panel title="Panel 1">
+                            {obj2}
+                          </Panel>
+                        )
+                      })
+                    }
+                  </Accordion>
+                )
+              })
+            :
+              (Object.keys(arrObj)).map(function (obj, id) {
+                return (
+                  <Accordion id="1" title="Accordion 1" header={arrObj[obj].name}>
+                    {
+                      Object.keys(arrObj[obj].body).map(function (obj1, id1) {
+                        return (
+                          <Accordion id="1" title="Accordion 1" header={arrObj[obj].body[obj1].name}>
                             {
-                              (obj1.contentObject).map(function (obj2, id1) {
+                              (arrObj[obj].body[obj1].body).map(function (obj2, id1) {
                                 return (
                                   <Panel title="Panel 1">
                                     {obj2}
