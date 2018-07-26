@@ -18,10 +18,10 @@ class Accordion extends React.Component {
   }
 
   toggleItem(e) {
-    e.stopPropagation();
-    // if(!e.target.id){
-    //   return false;
-    // }
+   
+    if(e.target.id==e.currentTarget.id){
+      return false;
+    }
    let arr = !this.state.activeid;
    this.setState({activeid:arr});
 
@@ -30,12 +30,12 @@ class Accordion extends React.Component {
       
       
       return (   
-        <div>   
+       
         <div id={this.props.id} className="accordion"  onClick={this.toggleItem}>
         <AccordionHeader  data={this.props.header}/> 
          {this.state.activeid?this.props.children:""}
          </div>
-         </div>
+     
       );
     }
   }

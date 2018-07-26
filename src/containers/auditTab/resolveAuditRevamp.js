@@ -9,6 +9,7 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import Accordion from '../../components/accordian/accordion';
 import Panel from '../../components/accordian/Panel';
 import { isArray } from 'util';
+import AproveReject from '../../components/approveRejectComponent/approveReject'
 const messages = defineMessages({
   raManager: {
     id: "resolveaudit.manager",
@@ -119,6 +120,7 @@ const mockData={
 class ResolveAudit extends React.Component {
   constructor(props) {
     super(props);
+    this._headerCheckChange = this._headerCheckChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -173,7 +175,9 @@ class ResolveAudit extends React.Component {
 
     this._removeThisModal();
   }
-
+  _headerCheckChange(){
+    console.log('resolveauditrevamp');
+  }
 
   _findDisplayidName(rawString) {
     return rawString.split(',');
@@ -306,7 +310,9 @@ var arrObj={}
       (arrObj[mockData.auditlines[i].slot_id]).body.push(<div><DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
         <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
-        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div></div>);
+        <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+        <AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/>
+        </div>);
     }else
     {
       slotObj.name=<div>
@@ -320,6 +326,7 @@ var arrObj={}
         <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
+        <AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/>
       </div>);
       arrObj[mockData.auditlines[i].slot_id]=slotObj;
     }
@@ -443,6 +450,7 @@ var arrObj={}
                 )
               })
             }
+            
           </div>
         </div>
       </div>
