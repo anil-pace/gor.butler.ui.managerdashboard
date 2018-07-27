@@ -178,7 +178,7 @@ body {
 .gor-emergency-dropdown-close, .gor-emergency-dropdown-open, .gor-info-icon, .gor-selected-icon, .not-bell, .searchIcon, .not-statusIcon,
 .calloutArr, .gor-audit-info-icon, .gor-resume-icon, .gor-zone-status, .action-icon, .gor-up-arrow, .gor-tag-icon, .gor-tag-icon-grey,
 .dwnload-rpt-ico, .error-icon, .gor-filter-arrow, .gor-filter-checkbox, .gor-delete-location-disabled, .gor-file-upload, .gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-refresh-whiteIcon,
-.gor-exp-coll {
+.gor-exp-coll, .editIcon {
   background-image: url(./images/icons.svg);
 }
 
@@ -12865,4 +12865,54 @@ checkmark1 for indeterminate state*/
   float: right;
   margin-left: 5px;
   margin-right: 10px;
+}
+
+.textBox {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  background-color: white;
+  background-color: -moz-field;
+  border: 1px solid darkgray;
+  box-shadow: 1px 1px 1px 0 lightgray inset;
+  font: -moz-field;
+  font: -webkit-small-control;
+  margin-top: 5px;
+  padding: 2px 3px;
+  width: 398px;
+  height: 40px;
+}
+
+.pressEnter {
+  font-size: 10px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  content: attr(data-text);
+}
+
+.viewContent {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  float: left;
+}
+
+.editIcon {
+  background-position: -171px 42px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid red;
+}
+
+.divBox {
+  width: 200px;
+  height: 20px;
+  border: 1px solid red;
 }

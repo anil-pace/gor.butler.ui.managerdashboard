@@ -10,6 +10,7 @@ import Accordion from '../../components/accordian/accordion';
 import Panel from '../../components/accordian/Panel';
 import { isArray } from 'util';
 import AproveReject from '../../components/approveRejectComponent/approveReject'
+import TextEditor from '../../components/textEditor/textEditor';
 const messages = defineMessages({
   raManager: {
     id: "resolveaudit.manager",
@@ -312,6 +313,7 @@ var arrObj={}
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
         <AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/>
+        <TextEditor/>
         </div>);
     }else
     {
@@ -327,6 +329,7 @@ var arrObj={}
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
         <AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/>
+        <TextEditor/>
       </div>);
       arrObj[mockData.auditlines[i].slot_id]=slotObj;
     }
