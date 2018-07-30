@@ -9,6 +9,7 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import Accordion from '../../components/accordian/accordion';
 import Panel from '../../components/accordian/Panel';
 import { isArray } from 'util';
+import PopupContainer from '../../components/popupContainer/popupContainer';
 import AproveReject from '../../components/approveRejectComponent/approveReject'
 import TextEditor from '../../components/textEditor/textEditor';
 const messages = defineMessages({
@@ -22,7 +23,7 @@ const messages = defineMessages({
   }
 });
 //const receiveMock = [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": { "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } } }, { "header": { "slot": "002.0.d.02.04", "totalmismatch": [15, 30], "comment": "My comments here", "noofauditline": "3" }, "body": { "Motorola-SKU-24323432": { "pdfa": "color:Black|16 GB", "operatorname": "Anil kumar", "mismatch": [2, 4], "comments": "anils commnets", "status": "approve" }, "LG-SKU-24342212": { "pdfa": "color:White|32 GB", "operatorname": "Sumit", "mismatch": [1, 3], "comments": "sumit's commnets", "status": "reject" }, "laptop-SKU-24342212": { "pdfa": "color:White|1 TB", "operatorname": "Hemant", "mismatch": [12, 34], "comments": "hemant's commnets", "status": "approve" } } }];
-const receiveMock = [{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }] }];// nested
+//const receiveMock = [{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }] }];// nested
 //const receiveMock=[{ "outerheader": { "MSU": "01.02", "totalmismatch": [20, 60], "comment": "My comments here", "noofauditline": "2" }, "outerbody": [{ "header": { "slot": "001.0.c.01.02", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-7-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-4-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] }, { "header": { "slot": "001.0.c.01.03", "totalmismatch": [10, 20], "comment": "My comments here", "noofauditline": "2" }, "body": [{ "IPhone-10-SKU-24323432": { "pdfa": "color:blue|64 GB", "operatorname": "raja dey", "mismatch": [4, 7], "comments": "my commnets", "status": "reject" }, "IPhone-10-SKU-24322212": { "pdfa": "color:blue|16 GB", "operatorname": "Satish", "mismatch": [3, 5], "comments": "satish's commnets", "status": "approve" } }] } ] }];
 const mockData={
   "auditlines": [{
@@ -192,6 +193,10 @@ class ResolveAudit extends React.Component {
     return [tile1Data];
   }
 
+  _handelClick(field) {
+  
+  }
+
 
   render() {
     var finalArr = [];
@@ -204,34 +209,7 @@ class ResolveAudit extends React.Component {
         <span className="tabsRaja"></span>
       </div>
     </div>;
-    // receiveMock.map(function (row, index) {
-    //   var headerObject = "";
-    //   var data = { contentObject: [] };
-    //   Object.keys(row).map(function (name, id) {
-    //     if (name == "header") {
-    //       data.headerObject = <div id={id}>
-    //         <DotSeparatorContent header={["SLOT " + row[name].slot]} id={id} />
-    //         <DotSeparatorContent header={[(row[name].totalmismatch).join(' missing out of ')]} />
-    //         <div style={{ 'display': 'inline' }}>{row[name].comment}</div>
-    //         <div style={{ 'display': 'inline' }}>{row[name].noofauditline + " unresoled line"}</div>
-    //       </div>;
-    //     }
-    //     else {
-    //       Object.keys(row[name]).map(function (lineName, id) {
-    //         var obj = <div>
-    //           <DotSeparatorContent header={[Object.keys(row[name])[id]]} subHeader={[row[name][lineName].pdfa]} />
-    //           <DotSeparatorContent header={[row[name][lineName].operatorname]} />
-    //           <DotSeparatorContent header={[[(row[name][lineName].mismatch).join(' missing out of ')]]} />
-    //           <div style={{ 'display': 'inline' }}>{row[name][lineName].comments}</div>
-    //         </div>
-    //         data.contentObject.push(obj);
-    //       })
-    //     }
-
-    //   })
-    //   finalArr.push(data);
-
-    // })
+  
     
 
     //direct 3 level
@@ -310,6 +288,9 @@ var arrObj={}
     {
       (arrObj[mockData.auditlines[i].slot_id]).body.push(<div><DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
         <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
+        <PopupContainer clickOptionBack={this._handelClick}>
+        <div className='embeddedImage'></div>
+        </PopupContainer>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].status}</div>
         <AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/>
@@ -334,57 +315,6 @@ var arrObj={}
       arrObj[mockData.auditlines[i].slot_id]=slotObj;
     }
   }
-
-    // receiveMock.map(function (row, index) {
-    //   var outerData = { outerContentObect: [] };
-
-    //   Object.keys(row).map(function (outername, id) {
-    //     var headerObject = "";
-    //     var data = { contentObject: [] };
-    //     if (outername == "outerheader") {
-    //       outerData.headerObject = <div>
-    //         <DotSeparatorContent header={['"SLOT " + row[outername][i][name].slot']} id={id} />
-    //         <DotSeparatorContent header={["(row[outername][i][name].totalmismatch).join(' missing out of ')"]} />
-    //         <div style={{ 'display': 'inline' }}>{'row[outername][i][name].comment'}</div>
-    //         <div style={{ 'display': 'inline' }}>{'row[outername][i][name].noofauditline + " unresoled line"'}</div>
-    //       </div>;
-    //     } else {
-    //       for (var i = 0; i < row[outername].length; i++) {
-    //         Object.keys(row[outername][i]).map(function (name, id) {
-    //           if (name == "header") {
-    //             data.headerObject = <div id={id}>
-    //               <DotSeparatorContent header={["SLOT " + row[outername][i][name].slot]} id={id} />
-    //               <DotSeparatorContent header={[(row[outername][i][name].totalmismatch).join(' missing out of ')]} />
-    //               <div style={{ 'display': 'inline' }}>{row[outername][i][name].comment}</div>
-    //               <div style={{ 'display': 'inline' }}>{row[outername][i][name].noofauditline + " unresoled line"}</div>
-    //             </div>;
-    //           }
-    //           else {
-    //             for (var j = 0; j < row[outername][i][name].length; j++) {
-    //               Object.keys(row[outername][i][name][j]).map(function (lineName, id) {
-    //                 var obj = <div>
-    //                   <DotSeparatorContent header={[Object.keys(row[outername][i][name][j])[id]]} subHeader={[row[outername][i][name][j][lineName].pdfa]} />
-    //                   <DotSeparatorContent header={[row[outername][i][name][j][lineName].operatorname]} />
-    //                   <DotSeparatorContent header={[[(row[outername][i][name][j][lineName].mismatch).join(' missing out of ')]]} />
-    //                   <div style={{ 'display': 'inline' }}>{row[outername][i][name][j][lineName].comments}</div>
-    //                 </div>
-    //                 data.contentObject.push(obj);
-    //               })
-    //             }
-    //           }
-
-    //         })
-    //         finalArr.push(data);
-    //       }
-    //       outerData.outerContentObect.push(finalArr);
-    //     }
-
-    //   })
-    //   mainfinalArr.push(outerData);
-    // })
-
-
-
 
     return (
       <div>
