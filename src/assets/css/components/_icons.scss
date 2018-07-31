@@ -51,7 +51,7 @@
 }
 .fk-logo,
 .gor-logo{
-    background-image: url(./images/Logos.svg);
+    background-image: url(./images/LogoUpdated.svg);
 }
 .WARNING-Biggericon,.ERROR-Biggericon,.INFO-Biggericon,
 .WARNING-icon,.INFO-icon,.ERROR-icon{
@@ -120,17 +120,28 @@
     margin-right:10px;
 }
 .alt-gor-logo{
-    background-image: url(./images/Logos.svg);    
+    background-image: url(./images/LogoUpdated.svg);    
 }
 .alt-gor-logo{
-    background-position:-182px -1px;
-    width:235px;
-    height:25px;
+    // background-position:-182px -1px;
+    // width:235px;
+    // height:25px;
+    background-position: center;
+    width: 235px;
+    height: 25px;
+    background-size: 70%;
+    background-repeat: no-repeat;
 }
 .gor-logo{
-    background-position: 11px -117px;
+    // background-position: 11px -117px;
+    // width: 173px;
+    // padding: 10px;
     width: 173px;
     padding: 10px;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    height: 12px;
+    background-position: 15% 15%;
     
 }
 .fk-logo{
