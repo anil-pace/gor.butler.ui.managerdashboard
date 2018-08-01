@@ -19,7 +19,7 @@ class AccordionHeader extends React.Component {
       var data=this.props.data;
       
       return (   
-        <div id="raj">   
+        <div id="raj" className="accordionHeader">   
         {data}
          </div>
       );
