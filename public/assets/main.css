@@ -12916,3 +12916,12 @@ checkmark1 for indeterminate state*/
   height: 20px;
   border: 1px solid red;
 }
+
+.gor-popup {
+  position: absolute;
+  z-index: 100;
+  background: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  right: 0;
+  border-radius: 4px;
+}

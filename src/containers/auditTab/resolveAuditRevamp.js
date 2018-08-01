@@ -288,7 +288,7 @@ var arrObj={}
     {
       (arrObj[mockData.auditlines[i].slot_id]).body.push(<div><DotSeparatorContent header={[mockData.auditlines[i].auditline_id]} subHeader={[mockData.auditlines[i].pdfa]} />
         <DotSeparatorContent header={[mockData.auditlines[i].expected_quantity+' missing out of '+ mockData.auditlines[i].actual_quantity]}  />
-        <PopupContainer clickOptionBack={this._handelClick}>
+        <PopupContainer clickOptionBack={this._handelClick} dataToShow={<div><div>raja Dey</div><AproveReject headerCheckChange={this._headerCheckChange} name={'raja'}/></div>}>
         <div className='embeddedImage'></div>
         </PopupContainer>
         <div style={{ 'display': 'inline' }}>{mockData.auditlines[i].comment}</div>
