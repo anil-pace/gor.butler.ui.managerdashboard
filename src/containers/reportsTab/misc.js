@@ -7,10 +7,7 @@ import {
   GR_REPORT_URL
 } from "../../constants/configConstants";
 import { connect } from "react-redux";
-import {
-  getGRdata,
-  validateInvoiceID
-} from "../../actions/utilityActions";
+import { getGRdata, validateInvoiceID } from "../../actions/utilityActions";
 import { setInventoryReportSpinner } from "../../actions/spinnerAction";
 import {
   GET,
@@ -51,30 +48,34 @@ class UtilityTab extends React.Component {
     };
   }
 
-    _generateReport(reqFileType) {
-        let fileType = "csv";
-        if (reqFileType) {
-            fileType = reqFileType;
-        }
-        
-        let url = INVENTORY_REPORT_URL + "?user="+this.props.username+"&sync=false&format=" + fileType;
-        let data = {
-            url: url,
-            method: POST,
-            token: this.props.auth_token,
-            responseType: "arraybuffer",
-            cause: INVENTORY_REPORT_RESPONSE
-        };
-        this.props.setInventoryReportSpinner(true);
-        this.props.getGRdata(data);
+  _generateReport(reqFileType) {
+    let fileType = "csv";
+    if (reqFileType) {
+      fileType = reqFileType;
     }
+
+    let url =
+      INVENTORY_REPORT_URL +
+      "?user=" +
+      this.props.username +
+      "&sync=false&format=" +
+      fileType;
+    let data = {
+      url: url,
+      method: POST,
+      token: this.props.auth_token,
+      responseType: "arraybuffer",
+      cause: INVENTORY_REPORT_RESPONSE
+    };
+    this.props.setInventoryReportSpinner(true);
+    this.props.getGRdata(data);
+  }
 
   _changeReportFileType(data) {
     var newState = this.state.reportState;
     newState.fileType = data.value;
     this.setState({ reportState: newState });
   }
-
 
   _generateGRN(reqFileType, invoiceId) {
     var fileType = "csv";
@@ -96,7 +97,6 @@ class UtilityTab extends React.Component {
     this.props.getGRdata(data);
     this.props.validateInvoiceID(false);
   }
-
 
   componentWillReceiveProps(nextProps, nextState) {
     if (
@@ -135,7 +135,7 @@ class UtilityTab extends React.Component {
 
     return (
       <div>
-        {show_inventory_report && show_gr_report ? (
+        {show_inventory_report ? (
           <div>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
@@ -147,7 +147,10 @@ class UtilityTab extends React.Component {
                 timeOffset={this.props.timeOffset}
               />
             </UtilityTile>
-
+          </div>
+        ) : null}
+        {show_gr_report ? (
+          <div>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
@@ -183,7 +186,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 var mapDispatchToProps = function(dispatch) {
-  return { 
+  return {
     getGRdata: function(data) {
       dispatch(getGRdata(data));
     },
@@ -205,4 +208,7 @@ UtilityTab.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UtilityTab);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UtilityTab);
