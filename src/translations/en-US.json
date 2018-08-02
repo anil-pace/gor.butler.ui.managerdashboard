@@ -2138,6 +2138,11 @@
     "filepath": "./src/containers/auditListingTab.js"
   },
   {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditListingTab.js"
+  },
+  {
     "id": "audit.cancel",
     "description": "Text for cancel",
     "defaultMessage": "Are you sure want to cancel {auditId} audit?",
@@ -3478,6 +3483,11 @@
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
     "id": "audit.audittask",
     "description": "Heading for view orderline",
     "defaultMessage": "Audit Task",
@@ -4232,7 +4242,7 @@
   {
     "id": "orderlist.filter.search.count",
     "description": "total orders for filter search bar",
-    "defaultMessage": "{total} Orders found",
+    "defaultMessage": "{total} Records found",
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
