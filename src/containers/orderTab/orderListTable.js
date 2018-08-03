@@ -197,8 +197,14 @@ class OrderListTable extends React.Component {
           "filtered_order_status":this.props.statusFilter,
           "page": page,
           "size": size
-      };
-
+      }
+      if (this.props.ppsIdFilter ){
+          formData["filtered_ppsId"] = this.props.ppsIdFilter 
+      }
+      if (this.props.statusFilter){
+        formData["filtered_order_status"]=this.props.statusFilter
+      }
+      
 
         saltParams.cut_off_time=cutOffTime
         let params={
