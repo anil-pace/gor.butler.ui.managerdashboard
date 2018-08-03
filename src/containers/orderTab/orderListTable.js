@@ -1,16 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
-import {FormattedMessage, defineMessages, FormattedRelative, FormattedDate, FormattedTime, injectIntl} from 'react-intl';
+import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
-import OrderFilter from './orderFilter';
-import Spinner from '../../components/spinner/Spinner';
 import {GTable} from '../../components/gor-table-component/index'
-import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
-import OrderTile from '../../containers/orderTab/OrderTile';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
@@ -18,36 +14,20 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
 import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
 import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
-import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
+import {updateSubscriptionPacket} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
-import {getDaysDiff} from '../../utilities/getDaysDiff';
 
 import {wsOverviewData} from './../../constants/initData.js';
 
-import {getPageData, getStatusFilter, getTimeFilter, getPageSizeOrders, currentPageOrders, lastRefreshTime} from '../../actions/paginationAction';
 
-import {ORDERS_RETRIEVE, GOR_BREACHED, BREACHED, GOR_EXCEPTION, toggleOrder, INITIAL_HEADER_SORT, sortOrderHead, sortOrder, WS_ONSEND, EVALUATED_STATUS,
-    ANY, DEFAULT_PAGE_SIZE_OL, REALTIME, ORDERS_FULFIL_FETCH, APP_JSON, POST, GET, ORDERS_SUMMARY_FETCH, ORDERS_CUT_OFF_TIME_FETCH, ORDERS_PER_PBT_FETCH, ORDERLINES_PER_ORDER_FETCH, POLLING_INTERVAL,
-    ORDERS_POLLING_INTERVAL
-} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, ORDERS_PER_PBT_FETCH} from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import moment from 'moment-timezone';
 
 import {
-    API_URL,
-    ORDERS_URL,
-    PAGE_SIZE_URL,
-    PROTOCOL,
-    ORDER_PAGE,
-    UPDATE_TIME_UNIT, UPDATE_TIME,
-    EXCEPTION_TRUE,
-    WAREHOUSE_STATUS_SINGLE,
-    WAREHOUSE_STATUS_MULTIPLE,
-    FILTER_ORDER_ID, GIVEN_PAGE, GIVEN_PAGE_SIZE, ORDER_ID_FILTER_PARAM,ORDER_ID_FILTER_PARAM_WITHOUT_STATUS,
-    ORDERS_FULFIL_URL, ORDERS_SUMMARY_URL, ORDERS_CUT_OFF_TIME_URL, ORDERS_PER_PBT_URL, ORDERLINES_PER_ORDER_URL
-} from '../../constants/configConstants';
+    ORDERS_PER_PBT_URL} from '../../constants/configConstants';
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
@@ -169,7 +149,7 @@ class OrderListTable extends React.Component {
 
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time
-        let page="1"
+        let page="0"
         let size="10";
         let need_to_fetch_more=false
         try{
@@ -184,7 +164,7 @@ class OrderListTable extends React.Component {
                 page=(pbtData.ordersPerPbt.orders.length/size)+1
                 page=page.toString();
             }catch(ex){
-                page="1"
+                page="0"
             }
         }
         else{
@@ -196,17 +176,20 @@ class OrderListTable extends React.Component {
             }
             
         }
-
         let formData={
           "start_date": this.props.startDate,
           "end_date": this.props.endDate,
           "cut_off_time" : cutOffTime,
-          "filtered_ppsId": this.props.ppsIdFilter,
-          "filtered_order_status":this.props.statusFilter,
           "page": page,
           "size": size
-      };
-
+      }
+      if (this.props.ppsIdFilter ){
+          formData["filtered_ppsId"] = this.props.ppsIdFilter 
+      }
+      if (this.props.statusFilter){
+        formData["filtered_order_status"]=this.props.statusFilter)
+      }
+      
 
         saltParams.cut_off_time=cutOffTime
         let params={
@@ -264,7 +247,7 @@ class OrderListTable extends React.Component {
         return timeLeft;
     }
 
-    _processPBTs = (arg, nProps) => {
+    _processPBTs = (nProps) => {
         nProps = this;
         let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = nProps.props.isGroupedById;
@@ -407,7 +390,7 @@ class OrderListTable extends React.Component {
 
     _processOrders = (orderData, nProps) => {
         nProps = this;
-        let formatPbtTime, formatOrderId, formatPpsId, formatBinId, formatProgressBar;
+        let formatOrderId, formatPpsId, formatBinId, formatProgressBar;
 
         let orderDataLen = orderData.length;
         let orderRows = [];
@@ -575,7 +558,7 @@ class OrderListTable extends React.Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         orderFilter: state.sortHeaderState.orderFilter || "",
         orderListSpinner: state.spinner.orderListSpinner || false,

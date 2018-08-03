@@ -717,7 +717,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     "start_date": startDate,
                     "end_date": endDate,
                     "cut_off_time": null,
-                    "page":"1",
+                    "page":"0",
                     "size":"10"
                 };
                 if(filteredPpsId){
@@ -736,8 +736,6 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                     'formdata':formData,
                 }
                 store.dispatch(makeAjaxCall(params));
-                sessionStorage.removeItem("filtered_ppsId");
-                sessionStorage.removeItem("filtered_order_status");
             }
             else{
                 store.dispatch(receiveCutOffTimeData(res));
