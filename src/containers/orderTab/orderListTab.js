@@ -84,7 +84,7 @@ class OrderListTab extends React.Component {
       endDateForOrders: null,
       ppsIdFilterForOrders: null,
       statusFilterForOrders: null,
-      timerId:null
+      timerId: null
     };
   }
 
@@ -162,59 +162,60 @@ class OrderListTab extends React.Component {
       this._viewOrderLine(query.orderId);
       this.props.filterApplied(false);
     }
-    let timeOffset=null
+    let timeOffset = null;
     if (this.props.timeOffset) {
-      timeOffset = this.props.timeOffset
-    }else{
-      timeOffset = ""
+      timeOffset = this.props.timeOffset;
+    } else {
+      timeOffset = "";
     }
-      if (!query.fromDate) {
-        query.fromDate = moment
-          .tz(timeOffset)
-          .startOf("day")
-          .format("YYYY-MM-DD");
-      }
-      if (!query.toDate) {
-        query.toDate = moment
-          .tz(timeOffset)
-          .endOf("day")
-          .format("YYYY-MM-DD");
-      }
-      if (!query.fromTime) {
-        query.fromTime = moment
-          .tz(timeOffset)
-          .startOf("day")
-          .format("HH:mm:ss");
-      }
-      if (!query.toTime) {
-        query.toTime = moment
-          .tz(timeOffset)
-          .endOf("day")
-          .format("HH:mm:ss");
-      }
-    
+    if (!query.fromDate) {
+      query.fromDate = moment
+        .tz(timeOffset)
+        .startOf("day")
+        .format("YYYY-MM-DD");
+    }
+    if (!query.toDate) {
+      query.toDate = moment
+        .tz(timeOffset)
+        .endOf("day")
+        .format("YYYY-MM-DD");
+    }
+    if (!query.fromTime) {
+      query.fromTime = moment
+        .tz(timeOffset)
+        .startOf("day")
+        .format("HH:mm:ss");
+    }
+    if (!query.toTime) {
+      query.toTime = moment
+        .tz(timeOffset)
+        .endOf("day")
+        .format("HH:mm:ss");
+    }
 
     let startDateFilter = moment(
       query.fromDate + " " + query.fromTime
     ).toISOString();
     let endDateFilter = moment(query.toDate + " " + query.toTime).toISOString();
-
-    // Start the backend calls
-    this._reqCutOffTime(
-      startDateFilter,
-      endDateFilter,
-      query.ppsId,
-      query.status
-    );
-    this._reqOrdersFulfillment(startDateFilter, endDateFilter);
-    this._reqOrdersSummary(startDateFilter, endDateFilter);
     this.setState(
       {
         startDateForOrders: startDateFilter,
         endDateForOrders: endDateFilter,
-        statusFilterForOrders: query.status || null,
-        ppsIdFilterForOrders: query.ppsId || null
-      });
+        statusFilterForOrders: query.status,
+        ppsIdFilterForOrders: query.ppsId
+      },
+      () => {
+        // Start the backend calls
+        this._reqCutOffTime(
+          startDateFilter,
+          endDateFilter,
+          query.ppsId,
+          query.status
+        );
+        this._reqOrdersFulfillment(startDateFilter, endDateFilter);
+        this._reqOrdersSummary(startDateFilter, endDateFilter);
+      }
+    );
   }
 
   _setPollingInterval() {
@@ -223,11 +224,13 @@ class OrderListTab extends React.Component {
       let self = this;
       let timerId = 0;
       timerId = setInterval(function() {
-        let query={}
+        let query = {};
         query.startDate = sessionStorage.getItem("startDate");
         query.endDate = sessionStorage.getItem("endDate");
         query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
-        query.filteredOrderStatus = JSON.parse(sessionStorage.getItem("filtered_order_status"));
+        query.filteredOrderStatus = JSON.parse(
+          sessionStorage.getItem("filtered_order_status")
+        );
         self._refreshList(query);
       }, ORDERS_POLLING_INTERVAL);
     } else {
@@ -237,8 +240,6 @@ class OrderListTab extends React.Component {
       }
     }
   }
-
-  
 
   _clearFilter() {
     this.props.filterApplied(false);
@@ -353,13 +354,17 @@ class OrderListTab extends React.Component {
       orderInfo;
 
     let orderDetails = this.props.pbts;
-    let noOfRecords = 0
-    if (orderDetails.length>1){
+    let noOfRecords = 0;
+    if (orderDetails.length > 1) {
       // get the total number of orders filtered
-      noOfRecords = orderDetails.length
-    }else if (orderDetails && orderDetails.length>0 && orderDetails[0].ordersPerPbt){
+      noOfRecords = orderDetails.length;
+    } else if (
+      orderDetails &&
+      orderDetails.length > 0 &&
+      orderDetails[0].ordersPerPbt
+    ) {
       // get the total number of orders filtered
-      noOfRecords = orderDetails[0].ordersPerPbt.totalOrders ||0;
+      noOfRecords = orderDetails[0].ordersPerPbt.totalOrders || 0;
     }
 
     return (
@@ -450,10 +455,14 @@ class OrderListTab extends React.Component {
               isFilterApplied={this.props.isFilterApplied}
               responseFlag={this.props.responseFlag}
               refreshList={this._clearFilter}
-              filterText={<FormattedMessage id="orderlist.filter.search.count"
-                                                          description='total orders for filter search bar'
-                                                          defaultMessage='{total} Records found'
-                                                          values={{total: noOfRecords || 0}}/>}
+              filterText={
+                <FormattedMessage
+                  id="orderlist.filter.search.count"
+                  description="total orders for filter search bar"
+                  defaultMessage="{total} Records found"
+                  values={{ total: noOfRecords || 0 }}
+                />
+              }
               refreshText={
                 <FormattedMessage
                   id="orderlist.filter.search.bar.showall"
@@ -469,8 +478,8 @@ class OrderListTab extends React.Component {
               pbts={this.props.pbts}
               startDate={this.state.startDateForOrders}
               endDate={this.state.endDateForOrders}
-              ppsIdFilter = {this.state.ppsIdFilterForOrders}
-              statusFilter = {this.state.statusFilterForOrders}            
+              ppsIdFilter={this.state.ppsIdFilterForOrders}
+              statusFilter={this.state.statusFilterForOrders}
               intervalIdForCutOffTime={this.state.timerId}
               isFilterApplied={this.props.isFilterApplied}
               enableCollapseAllBtn={this._enableCollapseAllBtn}
