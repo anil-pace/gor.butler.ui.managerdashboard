@@ -187,7 +187,7 @@ class OrderListTable extends React.Component {
           formData["filtered_ppsId"] = this.props.ppsIdFilter 
       }
       if (this.props.statusFilter){
-        formData["filtered_order_status"]=this.props.statusFilter)
+        formData["filtered_order_status"]=this.props.statusFilter
       }
       
 
