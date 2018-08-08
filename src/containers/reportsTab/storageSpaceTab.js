@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { FormattedMessage,injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 
 
@@ -18,6 +18,8 @@ import { STORAGE_SPACE_FETCH, GET, DOWNLOAD_REPORT_REQUEST, APP_JSON, APP_EXCEL 
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
 import { setReportsSpinner } from '../../actions/operationsLogsActions';
+import Dimensions from 'react-dimensions'
+import {withRouter} from 'react-router';
 
 /*Intl Messages*/
 const  messages= defineMessages({
@@ -303,5 +305,5 @@ function mapDispatchToProps(dispatch){
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(StorageSpaceTab);
+export default connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(injectIntl(StorageSpaceTab))));
 
