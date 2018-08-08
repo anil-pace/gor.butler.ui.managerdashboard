@@ -127,7 +127,7 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
-        //moment.locale('zh')
+    
     }
 
     _showAllOrder() {
@@ -153,7 +153,7 @@ class OrderListTable extends React.Component {
         let size="10";
         let need_to_fetch_more=false
         try{
-            need_to_fetch_more=pbtData.ordersPerPbt.order.length < pbtData.ordersPerPbt.totalOrders
+            need_to_fetch_more=pbtData.ordersPerPbt.orders.length < pbtData.ordersPerPbt.totalOrders
         }catch(ex){
 
         }
@@ -161,7 +161,7 @@ class OrderListTable extends React.Component {
 
         if(saltParams.lazyData && need_to_fetch_more){  // Accordion already open and infinite scroll
             try{
-                page=(pbtData.ordersPerPbt.orders.length/size)+1
+                page=(Math.floor(parseInt(pbtData.ordersPerPbt.orders.length,10)/size))+1
                 page=page.toString();
             }catch(ex){
                 page="0"
@@ -169,7 +169,9 @@ class OrderListTable extends React.Component {
         }
         else{
             try{
-                size=pbtData.ordersPerPbt.orders.length
+                size=Math.floor(parseInt(pbtData.ordersPerPbt.orders.length,10))
+                //size cannot be less that 10
+                size=(size<10)?10:size;
                 size = size.toString()
             }catch(ex){
               size = "10"
@@ -183,11 +185,13 @@ class OrderListTable extends React.Component {
           "page": page,
           "size": size
       }
-      if (this.props.ppsIdFilter ){
-          formData["filtered_ppsId"] = this.props.ppsIdFilter 
+
+      //picking from session storage since the below values might need to be parsed from string to array
+      if (sessionStorage.getItem("filtered_ppsId")){
+          formData["filtered_ppsId"] = sessionStorage.getItem("filtered_ppsId")
       }
-      if (this.props.statusFilter){
-        formData["filtered_order_status"]=this.props.statusFilter
+      if (sessionStorage.getItem("filtered_order_status")){
+        formData["filtered_order_status"]=JSON.parse(sessionStorage.getItem("filtered_order_status"))
       }
       
 
@@ -247,14 +251,13 @@ class OrderListTable extends React.Component {
         return timeLeft;
     }
 
-    _processPBTs = (nProps) => {
-        nProps = this;
+    _processPBTs = () => {
         let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
-        let isGroupedById = nProps.props.isGroupedById;
-        pbtData = isGroupedById ? nProps.props.pbts : (nProps.props.pbts[0].ordersPerPbt ? nProps.props.pbts[0].ordersPerPbt.orders : []);
+        let isGroupedById = this.props.isGroupedById;
+        pbtData = isGroupedById ? this.props.pbts : (this.props.pbts[0].ordersPerPbt ? this.props.pbts[0].ordersPerPbt.orders : []);
         let pbtDataLen = pbtData.length; 
         if(pbtDataLen === 0) return false;
-        let timeOffset = nProps.props.timeOffset || "";
+        let timeOffset = this.props.timeOffset || "";
         let pbtRows = []; 
         let processedData = {};
 
@@ -388,14 +391,12 @@ class OrderListTable extends React.Component {
    
     }
 
-    _processOrders = (orderData, nProps) => {
-        nProps = this;
+    _processOrders = (orderData) => {
         let formatOrderId, formatPpsId, formatBinId, formatProgressBar;
-
         let orderDataLen = orderData.length;
         let orderRows = [];
         let processedData = {};
-        let timeOffset = nProps.props.timeOffset || "";
+        let timeOffset = this.props.timeOffset || "";
         if(orderDataLen){
             for(let i=0; i < orderDataLen; i++){
                 let orderRow = [];
@@ -487,7 +488,7 @@ class OrderListTable extends React.Component {
 
     render() {
         var self=this;
-        const processedPbtData = this._processPBTs(this.props.pbts);
+        const processedPbtData = this._processPBTs();
         let isGroupedById = this.props.isGroupedById;
         return (
             <div>
@@ -499,6 +500,7 @@ class OrderListTable extends React.Component {
                                 return isGroupedById ?
                                 (<Accordion 
                                     key={idx}
+                                    index={idx}
                                     pbts={self.props.pbts}
                                     setActivePbt={self.props.setActivePbt}
                                     intervalIdForOrders={self._intervalIdForOrders}
@@ -574,7 +576,7 @@ function mapStateToProps(state) {
         orderFilterState: state.filterInfo.orderFilterState || {},
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        orderListRefreshed: state.ordersInfo.orderListRefreshed,
+        orderListRefreshed: state.orderDetails.orderListRefreshed,
         pageNumber:(state.filterInfo.orderFilterState)? state.filterInfo.orderFilterState.PAGE :1,
         pbts:state.orderDetails.pbts,
         totalPages: state.orderDetails.totalPages,

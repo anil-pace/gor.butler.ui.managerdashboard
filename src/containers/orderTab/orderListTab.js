@@ -63,7 +63,7 @@ import moment from "moment-timezone";
 class OrderListTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this._getInitialState();
+    this.state = this._resetState();
     this.props.showTableFilter(false);
     this._viewOrderLine = this._viewOrderLine.bind(this);
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
@@ -72,7 +72,7 @@ class OrderListTab extends React.Component {
     moment.locale(props.intl.locale);
   }
 
-  _getInitialState() {
+  _resetState() {
     return {
       isPanelOpen: true,
       collapseAllBtnState: true,
@@ -89,7 +89,6 @@ class OrderListTab extends React.Component {
     };
   }
 
-  
   _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
     let formData = {
       start_date: startDate,
@@ -130,7 +129,7 @@ class OrderListTab extends React.Component {
   componentWillMount() {
     this.props.orderListRefreshed();
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
       this.setState({ subscribed: true }, function() {
@@ -150,13 +149,13 @@ class OrderListTab extends React.Component {
         this._refreshList(nextProps.location.query)
       );
     }
-    if (!this.state.timerId && !this.props.isFilterApplied){
-      this._setPolling()
-    }else if (this.props.isFilterApplied && this.state.timerId){
-      clearInterval(this.state.timerId)
+    if (!this.state.timerId && !this.props.isFilterApplied) {
+      this._setPolling();
+    } else if (this.props.isFilterApplied && this.state.timerId) {
+      clearInterval(this.state.timerId);
       this.setState({
-        timerId:null
-      })
+        timerId: null
+      });
     }
   }
 
@@ -223,36 +222,47 @@ class OrderListTab extends React.Component {
   }
 
   _setPolling() {
-      //set interval for polling
-      let self = this;
-      let timerId = 0;
-      timerId = setInterval(function() {
-        let query = {};
-        query.startDate = sessionStorage.getItem("startDate");
-        query.endDate = sessionStorage.getItem("endDate");
-        query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
-        query.filteredOrderStatus = JSON.parse(
-          sessionStorage.getItem("filtered_order_status")
-        );
-        self._refreshList(query);
-      }, ORDERS_POLLING_INTERVAL);
-      self.setState({ timerId: timerId });
+    //set interval for polling
+    let self = this;
+    let timerId = 0;
+    timerId = setInterval(function() {
+      let query = {};
+      query.startDate = sessionStorage.getItem("startDate");
+      query.endDate = sessionStorage.getItem("endDate");
+      query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
+      query.filteredOrderStatus = JSON.parse(
+        sessionStorage.getItem("filtered_order_status")
+      );
+      self._refreshList(query);
+    }, ORDERS_POLLING_INTERVAL);
+    self.setState({ timerId: timerId });
   }
 
   _clearFilter() {
     this.props.filterApplied(false);
-    if (!this.state.timerId){
-      this._setPolling()
-    }    
     hashHistory.push({ pathname: "/orders", query: {} });
-    this._refreshList(this.state.query);
+    sessionStorage.removeItem("filtered_ppsId");
+    sessionStorage.removeItem("filtered_order_status");
+    this.props.orderfilterState({
+      tokenSelected: {
+          "ORDER TAGS": ["any"],
+          "STATUS": ["any"]
+      },
+      searchQuery: {ORDER_ID: '', PPS_ID: ''},
+    });
+    this.setState(this._resetState(), () => {
+      if (!this.state.timerId) {
+        this._setPolling();
+      }
+      this._refreshList(this.state.query);
+    });
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.timerId)
+    clearInterval(this.state.timerId);
     this.setState({
-      timerId:null
-    })
+      timerId: null
+    });
   }
 
   _subscribeData() {
@@ -282,7 +292,7 @@ class OrderListTab extends React.Component {
 
   _viewOrderLine = orderId => {
     modal.add(ViewOrderLine, {
-     orderId: orderId,
+      orderId: orderId,
       title: "",
       size: "large",
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -492,9 +502,14 @@ class OrderListTab extends React.Component {
           )}
           {!this.props.orderListSpinner &&
             this.props.pbts.length === 0 && (
-              <div className="noOrdersPresent">  <FormattedMessage id="orders.noOrders.noOrders" 
-                                description="display no orders" 
-                                defaultMessage="No orders available"/> </div>
+              <div className="noOrdersPresent">
+                {" "}
+                <FormattedMessage
+                  id="orders.noOrders.noOrders"
+                  description="display no orders"
+                  defaultMessage="No orders available"
+                />{" "}
+              </div>
             )}
           {this.props.orderListSpinner && <div className="noOrdersPresent" />}
         </div>
@@ -517,11 +532,10 @@ function mapStateToProps(state, ownProps) {
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus: state.filterInfo.orderFilterStatus,
-    orderFilterState: state.filterInfo.orderFilterState || {},
     wsSubscriptionData:
       state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     socketAuthorized: state.recieveSocketActions.socketAuthorized,
-    orderListRefreshed: state.ordersInfo.orderListRefreshed,
+    orderListRefresh: state.orderDetails.orderListRefreshed,
     pageNumber: state.filterInfo.orderFilterState
       ? state.filterInfo.orderFilterState.PAGE
       : 1,
@@ -607,8 +621,6 @@ OrderListTab.PropTypes = {
   showTableFilter: React.PropTypes.func,
   filterApplied: React.PropTypes.func,
   orderFilterStatus: React.PropTypes.bool,
-  orderFilterState: React.PropTypes.object,
-
   orderFulfilment: React.PropTypes.object,
   orderSummary: React.PropTypes.object,
   pbts: React.PropTypes.array,

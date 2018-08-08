@@ -35,13 +35,15 @@ export  function orderDetails(state={},action){
       }else{
       pbts_data.map(function(pbt,index){
         if(state.pbts && state.pbts[index]){
-          pbt.opened=state.pbts[index].opened;  
+          pbt.opened=false
           pbt.ordersPerPbt=state.pbts[index].ordersPerPbt;
         }
       })
+      let activePbtIndex=null;
+      activePbtIndex =Number.isInteger(action.data.activeIndex)?action.data.activeIndex:null;
         return Object.assign({}, state, {
           pbts: pbts_data,
-          activePbtIndex:state.activePbtIndex||null,
+          activePbtIndex:activePbtIndex,
           isGroupedById: true
         });  
       }
@@ -52,15 +54,19 @@ export  function orderDetails(state={},action){
     case TOGGLE_ACTIVE_PBT:
       let target_cut_off_time_2=action.data.pbt.cut_off_time
       let pbts=state.pbts;
+      let activePbtIndex=null;
       pbts.map(function(pbt, idx){
           if(pbt.cut_off_time === target_cut_off_time_2){
             pbt.opened=!pbt.opened;
+            if (pbt.opened){
+            activePbtIndex =Number.isInteger(action.data.activeIndex)?action.data.activeIndex:null;
+          }
           }
           return pbt
       })
-      
+     
       return Object.assign({}, state, {
-        activePbtIndex: action.data.index || null,
+        activePbtIndex: activePbtIndex,
         pbts:pbts
       });
       break;
@@ -85,10 +91,11 @@ export  function orderDetails(state={},action){
 
       let expected_pbts=[{}]; // create one empty pbt list...which is mandatory as per our json structure
       if(state.pbts && state.pbts.length>1){
-        expected_pbts = state.pbts.map(function(pbt, idx){
+          expected_pbts = state.pbts.map(function(pbt, idx){
           if(pbt.cut_off_time===target_cut_off_time){
             if(res.serviceRequests.constructor === Array && res.serviceRequests.length>0){
               let ordersData = isLazyData? pbt.ordersPerPbt.orders.concat(res.serviceRequests):res.serviceRequests;
+              pbt["opened"] = false;
               pbt.ordersPerPbt={
                   "orders": ordersData,
                   "isInfiniteLoading":false,
@@ -103,6 +110,8 @@ export  function orderDetails(state={},action){
       }
       else{
           if(res.serviceRequests.constructor === Array && res.serviceRequests.length>0){
+            expected_pbts[0]["cut_off_time"]=target_cut_off_time;
+            expected_pbts[0]["opened"] = false;
             expected_pbts[0].ordersPerPbt={
                   "orders": res.serviceRequests,
                   "isInfiniteLoading":false,
@@ -113,7 +122,9 @@ export  function orderDetails(state={},action){
               }
           }
       }
-      
+      if (Number.isInteger(state.activePbtIndex) && expected_pbts[state.activePbtIndex]){
+          expected_pbts[state.activePbtIndex].opened = true
+      }
       return Object.assign({},state,{
         pbts: expected_pbts
       });
