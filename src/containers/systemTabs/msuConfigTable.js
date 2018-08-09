@@ -101,27 +101,27 @@ class MsuConfigTable extends React.Component {
     }
 
     _changeDestinationType(id){
-        let msuList = this.props.msuList;
-        let rackType = null;
-        for(let i=0,len=msuList.length; i<len;i++){
-            if(msuList[i].id === id){
-                rackType = msuList[i].racktype;
-                break;
+            let msuList = this.props.msuList;
+            let rackType = null;
+            for(let i=0,len=msuList.length; i<len;i++){
+                if(msuList[i].id === id){
+                    rackType = msuList[i].racktype;
+                    break;
+                }
             }
+            
+            modal.add(ChangeRackType, {
+                msuList: this.props.msuList,
+                rackType: rackType,
+                blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
+                title: '',
+                id,
+                size: 'large', // large, medium or small,
+                closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+                hideCloseButton: true // (optional) if you don't wanna show the top right close button
+                //.. all what you put in here you will get access in the modal props ;),
+            });
         }
-        
-        modal.add(ChangeRackType, {
-            msuList: this.props.msuList,
-            rackType: rackType,
-            blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
-            title: '',
-            id,
-            size: 'large', // large, medium or small,
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true // (optional) if you don't wanna show the top right close button
-            //.. all what you put in here you will get access in the modal props ;),
-        });
-    }
 
     _processMSUs = (destType) => {
         let msuData = this.props.msuList;
