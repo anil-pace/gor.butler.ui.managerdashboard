@@ -63,15 +63,16 @@ import moment from "moment-timezone";
 class OrderListTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this._getInitialState();
-
+    this.state = this._resetState();
+    this.props.showTableFilter(false);
     this._viewOrderLine = this._viewOrderLine.bind(this);
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
+    this._setPolling = this._setPolling.bind(this);
     this._clearFilter = this._clearFilter.bind(this);
     moment.locale(props.intl.locale);
   }
 
-  _getInitialState() {
+  _resetState() {
     return {
       isPanelOpen: true,
       collapseAllBtnState: true,
@@ -86,16 +87,6 @@ class OrderListTab extends React.Component {
       statusFilterForOrders: null,
       timerId: null
     };
-  }
-
-  componentDidMount() {
-    this.props.setOrderListSpinner(true);
-    this.props.filterApplied(false);
-  }
-
-  _clearPolling() {
-    clearInterval(this._intervalIdForCutOffTime);
-    this._intervalIdForCutOffTime = null;
   }
 
   _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
@@ -135,6 +126,9 @@ class OrderListTab extends React.Component {
 
     this.props.makeAjaxCall(params);
   }
+  componentWillMount() {
+    this.props.orderListRefreshed();
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
@@ -155,9 +149,18 @@ class OrderListTab extends React.Component {
         this._refreshList(nextProps.location.query)
       );
     }
+    if (!this.state.timerId && !this.props.isFilterApplied) {
+      this._setPolling();
+    } else if (this.props.isFilterApplied && this.state.timerId) {
+      clearInterval(this.state.timerId);
+      this.setState({
+        timerId: null
+      });
+    }
   }
 
   _refreshList(query) {
+    this.props.setOrderListSpinner(true);
     if (query.orderId) {
       this._viewOrderLine(query.orderId);
       this.props.filterApplied(false);
@@ -218,37 +221,48 @@ class OrderListTab extends React.Component {
     );
   }
 
-  _setPollingInterval() {
-    if (!this.props.isFilterApplied) {
-      //set interval for polling
-      let self = this;
-      let timerId = 0;
-      timerId = setInterval(function() {
-        let query = {};
-        query.startDate = sessionStorage.getItem("startDate");
-        query.endDate = sessionStorage.getItem("endDate");
-        query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
-        query.filteredOrderStatus = JSON.parse(
-          sessionStorage.getItem("filtered_order_status")
-        );
-        self._refreshList(query);
-      }, ORDERS_POLLING_INTERVAL);
-    } else {
-      //if filter is applied clear polling
-      if (this._intervalIdForCutOffTime) {
-        this._clearPolling();
-      }
-    }
+  _setPolling() {
+    //set interval for polling
+    let self = this;
+    let timerId = 0;
+    timerId = setInterval(function() {
+      let query = {};
+      query.startDate = sessionStorage.getItem("startDate");
+      query.endDate = sessionStorage.getItem("endDate");
+      query.filteredPpsId = sessionStorage.getItem("filtered_ppsId");
+      query.filteredOrderStatus = JSON.parse(
+        sessionStorage.getItem("filtered_order_status")
+      );
+      self._refreshList(query);
+    }, ORDERS_POLLING_INTERVAL);
+    self.setState({ timerId: timerId });
   }
 
   _clearFilter() {
     this.props.filterApplied(false);
     hashHistory.push({ pathname: "/orders", query: {} });
-    this._refreshList(this.state.query);
+    sessionStorage.removeItem("filtered_ppsId");
+    sessionStorage.removeItem("filtered_order_status");
+    this.props.orderfilterState({
+      tokenSelected: {
+          "ORDER TAGS": ["any"],
+          "STATUS": ["any"]
+      },
+      searchQuery: {ORDER_ID: '', PPS_ID: ''},
+    });
+    this.setState(this._resetState(), () => {
+      if (!this.state.timerId) {
+        this._setPolling();
+      }
+      this._refreshList(this.state.query);
+    });
   }
 
   componentWillUnmount() {
-    this._clearPolling();
+    clearInterval(this.state.timerId);
+    this.setState({
+      timerId: null
+    });
   }
 
   _subscribeData() {
@@ -278,7 +292,6 @@ class OrderListTab extends React.Component {
 
   _viewOrderLine = orderId => {
     modal.add(ViewOrderLine, {
-      startPolling: this._restartPolling,
       orderId: orderId,
       title: "",
       size: "large",
@@ -489,7 +502,14 @@ class OrderListTab extends React.Component {
           )}
           {!this.props.orderListSpinner &&
             this.props.pbts.length === 0 && (
-              <div className="noOrdersPresent"> No orders available </div>
+              <div className="noOrdersPresent">
+                {" "}
+                <FormattedMessage
+                  id="orders.noOrders.noOrders"
+                  description="display no orders"
+                  defaultMessage="No orders available"
+                />{" "}
+              </div>
             )}
           {this.props.orderListSpinner && <div className="noOrdersPresent" />}
         </div>
@@ -512,11 +532,10 @@ function mapStateToProps(state, ownProps) {
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     orderFilterStatus: state.filterInfo.orderFilterStatus,
-    orderFilterState: state.filterInfo.orderFilterState || {},
     wsSubscriptionData:
       state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     socketAuthorized: state.recieveSocketActions.socketAuthorized,
-    orderListRefreshed: state.ordersInfo.orderListRefreshed,
+    orderListRefresh: state.orderDetails.orderListRefreshed,
     pageNumber: state.filterInfo.orderFilterState
       ? state.filterInfo.orderFilterState.PAGE
       : 1,
@@ -602,8 +621,6 @@ OrderListTab.PropTypes = {
   showTableFilter: React.PropTypes.func,
   filterApplied: React.PropTypes.func,
   orderFilterStatus: React.PropTypes.bool,
-  orderFilterState: React.PropTypes.object,
-
   orderFulfilment: React.PropTypes.object,
   orderSummary: React.PropTypes.object,
   pbts: React.PropTypes.array,
