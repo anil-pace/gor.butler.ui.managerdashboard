@@ -27,8 +27,11 @@ class Accordion extends React.Component {
     if (!pbtData.opened) {
       this.props.setOrderListSpinner(true);
       this.props.getOrderPerPbt(pbtData);
+      this.props.setActivePbt({ pbt: pbtData, activeIndex :this.props.index });
+    }else{
+      this.props.setActivePbt({ pbt: pbtData, activeIndex :null });
     }
-    this.props.setActivePbt({ pbt: pbtData, activeIndex :this.props.index });
+    
   }
 
   render() {
