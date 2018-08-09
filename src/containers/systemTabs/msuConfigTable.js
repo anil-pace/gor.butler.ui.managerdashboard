@@ -100,20 +100,29 @@ class MsuConfigTable extends React.Component {
         this.props.blockPutAndChangeTypeCallback();
     }
 
-    _changeDestinationType(index){
-        let getRackType = this.props.msuList[index].racktype;
-        //let getSourceType = this.props.msuList[index].racktype;
+    _changeDestinationType(id){
+        let msuList = this.props.msuList;
+        let rackType = null;
+        for(let i=0,len=msuList.length; i<len;i++){
+            if(msuList[i].id === id){
+                rackType = msuList[i].racktype;
+                break;
+            }
+        }
+        
         modal.add(ChangeRackType, {
             msuList: this.props.msuList,
-            rackType: getRackType,
+            rackType: rackType,
             blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
             title: '',
+            id,
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true // (optional) if you don't wanna show the top right close button
             //.. all what you put in here you will get access in the modal props ;),
         });
     }
+
 
     _processMSUs = (destType) => {
         let msuData = this.props.msuList;
@@ -168,8 +177,8 @@ class MsuConfigTable extends React.Component {
                                     </div>);
 
 
-                    msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(i)}>
+                    msuRow.push(<div key={msuData[i].id} style={{textAlign:"center"}}>
+                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].id)}>
                             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
                         </button>
                     </div>);

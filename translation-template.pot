@@ -3273,14 +3273,11 @@ msgstr ""
         msgid "Show all Orders"
         msgstr ""
 
-<<<<<<< HEAD
         #: orders.noOrders.noOrders
         msgctxt "orders.noOrders.noOrders"
         msgid "No orders available"
         msgstr ""
 
-=======
->>>>>>> 144c5ee... BSS-9582 [MD] - Order data not displayed
         #: orderList.inProgress.status
         msgctxt "orderList.inProgress.status"
         msgid "In progress"
@@ -3341,7 +3338,6 @@ msgstr ""
         msgid "ago"
         msgstr ""
 
-<<<<<<< HEAD
         #: orders.order.today
         msgctxt "orders.order.today"
         msgid "Today"
@@ -3357,8 +3353,6 @@ msgstr ""
         msgid "Yesterday"
         msgstr ""
 
-=======
->>>>>>> 144c5ee... BSS-9582 [MD] - Order data not displayed
         #: orders.view.orderLines
         msgctxt "orders.view.orderLines"
         msgid "VIEW ORDERLINES"
@@ -3389,14 +3383,6 @@ msgstr ""
         msgid "{current} of {total} products picked"
         msgstr ""
 
-<<<<<<< HEAD
-=======
-        #: orders.noOrders.noOrders
-        msgctxt "orders.noOrders.noOrders"
-        msgid "No orders available"
-        msgstr ""
-
->>>>>>> 144c5ee... BSS-9582 [MD] - Order data not displayed
         #: orders.fulfil.noProducts
         msgctxt "orders.fulfil.noProducts"
         msgid "No products to be picked"
@@ -5662,8 +5648,4 @@ msgstr ""
         msgid "{itemCount} expired items recalled"
         msgstr ""
 
-<<<<<<< HEAD
         
-=======
-        
->>>>>>> 144c5ee... BSS-9582 [MD] - Order data not displayed
