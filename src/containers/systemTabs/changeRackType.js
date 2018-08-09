@@ -78,7 +78,7 @@ class ChangeRackType extends React.Component {
 
     _blockPutAndChangeType(){
         let formData={         
-            "rack_id":this.props.msuList[0].id, // 0 is for currently filtered msulist
+            "rack_id":this.props.id, // 0 is for currently filtered msulist
             "destination_type":this.state.destType
         };
 
