@@ -167,7 +167,7 @@ export  function auditInfo(state={},action){
   }
 }
 
-function processValidationDataSKU(data,param,includeExpiry,audit_name){
+function processValidationDataSKU(data,param,includeExpiry,audit_Name){
   let finalArr=[],outerObj={}
   var processedData=[],
   skuList = data.sku_list,
@@ -213,7 +213,7 @@ for(let a=0,len=attrSet.length;a<len;a++){
   outerObj[attrSet[a].sku]=obj2;
 }
 kq=data.kq;
-audit_name=data.audit_param_name||"Raja";
+audit_name=data.audit_param_name||"";
 
 }
 
@@ -229,7 +229,7 @@ audit_name=data.audit_param_name||"Raja";
     tuple.status = status[statusList[i]];
     totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
     totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
-    audit_name=name||"";  
+    audit_name=audit_Name||"";  
   }
     let attributeList = attList[i];
     let categoryList = [];
