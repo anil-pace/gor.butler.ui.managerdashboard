@@ -102,7 +102,8 @@ export  function auditInfo(state={},action){
           })
           
     case VALIDATED_ATTIBUTES_DATA_SKU:
-        let processedDataSKU = processValidationDataSKU(action.data,null,action.includeExpiry)
+    let audit_name=state.auditEditData.audit_name;
+        let processedDataSKU = processValidationDataSKU(action.data,null,action.includeExpiry,audit_name);
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
             "hasDataChanged":!state.hasDataChanged,
@@ -166,7 +167,7 @@ export  function auditInfo(state={},action){
   }
 }
 
-function processValidationDataSKU(data,param,includeExpiry){
+function processValidationDataSKU(data,param,includeExpiry,audit_name){
   let finalArr=[],outerObj={}
   var processedData=[],
   skuList = data.sku_list,
@@ -212,7 +213,7 @@ for(let a=0,len=attrSet.length;a<len;a++){
   outerObj[attrSet[a].sku]=obj2;
 }
 kq=data.kq;
-audit_name=data.audit_param_name||"";
+audit_name=data.audit_param_name||"Raja";
 
 }
 
@@ -228,7 +229,8 @@ audit_name=data.audit_param_name||"";
     tuple.status = status[statusList[i]];
     totalValid = (tuple.status.constructor === Boolean) ? (totalValid+1) : totalValid;
     totalInvalid = (tuple.status.constructor !== Boolean) ? (totalInvalid+1) : totalInvalid;
-    }
+    audit_name=name||"";  
+  }
     let attributeList = attList[i];
     let categoryList = [];
     for(let key in attributeList){
@@ -251,7 +253,7 @@ audit_name=data.audit_param_name||"";
     processedData.push(tuple)
     
   }
- 
+
   return {
    data:processedData,
     totalValid,
