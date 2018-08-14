@@ -422,6 +422,7 @@ class ValidateSelAtt extends React.Component{
                {copyPasteData.data.map((tuple,i)=>{
                     let tuples=[],
                     attributeList = self.props.skuAttributes.data[i].attributeList;
+
                     if(tuple.visible){
                     tuples.push(<div className={allTuplesValid ? "gor-valid-row" : "gor-valid-row has-error"} key={tuple.value+i}>
                         <InputComponent.AfterValidation
@@ -429,6 +430,7 @@ class ValidateSelAtt extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart={self.state.copyPasteData.selectionStart}
                         allRowValid={allTuplesValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
