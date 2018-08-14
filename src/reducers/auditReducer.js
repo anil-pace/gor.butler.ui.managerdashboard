@@ -102,7 +102,7 @@ export  function auditInfo(state={},action){
           })
           
     case VALIDATED_ATTIBUTES_DATA_SKU:
-    let audit_name=state.auditEditData.audit_name;
+    let audit_name= state.auditEditData ? state.auditEditData.audit_name : null;
         let processedDataSKU = processValidationDataSKU(action.data,null,action.includeExpiry,audit_name);
        return Object.assign({}, state, { 
             "skuAttributes" : processedDataSKU,
