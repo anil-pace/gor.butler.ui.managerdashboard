@@ -80,10 +80,6 @@ auditTask: {
   id: "viewDetais.audit.audittask",
   defaultMessage: "in this Audit task"
 },
-noDataToShow: {
-  id: "viewDetais.audit.nodatashow",
-  defaultMessage: "No data to show"
-},
 vdhCreatedBy: {
   id: "viewDetais.createdby.status",
   defaultMessage: "Created By"
@@ -347,7 +343,6 @@ return tableData;
     let vdSearchBySKU = this.context.intl.formatMessage(messages.vdSearchBySKU);
     let vdChangePPS = this.context.intl.formatMessage(messages.vdChangePPS);
     let auditTask = this.context.intl.formatMessage(messages.auditTask);
-    let noDataToShow = this.context.intl.formatMessage(messages.noDataToShow);
     let allData=this.props.auditDetails;
     let tiledata=this._processDataTile(allData);
     let attributeData= this.state.items;
@@ -390,7 +385,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {this.props.auditDetails.change_pps_button!=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button==='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
@@ -436,7 +431,7 @@ return tableData;
                   
                </GTable>
 
-            </div>:<div>{noDataToShow}</div>}
+            </div>
 
          </div>
       );
