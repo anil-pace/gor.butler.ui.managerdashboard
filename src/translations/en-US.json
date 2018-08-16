@@ -3423,11 +3423,6 @@
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
-    "id": "viewDetais.audit.nodatashow",
-    "defaultMessage": "No data to show",
-    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
-  },
-  {
     "id": "viewDetais.createdby.status",
     "defaultMessage": "Created By",
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"

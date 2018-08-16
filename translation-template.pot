@@ -2638,11 +2638,6 @@ msgstr ""
         msgid "in this Audit task"
         msgstr ""
 
-        #: viewDetais.audit.nodatashow
-        msgctxt "viewDetais.audit.nodatashow"
-        msgid "No data to show"
-        msgstr ""
-
         #: viewDetais.createdby.status
         msgctxt "viewDetais.createdby.status"
         msgid "Created By"
