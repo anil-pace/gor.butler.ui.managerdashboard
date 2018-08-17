@@ -5,8 +5,6 @@
 import React  from 'react';
 import { FormattedMessage,injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
-import Dimensions from 'react-dimensions';
-
 
 import Spinner from '../../components/spinner/Spinner';
 import Dropdown from '../../components/gor-dropdown-component/dropdown';
