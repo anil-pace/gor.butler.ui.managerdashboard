@@ -30,7 +30,11 @@ class FileUpload extends React.Component {
         this.setState({
           errorCode: UTILITY001
         });
-        return;
+      }
+      else{
+        this.setState({
+          errorCode: null
+        });
       }
     }
     this.props.onChange(event.target.files[0]);
