@@ -25,15 +25,22 @@ class FileUpload extends React.Component {
   }
 
   _onFileChange(event) {
-    for (let i = 0; i < event.target.files.length; i++) {
-      if (event.target.files[i].size > this.props.maxFileSize) {
+     var totalFileSize = 0;
+     for (let i = 0; i < event.target.files.length; i++) {
+        totalFileSize = totalFileSize + event.target.files[i].size;
+        this.props.onChange(event.target.files[i]);
+     }
+
+     if (totalFileSize > this.props.maxFileSize) {
         this.setState({
           errorCode: UTILITY001
         });
-        return;
       }
-    }
-    this.props.onChange(event.target.files[0]);
+      else{
+        this.setState({
+          errorCode: null
+        });
+      }
   }
 
   _onInputClick() {
