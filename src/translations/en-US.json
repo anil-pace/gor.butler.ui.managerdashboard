@@ -626,55 +626,55 @@
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language",
-    "filepath": "./src/components/login/login.js"
+    "filepath": "./src/components/Login/login.js"
   },
   {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.username",
     "description": "Text for missing username error",
     "defaultMessage": "Please enter your username",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.password",
     "description": "Text for missing password error",
     "defaultMessage": "Please enter your password",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.form.username",
     "description": "Placeholder text for username",
     "defaultMessage": "Username",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.password",
     "description": "Placeholder text for password",
     "defaultMessage": "Password",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.button",
     "description": "Text for button",
     "defaultMessage": "Login",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "pps.dropdown.placeholder",
     "description": "placeholder for pps mode change",
     "defaultMessage": "Change PPS mode",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
     "defaultMessage": "Filter by keywords",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "notifications.read.message",
@@ -4247,6 +4247,12 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
+    "id": "orders.noOrders.noOrders",
+    "description": "display no orders",
+    "defaultMessage": "No orders available",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
     "id": "orderList.inProgress.status",
     "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
@@ -4316,6 +4322,24 @@
     "id": "orders.order.ago",
     "description": "ago",
     "defaultMessage": "ago",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.today",
+    "description": "Today",
+    "defaultMessage": "Today",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.tomorrow",
+    "description": "tomorrow",
+    "defaultMessage": "Tomorrow",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.yesterday",
+    "description": "yesterday",
+    "defaultMessage": "Yesterday",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {

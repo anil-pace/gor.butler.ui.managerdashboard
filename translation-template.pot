@@ -3268,6 +3268,11 @@ msgstr ""
         msgid "Show all Orders"
         msgstr ""
 
+        #: orders.noOrders.noOrders
+        msgctxt "orders.noOrders.noOrders"
+        msgid "No orders available"
+        msgstr ""
+
         #: orderList.inProgress.status
         msgctxt "orderList.inProgress.status"
         msgid "In progress"
@@ -3328,6 +3333,21 @@ msgstr ""
         msgid "ago"
         msgstr ""
 
+        #: orders.order.today
+        msgctxt "orders.order.today"
+        msgid "Today"
+        msgstr ""
+
+        #: orders.order.tomorrow
+        msgctxt "orders.order.tomorrow"
+        msgid "Tomorrow"
+        msgstr ""
+
+        #: orders.order.yesterday
+        msgctxt "orders.order.yesterday"
+        msgid "Yesterday"
+        msgstr ""
+
         #: orders.view.orderLines
         msgctxt "orders.view.orderLines"
         msgid "VIEW ORDERLINES"
@@ -3356,11 +3376,6 @@ msgstr ""
         #: orders.inProgress.status
         msgctxt "orders.inProgress.status"
         msgid "{current} of {total} products picked"
-        msgstr ""
-
-        #: orders.noOrders.noOrders
-        msgctxt "orders.noOrders.noOrders"
-        msgid "No orders available"
         msgstr ""
 
         #: orders.fulfil.noProducts
