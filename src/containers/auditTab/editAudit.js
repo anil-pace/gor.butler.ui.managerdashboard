@@ -341,7 +341,7 @@ _onAttributeSelectionFirstTime(){
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status ? (data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
+      tuple.errorMessage = data[i].status ? (data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
 
       processedData.push(tuple);
     }
@@ -357,7 +357,7 @@ _onAttributeSelectionFirstTime(){
       tuple.visible=true;
       tuple.value=data[i].name;
       let error_code = data[i].status===true ? "" :data[i].status.error_code;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
       processedData.push(tuple);
       if(children){
       for(let j=0;j<children.length ;j++){
@@ -366,7 +366,7 @@ _onAttributeSelectionFirstTime(){
         child.index=j;
         child.value=children[j].name;
         let error_code = children[j].status===true ? "" : children[j].status.error_code;
-        child.errorMessage = children[j].status===true ? children[j].status : this.props.intl.formatMessage(messages[error_code]);
+        child.errorMessage = children[j].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
         processedData.push(child);
       }
     }
@@ -609,7 +609,8 @@ _onAttributeSelectionFirstTime(){
       index:stateInputList.length,
       value:"",
       visible:true,
-      errorMessage:true
+      errorMessage:"",
+      manualEntry:true
     }
     stateInputList.push(tuple);
     if(type === "location"){
@@ -752,7 +753,7 @@ _onAttributeSelectionFirstTime(){
           processedData.push(tuple);
         }
         else if(selection === "select_all_valid"){
-          if(tuple.errorMessage.constructor === Boolean){
+          if(tuple.errorMessage === ""){
             tuple.checked = true;
           }
           else{
@@ -761,7 +762,7 @@ _onAttributeSelectionFirstTime(){
           processedData.push(tuple);
         }
         else if(selection === "select_all_invalid"){
-          if(tuple.errorMessage.constructor !== Boolean){
+          if(tuple.errorMessage !== ""){
             tuple.checked = true;
             
           }
@@ -832,7 +833,7 @@ _onAttributeSelectionFirstTime(){
     _parseCSVFile(fileObject){
     
     var _this =this;
-    var textType = /(text.*|vnd.ms-excel)/; 
+    var textType = /(text.*|vnd.ms-excel)/;
     var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
       if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
@@ -846,7 +847,7 @@ _onAttributeSelectionFirstTime(){
             tuple.index=i;
             tuple.value=data[i];
             tuple.visible=true;
-            tuple.errorMessage = true;
+            tuple.errorMessage = "";
             processedList.push(tuple);
 
            }
@@ -1204,7 +1205,9 @@ _onAttributeSelectionFirstTime(){
                         selectionStart = {self.state.copyPasteSKU.selectionStart}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
+                        key={tuple.value}
+                        manualEntry={tuple.manualEntry}
+                        errorMessage={!allSKUsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
@@ -1375,11 +1378,13 @@ _onAttributeSelectionFirstTime(){
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        key={tuple.value}
+                        manualEntry={tuple.manualEntry}
                         allRowValid={allLocationsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
                         selectionStart = {self.state.copyPasteLocation.selectionStart}
-                        errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
+                        errorMessage={!allLocationsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>)
                   }
@@ -1388,7 +1393,7 @@ _onAttributeSelectionFirstTime(){
                     return(tuples) 
               })}
             <div>
-            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
+            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={()=>this._addNewInput('location')}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
                         </div>
                         
