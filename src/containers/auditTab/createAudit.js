@@ -257,7 +257,7 @@ class CreateAudit extends React.Component{
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
       processedData.push(tuple);
     }
     return processedData
@@ -272,7 +272,7 @@ class CreateAudit extends React.Component{
       tuple.visible=true;
       tuple.value=data[i].name;
       let error_code = data[i].status===true ? "" :data[i].status.error_code;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
       processedData.push(tuple);
       if(children){
       for(let j=0;j<children.length ;j++){
@@ -281,7 +281,7 @@ class CreateAudit extends React.Component{
         child.index=j;
         child.value=children[j].name;
         let error_code = children[j].status===true ? "" : children[j].status.error_code;
-        child.errorMessage = children[j].status===true ? children[j].status : this.props.intl.formatMessage(messages[error_code]);
+        child.errorMessage = children[j].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
         processedData.push(child);
       }
     }
@@ -492,7 +492,7 @@ class CreateAudit extends React.Component{
       index:stateInputList.length,
       value:"",
       visible:true,
-      errorMessage:true
+      manualEntry: true
     }
     stateInputList.push(tuple);
     if(type === "location"){
@@ -635,7 +635,7 @@ class CreateAudit extends React.Component{
           processedData.push(tuple);
         }
         else if(selection === "select_all_valid"){
-          if(tuple.errorMessage.constructor === Boolean){
+          if(tuple.errorMessage ===""){
             tuple.checked = true;
           }
           else{
@@ -644,7 +644,7 @@ class CreateAudit extends React.Component{
           processedData.push(tuple);
         }
         else if(selection === "select_all_invalid"){
-          if(tuple.errorMessage.constructor !== Boolean){
+          if(tuple.errorMessage !== ""){
             tuple.checked = true;
             
           }
@@ -729,7 +729,7 @@ class CreateAudit extends React.Component{
             tuple.index=i;
             tuple.value=data[i];
             tuple.visible=true;
-            tuple.errorMessage = true;
+            tuple.errorMessage = "";
             processedList.push(tuple);
 
            }
@@ -1086,11 +1086,13 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        key={tuple.value+i}
+                        manualEntry={tuple.manualEntry}
                         selectionStart = {self.state.copyPasteSKU.selectionStart}
                         allRowValid={allSKUsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
+                        errorMessage={!allSKUsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditskuinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
@@ -1235,11 +1237,13 @@ class CreateAudit extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        key={tuple.value+i}
+                        manualEntry={tuple.manualEntry}
                         selectionStart = {self.state.copyPasteLocation.selectionStart}
                         allRowValid={allLocationsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
+                        errorMessage={!allLocationsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditlocationinputplaceholder)}/>
                       </div>)
                   }
