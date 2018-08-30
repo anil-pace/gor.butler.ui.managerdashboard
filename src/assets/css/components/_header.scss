@@ -108,6 +108,7 @@
 		.logoWrap{
 			display: inline-block;
 			padding-right:10px;
+			padding-left: 10px;
 		}
 		.logo {
 			display: inline-block; 
@@ -134,7 +135,7 @@
 			.mainBlock {
 				display: inline-block;
 				overflow: hidden;
-    			padding: calculateRem(5px) 0;			
+    			padding: calculateRem(3px) 0;			
 			}
 
 			.blockSystem {
