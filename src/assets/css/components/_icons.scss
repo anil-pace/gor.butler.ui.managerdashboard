@@ -49,7 +49,8 @@
 }
 .fk-logo,
 .gor-logo{
-    background-image: url(./images/Logos.svg);
+    background-image: url(./images/GO_Orange_Black_Horizontal.svg);
+    background-size: 100%;
 }
 .WARNING-Biggericon,.ERROR-Biggericon,.INFO-Biggericon,
 .WARNING-icon,.INFO-icon,.ERROR-icon{
@@ -109,18 +110,17 @@
     margin-right:10px;
 }
 .alt-gor-logo{
-    background-image: url(./images/Logos.svg);    
+    background-image: url(./images/GO_White_Horizontal.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;   
 }
 .alt-gor-logo{
-    background-position:-182px -1px;
-    width:235px;
-    height:25px;
+    width: 243px;
+    height: 62px;
 }
 .gor-logo{
-    background-position: 11px -117px;
-    width: 173px;
-    padding: 10px;
-    
+    width: 120px;
+    padding: 19px;
 }
 .fk-logo{
     background-position: 3px -138px;
