@@ -184,7 +184,8 @@ body {
 
 .fk-logo,
 .gor-logo {
-  background-image: url(./images/Logos.svg);
+  background-image: url(./images/GO_Orange_Black_Horizontal.svg);
+  background-size: 100%;
 }
 
 .WARNING-Biggericon, .ERROR-Biggericon, .INFO-Biggericon,
@@ -260,19 +261,19 @@ body {
 }
 
 .alt-gor-logo {
-  background-image: url(./images/Logos.svg);
+  background-image: url(./images/GO_White_Horizontal.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .alt-gor-logo {
-  background-position: -182px -1px;
-  width: 235px;
-  height: 25px;
+  width: 243px;
+  height: 62px;
 }
 
 .gor-logo {
-  background-position: 11px -117px;
-  width: 173px;
-  padding: 10px;
+  width: 120px;
+  padding: 19px;
 }
 
 .fk-logo {
@@ -1089,6 +1090,7 @@ body {
 .gorHeader .logoWrap {
   display: inline-block;
   padding-right: 10px;
+  padding-left: 10px;
 }
 
 .gorHeader .logo {
@@ -1116,7 +1118,7 @@ body {
 .gorHeader .mainBlock {
   display: inline-block;
   overflow: hidden;
-  padding: 0.3125rem 0;
+  padding: 0.1875rem 0;
 }
 
 .gorHeader .blockSystem {
@@ -1775,7 +1777,7 @@ body {
 
 .gor-login-form .gor-login-logo {
   margin: auto;
-  margin-top: 3.125rem;
+  margin-top: 0.625rem;
 }
 
 .gor-login-form .gor-login-lang:hover {
