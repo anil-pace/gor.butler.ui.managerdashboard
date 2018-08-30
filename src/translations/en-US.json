@@ -4247,6 +4247,12 @@
     "filepath": "./src/containers/orderTab/orderListTab.js"
   },
   {
+    "id": "orders.noOrders.noOrders",
+    "description": "display no orders",
+    "defaultMessage": "No orders available",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
     "id": "orderList.inProgress.status",
     "description": "In 'inProgress' for orders",
     "defaultMessage": "In progress",
@@ -4316,6 +4322,24 @@
     "id": "orders.order.ago",
     "description": "ago",
     "defaultMessage": "ago",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.today",
+    "description": "Today",
+    "defaultMessage": "Today",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.tomorrow",
+    "description": "tomorrow",
+    "defaultMessage": "Tomorrow",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "orders.order.yesterday",
+    "description": "yesterday",
+    "defaultMessage": "Yesterday",
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
