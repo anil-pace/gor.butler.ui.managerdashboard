@@ -56,7 +56,7 @@ class UtilityTab extends React.Component {
 
     let url =
       INVENTORY_REPORT_URL +
-      "?user=" +
+      "&user=" +
       this.props.username +
       "&sync=false&format=" +
       fileType;
