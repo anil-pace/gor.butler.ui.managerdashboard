@@ -223,6 +223,11 @@ export const  stringConfig= defineMessages({
         description: 'Text to show Online',
         defaultMessage: "online"
     },
+    warning:{
+        id: 'stringConfig.warning',
+        description: 'Text to show Warning',
+        defaultMessage: "warning"
+    },
     offline:{
         id: 'stringConfig.offline',
         description: 'Text to show Offline',
