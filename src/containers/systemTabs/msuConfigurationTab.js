@@ -24,9 +24,6 @@ import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 import MsuConfigConfirmation from './msuConfigConfirmation';
 
-import {graphql, withApollo, compose} from "react-apollo";
-import gql from 'graphql-tag';
-
 import {
     WS_ONSEND,
     APP_JSON, POST, GET,
@@ -47,6 +44,8 @@ import {
     MSU_CONFIG_RELEASE_MSU_URL,
 } from '../../constants/configConstants';
 
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
 
 const SLOTS_QUERY = gql`
     query($input:MsuListParams){
@@ -69,36 +68,22 @@ class MsuConfigTab extends React.Component {
         this.state={
             query:null,
             startStopBtnState: true,
-            startStopBtnText: "START RECONFIG",
+            startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
-            flag: true
         };
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
         this._setFilterAction = this._setFilterAction.bind(this);
-        this._handleStartStopReconfig = this._handleStartStopReconfig.bind(this);
-        this._handleReleaseMsuBtn = this._handleReleaseMsuBtn.bind(this);
+        this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
+        this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-        this.props.msuConfigRefreshed();
-    }
+    
 
     componentDidMount(){
-       // this._requestMsuList();
-    }
-
-    componentWillUnmount(){
-      this.clearPolling()
-      
+       //this._requestMsuList();
     }
 
     _requestMsuList(){
@@ -110,10 +95,6 @@ class MsuConfigTab extends React.Component {
         //     'cause' : FETCH_MSU_CONFIG_LIST
         // }
         // this.props.makeAjaxCall(params);
-        // this._intervalIdForMsuList = setTimeout(() => 
-        //         this._requestMsuList(), 
-        //         MSU_CONFIG_POLLING_INTERVAL);
-
         // let self=this;
         // if(!this._intervalIdForMsuList){
         //    self.props.makeAjaxCall(params) 
@@ -162,7 +143,7 @@ class MsuConfigTab extends React.Component {
 
     
     _startStopActionInitiated(){
-        if(this.state.startStopBtnText === "START RECONFIG"){
+        if(this.state.startStopBtnText === "startReconfig"){
             let params={
                 'url': MSU_CONFIG_START_RECONFIG_URL,
                 'method':POST,
@@ -172,8 +153,8 @@ class MsuConfigTab extends React.Component {
             }
             this.props.makeAjaxCall(params);
             this.setState({
-                startStopBtnState: false,
-                startStopBtnText: "STOP RECONFIG"
+                startStopBtnState: true,
+                startStopBtnText: "stopReconfig"
             })
         }
         else{
@@ -187,11 +168,10 @@ class MsuConfigTab extends React.Component {
             this.props.makeAjaxCall(params);
             
             this.setState({
-                startStopBtnState: false,
-                startStopBtnText: "START RECONFIG"
+                startStopBtnState: true,
+                startStopBtnText: "startReconfig"
             })
         }
-        this._requestMsuList();  // refresh page post YES to start reconfig 
     }
 
     _startStopReconfigAction = () => {
@@ -206,44 +186,87 @@ class MsuConfigTab extends React.Component {
         });
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
-    //         this.setState({query: nextProps.location.query})
-    //         this._refreshList(nextProps.location.query)
-    //     }
+/*
+    componentWillReceiveProps(nextProps) {
 
-    //     if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
-    //         this._refreshList(nextProps.location.query)
-    //     }
-
-    //     if(Object.keys(nextProps.location.query).length>0 && this._intervalIdForMsuList && JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-    //         this.clearPolling()
-
-    //         }
-
-    //     if(JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-
-    //          // clear the ongoing interval
-
-    //         let result = nextProps.msuList.filter(function(eachMsu){
-    //                     return (eachMsu.status === "reconfig_ready")
-    //                 });
-    //                 if(!nextProps.isFilterApplied && result.length>0){ // when filtered has been applied and any filtered item is there
-    //                     this._handleStartStopReconfig(false);
-    //                 }
-
-    //         let result_1 = nextProps.msuList.filter(function(eachMsu){
-    //                     return (eachMsu.status === "ready_for_reconfiguration")
-    //                 });
-    //                 if(result_1.length>0){
-    //                     this._handleReleaseMsuBtn(false);
-    //                 }else{
-    //                     this._handleReleaseMsuBtn(true);
-    //                }
-    //     } 
-    // }
+        let isAnyMsuEmpty = [];
+        let isAnyMsuDropping = [];
+        let isAnyMsuDropped = [];
+        let isAnyMsuReadyForReconfig = [];
+        let isAnyMsuStoringBack = [];
 
 
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps)
+            })
+        }
+
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+            this.setState({query: nextProps.location.query})
+            this._refreshList(nextProps.location.query)
+        }
+
+        if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
+            this._refreshList(nextProps.location.query)
+        }
+
+        if(Object.keys(nextProps.location.query).length>0 &&
+            this._intervalIdForMsuList && 
+            JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+                this.clearPolling();
+        }
+
+        if(nextProps.msuList && Array.isArray(nextProps.msuList)){
+
+                nextProps.msuList.forEach((eachMsu)=>{
+                    if(eachMsu.status === "reconfig_ready"){  isAnyMsuEmpty.push(eachMsu.status);}
+                    else if (eachMsu.status === "waiting"){  isAnyMsuDropping.push(eachMsu.status);}
+                    else if (eachMsu.status === "dropped") { isAnyMsuDropped.push(eachMsu.status);}
+                    else if (eachMsu.status === "ready_for_reconfiguration")  {isAnyMsuReadyForReconfig.push(eachMsu.status);}
+                    else if (eachMsu.status === "storing_back") { isAnyMsuStoringBack.push(eachMsu.status);}
+                });
+
+            let checkAnyEmptyMsuFound = (isAnyMsuEmpty.length > 0 ? true : false);
+            let checkAnyMsuInProgressFound = ( (isAnyMsuDropping.length  > 0 ? true : false) ||
+                                                (isAnyMsuDropped.length > 0 ? true : false) || 
+                                                (isAnyMsuReadyForReconfig.length > 0 ? true : false) ||
+                                                (isAnyMsuStoringBack.length > 0 ? true : false)
+                                            );
+
+            // atleast 1 MSU is Empty and no MSU is in progress
+            if( checkAnyEmptyMsuFound && !checkAnyMsuInProgressFound){
+                 // START button should be enabled
+                 this.setState({
+                    startStopBtnText: "startReconfig"
+                });
+                this._disableStartStopReconfig(false);
+                
+            }
+            else if(checkAnyMsuInProgressFound){
+                // STOP button should be enabled
+                this.setState({
+                    startStopBtnText: "stopReconfig"
+                });
+                this._disableStartStopReconfig(false);
+                
+            }
+            else{
+                // START/STOP button should be DISABLED
+                this._disableStartStopReconfig(true);
+            }
+
+
+           // check for handling Release Button 
+            if(isAnyMsuReadyForReconfig.length > 0){
+                this._disableReleaseMsuBtn(false);
+            }else{
+                this._disableReleaseMsuBtn(true);
+           }
+       }
+    }
+
+*/
 
     /**
      * The method will update the subscription packet
@@ -251,6 +274,7 @@ class MsuConfigTab extends React.Component {
      * @private
      */
     _refreshList(query) {
+
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
         if(query.rack_id && query.status){
@@ -285,7 +309,14 @@ class MsuConfigTab extends React.Component {
         });
     }
 
+    _subscribeData() {
+        let updatedWsSubscription=this.props.wsSubscriptionData;
+        this.props.initDataSentCall(updatedWsSubscription["default"])
+        this.props.updateSubscriptionPacket(updatedWsSubscription);
+    }
+
     _blockPutAndChangeTypeCallback(){
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
         this.props.filterApplied(false);
         this._requestMsuList();
     }
@@ -300,13 +331,13 @@ class MsuConfigTab extends React.Component {
         this.props.showTableFilter(newState);
     }
 
-    _handleStartStopReconfig(isDisabled){
+    _disableStartStopReconfig(isDisabled){
         this.setState({
             startStopBtnState: isDisabled||false,
         })
     }
 
-    _handleReleaseMsuBtn(isDisabled){
+    _disableReleaseMsuBtn(isDisabled){
         this.setState({
             releaseMsuBtnState: isDisabled||false,
         })
@@ -315,8 +346,7 @@ class MsuConfigTab extends React.Component {
     render() {
         var filterHeight=screen.height - 190 - 50;
         let msuListData=this.props.msuList;
-        console.log("asjdfljlskadfjklajsdflkjklsd " + msuListData);
-        
+        let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
                 <div>
@@ -331,7 +361,7 @@ class MsuConfigTab extends React.Component {
 
 
                                 <div className="gorToolBar">
-                                    <div className="gorToolBarWrap">
+                                    <div style={{width: "auto"}} className="gorToolBarWrap">
                                         <div className="gorToolBarElements">
                                             <FormattedMessage id="msuConfig.table.heading" 
                                                 description="Heading for msu Configuration" 
@@ -346,7 +376,7 @@ class MsuConfigTab extends React.Component {
                                         <div className="gor-button-wrap">
                                             <button className="gor-msuConfig-btn grey" 
                                                 onClick={this._refreshMsuDataAction}>
-                                                <div className="gor-refresh-icon"/>
+                                                <div className="gor-refresh-whiteIcon"/>
                                                 <FormattedMessage id="gor.msuConfig.refreshData" 
                                                     description="button label for refresh data" 
                                                     defaultMessage="REFRESH DATA"/>
@@ -372,9 +402,16 @@ class MsuConfigTab extends React.Component {
                                                     style={{minWidth: "145px"}} 
                                                     className="gor-msuConfig-btn orange"
                                                     onClick={this._startStopReconfigAction}>
-                                                <FormattedMessage id="gor.msuConfig.startStopReconfig" 
-                                                    description="button label for start Stop reconfig" 
-                                                    defaultMessage={this.state.startStopBtnText}/>
+
+                                                    {this.state.startStopBtnText === "startReconfig" ? 
+                                                            <FormattedMessage id="gor.msuConfig.startReconfig" 
+                                                                description="button label for start reconfig" 
+                                                                defaultMessage="START RECONFIG"/>:
+                                                             <FormattedMessage id="gor.msuConfig.StopReconfig" 
+                                                            description="button label for Stop reconfig" 
+                                                            defaultMessage="STOP RECONFIG"/>
+                                                    }
+                                                    
                                             </button>
                                         </div>
                                     </div>  
@@ -408,18 +445,21 @@ class MsuConfigTab extends React.Component {
                                                     defaultMessage="Show all MSUs with blocked puts"/>}/>
                         </div>:null}
 
-                        <MsuConfigTable items={msuListData} 
-                            intlMessg={this.props.intlMessages}
-                            setButlerFilter={this.props.butlerFilterDetail}
-                            getButlerFilter={this.props.butlerFilter}
-                            showFilter={this.props.showFilter}
-                            isFilterApplied={this.props.isFilterApplied}
-                            setFilter={this.props.showTableFilter}
-                            botFilterStatus={this.props.botFilterStatus}
-                            butlerState={this.props.filterState}
-                            refreshList={this._clearFilter.bind(this)}
-                            blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
-                        />
+                        {this.props.msuList && this.props.msuList.length > 0 && 
+                            (<MsuConfigTable items={msuListData} 
+                                intlMessg={this.props.intlMessages}
+                                setButlerFilter={this.props.butlerFilterDetail}
+                                getButlerFilter={this.props.butlerFilter}
+                                showFilter={this.props.showFilter}
+                                isFilterApplied={this.props.isFilterApplied}
+                                setFilter={this.props.showTableFilter}
+                                botFilterStatus={this.props.botFilterStatus}
+                                butlerState={this.props.filterState}
+                                refreshList={this._clearFilter.bind(this)}
+                                blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
+                            />)}
+                        {!this.props.msuConfigSpinner && this.props.msuList && this.props.msuList.length===0 && <div className="noDataWrapper"> {noData} </div>}
+                        {this.props.msuConfigSpinner && <div className="noDataWrapper"></div>}
                     </div>
                 </div>
             </div>
@@ -428,12 +468,19 @@ class MsuConfigTab extends React.Component {
 };
 
 const withQuery = graphql(SLOTS_QUERY, {
+
     props: function(data){
+        console.log("inside withQuery");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
             return {}
         }
         return {
-            msuList: data.data.MsuList.list
+            //msuList: data.data.MsuList.list
+            msuList :  [
+                            {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
+                        ]
         }
     },
     options: ({match, location}) => ({
@@ -441,7 +488,6 @@ const withQuery = graphql(SLOTS_QUERY, {
         fetchPolicy: 'network-only'
     }),
 });
-
 
 function mapStateToProps(state, ownProps) {
     return {
@@ -458,7 +504,7 @@ function mapStateToProps(state, ownProps) {
         msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
         msuConfigSpinner: state.spinner.msuConfigSpinner || false,
 
-        //msuList: state.msuInfo.msuList||[],
+       // msuList: state.msuInfo.msuList||[],
         timeZone:state.authLogin.timeOffset
     };
 }
@@ -517,7 +563,7 @@ MsuConfigTab.PropTypes={
     msuConfigSpinner: React.PropTypes.bool,
 };
 
-//export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)); ;
+//export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab));
 export default compose(
     withQuery
 )(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));

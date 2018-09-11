@@ -130,7 +130,7 @@ class MsuConfigTable extends React.Component {
         //                     {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
         //                     {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
         //                 ];
-        let msuDataLen = msuData.length || 0; 
+        let msuDataLen = msuData ? msuData.length : 0; 
         let msuRows = []; 
         let processedData = {};
 
@@ -239,7 +239,7 @@ class MsuConfigTable extends React.Component {
         const processedMsuData = this._processMSUs();
         return (
             <div>
-            {this.props.items.length? 
+            {this.props.items && this.props.items.length? 
                 (<div className="msuConfigTableWrapper">
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedMsuData.msuData}>
