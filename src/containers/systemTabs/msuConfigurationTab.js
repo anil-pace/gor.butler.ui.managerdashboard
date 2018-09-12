@@ -47,7 +47,7 @@ import {
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag';
 
-const SLOTS_QUERY = gql`
+const MSU_LIST_QUERY = gql`
     query($input:MsuListParams){
         MsuList(input:$input){
              list{
@@ -467,7 +467,7 @@ class MsuConfigTab extends React.Component {
     }
 };
 
-const withQuery = graphql(SLOTS_QUERY, {
+const withQuery = graphql(MSU_LIST_QUERY, {
 
     props: function(data){
         console.log("inside withQuery");
