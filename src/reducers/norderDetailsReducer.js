@@ -29,13 +29,15 @@ export  function orderDetails(state={},action){
       break;
 
     case ORDERS_CUT_OFF_TIME_FETCH:
+    let filterApplied=action.params;
       let pbts_data=action.data||[];
       if(JSON.stringify(action.data)===JSON.stringify(state.pbts)){
         return state
       }else{
       pbts_data.map(function(pbt,index){
         if(state.pbts && state.pbts[index]){
-          pbt.opened=false
+          let pbtsValue=state.pbts[index]?state.pbts[index].opened:false;
+          pbt.opened=filterApplied && pbtsValue?false:pbtsValue;
           pbt.ordersPerPbt=state.pbts[index].ordersPerPbt;
         }
       })
@@ -90,7 +92,7 @@ export  function orderDetails(state={},action){
       let isLazyData= action.saltParams.lazyData
 
       let expected_pbts=[{}]; // create one empty pbt list...which is mandatory as per our json structure
-      if(state.pbts && state.pbts.length>1){
+      if(state.pbts && state.pbts.length>=1){
           expected_pbts = state.pbts.map(function(pbt, idx){
           if(pbt.cut_off_time===target_cut_off_time){
             if(res.serviceRequests.constructor === Array && res.serviceRequests.length>0){
