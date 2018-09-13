@@ -161,7 +161,7 @@ class OrderListTable extends React.Component {
 
         if(saltParams.lazyData && need_to_fetch_more){  // Accordion already open and infinite scroll
             try{
-                page=(Math.floor(parseInt(pbtData.ordersPerPbt.orders.length,10)/size))+1
+                page=(Math.floor(parseInt(pbtData.ordersPerPbt.orders.length,10)/size));
                 page=page.toString();
             }catch(ex){
                 page="0"
