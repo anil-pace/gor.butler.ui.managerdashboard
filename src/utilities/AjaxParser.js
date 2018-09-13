@@ -706,8 +706,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveOrderSummaryData(res));
             break;
         case ORDERS_CUT_OFF_TIME_FETCH:
+            let storeFilterData=store.getState().filterInfo;
+            let filterApplied=storeFilterData?storeFilterData.isFilterApplied:false;
             store.dispatch(setOrderListSpinner(false));
-            store.dispatch(receiveCutOffTimeData(res));
+            store.dispatch(receiveCutOffTimeData(res,filterApplied));
             break;
 
         case ORDERS_PER_PBT_FETCH:
