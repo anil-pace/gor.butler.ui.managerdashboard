@@ -101,7 +101,7 @@ const rootReducer=combineReducers({
   ppsConfiguration,
   operationsLogsReducer,
   downloadReportsReducer,
-  storageSpaceReducer,
+  storageSpaceReducer,  
   orderDetails
    })
 
