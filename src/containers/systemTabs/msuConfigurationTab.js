@@ -46,6 +46,10 @@ import {
 
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../actions/validationActions";
 
 const MSU_LIST_QUERY = gql`
     query($input:MsuListParams){
@@ -60,6 +64,17 @@ const MSU_LIST_QUERY = gql`
     }
 `;
 
+const MSU_LIST_POST_FILTER_QUERY = gql`
+    query($input:MsuFilterListParams){
+        MsuFilterList(input:$input){
+            list {
+              id
+              racktype
+            } 
+            }
+        
+    }
+`;
 
 class MsuConfigTab extends React.Component {
 
@@ -104,16 +119,38 @@ class MsuConfigTab extends React.Component {
         // },MSU_CONFIG_POLLING_INTERVAL)
     }
 
-    _requestMsuListViaFilter(filterUrl){
-        this.props.filterApplied(true);
-        let params={
-            'url': filterUrl,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST_VIA_FILTER
+    _requestMsuListViaFilter(rackId, rackStatus){
+
+        let formData = {};
+
+        if(rackId && rackStatus){
+            formData.id = rackId;
+            formData.rackType = rackStatus;
         }
-        this.props.makeAjaxCall(params);
+        else if(rackStatus){
+            formData.rackType = rackStatus;
+        }
+        else if (rackId){
+            formData.id = rackId;
+        }
+
+        // this.props.client.query({
+        //     query: MSU_LIST_POST_FILTER_QUERY,
+        //     variables: formData,
+        //     fetchPolicy: 'network-only'
+        // }).then(data=>{
+        //   _this.props.notifyFail()
+        // })
+
+        // this.props.filterApplied(true);
+        // let params={
+        //     'url': filterUrl,
+        //     'method':GET,
+        //     'contentType':APP_JSON,
+        //     'accept':APP_JSON,
+        //     'cause' : FETCH_MSU_CONFIG_LIST_VIA_FILTER
+        // }
+        // this.props.makeAjaxCall(params);
     }
 
 
@@ -186,7 +223,7 @@ class MsuConfigTab extends React.Component {
         });
     }
 
-/*
+
     componentWillReceiveProps(nextProps) {
 
         let isAnyMsuEmpty = [];
@@ -266,7 +303,7 @@ class MsuConfigTab extends React.Component {
        }
     }
 
-*/
+
 
     /**
      * The method will update the subscription packet
@@ -277,21 +314,22 @@ class MsuConfigTab extends React.Component {
 
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
-        if(query.rack_id && query.status){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else if(query.status){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?racktype="+query.status;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else if (query.rack_id){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else{
-            this._requestMsuList()
-        }
+        this._requestMsuListViaFilter(query.rack_id, query.status);
+        // if(query.rack_id && query.status){
+        //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
+        //     this._requestMsuListViaFilter(filterUrl);
+        // }
+        // else if(query.status){
+        //     filterUrl = MSU_CONFIG_FILTER_URL+"?racktype="+query.status;
+        //     this._requestMsuListViaFilter(filterUrl);
+        // }
+        // else if (query.rack_id){
+        //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
+        //     this._requestMsuListViaFilter(filterUrl);
+        // }
+        // else{
+        //     this._requestMsuList()
+        // }
         
 
         if(Object.keys(query).length>0){
@@ -505,7 +543,7 @@ function mapStateToProps(state, ownProps) {
         msuConfigSpinner: state.spinner.msuConfigSpinner || false,
 
        // msuList: state.msuInfo.msuList||[],
-        timeZone:state.authLogin.timeOffset
+        timeZone:state.authLogin.timeOffset,
     };
 }
 
@@ -540,6 +578,12 @@ var mapDispatchToProps=function (dispatch) {
         setMsuConfigSpinner: function (data) {
             dispatch(setMsuConfigSpinner(data))
         },
+        notifySuccess: function (data) {
+            dispatch(notifySuccess(data));
+        },
+        notifyFail: function (data) {
+            dispatch(notifyFail(data));
+        }
     };
 }
 
@@ -565,7 +609,8 @@ MsuConfigTab.PropTypes={
 
 //export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab));
 export default compose(
-    withQuery
+    withQuery,
+    withApollo
 )(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));
 
 
