@@ -116,7 +116,7 @@ class PPS extends React.Component {
         if (query.operator) {
             let operator_assigned_query=query.operator.split(" ")
             operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
-            filterSubsData["operators_assigned"]=operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
+            filterSubsData["operators_assigned"]=operator_assigned_query.length>1?["contains",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
         }
 
         if (query.pps_id) {
