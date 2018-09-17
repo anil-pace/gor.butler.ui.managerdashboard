@@ -213,25 +213,31 @@ class OrderListTable extends React.Component {
 
     _formatProgressBar(nr, dr){
         let x = {};
-        if(nr === 0 && dr === 0){ // when nothing has started
+        const numerator = (nr)?nr:0;
+        const denominator = (dr)?dr:0;
+        if(numerator === 0 && denominator === 0){ // when nothing has started
             x.message = (<FormattedMessage id="orders.pending.status" description="status" defaultMessage="Pending"/>);
             x.action = false;
         }
 
-        else if(nr === dr){ // when ALL orders has been processed
+        else if(numerator === denominator){ // when ALL orders has been processed 
             x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
-                      values={{total:dr}} />);
+                      values={{total:denominator}} />);
             x.action = true;
         }
-        else if(nr === 0){ // when ALL are remaining to be picked
+        else if(numerator === 0){ // when ALL are remaining to be picked
             x.message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{current} products to be picked"
-                      values={{current:dr}} />);
+                      values={{current:denominator}} />);
             x.action = true;
         }
-        else{
-            x.width = (nr/dr)*100; 
+        else if (denominator === 0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
+            x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
+            values={{total:denominator}} />);
+  x.action = true;
+        }else{
+            x.width = (numerator/denominator)*100; 
             x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
-                            values={{current:nr, total: dr}} />);
+                            values={{current:numerator, total: denominator}} />);
             x.action  = true;
         }
         return x;
