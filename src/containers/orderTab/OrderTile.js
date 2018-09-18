@@ -35,11 +35,11 @@ class OrderTile extends React.Component{
       const { orderFulfilData, orderSummaryData } = this.props;
       let fromDate, toDate;
       
-      const picked_products_count = (orderFulfilData.picked_products_count)?orderFulfilData.picked_products_count:0;
-      const total_products_count = (orderFulfilData.total_products_count)?orderFulfilData.total_products_count:0;
+      const picked_products_count = (orderFulfilData.picked_products_count)?Number(orderFulfilData.picked_products_count):0;
+      const total_products_count = (orderFulfilData.total_products_count)?Number(orderFulfilData.total_products_count):0;
       const avgProgress = (picked_products_count / total_products_count) * 100
       // if we encounter NaN or Infinity situation in avgProgress
-      const progressWidth = parseInt(avgProgress,10)?parseInt(avgProgress,10):100;
+      const progressWidth = Math.ceil(parseInt(avgProgress,10))>1?100 : parseInt(avgProgress,10);
       let formatProgressBarMessage = this._formatProgressBarMessage(picked_products_count,total_products_count);
       let backgroundColor = (this.props.pbtsData.length > 0 ? "#ffffff" : "#fafafa");
       if(this.props.fromDate && this.props.toDate){

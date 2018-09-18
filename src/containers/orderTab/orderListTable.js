@@ -220,7 +220,7 @@ class OrderListTable extends React.Component {
             x.action = false;
         }
 
-        else if(numerator === denominator){ // when ALL orders has been processed 
+        else if((numerator === denominator) ){ // when ALL orders have been processed 
             x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
                       values={{total:denominator}} />);
             x.action = true;
@@ -235,7 +235,7 @@ class OrderListTable extends React.Component {
             values={{total:denominator}} />);
   x.action = true;
         }else{
-            x.width = (numerator/denominator)*100; 
+            x.width = Math.ceil(numerator/denominator)>1 ?  100 : Math.ceil(numerator/denominator); 
             x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
                             values={{current:numerator, total: denominator}} />);
             x.action  = true;
