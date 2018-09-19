@@ -71,8 +71,7 @@ const MSU_LIST_POST_FILTER_QUERY = gql`
               id
               racktype
             } 
-            }
-        
+        }
     }
 `;
 
@@ -120,7 +119,7 @@ class MsuConfigTab extends React.Component {
     }
 
     _requestMsuListViaFilter(rackId, rackStatus){
-
+        
         let formData = {};
 
         if(rackId && rackStatus){
@@ -134,23 +133,13 @@ class MsuConfigTab extends React.Component {
             formData.id = rackId;
         }
 
-        // this.props.client.query({
-        //     query: MSU_LIST_POST_FILTER_QUERY,
-        //     variables: formData,
-        //     fetchPolicy: 'network-only'
-        // }).then(data=>{
-        //   _this.props.notifyFail()
-        // })
-
-        // this.props.filterApplied(true);
-        // let params={
-        //     'url': filterUrl,
-        //     'method':GET,
-        //     'contentType':APP_JSON,
-        //     'accept':APP_JSON,
-        //     'cause' : FETCH_MSU_CONFIG_LIST_VIA_FILTER
-        // }
-        // this.props.makeAjaxCall(params);
+        this.props.client.query({
+            query: MSU_LIST_POST_FILTER_QUERY,
+            variables: formData,
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+          this.props.notifyFail();
+        })
     }
 
 
