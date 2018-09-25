@@ -120,22 +120,31 @@ class MsuConfigTab extends React.Component {
 
     _requestMsuListViaFilter(rackId, rackStatus){
         
-        let formData = {};
+        // let formData = {};
 
-        if(rackId && rackStatus){
-            formData.id = rackId;
-            formData.rackType = rackStatus;
-        }
-        else if(rackStatus){
-            formData.rackType = rackStatus;
-        }
-        else if (rackId){
-            formData.id = rackId;
-        }
+        // if(rackId && rackStatus){
+        //     formData.id = rackId;
+        //     formData.racktype = rackStatus;
+        // }
+        // else if(rackStatus){
+        //     console.log("inside rackStatus ==============>");
+        //     formData.racktype = rackStatus;
+        // }
+        // else if (rackId){
+        //     formData.id = rackId;
+        // }
 
         this.props.client.query({
             query: MSU_LIST_POST_FILTER_QUERY,
-            variables: formData,
+            //variables: formData,
+            variables: (function () {
+                return {
+                    input: {
+                        id: rackId,
+                        racktype:rackStatus
+                    }
+                }
+            }()),
             fetchPolicy: 'network-only'
         }).then(data=>{
           this.props.notifyFail();
@@ -303,7 +312,10 @@ class MsuConfigTab extends React.Component {
 
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
-        this._requestMsuListViaFilter(query.rack_id, query.status);
+        if(query.rack_id || query.status){
+            this._requestMsuListViaFilter(query.rack_id, query.status);
+        }
+        
         // if(query.rack_id && query.status){
         //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
         //     this._requestMsuListViaFilter(filterUrl);
@@ -497,7 +509,7 @@ class MsuConfigTab extends React.Component {
 const withQuery = graphql(MSU_LIST_QUERY, {
 
     props: function(data){
-        console.log("inside withQuery");
+        console.log("inside withQuery => md");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
             return {}
         }
