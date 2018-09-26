@@ -55,7 +55,9 @@ class AccordianBar extends React.Component{
 	    								<div className={this.props.showPanel?"gor-down-arrow":"gor-right-arrow"}/>
 	    							</div>
 	    							<div className="gor-inline">
-	    								<div className="gor-utility-master-h1"><FormattedMessage id="utility.uploadHist.fileName" description='Upload file name' defaultMessage='File {fileName}' values={{fileName:this.props.data.id}}/></div>
+	    								<div className="gor-utility-master-h1">
+											<span title={this.props.data.fileName}> {this.props.data.fileName} </span>
+										</div>
 	    								<div className="gor-utility-master-h2"><FormattedMessage id="utility.uploadHist.success" description='Status percent' defaultMessage='Status: {status} % completed' values={{status:this.props.completed.toString()}}/></div> 
 	    							</div>
 	    							<div className="gor-inline gor-utility-master-h2"> 
