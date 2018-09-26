@@ -1,7 +1,6 @@
 import React  from 'react';
 import {FormattedMessage, defineMessages} from 'react-intl';
 import {connect} from 'react-redux';
-import {hashHistory} from 'react-router';
 
 import MsuRackFlex from './MsuRackFlex';
 import UtilityDropDown from "../../components/utilityComponents/utilityDropdownWrap";
@@ -23,7 +22,6 @@ import {
     FETCH_MSU_CONFIG_RACK_STRUCTURE
 } from '../../constants/frontEndConstants';
 
-
 const messages = defineMessages({
   destTypeDdownPlcHldr: {
     id: "msuConfig.destType.destTypeDdownPlcHldr",
@@ -39,7 +37,11 @@ class ChangeRackType extends React.Component {
         super(props);
         this.state = {
           sourceType: true,
+          sourceTypeStructure: null,
+          sourceTypeWidth: null,
           destType: null,
+          destTypeStructure: null,
+          destTypeWidth: null,
           blockPutChangeTypeBtnState: false,
         };
         this._blockPutAndChangeType = this._blockPutAndChangeType.bind(this);
@@ -48,10 +50,35 @@ class ChangeRackType extends React.Component {
         this._reqRackStructure = this._reqRackStructure.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
+            if(this.state.sourceType && nextProps.rackStructure){
+                this.setState({
+                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
+                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
+                })
+            }
+            if(!this.state.sourceType && nextProps.rackStructure){
+                this.setState({
+                    destTypeStructure: nextProps.rackStructure[0].rack_json,
+                    destTypeWidth: nextProps.rackStructure[0].rack_width
+                })
+            }
+        } 
+        else{
+            if(this.state.sourceType && nextProps.rackStructure){
+                this.setState({
+                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
+                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
+                })
+            }
+        }
+    }
+
 
     _blockPutAndChangeType(){
         let formData={         
-            "rack_id":this.props.msuList[0].id, // 0 is for currently filtered msulist
+            "rack_id":this.props.id, // 0 is for currently filtered msulist
             "destination_type":this.state.destType
         };
 
@@ -74,11 +101,10 @@ class ChangeRackType extends React.Component {
 
     componentDidMount() {
        this._reqRackStructure(this.props.rackType); // request Rack structure for EXISTING SOURCE TYPE
-       this._reqDestinationTypes(); // request available destination types from backend
+       this._reqDestinationTypes();
     }
 
     _reqRackStructure(rackType){
-
         let params={
             'url': MSU_CONFIG_LIST_RACK_STRUCTURE_URL+"/"+rackType,
             'method':GET,
@@ -98,6 +124,7 @@ class ChangeRackType extends React.Component {
             'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
         }
         this.props.makeAjaxCall(params);
+        
     }
 
     _reqRackStructureOnDestTypeChange(){
@@ -107,6 +134,7 @@ class ChangeRackType extends React.Component {
     _changeDestType(data) {
         this.setState({ 
             destType: data.value,
+            sourceType: false,
             blockPutChangeTypeBtnState: false,
         },
         this._reqRackStructureOnDestTypeChange);
@@ -123,23 +151,11 @@ class ChangeRackType extends React.Component {
 
 
     render() {
-
-        let msuList, rackStructure, destTypeList, labelC1, destTypeStructure, sourceTypeStructure, sourceTypeWidth, destTypeWidth;
+        let msuList, rackStructure, destTypeList, labelC1;
         rackStructure = this.props.rackStructure;
         destTypeList = this.props.destType;
         msuList = this.props.msuList[0];
-        if(rackStructure){
-            if(this.state.destType){
-                destTypeStructure = this.props.rackStructure[0].rack_json;
-                destTypeWidth = this.props.rackStructure[0].rack_width;
-            }
-            /*destType = null */
-            else{ 
-                sourceTypeStructure = this.props.rackStructure[0].rack_json;
-                sourceTypeWidth = this.props.rackStructure[0].rack_width;
-            }
-        }
-
+        
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
         if(destTypeList){
@@ -175,12 +191,11 @@ class ChangeRackType extends React.Component {
                                         values={{sourceType:msuList.racktype}}
                                         />
                                 </div>
-                                {this.props.rackStructure && this.state.sourceType?
                                     <div className="rackWrapper">
-                                        <MsuRackFlex rackDetails={this.props.rackStructure? sourceTypeStructure: ""} 
-                                                      rackWidth={this.props.rackStructure?  sourceTypeWidth: ""} />
-                                    </div> : ""}
-
+                                        <MsuRackFlex rackDetails={this.state.sourceTypeStructure} 
+                                                      rackWidth={this.state.sourceTypeWidth} />
+                                    </div>
+                                    
                             </div>
 
                             <div className="destWrapper">
@@ -191,25 +206,28 @@ class ChangeRackType extends React.Component {
                                   currentState={currentDestType}
                                 />
 
-                                <div className="rackWrapper">
-
-                                    {this.props.rackStructure && this.state.destType ? 
-                                        <MsuRackFlex rackDetails={this.props.rackStructure ? destTypeStructure: ""}
-                                                     rackWidth={this.props.rackStructure ? destTypeWidth: ""} /> 
-                                        :(<div className="parent-container" style={{width: "100%"}}>
+                                {(this.props.rackStructure && !this.state.sourceType)?
+                                    <div className="rackWrapper">
+                                        <MsuRackFlex rackDetails={this.state.destTypeStructure}
+                                                     rackWidth={this.state.destTypeWidth} />
+                                    </div>:
+                                    <div className="rackWrapper">
+                                        <div className="parent-container" style={{width: "100%"}}>
                                                 <div className="slotsFlexContainer">
                                                     <div className="legsSpaceContainer"> </div>
                                                  </div>
-                                        </div>)
-                                    }
-                                </div>
+                                        </div>
+                                    </div>
 
+                                }
                             </div>
                         </div>
                     </div>
                     <div className="gor-smmodal-footer">
                         <div className="gor-footer-msg">
-                             <span> Select a destination type in order to block put. </span>
+                            <FormattedMessage id="gor.msuConfig.destSelection" 
+                                    description="label for select destination type" 
+                                    defaultMessage="Select a destination type in order to block put."/>
                         </div>
                         <div className="gor-button-wrap">
                             <button disabled = {this.state.blockPutChangeTypeBtnState} className="gor-msuConfig-btn orange"
@@ -230,6 +248,7 @@ class ChangeRackType extends React.Component {
 ChangeRackType.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
+
 function mapStateToProps(state, ownProps) {
     return {
         destType: state.msuInfo.destType,
@@ -241,7 +260,7 @@ var mapDispatchToProps=function (dispatch) {
     return {
         makeAjaxCall: function(params){
             dispatch(makeAjaxCall(params))
-        },
+        }
     }
 };
 
