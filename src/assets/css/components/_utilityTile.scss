@@ -151,6 +151,10 @@
   color: #000000;
   padding-top: 9px;
   padding-left: 10px;
+  width: 175px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .gor-utility-master-h2 {
   font-size: 12px;
