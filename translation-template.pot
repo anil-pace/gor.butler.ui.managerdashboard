@@ -5528,9 +5528,9 @@ msgstr ""
 		msgid "Audit {id} successfully duplicated"
 		msgstr ""
 
-		#: audit.cancel.success
-		msgctxt "audit.cancel.success"
-		msgid "Audit {id} successfully cancelled"
+		#: audit.cancelsent.status
+		msgctxt "audit.cancelsent.status"
+		msgid "Audit {id} sent for cancellation"
 		msgstr ""
 
 		#: audit.start.fail

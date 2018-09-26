@@ -7351,9 +7351,9 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
-    "id": "audit.cancel.success",
-    "description": "Audit cancel success",
-    "defaultMessage": "Audit {id} successfully cancelled",
+    "id": "audit.cancelsent.status",
+    "description": "Audit cancel sent status",
+    "defaultMessage": "Audit {id} sent for cancellation",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
