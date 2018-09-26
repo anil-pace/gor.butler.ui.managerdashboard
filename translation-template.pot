@@ -633,11 +633,6 @@ msgstr ""
 		msgid "System Controllers"
 		msgstr ""
 
-		#: utility.uploadHist.fileName
-		msgctxt "utility.uploadHist.fileName"
-		msgid "File {fileName}"
-		msgstr ""
-
 		#: utility.uploadHist.success
 		msgctxt "utility.uploadHist.success"
 		msgid "Status: {status} % completed"

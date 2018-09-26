@@ -749,12 +749,6 @@
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
-    "id": "utility.uploadHist.fileName",
-    "description": "Upload file name",
-    "defaultMessage": "File {fileName}",
-    "filepath": "./src/components/utilityComponents/accordianBar.js"
-  },
-  {
     "id": "utility.uploadHist.success",
     "description": "Status percent",
     "defaultMessage": "Status: {status} % completed",
