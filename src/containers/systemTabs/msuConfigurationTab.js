@@ -52,7 +52,7 @@ import {
 } from "./../../actions/validationActions";
 
 const MSU_LIST_QUERY = gql`
-    query($input:MsuListParams){
+    query MsuList($input:MsuListParams){
         MsuList(input:$input){
              list{
                   rack_id
@@ -63,6 +63,17 @@ const MSU_LIST_QUERY = gql`
         }
     }
 `;
+
+const SUBSCRIPTION_QUERY = gql`
+subscription USER_CHANNEL_1($username: String){
+    MsuFilterList(input:$input){
+        list {
+          id
+          racktype
+        } 
+    }
+}
+`
 
 const MSU_LIST_POST_FILTER_QUERY = gql`
     query($input:MsuFilterListParams){
@@ -85,6 +96,9 @@ class MsuConfigTab extends React.Component {
             startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
         };
+        this.subscription = null;
+        this.linked =false;
+
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
@@ -119,21 +133,7 @@ class MsuConfigTab extends React.Component {
     }
 
     _requestMsuListViaFilter(rackId, rackStatus){
-        
-        // let formData = {};
-
-        // if(rackId && rackStatus){
-        //     formData.id = rackId;
-        //     formData.racktype = rackStatus;
-        // }
-        // else if(rackStatus){
-        //     console.log("inside rackStatus ==============>");
-        //     formData.racktype = rackStatus;
-        // }
-        // else if (rackId){
-        //     formData.id = rackId;
-        // }
-
+        let msuList = [];
         this.props.client.query({
             query: MSU_LIST_POST_FILTER_QUERY,
             //variables: formData,
@@ -147,7 +147,9 @@ class MsuConfigTab extends React.Component {
             }()),
             fetchPolicy: 'network-only'
         }).then(data=>{
-          this.props.notifyFail();
+            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+            msuList= data.data.MsuFilterList.list;
+          //this.props.notifyFail();
         })
     }
 
@@ -299,6 +301,35 @@ class MsuConfigTab extends React.Component {
                 this._disableReleaseMsuBtn(true);
            }
        }
+
+    //    if ((!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
+    //        console.log("============ coming inside new code introduced ===============");
+    //         this.updateSubscription(nextProps.location.query)
+    //     }
+    }
+
+    componentWillUnMount() {
+        if (this.subscription) {
+            this.subscription()
+        }
+    }
+
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: SUBSCRIPTION_QUERY,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                console.log(newResult)
+
+                return Object.assign({}, {
+                    MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
+                })
+            },
+        });
     }
 
 
@@ -385,6 +416,7 @@ class MsuConfigTab extends React.Component {
     render() {
         var filterHeight=screen.height - 190 - 50;
         let msuListData=this.props.msuList;
+        console.log("hello m getting triggered inside Render==============>" + JSON.stringify(this.props.msuList));
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
@@ -507,21 +539,23 @@ class MsuConfigTab extends React.Component {
 };
 
 const withQuery = graphql(MSU_LIST_QUERY, {
-
+    /*
     props: function(data){
         console.log("inside withQuery => md");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
             return {}
         }
         return {
-            //msuList: data.data.MsuList.list
-            msuList :  [
-                            {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-                        ]
+            msuList: data.data.MsuList.list
+            //msuList :  [
+                            //{"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            //{"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            //{"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
+                        //]
         }
     },
+    */
+    props: (data) => (data),
     options: ({match, location}) => ({
         variables: {},
         fetchPolicy: 'network-only'
