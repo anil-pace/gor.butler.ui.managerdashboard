@@ -64,17 +64,6 @@ const MSU_LIST_QUERY = gql`
     }
 `;
 
-const SUBSCRIPTION_QUERY = gql`
-subscription USER_CHANNEL_1($username: String){
-    MsuFilterList(input:$input){
-        list {
-          id
-          racktype
-        } 
-    }
-}
-`
-
 const MSU_LIST_POST_FILTER_QUERY = gql`
     query($input:MsuFilterListParams){
         MsuFilterList(input:$input){
@@ -84,6 +73,17 @@ const MSU_LIST_POST_FILTER_QUERY = gql`
             } 
         }
     }
+`;
+
+const SUBSCRIPTION_QUERY = gql`
+subscription USER_CHANNEL_1($username: String){
+    MsuFilterList(input:$input){
+        list {
+          id
+          racktype
+        } 
+    }
+}
 `;
 
 class MsuConfigTab extends React.Component {
@@ -98,7 +98,6 @@ class MsuConfigTab extends React.Component {
         };
         this.subscription = null;
         this.linked =false;
-
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
@@ -301,35 +300,6 @@ class MsuConfigTab extends React.Component {
                 this._disableReleaseMsuBtn(true);
            }
        }
-
-    //    if ((!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
-    //        console.log("============ coming inside new code introduced ===============");
-    //         this.updateSubscription(nextProps.location.query)
-    //     }
-    }
-
-    componentWillUnMount() {
-        if (this.subscription) {
-            this.subscription()
-        }
-    }
-
-    updateSubscription(variables) {
-        if (this.subscription) {
-            this.subscription()
-        }
-        this.subscription = this.props.data.subscribeToMore({
-            variables: variables,
-            document: SUBSCRIPTION_QUERY,
-            notifyOnNetworkStatusChange: true,
-            updateQuery: (previousResult, newResult) => {
-                console.log(newResult)
-
-                return Object.assign({}, {
-                    MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
-                })
-            },
-        });
     }
 
 
@@ -539,7 +509,7 @@ class MsuConfigTab extends React.Component {
 };
 
 const withQuery = graphql(MSU_LIST_QUERY, {
-    /*
+
     props: function(data){
         console.log("inside withQuery => md");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
@@ -547,15 +517,13 @@ const withQuery = graphql(MSU_LIST_QUERY, {
         }
         return {
             msuList: data.data.MsuList.list
-            //msuList :  [
-                            //{"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            //{"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            //{"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-                        //]
+            // msuList :  [
+            //                 {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
+            //                 {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
+            //                 {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
+            //             ]
         }
     },
-    */
-    props: (data) => (data),
     options: ({match, location}) => ({
         variables: {},
         fetchPolicy: 'network-only'
@@ -647,5 +615,3 @@ export default compose(
     withQuery,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));
-
-
