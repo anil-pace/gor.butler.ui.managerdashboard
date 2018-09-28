@@ -1,6 +1,6 @@
-export const BASE_URL = 'localhost'; 
-export const PROTOCOL = 'https://';
-export const WS_PROTOCOL ="wss://";
+export const BASE_URL = ''; // empty for production version -- which will translate to relative in future.
+export const PROTOCOL = ''; // empty for production -- which will translate to relative in future.
+export const WS_PROTOCOL = ''; // empty for production -- which will translate to relative in future.
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const API_GATEWAY = API_URL+"/api-gateway";
