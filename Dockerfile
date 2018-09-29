@@ -4,9 +4,6 @@ WORKDIR /usr/src/app
 COPY ./ ./
 RUN npm install
 RUN npm run build
-
-# Step 2 - deploy app
-FROM nginx:1.12-alpine
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html/md
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY /usr/src/app/build /usr/share/nginx/html/md
+RUN echo Deleting the source files except the build folder
+RUN rm src/*

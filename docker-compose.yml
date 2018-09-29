@@ -2,6 +2,6 @@ version: '3'
 services:
   webapp:
     build: .
-    ports:
-      - 80:80
+    volumes: 
+      - "//usr/share/nginx/html/md:/usr/share/nginx/html/md"
     restart: unless-stopped
