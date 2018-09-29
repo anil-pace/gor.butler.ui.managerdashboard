@@ -230,12 +230,12 @@ class OrderListTable extends React.Component {
                       values={{current:denominator}} />);
             x.action = true;
         }
-        else if (denominator === 0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
+        else if (denominator === 0 && numerator>0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
             x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
-            values={{total:denominator}} />);
-  x.action = true;
+            values={{total:numerator}} />);
+        x.action = true;
         }else{
-            x.width = Math.ceil(numerator/denominator)>1 ?  100 : Math.ceil(numerator/denominator); 
+            x.width = Math.ceil(numerator/numerator)>1 ?  100 : Math.ceil(numerator/denominator); 
             x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
                             values={{current:numerator, total: denominator}} />);
             x.action  = true;
