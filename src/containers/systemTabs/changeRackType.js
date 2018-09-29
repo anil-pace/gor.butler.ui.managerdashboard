@@ -144,7 +144,6 @@ class ChangeRackType extends React.Component {
     }
 
     componentDidMount() {
-        console.log("aksjdflkjasldkfj sdf slkdfj asdf alksdfj klsdfkjsdf");
        //this._reqRackStructure(this.props.rackType); // request Rack structure for EXISTING SOURCE TYPE
        //this._reqDestinationTypes();
     }
@@ -221,8 +220,8 @@ class ChangeRackType extends React.Component {
     render() {
         let msuList, rackStructure, destTypeList, labelC1;
 
-        this._reqRackStructure(this.props.rackType);
-        this._reqDestinationTypes();
+        rackStructure =  this._reqRackStructure(this.props.rackType);
+        destTypeList = this._reqDestinationTypes();
 
         rackStructure = this.props.rackStructure;
         destTypeList = this.props.destType;
@@ -264,8 +263,15 @@ class ChangeRackType extends React.Component {
                                         />
                                 </div>
                                     <div className="rackWrapper">
+                                    {/*
                                         <MsuRackFlex rackDetails={this.state.sourceTypeStructure} 
                                                       rackWidth={this.state.sourceTypeWidth} />
+                                    */}
+                                    {this.props.rackStructure && 
+                                        <MsuRackFlex 
+                                            rackDetails = {this.props.rackStructure["face_zero"].rack_json}
+                                            rackWidth = {this.props.rackStructure["face_zero"].rack_width} />
+                                    }
                                     </div>
                                     
                             </div>
@@ -330,7 +336,7 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
         return {
            // rackStructure: data.data.MsuRackJsonList.list
            rackStructure: {
-            "0": {
+            "face_zero": {
                 "rack_width": 96,
                 "rack_json": [{
                     "barcodes": ["A.01", "A.02", "A.03"],
@@ -467,7 +473,7 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
                     "slot_ref": [48, 46, 70, 46, 48, 53, 45, 70, 46, 48, 54]
                 }]
             },
-            "1": {
+            "face_one": {
                 "rack_width": 96,
                 "rack_json": [{
                     "barcodes": ["A.01", "A.02", "A.03"],
