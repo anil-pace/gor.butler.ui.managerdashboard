@@ -1,9 +1,9 @@
 # Step 1 - build
 FROM node:8 as build-deps
 WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn install --production
-RUN yarn build
+COPY ./ ./
+RUN npm install
+RUN npm run build
 
 # Step 2 - deploy app
 FROM nginx:1.12-alpine
