@@ -98,22 +98,22 @@ class ChangeRackType extends React.Component {
         if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
             if(this.state.sourceType && nextProps.rackStructure){
                 this.setState({
-                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
+                    sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+                    sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
                 })
             }
             if(!this.state.sourceType && nextProps.rackStructure){
                 this.setState({
-                    destTypeStructure: nextProps.rackStructure[0].rack_json,
-                    destTypeWidth: nextProps.rackStructure[0].rack_width
+                    destTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+                    destTypeWidth: nextProps.rackStructure["face_zero"].rack_width
                 })
             }
         } 
         else{
             if(this.state.sourceType && nextProps.rackStructure){
                 this.setState({
-                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
+                    sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+                    sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
                 })
             }
         }
@@ -159,40 +159,64 @@ class ChangeRackType extends React.Component {
     //     this.props.makeAjaxCall(params);
     // }
 
-    _reqRackStructure(rackType){
-        let msuList = [];
+    _reqRackStructure(destType){
+        let rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
             //variables: formData,
             variables: (function () {
                 return {
                     input: {
-                        rackType: rackType
+                        rackType: destType
                     }
                 }
             }()),
             fetchPolicy: 'network-only'
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-            msuList= data.data.MsuRackJsonList.list;
-            // this.setState({
-            //     msuList: msuList
-            // });
+            rackStructure= data.data.MsuRackJsonList.list;
+            this.setState({
+                destTypeStructure: rackStructure["face_zero"].rack_json,
+                destTypeWidth: rackStructure["face_zero"].rack_width
+            });
           //this.props.notifyFail();
         })
     }
 
-    _reqDestinationTypes(){
-        let params={
-            'url': MSU_CONFIG_DEST_TYPE_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
-        }
-        this.props.makeAjaxCall(params);
+    // _reqDestinationTypes(){
+    //     let msuList = [];
+    //     this.props.client.query({
+    //         query: MSU_SOURCE_TYPE_QUERY,
+    //         //variables: formData,
+    //         variables: (function () {
+    //             return {
+    //                 input: {
+    //                     rackType: rackType
+    //                 }
+    //             }
+    //         }()),
+    //         fetchPolicy: 'network-only'
+    //     }).then(data=>{
+    //         console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+    //         msuList= data.data.MsuRackJsonList.list;
+    //         // this.setState({
+    //         //     msuList: msuList
+    //         // });
+    //       //this.props.notifyFail();
+    //     })
+    // }
+
+    // _reqDestinationTypes(){
+    //     let params={
+    //         'url': MSU_CONFIG_DEST_TYPE_URL,
+    //         'method':GET,
+    //         'contentType':APP_JSON,
+    //         'accept':APP_JSON,
+    //         'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
+    //     }
+    //     this.props.makeAjaxCall(params);
         
-    }
+    // }
 
     _reqRackStructureOnDestTypeChange(){
         this._reqRackStructure(this.state.destType);
@@ -220,8 +244,8 @@ class ChangeRackType extends React.Component {
     render() {
         let msuList, rackStructure, destTypeList, labelC1;
 
-        rackStructure =  this._reqRackStructure(this.props.rackType);
-        destTypeList = this._reqDestinationTypes();
+       // rackStructure =  this._reqRackStructure(this.props.rackType);
+       // destTypeList = this._reqDestinationTypes();
 
         rackStructure = this.props.rackStructure;
         destTypeList = this.props.destType;
@@ -284,7 +308,8 @@ class ChangeRackType extends React.Component {
                                   currentState={currentDestType}
                                 />
 
-                                {(this.props.rackStructure && !this.state.sourceType)?
+                                {/*{(this.props.rackStructure && !this.state.sourceType)? */}
+                                {(this.props.rackStructure && !this.state.sourceType && this.state.destTypeStructure && this.state.destTypeWidth)?
                                     <div className="rackWrapper">
                                         <MsuRackFlex rackDetails={this.state.destTypeStructure}
                                                      rackWidth={this.state.destTypeWidth} />
