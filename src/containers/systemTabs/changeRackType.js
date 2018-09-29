@@ -38,35 +38,34 @@ import {
 } from "./../../actions/validationActions";
 
 const MSU_RACK_STRUCTURE_QUERY = gql`
-query($input:MsuRackJsonListParams){
-    MsuRackJsonList(input:$input){
-         list {
-            face_zero{
-              rack_width
-                  rack_json{
-                barcodes
-                length
-                height
-                type
-                orig_coordinates
-              }  
+    query($input:MsuRackJsonListParams){
+        MsuRackJsonList(input:$input){
+            list {
+                face_zero{
+                rack_width
+                    rack_json{
+                    barcodes
+                    length
+                    height
+                    type
+                    orig_coordinates
+                }  
+                }
+            face_one{
+                rack_width
+                    rack_json{
+                    barcodes
+                    length
+                    height
+                    type
+                    orig_coordinates
+                }  
+                }
+            
             }
-          face_one{
-              rack_width
-                  rack_json{
-                barcodes
-                length
-                height
-                type
-                orig_coordinates
-              }  
+            
             }
-          
-         }
-          
-          }
-    
-}
+    }
 `;
 
 const MSU_SOURCE_TYPE_QUERY = gql`
@@ -324,12 +323,12 @@ ChangeRackType.contextTypes={
 
 const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
     props: function(data){
-        console.log("inside graphql  MSU_RACK_STRUCTURE_QUERY =========>");
+        console.log("inside ===============withQueryForRackStructure =========>");
         if(!data || !data.data.MsuRackJsonList || !data.data.MsuRackJsonList.list){
             return {}
         }
         return {
-           // msuRackJsonList: data.data.MsuRackJsonList.list
+           // rackStructure: data.data.MsuRackJsonList.list
            rackStructure: {
             "0": {
                 "rack_width": 96,
@@ -615,14 +614,12 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
 });
 
 const withQueryForDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
-
     props: function(data){
-        console.log("inside  MSU_SOURCE_TYPE_QUERY withQuery");
+        console.log("inside ===============  withQueryForDestinationTypes =========>");
         if(!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list){
             return {}
         }
         return {
-            //destType: ["33","15","24","16","12","27","26","14","11","22","19","17","21"]
             destType: data.data.MsuSourceTypeList.list
         }
     },
@@ -631,6 +628,7 @@ const withQueryForDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
         fetchPolicy: 'network-only'
     }),
 });
+
 
 function mapStateToProps(state, ownProps) {
     return {
@@ -649,6 +647,7 @@ var mapDispatchToProps=function (dispatch) {
 
 //export default connect(mapStateToProps, mapDispatchToProps)(ChangeRackType) ;
 export default compose(
-    withQueryForRackStructure, withQueryForDestinationTypes,
+    withQueryForRackStructure, 
+    withQueryForDestinationTypes,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)((ChangeRackType)));
