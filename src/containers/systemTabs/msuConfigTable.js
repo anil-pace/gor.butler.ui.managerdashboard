@@ -101,7 +101,8 @@ class MsuConfigTable extends React.Component {
     }
 
     _changeDestinationType(id){
-        let msuList = this.props.msuList;
+        //let msuList = this.props.msuList;
+        let msuList = this.props.items;
         let rackType = null;
         for(let i=0,len=msuList.length; i<len;i++){
             if(msuList[i].id === id){
@@ -111,7 +112,8 @@ class MsuConfigTable extends React.Component {
         }
         
         modal.add(ChangeRackType, {
-            msuList: this.props.msuList,
+            //msuList: this.props.msuList,
+            msuList: this.props.items,
             rackType: rackType,
             blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
             title: '',

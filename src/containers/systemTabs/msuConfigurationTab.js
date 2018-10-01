@@ -95,6 +95,7 @@ class MsuConfigTab extends React.Component {
             startStopBtnState: true,
             startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
+            msuList: []
         };
         this.subscription = null;
         this.linked =false;
@@ -148,6 +149,9 @@ class MsuConfigTab extends React.Component {
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             msuList= data.data.MsuFilterList.list;
+            this.setState({
+                msuList: msuList
+            });
           //this.props.notifyFail();
         })
     }
@@ -385,7 +389,8 @@ class MsuConfigTab extends React.Component {
 
     render() {
         var filterHeight=screen.height - 190 - 50;
-        let msuListData=this.props.msuList;
+        //let msuListData=this.props.msuList;
+        let msuListData = this.state.msuList;
         console.log("hello m getting triggered inside Render==============>" + JSON.stringify(this.props.msuList));
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
@@ -486,7 +491,7 @@ class MsuConfigTab extends React.Component {
                                                     defaultMessage="Show all MSUs with blocked puts"/>}/>
                         </div>:null}
 
-                        {this.props.msuList && this.props.msuList.length > 0 && 
+                        {this.state.msuList && this.state.msuList.length > 0 && 
                             (<MsuConfigTable items={msuListData} 
                                 intlMessg={this.props.intlMessages}
                                 setButlerFilter={this.props.butlerFilterDetail}
