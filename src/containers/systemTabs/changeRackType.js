@@ -76,6 +76,17 @@ const MSU_SOURCE_TYPE_QUERY = gql`
     }
 `;
 
+const MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST = gql`
+    query($input:MsuFilterListParams){
+        MsuFilterList(input:$input){
+            list {
+              id
+              racktype
+            } 
+        }
+    }
+`;
+
 class ChangeRackType extends React.Component {
     constructor(props) {
         super(props);
@@ -120,23 +131,45 @@ class ChangeRackType extends React.Component {
     }
 
 
-    _blockPutAndChangeType(){
-        let formData={         
-            "rack_id":this.props.id, // 0 is for currently filtered msulist
-            "destination_type":this.state.destType
-        };
+    // _blockPutAndChangeType(){
+    //     let formData={         
+    //         "rack_id":this.props.id, // 0 is for currently filtered msulist
+    //         "destination_type":this.state.destType
+    //     };
 
-        let params={
-            'url': MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
-            'formdata':formData,
-        }
-        this.props.makeAjaxCall(params);
-        this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-        this.props.blockPutAndChangeTypeCallback();
+    //     let params={
+    //         'url': MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL,
+    //         'method':POST,
+    //         'contentType':APP_JSON,
+    //         'accept':APP_JSON,
+    //         'cause' : FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
+    //         'formdata':formData,
+    //     }
+    //     this.props.makeAjaxCall(params);
+    //     this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+    //     this.props.blockPutAndChangeTypeCallback();
+    // }
+
+    _blockPutAndChangeType(){
+        let msuList = [];
+            this.props.client.query({
+                query: MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST,
+                //variables: formData,
+                variables: (function () {
+                    return {
+                        input: {
+                            rack_id: "15",    // HARD- CODED FOR NOW
+                            destination_type: "16"  // HARD- CODED FOR NOW
+                        }
+                    }
+                }()),
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                console.log("changeRackType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
+                msuList= data.data.MsuList.list;
+                this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+                this.props.blockPutAndChangeTypeCallback();
+            })
     }
 
     _removeThisModal() {
@@ -333,7 +366,8 @@ class ChangeRackType extends React.Component {
                                     defaultMessage="Select a destination type in order to block put."/>
                         </div>
                         <div className="gor-button-wrap">
-                            <button disabled = {this.state.blockPutChangeTypeBtnState} className="gor-msuConfig-btn orange"
+                            <button disabled = {this.state.blockPutChangeTypeBtnState} 
+                                    className="gor-msuConfig-btn orange"
                                      onClick={this._blockPutAndChangeType}>
                                 <FormattedMessage id="gor.msuConfig.blockPutChangeType" 
                                     description="button label for block put & change type" 
@@ -360,6 +394,7 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
         }
         return {
            rackStructure: data.data.MsuRackJsonList.list
+           //}
         }
     },
     options: ({match, location}) => ({
