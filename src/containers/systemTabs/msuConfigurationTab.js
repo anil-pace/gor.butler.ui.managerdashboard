@@ -86,6 +86,32 @@ subscription USER_CHANNEL_1($username: String){
 }
 `;
 
+
+const MSU_START_RECONFIG_QUERY = gql`
+    query($input:MsuStartReconfigParams){
+            MsuStartReconfig(input:$input) {
+                list
+            }
+        }
+`;
+
+const MSU_STOP_RECONFIG_QUERY = gql`
+    query($input:MsuStopReconfigarams){
+            MsuStopReconfig(input:$input) {
+                list
+            }
+        }
+`;
+
+const MSU_RELEASE_QUERY = gql`
+    query($input:MsuReleaseParams){
+            MsuRelease(input:$input) {
+                list
+            }
+        }
+`;
+
+
 class MsuConfigTab extends React.Component {
 
     constructor(props) {
@@ -100,12 +126,12 @@ class MsuConfigTab extends React.Component {
         this.subscription = null;
         this.linked =false;
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
-        this._releaseMsuAction = this._releaseMsuAction.bind(this);
+        //this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
         this._setFilterAction = this._setFilterAction.bind(this);
         this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
-        this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
+       // this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
 
     
@@ -170,42 +196,88 @@ class MsuConfigTab extends React.Component {
 
     }
 
-    _releaseMsuAction = () => {
-        let params={
-            'url': MSU_CONFIG_RELEASE_MSU_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':FETCH_MSU_CONFIG_RELEASE_MSU
-        }
-        this.props.makeAjaxCall(params);
+    // _releaseMsuAction = () => {
+    //     let params={
+    //         'url': MSU_CONFIG_RELEASE_MSU_URL,
+    //         'method':POST,
+    //         'contentType':APP_JSON,
+    //         'accept':APP_JSON,
+    //         'cause':FETCH_MSU_CONFIG_RELEASE_MSU
+    //     }
+    //     this.props.makeAjaxCall(params);
+    // }
+
+    _releaseMsuAction(){
+        let msuList = [];
+        this.props.client.query({
+            query: MSU_RELEASE_QUERY,
+            //variables: formData,
+            variables: {},
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+            msuList= data.data.MsuFilterList.list;
+            this.setState({
+                msuList: msuList
+            });
+          //this.props.notifyFail();
+        })
     }
 
     
     _startStopActionInitiated(){
         if(this.state.startStopBtnText === "startReconfig"){
-            let params={
-                'url': MSU_CONFIG_START_RECONFIG_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause' : FETCH_MSU_CONFIG_START_RECONFIG
-            }
-            this.props.makeAjaxCall(params);
+            // let params={
+            //     'url': MSU_CONFIG_START_RECONFIG_URL,
+            //     'method':POST,
+            //     'contentType':APP_JSON,
+            //     'accept':APP_JSON,
+            //     'cause' : FETCH_MSU_CONFIG_START_RECONFIG
+            // }
+            // this.props.makeAjaxCall(params);
+
+            this.props.client.query({
+                query: MSU_START_RECONFIG_QUERY,
+                //variables: formData,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+                msuList= data.data.MsuList.list;
+                this.setState({
+                    msuList: msuList
+                });
+              //this.props.notifyFail();
+            })
+
             this.setState({
                 startStopBtnState: true,
                 startStopBtnText: "stopReconfig"
             })
         }
         else{
-            let params={
-                'url': MSU_CONFIG_STOP_RECONFIG_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause' : FETCH_MSU_CONFIG_STOP_RECONFIG
-            }
-            this.props.makeAjaxCall(params);
+            // let params={
+            //     'url': MSU_CONFIG_STOP_RECONFIG_URL,
+            //     'method':POST,
+            //     'contentType':APP_JSON,
+            //     'accept':APP_JSON,
+            //     'cause' : FETCH_MSU_CONFIG_STOP_RECONFIG
+            // }
+            // this.props.makeAjaxCall(params);
+
+            this.props.client.query({
+                query: MSU_STOP_RECONFIG_QUERY,
+                //variables: formData,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+                msuList= data.data.MsuList.list;
+                this.setState({
+                    msuList: msuList
+                });
+              //this.props.notifyFail();
+            })
             
             this.setState({
                 startStopBtnState: true,
