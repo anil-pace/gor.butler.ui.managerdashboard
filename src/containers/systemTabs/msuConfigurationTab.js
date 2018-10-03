@@ -389,8 +389,7 @@ class MsuConfigTab extends React.Component {
 
     render() {
         var filterHeight=screen.height - 190 - 50;
-        //let msuListData=this.props.msuList;
-        let msuListData = this.state.msuList;
+        let msuListData=this.props.msuList;
         console.log("hello m getting triggered inside Render==============>" + JSON.stringify(this.props.msuList));
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
@@ -491,7 +490,7 @@ class MsuConfigTab extends React.Component {
                                                     defaultMessage="Show all MSUs with blocked puts"/>}/>
                         </div>:null}
 
-                        {this.state.msuList && this.state.msuList.length > 0 && 
+                        {this.props.msuList && this.props.msuList.length > 0 && 
                             (<MsuConfigTable items={msuListData} 
                                 intlMessg={this.props.intlMessages}
                                 setButlerFilter={this.props.butlerFilterDetail}
@@ -521,12 +520,12 @@ const withQuery = graphql(MSU_LIST_QUERY, {
             return {}
         }
         return {
-            msuList: data.data.MsuList.list
-            // msuList :  [
-            //                 {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
-            //                 {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
-            //                 {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-            //             ]
+            //msuList: data.data.MsuList.list
+            msuList :  [
+                            {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
+                            {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
+                        ]
         }
     },
     options: ({match, location}) => ({
