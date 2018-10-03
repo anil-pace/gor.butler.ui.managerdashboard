@@ -45,7 +45,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     let parseDtInMS,invDate ;
     invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
     invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
-    parsedDate=new Date(invObj.date);
+    parsedDate=invDate;
     parseDtInMS=parsedDate.getTime();
     recreatedData[parseDtInMS]={};
     recreatedData[parseDtInMS].otherInfo=invObj;
