@@ -77,14 +77,11 @@ const MSU_SOURCE_TYPE_QUERY = gql`
 `;
 
 const MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST = gql`
-    query($input:MsuFilterListParams){
-        MsuFilterList(input:$input){
-            list {
-              id
-              racktype
-            } 
+    query($input:MsuBlockPutChangeTypeParams){
+        MsuBlockPutChangeType(input:$input){
+                    status
         }
-    }
+        }
 `;
 
 class ChangeRackType extends React.Component {
@@ -158,14 +155,14 @@ class ChangeRackType extends React.Component {
                 variables: (function () {
                     return {
                         input: {
-                            rack_id: "15",    // HARD- CODED FOR NOW
-                            destination_type: "16"  // HARD- CODED FOR NOW
+                            rack_id: "12",    // HARD- CODED FOR NOW
+                            destination_type: "26"  // HARD- CODED FOR NOW
                         }
                     }
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("changeRackType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
+                console.log("_blockPutAndChangeType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
                 msuList= data.data.MsuList.list;
                 this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
                 this.props.blockPutAndChangeTypeCallback();
