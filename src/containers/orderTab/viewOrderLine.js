@@ -299,10 +299,11 @@ class ViewOrderLine extends React.Component{
                                 <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.binNo" description='bin no' defaultMessage='Bin no:'/> </span> 
                                 <span className="spanValues"> {this.props.orderLines.pps_bin_id} </span> 
                               </div>
-                              <div className="orderDetailsRows"> 
-                                <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
-                                <span className="spanValues"> {this.props.orderLines.username} </span> 
-                              </div>
+                              {this.props.orderLines.username ? 
+                                <div className="orderDetailsRows"> 
+                                    <span className="spanKeys col-1-span-key"> <FormattedMessage id="orders.oLines.operator" description='operator' defaultMessage='Operator:'/> </span> 
+                                    <span className="spanValues"> {this.props.orderLines.username} </span> 
+                                </div> : <div className="orderDetailsRows"> &nbsp;</div>}
                           </div>
 
                           <div className="orderDetailsColumn">
