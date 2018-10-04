@@ -164,9 +164,10 @@ class ChangeRackType extends React.Component {
             }).then(data=>{
                 console.log("_blockPutAndChangeType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
                 msuList= data.data.MsuList.list;
-                this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-                this.props.blockPutAndChangeTypeCallback();
-            })
+                
+            });
+            this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+            this.props.blockPutAndChangeTypeCallback();
     }
 
     _removeThisModal() {

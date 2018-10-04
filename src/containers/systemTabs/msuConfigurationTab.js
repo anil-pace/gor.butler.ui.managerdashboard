@@ -141,6 +141,9 @@ class MsuConfigTab extends React.Component {
     }
 
     _requestMsuList(){
+        // call this funciton post click on Put block and change type
+
+
         // let params={
         //     'url': MSU_CONFIG_URL,
         //     'method':GET,
@@ -156,6 +159,15 @@ class MsuConfigTab extends React.Component {
         // this._intervalIdForMsuList= setInterval(function(){
         //     self.props.makeAjaxCall(params)
         // },MSU_CONFIG_POLLING_INTERVAL)
+        let msuList = [];
+        this.props.client.query({
+            query: MSU_LIST_QUERY,
+            variables: {},
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+            msuList= data.data.MsuList.list;
+        })
     }
 
     _requestMsuListViaFilter(rackId, rackStatus){
