@@ -76,7 +76,7 @@ const MSU_LIST_POST_FILTER_QUERY = gql`
 `;
 
 const SUBSCRIPTION_QUERY = gql`
-subscription MSULIST_CHANNEL($input: input){
+subscription MSULIST_CHANNEL{
     MsuFilterList(input:$input){
         list {
           id
@@ -130,7 +130,7 @@ class MsuConfigTab extends React.Component {
         this._setFilterAction = this._setFilterAction.bind(this);
         this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
-       // this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
+        this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
     }
 
     
@@ -195,9 +195,6 @@ class MsuConfigTab extends React.Component {
 
 
     _refreshMsuDataAction = () => {
-        if(this._intervalIdForMsuList){
-            this.clearPolling()
-        }
       this._refreshList(this.props.location.query);
     }
 
@@ -228,10 +225,6 @@ class MsuConfigTab extends React.Component {
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             msuList= data.data.MsuList.list;
-            // this.setState({
-            //     msuList: msuList
-            // });
-          //this.props.notifyFail();
         })
     }
 
@@ -254,10 +247,10 @@ class MsuConfigTab extends React.Component {
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-                msuList= data.data.MsuList.list;
-                this.setState({
-                    msuList: msuList
-                });
+                // msuList= data.data.MsuList.list;
+                // this.setState({
+                //     msuList: msuList
+                // });
               //this.props.notifyFail();
             })
 
@@ -283,10 +276,10 @@ class MsuConfigTab extends React.Component {
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-                msuList= data.data.MsuList.list;
-                this.setState({
-                    msuList: msuList
-                });
+                // msuList= data.data.MsuList.list;
+                // this.setState({
+                //     msuList: msuList
+                // });
               //this.props.notifyFail();
             })
             
@@ -435,6 +428,9 @@ class MsuConfigTab extends React.Component {
         let filterUrl;
         if(query.rack_id || query.status){
             this._requestMsuListViaFilter(query.rack_id, query.status);
+        }
+        else{
+            this._requestMsuList()
         }
         
         // if(query.rack_id && query.status){
@@ -629,7 +625,6 @@ class MsuConfigTab extends React.Component {
 };
 
 const withQuery = graphql(MSU_LIST_QUERY, {
-
     props: function(data){
         console.log("inside withQuery => md");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
@@ -730,8 +725,86 @@ MsuConfigTab.PropTypes={
     msuConfigSpinner: React.PropTypes.bool,
 };
 
+const botsClientData = gql`
+    query  {
+    todos @client
+    botsFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+                MODE
+            }
+            searchQuery{
+                BOT_ID
+                SPECIFIC_LOCATION_ZONE
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+            }
+        }
+    }
+    }
+`;
+
+const SET_VISIBILITY = gql`
+    mutation setBotsFilter($filter: String!) {
+        setShowBotsFilter(filter: $filter) @client
+    }
+`;
+
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setButlerBotsFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setBotsFilterState(state: $state) @client
+    }
+`;
+
+
+const withClientData = graphql(botsClientData, {
+    props: (data) => ({
+        todos: data.data.todos,
+        showFilter: data.data.botsFilter ? data.data.botsFilter.display : false,
+        isFilterApplied: data.data.botsFilter ? data.data.botsFilter.isFilterApplied : false,
+        botsFilterStatus:data.data.botsFilter ? JSON.parse(JSON.stringify(data.data.botsFilter.filterState)) : null,
+    })
+})
+
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        showBotsFilter: function (show) {
+            mutate({variables: {filter: show}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        butlerfilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
 //export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab));
 export default compose(
+   // withClientData,
+    //setVisibilityFilter,
+    //setFilterApplied,
+    //setFilterState,
     withQuery,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));

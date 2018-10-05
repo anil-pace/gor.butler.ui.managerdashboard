@@ -127,7 +127,7 @@ class MsuConfigTable extends React.Component {
 
     _processMSUs = (destType) => {
         let msuData = this.props.items;
-       //let msuData = [{"id":"26","racktype":"15","__typename":"MsuFilter"},{"id":"25","racktype":"15","__typename":"MsuFilter"}];
+        //let msuData = [{"id":"26","racktype":"15","__typename":"MsuFilter"},{"id":"25","racktype":"15","__typename":"MsuFilter"}];
         let msuDataLen = msuData ? msuData.length : 0; 
         let msuRows = []; 
         let processedData = {};
