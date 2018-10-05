@@ -76,7 +76,7 @@ const MSU_LIST_POST_FILTER_QUERY = gql`
 `;
 
 const SUBSCRIPTION_QUERY = gql`
-subscription USER_CHANNEL_1($username: String){
+subscription MSULIST_CHANNEL($input: input){
     MsuFilterList(input:$input){
         list {
           id
@@ -121,7 +121,6 @@ class MsuConfigTab extends React.Component {
             startStopBtnState: true,
             startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
-            msuList: []
         };
         this.subscription = null;
         this.linked =false;
@@ -185,11 +184,11 @@ class MsuConfigTab extends React.Component {
             }()),
             fetchPolicy: 'network-only'
         }).then(data=>{
-            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-            msuList= data.data.MsuFilterList.list;
-            this.setState({
-                msuList: msuList
-            });
+            console.log("MSU_LIST_POST_FILTER_QUERY============>" + JSON.stringify(data));
+             msuList= data.data.MsuFilterList.list;
+            // this.setState({
+            //     msuList: msuList
+            // });
           //this.props.notifyFail();
         })
     }
@@ -228,10 +227,10 @@ class MsuConfigTab extends React.Component {
             fetchPolicy: 'network-only'
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-            msuList= data.data.MsuFilterList.list;
-            this.setState({
-                msuList: msuList
-            });
+            msuList= data.data.MsuList.list;
+            // this.setState({
+            //     msuList: msuList
+            // });
           //this.props.notifyFail();
         })
     }
@@ -326,20 +325,24 @@ class MsuConfigTab extends React.Component {
             })
         }
 
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
         }
 
-        if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
-            this._refreshList(nextProps.location.query)
+        if (this.props.data && (!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
+            this.updateSubscription(nextProps.location.query)
         }
 
-        if(Object.keys(nextProps.location.query).length>0 &&
-            this._intervalIdForMsuList && 
-            JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-                this.clearPolling();
-        }
+        // if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
+        //     this._refreshList(nextProps.location.query)
+        // }
+
+        // if(Object.keys(nextProps.location.query).length>0 &&
+        //     this._intervalIdForMsuList && 
+        //     JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
+        //         this.clearPolling();
+        // }
 
         if(nextProps.msuList && Array.isArray(nextProps.msuList)){
 
@@ -388,6 +391,35 @@ class MsuConfigTab extends React.Component {
                 this._disableReleaseMsuBtn(true);
            }
        }
+
+    }
+
+
+
+    componentWillUnMount() {
+        if (this.subscription) {
+            this.subscription()
+        }
+    }
+
+
+
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: SUBSCRIPTION_QUERY,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                console.log(newResult)
+
+                return Object.assign({}, {
+                    MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
+                })
+            },
+        });
     }
 
 
@@ -604,12 +636,12 @@ const withQuery = graphql(MSU_LIST_QUERY, {
             return {}
         }
         return {
-            //msuList: data.data.MsuList.list
-            msuList :  [
-                            {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
-                            {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-                        ]
+            msuList: data.data.MsuList.list
+            // msuList :  [
+            //                 {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
+            //                 {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
+            //                 {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
+            //             ]
         }
     },
     options: ({match, location}) => ({
