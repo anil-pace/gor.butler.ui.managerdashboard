@@ -14,7 +14,7 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setMsuConfigSpinner} from  '../../actions/spinnerAction';
 import {butlerFilterDetail} from '../../actions/sortHeaderActions';
-import {showTableFilter, filterApplied, toggleBotButton, butlerfilterState, msuConfigFilterState} from '../../actions/filterAction';
+import {showTableFilter, filterApplied, toggleBotButton, msuListFilterState, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import MsuConfigFilter from './msuConfigFilter';
@@ -68,8 +68,8 @@ const MSU_LIST_POST_FILTER_QUERY = gql`
     query($input:MsuFilterListParams){
         MsuFilterList(input:$input){
             list {
-              id
-              racktype
+              rack_id
+              source_type
             } 
         }
     }
@@ -79,8 +79,8 @@ const SUBSCRIPTION_QUERY = gql`
 subscription MSULIST_CHANNEL{
     MsuFilterList(input:$input){
         list {
-          id
-          racktype
+          rack_id
+          source_type
         } 
     }
 }
@@ -124,6 +124,9 @@ class MsuConfigTab extends React.Component {
         };
         this.subscription = null;
         this.linked =false;
+
+       // this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
+
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         //this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
@@ -139,34 +142,36 @@ class MsuConfigTab extends React.Component {
        //this._requestMsuList();
     }
 
-    _requestMsuList(){
-        // call this funciton post click on Put block and change type
-
-
-        // let params={
-        //     'url': MSU_CONFIG_URL,
-        //     'method':GET,
-        //     'contentType':APP_JSON,
-        //     'accept':APP_JSON,
-        //     'cause' : FETCH_MSU_CONFIG_LIST
-        // }
-        // this.props.makeAjaxCall(params);
-        // let self=this;
-        // if(!this._intervalIdForMsuList){
-        //    self.props.makeAjaxCall(params) 
-        // }
-        // this._intervalIdForMsuList= setInterval(function(){
-        //     self.props.makeAjaxCall(params)
-        // },MSU_CONFIG_POLLING_INTERVAL)
-        let msuList = [];
-        this.props.client.query({
-            query: MSU_LIST_QUERY,
-            variables: {},
-            fetchPolicy: 'network-only'
-        }).then(data=>{
-            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-            msuList= data.data.MsuList.list;
-        })
+    _requestMsuList(rackId, rackStatus){
+        if(rackId || rackStatus){
+            let msuList = [];
+            this.props.client.query({
+                query: MSU_LIST_POST_FILTER_QUERY,
+                variables: (function () {
+                    return {
+                        input: {
+                            id: rackId,
+                            racktype:rackStatus
+                        }
+                    }
+                }()),
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                console.log("MSU_LIST_POST_FILTER_QUERY============>" + JSON.stringify(data));
+                msuList= data.data.MsuFilterList.list;
+            })
+        }
+        else{
+            let msuList = [];
+            this.props.client.query({
+                query: MSU_LIST_QUERY,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+                msuList= data.data.MsuList.list;
+            })
+        }
     }
 
     _requestMsuListViaFilter(rackId, rackStatus){
@@ -323,9 +328,9 @@ class MsuConfigTab extends React.Component {
             this._refreshList(nextProps.location.query)
         }
 
-        if (this.props.data && (!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
-            this.updateSubscription(nextProps.location.query)
-        }
+        // if (this.props.data && (!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
+        //     this.updateSubscription(nextProps.location.query)
+        // }
 
         // if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
         //     this._refreshList(nextProps.location.query)
@@ -389,31 +394,31 @@ class MsuConfigTab extends React.Component {
 
 
 
-    componentWillUnMount() {
-        if (this.subscription) {
-            this.subscription()
-        }
-    }
+    // componentWillUnMount() {
+    //     if (this.subscription) {
+    //         this.subscription()
+    //     }
+    // }
 
 
 
-    updateSubscription(variables) {
-        if (this.subscription) {
-            this.subscription()
-        }
-        this.subscription = this.props.data.subscribeToMore({
-            variables: variables,
-            document: SUBSCRIPTION_QUERY,
-            notifyOnNetworkStatusChange: true,
-            updateQuery: (previousResult, newResult) => {
-                console.log(newResult)
+    // updateSubscription(variables) {
+    //     if (this.subscription) {
+    //         this.subscription()
+    //     }
+    //     this.subscription = this.props.data.subscribeToMore({
+    //         variables: variables,
+    //         document: SUBSCRIPTION_QUERY,
+    //         notifyOnNetworkStatusChange: true,
+    //         updateQuery: (previousResult, newResult) => {
+    //             console.log(newResult)
 
-                return Object.assign({}, {
-                    MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
-                })
-            },
-        });
-    }
+    //             return Object.assign({}, {
+    //                 MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
+    //             })
+    //         },
+    //     });
+    // }
 
 
 
@@ -426,12 +431,14 @@ class MsuConfigTab extends React.Component {
 
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
-        if(query.rack_id || query.status){
-            this._requestMsuListViaFilter(query.rack_id, query.status);
-        }
-        else{
-            this._requestMsuList()
-        }
+        this._requestMsuList(query.rack_id, query.status);
+        //if(query.rack_id || query.status){
+           // this._requestMsuListViaFilter(query.rack_id, query.status);
+           
+        //}
+        //else{
+          //  this._requestMsuList()
+       // }
         
         // if(query.rack_id && query.status){
         //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
@@ -513,7 +520,12 @@ class MsuConfigTab extends React.Component {
                             <div>
                                 <div className="gor-filter-wrap"
                                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                    <MsuConfigFilter msuListData={msuListData} responseFlag={this.props.responseFlag}/>
+                                    <MsuConfigFilter
+                                        msuListFilterState={this.props.msuListFilterState} 
+                                        isFilterApplied={this.props.isFilterApplied} 
+                                        showMsuListFilter={this.props.showMsuListFilter} 
+                                        msuListData={msuListData} 
+                                        responseFlag={this.props.responseFlag}/>
                                 </div>
 
 
@@ -725,7 +737,8 @@ MsuConfigTab.PropTypes={
     msuConfigSpinner: React.PropTypes.bool,
 };
 
-const botsClientData = gql`
+/*
+const msuListClientData = gql`
     query  {
     todos @client
     botsFilter @client{
@@ -749,37 +762,69 @@ const botsClientData = gql`
     }
     }
 `;
+*/
+
+const msuListClientData = gql`
+    query  {
+    msuListFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+            }
+            searchQuery{
+                MSU ID
+            }
+            
+            defaultToken{
+                STATUS
+            }
+        }
+    }
+   
+    }
+`;
+
+
+
+
+
 
 const SET_VISIBILITY = gql`
-    mutation setBotsFilter($filter: String!) {
-        setShowBotsFilter(filter: $filter) @client
+    mutation setMsuListFilter($filter: String!) {
+        showMsuListFilter(filter: $filter) @client
     }
 `;
 
 const SET_FILTER_APPLIED = gql`
     mutation setFilterApplied($isFilterApplied: String!) {
-        setButlerBotsFilterApplied(isFilterApplied: $isFilterApplied) @client
+        setFilterApplied(isFilterApplied: $isFilterApplied) @client
     }
 `;
 const SET_FILTER_STATE = gql`
     mutation setFilterState($state: String!) {
-        setBotsFilterState(state: $state) @client
+        setMsuFilterState(state: $state) @client
     }
 `;
 
-
-const withClientData = graphql(botsClientData, {
-    props: (data) => ({
-        todos: data.data.todos,
-        showFilter: data.data.botsFilter ? data.data.botsFilter.display : false,
-        isFilterApplied: data.data.botsFilter ? data.data.botsFilter.isFilterApplied : false,
-        botsFilterStatus:data.data.botsFilter ? JSON.parse(JSON.stringify(data.data.botsFilter.filterState)) : null,
-    })
+const withClientData = graphql(msuListClientData, {
+    props: function(data) { 
+        console.log(data);
+        return {
+            msuList: data.data.msuList,
+            //todos: data.data.todos,
+            showFilter: data.data.msuListFilter ? data.data.msuListFilter.display : false,
+            isFilterApplied: data.data.msuListFitler ? data.data.msuListFilter.isFilterApplied : false,
+            msuListFilterStatus:data.data.msuListFitler ? JSON.parse(JSON.stringify(data.data.msuListFitler.filterState)) : null,
+        }
+    }
 })
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
     props: ({mutate, ownProps}) => ({
-        showBotsFilter: function (show) {
+        //showBotsFilter: function (show) {
+        showMsuListFilter: function (show) {
             mutate({variables: {filter: show}})
         },
     }),
@@ -793,7 +838,8 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
     props: ({mutate, ownProps}) => ({
-        butlerfilterState: function (state) {
+        //butlerfilterState: function (state) {
+        msuListFilterState: function (state) {
             mutate({variables: {state: state}})
         },
     }),
@@ -801,10 +847,10 @@ const setFilterState = graphql(SET_FILTER_STATE, {
 
 //export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab));
 export default compose(
-   // withClientData,
-    //setVisibilityFilter,
-    //setFilterApplied,
-    //setFilterState,
+    withClientData,
+    setVisibilityFilter,
+    setFilterApplied,
+    setFilterState,
     withQuery,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));
