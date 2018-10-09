@@ -102,30 +102,30 @@ class ChangeRackType extends React.Component {
         //this._reqRackStructure = this._reqRackStructure.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
-            if(this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-                })
-            }
-            if(!this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    destTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-                    destTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-                })
-            }
-        } 
-        else{
-            if(this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-                })
-            }
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
+    //         if(this.state.sourceType && nextProps.rackStructure){
+    //             this.setState({
+    //                 sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+    //                 sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
+    //             })
+    //         }
+    //         if(!this.state.sourceType && nextProps.rackStructure){
+    //             this.setState({
+    //                 destTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+    //                 destTypeWidth: nextProps.rackStructure["face_zero"].rack_width
+    //             })
+    //         }
+    //     } 
+    //     else{
+    //         if(this.state.sourceType && nextProps.rackStructure){
+    //             this.setState({
+    //                 sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
+    //                 sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
+    //             })
+    //         }
+    //     }
+    // }
 
 
     // _blockPutAndChangeType(){
@@ -174,23 +174,7 @@ class ChangeRackType extends React.Component {
         this.props.removeModal();
     }
 
-    componentDidMount() {
-       //this._reqRackStructure(this.props.rackType); // request Rack structure for EXISTING SOURCE TYPE
-       //this._reqDestinationTypes();
-    }
-
-    // _reqRackStructure(rackType){
-    //     let params={
-    //         'url': MSU_CONFIG_LIST_RACK_STRUCTURE_URL+"/"+rackType,
-    //         'method':GET,
-    //         'contentType':APP_JSON,
-    //         'accept':APP_JSON,
-    //         'cause' : FETCH_MSU_CONFIG_RACK_STRUCTURE,
-    //     }
-    //     this.props.makeAjaxCall(params);
-    // }
-
-    _reqRackStructure(destType){
+    _reqRackStructure(rackType, forWhichType){
         let rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
@@ -198,7 +182,7 @@ class ChangeRackType extends React.Component {
             variables: (function () {
                 return {
                     input: {
-                        rackType: destType
+                        rackType: rackType
                     }
                 }
             }()),
@@ -206,11 +190,33 @@ class ChangeRackType extends React.Component {
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             rackStructure= data.data.MsuRackJsonList.list;
-            this.setState({
-                destTypeStructure: rackStructure["face_zero"].rack_json,
-                destTypeWidth: rackStructure["face_zero"].rack_width
-            });
-          //this.props.notifyFail();
+                this.setState({
+                    sourceTypeStructure: rackStructure["face_zero"].rack_json,
+                    sourceTypeWidth: rackStructure["face_zero"].rack_width
+                });
+        })
+    }
+
+    _reqRackStructureForDestinationType(rackType){
+        let rackStructure = [];
+        this.props.client.query({
+            query: MSU_RACK_STRUCTURE_QUERY,
+            //variables: formData,
+            variables: (function () {
+                return {
+                    input: {
+                        rackType: rackType
+                    }
+                }
+            }()),
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+            rackStructure= data.data.MsuRackJsonList.list;
+                this.setState({
+                    destTypeStructure: rackStructure["face_zero"].rack_json,
+                    destTypeWidth: rackStructure["face_zero"].rack_width
+                });
         })
     }
 
@@ -249,10 +255,6 @@ class ChangeRackType extends React.Component {
         
     // }
 
-    _reqRackStructureOnDestTypeChange(){
-        this._reqRackStructure(this.state.destType);
-    }
-
     _changeDestType(data) {
         this.setState({ 
             destType: data.value,
@@ -260,6 +262,10 @@ class ChangeRackType extends React.Component {
             blockPutChangeTypeBtnState: false,
         },
         this._reqRackStructureOnDestTypeChange);
+    }
+
+    _reqRackStructureOnDestTypeChange(){
+        this._reqRackStructureForDestinationType(this.state.destType);
     }
 
     _getCurrentDropDownState(fileType, currentValue) {
@@ -273,14 +279,18 @@ class ChangeRackType extends React.Component {
 
 
     render() {
-        let msuList, rackStructure, destTypeList, labelC1;
+        let msuList, rackStructure, destTypeList, labelC1, sourceRackType;
+        sourceRackType = this.props.rackType;
 
-       // rackStructure =  this._reqRackStructure(this.props.rackType);
+        if(!this.state.sourceTypeStructure && !this.state.sourceTypeWidth){
+            rackStructure =  this._reqRackStructure(sourceRackType, "forSourceType");
+        }
+       
        // destTypeList = this._reqDestinationTypes();
 
-        rackStructure = this.props.rackStructure;
-        destTypeList = this.props.destType;
-        msuList = this.props.msuList[0];
+        // rackStructure = this.props.rackStructure;
+        // destTypeList = this.props.destType;
+        // msuList = this.props.msuList[0];
         
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
@@ -314,7 +324,7 @@ class ChangeRackType extends React.Component {
                                     <FormattedMessage id="msuConfig.sourceType.heading" 
                                         description='Heading for source type' 
                                         defaultMessage='Source type: {sourceType}'
-                                        values={{sourceType:msuList.racktype}}
+                                        values={{sourceType:sourceRackType}}
                                         />
                                 </div>
                                     <div className="rackWrapper">
@@ -322,10 +332,10 @@ class ChangeRackType extends React.Component {
                                         <MsuRackFlex rackDetails={this.state.sourceTypeStructure} 
                                                       rackWidth={this.state.sourceTypeWidth} />
                                     */}
-                                    {this.props.rackStructure && 
+                                    {this.state.sourceTypeStructure && this.state.sourceTypeWidth? 
                                         <MsuRackFlex 
-                                            rackDetails = {this.props.rackStructure["face_zero"].rack_json}
-                                            rackWidth = {this.props.rackStructure["face_zero"].rack_width} />
+                                            rackDetails={this.state.sourceTypeStructure}
+                                            rackWidth={this.state.sourceTypeWidth} /> : ""
                                     }
                                     </div>
                                     
@@ -340,7 +350,7 @@ class ChangeRackType extends React.Component {
                                 />
 
                                 {/*{(this.props.rackStructure && !this.state.sourceType)? */}
-                                {(this.props.rackStructure && !this.state.sourceType && this.state.destTypeStructure && this.state.destTypeWidth)?
+                                {this.state.destTypeStructure && this.state.destTypeWidth?
                                     <div className="rackWrapper">
                                         <MsuRackFlex rackDetails={this.state.destTypeStructure}
                                                      rackWidth={this.state.destTypeWidth} />
@@ -398,9 +408,10 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
     options: ({match, location}) => ({
         //variables: {},
         variables: (function () {
+            console.log(location);
             return {
                 input: {
-                    rackType: "15"
+                    rackType: '15'
                 }
             }
         }()),
@@ -408,7 +419,7 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
     }),
 });
 
-const withQueryForDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
+const withQueryGetDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
     props: function(data){
         console.log("inside ===============  withQueryForDestinationTypes =========>");
         if(!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list){
@@ -442,7 +453,7 @@ var mapDispatchToProps=function (dispatch) {
 
 //export default connect(mapStateToProps, mapDispatchToProps)(ChangeRackType) ;
 export default compose(
-    withQueryForRackStructure, 
-    withQueryForDestinationTypes,
+   // withQueryForRackStructure, 
+    withQueryGetDestinationTypes,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)((ChangeRackType)));
