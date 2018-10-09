@@ -23,6 +23,7 @@ import ChangeRackType from './changeRackType';
 import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 import MsuConfigConfirmation from './msuConfigConfirmation';
+import { ApolloConsumer } from 'react-apollo';
 
 import {
     WS_ONSEND,
@@ -65,22 +66,22 @@ const MSU_LIST_QUERY = gql`
 `;
 
 const MSU_LIST_POST_FILTER_QUERY = gql`
-    query($input:MsuFilterListParams){
+    query MsuFilterList($input:MsuFilterListParams){
         MsuFilterList(input:$input){
             list {
-              rack_id
-              source_type
+              id
+              racktype
             } 
         }
     }
 `;
 
 const SUBSCRIPTION_QUERY = gql`
-subscription MSULIST_CHANNEL{
+subscription MSULIST_CHANNEL($input: MsuListFilterParams){
     MsuFilterList(input:$input){
         list {
-          rack_id
-          source_type
+          id
+          racktype
         } 
     }
 }
@@ -157,9 +158,15 @@ class MsuConfigTab extends React.Component {
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("MSU_LIST_POST_FILTER_QUERY============>" + JSON.stringify(data));
-                msuList= data.data.MsuFilterList.list;
-            })
+                //console.log("then", JSON.stringify(data), this.props);
+                //this.props.client.resetStore();
+                //msuList= data.data.MsuList.list;
+                console.log(data.data.MsuFilterList);
+                this.setState({msuList:data.data.MsuFilterList.list});
+            });
+            //this.props.client.resetStore();
+            //this.props.client.queryManager.broadcastQueries();
+            
         }
         else{
             let msuList = [];
@@ -323,6 +330,11 @@ class MsuConfigTab extends React.Component {
             })
         }
 
+
+        if(this.props.msuList!==nextProps.msuList){
+            this.setState({msuList:nextProps.msuList});
+        }
+
         if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
@@ -432,30 +444,6 @@ class MsuConfigTab extends React.Component {
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
         this._requestMsuList(query.rack_id, query.status);
-        //if(query.rack_id || query.status){
-           // this._requestMsuListViaFilter(query.rack_id, query.status);
-           
-        //}
-        //else{
-          //  this._requestMsuList()
-       // }
-        
-        // if(query.rack_id && query.status){
-        //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
-        //     this._requestMsuListViaFilter(filterUrl);
-        // }
-        // else if(query.status){
-        //     filterUrl = MSU_CONFIG_FILTER_URL+"?racktype="+query.status;
-        //     this._requestMsuListViaFilter(filterUrl);
-        // }
-        // else if (query.rack_id){
-        //     filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
-        //     this._requestMsuListViaFilter(filterUrl);
-        // }
-        // else{
-        //     this._requestMsuList()
-        // }
-        
 
         if(Object.keys(query).length>0){
             this.props.filterApplied(true);
@@ -508,8 +496,8 @@ class MsuConfigTab extends React.Component {
 
     render() {
         var filterHeight=screen.height - 190 - 50;
-        let msuListData=this.props.msuList;
-        console.log("hello m getting triggered inside Render==============>" + JSON.stringify(this.props.msuList));
+        let msuListData=this.state.msuList;
+        console.log("hello m getting triggered inside Render==============>" + JSON.stringify(msuListData));
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
@@ -812,11 +800,11 @@ const withClientData = graphql(msuListClientData, {
     props: function(data) { 
         console.log(data);
         return {
-            msuList: data.data.msuList,
-            //todos: data.data.todos,
+            todos: data.data.todos,
+            msuList: data.data.msuFilterList,
             showFilter: data.data.msuListFilter ? data.data.msuListFilter.display : false,
             isFilterApplied: data.data.msuListFitler ? data.data.msuListFilter.isFilterApplied : false,
-            msuListFilterStatus:data.data.msuListFitler ? JSON.parse(JSON.stringify(data.data.msuListFitler.filterState)) : null,
+            msuListFilterStatus: data.data.msuListFitler ? JSON.parse(JSON.stringify(data.data.msuListFitler.filterState)) : null,
         }
     }
 })
