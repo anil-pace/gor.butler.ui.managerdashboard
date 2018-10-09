@@ -139,10 +139,6 @@ class MsuConfigTab extends React.Component {
 
     
 
-    componentDidMount(){
-       //this._requestMsuList();
-    }
-
     _requestMsuList(rackId, rackStatus){
         if(rackId || rackStatus){
             let msuList = [];
@@ -152,21 +148,17 @@ class MsuConfigTab extends React.Component {
                     return {
                         input: {
                             id: rackId,
-                            racktype:rackStatus
+                            racktype: rackStatus.toString()
                         }
                     }
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 //console.log("then", JSON.stringify(data), this.props);
-                //this.props.client.resetStore();
-                //msuList= data.data.MsuList.list;
                 console.log(data.data.MsuFilterList);
                 this.setState({msuList:data.data.MsuFilterList.list});
             });
             //this.props.client.resetStore();
-            //this.props.client.queryManager.broadcastQueries();
-            
         }
         else{
             let msuList = [];
@@ -176,35 +168,10 @@ class MsuConfigTab extends React.Component {
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-                msuList= data.data.MsuList.list;
+                this.setState({msuList:data.data.MsuList.list});
             })
         }
     }
-
-    _requestMsuListViaFilter(rackId, rackStatus){
-        let msuList = [];
-        this.props.client.query({
-            query: MSU_LIST_POST_FILTER_QUERY,
-            //variables: formData,
-            variables: (function () {
-                return {
-                    input: {
-                        id: rackId,
-                        racktype:rackStatus
-                    }
-                }
-            }()),
-            fetchPolicy: 'network-only'
-        }).then(data=>{
-            console.log("MSU_LIST_POST_FILTER_QUERY============>" + JSON.stringify(data));
-             msuList= data.data.MsuFilterList.list;
-            // this.setState({
-            //     msuList: msuList
-            // });
-          //this.props.notifyFail();
-        })
-    }
-
 
     _refreshMsuDataAction = () => {
       this._refreshList(this.props.location.query);
@@ -236,22 +203,12 @@ class MsuConfigTab extends React.Component {
             fetchPolicy: 'network-only'
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-            msuList= data.data.MsuList.list;
         })
     }
 
     
     _startStopActionInitiated(){
         if(this.state.startStopBtnText === "startReconfig"){
-            // let params={
-            //     'url': MSU_CONFIG_START_RECONFIG_URL,
-            //     'method':POST,
-            //     'contentType':APP_JSON,
-            //     'accept':APP_JSON,
-            //     'cause' : FETCH_MSU_CONFIG_START_RECONFIG
-            // }
-            // this.props.makeAjaxCall(params);
-
             this.props.client.query({
                 query: MSU_START_RECONFIG_QUERY,
                 //variables: formData,
@@ -259,28 +216,13 @@ class MsuConfigTab extends React.Component {
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-                // msuList= data.data.MsuList.list;
-                // this.setState({
-                //     msuList: msuList
-                // });
-              //this.props.notifyFail();
-            })
-
-            this.setState({
-                startStopBtnState: true,
-                startStopBtnText: "stopReconfig"
+                this.setState({
+                    startStopBtnState: true,
+                    startStopBtnText: "stopReconfig"
+                })
             })
         }
         else{
-            // let params={
-            //     'url': MSU_CONFIG_STOP_RECONFIG_URL,
-            //     'method':POST,
-            //     'contentType':APP_JSON,
-            //     'accept':APP_JSON,
-            //     'cause' : FETCH_MSU_CONFIG_STOP_RECONFIG
-            // }
-            // this.props.makeAjaxCall(params);
-
             this.props.client.query({
                 query: MSU_STOP_RECONFIG_QUERY,
                 //variables: formData,
@@ -288,16 +230,10 @@ class MsuConfigTab extends React.Component {
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-                // msuList= data.data.MsuList.list;
-                // this.setState({
-                //     msuList: msuList
-                // });
-              //this.props.notifyFail();
-            })
-            
-            this.setState({
-                startStopBtnState: true,
-                startStopBtnText: "startReconfig"
+                this.setState({
+                    startStopBtnState: true,
+                    startStopBtnText: "startReconfig"
+                })
             })
         }
     }
@@ -310,13 +246,12 @@ class MsuConfigTab extends React.Component {
             hideCloseButton: true, // (optional) if you don't wanna show the top right close button
             startStopActionInitiated:this._startStopActionInitiated,
             activeBtnText: this.state.startStopBtnText
-
         });
     }
 
 
     componentWillReceiveProps(nextProps) {
-
+        console.log(" COMPONENT WILL RECEIVE PROPS: => ");
         let isAnyMsuEmpty = [];
         let isAnyMsuDropping = [];
         let isAnyMsuDropped = [];
@@ -339,20 +274,6 @@ class MsuConfigTab extends React.Component {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
         }
-
-        // if (this.props.data && (!this.props.data.MsuList && nextProps.data.MsuList && !this.subscription && !nextProps.data.loading)) {
-        //     this.updateSubscription(nextProps.location.query)
-        // }
-
-        // if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
-        //     this._refreshList(nextProps.location.query)
-        // }
-
-        // if(Object.keys(nextProps.location.query).length>0 &&
-        //     this._intervalIdForMsuList && 
-        //     JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-        //         this.clearPolling();
-        // }
 
         if(nextProps.msuList && Array.isArray(nextProps.msuList)){
 
@@ -474,7 +395,8 @@ class MsuConfigTab extends React.Component {
 
 
     _clearFilter() {
-        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}});
+        this._requestMsuList();
     }
 
     _setFilterAction() {
@@ -800,8 +722,8 @@ const withClientData = graphql(msuListClientData, {
     props: function(data) { 
         console.log(data);
         return {
-            todos: data.data.todos,
-            msuList: data.data.msuFilterList,
+            //todos: data.data.todos,
+            //msuList: data.data.msuFilterList,
             showFilter: data.data.msuListFilter ? data.data.msuListFilter.display : false,
             isFilterApplied: data.data.msuListFitler ? data.data.msuListFilter.isFilterApplied : false,
             msuListFilterStatus: data.data.msuListFitler ? JSON.parse(JSON.stringify(data.data.msuListFitler.filterState)) : null,
