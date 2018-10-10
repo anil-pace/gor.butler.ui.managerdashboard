@@ -78,13 +78,18 @@ class MsuConfigFilter extends React.Component{
          * Hide the filter as soon as data in the list get updated.
          */
         if(nextProps.msuListData.length>0 && JSON.stringify(nextProps.msuListData)!==JSON.stringify(this.props.msuListData)){
-            this.props.showTableFilter(false);
+            //this.props.showTableFilter(false);
+            this.props.showMsuListFilter(false);
         }
     }
-    _closeFilter() {
-        let filterState=!this.props.showFilter;
-        this.props.showTableFilter(filterState);
-    }   
+    // _closeFilter() {
+    //     let filterState=!this.props.showFilter;
+    //     this.props.showTableFilter(filterState);
+    // }   
+
+    _closeFilter(){
+        this.props.showMsuListFilter(false);
+    }
 
     _processMsuConfigSearchField(){
         const temp=[{value:"MSU ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
@@ -147,7 +152,7 @@ class MsuConfigFilter extends React.Component{
     }
 
     _clearFilter() {
-        this.props.msuConfigFilterState({
+        this.props.msuListFilterState({
             tokenSelected: {"STATUS": ["any"]}, searchQuery: {
                 "MSU ID":null
             },

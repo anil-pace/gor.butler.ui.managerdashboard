@@ -448,9 +448,9 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        makeAjaxCall: function(params){
-            dispatch(makeAjaxCall(params))
-        }
+        // makeAjaxCall: function(params){
+        //     dispatch(makeAjaxCall(params))
+        // }
     }
 };
 

@@ -14,7 +14,7 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setMsuConfigSpinner} from  '../../actions/spinnerAction';
 import {butlerFilterDetail} from '../../actions/sortHeaderActions';
-import {showTableFilter, filterApplied, toggleBotButton, msuListFilterState, msuConfigFilterState} from '../../actions/filterAction';
+//import {showTableFilter, filterApplied, toggleBotButton, msuListFilterState, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import MsuConfigFilter from './msuConfigFilter';
@@ -133,10 +133,11 @@ class MsuConfigTab extends React.Component {
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
         //this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
-        this._setFilterAction = this._setFilterAction.bind(this);
+       // this._setFilterAction = this._setFilterAction.bind(this);
         this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
+        this._showMsuListFilter = this.props.showMsuListFilter.bind(this);
     }
 
     
@@ -323,7 +324,8 @@ class MsuConfigTab extends React.Component {
             this.props.filterApplied(false);
         }
        
-        this.props.msuConfigFilterState({
+        //this.props.msuConfigFilterState({
+          this.props.msuListFilterState({
             tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
             searchQuery: {
                 "MSU ID":query.rack_id||null
@@ -350,10 +352,11 @@ class MsuConfigTab extends React.Component {
         this._requestMsuList();
     }
 
-    _setFilterAction() {
-        var newState=!this.props.showFilter;
-        this.props.showTableFilter(newState);
-    }
+    //_setFilterAction() {
+    // __showMsuListFilter(){
+    //     var newState=!this.props.showFilter;
+    //     this.props.showTableFilter(newState);
+    // }
 
     _disableStartStopReconfig(isDisabled){
         this.setState({
@@ -381,10 +384,11 @@ class MsuConfigTab extends React.Component {
                                 <div className="gor-filter-wrap"
                                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
                                     <MsuConfigFilter
+                                        filterState={this.props.msuListFilterStatus}
+                                        isFilterApplied={this.props.isFilterApplied}
+                                        showMsuListFilter={this._showMsuListFilter}
                                         msuListFilterState={this.props.msuListFilterState} 
-                                        isFilterApplied={this.props.isFilterApplied} 
-                                        showMsuListFilter={this.props.showMsuListFilter} 
-                                        msuListData={msuListData} 
+                                        msuListData={msuListData}
                                         responseFlag={this.props.responseFlag}/>
                                 </div>
 
@@ -449,8 +453,8 @@ class MsuConfigTab extends React.Component {
                                     <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                         <div className="gor-button-wrap">
                                             <button style={{minWidth: "145px"}} 
-                                                className={"gor-filterBtn-btn"}
-                                                 onClick={this._setFilterAction}>
+                                                className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                onClick={()=>{this._showMsuListFilter(true)}}>
                                                 <div className="gor-manage-task"/>
                                                 <FormattedMessage id="gor.msuConfig.filterLabel" 
                                                     description="button label for filter" 
@@ -513,61 +517,61 @@ const withQuery = graphql(MSU_LIST_QUERY, {
 
 function mapStateToProps(state, ownProps) {
     return {
-        butlerFilter: state.sortHeaderState.butlerFilter || "",
-        butlerSpinner: state.spinner.butlerSpinner || false,
-        butlerDetail: state.butlerDetail || [],
-        intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        botFilterStatus: state.filterInfo.botFilterStatus || false,
-        filterState: state.filterInfo.butlerFilterState,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
-        msuConfigSpinner: state.spinner.msuConfigSpinner || false,
+    //     butlerFilter: state.sortHeaderState.butlerFilter || "",
+    //     butlerSpinner: state.spinner.butlerSpinner || false,
+    //     butlerDetail: state.butlerDetail || [],
+    //     intlMessages: state.intl.messages,
+    //     showFilter: state.filterInfo.filterState || false,
+    //     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    //     botFilterStatus: state.filterInfo.botFilterStatus || false,
+    //     filterState: state.filterInfo.butlerFilterState,
+    //     wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+    //     socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    //     msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
+    //     msuConfigSpinner: state.spinner.msuConfigSpinner || false,
 
-       // msuList: state.msuInfo.msuList||[],
-        timeZone:state.authLogin.timeOffset,
+    //    // msuList: state.msuInfo.msuList||[],
+    //     timeZone:state.authLogin.timeOffset,
     };
 }
 
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        butlerFilterDetail: function (data) {
-            dispatch(butlerFilterDetail(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        toggleBotButton: function (data) {
-            dispatch(toggleBotButton(data));
-        },
-        butlerfilterState: function (data) {
-            dispatch(butlerfilterState(data));
-        },
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        // butlerFilterDetail: function (data) {
+        //     dispatch(butlerFilterDetail(data))
+        // },
+        // showTableFilter: function (data) {
+        //     dispatch(showTableFilter(data));
+        // },
+        // filterApplied: function (data) {
+        //     dispatch(filterApplied(data));
+        // },
+        // updateSubscriptionPacket: function (data) {
+        //     dispatch(updateSubscriptionPacket(data));
+        // },
+        // toggleBotButton: function (data) {
+        //     dispatch(toggleBotButton(data));
+        // },
+        // butlerfilterState: function (data) {
+        //     dispatch(butlerfilterState(data));
+        // },
+        // initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
 
-        makeAjaxCall: function(params){
-            dispatch(makeAjaxCall(params))
-        },
-        msuConfigFilterState: function(data){dispatch(msuConfigFilterState(data));},
-        msuConfigRefreshed:function(data){dispatch(msuConfigRefreshed(data))},
+        // makeAjaxCall: function(params){
+        //     dispatch(makeAjaxCall(params))
+        // },
+        // msuConfigFilterState: function(data){dispatch(msuConfigFilterState(data));},
+        // msuConfigRefreshed:function(data){dispatch(msuConfigRefreshed(data))},
         setMsuConfigSpinner: function (data) {
             dispatch(setMsuConfigSpinner(data))
         },
-        notifySuccess: function (data) {
-            dispatch(notifySuccess(data));
-        },
-        notifyFail: function (data) {
-            dispatch(notifyFail(data));
-        }
+        // notifySuccess: function (data) {
+        //     dispatch(notifySuccess(data));
+        // },
+        // notifyFail: function (data) {
+        //     dispatch(notifyFail(data));
+        // }
     };
 }
 
@@ -669,8 +673,8 @@ const withClientData = graphql(msuListClientData, {
             //todos: data.data.todos,
             //msuList: data.data.msuFilterList,
             showFilter: data.data.msuListFilter ? data.data.msuListFilter.display : false,
-            isFilterApplied: data.data.msuListFitler ? data.data.msuListFilter.isFilterApplied : false,
-            msuListFilterStatus: data.data.msuListFitler ? JSON.parse(JSON.stringify(data.data.msuListFitler.filterState)) : null,
+            isFilterApplied: data.data.msuListFilter ? data.data.msuListFilter.isFilterApplied : false,
+            msuListFilterStatus: data.data.msuListFilter ? JSON.parse(JSON.stringify(data.data.msuListFilter.filterState)) : null,
         }
     }
 })
