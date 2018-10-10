@@ -99,10 +99,11 @@ class ChangeRackType extends React.Component {
         this._blockPutAndChangeType = this._blockPutAndChangeType.bind(this);
         this._changeDestType = this._changeDestType.bind(this);
         this._removeThisModal = this._removeThisModal.bind(this);
-        //this._reqRackStructure = this._reqRackStructure.bind(this);
     }
 
     // componentWillReceiveProps(nextProps) {
+    //     console.log(" CHANGE RACK TYPE = Coponent will receve props" );
+
     //     if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
     //         if(this.state.sourceType && nextProps.rackStructure){
     //             this.setState({
@@ -147,7 +148,7 @@ class ChangeRackType extends React.Component {
     //     this.props.blockPutAndChangeTypeCallback();
     // }
 
-    _blockPutAndChangeType(){
+    _blockPutAndChangeType(rackId, destType){
         let msuList = [];
             this.props.client.query({
                 query: MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST,
@@ -155,27 +156,25 @@ class ChangeRackType extends React.Component {
                 variables: (function () {
                     return {
                         input: {
-                            rack_id: "12",    // HARD- CODED FOR NOW
-                            destination_type: "26"  // HARD- CODED FOR NOW
+                            rack_id: rackId,    // HARD- CODED FOR NOW
+                            destination_type: destType  // HARD- CODED FOR NOW
                         }
                     }
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
                 console.log("_blockPutAndChangeType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
-                msuList= data.data.MsuList.list;
-                
+                this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+                this.props.blockPutAndChangeTypeCallback();
             });
-            this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-            this.props.blockPutAndChangeTypeCallback();
     }
 
     _removeThisModal() {
         this.props.removeModal();
     }
 
-    _reqRackStructure(rackType, forWhichType){
-        let rackStructure = [];
+    _reqRackStructure(rackType){
+        var rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
             //variables: formData,
@@ -190,15 +189,16 @@ class ChangeRackType extends React.Component {
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             rackStructure= data.data.MsuRackJsonList.list;
-                this.setState({
-                    sourceTypeStructure: rackStructure["face_zero"].rack_json,
-                    sourceTypeWidth: rackStructure["face_zero"].rack_width
-                });
+            this.setState({
+                sourceTypeStructure: rackStructure["face_zero"].rack_json,
+                sourceTypeWidth: rackStructure["face_zero"].rack_width,
+            });
         })
+        
     }
 
     _reqRackStructureForDestinationType(rackType){
-        let rackStructure = [];
+        var rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
             //variables: formData,
@@ -213,11 +213,12 @@ class ChangeRackType extends React.Component {
         }).then(data=>{
             console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             rackStructure= data.data.MsuRackJsonList.list;
-                this.setState({
-                    destTypeStructure: rackStructure["face_zero"].rack_json,
-                    destTypeWidth: rackStructure["face_zero"].rack_width
-                });
+            this.setState({
+                destTypeStructure: rackStructure["face_zero"].rack_json,
+                destTypeWidth: rackStructure["face_zero"].rack_width
+            });
         })
+        
     }
 
     // _reqDestinationTypes(){
@@ -279,11 +280,13 @@ class ChangeRackType extends React.Component {
 
 
     render() {
+
+        console.log("changes Rack type + render ======>");
         let msuList, rackStructure, destTypeList, labelC1, sourceRackType;
         sourceRackType = this.props.rackType;
 
         if(!this.state.sourceTypeStructure && !this.state.sourceTypeWidth){
-            rackStructure =  this._reqRackStructure(sourceRackType, "forSourceType");
+            rackStructure =  this._reqRackStructure(sourceRackType);
         }
        
        // destTypeList = this._reqDestinationTypes();
@@ -376,7 +379,7 @@ class ChangeRackType extends React.Component {
                         <div className="gor-button-wrap">
                             <button disabled = {this.state.blockPutChangeTypeBtnState} 
                                     className="gor-msuConfig-btn orange"
-                                     onClick={this._blockPutAndChangeType}>
+                                     onClick={this._blockPutAndChangeType.bind(this, this.props.id, this.state.destType)}>
                                 <FormattedMessage id="gor.msuConfig.blockPutChangeType" 
                                     description="button label for block put & change type" 
                                     defaultMessage="BLOCK PUT AND CHANGE TYPE"/>

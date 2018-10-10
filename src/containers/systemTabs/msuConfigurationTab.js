@@ -122,9 +122,11 @@ class MsuConfigTab extends React.Component {
             startStopBtnState: true,
             startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
+            //msuList: []
         };
         this.subscription = null;
         this.linked =false;
+        
 
        // this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
 
