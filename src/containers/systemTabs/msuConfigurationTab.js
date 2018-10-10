@@ -159,6 +159,7 @@ class MsuConfigTab extends React.Component {
                 //console.log("then", JSON.stringify(data), this.props);
                 console.log(data.data.MsuFilterList);
                 this.setState({msuList:data.data.MsuFilterList.list});
+                this._disableStartStopReconfig(true);
             });
             //this.props.client.resetStore();
         }
