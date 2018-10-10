@@ -101,58 +101,10 @@ class ChangeRackType extends React.Component {
         this._removeThisModal = this._removeThisModal.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(" CHANGE RACK TYPE = Coponent will receve props" );
-
-    //     if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
-    //         if(this.state.sourceType && nextProps.rackStructure){
-    //             this.setState({
-    //                 sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-    //                 sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-    //             })
-    //         }
-    //         if(!this.state.sourceType && nextProps.rackStructure){
-    //             this.setState({
-    //                 destTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-    //                 destTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-    //             })
-    //         }
-    //     } 
-    //     else{
-    //         if(this.state.sourceType && nextProps.rackStructure){
-    //             this.setState({
-    //                 sourceTypeStructure: nextProps.rackStructure["face_zero"].rack_json,
-    //                 sourceTypeWidth: nextProps.rackStructure["face_zero"].rack_width
-    //             })
-    //         }
-    //     }
-    // }
-
-
-    // _blockPutAndChangeType(){
-    //     let formData={         
-    //         "rack_id":this.props.id, // 0 is for currently filtered msulist
-    //         "destination_type":this.state.destType
-    //     };
-
-    //     let params={
-    //         'url': MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL,
-    //         'method':POST,
-    //         'contentType':APP_JSON,
-    //         'accept':APP_JSON,
-    //         'cause' : FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
-    //         'formdata':formData,
-    //     }
-    //     this.props.makeAjaxCall(params);
-    //     this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-    //     this.props.blockPutAndChangeTypeCallback();
-    // }
-
     _blockPutAndChangeType(rackId, destType){
         let msuList = [];
             this.props.client.query({
                 query: MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST,
-                //variables: formData,
                 variables: (function () {
                     return {
                         input: {
@@ -163,7 +115,6 @@ class ChangeRackType extends React.Component {
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("_blockPutAndChangeType file =======> coming inside THEN CODE============>" + JSON.stringify(data));
                 this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
                 this.props.blockPutAndChangeTypeCallback();
             });
@@ -177,7 +128,6 @@ class ChangeRackType extends React.Component {
         var rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
-            //variables: formData,
             variables: (function () {
                 return {
                     input: {
@@ -187,7 +137,6 @@ class ChangeRackType extends React.Component {
             }()),
             fetchPolicy: 'network-only'
         }).then(data=>{
-            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
             rackStructure= data.data.MsuRackJsonList.list;
             this.setState({
                 sourceTypeStructure: rackStructure["face_zero"].rack_json,
@@ -201,7 +150,6 @@ class ChangeRackType extends React.Component {
         var rackStructure = [];
         this.props.client.query({
             query: MSU_RACK_STRUCTURE_QUERY,
-            //variables: formData,
             variables: (function () {
                 return {
                     input: {
@@ -220,41 +168,6 @@ class ChangeRackType extends React.Component {
         })
         
     }
-
-    // _reqDestinationTypes(){
-    //     let msuList = [];
-    //     this.props.client.query({
-    //         query: MSU_SOURCE_TYPE_QUERY,
-    //         //variables: formData,
-    //         variables: (function () {
-    //             return {
-    //                 input: {
-    //                     rackType: rackType
-    //                 }
-    //             }
-    //         }()),
-    //         fetchPolicy: 'network-only'
-    //     }).then(data=>{
-    //         console.log("coming inside THEN CODE============>" + JSON.stringify(data));
-    //         msuList= data.data.MsuRackJsonList.list;
-    //         // this.setState({
-    //         //     msuList: msuList
-    //         // });
-    //       //this.props.notifyFail();
-    //     })
-    // }
-
-    // _reqDestinationTypes(){
-    //     let params={
-    //         'url': MSU_CONFIG_DEST_TYPE_URL,
-    //         'method':GET,
-    //         'contentType':APP_JSON,
-    //         'accept':APP_JSON,
-    //         'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
-    //     }
-    //     this.props.makeAjaxCall(params);
-        
-    // }
 
     _changeDestType(data) {
         this.setState({ 
@@ -280,21 +193,14 @@ class ChangeRackType extends React.Component {
 
 
     render() {
-
-        console.log("changes Rack type + render ======>");
         let msuList, rackStructure, destTypeList, labelC1, sourceRackType;
         sourceRackType = this.props.rackType;
+        destTypeList = this.props.destType;
 
         if(!this.state.sourceTypeStructure && !this.state.sourceTypeWidth){
             rackStructure =  this._reqRackStructure(sourceRackType);
         }
-       
-       // destTypeList = this._reqDestinationTypes();
 
-        // rackStructure = this.props.rackStructure;
-        // destTypeList = this.props.destType;
-        // msuList = this.props.msuList[0];
-        
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
         if(destTypeList){
@@ -331,10 +237,6 @@ class ChangeRackType extends React.Component {
                                         />
                                 </div>
                                     <div className="rackWrapper">
-                                    {/*
-                                        <MsuRackFlex rackDetails={this.state.sourceTypeStructure} 
-                                                      rackWidth={this.state.sourceTypeWidth} />
-                                    */}
                                     {this.state.sourceTypeStructure && this.state.sourceTypeWidth? 
                                         <MsuRackFlex 
                                             rackDetails={this.state.sourceTypeStructure}
@@ -352,7 +254,6 @@ class ChangeRackType extends React.Component {
                                   currentState={currentDestType}
                                 />
 
-                                {/*{(this.props.rackStructure && !this.state.sourceType)? */}
                                 {this.state.destTypeStructure && this.state.destTypeWidth?
                                     <div className="rackWrapper">
                                         <MsuRackFlex rackDetails={this.state.destTypeStructure}
@@ -399,19 +300,15 @@ ChangeRackType.contextTypes={
 
 const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
     props: function(data){
-        console.log("inside ===============withQueryForRackStructure =========>");
         if(!data || !data.data.MsuRackJsonList || !data.data.MsuRackJsonList.list){
             return {}
         }
         return {
            rackStructure: data.data.MsuRackJsonList.list
-           //}
         }
     },
     options: ({match, location}) => ({
-        //variables: {},
         variables: (function () {
-            console.log(location);
             return {
                 input: {
                     rackType: '15'
@@ -424,7 +321,6 @@ const withQueryForRackStructure = graphql(MSU_RACK_STRUCTURE_QUERY, {
 
 const withQueryGetDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
     props: function(data){
-        console.log("inside ===============  withQueryForDestinationTypes =========>");
         if(!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list){
             return {}
         }
@@ -440,23 +336,14 @@ const withQueryGetDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
 
 
 function mapStateToProps(state, ownProps) {
-    return {
-        //destType: state.msuInfo.destType,
-        //rackStructure: state.msuInfo.rackStructure
-    };
+    return {};
 }
 
 var mapDispatchToProps=function (dispatch) {
-    return {
-        makeAjaxCall: function(params){
-            dispatch(makeAjaxCall(params))
-        }
-    }
+    return {};
 };
 
-//export default connect(mapStateToProps, mapDispatchToProps)(ChangeRackType) ;
 export default compose(
-   // withQueryForRackStructure, 
     withQueryGetDestinationTypes,
     withApollo
 )(connect(mapStateToProps, mapDispatchToProps)((ChangeRackType)));
