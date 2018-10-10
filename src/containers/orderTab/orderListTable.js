@@ -235,7 +235,7 @@ class OrderListTable extends React.Component {
             values={{total:numerator}} />);
         x.action = true;
         }else{
-            x.width = Math.ceil(numerator/numerator)>1 ?  100 : Math.ceil(numerator/denominator); 
+            x.width = Math.ceil(numerator/numerator)>1 ?  100 : (numerator/denominator) * 100; 
             x.message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked"
                             values={{current:numerator, total: denominator}} />);
             x.action  = true;
