@@ -156,12 +156,9 @@ class MsuConfigTab extends React.Component {
                 }()),
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                //console.log("then", JSON.stringify(data), this.props);
-                console.log(data.data.MsuFilterList);
                 this.setState({msuList:data.data.MsuFilterList.list});
                 this._disableStartStopReconfig(true);
             });
-            //this.props.client.resetStore();
         }
         else{
             let msuList = [];
@@ -170,7 +167,6 @@ class MsuConfigTab extends React.Component {
                 variables: {},
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
                 this.setState({msuList:data.data.MsuList.list});
             })
         }
@@ -186,22 +182,10 @@ class MsuConfigTab extends React.Component {
 
     }
 
-    // _releaseMsuAction = () => {
-    //     let params={
-    //         'url': MSU_CONFIG_RELEASE_MSU_URL,
-    //         'method':POST,
-    //         'contentType':APP_JSON,
-    //         'accept':APP_JSON,
-    //         'cause':FETCH_MSU_CONFIG_RELEASE_MSU
-    //     }
-    //     this.props.makeAjaxCall(params);
-    // }
-
     _releaseMsuAction(){
         let msuList = [];
         this.props.client.query({
             query: MSU_RELEASE_QUERY,
-            //variables: formData,
             variables: {},
             fetchPolicy: 'network-only'
         }).then(data=>{
@@ -214,11 +198,9 @@ class MsuConfigTab extends React.Component {
         if(this.state.startStopBtnText === "startReconfig"){
             this.props.client.query({
                 query: MSU_START_RECONFIG_QUERY,
-                //variables: formData,
                 variables: {},
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
                 this.setState({
                     startStopBtnState: true,
                     startStopBtnText: "stopReconfig"
@@ -228,11 +210,9 @@ class MsuConfigTab extends React.Component {
         else{
             this.props.client.query({
                 query: MSU_STOP_RECONFIG_QUERY,
-                //variables: formData,
                 variables: {},
                 fetchPolicy: 'network-only'
             }).then(data=>{
-                console.log("coming inside THEN CODE============>" + JSON.stringify(data));
                 this.setState({
                     startStopBtnState: true,
                     startStopBtnText: "startReconfig"
@@ -254,7 +234,6 @@ class MsuConfigTab extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        console.log(" COMPONENT WILL RECEIVE PROPS: => ");
         let isAnyMsuEmpty = [];
         let isAnyMsuDropping = [];
         let isAnyMsuDropped = [];
@@ -268,10 +247,11 @@ class MsuConfigTab extends React.Component {
             })
         }
 
-
-        if(this.props.msuList!==nextProps.msuList){
+        /* start => condition for loading of data with Props from withQuery */
+        if(this.props.msuList !== nextProps.msuList){
             this.setState({msuList:nextProps.msuList});
         }
+        /* end */ 
 
         if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
@@ -279,7 +259,6 @@ class MsuConfigTab extends React.Component {
         }
 
         if(nextProps.msuList && Array.isArray(nextProps.msuList)){
-
                 nextProps.msuList.forEach((eachMsu)=>{
                     if(eachMsu.status === "reconfig_ready"){  isAnyMsuEmpty.push(eachMsu.status);}
                     else if (eachMsu.status === "waiting"){  isAnyMsuDropping.push(eachMsu.status);}
@@ -328,43 +307,12 @@ class MsuConfigTab extends React.Component {
 
     }
 
-
-
-    // componentWillUnMount() {
-    //     if (this.subscription) {
-    //         this.subscription()
-    //     }
-    // }
-
-
-
-    // updateSubscription(variables) {
-    //     if (this.subscription) {
-    //         this.subscription()
-    //     }
-    //     this.subscription = this.props.data.subscribeToMore({
-    //         variables: variables,
-    //         document: SUBSCRIPTION_QUERY,
-    //         notifyOnNetworkStatusChange: true,
-    //         updateQuery: (previousResult, newResult) => {
-    //             console.log(newResult)
-
-    //             return Object.assign({}, {
-    //                 MsuList: {list: newResult.subscriptionData.data.MsuFilterList.list}
-    //             })
-    //         },
-    //     });
-    // }
-
-
-
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
     _refreshList(query) {
-
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
         this._requestMsuList(query.rack_id, query.status);
@@ -422,7 +370,6 @@ class MsuConfigTab extends React.Component {
     render() {
         var filterHeight=screen.height - 190 - 50;
         let msuListData=this.state.msuList;
-        console.log("hello m getting triggered inside Render==============>" + JSON.stringify(msuListData));
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
@@ -551,17 +498,11 @@ class MsuConfigTab extends React.Component {
 
 const withQuery = graphql(MSU_LIST_QUERY, {
     props: function(data){
-        console.log("inside withQuery => md");
         if(!data || !data.data.MsuList || !data.data.MsuList.list){
             return {}
         }
         return {
             msuList: data.data.MsuList.list
-            // msuList :  [
-            //                 {"rack_id":"021","source_type":"11","destination_type":"19","status":"put_blocked"},
-            //                 {"rack_id":"022","source_type":"11","destination_type":"19","status":"put_blocked"},
-            //                 {"rack_id":"025","source_type":"11","destination_type":"19","status":"put_blocked"}
-            //             ]
         }
     },
     options: ({match, location}) => ({
