@@ -13,7 +13,7 @@ const msuConfigFilterState = {
     },
     resolvers: {
         Mutation: {
-            showMsuListFilter: (_, {filter}, {cache}) => {
+            setShowMsuListFilter: (_, {filter}, {cache}) => {
                 let query = gql`
                     query  {
                         msuListFilter @client{
@@ -46,7 +46,7 @@ const msuConfigFilterState = {
                 return null;
 
             },
-            setFilterApplied: (_, {isFilterApplied}, {cache}) => {
+            setMsuListFilterApplied: (_, {isFilterApplied}, {cache}) => {
                 let query = gql`
                     query  {
                         msuListFilter @client{

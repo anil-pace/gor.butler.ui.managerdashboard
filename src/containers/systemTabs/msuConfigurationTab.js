@@ -651,13 +651,13 @@ const msuListClientData = gql`
 
 const SET_VISIBILITY = gql`
     mutation setMsuListFilter($filter: String!) {
-        showMsuListFilter(filter: $filter) @client
+        setShowMsuListFilter(filter: $filter) @client
     }
 `;
 
 const SET_FILTER_APPLIED = gql`
     mutation setFilterApplied($isFilterApplied: String!) {
-        setFilterApplied(isFilterApplied: $isFilterApplied) @client
+        setMsuListFilterApplied(isFilterApplied: $isFilterApplied) @client
     }
 `;
 const SET_FILTER_STATE = gql`
