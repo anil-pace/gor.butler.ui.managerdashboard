@@ -1,3 +1,6 @@
+msuConfigFilterState
+
+
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
@@ -92,7 +95,7 @@ class MsuConfigFilter extends React.Component{
     }
 
     _processMsuConfigSearchField(){
-        const temp=[{value:"MSU ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
+        const temp=[{value:"MSU_ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -142,8 +145,8 @@ class MsuConfigFilter extends React.Component{
          * for query generation
          */
         
-        if (filterState.searchQuery["MSU ID"]) {
-            _query.rack_id=filterState.searchQuery["MSU ID"]
+        if (filterState.searchQuery["MSU_ID"]) {
+            _query.rack_id=filterState.searchQuery["MSU_ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
@@ -152,13 +155,15 @@ class MsuConfigFilter extends React.Component{
     }
 
     _clearFilter() {
-        this.props.msuListFilterState({
-            tokenSelected: {"STATUS": ["any"]}, searchQuery: {
-                "MSU ID":null
+        this.props.msuConfigFilterState({
+            tokenSelected: {"STATUS": ["any"], __typename:"MsuReconfigTokenSelected"},
+            searchQuery: {
+                "MSU_ID": '',
+                __typename:"MsuReconfigSearchQuery"
             },
+            defaultToken: {"STATUS": ["any"],__typename:"MsuReconfigTokenSelected"}
         });
         hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
-        
     }
     
 

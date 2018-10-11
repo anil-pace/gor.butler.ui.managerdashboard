@@ -137,7 +137,7 @@ class MsuConfigTab extends React.Component {
         this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
-        this._showMsuListFilter = this.props.showMsuListFilter.bind(this);
+        this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
     }
 
     
@@ -324,13 +324,13 @@ class MsuConfigTab extends React.Component {
             this.props.filterApplied(false);
         }
        
-        //this.props.msuConfigFilterState({
-          this.props.msuListFilterState({
-            tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
+        this.props.msuConfigFilterState({
+            tokenSelected: {__typename:"MsuReconfigTokenSelected", "STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
             searchQuery: {
-                "MSU ID":query.rack_id||null
+                __typename:"MsuReconfigSearchQuery",
+                "MSU_ID":query.rack_id||null
             },
-            defaultToken: {"STATUS": ["any"]}
+            defaultToken: {"STATUS": ["any"], __typename:"MsuReconfigTokenSelected"}
         });
     }
 
@@ -386,8 +386,8 @@ class MsuConfigTab extends React.Component {
                                     <MsuConfigFilter
                                         filterState={this.props.msuListFilterStatus}
                                         isFilterApplied={this.props.isFilterApplied}
-                                        showMsuListFilter={this._showMsuListFilter}
-                                        msuListFilterState={this.props.msuListFilterState} 
+                                        showMsuListFilter={this.showMsuListFilter}
+                                        msuConfigFilterState={this.props.msuConfigFilterState} 
                                         msuListData={msuListData}
                                         responseFlag={this.props.responseFlag}/>
                                 </div>
@@ -454,7 +454,7 @@ class MsuConfigTab extends React.Component {
                                         <div className="gor-button-wrap">
                                             <button style={{minWidth: "145px"}} 
                                                 className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                                onClick={()=>{this._showMsuListFilter(true)}}>
+                                                onClick={()=>{this.showMsuListFilter(true)}}>
                                                 <div className="gor-manage-task"/>
                                                 <FormattedMessage id="gor.msuConfig.filterLabel" 
                                                     description="button label for filter" 
@@ -632,7 +632,7 @@ const msuListClientData = gql`
                 STATUS
             }
             searchQuery{
-                MSU ID
+                MSU_ID
             }
             
             defaultToken{
@@ -697,7 +697,7 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
 const setFilterState = graphql(SET_FILTER_STATE, {
     props: ({mutate, ownProps}) => ({
         //butlerfilterState: function (state) {
-        msuListFilterState: function (state) {
+        msuConfigFilterState: function (state) {
             mutate({variables: {state: state}})
         },
     }),

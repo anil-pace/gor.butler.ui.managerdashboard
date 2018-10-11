@@ -2,7 +2,7 @@
  * Created by gaurav.m on 2/28/18.
  */
 import gql from 'graphql-tag'
-const msuListFilterState = {
+const msuConfigFilterState = {
     defaults: {
         msuListFilter: {
             display: false,
@@ -19,11 +19,27 @@ const msuListFilterState = {
                         msuListFilter @client{
                             display
                             isFilterApplied
-                            filterState
-                            __typename
-                        }
-                    }
-                `;
+                            filterState{
+                                tokenSelected{
+                                    STATUS
+                                    __typename
+                                }
+                                searchQuery{
+                                    MSU_ID
+                                    __typename
+                    
+                                }
+                                defaultToken{
+                                    STATUS
+                                    __typename
+                                }
+                                __typename
+                            }
+                                                __typename
+                                            }
+                                        }
+                                    `;
+                           
                 let previous = cache.readQuery({query}).msuListFilter
                 previous.display = filter
                 cache.writeData({data: {msuListFilter: previous}});
@@ -36,11 +52,26 @@ const msuListFilterState = {
                         msuListFilter @client{
                             display
                             isFilterApplied
-                            filterState
-                            __typename
-                        }
-                    }
-                `;
+                            filterState{
+                                tokenSelected{
+                                    STATUS
+                                    __typename
+                                }
+                                searchQuery{
+                                    MSU_ID
+                                    __typename
+                    
+                                }
+                                defaultToken{
+                                    STATUS
+                                    __typename
+                                }
+                                __typename
+                            }
+                                                __typename
+                                            }
+                                        }
+                                    `;
                 let previous = cache.readQuery({query}).msuListFilter
                 previous.isFilterApplied = isFilterApplied
                 cache.writeData({data: {msuListFilter: previous}});
@@ -53,11 +84,26 @@ const msuListFilterState = {
                         msuListFilter @client{
                             display
                             isFilterApplied
-                            filterState
-                            __typename
-                        }
-                    }
-                `;
+                            filterState{
+                                tokenSelected{
+                                    STATUS
+                                    __typename
+                                }
+                                searchQuery{
+                                    MSU_ID
+                                    __typename
+                    
+                                }
+                                defaultToken{
+                                    STATUS
+                                    __typename
+                                }
+                                __typename
+                            }
+                                                __typename
+                                            }
+                                        }
+                                    `;
                 let previous = cache.readQuery({query}).msuListFilter
                 previous.filterState = state
                 previous.filterState.__typename="MsuListFilterState"
@@ -71,4 +117,4 @@ const msuListFilterState = {
     },
 };
 
-export default msuListFilterState;
+export default msuConfigFilterState;
