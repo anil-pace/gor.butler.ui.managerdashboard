@@ -19,7 +19,25 @@ const butlerFilterState = {
                         botsFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                                filterState{
+            tokenSelected{
+                STATUS
+                MODE
+                __typename
+            }
+            searchQuery{
+                BOT_ID
+                SPECIFIC_LOCATION_ZONE
+                __typename
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+                __typename
+            }
+            __typename
+        }
                             __typename
                         }
                     }
@@ -30,13 +48,31 @@ const butlerFilterState = {
                 return null;
 
             },
-            setFilterApplied: (_, {isFilterApplied}, {cache}) => {
+            setButlerBotsFilterApplied: (_, {isFilterApplied}, {cache}) => {
                 let query = gql`
                     query  {
                         botsFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                                filterState{
+            tokenSelected{
+                STATUS
+                MODE
+                __typename
+            }
+            searchQuery{
+                BOT_ID
+                SPECIFIC_LOCATION_ZONE
+                __typename
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+                __typename
+            }
+            __typename
+        }
                             __typename
                         }
                     }
@@ -53,7 +89,25 @@ const butlerFilterState = {
                         botsFilter @client{
                             display
                             isFilterApplied
-                            filterState
+                                filterState{
+            tokenSelected{
+                STATUS
+                MODE
+                __typename
+            }
+            searchQuery{
+                BOT_ID
+                SPECIFIC_LOCATION_ZONE
+                __typename
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+                __typename
+            }
+            __typename
+        }
                             __typename
                         }
                     }
