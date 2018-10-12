@@ -30,7 +30,59 @@ const messages = defineMessages({
   }
 });
 
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../actions/validationActions";
 
+const MSU_RACK_STRUCTURE_QUERY = gql`
+    query($input:MsuRackJsonListParams){
+        MsuRackJsonList(input:$input){
+            list {
+                face_zero{
+                rack_width
+                    rack_json{
+                    barcodes
+                    length
+                    height
+                    type
+                    orig_coordinates
+                }  
+                }
+            face_one{
+                rack_width
+                    rack_json{
+                    barcodes
+                    length
+                    height
+                    type
+                    orig_coordinates
+                }  
+                }
+            
+            }
+            
+            }
+    }
+`;
+
+const MSU_SOURCE_TYPE_QUERY = gql`
+    query($input:MsuSourceTypeListParams){
+        MsuSourceTypeList(input:$input){
+             list
+            }
+    }
+`;
+
+const MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST = gql`
+    query($input:MsuBlockPutChangeTypeParams){
+        MsuBlockPutChangeType(input:$input){
+                    status
+        }
+        }
+`;
 
 class ChangeRackType extends React.Component {
     constructor(props) {
@@ -47,88 +99,58 @@ class ChangeRackType extends React.Component {
         this._blockPutAndChangeType = this._blockPutAndChangeType.bind(this);
         this._changeDestType = this._changeDestType.bind(this);
         this._removeThisModal = this._removeThisModal.bind(this);
-        this._reqRackStructure = this._reqRackStructure.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(JSON.stringify(this.props.rackStructure) !==JSON.stringify(nextProps.rackStructure)){
-            if(this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
-                })
-            }
-            if(!this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    destTypeStructure: nextProps.rackStructure[0].rack_json,
-                    destTypeWidth: nextProps.rackStructure[0].rack_width
-                })
-            }
-        } 
-        else{
-            if(this.state.sourceType && nextProps.rackStructure){
-                this.setState({
-                    sourceTypeStructure: nextProps.rackStructure[0].rack_json,
-                    sourceTypeWidth: nextProps.rackStructure[0].rack_width
-                })
-            }
-        }
-    }
-
-
-    _blockPutAndChangeType(){
-        let formData={         
-            "rack_id":this.props.id, // 0 is for currently filtered msulist
-            "destination_type":this.state.destType
-        };
-
-        let params={
-            'url': MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE,
-            'formdata':formData,
-        }
-        this.props.makeAjaxCall(params);
-        this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-        this.props.blockPutAndChangeTypeCallback();
+    _blockPutAndChangeType(rackId, destType){
+        let msuList = [];
+            this.props.client.query({
+                query: MSU_RECONFIG_BLOCK_PUT_CHANGE_TYPE_POST,
+                variables: (function () {
+                    return {
+                        input: {
+                            rack_id: rackId,    // HARD- CODED FOR NOW
+                            destination_type: destType  // HARD- CODED FOR NOW
+                        }
+                    }
+                }()),
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+                this.props.blockPutAndChangeTypeCallback();
+            });
     }
 
     _removeThisModal() {
         this.props.removeModal();
     }
 
-    componentDidMount() {
-       this._reqRackStructure(this.props.rackType); // request Rack structure for EXISTING SOURCE TYPE
-       this._reqDestinationTypes();
-    }
-
-    _reqRackStructure(rackType){
-        let params={
-            'url': MSU_CONFIG_LIST_RACK_STRUCTURE_URL+"/"+rackType,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_RACK_STRUCTURE,
-        }
-        this.props.makeAjaxCall(params);
-    }
-
-    _reqDestinationTypes(){
-        let params={
-            'url': MSU_CONFIG_DEST_TYPE_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
-        }
-        this.props.makeAjaxCall(params);
-        
-    }
-
-    _reqRackStructureOnDestTypeChange(){
-        this._reqRackStructure(this.state.destType);
+    _reqRackStructure(rackType, forWhichType){
+        var rackStructure = [];
+        this.props.client.query({
+            query: MSU_RACK_STRUCTURE_QUERY,
+            variables: (function () {
+                return {
+                    input: {
+                        rackType: rackType
+                    }
+                }
+            }()),
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+            rackStructure= data.data.MsuRackJsonList.list;
+            if(forWhichType === "forSourceType"){
+                this.setState({
+                    sourceTypeStructure: rackStructure["face_zero"].rack_json,
+                    sourceTypeWidth: rackStructure["face_zero"].rack_width,
+                });
+            }
+            else if(forWhichType === "forDestinationType"){
+                this.setState({
+                    destTypeStructure: rackStructure["face_zero"].rack_json,
+                    destTypeWidth: rackStructure["face_zero"].rack_width
+                });
+            }
+        })
     }
 
     _changeDestType(data) {
@@ -140,6 +162,10 @@ class ChangeRackType extends React.Component {
         this._reqRackStructureOnDestTypeChange);
     }
 
+    _reqRackStructureOnDestTypeChange(){
+        this._reqRackStructure(this.state.destType, "forDestinationType");
+    }
+
     _getCurrentDropDownState(fileType, currentValue) {
         for (var i = fileType.length - 1; i >= 0; i--) {
           if (fileType[i].value === currentValue) {
@@ -149,13 +175,15 @@ class ChangeRackType extends React.Component {
         return null;
     }
 
-
     render() {
-        let msuList, rackStructure, destTypeList, labelC1;
-        rackStructure = this.props.rackStructure;
+        let msuList, rackStructure, destTypeList, labelC1, sourceRackType;
+        sourceRackType = this.props.rackType;
         destTypeList = this.props.destType;
-        msuList = this.props.msuList[0];
-        
+
+        if(!this.state.sourceTypeStructure && !this.state.sourceTypeWidth){
+            rackStructure =  this._reqRackStructure(sourceRackType, "forSourceType");
+        }
+
         labelC1=[{ value: 'any', label:<FormattedMessage id="msuConfig.token1.all" defaultMessage="Any"/> }];
 
         if(destTypeList){
@@ -188,12 +216,15 @@ class ChangeRackType extends React.Component {
                                     <FormattedMessage id="msuConfig.sourceType.heading" 
                                         description='Heading for source type' 
                                         defaultMessage='Source type: {sourceType}'
-                                        values={{sourceType:msuList.racktype}}
+                                        values={{sourceType:sourceRackType}}
                                         />
                                 </div>
                                     <div className="rackWrapper">
-                                        <MsuRackFlex rackDetails={this.state.sourceTypeStructure} 
-                                                      rackWidth={this.state.sourceTypeWidth} />
+                                    {this.state.sourceTypeStructure && this.state.sourceTypeWidth? 
+                                        <MsuRackFlex 
+                                            rackDetails={this.state.sourceTypeStructure}
+                                            rackWidth={this.state.sourceTypeWidth} /> : ""
+                                    }
                                     </div>
                                     
                             </div>
@@ -206,7 +237,7 @@ class ChangeRackType extends React.Component {
                                   currentState={currentDestType}
                                 />
 
-                                {(this.props.rackStructure && !this.state.sourceType)?
+                                {this.state.destTypeStructure && this.state.destTypeWidth?
                                     <div className="rackWrapper">
                                         <MsuRackFlex rackDetails={this.state.destTypeStructure}
                                                      rackWidth={this.state.destTypeWidth} />
@@ -230,8 +261,9 @@ class ChangeRackType extends React.Component {
                                     defaultMessage="Select a destination type in order to block put."/>
                         </div>
                         <div className="gor-button-wrap">
-                            <button disabled = {this.state.blockPutChangeTypeBtnState} className="gor-msuConfig-btn orange"
-                                     onClick={this._blockPutAndChangeType}>
+                            <button disabled = {this.state.blockPutChangeTypeBtnState} 
+                                    className="gor-msuConfig-btn orange"
+                                     onClick={this._blockPutAndChangeType.bind(this, this.props.id, this.state.destType)}>
                                 <FormattedMessage id="gor.msuConfig.blockPutChangeType" 
                                     description="button label for block put & change type" 
                                     defaultMessage="BLOCK PUT AND CHANGE TYPE"/>
@@ -249,19 +281,31 @@ ChangeRackType.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 
+const withQueryGetDestinationTypes = graphql(MSU_SOURCE_TYPE_QUERY, {
+    props: function(data){
+        if(!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list){
+            return {}
+        }
+        return {
+            destType: data.data.MsuSourceTypeList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+
 function mapStateToProps(state, ownProps) {
-    return {
-        destType: state.msuInfo.destType,
-        rackStructure: state.msuInfo.rackStructure
-    };
+    return {};
 }
 
 var mapDispatchToProps=function (dispatch) {
-    return {
-        makeAjaxCall: function(params){
-            dispatch(makeAjaxCall(params))
-        }
-    }
+    return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeRackType) ;
+export default compose(
+    withQueryGetDestinationTypes,
+    withApollo
+)(connect(mapStateToProps, mapDispatchToProps)((ChangeRackType)));

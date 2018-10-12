@@ -12,14 +12,14 @@ import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import {setCsFilterSpinner}  from '../../actions/spinnerAction';
+
 import {hashHistory} from 'react-router'
 class ChargingStationFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            tokenSelected: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}, searchQuery: {},
-            defaultToken: {"DOCKING STATUS": ["all"], "OPERATING MODE": ["all"]}
+            tokenSelected: {"DOCKING_STATUS": ["all"], "OPERATING_MODE": ["all"]}, searchQuery: {},
+            defaultToken: {"DOCKING_STATUS": ["all"], "OPERATING_MODE": ["all"]}
         };
         this._closeFilter = this._closeFilter.bind(this);
         this._clearFilter = this._clearFilter.bind(this);
@@ -28,8 +28,8 @@ class ChargingStationFilter extends React.Component {
 
 
     _closeFilter() {
-        let filterState=!this.props.showFilter;
-        this.props.showTableFilter(false);
+        //let filterState=!this.props.showFilter;
+        this.props.showChargingStationFilter(false);
     }
 
 
@@ -46,7 +46,7 @@ class ChargingStationFilter extends React.Component {
          * Hide the filter as soon as data in the list get updated.
          */
         if (nextProps.chargersData.length > 0 && JSON.stringify(nextProps.chargersData) !== JSON.stringify(this.props.chargersData)) {
-            this.props.showTableFilter(false);
+            this.props.showChargingStationFilter(false);
         }
     }
 
@@ -66,11 +66,11 @@ class ChargingStationFilter extends React.Component {
 
     _processFilterToken() {
         let tokenField1={
-            value: "DOCKING STATUS",
+            value: "DOCKING_STATUS",
             label: <FormattedMessage id="charging.token.status" defaultMessage="DOCKING STATUS"/>
         };
         let tokenField2={
-            value: "OPERATING MODE",
+            value: "OPERATING_MODE",
             label: <FormattedMessage id="charging.token.timePeriod" defaultMessage="OPERATING MODE"/>
         };
         let labelC1=[
@@ -110,11 +110,11 @@ class ChargingStationFilter extends React.Component {
             _query.charger_id=filterState.searchQuery["CHARGING STATION ID"]
         }
 
-        if (filterState.tokenSelected["DOCKING STATUS"] && filterState.tokenSelected["DOCKING STATUS"][0] !== 'all') {
-            _query.charger_status=filterState.tokenSelected["DOCKING STATUS"]
+        if (filterState.tokenSelected["DOCKING_STATUS"] && filterState.tokenSelected["DOCKING_STATUS"][0] !== 'all') {
+            _query.status=filterState.tokenSelected["DOCKING_STATUS"]
         }
-        if (filterState.tokenSelected["OPERATING MODE"] && filterState.tokenSelected["OPERATING MODE"][0] !== 'all') {
-            _query.charger_mode=filterState.tokenSelected["OPERATING MODE"]
+        if (filterState.tokenSelected["OPERATING_MODE"] && filterState.tokenSelected["OPERATING_MODE"][0] !== 'all') {
+            _query.mode=filterState.tokenSelected["OPERATING_MODE"]
         }
 
         hashHistory.push({pathname: "/system/chargingstation", query: _query})
@@ -123,11 +123,14 @@ class ChargingStationFilter extends React.Component {
     _clearFilter() {
         this.props.chargingstationfilterState({
             tokenSelected: {
-                "DOCKING STATUS": ["all"],
-                "OPERATING MODE":["all"]
+                "DOCKING_STATUS": ["all"],
+                "OPERATING_MODE":["all"],
+                __typename:"CharginStationTokenSelected"
             }, searchQuery: {
-                "CHARGING STATION ID": ''
-            }
+                "CHARGING_STATION_ID": '',
+                __typename:"CharginStationSearchQuery"
+            },
+            defaultToken: {"DOCKING_STATUS": ["all"], "OPERATING_MODE": ["all"],__typename:"ChargingStationDefaultToken"}
         });
         hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
@@ -135,9 +138,6 @@ class ChargingStationFilter extends React.Component {
 
     render() {
         let chargingDetails=this.props.chargerData;
-        let noOrder=chargingDetails.noResultFound
-
-
         let chargingSearchField=this._processChargingSearchField();
         let chargingFilterToken=this._processFilterToken();
         return (
@@ -153,7 +153,7 @@ class ChargingStationFilter extends React.Component {
                             defaultMessage="Hide"/>
                     </div>
                  </div>
-                    <div>{noOrder?
+                    <div>{this.props.noResults?
                             <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/></div>:""}
                     </div>
@@ -197,14 +197,7 @@ class ChargingStationFilter extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        showFilter: state.filterInfo.filterState || false,
-        chargerData: state.chargersDetail || [],
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
-        orderListSpinner: state.spinner.orderListSpinner || false,
-        filterState: state.filterInfo.chargingstationfilterState,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
-        csSpinner: state.spinner.csSpinner || false,
+        
         csFilterSpinner: state.spinner.csFilterSpinner || false
 
     };
@@ -212,23 +205,8 @@ function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
         chargingstationfilterState: function (data) {
             dispatch(chargingstationfilterState(data));
-        },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
-        },
-        setCsFilterSpinner: function (data) {
-            dispatch(setCsFilterSpinner(data));
         }
     }
 };
@@ -245,7 +223,8 @@ ChargingStationFilter.PropTypes={
     filterApplied: React.PropTypes.func,
     updateSubscriptionPacket: React.PropTypes.func,
     chargingstationfilterState: React.PropTypes.func,
-    toggleChargingFilter: React.PropTypes.func
+    toggleChargingFilter: React.PropTypes.func,
+    showChargingStationFilter: React.PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChargingStationFilter) ;

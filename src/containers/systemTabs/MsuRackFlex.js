@@ -9,7 +9,7 @@ class MsuRackFlex extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this._getMaxXMaxYCoords(nextProps.rackDetails);
+        this.setState(this._getMaxXMaxYCoords(nextProps.rackDetails));
     }
       
     _getMaxXMaxYCoords(vSlots){
@@ -54,13 +54,13 @@ class MsuRackFlex extends React.Component {
           }
       });
 
-      this.setState({
+      return{
         vSlots:vSlots,
         lastHSlot:lastHSlot,
         lastVSlot: lastVSlot,
         selectedSlotIndex: selectedSlotIndex,
         selectedSlotIds: selectedSlotIds
-      });
+      }
     }
 
     connect(startEl, endEl, color, thickness) {

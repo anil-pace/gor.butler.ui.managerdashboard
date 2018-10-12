@@ -21,7 +21,7 @@ export class GTableHeaderCell extends React.Component {
     }
 
     render() {
-        let header = this.props.header
+        let header = this.props.header||{}
         return <div style={header.width ? {flex: '1 0 ' + header.width + "%"} : {}} className={["cell", (header.sortDir || "")].join(" ")} {...this.props}>
             {this.props.children}
 

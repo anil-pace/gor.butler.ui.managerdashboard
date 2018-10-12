@@ -10,37 +10,32 @@ import FieldError from '../../components/fielderror/fielderror';
 import UserRoles from './userRoles';
 import {nameStatus, passwordStatus} from '../../utilities/fieldCheck';
 
+import {
+    notifySuccess,
+    notifyFail,
+} from "./../../actions/validationActions";
+import {graphql, compose} from "react-apollo";
+import gql from 'graphql-tag'
+const EDIT_USER_MUTATION = gql`
+    mutation editUser($id:ID, $input: CreateUserInput) {
+        editUser(id:$id, input: $input) {
+            password
+            username
+            code
+            description
+        }
+    }
+`;
+
 class EditUser extends React.Component {
     constructor(props) {
         super(props);
         this.state={pwdView: false}
     }
 
-    componentDidMount() {
-        let userData={
-            'url': ROLE_URL,
-            'method': GET,
-            'cause': GET_ROLES,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        if (!this.props.roleList) {
-            this.props.userRequest(userData);
-        }
-
-
-    }
-
     removeThisModal() {
         this.props.resetForm();
         this.props.removeModal();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.auth_token) {
-            this.removeThisModal();
-        }
     }
 
     _checkName() {
@@ -101,25 +96,17 @@ class EditUser extends React.Component {
         else if (!this._checkPwd()) {
             return;
         }
-        let formdata={
+        let graphql_data={
+            id:this.props.id,
             "first_name": firstname,
             "last_name": lastname,
             "role_id": role,
             "password": pswd,
             "password_confirm": confirmPswd
-
-        };
-        let editurl=HEADER_URL + '/' + this.props.id;
-        let userData={
-            'url': editurl,
-            'formdata': formdata,
-            'method': PUT,
-            'cause': EDIT_USER,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
         }
-        this.props.userRequest(userData);
+        let editurl=HEADER_URL + '/' + this.props.id;
+        this.props.editUser(graphql_data)
+        // this.props.userRequest(userData);
         this.removeThisModal();
     }
 
@@ -264,9 +251,7 @@ function mapStateToProps(state, ownProps) {
     return {
         nameCheck: state.appInfo.nameInfo || {},
         passwordCheck: state.appInfo.passwordInfo || {},
-        roleList: state.appInfo.roleList || [],
         roleSet: state.appInfo.roleSet || null,
-        auth_token: state.authLogin.auth_token
     };
 }
 
@@ -283,8 +268,59 @@ var mapDispatchToProps=function (dispatch) {
         },
         resetForm: function () {
             dispatch(resetForm());
+        },
+        notifySuccess: function (data) {
+            dispatch(notifySuccess(data));
+        }
+        ,
+        notifyFail: function (data) {
+            dispatch(notifyFail(data));
         }
     }
 };
+const withMutations = graphql(EDIT_USER_MUTATION, {
+    props: ({ownProps, mutate}) => ({
+        editUser: ({first_name, last_name, username, role_id, password,id}) =>
+            mutate({
+                variables: {input: {first_name, last_name, username, role_id, password},id:id},
+                update: (proxy, {data: {editUser}}) => {
+                    if (editUser.code === 'us004') {
+                        ownProps.notifySuccess(editUser.description)
+                    } else {
+                        ownProps.notifyFail(editUser.description)
+                    }
+                }
+            }),
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditUser);
+
+    }),
+});
+
+const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
+
+            }
+        }
+    }
+`;
+const withRoleList = graphql(ROLE_LIST_QUERY, {
+    props: (data) => ({
+        roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],
+    }),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+export default (connect(mapStateToProps,mapDispatchToProps)(compose(
+    withRoleList,
+    withMutations
+)(EditUser)));
+
+

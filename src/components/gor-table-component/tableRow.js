@@ -18,8 +18,10 @@ export class GTableRow extends React.Component {
         let max = this.props.max || this.props.data.length
         let props_to_be_passed=Object.assign({},this.props)
         delete props_to_be_passed.offset
+        delete props_to_be_passed.key
         delete props_to_be_passed.max
         delete props_to_be_passed.data
+        delete props_to_be_passed.index
 
 
 

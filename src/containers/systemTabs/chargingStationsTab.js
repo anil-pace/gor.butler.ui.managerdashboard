@@ -1,7 +1,3 @@
-/**
- * Container for Overview tab
- * This will be switched based on tab click
- */
 import React  from 'react';
 import ChargingStationsTable from './chargingStationsTable';
 import {connect} from 'react-redux';
@@ -16,19 +12,15 @@ import {
     GOR_CONNECTED_STATUS,
     WS_ONSEND,GOR_MANUAL_MODE
 } from '../../constants/frontEndConstants';
-import {csHeaderSort, csHeaderSortOrder, csFilterDetail} from '../../actions/sortHeaderActions';
-import {
-    showTableFilter,
-    filterApplied,
-    chargingstationfilterState,
-    toggleChargingFilter
-} from '../../actions/filterAction';
-import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions'
+
+
+import { setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
-import {chargingStationListRefreshed} from './../../actions/systemActions'
 import {hashHistory} from 'react-router'
 import ChargingStationFilter from './chargingStationFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary'
+import FilterSummary from '../../components/tableFilter/filterSummary';
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 
 //Mesages for internationalization
 const messages=defineMessages({
@@ -45,40 +37,72 @@ const messages=defineMessages({
 
 });
 
+const CHARGING_STATION_QUERY = gql`
+    query ChargingStationList($input: ChargingStationListParams) {
+        ChargingStationList(input:$input){
+            list {
+                charger_id
+                mode
+                status
+                attached_butler_id
+               
+            }
+        }
+    }
+`;
+
+
+const SUBSCRIPTION_QUERY = gql`subscription CHARGER_CHANNEL($charger_id: String){
+    ChargingStationList(input:{charger_id:$charger_id}){
+        list{
+                charger_id
+                mode
+                status
+                attached_butler_id
+
+        }
+    }
+}
+`
+
 
 class ChargingStations extends React.Component {
     constructor(props) {
         super(props);
         this.state={query: null}
-        this.props.showTableFilter(false)
+        this.subscription = null;
+        this.linked = false,
+            this.showChargingStationFilter = this.props.showChargingStationFilter.bind(this)
     }
 
-    _processChargersData(data, nProps) {
+    _processChargersData(data) {
         var chargerData=[], detail={}, count=0,
             nProps=this,
-            data=nProps.props.chargersDetail.chargersDetail,
+            data=data,
             CS, csId, botId, BUTLER;
+
+         data = this._filterList(data, nProps.props.location.query)
 
         var priStatus={"connected": 1, "disconnected": 2};
 
         for (var i=data.length - 1; i >= 0; i--) {
             detail={}
             csId=data[i].charger_id;
-            botId=data[i].docked_butler_id;
+            botId=data[i].attached_butler_id;
             CS=nProps.context.intl.formatMessage(messages.cdPrefix, {"csId": csId});
             BUTLER=nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
             detail.id=CS;
-            detail.status=nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
-            detail.statusClass=data[i].charger_status;
-            detail.statusPriority=priStatus[data[i].charger_status];
-            if (stringConfig[data[i].charger_mode] && nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
-                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+            detail.status=nProps.context.intl.formatMessage((stringConfig[data[i].status]));
+            detail.statusClass=data[i].status;
+            detail.statusPriority=priStatus[data[i].status];
+            if (nProps.context.intl.formatMessage(stringConfig[data[i].mode])) {
+                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].mode]);
             }
             else {
-                detail.mode=data[i].charger_mode;
+                detail.mode=data[i].mode;
             }
-            detail.modeClass=data[i].charger_mode;
-            if (data[i].docked_butler_id && data[i].docked_butler_id.length) {
+            detail.modeClass=data[i].mode;
+            if (data[i].attached_butler_id && data[i].attached_butler_id.length) {
                 detail.dockedBots=BUTLER;
             }
 
@@ -90,21 +114,74 @@ class ChargingStations extends React.Component {
         return chargerData;
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-        this.props.chargingStationListRefreshed()
+    
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: SUBSCRIPTION_QUERY,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                console.log(newResult)
+
+                return Object.assign({}, {
+                    ChargingStationList: {list: newResult.subscriptionData.data.ChargingStationList.list}
+                })
+            },
+        });
     }
 
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+         if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
+
             this._refreshList(nextProps.location.query)
         }
+
+
+        if (this.props.data && (!this.props.data.ChargingStationList && nextProps.data.ChargingStationList && !this.subscription && !nextProps.data.loading)) {
+            this.updateSubscription(nextProps.location.query)
+        }
+    }
+
+
+    componentWillUnMount() {
+        if (this.subscription) {
+            this.subscription()
+        }
+    }
+
+
+        _filterList(init_data, query) {
+        let filtered_data = init_data
+        
+        if (query.charger_id) {
+            query.charger_id=query.charger_id.toString().replace( /^\D+/g, ''); 
+            query.charger_id = query.charger_id.constructor === Array ? query.charger_id : [query.charger_id]
+            filtered_data = filtered_data.filter(function (charger) {
+                return query.charger_id.indexOf(charger.charger_id)>-1
+            })
+        }
+
+        if(query.status) {
+             query.status = query.status.constructor === Array ? query.status : [query.status]
+            filtered_data = filtered_data.filter(function (charger) {
+                return query.status.indexOf(charger.status)>-1
+            })
+        }
+        
+        
+        if(query.mode){
+            query.mode = query.mode.constructor === Array ? query.mode : [query.mode]
+            filtered_data = filtered_data.filter(function (charger) {
+                return query.mode.indexOf(charger.mode)>-1
+            })
+        }
+         
+        return filtered_data
     }
 
     /**
@@ -118,32 +195,29 @@ class ChargingStations extends React.Component {
         if (query.charger_id) {
             filterSubsData["charger_id"]=['contains', query.charger_id]
         }
-        if (query.charger_status) {
-            filterSubsData["charger_status"]=['in', query.charger_status.constructor=== Array ? query.charger_status : [query.charger_status]]
+        if (query.status) {
+            filterSubsData["status"]=['in', query.status.constructor=== Array ? query.status : [query.status]]
         }
-        if (query.charger_mode) {
-            filterSubsData["charger_mode"]=['in', query.charger_mode.constructor=== Array ? query.charger_mode : [query.charger_mode]]
+        if (query.mode) {
+            filterSubsData["mode"]=['in', query.mode.constructor=== Array ? query.mode : [query.mode]]
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
-            this.props.toggleChargingFilter(true);
             this.props.filterApplied(true);
         } else {
-            this.props.toggleChargingFilter(false);
             this.props.filterApplied(false);
         }
 
-        let updatedWsSubscription=this.props.wsSubscriptionData;
-        updatedWsSubscription["chargingstation"].data[0].details["filter_params"]=filterSubsData;
-        this.props.initDataSentCall(updatedWsSubscription["chargingstation"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
         this.props.chargingstationfilterState({
             tokenSelected: {
-                "DOCKING STATUS": query.charger_status ? query.charger_status.constructor=== Array ? query.charger_status : [query.charger_status] : ["all"],
-                "OPERATING MODE": query.charger_mode ? query.charger_mode.constructor=== Array ? query.charger_mode : [query.charger_mode] : ["all"]
+                __typename:"ChargingStationTokenSelected",
+                "DOCKING_STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : ["all"],
+                "OPERATING_MODE": query.mode ? query.mode.constructor=== Array ? query.mode : [query.mode] : ["all"]
             }, searchQuery: {
-                "CHARGING STATION ID": query.charger_id || ''
-            }
+                __typename:"ChargingStationSearchQuery",
+                "CHARGING_STATION_ID": query.charger_id || ''
+            },
+            defaultToken: {"DOCKING_STATUS": ["all"], "OPERATING_MODE": ["all"],__typename:"ChargingStationDefaultToken"}
         });
     }
 
@@ -155,19 +229,17 @@ class ChargingStations extends React.Component {
         hashHistory.push({pathname: "/system/chargingstation", query: {}})
     }
 
-    _setFilter() {
-        this.props.showTableFilter(!this.props.showFilter);
-    }
 
 
     render() {
+        var data=this.props.chargingStationList;
         let filterHeight=screen.height - 190 - 50;
         let updateStatusIntl="";
         var itemNumber=4, connectedBots=0, manualMode=0, automaticMode=0,
             chargersState={"connectedBots": "--", "manualMode": "--", "automaticMode": "--", "csConnected": 0},
             chargersData, csConnected=0;
-        if (this.props.chargersDetail.chargersDetail !== undefined) {
-            chargersData=this._processChargersData();
+        if (this.props.chargingStationList !== undefined) {
+            chargersData=this._processChargersData(data);
             if (chargersData && chargersData.length) {
                 for (var i=chargersData.length - 1; i >= 0; i--) {
                     if (chargersData[i].dockedBots !== "--") {
@@ -195,74 +267,72 @@ class ChargingStations extends React.Component {
         }
 
         return (
+             
+
+
             <div>
                 <div>
-                    <div className="gorTesting">
-                        <Spinner isLoading={this.props.csSpinner} setSpinner={this.props.setCsSpinner}/>
-                        {chargersData?<div>
-                            <div className="gor-filter-wrap"
-                                 style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <ChargingStationFilter chargersData={chargersData} responseFlag={this.props.responseFlag}/>
+                    <div className="gorTesting wrapper gor-charging-station">
+                        
+                        {chargersData?<div><div><div className="gor-filter-wrap"
+                                         style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
+                                <ChargingStationFilter 
+                                isFilterApplied={this.props.isFilterApplied}  
+                                filterState={this.props.chargingStationFilterStatus} 
+                                chargingstationfilterState={this.props.chargingstationfilterState} 
+                                chargersData={chargersData} 
+                                responseFlag={this.props.responseFlag} 
+                                showChargingStationFilter={this.showChargingStationFilter} 
+                                noResults={chargersData.length === 0}/>
                             </div>
+
                             <div className="gorToolBar">
-                                <div className="gorToolBarWrap">
-                                    <div className="gorToolBarElements">
-                                        <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations"
+                            <div className="gorToolBarWrap">
+                            <div className="gorToolBarElements">
+                            <FormattedMessage id="ChargingStations.table.heading" description="Heading for ChargingStations"
                                                           defaultMessage="Charging Stations"/>
 
-                                    </div>
-                                </div>
-
-
-                                <div className="filterWrapper">
-                                    <div className="gorToolBarDropDown">
-                                        <div className="gor-button-wrap">
-                                            <div
-                                                className="gor-button-sub-status">{updateStatusIntl} {updateStatusIntl} </div>
-
-                                            <button
-                                                className={this.props.chargingFilterStatus ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
-                                                onClick={this._setFilter.bind(this)}>
-                                                <div className="gor-manage-task"/>
-                                                <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
-                                                                  defaultMessage="Filter data"/>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                            </div>
                             </div>
 
-                            {/*Filter Summary*/}
-                            <FilterSummary total={chargersData.length||0}  isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
-                                           filterText={<FormattedMessage id="ChargingStationsTable.filter.search.bar"
+
+                            <div className="filterWrapper">
+                            <div className="gorToolBarDropDown">
+                            <div className="gor-button-wrap">
+                            
+                            <button
+                            className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"} onClick={this.showChargingStationFilter.bind(this, true)}>
+                            <div className="gor-manage-task"/>
+                            <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
+                            defaultMessage="Filter data"/>
+                            </button>
+
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        {/*Filter Summary*/}
+                         <FilterSummary total={chargersData.length||0}  noResults={chargersData.length === 0}  isFilterApplied={this.props.isFilterApplied} responseFlag={this.props.responseFlag}
+                            filterText={<FormattedMessage id="ChargingStationsTable.filter.search.bar"
                                                                          description='total stations for filter search bar'
                                                                          defaultMessage='{total} Stations found'
                                                                          values={{total: chargersData.length || 0}}/>}
-                                           refreshList={this._clearFilter.bind(this)}
-                                           refreshText={<FormattedMessage
+                            refreshList={this._clearFilter.bind(this)}
+                             refreshText={<FormattedMessage
                                                id="ChargingStationsTable.filter.search.bar.showall"
                                                description="button label for show all"
                                                defaultMessage="Show all Stations"/>}/>
-                        </div>:null}
-                        <ChargingStationsTable items={chargersData} itemNumber={itemNumber}
-                                               chargersState={chargersState} intlMessg={this.props.intlMessages}
-                                               sortHeaderState={this.props.csHeaderSort}
-                                               currentSortState={this.props.csSortHeader}
-                                               sortHeaderOrder={this.props.csHeaderSortOrder}
-                                               currentHeaderOrder={this.props.csSortHeaderState}
-                                               setCsFilter={this.props.csFilterDetail}
-                                               getCsFilter={this.props.csFilter}
-                                               chargingFilterStatus={this.props.chargingFilterStatus}
-                                               isFilterApplied={this.props.isFilterApplied}
-                                               lastUpdatedText={updateStatusIntl}
-                                               lastUpdated={updateStatusIntl}
-                                               showFilter={this.props.showFilter}
-                                               setFilter={this.props.showTableFilter}
-                                               refreshList={this._clearFilter.bind(this)}/>
+                                                           <ChargingStationsTable data={chargersData} chargersState={chargersState}/>
 
 
+
+                       </div></div>:null}
+                        
+
+
+                
+            
+                       
                     </div>
                 </div>
             </div>
@@ -274,58 +344,18 @@ class ChargingStations extends React.Component {
 function mapStateToProps(state, ownProps) {
 
     return {
-        csFilter: state.sortHeaderState.csFilter || "",
-        csSortHeader: state.sortHeaderState.csHeaderSort || INITIAL_HEADER_SORT,
-        csSortHeaderState: state.sortHeaderState.csHeaderSortOrder || INITIAL_HEADER_ORDER,
         csSpinner: state.spinner.csSpinner || false,
-        chargersDetail: state.chargersDetail || [],
-        intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        chargingFilterStatus: state.filterInfo.chargingFilterStatus || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        chargingStationListRefreshed: state.chargerInfo.chargingStationListRefreshed,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        intlMessages: state.intl.messages
     };
 }
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        csFilterDetail: function (data) {
-            dispatch(csFilterDetail(data))
-        },
+        
         setCsSpinner: function (data) {
             dispatch(setCsSpinner(data));
-        },
-        csHeaderSort: function (data) {
-            dispatch(csHeaderSort(data))
-        },
-        csHeaderSortOrder: function (data) {
-            dispatch(csHeaderSortOrder(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        chargingstationfilterState: function (data) {
-            dispatch(chargingstationfilterState(data));
-        },
-        toggleChargingFilter: function (data) {
-            dispatch(toggleChargingFilter(data));
-        },
-        chargingStationListRefreshed: function (data) {
-            dispatch(chargingStationListRefreshed(data))
-        },
-        initDataSentCall: function (data) {
-            dispatch(setWsAction({type: WS_ONSEND, data: data}));
-        },
-
+        }
+        
     };
 }
 
@@ -333,23 +363,126 @@ ChargingStations.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
 ChargingStations.PropTypes={
-    csFilter: React.PropTypes.string,
-    csSortHeader: React.PropTypes.string,
-    csSortHeaderState: React.PropTypes.string,
     csSpinner: React.PropTypes.bool,
     chargersDetail: React.PropTypes.array,
-    showFilter: React.PropTypes.bool,
     isFilterApplied: React.PropTypes.bool,
     chargingFilterStatus: React.PropTypes.bool,
     csFilterDetail: React.PropTypes.func,
     setCsSpinner: React.PropTypes.func,
     csHeaderSort: React.PropTypes.func,
     csHeaderSortOrder: React.PropTypes.func,
-    showTableFilter: React.PropTypes.func,
-    filterApplied: React.PropTypes.func,
-    wsSubscriptionData: React.PropTypes.object
+    showChargingStationFilter: React.PropTypes.func,
+    filterApplied: React.PropTypes.func
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChargingStations) ;
+
+const withQuery = graphql(CHARGING_STATION_QUERY, {
+    props: function(data){
+        if(!data || !data.data.ChargingStationList || !data.data.ChargingStationList.list){
+            return {}
+        }
+        return {
+            chargingStationList: data.data.ChargingStationList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+
+
+
+
+const chargingStationClientData = gql`
+    query  {
+    todos @client
+    chargingStationFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+               DOCKING_STATUS
+               OPERATING_MODE
+            }
+            searchQuery{
+                CHARGING_STATION_ID
+
+            }
+            defaultToken{
+                DOCKING_STATUS
+                OPERATING_MODE
+            }
+        }
+    }
+    }
+`;
+
+
+const SET_VISIBILITY = gql`
+    mutation setChargingStationFilter($filter: String!) {
+        setShowChargingStationFilter(filter: $filter) @client
+    }
+`;
+
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setChargingStationFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setChargingStationFilterState(state: $state) @client
+    }
+`;
+
+
+const withClientData = graphql(chargingStationClientData, {
+    
+    props:function(data){
+        return {
+          showFilter: data.data.chargingStationFilter ?data.data.chargingStationFilter.display:false,
+        isFilterApplied:data.data.chargingStationFilter?data.data.chargingStationFilter.isFilterApplied:false,
+        chargingStationFilterStatus: data.data.chargingStationFilter ?JSON.parse(JSON.stringify(data.data.chargingStationFilter.filterState)):null,
+        chargingStationFilter:data.data.chargingStationFilter  
+        }
+    }
+})
+
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        showChargingStationFilter: function (show) {
+            mutate({variables: {filter: show}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        chargingstationfilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+
+
+
+
+
+export default compose(
+    withClientData,
+    setVisibilityFilter,
+    setFilterApplied,
+    setFilterState,
+    withQuery
+)(connect(mapStateToProps, mapDispatchToProps)(ChargingStations));
 

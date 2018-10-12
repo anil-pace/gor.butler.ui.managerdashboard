@@ -4,7 +4,7 @@ import {modal} from 'react-redux-modal';
 import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
 
-import {GTable} from '../../components/gor-table-component/index'
+import GTable from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
@@ -101,7 +101,8 @@ class MsuConfigTable extends React.Component {
     }
 
     _changeDestinationType(id){
-        let msuList = this.props.msuList;
+        //let msuList = this.props.msuList;
+        let msuList = this.props.items;
         let rackType = null;
         for(let i=0,len=msuList.length; i<len;i++){
             if(msuList[i].id === id){
@@ -111,7 +112,8 @@ class MsuConfigTable extends React.Component {
         }
         
         modal.add(ChangeRackType, {
-            msuList: this.props.msuList,
+            //msuList: this.props.msuList,
+            msuList: this.props.items,
             rackType: rackType,
             blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
             title: '',
@@ -124,8 +126,9 @@ class MsuConfigTable extends React.Component {
     }
 
     _processMSUs = (destType) => {
-        let msuData = this.props.msuList;
-        let msuDataLen = msuData.length || 0; 
+        let msuData = this.props.items;
+        //let msuData = [{"id":"26","racktype":"15","__typename":"MsuFilter"},{"id":"25","racktype":"15","__typename":"MsuFilter"}];
+        let msuDataLen = msuData ? msuData.length : 0; 
         let msuRows = []; 
         let processedData = {};
 
@@ -234,7 +237,7 @@ class MsuConfigTable extends React.Component {
         const processedMsuData = this._processMSUs();
         return (
             <div>
-            {this.props.msuList.length? 
+            {this.props.items && this.props.items.length? 
                 (<div className="msuConfigTableWrapper">
                     <GTable options={['table-bordered']}>
                         <GTableBody data={processedMsuData.msuData}>
@@ -269,7 +272,7 @@ function mapStateToProps(state, ownProps) {
         isFilterApplied: state.filterInfo.isFilterApplied || false,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        msuList: state.msuInfo.msuList,
+        //msuList: state.msuInfo.msuList,
         timeZone:state.authLogin.timeOffset,
         msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
     };

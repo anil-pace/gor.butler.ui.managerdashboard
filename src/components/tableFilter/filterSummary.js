@@ -4,18 +4,24 @@
 import React  from 'react';
 
 class FilterSummary extends React.Component {
-    
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            total: props.total
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if ((nextProps.total && nextProps.total !== 0) || nextProps.forceUpdate) {
+            this.setState({total: nextProps.total})
+        }
+    }
 
     shouldComponentUpdate(nextProps) {
-        /**
-         * Don't display the filter summary if count=0
-         * or previous number of results is same of updated list.
-         */
-        if ((this.props.total!== nextProps.total || nextProps.total) || (this.props.isFilterApplied !== nextProps.isFilterApplied)) {
-            return true
-        }
-        return false;
+        return !nextProps.noResults
     }
+
 
     render() {
         return (
@@ -31,7 +37,7 @@ class FilterSummary extends React.Component {
     }
 }
 
-FilterSummary.propTypes={
+FilterSummary.propTypes = {
     refreshList: React.PropTypes.func.isRequired
 }
 

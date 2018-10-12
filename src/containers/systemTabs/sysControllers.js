@@ -4,6 +4,7 @@ import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
 import FilterSummary from '../../components/tableFilter/filterSummary';
+import SysControllersTable from './sysControllersTable';
 import {
     SortHeaderCell,
     tableRenderer,
@@ -29,119 +30,134 @@ import {
     showTableFilter,
     filterApplied
 } from '../../actions/filterAction';
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 
+const SYSTEM_CONTROLLER_QUERY = gql`
+    query SystemControllerList($input: SystemControllerListParams) {
+        SystemControllerList(input:$input){
+            list {
+                controller_id
+                status
+                enabled
+                state_data{
+                    zone
+                    zone_state{
+                       hard_emergency 
+                       latch_gate
+                       soft_emergency
+                       zone_clear
+                       zone_pause
+                    }
+                    sensor_activated
+                    action_triggered
 
+                }
+               
+            }
+        }
+    }
+`;
+
+const SUBSCRIPTION_QUERY = gql`subscription SYSTEM_CONTROLLER_CHANNEL($controller_id: String){
+    SystemControllerList(input:{controller_id:$controller_id}){
+        list{
+                controller_id
+                status
+                enabled
+                state_data{
+                    zone
+                    zone_state{
+                       hard_emergency 
+                       latch_gate
+                       soft_emergency
+                       zone_clear
+                       zone_pause
+                    }
+                    sensor_activated
+                    action_triggered
+
+                }
+
+        }
+    }
+}
+`
 
 
 class SystemControllers extends React.Component {
     constructor(props,context) {
         super(props,context);
-        this.state=this._getInitialState();
-        this._clearFilter =  this._clearFilter.bind(this);
-        this._sortTableData = this._sortTableData.bind(this);
-        
+        this.state={query: null};
+        this.subscription = null;
+        this.linked = false; 
     }
 
-    _getInitialState(){
-        var data=this._processData(this.props.controllers.slice(0));
-        var dataList = new tableRenderer(data.length);
-        dataList.newData=data;
-        return {
-            columnWidths: {
-                id: this.props.containerWidth * 0.15,
-                status: this.props.containerWidth * 0.1,
-                location: this.props.containerWidth * 0.13,
-                connectionDetails: this.props.containerWidth * 0.2,
-                operatingMode: this.props.containerWidth * 0.4
-            },
-            sortOrder:{
-                controller_id: "ASC",
-                statusText: "ASC"
-            },
-            dataList:dataList,
-            query:this.props.location.query,
-            locale:this.context.intl.locale,
-            subscribed:false,
-            queryApplied:Object.keys(this.props.location.query).length ? true :false
+
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
         }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: SUBSCRIPTION_QUERY,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                console.log(newResult)
+
+                return Object.assign({}, {
+                    SystemControllerList: {list: newResult.subscriptionData.data.SystemControllerList.list}
+                })
+            },
+        });
     }
-   
+
 
     _processData(data){
         //var data=this.props.controllers.slice(0);
+        if(data){
         var dataLen = data.length;
         var processedData=[];
         if(dataLen){
             for(let i=0 ;i < dataLen ; i++){
                 let rowObj={};
                 rowObj = Object.assign({},data[i])
-                if(data[i].status === "connected"){
+                if(data[i].enabled === true){
                     rowObj.statusText = this.context.intl.formatMessage(stringConfig.connected)
                 }
                 else{
                     rowObj.statusText = this.context.intl.formatMessage(stringConfig.disconnected)
                 }
-                if(data[i].zigbee_network === "connected"){
+                if(data[i].status === "connected"){
                     rowObj.zigbeeText = this.context.intl.formatMessage(stringConfig.connected)
                 }
                 else{
                     rowObj.zigbeeText = this.context.intl.formatMessage(stringConfig.disconnected)
                 }
-                if(data[i].ethernet_network === "connected"){
+                if(data[i].status === "connected"){
                     rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.connected)
                 }
                 else{
                     rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.disconnected)
                 }
-                if(rowObj.sensor_activated === "button_press"){
-                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor]
+
+                if(rowObj.state_data.sensor_activated === "button_press"){
+                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.state_data.sensor_activated]
                 }
-                else if(rowObj.sensor_activated === "none"){
+                if(rowObj.state_data.sensor_activated === "none"){
                     rowObj.sensor_activated_text = "";
                 }
                 else{
-                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.sensor_activated];
+                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.state_data.sensor_activated];
                 }
-                rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.action_triggered];
+                rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.state_data.action_triggered];
                 
                 processedData.push(rowObj)
             }
         }
         return processedData
     }
-
-    _sortTableData(column,direction){
-        var _this = this;
-        var data = JSON.parse(JSON.stringify(_this.state.dataList.newData));
-        var dataList;
-        var sortOrder =JSON.parse(JSON.stringify(_this.state.sortOrder));
-
-         data.sort(function(current,next){
-            let result= direction === "ASC" ? next[column].toLowerCase().localeCompare(current[column].toLowerCase(),_this.state.locale)
-                        :current[column].toLowerCase().localeCompare(next[column].toLowerCase(),_this.state.locale);
-            return result <= 0 ? false : true;
-            
-        })
-        dataList = new tableRenderer(data.length);
-        dataList.newData=data;
-        sortOrder[column] = sortOrder[column] === "ASC" ? "DESC" : "ASC";
-        _this.setState({
-            dataList,
-            hasStateChanged:!_this.state.hasStateChanged,
-            sortOrder
-        })
     }
-
-    
-     _clearFilter() {
-        this.setState({
-            subscribed:false
-        },function(){
-            this.props.router.push({pathname: "/system/sysControllers"})
-        })
-        
-    }
-   
 
     _refreshList(query){
         var filterSubsData = {};
@@ -150,14 +166,6 @@ class SystemControllers extends React.Component {
             filterSubsData["zone_id"]=['=',query.zone_id]
         }
         updatedWsSubscription["controllers"].data[0].details["filter_params"]=filterSubsData;
-        this.props.initDataSentCall(updatedWsSubscription["controllers"])
-    }
-
- 
-
-    shouldComponentUpdate(nextProps,nextState) {
-        return ((nextProps.hasDataChanged !== this.props.hasDataChanged) || 
-            (nextState.hasStateChanged !== this.state.hasStateChanged));
     }
 
 
@@ -196,9 +204,13 @@ class SystemControllers extends React.Component {
     render() {
         var {dataList} = this.state;
         var filterHeight=screen.height - 190 - 50;
-        
+       var data=this._processData(this.props.systemControllerList);
+
+
+        if(data!==undefined){
         return (
-            <div  className="gorTableMainContainer gor-sys-controller">
+            
+           <div  className="gorTableMainContainer gor-sys-controller">
             
             <div className="gorToolBar">
                                 <div className="gorToolBarWrap">
@@ -210,142 +222,19 @@ class SystemControllers extends React.Component {
                                 </div>
                         
                 </div>
-                <FilterSummary total={dataList.getSize()||0} isFilterApplied={this.state.queryApplied} responseFlag={null}
-                                           refreshList={this._clearFilter}
-                                           refreshText={<FormattedMessage id="sysController.summary.showall"
-                                                                          description="button label for show all"
-                                                                          defaultMessage="Show all Zones"/>}/>
+               
                 
-                <Table
-                    rowHeight={80}
-                    rowsCount={dataList.getSize()}
-                    headerHeight={70}
-                    onColumnResizeEndCallback={null}
-                    isColumnResizing={false}
-                    width={this.props.containerWidth}
-                    height={document.documentElement.clientHeight * 0.6}
-                    {...this.props}>
-                    <Column
-                        columnKey="controller_id"
-                        header={
-                            
-                               
-                                    <SortHeaderCell onSortChange={()=>this._sortTableData("controller_id",this.state.sortOrder.controller_id)}
-                                                    sortDir={this.state.sortOrder.controller_id}>
-                                        <div className="gorToolHeaderEl">
-                                            <FormattedMessage id="sysControllers.idColumn.heading"
-                                                              description='CONTROLLER ID'
-                                                              defaultMessage='CONTROLLER ID'/>
-                                            <div className="gorToolHeaderSubText">
-                                                <FormattedMessage id="sysControllers.totalControllers"
-                                                                  description='total controllers'
-                                                                  defaultMessage='Total:{count}'
-                                                                  values={{count: (dataList.getSize()||0)}}/>
-
-                                            </div>
-                                            
-                                        </div>
-
-                                    </SortHeaderCell>
-                                
-                            
-                        }
-                        cell={<TextCell data={dataList} classKey={"id"} />}
-                        fixed={true}
-                        width={this.state.columnWidths.id}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="statusText"
-                        header={
-                            <SortHeaderCell onSortChange={()=>this._sortTableData("statusText",this.state.sortOrder.statusText)}
-
-                                            sortDir={this.state.sortOrder.statusText}>
-
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="sysController.table.status" description="Status for PPS"
-                                                      defaultMessage="STATUS"/>
-                                    <div className="gorToolHeaderSubText"/>
-                                </div>
-                            </SortHeaderCell>
-                        }
-                        cell={<TextCell data={dataList} setClass={"status"}/>}
-                        fixed={true}
-                        width={this.state.columnWidths.status}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey={null}
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="sysController.table.location" description="Location"
-                                                      defaultMessage="LOCATION"/>
-                                    <div className="gorToolHeaderSubText"/>
-                                </div>
-                            </Cell>
-                        }
-                        cell={<TextCell data={dataList} classKey={"location"} childrenClass="location" childColumnKey="zone_id">
-                             <span ></span>
-                        </TextCell>}
-                        fixed={true}
-                        width={this.state.columnWidths.location}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey={"ethernetText"}
-                        
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="sysController.table.conDetails" description="Status for PPS"
-                                                      defaultMessage="CONNECTION DETAILS"/>
-                                    <div className="gorToolHeaderSubText"/>
-                                </div>
-                                </Cell>
-                        }
-                        cell={<ConnectionDetailsCell data={dataList} subColumnKey={"zigbeeText"} classKey={"connectionDetails"}>
-                                 <FormattedMessage id="sysController.table.ethernetStatus" description='sysController.table.ethernetStatus'
-                                                          defaultMessage='Ethernet Network: '
-                                                          />
-                                <FormattedMessage id="sysController.table.zigbeeStatus" description='sysController.table.zigbeeStatus'
-                                                          defaultMessage='Zigbee Network: '
-                                                          />
-
-                              </ConnectionDetailsCell>}
-                        fixed={true}
-                        width={this.state.columnWidths.connectionDetails}
-                        isResizable={true}
-                    />
-                    <Column
-                        columnKey="action_triggered_text"
-                        header={
-                                <Cell>
-                                <div className="gorToolHeaderEl">
-
-                                    <FormattedMessage id="sysController.table.operatingMode" description="Status for PPS"
-                                                      defaultMessage="OPERATING MODE"/>
-                                    <div className="gorToolHeaderSubText"/>
-
-                                  
-                                </div>
-                                </Cell>
-                        }
-                        cell={<OperatingModeCell data={dataList} subColumnKey={"sensor_activated_text"} classKey={"action_triggered"} />}
-                        fixed={true}
-                        width={this.state.columnWidths.operatingMode}
-                        isResizable={true}
-                    />
-                    
-                </Table>
-               {!this.props.controllers.length && <div className="gor-no-data"><FormattedMessage id="sysControllers.table.noData"
+                <SysControllersTable data={data}/>
+               {!data.length && <div className="gor-no-data"><FormattedMessage id="sysControllers.table.noData"
                                                                     description="No data message for PPStable"
                                                                     defaultMessage="No Controllers Found"/></div>}
             </div>
+
         );
+    }
+    else{
+        return null;
+    }
     }
 }
 
@@ -362,12 +251,26 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-function mapDispatchToProps(dispatch){
-    return{
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); }
-    }
-}
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dimensions()(withRouter(SystemControllers)));
+const withQuery = graphql(SYSTEM_CONTROLLER_QUERY, {
+    props: function(data){
+        if(!data || !data.data.SystemControllerList || !data.data.SystemControllerList.list){
+            return {}
+        }
+        return {
+            systemControllerList: data.data.SystemControllerList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+
+
+export default compose(
+    withQuery
+)(connect(mapStateToProps)(Dimensions()(withRouter(SystemControllers))));

@@ -1,3 +1,6 @@
+msuConfigFilterState
+
+
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
@@ -19,6 +22,17 @@ import {
     MSU_CONFIG_DEST_TYPE_URL
 } from '../../constants/configConstants';
 
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+
+const MSU_SOURCE_TYPE_QUERY = gql`
+    query($input:MsuSourceTypeListParams){
+        MsuSourceTypeList(input:$input){
+             list
+            }
+    }
+`;
+
 class MsuConfigFilter extends React.Component{
     constructor(props) 
     {
@@ -38,19 +52,19 @@ class MsuConfigFilter extends React.Component{
     }
 
     componentDidMount(){
-        this._requestDestTypeList();
+        //this._requestDestTypeList();
     }
 
     _requestDestTypeList(){
-        let params={
-            'url': MSU_CONFIG_DEST_TYPE_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
-            //'formdata':formData,
-        }
-        this.props.makeAjaxCall(params);
+        // let params={
+        //     'url': MSU_CONFIG_DEST_TYPE_URL,
+        //     'method':GET,
+        //     'contentType':APP_JSON,
+        //     'accept':APP_JSON,
+        //     'cause' : FETCH_MSU_CONFIG_DEST_TYPE_LIST
+        //     //'formdata':formData,
+        // }
+        // this.props.makeAjaxCall(params);
     }
 
     componentWillReceiveProps(nextProps){
@@ -67,16 +81,21 @@ class MsuConfigFilter extends React.Component{
          * Hide the filter as soon as data in the list get updated.
          */
         if(nextProps.msuListData.length>0 && JSON.stringify(nextProps.msuListData)!==JSON.stringify(this.props.msuListData)){
-            this.props.showTableFilter(false);
+            //this.props.showTableFilter(false);
+            this.props.showMsuListFilter(false);
         }
     }
-    _closeFilter() {
-        let filterState=!this.props.showFilter;
-        this.props.showTableFilter(filterState);
-    }   
+    // _closeFilter() {
+    //     let filterState=!this.props.showFilter;
+    //     this.props.showTableFilter(filterState);
+    // }   
+
+    _closeFilter(){
+        this.props.showMsuListFilter(false);
+    }
 
     _processMsuConfigSearchField(){
-        const temp=[{value:"MSU ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
+        const temp=[{value:"MSU_ID", label:<FormattedMessage id="msuConfig.inputField.id" defaultMessage="MSU ID"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={temp} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -126,8 +145,8 @@ class MsuConfigFilter extends React.Component{
          * for query generation
          */
         
-        if (filterState.searchQuery["MSU ID"]) {
-            _query.rack_id=filterState.searchQuery["MSU ID"]
+        if (filterState.searchQuery["MSU_ID"]) {
+            _query.rack_id=filterState.searchQuery["MSU_ID"]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !=='any') {
             _query.status=filterState.tokenSelected["STATUS"]
@@ -137,12 +156,14 @@ class MsuConfigFilter extends React.Component{
 
     _clearFilter() {
         this.props.msuConfigFilterState({
-            tokenSelected: {"STATUS": ["any"]}, searchQuery: {
-                "MSU ID":null
+            tokenSelected: {"STATUS": ["any"], __typename:"MsuReconfigTokenSelected"},
+            searchQuery: {
+                "MSU_ID": '',
+                __typename:"MsuReconfigSearchQuery"
             },
+            defaultToken: {"STATUS": ["any"],__typename:"MsuReconfigTokenSelected"}
         });
         hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
-        
     }
     
 
@@ -208,6 +229,24 @@ class MsuConfigFilter extends React.Component{
     }
 };
 
+const withQuery = graphql(MSU_SOURCE_TYPE_QUERY, {
+
+    props: function(data){
+        console.log("inside  MSU_SOURCE_TYPE_QUERY withQuery");
+        if(!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list){
+            return {}
+        }
+        return {
+            //destType: ["33","15","24","16","12","27","26","14","11","22","19","17","21"]
+            destType: data.data.MsuSourceTypeList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
 
 function mapStateToProps(state, ownProps){
   return {
@@ -218,7 +257,7 @@ function mapStateToProps(state, ownProps){
     isFilterApplied: state.filterInfo.isFilterApplied || false,
     botFilterStatus:state.filterInfo.botFilterStatus || false,
     msuConfigFilterSpinnerState:state.spinner.msuConfigFilterSpinnerState || false,
-    destType: state.msuInfo.destType
+    //destType: state.msuInfo.destType
   };
 }
 
@@ -245,4 +284,7 @@ MsuConfigFilter.PropTypes={
     msuConfigFilterState:React.PropTypes.func,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(MsuConfigFilter) ;
+//export default connect(mapStateToProps,mapDispatchToProps)(MsuConfigFilter) ;
+export default compose(
+    withQuery
+)(connect(mapStateToProps, mapDispatchToProps)(MsuConfigFilter));
