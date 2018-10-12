@@ -46,8 +46,11 @@
 @import 'components/operationsLogs';
 @import 'components/downloadReports';
 @import 'components/storageSpace';
+@import 'components/systemController';
 @import 'components/orders';
 @import 'components/accordion';
+@import 'components/butlerBots';
+@import 'components/chargingStation';
 @import 'components/initialName';
 @import 'components/dotSeparatorContent';
 @import 'components/progressBar';
@@ -66,5 +69,6 @@
 @import 'components/itemRecall';
 @import 'components/msuConfig';
 
+@import 'components/usersTab';
 
 

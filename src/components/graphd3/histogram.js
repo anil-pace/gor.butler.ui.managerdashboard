@@ -25,13 +25,6 @@ class Histogram extends React.Component{
   	this._processData(JSON.parse(JSON.stringify(nextProps.histogramData)),nextProps.config);
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    if(this.props.hasDataChanged=== nextProps.hasDataChanged || !nextProps.histogramData.length){
-      return false;
-    }
-      return true;
-    
-  }
 
 
   

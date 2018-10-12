@@ -21,7 +21,8 @@ class langDropdown extends React.Component{
             locale : e.userLanguage.value,
             messages : messages 
         }
-        this.props.updateIntl(localeData);
+        localStorage.setItem('localLanguage', e.userLanguage.value);
+        location.reload()
      }
 
     render (){

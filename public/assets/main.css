@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* 
 Reset Stylesheet v0.0.1
 Author: Himanshu Saraswat
@@ -2423,7 +2424,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.Warning .public_fixedDataTableCell_cellContent {
+.Warning .public_fixedDataTableCell_cellContent, .warning .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -6368,12 +6369,12 @@ button:disabled {
   width: 100%;
   border-radius: 6px;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-rail {
@@ -6555,12 +6556,12 @@ button:disabled {
   top: -9999px;
   visibility: visible;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-tooltip * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .rc-slider .rc-slider-tooltip-hidden {
@@ -7386,13 +7387,13 @@ button:disabled {
 }
 
 .table-container .table-header .cell.asc:after {
-  content: ' ';
+  content: '↑';
   margin-left: 2px;
   height: 100%;
 }
 
 .table-container .table-header .cell.desc:after {
-  content: ' ';
+  content: '↓';
   margin-left: 2px;
   line-height: 100%;
 }
@@ -8660,7 +8661,7 @@ button:disabled {
 
 .pps-configuration-container .pps-tags-container {
   float: right;
-  width: 20%;
+  width: 19%;
   border-left: 1px solid #ccc;
   box-sizing: border-box;
   height: 520px;
@@ -8996,6 +8997,66 @@ button:disabled {
   cursor: pointer;
 }
 
+.gor-operations-log .ops-log-table .status {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-operations-log .ops-log-table .success {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-operations-log .ops-log-table .table-body .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-body .row .cell:last-child {
+  padding-right: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-header .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.gor-operations-log .ops-log-table .table-header .row .cell:last-child {
+  padding-right: 15px;
+}
+
+.gor-download-rpts .gor-download-report-table .row {
+  background: #f7f7f7;
+}
+
+.gor-download-rpts .gor-download-report-table .row:hover {
+  background: #DDDDDD;
+}
+
+.gor-download-rpts .gor-download-report-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
 .gor-download-rpts .gor-rpt-dwnld {
   min-width: 60%;
   border-radius: 3px;
@@ -9066,6 +9127,16 @@ button:disabled {
   margin-top: 2rem;
 }
 
+.gor-storage-space .gor-storage-table .row {
+  background: #f7f7f7;
+}
+
+.gor-storage-space .gor-storage-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
 .gor-storage-space .gor-ol-paginate-wrap {
   width: 100%;
 }
@@ -9117,6 +9188,50 @@ button:disabled {
   padding-right: 0.875rem;
   vertical-align: sub;
   cursor: pointer;
+}
+
+.gor-sys-controller .gor-syscontroller-table .row {
+  background: #f7f7f7;
+}
+
+.gor-sys-controller .gor-syscontroller-table .row:hover {
+  background: #DDDDDD;
+}
+
+.gor-sys-controller .gor-syscontroller-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
+.gor-sys-controller .gor-syscontroller-table .disconnected {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-sys-controller .gor-syscontroller-table .connected {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
 }
 
 .noOrdersPresent {
@@ -9631,6 +9746,168 @@ button:disabled {
 
 .panelContent .table-body {
   max-height: 334px;
+}
+
+.gor-butler-bots .gor-bots-table .row {
+  background: #f7f7f7;
+}
+
+.gor-butler-bots .gor-bots-table .row:hover {
+  background: #DDDDDD;
+}
+
+.gor-butler-bots .gor-bots-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
+.gor-butler-bots .gor-bots-table .offline {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-butler-bots .gor-bots-table .online {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-butler-bots .gor-filterBtn-btn .ico-wrap {
+  display: inline-block;
+  width: 20%;
+}
+
+.gor-butler-bots .gor-filterBtn-btn .ico-txt-wrp {
+  display: inline-block;
+  width: 80%;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap {
+  width: 95%;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-butler-bots .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
+}
+
+.gor-charging-station .gor-chergingstation-table .row {
+  background: #f7f7f7;
+}
+
+.gor-charging-station .gor-chergingstation-table .row:hover {
+  background: #DDDDDD;
+}
+
+.gor-charging-station .gor-chergingstation-table .cell {
+  padding-left: 15px;
+  height: 40px;
+  width: 240px;
+}
+
+.gor-charging-station .gor-chergingstation-table .Disconnected {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-charging-station .gor-chergingstation-table .Connected {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.gor-charging-station .gor-filterBtn-btn .ico-wrap {
+  display: inline-block;
+  width: 20%;
+}
+
+.gor-charging-station .gor-filterBtn-btn .ico-txt-wrp {
+  display: inline-block;
+  width: 80%;
+}
+
+.gor-charging-station .gor-ol-paginate-wrap {
+  width: 95%;
+}
+
+.gor-charging-station .gor-ol-paginate-wrap .gor-ol-paginate-left {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-charging-station .gor-ol-paginate-wrap .gor-ol-paginate-right {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.gor-charging-station .gor-ol-paginate-wrap .gor-paginate-wrap {
+  float: right;
+}
+
+.gor-charging-station .gor-ol-paginate-wrap .gor-dropdown-wrapper {
+  width: 10%;
+  margin-left: 4%;
+  background: #fff;
+  margin-top: 2rem;
 }
 
 .gor-IN-wrapper {
@@ -12699,4 +12976,50 @@ checkmark1 for indeterminate state*/
 
 .gor-smmodal-content .gor-smmodal-footer .gor-button-wrap .gor-msuConfig-btn.orange {
   background: #f36f36;
+}
+
+.users-table .offline {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.users-table .online {
+  border-radius: 15px;
+  text-align: center;
+  width: 90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #00a54f;
+  color: #00a54f;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+  padding: 5px 8px 8px;
+}
+
+.users-table .table-body .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.users-table .table-body .row .cell:last-child {
+  padding-right: 15px;
+}
+
+.users-table .table-header .row .cell:first-child {
+  padding-left: 15px;
+}
+
+.users-table .table-header .row .cell:last-child {
+  padding-right: 15px;
 }

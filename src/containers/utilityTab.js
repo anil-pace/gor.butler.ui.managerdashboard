@@ -46,6 +46,10 @@ import {
 import {wsOverviewData} from "./../constants/initData.js";
 import {FormattedMessage} from "react-intl";
 
+import {graphql, withApollo, compose} from "react-apollo";
+
+import gql from 'graphql-tag'
+
 //Mesages for internationalization
 const messages = defineMessages({
     masterDataHead: {
@@ -337,17 +341,8 @@ class UtilityTab extends React.Component {
     _onMasterFileUpload(fileObject) {
         var formData = new FormData();
         formData.append("file", fileObject);
-        var params = {
-            url: MASTER_UPLOAD_URL,
-            method: POST,
-            token: this.props.auth_token,
-            cause: MASTER_FILE_UPLOAD,
-            contentType: false,
-            formdata: formData,
-            accept: APP_JSON
-        };
-        this.props.uploadMasterDataProcessing(true);
-        this.props.getItemRecall(params);
+        this.setState({isMasterUploadProcessing:true})
+        this.props.uploadMasterData({file:fileObject}).then(()=>{this._onMDMRefresh()}).finally(()=>this.setState({isMasterUploadProcessing:false}))
     }
 
     _getfilemaxsize() {
@@ -425,14 +420,12 @@ class UtilityTab extends React.Component {
     }
 
     _onMDMRefresh() {
-        var params = {
-            url: UPLOAD_HISTORY_URL + "?sort=CreateTime,desc",
-            method: GET,
-            token: this.props.auth_token,
-            cause: UPLOAD_HISTORY,
-            accept: APP_JSON
-        };
-        this.props.getUploadHistory(params);
+        this.props.client.query({
+            query:FETCH_MASTER_DATA_UPLOAD_HISTORY,
+            variables:{},
+            fetchPolicy: 'network-only'
+        }).then(data=>this.setState({uploadHistoryData:data.data.MasterDataUploadHistory.list||[]}))
+
     }
 
     componentDidMount() {
@@ -441,10 +434,6 @@ class UtilityTab extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
-        if (nextProps.newFileUploaded !== this.props.newFileUploaded) {
-            this._onMDMRefresh();
-        }
-
         if (
             nextProps.socketAuthorized &&
             nextProps.utilityTabRefreshed !== this.state.utilityTabRefreshed
@@ -550,7 +539,7 @@ class UtilityTab extends React.Component {
                                 messages.uploadBtnText
                             )}
                             isMasterUploadProcessing={
-                                this.props.isMasterUploadProcessing
+                                this.state.isMasterUploadProcessing
                             }
                             maxFileSize={this.props.maxfilesizelimit}
                             errorList={fileUploadMessages}
@@ -559,7 +548,7 @@ class UtilityTab extends React.Component {
                                 this
                             )}
                             historyData={
-                                this.props.uploadHistoryData || []
+                                this.state.uploadHistoryData || []
                             }
                             errorCode={this.props.errorCode}
                             maxSize={this.props.maxsize}
@@ -610,10 +599,6 @@ function mapStateToProps(state, ownProps) {
     return {
         auth_token: state.authLogin.auth_token,
         validatedStockLedgerSKU: state.utilityValidations.invalidStockLedgerSKU || false,
-        isMasterUploadProcessing: state.utilityValidations.isMasterUploadProcessing || false,
-        newFileUploaded: state.utilityValidations.newFileUploaded,
-        uploadHistoryData: state.utilityValidations.uploadHistoryData,
-        uploadHistChanged: state.utilityValidations.uploadHistChanged,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket ||wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         utilityTabRefreshed: state.utilityValidations.utilityTabRefreshed,
@@ -671,4 +656,45 @@ UtilityTab.contextTypes = {
     intl: React.PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UtilityTab);
+const UPLOAD_MASTER_DATA_MUTATION=gql`
+    mutation($file: Upload!) {
+        uploadMasterData(file: $file) {
+            filename
+            encoding
+            mimetype
+        }
+    }
+`
+
+const FETCH_MASTER_DATA_UPLOAD_HISTORY = gql`
+    query MasterDataUploadHistory {
+    MasterDataUploadHistory {
+    list {
+      createTime
+    updateTime
+    id
+    total
+    created
+    updated
+    deleted
+    failed
+    requestfile
+    responsefile
+    }
+  }
+}
+
+`
+
+const withMasterDataUpload=graphql(UPLOAD_MASTER_DATA_MUTATION, {
+    props: ({mutate, ownProps,loading}) => ({
+        uploadMasterData: function ({file}) {
+            return mutate({variables: {file}})
+        }
+    }),
+});
+
+export default compose(withApollo)(connect(mapStateToProps, mapDispatchToProps)(compose(withMasterDataUpload)(UtilityTab)))
+
+
+

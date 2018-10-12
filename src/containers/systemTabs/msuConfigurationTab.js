@@ -14,7 +14,7 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setMsuConfigSpinner} from  '../../actions/spinnerAction';
 import {butlerFilterDetail} from '../../actions/sortHeaderActions';
-import {showTableFilter, filterApplied, toggleBotButton, butlerfilterState, msuConfigFilterState} from '../../actions/filterAction';
+//import {showTableFilter, filterApplied, toggleBotButton, msuListFilterState, msuConfigFilterState} from '../../actions/filterAction';
 import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
 import {wsOverviewData} from './../../constants/initData.js';
 import MsuConfigFilter from './msuConfigFilter';
@@ -23,6 +23,7 @@ import ChangeRackType from './changeRackType';
 import MsuRackFlex from './MsuRackFlex';
 import MsuConfigTable from './msuConfigTable';
 import MsuConfigConfirmation from './msuConfigConfirmation';
+import { ApolloConsumer } from 'react-apollo';
 
 import {
     WS_ONSEND,
@@ -44,6 +45,72 @@ import {
     MSU_CONFIG_RELEASE_MSU_URL,
 } from '../../constants/configConstants';
 
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../actions/validationActions";
+
+const MSU_LIST_QUERY = gql`
+    query MsuList($input:MsuListParams){
+        MsuList(input:$input){
+             list{
+                  rack_id
+                  source_type
+                  destination_type
+                  status
+            }
+        }
+    }
+`;
+
+const MSU_LIST_POST_FILTER_QUERY = gql`
+    query MsuFilterList($input:MsuFilterListParams){
+        MsuFilterList(input:$input){
+            list {
+              id
+              racktype
+            } 
+        }
+    }
+`;
+
+const SUBSCRIPTION_QUERY = gql`
+subscription MSULIST_CHANNEL($input: MsuListFilterParams){
+    MsuFilterList(input:$input){
+        list {
+          id
+          racktype
+        } 
+    }
+}
+`;
+
+
+const MSU_START_RECONFIG_QUERY = gql`
+    query($input:MsuStartReconfigParams){
+            MsuStartReconfig(input:$input) {
+                list
+            }
+        }
+`;
+
+const MSU_STOP_RECONFIG_QUERY = gql`
+    query($input:MsuStopReconfigarams){
+            MsuStopReconfig(input:$input) {
+                list
+            }
+        }
+`;
+
+const MSU_RELEASE_QUERY = gql`
+    query($input:MsuReleaseParams){
+            MsuRelease(input:$input) {
+                list
+            }
+        }
+`;
 
 
 class MsuConfigTab extends React.Component {
@@ -55,57 +122,58 @@ class MsuConfigTab extends React.Component {
             startStopBtnState: true,
             startStopBtnText: "startReconfig",
             releaseMsuBtnState: true,
+            //msuList: []
         };
+        this.subscription = null;
+        this.linked =false;
+        
+
+       // this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
+
         this._refreshMsuDataAction = this._refreshMsuDataAction.bind(this);
-        this._releaseMsuAction = this._releaseMsuAction.bind(this);
+        //this._releaseMsuAction = this._releaseMsuAction.bind(this);
         this._startStopReconfigAction = this._startStopReconfigAction.bind(this);
-        this._setFilterAction = this._setFilterAction.bind(this);
+       // this._setFilterAction = this._setFilterAction.bind(this);
         this._disableStartStopReconfig = this._disableStartStopReconfig.bind(this);
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
+        this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
     }
 
     
 
-    componentDidMount(){
-       this._requestMsuList();
-    }
-
-    _requestMsuList(){
-        let params={
-            'url': MSU_CONFIG_URL,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST
+    _requestMsuList(rackId, rackStatus){
+        if(rackId || rackStatus){
+            let msuList = [];
+            this.props.client.query({
+                query: MSU_LIST_POST_FILTER_QUERY,
+                variables: (function () {
+                    return {
+                        input: {
+                            id: rackId,
+                            racktype: rackStatus.toString()
+                        }
+                    }
+                }()),
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                this.setState({msuList:data.data.MsuFilterList.list});
+                this._disableStartStopReconfig(true);
+            });
         }
-        this.props.makeAjaxCall(params);
-        let self=this;
-        if(!this._intervalIdForMsuList){
-           self.props.makeAjaxCall(params) 
+        else{
+            let msuList = [];
+            this.props.client.query({
+                query: MSU_LIST_QUERY,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                this.setState({msuList:data.data.MsuList.list});
+            })
         }
-        this._intervalIdForMsuList= setInterval(function(){
-            self.props.makeAjaxCall(params)
-        },MSU_CONFIG_POLLING_INTERVAL)
     }
-
-    _requestMsuListViaFilter(filterUrl){
-        this.props.filterApplied(true);
-        let params={
-            'url': filterUrl,
-            'method':GET,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause' : FETCH_MSU_CONFIG_LIST_VIA_FILTER
-        }
-        this.props.makeAjaxCall(params);
-    }
-
 
     _refreshMsuDataAction = () => {
-        if(this._intervalIdForMsuList){
-            this.clearPolling()
-        }
       this._refreshList(this.props.location.query);
     }
 
@@ -115,46 +183,41 @@ class MsuConfigTab extends React.Component {
 
     }
 
-    _releaseMsuAction = () => {
-        let params={
-            'url': MSU_CONFIG_RELEASE_MSU_URL,
-            'method':POST,
-            'contentType':APP_JSON,
-            'accept':APP_JSON,
-            'cause':FETCH_MSU_CONFIG_RELEASE_MSU
-        }
-        this.props.makeAjaxCall(params);
+    _releaseMsuAction(){
+        let msuList = [];
+        this.props.client.query({
+            query: MSU_RELEASE_QUERY,
+            variables: {},
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+            console.log("coming inside THEN CODE============>" + JSON.stringify(data));
+        })
     }
 
     
     _startStopActionInitiated(){
         if(this.state.startStopBtnText === "startReconfig"){
-            let params={
-                'url': MSU_CONFIG_START_RECONFIG_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause' : FETCH_MSU_CONFIG_START_RECONFIG
-            }
-            this.props.makeAjaxCall(params);
-            this.setState({
-                startStopBtnState: true,
-                startStopBtnText: "stopReconfig"
+            this.props.client.query({
+                query: MSU_START_RECONFIG_QUERY,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                this.setState({
+                    startStopBtnState: true,
+                    startStopBtnText: "stopReconfig"
+                })
             })
         }
         else{
-            let params={
-                'url': MSU_CONFIG_STOP_RECONFIG_URL,
-                'method':POST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'cause' : FETCH_MSU_CONFIG_STOP_RECONFIG
-            }
-            this.props.makeAjaxCall(params);
-            
-            this.setState({
-                startStopBtnState: true,
-                startStopBtnText: "startReconfig"
+            this.props.client.query({
+                query: MSU_STOP_RECONFIG_QUERY,
+                variables: {},
+                fetchPolicy: 'network-only'
+            }).then(data=>{
+                this.setState({
+                    startStopBtnState: true,
+                    startStopBtnText: "startReconfig"
+                })
             })
         }
     }
@@ -167,12 +230,11 @@ class MsuConfigTab extends React.Component {
             hideCloseButton: true, // (optional) if you don't wanna show the top right close button
             startStopActionInitiated:this._startStopActionInitiated,
             activeBtnText: this.state.startStopBtnText
-
         });
     }
 
-    componentWillReceiveProps(nextProps) {
 
+    componentWillReceiveProps(nextProps) {
         let isAnyMsuEmpty = [];
         let isAnyMsuDropping = [];
         let isAnyMsuDropped = [];
@@ -186,23 +248,18 @@ class MsuConfigTab extends React.Component {
             })
         }
 
-        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        /* start => condition for loading of data with Props from withQuery */
+        if(this.props.msuList !== nextProps.msuList){
+            this.setState({msuList:nextProps.msuList});
+        }
+        /* end */ 
+
+        if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
         }
 
-        if(Object.keys(nextProps.location.query).length==0 && !this._intervalIdForMsuList){
-            this._refreshList(nextProps.location.query)
-        }
-
-        if(Object.keys(nextProps.location.query).length>0 &&
-            this._intervalIdForMsuList && 
-            JSON.stringify(this.props.msuList) !==JSON.stringify(nextProps.msuList)){
-                this.clearPolling();
-        }
-
         if(nextProps.msuList && Array.isArray(nextProps.msuList)){
-
                 nextProps.msuList.forEach((eachMsu)=>{
                     if(eachMsu.status === "reconfig_ready"){  isAnyMsuEmpty.push(eachMsu.status);}
                     else if (eachMsu.status === "waiting"){  isAnyMsuDropping.push(eachMsu.status);}
@@ -241,16 +298,15 @@ class MsuConfigTab extends React.Component {
             }
 
 
-           /* check for handling Release Button */
+           // check for handling Release Button 
             if(isAnyMsuReadyForReconfig.length > 0){
                 this._disableReleaseMsuBtn(false);
             }else{
                 this._disableReleaseMsuBtn(true);
            }
        }
+
     }
-
-
 
     /**
      * The method will update the subscription packet
@@ -258,25 +314,9 @@ class MsuConfigTab extends React.Component {
      * @private
      */
     _refreshList(query) {
-
         this.props.setMsuConfigSpinner(true);
         let filterUrl;
-        if(query.rack_id && query.status){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id +"&racktype="+query.status;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else if(query.status){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?racktype="+query.status;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else if (query.rack_id){
-            filterUrl = MSU_CONFIG_FILTER_URL+"?id="+query.rack_id;
-            this._requestMsuListViaFilter(filterUrl);
-        }
-        else{
-            this._requestMsuList()
-        }
-        
+        this._requestMsuList(query.rack_id, query.status);
 
         if(Object.keys(query).length>0){
             this.props.filterApplied(true);
@@ -285,11 +325,12 @@ class MsuConfigTab extends React.Component {
         }
        
         this.props.msuConfigFilterState({
-            tokenSelected: {"STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
+            tokenSelected: {__typename:"MsuReconfigTokenSelected", "STATUS": query.status?query.status.constructor===Array?query.status:[query.status]:["any"]},
             searchQuery: {
-                "MSU ID":query.rack_id||null
+                __typename:"MsuReconfigSearchQuery",
+                "MSU_ID":query.rack_id||null
             },
-            defaultToken: {"STATUS": ["any"]}
+            defaultToken: {"STATUS": ["any"], __typename:"MsuReconfigTokenSelected"}
         });
     }
 
@@ -307,13 +348,15 @@ class MsuConfigTab extends React.Component {
 
 
     _clearFilter() {
-        hashHistory.push({pathname: "/system/msuConfiguration", query: {}})
+        hashHistory.push({pathname: "/system/msuConfiguration", query: {}});
+        this._requestMsuList();
     }
 
-    _setFilterAction() {
-        var newState=!this.props.showFilter;
-        this.props.showTableFilter(newState);
-    }
+    //_setFilterAction() {
+    // __showMsuListFilter(){
+    //     var newState=!this.props.showFilter;
+    //     this.props.showTableFilter(newState);
+    // }
 
     _disableStartStopReconfig(isDisabled){
         this.setState({
@@ -329,7 +372,7 @@ class MsuConfigTab extends React.Component {
 
     render() {
         var filterHeight=screen.height - 190 - 50;
-        let msuListData=this.props.msuList;
+        let msuListData=this.state.msuList;
         let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
         return (
             <div>
@@ -340,7 +383,13 @@ class MsuConfigTab extends React.Component {
                             <div>
                                 <div className="gor-filter-wrap"
                                     style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                    <MsuConfigFilter msuListData={msuListData} responseFlag={this.props.responseFlag}/>
+                                    <MsuConfigFilter
+                                        filterState={this.props.msuListFilterStatus}
+                                        isFilterApplied={this.props.isFilterApplied}
+                                        showMsuListFilter={this.showMsuListFilter}
+                                        msuConfigFilterState={this.props.msuConfigFilterState} 
+                                        msuListData={msuListData}
+                                        responseFlag={this.props.responseFlag}/>
                                 </div>
 
 
@@ -404,8 +453,8 @@ class MsuConfigTab extends React.Component {
                                     <div style={{paddingLeft: "0px"}} className="gorToolBarDropDown">
                                         <div className="gor-button-wrap">
                                             <button style={{minWidth: "145px"}} 
-                                                className={"gor-filterBtn-btn"}
-                                                 onClick={this._setFilterAction}>
+                                                className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                onClick={()=>{this.showMsuListFilter(true)}}>
                                                 <div className="gor-manage-task"/>
                                                 <FormattedMessage id="gor.msuConfig.filterLabel" 
                                                     description="button label for filter" 
@@ -429,7 +478,7 @@ class MsuConfigTab extends React.Component {
                                                     defaultMessage="Show all MSUs with blocked puts"/>}/>
                         </div>:null}
 
-                        {this.props.msuList.length > 0 && 
+                        {this.props.msuList && this.props.msuList.length > 0 && 
                             (<MsuConfigTable items={msuListData} 
                                 intlMessg={this.props.intlMessages}
                                 setButlerFilter={this.props.butlerFilterDetail}
@@ -442,67 +491,87 @@ class MsuConfigTab extends React.Component {
                                 refreshList={this._clearFilter.bind(this)}
                                 blockPutAndChangeTypeCallback={this._blockPutAndChangeTypeCallback.bind(this)}
                             />)}
-                        {!this.props.msuConfigSpinner && this.props.msuList.length===0 && <div className="noDataWrapper"> {noData} </div>}
+                        {!this.props.msuConfigSpinner && this.props.msuList && this.props.msuList.length===0 && <div className="noDataWrapper"> {noData} </div>}
                         {this.props.msuConfigSpinner && <div className="noDataWrapper"></div>}
                     </div>
                 </div>
             </div>
         );
-    }P
-}
-;
+    }
+};
+
+const withQuery = graphql(MSU_LIST_QUERY, {
+    props: function(data){
+        if(!data || !data.data.MsuList || !data.data.MsuList.list){
+            return {}
+        }
+        return {
+            msuList: data.data.MsuList.list
+        }
+    },
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
 
 function mapStateToProps(state, ownProps) {
     return {
-        butlerFilter: state.sortHeaderState.butlerFilter || "",
-        butlerSpinner: state.spinner.butlerSpinner || false,
-        butlerDetail: state.butlerDetail || [],
-        intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        botFilterStatus: state.filterInfo.botFilterStatus || false,
-        filterState: state.filterInfo.butlerFilterState,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
-        msuConfigSpinner: state.spinner.msuConfigSpinner || false,
+    //     butlerFilter: state.sortHeaderState.butlerFilter || "",
+    //     butlerSpinner: state.spinner.butlerSpinner || false,
+    //     butlerDetail: state.butlerDetail || [],
+    //     intlMessages: state.intl.messages,
+    //     showFilter: state.filterInfo.filterState || false,
+    //     isFilterApplied: state.filterInfo.isFilterApplied || false,
+    //     botFilterStatus: state.filterInfo.botFilterStatus || false,
+    //     filterState: state.filterInfo.butlerFilterState,
+    //     wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+    //     socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    //     msuConfigRefreshed: state.msuInfo.msuConfigRefreshed,
+    //     msuConfigSpinner: state.spinner.msuConfigSpinner || false,
 
-        msuList: state.msuInfo.msuList||[],
-        timeZone:state.authLogin.timeOffset
+    //    // msuList: state.msuInfo.msuList||[],
+    //     timeZone:state.authLogin.timeOffset,
     };
 }
 
 
 var mapDispatchToProps=function (dispatch) {
     return {
-        butlerFilterDetail: function (data) {
-            dispatch(butlerFilterDetail(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        toggleBotButton: function (data) {
-            dispatch(toggleBotButton(data));
-        },
-        butlerfilterState: function (data) {
-            dispatch(butlerfilterState(data));
-        },
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
+        // butlerFilterDetail: function (data) {
+        //     dispatch(butlerFilterDetail(data))
+        // },
+        // showTableFilter: function (data) {
+        //     dispatch(showTableFilter(data));
+        // },
+        // filterApplied: function (data) {
+        //     dispatch(filterApplied(data));
+        // },
+        // updateSubscriptionPacket: function (data) {
+        //     dispatch(updateSubscriptionPacket(data));
+        // },
+        // toggleBotButton: function (data) {
+        //     dispatch(toggleBotButton(data));
+        // },
+        // butlerfilterState: function (data) {
+        //     dispatch(butlerfilterState(data));
+        // },
+        // initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
 
-        makeAjaxCall: function(params){
-            dispatch(makeAjaxCall(params))
-        },
-        msuConfigFilterState: function(data){dispatch(msuConfigFilterState(data));},
-        msuConfigRefreshed:function(data){dispatch(msuConfigRefreshed(data))},
+        // makeAjaxCall: function(params){
+        //     dispatch(makeAjaxCall(params))
+        // },
+        // msuConfigFilterState: function(data){dispatch(msuConfigFilterState(data));},
+        // msuConfigRefreshed:function(data){dispatch(msuConfigRefreshed(data))},
         setMsuConfigSpinner: function (data) {
             dispatch(setMsuConfigSpinner(data))
         },
+        // notifySuccess: function (data) {
+        //     dispatch(notifySuccess(data));
+        // },
+        // notifyFail: function (data) {
+        //     dispatch(notifyFail(data));
+        // }
     };
 }
 
@@ -526,6 +595,120 @@ MsuConfigTab.PropTypes={
     msuConfigSpinner: React.PropTypes.bool,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)); ;
+/*
+const msuListClientData = gql`
+    query  {
+    todos @client
+    botsFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+                MODE
+            }
+            searchQuery{
+                BOT_ID
+                SPECIFIC_LOCATION_ZONE
+
+            }
+            defaultToken{
+                STATUS
+                MODE
+            }
+        }
+    }
+    }
+`;
+*/
+
+const msuListClientData = gql`
+    query  {
+    msuListFilter @client{
+        display
+        isFilterApplied
+        filterState{
+            tokenSelected{
+                STATUS
+            }
+            searchQuery{
+                MSU_ID
+            }
+            
+            defaultToken{
+                STATUS
+            }
+        }
+    }
+   
+    }
+`;
 
 
+
+
+
+
+const SET_VISIBILITY = gql`
+    mutation setMsuListFilter($filter: String!) {
+        setShowMsuListFilter(filter: $filter) @client
+    }
+`;
+
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setMsuListFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setMsuFilterState(state: $state) @client
+    }
+`;
+
+const withClientData = graphql(msuListClientData, {
+    props: function(data) { 
+        console.log(data);
+        return {
+            //todos: data.data.todos,
+            //msuList: data.data.msuFilterList,
+            showFilter: data.data.msuListFilter ? data.data.msuListFilter.display : false,
+            isFilterApplied: data.data.msuListFilter ? data.data.msuListFilter.isFilterApplied : false,
+            msuListFilterStatus: data.data.msuListFilter ? JSON.parse(JSON.stringify(data.data.msuListFilter.filterState)) : null,
+        }
+    }
+})
+
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        //showBotsFilter: function (show) {
+        showMsuListFilter: function (show) {
+            mutate({variables: {filter: show}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        //butlerfilterState: function (state) {
+        msuConfigFilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+//export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab));
+export default compose(
+    withClientData,
+    setVisibilityFilter,
+    setFilterApplied,
+    setFilterState,
+    withQuery,
+    withApollo
+)(connect(mapStateToProps, mapDispatchToProps)(injectIntl(MsuConfigTab)));

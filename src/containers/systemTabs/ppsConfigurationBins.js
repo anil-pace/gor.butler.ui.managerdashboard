@@ -5,15 +5,10 @@
  * Created by gaurav.m on 6/21/17.
  */
 import React  from 'react';
-import {connect} from 'react-redux'
-import {
-    selectPPSBin,
-    clearSelectionPPSBin,
-    changePPSBinStatus,
-    cancelProfileChanges, changePPSBinGroupStatus, selectPPSBinGroup
-} from './../../actions/ppsConfigurationActions'
 import {FormattedMessage} from 'react-intl'
-import {makeAjaxCall} from './../../actions/ajaxActions'
+
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 
 class Bins extends React.Component {
     constructor(props) {
@@ -24,7 +19,7 @@ class Bins extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedProfile && nextProps.selectedProfile !== this.props.selectedProfile) {
+        if (nextProps.selectedProfile && (!this.props.selectedProfile || nextProps.selectedProfile.profile_name !== this.props.selectedProfile.profile_name)) {
             /**
              * Profile changed from left hand side pane
              */
@@ -33,14 +28,14 @@ class Bins extends React.Component {
                     return bin.direction !== 'center'
                 }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
-            } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
-                return bin.direction !== 'center'
-            }).length !== 0) {
+            } else if (this.state.currentBinDirection) {
                 this.setBinDirection(this.state.currentBinDirection)
             } else {
                 this.setBinDirection()
             }
         }
+
+
     }
 
     /**
@@ -175,7 +170,7 @@ class Bins extends React.Component {
                                       description="Select a bin to manage tags"
                                       defaultMessage="Select a bin to manage tags"/>
                 </div>
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"
@@ -215,7 +210,7 @@ class Bins extends React.Component {
                 </div>
 
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"
@@ -254,7 +249,7 @@ class Bins extends React.Component {
                         }}/>
                 </div>
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"
@@ -294,7 +289,8 @@ class Bins extends React.Component {
                     return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
                 }).map(function (bin, index) {
                     let bin_id = [self.props.selectedPPS.pps_id, bin.pps_bin_id].join("-")
-                    let selected_bin = (self.props.selectedPPSBin && self.props.selectedPPSBin[self.props.currentView] && self.props.selectedPPSBin[self.props.currentView].id === bin_id)
+                    let selected_pps_bin_id = (self.props.selectedPPS && self.props.selectedPPSBin) ? [self.props.selectedPPS.pps_id, self.props.selectedPPSBin.pps_bin_id].join('-') : ''
+                    let selected_bin = (self.props.selectedPPSBin && selected_pps_bin_id === bin_id)
                     return <div key={bin.pps_bin_id} style={{
                         display: 'inline-block',
                         position: 'absolute',
@@ -365,11 +361,11 @@ class Bins extends React.Component {
             {/*Bin enable/disable action items*/}
             {self.props.currentView === 'bins' &&
             <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
-                {self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                {self.props.selectedPPSBin ? (
                     <button
-                        disabled={self.props.selectedPPSBin['bins'].enabled}
+                        disabled={self.props.selectedPPSBin.enabled}
                         className="pps-bin-action-button"
-                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], true)}>
+                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, true)}>
                         <FormattedMessage id="pps.configuration.bins.activation.button.text"
                                           description="ACTIVATE"
                                           defaultMessage="ACTIVATE"/>
@@ -381,11 +377,11 @@ class Bins extends React.Component {
                                       defaultMessage="ACTIVATE"/>
                 </button>)}
 
-                {self.props.currentView === 'bins' && self.props.selectedPPSBin && self.props.selectedPPSBin['bins'] ? (
+                {self.props.currentView === 'bins' && self.props.selectedPPSBin ? (
                     <button
-                        disabled={!self.props.selectedPPSBin['bins'].enabled}
+                        disabled={!self.props.selectedPPSBin.enabled}
                         className="pps-bin-action-button"
-                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin['bins'], false)}>
+                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, false)}>
                         <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
                                           description="DEACTIVATE"
                                           defaultMessage="DEACTIVATE"/>
@@ -436,35 +432,113 @@ class Bins extends React.Component {
         </div>
     }
 }
-function mapStateToProps(state, ownProps) {
-    return {
-        selectedProfile: state.ppsConfiguration.selectedProfile,
-        selectedPPS: state.ppsConfiguration.selectedPPS,
-        selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
-        ppsList: state.ppsConfiguration.ppsList,
-        selectedPPSBinGroup: state.ppsConfiguration.selectedPPSBinGroup || {}
-    };
-}
 
-var mapDispatchToProps = function (dispatch) {
-    return {
-        selectPPSBin: function (data) {
-            dispatch(selectPPSBin(data));
-        },
-        clearSelectionPPSBin: function (data) {
-            dispatch(clearSelectionPPSBin(data));
-        },
-        changePPSBinStatus: function (data) {
-            dispatch(changePPSBinStatus(data));
-        },
-        selectPPSBinGroup: function (data) {
-            dispatch(selectPPSBinGroup(data));
-        },
-        changePPSBinGroupStatus: function (data) {
-            dispatch(changePPSBinGroupStatus(data));
-        },
-
+/**
+ * Mutation to save selectedPPSBin in cache
+ */
+const SELECT_PPS_BIN = gql`
+    mutation setSelectedBin($state: String!) {
+        setSelectedBin(state: $state) @client
     }
-};
+`;
 
-export  default connect(mapStateToProps, mapDispatchToProps)(Bins);
+
+/**
+ * Will expose a method to save selectedPPSBin in cache
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withSelectPPSBinMutation = graphql(SELECT_PPS_BIN, {
+    props: ({mutate, ownProps}) => ({
+        selectPPSBin: function (state) {
+            mutate({variables: {state: state}})
+        }
+    }),
+});
+
+/**
+ * Mutation to save selectedPPSBinGroup in cache
+ */
+const SELECT_PPS_BIN_GROUP = gql`
+    mutation setSelectedBinGroup($state: String!) {
+        setSelectedBinGroup(state: $state) @client
+    }
+`;
+
+/**
+ * Will expose a method to save selectedPPSBinGroup in cache
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withSelectPPSBinGroupMutation = graphql(SELECT_PPS_BIN_GROUP, {
+    props: ({mutate, ownProps}) => ({
+        selectPPSBinGroup: function (state) {
+            mutate({variables: {state: state}})
+        }
+    }),
+});
+
+/**
+ * Mutation to clear the selectedPPSBin from cache
+ */
+const CLEAR_PPS_BIN_SELECTION = gql`
+    mutation setSelectedBin($state: String!) {
+        setClearSelectedBin(state: $state) @client
+    }
+`;
+/**
+ * Will expose a method to clear the selectedPPSBin from cache.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withClearPPSBinSelection = graphql(CLEAR_PPS_BIN_SELECTION, {
+    props: ({mutate, ownProps}) => ({
+        clearSelectionPPSBin: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+/**
+ * Mutation to change the Bin status
+ */
+const CHANGE_PPS_BIN_STATUS = gql`
+    mutation changePPSBinStatus($state: String!) {
+        setPPSBinStatus(state: $state) @client
+    }
+`;
+/**
+ * Will expose a method to change the PPS Bin Status in cache.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withPPSBinStatusMutation = graphql(CHANGE_PPS_BIN_STATUS, {
+    props: ({mutate, ownProps}) => ({
+        changePPSBinStatus: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+/**
+ * Mutation to change PPS Bin Group Status in cache.
+ */
+const CHANGE_PPS_BIN_GROUP_STATUS = gql`
+    mutation changePPSBinGroupStatus($state: String!) {
+        setPPSBinGroupStatus(state: $state) @client
+    }
+`;
+/**
+ * Will expose a method to change the PPS Bin Group Status in cache.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withPPSBinGroupStatusMutation = graphql(CHANGE_PPS_BIN_GROUP_STATUS, {
+    props: ({mutate, ownProps}) => ({
+        changePPSBinGroupStatus: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
+
+export default compose(
+    withSelectPPSBinMutation,
+    withSelectPPSBinGroupMutation,
+    withClearPPSBinSelection,
+    withPPSBinStatusMutation,
+    withPPSBinGroupStatusMutation)(Bins)
