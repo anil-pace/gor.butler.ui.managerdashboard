@@ -237,7 +237,7 @@ export default class SelectAttributes extends React.Component {
                 let boundingPlaceHolderEl = this.placeHolderEl.getBoundingClientRect();
                 hackPositionStyles.position="fixed";
                 hackPositionStyles.width="267";
-                hackPositionStyles.left="49%";
+                hackPositionStyles.left=boundingPlaceHolderEl.left;
                 hackPositionStyles.top = boundingPlaceHolderEl.top -254;
             }
         }

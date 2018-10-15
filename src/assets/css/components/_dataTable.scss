@@ -427,7 +427,7 @@ background-color: #FFFFFF;
 
 }
 
-.Warning .public_fixedDataTableCell_cellContent{
+.Warning .public_fixedDataTableCell_cellContent, .warning .public_fixedDataTableCell_cellContent{
 
   background: #f99405;
   border-radius: 15px;
@@ -1448,12 +1448,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
       font-size: 20px;
       color: #000000;
       padding-left: 20px;
-      &.auditListingToolbar{
-      height:80px;
-      background: #f2f2f2;
-      border-bottom:2px solid #dddddd; 
-       padding-left: 25px;
-      }
+     
       }
 
 
@@ -1505,14 +1500,6 @@ color: #000000;
   display: inline-block;
   vertical-align: middle;
   padding-top: 6px;
-  &.auditListingToolbarWrap{
-      margin-top: 18px;
-      width:18%;
-  }
-  .auditHeaderContainer{
-  display:inline-block;
-  padding-top:7px;
-  }
 }
 .fixedDataTableLayout_main{
     .gorToolHeaderEl {

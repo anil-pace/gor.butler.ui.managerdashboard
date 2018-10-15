@@ -8,6 +8,7 @@ export const SPANISH=(<FormattedMessage id='login.lang.spanish' defaultMessage="
 export const CHINESE=(<FormattedMessage id='login.lang.chinese' defaultMessage="中文" description="Chinese option in the language drop down"/>);
 export const GERMAN=(<FormattedMessage id='login.lang.german' defaultMessage="Deutsche" description="German option in the language drop down"/>);
 export const FRENCH=(<FormattedMessage id='login.lang.french' defaultMessage="Français" description="French option in the language drop down"/>);
+export const DUTCH=(<FormattedMessage id='login.lang.dutch' defaultMessage="Nederlands" description="Dutch option in the language drop down"/>);
 
 
 export const AUTO_LOGOUT=(<FormattedMessage id= 'login.autologout.message' defaultMessage="Due to session expiry, Auto Logout has been triggered!"

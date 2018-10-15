@@ -76,10 +76,10 @@ export function getFormattedMessages(action,values){
 			break;
 			
 			case "CANCELLED":
-			return 	(<FormattedMessage id="audit.cancel.success" description='Audit cancel success'
-			defaultMessage='Audit {id} successfully cancelled' values={values}/>);
+			return 	(<FormattedMessage id="audit.cancelsent.status" description='Audit cancel sent status'
+			defaultMessage='Audit {id} sent for cancellation' values={values}/>);
 			break;
-			
+		
 			case "STARTFAIL":
 				let startFailstringInfo;
 			 startFailstringInfo={

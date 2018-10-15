@@ -26,9 +26,9 @@ class ReportsTab extends React.Component{
     
 	render(){
 
-		let showMiscReportTab = this.props.config.utility_tab && (this.props.config.utility_tab.widgets.gr_report && this.props.config.utility_tab.widgets.reports.inventory_report) ? true : false;
+		let showMiscReportTab = this.props.config.utility_tab && (this.props.config.utility_tab.widgets.gr_report || this.props.config.utility_tab.widgets.reports.inventory_report) ? true : false;
 		
-		var selectClass={};
+		
 		var operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
 		var storageSpace=<FormattedMessage id="reportsTab.storageSpace" description="Storage space tab for Reports tab" defaultMessage="Storage Space"/>
 		var misc=<FormattedMessage id="reportsTab.misc" description="Storage space tab for GR Reports tab" defaultMessage="Misc"/>

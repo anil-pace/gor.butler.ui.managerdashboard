@@ -16,7 +16,7 @@ const ajaxMiddleware=(function(){
 
        var params=action.params;
        var saltParams = action.params.saltParams ? action.params.saltParams : {};
-       var formData = params.formdata || params || null,httpData;
+       var formData = params.formdata || params || null, httpData;
 
        if(params.cause !== MASTER_FILE_UPLOAD){
           httpData=params.formdata? JSON.stringify(params.formdata):null;
@@ -87,7 +87,7 @@ const ajaxMiddleware=(function(){
             httpRequest.withCredentials = true;
         }
         httpRequest.setRequestHeader('Accept', params.accept || "text/html");
-        if(params.cause!==AUTH_LOGIN)
+        if(params.cause!==AUTH_LOGIN && params.token)
         {
             httpRequest.setRequestHeader('Authentication-Token', params.token);
         }

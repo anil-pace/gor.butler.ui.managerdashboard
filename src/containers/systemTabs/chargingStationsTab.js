@@ -92,11 +92,11 @@ class ChargingStations extends React.Component {
             CS=nProps.context.intl.formatMessage(messages.cdPrefix, {"csId": csId});
             BUTLER=nProps.context.intl.formatMessage(messages.butlerPrefix, {"botId": botId});
             detail.id=CS;
-            detail.status=nProps.context.intl.formatMessage((stringConfig[data[i].status]));
-            detail.statusClass=data[i].status;
-            detail.statusPriority=priStatus[data[i].status];
-            if (nProps.context.intl.formatMessage(stringConfig[data[i].mode])) {
-                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].mode]);
+            detail.status=nProps.context.intl.formatMessage((stringConfig[data[i].charger_status]));
+            detail.statusClass=data[i].charger_status;
+            detail.statusPriority=priStatus[data[i].charger_status];
+            if (stringConfig[data[i].charger_mode] && nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
+                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
             }
             else {
                 detail.mode=data[i].mode;

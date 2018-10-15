@@ -69,8 +69,7 @@ class ButlerBotFilter extends React.Component{
                     { value: 'puttask', label:<FormattedMessage id="butletbot.token2.put" defaultMessage="Put"/> },
                     { value: 'audittask', label:<FormattedMessage id="butletbot.token2.audit" defaultMessage="Audit"/> },
                     { value: 'chargetask', label:<FormattedMessage id="butletbot.token2.charging" defaultMessage="Charging"/>},
-                    { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }
-                    ];
+                    { value: 'not set', label:<FormattedMessage id="butletbot.token2.notSet" defaultMessage="Not set"/> }];
         let selectedToken= this.state.tokenSelected;
         let column1=<FilterTokenWrap field={tokenFieldC2} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC2} selectedToken={selectedToken}/>;
         let column2=<FilterTokenWrap field={tokenFieldC1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;

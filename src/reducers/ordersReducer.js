@@ -30,7 +30,7 @@ export  function ordersInfo(state={},action){
               "count_risk":count_risk,
               "count_total":count_total,
               "eta":eta,
-              "wave_end":wave_end            
+              "wave_end":wave_end    
             }
             return Object.assign({}, state, {
             "ordersData" : ordersData

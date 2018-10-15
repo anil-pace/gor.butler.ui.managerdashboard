@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
-import {FormattedMessage, defineMessages, FormattedRelative, injectIntl} from 'react-intl';
+import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
 
 import {GTable} from '../../components/gor-table-component/index'
@@ -10,9 +10,7 @@ import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import ChangeRackType from './changeRackType';
 
-import {setOrderListSpinner, orderListRefreshed,setOrderQuery} from '../../actions/orderListActions';
-import {orderHeaderSortOrder, orderHeaderSort, orderFilterDetail} from '../../actions/sortHeaderActions';
-import {showTableFilter, filterApplied, orderfilterState, toggleOrderFilter} from '../../actions/filterAction';
+import {showTableFilter, filterApplied} from '../../actions/filterAction';
 import {updateSubscriptionPacket, setWsAction} from './../../actions/socketActions';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
@@ -41,22 +39,22 @@ const messages=defineMessages({
     putBlockedStatus: {
         id: "msuConfig.putBlocked.status",
         description: "Put blocked status",
-        defaultMessage: "Put Blocked"
+        defaultMessage: "Put blocked"
     },
     reconfigReadyStatus: {
         id: "msuConfig.reconfigReady.status",
         description: "Msu empty status",
-        defaultMessage: "Msu empty"
+        defaultMessage: "MSU empty"
     },
     completeStatus: {
         id: "msuConfig.complete.status",
         description: "reconfiguration complete for Msu",
         defaultMessage: "Reconfiguration complete "
     },
-    waitingStatus: {
+    droppingStatus: {
         id: "msuConfig.waiting.status",
         description: "Dropping MSU at config area",
-        defaultMessage: "Dropping MSU at reconfig area ..."
+        defaultMessage: "Dropping MSU at reconfig area"
     },
     droppedStatus: {
         id: "msuConfig.dropped.status",
@@ -82,7 +80,7 @@ class MsuConfigTable extends React.Component {
                 "put_blocked": this.props.intl.formatMessage(messages.putBlockedStatus),
                 "reconfig_ready": this.props.intl.formatMessage(messages.reconfigReadyStatus),
                 "complete": this.props.intl.formatMessage(messages.completeStatus),
-                "waiting": this.props.intl.formatMessage(messages.waitingStatus),
+                "waiting": this.props.intl.formatMessage(messages.droppingStatus),
                 "dropped": this.props.intl.formatMessage(messages.droppedStatus),
                 "storing_back": this.props.intl.formatMessage(messages.storingBackStatus) 
             }
@@ -102,14 +100,22 @@ class MsuConfigTable extends React.Component {
         this.props.blockPutAndChangeTypeCallback();
     }
 
-    _changeDestinationType(index){
-        let getRackType = this.props.msuList[index].racktype;
-        //let getSourceType = this.props.msuList[index].racktype;
+    _changeDestinationType(id){
+        let msuList = this.props.msuList;
+        let rackType = null;
+        for(let i=0,len=msuList.length; i<len;i++){
+            if(msuList[i].id === id){
+                rackType = msuList[i].racktype;
+                break;
+            }
+        }
+        
         modal.add(ChangeRackType, {
             msuList: this.props.msuList,
-            rackType: getRackType,
+            rackType: rackType,
             blockPutAndChangeTypeCallback: this._blockPutAndChangeTypeCallback,
             title: '',
+            id,
             size: 'large', // large, medium or small,
             closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
             hideCloseButton: true // (optional) if you don't wanna show the top right close button
@@ -170,8 +176,8 @@ class MsuConfigTable extends React.Component {
                                     </div>);
 
 
-                    msuRow.push(<div key={i} style={{textAlign:"center"}}>
-                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(i)}>
+                    msuRow.push(<div key={msuData[i].id} style={{textAlign:"center"}}>
+                        <button className="changeDestTypeBtn" onClick={() => this._changeDestinationType(msuData[i].id)}>
                             <FormattedMessage id="msuConfig.table.changeDestType" description="button label for change destination type" defaultMessage="CHANGE DESTINATION TYPE"/>
                         </button>
                     </div>);
@@ -226,9 +232,6 @@ class MsuConfigTable extends React.Component {
 
     render() {
         const processedMsuData = this._processMSUs();
-        
-        let noData= <FormattedMessage id="msuConfig.table.noMsuData" description="Heading for no Msu Data" defaultMessage="No MSUs with blocked puts"/>;
-
         return (
             <div>
             {this.props.msuList.length? 
@@ -248,7 +251,7 @@ class MsuConfigTable extends React.Component {
                             }):""}
                         </GTableBody>
                     </GTable>
-                </div>): <div className="noDataWrapper"> {noData} </div>
+                </div>): ""
             }
             </div>
         );

@@ -15,11 +15,37 @@ class OrderTile extends React.Component{
     return dateFormat;
   }
 
+  _formatProgressBarMessage(pickedItems, totalItems){
+      let message; 
+      const numerator = (pickedItems)?pickedItems:0;
+      const denominator = (totalItems)?totalItems:0;
+      if(numerator === 0 && denominator === 0){
+        message= (<FormattedMessage id="orders.fulfil.noProducts" description="default picked message" defaultMessage="No products to be picked"/>);
+      }
+      else if(numerator === denominator){ 
+          message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{total} products picked" values={{total:denominator}} />);
+      }else if (denominator === 0 && numerator>0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
+          message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
+          values={{total:numerator}} />);
+      }else {
+          message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked" 
+            values={{current:<span style={{fontWeight:"bold"}}>{numerator}</span>, total: <span style={{fontWeight:"bold"}}>{denominator}</span>}} />);
+      }
+      return message;
+  }
+
   render()
   {
       const { orderFulfilData, orderSummaryData } = this.props;
       let fromDate, toDate;
-      const progressWidth = (orderFulfilData.picked_products_count / orderFulfilData.total_products_count) * 100;
+      
+      const picked_products_count = (orderFulfilData.picked_products_count)?Number(orderFulfilData.picked_products_count):0;
+      const total_products_count = (orderFulfilData.total_products_count)?Number(orderFulfilData.total_products_count):0;
+      let avgProgress = (picked_products_count / total_products_count) * 100
+      // if we encounter NaN or Infinity situation in avgProgress
+      avgProgress = isFinite(avgProgress) ? avgProgress : 0
+      const progressWidth = Math.ceil(parseInt(avgProgress,10))>=0? parseInt(avgProgress,10):100 ;
+      let formatProgressBarMessage = this._formatProgressBarMessage(picked_products_count,total_products_count);
       let backgroundColor = (this.props.pbtsData.length > 0 ? "#ffffff" : "#fafafa");
       if(this.props.fromDate && this.props.toDate){
          fromDate = this._formatDate(this.props.fromDate);
@@ -34,33 +60,12 @@ class OrderTile extends React.Component{
                       {fromDate && toDate ? fromDate + " - " +  toDate : this.props.date}
                   </div>
                   <div className="orderLeftHeader"> 
-                    <FormattedMessage id="orders.fulfil" description="header of orders fulfilment" defaultMessage="Order fulfuilment progress "/>
+                    <FormattedMessage id="orders.fulfil" description="header of orders fulfilment" defaultMessage="Order fulfilment progress "/>
                   </div>
                   <ProgressBar progressWidth={ progressWidth ? progressWidth : 0}/>
                   <div className="orderLeftStatus">
-                    <div className="statusLeft">
-                      {orderFulfilData.pps_count ? 
-                        (<div> 
-                            <FormattedMessage id="orders.fulfil.ppsCount" description="pps count" defaultMessage="{current} PPS running"
-                              values={{
-                                current:<span style={{fontWeight:"bold"}}>{orderFulfilData.pps_count}</span>
-                              }}
-                            />
-                          </div>) : <FormattedMessage id="orders.fulfil.noPpsCount" description="no pps count" defaultMessage="No PPS running"/>
-                      }
-                    </div>
-
                     <div className="statusRight">
-                      {(orderFulfilData.picked_products_count && orderFulfilData.total_products_count) ?
-                        (<div>
-                          <FormattedMessage id="orders.fulfil.status" description="order status" defaultMessage="{picked} of {totalItems} products picked" 
-                            values={{
-                              picked:<span style={{fontWeight: "bold"}}>{orderFulfilData.picked_products_count}</span>,
-                              totalItems:<span style={{fontWeight: "bold"}}>{orderFulfilData.total_products_count}</span>
-                            }}
-                          />
-                        </div>) : <FormattedMessage id="orders.fulfil.noProducts" description="default picked message" defaultMessage="No products to be picked"/>
-                      }
+                        <div> {formatProgressBarMessage}</div>
                     </div>
                   </div>
                 </div>

@@ -171,28 +171,24 @@ export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...
 
             <div>
                 <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
-                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.outer.label"
-                                                                            description="audit.table.pack.outer.label"
-                                                                            defaultMessage="Outer"/></div>
-                <div className="gor-audit-resolve-packing-cell"><FormattedMessage id="audit.table.pack.inner.label"
-                                                                            description="audit.table.pack.inner.label"
-                                                                            defaultMessage="Inner"/></div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[0]?data.getObjectAt(rowIndex).anamoly_info[0].name:""}</div>
+                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[1]?data.getObjectAt(rowIndex).anamoly_info[1].name:""}</div>
             </div>
         </Cell>
     )
 };
 export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
 
-    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_1"})
-    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_2"})
+    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_2"})
+    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_1"})
 
 
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
 
             <div>
                 <div className="gor-audit-resolve-packing-cell"/>
-                <div className="gor-audit-resolve-packing-cell">{outer_pack[0][dataKey]}</div>
-                <div className="gor-audit-resolve-packing-cell">{inner_pack[0][dataKey]}</div>
+                <div className="gor-audit-resolve-packing-cell">{inner_pack.length!==0?inner_pack[0][dataKey]:""}</div>
+                <div className="gor-audit-resolve-packing-cell">{outer_pack.length!==0?outer_pack[0][dataKey]:""}</div>
             </div>
         </Cell>
     )

@@ -221,7 +221,6 @@ class ButlerBot extends React.Component {
 
         var priStatus={"online": 1, "offline": 2};
         let BOT, PPS, CS, MSU;
-
         for (var i=data.length - 1; i >= 0; i--) {
             var botId=data[i].id, msuId=data[i].display_msu_id, csId=data[i].charger_id,
             ppsId=data[i].pps_id;
@@ -232,10 +231,9 @@ class ButlerBot extends React.Component {
             butlerDetail={};
             butlerDetail.id=BOT;
             butlerDetail.statusClass=data[i].state;
-            if (nProps.context.intl.formatMessage(stringConfig[data[i].state])) {
+            if (stringConfig[data[i].state]) {
                 butlerDetail.status=nProps.context.intl.formatMessage(stringConfig[data[i].state]);
             }
-
             else {
                 butlerDetail.status=data[i].state;
             }
@@ -389,9 +387,8 @@ class ButlerBot extends React.Component {
         });
 
     }
-
-
-     _clearFilter() {
+    
+    _clearFilter() {
         hashHistory.push({pathname: "/system/butlerbots", query: {}})
     }
 

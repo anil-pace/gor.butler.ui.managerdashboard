@@ -13,7 +13,7 @@ export const GET_PPS_MSU = API_URL+"/pps/get_pending_msu";
 export const PAGE_SIZE_URL="&PAGE_SIZE=";
 export const ROLE_URL=HEADER_URL+'/role';
 export const CHECK_USER=HEADER_URL+'?username=';
-export const AUDIT_URL=API_URL+"/audit";
+export const AUDIT_URL=API_URL+"/audit";    
 export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
@@ -71,11 +71,11 @@ export const WS_PLATFORM_HEADER_ORDER_URL = "/dashboard/api/header-data/live";
  * URLs or PPS Configurations
  */
 
-export const PPS_LIST_URL=API_URL+"/pps"//TODO: URL need to be changed accrodingly
-export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
-export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"//TODO: URL need to be changed accrodingly
-export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"//TODO: URL need to be changed accrodingly
+export const PPS_LIST_URL=API_URL+"/pps"
+export const PPS_PROFILE_URL=API_URL+"/pps_profiles/"
+export const FETCH_TAGS_URL=API_URL+"/components/get_bin_tags"
+export const SAVE_TAGS_URL=API_URL+"/components/add_bin_tags"
+export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"
 
 /**
  * URLs for Operations Log Report
@@ -99,7 +99,7 @@ export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/or
 export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
 
 
-export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report";
+export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report?requester=md";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
 
 export const AUDIT_PAUSE_URL=API_URL+"/audit/pause/";
@@ -120,20 +120,3 @@ export const MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE_URL= API_INTEGRATION_SERVICE + "/r
 export const MSU_CONFIG_START_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/start";
 export const MSU_CONFIG_STOP_RECONFIG_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/stop";
 export const MSU_CONFIG_RELEASE_MSU_URL = API_INTEGRATION_SERVICE+ "/reconfig_msu/release";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

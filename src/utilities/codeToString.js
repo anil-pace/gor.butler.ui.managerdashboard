@@ -144,7 +144,7 @@ export function codeToString(res){
               stringInfo={
                 type:SUCCESS,
                 msg:(<FormattedMessage id="notify.success.auditPaused" description='Text for successfull pause audit' 
-            defaultMessage='Audit "{id}" has been paused' values={{id:res.details.audit_id||"--"}}/>)   //Make string for addition
+            defaultMessage='Audit "{id}" has been paused' values={{id:res.details.display_id||"--"}}/>)   //Make string for addition
               }                                   
               break;
 
@@ -154,7 +154,7 @@ export function codeToString(res){
                 msg:(<FormattedMessage id="audit.paused.fail" description='audit paused fail' 
             defaultMessage='AUDIT NOT PAUSED'/>),
             desc:(<FormattedMessage id="audit.paused.fail_desc" description='audit paused fail description' 
-            defaultMessage='Audit {id} could not be paused due to intenal issue' values={{id:res.details.audit_id||"--"}}/>)
+            defaultMessage='Audit {id} could not be paused due to intenal issue' values={{id:res.details.display_id||"--"}}/>)
                   }                                   
               break;
 
@@ -164,16 +164,16 @@ export function codeToString(res){
                 msg:(<FormattedMessage id="audit.delete.fail" description='audit delete fail' 
             defaultMessage='AUDIT NOT DELETED'/>),
             desc:(<FormattedMessage id="audit.delete.fail_desc" description='audit delete fail description' 
-            defaultMessage='Audit {id} does not exist' values={{id:res.details.audit_id||"--"}}/>)
+            defaultMessage='Audit {id} does not exist' values={{id:res.details.display_id||"--"}}/>)
                   }                                   
               break;
               case "as003":
               stringInfo={
                 type:WARNING,
-                msg:(<FormattedMessage id="audit.delete.fail" description='audit delete fail' 
+                msg:(<FormattedMessage id="audit.notDelete.fail" description='audit not delete fail' 
             defaultMessage='AUDIT NOT DELETED'/>),
-            desc:(<FormattedMessage id="audit.delete.fail_desc" description='audit delete fail description' 
-            defaultMessage='Audit {id} already processed  could not be deleted' values={{id:res.details.audit_id||"--"}}/>)
+            desc:(<FormattedMessage id="audit.notDelete.fail_desc" description='audit not delete fail description' 
+            defaultMessage='Audit {id} already processed  could not be deleted' values={{id:res.details.display_id||"--"}}/>)
                   }                                   
               break;
               case "bx001":
@@ -201,18 +201,18 @@ export function codeToString(res){
                 else if(res.details.action=="edit"){
                   stringInfo={
                     type:WARNING,
-                    msg:(<FormattedMessage id="audit.edit.fail" description='audit edit fail' 
+                    msg:(<FormattedMessage id="audit.edit.fail" description='audit edit failed' 
                 defaultMessage='AUDIT EDIT FAILED'/>),
                 desc:(<FormattedMessage id="audit.EDIT.fail_desc" description='audit edit fail description' 
-                defaultMessage='Audit {id} could not be edited due to network issue ' values={{id:res.details.audit_id||"--"}}/>)
+                defaultMessage='Audit {id} could not be edited due to network issue ' values={{id:res.details.display_id||"--"}}/>)
                       }
                 }  
                 else{
                   stringInfo={
                     type:WARNING,
-                    msg:(<FormattedMessage id="audit.duplicate.fail" description='audit duplicate fail' 
+                    msg:(<FormattedMessage id="audit.not.duplicated" description='audit not duplicated' 
                 defaultMessage='AUDIT NOT DUPLICATED'/>),
-                desc:(<FormattedMessage id="audit.duplicate.fail_desc" description='audit duplicate fail description' 
+                desc:(<FormattedMessage id="audit.fail.duplicated" description='audit edit fail description' 
                 defaultMessage='Audit could not be duplicated due to network issue '/>)
                       } 
                 }                                
@@ -221,10 +221,10 @@ export function codeToString(res){
               case "g027":
               stringInfo={
                 type:WARNING,
-                msg:(<FormattedMessage id="audit.Cancellation.fail" description='audit Cancellation fail' 
+                msg:(<FormattedMessage id="audit.Cancellation.fail" description='audit not cancelled' 
             defaultMessage='AUDIT NOT CANCELLED'/>),
             desc:(<FormattedMessage id="audit.duplicate.fail_desc" description='audit duplicate fail description' 
-            defaultMessage='Audit {id} could not be cancelled due to network issue ' values={{id:res.details.audit_id||"--"}}/>)
+            defaultMessage='Audit {id} could not be cancelled due to network issue ' values={{id:res.details.display_id||"--"}}/>)
                   }                                   
               break;
               case "g028":

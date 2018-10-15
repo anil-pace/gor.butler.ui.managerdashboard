@@ -214,12 +214,12 @@ class EditAudit extends React.Component{
       copyPasteLocation:{
         data:validatedLocations,
         focusedEl:"0",
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteLocation.selectionStart
       },
       copyPasteSKU:{
         data:validatedSKUs,
         focusedEl:"0",
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       },
       locationAttributes,
       validationDone,
@@ -316,7 +316,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteSKU:{
         data:copyPasteLocation,
         focusedEl:this.state.copyPasteSKU.focusedEl,
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
     }
@@ -325,7 +325,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteLocation:{
         data:copyPasteLocation,
         focusedEl:this.state.copyPasteLocation.focusedEl,
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
     }
@@ -341,7 +341,7 @@ _onAttributeSelectionFirstTime(){
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status ? (data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
+      tuple.errorMessage = data[i].status ? (data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code])):"";//MIGHT
 
       processedData.push(tuple);
     }
@@ -357,7 +357,7 @@ _onAttributeSelectionFirstTime(){
       tuple.visible=true;
       tuple.value=data[i].name;
       let error_code = data[i].status===true ? "" :data[i].status.error_code;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
       processedData.push(tuple);
       if(children){
       for(let j=0;j<children.length ;j++){
@@ -366,7 +366,7 @@ _onAttributeSelectionFirstTime(){
         child.index=j;
         child.value=children[j].name;
         let error_code = children[j].status===true ? "" : children[j].status.error_code;
-        child.errorMessage = children[j].status===true ? children[j].status : this.props.intl.formatMessage(messages[error_code]);
+        child.errorMessage = children[j].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
         processedData.push(child);
       }
     }
@@ -559,7 +559,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteSKU:{
           data:data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         filterApplied:true
       })
@@ -569,7 +569,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteLocation:{
           data:data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         filterApplied:true
       })
@@ -583,7 +583,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteSKU:{
           data:filteredData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
@@ -593,7 +593,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteLocation:{
           data:filteredData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
     }
@@ -609,7 +609,8 @@ _onAttributeSelectionFirstTime(){
       index:stateInputList.length,
       value:"",
       visible:true,
-      errorMessage:true
+      errorMessage:"",
+      manualEntry:true
     }
     stateInputList.push(tuple);
     if(type === "location"){
@@ -617,7 +618,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteLocation:{
         data:stateInputList,
         focusedEl:(stateInputList.length -1).toString(),
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteLocation.selectionStart
       }
     })
   }
@@ -626,7 +627,7 @@ _onAttributeSelectionFirstTime(){
       copyPasteSKU:{
         data:stateInputList,
         focusedEl:(stateInputList.length -1).toString(),
-        selectionStart:this.state.selectionStart
+        selectionStart:this.state.copyPasteSKU.selectionStart
       }
     })
   }
@@ -726,7 +727,7 @@ _onAttributeSelectionFirstTime(){
           copyPasteSKU:{
           data:selectedTuples,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
       }
@@ -735,7 +736,7 @@ _onAttributeSelectionFirstTime(){
           copyPasteLocation:{
           data:selectedTuples,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         }
       })
       }
@@ -752,7 +753,7 @@ _onAttributeSelectionFirstTime(){
           processedData.push(tuple);
         }
         else if(selection === "select_all_valid"){
-          if(tuple.errorMessage.constructor === Boolean){
+          if(tuple.errorMessage === ""){
             tuple.checked = true;
           }
           else{
@@ -761,7 +762,7 @@ _onAttributeSelectionFirstTime(){
           processedData.push(tuple);
         }
         else if(selection === "select_all_invalid"){
-          if(tuple.errorMessage.constructor !== Boolean){
+          if(tuple.errorMessage !== ""){
             tuple.checked = true;
             
           }
@@ -790,7 +791,7 @@ _onAttributeSelectionFirstTime(){
               copyPasteSKU:{
               data:processedData,
               focusedEl:this.state.copyPasteSKU.focusedEl,
-              selectionStart:this.state.selectionStart
+              selectionStart:this.state.copyPasteSKU.selectionStart
             },
             filterSelectionState
            })
@@ -800,7 +801,7 @@ _onAttributeSelectionFirstTime(){
             copyPasteLocation:{
             data:processedData,
             focusedEl:this.state.copyPasteLocation.focusedEl,
-            selectionStart:this.state.selectionStart
+            selectionStart:this.state.copyPasteLocation.selectionStart
           },
           filterSelectionState
          })
@@ -832,13 +833,13 @@ _onAttributeSelectionFirstTime(){
     _parseCSVFile(fileObject){
     
     var _this =this;
-    var textType = /text.*/;
+    var textType = /(text.*|vnd.ms-excel)/;
     var fileExt = fileObject.name.substring(fileObject.name.lastIndexOf("."),fileObject.name.length);
       if (fileObject.type.match(textType) && fileExt === ".csv") {
         var reader = new FileReader();
 
         reader.onload = function() {
-          let data = reader.result.split(/[\s,;\t\n]+/);
+          let data = reader.result.trim().split(/[\s,;\t\n]+/);
            let processedList=[];
            for(let i=0,len=data.length; i< len;i++){
             let tuple={};
@@ -846,7 +847,7 @@ _onAttributeSelectionFirstTime(){
             tuple.index=i;
             tuple.value=data[i];
             tuple.visible=true;
-            tuple.errorMessage = true;
+            tuple.errorMessage = "";
             processedList.push(tuple);
 
            }
@@ -856,7 +857,7 @@ _onAttributeSelectionFirstTime(){
               copyPasteLocation:{
                 data:processedList,
                 focusedEl:"0",
-                selectionStart:_this.state.selectionStart
+                selectionStart:_this.state.copyPasteLocation.selectionStart
               },
               locationMode:"location",
               locationAttributes:{},
@@ -870,7 +871,7 @@ _onAttributeSelectionFirstTime(){
               copyPasteSKU:{
                 data:processedList,
                 focusedEl:"0",
-                selectionStart:_this.state.selectionStart
+                selectionStart:_this.state.copyPasteSKU.selectionStart
               },
               skuMode:"sku",
               skuAttributes:{},
@@ -906,7 +907,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteSKU:{
           data:resetData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         },
         validateclicked:false,
         selectedSKUList:{},
@@ -920,7 +921,7 @@ _onAttributeSelectionFirstTime(){
         copyPasteLocation:{
           data:resetData,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         validateclicked:false,
         auditSpinner:false
@@ -946,7 +947,7 @@ _onAttributeSelectionFirstTime(){
             errorMessage:""
           }] : this.state.copyPasteLocation.data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteLocation.selectionStart
         },
         copyPasteSKU:{
           data:tabIndex === 0 ? [{
@@ -957,7 +958,7 @@ _onAttributeSelectionFirstTime(){
             errorMessage:""
           }] : this.state.copyPasteSKU.data,
           focusedEl:"0",
-          selectionStart:this.state.selectionStart
+          selectionStart:this.state.copyPasteSKU.selectionStart
         }
       })
     }
@@ -998,7 +999,8 @@ _onAttributeSelectionFirstTime(){
       let validSkuNoAtriMessg=<FormattedMessage id="audit.noAtrributes.sku" description='text for valid sku with no attributed' defaultMessage='SKU confirmed but no Box Id found'/>;
       let uploadCsvMessg=<FormattedMessage id="audit.uploadcsv.text" description='text for upload csv and validate' defaultMessage='Upload CSV and validate'/>;
       let selectAttributesMessg=<FormattedMessage id="audit.selectattributes.text" description='text for select attributes' defaultMessage='Select attributes'/>;
-      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Enter SKU and validate'/>;
+      let auditBySkuMessg=<FormattedMessage id="audit.auditbysku.text" description='text for Enter SKU and validate' defaultMessage='Audit by SKU'/>;
+      let enterSkuMessg=<FormattedMessage id="audit.auditbysku.editEnterSKU" description='text for audit by sku' defaultMessage='Enter SKU and validate'/>;
       let skuSelectAttributes = <FormattedMessage id="audit.auditbysku.selectAttributes" description='text for Select Attributes' defaultMessage='Select Attributes'/>;
       let auditByLocationMessg=<FormattedMessage id="audit.auditbylocation.text" description='text for audit by location' defaultMessage='Audit by Location'/>;
       let selectAllLabel = <FormattedMessage id="Audit.inputCheckbox.selectAllLabel" description="audit dropdown option for Select All"
@@ -1095,7 +1097,7 @@ _onAttributeSelectionFirstTime(){
                           <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameSKU = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)}  />
                           </div>                      
                             <div className='gor-usr-hdsm-audit'>
-                          <FormattedMessage id="audit.select.sku.mode" description='Text for sku mode' defaultMessage='Select mode of input:'/>
+                          <FormattedMessage id="audit.select.sku.modeinput" description='Text for sku mode' defaultMessage='Select mode of input:'/>
                           </div>
                           
                          
@@ -1107,7 +1109,7 @@ _onAttributeSelectionFirstTime(){
                                
             <div className={`sku-mode ${self.state.skuMode === 'sku' ? 'active-mode' : 'inactive-mode'}`}>
             <GorTabs defaultActiveTabIndex={!validationDoneSKU ? 0 :1} disabledTabIndex={validationDoneSKU ? 0 :1} tabClass={"sub-tabs-audit"}>
-            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{auditBySkuMessg}</span>} iconClassName={'icon-class-0'}
+            <Tab tabName = {<span className={"sub-tab-name"}><i className={"sub-tab-index"}>1</i>{enterSkuMessg}</span>} iconClassName={'icon-class-0'}
                                  linkClassName={'link-class-0'}  >
           {!validationDoneSKU && <div className="gor-audit-inputlist-wrap" >
               <div>
@@ -1121,13 +1123,14 @@ _onAttributeSelectionFirstTime(){
                         <InputComponent.CopyPaste
                         className={"gor-audit-input gor-input-ok"} 
                         autoFocus = {focus} 
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         updateInput={self._updateInput} 
                         index={i}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
               }) }
                <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addAuditSkuCP" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>
                </div>
@@ -1199,9 +1202,12 @@ _onAttributeSelectionFirstTime(){
                         updateInput={self._updateInput} 
                         index={i}
                         allRowValid={allSKUsValid}
+                        selectionStart = {self.state.copyPasteSKU.selectionStart}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allSKUsValid ? tuple.errorMessage : true}  
+                        key={tuple.value}
+                        manualEntry={tuple.manualEntry}
+                        errorMessage={!allSKUsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                         {allSKUsValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
@@ -1219,7 +1225,7 @@ _onAttributeSelectionFirstTime(){
 
 
                {!validationDoneSKU && <div>
-                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+                      <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("sku")}><FormattedMessage id="audits.addAuditSkuValid" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
               </div>}
                </div>
@@ -1243,7 +1249,7 @@ _onAttributeSelectionFirstTime(){
           <div className={`location-mode ${self.state.skuMode === 'sku_csv'  ? 'active-mode' : 'inactive-mode'}`}>
 
           <div >
-      <div className="gor-audit-csvupload-wrap">
+       <div className="gor-audit-csvupload-wrap">
                        {!self.state.isValidCsv?
                   <div className="gor-global-notification"> 
                   <div className="message error"> 
@@ -1284,7 +1290,7 @@ _onAttributeSelectionFirstTime(){
                         <input className="gor-audit-name-wrap" type="text" ref={(input) => { this.auditNameLoc = input; }} placeholder={self.props.intl.formatMessage(messages.auditnameplaceholder)} />
                         
                         
-                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.sku.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
+                        <div className='gor-usr-hdsm-audit'><FormattedMessage id="audit.select.mode" description='Text for location mode' defaultMessage='Select mode of input:'/></div>
                           <div className='gor-audit-button-wrap'>
                             <button onClick={()=>(self._onLocationModeSelection('location'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.enterLocation" description='Button for entering skus' defaultMessage='Enter Location'/></button>
                             <button onClick={()=>(self._onLocationModeSelection('location_csv'))} className={`gor-loc-mode-btn ${self.state.locationMode === 'location_csv' ? 'active-mode' : 'inactive-mode'}`}  type="button" ><FormattedMessage id="audits.csvUpload" description='Button for csv upload' defaultMessage='Upload CSV file'/></button>
@@ -1315,12 +1321,13 @@ _onAttributeSelectionFirstTime(){
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}  
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>:null) 
               }) }
               
                <div>
-    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addLocation" description='Text for adding a location' 
+    <button className='gor-audit-addnew-button' type="button" onClick={()=>this._addNewInput("location")}><FormattedMessage id="audits.addAuditLocationCP" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
                         </div>
               </div>:<div className="gor-audit-inputlist-wrap gor-audit-location-wrap" >
@@ -1371,10 +1378,13 @@ _onAttributeSelectionFirstTime(){
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        key={tuple.value}
+                        manualEntry={tuple.manualEntry}
                         allRowValid={allLocationsValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allLocationsValid ? tuple.errorMessage : true}  
+                        selectionStart = {self.state.copyPasteLocation.selectionStart}
+                        errorMessage={!allLocationsValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                       </div>)
                   }
@@ -1383,7 +1393,7 @@ _onAttributeSelectionFirstTime(){
                     return(tuples) 
               })}
             <div>
-            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={this._addNewInput}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
+            <button className={!allLocationsValid?'gor-audit-addnew-button':'gor-audit-addnew-button-disabled'} type="button" onClick={()=>this._addNewInput('location')}><FormattedMessage id="audits.locationValidation.addLocation" description='Text for adding a location' 
                         defaultMessage='+ Add New'/></button>
                         </div>
                         
@@ -1409,7 +1419,7 @@ _onAttributeSelectionFirstTime(){
               <div className={`location-mode ${self.state.locationMode === 'location_csv'  ? 'active-mode' : 'inactive-mode'}`}>
 
           <div >
-      <div className="gor-audit-csvupload-wrap">
+       <div className="gor-audit-csvupload-wrap">
                         {!self.state.isValidCsv?
                   <div className="gor-global-notification"> 
                   <div className="message error"> 
