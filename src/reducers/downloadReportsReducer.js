@@ -7,7 +7,8 @@ export  function downloadReportsReducer(state={},action){
 	  
 	  case REPORTS_FETCH:
 	    return Object.assign({}, state, {
-	    	reportsData:action.data,
+	    	reportsData:action.data.content,
+            totalElements:action.data.totalElements,
 	    	hasDataChanged:!state.hasDataChanged,
 	    	downloadReportsSpinner:false
       })

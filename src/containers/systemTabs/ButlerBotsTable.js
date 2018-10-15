@@ -3,7 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import Dimensions from 'react-dimensions';
 import {modal} from 'react-redux-modal';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
-
+import ProgressBar from '../../components/progressBar/progressBar.js';
 import GTable from './../../components/gor-table-component'
 import {GTableHeader, GTableHeaderCell, GTableBody, GTableRow} from './../../components/gor-table-component'
 import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFunctionsDataTable';
@@ -17,7 +17,7 @@ class ButlerBotsTable extends React.Component {
                 {id: 2, text: "CURRENT TASK", key: 'current', sortable: true},
                 {id: 3, text: "MSU MOUNTED", key: 'msu', sortable: true},
                 {id: 4, text: "LOCATION", key: 'position', sortable: true},
-                {id: 5, text: "POWER", key: 'voltage', sortable: true}
+                {id: 5, text: "CHARGE LEVEL", key: 'voltage', sortable: true}
                 
             ],
             butlerBotsList:props.data
@@ -145,7 +145,7 @@ class ButlerBotsTable extends React.Component {
 
                         <GTableHeaderCell header={self.state.header[5]} onClick={self._onSortChange.bind(self, this.state.header[5])}>
                         <span><FormattedMessage id="bots.table.power" description="Power"
-                                                defaultMessage="POWER"/></span>
+                                                defaultMessage="CHARGE LEVEL"/></span>
 
                                                 <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="ButlerBotTable.avgVoltage"
@@ -192,7 +192,12 @@ class ButlerBotsTable extends React.Component {
                                     <div
                                         style={self.state.header[4].width ? {flex: '1 0 ' + self.state.header[4].width + "%"} : {}}
                                         className="cell">
+                                        <div>
+                                        <ProgressBar progressWidth={row.voltage !== "--" ? row.voltage.substring(0, row.voltage.length - 2) : "0"}/>
+                                        </div>
+                                        <div>
                                         {row.voltage}
+                                        </div>
                                     </div>
                                   
                                 </GTableRow>

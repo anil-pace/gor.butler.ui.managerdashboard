@@ -80,10 +80,6 @@ auditTask: {
   id: "viewDetais.audit.audittask",
   defaultMessage: "in this Audit task"
 },
-noDataToShow: {
-  id: "viewDetais.audit.nodatashow",
-  defaultMessage: "No data to show"
-},
 vdhCreatedBy: {
   id: "viewDetais.createdby.status",
   defaultMessage: "Created By"
@@ -127,6 +123,10 @@ trueStatus:{
 falseStatus:{
   id: "viewDetais.audit.false",
   defaultMessage: "False"
+},
+multiPPS:{
+  id: "viewDetais.audit.multiPPS",
+  defaultMessage: "Multi PPS"
 }
 });
 
@@ -169,17 +169,6 @@ class ViewDetailsAudit extends React.Component {
         this.props.userRequest(userData);
   let attributeData= this.props.auditDetails.entity_list?this.props.auditDetails.entity_list:[];
    this.setState({items: attributeData});
-  }
-  _PPSstring(list){
-    let pps = this.context.intl.formatMessage(messages.pps);
-    
-    let finalstring="";
-    if(list && list.length!=0){
-    for(let i=0,len=list.length;i<len;i++){
-       finalstring=len>i+1?finalstring+pps+list[i]+", ":finalstring+pps+list[i];
-    }
-  }
-    return finalstring!==""?finalstring:"-";
   }
 
   ppsChange(e){
@@ -247,8 +236,11 @@ _timeFormat(UTCtime){
     let vdhProgress = this.context.intl.formatMessage(messages.vdhProgress);
     let trueStatus=this.context.intl.formatMessage(messages.trueStatus);
     let falseStatus=this.context.intl.formatMessage(messages.falseStatus);
+    let multiPPS=this.context.intl.formatMessage(messages.multiPPS);
+    
 
     let tile1Data={},tile2Data={},tile3Data={};
+    var ppsList="";
     tile1Data[vdhCreatedBy]=data.audit_creator_name;
     tile1Data[vdhOperator]=data.operator_assigned;
     if(data.audit_param_type=="sku"){
@@ -256,7 +248,14 @@ _timeFormat(UTCtime){
     }else if(data.audit_param_type=="location"){
      tile1Data[vdhAuditType]=data.entity_list.length>1?vdMultiLocation:vdSingleLocation;
     }
-    tile3Data[vdhPPSid]=this._PPSstring(data.pps_id);
+    if(data.pps_id && data.pps_id.length>1){
+     ppsList=<span><span>{multiPPS}</span><span title={data.pps_id} className="gor-view-details-info-icon"></span></span>
+    }
+    else
+    {
+      ppsList=data.pps_id||"";
+    }
+    tile3Data[vdhPPSid]=ppsList||"";
     tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
@@ -303,7 +302,7 @@ _timeFormat(UTCtime){
   let rowObject={};
   rowObject.auditDetails={
       "header":[itemsData[i].id||""],
-      "subHeader":[itemsData[i].name||""]
+      "subHeader":[itemsData[i].description||""]
       };
     
       if(itemsData[i].attributes_list!=0){
@@ -344,7 +343,6 @@ return tableData;
     let vdSearchBySKU = this.context.intl.formatMessage(messages.vdSearchBySKU);
     let vdChangePPS = this.context.intl.formatMessage(messages.vdChangePPS);
     let auditTask = this.context.intl.formatMessage(messages.auditTask);
-    let noDataToShow = this.context.intl.formatMessage(messages.noDataToShow);
     let allData=this.props.auditDetails;
     let tiledata=this._processDataTile(allData);
     let attributeData= this.state.items;
@@ -387,7 +385,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {this.props.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.props.auditDetails.change_pps_button==='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
@@ -415,7 +413,7 @@ return tableData;
                              
                                    {Object.keys(row).map(function (text, index) {
                                        return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"} >  
-                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
+                                          {index==0?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} separator={<div className="dotImage"></div>} subheaderClassName="subheaderName viewDetailslimitsSubHeader" />:""} 
                                           {index==1?<DotSeparatorContent header={processedTableData[idx][text]['header']} subHeader={processedTableData[idx][text]['subHeader']} headerClassName="viewDetailsSeparatorHeader" subheaderClassName="viewDetailsSeparatorSubHeader" separator={<div className="dotImage"></div>} />:""}     
                                           {index==2?<div className="missing-item">{processedTableData[idx][text]}</div>:""} 
 
@@ -433,7 +431,7 @@ return tableData;
                   
                </GTable>
 
-            </div>:<div>{noDataToShow}</div>}
+            </div>
 
          </div>
       );

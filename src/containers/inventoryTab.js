@@ -19,7 +19,8 @@ import SnapShot from './../components/inventory/snapShot'
 import ItemCategoryTable from './../components/inventory/itemCategoryTable'
 import InventoryStacked from './../containers/inventoryTab/inventoryStacked'
 import {FormattedMessage} from 'react-intl';
-const moment = require("moment-timezone")
+import moment from 'moment';
+import 'moment-timezone';
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
 
@@ -42,6 +43,7 @@ const InventoryHistorySubscription = gql`
                     cbm_used
                     warehouse_utilization
                 }
+                __typename
             }
         }
     }

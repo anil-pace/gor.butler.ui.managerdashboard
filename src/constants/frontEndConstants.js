@@ -90,6 +90,7 @@ export const PICK_PPS_PERFORMANCE="PICK_PPS_PERFORMANCE";
 export const PUT_PPS_PERFORMANCE="PUT_PPS_PERFORMANCE";
 export const AUDIT_PPS_PERFORMANCE="AUDIT_PPS_PERFORMANCE";
 export const UTILITY002="utility002";
+export const UTILITY001="utility001";
 export const MB=1000000;
 export const KB=1024;
 
@@ -497,6 +498,7 @@ export const ES='es';
 export const ZH='zh'; 
 export const DE='de'; 
 export const FR='fr'; 
+export const NL='nl';
 export const HR='h ';
 export const MM='m ';
 export const SS='s ';
@@ -871,13 +873,18 @@ export const BREACHED_STATUS ="BREACHED";
 export const BREACHED_COMPLETED_STATUS ="BREACHED COMPLETED";
 export const PRODUCT_SHORT_STATUS ="PRODUCT SHORT";
 export const OUT_OF_STOCK_STATUS ="OUT OF STOCK";
-export const COMPLETED_STATUS ="COMPLETED";
 export const REJECTED_STATUS ="REJECTED";
-export const CANCELLED_STATUS ="CANCELLED";
-export const ABANDONED_STATUS ="ABANDONED";
 export const ORDER_TAGS = "ORDER TAGS";
 export const STATUS = "STATUS";
+export const CREATED_STATUS = "CREATED";
+export const PROCESSING_STATUS = "PROCESSING";
+export const PROCESSED_STATUS = "PROCESSED";
+export const FAILED_STATUS = "FAILED";
+export const CANCELLED_STATUS = "CANCELED";
+export const WAITING_STATUS  = "WAITING"
 export const ORDERS_POLLING_INTERVAL = 60000;
+//Wall to wall audit
+export const WALL_TO_WALL = "Wall-to-Wall"; 
 
 
  

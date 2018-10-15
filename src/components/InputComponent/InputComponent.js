@@ -35,6 +35,9 @@ class InputAfterValidation extends React.Component{
 	}
 	
 	render(){
+		let hasError = (this.props.errorMessage === undefined || this.props.errorMessage === "") ? false : true;
+		let errorClass =null;
+
 		let attributes = {
 				autoFocus : this.props.autoFocus,
 			    className : this.props.className,
@@ -43,19 +46,26 @@ class InputAfterValidation extends React.Component{
 			    onChange:(e)=>{this.props.updateInput(e,this.props.index)},
 			    type:"text",
 			    placeholder:this.props.placeholder,
-			    disabled: this.props.errorMessage === true ? true : false
+			    disabled: !hasError && !this.props.manualEntry ? true : false
 		}
-		let hasError = this.props.errorMessage===true ? false : true;
 		let allRowValid = this.props.allRowValid;
-		
+		if(hasError){
+			errorClass = "error-tuple";
+		}
+		else if(!this.props.manualEntry){
+			errorClass = "valid-tuple";
+		}
+		else{
+			errorClass="";
+		}
 		return(
 			<div>
 			{!allRowValid?<input type="checkbox" onChange={(e)=>{this.props.onAttributeCheck(e,this.props.index)}} checked={this.props.checked}/>:null}
-			<div className={"gor-audit-input-wrap after-validation "+(hasError ? "error-tuple" : "valid-tuple") }>
+			<div className={"gor-audit-input-wrap after-validation "+errorClass }>
 			<input {...attributes}  ref={node => this.input = node}/>
-			<span className={hasError ? "error-icon" : ""}></span>
+			{hasError && <span className={"error-icon" }></span>}
 			</div>
-			    <span className={"error-message"}>{hasError ? this.props.errorMessage : null}</span>
+			    {hasError &&<span className={"error-message"}>{this.props.errorMessage}</span>}
 			    </div>
 
 			    )

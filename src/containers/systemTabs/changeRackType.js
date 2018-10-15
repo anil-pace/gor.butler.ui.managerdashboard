@@ -66,7 +66,7 @@ class ChangeRackType extends React.Component {
             }
         } 
         else{
-            if(nextProps.rackStructure){
+            if(this.state.sourceType && nextProps.rackStructure){
                 this.setState({
                     sourceTypeStructure: nextProps.rackStructure[0].rack_json,
                     sourceTypeWidth: nextProps.rackStructure[0].rack_width
@@ -78,7 +78,7 @@ class ChangeRackType extends React.Component {
 
     _blockPutAndChangeType(){
         let formData={         
-            "rack_id":this.props.msuList[0].id, // 0 is for currently filtered msulist
+            "rack_id":this.props.id, // 0 is for currently filtered msulist
             "destination_type":this.state.destType
         };
 

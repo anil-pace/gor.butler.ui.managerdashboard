@@ -9,12 +9,34 @@
         text-align: left;
         color: #333333;
     }
+    .viewOrderLinesHeader{
+        position: relative;
+        left: 5px;
+        top: 5px;
+        vertical-align: middle;
+    }
+
     .subheaderName,
     .viewDetailsSeparatorSubHeader {
         padding: 7px;
         font-size: 13px;
         text-align: left;
         color: #333333;
+    }
+    .viewDetailslimitsSubHeader{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:300px;
+        display: block;
+    }
+    .viewOrderLinesSubHeader{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width:100px;
+        display: inline-block;
+        vertical-align: middle;
     }
 }
 

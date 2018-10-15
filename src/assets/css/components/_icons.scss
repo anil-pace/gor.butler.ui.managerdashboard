@@ -46,19 +46,29 @@
 .gor-emergency-dropdown-close,.gor-emergency-dropdown-open,.gor-info-icon,.gor-selected-icon,.not-bell,.searchIcon,.not-statusIcon,
 .calloutArr,.gor-audit-info-icon,.gor-resume-icon,.gor-zone-status,.action-icon,.gor-up-arrow,.gor-tag-icon,.gor-tag-icon-grey,
 .dwnload-rpt-ico,.error-icon,.gor-filter-arrow,.gor-filter-checkbox,.gor-delete-location-disabled, .gor-file-upload,.gor-spinner, .gor-delete-location, .gor-sel-att-arr, .gor-expand-icon, .gor-collapse-icon, .gor-search-icon, .gor-refresh-whiteIcon,
-.gor-exp-coll{
+.gor-exp-coll,.gor-view-details-info-icon{
     background-image: url(./images/icons.svg);
 }
 .fk-logo,
 .gor-logo{
-    background-image: url(./images/Logos.svg);
+    background-image: url(./images/GO_Orange_Black_Horizontal.svg);
+    background-size: 100%;
 }
 .WARNING-Biggericon,.ERROR-Biggericon,.INFO-Biggericon,
 .WARNING-icon,.INFO-icon,.ERROR-icon{
     background-image: url(./images/Icons_need_update.svg);
 }
 
-
+.gor-view-details-info-icon
+{
+    background-position: -509px -1px;
+    width: 55px;
+    height: 52px;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 0.3;
+    margin-left: 25px; 
+}
 .gor-login-user{
     background-position:-205px -77px;
     width:16px;
@@ -111,18 +121,17 @@
     margin-right:10px;
 }
 .alt-gor-logo{
-    background-image: url(./images/Logos.svg);    
+    background-image: url(./images/GO_White_Horizontal.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;   
 }
 .alt-gor-logo{
-    background-position:-182px -1px;
-    width:235px;
-    height:25px;
+    width: 243px;
+    height: 62px;
 }
 .gor-logo{
-    background-position: 11px -117px;
-    width: 173px;
-    padding: 10px;
-    
+    width: 120px;
+    padding: 19px;
 }
 .fk-logo{
     background-position: 3px -138px;

@@ -28,7 +28,9 @@ class Bins extends React.Component {
                     return bin.direction !== 'center'
                 }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
-            } else if (this.state.currentBinDirection) {
+            } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
+                return bin.direction !== 'center'
+            }).length !== 0) {
                 this.setBinDirection(this.state.currentBinDirection)
             } else {
                 this.setBinDirection()
@@ -170,7 +172,7 @@ class Bins extends React.Component {
                                       description="Select a bin to manage tags"
                                       defaultMessage="Select a bin to manage tags"/>
                 </div>
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"
@@ -210,7 +212,7 @@ class Bins extends React.Component {
                 </div>
 
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"
@@ -249,7 +251,7 @@ class Bins extends React.Component {
                         }}/>
                 </div>
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: '14'}}>
+                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
                     <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
                         id="pps.configuration.bins.direction.label"
                         description="Bin Direction"

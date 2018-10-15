@@ -3,7 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
-import { FormattedMessage, injectIntl, defineMessages } from 'react-intl';
+import { FormattedMessage,injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions';
 import SlotsTable from './SlotsTable';
@@ -19,6 +19,7 @@ import {
 } from "../../constants/messageConstants";
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
+
 
 /*Intl Messages*/
 const  messages= defineMessages({
@@ -203,7 +204,6 @@ var mapDispatchToProps=function (dispatch) {
         }
     }
 };
-
 
 
 export default compose(
