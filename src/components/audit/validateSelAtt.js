@@ -432,7 +432,7 @@ class ValidateSelAtt extends React.Component{
                         allRowValid={allTuplesValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allTuplesValid ? tuple.errorMessage : true}  
+                        errorMessage={!allTuplesValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                         {allTuplesValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
