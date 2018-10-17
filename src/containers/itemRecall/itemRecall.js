@@ -46,6 +46,8 @@ class ItemRecall extends React.Component{
    this._validateSKU = this._validateSKU.bind(this);
    this._onAttributeSelection = this._onAttributeSelection.bind(this);
    this._recallItems = this._recallItems.bind(this);
+   this._onOrderInputChange= this._onOrderInputChange.bind(this);
+   this._checkIfSKUEmpty= this._checkIfSKUEmpty.bind(this);
    this.state=this._getInitialState()
  } 
  _getInitialState(){
@@ -68,16 +70,18 @@ class ItemRecall extends React.Component{
     validationDoneSKU:false,
     allTuplesValid:false,
     skuDetails:{},
-    enableRecall:false
+    disableRecall:true,
+    orderInput:"",
+    isInputEmpty:true
   }
  } 
 
 
  _handleOptionChange(evt){
-  
-  this.orderInput.value = "";
   this.setState({
     selectedOption:evt.target.value,
+    orderInput:"",
+    disableRecall:true,
     ...(evt.target.value === "expired_items" ? {
         copyPasteData:{
           data:[{
@@ -124,7 +128,7 @@ class ItemRecall extends React.Component{
       tuple.index=i;
       tuple.visible=true;
       tuple.value=data[i].skuName;
-      tuple.errorMessage = data[i].status===true ? data[i].status : this.props.intl.formatMessage(messages[error_code]);
+      tuple.errorMessage = data[i].status===true ? "" : this.props.intl.formatMessage(messages[error_code]);
       if(error_code === ""){
         skuDetail["productSku"] = data[i].skuName;
         skuDetail["productAttributes"] =[]
@@ -172,7 +176,7 @@ else{
   }
   _recallItems(){
     var formData = {};
-    formData.orderId=this.orderInput.value;
+    formData.orderId=this.state.orderInput;
     formData.timeZone=this.props.timeOffset;
     if(this.state.selectedOption === "specific_item"){
     let skuDetail=[],
@@ -217,27 +221,57 @@ else{
       })
     }
   }
+  _onOrderInputChange(e){
+    let disableRecall = null;
+    let {isInputEmpty,selectedOption} = this.state
+    const value = e.target.value.trim();
+    if(selectedOption === "expired_items"){
+      disableRecall= value ? false :true
+    }
+    else{
+      disableRecall= !isInputEmpty && value ? false :true
+    }
+    
+    this.setState((state,props)=>{
+      return {
+        ...state,
+        orderInput:value,
+        disableRecall
+    }
+    })
+  }
+  _checkIfSKUEmpty(childState){
+    this.setState((state,props)=>{
+      return {
+        disableRecall: state.orderInput && !childState.isInputEmpty ? false : true,
+        ...childState
+      }
+    })
+  }
     /**Render method called when component react renders
      * @return {[type]}
      */
     render(){
-     
       return (
            <div className={"item-recall-wrapper"}>
            <div className={"recall-options"}>
            <ul>
            <li>
-           <input className={"recall-option"} onChange={this._handleOptionChange} value={"expired_items"} checked={this.state.selectedOption === "expired_items"} name={"recall-options"} type="radio" /><label className={"option-text"}>Expired Items</label>
+           <input className={"recall-option"} onChange={this._handleOptionChange} value={"expired_items"} checked={this.state.selectedOption === "expired_items"} name={"recall-options"} type="radio" /><label className={"option-text"}>
+           <FormattedMessage id="itemRecall.order.label.expiredItems" description='Text for item recall button' 
+            defaultMessage='Expired Items'/></label>
            </li>
            <li>
-           <input  className={"recall-option"} onChange={this._handleOptionChange} value={"specific_item"} checked={this.state.selectedOption === "specific_item"} type="radio" name={"recall-options"} /><label className={"option-text"}>Specific SKU + attribute(s)</label>
+           <input  className={"recall-option"} onChange={this._handleOptionChange} value={"specific_item"} checked={this.state.selectedOption === "specific_item"} type="radio" name={"recall-options"} /><label className={"option-text"}>
+           <FormattedMessage id="itemRecall.order.label.specificItem" description='Text for item recall button' 
+            defaultMessage='Specific SKU + attribute(s)'/></label>
            </li>
            </ul>
            </div>
            <div className={"order-id-wrap"}>
            <p className="order-id-label"><FormattedMessage id="itemRecall.order.label" description='Text for item recall button' 
             defaultMessage='Order Id'/>:</p>
-           <p className="order-inp-wrap"><input ref={(input) => { this.orderInput = input; }} type="text"  className="order-id-input" placeholder="Enter Order Id"/></p>
+           <p className="order-inp-wrap"><input value={this.state.orderInput}  onInput={this._onOrderInputChange} type="text"  className="order-id-input" placeholder="Enter Order Id"/></p>
            </div>
            {this.state.selectedOption === "specific_item" &&  <ValidateSelAtt 
            validationCallBack={this._validateSKU} 
@@ -247,9 +281,10 @@ else{
            copyPasteData={this.state.copyPasteData}
            onAttributeSelection={this._onAttributeSelection}
            tabMessages={tabMessages}
+           callBack={this._checkIfSKUEmpty}
             />}
           
-          <div className="recall-footer"><button className={"gor-item-recall-btn"} onClick={this._recallItems}>
+          <div className="recall-footer"><button disabled={this.state.disableRecall} className={"gor-item-recall-btn"} onClick={this._recallItems}>
           <FormattedMessage id="itemRecall.recall.button" description='Text for item recall button' 
             defaultMessage='Recall'/>
           </button></div>
