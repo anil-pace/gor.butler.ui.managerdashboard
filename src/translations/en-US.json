@@ -3975,6 +3975,18 @@
     "filepath": "./src/containers/itemRecall/itemRecall.js"
   },
   {
+    "id": "itemRecall.order.label.expiredItems",
+    "description": "Text for item recall button",
+    "defaultMessage": "Expired Items",
+    "filepath": "./src/containers/itemRecall/itemRecall.js"
+  },
+  {
+    "id": "itemRecall.order.label.specificItem",
+    "description": "Text for item recall button",
+    "defaultMessage": "Specific SKU + attribute(s)",
+    "filepath": "./src/containers/itemRecall/itemRecall.js"
+  },
+  {
     "id": "itemRecall.order.label",
     "description": "Text for item recall button",
     "defaultMessage": "Order Id",
