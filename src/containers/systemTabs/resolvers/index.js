@@ -5,5 +5,6 @@ import merge from 'lodash.merge'
 import ppsConfigurationState from './ppsConfigurations'
 import butlerFilterState from './butlerBots'
 import chargingStationFilterState from './chargingStation'
-let pps_resolvers=merge(ppsConfigurationState,butlerFilterState,chargingStationFilterState)
-export default pps_resolvers
+import msuReconfigFilterState from './msuReconfig';
+let pps_resolvers = merge(ppsConfigurationState, butlerFilterState, chargingStationFilterState, msuReconfigFilterState);
+export default pps_resolvers;
