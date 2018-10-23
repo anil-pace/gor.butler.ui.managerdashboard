@@ -105,23 +105,7 @@ class ItemRecall extends React.Component{
   })
  }
  _validateSKU(data){
-    /*let validSKUData={
-      "audit_param_name":"name",
-      "audit_param_type":"sku",
-      "audit_param_value":{}
-    };
-    validSKUData.audit_param_value.sku_list = data;
-    let urlData={
-          'url': AUDIT_VALIDATION_URL,
-          'formdata': validSKUData,
-          'method':POST,
-          'cause':VALIDATE_SKU_ITEM_RECALL,
-          'contentType':APP_JSON,
-          'accept':APP_JSON,
-          'token':this.props.auth_token
-      }
-    
-    this.props.makeAjaxCall(urlData);*/
+  
     let skuList = {
         "sku":{
           "sku":data
