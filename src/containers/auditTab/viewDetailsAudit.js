@@ -2,10 +2,7 @@ import React from 'react';
 import { FormattedMessage,defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import Tile from '../../components/tile/tile.js';
-import {GTable} from '../../components/gor-table-component/index'
-import {userRequest} from '../../actions/userActions';
-import { AUDITDETAIL_URL } from '../../constants/configConstants';
-import { GET_AUDIT_DETAILS,GET,APP_JSON,POST } from '../../constants/frontEndConstants';
+import GTable from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
@@ -14,6 +11,14 @@ import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparat
 import SearchFilter from '../../components/searchFilter/searchFilter';
 import AuditStart from '../../containers/auditTab/auditStart';
 import {modal} from 'react-redux-modal';
+import Spinner from '../../components/spinner/Spinner';
+import {graphql, withApollo, compose} from "react-apollo";
+import {ShowError} from '../../../src/utilities/ErrorResponseParser';
+import gql from 'graphql-tag'
+import { notifyfeedback,notifyFail } from '../../actions/validationActions';
+import { setNotification } from '../../actions/notificationAction';
+import {AUDIT_DETAILS_QUERY,AUDIT_DETAILS_SUBSCRIPTION_QUERY} from './query/serverQuery';
+import {auditViewSpinnerState} from './query/clientQuery';
 
 const messages = defineMessages({
   vdMultiSKU: {
@@ -130,46 +135,44 @@ multiPPS:{
 }
 });
 
-class ViewDetailsAudit extends React.Component {
+
+class viewDetailsAudit extends React.Component {
    constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
       this.state={items:[],auditId:this.props.auditId};
+
    }
    _removeThisModal() {
       this.props.removeModal();
    }
-     componentWillReceiveProps(nextProps){
-       if(!nextProps.auth_token)
-       {
-         this._removeThisModal();
-       }
-     }
 
-
-  componentWillReceiveProps(nextProps){
-    if(JSON.stringify(this.props.auditDetails)!== JSON.stringify(nextProps.auditDetails)){
-    let attributeData= nextProps.auditDetails.entity_list?nextProps.auditDetails.entity_list:[];
-   this.setState({items: attributeData});
- }
-  }
-     componentDidMount(){
-    let formdata={
-      audit_id_list:(this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId
-    }
-        let userData={
-                'url':AUDITDETAIL_URL,
-                'method':POST,
-                'cause':GET_AUDIT_DETAILS,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':sessionStorage.getItem('auth_token'),
-                'formdata':formdata
+   componentDidMount(){
+  var _this=this;
+     var  audit_id_list=(this.state.auditId).constructor.name!=="Array"?[this.state.auditId]:this.state.auditId
+     this.props.setViewAuditSpinner(true);
+    this.props.client.query({
+      query: AUDIT_DETAILS_QUERY,
+      variables: (function () {
+        return {
+            input: {
+          audit_id_list:audit_id_list
             }
-        this.props.userRequest(userData);
-  let attributeData= this.props.auditDetails.entity_list?this.props.auditDetails.entity_list:[];
-   this.setState({items: attributeData});
+        }
+    }()),
+      fetchPolicy: 'network-only'
+  }).then((data,error) => {
+   this.props.setViewAuditSpinner(false);
+   this.setState({attributeData:data.data.AuditDetails.list.entity_list||[]}); 
+   this.setState({auditDetails:data.data.AuditDetails.list||[]})
+  }).catch((errors)=>{
+let code=errors.graphQLErrors[0].code;
+let message=errors.graphQLErrors[0].message;
+    ShowError(_this,code)
+  })
+
   }
+
 
   ppsChange(e){
     let param="CHANGE_PPS";
@@ -264,7 +267,7 @@ _timeFormat(UTCtime){
   }
 
   handleChange(input) {
-    var updatedList = this.props.auditDetails
+    var updatedList = this.state.auditDetails
     let attributeData= updatedList.entity_list;
     let data=input.toLowerCase();
     var queryResult=[];
@@ -287,7 +290,7 @@ _timeFormat(UTCtime){
             })
     });
 
-    this.setState({items: queryResult});
+    this.setState({attributeData: queryResult});
   }
 
   processData(itemsData){
@@ -339,13 +342,29 @@ return tableData;
 }
 
    render() {
+     if(!this.state.auditDetails){
+      return (
+        <div>
+            <div>
+                <div className="gor-Auditlist-table">
+                    {
+                        <Spinner isLoading={this.props.viewAuditSpinner} setSpinner={this.props.setAuditSpinner} />
+                        }
+                   
+                </div>
+            </div>
+            
+        </div>
+    );
+      
+      }
     let audit = this.context.intl.formatMessage(messages.audit);
     let vdSearchBySKU = this.context.intl.formatMessage(messages.vdSearchBySKU);
     let vdChangePPS = this.context.intl.formatMessage(messages.vdChangePPS);
     let auditTask = this.context.intl.formatMessage(messages.auditTask);
-    let allData=this.props.auditDetails;
+    let allData=this.state.auditDetails;
     let tiledata=this._processDataTile(allData);
-    let attributeData= this.state.items;
+    let attributeData= this.state.attributeData;
     let processedTableData=this.processData(attributeData);
     let type=allData.audit_param_type;
     let no_of_record=processedTableData.length;
@@ -385,7 +404,7 @@ return tableData;
                         <Tile data={tiledata[0]}/>
                         <Tile data={tiledata[1]}/>
                         <Tile className="width-auto" data={tiledata[2]}/>
-                        {this.props.auditDetails.change_pps_button==='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
+                        {this.state.auditDetails.change_pps_button=='enable'?<div className="details-changepps"    onClick={this.ppsChange.bind(this)}>| {vdChangePPS}</div>:""}
                         </div>
                         
                      </div>
@@ -437,24 +456,48 @@ return tableData;
       );
    }
 }
+
+const SET_VIEW_AUDIT_SPINNER_STATE = gql`
+    mutation setviewAuditSpinner($viewAuditSpinner: String!) {
+        setViewAuditSpinnerState(viewAuditSpinner: $viewAuditSpinner) @client
+    }
+`;
+const setSpinnerState = graphql(SET_VIEW_AUDIT_SPINNER_STATE, {
+  props: ({mutate, ownProps}) => ({
+      setViewAuditSpinner: function (viewAuditSpinner) {
+          mutate({variables: {viewAuditSpinner: viewAuditSpinner}})
+      },
+  }),
+});
+const clientviewDetailsSpinnerState = graphql(auditViewSpinnerState, {
+  props: (data) => ({
+    viewAuditSpinner:data.data.auditSpinnerstatus.viewAuditSpinner
+  })
+})
 function mapStateToProps(state, ownProps){
   return {
-      auditType:  state.auditInfo.auditType  || {},
-      auditDetails: state.auditInfo.auditDetails  || {},
-      auth_token:state.authLogin.auth_token,
+     
       timeOffset: state.authLogin.timeOffset,
   };
 }
-ViewDetailsAudit.contextTypes={
+viewDetailsAudit.contextTypes={
     intl: React.PropTypes.object.isRequired
 }
+viewDetailsAudit.defaultProps = {
+  viewAuditSpinner:true,
+};
 
 var mapDispatchToProps=function(dispatch){
   return {
-     userRequest: function(data){ dispatch(userRequest(data)); },
-
-
+     notifyfeedback: function (data) {dispatch(notifyfeedback(data))},
+     setNotification: function (data) {dispatch(setNotification(data))},
+     notifyFail:function (data) {dispatch(notifyFail(data)) 
   }
+}
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ViewDetailsAudit);
+export default compose(
+  clientviewDetailsSpinnerState,
+  setSpinnerState,
+ withApollo
+)(connect(mapStateToProps,mapDispatchToProps)(viewDetailsAudit));

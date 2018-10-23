@@ -155,7 +155,7 @@ class UsersTab extends React.Component {
                 console.log(newResult)
 
                 return Object.assign({}, {
-                    UserList: {list: newResult.subscriptionData.data.UserList.list}
+                    UserList: {list: newResult.subscriptionData.data.UserList.list,__typename:previousResult.AuditList.__typename}
                 })
             },
         });

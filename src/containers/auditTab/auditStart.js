@@ -2,38 +2,39 @@ import React from "react";
 import { FormattedMessage, defineMessages } from "react-intl";
 import { connect } from "react-redux";
 import Tile from "../../components/tile/tile.js";
-import { GTable } from "../../components/gor-table-component/index";
+import GTable  from "../../components/gor-table-component/index";
 import {
   GTableHeader,
   GTableHeaderCell
 } from "../../components/gor-table-component/tableHeader";
+import {codeToString} from '../../../src/utilities/codeToString';
+import {getFormattedMessages} from '../../../src/utilities/getFormattedMessages';
+import { resetForm,notifyfeedback,notifyFail} from '../../actions/validationActions';
+import { setNotification } from '../../actions/notificationAction';
 import { GTableBody } from "../../components/gor-table-component/tableBody";
 import { GTableRow } from "../../components/gor-table-component/tableRow";
-import {
-  setCheckedAuditpps,
-  setCheckedOtherpps
-} from "../../actions/auditActions";
 import { userRequest } from "../../actions/userActions";
 import DotSeparatorContent from "../../components/dotSeparatorContent/dotSeparatorContent";
 import {
-  GET_PPSLIST,
   START_AUDIT,
-  GET,
   APP_JSON,
-  POST,
   START_AUDIT_TASK,
   CHANGE_PPS_TASK,
   WALL_TO_WALL
 } from "../../constants/frontEndConstants";
 import {
-  PPSLIST_ACTIVE_AUDIT_URL,
-  PPSLIST_ALL_URL,
   START_AUDIT_URL,
   START_CHANGE_PPS_URL
 } from "../../constants/configConstants";
 import SearchFilter from "../../components/searchFilter/searchFilter";
 import AuditAction from "../auditTab/auditAction";
 import { modal } from "react-redux-modal";
+import {graphql, withApollo, compose} from "react-apollo";
+import {AuditParse} from '../../../src/utilities/auditResponseParser'
+import {ShowError} from '../../../src/utilities/ErrorResponseParser';
+import gql from 'graphql-tag';
+import {AUDIT_PPS_FETCH_QUERY,AUDIT_START,AUDIT_REQUEST_QUERY} from './query/serverQuery';
+import {auditClientPPSData} from './query/clientQuery';
 
 const messages = defineMessages({
   pendingAudit: {
@@ -51,15 +52,21 @@ const messages = defineMessages({
  
   
 });
+
+
+
+
+
+
 class AuditStart extends React.Component {
-  constructor(props) {
+  constructor(props) {  
     super(props);
     this.state = {
       checkedAuditPPS: [],
       checkedOtherPPS: [],
-      auditId: this.props.auditID,
+    auditId: this.props.auditID,
       visiblePopUp:false,
-      type:[],
+      type:[{'type':""}],
       items: []
     };    
     this.handleChange = this.handleChange.bind(this);
@@ -68,13 +75,18 @@ class AuditStart extends React.Component {
     this.props.removeModal();
   }
 
+  componentDidMount() {
+     var resultantArr=this._findDisplayidName(this.state.auditId);
+  }
+
+
   openPopup(e){
     this.setState({"visiblePopUp":!this.state.visiblePopUp});
     }
   _findDisplayidName(arrId)
   {
     var resultantArr=[];
-    var dataSet=this.props.auditDetail;
+    var dataSet=this.props.auditDetails;
     dataSet.forEach(function(entry){
       arrId.forEach(function(content){
         if(content==entry.audit_id){
@@ -125,6 +137,7 @@ class AuditStart extends React.Component {
     return tableData;
   }
   _handlestartaudit(e) {
+    var _this=this;
     let allAuditId,
       URL = "",
       cause = "",
@@ -147,6 +160,7 @@ class AuditStart extends React.Component {
       audit_id_list: allAuditId,
       pps_list: allPPSList
     };
+    
     e.preventDefault();
     if (this.props.checkedOtherPPSList.length > 0) {
       let data = (
@@ -169,25 +183,38 @@ class AuditStart extends React.Component {
       });
       this._removeThisModal();
     } else {
-      let userData = {
-        url: URL,
-        formdata: formdata,
-        method: POST,
-        cause: START_AUDIT_TASK,
-        contentType: APP_JSON,
-        accept: APP_JSON,
-        token: this.props.auth_token
-      };
-      this.props.userRequest(userData);
+        
+        let startAuditData = {
+          'formdata': formdata,
+          'cause': 'START_AUDIT',
+          'contentType': APP_JSON
+      }
+
+     var  dataToSent=JSON.stringify(startAuditData);
+      this.props.client.query({
+                   query:AUDIT_REQUEST_QUERY,
+                   variables: (function () {
+                    return {
+                      input: {
+                        data:dataToSent
+                          }
+                    }
+                }()),
+                   fetchPolicy: 'network-only'
+               }).then(data=>{
+                
+                 var AuditRequestSubmit=data.data.AuditRequestSubmit?JSON.parse(data.data.AuditRequestSubmit.list):""
+                
+                 AuditParse(AuditRequestSubmit,'START_AUDIT',_this)
+                })
       this.props.removeModal();
     }
 
-    // this.props.setCheckedAudit({});
   }
 
   headerCheckChange(type, e) {
     let ppslist = this.props.ppsList.pps_list;
-    let arr = []; // this.props.checkedAudit
+    let arr = []; 
     if (type == "Audit") {
       if (e.currentTarget.checked) {
         Object.keys(ppslist).forEach(function (key) {
@@ -212,52 +239,16 @@ class AuditStart extends React.Component {
   CheckChange(type, e) {
     let arr = [];
     if (type == "Audit") {
-      arr = this.props.checkedAuditPPSList;
+      arr = JSON.parse(JSON.stringify(this.props.checkedAuditPPSList));
       let a = arr.indexOf(e.currentTarget.id);
       a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
       this.props.setCheckedAuditpps(arr);
     } else {
-      arr = this.props.checkedOtherPPSList;
+      arr = JSON.parse(JSON.stringify(this.props.checkedOtherPPSList));
       let a = arr.indexOf(e.currentTarget.id);
       a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
       this.props.setCheckedOtherpps(arr);
     }
-  }
-  componentDidMount() {
-    let urlStr = "";
-    if (this.props.param === "CHANGE_PPS") {
-      urlStr = PPSLIST_ACTIVE_AUDIT_URL
-    } else {
-      urlStr = PPSLIST_ALL_URL
-    }
-
-  var resultantArr=this._findDisplayidName(this.state.auditId);
-    let userData = {
-      url: urlStr,
-      method: GET,
-      cause: GET_PPSLIST,
-      contentType: APP_JSON,
-      accept: APP_JSON,
-      token: sessionStorage.getItem("auth_token")
-    };
-    this.props.userRequest(userData);
-    let attributeData = this.props
-      ? this.props.ppsList.pps_list
-      : [];
-    this.setState({ items: attributeData });
-    let auditList=[],otherList=[];
-    if(this.props.ppsList.pps_list && this.props.ppsList.pps_list.length>1)
-    if(resultantArr[0].type==WALL_TO_WALL){
-      for(var i=0;i<this.props.ppsList.pps_list.length;i++){
-        if(this.props.ppsList.pps_list[i].pps_mode=='audit')
-        auditList.push(this.props.ppsList.pps_list[i].pps_id);
-        else
-        otherList.push(this.props.ppsList.pps_list[i].pps_id);
-      }
-      this.props.setCheckedAuditpps(auditList);
-      this.props.setCheckedOtherpps(otherList);
-      }
-
   }
 
   componentWillUnmount() {
@@ -266,7 +257,7 @@ class AuditStart extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(this.props.ppsList.pps_list) !==JSON.stringify(nextProps.ppsList.pps_list)) {
+    if (JSON.stringify(nextProps.ppsList.pps_list)) {
       let attributeData = nextProps.ppsList.pps_list || [];
       this.setState({ items: attributeData });
       let auditList=[],otherList=[];
@@ -720,28 +711,87 @@ class AuditStart extends React.Component {
 AuditStart.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
-function mapStateToProps(state, ownProps) {
-  return {
-    auditType: state.auditInfo.auditType || {},
-    ppsList: state.auditInfo.ppsList || [],
-    auth_token: state.authLogin.auth_token,
-    checkedAuditPPSList: state.auditInfo.checkedAuditPPSList || [],
-    checkedOtherPPSList: state.auditInfo.checkedOtherPPSList || [],
-    auditDetail: state.recieveAuditDetail.auditDetail
-  };
-}
+
 
 var mapDispatchToProps = function (dispatch) {
   return {
-    userRequest: function (data) {
-      dispatch(userRequest(data));
-    },
-    setCheckedAuditpps: function (data) {
-      dispatch(setCheckedAuditpps(data));
-    },
-    setCheckedOtherpps: function (data) {
-      dispatch(setCheckedOtherpps(data));
-    }
+    notifyfeedback: function (data) {dispatch(notifyfeedback(data))},
+    setNotification: function (data) {dispatch(setNotification(data))   },
+    notifyFail:function (data) {dispatch(notifyFail(data)) }
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(AuditStart);
+
+
+
+const SET_CHECKED_AUDIT_PPS = gql`
+    mutation setCheckedAuditpps($checkedAuditPPSList: Array!) {
+      setCheckedAuditpps(checkedAuditPPSList: $checkedAuditPPSList) @client
+    }
+`;
+
+const SET_CHECKED_OTHER_PPS = gql`
+    mutation setCheckedOtherpps($checkedOtherPPSList: Array!) {
+      setCheckedOtherpps(checkedOtherPPSList: $checkedOtherPPSList) @client
+    }
+`;
+
+const CheckedAuditpps = graphql(SET_CHECKED_AUDIT_PPS, {
+  props: ({mutate, ownProps}) => ({
+    setCheckedAuditpps: function (data) {
+          mutate({variables: {checkedAuditPPSList: data}})
+      },
+  }),
+});
+const CheckedOtherpps = graphql(SET_CHECKED_OTHER_PPS, {
+  props: ({mutate, ownProps}) => ({
+    setCheckedOtherpps: function (data) {
+          mutate({variables: {checkedOtherPPSList: data}})
+      },
+  }),
+});
+const SET_AUDIT_LIST_REFRESH_STATE = gql`
+    mutation setauditListRefresh($auditRefreshFlag: String!) {
+      setAuditListRefreshState(auditRefreshFlag: $auditRefreshFlag) @client
+    }
+`;
+const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
+  props: ({mutate, ownProps}) => ({
+    setAuditListRefresh: function (auditRefreshFlag) {
+          mutate({variables: {auditRefreshFlag: auditRefreshFlag}})
+      },
+  }),
+});
+
+
+const withClientData = graphql(auditClientPPSData, {
+  props: (data) => 
+  ({
+     checkedAuditPPSList: data.data.ppsCheckedData?data.data.ppsCheckedData.checkedAuditPPSList:[],
+     checkedOtherPPSList:data.data.ppsCheckedData?data.data.ppsCheckedData.checkedOtherPPSList:[],
+     auditDetails: data.data.ppsCheckedData?JSON.parse(data.data.ppsCheckedData.auditDetails):[]
+    })
+})
+
+const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
+    
+  props: function(data){
+    var list={pps_list:[]}
+       if(!data || !data.data.AuditPPSDetails || !data.data.AuditPPSDetails.list){
+          ppsList:list
+          return{}
+      }
+      return {
+          ppsList: data.data.AuditPPSDetails.list
+      }
+  },
+  options: ({match, location}) => ({
+    variables: {},
+    fetchPolicy: 'network-only'
+}),
+});
+
+export default compose(
+  withClientData,initialQuery,setAuditListRefreshState,
+  CheckedAuditpps,CheckedOtherpps,withApollo)
+  (connect(null,mapDispatchToProps)
+  (AuditStart));

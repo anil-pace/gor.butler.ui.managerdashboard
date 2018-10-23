@@ -2338,16 +2338,6 @@ msgstr ""
         msgid "CREATE AUDIT"
         msgstr ""
 
-        #: audit.delete.heading
-        msgctxt "audit.delete.heading"
-        msgid "Are you sure you would like to delete audit task {task_name} ?"
-        msgstr ""
-
-        #: audit.duplicate.heading
-        msgctxt "audit.duplicate.heading"
-        msgid "Are you sure you would like to duplicate audit task {task_name} ?"
-        msgstr ""
-
         #: audit.valid.sku
         msgctxt "audit.valid.sku"
         msgid "SKU confirmed"
@@ -3638,21 +3628,6 @@ msgstr ""
         msgid "Items stocked"
         msgstr ""
 
-        #: operationLog.page.twentyfive
-        msgctxt "operationLog.page.twentyfive"
-        msgid "25"
-        msgstr ""
-
-        #: operationLog.page.fifty
-        msgctxt "operationLog.page.fifty"
-        msgid "50"
-        msgstr ""
-
-        #: operationLog.page.hundred
-        msgctxt "operationLog.page.hundred"
-        msgid "100"
-        msgstr ""
-
         #: downloadReport.type.operationsLog
         msgctxt "downloadReport.type.operationsLog"
         msgid "Operations Logs"
@@ -3683,39 +3658,49 @@ msgstr ""
         msgid "Refresh"
         msgstr ""
 
-        #: downloadReport.table.reportName
-        msgctxt "downloadReport.table.reportName"
+        #: downloadreport.table.reportname
+        msgctxt "downloadreport.table.reportname"
         msgid "REPORT NAME"
         msgstr ""
 
-        #: downloadReport.table.reportType
-        msgctxt "downloadReport.table.reportType"
+        #: downloadreport.table.reporttype
+        msgctxt "downloadreport.table.reporttype"
         msgid "REPORT TYPE"
         msgstr ""
 
-        #: downloadReport.table.requestedBy
-        msgctxt "downloadReport.table.requestedBy"
+        #: downloadreport.table.requestedby
+        msgctxt "downloadreport.table.requestedby"
         msgid "REQUESTED BY"
         msgstr ""
 
-        #: downloadReport.table.completionTime
-        msgctxt "downloadReport.table.completionTime"
+        #: downloadreport.table.completiontime
+        msgctxt "downloadreport.table.completiontime"
         msgid "COMPLETION TIME"
         msgstr ""
 
-        #: downloadReport.table.status
-        msgctxt "downloadReport.table.status"
+        #: downloadreport.table.generationprogress
+        msgctxt "downloadreport.table.generationprogress"
         msgid "GENERATION PROGRESS"
-        msgstr ""
-
-        #: operationsLog.table.noData
-        msgctxt "operationsLog.table.noData"
-        msgid "No Data Found"
         msgstr ""
 
         #: utility.goodsRcvdNotes.head
         msgctxt "utility.goodsRcvdNotes.head"
         msgid "Goods Received Notes"
+        msgstr ""
+
+        #: operationLog.page.twentyfive
+        msgctxt "operationLog.page.twentyfive"
+        msgid "25"
+        msgstr ""
+
+        #: operationLog.page.fifty
+        msgctxt "operationLog.page.fifty"
+        msgid "50"
+        msgstr ""
+
+        #: operationLog.page.hundred
+        msgctxt "operationLog.page.hundred"
+        msgid "100"
         msgstr ""
 
         #: operationLog.genRep.tooltip
@@ -3783,6 +3768,11 @@ msgstr ""
         msgid "TIMESTAMP"
         msgstr ""
 
+        #: operationsLog.table.noData
+        msgctxt "operationsLog.table.noData"
+        msgid "No Data Found"
+        msgstr ""
+
         #: reportsTab.operationsLog
         msgctxt "reportsTab.operationsLog"
         msgid "Operations Log"
@@ -3803,6 +3793,36 @@ msgstr ""
         msgid "Download"
         msgstr ""
 
+        #: slot.table.slotType
+        msgctxt "slot.table.slotType"
+        msgid "SLOT TYPE"
+        msgstr ""
+
+        #: slot.table.slotVolume
+        msgctxt "slot.table.slotVolume"
+        msgid "SLOT VOLUME"
+        msgstr ""
+
+        #: slot.table.dimension
+        msgctxt "slot.table.dimension"
+        msgid "DIMENSION(L*B*H)"
+        msgstr ""
+
+        #: slot.table.totalSlots
+        msgctxt "slot.table.totalSlots"
+        msgid "TOTAL SLOTS"
+        msgstr ""
+
+        #: slot.table.emptySlots
+        msgctxt "slot.table.emptySlots"
+        msgid "EMPTY SLOTS"
+        msgstr ""
+
+        #: slot.table.slotUtilization
+        msgctxt "slot.table.slotUtilization"
+        msgid "SLOT UTILIZATION"
+        msgstr ""
+
         #: storageSpace.report.tooltip
         msgctxt "storageSpace.report.tooltip"
         msgid "Reports not available for Realtime filter"
@@ -3816,41 +3836,6 @@ msgstr ""
         #: storageSpace.table.downloadBtn
         msgctxt "storageSpace.table.downloadBtn"
         msgid "GENERATE REPORT"
-        msgstr ""
-
-        #: storageSpace.table.slotType
-        msgctxt "storageSpace.table.slotType"
-        msgid "SLOT TYPE"
-        msgstr ""
-
-        #: storageSpace.table.slotVolume
-        msgctxt "storageSpace.table.slotVolume"
-        msgid "SLOT VOLUME"
-        msgstr ""
-
-        #: storageSpace.table.dimension
-        msgctxt "storageSpace.table.dimension"
-        msgid "DIMENSION (L*B*H)"
-        msgstr ""
-
-        #: storageSpace.table.totalSlots
-        msgctxt "storageSpace.table.totalSlots"
-        msgid "TOTAL SLOTS"
-        msgstr ""
-
-        #: storageSpace.table.emptySlots
-        msgctxt "storageSpace.table.emptySlots"
-        msgid "EMPTY SLOTS"
-        msgstr ""
-
-        #: storageSpace.table.slotUtilization
-        msgctxt "storageSpace.table.slotUtilization"
-        msgid "SLOT UTILIZATION"
-        msgstr ""
-
-        #: storageSpace.table.noData
-        msgctxt "storageSpace.table.noData"
-        msgid "No Data Found"
         msgstr ""
 
         #: butletbot.inputField.id
@@ -3920,7 +3905,72 @@ msgstr ""
 
         #: butletbot.token2.notSet
         msgctxt "butletbot.token2.notSet"
-        msgid "Idle"
+        msgid "Not set"
+        msgstr ""
+
+        #: butlerbot.table.noData
+        msgctxt "butlerbot.table.noData"
+        msgid "No Butler Bot Found"
+        msgstr ""
+
+        #: bots.table.bots
+        msgctxt "bots.table.bots"
+        msgid "BOTS"
+        msgstr ""
+
+        #: ButlerBotTable.subTotalBot
+        msgctxt "ButlerBotTable.subTotalBot"
+        msgid "Total: {totalBot}"
+        msgstr ""
+
+        #: bots.table.status
+        msgctxt "bots.table.status"
+        msgid "STATUS"
+        msgstr ""
+
+        #: ButlerBotTable.status
+        msgctxt "ButlerBotTable.status"
+        msgid "{onlineBots} Online"
+        msgstr ""
+
+        #: bots.table.currentTask
+        msgctxt "bots.table.currentTask"
+        msgid "CURRENT TASK"
+        msgstr ""
+
+        #: ButlerBotTable.botState
+        msgctxt "ButlerBotTable.botState"
+        msgid "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
+        msgstr ""
+
+        #: bots.table.msuMounted
+        msgctxt "bots.table.msuMounted"
+        msgid "MSU MOUNTED"
+        msgstr ""
+
+        #: ButlerBotTable.mounted
+        msgctxt "ButlerBotTable.mounted"
+        msgid "{msuMounted} Mounted"
+        msgstr ""
+
+        #: bots.table.location
+        msgctxt "bots.table.location"
+        msgid "LOCATION"
+        msgstr ""
+
+        #: ButlerBotTable.locations
+        msgctxt "ButlerBotTable.locations"
+        msgid "{locations} Locations"
+        msgstr ""
+
+        #: bots.table.power
+        msgctxt "bots.table.power"
+        msgid "CHARGE LEVEL"
+        msgstr ""
+
+        #: ButlerBotTable.avgVoltage
+        msgctxt "ButlerBotTable.avgVoltage"
+        msgid "Avg {voltage}"
         msgstr ""
 
         #: butlerDetail.name.prefix
@@ -3993,19 +4043,9 @@ msgstr ""
         msgid "Show all Bots"
         msgstr ""
 
-        #: butlerbot.table.noData
-        msgctxt "butlerbot.table.noData"
-        msgid "No Butler Bot Found"
-        msgstr ""
-
         #: ButlerBotTable.TotalBot
         msgctxt "ButlerBotTable.TotalBot"
         msgid "BOTS"
-        msgstr ""
-
-        #: ButlerBotTable.subTotalBot
-        msgctxt "ButlerBotTable.subTotalBot"
-        msgid "Total: {totalBot}"
         msgstr ""
 
         #: butlerBot.table.status
@@ -4013,19 +4053,9 @@ msgstr ""
         msgid "STATUS"
         msgstr ""
 
-        #: ButlerBotTable.status
-        msgctxt "ButlerBotTable.status"
-        msgid "{onlineBots} Online"
-        msgstr ""
-
         #: butlerBot.table.currentTask
         msgctxt "butlerBot.table.currentTask"
         msgid "MODE"
-        msgstr ""
-
-        #: ButlerBotTable.botState
-        msgctxt "ButlerBotTable.botState"
-        msgid "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
         msgstr ""
 
         #: butlerBot.table.msu
@@ -4033,29 +4063,14 @@ msgstr ""
         msgid "MSU MOUNTED"
         msgstr ""
 
-        #: ButlerBotTable.mounted
-        msgctxt "ButlerBotTable.mounted"
-        msgid "{msuMounted} Mounted"
-        msgstr ""
-
         #: butlerBot.table.location
         msgctxt "butlerBot.table.location"
         msgid "LOCATION"
         msgstr ""
 
-        #: ButlerBotTable.locations
-        msgctxt "ButlerBotTable.locations"
-        msgid "{locations} Locations"
-        msgstr ""
-
         #: butlerBot.table.power
         msgctxt "butlerBot.table.power"
         msgid "CHARGE LEVEL"
-        msgstr ""
-
-        #: ButlerBotTable.avgVoltage
-        msgctxt "ButlerBotTable.avgVoltage"
-        msgid "Avg {voltage}"
         msgstr ""
 
         #: msuConfig.destType.destTypeDdownPlcHldr
@@ -4170,7 +4185,7 @@ msgstr ""
 
         #: ChargingStationsTable.SubstationID
         msgctxt "ChargingStationsTable.SubstationID"
-        msgid "Total:{rowsCount}"
+        msgid "Total: {rowsCount}"
         msgstr ""
 
         #: ChargingStations.table.STATUS
@@ -4783,34 +4798,44 @@ msgstr ""
         msgid "System Controllers"
         msgstr ""
 
-        #: sysController.summary.showall
-        msgctxt "sysController.summary.showall"
-        msgid "Show all Zones"
+        #: sysControllers.table.noData
+        msgctxt "sysControllers.table.noData"
+        msgid "No Controllers Found"
         msgstr ""
 
-        #: sysControllers.idColumn.heading
-        msgctxt "sysControllers.idColumn.heading"
+        #: SystemControllers.table.noData
+        msgctxt "SystemControllers.table.noData"
+        msgid "No System Controllers Found"
+        msgstr ""
+
+        #: SystemControllersTable.controllerID.heading
+        msgctxt "SystemControllersTable.controllerID.heading"
         msgid "CONTROLLER ID"
         msgstr ""
 
-        #: sysControllers.totalControllers
-        msgctxt "sysControllers.totalControllers"
-        msgid "Total:{count}"
+        #: SystemControllersTable.subtext
+        msgctxt "SystemControllersTable.subtext"
+        msgid "Total: {rowsCount}"
         msgstr ""
 
-        #: sysController.table.status
-        msgctxt "sysController.table.status"
+        #: SystemControllers.table.STATUS
+        msgctxt "SystemControllers.table.STATUS"
         msgid "STATUS"
         msgstr ""
 
-        #: sysController.table.location
-        msgctxt "sysController.table.location"
+        #: SystemControllers.table.LOCATION
+        msgctxt "SystemControllers.table.LOCATION"
         msgid "LOCATION"
         msgstr ""
 
-        #: sysController.table.conDetails
-        msgctxt "sysController.table.conDetails"
+        #: SystemControllers.table.connectionDetails
+        msgctxt "SystemControllers.table.connectionDetails"
         msgid "CONNECTION DETAILS"
+        msgstr ""
+
+        #: SystemControllers.table.operatingMode
+        msgctxt "SystemControllers.table.operatingMode"
+        msgid "OPERATING MODE"
         msgstr ""
 
         #: sysController.table.ethernetStatus
@@ -4821,16 +4846,6 @@ msgstr ""
         #: sysController.table.zigbeeStatus
         msgctxt "sysController.table.zigbeeStatus"
         msgid "Zigbee Network:"
-        msgstr ""
-
-        #: sysController.table.operatingMode
-        msgctxt "sysController.table.operatingMode"
-        msgid "OPERATING MODE"
-        msgstr ""
-
-        #: sysControllers.table.noData
-        msgctxt "sysControllers.table.noData"
-        msgid "No Controllers Found"
         msgstr ""
 
         #: sysOverView.zones.count
@@ -5283,6 +5298,21 @@ msgstr ""
         msgid "Role definitions"
         msgstr ""
 
+        #: userDetails.userAdmin
+        msgctxt "userDetails.userAdmin"
+        msgid "Admin"
+        msgstr ""
+
+        #: userDetails.qc_operator
+        msgctxt "userDetails.qc_operator"
+        msgid "QC Operator"
+        msgstr ""
+
+        #: userDetails.packing_operator
+        msgctxt "userDetails.packing_operator"
+        msgid "Packing Operator"
+        msgstr ""
+
         #: user.table.heading
         msgctxt "user.table.heading"
         msgid "Users"
@@ -5301,11 +5331,6 @@ msgstr ""
         #: userList.filter.search.bar.showall
         msgctxt "userList.filter.search.bar.showall"
         msgid "Show all Users"
-        msgstr ""
-
-        #: user.table.noData
-        msgctxt "user.table.noData"
-        msgid "No User Found"
         msgstr ""
 
         #: user.table.usersCount
@@ -5336,6 +5361,11 @@ msgstr ""
         #: user.table.logInTime
         msgctxt "user.table.logInTime"
         msgid "LOG IN TIME"
+        msgstr ""
+
+        #: user.table.noData
+        msgctxt "user.table.noData"
+        msgid "No User Found"
         msgstr ""
 
         #: user.table.action
