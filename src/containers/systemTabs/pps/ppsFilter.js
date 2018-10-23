@@ -1,15 +1,11 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
-import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied,ppsfilterState,togglePPSFilter,setDefaultRange} from '../../actions/filterAction';
-import { connect } from 'react-redux'; 
-import {updateSubscriptionPacket} from '../../actions/socketActions';
-import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
-import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
-import RangeSlider from '../../components/rangeSlider/RangeSlider'
-import {filterMarks} from '../../constants/frontEndConstants';
-import {setPpsFilterSpinner}  from '../../actions/spinnerAction';
+import Filter from '../../../components/tableFilter/filter';
+import FilterInputFieldWrap from '../../../components/tableFilter/filterInputFieldWrap';
+import FilterTokenWrap from '../../../components/tableFilter/filterTokenContainer';
+import {handelTokenClick, handleInputQuery} from '../../../components/tableFilter/tableFilterCommonFunctions';
+import RangeSlider from '../../../components/rangeSlider/RangeSlider'
+import {filterMarks} from '../../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 
 
@@ -30,8 +26,8 @@ class PPSFilter extends React.Component{
     } 
 
      _processPPSSearchField(){
-        const filterInputFields=[{value:"PPS ID", label:<FormattedMessage id="pps.inputField.id" defaultMessage="PPS ID"/>}, 
-                    {value:"OPERATOR ASSIGNED", label:<FormattedMessage id="pps.inputField.oprator" defaultMessage="OPERATOR ASSIGNED"/>}];
+        const filterInputFields=[{value:"PPS_ID", label:<FormattedMessage id="pps.inputField.id" defaultMessage="PPS ID"/>}, 
+                    {value:"OPERATOR_ASSIGNED", label:<FormattedMessage id="pps.inputField.oprator" defaultMessage="OPERATOR ASSIGNED"/>}];
         let inputValue=this.state.searchQuery;
         let inputField=<FilterInputFieldWrap inputText={filterInputFields} handleInputText={this._handleInputQuery.bind(this)} inputValue={inputValue}/>
         return inputField;           
@@ -46,11 +42,11 @@ class PPSFilter extends React.Component{
             this.setState(nextProps.filterState)
         }
 
-        /**
-         * Hide the filter as soon as data in the list get updated.
-         */
-        if(nextProps.data.length>0 && JSON.stringify(nextProps.data)!==JSON.stringify(this.props.data)){
-            this.props.showTableFilter(false);
+        
+         /* Hide the filter as soon as data in the list get updated.*/
+         
+        if(nextProps.noResults!==this.props.noResults){
+            this.props.showTableFilter(nextProps.noResults ? true : false);
         }
     }
 
@@ -91,7 +87,7 @@ class PPSFilter extends React.Component{
                                  step={100}
                                  marks={filterMarks}
                                  maxValue={500}
-                                 defaultValue={this.props.deaultSliderRange}
+                                 defaultValue={[0,500]}
                                  allowCross={false}
                                  onChange={this._changeSliderRange.bind(this)}
                                   />
@@ -100,7 +96,9 @@ class PPSFilter extends React.Component{
     }
 
     _handelTokenClick(field,value,state) {
-        this.setState({tokenSelected:handelTokenClick(field,value,state,this.state)});
+        this.setState({
+            tokenSelected:handelTokenClick(field,value,state,this.state)
+        });
         
     }
 
@@ -113,39 +111,38 @@ class PPSFilter extends React.Component{
         let filterState=this.state, _query={};
         if (filterState.searchQuery) {
 
-            if (filterState.searchQuery && filterState.searchQuery["OPERATOR ASSIGNED"]) {
-                _query.operator=filterState.searchQuery["OPERATOR ASSIGNED"]
+            if (filterState.searchQuery && filterState.searchQuery["OPERATOR_ASSIGNED"]) {
+                _query.operators_assigned=filterState.searchQuery["OPERATOR_ASSIGNED"]
             }
 
-            if (filterState.searchQuery && filterState.searchQuery["PPS ID"]) {
-                _query.pps_id=filterState.searchQuery["PPS ID"]
+            if (filterState.searchQuery && filterState.searchQuery["PPS_ID"]) {
+                _query.pps_id=filterState.searchQuery["PPS_ID"]
             }
 
             if (filterState.rangeSelected && (filterState.rangeSelected["maxValue"] || filterState.rangeSelected["minValue"])) {
-                _query.minRange=filterState.rangeSelected["minValue"] || 0
-                _query.maxRange=filterState.rangeSelected["maxValue"]
+               let minRange = filterState.rangeSelected["minValue"];
+                _query.performance = `${minRange},${filterState.rangeSelected["maxValue"]}`
             }
             if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== "all") {
-                _query.status=filterState.tokenSelected["STATUS"]
+                _query.pps_status=filterState.tokenSelected["STATUS"]
             }
             if (filterState.tokenSelected["MODE"] && filterState.tokenSelected["MODE"][0] !== "all") {
-                _query.mode=filterState.tokenSelected["MODE"]
+                _query.current_task=filterState.tokenSelected["MODE"]
             }
             hashHistory.push({pathname: "/system/pps", query: _query})
+            this.props.setCheckedPps("{}");
         }
     }
 
     _clearFilter(){
         this.props.ppsfilterState({
-            tokenSelected: {
-                "STATUS": ["all"],
-                "MODE": ["all"]
+            tokenSelected: {"STATUS": ["all"], "MODE": ["all"],__typename:"tokenSelected"},
+             searchQuery: {
+                "OPERATOR_ASSIGNED":'',
+                "PPS_ID":'',
+                 __typename:"searchQuery"
             },
-            searchQuery: {
-                "PPS ID": '',
-                "OPERATOR ASSIGNED": ""
-            },
-            rangeSelected: {"minValue": ["-1"], "maxValue": ["500"]}
+            defaultToken: {"STATUS": ["all"], "MODE": ["all"],__typename:"defaultToken"}
         })
         hashHistory.push({pathname: "/system/pps", query: {}})
 
@@ -155,9 +152,7 @@ class PPSFilter extends React.Component{
       this.setState({rangeSelected:{minValue:(sliderVal[0] ? sliderVal[0] : -1),maxValue:sliderVal[1]}});
     }
   render(){
-    
-        var ppsDetail=this.props.PPSDetail;
-        var noOrder=ppsDetail.noResultFound;
+        var noOrder=this.props.noResults;//ppsDetail.noResultFound;
         let ppsSearchField=this._processPPSSearchField();
         let ppsFilterToken=this._processFilterToken();
         let rangeSlider=this._handleRangeSlider();
@@ -217,35 +212,8 @@ class PPSFilter extends React.Component{
 };
 
 
-function mapStateToProps(state, ownProps){
-  return {
-    PPSDetail: state.PPSDetail || [],
-    showFilter: state.filterInfo.filterState || false,
-    orderData: state.getOrderDetail || {},
-    wsSubscriptionData:state.recieveSocketActions.socketDataSubscriptionPacket,
-    orderListSpinner: state.spinner.orderListSpinner || false,
-    filterState: state.filterInfo.ppsfilterState,
-    isFilterApplied: state.filterInfo.isFilterApplied || false,
-    ppsFilterState:state.filterInfo.ppsFilterState || false,
-    ppsFilterSpinnerState:state.spinner.ppsFilterSpinnerState || false,
-    deaultSliderRange:state.filterInfo.deaultSliderRange || [0,500]
-    
 
-  };
-}
 
-var mapDispatchToProps=function(dispatch){
-  return {
-    showTableFilter: function(data){dispatch(showTableFilter(data));},
-    filterApplied: function(data){dispatch(filterApplied(data));},
-    updateSubscriptionPacket: function(data){dispatch(updateSubscriptionPacket(data));},
-    ppsfilterState: function(data){dispatch(ppsfilterState(data));},
-    togglePPSFilter: function(data){dispatch(togglePPSFilter(data));},
-    setPpsFilterSpinner: function(data){dispatch(setPpsFilterSpinner(data));},
-    setDefaultRange: function(data){dispatch(setDefaultRange(data));}
-
-  }
-};
 PPSFilter.PropTypes={
   PPSDetail:React.PropTypes.array,
  showFilter:React.PropTypes.bool,
@@ -260,6 +228,6 @@ updateSubscriptionPacket:React.PropTypes.func,
 togglePPSFilter:React.PropTypes.func
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(PPSFilter) ;
+export default PPSFilter ;
 
 

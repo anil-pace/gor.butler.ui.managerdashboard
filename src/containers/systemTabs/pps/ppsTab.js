@@ -5,49 +5,29 @@
 import React  from 'react';
 import PPStable from './PPStable';
 import {connect} from 'react-redux';
-import {changePPSmode} from '../../actions/ppsModeChangeAction'
+import {changePPSmode} from '../../../actions/ppsModeChangeAction'
 import {FormattedMessage} from 'react-intl';
-import Spinner from '../../components/spinner/Spinner';
-import {setPpsSpinner} from '../../actions/spinnerAction';
-import {stringConfig} from '../../constants/backEndConstants'
+import Spinner from '../../../components/spinner/Spinner';
+import {stringConfig} from '../../../constants/backEndConstants'
 import {defineMessages} from 'react-intl';
-import {ppsListRefreshed} from './../../actions/systemActions'
-import {hashHistory} from 'react-router'
-import {
-    ppsHeaderSort,
-    ppsHeaderSortOrder,
-    setCheckedPps,
-    setDropDisplay,
-    setCheckAll,
-    ppsFilterDetail
-} from '../../actions/sortHeaderActions';
-import {
-    INITIAL_HEADER_SORT,
-    INITIAL_HEADER_ORDER,
-    GOR_ON_STATUS,
-    GOR_FIRST_LAST,WS_ONSEND,
-    PPS_STATUS_CHANGE,
-    PPS_STATUS_CLOSE,
-    PPS_STATUS_FCLOSE,
-    PPS_STATUS_OPEN,
-    PPS_MODE_CHANGE, APP_JSON, PUT,
-    POST
-} from '../../constants/frontEndConstants';
-import {
-    showTableFilter,
-    filterApplied,
-    ppsfilterState,
-    togglePPSFilter,
-    setDefaultRange
-} from '../../actions/filterAction';
-import {updateSubscriptionPacket,setWsAction} from './../../actions/socketActions'
-import {wsOverviewData} from './../../constants/initData.js';
+import {hashHistory} from 'react-router';
+import {setWsAction} from './../../../actions/socketActions'
+import {wsOverviewData} from './../../../constants/initData.js';
 import PPSFilter from './ppsFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary';
-import Dropdown from '../../components/gor-dropdown-component/dropdown';
-import {PPS_MODE_CHANGE_URL,PPS_STATUS_CHANGE_URL} from '../../constants/configConstants';
-
-
+import FilterSummary from '../../../components/tableFilter/filterSummary';
+import Dropdown from '../../../components/gor-dropdown-component/dropdown';
+import {ppsStatusFailure,ppsStatusSuccess,ppsModeFailure,ppsModeSuccess} from '../../../constants/messageConstants';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../../actions/validationActions";
+import {WS_ONSEND,PPS_STATUS_OPEN,PPS_STATUS_CLOSE,
+    PPS_STATUS_FCLOSE,GOR_FIRST_LAST,GOR_ON_STATUS} from '../../../constants/frontEndConstants'
+import {PPS_LIST_SUBSCRIPTION,PPS_LIST_QUERY,ppsClientData,
+    SET_VISIBILITY,SET_FILTER_APPLIED,
+    SET_FILTER_STATE,SET_CHECKED_PPS,CHANGE_PPS_STATUS_QUERY,
+CHANGE_PPS_MODE_QUERY,CHANGE_PPS_PROFILE_QUERY} from './queries/ppsTab';
+import {graphql, withApollo, compose} from "react-apollo";
 import {modal} from 'react-redux-modal';
 import ClosePPSList from './closePPSList';
 
@@ -79,83 +59,107 @@ class PPS extends React.Component {
                 "pick":0,
                 "put":0,
                 "audit":0
-            }
+            },
+            legacyDataSubscribed:false
         }
-        this.props.showTableFilter(false)
+        this._clearFilter = this._clearFilter.bind(this);
+        this.handleStatusChange= this.handleStatusChange.bind(this);
+        this.changePPSStatus = this.changePPSStatus.bind(this);
+        this.changePPSProfile = this.changePPSProfile.bind(this);
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+        this.props.showPPSFilter(false)
     }
 
-    componentWillMount() {
-        /**
-         * It will update the last refreshed property of
-         * overview details, so that updated subscription
-         * packet can be sent to the server for data
-         * update.
-         */
-        this.props.ppsListRefreshed()
-    }
+    
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.socketAuthorized && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
+        if (nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.setState({query: nextProps.location.query})
             this._refreshList(nextProps.location.query)
            
         }
          
         this._processCheckedPPS(nextProps)
+        if (nextProps.data &&(!this.props.data.PPSListSystem && nextProps.data.PPSListSystem && !this.subscription && !nextProps.loading)) {
+            this.updateSubscription(nextProps.location.query)
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState({
+                legacyDataSubscribed:true
+            },()=>{
+                this._subscribeLegacyData()
+            })
+        }
     
     }
 
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
+    }
+
+    updateSubscription(variables) {
+        if (this.subscription) {
+            this.subscription()
+        }
+        this.subscription = this.props.data.subscribeToMore({
+            variables: variables,
+            document: PPS_LIST_SUBSCRIPTION,
+            notifyOnNetworkStatusChange: true,
+            updateQuery: (previousResult, newResult) => {
+                return Object.assign({}, {
+                    PPSListSystem: {
+                        list: newResult.subscriptionData.data.PPSListSystem.list,
+                        __typename: previousResult.PPSListSystem.__typename
+                    }
+                })
+            },
+        });
+    }
     /**
      * The method will update the subscription packet
      * and will fetch the data from the socket.
      * @private
      */
     _refreshList(query) {
-        this.props.setPpsSpinner(true)
-        let filterSubsData={}
-        if (query.operator) {
-            let operator_assigned_query=query.operator.split(" ")
-            operator_assigned_query=operator_assigned_query.filter(function(word){ return !!word})
-            filterSubsData["operators_assigned"]=operator_assigned_query.length>1?["=",operator_assigned_query]:["=",operator_assigned_query.join("").trim()];
-        }
+        //this.props.setPpsSpinner(true)
+        let filterSubsData=Object.assign({},query);
 
         if (query.pps_id) {
-            filterSubsData["pps_id"]=['=',query.pps_id]
+            filterSubsData["pps_id"]=Number(query.pps_id);
         }
-        if (query.status) {
-            filterSubsData["pps_status"]=['in',query.status.constructor===Array?query.status:[query.status]]
+        if (query.pps_status) {
+            filterSubsData["pps_status"]=query.pps_status.constructor === String ? [query.pps_status] : query.pps_status
+            //delete filterSubsData["pps_status"];
         }
-        if (query.mode) {
-            filterSubsData["current_task"]=['in',query.mode.constructor===Array?query.mode:[query.mode]]
+        if (query.current_task) {
+            filterSubsData["current_task"]=query.current_task.constructor === String ? [query.current_task] : query.current_task;
+            //delete filterSubsData["mode"];
         }
 
         if(query.minRange||query.maxRange){
-            filterSubsData["performance"]=['between',[query.minRange?+query.minRange:-1,query.maxRange?+query.maxRange:500]]
+            filterSubsData["performance"]=[query.minRange,query.maxRange]
+            //delete filterSubsData["minRange"];
+            //delete filterSubsData["maxRange"];
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
-            this.props.togglePPSFilter(true);
+            //this.props.togglePPSFilter(true);
             this.props.filterApplied(true);
         } else {
-            this.props.togglePPSFilter(false);
+           // this.props.togglePPSFilter(false);
             this.props.filterApplied(false);
         }
-
-        let updatedWsSubscription=this.props.wsSubscriptionData;
-        updatedWsSubscription["pps"].data[0].details["filter_params"]=filterSubsData;
-        this.props.initDataSentCall(updatedWsSubscription["pps"])
-        this.props.updateSubscriptionPacket(updatedWsSubscription);
+        
         this.props.ppsfilterState({
-            tokenSelected: {
-                "STATUS": query.status ? query.status.constructor=== Array ? query.status : [query.status] : ["all"],
-                "MODE": query.mode ? query.mode.constructor=== Array ? query.mode : [query.mode] : ["all"]
-            },
+            tokenSelected: {__typename:"tokenSelected","STATUS": filterSubsData.pps_status ? filterSubsData.pps_status : ["all"] , "MODE": query.current_task?query.current_task.constructor===Array?query.current_task:[query.current_task]:["all"]},
             searchQuery: {
-                "PPS ID": query.pps_id || '',
-                "OPERATOR ASSIGNED": query.operator || ""
+                 __typename:"searchQuery",
+                "OPERATOR_ASSIGNED":filterSubsData.operators_assigned||null,
+                "PPS_ID":filterSubsData.pps_id||null
             },
-            rangeSelected: {"minValue": [query.minRange || "-1"], "maxValue": [query.maxRange || "500"]}
+            defaultToken: {"STATUS": ["all"], "MODE": ["all"],__typename:"defaultToken"}
         })
+       
 
     }
 
@@ -206,13 +210,101 @@ class PPS extends React.Component {
     _clearFilter() {
         hashHistory.push({pathname: "/system/pps", query: {}})
     }
+    _filterList(init_data, input_variables) {
+       input_variables = Object.assign({
+        "pps_id":null,
+        "operator":null,
+        "current_task":null,
+        "pps_status":null,
+        "performance":null
+       },input_variables)
+       return init_data.filter(function (pps) {
+                let matchPPSId = !input_variables["pps_id"],matchOperator=!input_variables["operator"],
+                matchCurrentTask=!input_variables["current_task"],matchStatus=!input_variables["pps_status"],matchPerformance=!input_variables["performance"];
+                for (let key in input_variables) {
+                    if(key === "pps_id" && input_variables[key]){
+                        if (pps[key] && (pps[key].toString() === input_variables[key])){
+                            matchPPSId = true;
+                        }
+                        else{
+                            matchPPSId = false;
+                        }
+                    }
+                    else if(key === "operator" && input_variables[key]){
+                        if(pps[key] && pps[key][0].toString().replace(","," ") === input_variables[key]){
+                            matchOperator = true;
+                        }
+                        else{
+                            matchOperator = false;
+                        }
+
+                    }
+                    else if((key === "current_task" || key === "pps_status") && input_variables[key]){
+                            let isStatus = (key === "pps_status");
+                            if(input_variables[key].constructor === Array){
+                            for(let i=0,len=input_variables[key].length; i<len;i++){
+                                if(input_variables[key][i].toUpperCase() === pps[key].toUpperCase()){
+                                    if(isStatus){
+                                        matchStatus = true;
+                                    }
+                                    else{
+                                        matchCurrentTask = true;
+                                    }
+                                    
+                                }
+                                else{
+                                     if(isStatus){
+                                        matchStatus = false;
+                                    }
+                                    else{
+                                        matchCurrentTask = false;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                             if((input_variables[key].toUpperCase() === "ANY") || (input_variables[key].toUpperCase() === pps[key].toUpperCase())){
+                                if(isStatus){
+                                        matchStatus = true;
+                                    }
+                                    else{
+                                        matchCurrentTask = true;
+                                    }
+                            }
+                            else{
+                                if(isStatus){
+                                        matchStatus = false;
+                                    }
+                                    else{
+                                        matchCurrentTask = false;
+                                    }
+                            }
+                        }
+                            
+                    }
+                    else if(key === "performance" && input_variables[key]){
+                        let performance = input_variables[key].split(",");
+                        performance[0]= Number(performance[0]) === 0 ? -1 : Number(performance[0])
+                        if(performance[0] <= Number(pps[key]) && Number(performance[1]) >= Number(pps[key])){
+                            matchPerformance= true;
+                        }
+                        else{
+                            matchPerformance =false;
+                        }
+                        
+                    }
+                    
+                }
+                return matchPPSId && matchOperator && matchCurrentTask && matchStatus && matchPerformance;
+        })
+    }
 
     _processPPSData() {
         
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
-        var data=nProps.props.PPSDetail.PPStypeDetail;
-        
+        var pps_data=nProps.props.data.PPSListSystem ? nProps.props.data.PPSListSystem.list : [];//nProps.props.PPSDetail.PPStypeDetail;
+        var data = Object.keys(nProps.props.location.query).length ? this._filterList(pps_data, nProps.props.location.query) : pps_data
         let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
@@ -266,8 +358,9 @@ class PPS extends React.Component {
             detail.operatingModeClass=data[i].current_task;
             detail.performance=PERFORMANCE;///  orders /items
             detail.ppsThroughput=(data[i].performance < 0 ? 0 : data[i].performance);
-            if (data[i].operators_assigned=== null) {
+            if (!data[i].operators_assigned) {
                 detail.operatorAssigned="--";
+                data[i].operators_assigned=[];
             }
             else {
                 var userFirstLast;
@@ -290,7 +383,7 @@ class PPS extends React.Component {
 
             }
             detail.totalUser=totalUser;
-            detail.profiles=data[i].pps_profiles
+            detail.profiles=data[i].pps_profiles || []
             PPSData.push(detail);
         }
         return PPSData;
@@ -298,12 +391,65 @@ class PPS extends React.Component {
     }
 
     _setFilter() {
-        this.props.showTableFilter(!this.props.showFilter);
+        this.props.showPPSFilter(!this.props.showFilter);
     }
 
 
     updateSortedDataList(updatedList){
         this.setState({sortedDataList:updatedList})
+    }
+
+    changePPSStatus(requestObj){
+        let _this = this;
+        _this.props.client.query({
+            query:CHANGE_PPS_STATUS_QUERY,
+            variables:{
+                "input":{
+                    "pps_id":JSON.stringify(requestObj)
+                }
+            },
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+
+          if(data.data.ChangePPSStatus){
+            let statusChangeData = JSON.parse(data.data.ChangePPSStatus.list);
+            let unsuccessfulData = Object.keys(statusChangeData.unsuccessful).length;
+            let successfulData = statusChangeData.successful.length
+            if(unsuccessfulData){
+                _this.props.notifyFail(ppsStatusFailure.replace("{unsuccessful}",unsuccessfulData).replace("{totalCount}",(successfulData+unsuccessfulData)));
+                _this.props.setCheckedPps(JSON.stringify(_this._getUnSuccessfulPPS(Object.keys(statusChangeData.unsuccessful))));
+            }
+            else{
+                _this.props.notifySuccess(ppsStatusSuccess);
+                _this.props.setCheckedPps("{}")
+            }
+          }
+        })
+    }
+    _getUnSuccessfulPPS(unSuccessfulPPS){
+        const checkedPPS = this.props.checkedPps || {}
+        var unSuccessfulPPSList={};
+        for(let k in checkedPPS){
+            for(let j=0,innerLen=unSuccessfulPPS.length; j<innerLen;j++){
+                if(k === unSuccessfulPPS["pps_id"]){
+                    unSuccessfulPPSList[k] = checkedPPS["pps_id"]
+                }
+            }
+        }
+        return unSuccessfulPPSList;
+    }
+    changePPSProfile(pps_id,profile){
+        let _this = this;
+        _this.props.client.query({
+            query:CHANGE_PPS_PROFILE_QUERY,
+            variables:{
+                "input":{
+                    "pps_id":pps_id,
+                    "profile":profile
+                }
+            },
+            fetchPolicy: 'network-only'
+        })
     }
 
     /*handler for status change*/
@@ -327,25 +473,12 @@ class PPS extends React.Component {
                 closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
                 hideCloseButton: true,
                 checkedPPS: openPps,
-                handleStatusChange:this.handleStatusChange.bind(this),
-                changePPSmode:this.props.changePPSmode.bind(this)
+                handleStatusChange:this.handleStatusChange
             });
          }
          else {
-               let formData={}
-                formData = requestObj
-                let ppsStatusChange={
-                        'url': PPS_STATUS_CHANGE_URL,
-                        'formdata': formData,
-                        'method': POST,
-                        'cause': PPS_STATUS_CHANGE,
-                        'token': sessionStorage.getItem('auth_token'),
-                        'contentType': APP_JSON
-                    }
-
-            this.props.changePPSmode(ppsStatusChange);
-            this.props.setCheckAll(false);
-            this.props.setDropDisplay(false);
+            this.changePPSStatus(requestObj);
+            
             
          }
         }
@@ -355,39 +488,39 @@ class PPS extends React.Component {
                 selectedPps[k] = "open"
             }
             formData["requested_pps_status"] = selectedPps
-            let ppsStatusChange={
-                    'url': PPS_STATUS_CHANGE_URL,
-                    'formdata': formData,
-                    'method': POST,
-                    'cause': PPS_STATUS_CHANGE,
-                    'token': sessionStorage.getItem('auth_token'),
-                    'contentType': APP_JSON
-                }
-
-        this.props.changePPSmode(ppsStatusChange);
-        this.props.setCheckAll(false);
-        this.props.setDropDisplay(false);
-        
+            this.changePPSStatus(formData);
         }
     }
+    changePPSmode(params){
+        let _this = this;
+        _this.props.client.query({
+            query:CHANGE_PPS_MODE_QUERY,
+            variables:{
+                "input":params
+            },
+            fetchPolicy: 'network-only'
+        }).then(data=>{
 
+          if(data.data.ChangePPSMode){
+            let modeChangeData = JSON.parse(data.data.ChangePPSMode.list);
+            let unsuccessfulData = Object.keys(modeChangeData.unsuccessful).length;
+            let successfulData = modeChangeData.successful.length
+            if(unsuccessfulData){
+                _this.props.notifyFail(ppsModeFailure.replace("{unsuccessful}",unsuccessfulData).replace("{totalCount}",(successfulData+unsuccessfulData)));
+            }
+            else{
+                _this.props.notifySuccess(ppsModeSuccess);
+            }
+          }
+        })
+    }
     handleModeChange(data) {
         var checkedPPS=[], j=0, mode=data.value, sortedIndex,formData={};
         checkedPPS =Object.keys(this.props.checkedPps);
         formData["pps_id"] = checkedPPS
         formData["requested_pps_mode"] =  mode;
-        var ppsModeChange={
-                    'url': PPS_MODE_CHANGE_URL,
-                    'formdata': formData,
-                    'method': POST,
-                    'cause': PPS_MODE_CHANGE,
-                    'token': sessionStorage.getItem('auth_token'),
-                    'contentType': APP_JSON
-                }
-
-        this.props.changePPSmode(ppsModeChange);
-        this.props.setCheckAll(false);
-        this.props.setDropDisplay(false);
+        this.changePPSmode(formData);
+       
         
 
     }
@@ -398,7 +531,7 @@ class PPS extends React.Component {
         let updateStatusIntl="";
         let operationMode={"pick": 0, "put": 0, "audit": 0, "notSet": 0};
         let data, operatorNum=0, itemNumber=5, ppsOn=0, avgThroughput=0;
-        if (this.props.PPSDetail.PPStypeDetail !== undefined) {
+        if (this.props.data.PPSListSystem !== undefined) {
             data=this._processPPSData();
             for (var i=data.length - 1; i >= 0; i--) {
                 if (data[i].operatingModeClass !== null) {
@@ -448,6 +581,7 @@ class PPS extends React.Component {
         var closeCount=this.state.closeCount;
         var Modes=this.state.Modes;
         var count=openCount+closeCount;
+        const bDropRender = this.props.checkedPps ?  (Object.keys(this.props.checkedPps).length ? false : true) : true
         const status = [
             {value: 'open', disabled:(closeCount  ? false : true),label: openStatusLabel},
             {value: 'close', disabled:(openCount ? false : true),label: closeStatusLabel}
@@ -459,14 +593,14 @@ class PPS extends React.Component {
             drop=<Dropdown 
                     options={modes} 
                     onSelectHandler={(e) => this.handleModeChange(e)}
-                    disabled={!this.props.bDropRender}
+                    disabled={bDropRender}
                     resetOnSelect={true}
                     placeholder={modeDropPHolder} />
         
             statusDrop = <Dropdown 
                     options={status} 
                     onSelectHandler={(e) => this.handleStatusChange(e)}
-                    disabled={!this.props.bDropRender}
+                    disabled={bDropRender}
                     resetOnSelect={true}
                     placeholder={statusDropPHolder} />
        
@@ -479,11 +613,17 @@ class PPS extends React.Component {
             <div>
                 <div>
                     <div className="gorTesting">
-                        <Spinner isLoading={this.props.ppsSpinner} setSpinner={this.props.setPpsSpinner}/>
-                        {data?<div>
+                        {this.props.data.loading && <Spinner isLoading={this.props.data.loading} setSpinner={null}/>}
+                        { data ? <div>
                             <div className="gor-filter-wrap"
                                  style={{'width': this.props.showFilter ? '350px' : '0px', height: filterHeight}}>
-                                <PPSFilter data={data} responseFlag={this.props.responseFlag}/>
+                                <PPSFilter noResults={data.length === 0} 
+                                isFilterApplied={this.props.isFilterApplied} 
+                                ppsfilterState={this.props.ppsfilterState}
+                                setCheckedPps={this.props.setCheckedPps}
+                                showTableFilter={this.props.showPPSFilter}
+                                filterState={this.props.filterState}
+                                responseFlag={this.props.responseFlag}/>
                             </div>
 
                             <div className="gorToolBar">
@@ -512,7 +652,7 @@ class PPS extends React.Component {
                                             <div
                                                 className="gor-button-sub-status">{this.props.lastUpdatedText} {this.props.lastUpdated} </div>
                                             <button
-                                                className={this.props.ppsFilterState ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
+                                                className={this.props.isFilterApplied ? "gor-filterBtn-applied" : "gor-filterBtn-btn"}
                                                 onClick={this._setFilter.bind(this)}>
                                                 <div className="gor-manage-task"/>
                                                 <FormattedMessage id="gor.filter.filterLabel" description="button label for filter"
@@ -530,7 +670,7 @@ class PPS extends React.Component {
                                                                          description='total pps for filter search bar'
                                                                          defaultMessage='{total} Stations found'
                                                                          values={{total: data.length || 0}}/>}
-                                           refreshList={this._clearFilter.bind(this)}
+                                           refreshList={this._clearFilter}
                                            refreshText={<FormattedMessage id="ppsList.filter.search.bar.showall"
                                                                           description="button label for show all"
                                                                           defaultMessage="Show all Stations"/>}/>
@@ -544,7 +684,8 @@ class PPS extends React.Component {
                                   sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader}
                                   sortHeaderOrder={this.props.ppsHeaderSortOrder}
                                   currentHeaderOrder={this.props.ppsSortHeaderState}
-                                  setCheckedPps={this.props.setCheckedPps} checkedPps={this.props.checkedPps}
+                                  setCheckedPps={this.props.setCheckedPps} 
+                                  checkedPps={this.props.checkedPps}
                                   ppsOnState={ppsOn}
                                   renderDdrop={this.props.setDropDisplay}
                                   bDropRender={this.props.bDropRender}
@@ -558,8 +699,9 @@ class PPS extends React.Component {
                                   lastUpdatedText={updateStatusIntl}
                                   lastUpdated={updateStatusIntl}
                                   showFilter={this.props.showFilter}
-                                  setFilter={this.props.showTableFilter}
-                                  refreshList={this._clearFilter.bind(this)}
+                                  setFilter={this.props.showPPSFilter}
+                                  refreshList={this._clearFilter}
+                                  changePPSProfile={this.changePPSProfile}
                         />
                     </div>
                 </div>
@@ -569,76 +711,53 @@ class PPS extends React.Component {
 }
 ;
 
+const withQuery = graphql(PPS_LIST_QUERY, {
+    props: (data) => (data),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
 
-function mapStateToProps(state, ownProps) {
-    return {
-        ppsFilter: state.sortHeaderState.ppsFilter || "",
-        getCheckAll: state.sortHeaderState.checkAll || false,
-        bDropRender: state.sortHeaderState.renderDropD || false,
-        checkedPps: state.sortHeaderState.checkedPps,
-        ppsSortHeader: state.sortHeaderState.ppsHeaderSort || INITIAL_HEADER_SORT,
-        ppsSortHeaderState: state.sortHeaderState.ppsHeaderSortOrder || INITIAL_HEADER_ORDER,
-        ppsSpinner: state.spinner.ppsSpinner || false,
-        PPSDetail: state.PPSDetail || [],
-        intlMessages: state.intl.messages,
-        showFilter: state.filterInfo.filterState || false,
-        ppsFilterState: state.filterInfo.ppsFilterState || false,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        ppsListRefreshed:state.ppsInfo.ppsListRefreshed
-    };
-}
+const withClientData = graphql(ppsClientData, {
+    props: (data) => ({
+        showFilter: data.data.ppsFilter ? data.data.ppsFilter.display : false,
+        isFilterApplied: data.data.ppsFilter ? data.data.ppsFilter.isFilterApplied : false,
+        checkedPps:data.data.checkedPPS ? JSON.parse(data.data.checkedPPS.checkedPPSList):null,
+        filterState: data.data.ppsFilter ? data.data.ppsFilter.filterState:{}
+    })
+});
 
-var mapDispatchToProps=function (dispatch) {
-    return {
-        ppsFilterDetail: function (data) {
-            dispatch(ppsFilterDetail(data))
+const setVisibilityFilter = graphql(SET_VISIBILITY, {
+    props: ({mutate, ownProps}) => ({
+        showPPSFilter: function (show) {
+            mutate({variables: {filter: show}})
         },
-        changePPSmode: function (data) {
-            dispatch(changePPSmode(data));
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
         },
-        setPpsSpinner: function (data) {
-            dispatch(setPpsSpinner(data))
+    }),
+});
+const setCheckedPps = graphql(SET_CHECKED_PPS, {
+    props: ({mutate, ownProps}) => ({
+        setCheckedPps: function (checkedPPSList) {
+            mutate({variables: {checkedPPSList: checkedPPSList}})
         },
-        ppsHeaderSort: function (data) {
-            dispatch(ppsHeaderSort(data))
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        ppsfilterState: function (state) {
+            mutate({variables: {state: state}})
         },
-        ppsHeaderSortOrder: function (data) {
-            dispatch(ppsHeaderSortOrder(data))
-        },
-        setCheckedPps: function (data) {
-            dispatch(setCheckedPps(data))
-        },
-        setDropDisplay: function (data) {
-            dispatch(setDropDisplay(data))
-        },
-        setCheckAll: function (data) {
-            dispatch(setCheckAll(data))
-        },
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        ppsfilterState: function (data) {
-            dispatch(ppsfilterState(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        togglePPSFilter: function (data) {
-            dispatch(togglePPSFilter(data));
-        },
+    }),
+});
 
-        setDefaultRange: function (data) {
-            dispatch(setDefaultRange(data));
-        },
-        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
-        ppsListRefreshed:function(data){dispatch(ppsListRefreshed(data))}
-    }
-};
+
 
 PPS.contextTypes={
     intl: React.PropTypes.object.isRequired
@@ -667,6 +786,32 @@ PPS.PropTypes={
     wsSubscriptionData: React.PropTypes.object
 
 }
+function mapStateToProps(state, ownProps) {
+    return {
+        intlMessages: state.intl.messages,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        notifySuccess: function (data) {
+            dispatch(notifySuccess(data))
+        },
+        notifyFail: function (data){
+            dispatch(notifyFail(data))
+        },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        },
+    };
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PPS) ;
+export default compose(
+    withClientData,
+    withApollo,
+    withQuery,
+    setVisibilityFilter,
+    setFilterApplied,
+    setCheckedPps,
+    setFilterState)(connect(mapStateToProps,mapDispatchToProps)(PPS));
 
