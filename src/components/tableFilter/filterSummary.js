@@ -26,7 +26,7 @@ class FilterSummary extends React.Component {
     render() {
         return (
             <div>
-                {this.props.isFilterApplied && !this.props.responseFlag ? <div className="gor-filter-search-result-bar">
+                {this.props.isFilterApplied ? <div className="gor-filter-search-result-bar">
                     {this.props.filterText}
                     <span className="gor-filter-search-show-all" onClick={this.props.refreshList}>
                         {this.props.refreshText}

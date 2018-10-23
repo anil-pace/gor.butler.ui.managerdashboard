@@ -46,13 +46,7 @@ export function ordersFilterToggle(data){
 		data
   	}
 }
-//Based on this action we show hide the filter for in audit tab
-export function auditFilterToggle(data){
-	return {
-		type: AUDIT_TOGGLE_FILTER,
-		data
-  	}
-}
+
 //Based on this action we show hide the filter for in User tab
 export function userFilterToggle(data){
 	return {

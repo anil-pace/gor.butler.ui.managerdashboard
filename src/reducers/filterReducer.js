@@ -45,14 +45,7 @@ case BOT_TOGGLE_FILTER:
     return Object.assign({}, state, { 
       "ordersToggleFilter" : action.data
     })     
-    
-
-     case AUDIT_TOGGLE_FILTER:
-    return Object.assign({}, state, { 
-      "auditToggleFilter" : action.data
-    })     
-    
-
+ 
      case USER_TOGGLE_FILTER:
     return Object.assign({}, state, { 
       "userToggleFilter" : action.data
@@ -105,38 +98,7 @@ case ORDER_FILTER_VALUE:               //This reducer will update the the ppsFil
     })
     
 
-    case USER_FILTER_VALUE:             //This reducer will update the the userFilterStatus value with latest applied filter
-    return Object.assign({}, state, { 
-      "userFilterStatus" : action.data
-    })
-    
 
-    case BUTLER_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
-    return Object.assign({}, state, { 
-      "butlerFilterState" : action.data
-    })
-
-    case MSU_CONFIG_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
-    return Object.assign({}, state, { 
-      "msuConfigFilterState" : action.data
-    })
-       
-
-    case AUDIT_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
-    return Object.assign({}, state, { 
-      "auditFilterState" : action.data
-    })
-      
-    case ORDER_FILTER_STATE:          //This reducer will update the the butlerFilterState value with latest applied filter
-    return Object.assign({}, state, { 
-      "orderFilterState" : action.data
-    })
-     
-
-    case CHARGINGSTATION_FILTER_STATE:   //This reducer will update the the chargingstationfilterState value with latest applied filter
-    return Object.assign({}, state, { 
-      "chargingstationfilterState" : action.data
-    })
      
     case PPS_FILTER_STATE:                //This reducer will update the the ppsfilterState value with latest applied filter
     return Object.assign({}, state, { 

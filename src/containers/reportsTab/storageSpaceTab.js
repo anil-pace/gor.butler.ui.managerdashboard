@@ -7,6 +7,9 @@ import { FormattedMessage,injectIntl, defineMessages } from 'react-intl';
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions';
 import SlotsTable from './SlotsTable';
+import Spinner from '../../components/spinner/Spinner';
+import Dropdown from '../../components/gor-dropdown-component/dropdown';
+import { Table, Column, Cell } from 'fixed-data-table';
 import { tableRenderer, TextCell, ProgressCell } from '../../components/commonFunctionsDataTable';
 import {
     notifySuccess,
@@ -19,7 +22,6 @@ import {
 } from "../../constants/messageConstants";
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
-
 
 /*Intl Messages*/
 const  messages= defineMessages({

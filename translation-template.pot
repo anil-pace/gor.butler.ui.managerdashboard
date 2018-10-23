@@ -2338,16 +2338,6 @@ msgstr ""
         msgid "CREATE AUDIT"
         msgstr ""
 
-        #: audit.delete.heading
-        msgctxt "audit.delete.heading"
-        msgid "Are you sure you would like to delete audit task {task_name} ?"
-        msgstr ""
-
-        #: audit.duplicate.heading
-        msgctxt "audit.duplicate.heading"
-        msgid "Are you sure you would like to duplicate audit task {task_name} ?"
-        msgstr ""
-
         #: audit.valid.sku
         msgctxt "audit.valid.sku"
         msgid "SKU confirmed"

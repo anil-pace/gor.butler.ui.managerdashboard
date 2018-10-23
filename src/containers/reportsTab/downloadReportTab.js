@@ -146,6 +146,7 @@ class DownloadReportTab extends React.Component{
 
             <div className="gorTesting wrapper gor-download-rpts">
                 <div>
+                  
                     <div>
                     <div className="gorToolBar">
                             <div className="gorToolBarWrap">

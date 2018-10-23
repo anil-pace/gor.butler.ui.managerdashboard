@@ -1,7 +1,7 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 
-class searchFilter extends React.Component{
+class SearchFilter extends React.Component{
   constructor(props) 
   {
       super(props); 
@@ -27,4 +27,4 @@ class searchFilter extends React.Component{
     }
 }
 
-export default searchFilter;
+export default SearchFilter;
