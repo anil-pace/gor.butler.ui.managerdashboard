@@ -3,7 +3,6 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import ValidateSelAtt from '../../components/audit/validateSelAtt';
-//import {makeAjaxCall} from '../../actions/ajaxActions';
 import {VALIDATE_SKU_QUERY,RECALL_ITEM} from './query';
 import { APP_JSON,POST, GET, VALIDATE_SKU_ITEM_RECALL,CREATE_AUDIT_REQUEST,SELLER_RECALL } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,SELLER_RECALL_URL,SELLER_RECALL_EXPIRY_URL} from '../../constants/configConstants';
@@ -13,7 +12,7 @@ import {
     notifySuccess,
     notifyFail
 } from "./../../actions/validationActions";
-import {ITEM_RECALL_SUCCESS,ITEM_RECALL_FAILURE} from "../../constants/messageConstants";
+import {ITEM_RECALL_SUCCESS,ITEM_RECALL_FAILURE,ERR_500,ERR_400} from "../../constants/messageConstants";
 
 const messages = defineMessages({
     e026: {
@@ -200,11 +199,13 @@ else{
     for(let k in skuDetails){
       skuDetail.push(skuDetails[k]);
     }
-    formData.skuDetail = skuDetail;
+    formData.skuDetail = JSON.stringify(skuDetail);
+    formData.isExpired = false
   }
   else{
     
     formData.isExpired= true
+    formData.skuDetail =null;
   }
 
       let parameters = {
@@ -216,6 +217,14 @@ else{
             fetchPolicy: 'network-only'
         }).then(data=>{
           _this.props.notifyFail(ITEM_RECALL_FAILURE[data.data.ItemRecall.status.reason])
+        }).catch(err=>{
+          if(err.graphQLErrors[0].code === 400){
+             _this.props.notifyFail(ERR_400)
+          }
+          else{
+            _this.props.notifyFail(ERR_500)
+          }
+          
         })
     
     
