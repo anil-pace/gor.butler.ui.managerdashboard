@@ -65,7 +65,6 @@ class Routes extends React.Component {
 
                     case MSU.toUpperCase():
                         this.props.setPpsSpinner(true);
-                        //this.props.setMsuSpinner(true);
                         break;
 
                     case CHARGING.toUpperCase():
@@ -78,15 +77,11 @@ class Routes extends React.Component {
 
 
                     default:
-                        //this.props.setOrderListSpinner(false);
                         this.props.setWavesSpinner(false);
                         this.props.setButlerSpinner(false);
                         this.props.setPpsSpinner(false);
                         this.props.setCsSpinner(false);
                         this.props.setWavesSpinner(false);
-                        //this.props.setMsuSpinner(true);
-
-
                 }
             }
             replace(nextView)
@@ -183,7 +178,7 @@ class Routes extends React.Component {
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="pps" path="/system/pps"
                                getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/ppsTab').default);
+                                       callback(null, require('../containers/systemTabs/pps/ppsTab').default);
                                    }, "pps");
                                }}
                         />

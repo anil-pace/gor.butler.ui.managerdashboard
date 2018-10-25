@@ -11,9 +11,9 @@ import {
     filterIndex,
     DataListWrapper,
     sortData,ActionCellPPS
-} from '../../components/commonFunctionsDataTable';
+} from '../../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
-import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../constants/frontEndConstants';
+import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT} from '../../../constants/frontEndConstants';
 
 import {modal} from 'react-redux-modal';
 import ConfirmApplyProfile from './confirmApplyProfile'
@@ -62,7 +62,6 @@ class PPStable extends React.Component {
         this._onSortChange=this._onSortChange.bind(this);
         this._onFilterChange=this._onFilterChange.bind(this);
         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
-
     }
 
     confirmApplyProfileChanges(pps_id,profile_name){
@@ -73,7 +72,8 @@ class PPStable extends React.Component {
             hideCloseButton: true, // (optional) if you don't wanna show the top right close button
             //.. all what you put in here you will get access in the modal props ;)
             pps_id:pps_id,
-            profile_name:profile_name.value
+            profile_name:profile_name.value,
+            changePPSProfile: this.props.changePPSProfile
         });
     }
 
@@ -94,35 +94,16 @@ class PPStable extends React.Component {
         for (var index=0; index < size; index++) {
             this._defaultSortIndexes.push(index);
         }
-        if (!this.props.checkedPps && nextProps.items) {
-            //var initialCheckState=new Array(nextProps.items.length).fill(false);
-            this.props.setCheckedPps({})
-        }
-        this.state={
-            sortedDataList: this._dataList,
-            colSortDirs: {},
-            columnWidths: {
-
-                id: nextProps.containerWidth * 0.12,
-                status: nextProps.containerWidth * 0.1,
-                operatingMode: nextProps.containerWidth * 0.15,
-                performance: nextProps.containerWidth * 0.1,
-                operatorAssigned: nextProps.containerWidth * 0.18,
-                profiles: nextProps.containerWidth * 0.33
-
-            },
-            headerChecked: this.state.headerChecked,
-            isChecked: this.props.checkedPps
-        };
-        this.props.updateSortedDataList(this._dataList)
-
-
-        this._onSortChange=this._onSortChange.bind(this);
-        this._onFilterChange=this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
+        
+        this.props.updateSortedDataList(this._dataList);
         if (this.props.items && this.props.items.length) {
-            this._onFilterChange(nextProps.getPpsFilter);
+            this._onFilterChange();
         }
+        let checkedPps = nextProps.checkedPps || {};
+        this.setState({
+            sortedDataList: this._dataList,
+            headerChecked: (nextProps.items.length && (nextProps.items.length === Object.keys(checkedPps).length))
+        })
     }
 
     /**
@@ -174,7 +155,7 @@ class PPStable extends React.Component {
         }));
     }
 
-    _onFilterChange(e) {
+    _onFilterChange(e = new Event("click")) {
         var filterField=["operatingMode", "id", "status", "performance", "operatorAssigned"], newData;
         if (e.target && !e.target.value) {
             this.props.updateSortedDataList(this._dataList)
@@ -197,7 +178,7 @@ class PPStable extends React.Component {
         }
 
         else {
-            newData=new DataListWrapper(filterIndex(e, this.state.sortedDataList, filterField), this._dataList);
+            newData=new DataListWrapper(filterIndex("", this.state.sortedDataList, filterField), this._dataList);
             this.props.updateSortedDataList(newData)
             this.setState({
                 sortedDataList: newData
@@ -210,7 +191,7 @@ class PPStable extends React.Component {
     }
 
     handleChange(columnKey, rowIndex, evt) {
-        var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+        var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps || {}));
         var sortedDataList = this.state.sortedDataList;
         var selectedData =  sortedDataList._data ? 
                                 sortedDataList._data.newData[sortedDataList._indexMap[rowIndex]]:
@@ -223,8 +204,7 @@ class PPStable extends React.Component {
         }
 
        
-        this.props.setCheckedPps(checkedPPS)
-        this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false);
+        this.props.setCheckedPps(JSON.stringify(checkedPPS))
     }
 
 
@@ -247,8 +227,7 @@ class PPStable extends React.Component {
                 [columnKey]: sortDir,
             },
         });
-        this.props.sortHeaderOrder(sortDir);
-        this.props.sortHeaderState(columnKey);
+       
     }
 
     headerCheckChange(evt) {
@@ -256,7 +235,7 @@ class PPStable extends React.Component {
         this.setState({
             headerChecked: !this.state.headerChecked
         },function(){
-           var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps));
+           var checkedPPS = JSON.parse(JSON.stringify(this.props.checkedPps || {}));
             if(isChecked){
                 for(let i=0,len = this.props.items.length ;i < len ; i++){
                     checkedPPS[this.props.items[i]["ppsId"]]=this.props.items[i];
@@ -268,8 +247,7 @@ class PPStable extends React.Component {
             }
 
        
-        this.props.setCheckedPps(checkedPPS)
-        this.props.renderDdrop(Object.keys(checkedPPS).length ? true :false); 
+        this.props.setCheckedPps(JSON.stringify(checkedPPS));
         })
         
     }

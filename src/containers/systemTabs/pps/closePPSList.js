@@ -1,10 +1,10 @@
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
-import GTable,{GTableHeader,GTableHeaderCell,GTableBody,GTableRow} from '../../components/gor-table-component/index'
+import GTable,{GTableHeader,GTableHeaderCell,GTableBody,GTableRow} from '../../../components/gor-table-component/index'
 
-import {POST, APP_JSON,GET_PENDING_MSU} from '../../constants/frontEndConstants';
-import {GET_PPS_MSU} from '../../constants/configConstants'
+import {POST, APP_JSON,GET_PENDING_MSU} from '../../../constants/frontEndConstants';
+import {GET_PPS_MSU} from '../../../constants/configConstants'
 import {graphql, withApollo, compose} from "react-apollo"
 import {GET_PENDING_MSU_QUERY} from './queries/ppsTab'
 

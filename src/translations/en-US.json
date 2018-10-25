@@ -626,55 +626,55 @@
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language",
-    "filepath": "./src/components/login/login.js"
+    "filepath": "./src/components/Login/login.js"
   },
   {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.username",
     "description": "Text for missing username error",
     "defaultMessage": "Please enter your username",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.password",
     "description": "Text for missing password error",
     "defaultMessage": "Please enter your password",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.form.username",
     "description": "Placeholder text for username",
     "defaultMessage": "Username",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.password",
     "description": "Placeholder text for password",
     "defaultMessage": "Password",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.button",
     "description": "Text for button",
     "defaultMessage": "Login",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "pps.dropdown.placeholder",
     "description": "placeholder for pps mode change",
     "defaultMessage": "Change PPS mode",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
     "defaultMessage": "Filter by keywords",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "notifications.read.message",
@@ -6056,6 +6056,335 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
+    "id": "ppsclose.tblhead1.text",
+    "description": "Table first head",
+    "defaultMessage": "SLOT ID",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead2.text",
+    "description": "Table second head",
+    "defaultMessage": "MSU Pending",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead3.text",
+    "description": "Table third head",
+    "defaultMessage": "ACTION",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.close.cancel",
+    "description": "Text for cancel close",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.close.confirm",
+    "description": "Text for close confirm",
+    "defaultMessage": "CONFIRM",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.profile",
+    "description": "Apply Profile to PPS",
+    "defaultMessage": "Are you sure you want to change the profile?",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.profile.description",
+    "description": "PPS Configuration will be changed",
+    "defaultMessage": "PPS Configuration will be changed",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.change.profile",
+    "description": "Change Profile to PPS",
+    "defaultMessage": "Change",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.inputField.id",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.inputField.oprator",
+    "defaultMessage": "OPERATOR ASSIGNED",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.token.status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.token.timePeriod",
+    "defaultMessage": "MODE",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.stopped",
+    "defaultMessage": "Open",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.error",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.fclose",
+    "defaultMessage": "Force Close",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.pick",
+    "defaultMessage": "Pick",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.put",
+    "defaultMessage": "Put",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.audit",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "v.MODE.notset",
+    "defaultMessage": "Not set",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS-{ppsId}",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsDetail.performance.prefix.items",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "{performance} items/hr",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.close.heading",
+    "description": "Heading for Close PPS",
+    "defaultMessage": "Close PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.pickDrop",
+    "description": "pick dropdown option for PPS",
+    "defaultMessage": "Put",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "put dropdown option for PPS",
+    "defaultMessage": "Pick",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "audit dropdown option for PPS",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.openStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Open Selected PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.closeStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Close Selected PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.statusPlaceholder",
+    "description": "Placeholder for status dropdown",
+    "defaultMessage": "Change PPS Status",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.modePlaceholder",
+    "description": "Placeholder for mode dropdown",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Pick Put Stations",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "selected pps for ppsSelected",
+    "defaultMessage": "{selected} selected",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsList.filter.search.bar",
+    "description": "total pps for filter search bar",
+    "defaultMessage": "{total} Stations found",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No PPS Found",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS - column Heading",
+    "defaultMessage": "PPS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.Subpps",
+    "description": "sub pps",
+    "defaultMessage": "Total: {ppsTotal}",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.status",
+    "description": "status for PPS table",
+    "defaultMessage": "{ppsOnState} Open",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "CURRENT MODE",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.requestedMode.text",
+    "description": "PPStable.requestedMode.text",
+    "defaultMessage": "Requested Mode:",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.requestedStatus",
+    "description": "Requested status for PPS",
+    "defaultMessage": "REQUESTED STATUS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "PERFORMANCE",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.avgThroughput",
+    "description": "avgThroughput for PPStable",
+    "defaultMessage": "Avg {avgThroughput} items/hr",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "OPERATOR ASSIGNED",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.totalOperator",
+    "description": "totalOperator for PPStable",
+    "defaultMessage": "{operatorNum} operators",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.profiles",
+    "description": "profiles for PPS",
+    "defaultMessage": "PROFILES USED",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
     "id": "pps.configuration.bins.selection.label",
     "description": "Select a bin to manage tags",
     "defaultMessage": "Select a bin to manage tags",
@@ -6204,281 +6533,6 @@
     "description": "SAVE",
     "defaultMessage": "SAVE",
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
-  },
-  {
-    "id": "pps.inputField.id",
-    "defaultMessage": "PPS ID",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.inputField.oprator",
-    "defaultMessage": "OPERATOR ASSIGNED",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.token.status",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.token.timePeriod",
-    "defaultMessage": "MODE",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.all",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.stopped",
-    "defaultMessage": "Open",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.error",
-    "defaultMessage": "Close",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.fclose",
-    "defaultMessage": "Force Close",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.all",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.pick",
-    "defaultMessage": "Pick",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.put",
-    "defaultMessage": "Put",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.audit",
-    "defaultMessage": "Audit",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "v.MODE.notset",
-    "defaultMessage": "Not set",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.filterLabel",
-    "description": "label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.hide",
-    "description": "label for hide",
-    "defaultMessage": "Hide",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.noResult",
-    "description": "label for no result",
-    "defaultMessage": "No results found, please try again",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.reset",
-    "description": "label for reset",
-    "defaultMessage": "Reset",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.heading",
-    "description": "filter heading",
-    "defaultMessage": "Apply filter",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "ppsDetail.name.prefix",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "PPS-{ppsId}",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsDetail.performance.prefix.items",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "{performance} items/hr",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.close.heading",
-    "description": "Heading for Close PPS",
-    "defaultMessage": "Close PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.pickDrop",
-    "description": "pick dropdown option for PPS",
-    "defaultMessage": "Put",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.putDrop",
-    "description": "put dropdown option for PPS",
-    "defaultMessage": "Pick",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.auditDrop",
-    "description": "audit dropdown option for PPS",
-    "defaultMessage": "Audit",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.openStatusLabel",
-    "description": "audit dropdown option for Status change",
-    "defaultMessage": "Open Selected PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.closeStatusLabel",
-    "description": "audit dropdown option for Status change",
-    "defaultMessage": "Close Selected PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.statusPlaceholder",
-    "description": "Placeholder for status dropdown",
-    "defaultMessage": "Change PPS Status",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.modePlaceholder",
-    "description": "Placeholder for mode dropdown",
-    "defaultMessage": "Change PPS Mode",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.table.heading",
-    "description": "Heading for PPS",
-    "defaultMessage": "Pick Put Stations",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPStable.selected",
-    "description": "selected pps for ppsSelected",
-    "defaultMessage": "{selected} selected",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "gor.filter.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsList.filter.search.bar",
-    "description": "total pps for filter search bar",
-    "defaultMessage": "{total} Stations found",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Stations",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.dropdown.placeholder",
-    "description": "mode change for pps",
-    "defaultMessage": "Change PPS Mode",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.table.noData",
-    "description": "No data message for PPStable",
-    "defaultMessage": "No PPS Found",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.ppsColumn.heading",
-    "description": "PPS - column Heading",
-    "defaultMessage": "PPS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.Subpps",
-    "description": "sub pps",
-    "defaultMessage": "Total: {ppsTotal}",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.status",
-    "description": "Status for PPS",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.status",
-    "description": "status for PPS table",
-    "defaultMessage": "{ppsOnState} Open",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.operatingMode",
-    "description": "operatingMode for PPS",
-    "defaultMessage": "CURRENT MODE",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.ppsState",
-    "description": "pps state for PPStable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.requestedMode.text",
-    "description": "PPStable.requestedMode.text",
-    "defaultMessage": "Requested Mode:",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.requestedStatus",
-    "description": "Requested status for PPS",
-    "defaultMessage": "REQUESTED STATUS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.performance",
-    "description": "performance Status for PPS",
-    "defaultMessage": "PERFORMANCE",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.avgThroughput",
-    "description": "avgThroughput for PPStable",
-    "defaultMessage": "Avg {avgThroughput} items/hr",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.operatorAssigned",
-    "description": "operatorAssigned for PPS",
-    "defaultMessage": "OPERATOR ASSIGNED",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.totalOperator",
-    "description": "totalOperator for PPStable",
-    "defaultMessage": "{operatorNum} operators",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.profiles",
-    "description": "profiles for PPS",
-    "defaultMessage": "PROFILES USED",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
   },
   {
     "id": "pps.configuration.confirm.saveAndapply.profile",

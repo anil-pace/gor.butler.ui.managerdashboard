@@ -20,7 +20,7 @@ import resolvers from './resolvers'
 const cache = new InMemoryCache({
     dataIdFromObject: o => {o.id ? `${o.__typename}-${o.id}`: `${o.__typename}-${o.cursor}`},}
     );
-console.log(resolvers)
+
 let state_link = withClientState({...resolvers, cache})
 let client = new ApolloClient({
     ssrForceFetchDelay: 100,
