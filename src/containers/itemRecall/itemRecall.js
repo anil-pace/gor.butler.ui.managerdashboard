@@ -216,7 +216,13 @@ else{
             variables:parameters,
             fetchPolicy: 'network-only'
         }).then(data=>{
-          _this.props.notifyFail(ITEM_RECALL_FAILURE[data.data.ItemRecall.status.reason])
+          if(data.data.ItemRecall.status.code === "202"){
+            _this.props.notifySuccess(ITEM_RECALL_SUCCESS);
+          }
+          else{
+            _this.props.notifyFail(ITEM_RECALL_FAILURE[data.data.ItemRecall.status.reason])
+          }
+          
         }).catch(err=>{
           if(err.graphQLErrors[0].code === 400){
              _this.props.notifyFail(ERR_400)

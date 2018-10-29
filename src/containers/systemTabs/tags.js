@@ -29,7 +29,10 @@ class Tags extends React.Component {
         let self = this
         if (nextProps.tags !== this.state.tags) {
             this.setState({tags: nextProps.tags, filteredTags: nextProps.tags}, function () {
-                self.searchTags({target: {value: ''}})
+                if(self.state.tags){
+                    self.searchTags({target: {value: ''}})
+                }
+                
             })
 
         }
@@ -113,7 +116,7 @@ class Tags extends React.Component {
 
     render() {
         let self = this
-        if (self.props.tags.length === 0) {
+        if (!self.props.tags || self.props.tags.length === 0) {
             return null
         }
         return <div className="pps-tags-container">
