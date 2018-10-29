@@ -115,7 +115,7 @@ class StorageSpaceTab extends React.Component{
         
         var dataList={
             newData:this._processData(this.props.slotList),
-            size:this._processData(this.props.slotList).length
+            size:this._processData(this.props.slotList || []).length
         }
         
         

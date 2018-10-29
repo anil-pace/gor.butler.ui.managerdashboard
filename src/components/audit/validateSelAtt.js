@@ -419,7 +419,7 @@ class ValidateSelAtt extends React.Component{
                                                               />
                 </div>
               <div>
-               {copyPasteData.data.map((tuple,i)=>{
+               {copyPasteData.data.processedData.map((tuple,i)=>{
                     let tuples=[],
                     attributeList = self.props.skuAttributes.data[i].attributeList;
                     if(tuple.visible){

@@ -250,4 +250,3 @@ function mapDispatchToProps(dispatch){
 export default compose(
     withQuery
 )(connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(DownloadReportTab))));
-
