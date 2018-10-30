@@ -47,7 +47,7 @@ export const subscriptionLink = (config = {}) =>
     new WebSocketLink({
         uri:
             process.env.NODE_ENV !== 'production'
-                ? `ws://${WS_GRAPHQL_URL}:3010/subscriptions`
+                ? `ws://${WS_GRAPHQL_URL}:3020/subscriptions`
                 : 'wss://api.githunt.com/subscriptions',
         options: { reconnect: true,connectionParams: () => {
             return { 'auth_token': sessionStorage.getItem("auth_token") }
