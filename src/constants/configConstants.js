@@ -19,6 +19,9 @@ export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
 
+export const GRAPHQL_URL = 'http://localhost:3020/graphql';
+export const WS_GRAPHQL_URL = BASE_URL;
+
 
 
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";

@@ -626,55 +626,55 @@
     "id": "login.butler.language",
     "description": "Text for language",
     "defaultMessage": "Language",
-    "filepath": "./src/components/login/login.js"
+    "filepath": "./src/components/Login/login.js"
   },
   {
     "id": "login.butler.manageInterface",
     "description": "Text for Management Interface",
     "defaultMessage": "Management Interface",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.username",
     "description": "Text for missing username error",
     "defaultMessage": "Please enter your username",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.butler.error.password",
     "description": "Text for missing password error",
     "defaultMessage": "Please enter your password",
-    "filepath": "./src/components/login/loginForm.js"
+    "filepath": "./src/components/Login/loginForm.js"
   },
   {
     "id": "login.form.username",
     "description": "Placeholder text for username",
     "defaultMessage": "Username",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.password",
     "description": "Placeholder text for password",
     "defaultMessage": "Password",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "login.form.button",
     "description": "Text for button",
     "defaultMessage": "Login",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "pps.dropdown.placeholder",
     "description": "placeholder for pps mode change",
     "defaultMessage": "Change PPS mode",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "table.filter.placeholder",
     "description": "placeholder for table filter",
     "defaultMessage": "Filter by keywords",
-    "filepath": "./src/components/login/messages.js"
+    "filepath": "./src/components/Login/messages.js"
   },
   {
     "id": "notifications.read.message",
@@ -5317,84 +5317,6 @@
     "description": "status for ButlerBotTable",
     "defaultMessage": "{onlineBots} Online",
     "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "bots.table.currentTask",
-    "description": "Bots current task",
-    "defaultMessage": "CURRENT TASK",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "ButlerBotTable.botState",
-    "description": "bot state for ButlerBotTable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "bots.table.msuMounted",
-    "description": "MSU Mounted",
-    "defaultMessage": "MSU MOUNTED",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "ButlerBotTable.mounted",
-    "description": "msu mounted for ButlerBotTable",
-    "defaultMessage": "{msuMounted} Mounted",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "bots.table.location",
-    "description": "Location",
-    "defaultMessage": "LOCATION",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "ButlerBotTable.locations",
-    "description": "msu Location for ButlerBotTable",
-    "defaultMessage": "{locations} Locations",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "bots.table.power",
-    "description": "Power",
-    "defaultMessage": "CHARGE LEVEL",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "ButlerBotTable.avgVoltage",
-    "description": "avgVoltage for ButlerBotTable",
-    "defaultMessage": "Avg {voltage}",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "butlerDetail.name.prefix",
-    "description": "prefix for butler id",
-    "defaultMessage": "BOT - {botId}",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
-  },
-  {
-    "id": "charger.name.prefix",
-    "description": "prefix for charger id",
-    "defaultMessage": "CS - {csId}",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
-  },
-  {
-    "id": "bots.table.status",
-    "description": "Bots Status",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
-  },
-  {
-    "id": "pps.name.prefix",
-    "description": "prefix for pps id",
-    "defaultMessage": "PPS {ppsId}",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
-  },
-  {
-    "id": "audit.name.prefix",
-    "description": "prefix for audit",
-    "defaultMessage": "Audit",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
     "id": "bots.table.currentTask",
