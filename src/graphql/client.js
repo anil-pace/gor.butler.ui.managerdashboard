@@ -13,6 +13,7 @@ import {
     requestLink,
 } from './links';
 import resolvers from './resolvers'
+import {GRAPHQL_URL} from '../constants/configConstants'
 /**
  * Refer https://github.com/apollographql/react-apollo/issues/1558
  * @type {InMemoryCache}
@@ -29,7 +30,7 @@ let client = new ApolloClient({
         requestLink({
             queryOrMutationLink: queryOrMutationLink({
                 fetch: require('cross-fetch'),
-                uri: "http://localhost:3010/graphql",
+                uri: GRAPHQL_URL,
                 credentials: 'same-origin'
 
             }),

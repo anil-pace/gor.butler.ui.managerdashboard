@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost'; 
+export const BASE_URL = '192.168.9.205'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -18,6 +18,9 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
+
+export const GRAPHQL_URL = 'http://192.168.9.205:3020/graphql';
+export const WS_GRAPHQL_URL = '192.168.9.205';
 
 
 
