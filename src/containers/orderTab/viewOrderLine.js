@@ -123,7 +123,9 @@ class ViewOrderLine extends React.Component{
     var updatedList = this.props.orderLines.orderlines;
     var queryResult=[];
     updatedList.forEach(function(item){
-            if(item.pdfa_values[0].toLowerCase().indexOf(event)!=-1)
+    let pdfa_values_split = item.pdfa_values[0]?item.pdfa_values[0].substring(1,item.pdfa_values[0].length-1).split(","):[];
+    var rawItem=pdfa_values_split[0].split("=");
+            if(rawItem[1].toLowerCase().indexOf(event.toLowerCase())!=-1)
               queryResult.push(item);
     });
     this.setState({items: queryResult});
