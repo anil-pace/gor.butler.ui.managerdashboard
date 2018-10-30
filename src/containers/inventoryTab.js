@@ -25,7 +25,7 @@ import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
 
 const InventoryHistorySubscription = gql`
-    subscription InventoryHistoryList {
+    subscription InventoryHistory {
         InventoryHistory {
             list {
                 cbm_used
@@ -46,6 +46,7 @@ const InventoryHistorySubscription = gql`
                 __typename
             }
         }
+        __typename
     }
 `;
 
@@ -237,7 +238,7 @@ class InventoryTab extends React.Component {
     }
 }
 const InventoryHistoryQuery = gql`
-    query InventoryHistoryList {
+    query InventoryHistory {
         InventoryHistory {
             list {
                 cbm_used
