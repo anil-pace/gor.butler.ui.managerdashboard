@@ -360,7 +360,6 @@ class PPS extends React.Component {
             detail.ppsThroughput=(data[i].performance < 0 ? 0 : data[i].performance);
             if (!data[i].operators_assigned) {
                 detail.operatorAssigned="--";
-                data[i].operators_assigned=[];
             }
             else {
                 var userFirstLast;
