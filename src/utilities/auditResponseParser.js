@@ -54,14 +54,14 @@ export function AuditParse(res, cause,_this) {
          msg = getFormattedMessages("CREATEAUDIT", values);  
          _this.props.notifyfeedback(msg)
         _this.props.setAuditListRefresh('flag');
-        _this.props.setAuditSpinner(false);
+        //_this.props.setAuditSpinner(false);
          return;
    
    } 
    else {
     stringInfo = codeToString(res.alert_data[0]);
    _this.props.setNotification(stringInfo);
-   _this.props.setAuditSpinner(false);
+   //_this.props.setAuditSpinner(false);
    return;
    }
 break;
@@ -71,14 +71,14 @@ if (res.alert_data[0].code=="as006") {
     msg = getFormattedMessages("PAUSEAUDIT", values);
     _this.props.notifyfeedback(msg)
     _this.props.setAuditListRefresh('flag');
-    _this.props.setAuditSpinner(false);
+    //_this.props.setAuditSpinner(false);
    // store.dispatch(setCheckedAudit([]));
     }
     else{
         values={id:res.alert_data[0].details.display_id},
         stringInfo = codeToString(res.alert_data[0]);
         _this.props.setNotification(stringInfo);
-        _this.props.setAuditSpinner(false);
+       // _this.props.setAuditSpinner(false);
    
     }
     break;
@@ -123,7 +123,7 @@ if (res.alert_data[0].code=="as006") {
         _this.props.setNotification(stringInfo);
 
     }
-    _this.props.setAuditSpinner(false);
+    //_this.props.setAuditSpinner(false);
     break;
 case DELETE_AUDIT:
    
@@ -131,7 +131,7 @@ case DELETE_AUDIT:
     {
             values={id:res.alert_data[0].details.display_id},
             stringInfo = codeToString(res.alert_data[0]);
-            _this.props.setAuditSpinner(false);
+           // _this.props.setAuditSpinner(false);
 
             _this.props.setNotification(stringInfo);
             _this.props.setAuditListRefresh('flag');
@@ -140,7 +140,7 @@ case DELETE_AUDIT:
             values={id:res.alert_data[0].details.display_id};
             msg = getFormattedMessages("DELETEAUDIT", values);
            _this.props.notifyfeedback(msg);
-           _this.props.setAuditSpinner(false);
+           //_this.props.setAuditSpinner(false);
            _this.props.setAuditListRefresh('flag'); //reset refresh flag
 
         }
@@ -152,14 +152,14 @@ case DELETE_AUDIT:
           stringInfo = codeToString(res.alert_data[0]);
           _this.props.setNotification(stringInfo);
           _this.props.setAuditListRefresh('flag'); //set refresh flag
-          _this.props.setAuditSpinner(false);
+         // _this.props.setAuditSpinner(false);
       }
       else{
           values={id:res.alert_data[0].details.display_id},
           msg = getFormattedMessages("CANCELLED", values);
           _this.props.notifyfeedback(msg);
 
-         _this.props.setAuditSpinner(false);
+        // _this.props.setAuditSpinner(false);
       }
       break;
       case AUDIT_RESOLVE_CONFIRMED:
@@ -167,12 +167,12 @@ case DELETE_AUDIT:
           stringInfo = statusToString(res.successful);
           _this.props.notifyfeedback(stringInfo.msg);
          _this.props.setAuditListRefresh('flag');
-         _this.props.setAuditSpinner(false);
+        // _this.props.setAuditSpinner(false);
       } else {
           stringInfo = getFormattedMessages("RESOLVEFAIL", values);
           _this.props.setNotification(stringInfo);
           _this.props.setAuditListRefresh('flag');
-          _this.props.setAuditSpinner(false);
+        //  _this.props.setAuditSpinner(false);
       }
       break;
 

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-export const AUDIT_VALIDATE_QUERY = gql`query SKUList($sku:dataListParams){
-    SKUList(input:$sku){
+export const AUDIT_VALIDATE_QUERY = gql`query AuditSKUList($sku:dataListParams){
+  AuditSKUList(input:$sku){
      list
     }
       }
@@ -201,7 +201,7 @@ export const AUDIT_QUERY = gql`query AuditList($input: AuditListParams){
             total
             
           }
-
+          __typename
         }
         page
         page_results
@@ -220,6 +220,8 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
       AuditList(input:$input){
      
       list {
+        approved
+        rejected
           create_time
           actual_quantity
           audit_created_by
@@ -261,12 +263,12 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
             total
             
           }
+          __typename
         }
         page
         page_results
         total_pages
         total_results
-       
   }
 }
 `;

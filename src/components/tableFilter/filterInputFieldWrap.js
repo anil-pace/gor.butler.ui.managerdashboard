@@ -5,7 +5,7 @@ class FilterInputFieldWrap extends React.Component{
 	
  _processInputField() {
   var totalInput=this.props.inputText, inputFieldWrap=[],  by2value=false,type="text";
-  var textboxStatus=this.props.textboxStatus?JSON.parse(this.props.textboxStatus):JSON.parse('{"name":["AUDIT TASK ID"]}');
+  var textboxStatus=this.props.textboxStatus==null || typeof(this.props.textboxStatus)=="string"?this.props.textboxStatus?JSON.parse(this.props.textboxStatus):JSON.parse('{"name":["AUDIT TASK ID"]}'):this.props.textboxStatus ||{};
 
   var length=totalInput.length;
 

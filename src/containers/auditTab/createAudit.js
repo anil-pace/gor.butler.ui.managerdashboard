@@ -381,7 +381,7 @@ class CreateAudit extends React.Component{
       variables: dataToSent,
       fetchPolicy: 'network-only'
   }).then(data=>{
-    var auditEditData=data.data.SKUList?JSON.parse(data.data.SKUList.list):""
+    var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
     var values={},stringInfo={},msg={};
   if(auditEditData.action=='create')
     {
@@ -454,7 +454,7 @@ else{
       variables: dataToSent,
       fetchPolicy: 'network-only'
   }).then(data=>{
-    var auditEditData=data.data.SKUList?JSON.parse(data.data.SKUList.list):""
+    var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
     var values={},stringInfo={},msg={};
     if(auditEditData.action=='create')
     {
