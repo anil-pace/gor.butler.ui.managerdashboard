@@ -1,5 +1,4 @@
 {
-
   "name": "md-react-scripts",
   "version": "0.1.0",
   "private": true,
@@ -83,6 +82,10 @@
     "sockjs-client": "1.1.4",
     "webstomp-client": "1.0.6"
   },
+  "resolutions": {
+    "graphql": "^0.12.3",
+    "**/graphql": "^0.12.3"
+  },
   "scripts": {
     "build-css": "node-sass src/assets/css/main.scss -o public/assets/ --output-style expanded ",
     "post-css": "postcss  --no-map --use autoprefixer -b 'last 2 versions' < public/assets/main.css | postcss  --no-map --use cssnano  > public/assets/main.min.css",
@@ -98,4 +101,3 @@
   },
   "homepage": "./"
 }
-
