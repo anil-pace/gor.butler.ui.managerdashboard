@@ -55,7 +55,7 @@
     background-size: 100%;
 }
 .WARNING-Biggericon,.ERROR-Biggericon,.INFO-Biggericon,
-.WARNING-icon,.INFO-icon,.ERROR-icon{
+.warning-icon,.info-icon,.error-icon{
     background-image: url(./images/Icons_need_update.svg);
 }
 
@@ -568,7 +568,7 @@ background-position: -101px -52px;
     margin-left: 30px;
     margin-bottom:3px;
 }
-.WARNING-icon{
+.warning-icon{
     width:30px;
     height:45px;
     background-position: -88px -38px; 
@@ -576,7 +576,7 @@ background-position: -101px -52px;
     vertical-align: top;  
     margin-top: 5px;                      
 }
-.INFO-icon{
+.info-icon{
     width:30px;
     height:35px;
     background-position: -3px -41px; 
@@ -584,7 +584,7 @@ background-position: -101px -52px;
     vertical-align: top; 
     margin-top: 5px;                           
 }
-.ERROR-icon{
+.error-icon{
     width:30px;
     height:35px;
     background-position: -41px -41px; 
