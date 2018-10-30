@@ -45,10 +45,7 @@ async function asyncCall() {
 
 export const subscriptionLink = (config = {}) =>
     new WebSocketLink({
-        uri:
-            process.env.NODE_ENV !== 'production'
-                ? `ws://${WS_GRAPHQL_URL}:3020/subscriptions`
-                : 'wss://api.githunt.com/subscriptions',
+        uri:`ws://${WS_GRAPHQL_URL}:3020/subscriptions`,
         options: { reconnect: true,connectionParams: () => {
             return { 'auth_token': sessionStorage.getItem("auth_token") }
         } },
