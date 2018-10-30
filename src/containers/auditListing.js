@@ -115,26 +115,32 @@ class AuditTab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {selected_page: 1, query: null, auditListRefreshed: null, timerId: 0, 
-            intervalPage: 1,AuditList:[],totalAudits:0,totalPage:1};
+            intervalPage: 1,AuditList:this.props.AuditList||[],totalAudits:0,totalPage:1};
         this._handelClick = this._handelClick.bind(this);
         this.showAuditFilter = this.props.showAuditFilter.bind(this)
         this.subscription = null;
         this.flag=true;
+        this.props.setAuditDetails(this.state.AuditList);
     }
 
+    componentWillUnmount(){
+    }
  
 
     componentWillReceiveProps(nextProps) { 
-        if(nextProps.auditRefreshFlag!==this.props.auditRefreshFlag)   {
+        if(nextProps.socketAuthorized && nextProps.auditRefreshFlag!==this.props.auditRefreshFlag)   {
             this._refreshList(nextProps.location.query);
-
         }
-        if(JSON.stringify(this.props.AuditList)!==JSON.stringify(nextProps.AuditList) && !nextProps.dataFromWS){
+
+
+        if(JSON.stringify(this.props.AuditList)!==JSON.stringify(nextProps.AuditList) && !nextProps.dataFromWS ){
             this.setState({AuditList:nextProps.AuditList});
+            this.props.setAuditDetails(nextProps.AuditList);
             this.setState({totalAudits:nextProps.TotalResults});
             this.setState({totalPage:nextProps.TotalPage});
             this.updateSubscription({});
             this.props.setCurrentPageNumber(nextProps.CurrentPageNo);
+            this._subscribeData();
         }
 
         if(this.props.isUpdateSubsciption)
@@ -142,7 +148,7 @@ class AuditTab extends React.Component {
                 this._refreshList(nextProps.location.query);
                 this.props.updateSubscription(false);
         }
-      
+       
         }
 
     _handelClick(field) {
@@ -226,7 +232,8 @@ class AuditTab extends React.Component {
      */
 
     updateSubscription(variables) {
-      let pageNo=  this.props.currentPageNumber;
+    
+              let pageNo=  this.props.currentPageNumber;
       let pageSize= pageNo*10||10;
         this.subscription = this.props.subscribeToMore({
             variables: {
@@ -250,18 +257,19 @@ class AuditTab extends React.Component {
             updateQuery: (previousResult, newResult) => {
                 return Object.assign({}, {
                     AuditList: {list: newResult.subscriptionData.data.AuditList.list,
-                        __typename:newResult.AuditList.__typename},
+                        __typename:newResult.subscriptionData.data.AuditList.__typename},
                     dataFromWS:true
                 })
             },
         });
+   
     }
 
     
    
 _refreshList(query) {
     var me=this;
-    if(this.props.currentPageNumber <this.state.totalPage){
+    if(this.props.currentPageNumber <this.props.TotalPage){
 
        if(query.scrolling){
      
@@ -319,12 +327,15 @@ _refreshList(query) {
     me.props.listDataAudit(a);
     let stateData,finalData;
     stateData=me.state.AuditList;
-if(query.scrolling)
+if(query.scrolling){
     finalData=stateData.concat(data.data.AuditList.list);
+}
     else
+    {
     finalData=data.data.AuditList.list;
+    }
     me.setState({AuditList:finalData});   
-    me.props.setAuditDetails(finalData)
+    me.props.setAuditDetails(finalData);
     me.updateSubscription({});   
     })
     }
@@ -826,6 +837,7 @@ function mapStateToProps(state, ownProps) {
         timeOffset: state.authLogin.timeOffset,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
         socketAuthorized: state.recieveSocketActions.socketAuthorized
+
     };
 }
 
@@ -833,7 +845,13 @@ var mapDispatchToProps = function (dispatch) {
     return {
         notifyfeedback: function (data) {dispatch(notifyfeedback(data))},
         setNotification: function (data) {dispatch(setNotification(data))},
-        notifyFail:function (data) {dispatch(notifyFail(data)) }
+        notifyFail:function (data) {dispatch(notifyFail(data)) },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+        },
+        updateSubscriptionPacket: function (data) {
+            dispatch(updateSubscriptionPacket(data));
+        }
     }
 };
 
@@ -1093,4 +1111,4 @@ export default compose(
    ,clientAuditSpinnerState
    ,clientauditNeedRefreshFlag
    ,setAuditListRefreshState
-)(connect(mapStateToProps)(AuditTab));
+)(connect(mapStateToProps,mapDispatchToProps)(AuditTab));

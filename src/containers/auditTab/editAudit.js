@@ -486,7 +486,7 @@ if(sendRequest){
       variables: dataToSent,
       fetchPolicy: 'network-only'
   }).then(data=>{
- var auditEditData=data.data.SKUList?JSON.parse(data.data.SKUList.list):""
+ var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
  if(validSKUData.action=="edit" ||validSKUData.action=="duplicate"){
   AuditParse(auditEditData,validSKUData.action,_this)
  }
@@ -527,6 +527,7 @@ var dataToSentToProps= {
 
   _validateLocation(type){
     var _this=this;
+var action="";
     let validLocationData, validLocationDataCreateAudit;
     let arrLocation=this.state.copyPasteLocation.data.slice(0);
     let auditParamValue = []
@@ -550,31 +551,50 @@ var dataToSentToProps= {
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
-      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'',
+      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'admin',
       "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
       "data":JSON.stringify(auditParamValue)
     }
      
     }
+    action=(type === "create" || type === "confirm")?'edit':'';
   }
-  else
+  else if (type!=='validate')
   {
     validLocationDataCreateAudit={
       "sku":{
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":'duplicate',
-      "audit_creator_name":this.props.username,
+      "audit_creator_name":this.props.username||'admin',
       "kq":this.kqCheck.checked,
-      "audit_param_value":JSON.stringify(auditParamValue)
+      "data":JSON.stringify(auditParamValue)
     }
+  
     }
+    action='duplicate';
   }
+else
+    {
+      validLocationDataCreateAudit={
+        "sku":{
+        "audit_param_name":this.auditNameLoc.value,
+        "audit_param_type":"location",
+        "action":'validate',
+        "audit_creator_name":this.props.username||'admin',
+        "kq":this.kqCheck.checked,
+        "audit_param_value":JSON.stringify(auditParamValue)
+      }
+     
+      }
+      action='validate';
+    }
+  
 
 
    this.props.setValidAuditSpinner(true);
-    const AUDIT_VALIDATE_QUERY = gql`query SKUList($sku:dataListParams){
-      SKUList(input:$sku){
+    const AUDIT_VALIDATE_QUERY = gql`query AuditSKUList($sku:dataListParams){
+      AuditSKUList(input:$sku){
        list
       }
         }
@@ -588,10 +608,10 @@ var dataToSentToProps= {
           variables: dataToSent,
           fetchPolicy: 'network-only'
       }).then(data=>{
-     var auditEditData=data.data.SKUList?JSON.parse(data.data.SKUList.list):""
+     var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
      var values={},stringInfo={},msg={};
-     if(validSKUData.action=="edit" ||validSKUData.action=="duplicate"){
-      AuditParse(auditEditData,validSKUData.action,_this)
+     if(action=="edit" ||action=="duplicate"){
+      AuditParse(auditEditData,action,_this)
      }
      else{
      let audit_name= 'Alpha';
@@ -1508,7 +1528,7 @@ var dataToSentToProps= {
               </div>
             }
                           <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
+                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateLocation("validate")}>
                 <label>
 {(this.state.auditSpinner) ? 
 <div className='gor-orange-spinner'></div>
