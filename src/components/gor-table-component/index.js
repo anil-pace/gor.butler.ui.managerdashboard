@@ -22,7 +22,7 @@ import {GTableBody} from './tableBody'
 import {GTableRow} from './tableRow'
 
 //require("./../../../library/table/css/table.css")
-export default class GTable extends React.Component{
+export class GTable extends React.Component{
     constructor(props){
         super(props)
     }
