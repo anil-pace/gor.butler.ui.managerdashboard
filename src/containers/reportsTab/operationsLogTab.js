@@ -7,10 +7,10 @@ import {FormattedMessage, FormattedDate, injectIntl, intlShape, defineMessages} 
 import {connect} from 'react-redux';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
-
-
+import {wsOverviewData} from '../../constants/initData.js';
+import {setWsAction} from '../../actions/socketActions';
 import {
-    POST, APP_JSON, REALTIME, DOWNLOAD_REPORT_REQUEST, REPORT_NAME_OPERATOR_LOGS
+    POST, APP_JSON, REALTIME, DOWNLOAD_REPORT_REQUEST, REPORT_NAME_OPERATOR_LOGS,WS_ONSEND
 } from '../../constants/frontEndConstants';
 
 import OperationsFilter from './operationsFilter';
@@ -111,8 +111,8 @@ class OperationsLogTab extends React.Component {
         this._requestReportDownload = this._requestReportDownload.bind(this);
         this._setFilter = this._setFilter.bind(this)
         this.subscription = null
-        this.state = {query: null, page: 1}
-
+        this.state = {query: null, page: 1,subscribed:false,}
+        
 
     }
 
@@ -123,9 +123,29 @@ class OperationsLogTab extends React.Component {
 
         this.subscription = null
     }
-
+    componentWillMount() {
+        if (this.props.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData()
+            })
+            
+        }
+    }
+    componentWillUnmount(){
+        /**
+         * If a user navigates back to the inventory page,
+         * it should subscribe to the packet again.
+         */
+        this.setState({subscribed: false})
+    }
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.socketAuthorized && !this.state.subscribed) {
+            this.setState({subscribed: true},function(){
+                this._subscribeData(nextProps.location.query)
+            })
+            
+        }
         if ((!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
             this.removeSubscription()
             this.setState({query: nextProps.location.query})
@@ -176,6 +196,10 @@ class OperationsLogTab extends React.Component {
         }
 
 
+    }
+
+    _subscribeData(){
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     _setFilterState(query) {
@@ -380,13 +404,17 @@ OperationsLogTab.propTypes = {
 function mapStateToProps(state, ownProps) {
     return {
         timeOffset: state.authLogin.timeOffset,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
+
 function mapDispatchToProps(dispatch) {
     return {
         notifySuccess: function (data) {
             dispatch(notifySuccess(data));
-        }
+        },
+        initDataSentCall: function(data){ dispatch(setWsAction({type:WS_ONSEND,data:data})); },
     }
 };
 
