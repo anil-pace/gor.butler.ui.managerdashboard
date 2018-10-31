@@ -126,7 +126,7 @@ class ItemRecall extends React.Component{
           let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
           this.setState({
              copyPasteData:{
-              data:validatedSKUs,
+              data:validatedSKUs.processedData,
               focusedEl:"0"
             },
             validationDoneSKU,
@@ -240,24 +240,7 @@ else{
     
 
   }
-  componentWillReceiveProps(nextProps){
-    if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-      let skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes));
-      let validatedSKUs = this._processSkuAttributes(skuAttributes.data);
-      let validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
-      let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
-      this.setState({
-         copyPasteData:{
-          data:validatedSKUs.processedData,
-          focusedEl:"0",
-          selectionStart:0
-        },
-        validationDoneSKU,
-        allTuplesValid,
-        skuDetails:validatedSKUs.skuDetails
-      })
-    }
-  }
+
   _onOrderInputChange(e){
     let disableRecall = null;
     let {isInputEmpty,selectedOption} = this.state
@@ -339,8 +322,6 @@ ItemRecall.propTypes={
 const mapStateToProps = (state, ownProps)=>{
   return {
       auth_token:state.authLogin.auth_token,
-      skuAttributes: state.auditInfo.skuAttributes,
-      hasDataChanged:state.auditInfo.hasDataChanged,
       timeOffset:state.authLogin.timeOffset
   };
 };
