@@ -142,6 +142,12 @@ class OperationsLogTab extends React.Component {
                  * we'll show last 100 logs in a day.
                  * @type {()=>void}
                  */
+               var timePeriodObj={value:0,unit:''};
+                var timeperiod=nextProps.location.query.time_period;
+                if(timeperiod){
+                var timeperiodArray=timeperiod.split("_");
+                 timePeriodObj={value:timeperiodArray[0],unit:timeperiodArray[1]}
+                }
                 this.subscription = nextProps.data.subscribeToMore({
                     document: OPS_LOG_SUBSCRIPTION_QUERY,
                     variables: (function () {
@@ -153,7 +159,7 @@ class OperationsLogTab extends React.Component {
                                 ppsId: nextProps.location.query.pps_id,
                                 operatingMode: nextProps.location.query.operatingMode ? (Array.isArray(nextProps.location.query.operatingMode) ? nextProps.location.query.operatingMode : [nextProps.location.query.operatingMode]) : null,
                                 status: nextProps.location.query.status ? (Array.isArray(nextProps.location.query.status) ? nextProps.location.query.status : [nextProps.location.query.status]) : null,
-                                timePeriod: {value: 1, unit: 'd'},
+                                timePeriod: timePeriodObj,
                                 page: 0,
                                 PAGE_SIZE: 100
                             }
@@ -226,7 +232,7 @@ class OperationsLogTab extends React.Component {
                     timePeriod: this.props.location.query.time_period ? {
                         value: this.props.location.query.time_period.split("_")[0],
                         unit: this.props.location.query.time_period.split("_")[1]
-                    } : {value: 1, unit: 'd'}
+                    } : {value: 0, unit: ''}
                 }
             },
             fetchPolicy: 'network-only'
@@ -253,7 +259,7 @@ class OperationsLogTab extends React.Component {
                         timePeriod: self.props.location.query.time_period ? {
                             value: self.props.location.query.time_period.split("_")[0],
                             unit: self.props.location.query.time_period.split("_")[1]
-                        } : {value: 1, unit: 'd'},
+                        } : {value: 0, unit: ''},
                         page: page,
                         PAGE_SIZE: 25
                     }
@@ -459,7 +465,7 @@ const withQuery = graphql(OPS_LOG_QUERY, {
                     timePeriod: location.query.time_period ? {
                         value: location.query.time_period.split("_")[0],
                         unit: location.query.time_period.split("_")[1]
-                    } : {value: 1, unit: 'd'}
+                    } : {value:0 , unit: ""}
                 }
             }
         }()),

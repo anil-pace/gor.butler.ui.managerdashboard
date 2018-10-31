@@ -133,7 +133,7 @@ class AuditTab extends React.Component {
         }
 
 
-        if(JSON.stringify(this.props.AuditList)!==JSON.stringify(nextProps.AuditList) && !nextProps.dataFromWS ){
+        if((JSON.stringify(this.props.AuditList)!==JSON.stringify(nextProps.AuditList) && !nextProps.dataFromWS)||(nextProps.socketAuthorized && nextProps.AuditList.length==0)){ 
             this.setState({AuditList:nextProps.AuditList});
             this.props.setAuditDetails(nextProps.AuditList);
             this.setState({totalAudits:nextProps.TotalResults});
