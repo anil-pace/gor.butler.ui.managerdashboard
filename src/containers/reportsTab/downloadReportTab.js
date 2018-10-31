@@ -3,10 +3,13 @@ import { FormattedMessage,FormattedDate} from 'react-intl';
 import { connect } from 'react-redux';
 import Dimensions from 'react-dimensions';
 import {withRouter} from 'react-router';
-import {WS_ONSEND,GET,APP_JSON,DEFAULT_PAGE_SIZE_OL,REPORTS_FETCH,GET_REPORT} from '../../constants/frontEndConstants';
+import {WS_ONSEND,GET,APP_JSON,
+    DEFAULT_PAGE_SIZE_OL,REPORTS_FETCH,GET_REPORT} from '../../constants/frontEndConstants';
+import {wsOverviewData} from '../../constants/initData.js';
 import {REPORTS_URL,DOWNLOAD_REPORT} from '../../constants/configConstants';
 import {makeAjaxCall} from '../../actions/ajaxActions';
 import {setDownloadReportSpinner} from '../../actions/downloadReportsActions';
+import { setWsAction} from '../../actions/socketActions'
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag';
 import DownloadReportTable from './DownloadReportTable';
@@ -36,10 +39,23 @@ const DOWNLOAD_REPORT_QUERY = gql`
 class DownloadReportTab extends React.Component{
     constructor(props,context) {
         super(props,context);
-        this.state={page:4,loading:false};
+        this.state={page:4,loading:false,legacyDataSubscribed:false};
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
         
     }
-        _processData(data){
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
+    }
+    componentWillReceiveProps(nextProps) {
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
+        }
+    }
+    _processData(data){
             if(data){   
         var processedData = [],
         datalen = data.length,
@@ -192,17 +208,15 @@ class DownloadReportTab extends React.Component{
     }
 };
 
-DownloadReportTab.propTypes = {
-   
-}
+
 DownloadReportTab.defaultProps = {
-  timeOffset:"",
- 
+  timeOffset:""
 }
 
 function mapStateToProps(state, ownProps) {
     return {
-        timeOffset: state.authLogin.timeOffset
+        timeOffset: state.authLogin.timeOffset,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -242,7 +256,10 @@ function mapDispatchToProps(dispatch){
     return {
         
         makeAjaxCall: function(params){dispatch(makeAjaxCall(params));},
-        setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));}
+        setDownloadReportSpinner:function(data){dispatch(setDownloadReportSpinner(data));},
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
     }
 };
 

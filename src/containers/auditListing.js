@@ -123,10 +123,6 @@ class AuditTab extends React.Component {
         this.props.setAuditDetails(this.state.AuditList);
     }
 
-    componentWillUnmount(){
-    }
- 
-
     componentWillReceiveProps(nextProps) { 
         if(nextProps.socketAuthorized && nextProps.auditRefreshFlag!==this.props.auditRefreshFlag)   {
             this._refreshList(nextProps.location.query);

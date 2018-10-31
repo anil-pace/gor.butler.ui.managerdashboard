@@ -16,10 +16,13 @@ import {
     notifyFail,
 } from "./../../actions/validationActions";
 
+import { setWsAction} from '../../actions/socketActions'
 import {
     REQUEST_REPORT_SUCCESS,
     REQUEST_REPORT_FAILURE
 } from "../../constants/messageConstants";
+import {WS_ONSEND} from "../../constants/frontEndConstants";
+import {wsOverviewData} from '../../constants/initData.js';
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
 
@@ -64,7 +67,22 @@ class StorageSpaceTab extends React.Component{
         super(props,context);
         this.subscription = null;
         this.linked = false;
-        this.state={generateSlotReport:""};
+        this.state={generateSlotReport:"",legacyDataSubscribed:false};
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+    }
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
+        }
     }
 
     _processData(data){
@@ -190,7 +208,8 @@ const withQuery = graphql(SLOTS_QUERY, {
 
 function mapStateToProps(state, ownProps) {
     return {
-        username: state.authLogin.username
+        username: state.authLogin.username,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -203,6 +222,9 @@ var mapDispatchToProps=function (dispatch) {
         ,
         notifyFail: function (data) {
             dispatch(notifyFail(data));
+        },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
         }
     }
 };

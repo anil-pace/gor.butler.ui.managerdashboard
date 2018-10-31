@@ -3,15 +3,18 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
+import {connect} from 'react-redux';
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
 import {modal} from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
 import {FormattedMessage} from 'react-intl'
-import {PPS_STATUS_FCLOSE} from './../../constants/frontEndConstants'
+import {PPS_STATUS_FCLOSE,WS_ONSEND} from './../../constants/frontEndConstants'
+import {wsOverviewData} from '../../constants/initData';
 import Spinner from './../../components/spinner/Spinner';
 import SaveApplyProfile from './saveApplyProfile'
+import {setWsAction} from '../../actions/socketActions';
 
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
@@ -20,7 +23,11 @@ import gql from 'graphql-tag'
 class PPSConfiguration extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {subscribed: false, currentView: 'tags', ppsList: []}
+        this.state = {legacyDataSubscribed: false, currentView: 'tags', ppsList: []}
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+    }
+     _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -30,6 +37,13 @@ class PPSConfiguration extends React.Component {
          */
         if (JSON.stringify(this.state.ppsList) !== JSON.stringify(nextProps.ppsList)) {
             this.setState({ppsList: nextProps.ppsList})
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
         }
     }
 
@@ -651,7 +665,22 @@ const withCancelPPSProfileMutations = graphql(CANCEL_PROFILE_CHANGES_MUTATION, {
         },
     }),
 });
-
+const mapStateToProps = (state, ownProps)=>{
+    return {
+        controllers:state.sysControllersReducer.controllers || [],
+        hasDataChanged:state.sysControllersReducer.hasDataChanged,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
+        
+    };
+}
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
+    }
+}
 
 export default compose(
     withQuery,
@@ -662,6 +691,6 @@ export default compose(
     savePPSProfileMutation,
     withPPSProfileSavedMutations,
     withCancelPPSProfileMutations,
-    createPPSProfileMutation)(PPSConfiguration);
+    createPPSProfileMutation)(connect(mapStateToProps,mapDispatchToProps)(PPSConfiguration));
 
 

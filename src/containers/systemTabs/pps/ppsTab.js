@@ -788,7 +788,7 @@ PPS.PropTypes={
 function mapStateToProps(state, ownProps) {
     return {
         intlMessages: state.intl.messages,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -801,7 +801,7 @@ function mapDispatchToProps(dispatch) {
         },
         initDataSentCall: function (data) {
             dispatch(setWsAction({type: WS_ONSEND, data: data}));
-        },
+        }
     };
 }
 

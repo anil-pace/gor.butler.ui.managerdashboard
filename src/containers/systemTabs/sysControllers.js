@@ -18,6 +18,7 @@ import {
     OperatingModeCell
 } from '../../components/commonFunctionsDataTable';
 import {defineMessages} from 'react-intl';
+import {wsOverviewData} from '../../constants/initData.js';
 import {withRouter} from 'react-router';
 import {stringConfig} from '../../constants/backEndConstants';
 import {GOR_STATUS, GOR_STATUS_PRIORITY, GOR_TABLE_HEADER_HEIGHT,WS_ONSEND} from '../../constants/frontEndConstants';
@@ -88,9 +89,13 @@ const SUBSCRIPTION_QUERY = gql`subscription SYSTEM_CONTROLLER_CHANNEL($controlle
 class SystemControllers extends React.Component {
     constructor(props,context) {
         super(props,context);
-        this.state={query: null};
+        this.state={query: null,legacyDataSubscribed:false};
         this.subscription = null;
         this.linked = false; 
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+    }
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
 
@@ -103,8 +108,6 @@ class SystemControllers extends React.Component {
             document: SUBSCRIPTION_QUERY,
             notifyOnNetworkStatusChange: true,
             updateQuery: (previousResult, newResult) => {
-                console.log(newResult)
-
                 return Object.assign({}, {
                     SystemControllerList: {list: newResult.subscriptionData.data.SystemControllerList.list}
                 })
@@ -187,6 +190,13 @@ class SystemControllers extends React.Component {
                 queryApplied:Object.keys(nextProps.location.query).length ? true :false
             })
         }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
+        }
     }
     componentWillMount(){
         if(this.props.socketAuthorized && !this.state.subscribed){
@@ -250,6 +260,13 @@ function mapStateToProps(state, ownProps) {
         
     };
 }
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
+    }
+}
 
 
 
@@ -273,4 +290,4 @@ const withQuery = graphql(SYSTEM_CONTROLLER_QUERY, {
 
 export default compose(
     withQuery
-)(connect(mapStateToProps)(Dimensions()(withRouter(SystemControllers))));
+)(connect(mapStateToProps,mapDispatchToProps)(Dimensions()(withRouter(SystemControllers))));

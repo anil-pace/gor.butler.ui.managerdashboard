@@ -1,4 +1,4 @@
-   import React  from 'react';
+import React  from 'react';
 import ButlerBotsTable from './ButlerBotsTable';
 import {connect} from 'react-redux';
 import {FormattedMessage} from 'react-intl';
@@ -12,8 +12,10 @@ import {
 } from '../../constants/frontEndConstants';
 import Spinner from '../../components/spinner/Spinner';
 import {setButlerSpinner} from  '../../actions/spinnerAction';
+import {wsOverviewData} from '../../constants/initData.js';
 import {defineMessages} from 'react-intl';
 import ButlerBotFilter from './butlerBotFilter';
+import { setWsAction} from '../../actions/socketActions'
 import FilterSummary from '../../components/tableFilter/filterSummary'
 import {graphql, withApollo, compose} from "react-apollo";
 import gql from 'graphql-tag'
@@ -138,7 +140,7 @@ class ButlerBot extends React.Component {
 
      constructor(props) {
         super(props);
-        this.state = {query: null}
+        this.state = {query: null,legacyDataSubscribed:false}
         // keep track of subscription handle to not subscribe twice.
         // we don't need to unsubscribe on unmount, because the subscription
         // gets stopped when the query stops.
@@ -148,7 +150,9 @@ class ButlerBot extends React.Component {
     }
 
 
-
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location && nextProps.location.query && (!this.state.query || (JSON.stringify(nextProps.location.query) !== JSON.stringify(this.state.query)))) {
@@ -160,6 +164,13 @@ class ButlerBot extends React.Component {
 
         if (this.props.data && (!this.props.data.ButlerBotsList && nextProps.data.ButlerBotsList && !this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
         }
 
     }
@@ -528,7 +539,7 @@ class ButlerBot extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         intlMessages: state.intl.messages,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -538,6 +549,9 @@ var mapDispatchToProps=function (dispatch) {
         setButlerSpinner: function (data) {
             dispatch(setButlerSpinner(data))
         },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
     
     };
 }

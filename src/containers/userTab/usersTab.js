@@ -4,15 +4,17 @@ import {connect} from 'react-redux';
 import {defineMessages} from 'react-intl';
 import {stringConfig} from '../../constants/backEndConstants'
 import {
-    INITIAL_HEADER_ORDER,
+    INITIAL_HEADER_ORDER,WS_ONSEND
 } from '../../constants/frontEndConstants';
 import {hashHistory} from 'react-router'
 import {modal} from 'react-redux-modal';
 import AddUser from './addNewUser';
 import UserFilter from './userFilter';
+import {wsOverviewData} from '../../constants/initData';
 import {FormattedMessage} from 'react-intl';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 import {graphql, withApollo, compose} from "react-apollo";
+import {setWsAction} from '../../actions/socketActions';
 
 import gql from 'graphql-tag'
 //Mesages for internationalization
@@ -114,13 +116,17 @@ const USERS_QUERY = gql`
 class UsersTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {query: null}
+        this.state = {query: null,legacyDataSubscribed: false}
         // keep track of subscription handle to not subscribe twice.
         // we don't need to unsubscribe on unmount, because the subscription
         // gets stopped when the query stops.
         this.subscription = null;
         this.linked = false,
-            this.showUserFilter = this.props.showUserFilter.bind(this)
+        this.showUserFilter = this.props.showUserFilter.bind(this)
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this)
+    }
+     _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -133,6 +139,13 @@ class UsersTab extends React.Component {
 
         if ((!this.props.data.UserList && nextProps.data.UserList && !this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
         }
 
     }
@@ -436,12 +449,20 @@ class UsersTab extends React.Component {
 ;
 
 
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state, ownProps)=> {
 
     return {
         userSortHeader: state.sortHeaderState.userHeaderSort || "role",
         userSortHeaderState: state.sortHeaderState.userHeaderSortOrder || INITIAL_HEADER_ORDER,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
+}
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
+    }
 }
 
 UsersTab.contextTypes = {
@@ -551,7 +572,7 @@ export default compose(
     setFilterApplied,
     setFilterState,
     withQuery
-)(connect(mapStateToProps)(UsersTab));
+)(connect(mapStateToProps,mapDispatchToProps)(UsersTab));
 
 
 

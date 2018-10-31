@@ -69,10 +69,14 @@ const SUBSCRIPTION_QUERY = gql`subscription CHARGER_CHANNEL($charger_id: String)
 class ChargingStations extends React.Component {
     constructor(props) {
         super(props);
-        this.state={query: null}
+        this.state={query: null,legacyDataSubscribed:false}
         this.subscription = null;
         this.linked = false,
-            this.showChargingStationFilter = this.props.showChargingStationFilter.bind(this)
+        this.showChargingStationFilter = this.props.showChargingStationFilter.bind(this);
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+    }
+    _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     _processChargersData(data) {
@@ -144,6 +148,13 @@ class ChargingStations extends React.Component {
 
         if (this.props.data && (!this.props.data.ChargingStationList && nextProps.data.ChargingStationList && !this.subscription && !nextProps.data.loading)) {
             this.updateSubscription(nextProps.location.query)
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
         }
     }
 
@@ -345,7 +356,8 @@ function mapStateToProps(state, ownProps) {
 
     return {
         csSpinner: state.spinner.csSpinner || false,
-        intlMessages: state.intl.messages
+        intlMessages: state.intl.messages,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 
@@ -354,6 +366,9 @@ var mapDispatchToProps=function (dispatch) {
         
         setCsSpinner: function (data) {
             dispatch(setCsSpinner(data));
+        },
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
         }
         
     };

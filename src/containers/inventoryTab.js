@@ -3,6 +3,7 @@
  * This will be switched based on tab click
  */
 import React  from 'react';
+import {connect} from 'react-redux';
 import {
     INVENTORY_HISTOGRAM_CONFIG,
     LEGEND_ROUND,
@@ -10,9 +11,11 @@ import {
     INV_LINE_LEGEND_CONFIG,
     INV_LINE_LEGEND_IPUT_COLOR,
     INV_HIST_LEGEND_COLOR,
-    INV_HIST_LEGEND_CONFIG, CATEGORY_COLOR_MAP
+    INV_HIST_LEGEND_CONFIG, CATEGORY_COLOR_MAP,WS_ONSEND
 } from './../constants/frontEndConstants';
 import Legend from './../components/legend/legend';
+import { setWsAction} from './../actions/socketActions'
+import {wsOverviewData} from './../constants/initData.js';
 import InventoryHistogram from './inventoryTab/inventoryHistogram'
 import PickPutLineGraph from './../components/inventory/pickPutLineGraph'
 import SnapShot from './../components/inventory/snapShot'
@@ -54,13 +57,18 @@ const InventoryHistorySubscription = gql`
 class InventoryTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formattedData: null, selectedData: null}
+        this.state = {formattedData: null, selectedData: null,legacyDataSubscribed:false}
         this.subscription = null
+        this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+
     }
 
     _onClickCallBack(data) {
         this.props.setInventoryDate(data.customData);
 
+    }
+     _subscribeLegacyData() {
+        this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -70,6 +78,13 @@ class InventoryTab extends React.Component {
 
         if (!this.subscription && nextProps.subscribeToMore) {
             this.updateSubscription(nextProps.subscribeToMore, {})
+        }
+        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
+            this.setState(()=>{
+                return{legacyDataSubscribed:true}
+            },()=>{
+                this._subscribeLegacyData()
+            })
         }
     }
 
@@ -140,7 +155,10 @@ class InventoryTab extends React.Component {
             this.setState({selectedData: this.state.formattedData[timeStamp].otherInfo})
         } else {
             let firstIndexData = Object.keys(this.state.formattedData)[0]
-            this.setState({selectedData: this.state.formattedData[firstIndexData].otherInfo})
+            if(firstIndexData){
+                this.setState({selectedData: this.state.formattedData[firstIndexData].otherInfo})
+            }
+            
         }
 
     }
@@ -277,8 +295,25 @@ const withNetworkData = graphql(InventoryHistoryQuery, {
     }),
 })
 
+const mapStateToProps = function(state, ownProps) {
+
+    return {
+        intlMessages: state.intl.messages,
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
+    };
+}
+
+const mapDispatchToProps=function (dispatch) {
+    return {
+        initDataSentCall: function (data) {
+            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+        }
+        
+    };
+}
+
 
 export default compose(
     withNetworkData
-)(InventoryTab);
+)(connect(mapStateToProps, mapDispatchToProps)(InventoryTab));
 

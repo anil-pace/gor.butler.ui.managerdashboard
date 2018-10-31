@@ -61,6 +61,7 @@ class ValidateSelAtt extends React.Component{
    this._onFilterSelection = this._onFilterSelection.bind(this);
    this._deleteTuples = this._deleteTuples.bind(this);
    this._onAttributeSelection = this._onAttributeSelection.bind(this);
+   this._onAttributeCheck = this._onAttributeCheck.bind(this);
    this._searchCallBack = this._searchCallBack.bind(this);
    this._resetStateData = this._resetStateData.bind(this);
    this._onBackClick = this._onBackClick.bind(this);
@@ -84,7 +85,8 @@ class ValidateSelAtt extends React.Component{
    selectionStart = event.target.selectionStart,
    processedList=[],
    stateInputList = JSON.parse(JSON.stringify(this.state.copyPasteData.data)),
-   focusedEl = id ? id.toString() : "0";
+   focusedEl = id ? id.toString() : "0",
+   isInputFilled=false;
    
    if(inputList.length > 1){
     for(let i=0,len=inputList.length; i < len;i++){
@@ -94,6 +96,7 @@ class ValidateSelAtt extends React.Component{
       tuple.visible=true;
       tuple.value=inputList[i];
       tuple.errorMessage = "";
+      isInputFilled = !isInputFilled && inputList[i].trim() ? true : false
       processedList.push(tuple);
    }
     stateInputList = processedList;
@@ -105,6 +108,7 @@ class ValidateSelAtt extends React.Component{
     tuple.visible=true;
     stateInputList.splice(id, 1, tuple);
     focusedEl = id.toString();
+    isInputFilled=!isInputFilled && input ? true : false;
    }
    this.setState({
       copyPasteData:{
@@ -112,7 +116,11 @@ class ValidateSelAtt extends React.Component{
         selectionStart,
         focusedEl
       },
-      isInputEmpty: stateInputList[0].value.trim() !=='' ? false : true
+      isInputEmpty: !isInputFilled
+    },()=>{
+      if(this.props.callBack){
+        this.props.callBack({...this.state})
+      }
     })
 } 
   _addNewInput(type){
@@ -283,6 +291,10 @@ class ValidateSelAtt extends React.Component{
         focusedEl:"0",
         selectionStart:this.state.copyPasteData.selectionStart
       }
+    },()=>{
+      if(this.props.callBack){
+        this.props.callBack({...this.state})
+      }
     })
     
     
@@ -294,12 +306,23 @@ class ValidateSelAtt extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    //var validationDoneSKU = this.props.skuAttributes && Object.keys(this.props.skuAttributes).length ? true : false;
-    //var allTuplesValid = (nextProps.skuAttributes && nextProps.skuAttributes.totalInvalid === 0) ? true : false;
       this.setState({
         ...nextProps
         
       }) 
+  }
+  _onAttributeCheck(event,index){
+    var copyPasteData = JSON.parse(JSON.stringify(this.state.copyPasteData.data));
+    var tuple = Object.assign({},copyPasteData[parseInt(index)]);
+    tuple.checked = event.target.checked;
+    copyPasteData.splice(parseInt(index), 1, tuple);
+      this.setState({
+      copyPasteData:{
+        data:copyPasteData,
+        focusedEl:this.state.copyPasteData.focusedEl,
+        selectionStart:this.state.copyPasteData.selectionStart
+      }
+    })
   }
 
  
@@ -411,7 +434,12 @@ class ValidateSelAtt extends React.Component{
              
                 
               </div>
-          {validationDoneSKU && <div><div className="gor-audit-inputlist-wrap" >
+          {validationDoneSKU && <div>
+            {!allTuplesValid && <div className="gor-sku-validation-btn-wrap">
+                 <button onClick={this._onBackClick} className={"gor-audit-edit-att"}><FormattedMessage id="audits.editSKUText" description='Text for editing a location' 
+                        defaultMessage='BACK TO EDIT'/></button>
+                 </div>}
+            <div className="gor-audit-inputlist-wrap" >
           <div className={"gor-audit-inputlist-cont "+self.state.panelClass}>
           <div className={"note-message"}>
                   <FormattedMessage id="audit.skuValidation.note" description='Audit location verification error message'
@@ -429,10 +457,11 @@ class ValidateSelAtt extends React.Component{
                         autoFocus = {focus} 
                         updateInput={self._updateInput} 
                         index={i}
+                        selectionStart = {self.state.copyPasteData.selectionStart}
                         allRowValid={allTuplesValid}
                         onAttributeCheck={self._onAttributeCheck}
                         checked={tuple.checked}
-                        errorMessage={!allTuplesValid ? tuple.errorMessage : true}  
+                        errorMessage={!allTuplesValid ? tuple.errorMessage : ""}  
                         value={tuple.value} placeholder={self.props.intl.formatMessage(messages.auditinputplaceholder)}/>
                         {allTuplesValid && attributeList.length > 0 && <SelectAttributes 
                           messages={attributeComponentMessages}
