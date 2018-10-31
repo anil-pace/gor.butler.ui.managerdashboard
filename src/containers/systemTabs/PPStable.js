@@ -338,8 +338,20 @@ class PPStable extends React.Component {
                                 </div>
                             </div>
                         }
-                        cell={  <PPSComponentCell checkboxColumn={"ppsId"} data={sortedDataList} checkState={checkState}
-                                               checked={checkedStatePps}/>}
+                        cell={<PPSComponentCell 
+                                    checkboxColumn={"ppsId"} 
+                                    data={sortedDataList} 
+                                    checkState={checkState}
+                                    childrenClass="requestedModeTxt_1" 
+                                    childColumnKey="pps_requested_mode" 
+                                    classKey={"operatingModeClass"}
+                                    checked={checkedStatePps}>
+                                        <span><FormattedMessage 
+                                                id="PPStable.ppsId.status"
+                                                description='PPStable.ppsIdStatus.text'
+                                                defaultMessage='bins active'/>
+                                        </span>
+                               </PPSComponentCell>}
                         fixed={true}
                         width={columnWidths.id}
                         isResizable={true}
@@ -390,10 +402,16 @@ class PPStable extends React.Component {
                                 </div>
                             </SortHeaderCell>
                         }
-                        cell={<TextCell data={sortedDataList}  childrenClass="requestedModeTxt" childColumnKey="pps_requested_mode" classKey={"operatingModeClass"}>
-                                <span ><FormattedMessage id="PPStable.requestedMode.text" description='PPStable.requestedMode.text'
-                                                          defaultMessage='Requested Mode: '
-                                                          /></span>
+                        cell={<TextCell 
+                                data={sortedDataList}  
+                                childrenClass="requestedModeTxt" 
+                                childColumnKey="pps_requested_mode" 
+                                classKey={"operatingModeClass"}>
+                                <span ><FormattedMessage 
+                                            id="PPStable.requestedMode.text"
+                                            description='PPStable.requestedMode.text'
+                                            defaultMessage='Requested Mode: '
+                                /></span>
                                 </TextCell>}
                         fixed={true}
                         width={columnWidths.operatingMode}

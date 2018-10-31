@@ -58,6 +58,11 @@ const messages=defineMessages({
         description: "prefix for pps id in ppsDetail",
         defaultMessage: "PPS-{ppsId}"
     },
+    namePrefixFooter: {
+        id: "ppsDetail.name.prefixFooter",
+        description: "prefix for pps id in ppsDetail",
+        defaultMessage: "PPSFOOTER-{ppsId}"
+    },
     perfPrefix: {
         id: "ppsDetail.performance.prefix.items",
         description: "prefix for pps id in ppsDetail",
@@ -213,7 +218,7 @@ class PPS extends React.Component {
         var nProps=this;
         var data=nProps.props.PPSDetail.PPStypeDetail;
         
-        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
+        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE, PPS_footer;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
@@ -227,6 +232,7 @@ class PPS extends React.Component {
             ppsId=data[i].pps_id;
             performance=(data[i].performance < 0 ? 0 : data[i].performance);
             PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
+            PPS_footer = nProps.context.intl.formatMessage(messages.namePrefixFooter, {"ppsId": ppsId});
             OPEN=nProps.context.intl.formatMessage(stringConfig.open);
             CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
             FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
