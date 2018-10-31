@@ -45,7 +45,7 @@ async function asyncCall() {
 
 export const subscriptionLink = (config = {}) =>
     new WebSocketLink({
-        uri:`ws://${WS_GRAPHQL_URL}:3020/subscriptions`,
+        uri:WS_GRAPHQL_URL,
         options: { reconnect: true,connectionParams: () => {
             return { 'auth_token': sessionStorage.getItem("auth_token") }
         } },

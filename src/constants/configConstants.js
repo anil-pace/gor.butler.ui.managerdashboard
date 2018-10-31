@@ -18,9 +18,9 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
-
+export const WS_GRAPHQL_ENDPOINT = "/subscriptions";
 export const GRAPHQL_URL = `${PROTOCOL}${BASE_URL}/graphql`;
-export const WS_GRAPHQL_URL = BASE_URL;
+export const WS_GRAPHQL_URL = `${WS_PROTOCOL}${BASE_URL}${WS_GRAPHQL_ENDPOINT}`;
 
 
 
