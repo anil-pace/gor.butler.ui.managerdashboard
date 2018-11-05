@@ -623,8 +623,8 @@ class UtilityTab extends React.Component {
                         tileHead={this.context.intl.formatMessage(
                             messages.shipmentClosureHeader
                         )}
-                        showFooter={true}
-                        enableButton={true}
+                        //showFooter={true}
+                        //enableButton={true}
                     >
                         <ShipmentClosure
                             validatedInvoice={this.props.validatedInvoice}
