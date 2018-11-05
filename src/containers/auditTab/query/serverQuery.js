@@ -272,3 +272,12 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
   }
 }
 `;
+
+
+export const INVENTORY_STOCK_LEDGER_QUERY = gql`query InventoryStockLedger($input: InventoryStockLedgerParams) {
+  InventoryStockLedger(input:$input){
+      list 
+  }
+}
+`;  
+

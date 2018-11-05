@@ -49,6 +49,8 @@ import {FormattedMessage} from "react-intl";
 import {graphql, withApollo, compose} from "react-apollo";
 
 import gql from 'graphql-tag'
+import {INVENTORY_STOCK_LEDGER_QUERY} from '../containers/auditTab/query/serverQuery';
+import {saveFile} from '../utilities/utils'
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -363,41 +365,31 @@ class UtilityTab extends React.Component {
      * @private
      */
     _downloadStockLedger() {
+        var _this=this;
         let params = [];
-        if (this.state.stockLedgerState.sku) {
-            params.push(["sku", this.state.stockLedgerState.sku].join("="));
-            params.push(["all", "false"].join("="));
-        } else {
-            params.push(["all", "true"].join("="));
-        }
-        params.push(
-            [
-                "today",
-                this.state.stockLedgerState.duration.today ? "true" : "false"
-            ].join("=")
-        );
-        params.push(
-            [
-                "yesterday",
-                this.state.stockLedgerState.duration.yesterday
-                    ? "true"
-                    : "false"
-            ].join("=")
-        );
-
-        var url = STOCK_LEDGER_REPORT_DOWNLOAD_URL;
-        url = [url, params.join("&")].join("?");
-        let data = {
-            url: url,
-            method: GET,
-            token: this.props.auth_token,
-            cause: DOWNLOAD_STOCK_LEDGER_REPORT,
-            responseType: "arraybuffer",
-            accept: "text/csv"
-        };
-        this.props.setStockLedgerSpinner(true);
-        this.props.downloadStockLedgerReport(data);
-        this.props.validateInvoiceID(false);
+        let sku=this.state.stockLedgerState.sku;
+        let durationToday=this.state.stockLedgerState.duration.today
+        let durationYesterday=this.state.stockLedgerState.duration.yesterday
+        
+        this.props.client.query({
+            query:INVENTORY_STOCK_LEDGER_QUERY,
+              variables: (function () {
+              return {
+                input: {
+                    sku:sku,
+                    durationToday:durationToday,
+                    durationYesterday:durationYesterday
+                    }
+              }
+          }()),
+            fetchPolicy: 'network-only'
+          }).then(data=>{
+            _this.props.setStockLedgerSpinner(true);
+            saveFile(data.data.InventoryStockLedger.list, 'fileName');
+            _this.props.setStockLedgerSpinner(false);
+            _this.props.validateInvoiceID(false);
+          })
+  
     }
 
     /**
