@@ -2,6 +2,7 @@ import React from "react";
 import UtilityTile from "../components/utilityComponents/utilityTile";
 import ItemRecall from "../containers/itemRecall/itemRecall";
 import MasterUploadTile from "../components/utilityComponents/masterUploadTile";
+import ShipmentClosure from "../components/utilityComponents/shipmentClosure";
 import {
     MASTER_UPLOAD_URL,
     UPLOAD_HISTORY_URL,
@@ -34,7 +35,8 @@ import {
     WS_ONSEND,
     DOWNLOAD_STOCK_LEDGER_REPORT,
     DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
-    APP_JSON
+    APP_JSON,
+    CLOSE_SHIPMENT
 } from "../constants/frontEndConstants";
 import {fileUploadMessages} from "../constants/messageConstants";
 
@@ -76,7 +78,13 @@ const messages = defineMessages({
         id: "utility.itemsRecall.head",
         description: "Recall Items",
         defaultMessage: "Recall Items"
+    },
+    shipmentClosureHeader: {
+        id: "utility.shipmentClosure.head",
+        description: "Shipment Closure",
+        defaultMessage: "Shipment Closure"
     }
+
 });
 
 class UtilityTab extends React.Component {
@@ -92,6 +100,27 @@ class UtilityTab extends React.Component {
             utilityTabRefreshed: null
         };
     }
+
+    _generateGRN(reqFileType, invoiceId) {
+        // var fileType = "csv";
+        // if (reqFileType) {
+        //   fileType = reqFileType;
+        // }
+        // if (!invoiceId) {
+        //   throw new Error("Did not receive the Invoice id for GRN generation!");
+        // }
+        // var url =
+        //   GR_REPORT_URL + "/" + invoiceId + "?sync=false&format=" + fileType;
+        // let data = {
+        //   url: url,
+        //   method: GET,
+        //   token: this.props.auth_token,
+        //   cause: GR_REPORT_RESPONSE,
+        //   responseType: "arraybuffer"
+        // };
+        // this.props.getGRdata(data);
+        // this.props.validateInvoiceID(false);
+      }
 
     _handleChangeSkuNumber(e) {
         if (e.target) {
@@ -469,6 +498,7 @@ class UtilityTab extends React.Component {
         let show_item_recall_scripts = false;
         let show_stock_ledger_widget = false;
         let show_stock_ledger_raw_transaction_widget = false;
+        let show_shipment_closure = true;
 
 
         try {
@@ -588,8 +618,21 @@ class UtilityTab extends React.Component {
                         {stockLedgerRawTransactionTile}
                     </UtilityTile>
                     : null}
-               
-
+                {show_shipment_closure
+                    ? <UtilityTile
+                        tileHead={this.context.intl.formatMessage(
+                            messages.shipmentClosureHeader
+                        )}
+                        showFooter={true}
+                        enableButton={true}
+                    >
+                        <ShipmentClosure
+                            validatedInvoice={this.props.validatedInvoice}
+                            generateReport={this._generateGRN.bind(this)}
+                            timeOffset={this.props.timeOffset}
+                    />
+                    </UtilityTile>
+                    : null}
             </div>
         );
     }
