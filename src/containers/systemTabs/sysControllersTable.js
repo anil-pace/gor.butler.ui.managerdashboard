@@ -131,7 +131,7 @@ class SysControllersTable extends React.Component {
                                     <div
                                         style={self.state.header[2].width ? {flex: '1 0 ' + self.state.header[2].width + "%"} : {}}
                                         className="cell">
-                                        {row.state_data.zone}
+                                        {row.zone_id}
                                     </div>
                                     <div
                                         style={self.state.header[3].width ? {flex: '1 0 ' + self.state.header[3].width + "%"} : {}}

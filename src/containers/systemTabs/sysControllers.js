@@ -3,6 +3,7 @@ import {Table, Column,Cell} from 'fixed-data-table';
 import Dimensions from 'react-dimensions'
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import SysControllersTable from './sysControllersTable';
 import {
@@ -41,8 +42,9 @@ const SYSTEM_CONTROLLER_QUERY = gql`
                 controller_id
                 status
                 enabled
+                zone_id
                 state_data{
-                    zone
+                    zone_id
                     zone_state{
                        hard_emergency 
                        latch_gate
@@ -66,8 +68,9 @@ const SUBSCRIPTION_QUERY = gql`subscription SYSTEM_CONTROLLER_CHANNEL($controlle
                 controller_id
                 status
                 enabled
+                zone_id
                 state_data{
-                    zone
+                    zone_id
                     zone_state{
                        hard_emergency 
                        latch_gate
@@ -93,6 +96,8 @@ class SystemControllers extends React.Component {
         this.subscription = null;
         this.linked = false; 
         this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
+        this._clearFilter = this._clearFilter.bind(this);
+        this._filterList = this._filterList.bind(this);
     }
     _subscribeLegacyData() {
         this.props.initDataSentCall(wsOverviewData["default"]);
@@ -144,16 +149,16 @@ class SystemControllers extends React.Component {
                     rowObj.ethernetText = this.context.intl.formatMessage(stringConfig.disconnected)
                 }
 
-                if(rowObj.state_data.sensor_activated === "button_press"){
+                if(rowObj.state_data && rowObj.state_data.sensor_activated === "button_press"){
                     rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.state_data.sensor_activated]
                 }
-                if(rowObj.state_data.sensor_activated === "none"){
+                if(rowObj.state_data && rowObj.state_data.sensor_activated === "none"){
                     rowObj.sensor_activated_text = "";
                 }
                 else{
-                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.state_data.sensor_activated];
+                    rowObj.sensor_activated_text = CONTROLLER_SENSOR_TRIGGERED_MESSAGES[rowObj.state_data ? rowObj.state_data.sensor_activated : ""];
                 }
-                rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.state_data.action_triggered];
+                rowObj.action_triggered_text = CONTROLLER_ACTION_TRIGGERED_MESSAGES[rowObj.state_data ? rowObj.state_data.action_triggered: ""];
                 
                 processedData.push(rowObj)
             }
@@ -172,22 +177,24 @@ class SystemControllers extends React.Component {
     }
 
 
+
     componentWillReceiveProps(nextProps) {
-        if((nextProps.socketAuthorized && !this.state.subscribed) || (JSON.stringify(this.props.location.query) !== JSON.stringify(nextProps.location.query))){
+        if(nextProps.socketAuthorized && !this.state.subscribed ){
             this.setState({
                 subscribed:true,
-                queryApplied:Object.keys(this.props.location.query).length ? true :false
-            },function(){
-                this._refreshList(nextProps.location.query)
+                queryApplied:Object.keys(nextProps.location.query).length ? true :false
+            },()=>{
+                this.updateSubscription(nextProps.location.query)
             })
         }
-        if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-            let data = this._processData(nextProps.controllers.slice(0));
-            let dataList = new tableRenderer(data.length)
-            dataList.newData=data;
-            this.setState({
-                dataList,
-                queryApplied:Object.keys(nextProps.location.query).length ? true :false
+        if(JSON.stringify(this.props.location.query) !== JSON.stringify(nextProps.location.query)){
+            this.setState((state, props)=>{
+                const queryApplied = Object.keys(props.location.query).length ? true :false
+                return{
+                    queryApplied
+                }
+            },()=>{
+                this.updateSubscription(nextProps.location.query)
             })
         }
         if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
@@ -198,7 +205,7 @@ class SystemControllers extends React.Component {
             })
         }
     }
-    componentWillMount(){
+    /*componentWillMount(){
         if(this.props.socketAuthorized && !this.state.subscribed){
             this.setState({
                 subscribed:true,
@@ -207,17 +214,29 @@ class SystemControllers extends React.Component {
                 this._refreshList(this.props.location.query)
             })
         }
+    }*/
+ _filterList(data,filters){
+    return data.filter((datum)=>{
+        if(filters.zone_id === datum.zone_id){
+            return true
+        }
+        return false
+    })
+ }
+ _clearFilter() {
+        hashHistory.push({pathname: "/system/sysControllers", query: {}})
     }
- 
    
 
     render() {
-        var {dataList} = this.state;
-        var filterHeight=screen.height - 190 - 50;
-       var data=this._processData(this.props.systemControllerList);
+        const {dataList,queryApplied} = this.state;
+        const filterHeight=screen.height - 190 - 50;
+        const controllerData = !this.props.data.loading ? this.props.data.SystemControllerList.list : [];
+        var data = queryApplied ? this._filterList(controllerData.slice(0),this.props.location.query) : controllerData;
+        data= this._processData(data);
 
 
-        if(data!==undefined){
+        if(data.length){
         return (
             
            <div  className="gorTableMainContainer gor-sys-controller">
@@ -232,7 +251,15 @@ class SystemControllers extends React.Component {
                                 </div>
                         
                 </div>
-               
+               <FilterSummary total={data.length||0} isFilterApplied={queryApplied} responseFlag={null}
+                                           filterText={<FormattedMessage id="sysControllerList.filter.search.bar"
+                                                                         description='total pps for filter search bar'
+                                                                         defaultMessage='{total} Controllers found'
+                                                                         values={{total: data.length || 0}}/>}
+                                           refreshList={this._clearFilter}
+                                           refreshText={<FormattedMessage id="sysControllerList.filter.search.bar.showall"
+                                                                          description="button label for show all"
+                                                                          defaultMessage="Show all Controllers"/>}/>
                 
                 <SysControllersTable data={data}/>
                {!data.length && <div className="gor-no-data"><FormattedMessage id="sysControllers.table.noData"
@@ -253,11 +280,7 @@ SystemControllers.contextTypes={
 }
 function mapStateToProps(state, ownProps) {
     return {
-        controllers:state.sysControllersReducer.controllers || [],
-        hasDataChanged:state.sysControllersReducer.hasDataChanged,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
-        
+        socketAuthorized: state.recieveSocketActions.socketAuthorized
     };
 }
 const mapDispatchToProps = (dispatch)=>{
@@ -272,14 +295,7 @@ const mapDispatchToProps = (dispatch)=>{
 
 
 const withQuery = graphql(SYSTEM_CONTROLLER_QUERY, {
-    props: function(data){
-        if(!data || !data.data.SystemControllerList || !data.data.SystemControllerList.list){
-            return {}
-        }
-        return {
-            systemControllerList: data.data.SystemControllerList.list
-        }
-    },
+    props: (data) => (data),
     options: ({match, location}) => ({
         variables: {},
         fetchPolicy: 'network-only'

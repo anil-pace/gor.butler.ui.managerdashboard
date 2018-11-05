@@ -129,24 +129,22 @@ class PPS extends React.Component {
         }
         if (query.pps_status) {
             filterSubsData["pps_status"]=query.pps_status.constructor === String ? [query.pps_status] : query.pps_status
-            //delete filterSubsData["pps_status"];
+            
         }
         if (query.current_task) {
             filterSubsData["current_task"]=query.current_task.constructor === String ? [query.current_task] : query.current_task;
-            //delete filterSubsData["mode"];
+            
         }
 
         if(query.minRange||query.maxRange){
             filterSubsData["performance"]=[query.minRange,query.maxRange]
-            //delete filterSubsData["minRange"];
-            //delete filterSubsData["maxRange"];
         }
 
         if (Object.keys(query).filter(function(el){return el!=='page'}).length !== 0) {
-            //this.props.togglePPSFilter(true);
+           
             this.props.filterApplied(true);
         } else {
-           // this.props.togglePPSFilter(false);
+          
             this.props.filterApplied(false);
         }
         
