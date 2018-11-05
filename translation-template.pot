@@ -5408,6 +5408,11 @@ msgstr ""
         msgid "Recall Items"
         msgstr ""
 
+        #: utility.shipmentClosure.head
+        msgctxt "utility.shipmentClosure.head"
+        msgid "Shipment Closure"
+        msgstr ""
+
         #: utility.stockLedger.category.all
         msgctxt "utility.stockLedger.category.all"
         msgid "All"
