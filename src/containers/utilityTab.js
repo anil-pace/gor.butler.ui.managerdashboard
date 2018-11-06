@@ -39,17 +39,13 @@ import {
 import {fileUploadMessages} from "../constants/messageConstants";
 
 import {defineMessages} from "react-intl";
-import {
-    updateSubscriptionPacket,
-    setWsAction
+import {updateSubscriptionPacket,setWsAction
 } from "./../actions/socketActions";
 import {wsOverviewData} from "./../constants/initData.js";
 import {FormattedMessage} from "react-intl";
-
 import {graphql, withApollo, compose} from "react-apollo";
-
 import gql from 'graphql-tag'
-import {INVENTORY_STOCK_LEDGER_QUERY} from '../containers/auditTab/query/serverQuery';
+import {INVENTORY_STOCK_LEDGER_QUERY,STOCK_LEDGER_RAW_TRANSACTION_QUERY} from '../containers/serverQuery';
 import {saveFile} from '../utilities/utils'
 
 //Mesages for internationalization
@@ -399,17 +395,23 @@ class UtilityTab extends React.Component {
      * @private
      */
     _downloadStockLedgerRawTransactions() {
-        let url = STOCK_LEDGER_REPORT_DOWNLOAD_RAW_TRANSACTIONS_URL;
-        let data = {
-            url: url,
-            method: GET,
-            token: this.props.auth_token,
-            cause: DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
-            responseType: "arraybuffer",
-            accept: "text/csv"
-        };
-        this.props.setStockLedgerRawTransactionsSpinner(true);
-        this.props.downloadStockLedgerRawTransactionsReport(data);
+        var _this=this;
+        this.props.client.query({
+            query:STOCK_LEDGER_RAW_TRANSACTION_QUERY,
+              variables: (function () {
+              return {
+                input: {
+                   data:""
+                    }
+              }
+          }()),
+            fetchPolicy: 'network-only'
+          }).then(data=>{
+            _this.props.setStockLedgerRawTransactionsSpinner(true);
+            var fileName=data.data.StockLedgerRawTransaction.fileName||"";
+            saveFile(data.data.StockLedgerRawTransaction.reponseData, fileName);
+            _this.props.setStockLedgerRawTransactionsSpinner(false);
+          })
     }
 
     _onMDMRefresh() {
