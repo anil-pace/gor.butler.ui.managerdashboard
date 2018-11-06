@@ -205,16 +205,7 @@ class SystemControllers extends React.Component {
             })
         }
     }
-    /*componentWillMount(){
-        if(this.props.socketAuthorized && !this.state.subscribed){
-            this.setState({
-                subscribed:true,
-                queryApplied:Object.keys(this.props.location.query).length ? true :false
-            },function(){
-                this._refreshList(this.props.location.query)
-            })
-        }
-    }*/
+   
  _filterList(data,filters){
     return data.filter((datum)=>{
         if(filters.zone_id === datum.zone_id){
