@@ -385,7 +385,8 @@ class UtilityTab extends React.Component {
             fetchPolicy: 'network-only'
           }).then(data=>{
             _this.props.setStockLedgerSpinner(true);
-            saveFile(data.data.InventoryStockLedger.list, 'fileName');
+            var fileName=data.data.InventoryStockLedger.fileName||"";
+            saveFile(data.data.InventoryStockLedger.reponseData, fileName);
             _this.props.setStockLedgerSpinner(false);
             _this.props.validateInvoiceID(false);
           })
