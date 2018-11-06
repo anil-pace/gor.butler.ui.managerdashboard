@@ -17,15 +17,19 @@ class OrderTile extends React.Component{
 
   _formatProgressBarMessage(pickedItems, totalItems){
       let message; 
-      if(pickedItems === 0 && totalItems === 0){
+      const numerator = (pickedItems)?pickedItems:0;
+      const denominator = (totalItems)?totalItems:0;
+      if(numerator === 0 && denominator === 0){
         message= (<FormattedMessage id="orders.fulfil.noProducts" description="default picked message" defaultMessage="No products to be picked"/>);
       }
-      else if(pickedItems === totalItems){ 
-          message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{total} products picked" values={{total:totalItems}} />);
-      }
-      else{
+      else if(numerator === denominator){ 
+          message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{total} products picked" values={{total:denominator}} />);
+      }else if (denominator === 0 && numerator>0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
+          message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
+          values={{total:numerator}} />);
+      }else {
           message = (<FormattedMessage id="orders.inProgress.status" description="status" defaultMessage="{current} of {total} products picked" 
-            values={{current:<span style={{fontWeight:"bold"}}>{pickedItems}</span>, total: <span style={{fontWeight:"bold"}}>{totalItems}</span>}} />);
+            values={{current:<span style={{fontWeight:"bold"}}>{numerator}</span>, total: <span style={{fontWeight:"bold"}}>{denominator}</span>}} />);
       }
       return message;
   }
@@ -37,9 +41,10 @@ class OrderTile extends React.Component{
       
       const picked_products_count = (orderFulfilData.picked_products_count)?Number(orderFulfilData.picked_products_count):0;
       const total_products_count = (orderFulfilData.total_products_count)?Number(orderFulfilData.total_products_count):0;
-      const avgProgress = (picked_products_count / total_products_count) * 100
+      let avgProgress = (picked_products_count / total_products_count) * 100
       // if we encounter NaN or Infinity situation in avgProgress
-      const progressWidth = Math.ceil(parseInt(avgProgress,10))>1? parseInt(avgProgress,10):100 ;
+      avgProgress = isFinite(avgProgress) ? avgProgress : 0
+      const progressWidth = Math.ceil(parseInt(avgProgress,10))>=0? parseInt(avgProgress,10):100 ;
       let formatProgressBarMessage = this._formatProgressBarMessage(picked_products_count,total_products_count);
       let backgroundColor = (this.props.pbtsData.length > 0 ? "#ffffff" : "#fafafa");
       if(this.props.fromDate && this.props.toDate){
