@@ -25,6 +25,14 @@ const OPEN_SHIPMENT_LIST_QUERY = gql`
     }
 `;
 
+const CLOSE_SHIPMENT_ID_QUERY = gql`
+  query($input:CloseShipmentParams){
+    CloseShipment(input:$input){
+        status
+    }
+  }
+`;
+
 class ShipmentClosure extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +45,7 @@ class ShipmentClosure extends React.Component {
   }
 
   _changeShipment(data) {
-    this.setState({ fileType: data.value});
+    this.setState({ fileType: data.value });
   }
 
   _getCurrentDropDownState(fileType, currentValue) {
@@ -49,28 +57,21 @@ class ShipmentClosure extends React.Component {
     return null;
   }
 
-  _closeShipment() {
-    alert(this.state.fileType);
+  _closeShipment(openShipmentId) {
     this.props.client.query({
-      query: UTILITIES_TAB_CLOSE_SHIPMENT_POST,
+      query: CLOSE_SHIPMENT_ID_QUERY,
       variables: (function () {
-          return {
-              input: {
-                  rack_id: rackId,    // HARD- CODED FOR NOW
-                  destination_type: destType  // HARD- CODED FOR NOW
-              }
+        return {
+          input: {
+            shipment_id: openShipmentId,    // HARD- CODED FOR NOW
           }
+        }
       }()),
       fetchPolicy: 'network-only'
-  }).then(data => {
+    }).then(data => {
+      this.setState({ fileType: null });
       this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
-      this.props.blockPutAndChangeTypeCallback();
-  })
-    // if (this.props.generateReport) {
-    //   this.props.generateReport(this.state.fileType, this.state.invoiceId);
-    // } else {
-    //   throw new Error("Could not get the callback here!");
-    // }
+    })
   }
 
   render() {
@@ -92,19 +93,19 @@ class ShipmentClosure extends React.Component {
 
     labelC1 = [{ value: 'any', label: <FormattedMessage id="msuConfig.token1.all" defaultMessage="Any" /> }];
 
-    if(fileTypeList){
-        fileTypeList.forEach((data) => {
-            labelC1.push(
-                {
-                    value: data,
-                    label: "Open Shipment: " + data
-                }
-            )
-        });
+    if (fileTypeList) {
+      fileTypeList.forEach((data) => {
+        labelC1.push(
+          {
+            value: data,
+            label: "Open Shipment: " + data
+          }
+        )
+      });
     }
 
-    let currentFileType = fileTypeList? this._getCurrentDropDownState(labelC1, this.state.fileType): null;
-   
+    let currentFileType = fileTypeList ? this._getCurrentDropDownState(labelC1, this.state.fileType) : null;
+
     return (
       <div>
         <UtilityDropDown
@@ -119,7 +120,7 @@ class ShipmentClosure extends React.Component {
         <div className="gor-utility-tile-footer">
           <div className="gor-utility-btn-wrap">
             <button
-              onClick={this._closeShipment.bind(this)}
+              onClick={this._closeShipment.bind(this, this.state.fileType)}
               className={
                 this.state.invoiceId && this.state.fileType
                   ? "gor-download-button"
@@ -147,16 +148,16 @@ ShipmentClosure.contextTypes = {
 
 const withQueryGetOpenShipmentList = graphql(OPEN_SHIPMENT_LIST_QUERY, {
   props: function (data) {
-      if (!data || !data.data.ShipmentClosureList || !data.data.ShipmentClosureList.list) {
-          return {}
-      }
-      return {
-          fileType: data.data.ShipmentClosureList.list
-      }
+    if (!data || !data.data.ShipmentClosureList || !data.data.ShipmentClosureList.list) {
+      return {}
+    }
+    return {
+      fileType: data.data.ShipmentClosureList.list
+    }
   },
   options: ({ match, location }) => ({
-      variables: {},
-      fetchPolicy: 'network-only'
+    variables: {},
+    fetchPolicy: 'network-only'
   }),
 });
 
