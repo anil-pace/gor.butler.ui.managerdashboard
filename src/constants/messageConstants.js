@@ -271,6 +271,13 @@ export const REQUEST_REPORT_SUCCESS = (<FormattedMessage id="operationsLog.repor
 export const REQUEST_REPORT_FAILURE = (<FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
       defaultMessage='Error creating request'/>)
 
+/*Messages for Reports => shipment closure*/    
+export const shipmentClosureSuccess = (<FormattedMessage id="reports.shipmentClosure.success" description='Success message of shipment closing' 
+      defaultMessage='Shipment closed successfully.'/>)
+
+export const shipmentClosureFailure = (<FormattedMessage id="reports.shipmentClosure.failure" description='Failure message of shipment closing' 
+      defaultMessage='Shipment closing failed.'/>)
+
 export const ZONE_SUB_STATUS_INTL_MESSAGE={
       zone_pause:(<FormattedMessage id="zoning.substatus.action.zone_pause" description='Status text for zone' 
       defaultMessage='Zone pause activated'/>),

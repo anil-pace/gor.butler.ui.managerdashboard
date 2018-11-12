@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
+import {connect} from 'react-redux';
+import { FormattedMessage,defineMessages } from "react-intl";
 import UtilityDropDown from "./utilityDropdownWrap";
 
 //import {SHIPMENTS_TO_CLOSE_QUERY,
@@ -8,6 +9,12 @@ import UtilityDropDown from "./utilityDropdownWrap";
 
 import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag';
+
+import {shipmentClosureSuccess, SHOW_SELECTED_ENTRIES} from '../../constants/frontEndConstants';
+import {
+  notifySuccess,
+  notifyFail
+} from "./../../actions/validationActions";
 
 const messages = defineMessages({
   shipmentClosureSelectFormatPlaceHolder: {
@@ -45,6 +52,7 @@ class ShipmentClosure extends React.Component {
   }
 
   _changeShipment(data) {
+   
     this.setState({ fileType: data.value });
   }
 
@@ -70,7 +78,7 @@ class ShipmentClosure extends React.Component {
       fetchPolicy: 'network-only'
     }).then(data => {
       this.setState({ fileType: null });
-      this._removeThisModal(); // close the changeRackType modal once put block & change type button has been clicked
+      this.props.notifySuccess(shipmentClosureSuccess);
     })
   }
 
@@ -161,6 +169,19 @@ const withQueryGetOpenShipmentList = graphql(OPEN_SHIPMENT_LIST_QUERY, {
   }),
 });
 
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+      notifySuccess: function (data) {
+          dispatch(notifySuccess(data))
+      },
+      notifyFail: function (data){
+          dispatch(notifyFail(data))
+      }
+  };
+}
+
 export default compose(
   withQueryGetOpenShipmentList
-)(ShipmentClosure);
+)(connect(null, mapDispatchToProps)(ShipmentClosure));
