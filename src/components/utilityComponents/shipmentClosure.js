@@ -17,13 +17,13 @@ const messages = defineMessages({
   }
 });
 
-//const SHIPMENTS_TO_CLOSE_QUERY = gql`
-    // query($input:MsuSourceTypeListParams){
-    //     MsuSourceTypeList(input:$input){
-    //          list
-    //         }
-    // }
-//`;
+const OPEN_SHIPMENT_LIST_QUERY = gql`
+    query($input:ShipmentClosureListParams){
+      ShipmentClosureList(input:$input){
+             list
+            }
+    }
+`;
 
 class ShipmentClosure extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class ShipmentClosure extends React.Component {
   }
 
   _changeShipment(data) {
-    this.setState({ fileType: data.value });
+    this.setState({ fileType: data.value});
   }
 
   _getCurrentDropDownState(fileType, currentValue) {
@@ -74,33 +74,47 @@ class ShipmentClosure extends React.Component {
   }
 
   render() {
-    const fileType = [
-      { value: "12345",
-        label: "12345" 
-      },
-      {
-        value: "67890",
-        label: "67890"
-      },
-      {
-        value: "11111",
-        label: "11111"
-      }
-    ];
+    // const fileType = [
+    //   { value: "12345",
+    //     label: "12345" 
+    //   },
+    //   {
+    //     value: "67890",
+    //     label: "67890"
+    //   },
+    //   {
+    //     value: "11111",
+    //     label: "11111"
+    //   }
+    // ];
+    let labelC1, fileTypeList;
+    fileTypeList = this.props.fileType;
 
-    let currenFileType = this.state.fileType
-      ? this._getCurrentDropDownState(fileType, this.state.fileType)
-      : null;
+    labelC1 = [{ value: 'any', label: <FormattedMessage id="msuConfig.token1.all" defaultMessage="Any" /> }];
+
+    if(fileTypeList){
+        fileTypeList.forEach((data) => {
+            labelC1.push(
+                {
+                    value: data,
+                    label: "Open Shipment: " + data
+                }
+            )
+        });
+    }
+
+    let currentFileType = fileTypeList? this._getCurrentDropDownState(labelC1, this.state.fileType): null;
+   
     return (
       <div>
         <UtilityDropDown
-          items={fileType}
+          items={this.props.fileType}
           dropdownLabel="Select shipment"
           placeHolderText={this.context.intl.formatMessage(
             messages.shipmentClosureSelectFormatPlaceHolder
           )}
           changeMode={this._changeShipment.bind(this)}
-          currentState={currenFileType}
+          currentState={currentFileType}
         />
         <div className="gor-utility-tile-footer">
           <div className="gor-utility-btn-wrap">
@@ -131,22 +145,21 @@ ShipmentClosure.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
 
-// const withQueryGetShipmentsTypes = graphql(SHIPMENTS_TO_CLOSE_QUERY, {
-//   props: function (data) {
-//       if (!data || !data.data.MsuSourceTypeList || !data.data.MsuSourceTypeList.list) {
-//           return {}
-//       }
-//       return {
-//           destType: data.data.MsuSourceTypeList.list
-//       }
-//   },
-//   options: ({ match, location }) => ({
-//       variables: {},
-//       fetchPolicy: 'network-only'
-//   }),
-// });
+const withQueryGetOpenShipmentList = graphql(OPEN_SHIPMENT_LIST_QUERY, {
+  props: function (data) {
+      if (!data || !data.data.ShipmentClosureList || !data.data.ShipmentClosureList.list) {
+          return {}
+      }
+      return {
+          fileType: data.data.ShipmentClosureList.list
+      }
+  },
+  options: ({ match, location }) => ({
+      variables: {},
+      fetchPolicy: 'network-only'
+  }),
+});
 
-export default ShipmentClosure;
-// export default compose(
-//   withQueryGetShipmentsTypes
-// )(ShipmentClosure);
+export default compose(
+  withQueryGetOpenShipmentList
+)(ShipmentClosure);

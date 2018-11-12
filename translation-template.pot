@@ -793,6 +793,16 @@ msgstr ""
         msgid "RECALL"
         msgstr ""
 
+        #: utility.shipmentClosure.formatPlaceholder
+        msgctxt "utility.shipmentClosure.formatPlaceholder"
+        msgid "Select shipment"
+        msgstr ""
+
+        #: closeShipmentBtnHeader
+        msgctxt "closeShipmentBtnHeader"
+        msgid "CLOSE SHIPMENT"
+        msgstr ""
+
         #: utility.downDlabel
         msgctxt "utility.downDlabel"
         msgid "DOWNLOAD"
