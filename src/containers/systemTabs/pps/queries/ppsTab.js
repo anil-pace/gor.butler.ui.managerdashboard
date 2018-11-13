@@ -55,6 +55,14 @@ export const CHANGE_PPS_PROFILE_QUERY=gql`
     }
 `;
 
+export const PPS_CONFIG_QUERY = gql`
+      query PpsConfigList($input: PpsConfigListParams) {
+        PpsConfigList(input:$input){
+             list
+      }
+    }
+`;
+
 export const PPS_LIST_QUERY = gql`
         query PPSListSystem($input: PPSListSystemParams) {
         PPSListSystem(input:$input){
@@ -127,3 +135,5 @@ export const ppsClientData = gql`
     }
     }
 `;
+
+

@@ -26,7 +26,8 @@ import {WS_ONSEND,PPS_STATUS_OPEN,PPS_STATUS_CLOSE,
 import {PPS_LIST_SUBSCRIPTION,PPS_LIST_QUERY,ppsClientData,
     SET_VISIBILITY,SET_FILTER_APPLIED,
     SET_FILTER_STATE,SET_CHECKED_PPS,CHANGE_PPS_STATUS_QUERY,
-CHANGE_PPS_MODE_QUERY,CHANGE_PPS_PROFILE_QUERY} from './queries/ppsTab';
+CHANGE_PPS_MODE_QUERY,CHANGE_PPS_PROFILE_QUERY,
+PPS_CONFIG_QUERY} from './queries/ppsTab';
 import {graphql, withApollo, compose} from "react-apollo";
 import {modal} from 'react-redux-modal';
 import ClosePPSList from './closePPSList';
@@ -725,6 +726,21 @@ const withClientData = graphql(ppsClientData, {
     })
 });
 
+const withQueryGetPpsConfigDetails = graphql(PPS_CONFIG_QUERY, {
+    props: function (data) {
+        if (!data || !data.data.PPSConfigList || !data.data.PPSConfigList.list) {
+            return {}
+        }
+        return {
+            destType: data.data.PPSConfigList.list
+        }
+    },
+    options: ({ match, location }) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
     props: ({mutate, ownProps}) => ({
         showPPSFilter: function (show) {
@@ -810,5 +826,6 @@ export default compose(
     setVisibilityFilter,
     setFilterApplied,
     setCheckedPps,
+    withQueryGetPpsConfigDetails,
     setFilterState)(connect(mapStateToProps,mapDispatchToProps)(PPS));
 
