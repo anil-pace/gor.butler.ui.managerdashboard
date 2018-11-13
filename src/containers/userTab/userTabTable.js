@@ -46,7 +46,7 @@ class UserDataTable extends React.Component {
         }));
     }
 
-    componentWillReceiveProps(nextProps) {
+     componentWillReceiveProps(nextProps) {
         this._dataList=new tableRenderer(nextProps.items.length);
         this._defaultSortIndexes=[];
         this._dataList.newData=nextProps.items;
@@ -57,12 +57,12 @@ class UserDataTable extends React.Component {
         this.state={
             colSortDirs: {},
             sortedDataList: this._dataList,
-        },
-            this._onSortChange=this._onSortChange.bind(this);
-        this._onFilterChange=this._onFilterChange.bind(this);
-        this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
-        this._onFilterChange(nextProps.getUserFilter);
-    }
+        }
+         this._onSortChange=this._onSortChange.bind(this);
+         this._onFilterChange=this._onFilterChange.bind(this);
+         this._onColumnResizeEndCallback=this._onColumnResizeEndCallback.bind(this);
+         // this._onFilterChange(nextProps.getUserFilter);
+     }
 
     _onColumnResizeEndCallback(newColumnWidth, columnKey) {
         this.setState(({columnWidths})=> ({

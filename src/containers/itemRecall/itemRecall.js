@@ -3,9 +3,16 @@ import React  from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
 import ValidateSelAtt from '../../components/audit/validateSelAtt';
-import {makeAjaxCall} from '../../actions/ajaxActions';
+import {VALIDATE_SKU_QUERY,RECALL_ITEM} from './query';
 import { APP_JSON,POST, GET, VALIDATE_SKU_ITEM_RECALL,CREATE_AUDIT_REQUEST,SELLER_RECALL } from '../../constants/frontEndConstants';
 import { AUDIT_VALIDATION_URL,SELLER_RECALL_URL,SELLER_RECALL_EXPIRY_URL} from '../../constants/configConstants';
+import { withApollo, compose} from "react-apollo";
+import {processValidationDataSKU} from './utilityFunctions';
+import {
+    notifySuccess,
+    notifyFail
+} from "./../../actions/validationActions";
+import {ITEM_RECALL_SUCCESS,ITEM_RECALL_FAILURE,ERR_500,ERR_400} from "../../constants/messageConstants";
 
 const messages = defineMessages({
     e026: {
@@ -101,23 +108,33 @@ class ItemRecall extends React.Component{
   })
  }
  _validateSKU(data){
-    let validSKUData={
-      "audit_param_name":"name",
-      "audit_param_type":"sku",
-      "audit_param_value":{}
-    };
-    validSKUData.audit_param_value.sku_list = data;
-    let urlData={
-          'url': AUDIT_VALIDATION_URL,
-          'formdata': validSKUData,
-          'method':POST,
-          'cause':VALIDATE_SKU_ITEM_RECALL,
-          'contentType':APP_JSON,
-          'accept':APP_JSON,
-          'token':this.props.auth_token
+  
+    let skuList = {
+        "sku":{
+          "sku":data
+        }
       }
-    
-    this.props.makeAjaxCall(urlData);
+    this.props.client.query({
+            query:VALIDATE_SKU_QUERY,
+            variables:skuList,
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+
+          let skuAttributes = processValidationDataSKU(JSON.parse(data.data.SKUList.list));
+          let validatedSKUs = this._processSkuAttributes(skuAttributes.data);
+          let validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
+          let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
+          this.setState({
+             copyPasteData:{
+              data:validatedSKUs.processedData,
+              focusedEl:"0"
+            },
+            validationDoneSKU,
+            allTuplesValid,
+            skuAttributes
+          })
+
+        })
  }
  _processSkuAttributes(data) {
     var processedData=[],skuDetails={}
@@ -176,50 +193,80 @@ else{
   }
   _recallItems(){
     var formData = {};
-    formData.orderId=this.state.orderInput;
-    formData.timeZone=this.props.timeOffset;
-    if(this.state.selectedOption === "specific_item"){
+    let _this = this;
+    formData.orderId=_this.state.orderInput;
+    formData.timeZone=_this.props.timeOffset;
+    if(_this.state.selectedOption === "specific_item"){
     let skuDetail=[],
-    skuDetails = JSON.parse(JSON.stringify(this.state.skuDetails))
+    skuDetails = JSON.parse(JSON.stringify(_this.state.skuDetails))
     
     for(let k in skuDetails){
       skuDetail.push(skuDetails[k]);
     }
-    formData.skuDetail = skuDetail;
+    formData.skuDetail = JSON.stringify(skuDetail);
+    formData.isExpired = false
   }
   else{
     
     formData.isExpired= true
+    formData.skuDetail =null;
   }
-    let urlData={
-                  'url': this.state.selectedOption === "specific_item" ? SELLER_RECALL_URL : SELLER_RECALL_EXPIRY_URL,
-                  'formdata': formData,
-                  'method':POST,
-                  'cause':SELLER_RECALL,
-                  'contentType':APP_JSON,
-                  'accept':APP_JSON
+
+      let parameters = {
+        "params":formData
       }
-    //this.props.setAuditSpinner(true);
-    this.props.makeAjaxCall(urlData);
+    _this.props.client.query({
+            query:RECALL_ITEM,
+            variables:parameters,
+            fetchPolicy: 'network-only'
+        }).then(data=>{
+          if(data.data.ItemRecall.status.code === "202"){
+            _this.props.notifySuccess(ITEM_RECALL_SUCCESS);
+          }
+          else{
+            _this.props.notifyFail(ITEM_RECALL_FAILURE[data.data.ItemRecall.status.reason])
+          }
+          
+        }).catch(err=>{
+          if(err.graphQLErrors[0].code === 400){
+             _this.props.notifyFail(ERR_400)
+          }
+          else{
+            _this.props.notifyFail(ERR_500)
+          }
+          
+        })
+    
+    
 
   }
-  componentWillReceiveProps(nextProps){
-    if(this.props.hasDataChanged !== nextProps.hasDataChanged){
-      let skuAttributes = JSON.parse(JSON.stringify(nextProps.skuAttributes));
-      let validatedSKUs = this._processSkuAttributes(skuAttributes.data);
-      let validationDoneSKU = Object.keys(skuAttributes).length ? true : false;
-      let allTuplesValid = skuAttributes.totalInvalid === 0 ? true : false;
-      this.setState({
-         copyPasteData:{
-          data:validatedSKUs.processedData,
-          focusedEl:"0",
-          selectionStart:0
-        },
-        validationDoneSKU,
-        allTuplesValid,
-        skuDetails:validatedSKUs.skuDetails
-      })
+
+  _onOrderInputChange(e){
+    let disableRecall = null;
+    let {isInputEmpty,selectedOption} = this.state
+    const value = e.target.value.trim();
+    if(selectedOption === "expired_items"){
+      disableRecall= value ? false :true
     }
+    else{
+      disableRecall= !isInputEmpty && value ? false :true
+    }
+    
+    this.setState((state,props)=>{
+      return {
+        ...state,
+        orderInput:value,
+        disableRecall
+    }
+    })
+  }
+  _checkIfSKUEmpty(childState){
+    this.setState((state,props)=>{
+      return {
+        disableRecall: state.orderInput && !childState.isInputEmpty ? false : true,
+        ...childState
+      }
+    })
   }
   _onOrderInputChange(e){
     let disableRecall = null;
@@ -277,7 +324,7 @@ else{
            validationCallBack={this._validateSKU} 
            validationDoneSKU={this.state.validationDoneSKU}
            allTuplesValid={this.state.allTuplesValid}
-           skuAttributes={this.props.skuAttributes}
+           skuAttributes={this.state.skuAttributes}
            copyPasteData={this.state.copyPasteData}
            onAttributeSelection={this._onAttributeSelection}
            tabMessages={tabMessages}
@@ -298,20 +345,25 @@ ItemRecall.propTypes={
   hasDataChanged:React.PropTypes.bool,
   skuAttributes:React.PropTypes.object
 }
-function mapDispatchToProps(dispatch){
-  return {
-    makeAjaxCall: function (data) {dispatch(makeAjaxCall(data))},
-  }
-};
-function mapStateToProps(state, ownProps){
+
+const mapStateToProps = (state, ownProps)=>{
   return {
       auth_token:state.authLogin.auth_token,
-      skuAttributes: state.auditInfo.skuAttributes,
-      hasDataChanged:state.auditInfo.hasDataChanged,
       timeOffset:state.authLogin.timeOffset
   };
 };
-export  default connect(mapStateToProps,mapDispatchToProps)(injectIntl(ItemRecall));            
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    notifySuccess: function (data) {
+            dispatch(notifySuccess(data));
+    },
+        notifyFail: function (data) {
+            dispatch(notifyFail(data));
+    }
+  }
+}
+
+export  default compose(withApollo)(connect(mapStateToProps,mapDispatchToProps)(injectIntl(ItemRecall)));            
 
 
            

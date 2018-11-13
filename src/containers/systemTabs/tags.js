@@ -2,18 +2,16 @@
  * Created by gaurav.m on 6/21/17.
  */
 import React  from 'react';
-import {connect} from 'react-redux'
-import {addTagToBin, addTag,setPPSConfigurationSpinner} from './../../actions/ppsConfigurationActions'
-import {FETCH_TAGS_URL, SAVE_TAGS_URL} from './../../constants/configConstants'
-import {GET, FETCH_TAGS, APP_JSON, PUT, ADD_TAG_TO_LIST} from './../../constants/frontEndConstants'
 import {FormattedMessage, defineMessages} from 'react-intl'
-import {makeAjaxCall} from './../../actions/ajaxActions'
 const messages = defineMessages({
     tagSearchPlaceholder: {
         id: "pps.configuration.tag.search.placeholder",
         defaultMessage: "Enter a tag..."
     }
 })
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
+
 class Tags extends React.Component {
     constructor(props) {
         super(props)
@@ -31,27 +29,15 @@ class Tags extends React.Component {
         let self = this
         if (nextProps.tags !== this.state.tags) {
             this.setState({tags: nextProps.tags, filteredTags: nextProps.tags}, function () {
-                self.searchTags({target: {value: ''}})
+                if(self.state.tags){
+                    self.searchTags({target: {value: ''}})
+                }
+                
             })
 
         }
     }
 
-    componentDidMount() {
-        /**
-         * Fetch PPS List
-         */
-        let data = {
-            'url': FETCH_TAGS_URL,
-            'method': GET,
-            'cause': FETCH_TAGS,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        this.props.setPPSConfigurationSpinner(true)
-        this.props.makeAjaxCall(data)
-    }
 
     searchTags(e) {
         let searchedText = (function (e) {
@@ -92,7 +78,7 @@ class Tags extends React.Component {
         let tags = this.state.filteredTags
         tags.forEach(function (tag) {
             if (tag === selectedTag) {
-                self.props.addTagToBin({tag: tag, bin: self.props.selectedPPSBin['tags']})
+                self.props.addTagToBin({tag: tag, bin: self.props.selectedPPSBin})
             }
         })
 
@@ -105,18 +91,8 @@ class Tags extends React.Component {
          * The API will update the list
          * of tags.
          */
-        let form_data={"pps_bin_tags":[this.state.filter]}
-        let data = {
-            'url': SAVE_TAGS_URL,
-            'method': PUT,
-            'cause': ADD_TAG_TO_LIST,
-            'formdata':form_data,
-            'contentType': APP_JSON,
-            'accept': APP_JSON,
-            'token': this.props.auth_token
-        }
-        this.props.setPPSConfigurationSpinner(true)
-        this.props.makeAjaxCall(data)
+        let form_data = {"pps_bin_tags": [this.state.filter]}
+        this.props.addTags(form_data)
 
     }
 
@@ -140,7 +116,7 @@ class Tags extends React.Component {
 
     render() {
         let self = this
-        if (self.props.tags.length === 0) {
+        if (!self.props.tags || self.props.tags.length === 0) {
             return null
         }
         return <div className="pps-tags-container">
@@ -170,8 +146,8 @@ class Tags extends React.Component {
                         <span className="pps-tag-name"
                               dangerouslySetInnerHTML={{__html: self.highlightSearchedText.call(self, tag)}}/>
                         <span className="pps-tag-selection">
-                        {self.props.selectedPPSBin && self.props.selectedPPSBin['tags'] &&
-                        <input checked={self.props.selectedPPSBin['tags'].bin_tags.map(function (tag) {
+                        {self.props.selectedPPSBin &&
+                        <input checked={self.props.selectedPPSBin.bin_tags.map(function (tag) {
                             return tag
                         }).indexOf(tag) > -1} onChange={self.handleTagSelect.bind(self, tag)} type="checkbox"/>}
                     </span>
@@ -194,28 +170,77 @@ Tags.contextTypes = {
     intl: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(state, ownProps) {
-    return {
-        selectedProfile: state.ppsConfiguration.selectedProfile || {id: null},
-        selectedPPS: state.ppsConfiguration.selectedPPS || {id: null},
-        selectedPPSBin: state.ppsConfiguration.selectedPPSBin,
-        tags: state.ppsConfiguration.tags || [],
-        auth_token: state.authLogin.auth_token
-    };
-}
+/**
+ * Mutation to add the selected tag in selected bin
+ */
+const ADD_TAG_TO_BIN = gql`
+    mutation setSelectedBin($state: String!) {
+        addTagToSelectedBin(state: $state) @client
+    }
+`;
+/**
+ * Expose a method to add the selected tag in selected bin.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withAddTagMutation = graphql(ADD_TAG_TO_BIN, {
+    props: ({mutate, ownProps}) => ({
+        addTagToBin: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
 
-var mapDispatchToProps = function (dispatch) {
-    return {
-        addTagToBin: function (data) {
-            dispatch(addTagToBin(data))
-        },
-        makeAjaxCall: function (data) {
-            dispatch(makeAjaxCall(data))
-        },
-        setPPSConfigurationSpinner: function (data) {
-            dispatch(setPPSConfigurationSpinner(data))
+/**
+ * Query to fetch Tags list from the server
+ */
+const TAG_LIST_QUERY = gql`
+    query BinTagList {
+        BinTagList{
+            list
+        }
+
+    }
+`;
+
+/**
+ * Will expose a method to fetch the Tag list
+ * from the server.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withQuery = graphql(TAG_LIST_QUERY, {
+    props: (data) => ({
+        tags: data.data.BinTagList ? data.data.BinTagList.list : []
+    })
+});
+
+
+/**
+ * Mutation to add a tag in the tag list
+ */
+const ADD_TAG_TO_LIST_MUTATION = gql`
+    mutation addBinTags($input:AddBinTagInput){
+        addBinTags(input:$input){
+            list
         }
     }
-};
+`;
 
-export  default connect(mapStateToProps, mapDispatchToProps)(Tags);
+/**
+ * Will call the server API to add the desired tag in the list
+ * and update the Tag List.
+ * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
+ */
+const withAddTagToListMutations = graphql(ADD_TAG_TO_LIST_MUTATION, {
+    props: ({ownProps, mutate}) => ({
+        addTags: ({pps_bin_tags}) =>
+            mutate({
+                variables: {input: {pps_bin_tags}},
+                refetchQueries: [{query: TAG_LIST_QUERY}]
+            }),
+
+
+    }),
+});
+
+
+export default compose(withAddTagMutation, withQuery, withAddTagToListMutations)(Tags)

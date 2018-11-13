@@ -2816,18 +2816,6 @@
     "filepath": "./src/containers/auditTab/createAudit.js"
   },
   {
-    "id": "audit.delete.heading",
-    "description": "Text for audit delete heading",
-    "defaultMessage": "Are you sure you would like to delete audit task {task_name} ?",
-    "filepath": "./src/containers/auditTab/deleteAudit.js"
-  },
-  {
-    "id": "audit.duplicate.heading",
-    "description": "Text for audit duplicate heading",
-    "defaultMessage": "Are you sure you would like to duplicate audit task {task_name} ?",
-    "filepath": "./src/containers/auditTab/duplicateAudit.js"
-  },
-  {
     "id": "Audit.selectAttribute.apply",
     "description": "Texts for select attribute component",
     "defaultMessage": "Apply",
@@ -3909,6 +3897,30 @@
     "filepath": "./src/containers/emergencyProcess/safetyChecklist.js"
   },
   {
+    "id": "inventory.histogram.legend",
+    "description": "Inventory Histogram Legend",
+    "defaultMessage": "Items Stocked",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.linechart.legendPicked",
+    "description": "Inventory Linechart Legend for picked",
+    "defaultMessage": "Items Picked",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.linechart.legendPut",
+    "description": "Inventory Linechart Legend for put",
+    "defaultMessage": "Items Put",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
+    "id": "inventory.header",
+    "description": "Inventory Header Message",
+    "defaultMessage": "Inventory",
+    "filepath": "./src/containers/inventoryTab.js"
+  },
+  {
     "id": "inventory.histogram.header",
     "description": "Inventory Histogram Header Message",
     "defaultMessage": "Stock level history",
@@ -4799,24 +4811,6 @@
     "filepath": "./src/containers/putStatusWidget.js"
   },
   {
-    "id": "operationLog.page.twentyfive",
-    "description": "Page size 25",
-    "defaultMessage": "25",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
-    "id": "operationLog.page.fifty",
-    "description": "Page size 50",
-    "defaultMessage": "50",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
-    "id": "operationLog.page.hundred",
-    "description": "Page size 100",
-    "defaultMessage": "100",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
-  },
-  {
     "id": "downloadReport.type.operationsLog",
     "description": "Heading for PPS",
     "defaultMessage": "Operations Logs",
@@ -4842,7 +4836,7 @@
   },
   {
     "id": "downloadReport.table.heading",
-    "description": "Heading for PPS",
+    "description": "Heading for Download Report",
     "defaultMessage": "Download Report",
     "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
@@ -4853,40 +4847,40 @@
     "filepath": "./src/containers/reportsTab/downloadReportTab.js"
   },
   {
-    "id": "downloadReport.table.reportName",
-    "description": "REPORT NAME",
+    "id": "downloadreport.table.reportname",
+    "description": "Download report name",
     "defaultMessage": "REPORT NAME",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.reportType",
+    "id": "downloadreport.table.reporttype",
     "description": "REPORT TYPE",
     "defaultMessage": "REPORT TYPE",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.requestedBy",
-    "description": "Request ID",
+    "id": "downloadreport.table.requestedby",
+    "description": "REQUESTED BY",
     "defaultMessage": "REQUESTED BY",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.completionTime",
-    "description": "Status for PPS",
+    "id": "downloadreport.table.completiontime",
+    "description": "COMPLETION TIME",
     "defaultMessage": "COMPLETION TIME",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "downloadReport.table.status",
-    "description": "Status for PPS",
+    "id": "downloadreport.table.generationprogress",
+    "description": "GENERATION PROGRESS",
     "defaultMessage": "GENERATION PROGRESS",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
-    "id": "operationsLog.table.noData",
-    "description": "No data message for operations logs",
-    "defaultMessage": "No Data Found",
-    "filepath": "./src/containers/reportsTab/downloadReportTab.js"
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/reportsTab/DownloadReportTable.js"
   },
   {
     "id": "utility.downloadReport.head",
@@ -4934,19 +4928,109 @@
     "id": "operationLog.page.twentyfive",
     "description": "Page size 25",
     "defaultMessage": "25",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.page.fifty",
     "description": "Page size 50",
     "defaultMessage": "50",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.page.hundred",
     "description": "Page size 100",
     "defaultMessage": "100",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.genRep.tooltip",
+    "description": "Tooltip to display Generate button",
+    "defaultMessage": "Reports not available for Realtime filter",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Operations Log",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.downloadBtn",
+    "description": "button label for download report",
+    "defaultMessage": "Generate Report",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar",
+    "description": "total waves for filter search bar",
+    "defaultMessage": "{total} Results found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Operations",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.status",
+    "description": "STATUS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.skuId",
+    "description": "Status for PPS",
+    "defaultMessage": "SKU ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.sourceId",
+    "description": "Status for PPS",
+    "defaultMessage": "SOURCE ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.destinationId",
+    "description": "Status for PPS",
+    "defaultMessage": "DESTINATION ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.userId",
+    "description": "Status for PPS",
+    "defaultMessage": "USER ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationLog.table.timestamp",
+    "description": "Status for PPS",
+    "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
+  },
+  {
+    "id": "operationsLog.table.noData",
+    "description": "No data message for operations logs",
+    "defaultMessage": "No Data Found",
+    "filepath": "./src/containers/reportsTab/operationsLogTab_bkup.js"
   },
   {
     "id": "operationLog.genRep.tooltip",
@@ -4988,55 +5072,55 @@
     "id": "operationLog.table.operatingMode",
     "description": "OPERATING MODE",
     "defaultMessage": "OPERATING MODE",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.status",
     "description": "STATUS",
     "defaultMessage": "STATUS",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.requestId",
     "description": "Request ID",
     "defaultMessage": "REQUEST ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.skuId",
     "description": "Status for PPS",
     "defaultMessage": "SKU ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.sourceId",
     "description": "Status for PPS",
     "defaultMessage": "SOURCE ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.destinationId",
     "description": "Status for PPS",
     "defaultMessage": "DESTINATION ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.userId",
     "description": "Status for PPS",
     "defaultMessage": "USER ID",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "operationLog.table.timestamp",
     "description": "Status for PPS",
     "defaultMessage": "TIMESTAMP",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
-    "id": "operationsLog.table.noData",
-    "description": "No data message for operations logs",
-    "defaultMessage": "No Data Found",
-    "filepath": "./src/containers/reportsTab/operationsLogTab.js"
+    "id": "notification.infinite.message",
+    "description": "Infinite scroll message",
+    "defaultMessage": "Loading More",
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
     "id": "reportsTab.operationsLog",
@@ -5063,6 +5147,42 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
+    "id": "slot.table.slotType",
+    "description": "Slot Type column",
+    "defaultMessage": "SLOT TYPE",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.slotVolume",
+    "description": "SlotVolume",
+    "defaultMessage": "SLOT VOLUME",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.dimension",
+    "description": "DIMENSION(L*B*H)",
+    "defaultMessage": "DIMENSION(L*B*H)",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.totalSlots",
+    "description": "TOTAL SLOTS",
+    "defaultMessage": "TOTAL SLOTS",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.emptySlots",
+    "description": "Empty Slots",
+    "defaultMessage": "EMPTY SLOTS",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
+    "id": "slot.table.slotUtilization",
+    "description": "Slot Utilization",
+    "defaultMessage": "SLOT UTILIZATION",
+    "filepath": "./src/containers/reportsTab/SlotsTable.js"
+  },
+  {
     "id": "storageSpace.report.tooltip",
     "description": "Tooltip to display Generate button",
     "defaultMessage": "Reports not available for Realtime filter",
@@ -5070,7 +5190,7 @@
   },
   {
     "id": "storageSpace.table.heading",
-    "description": "Heading for PPS",
+    "description": "Heading for Storage Space",
     "defaultMessage": "Storage space information",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
@@ -5078,48 +5198,6 @@
     "id": "storageSpace.table.downloadBtn",
     "description": "button label for download report",
     "defaultMessage": "GENERATE REPORT",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotType",
-    "description": "slot type",
-    "defaultMessage": "SLOT TYPE",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotVolume",
-    "description": "slot volume",
-    "defaultMessage": "SLOT VOLUME",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.dimension",
-    "description": "Dimension",
-    "defaultMessage": "DIMENSION (L*B*H)",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.totalSlots",
-    "description": "Status for total slots",
-    "defaultMessage": "TOTAL SLOTS",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.emptySlots",
-    "description": "Status for empty slots",
-    "defaultMessage": "EMPTY SLOTS",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.slotUtilization",
-    "description": "Status for PPS",
-    "defaultMessage": "SLOT UTILIZATION",
-    "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
-  },
-  {
-    "id": "storageSpace.table.noData",
-    "description": "No data message for Storage space",
-    "defaultMessage": "No Data Found",
     "filepath": "./src/containers/reportsTab/storageSpaceTab.js"
   },
   {
@@ -5189,7 +5267,7 @@
   },
   {
     "id": "butletbot.token2.notSet",
-    "defaultMessage": "Idle",
+    "defaultMessage": "Not set",
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {
@@ -5223,15 +5301,87 @@
     "filepath": "./src/containers/systemTabs/butlerBotFilter.js"
   },
   {
+    "id": "butlerbot.table.noData",
+    "description": "No data message for butlerbot table",
+    "defaultMessage": "No Butler Bot Found",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.bots",
+    "description": "Bots id Column",
+    "defaultMessage": "BOTS",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "sub text for totalbot ButlerBotTable",
+    "defaultMessage": "Total: {totalBot}",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.status",
+    "description": "Bots Status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.status",
+    "description": "status for ButlerBotTable",
+    "defaultMessage": "{onlineBots} Online",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.currentTask",
+    "description": "Bots current task",
+    "defaultMessage": "CURRENT TASK",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.botState",
+    "description": "bot state for ButlerBotTable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.msuMounted",
+    "description": "MSU Mounted",
+    "defaultMessage": "MSU MOUNTED",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.mounted",
+    "description": "msu mounted for ButlerBotTable",
+    "defaultMessage": "{msuMounted} Mounted",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.location",
+    "description": "Location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.locations",
+    "description": "msu Location for ButlerBotTable",
+    "defaultMessage": "{locations} Locations",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "bots.table.power",
+    "description": "Power",
+    "defaultMessage": "CHARGE LEVEL",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
+    "id": "ButlerBotTable.avgVoltage",
+    "description": "avgVoltage for ButlerBotTable",
+    "defaultMessage": "Avg {voltage}",
+    "filepath": "./src/containers/systemTabs/ButlerBotsTable.js"
+  },
+  {
     "id": "butlerDetail.name.prefix",
     "description": "prefix for butler id",
     "defaultMessage": "BOT - {botId}",
-    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
-  },
-  {
-    "id": "pps.name.prefix",
-    "description": "prefix for pps id",
-    "defaultMessage": "PPS {ppsId}",
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
@@ -5244,6 +5394,12 @@
     "id": "msu.name.prefix",
     "description": "prefix for msu id",
     "defaultMessage": "MSU - {msuId}",
+    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "prefix for pps id",
+    "defaultMessage": "PPS {ppsId}",
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
@@ -5563,7 +5719,7 @@
   {
     "id": "ChargingStationsTable.SubstationID",
     "description": "total SubStationID for ChargingStationsTable",
-    "defaultMessage": "Total:{rowsCount}",
+    "defaultMessage": "Total: {rowsCount}",
     "filepath": "./src/containers/systemTabs/chargingStationsTable.js"
   },
   {
@@ -5912,6 +6068,335 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
+    "id": "ppsclose.tblhead1.text",
+    "description": "Table first head",
+    "defaultMessage": "SLOT ID",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead2.text",
+    "description": "Table second head",
+    "defaultMessage": "MSU Pending",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.tblhead3.text",
+    "description": "Table third head",
+    "defaultMessage": "ACTION",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.close.cancel",
+    "description": "Text for cancel close",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.close.confirm",
+    "description": "Text for close confirm",
+    "defaultMessage": "CONFIRM",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.profile",
+    "description": "Apply Profile to PPS",
+    "defaultMessage": "Are you sure you want to change the profile?",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.profile.description",
+    "description": "PPS Configuration will be changed",
+    "defaultMessage": "PPS Configuration will be changed",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.configuration.confirm.change.profile",
+    "description": "Change Profile to PPS",
+    "defaultMessage": "Change",
+    "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.inputField.id",
+    "defaultMessage": "PPS ID",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.inputField.oprator",
+    "defaultMessage": "OPERATOR ASSIGNED",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.token.status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.token.timePeriod",
+    "defaultMessage": "MODE",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.stopped",
+    "defaultMessage": "Open",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.error",
+    "defaultMessage": "Close",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.STATUS.fclose",
+    "defaultMessage": "Force Close",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.pick",
+    "defaultMessage": "Pick",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.put",
+    "defaultMessage": "Put",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "pps.MODE.audit",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "v.MODE.notset",
+    "defaultMessage": "Not set",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
+    "id": "ppsDetail.name.prefix",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "PPS-{ppsId}",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsDetail.performance.prefix.items",
+    "description": "prefix for pps id in ppsDetail",
+    "defaultMessage": "{performance} items/hr",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.close.heading",
+    "description": "Heading for Close PPS",
+    "defaultMessage": "Close PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.pickDrop",
+    "description": "pick dropdown option for PPS",
+    "defaultMessage": "Put",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "put dropdown option for PPS",
+    "defaultMessage": "Pick",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "audit dropdown option for PPS",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.openStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Open Selected PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.closeStatusLabel",
+    "description": "audit dropdown option for Status change",
+    "defaultMessage": "Close Selected PPS",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.statusPlaceholder",
+    "description": "Placeholder for status dropdown",
+    "defaultMessage": "Change PPS Status",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.modePlaceholder",
+    "description": "Placeholder for mode dropdown",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Heading for PPS",
+    "defaultMessage": "Pick Put Stations",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "selected pps for ppsSelected",
+    "defaultMessage": "{selected} selected",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsList.filter.search.bar",
+    "description": "total pps for filter search bar",
+    "defaultMessage": "{total} Stations found",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "ppsList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Stations",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "mode change for pps",
+    "defaultMessage": "Change PPS Mode",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No PPS Found",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS - column Heading",
+    "defaultMessage": "PPS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.Subpps",
+    "description": "sub pps",
+    "defaultMessage": "Total: {ppsTotal}",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.status",
+    "description": "status for PPS table",
+    "defaultMessage": "{ppsOnState} Open",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "operatingMode for PPS",
+    "defaultMessage": "CURRENT MODE",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.requestedMode.text",
+    "description": "PPStable.requestedMode.text",
+    "defaultMessage": "Requested Mode:",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.requestedStatus",
+    "description": "Requested status for PPS",
+    "defaultMessage": "REQUESTED STATUS",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "performance Status for PPS",
+    "defaultMessage": "PERFORMANCE",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.avgThroughput",
+    "description": "avgThroughput for PPStable",
+    "defaultMessage": "Avg {avgThroughput} items/hr",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "operatorAssigned for PPS",
+    "defaultMessage": "OPERATOR ASSIGNED",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.totalOperator",
+    "description": "totalOperator for PPStable",
+    "defaultMessage": "{operatorNum} operators",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPS.table.profiles",
+    "description": "profiles for PPS",
+    "defaultMessage": "PROFILES USED",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
     "id": "pps.configuration.bins.selection.label",
     "description": "Select a bin to manage tags",
     "defaultMessage": "Select a bin to manage tags",
@@ -6062,281 +6547,6 @@
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
   },
   {
-    "id": "pps.inputField.id",
-    "defaultMessage": "PPS ID",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.inputField.oprator",
-    "defaultMessage": "OPERATOR ASSIGNED",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.token.status",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.token.timePeriod",
-    "defaultMessage": "MODE",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.all",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.stopped",
-    "defaultMessage": "Open",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.error",
-    "defaultMessage": "Close",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.STATUS.fclose",
-    "defaultMessage": "Force Close",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.all",
-    "defaultMessage": "Any",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.pick",
-    "defaultMessage": "Pick",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.put",
-    "defaultMessage": "Put",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "pps.MODE.audit",
-    "defaultMessage": "Audit",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "v.MODE.notset",
-    "defaultMessage": "Not set",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.filterLabel",
-    "description": "label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.hide",
-    "description": "label for hide",
-    "defaultMessage": "Hide",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.noResult",
-    "description": "label for no result",
-    "defaultMessage": "No results found, please try again",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.reset",
-    "description": "label for reset",
-    "defaultMessage": "Reset",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "gor.filter.heading",
-    "description": "filter heading",
-    "defaultMessage": "Apply filter",
-    "filepath": "./src/containers/systemTabs/ppsFilter.js"
-  },
-  {
-    "id": "ppsDetail.name.prefix",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "PPS-{ppsId}",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsDetail.performance.prefix.items",
-    "description": "prefix for pps id in ppsDetail",
-    "defaultMessage": "{performance} items/hr",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.close.heading",
-    "description": "Heading for Close PPS",
-    "defaultMessage": "Close PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.pickDrop",
-    "description": "pick dropdown option for PPS",
-    "defaultMessage": "Put",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.putDrop",
-    "description": "put dropdown option for PPS",
-    "defaultMessage": "Pick",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.auditDrop",
-    "description": "audit dropdown option for PPS",
-    "defaultMessage": "Audit",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.openStatusLabel",
-    "description": "audit dropdown option for Status change",
-    "defaultMessage": "Open Selected PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.closeStatusLabel",
-    "description": "audit dropdown option for Status change",
-    "defaultMessage": "Close Selected PPS",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.statusPlaceholder",
-    "description": "Placeholder for status dropdown",
-    "defaultMessage": "Change PPS Status",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPS.table.modePlaceholder",
-    "description": "Placeholder for mode dropdown",
-    "defaultMessage": "Change PPS Mode",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.table.heading",
-    "description": "Heading for PPS",
-    "defaultMessage": "Pick Put Stations",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "PPStable.selected",
-    "description": "selected pps for ppsSelected",
-    "defaultMessage": "{selected} selected",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "gor.filter.filterLabel",
-    "description": "button label for filter",
-    "defaultMessage": "Filter data",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsList.filter.search.bar",
-    "description": "total pps for filter search bar",
-    "defaultMessage": "{total} Stations found",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "ppsList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Stations",
-    "filepath": "./src/containers/systemTabs/ppsTab.js"
-  },
-  {
-    "id": "pps.dropdown.placeholder",
-    "description": "mode change for pps",
-    "defaultMessage": "Change PPS Mode",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.table.noData",
-    "description": "No data message for PPStable",
-    "defaultMessage": "No PPS Found",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.ppsColumn.heading",
-    "description": "PPS - column Heading",
-    "defaultMessage": "PPS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.Subpps",
-    "description": "sub pps",
-    "defaultMessage": "Total: {ppsTotal}",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.status",
-    "description": "Status for PPS",
-    "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.status",
-    "description": "status for PPS table",
-    "defaultMessage": "{ppsOnState} Open",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.operatingMode",
-    "description": "operatingMode for PPS",
-    "defaultMessage": "CURRENT MODE",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.ppsState",
-    "description": "pps state for PPStable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.requestedMode.text",
-    "description": "PPStable.requestedMode.text",
-    "defaultMessage": "Requested Mode:",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.requestedStatus",
-    "description": "Requested status for PPS",
-    "defaultMessage": "REQUESTED STATUS",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.performance",
-    "description": "performance Status for PPS",
-    "defaultMessage": "PERFORMANCE",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.avgThroughput",
-    "description": "avgThroughput for PPStable",
-    "defaultMessage": "Avg {avgThroughput} items/hr",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.operatorAssigned",
-    "description": "operatorAssigned for PPS",
-    "defaultMessage": "OPERATOR ASSIGNED",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPStable.totalOperator",
-    "description": "totalOperator for PPStable",
-    "defaultMessage": "{operatorNum} operators",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
-    "id": "PPS.table.profiles",
-    "description": "profiles for PPS",
-    "defaultMessage": "PROFILES USED",
-    "filepath": "./src/containers/systemTabs/PPStable.js"
-  },
-  {
     "id": "pps.configuration.confirm.saveAndapply.profile",
     "description": "Save and ppply Profile to PPS",
     "defaultMessage": "Are you sure you want to save and apply the profile?",
@@ -6367,64 +6577,64 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "sysController.summary.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Zones",
+    "id": "sysControllers.table.noData",
+    "description": "No data message for PPStable",
+    "defaultMessage": "No Controllers Found",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "sysControllers.idColumn.heading",
-    "description": "CONTROLLER ID",
+    "id": "SystemControllers.table.noData",
+    "description": "No data message for System Controllers table",
+    "defaultMessage": "No System Controllers Found",
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
+  },
+  {
+    "id": "SystemControllersTable.controllerID.heading",
+    "description": "controllerID heading",
     "defaultMessage": "CONTROLLER ID",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
-    "id": "sysControllers.totalControllers",
-    "description": "total controllers",
-    "defaultMessage": "Total:{count}",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "id": "SystemControllersTable.subtext",
+    "description": "Total System Controllers",
+    "defaultMessage": "Total: {rowsCount}",
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
-    "id": "sysController.table.status",
-    "description": "Status for PPS",
+    "id": "SystemControllers.table.STATUS",
+    "description": "STATUS for SystemControllers",
     "defaultMessage": "STATUS",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
-    "id": "sysController.table.location",
-    "description": "Location",
+    "id": "SystemControllers.table.LOCATION",
+    "description": "LOCATION for SystemControllers",
     "defaultMessage": "LOCATION",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
-    "id": "sysController.table.conDetails",
-    "description": "Status for PPS",
+    "id": "SystemControllers.table.connectionDetails",
+    "description": "connectionDetails for SystemControllers",
     "defaultMessage": "CONNECTION DETAILS",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
+  },
+  {
+    "id": "SystemControllers.table.operatingMode",
+    "description": "operatingMode for SystemControllers",
+    "defaultMessage": "OPERATING MODE",
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
     "id": "sysController.table.ethernetStatus",
     "description": "sysController.table.ethernetStatus",
     "defaultMessage": "Ethernet Network:",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
     "id": "sysController.table.zigbeeStatus",
     "description": "sysController.table.zigbeeStatus",
     "defaultMessage": "Zigbee Network:",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
-  },
-  {
-    "id": "sysController.table.operatingMode",
-    "description": "Status for PPS",
-    "defaultMessage": "OPERATING MODE",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
-  },
-  {
-    "id": "sysControllers.table.noData",
-    "description": "No data message for PPStable",
-    "defaultMessage": "No Controllers Found",
-    "filepath": "./src/containers/systemTabs/sysControllers.js"
+    "filepath": "./src/containers/systemTabs/sysControllersTable.js"
   },
   {
     "id": "sysOverView.zones.count",
@@ -6987,6 +7197,21 @@
     "filepath": "./src/containers/userTab/usersTab.js"
   },
   {
+    "id": "userDetails.userAdmin",
+    "defaultMessage": "Admin",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "userDetails.qc_operator",
+    "defaultMessage": "QC Operator",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "userDetails.packing_operator",
+    "defaultMessage": "Packing Operator",
+    "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
     "id": "userDetails.manager",
     "defaultMessage": "Manager",
     "filepath": "./src/containers/userTab/usersTab.js"
@@ -7065,6 +7290,54 @@
     "description": "button label for show all",
     "defaultMessage": "Show all Users",
     "filepath": "./src/containers/userTab/usersTab.js"
+  },
+  {
+    "id": "user.table.usersCount",
+    "description": "Users Column",
+    "defaultMessage": "{rowsCount} USERS",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.status",
+    "description": "Users Status",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.role",
+    "description": "User Role",
+    "defaultMessage": "ROLE",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "User Workmode",
+    "defaultMessage": "WORKMODE",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.location",
+    "description": "User location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "User log in time",
+    "defaultMessage": "LOG IN TIME",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "commonDataTable.edit.button",
+    "description": "edit button",
+    "defaultMessage": "Edit",
+    "filepath": "./src/containers/userTab/usersTable.js"
+  },
+  {
+    "id": "commonDataTable.Delete.button",
+    "description": "Delete button",
+    "defaultMessage": "Delete",
+    "filepath": "./src/containers/userTab/usersTable.js"
   },
   {
     "id": "user.table.noData",

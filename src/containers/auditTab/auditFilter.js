@@ -5,7 +5,6 @@ import {showTableFilter, filterApplied, auditfilterState, toggleAuditFilter,setC
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-import {setTextBoxStatus}  from '../../actions/auditActions';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {
     ANY,
@@ -30,13 +29,16 @@ import {hashHistory} from 'react-router'
 import {setAuditSpinner} from './../../actions/auditActions';
 import {userRequest} from '../../actions/userActions';
 import {mappingArray,arrayDiff} from '../../utilities/utils';
-
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag';
+import {AUDIT_USER_FETCH_QUERY} from './query/serverQuery';
+import {auditClientData} from './query/clientQuery';
 class AuditFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL],"CREATED BY":[ALL]}, searchQuery: {},
-            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]}
+            tokenSelected: {"AUDIT_TYPE": [ANY], "STATUS": [ALL],"CREATED_BY":[ALL]}, searchQuery: {},textboxStatus:null,
+            defaultToken: {"AUDIT_TYPE": [ANY], "STATUS": [ALL], "CREATED_BY":[ALL]}
         };
          this._applyFilter =  this._applyFilter.bind(this);
         this._closeFilter = this._closeFilter.bind(this);
@@ -44,33 +46,16 @@ class AuditFilter extends React.Component {
     }
 
     _closeFilter() {
-        var filterState=!this.props.showFilter;
-        this.props.showTableFilter(filterState);
+        this.props.showAuditFilter(false);
     }
 
-     componentDidMount(){
-        let userData={
-                'url':USERLIST_URL,
-                'method':GET,
-                'cause':AUDIT_USERLIST,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':sessionStorage.getItem('auth_token')
-            }
-        this.props.userRequest(userData);
-
-  }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState) && (this.props.pollTimerId!==nextProps.pollTimerId)) {
+        if(nextProps.auditFilterState){
+        if (nextProps.auditFilterState && JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)) {
             this.setState(nextProps.auditFilterState)
         }
-        /**
-         * Hide the filter as soon as data in the list get updated.
-         */
-        if((nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail) && (!nextProps.pollTimerId))||(nextProps.auditDetail.length>0 && JSON.stringify(nextProps.auditDetail)!==JSON.stringify(this.props.auditDetail) && this.props.clearIntervalFlag)){
-            this.props.showTableFilter(false);
-            this.props.setClearIntervalFlag(false);
-        }
+    }   
+
 
     }
 
@@ -107,7 +92,7 @@ class AuditFilter extends React.Component {
             ];
 
         var inputValue=this.state.searchQuery;
-        var textboxStatus=this.props.textboxStatus || {};
+        var textboxStatus=this.state.textboxStatus ||null;
         var inputField=<FilterInputFieldWrap inputText={filterInputFields} 
                                              handleInputText={this._handleInputQuery.bind(this)}
                                              inputValue={inputValue} textboxStatus={textboxStatus}/>
@@ -116,10 +101,10 @@ class AuditFilter extends React.Component {
 
     _processFilterToken() {
         var tokenAuditTypeField={
-            value: "AUDIT TYPE",
+            value: "AUDIT_TYPE",
             label: <FormattedMessage id="audit.tokenfield.typeAudit" defaultMessage="AUDIT TYPE"/>
         };
-        let userArr=this.props.auditUserList;
+        let userArr=this.props.auditUserList||[];
         let labelC3=[
             {value: ALL, label: <FormattedMessage id="audit.token3.all" defaultMessage="Any"/>}
         ];
@@ -137,7 +122,7 @@ class AuditFilter extends React.Component {
             label: <FormattedMessage id="audit.tokenfield.STATUS" defaultMessage="STATUS"/>
         };
          var tokenCreatedByField={
-            value: "CREATED BY",
+            value: "CREATED_BY",
             label: <FormattedMessage id="audit.tokenfield.createdby" defaultMessage="CREATED BY"/>
         };
         const labelC1=[
@@ -172,7 +157,7 @@ class AuditFilter extends React.Component {
     _handelTokenClick(field, value, state) {
         var tempArray=[SPECIFIC_SKU_ID,SPECIFIC_LOCATION_ID];
         var obj={},queryField,tokentoRemove;
-        var selectedToken=this.state.tokenSelected['AUDIT TYPE'];
+        var selectedToken=this.state.tokenSelected['AUDIT_TYPE'];
         var token=[value];
         this.setState({tokenSelected: handelTokenClick(field, value, state, this.state)});
 
@@ -183,12 +168,14 @@ class AuditFilter extends React.Component {
             if (queryField && queryField.length!==0){
                 this.setState({searchQuery: handleInputQuery("", queryField, this.state)});
             }
-            if(field=="AUDIT TYPE")
-            this.props.setTextBoxStatus(obj);
+            if(field=="AUDIT_TYPE")
+            this.setState({'textboxStatus':JSON.stringify(obj)});
+            
         }
         else {
-            if(field=="AUDIT TYPE")
-            this.props.setTextBoxStatus(obj);
+            if(field=="AUDIT_TYPE")
+            this.setState({'textboxStatus':JSON.stringify(obj)})
+            
         }
     }
 
@@ -198,16 +185,21 @@ class AuditFilter extends React.Component {
     }
 
     _applyFilter() {
-        var filterState=this.state,_query={}
 
+        var filterState=this.state,_query={}
+        
+        if(JSON.stringify(this.state)!==JSON.stringify(this.props. auditFilterState)){
+            this.props.setCurrentPageNumber(0);
+        }
+        
         if(filterState.tokenSelected[AUDIT_TYPE] && filterState.tokenSelected[AUDIT_TYPE][0]!==ANY){
             _query.auditType=filterState.tokenSelected[AUDIT_TYPE]
         }
         if (filterState.tokenSelected["STATUS"] && filterState.tokenSelected["STATUS"][0] !== ALL) {
             _query.status=filterState.tokenSelected["STATUS"]
         }
-         if (filterState.tokenSelected["CREATED BY"] && filterState.tokenSelected["CREATED BY"][0] !== ALL) {
-            _query.createdBy=filterState.tokenSelected["CREATED BY"]
+         if (filterState.tokenSelected["CREATED_BY"] && filterState.tokenSelected["CREATED_BY"][0] !== ALL) {
+            _query.createdBy=filterState.tokenSelected["CREATED_BY"]
         }
 
         if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
@@ -228,21 +220,41 @@ class AuditFilter extends React.Component {
          if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
             _query.toDate=filterState.searchQuery[TO_DATE]
         }
+            _query.pageNo=this.props.currentPage;
+            _query.pageSize=this.props.totalResults;
 
         hashHistory.push({pathname: "/auditlisting", query: _query})
-        clearInterval(this.props.pollTimerId);
-        this.props.setClearIntervalFlag(true);
-
+        this.props.filterApplied(true);
+        this.props.updateSubscription(true);
+        this.props.showAuditFilter(false);
     }
 
     _clearFilter() {
-        this.props.auditfilterState({
-            tokenSelected: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]}, searchQuery: {},
-            defaultToken: {"AUDIT TYPE": [ANY], "STATUS": [ALL], "CREATED BY":[ALL]}
-        })
+       this.props.auditfilterState({
+            tokenSelected: {
+                "AUDIT_TYPE": [ANY],
+                "STATUS":  [ALL],
+                "CREATED_BY":  [ALL],
+                __typename: "AuditFilterTokenSelected"
+            }, 
+            searchQuery: {
+                'SPECIFIC_SKU_ID': null,
+                'SPECIFIC_LOCATION_ID': null,
+                'AUDIT_TASK_ID': null,
+                'SPECIFIC_PPS_ID': null,
+                'FROM_DATE': null,
+                'TO_DATE': null,
+            __typename: "AuditFilterSearchQuery"},
+            defaultToken: {
+                "AUDIT_TYPE": [ANY], "STATUS": [ALL], "CREATED_BY": [ALL] ,
+                __typename: "AuditFilterDefaultToken"
+            }
+           
+        });
+        this.props.filterApplied(false);
         hashHistory.push({pathname: "/auditlisting", query: {}});
-        this.props.pollingFunc();
-        this.props.setClearIntervalFlag(true);
+        this.props.showAuditFilter(false);
+       
     }
 
     render() {
@@ -306,47 +318,16 @@ class AuditFilter extends React.Component {
 ;
 
 
-function mapStateToProps(state, ownProps) {
-    return {
-        showFilter: state.filterInfo.filterState || false,
-        auditSpinner: state.spinner.auditSpinner || false,
-        totalAudits: state.recieveAuditDetail.totalAudits || 0,
-        noResultFound: state.recieveAuditDetail.noResultFound || 0,
-        auditFilterState: state.filterInfo.auditFilterState,
-        auditFilterStatus: state.filterInfo.auditFilterStatus,
-        textboxStatus: state.auditInfo.textBoxStatus || {},
-        auditUserList:state.auditInfo.auditUserList ||[],
-        clearIntervalFlag:state.filterInfo.clearIntervalFlag|| false
-    };
-}
 
-var mapDispatchToProps=function (dispatch) {
-    return {
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        setTextBoxStatus: function (data) {
-            dispatch(setTextBoxStatus(data));
-        },
-        auditfilterState: function (data) {
-            dispatch(auditfilterState(data));
-        },
-        toggleAuditFilter: function (data) {
-            dispatch(toggleAuditFilter(data));
-        },
-        setAuditSpinner: function (data) {
-            dispatch(setAuditSpinner(data))
-        },
-        setClearIntervalFlag: function (data) {
-            dispatch(setClearIntervalFlag(data))
-        },
-        userRequest: function(data){ dispatch(userRequest(data)); }
 
-    }
-};
+const withClientData = graphql(auditClientData, {
+   
+    props: (data) => ({
+       auditFilterState:data.data.auditFilter?JSON.parse(JSON.stringify(data.data.auditFilter.filterState)):null,
+
+    })
+})
+
 
 AuditFilter.PropTypes={
     showFilter: React.PropTypes.bool,
@@ -354,10 +335,97 @@ AuditFilter.PropTypes={
     totalAudits: React.PropTypes.number,
     showTableFilter: React.PropTypes.func,
     filterApplied: React.PropTypes.func,
-    auditFilterState: React.PropTypes.object,
     auditFilterStatus: React.PropTypes.bool,
-    setTextBoxStatus:React.PropTypes.func
+    showAuditFilter: React.PropTypes.func,
 };
+const SET_TEXT_BOX_STATUS = gql`
+    mutation setFilterTextBox($textBoxName: String!) {
+        setAuditFilterTextBox(textBoxName: $textBoxName) @client
+    }
+`;
+const SET_FILTER_APPLIED = gql`
+    mutation setFilterApplied($isFilterApplied: String!) {
+        setAuditFilterApplied(isFilterApplied: $isFilterApplied) @client
+    }
+`;
+const SET_UPDATE_SUBSCRIPTION = gql`
+    mutation setUpdateSubscription($isUpdateSubsciption: String!) {
+        setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption) @client
+    }
+`;
+const SET_FILTER_STATE = gql`
+    mutation setFilterState($state: String!) {
+        setAuditFilterState(state: $state) @client
+    }
+`;
+const SET_PAGE_NUMBER = gql`
+    mutation setPageNumber($pageNumber: Int!) {
+        setAuditPageNumber(pageNumber: $pageNumber) @client
+    }
+`;
+const setPageNumber = graphql(SET_PAGE_NUMBER, {
+    props: ({mutate, ownProps}) => ({
+        setCurrentPageNumber: function (number) {
+            mutate({variables: {pageNumber: number}})
+        },
+    }),
+});
+const setFilterApplied = graphql(SET_FILTER_APPLIED, {
+    props: ({mutate, ownProps}) => ({
+        filterApplied: function (applied) {
+            mutate({variables: {isFilterApplied: applied}})
+        },
+    }),
+});
+const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
+    props: ({mutate, ownProps}) => ({
+        updateSubscription: function (applied) {
+            mutate({variables: {isUpdateSubsciption: applied}})
+        },
+    }),
+});
 
+const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
+    props: ({mutate, ownProps}) => ({
+        setTextBoxStatus: function (textBoxName) {
+            mutate({variables: {textBoxName: textBoxName}})
+        },
+    }),
+});
+const setFilterState = graphql(SET_FILTER_STATE, {
+    props: ({mutate, ownProps}) => ({
+        auditfilterState: function (state) {
+            mutate({variables: {state: state}})
+        },
+    }),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuditFilter) ;
+const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
+    
+    props: function(data){
+      var list={pps_list:[]}
+         if(!data || !data.data.AuditFetchUser || !data.data.AuditFetchUser.list){
+            auditUserList:list.users
+            return{}
+        }
+        
+        return {
+            
+            auditUserList: data.data.AuditFetchUser.list.users
+          
+        }
+    },
+    options: ({match, location}) => ({
+      variables: {},
+      fetchPolicy: 'network-only'
+  }),
+  });
+export default compose(initialQuery,
+    withApollo,
+    withClientData
+    ,setTextBoxStatus
+    ,setFilterApplied
+    ,setFilterState
+    ,setUpdateSubscription
+    ,setPageNumber
+)(connect()(AuditFilter));

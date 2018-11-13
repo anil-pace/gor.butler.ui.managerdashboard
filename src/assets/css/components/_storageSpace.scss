@@ -1,5 +1,15 @@
-@import '../abstracts/functions';
 .gor-storage-space{
+	.gor-storage-table{
+		.row{
+			background:#f7f7f7;
+		}
+		.cell{
+			padding-left:15px;
+			height: 40px;
+    		width: 240px;
+		}
+
+	}
 	.gor-ol-paginate-wrap{
 		width:100%;
 		.gor-ol-paginate-left{

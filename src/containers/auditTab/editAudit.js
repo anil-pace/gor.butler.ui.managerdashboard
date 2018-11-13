@@ -1,9 +1,7 @@
 import React  from 'react';
 import { FormattedMessage,injectIntl,intlShape,defineMessages } from 'react-intl'; 
-import { resetForm } from '../../actions/validationActions';
 import { connect } from 'react-redux';
-import { APP_JSON,POST, GET, VALIDATE_SKU_ID,VALIDATE_LOCATION_ID,VALID_SKU,CREATE_AUDIT_REQUEST,AUDIT_EDIT,AUDIT_EDIT_REQUEST ,CREATE_DUPLICATE_REQUEST} from '../../constants/frontEndConstants';
-import { AUDIT_VALIDATION_URL,AUDIT_CREATION_URL,AUDIT_EDIT_URL,AUDIT_DUPLICATE_URL} from '../../constants/configConstants';
+import {VALID_SKU} from '../../constants/frontEndConstants';
 import SelectAttributes from '../../components/gor-select-attributes/selectAttributes';
 import {InputComponent} from '../../components/InputComponent/InputComponent.js';
 import Filter from '../../components/gor-filter-component/filter';
@@ -11,11 +9,20 @@ import SearchFilterComponent from '../../components/gor-search-component/searchF
 import GorTabs from '../../components/gor-tabs/tabs';
 import {Tab} from '../../components/gor-tabs/tabContent';
 import CSVUpload from '../../components/gor-drag-drop-upload/index';
-import {makeAjaxCall} from '../../actions/ajaxActions';
 import Spinner from '../../components/spinner/Spinner';
 import {setValidationAuditSpinner} from '../../actions/auditActions';
 import {modal} from 'react-redux-modal';
 import SkuAlerts from './skuAlerts';
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
+import {processValidationDataSKU,processValidationData} from "./utilityFunctions";
+import {getFormattedMessages} from '../../../src/utilities/getFormattedMessages';
+import { resetForm,notifyfeedback,notifyFail } from '../../actions/validationActions';
+import { setNotification } from '../../actions/notificationAction';
+import {AuditParse} from '../../../src/utilities/auditResponseParser'
+import {ShowError} from '../../../src/utilities/ErrorResponseParser';
+import {auditEditDupData,auditNeedRefreshFlag} from './query/clientQuery';
+import {AUDIT_VALIDATE_QUERY,AUDIT_EDIT_DUPLICATE_QUERY} from './query/serverQuery';
 
 
 const attributeComponentMessages={
@@ -71,14 +78,13 @@ const  messages= defineMessages({
     
 });
 
-
-
-
 class EditAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
-
+      this.processValidationDataSKU=processValidationDataSKU;
+      this.processValidationData=processValidationData;
+      
       this.state={
         copyPasteSKU:{
           data:[{
@@ -117,7 +123,8 @@ class EditAudit extends React.Component{
         activeTabIndex:0,
         validateclicked:false,
         selectedSKUList:{},
-        auditSpinner:this.props.auditSpinner
+        auditSpinner:this.props.auditSpinner,
+        audit_Id:this.props.auditId
         
       };
       
@@ -135,7 +142,6 @@ class EditAudit extends React.Component{
       this._validateLocation=this._validateLocation.bind(this);
       this._onBackClick=this._onBackClick.bind(this);
       this._validateSKU=this._validateSKU.bind(this);
-      //this._onTbClick = this._onTabClick.bind(this);
       this._invokeAlert = this._invokeAlert.bind(this);
       this._searchCallBack = this._searchCallBack.bind(this);
       this._createAudit=this._createAudit.bind(this);
@@ -145,31 +151,53 @@ class EditAudit extends React.Component{
 
 
   componentDidMount(){
-    if(this.props.param=='edit' || this.props.param=='duplicate' )
+    var _this=this;
+    var auditId=this.state.audit_Id;
+    this.props.client.query({
+      query:AUDIT_EDIT_DUPLICATE_QUERY,
+        variables: (function () {
+        return {
+          data:
+          {"audit_id": auditId}
+        }
+    }()),
+      fetchPolicy: 'network-only'
+    }).then(data=>{
+      var auditRawData=data.data.EditAuditDetails.list?JSON.parse(data.data.EditAuditDetails.list):{};
+let dataSentToProps={};
+      if(auditRawData && auditRawData.attributes_list_sets){
+        let processedDataSKUEditDup = _this.processValidationDataSKU(auditRawData,"Edit_Dup");
+       dataSentToProps= {
+             "auditEditData":processedDataSKUEditDup,              
+            "hasDataChanged":!_this.props.hasDataChanged,
+            "skuDataChanged":!_this.props.skuDataChanged,
+             "auditSpinner":false,
+             "auditValidationSpinner":false,
+             "locationAttributes":null
+             
+        }
+      }else
+      {
+        let processedData = _this.processValidationData(auditRawData,"Edit_Dup")//(action.data)
+        dataSentToProps={ 
+          "locationAttributes":processedData, 
+             "hasDataChanged":!_this.props.hasDataChanged,
+             "locationDataChanged":!_this.props.locationDataChanged,
+             "auditValidationSpinner":false
+           }
+      }
+     _this.props.SetEditDupDetails(dataSentToProps);
 
-    {
-    let formdata={
-      "audit_id":this.props.auditId
-    }
-    
-    this.props.auditId;
-      let auditData={
-                'url':AUDIT_EDIT_URL,
-                'method':POST,
-                'cause':AUDIT_EDIT,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'formdata':formdata,
-                'token':sessionStorage.getItem('auth_token')
-            }
-      this.props.makeAjaxCall(auditData);
-    }
+    }).catch((errors)=>{
+      let code=errors.graphQLErrors[0].code;
+      let message=errors.graphQLErrors[0].message;
+          ShowError(_this,code)
+        })
   }
 
   componentWillUnmount()
   {
-    
-    this.props.resetForm();            
+             
   }
 
  
@@ -178,13 +206,9 @@ class EditAudit extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     var a=nextProps.auditEditData;
-    if(!nextProps.auth_token)
-    {
-      this._removeThisModal();
-    }
     if(this.props.hasDataChanged !== nextProps.hasDataChanged){
       let locationAttributes=[],validatedLocations=[],validationDone=true,skuAttributes={},validatedSKUs=[],validationDoneSKU=true,attrList={},activeTabIndex=0;
-      if(Object.keys(nextProps.locationAttributes).length){
+      if(nextProps.locationAttributes && Object.keys(nextProps.locationAttributes).length){
          locationAttributes = JSON.parse(JSON.stringify(nextProps.locationAttributes));
         validatedLocations = this._processLocationAttributes(locationAttributes.data) || [];
         validationDone = Object.keys(locationAttributes).length ? true : false;
@@ -194,7 +218,7 @@ class EditAudit extends React.Component{
         this.kqCheck.checked=locationAttributes.kq;
       }
       else{
-        if(this.props.auditEditData!==nextProps.auditEditData){
+        if(this.props.auditEditData!==nextProps.auditEditData && !nextProps.skuAttributes){
        skuAttributes =JSON.parse(JSON.stringify(nextProps.auditEditData));
        attrList=nextProps.auditEditData.outerObj;
        this.kqCheck.checked=skuAttributes.kq;
@@ -377,6 +401,7 @@ _onAttributeSelectionFirstTime(){
 
 
   _validateSKU(type) {
+    var _this=this;
     let validSKUData={
       "audit_param_name":this.auditNameSKU.value,
       "audit_param_type":"sku"
@@ -404,7 +429,7 @@ _onAttributeSelectionFirstTime(){
       for(let i=0,len=arrSKU.length; i<len;i++){
       auditParamValue.push(arrSKU[i].value.trim())
       }
-      validSKUData.audit_param_value.sku_list = auditParamValue;
+      validSKUData.audit_param_value = auditParamValue;
       sendRequest = true;
     }
     else if(type === "confirm" || type === "create" || type === "duplicate"){
@@ -439,27 +464,70 @@ _onAttributeSelectionFirstTime(){
       this.props.removeModal();
     }
     }
-    if(sendRequest){
-      let urlData={
-                  'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
-                  'formdata': validSKUData,
-                  'method':POST,
-                  'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_SKU_ID),
-                  'contentType':APP_JSON,
-                  'accept':APP_JSON,
-                  'token':this.props.auth_token
-      }
-    this.props.setAuditSpinner(true);
-    this.props.makeAjaxCall(urlData);
+   
+
+this.props.setValidAuditSpinner(true);
+if(sendRequest){
+        let dataToSent;
+          dataToSent = {
+            "sku":{
+              "audit_id":validSKUData.audit_id,
+              "audit_param_type":validSKUData.audit_param_type,
+              "audit_param_name":validSKUData.audit_param_name,
+              "action":validSKUData.action,
+              "audit_creator_name":validSKUData.audit_creator_name||"admin",
+              "data":type === "create"|| type === "duplicate"?JSON.stringify(validSKUData.audit_param_value.attributes_list):JSON.stringify(validSKUData.audit_param_value),
+              "kq":validSKUData.kq
+            }
+          }
+        
+    this.props.client.query({
+      query:AUDIT_VALIDATE_QUERY,
+      variables: dataToSent,
+      fetchPolicy: 'network-only'
+  }).then(data=>{
+ var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
+ if(validSKUData.action=="edit" ||validSKUData.action=="duplicate"){
+  AuditParse(auditEditData,validSKUData.action,_this)
+ }
+
+ let audit_name= 'Alpha';
+if(auditEditData && auditEditData.attributes_list){
+ let processedDataSKU = _this.processValidationDataSKU(auditEditData,null,true,audit_name);
+var dataToSentToProps= { 
+     "skuAttributes" : processedDataSKU,
+     "hasDataChanged":!_this.props.hasDataChanged,
+     "skuDataChanged":!_this.props.skuDataChanged,
+     "auditValidationSpinner":false,
+     "locationAttributes":null,
+   };
+   _this.props.SetEditDupValidateDetails(dataToSentToProps)
+  }else{
+
+    let processedData = _this.processValidationData(auditEditData.audit_location_validation_response)//(action.data)
+    var dataToSentToProps={ 
+         "locationAttributes" : processedData,
+         "hasDataChanged":!_this.props.hasDataChanged,
+         "locationDataChanged":!_this.props.locationDataChanged,
+         "auditValidationSpinner":false
+       }
+    _this.props.SetEditDupValidateDetails(dataToSentToProps)
   }
-  
-  
-    
+
+
+  }).catch((errors)=>{
+    let code=errors.graphQLErrors[0].code;
+    let message=errors.graphQLErrors[0].message;
+        ShowError(_this,code)
+      })
+}
   }
 
 
 
   _validateLocation(type){
+    var _this=this;
+var action="";
     let validLocationData, validLocationDataCreateAudit;
     let arrLocation=this.state.copyPasteLocation.data.slice(0);
     let auditParamValue = []
@@ -469,56 +537,115 @@ _onAttributeSelectionFirstTime(){
     }
    
     validLocationData={
+      "sku":{
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
-     
-      "audit_param_value":{
-        "locations_list":auditParamValue
-      }
+      "data":JSON.stringify(auditParamValue)
+    }
     }
     
     if(this.props.auditId &&  this.props.param!=='duplicate' && type !== "validate"){
     validLocationDataCreateAudit={
+      "sku":{
+      "audit_id":this.props.auditId,
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":(type === "create" || type === "confirm")?'edit':'',
-      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'',
+      "audit_creator_name":(type === "create" || type === "confirm")?this.props.username:'admin',
       "kq":(type === "create" || type === "confirm")?this.kqCheck.checked:'',
-      "audit_param_value":{
-        "locations_list":auditParamValue
-      },
-      audit_id:this.props.auditId
+      "data":JSON.stringify(auditParamValue)
     }
+     
+    }
+    action=(type === "create" || type === "confirm")?'edit':'';
   }
-  else
+  else if (type!=='validate')
   {
     validLocationDataCreateAudit={
+      "sku":{
       "audit_param_name":this.auditNameLoc.value,
       "audit_param_type":"location",
       "action":'duplicate',
-      "audit_creator_name":this.props.username,
+      "audit_creator_name":this.props.username||'admin',
       "kq":this.kqCheck.checked,
-      "audit_param_value":{
-        "locations_list":auditParamValue
-      }
-      
+      "data":JSON.stringify(auditParamValue)
     }
+  
+    }
+    action='duplicate';
   }
-
-
+else
+    {
+      validLocationDataCreateAudit={
+        "sku":{
+        "audit_param_name":this.auditNameLoc.value,
+        "audit_param_type":"location",
+        "action":'validate',
+        "audit_creator_name":this.props.username||'admin',
+        "kq":this.kqCheck.checked,
+        "audit_param_value":JSON.stringify(auditParamValue)
+      }
      
-    let urlData={
-                'url': (type === "create" || type === "confirm" ||type === "duplicate") ? AUDIT_CREATION_URL: AUDIT_VALIDATION_URL,
-                'formdata':(type === "create" || type === "duplicate") ? validLocationDataCreateAudit : validLocationData,
-                'method':POST,
-                'cause':(type==="duplicate")?CREATE_DUPLICATE_REQUEST:((type === "create" || type === "confirm") ? AUDIT_EDIT_REQUEST : VALIDATE_LOCATION_ID),
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
+      }
+      action='validate';
     }
-    this.props.setAuditSpinner(true);
-    this.props.makeAjaxCall(urlData);
-   
+  
+
+
+   this.props.setValidAuditSpinner(true);
+    const AUDIT_VALIDATE_QUERY = gql`query AuditSKUList($sku:dataListParams){
+      AuditSKUList(input:$sku){
+       list
+      }
+        }
+    `;
+    if(true){
+            let dataToSent;
+            dataToSent=(type === "create" || type === "duplicate") ? validLocationDataCreateAudit : validLocationData
+            
+        this.props.client.query({
+          query:AUDIT_VALIDATE_QUERY,
+          variables: dataToSent,
+          fetchPolicy: 'network-only'
+      }).then(data=>{
+     var auditEditData=data.data.AuditSKUList?JSON.parse(data.data.AuditSKUList.list):""
+     var values={},stringInfo={},msg={};
+     if(action=="edit" ||action=="duplicate"){
+      AuditParse(auditEditData,action,_this)
+     }
+     else{
+     let audit_name= 'Alpha';
+    if(auditEditData && auditEditData.attributes_list){
+     let processedDataSKU = _this.processValidationDataSKU(auditEditData,null,true,audit_name);
+    var dataToSentToProps= { 
+         "skuAttributes" : processedDataSKU,
+         "hasDataChanged":!_this.props.hasDataChanged,
+         "skuDataChanged":!_this.props.skuDataChanged,
+         "auditValidationSpinner":false,
+         "locationAttributes":null,
+       };
+       _this.props.SetEditDupValidateDetails(dataToSentToProps)
+      }else{
+    
+        let processedData = _this.processValidationData(auditEditData.audit_location_validation_response)//(action.data)
+        var dataToSentToProps={ 
+             "locationAttributes" : processedData,
+             "hasDataChanged":!_this.props.hasDataChanged,
+             "locationDataChanged":!_this.props.locationDataChanged,
+             "auditValidationSpinner":false
+           }
+        _this.props.SetEditDupValidateDetails(dataToSentToProps)
+      }
+    
+    }
+      }).catch((errors)=>{
+        let code=errors.graphQLErrors[0].code;
+        let message=errors.graphQLErrors[0].message;
+            ShowError(_this,code)
+          })
+    }
+
+
     if(type==="create"||type=="duplicate"){
       this.props.removeModal();
      
@@ -1236,7 +1363,8 @@ _onAttributeSelectionFirstTime(){
              
             </Tab>
             </GorTabs>
-              {!allSKUsValid && <div  className={"gor-sku-validation-btn-wrap" + (this.props.skuValidationSpinner?" gor-disable-content":"")}>
+              {!allSKUsValid && 
+              <div  className={"gor-sku-validation-btn-wrap" + (this.state.auditSpinner?" gor-disable-content":"")}>
                 <button className={"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateSKU("validate")}>{this.state.auditSpinner ? <Spinner isLoading={this.state.auditSpinner} utilClassNames={"gor-orange-spinner"} />:<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
                         defaultMessage='Validate'/>}</button>
               </div>}
@@ -1400,12 +1528,15 @@ _onAttributeSelectionFirstTime(){
               </div>
             }
                           <div  className={"gor-sku-validation-btn-wrap"}>
-                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={this._validateLocation}>
+                <button className={(self.state.copyPasteLocation.isInputEmpty || (validationDone && allLocationsValid) )?"gor-auditValidate-btn-disabled":"gor-auditValidate-btn"}  type="button" onClick={(e)=>this._validateLocation("validate")}>
                 <label>
-                {(!validationDone && validateclicked ) ? <div className='gor-spinner'></div> :<FormattedMessage id="audits.validateSKU" description='Text for validate sku button' 
+{(this.state.auditSpinner) ? 
+<div className='gor-orange-spinner'></div>
+ :<FormattedMessage id="audits.validateSKU" 
+ description='Text for validate sku button' 
                         defaultMessage='Validate'/>}
                         
-            
+
             </label>
                           
         </button>
@@ -1481,7 +1612,7 @@ _onAttributeSelectionFirstTime(){
 EditAudit.PropTypes={
     skuValidationSpinner: React.PropTypes.boolean,
     locationValidationSpinner:React.PropTypes.boolean,
-    locationValidationSpinnerCsv:React.PropTypes.boolean,
+   locationValidationSpinnerCsv :React.PropTypes.boolean,
     auditType:React.PropTypes.object,
     skuCheck:React.PropTypes.object,
     locCheck:React.PropTypes.object,
@@ -1504,36 +1635,95 @@ EditAudit.defaultProps = {
   skuAttributes:{},
   locationAttributes:{},
   hasDataChanged:false,
-  auditSpinner:false
+  skuDataChanged:false,
+  auditSpinner:false,
+  locationDataChanged:false
 };
-function mapStateToProps(state, ownProps){
-  return {
-      skuValidationSpinner: state.auditInfo.skuValidationSpinner ,
-      locationValidationSpinner: state.auditInfo.locationValidationSpinner ,
-      locationValidationSpinnerCsv: state.auditInfo.locationValidationSpinnerCsv ,
-      auditType:  state.auditInfo.auditType,
-      skuCheck: state.appInfo.skuInfo,
-      locCheck: state.appInfo.locInfo,
-      auth_token:state.authLogin.auth_token,
-      username: state.authLogin.username,
-      skuAttributes: state.auditInfo.skuAttributes,
-      locationAttributes:state.auditInfo.locationAttributes,
-      hasDataChanged:state.auditInfo.hasDataChanged,
-      auditSpinner: state.auditInfo.auditValidationSpinner,
-      auditEditData:state.auditInfo.auditEditData 
 
-  };
-}
 
 function mapDispatchToProps(dispatch){
   return {
     resetForm:   function(){ dispatch(resetForm()); },
-    makeAjaxCall: function (data) {dispatch(makeAjaxCall(data))},
-    setAuditSpinner: function (data) {
-            dispatch(setValidationAuditSpinner(data))
-        }
+    notifyfeedback: function (data) {dispatch(notifyfeedback(data))},
+    setNotification: function (data) {dispatch(setNotification(data))},
+    notifyFail:function (data) {dispatch(notifyFail(data)) }
   }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(injectIntl(EditAudit));
+const clientauditEditDupData = graphql(auditEditDupData, {
+  props: (data) => ({
+     auditEditData: data.data.auditEditDupData?JSON.parse(data.data.auditEditDupData.auditEditData):"",
+     auditSpinner: data.data.auditEditDupData?data.data.auditEditDupData.auditValidationSpinner:"",
+    hasDataChanged: data.data.auditEditDupData?data.data.auditEditDupData.hasDataChanged:"",
+    locationAttributes:data.data.auditEditDupData.locationAttributes?JSON.parse(data.data.auditEditDupData.locationAttributes):{},
+    skuDataChanged: data.data.auditEditDupData?data.data.auditEditDupData.skuDataChanged:"",
+    skuAttributes:data.data.auditEditDupData?JSON.parse(data.data.auditEditDupData.skuAttributes):"",
+    locationDataChanged:data.data.auditEditDupData?data.data.auditEditDupData.locationDataChanged:""
+  })
+})
+const clientauditNeedRefreshFlag = graphql(auditNeedRefreshFlag, {
+  props: (data) => ({
+     auditRefreshFlag: data.data.auditNeedRefreshFlag?JSON.parse(data.data.auditNeedRefreshFlag.auditRefreshFlag):"",
+  })
+})
+
+const SET_AUDIT_LIST_REFRESH_STATE = gql`
+    mutation setauditListRefresh($auditRefreshFlag: String!) {
+      setAuditListRefreshState(auditRefreshFlag: $auditRefreshFlag) @client
+    }
+`;
+const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
+  props: ({mutate, ownProps}) => ({
+    setAuditListRefresh: function (auditRefreshFlag) {
+          mutate({variables: {auditRefreshFlag: auditRefreshFlag}})
+      },
+  }),
+});
+const SET_EDIT_DUP_DETAILS = gql`
+    mutation setEditDupDetails($edit_Dup_Details: String!) {
+        setAuditEditDupDetails(edit_Dup_Details: $edit_Dup_Details) @client
+    }
+`;
+const SET_EDIT_DUP_VALIDATE_DETAILS = gql`
+    mutation setEditDupValidateDetails($edit_Dup_Validate_Details: String!) {
+        setAuditEditDupValidateDetails(edit_Dup_Validate_Details: $edit_Dup_Validate_Details) @client
+    }
+`;
+const SET_VALID_AUDIT_SPINNER_STATE = gql`
+    mutation setvalidAuditSpinner($validAuditSpinner: String!) {
+        setValidAuditSpinnerState(validAuditSpinner: $validAuditSpinner) @client
+    }
+`;
+const setSpinnerState = graphql(SET_VALID_AUDIT_SPINNER_STATE, {
+  props: ({mutate, ownProps}) => ({
+      setValidAuditSpinner: function (validAuditSpinner) {
+          mutate({variables: {validAuditSpinner: validAuditSpinner}})
+      },
+  }),
+});
+const setEditDupDetails = graphql(SET_EDIT_DUP_DETAILS, {
+  props: ({mutate, ownProps}) => ({
+    SetEditDupDetails: function (applied) {
+          mutate({variables: {edit_Dup_Details: applied}})
+      },
+  }),
+});
+const setEditDupValidateDetails = graphql(SET_EDIT_DUP_VALIDATE_DETAILS, {
+  props: ({mutate, ownProps}) => ({
+    SetEditDupValidateDetails: function (applied) {
+          mutate({variables: {edit_Dup_Validate_Details: applied}})
+      },
+  }),
+});
+
+export default compose(
+  withApollo,
+  setEditDupDetails,
+  setEditDupValidateDetails,
+  clientauditEditDupData,
+  setSpinnerState,
+  clientauditNeedRefreshFlag,
+  setAuditListRefreshState,
+)
+  (connect(null,mapDispatchToProps)(injectIntl(EditAudit)));
 

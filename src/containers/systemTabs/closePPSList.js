@@ -1,12 +1,12 @@
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
-import {GTable} from '../../components/gor-table-component/index'
-import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
-import {GTableBody} from "../../components/gor-table-component/tableBody";
-import {GTableRow} from "../../components/gor-table-component/tableRow";
+import GTable,{GTableHeader,GTableHeaderCell,GTableBody,GTableRow} from '../../components/gor-table-component/index'
+
 import {POST, APP_JSON,GET_PENDING_MSU} from '../../constants/frontEndConstants';
 import {GET_PPS_MSU} from '../../constants/configConstants'
+import {graphql, withApollo, compose} from "react-apollo"
+import {GET_PENDING_MSU_QUERY} from './queries/ppsTab'
 
 const closeAll = "closeAll";
 const fcloseAll = "fcloseAll";
@@ -45,19 +45,7 @@ class ClosePPSList extends React.Component {
         this.props.removeModal();
 
     }
-    componentDidMount(){
-        let formData = {};
-        formData.pps_id = Object.keys(this.props.checkedPPS)
-        let params={
-                'url': GET_PPS_MSU,
-                'formdata': formData,
-                'method': POST,
-                'cause': GET_PENDING_MSU,
-                'token': sessionStorage.getItem('auth_token'),
-                'contentType': APP_JSON
-            };
-            this.props.changePPSmode(params);
-    }
+
     _onRadioChange(ppsId,value){
        
         this.setState({
@@ -75,14 +63,13 @@ class ClosePPSList extends React.Component {
                 state[k].checkedValue = radioSelection
             }
         }
-    
         this.setState(state);
     }
     _processData(){
         var processedData = {};
         var checkedPPS = Object.keys(this.props.checkedPPS);
         var ppsLen = checkedPPS.length;
-        var pendingMSU = this.props.pendingMSU || {};
+        var pendingMSU = this.props.pendingMSU ? this.props.pendingMSU.successful : {};
         var areAllSelected = true
          processedData.header = [
             {id:1,text: <FormattedMessage id="ppsclose.tblhead1.text" description='Table first head' defaultMessage='SLOT ID'/>, sortable: false},
@@ -110,10 +97,10 @@ class ClosePPSList extends React.Component {
 
     render() {
         var processedData=this._processData();
-       
+        var self = this;
        
         return (
-            <div>
+             <div>
                 <div className="gor-modal-content pps-close">
                     <div className='gor-modal-head'>
                         <div className='gor-usr-add'>{this.props.heading}
@@ -175,12 +162,22 @@ class ClosePPSList extends React.Component {
         );
     }
 }
-
-
-function mapStateToProps(state, ownProps) {
-    return {
-        pendingMSU:state.ppsInfo.pendingMSU
-    };
+const withQuery = graphql(GET_PENDING_MSU_QUERY, {
+    props: (data) => {
+        return {pendingMSU:data.data.PendingMSUList ? JSON.parse(data.data.PendingMSUList.list) : null}
+    },
+    options(props){
+        return {
+      variables: {
+        "input":{
+            "pps_id": Object.keys(props.checkedPPS)
+        }
+      },
+      fetchPolicy: 'network-only'
+    } 
 }
+});
 
-export default connect(mapStateToProps, null)(ClosePPSList);
+
+
+export default compose(withQuery)(ClosePPSList);

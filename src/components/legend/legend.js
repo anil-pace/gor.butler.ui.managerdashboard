@@ -8,10 +8,6 @@
 
  class Legend extends React.Component{
  	
- 	shouldComponentUpdate(nextProps){
- 		return this.props.hasDataChanged !== nextProps.hasDataChanged
- 	}
- 	
  	_processData(){
  		var _this=this;
  		var data=_this.props.legendData.data || [];

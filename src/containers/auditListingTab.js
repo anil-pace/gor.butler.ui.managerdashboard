@@ -4,21 +4,22 @@
  */
  import React  from 'react';
  import {connect} from 'react-redux';
- import {GTable} from '../components/gor-table-component/index'
- import {GTableHeader,GTableHeaderCell} from '../components/gor-table-component/tableHeader';
- import {GTableBody} from "../components/gor-table-component/tableBody";
- import {GTableRow} from "../components/gor-table-component/tableRow";
+ import GTable from '../components/gor-table-component'
+ import {GTableHeader, GTableHeaderCell, GTableBody, GTableRow} from '../components/gor-table-component'
  import {FormattedMessage,defineMessages} from 'react-intl';
  import ResolveAudit from './auditTab/resolveAudit';
  import NameInitial from '../components/NameInitial/nameInitial';
  import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
  import ProgressBar from '../components/progressBar/progressBar.js';
- import ViewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
+ import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
  import AuditStart from '../containers/auditTab/auditStart';
  import ActionDropDown from '../components/actionDropDown/actionDropDown';
  import {modal} from 'react-redux-modal';
  import AuditAction from '../containers/auditTab/auditAction';
  import EditAudit from '../containers/auditTab/editAudit';  
+ import {graphql, withApollo, compose} from "react-apollo";
+ import Dimensions from 'react-dimensions';
+import gql from 'graphql-tag'
  import {
     APP_JSON,
     GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT,
@@ -83,19 +84,18 @@ multiPPS:{
 }
 });
 
- class auditListingTab extends React.Component{
+ class AuditListingTab extends React.Component{
 
-   constructor(props) 
-   {
+   constructor(props) {
     super(props);
     this._handelClick = this._handelClick.bind(this);
     this._handelResolveAudit = this._handelResolveAudit.bind(this);
     this.state={visibleMenu:false} ;
-    this.state={checkedAudit:[]};
+    this.state={checkedAudit:[]};    
   }	
 
   headerCheckChange(e){
-    let arr=this.props.checkedAudit;
+  let arr = JSON.parse(JSON.stringify(this.props.checkedAudit));
   let a= arr.indexOf(e.currentTarget.id);
   (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
   this.props.setCheckedAudit(arr);
@@ -106,7 +106,7 @@ multiPPS:{
 
 
  viewAuditDetails(auditId,displayId) {
-  modal.add(ViewDetailsAudit, {
+  modal.add(viewDetailsAudit, {
     title: '',
     size: 'large',
        	            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
@@ -122,17 +122,18 @@ startAudit(auditID) {
     size: 'large',
    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
    hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-   auditID: auditID
+   auditID: auditID,
+   arrNameId:this.state.arrNameId
    //.. all what you put in here you will get access in the modal props ;),
                       });
 }  
 
 _handelClick(field,id,displayId) {
-  let auditId=id;//field.currentTarget.id;
+  let auditId=id;
   if(field.target.value=='viewdetails'){
     this.viewAuditDetails(auditId,displayId);
   }else if(field.target.value=='pause'){
-  this._pauseAudit(auditId,'pause');
+    this.props.pauseAudit(auditId,'pause');
   }else if(field.target.value=='cancel'){
     this._auditAction(auditId,CANCEL_AUDIT,displayId);
      }else if(field.target.value=='delete'){
@@ -203,28 +204,14 @@ startAuditAuto(auditId){
 _onScrollHandler(event){
 
 if(event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight && Math.ceil(this.props.totalAudits/PAGE_DEFAULT_LIMIT)!==Number(this.props.currentPage)){
-    let page=this.props.currentPage?Number(this.props.currentPage)+1:this.props.items.length!==0?2:"";    
-    let _query=this.props.location.query || {}
-        _query.page=page.toString();
-        _query.saltParams={lazyData:true};
-    this.props.refreshCallback(_query);
+    let query={scrolling:true}
+    this.props.refreshCallback(query);
     
 }
 }
 
 
-_pauseAudit(auditId){
-  let  audit_id=(auditId).constructor.name!=="Array"?auditId:auditId.toString()
-      let auditData={
-                'url':AUDIT_PAUSE_URL+audit_id,
-                'method':PUT,
-                'cause':PAUSE_AUDIT,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':sessionStorage.getItem('auth_token')
-            }
-      this.props.userRequest(auditData);
-} 
+
 
  _auditAction(auditId,param,displayId){
   let data;
@@ -261,7 +248,7 @@ if(param==CANCEL_AUDIT){
 _findStatus(data)
 {
  
-return (Math.round(data.completed*100)/data.total);
+return (Math.round(data.completed*100)/data.total||0);
 }
 
 _tableBodyData(itemsData){
@@ -411,7 +398,9 @@ render(){
   )
 }
 }
-auditListingTab.contextTypes={
+
+AuditListingTab.contextTypes={
   intl: React.PropTypes.object.isRequired
 }
-export default auditListingTab ;
+export default AuditListingTab ;
+

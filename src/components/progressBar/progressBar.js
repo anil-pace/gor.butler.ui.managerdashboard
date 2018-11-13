@@ -1,16 +1,8 @@
 
 import React  from 'react';
-import { FormattedMessage } from 'react-intl'; 
 
 class ProgressBar extends React.Component{
- constructor(props) 
- {
-     super(props); 
-     
- }
- 
- render()
- {
+ render(){
      let applyWidth = this.props.progressBarWrapperWidth ? {width: this.props.progressBarWrapperWidth} : {width: "100%"};
      return (
        <div style={applyWidth} className="gor-progress-bar-wrapper">
