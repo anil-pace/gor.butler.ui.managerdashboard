@@ -39,6 +39,11 @@ const messages=defineMessages({
         description: "prefix for pps id in ppsDetail",
         defaultMessage: "PPS-{ppsId}"
     },
+    namePrefixFooter: {
+        id: "ppsDetail.name.prefixFooter",
+        description: "prefix for pps id in ppsDetail",
+        defaultMessage: "{currentPpsId}/{totalPpsId} bins acitve"
+    },
     perfPrefix: {
         id: "ppsDetail.performance.prefix.items",
         description: "prefix for pps id in ppsDetail",
@@ -299,12 +304,40 @@ class PPS extends React.Component {
     }
 
     _processPPSData() {
+
+        var fromPps = [
+               {
+                   "pps_id": "1",
+                   "active_bins": 8,
+                   "total_bins": 8
+               },
+               {
+                   "pps_id": "2",
+                   "active_bins": 10,
+                   "total_bins": 10
+               },
+               {
+                   "pps_id": "3",
+                   "active_bins": 10,
+                   "total_bins": 10
+               },
+               {
+                   "pps_id": "4",
+                   "active_bins": 12,
+                   "total_bins": 12
+               },
+               {
+                   "pps_id": "5",
+                   "active_bins": 10,
+                   "total_bins": 10
+               }
+            ];
         
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
         var pps_data=nProps.props.data.PPSListSystem ? nProps.props.data.PPSListSystem.list : [];//nProps.props.PPSDetail.PPStypeDetail;
         var data = Object.keys(nProps.props.location.query).length ? this._filterList(pps_data, nProps.props.location.query) : pps_data
-        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
+        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE, PPS_footer;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
@@ -316,8 +349,17 @@ class PPS extends React.Component {
         for (var i=data.length - 1; i >= 0; i--) {
             detail={};
             ppsId=data[i].pps_id;
+            for(var j = 0; j<fromPps.length; j++){
+                if(ppsId === parseInt(fromPps[j].pps_id)){
+                    let activeBins, totalBins; 
+                    activeBins = fromPps[j].active_bins;
+                    totalBins = fromPps[j].total_bins;
+                    PPS_footer = nProps.context.intl.formatMessage(messages.namePrefixFooter, {"currentPpsId": activeBins, "totalPpsId": totalBins});
+                }
+            }
             performance=(data[i].performance < 0 ? 0 : data[i].performance);
             PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
+
             OPEN=nProps.context.intl.formatMessage(stringConfig.open);
             CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
             FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
@@ -335,6 +377,7 @@ class PPS extends React.Component {
                 requestedStatusText = "--"
             }
             detail.id=PPS;
+            detail.idFooter = PPS_footer;
             detail.ppsId=ppsId;
             detail.requested_status=requestedStatusText ;
             detail.pps_requested_mode=data[i]["pps_requested_mode"];
