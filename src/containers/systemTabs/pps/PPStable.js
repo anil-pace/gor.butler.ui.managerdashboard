@@ -316,8 +316,20 @@ class PPStable extends React.Component {
                                 </div>
                             </div>
                         }
-                        cell={  <PPSComponentCell checkboxColumn={"ppsId"} data={sortedDataList} checkState={checkState}
-                                               checked={checkedStatePps}/>}
+                        cell={  <PPSComponentCell 
+                                    checkboxColumn={"ppsId"} 
+                                    data={sortedDataList} 
+                                    checkState={checkState}
+                                    checked={checkedStatePps}
+                                    childrenClass="requestedModeTxt_1" 
+                                    childColumnKey="pps_requested_mode_1" 
+                                    classKey={"operatingModeClass_1"}>
+                                        <span><FormattedMessage 
+                                                id="PPStable.ppsId.status"
+                                                description='PPStable.ppsIdStatus.text'
+                                                defaultMessage='bins active'/>
+                                        </span>
+                                </PPSComponentCell>}
                         fixed={true}
                         width={columnWidths.id}
                         isResizable={true}

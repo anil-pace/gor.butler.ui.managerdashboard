@@ -56,11 +56,15 @@ export const CHANGE_PPS_PROFILE_QUERY=gql`
 `;
 
 export const PPS_CONFIG_QUERY = gql`
-      query PpsConfigList($input: PpsConfigListParams) {
-        PpsConfigList(input:$input){
-             list
-      }
-    }
+    query($input:ConfigPpsListParams){
+        ConfigPpsList(input:$input){
+             list {
+               pps_id
+               active_bins
+               total_bins
+             }
+  		}
+        }
 `;
 
 export const PPS_LIST_QUERY = gql`
