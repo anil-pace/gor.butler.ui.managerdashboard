@@ -243,7 +243,7 @@ class Bins extends React.Component {
                     <FormattedMessage
                         id="pps.configuration.bins.group.selection.count"
                         description='total users for filter search bar'
-                        defaultMessage='Select a bin group to enable or disable ({disabled}/{total} groups disabled)'
+                        defaultMessage='Select a bin group to activate or deactivate ({disabled}/{total} groups deactivated)'
                         values={{
                             disabled: self.props.selectedProfile.bin_group_details.filter(function (group) {
                                 return !group.enabled
