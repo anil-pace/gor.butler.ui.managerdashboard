@@ -49,7 +49,7 @@ class PPStable extends React.Component {
             sortedDataList: this._dataList,
             colSortDirs: {},
             columnWidths: {
-                id: this.props.containerWidth * 0.12,
+                id: this.props.containerWidth * 0.13,
                 status: this.props.containerWidth * 0.1,
                 operatingMode: this.props.containerWidth * 0.15,
                 performance: this.props.containerWidth * 0.1,
@@ -368,10 +368,13 @@ class PPStable extends React.Component {
                                 </div>
                             </SortHeaderCell>
                         }
-                        cell={<TextCell data={sortedDataList}  childrenClass="requestedModeTxt" childColumnKey="pps_requested_mode" classKey={"operatingModeClass"}>
-                                <span ><FormattedMessage id="PPStable.requestedMode.text" description='PPStable.requestedMode.text'
-                                                          defaultMessage='Requested Mode: '
-                                                          /></span>
+                        cell={<TextCell data={sortedDataList}  
+                                        childrenClass="requestedModeTxt" 
+                                        childColumnKey="pps_requested_mode" 
+                                        classKey={"operatingModeClass"}>
+                                         <span ><FormattedMessage id="PPStable.requestedMode.text" description='PPStable.requestedMode.text'
+                                                defaultMessage='Requested Mode: '
+                                        /></span>
                                 </TextCell>}
                         fixed={true}
                         width={columnWidths.operatingMode}

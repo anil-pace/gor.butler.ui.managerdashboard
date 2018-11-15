@@ -292,6 +292,7 @@ export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ..
 
   <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
     {data.getObjectAt(rowIndex)[columnKey]}
+    <div className="ppsBinFooter"> {data.getObjectAt(rowIndex)["binDetails"]} </div>
   </Cell>
 );
 export const StatusCell=({rowIndex, data, columnKey,statusKey, ...props})=> (

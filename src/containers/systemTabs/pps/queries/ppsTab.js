@@ -127,3 +127,15 @@ export const ppsClientData = gql`
     }
     }
 `;
+
+export const PPS_BIN_LIST_QUERY = gql`
+    query($input:PpsBinListParams){
+        PpsBinList(input:$input){
+             list {
+               pps_id
+               active_bins
+               total_bins
+             }
+  		}
+        }
+`;

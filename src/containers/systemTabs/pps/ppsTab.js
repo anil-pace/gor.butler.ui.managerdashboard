@@ -26,7 +26,7 @@ import {WS_ONSEND,PPS_STATUS_OPEN,PPS_STATUS_CLOSE,
 import {PPS_LIST_SUBSCRIPTION,PPS_LIST_QUERY,ppsClientData,
     SET_VISIBILITY,SET_FILTER_APPLIED,
     SET_FILTER_STATE,SET_CHECKED_PPS,CHANGE_PPS_STATUS_QUERY,
-CHANGE_PPS_MODE_QUERY,CHANGE_PPS_PROFILE_QUERY} from './queries/ppsTab';
+CHANGE_PPS_MODE_QUERY,CHANGE_PPS_PROFILE_QUERY, PPS_BIN_LIST_QUERY} from './queries/ppsTab';
 import {graphql, withApollo, compose} from "react-apollo";
 import {modal} from 'react-redux-modal';
 import ClosePPSList from './closePPSList';
@@ -42,8 +42,12 @@ const messages=defineMessages({
         id: "ppsDetail.performance.prefix.items",
         description: "prefix for pps id in ppsDetail",
         defaultMessage: "{performance} items/hr"
+    },
+    ppsBinFooter: {
+        id: "ppsDetail.name.ppsBinFooter",
+        description: "show currently active bins",
+        defaultMessage: "{currentPpsId}/{totalPpsId} bins active"
     }
-
 });
 
 
@@ -298,12 +302,12 @@ class PPS extends React.Component {
     }
 
     _processPPSData() {
-        
+        var binDetailsList = this.props.binDetails;
         var PPSData=[], detail={}, ppsId, performance, totalUser=0;
         var nProps=this;
         var pps_data=nProps.props.data.PPSListSystem ? nProps.props.data.PPSListSystem.list : [];//nProps.props.PPSDetail.PPStypeDetail;
         var data = Object.keys(nProps.props.location.query).length ? this._filterList(pps_data, nProps.props.location.query) : pps_data
-        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE;
+        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE, ppsBinDetails;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
@@ -315,6 +319,16 @@ class PPS extends React.Component {
         for (var i=data.length - 1; i >= 0; i--) {
             detail={};
             ppsId=data[i].pps_id;
+            if(binDetailsList){
+                for(var j = 0; j<binDetailsList.length; j++){
+                    if(ppsId === parseInt(binDetailsList[j].pps_id)){
+                        let activeBins, totalBins; 
+                        activeBins = binDetailsList[j].active_bins;
+                        totalBins = binDetailsList[j].total_bins;
+                        ppsBinDetails = nProps.context.intl.formatMessage(messages.ppsBinFooter, {"currentPpsId": activeBins, "totalPpsId": totalBins});
+                    }
+                }
+            }
             performance=(data[i].performance < 0 ? 0 : data[i].performance);
             PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
             OPEN=nProps.context.intl.formatMessage(stringConfig.open);
@@ -335,6 +349,7 @@ class PPS extends React.Component {
             }
             detail.id=PPS;
             detail.ppsId=ppsId;
+            detail.binDetails = ppsBinDetails;
             detail.requested_status=requestedStatusText ;
             detail.pps_requested_mode=data[i]["pps_requested_mode"];
             detail.isChecked = checkedPPS[data[i].pps_id] ? true :false;
@@ -675,7 +690,8 @@ class PPS extends React.Component {
                         </div>:null}
 
 
-                        <PPStable updateSortedDataList={this.updateSortedDataList.bind(this)} items={data} itemNumber={itemNumber} operatorNum={operatorNum}
+                        <PPStable updateSortedDataList={this.updateSortedDataList.bind(this)} 
+                                  items={data} itemNumber={itemNumber} operatorNum={operatorNum}
                                   operationMode={operationMode}
                                   modeChange={this.props.changePPSmode} intlMessg={this.props.intlMessages}
                                   sortHeaderState={this.props.ppsHeaderSort} currentSortState={this.props.ppsSortHeader}
@@ -724,6 +740,22 @@ const withClientData = graphql(ppsClientData, {
         filterState: data.data.ppsFilter ? data.data.ppsFilter.filterState:{}
     })
 });
+
+const withQueryGetPpsConfigDetails = graphql(PPS_BIN_LIST_QUERY, {
+    props: function (data) {
+        if (!data || !data.data.PpsBinList || !data.data.PpsBinList.list) {
+            return {}
+        }
+        return {
+            binDetails: data.data.PpsBinList.list
+        }
+    },
+    options: ({ match, location }) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
     props: ({mutate, ownProps}) => ({
@@ -810,5 +842,6 @@ export default compose(
     setVisibilityFilter,
     setFilterApplied,
     setCheckedPps,
+    withQueryGetPpsConfigDetails,
     setFilterState)(connect(mapStateToProps,mapDispatchToProps)(PPS));
 
