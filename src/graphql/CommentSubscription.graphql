@@ -1,0 +1,10 @@
+
+
+subscription onUserListUpdated{
+  userListUpdated{
+    users{
+      id
+      username
+    }
+  }
+}

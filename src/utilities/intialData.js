@@ -1,7 +1,9 @@
 import { translationMessages } from './i18n';
+if(!localStorage.getItem('localLanguage')){
+    localStorage.setItem('localLanguage',navigator.language)
 
-var brsrLocale=navigator.language;
-brsrLocale=brsrLocale.substring(0,2);
+}
+var brsrLocale=localStorage.getItem('localLanguage').substring(0,2)
 
 
 export const preloadedState={

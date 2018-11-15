@@ -1,23 +1,22 @@
 import React  from 'react';
 import {FormattedMessage} from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-import {showTableFilter, filterApplied, userfilterState, toggleUserFilter} from '../../actions/filterAction';
-import {updateSubscriptionPacket} from '../../actions/socketActions';
 import {connect} from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
 import {handelTokenClick, handleInputQuery} from '../../components/tableFilter/tableFilterCommonFunctions';
 import {stringConfig} from '../../constants/backEndConstants';
-import {userFilterApplySpinner}  from '../../actions/spinnerAction';
 import {hashHistory} from 'react-router'
+import {graphql, withApollo, compose} from "react-apollo";
+import gql from 'graphql-tag'
 
 class UserFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            tokenSelected: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]},
+            tokenSelected: {"STATUS": ["all"], "ROLE": ["all"], "WORK_MODE": ["all"], "LOCATION": ["all"]},
             searchQuery: {},
-            defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK MODE": ["all"], "LOCATION": ["all"]}
+            defaultToken: {"STATUS": ["all"], "ROLE": ["all"], "WORK_MODE": ["all"], "LOCATION": ["all"]}
         };
          this._applyFilter =  this._applyFilter.bind(this);
         this._closeFilter = this._closeFilter.bind(this);
@@ -32,19 +31,18 @@ class UserFilter extends React.Component {
          * Hide the filter as soon as data in the list get updated.
          */
         if(nextProps.userData.length>0 && JSON.stringify(nextProps.userData)!==JSON.stringify(this.props.userData)){
-            this.props.showTableFilter(false);
+            this.props.showUserFilter(false);
         }
 
     }
 
     _closeFilter() {
-        let filterState=!this.props.showFilter;
-        this.props.showTableFilter(filterState);
+        this.props.showUserFilter(false);
     }
 
     _processUserSearchField() {
         const filterInputFields=[{
-            value: "USER NAME",
+            value: "USER_NAME",
             label: <FormattedMessage id="user.inputField.id" defaultMessage="USER NAME"/>
         }];
         let inputValue=this.state.searchQuery;
@@ -85,7 +83,7 @@ class UserFilter extends React.Component {
         };
         let tokenRole={value: "ROLE", label: <FormattedMessage id="user.tokenfield.role" defaultMessage="ROLE"/>};
         let tokenWorkMode={
-            value: "WORK MODE",
+            value: "WORK_MODE",
             label: <FormattedMessage id="user.tokenfield.mode" defaultMessage="WORK MODE"/>
         };
         
@@ -138,9 +136,9 @@ class UserFilter extends React.Component {
          * if multiple word:
          * {username:[<1>,<2>]}
          */
-        if (filterState.searchQuery && filterState.searchQuery["USER NAME"]) {
-            _query.username=filterState.searchQuery["USER NAME"]
-            let name_query=filterState.searchQuery["USER NAME"].split(" ")
+        if (filterState.searchQuery && filterState.searchQuery["USER_NAME"]) {
+            _query.username=filterState.searchQuery["USER_NAME"]
+            let name_query=filterState.searchQuery["USER_NAME"].split(" ")
             name_query=name_query.filter(function (word) {
                 return !!word
             })
@@ -155,9 +153,9 @@ class UserFilter extends React.Component {
              * Data format to be sent to the socket is
              * {pps:["in",[{pps_mode:"put",seat_type:"front"}]]}
              */
-            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== "all") {
+            if (filterState.tokenSelected["WORK_MODE"] && filterState.tokenSelected["WORK_MODE"][0] !== "all") {
                 let pps_list=[]
-                filterState.tokenSelected["WORK MODE"].forEach(function (mode) {
+                filterState.tokenSelected["WORK_MODE"].forEach(function (mode) {
                     pps_list.push(mode.split("__").length > 1 ? {
                         pps_mode: mode.split("__")[0],
                         seat_type: mode.split("__")[1]
@@ -178,8 +176,8 @@ class UserFilter extends React.Component {
             if (filterState.tokenSelected["ROLE"] && filterState.tokenSelected["ROLE"][0] !== 'all') {
                 _query.role=filterState.tokenSelected["ROLE"]
             }
-            if (filterState.tokenSelected["WORK MODE"] && filterState.tokenSelected["WORK MODE"][0] !== 'all') {
-                _query.mode=filterState.tokenSelected["WORK MODE"]
+            if (filterState.tokenSelected["WORK_MODE"] && filterState.tokenSelected["WORK_MODE"][0] !== 'all') {
+                _query.mode=filterState.tokenSelected["WORK_MODE"]
             }
         }
         hashHistory.push({pathname: "/users", query: _query})
@@ -190,17 +188,15 @@ class UserFilter extends React.Component {
             tokenSelected: {
                 "STATUS": ["all"],
                 "ROLE": ['all'],
-                "WORK MODE": ['all'],
-                "LOCATION": ["all"]
-            }, searchQuery: {"USER NAME": null},
+                "WORK_MODE": ['all'],
+                "LOCATION": ["all"],
+                __typename:"UserFilterTokenSelected"
+            }, searchQuery: {"USER_NAME": null,__typename:"UserFilterSearchQuery"},
         });
         hashHistory.push({pathname: "/users", query: {}})
     }
 
     render() {
-        let userDetail=this.props.userDetails;
-        let noOrder=userDetail.noResultFound;
-
         let userSearchField=this._processUserSearchField();
         let userFilterToken=this._processFilterToken();
         return (
@@ -216,7 +212,7 @@ class UserFilter extends React.Component {
                             defaultMessage="Hide"/>
                     </div>
                  </div>
-                    <div>{noOrder?
+                    <div>{this.props.noResults?
                             <div className="gor-no-result-filter"><FormattedMessage id="gor.filter.noResult" description="label for no result" 
                             defaultMessage="No results found, please try again"/></div>:""}
                     </div>
@@ -267,57 +263,43 @@ UserFilter.contextTypes={
 
 function mapStateToProps(state, ownProps) {
     return {
-        userDetails: state.userDetails || [],
-        showFilter: state.filterInfo.filterState || false,
-        auditSpinner: state.spinner.auditSpinner || false,
-        totalAudits: state.recieveAuditDetail.totalAudits || 0,
-        filterState: state.filterInfo.userfilterState,
-        wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket,
-        isFilterApplied: state.filterInfo.isFilterApplied || false,
-        userFilterStatus: state.filterInfo.userFilterStatus || false,
-        roleList: state.appInfo.roleList || [],
-        isLoading: state.spinner.isLoading || false
-
     };
 }
 
-var mapDispatchToProps=function (dispatch) {
-    return {
-        showTableFilter: function (data) {
-            dispatch(showTableFilter(data));
-        },
-        filterApplied: function (data) {
-            dispatch(filterApplied(data));
-        },
-        userfilterState: function (data) {
-            dispatch(userfilterState(data));
-        },
-        updateSubscriptionPacket: function (data) {
-            dispatch(updateSubscriptionPacket(data));
-        },
-        toggleUserFilter: function (data) {
-            dispatch(toggleUserFilter(data));
-        },
-        userFilterApplySpinner: function (data) {
-            dispatch(userFilterApplySpinner(data));
-        }
-    }
-};
 UserFilter.PropTypes={
     userDetails: React.PropTypes.array,
-    showFilter: React.PropTypes.bool,
     auditSpinner: React.PropTypes.bool,
     totalAudits: React.PropTypes.number,
     filterState: React.PropTypes.object,
     wsSubscriptionData: React.PropTypes.object,
     isFilterApplied: React.PropTypes.bool,
-    userFilterStatus: React.PropTypes.bool,
     roleList: React.PropTypes.object,
-    showTableFilter: React.PropTypes.func,
-    filterApplied: React.PropTypes.func,
-    userfilterState: React.PropTypes.func,
-    updateSubscriptionPacket: React.PropTypes.func,
-    toggleUserFilter: React.PropTypes.func
+    showUserFilter: React.PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserFilter) ;
+const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
+
+            }
+        }
+    }
+`;
+const withRoleList = graphql(ROLE_LIST_QUERY, {
+    props: (data) => ({
+        roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],
+    }),
+    options: ({match, location}) => ({
+        variables: {},
+        fetchPolicy: 'network-only'
+    }),
+});
+
+export default compose(
+    withRoleList
+)(connect(mapStateToProps)(UserFilter));
+

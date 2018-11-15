@@ -432,14 +432,13 @@ export class ActionCellPPS extends React.Component {
      * @param index
      */
     availablePPSProfiles(data, index) {
-    let profiles=data.getObjectAt(index).profiles.map(function(profile){
-        profile.value = profile.profile_name
-        // profile.label = <div key={profile.profile_name} className="pps-list-available-profile">
-        //     <div className="profile-name">{profile.profile_name}</div>
-        //     {profile.applied && <div className="applied-status">V</div>}</div>
-
-        profile.label =profile.profile_name
-        return profile
+    let profiles=data.getObjectAt(index).profiles.map((profile)=>{
+        return{
+          ...profile,
+          value:profile.profile_name,
+          label:profile.profile_name
+        }
+        
     })
 
 

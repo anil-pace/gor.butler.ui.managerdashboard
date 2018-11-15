@@ -1,6 +1,6 @@
 import {ERROR,SUCCESS} from '../constants/frontEndConstants';
 import {BUTLER_SUPERVISOR} from '../constants/backEndConstants'
-import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT} from '../constants/messageConstants';
+import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PWD_MG,MATCH_PWD,INVALID_LOCID,INVALID_SKUID,INVALID_ID,INVALID_FORMAT,UE002} from '../constants/messageConstants';
 
 export function nameStatus(firstname,lastname){
   // eslint-disable-next-line
@@ -116,7 +116,7 @@ export function skuStatus(skuId)
       }
       return skuInfo;
 }
-export function idStatus(userid)
+export function idStatus(userid,existingUserIds)
 {   // eslint-disable-next-line
     let idInfo,format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,<>\/?]/;
     if(userid.length<1||userid.length>30)
@@ -132,6 +132,11 @@ export function idStatus(userid)
               type:ERROR,
               msg:INVALID_FORMAT           
             }
+    }else if(existingUserIds.indexOf(userid)>-1){
+        idInfo = {
+            type: ERROR,
+            msg: UE002
+        };
     }
     else
       {

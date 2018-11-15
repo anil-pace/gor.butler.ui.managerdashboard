@@ -4,24 +4,12 @@ import {
     setTimeOffSetData
 } from "../actions/loginAction";
 import {recieveOrdersData} from "../actions/paginationAction";
-import {
-    recieveAuditData,
-    setAuditRefresh,
-    setAuditSpinner,
-    setPendingAuditLines,
-    auditValidatedAttributesSKU,
-    auditValidatedAttributesLocation,
-    auditValidatedAttributesLocationCsv,
-    createAuditAction,
-    setAuditEditData,
-    attributeValidationItemRecall
-} from "../actions/auditActions";
+
 import {assignRole, recieveConfigurations} from "../actions/userActions";
 import {
     recieveHeaderInfo,
     recieveShiftStartTime
 } from "../actions/headerAction";
-import {getPPSAudit,getAuditDetails,getAuditUserList,setValidationAuditSpinner} from "../actions/auditActions";
 import {codeToString} from "./codeToString";
 import {setOrderListSpinner} from "../actions/orderListActions";
 import {setMsuConfigSpinner} from  '../actions/spinnerAction';
@@ -32,10 +20,6 @@ import {
 	notifyDelete,
 	validatePassword,
 	loginError,
-	validateSKU,
-	validateSKUcodeSpinner,
-    validateLocationcodeSpinner,
-    validateLocationcodeSpinnerCsv,
 	modalStatus,
 	getSafetyList,
 	getSafetyErrorList,
@@ -55,20 +39,6 @@ import {
     EDIT_USER,
     RECIEVE_HEADER,
     SUCCESS,
-    CREATE_AUDIT,
-    AUDIT_RETRIEVE,
-    GET_PPSLIST,
-    GET_AUDIT_DETAILS,
-    START_AUDIT,
-    DELETE_AUDIT,
-    AUDIT_RESOLVE_LINES,
-    AUDIT_RESOLVE_CONFIRMED,
-    VALIDATE_SKU_ID,
-    VALIDATE_LOCATION_ID,
-    CREATE_AUDIT_REQUEST,
-    VALIDATE_LOCATION_ID_CSV,
-    PAUSE_OPERATION,
-    RESUME_OPERATION,
     CONFIRM_SAFETY,
     CHECK_SAFETY,
     RECEIVE_SHIFT_START_TIME,
@@ -79,7 +49,6 @@ import {
     MASTER_FILE_UPLOAD,
     GET_MAX_FILE_SIZE,
     GET_CONFIGS,
-    CANCEL_AUDIT,
     DOWNLOAD_STOCK_LEDGER_REPORT,
     DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT,
     UPLOAD_HISTORY,
@@ -105,8 +74,7 @@ import {
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
     ORDERLINES_PER_ORDER_FETCH,
-    WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
-    AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
+    WHITELISTED_ROLES,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
     FETCH_MSU_CONFIG_DEST_TYPE_LIST,
     FETCH_MSU_CONFIG_LIST_VIA_FILTER,
@@ -143,7 +111,7 @@ import {
 import {ShowError} from "./showError";
 import {endSession} from "./endSession";
 import {
-    setResolveAuditSpinner,
+  
     setSafetySpinner,
     setInventoryReportSpinner,
     setStockLedgerSpinner,
@@ -164,9 +132,7 @@ import {
     recievePendingMSU,
     resetCheckedPPSList
 } from "../actions/ppsModeChangeAction";
-import {
-    resetaudit,setCheckedAudit
-} from "../actions/sortHeaderActions";
+
 import {getFormattedMessages} from "../utilities/getFormattedMessages";
 import {
     recieveNotificationData,
@@ -225,10 +191,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(recieveOrdersData(res));
             store.dispatch(setOrderListSpinner(false));
             break;
-        case AUDIT_RETRIEVE:
-            store.dispatch(recieveAuditData(res,saltParams));
-            store.dispatch(setAuditSpinner(false));
-            break;
+    
         case GET_ROLES:
             let rolesArr = [];
             if (res.roles) {
@@ -272,149 +235,8 @@ export function AjaxParse(store, res, cause, status, saltParams) {
                 store.dispatch(setNotification(stringInfo));
             }
             break;
-        case CREATE_AUDIT_REQUEST:
-                    if (res.display_id) {
-                        values={id:res.display_id}
-                        msg = getFormattedMessages("CREATEAUDIT", values);  
-                        store.dispatch(notifyfeedback(msg));
-                        store.dispatch(setValidationAuditSpinner(false));
-                        store.dispatch(setAuditRefresh(true)); //set refresh flag
-                 
-                } 
-             else {
-               stringInfo = codeToString(res.alert_data[0]);
-            store.dispatch(setNotification(stringInfo));
-            store.dispatch(setValidationAuditSpinner(false));
-            store.dispatch(setAuditRefresh(true)); //set refresh flag
-            }
-            break;
-            //feedback notification
-       
-        case DELETE_AUDIT:
-       
-        if(res.alert_data[0].code!=="as002")
-        {
-                values={id:res.alert_data[0].details.display_id},
-                stringInfo = codeToString(res.alert_data[0]);
-                store.dispatch(setNotification(stringInfo));
-                store.dispatch(setAuditRefresh(true));
-            }
-            else{
-                values={id:res.alert_data[0].details.display_id};
-                msg = getFormattedMessages("DELETEAUDIT", values);
-                store.dispatch(notifyfeedback(msg));
-                store.dispatch(setAuditRefresh(true)); //reset refresh flag
-                store.dispatch(setCheckedAudit([]));
-            }
-            break;
 
-        case PAUSE_AUDIT:
-        if (res.alert_data[0].code=="as006") {
-            values={id:res.alert_data[0].details.display_id},
-            msg = getFormattedMessages("PAUSEAUDIT", values);
-            store.dispatch(notifyfeedback(msg));
-            store.dispatch(setAuditRefresh(false)); //reset refresh flag
-            store.dispatch(setCheckedAudit([]));
-            }
-            else{
-                values={id:res.alert_data[0].details.display_id},
-                stringInfo = codeToString(res.alert_data[0]);
-                store.dispatch(setNotification(stringInfo));
-                store.dispatch(setAuditRefresh(true)); //set refresh flag
-            }
-            break;
-
-          
-            
-        case CANCEL_AUDIT:
-        if (res.alert_data[0].code=="g027") {
-            values={id:res.alert_data[0].details.display_id};
-            stringInfo = codeToString(res.alert_data[0]);
-            store.dispatch(setNotification(stringInfo));
-            store.dispatch(setAuditRefresh(true)); //set refresh flag
-        }
-        else{
-            values={id:res.alert_data[0].details.display_id},
-            msg = getFormattedMessages("CANCELLED", values);
-            store.dispatch(notifyfeedback(msg));
-            store.dispatch(setAuditRefresh(false)); //reset refresh flag
-            store.dispatch(setCheckedAudit([]));
-        }
-
-            case AUDIT_USERLIST:
-            //let auditpps = [];
-            if (res) {
-            store.dispatch(getAuditUserList(res.users));
-            }
-            break;
-            
-        case GET_PPSLIST:
-            let auditpps = [];
-            if (res) {
-            store.dispatch(getPPSAudit(res));
-            }
-            break;
-        case CHANGE_PPS_TASK:
-        if(res){
-        store.dispatch(
-            notifyfeedback(res.alert_data[0].description)
-        );
-    }
-            break;
-        case GET_AUDIT_DETAILS:
-            let auditdetails = {};
-            if (res) {
-                auditdetails = res;
-                store.dispatch(getAuditDetails(auditdetails));
-            }
-            else{
-                stringInfo = codeToString(res.alert_data[0].code);
-				store.dispatch(notifyfeedback(stringInfo.msg));
-            }//put it in notification
-            
-            break;
-           
-        case START_AUDIT_TASK:
         
-        if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
-        {
-           var successCount = res.successful.length,
-                unsuccessfulCount = Object.keys(res.unsuccessful).length,
-                values = {
-                    successful: successCount,
-                    totalCount: successCount + unsuccessfulCount,
-                    fail:unsuccessfulCount
-                   
-                };
-                if(successCount>=1){
-                msg = getFormattedMessages("BulkAudit", values);
-                store.dispatch(notifyfeedback(msg));
-                store.dispatch(resetaudit(res.successful));
-                }
-                if(res.unsuccessful.length>=1){
-                    stringInfo = getFormattedMessages("STARTFAIL", values);
-                    store.dispatch(setNotification(stringInfo));
-                }
-                store.dispatch(setCheckedAudit([]));
-                store.dispatch(setAuditRefresh(true));
-        }
-        else if(res.alert_data[0].code== "as007"){//to do
-                stringInfo = codeToString(res.alert_data[0]);
-                store.dispatch(notifyfeedback(stringInfo.msg)); 
-                store.dispatch(setCheckedAudit([]));
-        }
-        else if(res.alert_data[0].code== "g028"){
-            stringInfo = codeToString(res.alert_data[0]);
-            store.dispatch(setNotification(stringInfo));
-            store.dispatch(setCheckedAudit([]));
-        }
-        else
-        {
-            stringInfo = getFormattedMessages("STARTFAILALL", values);
-            store.dispatch(setNotification(stringInfo));
-            store.dispatch(setCheckedAudit([]));
-        }
-        break;
 
         case RECIEVE_HEADER:
             if (!WHITELISTED_ROLES.hasOwnProperty(res.users[0].roles[0])){
@@ -429,117 +251,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(setTimeOffSetData(res));
             break;
 
-        case AUDIT_RESOLVE_LINES:
-            store.dispatch(setResolveAuditSpinner(false));
-            store.dispatch(setPendingAuditLines(res));
-            break;
-
-        case AUDIT_RESOLVE_CONFIRMED:
-            if (res.successful.status) {
-                stringInfo = statusToString(res.successful);
-               // store.dispatch(notifySuccess(stringInfo.msg));
-               store.dispatch(notifyfeedback(stringInfo.msg));
-            } else {
-                //ShowError(store, cause, status);
-                stringInfo = getFormattedMessages("RESOLVEFAIL", values);
-                store.dispatch(setNotification(stringInfo));
-            }
-            break;
-
-        case VALIDATE_SKU_ID:
-            store.dispatch(auditValidatedAttributesSKU(res));
-            break;
-        case VALIDATE_SKU_ITEM_RECALL:
-            store.dispatch(attributeValidationItemRecall(res));
-            break;
-        case VALIDATE_LOCATION_ID:
-            store.dispatch(auditValidatedAttributesLocation(res));
-            store.dispatch(validateLocationcodeSpinner(false));
-            break;
-
-        case AUDIT_EDIT:    
-        if(res){
-            store.dispatch(setAuditEditData(res));
-        }else{
-                stringInfo = codeToString(res.alert_data[0].code);
-				store.dispatch(notifyfeedback(stringInfo.msg));
-        }//put it in notification
-            break; 
-
-            case AUDIT_EDIT_REQUEST:    
-            if (res.display_id) {
-                values={id:res.display_id},
-                msg = getFormattedMessages("EDITED", values);  
-                store.dispatch(notifyfeedback(msg));
-                store.dispatch(setValidationAuditSpinner(false));
-                store.dispatch(setAuditRefresh(true)); //set refresh flag
-             } 
-          else {
-            stringInfo = codeToString(res.alert_data[0]);
-            store.dispatch(setNotification(stringInfo));
-            store.dispatch(setValidationAuditSpinner(false));
-            store.dispatch(setAuditRefresh(true)); //set refresh flag
-         }
-         break; 
-
-      case CREATE_DUPLICATE_REQUEST:
-      if (res.display_id) {
-        values={id:res.display_id},
-        msg = getFormattedMessages("DUPLICATED", values);
-        store.dispatch(notifyfeedback(msg));
-        store.dispatch(setValidationAuditSpinner(false));
-        store.dispatch(setAuditRefresh(false)); //reset refresh flag
-      }
-      else{
-        stringInfo = codeToString(res.alert_data[0]);
-        store.dispatch(setNotification(stringInfo));
-        store.dispatch(setValidationAuditSpinner(false));
-        store.dispatch(setAuditRefresh(true)); //set refresh flag
-      }
-      break;
-               
-        case VALIDATE_LOCATION_ID_CSV:
-            if (res.ordered_msus && res.ordered_slots && res.status && res.ordered_relations) {
-                store.dispatch(auditValidatedAttributesLocationCsv(res));
-            }
-            store.dispatch(validateLocationcodeSpinnerCsv(false));
-            break;
-
-
-		case PAUSE_OPERATION:
-			var pausePwd;
-			if (!res.auth_token) {
-				pausePwd = {
-					type: ERROR,
-					msg: UE002
-				};
-			} else {
-				pausePwd = {
-					type: SUCCESS,
-					msg: TYPE_SUCCESS
-				};
-				//hit next api
-				store.dispatch(modalStatus(true));
-			}
-			store.dispatch(validatePassword(pausePwd));
-			break;
-		case RESUME_OPERATION:
-			var resumePwd;
-			if (!res.auth_token) {
-				resumePwd = {
-					type: ERROR,
-					msg: UE002
-				};
-			} else {
-				resumePwd = {
-					type: SUCCESS,
-					msg: TYPE_SUCCESS
-				};
-				//hit next api
-				store.dispatch(modalStatus(true));
-			}
-			store.dispatch(validatePassword(resumePwd));
-			break;
+      
 		case CHECK_SAFETY:
 			store.dispatch(getSafetyList(res || {}));
 			break;

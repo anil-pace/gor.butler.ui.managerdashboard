@@ -195,13 +195,7 @@ export function setcheckedPPS(data){
         data
     }
 }
-//rajadey
-// export function updateStatus(params) {
-//     return {
-//         type: UPDATE_STATUS,
-//         params
-//     }
-// }
+
 export function createAuditAction(data){
     return {
         type:CREATE_AUDIT_REQUEST,

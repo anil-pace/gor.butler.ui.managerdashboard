@@ -2338,16 +2338,6 @@ msgstr ""
         msgid "CREATE AUDIT"
         msgstr ""
 
-        #: audit.delete.heading
-        msgctxt "audit.delete.heading"
-        msgid "Are you sure you would like to delete audit task {task_name} ?"
-        msgstr ""
-
-        #: audit.duplicate.heading
-        msgctxt "audit.duplicate.heading"
-        msgid "Are you sure you would like to duplicate audit task {task_name} ?"
-        msgstr ""
-
         #: audit.valid.sku
         msgctxt "audit.valid.sku"
         msgid "SKU confirmed"
@@ -3648,21 +3638,6 @@ msgstr ""
         msgid "Items stocked"
         msgstr ""
 
-        #: operationLog.page.twentyfive
-        msgctxt "operationLog.page.twentyfive"
-        msgid "25"
-        msgstr ""
-
-        #: operationLog.page.fifty
-        msgctxt "operationLog.page.fifty"
-        msgid "50"
-        msgstr ""
-
-        #: operationLog.page.hundred
-        msgctxt "operationLog.page.hundred"
-        msgid "100"
-        msgstr ""
-
         #: downloadReport.type.operationsLog
         msgctxt "downloadReport.type.operationsLog"
         msgid "Operations Logs"
@@ -3693,39 +3668,49 @@ msgstr ""
         msgid "Refresh"
         msgstr ""
 
-        #: downloadReport.table.reportName
-        msgctxt "downloadReport.table.reportName"
+        #: downloadreport.table.reportname
+        msgctxt "downloadreport.table.reportname"
         msgid "REPORT NAME"
         msgstr ""
 
-        #: downloadReport.table.reportType
-        msgctxt "downloadReport.table.reportType"
+        #: downloadreport.table.reporttype
+        msgctxt "downloadreport.table.reporttype"
         msgid "REPORT TYPE"
         msgstr ""
 
-        #: downloadReport.table.requestedBy
-        msgctxt "downloadReport.table.requestedBy"
+        #: downloadreport.table.requestedby
+        msgctxt "downloadreport.table.requestedby"
         msgid "REQUESTED BY"
         msgstr ""
 
-        #: downloadReport.table.completionTime
-        msgctxt "downloadReport.table.completionTime"
+        #: downloadreport.table.completiontime
+        msgctxt "downloadreport.table.completiontime"
         msgid "COMPLETION TIME"
         msgstr ""
 
-        #: downloadReport.table.status
-        msgctxt "downloadReport.table.status"
+        #: downloadreport.table.generationprogress
+        msgctxt "downloadreport.table.generationprogress"
         msgid "GENERATION PROGRESS"
-        msgstr ""
-
-        #: operationsLog.table.noData
-        msgctxt "operationsLog.table.noData"
-        msgid "No Data Found"
         msgstr ""
 
         #: utility.goodsRcvdNotes.head
         msgctxt "utility.goodsRcvdNotes.head"
         msgid "Goods Received Notes"
+        msgstr ""
+
+        #: operationLog.page.twentyfive
+        msgctxt "operationLog.page.twentyfive"
+        msgid "25"
+        msgstr ""
+
+        #: operationLog.page.fifty
+        msgctxt "operationLog.page.fifty"
+        msgid "50"
+        msgstr ""
+
+        #: operationLog.page.hundred
+        msgctxt "operationLog.page.hundred"
+        msgid "100"
         msgstr ""
 
         #: operationLog.genRep.tooltip
@@ -3793,6 +3778,11 @@ msgstr ""
         msgid "TIMESTAMP"
         msgstr ""
 
+        #: operationsLog.table.noData
+        msgctxt "operationsLog.table.noData"
+        msgid "No Data Found"
+        msgstr ""
+
         #: reportsTab.operationsLog
         msgctxt "reportsTab.operationsLog"
         msgid "Operations Log"
@@ -3813,6 +3803,36 @@ msgstr ""
         msgid "Download"
         msgstr ""
 
+        #: slot.table.slotType
+        msgctxt "slot.table.slotType"
+        msgid "SLOT TYPE"
+        msgstr ""
+
+        #: slot.table.slotVolume
+        msgctxt "slot.table.slotVolume"
+        msgid "SLOT VOLUME"
+        msgstr ""
+
+        #: slot.table.dimension
+        msgctxt "slot.table.dimension"
+        msgid "DIMENSION(L*B*H)"
+        msgstr ""
+
+        #: slot.table.totalSlots
+        msgctxt "slot.table.totalSlots"
+        msgid "TOTAL SLOTS"
+        msgstr ""
+
+        #: slot.table.emptySlots
+        msgctxt "slot.table.emptySlots"
+        msgid "EMPTY SLOTS"
+        msgstr ""
+
+        #: slot.table.slotUtilization
+        msgctxt "slot.table.slotUtilization"
+        msgid "SLOT UTILIZATION"
+        msgstr ""
+
         #: storageSpace.report.tooltip
         msgctxt "storageSpace.report.tooltip"
         msgid "Reports not available for Realtime filter"
@@ -3826,41 +3846,6 @@ msgstr ""
         #: storageSpace.table.downloadBtn
         msgctxt "storageSpace.table.downloadBtn"
         msgid "GENERATE REPORT"
-        msgstr ""
-
-        #: storageSpace.table.slotType
-        msgctxt "storageSpace.table.slotType"
-        msgid "SLOT TYPE"
-        msgstr ""
-
-        #: storageSpace.table.slotVolume
-        msgctxt "storageSpace.table.slotVolume"
-        msgid "SLOT VOLUME"
-        msgstr ""
-
-        #: storageSpace.table.dimension
-        msgctxt "storageSpace.table.dimension"
-        msgid "DIMENSION (L*B*H)"
-        msgstr ""
-
-        #: storageSpace.table.totalSlots
-        msgctxt "storageSpace.table.totalSlots"
-        msgid "TOTAL SLOTS"
-        msgstr ""
-
-        #: storageSpace.table.emptySlots
-        msgctxt "storageSpace.table.emptySlots"
-        msgid "EMPTY SLOTS"
-        msgstr ""
-
-        #: storageSpace.table.slotUtilization
-        msgctxt "storageSpace.table.slotUtilization"
-        msgid "SLOT UTILIZATION"
-        msgstr ""
-
-        #: storageSpace.table.noData
-        msgctxt "storageSpace.table.noData"
-        msgid "No Data Found"
         msgstr ""
 
         #: butletbot.inputField.id
@@ -3930,7 +3915,72 @@ msgstr ""
 
         #: butletbot.token2.notSet
         msgctxt "butletbot.token2.notSet"
-        msgid "Idle"
+        msgid "Not set"
+        msgstr ""
+
+        #: butlerbot.table.noData
+        msgctxt "butlerbot.table.noData"
+        msgid "No Butler Bot Found"
+        msgstr ""
+
+        #: bots.table.bots
+        msgctxt "bots.table.bots"
+        msgid "BOTS"
+        msgstr ""
+
+        #: ButlerBotTable.subTotalBot
+        msgctxt "ButlerBotTable.subTotalBot"
+        msgid "Total: {totalBot}"
+        msgstr ""
+
+        #: bots.table.status
+        msgctxt "bots.table.status"
+        msgid "STATUS"
+        msgstr ""
+
+        #: ButlerBotTable.status
+        msgctxt "ButlerBotTable.status"
+        msgid "{onlineBots} Online"
+        msgstr ""
+
+        #: bots.table.currentTask
+        msgctxt "bots.table.currentTask"
+        msgid "CURRENT TASK"
+        msgstr ""
+
+        #: ButlerBotTable.botState
+        msgctxt "ButlerBotTable.botState"
+        msgid "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
+        msgstr ""
+
+        #: bots.table.msuMounted
+        msgctxt "bots.table.msuMounted"
+        msgid "MSU MOUNTED"
+        msgstr ""
+
+        #: ButlerBotTable.mounted
+        msgctxt "ButlerBotTable.mounted"
+        msgid "{msuMounted} Mounted"
+        msgstr ""
+
+        #: bots.table.location
+        msgctxt "bots.table.location"
+        msgid "LOCATION"
+        msgstr ""
+
+        #: ButlerBotTable.locations
+        msgctxt "ButlerBotTable.locations"
+        msgid "{locations} Locations"
+        msgstr ""
+
+        #: bots.table.power
+        msgctxt "bots.table.power"
+        msgid "CHARGE LEVEL"
+        msgstr ""
+
+        #: ButlerBotTable.avgVoltage
+        msgctxt "ButlerBotTable.avgVoltage"
+        msgid "Avg {voltage}"
         msgstr ""
 
         #: butlerDetail.name.prefix
@@ -4003,19 +4053,9 @@ msgstr ""
         msgid "Show all Bots"
         msgstr ""
 
-        #: butlerbot.table.noData
-        msgctxt "butlerbot.table.noData"
-        msgid "No Butler Bot Found"
-        msgstr ""
-
         #: ButlerBotTable.TotalBot
         msgctxt "ButlerBotTable.TotalBot"
         msgid "BOTS"
-        msgstr ""
-
-        #: ButlerBotTable.subTotalBot
-        msgctxt "ButlerBotTable.subTotalBot"
-        msgid "Total: {totalBot}"
         msgstr ""
 
         #: butlerBot.table.status
@@ -4023,19 +4063,9 @@ msgstr ""
         msgid "STATUS"
         msgstr ""
 
-        #: ButlerBotTable.status
-        msgctxt "ButlerBotTable.status"
-        msgid "{onlineBots} Online"
-        msgstr ""
-
         #: butlerBot.table.currentTask
         msgctxt "butlerBot.table.currentTask"
         msgid "MODE"
-        msgstr ""
-
-        #: ButlerBotTable.botState
-        msgctxt "ButlerBotTable.botState"
-        msgid "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})"
         msgstr ""
 
         #: butlerBot.table.msu
@@ -4043,29 +4073,14 @@ msgstr ""
         msgid "MSU MOUNTED"
         msgstr ""
 
-        #: ButlerBotTable.mounted
-        msgctxt "ButlerBotTable.mounted"
-        msgid "{msuMounted} Mounted"
-        msgstr ""
-
         #: butlerBot.table.location
         msgctxt "butlerBot.table.location"
         msgid "LOCATION"
         msgstr ""
 
-        #: ButlerBotTable.locations
-        msgctxt "ButlerBotTable.locations"
-        msgid "{locations} Locations"
-        msgstr ""
-
         #: butlerBot.table.power
         msgctxt "butlerBot.table.power"
         msgid "CHARGE LEVEL"
-        msgstr ""
-
-        #: ButlerBotTable.avgVoltage
-        msgctxt "ButlerBotTable.avgVoltage"
-        msgid "Avg {voltage}"
         msgstr ""
 
         #: msuConfig.destType.destTypeDdownPlcHldr
@@ -4180,7 +4195,7 @@ msgstr ""
 
         #: ChargingStationsTable.SubstationID
         msgctxt "ChargingStationsTable.SubstationID"
-        msgid "Total:{rowsCount}"
+        msgid "Total: {rowsCount}"
         msgstr ""
 
         #: ChargingStations.table.STATUS
@@ -4443,131 +4458,6 @@ msgstr ""
         msgid "TIME"
         msgstr ""
 
-        #: pps.configuration.bins.selection.label
-        msgctxt "pps.configuration.bins.selection.label"
-        msgid "Select a bin to manage tags"
-        msgstr ""
-
-        #: pps.configuration.bins.direction.label
-        msgctxt "pps.configuration.bins.direction.label"
-        msgid "Current PPS Selection"
-        msgstr ""
-
-        #: pps.configuration.bins.direction.left
-        msgctxt "pps.configuration.bins.direction.left"
-        msgid "LEFT"
-        msgstr ""
-
-        #: pps.configuration.bins.direction.right
-        msgctxt "pps.configuration.bins.direction.right"
-        msgid "RIGHT"
-        msgstr ""
-
-        #: pps.configuration.bins.selection.count
-        msgctxt "pps.configuration.bins.selection.count"
-        msgid "Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)"
-        msgstr ""
-
-        #: pps.configuration.bins.group.selection.count
-        msgctxt "pps.configuration.bins.group.selection.count"
-        msgid "Select a bin group to enable or disable ({disabled}/{total} groups disabled)"
-        msgstr ""
-
-        #: pps.configuration.bins.tagCount.text
-        msgctxt "pps.configuration.bins.tagCount.text"
-        msgid "Tag"
-        msgstr ""
-
-        #: pps.configuration.bins.activation.button.text
-        msgctxt "pps.configuration.bins.activation.button.text"
-        msgid "ACTIVATE"
-        msgstr ""
-
-        #: pps.configuration.bins.deactivation.button.text
-        msgctxt "pps.configuration.bins.deactivation.button.text"
-        msgid "DEACTIVATE"
-        msgstr ""
-
-        #: pps.configuration.bins.group.enable.button.text
-        msgctxt "pps.configuration.bins.group.enable.button.text"
-        msgid "ENABLE"
-        msgstr ""
-
-        #: pps.configuration.bins.group.disable.button.text
-        msgctxt "pps.configuration.bins.group.disable.button.text"
-        msgid "DISABLE"
-        msgstr ""
-
-        #: pps.configuration.header.text
-        msgctxt "pps.configuration.header.text"
-        msgid "PPS Configurations"
-        msgstr ""
-
-        #: pps.configuration.applied.text
-        msgctxt "pps.configuration.applied.text"
-        msgid "Applied"
-        msgstr ""
-
-        #: pps.configuration.requested.text
-        msgctxt "pps.configuration.requested.text"
-        msgid "Requested"
-        msgstr ""
-
-        #: pps.configuration.profileAplied.text
-        msgctxt "pps.configuration.profileAplied.text"
-        msgid "profile applied"
-        msgstr ""
-
-        #: pps.configuration.bins.tags.label
-        msgctxt "pps.configuration.bins.tags.label"
-        msgid "Assign tags to bin"
-        msgstr ""
-
-        #: pps.configuration.bins.activation.label
-        msgctxt "pps.configuration.bins.activation.label"
-        msgid "Bin activate/deactivate"
-        msgstr ""
-
-        #: pps.configuration.group.activation.label
-        msgctxt "pps.configuration.group.activation.label"
-        msgid "Bin group enable/disable"
-        msgstr ""
-
-        #: pps.configuration.bins.frontView.label
-        msgctxt "pps.configuration.bins.frontView.label"
-        msgid "Front View"
-        msgstr ""
-
-        #: pps.configuration.buttons.cancel.text
-        msgctxt "pps.configuration.buttons.cancel.text"
-        msgid "CANCEL"
-        msgstr ""
-
-        #: pps.configuration.buttons.next.text
-        msgctxt "pps.configuration.buttons.next.text"
-        msgid "NEXT"
-        msgstr ""
-
-        #: pps.configuration.buttons.saveApply.text
-        msgctxt "pps.configuration.buttons.saveApply.text"
-        msgid "SAVE AND APPLY"
-        msgstr ""
-
-        #: pps.configuration.buttons.back.text
-        msgctxt "pps.configuration.buttons.back.text"
-        msgid "BACK"
-        msgstr ""
-
-        #: pps.configuration.buttons.saveNewProfile.text
-        msgctxt "pps.configuration.buttons.saveNewProfile.text"
-        msgid "SAVE AS NEW PROFILE"
-        msgstr ""
-
-        #: pps.configuration.buttons.save.text
-        msgctxt "pps.configuration.buttons.save.text"
-        msgid "SAVE"
-        msgstr ""
-
         #: pps.inputField.id
         msgctxt "pps.inputField.id"
         msgid "PPS ID"
@@ -4773,6 +4663,131 @@ msgstr ""
         msgid "PROFILES USED"
         msgstr ""
 
+        #: pps.configuration.bins.selection.label
+        msgctxt "pps.configuration.bins.selection.label"
+        msgid "Select a bin to manage tags"
+        msgstr ""
+
+        #: pps.configuration.bins.direction.label
+        msgctxt "pps.configuration.bins.direction.label"
+        msgid "Current PPS Selection"
+        msgstr ""
+
+        #: pps.configuration.bins.direction.left
+        msgctxt "pps.configuration.bins.direction.left"
+        msgid "LEFT"
+        msgstr ""
+
+        #: pps.configuration.bins.direction.right
+        msgctxt "pps.configuration.bins.direction.right"
+        msgid "RIGHT"
+        msgstr ""
+
+        #: pps.configuration.bins.selection.count
+        msgctxt "pps.configuration.bins.selection.count"
+        msgid "Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)"
+        msgstr ""
+
+        #: pps.configuration.bins.group.selection.count
+        msgctxt "pps.configuration.bins.group.selection.count"
+        msgid "Select a bin group to enable or disable ({disabled}/{total} groups disabled)"
+        msgstr ""
+
+        #: pps.configuration.bins.tagCount.text
+        msgctxt "pps.configuration.bins.tagCount.text"
+        msgid "Tag"
+        msgstr ""
+
+        #: pps.configuration.bins.activation.button.text
+        msgctxt "pps.configuration.bins.activation.button.text"
+        msgid "ACTIVATE"
+        msgstr ""
+
+        #: pps.configuration.bins.deactivation.button.text
+        msgctxt "pps.configuration.bins.deactivation.button.text"
+        msgid "DEACTIVATE"
+        msgstr ""
+
+        #: pps.configuration.bins.group.enable.button.text
+        msgctxt "pps.configuration.bins.group.enable.button.text"
+        msgid "ENABLE"
+        msgstr ""
+
+        #: pps.configuration.bins.group.disable.button.text
+        msgctxt "pps.configuration.bins.group.disable.button.text"
+        msgid "DISABLE"
+        msgstr ""
+
+        #: pps.configuration.header.text
+        msgctxt "pps.configuration.header.text"
+        msgid "PPS Configurations"
+        msgstr ""
+
+        #: pps.configuration.applied.text
+        msgctxt "pps.configuration.applied.text"
+        msgid "Applied"
+        msgstr ""
+
+        #: pps.configuration.requested.text
+        msgctxt "pps.configuration.requested.text"
+        msgid "Requested"
+        msgstr ""
+
+        #: pps.configuration.profileAplied.text
+        msgctxt "pps.configuration.profileAplied.text"
+        msgid "profile applied"
+        msgstr ""
+
+        #: pps.configuration.bins.tags.label
+        msgctxt "pps.configuration.bins.tags.label"
+        msgid "Assign tags to bin"
+        msgstr ""
+
+        #: pps.configuration.bins.activation.label
+        msgctxt "pps.configuration.bins.activation.label"
+        msgid "Bin activate/deactivate"
+        msgstr ""
+
+        #: pps.configuration.group.activation.label
+        msgctxt "pps.configuration.group.activation.label"
+        msgid "Bin group enable/disable"
+        msgstr ""
+
+        #: pps.configuration.bins.frontView.label
+        msgctxt "pps.configuration.bins.frontView.label"
+        msgid "Front View"
+        msgstr ""
+
+        #: pps.configuration.buttons.cancel.text
+        msgctxt "pps.configuration.buttons.cancel.text"
+        msgid "CANCEL"
+        msgstr ""
+
+        #: pps.configuration.buttons.next.text
+        msgctxt "pps.configuration.buttons.next.text"
+        msgid "NEXT"
+        msgstr ""
+
+        #: pps.configuration.buttons.saveApply.text
+        msgctxt "pps.configuration.buttons.saveApply.text"
+        msgid "SAVE AND APPLY"
+        msgstr ""
+
+        #: pps.configuration.buttons.back.text
+        msgctxt "pps.configuration.buttons.back.text"
+        msgid "BACK"
+        msgstr ""
+
+        #: pps.configuration.buttons.saveNewProfile.text
+        msgctxt "pps.configuration.buttons.saveNewProfile.text"
+        msgid "SAVE AS NEW PROFILE"
+        msgstr ""
+
+        #: pps.configuration.buttons.save.text
+        msgctxt "pps.configuration.buttons.save.text"
+        msgid "SAVE"
+        msgstr ""
+
         #: pps.configuration.confirm.saveAndapply.profile
         msgctxt "pps.configuration.confirm.saveAndapply.profile"
         msgid "Are you sure you want to save and apply the profile?"
@@ -4793,34 +4808,44 @@ msgstr ""
         msgid "System Controllers"
         msgstr ""
 
-        #: sysController.summary.showall
-        msgctxt "sysController.summary.showall"
-        msgid "Show all Zones"
+        #: sysControllers.table.noData
+        msgctxt "sysControllers.table.noData"
+        msgid "No Controllers Found"
         msgstr ""
 
-        #: sysControllers.idColumn.heading
-        msgctxt "sysControllers.idColumn.heading"
+        #: SystemControllers.table.noData
+        msgctxt "SystemControllers.table.noData"
+        msgid "No System Controllers Found"
+        msgstr ""
+
+        #: SystemControllersTable.controllerID.heading
+        msgctxt "SystemControllersTable.controllerID.heading"
         msgid "CONTROLLER ID"
         msgstr ""
 
-        #: sysControllers.totalControllers
-        msgctxt "sysControllers.totalControllers"
-        msgid "Total:{count}"
+        #: SystemControllersTable.subtext
+        msgctxt "SystemControllersTable.subtext"
+        msgid "Total: {rowsCount}"
         msgstr ""
 
-        #: sysController.table.status
-        msgctxt "sysController.table.status"
+        #: SystemControllers.table.STATUS
+        msgctxt "SystemControllers.table.STATUS"
         msgid "STATUS"
         msgstr ""
 
-        #: sysController.table.location
-        msgctxt "sysController.table.location"
+        #: SystemControllers.table.LOCATION
+        msgctxt "SystemControllers.table.LOCATION"
         msgid "LOCATION"
         msgstr ""
 
-        #: sysController.table.conDetails
-        msgctxt "sysController.table.conDetails"
+        #: SystemControllers.table.connectionDetails
+        msgctxt "SystemControllers.table.connectionDetails"
         msgid "CONNECTION DETAILS"
+        msgstr ""
+
+        #: SystemControllers.table.operatingMode
+        msgctxt "SystemControllers.table.operatingMode"
+        msgid "OPERATING MODE"
         msgstr ""
 
         #: sysController.table.ethernetStatus
@@ -4831,16 +4856,6 @@ msgstr ""
         #: sysController.table.zigbeeStatus
         msgctxt "sysController.table.zigbeeStatus"
         msgid "Zigbee Network:"
-        msgstr ""
-
-        #: sysController.table.operatingMode
-        msgctxt "sysController.table.operatingMode"
-        msgid "OPERATING MODE"
-        msgstr ""
-
-        #: sysControllers.table.noData
-        msgctxt "sysControllers.table.noData"
-        msgid "No Controllers Found"
         msgstr ""
 
         #: sysOverView.zones.count
@@ -5293,6 +5308,21 @@ msgstr ""
         msgid "Role definitions"
         msgstr ""
 
+        #: userDetails.userAdmin
+        msgctxt "userDetails.userAdmin"
+        msgid "Admin"
+        msgstr ""
+
+        #: userDetails.qc_operator
+        msgctxt "userDetails.qc_operator"
+        msgid "QC Operator"
+        msgstr ""
+
+        #: userDetails.packing_operator
+        msgctxt "userDetails.packing_operator"
+        msgid "Packing Operator"
+        msgstr ""
+
         #: user.table.heading
         msgctxt "user.table.heading"
         msgid "Users"
@@ -5311,11 +5341,6 @@ msgstr ""
         #: userList.filter.search.bar.showall
         msgctxt "userList.filter.search.bar.showall"
         msgid "Show all Users"
-        msgstr ""
-
-        #: user.table.noData
-        msgctxt "user.table.noData"
-        msgid "No User Found"
         msgstr ""
 
         #: user.table.usersCount
@@ -5346,6 +5371,11 @@ msgstr ""
         #: user.table.logInTime
         msgctxt "user.table.logInTime"
         msgid "LOG IN TIME"
+        msgstr ""
+
+        #: user.table.noData
+        msgctxt "user.table.noData"
+        msgid "No User Found"
         msgstr ""
 
         #: user.table.action

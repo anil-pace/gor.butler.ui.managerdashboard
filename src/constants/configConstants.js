@@ -18,6 +18,11 @@ export const DELETE_AUDIT_URL=AUDIT_URL+'/delete/';
 export const CANCEL_AUDIT_URL=AUDIT_URL + "/cancel/";
 export const START_AUDIT_URL=AUDIT_URL+'/start';
 export const START_CHANGE_PPS_URL=AUDIT_URL+'/change_pps';
+export const WS_GRAPHQL_ENDPOINT = "/subscriptions";
+export const GRAPHQL_URL = process.env.NODE_ENV ==='development'? 'http://localhost:3020/graphql':`${PROTOCOL}${BASE_URL}/graphql`;
+export const WS_GRAPHQL_URL = process.env.NODE_ENV ==='development'? 'ws://localhost:3020/subscriptions': `${WS_PROTOCOL}${BASE_URL}${WS_GRAPHQL_ENDPOINT}`;
+
+
 
 export const SEARCH_AUDIT_URL=AUDIT_URL + "/search?";
 export const PPSLIST_URL=API_URL+"/audit/pps_info";

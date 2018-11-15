@@ -70,15 +70,6 @@ class MasterUploadTile extends React.Component{
       }
       return result;
     }
-     shouldComponentUpdate(nextProps, nextState){
-
-        if((nextProps.uploadHistChanged !== this.props.uploadHistChanged) || (this.state.stateChanged !== nextState.stateChanged) ||(nextProps.maxFileSize !== this.props.maxFileSize)||(nextProps.errorCode !== this.props.errorCode)){
-          return true;
-        }
-          return false;
-        
-      }
-
   render(){
     var masterDataBody=this._renderMasterData();
     return (
@@ -102,7 +93,6 @@ MasterUploadTile.propTypes={
     maxFileSize :  React.PropTypes.number,
     isMasterUploadProcessing: React.PropTypes.bool,
     uploadBtnText:React.PropTypes.string,
-    uploadHistChanged:React.PropTypes.bool
 }
 
 export default MasterUploadTile ;

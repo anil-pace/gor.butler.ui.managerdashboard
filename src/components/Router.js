@@ -65,7 +65,6 @@ class Routes extends React.Component {
 
                     case MSU.toUpperCase():
                         this.props.setPpsSpinner(true);
-                        //this.props.setMsuSpinner(true);
                         break;
 
                     case CHARGING.toUpperCase():
@@ -78,42 +77,22 @@ class Routes extends React.Component {
 
 
                     default:
-                        //this.props.setOrderListSpinner(false);
                         this.props.setWavesSpinner(false);
                         this.props.setButlerSpinner(false);
                         this.props.setPpsSpinner(false);
                         this.props.setCsSpinner(false);
                         this.props.setWavesSpinner(false);
-                        //this.props.setMsuSpinner(true);
-
-
                 }
             }
             replace(nextView)
         }
     }
 
-    _updateLanguage() {
-        var sessionLocale=sessionStorage.getItem('localLanguage');
-
-        sessionLocale=sessionLocale.substring(0, 2);// since we need only the first two characters fo the locale.
-        let data={
-            locale: sessionLocale,
-            messages: translationMessages[sessionLocale]
-        }
-        sessionStorage.setItem('localLanguage', sessionLocale);
-        this.props.updateIntl(data);
-    }
-
-
     _refreshPage(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
             this._requireAuth.call(this, nextState, replace);
         }
 
-        if (sessionStorage.getItem('localLanguage')) {
-            this._updateLanguage.call(this);
-        }
     }
 
     _handleNavigationChanges(context, replace) {
@@ -199,7 +178,7 @@ class Routes extends React.Component {
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="pps" path="/system/pps"
                                getComponent={(location, callback)=> {
                                    require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/ppsTab').default);
+                                       callback(null, require('../containers/systemTabs/pps/ppsTab').default);
                                    }, "pps");
                                }}
                         />
