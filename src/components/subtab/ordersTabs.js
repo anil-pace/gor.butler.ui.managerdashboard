@@ -15,10 +15,7 @@ import {setWavesSpinner} from '../../actions/spinnerAction';
 
 
 class OrderSubTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-    }
+	
 
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);

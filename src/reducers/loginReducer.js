@@ -52,9 +52,9 @@ export  function authLogin(state={},action){
           "username":action.data
       })
     case SET_TIME_OFFSET:
-      sessionStorage.setItem('timeOffset', action.data.warehouse_time_zone || action.data);
+      sessionStorage.setItem('timeOffset', "America/Los_Angeles")//action.data.warehouse_time_zone || action.data);
       return Object.assign({}, state, {
-          "timeOffset":action.data.warehouse_time_zone || action.data
+          "timeOffset":"America/Los_Angeles"//action.data.warehouse_time_zone || action.data
       })
 	  default:
 	    return state

@@ -3,10 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import ProgressBar from '../../components/progressBar/progressBar';
 
 class OrderTile extends React.Component{
-  constructor(props) 
-  {
-    super(props);
-  } 
+  
 
   _formatDate(arg){
     let dateObj = new Date(arg);

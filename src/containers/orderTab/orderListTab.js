@@ -85,7 +85,8 @@ class OrderListTab extends React.Component {
       endDateForOrders: null,
       ppsIdFilterForOrders: null,
       statusFilterForOrders: null,
-      timerId: null
+      timerId: null,
+      timeOffset:this.props.timeOffset
     };
   }
 
@@ -157,41 +158,49 @@ class OrderListTab extends React.Component {
         timerId: null
       });
     }
+    if(!this.state.timeOffset){
+      this.setState({
+        timeOffset:nextProps.timeOffset
+      },()=>{
+        moment.tz.setDefault(this.state.timeOffset);
+      })
+    }
   }
 
   _refreshList(query) {
     this.props.setOrderListSpinner(true);
+    const {timeOffset} = this.state;
     if (query.orderId) {
       this._viewOrderLine(query.orderId);
       this.props.filterApplied(false);
     }
-    let timeOffset = null;
-    if (this.props.timeOffset) {
+    //let timeOffset = null;
+    /*if (timeOffset) {
       timeOffset = this.props.timeOffset;
     } else {
       timeOffset = "";
-    }
-    if (!query.fromDate) {
-      query.fromDate = moment
-        .tz(timeOffset)
+    }*/
+    if (!query.fromDate ) {
+      query.fromDate = moment()
+        //.tz(timeOffset || "")
         .startOf("day")
         .format("YYYY-MM-DD");
     }
     if (!query.toDate) {
-      query.toDate = moment
-        .tz(timeOffset)
+      query.toDate = moment()
+        //.tz(timeOffset || "")
         .endOf("day")
         .format("YYYY-MM-DD");
     }
     if (!query.fromTime) {
-      query.fromTime = moment
-        .tz(timeOffset)
+      query.fromTime = moment()
+        //.tz(timeOffset || "")
         .startOf("day")
         .format("HH:mm:ss");
     }
     if (!query.toTime) {
-      query.toTime = moment
-        .tz(timeOffset)
+      query.toTime = moment()
+        //.tz(timeOffset || "")
         .endOf("day")
         .format("HH:mm:ss");
     }
@@ -341,20 +350,23 @@ class OrderListTab extends React.Component {
 
   render() {
     let duration = null;
+    const {timeOffset} = this.state;
+    const {startDateForOrders,endDateForOrders} = this.state
     const durDiff = moment
       .duration(
         moment(this.state.endDateForOrders).diff(
-          moment(this.state.startDateForOrders)
+          moment(startDateForOrders)
         )
       )
       .asDays();
     if (Math.floor(durDiff) > 0) {
       duration =
-        moment(this.state.startDateForOrders).format("DD MMM") +
+        moment(startDateForOrders).format("DD MMM") +
         "-" +
-        moment(this.state.endDateForOrders).format("DD MMM YYYY");
-    } else {
-      duration = moment(this.state.startDateForOrders).format("DD MMM YYYY");
+        moment(endDateForOrders).format("DD MMM YYYY");
+    } else if(startDateForOrders){
+      duration = moment(startDateForOrders,moment.ISO_8601).format("DD MMM YYYY");
+      
     }
     var filterHeight = screen.height - 150;
     var itemNumber = 6,
@@ -412,6 +424,8 @@ class OrderListTab extends React.Component {
                 date={duration}
                 orderFulfilData={this.props.orderFulfilment}
                 orderSummaryData={this.props.orderSummary}
+                locale={this.props.intl.locale}
+                timeOffset={this.props.timeOffset}
               />
 
               <div
