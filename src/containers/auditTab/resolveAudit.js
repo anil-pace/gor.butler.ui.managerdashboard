@@ -86,8 +86,8 @@ class ResolveAudit extends React.Component{
   _processData(auditLines,nProps) {
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      auditData.actual_quantity=data[i].actual_quantity;
-      auditData.expected_quantity=data[i].expected_quantity;
+      auditData.actual_quantity=data[i].anamoly_data[i].actual_quantity;
+      auditData.expected_quantity=data[i].anamoly_data[i].expected_quantity;
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
