@@ -58,6 +58,8 @@ class ResolveAudit extends React.Component{
   
 
   _processData(auditLines,nProps) {
+    //audit by location
+    /*
     auditLines = [{
       "anamoly_info": [{
         "actual_quantity": 2,
@@ -66,67 +68,102 @@ class ResolveAudit extends React.Component{
         "type": ""
       },
       {
-        "actual_quantity": 222,
-        "expected_quantity": 322,
+        "actual_quantity": 4,
+        "expected_quantity": 4,
         "name": "no_name",
         "type": ""
       },
       {
-        "actual_quantity": 2222,
-        "expected_quantity": 3222,
+        "actual_quantity": 6,
+        "expected_quantity": 5,
         "name": "no_name",
         "type": ""
       }],
       "auditline_id": "b0d320a5-8f07-483b-ba4f-071186e1f077",
-      "k_deep_audit": false,
+      "k_deep_audit": true,
       "pdfa_audit_attributes": {
         "pdfa_values": "44444"
       },
       "slot_id": "002.1.A.01-02",
       "status": "audit_pending_approval"
     }];
+    //
+    */
+    
+    
+
+
+
+ //audit by sku 
+    auditLines=[
+      {
+        "anamoly_info": [{
+          "actual_quantity": 3,
+          "expected_quantity": 4,
+        }],
+        "auditline_id": "e17fadb6-3bdd-4780-b903-53286d424d89", 
+        "k_deep_audit": false, 
+        "pdfa_audit_attributes": {
+          "pdfa_values": "saurabh_30_nov7"
+        }, 
+        "slot_id": "427.1.E.03", 
+        "status": "audit_pending_approval"
+      }, 
+      {
+        "anamoly_info": [{
+          "actual_quantity": 31,
+          "expected_quantity": 41,
+        }],
+        "auditline_id": "e17fadb6-3bdd-4780-b903-53286d424d89", 
+        "k_deep_audit": false, 
+        "pdfa_audit_attributes": {
+          "pdfa_values": "saurabh_30_nov7"
+        }, 
+        "slot_id": "427.1.E.04", 
+        "status": "audit_pending_approval"
+      }, 
+      {
+        "anamoly_info": [{
+          "actual_quantity": 322,
+          "expected_quantity": 422,
+        }],
+        "auditline_id": "e17fadb6-3bdd-4780-b903-53286d424d89", 
+        "k_deep_audit": true, 
+        "pdfa_audit_attributes": {
+          "pdfa_values": "saurabh_30_nov7"
+        }, 
+        "slot_id": "427.1.E.05", 
+        "status": "audit_pending_approval"
+      }
+  ]
+
+  
+
+  
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      if(data[i].anamoly_info.length > 0){
-        //var arr =[];
-        //var ananmoly_obj ={};
+      if(data[i].anamoly_info.length>1){ // only multiple objects are there inside anamoly_info
         var sumActualQuantity=0, sumExpectedQuantity = 0;
         for(var j=0; j< data[i].anamoly_info.length; j++){
           sumActualQuantity = sumActualQuantity + data[i].anamoly_info[j].actual_quantity;
           sumExpectedQuantity = sumExpectedQuantity + data[i].anamoly_info[j].expected_quantity;
-          // ananmoly_obj={};
-          // ananmoly_obj.actual_quantity=data[i].anamoly_info[j].actual_quantity;
-          // ananmoly_obj.expected_quantity=data[i].anamoly_info[j].expected_quantity;
-          // ananmoly_obj.slot_id=data[i].slot_id;
-          // ananmoly_obj.auditLineId=data[i].auditline_id;
-          // arr.push(ananmoly_obj);
         }
         auditData.actual_quantity=sumActualQuantity;
         auditData.expected_quantity=sumExpectedQuantity;
-        //auditData.anamoly_list.push(arr);
-        // let newData = auditData.anamoly_list.map(() => {
-        //   return 
-        // }
-
       }
-      else{
-        auditData.actual_quantity=data[i].anamoly_info[i].actual_quantity;
-        auditData.expected_quantity=data[i].anamoly_info[i].expected_quantity;
+      else{ // only one object inside anamoly_info
+        auditData.actual_quantity=data[i].anamoly_info[0].actual_quantity;
+        auditData.expected_quantity=data[i].anamoly_info[0].expected_quantity;
       }
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
-      // auditData.actual_quantity=data[i].anamoly_info[i].actual_quantity;
-      // auditData.expected_quantity=data[i].anamoly_info[i].expected_quantity;
-      // totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
-      // auditData.slot_id=data[i].slot_id;
-      // auditData.auditLineId=data[i].auditline_id;
-      if(data[i].status){
-          /**
-           * Data from the backend for the comparison.
-           */
-          auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
-      }
+        if(data[i].status){
+            /**
+             * Data from the backend for the comparison.
+             */
+            auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
+        }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
@@ -292,6 +329,7 @@ class ResolveAudit extends React.Component{
     var containerHeight=(((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
     if(auditDataList.newData.length>0 && auditDataList.newData[0].k_deep_audit){
         containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);
+        /*
         resolveTable=<div>
             <Table
                 rowHeight={3 * headerHeight}
@@ -349,6 +387,51 @@ class ResolveAudit extends React.Component{
                 />
             </Table>
             </div>
+          */
+         resolveTable=<div>
+            <Table
+                rowHeight={headerHeight}
+                rowsCount={auditDataList.getSize()}
+                headerHeight={headerHeight}
+                onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+                isColumnResizing={false}
+                width={GOR_AUDIT_RESOLVE_WIDTH}
+                height={containerHeight}
+                {...this.props}>
+                <Column
+                    columnKey="slot_id"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage="SLOT ID"/> </div>}
+                    cell={  <TextCell data={auditDataList} />}
+                    width={220}
+                />
+                <Column
+                    columnKey="expected_quantity"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> </div>}
+                    cell={  <TextCell data={auditDataList} />}
+                    width={220}
+                />
+                <Column
+                    columnKey="actual_quantity"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> </div>
+                    }
+                    cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
+                    width={220}
+                />
+                <Column
+                    columnKey="status"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> </div>}
+                    cell={  <TextCell data={auditDataList}> </TextCell>}
+                    width={220}
+                />
+
+                <Column
+                    columnKey="resolve"
+                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> </div>}
+                    cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
+                    width={220}
+                />
+            </Table>
+        </div>
 
     }else{
         resolveTable=<div>
