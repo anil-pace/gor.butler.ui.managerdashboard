@@ -9842,6 +9842,7 @@ button:disabled {
 
 .width-auto {
   width: auto;
+  vertical-align: top;
 }
 
 .gor-actionDropDown {
