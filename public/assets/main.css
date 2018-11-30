@@ -2421,7 +2421,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.Warning .public_fixedDataTableCell_cellContent {
+.Warning .public_fixedDataTableCell_cellContent, .warning .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -6837,6 +6837,10 @@ button:disabled {
   color: #000000;
   padding-top: 9px;
   padding-left: 10px;
+  width: 175px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gor-utility-master-h2 {
