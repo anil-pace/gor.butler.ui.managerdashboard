@@ -741,6 +741,7 @@ const withClientData = graphql(ppsClientData, {
     })
 });
 
+
 const withQueryGetPpsConfigDetails = graphql(PPS_BIN_LIST_QUERY, {
     props: function (data) {
         if (!data || !data.data.PpsBinList || !data.data.PpsBinList.list) {
@@ -755,6 +756,7 @@ const withQueryGetPpsConfigDetails = graphql(PPS_BIN_LIST_QUERY, {
         fetchPolicy: 'network-only'
     }),
 });
+
 
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {

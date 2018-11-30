@@ -126,6 +126,7 @@ export const ppsClientData = gql`
         }
     }
     }
+
 `;
 
 export const PPS_BIN_LIST_QUERY = gql`

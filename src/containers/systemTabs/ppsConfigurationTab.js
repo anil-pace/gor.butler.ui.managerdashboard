@@ -214,14 +214,15 @@ class PPSConfiguration extends React.Component {
                             className={['navigation-tab', (this.state.currentView === 'bins' ? 'active' : '')].join(" ")}
                             onClick={this.handleClickOnNavigation.bind(this, 'bins')}><FormattedMessage
                             id="pps.configuration.bins.activation.label"
-                            description="Bin active/inactive"
-                            defaultMessage="Bin active/inactive"/></div>
+                            description="Bin activate/deactivate"
+                            defaultMessage="Bin activate/deactivate"/></div>
                         <div
                             className={['navigation-tab', (this.state.currentView === 'groups' ? 'active' : '')].join(" ")}
                             onClick={this.handleClickOnNavigation.bind(this, 'groups')}><FormattedMessage
                             id="pps.configuration.group.activation.label"
-                            description="Bin group active/inactive"
-                            defaultMessage="Bin group active/inactive"/></div>
+                            description="Bin group enable/disable"
+                            defaultMessage="Bin group enable/disable"/></div>
+
                         <div className={['seat-description'].join(" ")}><FormattedMessage
                             id="pps.configuration.bins.frontView.label"
                             description="Front View"

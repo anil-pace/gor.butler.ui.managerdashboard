@@ -39,6 +39,8 @@ import {
     EDIT_USER,
     RECIEVE_HEADER,
     SUCCESS,
+    PAUSE_OPERATION,
+    RESUME_OPERATION,
     CONFIRM_SAFETY,
     CHECK_SAFETY,
     RECEIVE_SHIFT_START_TIME,
@@ -250,7 +252,40 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case RECIEVE_TIME_OFFSET:
             store.dispatch(setTimeOffSetData(res));
             break;
-
+        case PAUSE_OPERATION:
+            var pausePwd;
+            if (!res.auth_token) {
+                pausePwd = {
+                    type: ERROR,
+                    msg: UE002
+                };
+            } else {
+                pausePwd = {
+                    type: SUCCESS,
+                    msg: TYPE_SUCCESS
+                };
+                //hit next api
+                store.dispatch(modalStatus(true));
+            }
+            store.dispatch(validatePassword(pausePwd));
+            break;
+        case RESUME_OPERATION:
+            var resumePwd;
+            if (!res.auth_token) {
+                resumePwd = {
+                    type: ERROR,
+                    msg: UE002
+                };
+            } else {
+                resumePwd = {
+                    type: SUCCESS,
+                    msg: TYPE_SUCCESS
+                };
+                //hit next api
+                store.dispatch(modalStatus(true));
+            }
+            store.dispatch(validatePassword(resumePwd));
+            break;
       
 		case CHECK_SAFETY:
 			store.dispatch(getSafetyList(res || {}));

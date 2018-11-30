@@ -3752,6 +3752,12 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 
+.public_fixedDataTableCell_cellContent .ppsBinFooter {
+  margin-left: 31px;
+  margin-top: -11px;
+  font-size: 80%;
+}
+
 .gorAuditHeader {
   display: inline-block;
   padding-left: 17px;
