@@ -3093,6 +3093,16 @@ msgstr ""
         msgid "Select Attributes"
         msgstr ""
 
+        #: itemRecall.order.label.expiredItems
+        msgctxt "itemRecall.order.label.expiredItems"
+        msgid "Expired Items"
+        msgstr ""
+
+        #: itemRecall.order.label.specificItem
+        msgctxt "itemRecall.order.label.specificItem"
+        msgid "Specific SKU + attribute(s)"
+        msgstr ""
+
         #: itemRecall.order.label
         msgctxt "itemRecall.order.label"
         msgid "Order Id"
