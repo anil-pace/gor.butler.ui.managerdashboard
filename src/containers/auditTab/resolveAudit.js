@@ -58,19 +58,75 @@ class ResolveAudit extends React.Component{
   
 
   _processData(auditLines,nProps) {
+    auditLines = [{
+      "anamoly_info": [{
+        "actual_quantity": 2,
+        "expected_quantity": 3,
+        "name": "no_name",
+        "type": ""
+      },
+      {
+        "actual_quantity": 222,
+        "expected_quantity": 322,
+        "name": "no_name",
+        "type": ""
+      },
+      {
+        "actual_quantity": 2222,
+        "expected_quantity": 3222,
+        "name": "no_name",
+        "type": ""
+      }],
+      "auditline_id": "b0d320a5-8f07-483b-ba4f-071186e1f077",
+      "k_deep_audit": false,
+      "pdfa_audit_attributes": {
+        "pdfa_values": "44444"
+      },
+      "slot_id": "002.1.A.01-02",
+      "status": "audit_pending_approval"
+    }];
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      auditData.actual_quantity=data[i].actual_quantity;
-      auditData.expected_quantity=data[i].expected_quantity;
+      if(data[i].anamoly_info.length > 0){
+        //var arr =[];
+        //var ananmoly_obj ={};
+        var sumActualQuantity=0, sumExpectedQuantity = 0;
+        for(var j=0; j< data[i].anamoly_info.length; j++){
+          sumActualQuantity = sumActualQuantity + data[i].anamoly_info[j].actual_quantity;
+          sumExpectedQuantity = sumExpectedQuantity + data[i].anamoly_info[j].expected_quantity;
+          // ananmoly_obj={};
+          // ananmoly_obj.actual_quantity=data[i].anamoly_info[j].actual_quantity;
+          // ananmoly_obj.expected_quantity=data[i].anamoly_info[j].expected_quantity;
+          // ananmoly_obj.slot_id=data[i].slot_id;
+          // ananmoly_obj.auditLineId=data[i].auditline_id;
+          // arr.push(ananmoly_obj);
+        }
+        auditData.actual_quantity=sumActualQuantity;
+        auditData.expected_quantity=sumExpectedQuantity;
+        //auditData.anamoly_list.push(arr);
+        // let newData = auditData.anamoly_list.map(() => {
+        //   return 
+        // }
+
+      }
+      else{
+        auditData.actual_quantity=data[i].anamoly_info[i].actual_quantity;
+        auditData.expected_quantity=data[i].anamoly_info[i].expected_quantity;
+      }
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
-        if(data[i].status){
-            /**
-             * Data from the backend for the comparison.
-             */
-            auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
-        }
+      // auditData.actual_quantity=data[i].anamoly_info[i].actual_quantity;
+      // auditData.expected_quantity=data[i].anamoly_info[i].expected_quantity;
+      // totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
+      // auditData.slot_id=data[i].slot_id;
+      // auditData.auditLineId=data[i].auditline_id;
+      if(data[i].status){
+          /**
+           * Data from the backend for the comparison.
+           */
+          auditData[GOR_AUDIT_STATUS_DATA]=data[i].status
+      }
       if(this.context.intl.formatMessage(stringConfig[data[i].status])) {
         auditData.status=this.context.intl.formatMessage(stringConfig[data[i].status]);
       } 
