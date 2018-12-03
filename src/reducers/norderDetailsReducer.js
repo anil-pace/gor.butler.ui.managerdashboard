@@ -55,7 +55,7 @@ break;
 
 case TOGGLE_ACTIVE_PBT:
 let target_cut_off_time_2=action.data.pbt.cut_off_time
-let pbts=state.pbts;
+let pbts=JSON.parse(JSON.stringify(state.pbts));
 let activePbtIndex=null;
 pbts.map(function(pbt, idx){
     if(pbt.cut_off_time === target_cut_off_time_2){
