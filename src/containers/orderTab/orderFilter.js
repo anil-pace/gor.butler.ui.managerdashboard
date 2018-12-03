@@ -237,6 +237,8 @@ class OrderFilter extends React.Component{
 
     _clearFilter() {
       this.props.filterApplied(false);
+      sessionStorage.removeItem("filtered_ppsId");
+      sessionStorage.removeItem("filtered_order_status");
         this.props.orderfilterState({
           tokenSelected: {
               "ORDER TAGS": [ANY],

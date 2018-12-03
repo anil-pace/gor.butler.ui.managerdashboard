@@ -881,7 +881,7 @@ export const CREATED_STATUS = "CREATED";
 export const PROCESSING_STATUS = "PROCESSING";
 export const PROCESSED_STATUS = "PROCESSED";
 export const FAILED_STATUS = "FAILED";
-export const CANCELLED_STATUS = "CANCELED";
+export const CANCELLED_STATUS = "CANCELLED";
 export const WAITING_STATUS  = "WAITING"
 export const ORDERS_POLLING_INTERVAL = 60000;
 //Wall to wall audit
