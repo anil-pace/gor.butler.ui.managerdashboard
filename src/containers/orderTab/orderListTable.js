@@ -147,6 +147,26 @@ class OrderListTable extends React.Component {
             });
     }
 
+    _getOrderPriorityList = (ordreId) => {
+        alert(ordreId);
+        let applyClassName = "orderPriorityListWrapper showList";
+        //let applyClassName=
+            // let x = (
+            //     <div className="orderPriorityWrapper">
+            //         <ul className="orderPriorityList">
+            //             <li>A</li> 
+            //             <li>B</li>
+            //         </ul>
+            //         <button>asdfasdf</button>
+            //     </div>
+            // );
+
+    }
+
+    dummy = (orderId) => {
+
+    }
+
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time
         let page="0"
@@ -333,6 +353,7 @@ class OrderListTable extends React.Component {
                               <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
+                              <div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}></div>
                             </div>);
                         }
                         else{
@@ -462,14 +483,44 @@ class OrderListTable extends React.Component {
 
                 if(formatProgressBar.action === true){
                     orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
-                      <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
-                        <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
-                      </button>
+                        <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
+                            <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                        </button>
                     </div>);
                 }
                 else{
                     orderRow.push(<div> </div>);
                 }
+                orderRow.push(
+                    <div className="orderPriorityWrapper">
+                        <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
+                        <div className="orderPriorityListWrapper">
+                            <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
+                            <ul className="orderPriorityList">
+                                <li className="listWrapper"> 
+                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
+                                    <label class="option-text"><span>High</span></label>
+                                </li>
+                                <li className="listWrapper"> 
+                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
+                                    <label class="option-text"><span>Normal</span></label>
+                                </li>
+                                <li className="listWrapper"> 
+                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
+                                    <label class="option-text"><span>Low</span></label>
+                                </li>
+                                <li className="listWrapper"> 
+                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
+                                    <label class="option-text"><span>Critical</span></label>
+                                </li>
+                            </ul>
+                            <div className="applyButton" onClick={() =>this.dummy()}>
+                                        <FormattedMessage id="orders.order.priority" description="button label for order Priority" defaultMessage="APPLY"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                )
 
                 orderRows.push(orderRow);
             }
