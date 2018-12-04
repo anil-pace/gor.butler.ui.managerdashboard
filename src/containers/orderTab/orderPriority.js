@@ -1,7 +1,8 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
 import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
-
+import OrderPriorityConfirmation from './OrderPriorityConfirmation';
+import {modal} from 'react-redux-modal';
 
 class OrderPriority extends React.Component{
 	
@@ -38,13 +39,39 @@ class OrderPriority extends React.Component{
       document.removeEventListener("click", this._handleDocumentClick,false)
   }
 
+  _showAlertModal = () => {
+    modal.add(OrderPriorityConfirmation, {
+        title: '',
+        size: 'large', // large, medium or small,
+        closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+        startStopActionInitiated:this._startStopActionInitiated,
+        activeBtnText: this.state.startStopBtnText
+
+    });
+}
+
+  _handleChangeOrderPriority(e){
+    alert(e.currentTarget.value);
+    if(e.currentTarget.value === "Critical"){
+        this._showAlertModal();
+    }
+  }
+
 	
 	render(){
-		// var arr=[];
-		// var data=this.props.data;
-		// data.map(function(item, i){
-		// 	arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
-		// },this);
+		var arr=[];
+        //var data=this.props.data;
+        var data = ["High", "Normal", "Low", "Critical"];
+		data.map(function(item, index){
+            //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
+            arr.push(
+                <li className="listWrapper"> 
+                    <input type="radio" class="recall-option" value={data[index]} name="recall-options" onClick={(evt)=>{this._handleChangeOrderPriority(evt)}}/>
+                    <label class="option-text"><span>{data[index]}</span></label>
+                </li>
+            );
+		},this);
 	
 		return (
             <div className="orderPriorityWrapper">
@@ -52,25 +79,10 @@ class OrderPriority extends React.Component{
                 <div className="orderPriorityListWrapper">
                     <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
                     <ul className="orderPriorityList">
-                        <li className="listWrapper"> 
-                            <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                            <label class="option-text"><span>High</span></label>
-                        </li>
-                        <li className="listWrapper"> 
-                            <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                            <label class="option-text"><span>Normal</span></label>
-                        </li>
-                        <li className="listWrapper"> 
-                            <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                            <label class="option-text"><span>Low</span></label>
-                        </li>
-                        <li className="listWrapper"> 
-                            <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                            <label class="option-text"><span>Critical</span></label>
-                        </li>
+                        {arr}
                     </ul>
                     <div className="applyButton" onClick={() =>this.dummy()}>
-                                <FormattedMessage id="orders.order.priority" description="button label for order Priority" defaultMessage="APPLY"/>
+                        <FormattedMessage id="orders.order.priority" description="button label for order Priority" defaultMessage="APPLY"/>
                     </div>
                 </div>
             </div>
