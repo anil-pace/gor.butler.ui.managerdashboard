@@ -8,6 +8,7 @@ import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
+import OrderPriority from '../../containers/orderTab/orderPriority';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
@@ -486,11 +487,13 @@ class OrderListTable extends React.Component {
                         <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
                             <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                         </button>
+                        <OrderPriority idx={orderData[i].order_id}/>
                     </div>);
                 }
                 else{
                     orderRow.push(<div> </div>);
                 }
+                /*
                 orderRow.push(
                     <div className="orderPriorityWrapper">
                         <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
@@ -520,7 +523,7 @@ class OrderListTable extends React.Component {
                         </div>
                     </div>
                 </div>
-                )
+                )*/
 
                 orderRows.push(orderRow);
             }
@@ -584,7 +587,7 @@ class OrderListTable extends React.Component {
                                             return (
                                                 <GTableRow key={idx_1} index={idx_1} offset={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).offset} max={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).max} data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData}>
                                                     {Object.keys(row_1).map(function (text, index) {
-                                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                        return <div key={index} style={{padding:"0px", overflow: "visible", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
                                                             {row_1[text]}
                                                         </div>
                                                     })}
