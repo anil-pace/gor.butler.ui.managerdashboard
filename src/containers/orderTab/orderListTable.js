@@ -116,6 +116,7 @@ class OrderListTable extends React.Component {
         this.state={
             cutOffTimeIndex:"",
             isOrderPriorityIconClicked: false,
+            orderIdForOrderPriority: '',
             statusMapping:{
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
@@ -152,13 +153,13 @@ class OrderListTable extends React.Component {
 
     _getOrderPriorityList = (orderId) => {
         this.setState({
+            orderIdForOrderPriority: orderId,
             isOrderPriorityIconClicked: true
         });
         let formData = {
             "order_id": orderId
         };
 
-        alert(orderId);
         // let params={
         //     'url': ORDERS_PRIORITY_URL,
         //     'method':POST,
@@ -359,7 +360,7 @@ class OrderListTable extends React.Component {
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
                               <div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
-                                    {this.state.isOrderPriorityIconClicked ? 
+                                    {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
                                         <OrderPriority idx={pbtData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
                                     }
                               </div>
@@ -497,7 +498,7 @@ class OrderListTable extends React.Component {
                         </button>
 
                         <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
-                            {this.state.isOrderPriorityIconClicked ? 
+                            {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ? 
                                 <OrderPriority idx={orderData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
                             }
                         </div>
