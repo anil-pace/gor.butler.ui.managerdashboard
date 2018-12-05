@@ -12,7 +12,8 @@ class OrderPriority extends React.Component{
 		this.state={
             visibleMenu:false,
             flyoutHack:false,
-            activePriority: ''
+            activePriority: '',
+            applyButtonClassName:"applyButton"
         }; 
         this._handleDocumentClick = this._handleDocumentClick.bind(this);
         this._changeOrderPriority = this._changeOrderPriority.bind(this);
@@ -24,10 +25,8 @@ class OrderPriority extends React.Component{
 		this.setState({flyoutHack:domRect.top>=546});
     	let currentStatus=this.state.visibleMenu;
     	currentStatus=!currentStatus;
-      this.setState({visibleMenu:currentStatus});
-      this.props.clickOptionBack(field,id,displayId);
-
-		
+        this.setState({visibleMenu:currentStatus});
+        this.props.clickOptionBack(field,id,displayId);
 }
 
   _handleDocumentClick() {
@@ -45,7 +44,7 @@ class OrderPriority extends React.Component{
       document.removeEventListener("click", this._handleDocumentClick,false)
   }
 
-  _showAlertModal = () => {
+  _showOrderPriorityModal = () => {
     modal.add(OrderPriorityConfirmation, {
         title: '',
         size: 'large', // large, medium or small,
@@ -58,15 +57,17 @@ class OrderPriority extends React.Component{
 }
 
   _changeOrderPriority(e){
-    //alert(e.currentTarget.value);
+    alert(e.currentTarget.value);
     this.setState({
-        activePriority: e.currentTarget.value
+        activePriority: e.currentTarget.value,
+        applyButtonClassName: "applyButton makeClickable"
     });
   }
 
   _applyOrderPriority(){
+      alert(" m licked");
     if(this.state.activePriority === "Critical"){
-        this._showAlertModal();
+        this._showOrderPriorityModal();
     }
   }
 
@@ -79,7 +80,12 @@ class OrderPriority extends React.Component{
             //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
             arr.push(
                 <li className="listWrapper"> 
-                    <input type="radio" class="recall-option" value={data[index]} name="recall-options" onClick={(evt)=>{this._changeOrderPriority(evt)}}/>
+                    <input type="radio" 
+                        class="recall-option" 
+                        value={data[index]} 
+                        checked={this.props.orderPriority === data[index].toLowerCase()? data[index]:this.state.activePriority }
+                        name="recall-options" 
+                        onChange={(evt)=>{this._changeOrderPriority(evt)}}/>
                     <label class="option-text"><span>{data[index]}</span></label>
                 </li>
             );
@@ -87,15 +93,14 @@ class OrderPriority extends React.Component{
 	
 		return (
             <div className="orderPriorityWrapper">
-                <div className="embeddedImage" onClick={() => this._getOrderPriorityList(this.props.idx)}></div>
                 <div className="orderPriorityListWrapper">
                     <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
                     <ul className="orderPriorityList">
                         {arr}
                     </ul>
-                    <button className="applyButton" onClick={() =>this._applyOrderPriority(this.props.idx)}>
+                    <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.idx)}>
                         <FormattedMessage id="orders.order.apply" description="button label for apply" defaultMessage="APPLY"/>
-                    </button>
+                    </div>
                 </div>
             </div>
             /*

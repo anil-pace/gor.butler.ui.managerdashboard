@@ -253,13 +253,17 @@
 			z-index: 100;
 			background: #ffffff;
 			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-			width: 180px;
+			width: 200px;
 			right: 25px;
 			border-radius: 4px;
 			//bottom: 0px;
+			.priorityListHeader{
+				padding-left: 10px;
+			}
 			ul.orderPriorityList{
 				li.listWrapper{
 					padding-top: 10px;
+					padding-left: 10px;
 					text-align: left;
 				}
 			}
@@ -270,6 +274,10 @@
 				border-top: 1px solid grey;
 				border-bottom: 1px solid grey;
 				line-height: 5vh;
+				pointer-events: none;
+				&.makeClickable{
+					pointer-events: auto;
+				}
 			}
 
 		}

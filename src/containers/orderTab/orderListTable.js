@@ -359,11 +359,12 @@ class OrderListTable extends React.Component {
                               <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
-                              <div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
-                                    {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
-                                        <OrderPriority idx={pbtData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
-                                    }
-                              </div>
+                              {pbtData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
+                                (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
+                                        {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
+                                            <OrderPriority idx={pbtData[i].order_id} orderPriority={pbtData[i].order_priority}/> : ""
+                                        }
+                                </div>): ""}
                             </div>);
                         }
                         else{
@@ -497,12 +498,12 @@ class OrderListTable extends React.Component {
                             <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                         </button>
 
-                        <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
-                            {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ? 
-                                <OrderPriority idx={orderData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
-                            }
-                        </div>
-
+                         {orderData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
+                            (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
+                                    {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ?
+                                        <OrderPriority idx={orderData[i].order_id} orderPriority={orderData[i].order_priority}/> : ""
+                                    }
+                            </div>): ""}
                     </div>);
                 }
                 else{
