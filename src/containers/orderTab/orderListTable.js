@@ -150,18 +150,22 @@ class OrderListTable extends React.Component {
             });
     }
 
-    _getOrderPriorityList = (ordreId) => {
+    _getOrderPriorityList = (orderId) => {
         this.setState({
             isOrderPriorityIconClicked: true
         });
-        alert(ordreId);
-        let applyClassName = "orderPriorityListWrapper showList";
+        let formData = {
+            "order_id": orderId
+        };
+
+        alert(orderId);
         // let params={
         //     'url': ORDERS_PRIORITY_URL,
-        //     'method':GET,
+        //     'method':POST,
         //     'contentType':APP_JSON,
         //     'accept':APP_JSON,
-        //     'cause' : ORDERS_PRIORITY_FETCH
+        //     'cause' : ORDERS_PRIORITY_FETCH,
+        //     'formdata':formData
         // }
         // this.props.makeAjaxCall(params);
         // alert(this.props.orderPriorityList);
