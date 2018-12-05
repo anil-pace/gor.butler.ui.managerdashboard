@@ -9,8 +9,14 @@ class OrderPriority extends React.Component{
 	constructor(props) 
 	{
 	   super(props);
-		this.state={visibleMenu:false,flyoutHack:false}; 
-        this._handleDocumentClick =  this._handleDocumentClick.bind(this);
+		this.state={
+            visibleMenu:false,
+            flyoutHack:false,
+            activePriority: ''
+        }; 
+        this._handleDocumentClick = this._handleDocumentClick.bind(this);
+        this._changeOrderPriority = this._changeOrderPriority.bind(this);
+        this._applyOrderPriority = this._applyOrderPriority.bind(this);
     }
     _handleClick(field,id,displayId){
 		
@@ -51,9 +57,15 @@ class OrderPriority extends React.Component{
     });
 }
 
-  _handleChangeOrderPriority(e){
-    alert(e.currentTarget.value);
-    if(e.currentTarget.value === "Critical"){
+  _changeOrderPriority(e){
+    //alert(e.currentTarget.value);
+    this.setState({
+        activePriority: e.currentTarget.value
+    });
+  }
+
+  _applyOrderPriority(){
+    if(this.state.activePriority === "Critical"){
         this._showAlertModal();
     }
   }
@@ -67,7 +79,7 @@ class OrderPriority extends React.Component{
             //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
             arr.push(
                 <li className="listWrapper"> 
-                    <input type="radio" class="recall-option" value={data[index]} name="recall-options" onClick={(evt)=>{this._handleChangeOrderPriority(evt)}}/>
+                    <input type="radio" class="recall-option" value={data[index]} name="recall-options" onClick={(evt)=>{this._changeOrderPriority(evt)}}/>
                     <label class="option-text"><span>{data[index]}</span></label>
                 </li>
             );
@@ -81,9 +93,9 @@ class OrderPriority extends React.Component{
                     <ul className="orderPriorityList">
                         {arr}
                     </ul>
-                    <div className="applyButton" onClick={() =>this.dummy()}>
-                        <FormattedMessage id="orders.order.priority" description="button label for order Priority" defaultMessage="APPLY"/>
-                    </div>
+                    <button className="applyButton" onClick={() =>this._applyOrderPriority(this.props.idx)}>
+                        <FormattedMessage id="orders.order.apply" description="button label for apply" defaultMessage="APPLY"/>
+                    </button>
                 </div>
             </div>
             /*
