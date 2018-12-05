@@ -22,13 +22,14 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {wsOverviewData} from './../../constants/initData.js';
 
 
-import {APP_JSON, POST, ORDERS_PER_PBT_FETCH} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH, ORDERS_PRIORITY_FETCH} from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import moment from 'moment-timezone';
 
 import {
-    ORDERS_PER_PBT_URL} from '../../constants/configConstants';
+    ORDERS_PER_PBT_URL,
+    ORDERS_PRIORITY_URL} from '../../constants/configConstants';
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
@@ -114,6 +115,7 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             cutOffTimeIndex:"",
+            isOrderPriorityIconClicked: false,
             statusMapping:{
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
@@ -149,24 +151,22 @@ class OrderListTable extends React.Component {
     }
 
     _getOrderPriorityList = (ordreId) => {
+        this.setState({
+            isOrderPriorityIconClicked: true
+        });
         alert(ordreId);
         let applyClassName = "orderPriorityListWrapper showList";
-        //let applyClassName=
-            // let x = (
-            //     <div className="orderPriorityWrapper">
-            //         <ul className="orderPriorityList">
-            //             <li>A</li> 
-            //             <li>B</li>
-            //         </ul>
-            //         <button>asdfasdf</button>
-            //     </div>
-            // );
-
+        // let params={
+        //     'url': ORDERS_PRIORITY_URL,
+        //     'method':GET,
+        //     'contentType':APP_JSON,
+        //     'accept':APP_JSON,
+        //     'cause' : ORDERS_PRIORITY_FETCH
+        // }
+        // this.props.makeAjaxCall(params);
+        // alert(this.props.orderPriorityList);
     }
 
-    dummy = (orderId) => {
-
-    }
 
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time
@@ -354,7 +354,11 @@ class OrderListTable extends React.Component {
                               <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
-                              <div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}></div>
+                              <div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
+                                    {this.state.isOrderPriorityIconClicked ? 
+                                        <OrderPriority idx={pbtData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
+                                    }
+                              </div>
                             </div>);
                         }
                         else{
@@ -487,7 +491,13 @@ class OrderListTable extends React.Component {
                         <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
                             <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                         </button>
-                        <OrderPriority idx={orderData[i].order_id}/>
+
+                        <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
+                            {this.state.isOrderPriorityIconClicked ? 
+                                <OrderPriority idx={orderData[i].order_id} orderPriorityList={this.props.orderPriorityList}/> : ""
+                            }
+                        </div>
+
                     </div>);
                 }
                 else{
@@ -644,7 +654,8 @@ function mapStateToProps(state) {
         ordersPerPbt:state.orderDetails.ordersPerPbt,
         timeZone:state.authLogin.timeOffset,
         isInfiniteLoading:state.notificationReducer.isInfiniteLoading,
-        isGroupedById: state.orderDetails.isGroupedById
+        isGroupedById: state.orderDetails.isGroupedById,
+        orderPriorityList: state.orderDetails.orderPriority||[],
     };
 }
 

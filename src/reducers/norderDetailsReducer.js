@@ -3,6 +3,7 @@ import {ORDERS_FULFIL_FETCH,
   ORDERS_CUT_OFF_TIME_FETCH, 
   ORDERS_PER_PBT_FETCH, 
   ORDERLINES_PER_ORDER_FETCH, 
+  ORDERS_PRIORITY_FETCH,
   ORDER_LIST_REFRESHED, 
   TOGGLE_ACTIVE_PBT,
   UNSET_ALL_ACTIVE_PBT
@@ -144,6 +145,12 @@ case ORDER_LIST_REFRESHED:
   return Object.assign({}, state, {
       "orderListRefreshed": new Date()
   })
+  break;
+
+  case ORDERS_PRIORITY_FETCH:
+  return Object.assign({}, state, {
+    orderPriority: action.data || [],
+  });
   break;
 
 default:

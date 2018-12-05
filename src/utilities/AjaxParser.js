@@ -104,6 +104,7 @@ import {
     ORDERS_SUMMARY_FETCH,
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
+    ORDERS_PRIORITY_FETCH,
     ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
@@ -202,7 +203,8 @@ import {receiveOrderFulfilmentData,
         receiveOrderSummaryData,
         receiveCutOffTimeData, 
         receiveOrdersPerPbtData,
-        receiveOrdersLinesData} from './../actions/norderDetailsAction';
+        receiveOrdersLinesData,
+        receiveOrdersPriority} from './../actions/norderDetailsAction';
 
 import {
      ORDERS_PER_PBT_URL
@@ -715,6 +717,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(setOrderListSpinner(false));
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+        
+        case ORDERS_PRIORITY_FETCH: 
+            store.dispatch(receiveOrdersPriority(res));
             break;
 
         case ORDERLINES_PER_ORDER_FETCH:
