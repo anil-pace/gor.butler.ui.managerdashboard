@@ -12,15 +12,15 @@ class OrderPriority extends React.Component{
 		this.state={
             visibleMenu:false,
             flyoutHack:false,
-            activePriority: '',
+            activePriority: this.props.orderPriority,
             applyButtonClassName:"applyButton"
         }; 
         this._handleDocumentClick = this._handleDocumentClick.bind(this);
         this._changeOrderPriority = this._changeOrderPriority.bind(this);
         this._applyOrderPriority = this._applyOrderPriority.bind(this);
     }
+
     _handleClick(field,id,displayId){
-		
 		var domRect = (field.target).getBoundingClientRect();
 		this.setState({flyoutHack:domRect.top>=546});
     	let currentStatus=this.state.visibleMenu;
@@ -75,18 +75,24 @@ class OrderPriority extends React.Component{
 	render(){
 		var arr=[];
         //var data=this.props.data;
-        var data = ["High", "Normal", "Low", "Critical"];
+        //var data = ["High", "Normal", "Low", "Critical"];
+        var data = [
+            {value: "high", text: "High"},
+            {value: "normal", text: "Normal"},
+            {value: "low", text: "Low"},
+            {value: "critical", text: "Critical"}
+        ];
 		data.map(function(item, index){
             //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
             arr.push(
-                <li className="listWrapper"> 
+                <li key={data[index].value} className="listWrapper"> 
                     <input type="radio" 
                         class="recall-option" 
-                        value={data[index]} 
-                        checked={this.props.orderPriority === data[index].toLowerCase()? data[index]:this.state.activePriority }
+                        value={data[index].value}
+                        checked={this.state.activePriority === data[index].value }
                         name="recall-options" 
                         onChange={(evt)=>{this._changeOrderPriority(evt)}}/>
-                    <label class="option-text"><span>{data[index]}</span></label>
+                    <label class="option-text"><span>{data[index].text}</span></label>
                 </li>
             );
 		},this);
