@@ -4,7 +4,7 @@ import {ORDERS_FULFIL_FETCH,
 		ORDERS_PER_PBT_FETCH,
 		ORDERLINES_PER_ORDER_FETCH,
 		TOGGLE_ACTIVE_PBT,UNSET_ALL_ACTIVE_PBT,
-		ORDERS_PRIORITY_FETCH
+		SET_ORDER_PRIORITY
 	} from './../constants/frontEndConstants'
 
 export function receiveOrderFulfilmentData(data){
@@ -60,7 +60,7 @@ export function receiveOrdersLinesData(data){
 
 export function receiveOrdersPriority(data){
 	return {
-		type: ORDERS_PRIORITY_FETCH,
+		type: SET_ORDER_PRIORITY,
 		data
 	}
 }

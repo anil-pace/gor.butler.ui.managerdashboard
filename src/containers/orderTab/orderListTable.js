@@ -22,14 +22,14 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {wsOverviewData} from './../../constants/initData.js';
 
 
-import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH, ORDERS_PRIORITY_FETCH} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import moment from 'moment-timezone';
 
 import {
     ORDERS_PER_PBT_URL,
-    ORDERS_PRIORITY_URL} from '../../constants/configConstants';
+    SET_ORDER_PRIORITY_URL} from '../../constants/configConstants';
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
@@ -161,11 +161,11 @@ class OrderListTable extends React.Component {
         };
 
         // let params={
-        //     'url': ORDERS_PRIORITY_URL,
+        //     'url': SET_ORDER_PRIORITY_URL,
         //     'method':POST,
         //     'contentType':APP_JSON,
         //     'accept':APP_JSON,
-        //     'cause' : ORDERS_PRIORITY_FETCH,
+        //     'cause' : SET_ORDER_PRIORITY,
         //     'formdata':formData
         // }
         // this.props.makeAjaxCall(params);
@@ -362,7 +362,11 @@ class OrderListTable extends React.Component {
                               {pbtData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
                                 (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
                                         {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
-                                            <OrderPriority idx={pbtData[i].order_id} orderPriority={pbtData[i].order_priority}/> : ""
+                                            <OrderPriority 
+                                                orderExternalId={pbtData[i].order_id} 
+                                                orderPriority = {pbtData[i].order_priority}
+                                                orderInternalId = {pbtData[i].order_internal_id}
+                                                orderType = {pbtData[i].order_type}/> : ""
                                         }
                                 </div>): ""}
                             </div>);
@@ -501,7 +505,11 @@ class OrderListTable extends React.Component {
                          {orderData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
                             (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
                                     {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ?
-                                        <OrderPriority idx={orderData[i].order_id} orderPriority={orderData[i].order_priority}/> : ""
+                                        <OrderPriority 
+                                                orderExternalId={orderData[i].order_id} 
+                                                orderPriority = {orderData[i].order_priority}
+                                                orderInternalId = {orderData[i].order_internal_id}
+                                                orderType = {orderData[i].order_type}/> : ""
                                     }
                             </div>): ""}
                     </div>);

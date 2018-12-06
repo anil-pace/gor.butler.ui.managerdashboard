@@ -275,8 +275,11 @@
 				border-bottom: 1px solid grey;
 				line-height: 5vh;
 				pointer-events: none;
+				opacity: 0.5;
 				&.makeClickable{
 					pointer-events: auto;
+					opacity:1;
+					color: blue;
 				}
 			}
 

@@ -104,7 +104,7 @@ import {
     ORDERS_SUMMARY_FETCH,
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
-    ORDERS_PRIORITY_FETCH,
+    SET_ORDER_PRIORITY,
     ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
@@ -719,8 +719,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
             break;
         
-        case ORDERS_PRIORITY_FETCH: 
+        case SET_ORDER_PRIORITY: 
             store.dispatch(receiveOrdersPriority(res));
+            store.dispatch(notifyfeedback(res));
             break;
 
         case ORDERLINES_PER_ORDER_FETCH:

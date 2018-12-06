@@ -50,23 +50,32 @@ class OrderPriority extends React.Component{
         size: 'large', // large, medium or small,
         closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
         hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-        startStopActionInitiated:this._startStopActionInitiated,
-        activeBtnText: this.state.startStopBtnText
-
+        orderExternalId: this.props.orderExternalId,
+        orderPriority : this.props.orderPriority,
+        orderInternalId :this.props.orderInternalId,
+        orderType :this.props.orderType
     });
 }
 
-  _changeOrderPriority(e){
-    alert(e.currentTarget.value);
-    this.setState({
-        activePriority: e.currentTarget.value,
-        applyButtonClassName: "applyButton makeClickable"
-    });
+  _changeOrderPriority(event){
+    alert(event.currentTarget.value);
+    if(event.currentTarget.value !== this.props.orderPriority){
+        this.setState({
+            activePriority: event.currentTarget.value,
+            applyButtonClassName: "applyButton makeClickable"
+        });
+    }
+    else{
+        this.setState({
+            activePriority: event.currentTarget.value,
+            applyButtonClassName: "applyButton"
+        });
+    }
   }
 
   _applyOrderPriority(){
       alert(" m licked");
-    if(this.state.activePriority === "Critical"){
+    if(this.state.activePriority === "critical"){
         this._showOrderPriorityModal();
     }
   }
@@ -104,7 +113,7 @@ class OrderPriority extends React.Component{
                     <ul className="orderPriorityList">
                         {arr}
                     </ul>
-                    <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.idx)}>
+                    <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
                         <FormattedMessage id="orders.order.apply" description="button label for apply" defaultMessage="APPLY"/>
                     </div>
                 </div>
