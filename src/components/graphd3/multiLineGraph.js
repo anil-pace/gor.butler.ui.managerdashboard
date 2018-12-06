@@ -6,7 +6,8 @@
  import React  from 'react';
  import rd3 from 'react-d3-library';
  import * as d3 from 'd3';
- import Dimensions from 'react-dimensions'
+ import Dimensions from 'react-dimensions';
+ import moment from 'moment-timezone';
 
 //constant for usage in render function
 const RD3Component=rd3.Component;
@@ -43,16 +44,17 @@ class MultiLineGraph extends React.Component{
         //setting the initial 
         //var parseDate=d3.time.format("%Y-%m-%d").parse;
         let noData=this.props.noData;
-        var dataArray=jsonArray.map(function(obj){
+        var dataArray=jsonArray.map(function(obj,i){
           let rObj={};
-          rObj.date=new Date(obj.date);
+          let dtArr = obj.date.split("-");
+          rObj.date=new Date(dtArr[0],dtArr[1]-1,dtArr[2]);
           rObj.items_put=obj.items_put;
           rObj.items_picked=obj.items_picked;
           rObj.toolTipData=obj.toolTipData;
 
           return rObj;
         })
-        //let dataArray=jsonArray;
+       
         //setting scale
         
         var x=d3.time.scale().range([padding, width-padding]);

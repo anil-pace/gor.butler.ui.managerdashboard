@@ -4,6 +4,7 @@
  */
  import React  from 'react';
  import { FormattedMessage,FormattedNumber,FormattedDate} from 'react-intl';
+ import moment from 'moment-timezone';
 
 
 
@@ -18,19 +19,17 @@
  	}
 
  	render(){
-
- 		var isToday=this.props.currentDate=== Date.parse(this.props.snapshotTabData.date) ? true :false,
- 		dt,currentStock,todayDate,timeOffset;
- 		timeOffset =  this.props.timeOffset;
+        let timeOffset =  this.props.timeOffset || Intl.DateTimeFormat().resolvedOptions().timeZone;
+ 		let isToday=this.props.currentDate=== this.props.snapshotTabData.dateinMS ? true :false,
+ 		dt,currentStock,todayDate;
  		if(isToday){
  			dt=<FormattedMessage id='inventory.snaphot.date' defaultMessage="Today's" description="Snapshot date string"/>
  			currentStock=<FormattedMessage id='inventory.snaphot.currentStock' defaultMessage="Current Stock" description="Snapshot table header"/>
  		}
  		else{
- 			let timeZonedDate;
- 			todayDate=this.props.snapshotTabData.date ? this.props.snapshotTabData.date : (new Date(new Date().toLocaleDateString("en-US",{timeZone:timeOffset})));
- 			timeZonedDate = new Date(new Date(todayDate).toLocaleDateString("en-US",{timeZone:timeOffset}));
- 			dt=<FormattedDate year='numeric' month='short' day='2-digit' value={timeZonedDate}/>
+ 			
+ 			todayDate=this.props.snapshotTabData.date ? this.props.snapshotTabData.date : moment().tz(timeOffset).format("MMM DD,YYYY"); 
+ 			dt=moment(todayDate).format("MMM DD,YYYY");
  			currentStock=<FormattedMessage id='inventory.snaphot.closingStock' defaultMessage="Closing Stock" description="Snapshot table header"/>
  		}
  		return (
