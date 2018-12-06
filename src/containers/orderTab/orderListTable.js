@@ -156,20 +156,6 @@ class OrderListTable extends React.Component {
             orderIdForOrderPriority: orderId,
             isOrderPriorityIconClicked: true
         });
-        let formData = {
-            "order_id": orderId
-        };
-
-        // let params={
-        //     'url': SET_ORDER_PRIORITY_URL,
-        //     'method':POST,
-        //     'contentType':APP_JSON,
-        //     'accept':APP_JSON,
-        //     'cause' : SET_ORDER_PRIORITY,
-        //     'formdata':formData
-        // }
-        // this.props.makeAjaxCall(params);
-        // alert(this.props.orderPriorityList);
     }
 
 

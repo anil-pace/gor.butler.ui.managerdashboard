@@ -86,10 +86,10 @@ class OrderPriority extends React.Component{
         //var data=this.props.data;
         //var data = ["High", "Normal", "Low", "Critical"];
         var data = [
-            {value: "high", text: "High"},
-            {value: "normal", text: "Normal"},
-            {value: "low", text: "Low"},
-            {value: "critical", text: "Critical"}
+            {value: "high", text: <FormattedMessage id="order.priority.high" description="label text for high" defaultMessage="High"/>},
+            {value: "normal", text: <FormattedMessage id="order.priority.normal" description="label text for normal" defaultMessage="Normal"/>},
+            {value: "low", text: <FormattedMessage id="order.priority.low" description="label text for low" defaultMessage="Low"/>},
+            {value: "critical", text: <FormattedMessage id="order.priority.critical" description="label text for critical" defaultMessage="Critical"/>},
         ];
 		data.map(function(item, index){
             //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
@@ -101,7 +101,9 @@ class OrderPriority extends React.Component{
                         checked={this.state.activePriority === data[index].value }
                         name="recall-options" 
                         onChange={(evt)=>{this._changeOrderPriority(evt)}}/>
-                    <label class="option-text"><span>{data[index].text}</span></label>
+                    <label class="option-text">
+                    <span>{data[index].text}</span>
+                    </label>
                 </li>
             );
 		},this);
@@ -114,7 +116,7 @@ class OrderPriority extends React.Component{
                         {arr}
                     </ul>
                     <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
-                        <FormattedMessage id="orders.order.apply" description="button label for apply" defaultMessage="APPLY"/>
+                        <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
                     </div>
                 </div>
             </div>
