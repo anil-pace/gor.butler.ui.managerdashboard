@@ -234,6 +234,8 @@
 	}
 	
 	.orderPriorityWrapper{
+		color: #666666;
+		font-size: 14px;
 		position: relative;
 		.embeddedImage{
 			position: relative;
@@ -259,12 +261,14 @@
 			//bottom: 0px;
 			.priorityListHeader{
 				padding-left: 10px;
+				font-weight: 600;
 			}
 			ul.orderPriorityList{
 				li.listWrapper{
 					padding-top: 10px;
 					padding-left: 10px;
 					text-align: left;
+					font-weight: 400;
 				}
 			}
 			.priorityListHeader{
@@ -279,7 +283,7 @@
 				&.makeClickable{
 					pointer-events: auto;
 					opacity:1;
-					color: blue;
+					color: #419BF9;
 				}
 			}
 

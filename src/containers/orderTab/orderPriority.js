@@ -1,9 +1,14 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
 import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 import OrderPriorityConfirmation from './OrderPriorityConfirmation';
 import {modal} from 'react-redux-modal';
-
+import {APP_JSON, PUT, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
+import { makeAjaxCall } from '../../actions/ajaxActions';
+import {
+    SET_ORDER_PRIORITY_URL
+} from '../../constants/configConstants';
 class OrderPriority extends React.Component{
 	
 	constructor(props) 
@@ -57,28 +62,52 @@ class OrderPriority extends React.Component{
     });
 }
 
-  _changeOrderPriority(event){
-    alert(event.currentTarget.value);
-    if(event.currentTarget.value !== this.props.orderPriority){
-        this.setState({
-            activePriority: event.currentTarget.value,
-            applyButtonClassName: "applyButton makeClickable"
-        });
+    _setOrderPriorityToNotCritical(orderPriority) {
+        alert(orderPriority);
+        let formData = {
+            "id": this.props.orderInternalId, 
+            "externalServiceRequestId": this.props.orderExternalId,
+            "type": this.props.orderType, 
+            "attributes": {
+                "simple_priority": orderPriority
+            }
+        };
+        let params={
+            'url': SET_ORDER_PRIORITY_URL,
+            'method':PUT,
+            'contentType':APP_JSON,
+            'accept':APP_JSON,
+            'cause' : SET_ORDER_PRIORITY,
+            'formdata':formData
+        }
+        this.props.makeAjaxCall(params);
     }
-    else{
-        this.setState({
-            activePriority: event.currentTarget.value,
-            applyButtonClassName: "applyButton"
-        });
-    }
-  }
 
-  _applyOrderPriority(){
-      alert(" m licked");
-    if(this.state.activePriority === "critical"){
-        this._showOrderPriorityModal();
+    _changeOrderPriority(event){
+        //alert(event.currentTarget.value);
+        if(event.currentTarget.value !== this.props.orderPriority){
+            this.setState({
+                activePriority: event.currentTarget.value,
+                applyButtonClassName: "applyButton makeClickable"
+            });
+        }
+        else{
+            this.setState({
+                activePriority: event.currentTarget.value,
+                applyButtonClassName: "applyButton"
+            });
+        }
     }
-  }
+
+    _applyOrderPriority(){
+        //alert(" m licked");
+        if(this.state.activePriority === "critical"){
+            this._showOrderPriorityModal();
+        }
+        else{
+            this._setOrderPriorityToNotCritical(this.state.activePriority);
+        }
+    }
 
 	
 	render(){
@@ -132,10 +161,22 @@ class OrderPriority extends React.Component{
 	}
 }
 
+var mapDispatchToProps=function (dispatch) {
+    return {
+        makeAjaxCall: function(params){
+            dispatch(makeAjaxCall(params))
+        }
+    }
+};
+
+function mapStateToProps(state, ownProps) {
+    return {};
+}
+
 OrderPriority.propTypes={
 	children: React.PropTypes.oneOfType([
         React.PropTypes.arrayOf(React.PropTypes.node),
         React.PropTypes.node
     ])
 }
-export default OrderPriority ;
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPriority);

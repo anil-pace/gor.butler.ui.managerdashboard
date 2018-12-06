@@ -5,7 +5,7 @@ import {
     SET_ORDER_PRIORITY_URL
 } from '../../constants/configConstants';
 
-import {APP_JSON, POST, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
+import {APP_JSON, PUT, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
 import { makeAjaxCall } from '../../actions/ajaxActions';
 
 class OrderPriorityConfirmation extends React.Component {
@@ -28,7 +28,7 @@ class OrderPriorityConfirmation extends React.Component {
         };
         let params={
             'url': SET_ORDER_PRIORITY_URL,
-            'method':POST,
+            'method':PUT,
             'contentType':APP_JSON,
             'accept':APP_JSON,
             'cause' : SET_ORDER_PRIORITY,
