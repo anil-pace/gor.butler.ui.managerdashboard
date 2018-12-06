@@ -341,20 +341,21 @@ class OrderListTab extends React.Component {
 
   render() {
     let duration = null;
+    const {timeOffset}= this.props;
     const durDiff = moment
       .duration(
-        moment(this.state.endDateForOrders).diff(
-          moment(this.state.startDateForOrders)
+        moment(this.state.endDateForOrders).tz(timeOffset).diff(
+          moment(this.state.startDateForOrders).tz(timeOffset)
         )
       )
       .asDays();
     if (Math.floor(durDiff) > 0) {
       duration =
-        moment(this.state.startDateForOrders).format("DD MMM") +
+        moment(this.state.startDateForOrders).tz(timeOffset).format("DD MMM") +
         "-" +
-        moment(this.state.endDateForOrders).format("DD MMM YYYY");
+        moment(this.state.endDateForOrders).tz(timeOffset).format("DD MMM YYYY");
     } else {
-      duration = moment(this.state.startDateForOrders).format("DD MMM YYYY");
+      duration = moment(this.state.startDateForOrders).tz(timeOffset).format("DD MMM YYYY");
     }
     var filterHeight = screen.height - 150;
     var itemNumber = 6,
@@ -412,6 +413,7 @@ class OrderListTab extends React.Component {
                 date={duration}
                 orderFulfilData={this.props.orderFulfilment}
                 orderSummaryData={this.props.orderSummary}
+                timeOffset={timeOffset}
               />
 
               <div
@@ -527,7 +529,7 @@ function mapStateToProps(state, ownProps) {
     orderData: state.getOrderDetail || {},
     statusFilter: state.filterOptions.statusFilter || null,
     intlMessages: state.intl.messages,
-    timeOffset: state.authLogin.timeOffset,
+    timeOffset: state.authLogin.timeOffset || Intl.DateTimeFormat().resolvedOptions().timeZone,
     auth_token: state.authLogin.auth_token,
     showFilter: state.filterInfo.filterState || false,
     isFilterApplied: state.filterInfo.isFilterApplied || false,
