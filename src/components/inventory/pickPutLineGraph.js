@@ -6,6 +6,7 @@ import React  from 'react';
 import MultiLineGraph from '../graphd3/multiLineGraph';
 import {INVENTORY_LINE_CONFIG} from  '../../constants/frontEndConstants'
 import {defineMessages} from 'react-intl';
+import moment from 'moment-timezone';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -47,12 +48,7 @@ class PickPutLineGraph extends React.Component {
         for (let k in recreatedData) {
             let dataObj = recreatedData[k].graphInfo;
             dataObj.toolTipData = {
-                date: this.context.intl.formatDate(dataObj.date,
-                    {
-                        year: 'numeric',
-                        month: 'short',
-                        day: '2-digit'
-                    }),
+                date: moment(dataObj.date).format("MMM DD,YYYY"),
                 put: this.context.intl.formatMessage(messages.toolTipPut) + ": " + dataObj.items_put + " " + this.context.intl.formatMessage(messages.toolTipEntity),
                 pick: this.context.intl.formatMessage(messages.toolTipPick) + ": " + dataObj.items_picked + " " + this.context.intl.formatMessage(messages.toolTipEntity)
             }

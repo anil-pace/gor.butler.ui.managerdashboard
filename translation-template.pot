@@ -4533,6 +4533,11 @@ msgstr ""
         msgid "{performance} items/hr"
         msgstr ""
 
+        #: ppsDetail.name.ppsBinFooter
+        msgctxt "ppsDetail.name.ppsBinFooter"
+        msgid "{currentPpsId}/{totalPpsId} bins active"
+        msgstr ""
+
         #: pps.close.heading
         msgctxt "pps.close.heading"
         msgid "Close PPS"
@@ -4690,7 +4695,7 @@ msgstr ""
 
         #: pps.configuration.bins.group.selection.count
         msgctxt "pps.configuration.bins.group.selection.count"
-        msgid "Select a bin group to enable or disable ({disabled}/{total} groups disabled)"
+        msgid "Select a bin group to activate or deactivate ({disabled}/{total} groups deactivated)"
         msgstr ""
 
         #: pps.configuration.bins.tagCount.text
@@ -4745,12 +4750,12 @@ msgstr ""
 
         #: pps.configuration.bins.activation.label
         msgctxt "pps.configuration.bins.activation.label"
-        msgid "Bin activate/deactivate"
+        msgid "Bin active/inactive"
         msgstr ""
 
         #: pps.configuration.group.activation.label
         msgctxt "pps.configuration.group.activation.label"
-        msgid "Bin group enable/disable"
+        msgid "Bin group active/inactive"
         msgstr ""
 
         #: pps.configuration.bins.frontView.label
@@ -4806,6 +4811,16 @@ msgstr ""
         #: sysController.table.heading
         msgctxt "sysController.table.heading"
         msgid "System Controllers"
+        msgstr ""
+
+        #: sysControllerList.filter.search.bar
+        msgctxt "sysControllerList.filter.search.bar"
+        msgid "{total} Controllers found"
+        msgstr ""
+
+        #: sysControllerList.filter.search.bar.showall
+        msgctxt "sysControllerList.filter.search.bar.showall"
+        msgid "Show all Controllers"
         msgstr ""
 
         #: sysControllers.table.noData
