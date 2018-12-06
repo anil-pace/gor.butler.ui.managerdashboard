@@ -58,7 +58,8 @@ class OrderPriority extends React.Component{
         orderExternalId: this.props.orderExternalId,
         orderPriority : this.props.orderPriority,
         orderInternalId :this.props.orderInternalId,
-        orderType :this.props.orderType
+        orderType :this.props.orderType,
+        onClick: this.props.onClick
     });
 }
 
@@ -81,6 +82,7 @@ class OrderPriority extends React.Component{
             'formdata':formData
         }
         this.props.makeAjaxCall(params);
+        this.props.onClick(false);
     }
 
     _changeOrderPriority(event){
@@ -100,7 +102,6 @@ class OrderPriority extends React.Component{
     }
 
     _applyOrderPriority(){
-        //alert(" m licked");
         if(this.state.activePriority === "critical"){
             this._showOrderPriorityModal();
         }
@@ -135,29 +136,28 @@ class OrderPriority extends React.Component{
                     </label>
                 </li>
             );
-		},this);
-	
-		return (
-            <div className="orderPriorityWrapper">
-                <div className="orderPriorityListWrapper">
-                    <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
-                    <ul className="orderPriorityList">
-                        {arr}
-                    </ul>
-                    <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
-                        <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
+        },this);
+        
+        if(this.props.showOrderPriorityList){
+            return (
+                <div className="orderPriorityWrapper">
+                    <div className="orderPriorityListWrapper">
+                        <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
+                        <ul className="orderPriorityList">
+                            {arr}
+                        </ul>
+                        <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
+                            <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            /*
-		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={(evt)=>{this._handleClick(evt,this.props.id,this.props.displayId)}} {...this.props}>
-		{this.props.children}
-			{this.state.visibleMenu?this.state.flyoutHack?<div className='gor-add-flyoutWrapper' style={{'bottom':0}} >{arr}</div>:<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
-        </div>
-        */
-		
-		
-		);
+            )
+        }
+        else{
+            return (
+                <div> </div>
+            )
+        }
 	}
 }
 

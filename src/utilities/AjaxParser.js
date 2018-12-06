@@ -721,7 +721,9 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         
         case SET_ORDER_PRIORITY: 
             store.dispatch(receiveOrdersPriority(res));
-            store.dispatch(notifyfeedback(res));
+            if(res.id){
+                store.dispatch(notifyfeedback("Order Priority has been changed"));
+            }
             break;
 
         case ORDERLINES_PER_ORDER_FETCH:

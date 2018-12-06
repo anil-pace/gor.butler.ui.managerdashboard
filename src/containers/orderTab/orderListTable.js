@@ -117,6 +117,7 @@ class OrderListTable extends React.Component {
             cutOffTimeIndex:"",
             isOrderPriorityIconClicked: false,
             orderIdForOrderPriority: '',
+            showOrderPriorityList: false,
             statusMapping:{
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
@@ -131,6 +132,7 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
+        this._processOrders = this._processOrders.bind(this);
     
     }
 
@@ -154,7 +156,8 @@ class OrderListTable extends React.Component {
     _getOrderPriorityList = (orderId) => {
         this.setState({
             orderIdForOrderPriority: orderId,
-            isOrderPriorityIconClicked: true
+            isOrderPriorityIconClicked: true,
+            showOrderPriorityList: true
         });
     }
 
@@ -269,6 +272,23 @@ class OrderListTable extends React.Component {
         return timeLeft;
     }
 
+    _callBack = (arg) => {
+        this.setState({
+            showOrderPriorityList : arg
+        })
+    }
+    // _callBack = (event) => {
+    //    // event.stopPropagation();
+    //     this.setState(()=>{
+    //         return {
+    //             showOrderPriorityList:false
+    //         }
+    //     },(event)=>{
+           
+    //     });
+    //     //alert("showOrderPriorityList has been set to false...will hide the order priority list");
+    // }
+
     _processPBTs = () => {
         let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
         let isGroupedById = this.props.isGroupedById;
@@ -339,22 +359,22 @@ class OrderListTable extends React.Component {
                                             <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
                                         </div>
                                     </div>);
-
                         if(formatProgressBar.action === true){
                             pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
                               <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
-                              {pbtData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
-                                (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}>
-                                        {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
-                                            <OrderPriority 
-                                                orderExternalId={pbtData[i].order_id} 
-                                                orderPriority = {pbtData[i].order_priority}
-                                                orderInternalId = {pbtData[i].order_internal_id}
-                                                orderType = {pbtData[i].order_type}/> : ""
-                                        }
-                                </div>): ""}
+                              {/* if order_priority is NOT null, show embeddedImage */}
+                                {pbtData[i].order_priority ?  (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}></div>): ""}
+                                {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
+                                    <OrderPriority 
+                                        onClick={this._callBack}
+                                        showOrderPriorityList={this.state.showOrderPriorityList}
+                                        orderExternalId={pbtData[i].order_id} 
+                                        orderPriority = {pbtData[i].order_priority}
+                                        orderInternalId = {pbtData[i].order_internal_id}
+                                        orderType = {pbtData[i].order_type}/> : ""
+                                }
                             </div>);
                         }
                         else{
@@ -488,16 +508,18 @@ class OrderListTable extends React.Component {
                             <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                         </button>
 
-                         {orderData[i].order_priority ?  // if order_priority is NOT null, show embeddedImage
-                            (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
-                                    {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ?
-                                        <OrderPriority 
-                                                orderExternalId={orderData[i].order_id} 
-                                                orderPriority = {orderData[i].order_priority}
-                                                orderInternalId = {orderData[i].order_internal_id}
-                                                orderType = {orderData[i].order_type}/> : ""
-                                    }
-                            </div>): ""}
+                         {/*if order_priority is NOT null, show embeddedImage */}
+                         {orderData[i].order_priority ? (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}></div>): ""}
+                        {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ?
+                            <OrderPriority 
+                                    onClick={this._callBack}
+                                    showOrderPriorityList={this.state.showOrderPriorityList}
+                                    orderExternalId={orderData[i].order_id} 
+                                    orderPriority = {orderData[i].order_priority}
+                                    orderInternalId = {orderData[i].order_internal_id}
+                                    orderType = {orderData[i].order_type}/> : ""
+                        }
+                            
                     </div>);
                 }
                 else{

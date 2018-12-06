@@ -35,6 +35,7 @@ class OrderPriorityConfirmation extends React.Component {
             'formdata':formData
         }
         this.props.makeAjaxCall(params);
+        this.props.onClick(false);
     }
 
     _triggerConfirm() {
@@ -48,17 +49,11 @@ class OrderPriorityConfirmation extends React.Component {
 
 
     render() {
-        let msgToDisplay;
-        if(this.props.activeBtnText === "startReconfig"){
-            msgToDisplay = <FormattedMessage id="orderPriority.dialog.message"
+        let msgToDisplay = <FormattedMessage id="orderPriority.dialog.message"
                             description="msu config start dialog box"
                             defaultMessage="Please note that critical priority orders will override all other lined up orders. Do you wish to proceed?"/>
-        }
-        else{
-            msgToDisplay = <FormattedMessage id="orderPriority.dialog.message"
-                            description="msu config stop dialog box"
-                            defaultMessage="Please note that critical priority orders will override all other lined up orders. Do you wish to proceed?"/>
-        }
+        
+        
         return <div>
             <div className='gor-create-profile'>
                 <div className='gor-create-profile-header'>
@@ -99,10 +94,7 @@ var mapDispatchToProps=function (dispatch) {
 
 
 function mapStateToProps(state, ownProps) {
-    return {
-        profileRequestedAt:state.ppsConfiguration.profileRequestedAt
-
-    };
+    return {};
 }
 
 export  default connect(mapStateToProps, mapDispatchToProps)(OrderPriorityConfirmation);
