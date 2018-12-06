@@ -1,18 +1,13 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl';
 import ProgressBar from '../../components/progressBar/progressBar';
+import moment from "moment-timezone";
 
 class OrderTile extends React.Component{
-  constructor(props) 
-  {
-    super(props);
-  } 
+  
 
   _formatDate(arg){
-    let dateObj = new Date(arg);
-    let dateObjArr = dateObj.toString().split(" ");
-    let dateFormat = dateObjArr[2] + " " + dateObjArr[1] + " " + dateObjArr[3];
-    return dateFormat;
+    return moment(arg).tz(this.props.timeOffset).format("MMM DD")
   }
 
   _formatProgressBarMessage(pickedItems, totalItems){

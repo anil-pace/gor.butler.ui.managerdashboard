@@ -3,6 +3,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   DISPLAY_INVENTORY_HISTORY,INVENTORY_DATA_TODAY,
   CATEGORY_COLOR_MAP,
   INVENTORY_REFRESHED} from '../constants/frontEndConstants';
+import moment from 'moment-timezone';
 
 
 /**
@@ -15,7 +16,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   var inventoryObj,invObj,parsedDate,historyClosingStock,
   dateToday,noData,todayCurrentStock,dataObj={},
   inventory,dateTodayState,stateObj,hasDataChanged,
-  isHistory,categoryData,recreatedData;
+  isHistory,categoryData,recreatedData,timeZone;
   
   isHistory=(action.type=== INVENTORY_DATA_HISTORY ? "inventoryDataHistory" : "inventoryDataToday")
   
@@ -29,6 +30,7 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
   recreatedData=stateObj.recreatedData?JSON.parse(JSON.stringify(stateObj.recreatedData)):{};
   dateTodayState=stateObj.dateTodayState || null;
   inventory=inventoryObj.complete_data;
+  timeZone = sessionStorage.getItem("timeOffset");
 
   if(isHistory=== "inventoryDataToday" ){
     invObj=inventory[0];
@@ -42,17 +44,19 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
     }
 
     
-    let parseDtInMS,invDate ;
-    invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
-    invObj.date=invDate.getFullYear() +"-"+(invDate.getMonth()+1)+"-"+("0" + invDate.getDate()).slice(-2);
+    let parseDtInMS,invDate,actualDate ;
+    actualDate = invObj.date;
+    invDate = moment(invObj.date).tz(timeZone).format("YYYY-MM-DD");
+    invObj.date=invDate;
+    invObj.dateinMS = moment(actualDate).tz(timeZone).valueOf();
     parsedDate=invDate;
-    parseDtInMS=parsedDate.getTime();
+    parseDtInMS=moment(actualDate).tz(timeZone).valueOf();
     recreatedData[parseDtInMS]={};
     recreatedData[parseDtInMS].otherInfo=invObj;
     dateToday=parsedDate;
     dateTodayState=parseDtInMS
 
-    dataObj.xAxisData=Math.random()+"_"+parsedDate.getDate();
+    dataObj.xAxisData=Math.random()+"_"+moment(actualDate).tz(timeZone).format("DD");
     dataObj.yAxisData=invObj.current_stock ;
     dataObj.items_picked=invObj.items_picked;
     dataObj.items_put=invObj.items_put;
@@ -63,15 +67,15 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
 
   }
   else if(isHistory !== "inventoryDataToday"){
-    dateToday = new Date(stateObj.dateTodayState) ;
-    dateToday=new Date(dateToday.getFullYear(),dateToday.getMonth(),dateToday.getDate()) ;
+    dateToday = moment(stateObj.dateTodayState).tz(timeZone).format("YYYY-MM-DD");
+    
     for(let i=0,k=0; k < INVENTORY_HISTORY_DAYS_COUNT ; k++){
-      dateToday=new Date(dateToday.setDate(dateToday.getDate()-1));
+      dateToday=moment(dateToday).subtract(1,"days").format("YYYY-MM-DD")
       invObj=inventory[i] ? inventory[i] : {};
-      let invDate = new Date(new Date(invObj.date).toLocaleDateString("en-US",{timeZone:sessionStorage.getItem("timeOffset")}));
-      invDate = new Date(invDate.getFullYear(),invDate.getMonth(),invDate.getDate())
-      let emptyData=(invDate.getDate() === dateToday.getDate() ? false : true);
-      let histDate=!emptyData ? invDate.getTime() : dateToday.getTime();
+      
+      let invDate = moment(invObj.date).tz(timeZone).format("YYYY-MM-DD");
+      let emptyData=(invDate === dateToday ? false : true);
+      let histDate=!emptyData ? moment(invDate).tz(timeZone).valueOf() : moment(dateToday).tz(timeZone).valueOf();
       invObj["current_stock"]=!emptyData ? (invObj["opening_stock"] + invObj["items_put"])-invObj["items_picked"] : 0;
       invObj.unusedSpace=!emptyData ? (100 - invObj["warehouse_utilization"]) : 100;
       invObj.colorCode=CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length -1];
@@ -84,12 +88,11 @@ import {INVENTORY_DATA_HISTORY,INVENTORY_HISTORY_DAYS_COUNT,
       recreatedData[histDate]={};
       recreatedData[histDate].otherInfo=invObj;
       dataObj={};
-      let currentDate=new Date(histDate);
-        dataObj.xAxisData=Math.random()+"_"+currentDate.getDate();
+        dataObj.xAxisData=!emptyData ? Math.random()+"_"+invDate.split("-")[2] : Math.random()+"_"+dateToday.split("-")[2];
         dataObj.items_picked=!emptyData ? invObj.items_picked : 0;
         dataObj.items_put=!emptyData ? invObj.items_put : 0;
         dataObj.yAxisData=!emptyData ? (invObj.current_stock || 0) : 0;
-        dataObj.date=currentDate;
+        dataObj.date=!emptyData ? invDate : dateToday;
         dataObj.customData=histDate ;
         recreatedData[histDate].graphInfo=dataObj;
         historyClosingStock+= invObj.current_stock 
@@ -128,7 +131,6 @@ export  function inventoryInfo(state={},action){
   switch (action.type) {
     case INVENTORY_DATA_HISTORY:
     case INVENTORY_DATA_TODAY:
-
     return parseInvData(state, action);
     case DISPLAY_INVENTORY_HISTORY:
     return displayHistorySnapShot(state,action)
