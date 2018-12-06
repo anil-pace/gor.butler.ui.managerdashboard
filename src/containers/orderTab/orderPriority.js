@@ -15,53 +15,46 @@ class OrderPriority extends React.Component{
 	{
 	   super(props);
 		this.state={
-            visibleMenu:false,
-            flyoutHack:false,
             activePriority: this.props.orderPriority,
-            applyButtonClassName:"applyButton"
+            applyButtonClassName:"applyButton",
         }; 
-        this._handleDocumentClick = this._handleDocumentClick.bind(this);
         this._changeOrderPriority = this._changeOrderPriority.bind(this);
         this._applyOrderPriority = this._applyOrderPriority.bind(this);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
-    _handleClick(field,id,displayId){
-		var domRect = (field.target).getBoundingClientRect();
-		this.setState({flyoutHack:domRect.top>=546});
-    	let currentStatus=this.state.visibleMenu;
-    	currentStatus=!currentStatus;
-        this.setState({visibleMenu:currentStatus});
-        this.props.clickOptionBack(field,id,displayId);
-}
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
 
-  _handleDocumentClick() {
-     if (!ReactDOM.findDOMNode(this).contains(event.target)) {
-       this.setState({visibleMenu: false});
-     }
- }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
 
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
 
-  componentDidMount(){
-      document.addEventListener('click',this._handleDocumentClick,false);
-  }
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+        this.props.onClick(false);
+        }
+    }
 
-  componentWillUnmount() {
-      document.removeEventListener("click", this._handleDocumentClick,false)
-  }
-
-  _showOrderPriorityModal = () => {
-    modal.add(OrderPriorityConfirmation, {
-        title: '',
-        size: 'large', // large, medium or small,
-        closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-        hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-        orderExternalId: this.props.orderExternalId,
-        orderPriority : this.props.orderPriority,
-        orderInternalId :this.props.orderInternalId,
-        orderType :this.props.orderType,
-        onClick: this.props.onClick
-    });
-}
+    _showOrderPriorityModal = () => {
+        modal.add(OrderPriorityConfirmation, {
+            title: '',
+            size: 'large', // large, medium or small,
+            closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+            orderExternalId: this.props.orderExternalId,
+            orderPriority : this.props.orderPriority,
+            orderInternalId :this.props.orderInternalId,
+            orderType :this.props.orderType,
+            onClick: this.props.onClick
+        });
+    }
 
     _setOrderPriorityToNotCritical(orderPriority) {
         alert(orderPriority);
@@ -113,8 +106,6 @@ class OrderPriority extends React.Component{
 	
 	render(){
 		var arr=[];
-        //var data=this.props.data;
-        //var data = ["High", "Normal", "Low", "Critical"];
         var data = [
             {value: "high", text: <FormattedMessage id="order.priority.high" description="label text for high" defaultMessage="High"/>},
             {value: "normal", text: <FormattedMessage id="order.priority.normal" description="label text for normal" defaultMessage="Normal"/>},
@@ -122,7 +113,6 @@ class OrderPriority extends React.Component{
             {value: "critical", text: <FormattedMessage id="order.priority.critical" description="label text for critical" defaultMessage="Critical"/>},
         ];
 		data.map(function(item, index){
-            //arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
             arr.push(
                 <li key={data[index].value} className="listWrapper"> 
                     <input type="radio" 
@@ -139,15 +129,18 @@ class OrderPriority extends React.Component{
         },this);
         
         if(this.props.showOrderPriorityList){
-            return (
-                <div className="orderPriorityWrapper">
-                    <div className="orderPriorityListWrapper">
-                        <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
-                        <ul className="orderPriorityList">
-                            {arr}
-                        </ul>
-                        <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
-                            <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
+            return (<div ref={this.setWrapperRef}>
+                    <div className="orderPriorityWrapper">
+                        <div className="orderPriorityListWrapper">
+                            <div className="priorityListHeader"> 
+                                <FormattedMessage id="order.priority.header" description="label text for change order priority" defaultMessage="CHANGE ORDER PRIORITY"/> 
+                            </div>
+                            <ul className="orderPriorityList">
+                                {arr}
+                            </ul>
+                            <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
+                                <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
+                            </div>
                         </div>
                     </div>
                 </div>
