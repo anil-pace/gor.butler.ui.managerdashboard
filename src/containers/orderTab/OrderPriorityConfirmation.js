@@ -55,14 +55,14 @@ class OrderPriorityConfirmation extends React.Component {
         
         
         return <div>
-            <div className='gor-create-profile'>
-                <div className='gor-create-profile-header'>
+            <div style={{"minHeight": "11.75rem"}} className='gor-create-profile'>
+                <div style={{"overflow": "hidden"}} className='gor-create-profile-header'>
                     <div className='gor-question gor-align-middle'></div>
                     <div><span>{msgToDisplay}</span>
                     </div>
                 </div>
 
-                <div className="gor-create-profile-body">
+                <div style={{"minHeight": "2.375rem"}} className="gor-create-profile-body">
                     <div style={{display: 'table-cell', verticalAlign: 'middle'}}></div>
                 </div>
 

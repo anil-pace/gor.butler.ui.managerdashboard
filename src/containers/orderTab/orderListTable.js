@@ -132,6 +132,8 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
+        this._processOrders = this._processOrders.bind(this);
+    
     }
 
     _showAllOrder() {
