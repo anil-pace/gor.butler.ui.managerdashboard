@@ -475,9 +475,6 @@ export function AjaxParse(store, res, cause, status, saltParams) {
             else{
                 msg = getFormattedMessages("SETORDERPRIORITYFAILURE");
                 store.dispatch(notifyfeedback(msg));
-                // var values = res.reason;
-                // stringInfo = getFormattedMessages("SETORDERPRIORITYFAILURE", values);
-                // store.dispatch(notifyfeedback(stringInfo));
             }
             break;
 
