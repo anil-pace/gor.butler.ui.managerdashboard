@@ -1,7 +1,7 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import OrderPriorityConfirmation from './OrderPriorityConfirmation';
 import {modal} from 'react-redux-modal';
 import {APP_JSON, PUT, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
@@ -38,7 +38,7 @@ class OrderPriority extends React.Component{
 
     handleClickOutside(event) {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-        this.props.onClick(false);
+            this.props.onClick(false);
         }
     }
 
@@ -79,7 +79,6 @@ class OrderPriority extends React.Component{
     }
 
     _changeOrderPriority(event){
-        //alert(event.currentTarget.value);
         if(event.currentTarget.value !== this.props.orderPriority){
             this.setState({
                 activePriority: event.currentTarget.value,
@@ -133,13 +132,19 @@ class OrderPriority extends React.Component{
                     <div className="orderPriorityWrapper">
                         <div className="orderPriorityListWrapper">
                             <div className="priorityListHeader"> 
-                                <FormattedMessage id="order.priority.header" description="label text for change order priority" defaultMessage="CHANGE ORDER PRIORITY"/> 
+                                <FormattedMessage 
+                                    id="order.priority.header" 
+                                    description="label text for change order priority" 
+                                    defaultMessage="CHANGE ORDER PRIORITY"/> 
                             </div>
                             <ul className="orderPriorityList">
                                 {arr}
                             </ul>
                             <div className={this.state.applyButtonClassName} onClick={() =>this._applyOrderPriority(this.props.orderExternalId)}>
-                                <FormattedMessage id="orders.priority.apply" description="button label for apply" defaultMessage="APPLY"/>
+                                <FormattedMessage 
+                                    id="orders.priority.apply" 
+                                    description="button label for apply" 
+                                    defaultMessage="APPLY"/>
                             </div>
                         </div>
                     </div>

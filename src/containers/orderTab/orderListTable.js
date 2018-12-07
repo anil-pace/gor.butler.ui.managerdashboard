@@ -22,14 +22,14 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {wsOverviewData} from './../../constants/initData.js';
 
 
-import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH} from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import moment from 'moment-timezone';
 
 import {
-    ORDERS_PER_PBT_URL,
-    SET_ORDER_PRIORITY_URL} from '../../constants/configConstants';
+    ORDERS_PER_PBT_URL
+} from '../../constants/configConstants';
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
@@ -277,17 +277,6 @@ class OrderListTable extends React.Component {
             showOrderPriorityList : arg
         })
     }
-    // _callBack = (event) => {
-    //    // event.stopPropagation();
-    //     this.setState(()=>{
-    //         return {
-    //             showOrderPriorityList:false
-    //         }
-    //     },(event)=>{
-           
-    //     });
-    //     //alert("showOrderPriorityList has been set to false...will hide the order priority list");
-    // }
 
     _processPBTs = () => {
         let formatOrderId, formatPpsId, formatBinId, formatStartDate, formatCompleteDate, formatProgressBar, pbtData;
@@ -525,38 +514,6 @@ class OrderListTable extends React.Component {
                 else{
                     orderRow.push(<div> </div>);
                 }
-                /*
-                orderRow.push(
-                    <div className="orderPriorityWrapper">
-                        <div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}>
-                        <div className="orderPriorityListWrapper">
-                            <div className="priorityListHeader"> CHANGE ORDER PRIORITY </div>
-                            <ul className="orderPriorityList">
-                                <li className="listWrapper"> 
-                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                                    <label class="option-text"><span>High</span></label>
-                                </li>
-                                <li className="listWrapper"> 
-                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                                    <label class="option-text"><span>Normal</span></label>
-                                </li>
-                                <li className="listWrapper"> 
-                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                                    <label class="option-text"><span>Low</span></label>
-                                </li>
-                                <li className="listWrapper"> 
-                                    <input type="radio" class="recall-option" value="specific_item" name="recall-options"/>
-                                    <label class="option-text"><span>Critical</span></label>
-                                </li>
-                            </ul>
-                            <div className="applyButton" onClick={() =>this.dummy()}>
-                                        <FormattedMessage id="orders.order.priority" description="button label for order Priority" defaultMessage="APPLY"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                )*/
-
                 orderRows.push(orderRow);
             }
             processedData.orderData = orderRows;
