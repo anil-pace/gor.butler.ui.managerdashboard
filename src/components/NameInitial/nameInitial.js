@@ -1,14 +1,8 @@
 import React  from 'react';
-import { FormattedMessage } from 'react-intl';
 
 
 class NameInitial extends React.Component{
-    constructor(props) 
-    {
-        super(props); 
-        
-    }
-
+    
 render()
 {
     let type=this.props.type?this.props.type:'';

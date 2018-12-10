@@ -13,12 +13,7 @@ import { FormattedMessage } from 'react-intl';
 
 
 class ReportsTab extends React.Component{
-	constructor(props) 
-	{
-    	super(props);
-
-    }
-
+	
     handleSysSubTabClick(tabName){
       this.props.subTabSelected(REPORTS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",REPORTS_SUB_TAB_ROUTE_MAP[tabName])

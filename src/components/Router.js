@@ -223,8 +223,21 @@ class Routes extends React.Component {
                                }, "orders");
                            }}
                     />
-                        
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="auditlisting" path="/auditlisting"
+                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit" className="gorResponsive"
+                           getComponent={(location, callback)=> {
+                               require.ensure([], function (require) {
+                                   callback(null, require('../containers/auditTab/auditSubTabs.js').default);
+                               }, "audit");
+                           }}
+                    >
+                    <IndexRoute
+                            getComponent={(location, callback)=> {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/auditListing').default);
+                                }, "defaultAudit");
+                            }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="auditlisting" path="/audit/auditlisting"
                            getComponent={(location, callback)=> {
                                require.ensure([], function (require) {
                                    callback(null, require('../containers/auditListing').default);
@@ -232,6 +245,17 @@ class Routes extends React.Component {
 
                            }}
                     />
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="itemsearch" path="/audit/itemsearch"
+                           getComponent={(location, callback)=> {
+                               require.ensure([], function (require) {
+                                   callback(null, require('../containers/auditTab/itemSearch').default);
+                               }, "itemsearch");
+
+                           }}
+                    />
+                    </Route>
+                        
+                    
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
                            getComponent={(location, callback)=> {

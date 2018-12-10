@@ -309,6 +309,8 @@ export const FIRE_EMERGENCY_POPUP_FLAG="FIRE_EMERGENCY_POPUP"
 export const DISPLAY_PPS_CONFIGURATION_SPINNER="DISPLAY_PPS_CONFIGURATION_SPINNER";
 export const DISPLAY_MSU_CONFIG_SPINNER="DISPLAY_MSU_CONFIG_SPINNER";
 export const DISPLAY_MSU_CONFIG_FILTER_SPINNER="DISPLAY_MSU_CONFIG_FILTER_SPINNER";
+export const ITEM_SEARCH = "itemSearch";
+export const AUDIT_LISTING = "auditlisting";
 
 
 
@@ -339,6 +341,10 @@ export const REPORTS_SUB_TAB_ROUTE_MAP={
 	[STORAGE_SPACE]:"storageSpace"
 
 
+}
+export const AUDIT_SUB_TAB_ROUTE_MAP={
+	[ITEM_SEARCH] : "itemSearch",
+	[AUDIT_LISTING]:"auditListing"
 }
 export const SHOW_UTILITY_TAB=true;
 /*Constant for time on header*/
