@@ -31,7 +31,17 @@ export function getFormattedMessages(action,values){
 									
 			case "grnGenerated" :
 			return (<FormattedMessage id="utility.downloadGRN.generateSuccess" description='GRN Request submitted successfully'
-                                   defaultMessage='GRN Request submitted successfully'/>);
+								   defaultMessage='GRN Request submitted successfully'/>);
+								   
+			case "SETORDERPRIORITYSUCCESS" :
+				return (<FormattedMessage id="order.setpriority.generateSuccess" description='set order priority successfully'
+								   defaultMessage='Order Priority has been changed'/>);
+
+			case "SETORDERPRIORITYFAILURE" :
+				return (<FormattedMessage id="order.setpriority.generateFailure" description='set order priority UNsuccessfully'
+									defaultMessage='Order Priority has not been changed' values={values}/>);
+									
+
 			case "invntryRptGenerated" :
 			return (<FormattedMessage id="utility.downloadInventory.generateSuccess" description='Inventory Report Request submitted successfully'
                                    defaultMessage='Inventory Report Request submitted successfully' />);
