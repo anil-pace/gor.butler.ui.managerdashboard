@@ -47,6 +47,7 @@ import {
   ORDERS_SUMMARY_FETCH,
   ORDERS_CUT_OFF_TIME_FETCH,
   ORDERS_PER_PBT_FETCH,
+  SET_ORDER_PRIORITY,
   ORDERS_POLLING_INTERVAL
 } from "../../constants/frontEndConstants";
 
