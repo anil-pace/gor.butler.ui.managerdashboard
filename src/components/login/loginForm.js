@@ -48,6 +48,8 @@ class LoginForm extends React.Component{
        let formdata={         
             'username': this.userName.value,
             'password': this.password.value,
+            "grant_type": "password",
+            "action": "LOGIN"
         };
 
         let loginData={
