@@ -1,29 +1,19 @@
 import React  from 'react';
 import { FormattedMessage } from 'react-intl'; 
 import { connect } from 'react-redux';
-import {GOR_BREACHED_LINES,APPROVE_AUDIT,
-  GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH,
-   AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
+import {getAuditOrderLines,resolveAuditLines} from '../../actions/auditActions';
+import {GET,APP_JSON,AUDIT_RESOLVE_LINES,GOR_BREACHED_LINES,APPROVE_AUDIT,GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH, POST, AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
+import {AUDIT_URL, PENDING_ORDERLINES, AUDIT_ANAMOLY} from '../../constants/configConstants';
 import {Table, Column} from 'fixed-data-table';
 import {tableRenderer,TextCell,ResolveCell,AuditPackingSlotIdCell,AuditPackingQuantityCell,AuditPackingStatusCell,AuditPackingResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
 import Spinner from '../../components/spinner/Spinner';
-import {graphql, withApollo, compose} from "react-apollo";
-import gql from 'graphql-tag'
-import { resetForm,notifyfeedback,notifyFail } from '../../actions/validationActions';
-import { setNotification } from '../../actions/notificationAction';
-import {AuditParse} from '../../../src/utilities/auditResponseParser';
-import {ShowError} from '../../../src/utilities/ErrorResponseParser';
-import {auditResolveData,auditResolveSpinnerState} from './query/clientQuery';
-import {AUDIT_RESOLVE_QUERY,AUDIT_RESOLVE_SUBMIT_QUERY} from './query/serverQuery';
-
-
-
+import {setResolveAuditSpinner} from '../../actions/spinnerAction';
 class ResolveAudit extends React.Component{
   constructor(props) 
   {
       super(props); 
-      var data=this.props.auditLines?this.props.auditLines: [];
+      var data=this.props.auditLines.auditlines || [];
       this._dataList=new tableRenderer(data ? data.length : 0);
       this._dataList.newData=data;
       this.state={
@@ -36,9 +26,9 @@ class ResolveAudit extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
-     var data=nextProps.auditLines || [], processedData,auditType;
+     var data=nextProps.auditLines.auditlines || [], processedData,auditType;
       processedData=this._processData(data,nextProps);
-      auditType=nextProps.audit_param_type;
+      auditType=nextProps.auditLines.audit_param_type;
       this._dataList=new tableRenderer(data ? data.length : 0);
       this._dataList.newData=processedData;
       this.state={
@@ -53,41 +43,25 @@ class ResolveAudit extends React.Component{
   }
 
   componentDidMount() {
-  var  _this=this;
-  let audit_id= this._findDisplayidName(this.props.auditId);
-
-  this.props.setResolveAuditSpinner(true);
-  this.props.client.query({
-    query:AUDIT_RESOLVE_QUERY,
-      variables: (function () {
-      return {
-        input: {
-          audit_id_list:[audit_id[0]]
-            }
-      }
-  }()),
-    fetchPolicy: 'network-only'
-  }).then(data=>{
-    _this.props.setResolveAuditSpinner(false);
-    let dataSentToProps={
-    audiltLine:data.data.AuditResolve.list.auditlines,
-    audit_param_type:data.data.AuditResolve.list.audit_param_type
-    }
-    _this.props.setResolveDetails(dataSentToProps);
-    
-  }).catch((errors)=>{
-    let code=errors.graphQLErrors[0].code;
-    let message=errors.graphQLErrors[0].message;
-        ShowError(_this,code)
-      })    
+   let audit_id= this._findDisplayidName(this.props.auditId);
+        let url=AUDIT_URL + "/" + audit_id[0] + PENDING_ORDERLINES; 
+        let paginationData={
+         'url':url,
+         'method':GET,
+         'cause': AUDIT_RESOLVE_LINES,
+         'token': this.props.auth_token,
+         'contentType':APP_JSON
+        } 
+        this.props.setResolveAuditSpinner(true);
+       this.props.getAuditOrderLines(paginationData);  
   }
   
 
   _processData(auditLines,nProps) {
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      auditData.actual_quantity=data[i].actual_quantity;
-      auditData.expected_quantity=data[i].expected_quantity;
+      auditData.actual_quantity=data[i].anamoly_info[0].actual_quantity;
+      auditData.expected_quantity=data[i].anamoly_info[0].expected_quantity;
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
@@ -145,37 +119,29 @@ class ResolveAudit extends React.Component{
   }
 
   _confirmIssues() {
-var _this=this;
+
     // since we also need the username for the request generated.
     // hence getting the username from the state and then sending 
     // the same during the request.
     
-    var userName=this.props.username||"admin"; 
+    var userName=this.props.username||null; 
     var auditConfirmDetail={data:{
       username: userName,
       auditlines:this.state.checkedState
     }};
-       let dataToSent=JSON.stringify(auditConfirmDetail)
-       this.props.client.query({
-        query:AUDIT_RESOLVE_SUBMIT_QUERY,
-          variables: (function () {
-          return {
-            input: {
-              "data": dataToSent
-                }
-          }
-      }()),
-        fetchPolicy: 'network-only'
-      }).then(data=>{
-        var AuditResolveSubmit=data.data.AuditResolveSubmit?JSON.parse(data.data.AuditResolveSubmit.list):""
-        AuditParse(AuditResolveSubmit,'AUDIT_RESOLVE_CONFIRMED',_this);
-        
-      }).catch((errors)=>{
-        let code=errors.graphQLErrors[0].code;
-        let message=errors.graphQLErrors[0].message;
-            ShowError(_this,code)
-          }) 
 
+    var url=AUDIT_URL + AUDIT_ANAMOLY;
+     let paginationData={
+         'url':url,
+         'method':POST,
+         'cause': AUDIT_RESOLVE_CONFIRMED,
+         'token': this.props.auth_token,
+         'contentType':APP_JSON,
+         'accept':APP_JSON,
+         'formdata': auditConfirmDetail
+        }
+        this.props.resolveAuditLines(paginationData);
+     
     this._removeThisModal();
   }
 
@@ -272,7 +238,7 @@ var _this=this;
         containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);
         resolveTable=<div>
             <Table
-                rowHeight={3 * headerHeight}
+                rowHeight={ (auditDataList.newData[0].anamoly_info.length + 1) * headerHeight}
                 rowsCount={auditDataList.getSize()}
                 headerHeight={headerHeight}
                 onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -454,20 +420,20 @@ var _this=this;
     }
   }
 
-  ResolveAudit.defaultProps = {
-    auditLines:null,
-    audit_param_type:null,
-    datachange:false
-    
-
+  function mapStateToProps(state, ownProps){
+  return {
+    auth_token:state.authLogin.auth_token,
+    username: state.authLogin.username,
+    auditLines:state.recieveAuditDetail.auditPendingLines || [],
+    auditResolveSpinner:state.spinner.auditResolveSpinner || false
   };
-
+}
 
 var mapDispatchToProps=function(dispatch){
   return {
-    notifyfeedback: function (data) {dispatch(notifyfeedback(data))},
-    setNotification: function (data) {dispatch(setNotification(data))   },
-    notifyFail:function (data) {dispatch(notifyFail(data)) }
+    resolveAuditLines: function(data){dispatch(resolveAuditLines(data))},
+    getAuditOrderLines: function(data){dispatch(getAuditOrderLines(data))},
+    setResolveAuditSpinner: function(data){dispatch(setResolveAuditSpinner(data))}
   }
 };
 
@@ -475,68 +441,5 @@ ResolveAudit.contextTypes={
  intl:React.PropTypes.object.isRequired
 }
 
-const clientauditResolveData = graphql(auditResolveData, {
-  props: (data) => ({
-     auditLines: data.data.auditResolveData?JSON.parse(data.data.auditResolveData.auditLines):"",
-     audit_param_type:data.data.auditResolveData.audit_param_type,
-     datachange:data.data.auditResolveData.datachange
-  })
-})
 
-
-const SET_RESOLVE_DETAILS = gql`
-    mutation setResolveDetails($auditPendingLines: String!) {
-        setAuditPendingLines(auditPendingLines: $auditPendingLines) @client
-    }
-`;
-const setResolveDetails = graphql(SET_RESOLVE_DETAILS, {
-  props: ({mutate, ownProps}) => ({
-    setResolveDetails: function (data) {
-          mutate({variables: {auditPendingLines: data}})
-      },
-  }),
-});
-
-
-const SET_RESOLVE_AUDIT_SPINNER_STATE = gql`
-    mutation setviewAuditSpinner($resolveAuditSpinner: String!) {
-        setViewAuditSpinnerState(resolveAuditSpinner: $resolveAuditSpinner) @client
-    }
-`;
-const setResolveSpinnerState = graphql(SET_RESOLVE_AUDIT_SPINNER_STATE, {
-  props: ({mutate, ownProps}) => ({
-    setResolveAuditSpinner: function (resolveAuditSpinner) {
-          mutate({variables: {resolveAuditSpinner: resolveAuditSpinner}})
-      },
-  }),
-});
-const SET_AUDIT_LIST_REFRESH_STATE = gql`
-    mutation setauditListRefresh($auditRefreshFlag: String!) {
-      setAuditListRefreshState(auditRefreshFlag: $auditRefreshFlag) @client
-    }
-`;
-const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
-  props: ({mutate, ownProps}) => ({
-    setAuditListRefresh: function (auditRefreshFlag) {
-          mutate({variables: {auditRefreshFlag: auditRefreshFlag}})
-      },
-  }),
-});
-const clientResolveSpinnerState = graphql(auditResolveSpinnerState, {
-  props: (data) => ({
-    auditResolveSpinner:data.data.auditSpinnerstatus?data.data.auditSpinnerstatus.resolveAuditSpinner:false
-  })
-})
-
-ResolveAudit.defaultProps = {
-  auditResolveSpinner:false,
-};
-export default compose(
-  withApollo,
-  setResolveDetails,
-  clientauditResolveData,
-  clientResolveSpinnerState,
-  setResolveSpinnerState,
-  setAuditListRefreshState
-)
-  (connect(null,mapDispatchToProps)(ResolveAudit));
+export default connect(mapStateToProps,mapDispatchToProps)(ResolveAudit);
