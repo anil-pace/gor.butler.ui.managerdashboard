@@ -3363,6 +3363,11 @@ msgstr ""
         msgid "Total {total} orders"
         msgstr ""
 
+        #: orders.order.priority
+        msgctxt "orders.order.priority"
+        msgid "APPLY"
+        msgstr ""
+
         #: orders.pending.status
         msgctxt "orders.pending.status"
         msgid "Pending"
@@ -4750,12 +4755,12 @@ msgstr ""
 
         #: pps.configuration.bins.activation.label
         msgctxt "pps.configuration.bins.activation.label"
-        msgid "Bin activate/deactivate"
+        msgid "Bin active/inactive"
         msgstr ""
 
         #: pps.configuration.group.activation.label
         msgctxt "pps.configuration.group.activation.label"
-        msgid "Bin group enable/disable"
+        msgid "Bin group active/inactive"
         msgstr ""
 
         #: pps.configuration.bins.frontView.label

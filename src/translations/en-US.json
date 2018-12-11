@@ -6506,14 +6506,14 @@
   },
   {
     "id": "pps.configuration.bins.activation.label",
-    "description": "Bin activate/deactivate",
-    "defaultMessage": "Bin activate/deactivate",
+    "description": "Bin active/inactive",
+    "defaultMessage": "Bin active/inactive",
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
   },
   {
     "id": "pps.configuration.group.activation.label",
-    "description": "Bin group enable/disable",
-    "defaultMessage": "Bin group enable/disable",
+    "description": "Bin group active/inactive",
+    "defaultMessage": "Bin group active/inactive",
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
   },
   {

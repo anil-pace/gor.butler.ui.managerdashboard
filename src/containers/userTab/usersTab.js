@@ -15,6 +15,7 @@ import {FormattedMessage} from 'react-intl';
 import FilterSummary from '../../components/tableFilter/filterSummary'
 import {graphql, withApollo, compose} from "react-apollo";
 import {setWsAction} from '../../actions/socketActions';
+import {SUBSCRIPTION_QUERY,USERS_QUERY,userClientData,SET_VISIBILITY,SET_FILTER_APPLIED,SET_FILTER_STATE} from './queries/userTabQueries';
 
 import gql from 'graphql-tag'
 //Mesages for internationalization
@@ -77,42 +78,7 @@ const messages = defineMessages({
 
 
 });
-const SUBSCRIPTION_QUERY = gql`subscription USER_CHANNEL($username: String){
-    UserList(input:{username:$username}){
-        list{
-            first_name
-            last_name
-            user_id
-            logged_in
-            role
-            user_name
-            login_time
-            full_name
 
-
-        }
-    }
-}
-`
-
-const USERS_QUERY = gql`
-    query UserList($input: UserListParams) {
-        UserList(input:$input){
-            list {
-                first_name
-                last_name
-                user_id
-                logged_in
-                role
-                user_name
-                login_time
-                full_name
-
-
-            }
-        }
-    }
-`;
 class UsersTab extends React.Component {
     constructor(props) {
         super(props);
@@ -491,50 +457,6 @@ const withQuery = graphql(USERS_QUERY, {
     }),
 });
 
-const userClientData = gql`
-    query  {
-    todos @client
-    userFilter @client{
-        display
-        isFilterApplied
-        filterState{
-            tokenSelected{
-                STATUS
-                ROLE
-                WORK_MODE
-                LOCATION
-            }
-            searchQuery{
-                USER_NAME
-            }
-            defaultToken{
-                STATUS
-                ROLE
-                WORK_MODE
-                LOCATION
-            }
-        }
-    }
-    }
-`;
-
-
-const SET_VISIBILITY = gql`
-    mutation setUserFiler($filter: String!) {
-        setShowUserFilter(filter: $filter) @client
-    }
-`;
-
-const SET_FILTER_APPLIED = gql`
-    mutation setFilterApplied($isFilterApplied: String!) {
-        setUserFilterApplied(isFilterApplied: $isFilterApplied) @client
-    }
-`;
-const SET_FILTER_STATE = gql`
-    mutation setFilterState($state: String!) {
-        setUserFilterState(state: $state) @client
-    }
-`;
 
 const withClientData = graphql(userClientData, {
     props: (data) => ({
