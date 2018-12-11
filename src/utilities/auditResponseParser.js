@@ -152,14 +152,14 @@ case DELETE_AUDIT:
           stringInfo = codeToString(res.alert_data[0]);
           _this.props.setNotification(stringInfo);
           _this.props.setAuditListRefresh('flag'); //set refresh flag
-         // _this.props.setAuditSpinner(false);
+          _this.props.setAuditSpinner(false);
       }
       else{
           values={id:res.alert_data[0].details.display_id},
           msg = getFormattedMessages("CANCELLED", values);
           _this.props.notifyfeedback(msg);
 
-        // _this.props.setAuditSpinner(false);
+         _this.props.setAuditSpinner(false);
       }
       break;
       case AUDIT_RESOLVE_CONFIRMED:
