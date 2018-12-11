@@ -6229,6 +6229,12 @@
     "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
   },
   {
+    "id": "ppsDetail.name.ppsBinFooter",
+    "description": "show currently active bins",
+    "defaultMessage": "{currentPpsId}/{totalPpsId} bins active",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
     "id": "pps.close.heading",
     "description": "Heading for Close PPS",
     "defaultMessage": "Close PPS",
@@ -6429,7 +6435,7 @@
   {
     "id": "pps.configuration.bins.group.selection.count",
     "description": "total users for filter search bar",
-    "defaultMessage": "Select a bin group to enable or disable ({disabled}/{total} groups disabled)",
+    "defaultMessage": "Select a bin group to activate or deactivate ({disabled}/{total} groups deactivated)",
     "filepath": "./src/containers/systemTabs/ppsConfigurationBins.js"
   },
   {
@@ -6494,14 +6500,14 @@
   },
   {
     "id": "pps.configuration.bins.activation.label",
-    "description": "Bin activate/deactivate",
-    "defaultMessage": "Bin activate/deactivate",
+    "description": "Bin active/inactive",
+    "defaultMessage": "Bin active/inactive",
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
   },
   {
     "id": "pps.configuration.group.activation.label",
-    "description": "Bin group enable/disable",
-    "defaultMessage": "Bin group enable/disable",
+    "description": "Bin group active/inactive",
+    "defaultMessage": "Bin group active/inactive",
     "filepath": "./src/containers/systemTabs/ppsConfigurationTab.js"
   },
   {
@@ -6574,6 +6580,18 @@
     "id": "sysController.table.heading",
     "description": "Heading for PPS",
     "defaultMessage": "System Controllers",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllerList.filter.search.bar",
+    "description": "total pps for filter search bar",
+    "defaultMessage": "{total} Controllers found",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllerList.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Controllers",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {

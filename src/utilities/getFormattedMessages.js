@@ -113,6 +113,40 @@ export function getFormattedMessages(action,values){
 				  }
 				  return resolveFailstringInfo;
 			break;
+			case "DELETEDUSER":
+                return 	(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
+				defaultMessage='User deleted successfully'/>) ;
+			break;
+			case "EDITEDUSER":
+                return 	(<FormattedMessage id="notify.successfully.edit" description='Text for successfull user edit' 
+				defaultMessage='User details updated successfully'/>) ;
+			break;
+			
+			case "EDITEDUSERFAIL":
+			let editFailString={
+                type:'WARNING',
+                msg:(<FormattedMessage id="notify.fail.edit" description='Text for fail user edit' 
+				defaultMessage='Failed to update user details'/>) ,
+            desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user edit' 
+            defaultMessage='Failed to edit user'/>)
+				  }
+				  return editFailString;
+			break;
+                
+			case "DELETEDUSERFAIL":
+			let deleteFailString={
+                type:'WARNING',
+                msg:(<FormattedMessage id="notify.fail.delete" description='Text for fail user deletion' 
+				defaultMessage='User deleted failed'/>) ,
+            desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user deletion' 
+            defaultMessage='User deleted failed'/>)
+				  }
+				  return deleteFailString;
+			break;
+
+			
+
+
 
 
 			default:

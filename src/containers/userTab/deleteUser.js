@@ -3,8 +3,34 @@ import { connect } from 'react-redux' ;
 import {userRequest} from '../../actions/userActions';
 import {DELETE_USER,APP_JSON,DELETE} from '../../constants/frontEndConstants';
 import {HEADER_URL} from '../../constants/configConstants';
-import { FormattedMessage } from 'react-intl';        
+import { FormattedMessage } from 'react-intl';  
+import {notifyfeedback} from '../../actions/validationActions';
+import { setNotification } from '../../actions/notificationAction';
+import {graphql, compose} from "react-apollo";
+import gql from 'graphql-tag'
+import { getFormattedMessages } from '../../utilities/getFormattedMessages';
+import {DELETE_USER_MUTATION} from './queries/userTabQueries';
 
+const withMutations = graphql(DELETE_USER_MUTATION, {
+  props: ({ownProps, mutate}) => ({
+      deleteUser: ({id}) =>
+          mutate({
+              variables: {id:id},
+              update: (proxy, {data: {deleteUser}}) => {
+                let msg={};
+                  if (deleteUser.code === 'us002') {
+                    msg=getFormattedMessages("DELETEDUSER");
+                      ownProps.notifyfeedback(msg);
+                  } else {
+                    msg = getFormattedMessages("DELETEDUSERFAIL");
+                    ownProps.setNotification(msg);
+                  }
+              }
+          }),
+
+
+  }),
+});
 class DeleteUser extends React.Component{
   removeThisModal() {
       this.props.removeModal();
@@ -16,18 +42,13 @@ class DeleteUser extends React.Component{
     }
   }
   userDelete() {
-    let delurl=HEADER_URL+'/'+(this.props.id?this.props.id:'');
-    let userData={
-                'url':delurl,
-                'method':DELETE,
-                'cause':DELETE_USER,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'token':this.props.auth_token
+    let graphql_data={
+      id:this.props.id,
     }
-    this.props.userRequest(userData);
+    this.props.deleteUser(graphql_data)
     this.props.removeModal();
   }  
+  
   render()
   {
       return (
@@ -60,8 +81,19 @@ class DeleteUser extends React.Component{
 } 
 function mapDispatchToProps(dispatch){
     return {
-      userRequest: function(data){ dispatch(userRequest(data)); }
+      userRequest: function(data){ dispatch(userRequest(data)); },
+      notifyfeedback: function (data) {
+        dispatch(notifyfeedback(data));
+    }
+    ,
+    setNotification: function (data) {
+        dispatch(setNotification(data));
+    }
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(DeleteUser);
+
+
+export default (connect(mapStateToProps,mapDispatchToProps)(compose(
+  withMutations
+)(DeleteUser)));
