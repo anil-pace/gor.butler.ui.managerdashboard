@@ -9,23 +9,15 @@ import {ROLE_URL, HEADER_URL} from '../../constants/configConstants';
 import FieldError from '../../components/fielderror/fielderror';
 import UserRoles from './userRoles';
 import {nameStatus, passwordStatus} from '../../utilities/fieldCheck';
-
+import { getFormattedMessages } from '../../utilities/getFormattedMessages';
 import {
-    notifySuccess,
+    notifyfeedback,
     notifyFail,
 } from "./../../actions/validationActions";
+import { setNotification } from '../../actions/notificationAction';
 import {graphql, compose} from "react-apollo";
 import gql from 'graphql-tag'
-const EDIT_USER_MUTATION = gql`
-    mutation editUser($id:ID, $input: CreateUserInput) {
-        editUser(id:$id, input: $input) {
-            password
-            username
-            code
-            description
-        }
-    }
-`;
+import {EDIT_USER_MUTATION} from './queries/userTabQueries';
 
 class EditUser extends React.Component {
     constructor(props) {
@@ -269,8 +261,11 @@ var mapDispatchToProps=function (dispatch) {
         resetForm: function () {
             dispatch(resetForm());
         },
-        notifySuccess: function (data) {
-            dispatch(notifySuccess(data));
+        notifyfeedback: function (data) {
+            dispatch(notifyfeedback(data));
+        },
+        setNotification: function (data) {
+            dispatch(setNotification(data));
         }
         ,
         notifyFail: function (data) {
@@ -284,10 +279,13 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
             mutate({
                 variables: {input: {first_name, last_name, username, role_id, password},id:id},
                 update: (proxy, {data: {editUser}}) => {
+                    let msg={};
                     if (editUser.code === 'us004') {
-                        ownProps.notifySuccess(editUser.description)
+                        msg=getFormattedMessages("EDITEDUSER");
+                        ownProps.notifyfeedback(msg);
                     } else {
-                        ownProps.notifyFail(editUser.description)
+                        msg = getFormattedMessages("EDITEDUSERFAIL");
+                        ownProps.setNotification(msg);
                     }
                 }
             }),

@@ -3363,6 +3363,11 @@ msgstr ""
         msgid "Total {total} orders"
         msgstr ""
 
+        #: orders.order.priority
+        msgctxt "orders.order.priority"
+        msgid "APPLY"
+        msgstr ""
+
         #: orders.pending.status
         msgctxt "orders.pending.status"
         msgid "Pending"
