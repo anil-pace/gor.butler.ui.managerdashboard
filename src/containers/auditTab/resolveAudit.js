@@ -60,19 +60,8 @@ class ResolveAudit extends React.Component{
   _processData(auditLines,nProps) {
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      if(data[i].anamoly_info.length>1){ // only multiple objects are there inside anamoly_info
-        var sumActualQuantity=0, sumExpectedQuantity = 0;
-        for(var j=0; j< data[i].anamoly_info.length; j++){
-          sumActualQuantity = sumActualQuantity + data[i].anamoly_info[j].actual_quantity;
-          sumExpectedQuantity = sumExpectedQuantity + data[i].anamoly_info[j].expected_quantity;
-        }
-        auditData.actual_quantity=sumActualQuantity;
-        auditData.expected_quantity=sumExpectedQuantity;
-      }
-      else{ // only one object inside anamoly_info
-        auditData.actual_quantity=data[i].anamoly_info[0].actual_quantity;
-        auditData.expected_quantity=data[i].anamoly_info[0].expected_quantity;
-      }
+      auditData.actual_quantity=data[i].anamoly_info[0].actual_quantity;
+      auditData.expected_quantity=data[i].anamoly_info[0].expected_quantity;
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
@@ -247,9 +236,9 @@ class ResolveAudit extends React.Component{
     var containerHeight=(((missingAudit?missingAudit:0)*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*headerHeight + headerHeight):minHeight);
     if(auditDataList.newData.length>0 && auditDataList.newData[0].k_deep_audit){
         containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);
-         resolveTable=<div>
+        resolveTable=<div>
             <Table
-                rowHeight={headerHeight}
+                rowHeight={ (auditDataList.newData[0].anamoly_info.length + 1) * headerHeight}
                 rowsCount={auditDataList.getSize()}
                 headerHeight={headerHeight}
                 onColumnResizeEndCallback={this._onColumnResizeEndCallback}
@@ -259,38 +248,51 @@ class ResolveAudit extends React.Component{
                 {...this.props}>
                 <Column
                     columnKey="slot_id"
-                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.slot" description="slot id Column" defaultMessage="SLOT ID"/> </div>}
-                    cell={  <TextCell data={auditDataList} />}
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.slot"
+                                                                              description="slot id Column"
+                                                                              defaultMessage="SLOT ID"/></div>}
+                    cell={  <AuditPackingSlotIdCell data={auditDataList}/>}
                     width={220}
                 />
                 <Column
-                    columnKey="expected_quantity"
-                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.expectedItems" description="expectedItems Column" defaultMessage="EXPECTED QUANTITY"/> </div>}
-                    cell={  <TextCell data={auditDataList} />}
+                    columnKey="anamoly_info"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.expectedItems"
+                                                                              description="expectedItems Column"
+                                                                              defaultMessage="EXPECTED QUANTITY"/>
+                    </div>}
+                    cell={  <AuditPackingQuantityCell dataKey="expected_quantity" data={auditDataList}/>}
                     width={220}
                 />
                 <Column
-                    columnKey="actual_quantity"
-                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity" description="actualQuantity Column" defaultMessage="ACTUAL QUANTITY"/> </div>
+                    columnKey="anamoly_info"
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.actualQuantity"
+                                                                              description="actualQuantity Column"
+                                                                              defaultMessage="ACTUAL QUANTITY"/></div>
                     }
-                    cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>}
+                    cell={ <AuditPackingQuantityCell dataKey="actual_quantity" data={auditDataList}/>}
                     width={220}
                 />
                 <Column
                     columnKey="status"
-                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS" description="status Column" defaultMessage="STATUS"/> </div>}
-                    cell={  <TextCell data={auditDataList}> </TextCell>}
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.STATUS"
+                                                                              description="status Column"
+                                                                              defaultMessage="STATUS"/></div>}
+                    cell={  <AuditPackingStatusCell data={auditDataList}/>}
                     width={220}
                 />
 
                 <Column
                     columnKey="resolve"
-                    header={<div className="gorAuditHeader"> <FormattedMessage id="resolveAudit.table.resolve" description="resolve Column" defaultMessage="RESOLVE"/> </div>}
-                    cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={screenId}> </ResolveCell>}
+                    header={<div className="gorAuditHeader"><FormattedMessage id="resolveAudit.table.resolve"
+                                                                              description="resolve Column"
+                                                                              defaultMessage="RESOLVE"/></div>}
+                    cell={ <AuditPackingResolveCell data={auditDataList}><ResolveCell data={auditDataList}
+                                                                                      checkStatus={this._checkAuditStatus.bind(this)}
+                                                                                      screenId={screenId}/></AuditPackingResolveCell>}
                     width={220}
                 />
             </Table>
-        </div>
+            </div>
 
     }else{
         resolveTable=<div>
