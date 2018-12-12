@@ -1,7 +1,7 @@
 import React  from 'react';
 import { FormattedMessage, defineMessages, FormattedRelative, injectIntl, FormattedTime } from 'react-intl'; 
 import { connect } from 'react-redux';
-import {GTable} from '../../components/gor-table-component/index'
+import GTable from '../../components/gor-table-component/index'
 import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
