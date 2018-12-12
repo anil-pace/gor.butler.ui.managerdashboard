@@ -86,8 +86,8 @@ class ResolveAudit extends React.Component{
   _processData(auditLines,nProps) {
     var data=auditLines, processedData=[], auditData={}, totalMismatch=0;
     for (var i=data.length - 1; i >= 0; i--) {
-      auditData.actual_quantity=data[i].actual_quantity;
-      auditData.expected_quantity=data[i].expected_quantity;
+      auditData.actual_quantity=data[i].anamoly_info[0].actual_quantity;
+      auditData.expected_quantity=data[i].anamoly_info[0].expected_quantity;
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
@@ -272,7 +272,7 @@ var _this=this;
         containerHeight=(((missingAudit?missingAudit:0)*3*headerHeight + headerHeight)>minHeight?((missingAudit?missingAudit:0)*3*headerHeight + headerHeight):minHeight);
         resolveTable=<div>
             <Table
-                rowHeight={3 * headerHeight}
+                rowHeight={ (auditDataList.newData[0].anamoly_info.length + 1) * headerHeight}
                 rowsCount={auditDataList.getSize()}
                 headerHeight={headerHeight}
                 onColumnResizeEndCallback={this._onColumnResizeEndCallback}
