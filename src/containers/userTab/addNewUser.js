@@ -20,24 +20,14 @@ import {connect} from 'react-redux';
 import FieldError from '../../components/fielderror/fielderror';
 import UserRoles from './userRoles';
 import {nameStatus, passwordStatus, idStatus} from '../../utilities/fieldCheck';
-
 import {
-    notifySuccess,
-    notifyFail,
+    notifyfeedback,
 } from "./../../actions/validationActions";
+import { setNotification } from '../../actions/notificationAction';
 import {graphql, withApollo,compose} from "react-apollo";
-import gql from 'graphql-tag'
-const CREATE_USER_MUTATION = gql`
-    mutation createUser($input: CreateUserInput) {
-        createUser(input: $input) {
-            password
-            username
-            code
-            description
-        }
-    }
-`;
-
+import gql from 'graphql-tag';
+import { getFormattedMessages } from '../../utilities/getFormattedMessages';
+import {CREATE_USER_MUTATION,ROLE_LIST_QUERY} from './queries/userTabQueries';
 
 class AddUser extends React.Component {
     constructor(props) {
@@ -274,11 +264,11 @@ var mapDispatchToProps = function (dispatch) {
         validatePassword: function (data) {
             dispatch(validatePassword(data));
         },
-        notifySuccess: function (data) {
-            dispatch(notifySuccess(data));
+        notifyfeedback: function (data) {
+            dispatch(notifyfeedback(data));
         },
-        notifyFail: function (data) {
-            dispatch(notifyFail(data));
+        setNotification: function (data) {
+            dispatch(setNotification(data));
         },
         resetForm: function () {
             dispatch(resetForm());
@@ -291,10 +281,13 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
             mutate({
                 variables: {input: {first_name, last_name, username, role_id, password}},
                 update: (proxy, {data: {createUser}}) => {
+                    let msg={};
                     if (createUser.code === 'us001') {
-                        ownProps.notifySuccess(createUser.description)
+                        msg=getFormattedMessages("NEWUSER",createUser);
+                        ownProps.notifyfeedback(msg);
                     } else {
-                        ownProps.notifyFail(createUser.description)
+                        msg = getFormattedMessages("NEWUSERFAIL",createUser);
+                        ownProps.setNotification(msg);
                     }
                 }
             }),
@@ -303,18 +296,7 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
     }),
 });
 
-const ROLE_LIST_QUERY = gql`
-    query RoleList($input: RoleListParams) {
-        RoleList(input:$input){
-            list {
-                id
-                name
-                internal
 
-            }
-        }
-    }
-`;
 const withRoleList = graphql(ROLE_LIST_QUERY, {
     props: (data) => ({
         roleList: (data.data && data.data.RoleList && data.data.RoleList.list)||[],

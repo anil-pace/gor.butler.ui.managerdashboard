@@ -281,10 +281,10 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
                 update: (proxy, {data: {editUser}}) => {
                     let msg={};
                     if (editUser.code === 'us004') {
-                        msg=getFormattedMessages("EDITEDUSER");
+                        msg=getFormattedMessages("EDITEDUSER",editUser);
                         ownProps.notifyfeedback(msg);
                     } else {
-                        msg = getFormattedMessages("EDITEDUSERFAIL");
+                        msg = getFormattedMessages("EDITEDUSERFAIL",editUser);
                         ownProps.setNotification(msg);
                     }
                 }
