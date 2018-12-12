@@ -166,33 +166,39 @@ export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
 )};
 
 export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
+    let listLength = data.newData[rowIndex].anamoly_info.length;
+    let dataToDisplay=[]; 
+    for(let i = 0; i < listLength; i++){
+        dataToDisplay.push(<div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[i]?data.getObjectAt(rowIndex).anamoly_info[i].name:""}</div>)
+    }
 
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
-
             <div>
                 <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex)[columnKey]}</div>
-                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[0]?data.getObjectAt(rowIndex).anamoly_info[0].name:""}</div>
-                <div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[1]?data.getObjectAt(rowIndex).anamoly_info[1].name:""}</div>
+                {dataToDisplay}
             </div>
         </Cell>
     )
 };
+
 export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
-
-    const outer_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_2"})
-    const inner_pack=data.getObjectAt(rowIndex)[columnKey].filter(function(packing_info){return packing_info.type==="container_level_1"})
-
+    let listLength = data.newData[rowIndex].anamoly_info.length;
+    let dataToDisplay=[]; 
+    for(let i = 0; i < listLength; i++){
+        dataToDisplay.push(<div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[i]?data.getObjectAt(rowIndex).anamoly_info[i][dataKey]:""}</div>)
+    }
 
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
-
             <div>
                 <div className="gor-audit-resolve-packing-cell"/>
-                <div className="gor-audit-resolve-packing-cell">{inner_pack.length!==0?inner_pack[0][dataKey]:""}</div>
-                <div className="gor-audit-resolve-packing-cell">{outer_pack.length!==0?outer_pack[0][dataKey]:""}</div>
+                {dataToDisplay}
             </div>
         </Cell>
     )
 };
+
+
+
 export const AuditPackingStatusCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
 
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
