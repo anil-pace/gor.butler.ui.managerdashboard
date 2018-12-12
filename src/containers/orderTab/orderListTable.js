@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
-import {GTable} from '../../components/gor-table-component/index'
+import GTable from '../../components/gor-table-component/index'
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
