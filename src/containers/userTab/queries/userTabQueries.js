@@ -5,6 +5,7 @@ export const DELETE_USER_MUTATION = gql`
       deleteUser(id:$id) {
         code
          description
+         details
         }
     }
 `;
@@ -15,6 +16,7 @@ export const EDIT_USER_MUTATION = gql`
             username
             code
             description
+            details
         }
     }
 `;
@@ -95,5 +97,29 @@ export const SET_FILTER_APPLIED = gql`
 export const SET_FILTER_STATE = gql`
     mutation setFilterState($state: String!) {
         setUserFilterState(state: $state) @client
+    }
+`;
+
+export const CREATE_USER_MUTATION = gql`
+    mutation createUser($input: CreateUserInput) {
+        createUser(input: $input) {
+            password
+            username
+            code
+            description
+            details
+        }
+    }
+`;
+export const ROLE_LIST_QUERY = gql`
+    query RoleList($input: RoleListParams) {
+        RoleList(input:$input){
+            list {
+                id
+                name
+                internal
+
+            }
+        }
     }
 `;
