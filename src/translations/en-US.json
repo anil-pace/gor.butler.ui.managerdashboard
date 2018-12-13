@@ -2468,6 +2468,18 @@
     "filepath": "./src/containers/auditTab/auditStart.js"
   },
   {
+    "id": "auditSubTabs.auditTab",
+    "description": "Audit tab for Audit tab",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/auditTab/auditSubTabs.js"
+  },
+  {
+    "id": "auditSubTabs.itemSearch",
+    "description": "Item Search tab for Audit tab",
+    "defaultMessage": "Item Search",
+    "filepath": "./src/containers/auditTab/auditSubTabs.js"
+  },
+  {
     "id": "Audit.selectAttribute.apply",
     "description": "Texts for select attribute component",
     "defaultMessage": "Apply",
@@ -3180,6 +3192,77 @@
     "description": "Audit location Csv upload error message",
     "defaultMessage": "Selecting this will enable key in quantity for this audit task",
     "filepath": "./src/containers/auditTab/editAudit.js"
+  },
+  {
+    "id": "auditlisting.cancel.status",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.delete.status",
+    "defaultMessage": "Delete",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.duplicate.prefix",
+    "defaultMessage": "Duplicate",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.resolve.status",
+    "defaultMessage": "Resolve",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.pause.status",
+    "defaultMessage": "Pause",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.edit.status",
+    "defaultMessage": "Edit",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.viewdetails.status",
+    "defaultMessage": "View Details",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.label.autoassignpps",
+    "defaultMessage": "Auto Assign PPS",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.label.manualassignpps",
+    "defaultMessage": "Manually-Assign PPS",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.label.startbutton",
+    "defaultMessage": "START",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.label.reauditbutton",
+    "defaultMessage": "RE-AUDIT",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "auditlisting.label.reolvebutton",
+    "defaultMessage": "RESOLVE",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "viewDetais.audit.multiPPS",
+    "defaultMessage": "Multi PPS",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.notfound",
+    "description": "Item Search not found",
+    "defaultMessage": "No Records Present",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
   },
   {
     "id": "audit.start.auditdetails.subheading2",

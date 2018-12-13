@@ -2108,6 +2108,16 @@ msgstr ""
         msgid "audit"
         msgstr ""
 
+        #: auditSubTabs.auditTab
+        msgctxt "auditSubTabs.auditTab"
+        msgid "Audit"
+        msgstr ""
+
+        #: auditSubTabs.itemSearch
+        msgctxt "auditSubTabs.itemSearch"
+        msgid "Item Search"
+        msgstr ""
+
         #: audit.nameplaceholder.text
         msgctxt "audit.nameplaceholder.text"
         msgid "Time, place or products"
@@ -2421,6 +2431,11 @@ msgstr ""
         #: audit.kq.label.submsg
         msgctxt "audit.kq.label.submsg"
         msgid "Selecting this will enable key in quantity for this audit task"
+        msgstr ""
+
+        #: itemSearch.notfound
+        msgctxt "itemSearch.notfound"
+        msgid "No Records Present"
         msgstr ""
 
         #: audit.start.auditdetails.subheading2
