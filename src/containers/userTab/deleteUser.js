@@ -19,10 +19,10 @@ const withMutations = graphql(DELETE_USER_MUTATION, {
               update: (proxy, {data: {deleteUser}}) => {
                 let msg={};
                   if (deleteUser.code === 'us002') {
-                    msg=getFormattedMessages("DELETEDUSER");
+                    msg=getFormattedMessages("DELETEDUSER",deleteUser);
                       ownProps.notifyfeedback(msg);
                   } else {
-                    msg = getFormattedMessages("DELETEDUSERFAIL");
+                    msg = getFormattedMessages("DELETEDUSERFAIL",deleteUser);
                     ownProps.setNotification(msg);
                   }
               }
