@@ -115,7 +115,7 @@ export function getFormattedMessages(action,values){
 			break;
 			case "DELETEDUSER":
                 return 	(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
-				defaultMessage='User deleted successfully'/>) ;
+				defaultMessage='User "{first} {last}"  deleted successfully' values={{first:values.details[0]||"--",last:values.details[1]||"--"}}/>) ;
 			break;
 			case "EDITEDUSER":
                 return 	(<FormattedMessage id="notify.successfully.edit" description='Text for successfull user edit' 
@@ -128,7 +128,7 @@ export function getFormattedMessages(action,values){
                 msg:(<FormattedMessage id="notify.fail.edit" description='Text for fail user edit' 
 				defaultMessage='Failed to update user details'/>) ,
             desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user edit' 
-            defaultMessage='Failed to edit user'/>)
+            defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
 				  }
 				  return editFailString;
 			break;
@@ -139,16 +139,26 @@ export function getFormattedMessages(action,values){
                 msg:(<FormattedMessage id="notify.fail.delete" description='Text for fail user deletion' 
 				defaultMessage='User deleted failed'/>) ,
             desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user deletion' 
-            defaultMessage='User deleted failed'/>)
+            defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
 				  }
 				  return deleteFailString;
-			break;
-
-			
-
-
-
-
+					break;
+				  case "NEWUSER":
+				  return 	(<FormattedMessage id="notify.successfully.add" description='Text for successfull user added' 
+				  defaultMessage='New user "{first} {last}" added successfully' values={{first:values.details[0]||"--",last:values.details[1]||"--"}}/>) ;
+			  break;
+			  
+			  case "NEWUSERFAIL":
+			  let addFailString={
+				  type:'WARNING',
+				  msg:(<FormattedMessage id="notify.fail.add" description='Text for fail user add' 
+				  defaultMessage='Failed to add new user'/>) ,
+			  desc:(<FormattedMessage id="user.add.fail" description='Text for fail user add' 
+			  defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
+					}
+					return addFailString;
+			  break;	  
+		
 			default:
 			return null;
 		}
