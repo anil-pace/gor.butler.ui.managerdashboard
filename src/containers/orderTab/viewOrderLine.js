@@ -1,19 +1,16 @@
 import React  from 'react';
-import { FormattedMessage, defineMessages, FormattedRelative, injectIntl, FormattedTime } from 'react-intl'; 
+import { FormattedMessage, defineMessages, injectIntl, FormattedTime } from 'react-intl'; 
 import { connect } from 'react-redux';
-import {GTable} from '../../components/gor-table-component/index'
-import {GTableHeader,GTableHeaderCell} from '../../components/gor-table-component/tableHeader';
+import GTable from '../../components/gor-table-component/index'
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
-import Accordion from '../../components/accordion/accordion';
 import ProgressBar from '../../components/progressBar/progressBar';
 import SearchFilter from '../../components/searchFilter/searchFilter';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
 import { makeAjaxCall } from '../../actions/ajaxActions';
-import {APP_JSON, POST, GET, ORDERLINES_PER_ORDER_FETCH, ORDERS_POLLING_INTERVAL} from '../../constants/frontEndConstants';
+import {APP_JSON, GET, ORDERLINES_PER_ORDER_FETCH} from '../../constants/frontEndConstants';
 import {ORDERLINES_PER_ORDER_URL} from '../../constants/configConstants';
-import {hashHistory} from 'react-router';
 
 const messages=defineMessages({
     inProgressStatus: {
