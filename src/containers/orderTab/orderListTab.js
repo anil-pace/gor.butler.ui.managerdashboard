@@ -84,9 +84,10 @@ class OrderListTab extends React.Component {
   }
 
   _requestReportDownload(){
-      let formData = {
-                      "requestedBy": this.props.username
-                      }
+    console.log("this.state.query");
+    console.log(this.state.query);
+      let formData = {"start_date":"2018-09-15T18:30:00.000Z","end_date":"2018-12-13T18:29:59.000Z"}
+      //let formData = this.state.query;
       let params={
               'url':ORDERS_REPORT_DOWNLOAD_URL,
               //'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
@@ -102,10 +103,11 @@ class OrderListTab extends React.Component {
       this.props.makeAjaxCall(params);
 }
 
-  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
+  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied) {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      //filter_applied: isFilterApplied
     };
     //Session storage being used in AJAX Parser
     sessionStorage.setItem("startDate", startDate);
@@ -226,7 +228,8 @@ class OrderListTab extends React.Component {
           startDateFilter,
           endDateFilter,
           query.ppsId,
-          query.status
+          query.status,
+          //true
         );
         this._reqOrdersFulfillment(startDateFilter, endDateFilter);
         this._reqOrdersSummary(startDateFilter, endDateFilter);
