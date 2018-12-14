@@ -1,4 +1,4 @@
-export const BASE_URL = '192.168.9.217'; 
+export const BASE_URL = 'localhost'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -83,10 +83,8 @@ export const SAVE_PROFILE_URL=API_URL+"/pps_profiles/"
 
 export const OPERATIONS_LOG_URL =  API_GATEWAY+"/dashboard-service/platform-dashboard/operator/logs/search";
 export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";//An arbitrary count has to be passed in this API
-//export const REPORTS_URL = API_GATEWAY+"/dashboard-service/platform-dashboard/report/find-by-page";
-export const REPORTS_URL =  "http://45.118.135.148:8080/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
-export const DOWNLOAD_REPORT = "http://45.118.135.148:8080/api-gateway//dashboard-service/platform-dashboard/report/download/";
-//export const DOWNLOAD_REPORT = API_GATEWAY+"/dashboard-service/platform-dashboard/report/download/";
+export const REPORTS_URL = API_GATEWAY+"/dashboard-service/platform-dashboard/report/find-by-page";
+export const DOWNLOAD_REPORT = API_GATEWAY+"/dashboard-service/platform-dashboard/report/download/";
 export const REQUEST_REPORT_DOWNLOAD = API_GATEWAY+"/dashboard-service/platform-dashboard/operator/logs/generate-report";
 export const ORDERS_URL= API_GATEWAY+"dashboard-service/platform-dashboard/api/orders";
 
@@ -99,8 +97,7 @@ export const ORDERS_SUMMARY_URL =  API_GATEWAY+"/sr-service/platform-srms/md/ord
 export const ORDERS_CUT_OFF_TIME_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-details/level1";
 export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level2";
 export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
-//export const ORDERS_REPORT_DOWNLOAD_URL="http://45.118.135.148:8080/api-gateway/sr-service/platform-srms/service-request/modify";
-export const ORDERS_REPORT_DOWNLOAD_URL = "http://45.118.135.148:8080/api-gateway/dashboard-service/platform-dashboard/report/generate-md-report";
+export const ORDERS_REPORT_DOWNLOAD_URL = API_URL + "/platform-dashboard/report/generate-md-report";
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report?requester=md";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
