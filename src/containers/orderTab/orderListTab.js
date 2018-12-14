@@ -84,17 +84,18 @@ class OrderListTab extends React.Component {
   }
 
   _requestReportDownload(){
-    console.log("this.state.query");
-    console.log(this.state.query);
-      let formData = {"start_date":"2018-09-15T18:30:00.000Z","end_date":"2018-12-13T18:29:59.000Z"}
-      //let formData = this.state.query;
+      //let formData = {"start_date":"2018-09-15T18:30:00.000Z","end_date":"2018-12-13T18:29:59.000Z"}  // local testing 
+      let formData = {
+        "start_date": this.state.startDateForOrders,
+        "end-data": this.state.endDateForOrders,
+        "filtered_order_status": this.state.statusFilterForOrders,
+        "filtered_ppsId": this.state.ppsIdFilterForOrders
+      }
       let params={
               'url':ORDERS_REPORT_DOWNLOAD_URL,
-              //'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
               'method':POST,
               'contentType': APP_JSON,
               'cause':ORDERS_REPORT_DOWNLOAD_REQUEST,
-              //'cause':DOWNLOAD_REPORT_REQUEST,
               'token': this.props.auth_token,
               'responseType': "arraybuffer",
               'formdata':formData,

@@ -85,7 +85,8 @@ export const OPERATIONS_LOG_URL =  API_GATEWAY+"/dashboard-service/platform-dash
 export const WS_OPERATIONS_LOG_SUBSCRIPTION =  "/dashboard/operator/logs/live";//An arbitrary count has to be passed in this API
 //export const REPORTS_URL = API_GATEWAY+"/dashboard-service/platform-dashboard/report/find-by-page";
 export const REPORTS_URL =  "http://45.118.135.148:8080/api-gateway/dashboard-service/platform-dashboard/report/find-by-page";
-export const DOWNLOAD_REPORT = API_GATEWAY+"/dashboard-service/platform-dashboard/report/download/";
+export const DOWNLOAD_REPORT = "http://45.118.135.148:8080/api-gateway//dashboard-service/platform-dashboard/report/download/";
+//export const DOWNLOAD_REPORT = API_GATEWAY+"/dashboard-service/platform-dashboard/report/download/";
 export const REQUEST_REPORT_DOWNLOAD = API_GATEWAY+"/dashboard-service/platform-dashboard/operator/logs/generate-report";
 export const ORDERS_URL= API_GATEWAY+"dashboard-service/platform-dashboard/api/orders";
 
