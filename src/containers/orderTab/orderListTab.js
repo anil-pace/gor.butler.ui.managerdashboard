@@ -7,10 +7,6 @@ import { modal } from "react-redux-modal";
 import OrderFilter from "./orderFilter";
 import OrderListTable from "./orderListTable";
 import Spinner from "../../components/spinner/Spinner";
-import {
-  GTableHeader,
-  GTableHeaderCell
-} from "../../components/gor-table-component/tableHeader";
 import OrderTile from "../../containers/orderTab/OrderTile";
 import ViewOrderLine from "../../containers/orderTab/viewOrderLine";
 import FilterSummary from "../../components/tableFilter/filterSummary";
@@ -20,11 +16,7 @@ import {
   orderListRefreshed,
   setOrderQuery
 } from "../../actions/orderListActions";
-import {
-  orderHeaderSortOrder,
-  orderHeaderSort,
-  orderFilterDetail
-} from "../../actions/sortHeaderActions";
+
 import {
   showTableFilter,
   filterApplied,
@@ -46,8 +38,8 @@ import {
   ORDERS_FULFIL_FETCH,
   ORDERS_SUMMARY_FETCH,
   ORDERS_CUT_OFF_TIME_FETCH,
-  ORDERS_PER_PBT_FETCH,
-  ORDERS_POLLING_INTERVAL
+  ORDERS_POLLING_INTERVAL,
+  ORDERS_REPORT_DOWNLOAD_REQUEST
 } from "../../constants/frontEndConstants";
 
 import { setInfiniteSpinner } from "../../actions/notificationAction";
@@ -56,7 +48,8 @@ import { unSetAllActivePbts } from "../../actions/norderDetailsAction";
 import {
   ORDERS_FULFIL_URL,
   ORDERS_SUMMARY_URL,
-  ORDERS_CUT_OFF_TIME_URL
+  ORDERS_CUT_OFF_TIME_URL,
+  ORDERS_REPORT_DOWNLOAD_URL
 } from "../../constants/configConstants";
 import moment from "moment-timezone";
 
@@ -69,6 +62,7 @@ class OrderListTab extends React.Component {
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
     this._setPolling = this._setPolling.bind(this);
     this._clearFilter = this._clearFilter.bind(this);
+    this._requestReportDownload = this._requestReportDownload.bind(this);
     moment.locale(props.intl.locale);
   }
 
@@ -88,6 +82,25 @@ class OrderListTab extends React.Component {
       timerId: null
     };
   }
+
+  _requestReportDownload(){
+      let formData = {
+                      "requestedBy": this.props.username
+                      }
+      let params={
+              'url':ORDERS_REPORT_DOWNLOAD_URL,
+              //'url':STORAGE_SPACE_REPORT_DOWNLOAD_URL,
+              'method':POST,
+              'contentType': APP_JSON,
+              'cause':ORDERS_REPORT_DOWNLOAD_REQUEST,
+              //'cause':DOWNLOAD_REPORT_REQUEST,
+              'token': this.props.auth_token,
+              'responseType': "arraybuffer",
+              'formdata':formData,
+              'accept': APP_JSON
+          }
+      this.props.makeAjaxCall(params);
+}
 
   _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
     let formData = {
@@ -427,6 +440,23 @@ class OrderListTab extends React.Component {
                     </div>
 
                     <div className="orderButtonWrapper">
+                      <div className="gorButtonWrap">
+                        <button
+                        /*
+                          disabled={
+                            this.props.pbts.filter(pbt => pbt.opened).length < 1
+                          }
+                          */
+                          className="gor-filterBtn-btn genReport"
+                          onClick={this._requestReportDownload}
+                        >
+                          <FormattedMessage
+                            id="orders.action.generateReport"
+                            description="button label for Generate Report"
+                            defaultMessage="GENERATE REPORT"
+                          />
+                        </button>
+                      </div>
                       <div className="gorButtonWrap">
                         <button
                           disabled={

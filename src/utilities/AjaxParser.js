@@ -105,6 +105,7 @@ import {
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
     ORDERLINES_PER_ORDER_FETCH,
+    ORDERS_REPORT_DOWNLOAD_REQUEST,
     WHITELISTED_ROLES,PAUSE_AUDIT,AUDIT_DUPLICATE,AUDIT_USERLIST,
     AUDIT_EDIT,START_AUDIT_TASK,CHANGE_PPS_TASK,CREATE_DUPLICATE_REQUEST,AUDIT_EDIT_REQUEST,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
@@ -719,6 +720,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));
+            break;
+        
+        case ORDERS_REPORT_DOWNLOAD_REQUEST:
+            store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
             break;
             
         case SELLER_RECALL:

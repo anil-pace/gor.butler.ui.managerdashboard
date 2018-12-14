@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost'; 
+export const BASE_URL = '192.168.9.217'; 
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
@@ -97,7 +97,7 @@ export const ORDERS_SUMMARY_URL =  API_GATEWAY+"/sr-service/platform-srms/md/ord
 export const ORDERS_CUT_OFF_TIME_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-details/level1";
 export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level2";
 export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
-
+export const ORDERS_REPORT_DOWNLOAD_URL=API_URL+"/orders/put/storage_availability/download";
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report?requester=md";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
