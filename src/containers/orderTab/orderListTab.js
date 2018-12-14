@@ -104,11 +104,11 @@ class OrderListTab extends React.Component {
       this.props.makeAjaxCall(params);
 }
 
-  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied) {
+  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
       end_date: endDate,
-      //filter_applied: isFilterApplied
+      filter_applied: isFilterApplied
     };
     //Session storage being used in AJAX Parser
     sessionStorage.setItem("startDate", startDate);
@@ -225,15 +225,28 @@ class OrderListTab extends React.Component {
       },
       () => {
         // Start the backend calls
-        this._reqCutOffTime(
-          startDateFilter,
-          endDateFilter,
-          query.ppsId,
-          query.status,
-          //true
-        );
-        this._reqOrdersFulfillment(startDateFilter, endDateFilter);
-        this._reqOrdersSummary(startDateFilter, endDateFilter);
+        if(this.props.isFilterApplied){
+          this._reqCutOffTime(
+            startDateFilter,
+            endDateFilter,
+            query.ppsId,
+            query.status,
+            "true"
+          );
+          this._reqOrdersFulfillment(startDateFilter, endDateFilter, "true");
+          this._reqOrdersSummary(startDateFilter, endDateFilter, "true");
+        }
+        else{
+          this._reqCutOffTime(
+            startDateFilter,
+            endDateFilter,
+            query.ppsId,
+            query.status,
+          );
+          this._reqOrdersFulfillment(startDateFilter, endDateFilter);
+          this._reqOrdersSummary(startDateFilter, endDateFilter);
+        }
+        
       }
     );
   }
@@ -318,10 +331,11 @@ class OrderListTab extends React.Component {
     });
   };
 
-  _reqOrdersFulfillment(startDate, endDate) {
+  _reqOrdersFulfillment(startDate, endDate, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      filter_applied: isFilterApplied
     };
 
     let params = {
@@ -335,10 +349,11 @@ class OrderListTab extends React.Component {
     this.props.makeAjaxCall(params);
   }
 
-  _reqOrdersSummary(startDate, endDate) {
+  _reqOrdersSummary(startDate, endDate, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      filter_applied: isFilterApplied
     };
 
     let params = {
