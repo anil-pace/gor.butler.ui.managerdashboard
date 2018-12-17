@@ -56,6 +56,7 @@ class MsuConfigTab extends React.Component {
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
         this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
+        this._releaseMsuAction = this._releaseMsuAction.bind(this);
     }
 
 
