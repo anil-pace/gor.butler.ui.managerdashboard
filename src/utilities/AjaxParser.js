@@ -77,6 +77,7 @@ import {
     ORDERS_PER_PBT_FETCH,
     SET_ORDER_PRIORITY,
     ORDERLINES_PER_ORDER_FETCH,
+    ORDERS_REPORT_DOWNLOAD_REQUEST,
     WHITELISTED_ROLES,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
     FETCH_MSU_CONFIG_DEST_TYPE_LIST,
@@ -480,6 +481,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
 
         case ORDERLINES_PER_ORDER_FETCH:
             store.dispatch(receiveOrdersLinesData(res));
+            break;
+        
+        case ORDERS_REPORT_DOWNLOAD_REQUEST:
+            store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
             break;
             
         case SELLER_RECALL:
