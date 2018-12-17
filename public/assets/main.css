@@ -9276,7 +9276,7 @@ button:disabled {
 
 .orderButtonWrapper .gorButtonWrap .gor-filterBtn-btn {
   font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 8.125rem;
+  width: 8.75rem;
   height: 35px;
   font-size: 14px;
   color: #666666;
@@ -9296,6 +9296,11 @@ button:disabled {
   display: inline-block;
   vertical-align: bottom;
   margin-right: 5px;
+}
+
+.orderButtonWrapper .gorButtonWrap .gor-filterBtn-btn.genReport {
+  background-color: #4d5055;
+  color: #fff;
 }
 
 .orderButtonWrapper .viewOrderLineBtn {

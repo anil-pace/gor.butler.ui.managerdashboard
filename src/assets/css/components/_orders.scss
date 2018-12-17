@@ -12,23 +12,9 @@
 				float: right;
 				.gorButtonWrap{
 					display: inline-block;
-					//margin-top: 30px;
-					// .ordersCollapseAll{
-					// 	font-family: 'Source Sans Pro Bold', sans-serif;
-					//     min-width: 113px;
-					//     width: calculateRem(130px);
-					//     height: 35px;
-					//     font-size: 14px;
-					//     color: #666666;
-					//     border-radius: 3px;
-					//     cursor: pointer;
-    				// 				background-color: #ffffff;
-					//     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-					//     border: 1px solid #aaaaaa;
-					// }
 					.gor-filterBtn-btn{
 						font-family: 'Source Sans Pro Bold', sans-serif;
-						width: calculateRem(130px);
+						width: calculateRem(140px);
 					    height: 35px;
 					    font-size: 14px;
 					    color: #666666;
@@ -46,7 +32,11 @@
 						    display: inline-block;
 						    vertical-align: bottom;
 						    margin-right: 5px;
-					    }
+						}
+						&.genReport{
+							background-color: #4d5055;
+							color: #fff;
+						}
 					}
 				}
 				.viewOrderLineBtn{
