@@ -89,11 +89,14 @@ class OrderTile extends React.Component{
                           }}
                         /> 
                        </li>
-                      <li className="liItem"> 
-                        <FormattedMessage id="orders.summary.ordersProg" description="orders in progress" defaultMessage="{current} currently in progress"
-                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orders || 0}</span> }}
-                        />
-                      </li>
+                       {orderSummaryData.pending_orders !== null? 
+                          <li className="liItem"> 
+                          <FormattedMessage id="orders.summary.ordersProg" description="orders in progress" defaultMessage="{current} currently in progress"
+                            values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orders}</span> }}
+                          />
+                        </li>:""
+                      }
+                      
                     </ul>
 
                     <ul className="summaryColumn">
@@ -105,11 +108,13 @@ class OrderTile extends React.Component{
                           }}
                         />
                       </li>
-                      <li className="liItem"> 
-                        <FormattedMessage id="orders.summary.olinesProg" description="orderlines in progress" defaultMessage="{current} currently in progress"
-                          values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orderlines || 0}</span> }}
-                        /> 
-                      </li>
+                      {orderSummaryData.pending_orderlines !== null? 
+                          <li className="liItem"> 
+                          <FormattedMessage id="orders.summary.olinesProg" description="orderlines in progress" defaultMessage="{current} currently in progress"
+                            values={{current:<span style={{fontWeight:"bold"}}>{orderSummaryData.pending_orderlines}</span> }}
+                          /> 
+                        </li> : ""
+                      }
                     </ul>
 
                     <ul className="summaryColumn">
