@@ -4,6 +4,7 @@ export const WS_PROTOCOL ="wss://";
 export const WS_URL = WS_PROTOCOL+BASE_URL+"/manager_api/wss";
 export const API_URL=PROTOCOL+BASE_URL+"/api";
 export const API_GATEWAY = API_URL+"/api-gateway";
+
 export const API_INTEGRATION_SERVICE= API_GATEWAY+"/integration-service/wms-integration/butler-core/api";
 export const LOGIN_URL=API_URL+"/auth/token"
 export const HEADER_URL=API_URL+"/user";
@@ -97,7 +98,7 @@ export const ORDERS_SUMMARY_URL =  API_GATEWAY+"/sr-service/platform-srms/md/ord
 export const ORDERS_CUT_OFF_TIME_URL =  API_GATEWAY+"/sr-service/platform-srms/md/order-details/level1";
 export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level2";
 export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
-
+export const ORDERS_REPORT_DOWNLOAD_URL = API_GATEWAY + "/platform-dashboard/report/generate-md-report";
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report?requester=md";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";

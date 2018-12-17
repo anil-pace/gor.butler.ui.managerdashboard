@@ -7,10 +7,6 @@ import { modal } from "react-redux-modal";
 import OrderFilter from "./orderFilter";
 import OrderListTable from "./orderListTable";
 import Spinner from "../../components/spinner/Spinner";
-import {
-  GTableHeader,
-  GTableHeaderCell
-} from "../../components/gor-table-component/tableHeader";
 import OrderTile from "../../containers/orderTab/OrderTile";
 import ViewOrderLine from "../../containers/orderTab/viewOrderLine";
 import FilterSummary from "../../components/tableFilter/filterSummary";
@@ -20,11 +16,7 @@ import {
   orderListRefreshed,
   setOrderQuery
 } from "../../actions/orderListActions";
-import {
-  orderHeaderSortOrder,
-  orderHeaderSort,
-  orderFilterDetail
-} from "../../actions/sortHeaderActions";
+
 import {
   showTableFilter,
   filterApplied,
@@ -46,8 +38,8 @@ import {
   ORDERS_FULFIL_FETCH,
   ORDERS_SUMMARY_FETCH,
   ORDERS_CUT_OFF_TIME_FETCH,
-  ORDERS_PER_PBT_FETCH,
-  ORDERS_POLLING_INTERVAL
+  ORDERS_POLLING_INTERVAL,
+  ORDERS_REPORT_DOWNLOAD_REQUEST
 } from "../../constants/frontEndConstants";
 
 import { setInfiniteSpinner } from "../../actions/notificationAction";
@@ -56,7 +48,8 @@ import { unSetAllActivePbts } from "../../actions/norderDetailsAction";
 import {
   ORDERS_FULFIL_URL,
   ORDERS_SUMMARY_URL,
-  ORDERS_CUT_OFF_TIME_URL
+  ORDERS_CUT_OFF_TIME_URL,
+  ORDERS_REPORT_DOWNLOAD_URL
 } from "../../constants/configConstants";
 import moment from "moment-timezone";
 
@@ -69,6 +62,7 @@ class OrderListTab extends React.Component {
     this._handleCollapseAll = this._handleCollapseAll.bind(this);
     this._setPolling = this._setPolling.bind(this);
     this._clearFilter = this._clearFilter.bind(this);
+    this._requestReportDownload = this._requestReportDownload.bind(this);
     moment.locale(props.intl.locale);
   }
 
@@ -89,10 +83,31 @@ class OrderListTab extends React.Component {
     };
   }
 
-  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus) {
+  _requestReportDownload(){
+     let formData = {
+        "start_date": this.state.startDateForOrders,
+        "end-data": this.state.endDateForOrders,
+        "filtered_order_status": this.state.statusFilterForOrders,
+        "filtered_ppsId": this.state.ppsIdFilterForOrders
+      };
+      let params={
+              'url':ORDERS_REPORT_DOWNLOAD_URL,
+              'method':POST,
+              'contentType': APP_JSON,
+              'cause':ORDERS_REPORT_DOWNLOAD_REQUEST,
+              'token': this.props.auth_token,
+              'responseType': "arraybuffer",
+              'formdata':formData,
+              'accept': APP_JSON
+          }
+      this.props.makeAjaxCall(params);
+}
+
+  _reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      filter_applied: isFilterApplied
     };
     //Session storage being used in AJAX Parser
     sessionStorage.setItem("startDate", startDate);
@@ -209,14 +224,28 @@ class OrderListTab extends React.Component {
       },
       () => {
         // Start the backend calls
-        this._reqCutOffTime(
-          startDateFilter,
-          endDateFilter,
-          query.ppsId,
-          query.status
-        );
-        this._reqOrdersFulfillment(startDateFilter, endDateFilter);
-        this._reqOrdersSummary(startDateFilter, endDateFilter);
+        if(this.props.isFilterApplied){
+          this._reqCutOffTime(
+            startDateFilter,
+            endDateFilter,
+            query.ppsId,
+            query.status,
+            "true"
+          );
+          this._reqOrdersFulfillment(startDateFilter, endDateFilter, "true");
+          this._reqOrdersSummary(startDateFilter, endDateFilter, "true");
+        }
+        else{
+          this._reqCutOffTime(
+            startDateFilter,
+            endDateFilter,
+            query.ppsId,
+            query.status,
+          );
+          this._reqOrdersFulfillment(startDateFilter, endDateFilter);
+          this._reqOrdersSummary(startDateFilter, endDateFilter);
+        }
+        
       }
     );
   }
@@ -301,10 +330,11 @@ class OrderListTab extends React.Component {
     });
   };
 
-  _reqOrdersFulfillment(startDate, endDate) {
+  _reqOrdersFulfillment(startDate, endDate, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      filter_applied: isFilterApplied
     };
 
     let params = {
@@ -318,10 +348,11 @@ class OrderListTab extends React.Component {
     this.props.makeAjaxCall(params);
   }
 
-  _reqOrdersSummary(startDate, endDate) {
+  _reqOrdersSummary(startDate, endDate, isFilterApplied = 'false') {
     let formData = {
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
+      filter_applied: isFilterApplied
     };
 
     let params = {
@@ -427,6 +458,23 @@ class OrderListTab extends React.Component {
                     </div>
 
                     <div className="orderButtonWrapper">
+                      <div className="gorButtonWrap">
+                        <button
+                        /*
+                          disabled={
+                            this.props.pbts.filter(pbt => pbt.opened).length < 1
+                          }
+                          */
+                          className="gor-filterBtn-btn genReport"
+                          onClick={this._requestReportDownload}
+                        >
+                          <FormattedMessage
+                            id="orders.action.generateReport"
+                            description="button label for Generate Report"
+                            defaultMessage="GENERATE REPORT"
+                          />
+                        </button>
+                      </div>
                       <div className="gorButtonWrap">
                         <button
                           disabled={
