@@ -110,13 +110,15 @@ class InventoryTab extends React.Component {
 
     formatData(data) {
         let return_data = {}
-        let self = this
+        let self = this;
+        const {timeOffset} = self.props;
+        let currentDate = data[0] ? data[0].date : moment.utc().format();
         data.forEach(function (inv, index) {
             let graphInfo = {}, inventory_data,
                 current_stock = 0,
                 unusedSpace = 100,
                 colorCode = CATEGORY_COLOR_MAP[CATEGORY_COLOR_MAP.length - 1],
-                inv_date = inv ? moment(inv.date).tz(sessionStorage.timeOffset) : moment().tz(sessionStorage.timeOffset).subtract(index, 'days')
+                inv_date = inv ? moment(inv.date).tz(timeOffset).format("YYYY-MM-DD") : moment().tz(timeOffset).subtract(index, 'days').format("YYYY-MM-DD")
             if (inv) {
                 inventory_data = JSON.parse(JSON.stringify(inv));
                 current_stock = inv["opening_stock"] + inv["items_put"] - inv["items_picked"];
@@ -133,18 +135,19 @@ class InventoryTab extends React.Component {
             }
 
             let otherInfo = {...inventory_data, current_stock, unusedSpace, colorCode}
-            graphInfo.xAxisData = [Math.random(), inv_date.format("DD")].join("_")
+            let timeinMS = moment(inv_date).toDate().getTime();
+            graphInfo.xAxisData = [Math.random(), inv_date.split("-")[2]].join("_")
             graphInfo.yAxisData = current_stock
             graphInfo.items_picked = inv ? inv.items_picked : 0
             graphInfo.items_put = inv ? inv.items_put : 0
-            graphInfo.date = inv_date.toDate()
-            graphInfo.customData = inv_date.toDate().getTime()
-            return_data[inv_date.toDate().getTime()] = {graphInfo, otherInfo}
+            graphInfo.date = inv_date;//.toDate()
+            graphInfo.customData = timeinMS;//inv_date.toDate().getTime()
+            return_data[timeinMS] = {graphInfo, otherInfo}
 
 
         })
 
-        this.setState({formattedData: return_data}, function () {
+        this.setState({formattedData: return_data,currentDate:currentDate}, function () {
             self.selectData()
         })
 
@@ -197,8 +200,7 @@ class InventoryTab extends React.Component {
             config: INV_LINE_LEGEND_CONFIG
         }
 
-        let timeOffset = sessionStorage.getItem('timeOffset')
-
+        const timeOffset = this.props.timeOffset 
         return (
             <div className="gorInventory wrapper">
                 <div>
@@ -243,7 +245,8 @@ class InventoryTab extends React.Component {
                         <div className="stkSnapSht">
                             <div className="snapShtWrap">
                                 <SnapShot
-                                    currentDate={this.props.currentDate}
+                                    currentDate={this.state.currentDate}
+                                    timeOffset={this.props.timeOffset}
                                     snapshotTabData={this.state.selectedData || {}}/>
                                 <InventoryStacked snapshotData={this.state.selectedData || {}}/>
                                 <ItemCategoryTable snapshotData={this.state.selectedData || {}}/>
@@ -299,7 +302,8 @@ const mapStateToProps = function(state, ownProps) {
 
     return {
         intlMessages: state.intl.messages,
-        socketAuthorized: state.recieveSocketActions.socketAuthorized
+        socketAuthorized: state.recieveSocketActions.socketAuthorized,
+        timeOffset:state.authLogin.timeOffset || Intl.DateTimeFormat().resolvedOptions().timeZone
     };
 }
 
@@ -316,4 +320,3 @@ const mapDispatchToProps=function (dispatch) {
 export default compose(
     withNetworkData
 )(connect(mapStateToProps, mapDispatchToProps)(InventoryTab));
-

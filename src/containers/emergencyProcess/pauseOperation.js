@@ -36,6 +36,8 @@ class PauseOperation extends React.Component{
    let formdata={         
             'username': this.props.username,
             'password': this.password.value,
+            "grant_type": "password",
+            "action": "LOGIN"
     };
     let userData={
                 'url':LOGIN_URL,

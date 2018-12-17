@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {modal} from 'react-redux-modal';
 import {FormattedMessage, defineMessages, injectIntl} from 'react-intl';
 
-import {GTable} from '../../components/gor-table-component/index'
+import GTable from '../../components/gor-table-component/index'
 import {GTableBody} from "../../components/gor-table-component/tableBody";
 import {GTableRow} from "../../components/gor-table-component/tableRow";
 import Accordion from '../../components/accordion/accordion';
 import ViewOrderLine from '../../containers/orderTab/viewOrderLine';
+import OrderPriority from '../../containers/orderTab/orderPriority';
 import ProgressBar from '../../components/progressBar/progressBar';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 
@@ -21,13 +22,14 @@ import { makeAjaxCall } from '../../actions/ajaxActions';
 import {wsOverviewData} from './../../constants/initData.js';
 
 
-import {APP_JSON, POST, ORDERS_PER_PBT_FETCH} from '../../constants/frontEndConstants';
+import {APP_JSON, POST, GET, ORDERS_PER_PBT_FETCH, SET_ORDER_PRIORITY} from '../../constants/frontEndConstants';
 
 import { setInfiniteSpinner } from '../../actions/notificationAction';
 import moment from 'moment-timezone';
 
 import {
-    ORDERS_PER_PBT_URL} from '../../constants/configConstants';
+    ORDERS_PER_PBT_URL
+} from '../../constants/configConstants';
 import {setActivePbt} from '../../actions/norderDetailsAction';
 
 const messages=defineMessages({
@@ -113,6 +115,9 @@ class OrderListTable extends React.Component {
         super(props);
         this.state={
             cutOffTimeIndex:"",
+            isOrderPriorityIconClicked: false,
+            orderIdForOrderPriority: '',
+            showOrderPriorityList: false,
             statusMapping:{
                 "CREATED": this.props.intl.formatMessage(messages.createdStatus),
                 "PROCESSING": this.props.intl.formatMessage(messages.inProgressStatus),
@@ -127,6 +132,7 @@ class OrderListTable extends React.Component {
         this._reqOrderPerPbt = this._reqOrderPerPbt.bind(this);
         this._viewOrderLine = this._viewOrderLine.bind(this);
         this._calculateTimeLeft = this._calculateTimeLeft.bind(this);
+        this._processOrders = this._processOrders.bind(this);
     
     }
 
@@ -146,6 +152,15 @@ class OrderListTable extends React.Component {
                                        //.. all what you put in here you will get access in the modal props ;),
             });
     }
+
+    _getOrderPriorityList = (orderId) => {
+        this.setState({
+            orderIdForOrderPriority: orderId,
+            isOrderPriorityIconClicked: true,
+            showOrderPriorityList: true
+        });
+    }
+
 
     _reqOrderPerPbt(pbtData, saltParams={}){
         let cutOffTime = pbtData.cut_off_time
@@ -211,7 +226,7 @@ class OrderListTable extends React.Component {
     
 
 
-    _formatProgressBar(nr, dr){
+   _formatProgressBar(nr, dr){
         let x = {};
         const numerator = (nr)?nr:0;
         const denominator = (dr)?dr:0;
@@ -222,12 +237,12 @@ class OrderListTable extends React.Component {
 
         else if((numerator === denominator) ){ // when ALL orders have been processed 
             x.message=(<FormattedMessage id="orders.toBePicked.status" description="status" defaultMessage="{total} products picked"
-                      values={{total:denominator}} />);
+                    values={{total:denominator}} />);
             x.action = true;
         }
         else if(numerator === 0){ // when ALL are remaining to be picked
             x.message=(<FormattedMessage id="orders.productsPicked.status" description="status" defaultMessage="{current} products to be picked"
-                      values={{current:denominator}} />);
+                    values={{current:denominator}} />);
             x.action = true;
         }
         else if (denominator === 0 && numerator>0){ // in case the denominator is less than or equal to 0 because of an issue at the backend.
@@ -255,6 +270,12 @@ class OrderListTable extends React.Component {
             
         }
         return timeLeft;
+    }
+
+    _callBack = (arg) => {
+        this.setState({
+            showOrderPriorityList : arg
+        })
     }
 
     _processPBTs = () => {
@@ -327,12 +348,22 @@ class OrderListTable extends React.Component {
                                             <span>{pbtData[i].missing_count > 0 ? pbtData[i].missing_count : ""}</span>
                                         </div>
                                     </div>);
-
                         if(formatProgressBar.action === true){
                             pbtRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
                               <button className="viewOrderLineBtn" onClick={() => this._viewOrderLine(pbtData[i].order_id)}>
                                 <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
                               </button>
+                              {/* if order_priority is NOT null, show embeddedImage */}
+                                {pbtData[i].order_priority ?  (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(pbtData[i].order_id)}></div>): ""}
+                                {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === pbtData[i].order_id) ?
+                                    <OrderPriority 
+                                        onClick={this._callBack}
+                                        showOrderPriorityList={this.state.showOrderPriorityList}
+                                        orderExternalId={pbtData[i].order_id} 
+                                        orderPriority = {pbtData[i].order_priority}
+                                        orderInternalId = {pbtData[i].order_internal_id}
+                                        orderType = {pbtData[i].order_type}/> : ""
+                                }
                             </div>);
                         }
                         else{
@@ -462,15 +493,27 @@ class OrderListTable extends React.Component {
 
                 if(formatProgressBar.action === true){
                     orderRow.push(<div key={i} style={{textAlign:"center"}} className="gorButtonWrap">
-                      <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
-                        <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
-                      </button>
+                        <button onClick={() => this._viewOrderLine(orderData[i].order_id)}>
+                            <FormattedMessage id="orders.view.orderLines" description="button label for view orderlines" defaultMessage="VIEW ORDERLINES "/>
+                        </button>
+
+                         {/*if order_priority is NOT null, show embeddedImage */}
+                         {orderData[i].order_priority ? (<div className="embeddedImage" onClick={() => this._getOrderPriorityList(orderData[i].order_id)}></div>): ""}
+                        {this.state.isOrderPriorityIconClicked && (this.state.orderIdForOrderPriority === orderData[i].order_id) ?
+                            <OrderPriority 
+                                    onClick={this._callBack}
+                                    showOrderPriorityList={this.state.showOrderPriorityList}
+                                    orderExternalId={orderData[i].order_id} 
+                                    orderPriority = {orderData[i].order_priority}
+                                    orderInternalId = {orderData[i].order_internal_id}
+                                    orderType = {orderData[i].order_type}/> : ""
+                        }
+                            
                     </div>);
                 }
                 else{
                     orderRow.push(<div> </div>);
                 }
-
                 orderRows.push(orderRow);
             }
             processedData.orderData = orderRows;
@@ -533,7 +576,7 @@ class OrderListTable extends React.Component {
                                             return (
                                                 <GTableRow key={idx_1} index={idx_1} offset={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).offset} max={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).max} data={self._processOrders(self.props.pbts[idx].ordersPerPbt.orders).orderData}>
                                                     {Object.keys(row_1).map(function (text, index) {
-                                                        return <div key={index} style={{padding:"0px", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
+                                                        return <div key={index} style={{padding:"0px", overflow: "visible", display:"flex", flexDirection:"column", justifyContent:'center', height:"75px"}} className="cell" >
                                                             {row_1[text]}
                                                         </div>
                                                     })}
@@ -590,7 +633,8 @@ function mapStateToProps(state) {
         ordersPerPbt:state.orderDetails.ordersPerPbt,
         timeZone:state.authLogin.timeOffset,
         isInfiniteLoading:state.notificationReducer.isInfiniteLoading,
-        isGroupedById: state.orderDetails.isGroupedById
+        isGroupedById: state.orderDetails.isGroupedById,
+        orderPriorityList: state.orderDetails.orderPriority||[],
     };
 }
 

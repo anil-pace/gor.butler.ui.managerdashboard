@@ -4474,6 +4474,12 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
+    "id": "orders.order.priority",
+    "description": "button label for order Priority",
+    "defaultMessage": "APPLY",
+    "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
     "id": "orders.pending.status",
     "description": "status",
     "defaultMessage": "Pending",

@@ -46,7 +46,8 @@ class MultiLineGraph extends React.Component {
                 let noData = this.props.noData;
                 var dataArray = jsonArray.map(function (obj) {
                     let rObj = {};
-                    rObj.date = new Date(obj.date);
+                    let date = obj.date.split("-");
+                    rObj.date = new Date(date[0],date[1]-1,date[2]);
                     rObj.items_put = obj.items_put;
                     rObj.items_picked = obj.items_picked;
                     rObj.toolTipData = obj.toolTipData;

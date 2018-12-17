@@ -75,6 +75,7 @@ import {
     ORDERS_SUMMARY_FETCH,
     ORDERS_CUT_OFF_TIME_FETCH,
     ORDERS_PER_PBT_FETCH,
+    SET_ORDER_PRIORITY,
     ORDERLINES_PER_ORDER_FETCH,
     WHITELISTED_ROLES,SELLER_RECALL,VALIDATE_SKU_ITEM_RECALL,
     FETCH_MSU_CONFIG_LIST,
@@ -170,7 +171,8 @@ import {receiveOrderFulfilmentData,
         receiveOrderSummaryData,
         receiveCutOffTimeData, 
         receiveOrdersPerPbtData,
-        receiveOrdersLinesData} from './../actions/norderDetailsAction';
+        receiveOrdersLinesData,
+        receiveOrdersPriority} from './../actions/norderDetailsAction';
 
 import {
      ORDERS_PER_PBT_URL
@@ -462,6 +464,18 @@ export function AjaxParse(store, res, cause, status, saltParams) {
         case ORDERS_PER_PBT_FETCH:
             store.dispatch(setOrderListSpinner(false));
             store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+            break;
+        
+        case SET_ORDER_PRIORITY: 
+            store.dispatch(receiveOrdersPriority(res));
+            if(res.id){
+                msg = getFormattedMessages("SETORDERPRIORITYSUCCESS");
+                store.dispatch(notifyfeedback(msg));
+            }
+            else{
+                msg = getFormattedMessages("SETORDERPRIORITYFAILURE");
+                store.dispatch(notifyfeedback(msg));
+            }
             break;
 
         case ORDERLINES_PER_ORDER_FETCH:

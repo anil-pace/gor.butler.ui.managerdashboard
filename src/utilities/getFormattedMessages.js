@@ -31,7 +31,17 @@ export function getFormattedMessages(action,values){
 									
 			case "grnGenerated" :
 			return (<FormattedMessage id="utility.downloadGRN.generateSuccess" description='GRN Request submitted successfully'
-                                   defaultMessage='GRN Request submitted successfully'/>);
+								   defaultMessage='GRN Request submitted successfully'/>);
+								   
+			case "SETORDERPRIORITYSUCCESS" :
+				return (<FormattedMessage id="order.setpriority.generateSuccess" description='set order priority successfully'
+								   defaultMessage='Order Priority has been changed'/>);
+
+			case "SETORDERPRIORITYFAILURE" :
+				return (<FormattedMessage id="order.setpriority.generateFailure" description='set order priority UNsuccessfully'
+									defaultMessage='Order Priority has not been changed' values={values}/>);
+									
+
 			case "invntryRptGenerated" :
 			return (<FormattedMessage id="utility.downloadInventory.generateSuccess" description='Inventory Report Request submitted successfully'
                                    defaultMessage='Inventory Report Request submitted successfully' />);
@@ -113,8 +123,52 @@ export function getFormattedMessages(action,values){
 				  }
 				  return resolveFailstringInfo;
 			break;
-
-
+			case "DELETEDUSER":
+                return 	(<FormattedMessage id="notify.success.delete" description='Text for successfull user deletion' 
+				defaultMessage='User "{first} {last}"  deleted successfully' values={{first:values.details[0]||"--",last:values.details[1]||"--"}}/>) ;
+			break;
+			case "EDITEDUSER":
+                return 	(<FormattedMessage id="notify.successfully.edit" description='Text for successfull user edit' 
+				defaultMessage='User details updated successfully'/>) ;
+			break;
+			
+			case "EDITEDUSERFAIL":
+			let editFailString={
+                type:'WARNING',
+                msg:(<FormattedMessage id="notify.fail.edit" description='Text for fail user edit' 
+				defaultMessage='Failed to update user details'/>) ,
+            desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user edit' 
+            defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
+				  }
+				  return editFailString;
+			break;
+                
+			case "DELETEDUSERFAIL":
+			let deleteFailString={
+                type:'WARNING',
+                msg:(<FormattedMessage id="notify.fail.delete" description='Text for fail user deletion' 
+				defaultMessage='User deleted failed'/>) ,
+            desc:(<FormattedMessage id="user.delete.fail" description='Text for fail user deletion' 
+            defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
+				  }
+				  return deleteFailString;
+					break;
+				  case "NEWUSER":
+				  return 	(<FormattedMessage id="notify.successfully.add" description='Text for successfull user added' 
+				  defaultMessage='New user "{first} {last}" added successfully' values={{first:values.details[0]||"--",last:values.details[1]||"--"}}/>) ;
+			  break;
+			  
+			  case "NEWUSERFAIL":
+			  let addFailString={
+				  type:'WARNING',
+				  msg:(<FormattedMessage id="notify.fail.add" description='Text for fail user add' 
+				  defaultMessage='Failed to add new user'/>) ,
+			  desc:(<FormattedMessage id="user.add.fail" description='Text for fail user add' 
+			  defaultMessage='Failed:"{description}" ' values={{description:values.description||"--"}}/>)
+					}
+					return addFailString;
+			  break;	  
+		
 			default:
 			return null;
 		}
