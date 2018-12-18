@@ -297,7 +297,7 @@ export const ComponentCell=({rowIndex, data, columnKey,checkState,checked, ...pr
 export const PPSComponentCell=({rowIndex, data, columnKey,checkState,checked, ...props})=> (
 
   <Cell {...props}> <input type="checkbox" checked={data.getObjectAt(rowIndex)["isChecked"]} onChange={checkState.bind(this,props.checkboxColumn,rowIndex)}/>
-    {data.getObjectAt(rowIndex)[columnKey]}
+    <span>{data.getObjectAt(rowIndex)[columnKey]}</span><span className="gor-pickpal">{data.getObjectAt(rowIndex)["pickPal"]}</span>
     <div className="ppsBinFooter"> {data.getObjectAt(rowIndex)["binDetails"]} </div>
   </Cell>
 );

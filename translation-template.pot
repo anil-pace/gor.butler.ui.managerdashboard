@@ -2418,6 +2418,16 @@ msgstr ""
         msgid "Selecting this will enable key in quantity for this audit task"
         msgstr ""
 
+        #: itemSearch.label.startbutton
+        msgctxt "itemSearch.label.startbutton"
+        msgid "START"
+        msgstr ""
+
+        #: itemSearch.notfound
+        msgctxt "itemSearch.notfound"
+        msgid "No Records Present"
+        msgstr ""
+
         #: audit.start.auditdetails.subheading2
         msgctxt "audit.start.auditdetails.subheading2"
         msgid "There are currently no PPS in audit mode."
@@ -3386,6 +3396,51 @@ msgstr ""
         #: orders.inProgress.status
         msgctxt "orders.inProgress.status"
         msgid "{current} of {total} products picked"
+        msgstr ""
+
+        #: order.priority.high
+        msgctxt "order.priority.high"
+        msgid "High"
+        msgstr ""
+
+        #: order.priority.normal
+        msgctxt "order.priority.normal"
+        msgid "Normal"
+        msgstr ""
+
+        #: order.priority.low
+        msgctxt "order.priority.low"
+        msgid "Low"
+        msgstr ""
+
+        #: order.priority.critical
+        msgctxt "order.priority.critical"
+        msgid "Critical"
+        msgstr ""
+
+        #: order.priority.header
+        msgctxt "order.priority.header"
+        msgid "CHANGE ORDER PRIORITY"
+        msgstr ""
+
+        #: orders.priority.apply
+        msgctxt "orders.priority.apply"
+        msgid "APPLY"
+        msgstr ""
+
+        #: orderPriority.dialog.message
+        msgctxt "orderPriority.dialog.message"
+        msgid "Please note that critical priority orders will override all other lined up orders. Do you wish to proceed?"
+        msgstr ""
+
+        #: orderPriority.modal.confirm.no
+        msgctxt "orderPriority.modal.confirm.no"
+        msgid "CANCEL"
+        msgstr ""
+
+        #: orderPriority.modal.confirm.yes
+        msgctxt "orderPriority.modal.confirm.yes"
+        msgid "CONFIRM"
         msgstr ""
 
         #: orders.fulfil.noProducts
@@ -5611,6 +5666,16 @@ msgstr ""
         #: utility.downloadGRN.generateSuccess
         msgctxt "utility.downloadGRN.generateSuccess"
         msgid "GRN Request submitted successfully"
+        msgstr ""
+
+        #: order.setpriority.generateSuccess
+        msgctxt "order.setpriority.generateSuccess"
+        msgid "Order Priority has been changed"
+        msgstr ""
+
+        #: order.setpriority.generateFailure
+        msgctxt "order.setpriority.generateFailure"
+        msgid "Order Priority has not been changed"
         msgstr ""
 
         #: utility.downloadInventory.generateSuccess

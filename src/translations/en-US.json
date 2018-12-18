@@ -3176,6 +3176,17 @@
     "filepath": "./src/containers/auditTab/editAudit.js"
   },
   {
+    "id": "itemSearch.label.startbutton",
+    "defaultMessage": "START",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.notfound",
+    "description": "Item Search not found",
+    "defaultMessage": "No Records Present",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
     "id": "audit.start.auditdetails.subheading2",
     "description": "Text for audit details subheading when no pps",
     "defaultMessage": "There are currently no PPS in audit mode.",
@@ -4385,12 +4396,6 @@
     "filepath": "./src/containers/orderTab/orderListTable.js"
   },
   {
-    "id": "orders.order.priority",
-    "description": "button label for order Priority",
-    "defaultMessage": "APPLY",
-    "filepath": "./src/containers/orderTab/orderListTable.js"
-  },
-  {
     "id": "orders.pending.status",
     "description": "status",
     "defaultMessage": "Pending",
@@ -4419,6 +4424,60 @@
     "description": "display no orders",
     "defaultMessage": "No orders available",
     "filepath": "./src/containers/orderTab/orderListTable.js"
+  },
+  {
+    "id": "order.priority.high",
+    "description": "label text for high",
+    "defaultMessage": "High",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "order.priority.normal",
+    "description": "label text for normal",
+    "defaultMessage": "Normal",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "order.priority.low",
+    "description": "label text for low",
+    "defaultMessage": "Low",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "order.priority.critical",
+    "description": "label text for critical",
+    "defaultMessage": "Critical",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "order.priority.header",
+    "description": "label text for change order priority",
+    "defaultMessage": "CHANGE ORDER PRIORITY",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "orders.priority.apply",
+    "description": "button label for apply",
+    "defaultMessage": "APPLY",
+    "filepath": "./src/containers/orderTab/orderPriority.js"
+  },
+  {
+    "id": "orderPriority.dialog.message",
+    "description": "msu config start dialog box",
+    "defaultMessage": "Please note that critical priority orders will override all other lined up orders. Do you wish to proceed?",
+    "filepath": "./src/containers/orderTab/OrderPriorityConfirmation.js"
+  },
+  {
+    "id": "orderPriority.modal.confirm.no",
+    "description": "Close the confirmation box",
+    "defaultMessage": "CANCEL",
+    "filepath": "./src/containers/orderTab/OrderPriorityConfirmation.js"
+  },
+  {
+    "id": "orderPriority.modal.confirm.yes",
+    "description": "yes and proceed further",
+    "defaultMessage": "CONFIRM",
+    "filepath": "./src/containers/orderTab/OrderPriorityConfirmation.js"
   },
   {
     "id": "orders.fulfil.noProducts",
@@ -7685,6 +7744,18 @@
     "id": "utility.downloadGRN.generateSuccess",
     "description": "GRN Request submitted successfully",
     "defaultMessage": "GRN Request submitted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "order.setpriority.generateSuccess",
+    "description": "set order priority successfully",
+    "defaultMessage": "Order Priority has been changed",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "order.setpriority.generateFailure",
+    "description": "set order priority UNsuccessfully",
+    "defaultMessage": "Order Priority has not been changed",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

@@ -307,7 +307,7 @@ class PPS extends React.Component {
         var nProps=this;
         var pps_data=nProps.props.data.PPSListSystem ? nProps.props.data.PPSListSystem.list : [];//nProps.props.PPSDetail.PPStypeDetail;
         var data = Object.keys(nProps.props.location.query).length ? this._filterList(pps_data, nProps.props.location.query) : pps_data
-        let PPS, OPEN, CLOSE,FCLOSE, PERFORMANCE, ppsBinDetails;
+        let OPEN, CLOSE,FCLOSE, PERFORMANCE, ppsBinDetails;
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
@@ -330,7 +330,6 @@ class PPS extends React.Component {
                 }
             }
             performance=(data[i].performance < 0 ? 0 : data[i].performance);
-            PPS=nProps.context.intl.formatMessage(messages.namePrefix, {"ppsId": ppsId});
             OPEN=nProps.context.intl.formatMessage(stringConfig.open);
             CLOSE=nProps.context.intl.formatMessage(stringConfig.close);
             FCLOSE=nProps.context.intl.formatMessage(stringConfig.fclose);
@@ -347,8 +346,9 @@ class PPS extends React.Component {
             else{
                 requestedStatusText = "--"
             }
-            detail.id=PPS;
+            detail.id=ppsId;
             detail.ppsId=ppsId;
+            detail.pickPal=data[i].pps_tags ? data[i].pps_tags[0] : "";
             detail.binDetails = ppsBinDetails;
             detail.requested_status=requestedStatusText ;
             detail.pps_requested_mode=data[i]["pps_requested_mode"];

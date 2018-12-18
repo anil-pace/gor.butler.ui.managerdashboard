@@ -16,7 +16,8 @@ export const PPS_LIST_SUBSCRIPTION = gql`
               requested_status,
               pps_requested_mode,
               current_task,
-              operators_assigned
+              operators_assigned,
+              pps_tags
                 
             }
         }
@@ -71,7 +72,8 @@ export const PPS_LIST_QUERY = gql`
               requested_status,
               pps_requested_mode,
               current_task,
-              operators_assigned
+              operators_assigned,
+              pps_tags
                 
             }
         }
