@@ -57,15 +57,19 @@ query AuditResolve($input: AuditResolveParams){
     
   AuditResolve(input:$input){
     list {
-      audit_param_type
+    audit_param_type
     auditlines{
-      actual_quantity
-    auditline_id
-    expected_quantity
-    k_deep_audit
-    pdfa_audit_attributes{
-      pdfa_values
-    }
+      auditline_id
+      k_deep_audit
+      pdfa_audit_attributes{
+        pdfa_values
+      }
+      anamoly_info{
+        actual_quantity
+        expected_quantity
+        name
+        type
+      }
     slot_id
     status
     }    
