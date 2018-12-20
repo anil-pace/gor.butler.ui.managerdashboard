@@ -104,7 +104,7 @@ export const ORDERS_CUT_OFF_TIME_URL =  API_GATEWAY+"/sr-service/platform-srms/m
 export const ORDERS_PER_PBT_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level2";
 export const ORDERLINES_PER_ORDER_URL = API_GATEWAY + "/sr-service/platform-srms/md/order-details/level3";
 export const SET_ORDER_PRIORITY_URL = API_GATEWAY + "/sr-service/platform-srms/service-request/modify";
-export const ORDERS_REPORT_DOWNLOAD_URL = API_GATEWAY + "/platform-dashboard/report/generate-md-report";
+export const ORDERS_REPORT_DOWNLOAD_URL =API_GATEWAY+"/dashboard-service/platform-dashboard/report/generate-md-report";
 
 export const INVENTORY_REPORT_URL=API_URL + "/platform-dashboard/report/generate-inventory-report?requester=md";
 export const GR_REPORT_URL=API_URL + "/platform-dashboard/report/generate-report";
