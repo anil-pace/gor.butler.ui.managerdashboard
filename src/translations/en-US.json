@@ -4253,6 +4253,12 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
+    "id": "orders.action.generateReport",
+    "description": "button label for Generate Report",
+    "defaultMessage": "GENERATE REPORT",
+    "filepath": "./src/containers/orderTab/orderListTab.js"
+  },
+  {
     "id": "orders.action.collapseAll",
     "description": "button label for collapse all",
     "defaultMessage": "COLLAPSE ALL",

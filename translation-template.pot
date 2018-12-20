@@ -3253,6 +3253,11 @@ msgstr ""
         msgid "TIME"
         msgstr ""
 
+        #: orders.action.generateReport
+        msgctxt "orders.action.generateReport"
+        msgid "GENERATE REPORT"
+        msgstr ""
+
         #: orders.action.collapseAll
         msgctxt "orders.action.collapseAll"
         msgid "COLLAPSE ALL"
