@@ -84,10 +84,11 @@ class OrderListTab extends React.Component {
   }
 
   _requestReportDownload(){
+    var filtered_order_status=(!this.state.statusFilterForOrders || Array.isArray(this.state.statusFilterForOrders))?this.state.statusFilterForOrders:[this.state.statusFilterForOrders]
      let formData = {
         "start_date": this.state.startDateForOrders,
-        "end-data": this.state.endDateForOrders,
-        "filtered_order_status": this.state.statusFilterForOrders,
+        "end_date": this.state.endDateForOrders,
+        "filtered_order_status": filtered_order_status,
         "filtered_ppsId": this.state.ppsIdFilterForOrders
       };
       let params={
