@@ -99,8 +99,8 @@ class ChargingStations extends React.Component {
             detail.status=stringConfig[data[i].status] ? nProps.context.intl.formatMessage((stringConfig[data[i].status])) : data[i].status;
             detail.statusClass=data[i].status;
             detail.statusPriority=priStatus[data[i].status];
-            if (stringConfig[data[i].charger_mode] && nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode])) {
-                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].charger_mode]);
+            if (stringConfig[data[i].mode] && nProps.context.intl.formatMessage(stringConfig[data[i].mode])) {
+                detail.mode=nProps.context.intl.formatMessage(stringConfig[data[i].mode]);
             }
             else {
                 detail.mode=data[i].mode;
