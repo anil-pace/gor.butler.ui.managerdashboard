@@ -240,34 +240,7 @@ else{
     
 
   }
-
-  _onOrderInputChange(e){
-    let disableRecall = null;
-    let {isInputEmpty,selectedOption} = this.state
-    const value = e.target.value.trim();
-    if(selectedOption === "expired_items"){
-      disableRecall= value ? false :true
-    }
-    else{
-      disableRecall= !isInputEmpty && value ? false :true
-    }
-    
-    this.setState((state,props)=>{
-      return {
-        ...state,
-        orderInput:value,
-        disableRecall
-    }
-    })
-  }
-  _checkIfSKUEmpty(childState){
-    this.setState((state,props)=>{
-      return {
-        disableRecall: state.orderInput && !childState.isInputEmpty ? false : true,
-        ...childState
-      }
-    })
-  }
+ 
   _onOrderInputChange(e){
     let disableRecall = null;
     let {isInputEmpty,selectedOption} = this.state
@@ -299,6 +272,12 @@ else{
      * @return {[type]}
      */
     render(){
+      const {allTuplesValid,selectedOption,disableRecall} = this.state;
+      let disableStatus =  disableRecall;
+      if(selectedOption === "specific_item" && !allTuplesValid){
+          disableStatus = true;
+      }
+       
       return (
            <div className={"item-recall-wrapper"}>
            <div className={"recall-options"}>
@@ -331,7 +310,7 @@ else{
            callBack={this._checkIfSKUEmpty}
             />}
           
-          <div className="recall-footer"><button disabled={this.state.disableRecall} className={"gor-item-recall-btn"} onClick={this._recallItems}>
+          <div className="recall-footer"><button disabled={disableStatus} className={"gor-item-recall-btn"} onClick={this._recallItems}>
           <FormattedMessage id="itemRecall.recall.button" description='Text for item recall button' 
             defaultMessage='Recall'/>
           </button></div>
