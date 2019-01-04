@@ -140,11 +140,11 @@ class OrderFilter extends React.Component{
     _processOrderDateField(){
         const dateColumn = [
           {
-            value: "FROM DATE",
+            value: FROM_DATE,
             label: <FormattedMessage id="order.inputField.fromDate" defaultMessage="FROM DATE"/>
           },
           {
-            value: "TO DATE",
+            value: TO_DATE,
             label: <FormattedMessage id="order.inputField.toDate" defaultMessage="TO DATE"/>
           }
         ];
@@ -164,11 +164,11 @@ class OrderFilter extends React.Component{
     _processOrderTimeField(){
         const dateColumn = [
           {
-            value: "FROM TIME",
+            value: FROM_TIME,
             label: <FormattedMessage id="order.inputField.fromTime" defaultMessage="TIME"/>
           },
           {
-            value: "TO TIME",
+            value: TO_TIME,
             label: <FormattedMessage id="order.inputField.toTime" defaultMessage="TIME"/>
           }
         ];
