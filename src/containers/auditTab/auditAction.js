@@ -51,6 +51,15 @@ class AuditAction extends React.Component{
      dataToSent=JSON.stringify(cancelAuditData);
 
     }
+    else if(this.props.param === "START_AUDIT_TASK"){
+      let startAuditData = {
+        'formdata': formData,
+        'cause': "START_AUDIT",
+        'method': PUT,
+        'contentType': APP_JSON
+    }
+     dataToSent=JSON.stringify(startAuditData);
+    }
     else
     {
       URL=this.props.URL;

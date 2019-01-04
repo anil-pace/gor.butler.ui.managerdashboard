@@ -83,7 +83,7 @@ if (res.alert_data[0].code=="as006") {
     }
     break;
 
-    case 'START_AUDIT':
+    case 'START_AUDIT_TASK':
     if((res.successful && res.successful.length>=1) || (res.unsuccessful && res.unsuccessful.length>=1) || ((res.successful && res.successful.length===1) && (res.unsuccessful && res.unsuccessful.length===1)))
     {
        var successCount = res.successful.length,
