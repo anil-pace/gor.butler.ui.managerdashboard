@@ -185,8 +185,8 @@ class OrderListTab extends React.Component {
 			query.toTime = moment.tz(timeOffset).endOf('day').format('HH:mm:ss');
 		}
 
-		let startDateFilter = moment(query.fromDate + ' ' + query.fromTime).toISOString();
-		let endDateFilter = moment(query.toDate + ' ' + query.toTime).toISOString();
+		let startDateFilter = moment.tz(query.fromDate + ' ' + query.fromTime, timeOffset).toISOString();
+		let endDateFilter = moment.tz(query.toDate + ' ' + query.toTime, timeOffset).toISOString();
 		this.setState(
 			{
 				startDateForOrders: startDateFilter,
