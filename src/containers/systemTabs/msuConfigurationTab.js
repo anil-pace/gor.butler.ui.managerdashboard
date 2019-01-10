@@ -61,7 +61,7 @@ class MsuConfigTab extends React.Component {
 
 
 
-    _requestMsuList(rackId, rackStatus) {
+    _requestMsuList(rackId = undefined, rackStatus = undefined) {
         if (rackId || rackStatus) {
             let msuList = [];
             this.props.client.query({
@@ -70,7 +70,7 @@ class MsuConfigTab extends React.Component {
                     return {
                         input: {
                             id: rackId,
-                            racktype: rackStatus.toString()
+                            racktype: rackStatus ? rackStatus.toString() : rackStatus
                         }
                     }
                 }()),
