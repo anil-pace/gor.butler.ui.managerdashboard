@@ -70,7 +70,7 @@ class MsuConfigTab extends React.Component {
                     return {
                         input: {
                             id: rackId,
-                            racktype: rackStatus.toString()
+                            racktype: rackStatus ? rackStatus.toString() : rackStatus
                         }
                     }
                 }()),
