@@ -110,12 +110,21 @@ auditwaitingStatus: {
 });
 
 
+const GENERATE_AUDIT_REPORT_QUERY = gql`
+    query GenerateAuditReport($input: GenerateAuditReportParams) {
+        GenerateAuditReport(input:$input){
+           data
+        }
+    }
+`;
+
 class AuditTab extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {selected_page: 1, query: null, auditListRefreshed: null, timerId: 0, 
-            intervalPage: 1,AuditList:this.props.AuditList||[],totalAudits:0,totalPage:1};
+            intervalPage: 1,AuditList:this.props.AuditList||[],totalAudits:0,totalPage:1,
+            generateAuditReport:""};
         this._handelClick = this._handelClick.bind(this);
         this.showAuditFilter = this.props.showAuditFilter.bind(this)
         this.subscription = null;
@@ -158,6 +167,22 @@ class AuditTab extends React.Component {
             this.startAuditAuto();
         }
 
+    }
+
+    generateAuditReport(){
+        this.props.client.query({
+            query: GENERATE_AUDIT_REPORT_QUERY,
+            variables:{input:{requestedBy:this.props.username}}
+           }).then(result => {
+            console.log(result);
+            if(result.data.GenerateAuditReport.data==="success"){
+                this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
+            }
+            else{
+                this.props.notifyFail(REQUEST_REPORT_FAILURE);
+            }
+            this.setState({ generateAuditReport: result.data.GenerateAuditReport.data })
+        })
     }
 
     startAuditAuto(auditId) {
@@ -769,6 +794,15 @@ if(query.scrolling){
 
                 </div>
                 <div className="gor-audit-filter-create-wrap">
+
+                    <div className="gor-button-wrap">
+                        <button className="gor-audit-generate-report-btn" onClick={this.generateAuditReport.bind(this)}>
+                            <FormattedMessage id="audit.table.generateAuditReport"
+                                description="button label for generate report"
+                                defaultMessage="GENERATE REPORT" />
+                        </button>
+                    </div>
+
                     <div className="gor-button-wrap">
                         <button className="gor-audit-create-btn" onClick={this.createAudit.bind(this)}>
                             <div className="gor-filter-add-token-white" />
