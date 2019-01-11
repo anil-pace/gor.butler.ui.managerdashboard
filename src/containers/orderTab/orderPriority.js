@@ -106,7 +106,7 @@ class OrderPriority extends React.Component{
 		var arr=[];
         var data = [
             {value: "high", text: <FormattedMessage id="order.priority.high" description="label text for high" defaultMessage="High"/>},
-            {value: "medium", text: <FormattedMessage id="order.priority.medium" description="label text for medium" defaultMessage="Medium"/>},
+            {value: "normal", text: <FormattedMessage id="order.priority.normal" description="label text for normal" defaultMessage="Normal"/>},
             {value: "low", text: <FormattedMessage id="order.priority.low" description="label text for low" defaultMessage="Low"/>},
             {value: "critical", text: <FormattedMessage id="order.priority.critical" description="label text for critical" defaultMessage="Critical"/>},
         ];
