@@ -206,11 +206,26 @@ class AuditTab extends React.Component {
   }
 
   generateAuditReport() {
+    let pageNo = this.props.currentPageNumber;
+    let pageSize = pageNo * 10 || 10;
     this.props.client
       .query({
         query: GENERATE_AUDIT_REPORT_QUERY,
         variables: {
-          input: {}
+          input: {
+            skuId: this.props.location.query.skuId || '',
+            locationId: this.props.location.query.locationId || '',
+            taskId: this.props.location.query.taskId || '',
+            ppsId: this.props.location.query.ppsId || '',
+            operatingMode: this.props.location.query.operatingMode || '',
+            status: this.props.location.query.status || '',
+            fromDate: this.props.location.query.fromDate || '',
+            toDate: this.props.location.query.toDate || '',
+            auditType: this.props.location.query.auditType || '',
+            createdBy: this.props.location.query.createdBy || '',
+            pageSize: pageSize,
+            pageNo: 1
+          }
         }
       })
       .then(result => {
