@@ -3,10 +3,10 @@ import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux';
 import AuditListingTab from './auditListingTab';
 import {
-  GTableHeader,
-  GTableHeaderCell
-} from '../components/gor-table-component/tableHeader';
-import { GTable } from '../components/gor-table-component/index';
+  REQUEST_REPORT_SUCCESS,
+  REQUEST_REPORT_FAILURE
+} from '../constants/messageConstants';
+
 import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
 import AuditStart from '../containers/auditTab/auditStart';
 import ActionDropDown from '../components/actionDropDown/actionDropDown';
@@ -52,9 +52,7 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import CreateAudit from './auditTab/createAudit';
 import { modal } from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary';
-import { mappingArray } from '../utilities/utils';
-import { codeToString } from '../utilities/codeToString';
-import { getFormattedMessages } from '../utilities/getFormattedMessages';
+
 import {
   resetForm,
   notifyfeedback,
