@@ -2,7 +2,6 @@ import React from 'react';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux';
 import AuditListingTab from './auditListingTab';
-//import { notifySuccess, notifyFail } from './../../actions/validationActions';
 import {
   REQUEST_REPORT_SUCCESS,
   REQUEST_REPORT_FAILURE
@@ -57,6 +56,7 @@ import FilterSummary from './../components/tableFilter/filterSummary';
 import {
   resetForm,
   notifyfeedback,
+  notifySuccess,
   notifyFail
 } from '../actions/validationActions';
 import { setNotification } from '../actions/notificationAction';
@@ -280,15 +280,11 @@ class AuditTab extends React.Component {
       })
       .then(result => {
         console.log(result);
-        this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
-        // if (result.data.GenerateAuditReport.data === 'success') {
-        //   this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
-        // } else {
-        //   this.props.notifyFail(REQUEST_REPORT_FAILURE);
-        // }
-        // this.setState({
-        //   generateAuditReport: result.data.GenerateAuditReport.data
-        // });
+        if (result.data.GenerateAuditReport.list) {
+          this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
+        } else {
+          this.props.notifyFail(REQUEST_REPORT_FAILURE);
+        }
       });
   }
 
@@ -1115,6 +1111,9 @@ var mapDispatchToProps = function(dispatch) {
     },
     setNotification: function(data) {
       dispatch(setNotification(data));
+    },
+    notifySuccess: function(data) {
+      dispatch(notifySuccess(data));
     },
     notifyFail: function(data) {
       dispatch(notifyFail(data));
