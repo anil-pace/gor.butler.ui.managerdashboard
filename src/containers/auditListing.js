@@ -255,7 +255,6 @@ class AuditTab extends React.Component {
   }
 
   generateAuditReport() {
-    let _this = this;
     let pageNo = this.props.currentPageNumber;
     let pageSize = pageNo * 10 || 10;
     this.props.client
