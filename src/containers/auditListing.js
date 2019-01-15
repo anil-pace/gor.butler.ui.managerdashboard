@@ -140,7 +140,19 @@ const messages = defineMessages({
 const GENERATE_AUDIT_REPORT_QUERY = gql`
   query GenerateAuditReport($input: GenerateAuditReportParams) {
     GenerateAuditReport(input: $input) {
-      data
+      status
+      requestId
+      skuId
+      locationId
+      taskId
+      ppsId
+      operatingMode
+      fromDate
+      toDate
+      auditType
+      createdBy
+      pageSize
+      pageNo
     }
   }
 `;
