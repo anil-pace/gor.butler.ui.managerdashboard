@@ -272,3 +272,54 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
   }
 }
 `;
+
+export const ITEM_SEARCH_DETAILS_QUERY = gql`  query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
+        ItemSearchDetailsList(input:$input){
+             list{
+              externalServiceRequestId,
+              createdOn,
+              attributes{
+                ppsIdList
+              },
+              actuals{
+                containers{
+                  products{
+                    productAttributes{
+                      pdfa_values{
+                        product_sku
+                      }
+                    }
+                  }
+                }
+              }
+            }
+      }
+    }
+`;
+export const ITEM_SEARCH_QUERY = gql` query ItemSearchList($input: ItemSearchListParams) {
+        ItemSearchList(input:$input){
+             list{
+              serviceRequests{
+                type,
+                status,
+                state,
+                externalServiceRequestId,
+                attributes{
+                  ppsIdList
+                }
+                expectations{
+                  containers{
+                  products{
+                    productAttributes{
+                      pdfa_values{
+                        product_sku
+                      }
+                    }
+                  }
+                }
+              }
+              }
+            }
+      }
+    }
+`;
