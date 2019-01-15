@@ -280,11 +280,7 @@ class AuditTab extends React.Component {
       })
       .then(result => {
         console.log(result);
-        if (result.data.GenerateAuditReport.list) {
-          this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
-        } else {
-          this.props.notifyFail(REQUEST_REPORT_FAILURE);
-        }
+        this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
       });
   }
 
