@@ -50,7 +50,6 @@ class OrderListTab extends React.Component {
 		this._handleCollapseAll = this._handleCollapseAll.bind(this);
 		this._setPolling = this._setPolling.bind(this);
 		this._clearFilter = this._clearFilter.bind(this);
-		this._requestReportDownload = this._requestReportDownload.bind(this);
 		moment.locale(props.intl.locale);
 	}
 
@@ -71,29 +70,7 @@ class OrderListTab extends React.Component {
 		};
 	}
 
-	_requestReportDownload() {
-		var filtered_order_status =
-			!this.state.statusFilterForOrders || Array.isArray(this.state.statusFilterForOrders)
-				? this.state.statusFilterForOrders
-				: [ this.state.statusFilterForOrders ];
-		let formData = {
-			start_date: this.state.startDateForOrders,
-			end_date: this.state.endDateForOrders,
-			filtered_order_status: filtered_order_status,
-			filtered_ppsId: this.state.ppsIdFilterForOrders
-		};
-		let params = {
-			url: ORDERS_REPORT_DOWNLOAD_URL,
-			method: POST,
-			contentType: APP_JSON,
-			cause: ORDERS_REPORT_DOWNLOAD_REQUEST,
-			token: this.props.auth_token,
-			responseType: 'arraybuffer',
-			formdata: formData,
-			accept: APP_JSON
-		};
-		this.props.makeAjaxCall(params);
-	}
+
 
 	_reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied = 'false') {
 		let formData = {
@@ -400,23 +377,7 @@ class OrderListTab extends React.Component {
 										</div>
 
 										<div className='orderButtonWrapper'>
-											<div className='gorButtonWrap'>
-												<button
-													/*
-                          disabled={
-                            this.props.pbts.filter(pbt => pbt.opened).length < 1
-                          }
-                          */
-													className='gor-filterBtn-btn genReport'
-													onClick={this._requestReportDownload}
-												>
-													<FormattedMessage
-														id='orders.action.generateReport'
-														description='button label for Generate Report'
-														defaultMessage='GENERATE REPORT'
-													/>
-												</button>
-											</div>
+									
 											<div className='gorButtonWrap'>
 												<button
 													disabled={this.props.pbts.filter((pbt) => pbt.opened).length < 1}
