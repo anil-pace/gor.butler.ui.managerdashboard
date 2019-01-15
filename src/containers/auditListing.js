@@ -2,10 +2,11 @@ import React from 'react';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux';
 import AuditListingTab from './auditListingTab';
+//import { notifySuccess, notifyFail } from './../../actions/validationActions';
 import {
   REQUEST_REPORT_SUCCESS,
   REQUEST_REPORT_FAILURE
-} from '../constants/messageConstants';
+} from './../constants/messageConstants';
 
 import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
 import AuditStart from '../containers/auditTab/auditStart';
@@ -140,19 +141,54 @@ const messages = defineMessages({
 const GENERATE_AUDIT_REPORT_QUERY = gql`
   query GenerateAuditReport($input: GenerateAuditReportParams) {
     GenerateAuditReport(input: $input) {
-      status
-      requestId
-      skuId
-      locationId
-      taskId
-      ppsId
-      operatingMode
-      fromDate
-      toDate
-      auditType
-      createdBy
-      pageSize
-      pageNo
+      list {
+        create_time
+        approved
+        rejected
+        actual_quantity
+        audit_created_by
+        audit_id
+        audit_name
+        audit_creator_name
+        audit_info
+        audit_param_name
+        audit_param_type
+        audit_param_value
+        audit_status
+        audit_type
+        cancel_request
+        completed_quantity
+        completion_time
+        description
+        display_id
+        expected_quantity
+        pps_id
+        resolved
+        start_actual_time
+        start_request_time
+        unresolved
+        kq
+
+        audit_button_data {
+          audit_cancel_button
+          audit_delete_button
+          audit_duplicate_button
+          audit_edit_button
+          audit_pause_button
+          audit_reaudit_button
+          audit_resolve_button
+          audit_start_button
+        }
+        audit_progress {
+          completed
+          total
+        }
+        __typename
+      }
+      page
+      page_results
+      total_pages
+      total_results
     }
   }
 `;
@@ -173,6 +209,7 @@ class AuditTab extends React.Component {
     };
     this._handelClick = this._handelClick.bind(this);
     this.showAuditFilter = this.props.showAuditFilter.bind(this);
+    this.generateAuditReport = this.generateAuditReport.bind(this);
     this.subscription = null;
     this.flag = true;
     this.props.setAuditDetails(this.state.AuditList);
@@ -218,6 +255,7 @@ class AuditTab extends React.Component {
   }
 
   generateAuditReport() {
+    let _this = this;
     let pageNo = this.props.currentPageNumber;
     let pageSize = pageNo * 10 || 10;
     this.props.client
