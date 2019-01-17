@@ -273,7 +273,7 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
 }
 `;
 
-export const ITEM_SEARCH_DETAILS_QUERY = gql`  query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
+export const ITEM_SEARCH_DETAILS_QUERY = gql` query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
         ItemSearchDetailsList(input:$input){
              list{
               externalServiceRequestId,
@@ -282,15 +282,7 @@ export const ITEM_SEARCH_DETAILS_QUERY = gql`  query ItemSearchDetailsList($inpu
                 ppsIdList
               },
               actuals{
-                containers{
-                  products{
-                    productAttributes{
-                      pdfa_values{
-                        product_sku
-                      }
-                    }
-                  }
-                }
+                containers
               }
             }
       }

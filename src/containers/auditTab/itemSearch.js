@@ -20,60 +20,7 @@ import ItemSearchDetails from './itemSearchDetails';
  //import Dimensions from 'react-dimensions';
 
 
-const messages=defineMessages({
-  alCancel: {
-    id: "auditlisting.cancel.status",
-    defaultMessage: "Cancel"
-},
-alDelete: {
-    id: "auditlisting.delete.status",
-    defaultMessage: "Delete"
-},
-alDuplicate: {
-    id: "auditlisting.duplicate.prefix",
-    defaultMessage: "Duplicate"
-},
-alResolve: {
-    id: "auditlisting.resolve.status",
-    defaultMessage: "Resolve"
-},
-alPause: {
-  id: "auditlisting.pause.status",
-  defaultMessage: "Pause"
-},
-alEdit: {
-  id: "auditlisting.edit.status",
-  defaultMessage: "Edit"
-},
-alViewDetails: {
-  id: "auditlisting.viewdetails.status",
-  defaultMessage: "View Details"
-},
-autoAssignPPS: {
-  id: "auditlisting.label.autoassignpps",
-  defaultMessage: "Auto Assign PPS"
-},
-manualAssignPPS: {
-  id: "auditlisting.label.manualassignpps",
-  defaultMessage: "Manually-Assign PPS"
-},
-startButton: {
-  id: "auditlisting.label.startbutton",
-  defaultMessage: "START"
-},
-reauditButton: {
-  id: "auditlisting.label.reauditbutton",
-  defaultMessage: "RE-AUDIT"
-},
-resolveButton: {
-  id: "auditlisting.label.reolvebutton",
-  defaultMessage: "RESOLVE"
-},
-multiPPS:{
-  id: "viewDetais.audit.multiPPS",
-  defaultMessage: "Multi PPS"
-}
-});
+
 
 const actionOptions = [{
   "name":"View Details",

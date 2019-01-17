@@ -1,4 +1,21 @@
 .table-itemsearch{
+    &.table-item-search-details{
+        margin-top:25px;
+        .table-head{
+            padding:25px 15px;
+            border-top: 1px solid #E6E6E6;
+            border-bottom: 1px solid #E6E6E6;
+            background: #FAFAFA;
+            p{
+                font-size:18px;
+                font-weight: bold;
+            }
+        }
+        .table-cell{
+            flex-grow: 1 !important;
+            text-align: inherit !important;
+        }
+    }
     .container{
         float:none;
     }
