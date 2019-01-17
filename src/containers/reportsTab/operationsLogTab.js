@@ -267,9 +267,7 @@ class OperationsLogTab extends React.Component {
         query: GENERATE_REPORT_QUERY,
         variables: {
           input: {
-            size: this.props.data.OperationLogList
-              ? this.props.data.OperationLogList.total
-              : 0,
+            size: this.props.data.OperationLogList.total,
             requestId: this.props.location.query.request_id,
             userId: this.props.location.query.user_id,
             skuId: this.props.location.query.sku_id,
@@ -396,8 +394,13 @@ class OperationsLogTab extends React.Component {
             <div className='gorToolBarDropDown'>
               <div className='gor-button-wrap'>
                 <button
+                  disabled={this.props.data.OperationLogList ? false : true}
                   title={this.props.intl.formatMessage(messages.genRepTooltip)}
-                  className='gor-rpt-dwnld'
+                  className={
+                    this.props.data.OperationLogList
+                      ? 'gor-rpt-dwnld'
+                      : 'gor-rpt-dwnld disabled'
+                  }
                   onClick={this._requestReportDownload}
                 >
                   <FormattedMessage
