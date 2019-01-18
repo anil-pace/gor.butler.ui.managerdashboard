@@ -36,7 +36,7 @@
     border-radius: 3px;
     background-color: #4d5055;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    font-family: "source sans pro";
+    font-family: 'source sans pro';
     font-size: calculateRem(14px);
     font-weight: 600;
     text-align: left;
@@ -45,6 +45,9 @@
     padding-right: calculateRem(14px);
     vertical-align: sub;
     cursor: pointer;
+    &.disabled {
+      cursor: default;
+    }
   }
 }
 
@@ -86,7 +89,6 @@
         .cell:last-child {
           padding-right: 15px;
         }
-
       }
     }
     .table-header {
@@ -97,11 +99,7 @@
         .cell:last-child {
           padding-right: 15px;
         }
-
       }
     }
   }
-
 }
-
-
