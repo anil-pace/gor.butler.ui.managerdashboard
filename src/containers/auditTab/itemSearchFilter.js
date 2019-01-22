@@ -51,15 +51,17 @@ import { mappingArray, arrayDiff } from '../../utilities/utils';
 import { graphql, withApollo, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import { AUDIT_USER_FETCH_QUERY } from './query/serverQuery';
-import { auditClientData } from './query/clientQuery';
+import { itemSearchClientData } from './query/clientQuery';
 class ItemSearchFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tokenSelected: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] },
+      //tokenSelected: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] },
+      tokenSelected: { STATUS: [ALL] },
       searchQuery: {},
       textboxStatus: null,
-      defaultToken: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] }
+      // defaultToken: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] }
+      defaultToken: { STATUS: [ALL] }
     };
     this._applyFilter = this._applyFilter.bind(this);
     this._closeFilter = this._closeFilter.bind(this);
@@ -67,17 +69,17 @@ class ItemSearchFilter extends React.Component {
   }
 
   _closeFilter() {
-    this.props.showAuditFilter(false);
+    this.props.showItemSearchFilter(false);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auditFilterState) {
+    if (nextProps.itemSearchFilterState) {
       if (
-        nextProps.auditFilterState &&
+        nextProps.itemSearchFilterState &&
         JSON.stringify(this.state) !==
-          JSON.stringify(nextProps.auditFilterState)
+          JSON.stringify(nextProps.itemSearchFilterState)
       ) {
-        this.setState(nextProps.auditFilterState);
+        this.setState(nextProps.itemSearchFilterState);
       }
     }
   }
@@ -88,28 +90,34 @@ class ItemSearchFilter extends React.Component {
         value: AUDIT_TASK_ID,
         label: (
           <FormattedMessage
-            id='audit.inputField.id'
-            defaultMessage='AUDIT ID'
+            id='itemSearch.inputField.id'
+            defaultMessage='ITEM SEARCH ID'
           />
         )
       },
       {
         value: SPECIFIC_PPS_ID,
         label: (
-          <FormattedMessage id='audit.inputField.pps' defaultMessage='PPS ID' />
+          <FormattedMessage
+            id='itemSearch.inputField.pps'
+            defaultMessage='PPS ID'
+          />
         )
       },
       {
         value: SPECIFIC_SKU_ID,
         label: (
-          <FormattedMessage id='audit.inputField.sku' defaultMessage='SKU ID' />
+          <FormattedMessage
+            id='itemSearch.inputField.sku'
+            defaultMessage='SKU ID'
+          />
         )
       },
       {
         value: SPECIFIC_LOCATION_ID,
         label: (
           <FormattedMessage
-            id='audit.inputField.location'
+            id='itemSearch.inputField.location'
             defaultMessage='LOCATION ID'
           />
         )
@@ -120,7 +128,7 @@ class ItemSearchFilter extends React.Component {
         type: 'date',
         label: (
           <FormattedMessage
-            id='audit.inputField.fromdate'
+            id='itemSearch.inputField.fromdate'
             defaultMessage='FROM DATE'
           />
         )
@@ -131,7 +139,7 @@ class ItemSearchFilter extends React.Component {
         type: 'date',
         label: (
           <FormattedMessage
-            id='audit.inputField.todate'
+            id='itemSearch.inputField.todate'
             defaultMessage='TO DATE'
           />
         )
@@ -152,76 +160,84 @@ class ItemSearchFilter extends React.Component {
   }
 
   _processFilterToken() {
-    var tokenAuditTypeField = {
-      value: 'AUDIT_TYPE',
-      label: (
-        <FormattedMessage
-          id='audit.tokenfield.typeAudit'
-          defaultMessage='AUDIT TYPE'
-        />
-      )
-    };
-    let userArr = this.props.auditUserList || [];
-    let labelC3 = [
-      {
-        value: ALL,
-        label: <FormattedMessage id='audit.token3.all' defaultMessage='Any' />
-      }
-    ];
-    userArr.forEach(data => {
-      labelC3.push({
-        value: data,
-        label: data
-      });
-    });
+    // var tokenAuditTypeField = {
+    //   value: 'AUDIT_TYPE',
+    //   label: (
+    //     <FormattedMessage
+    //       id='itemSearch.tokenfield.typeAudit'
+    //       defaultMessage='AUDIT TYPE'
+    //     />
+    //   )
+    // };
+    // let userArr = this.props.auditUserList || [];
+    // let labelC3 = [
+    //   {
+    //     value: ALL,
+    //     label: (
+    //       <FormattedMessage id='itemSearch.token3.all' defaultMessage='Any' />
+    //     )
+    //   }
+    // ];
+    // userArr.forEach(data => {
+    //   labelC3.push({
+    //     value: data,
+    //     label: data
+    //   });
+    // });
 
     var tokenStatusField = {
       value: 'STATUS',
       label: (
         <FormattedMessage
-          id='audit.tokenfield.STATUS'
+          id='itemSearch.tokenfield.STATUS'
           defaultMessage='STATUS'
         />
       )
     };
-    var tokenCreatedByField = {
-      value: 'CREATED_BY',
-      label: (
-        <FormattedMessage
-          id='audit.tokenfield.createdby'
-          defaultMessage='CREATED BY'
-        />
-      )
-    };
-    const labelC1 = [
-      {
-        value: ANY,
-        label: <FormattedMessage id='audit.token1.all' defaultMessage='Any' />
-      },
-      {
-        value: SKU,
-        label: <FormattedMessage id='audit.token1.sku' defaultMessage='SKU' />
-      },
-      {
-        value: LOCATION,
-        label: (
-          <FormattedMessage
-            id='audit.token1.location'
-            defaultMessage='Location'
-          />
-        )
-      }
-    ];
+    // var tokenCreatedByField = {
+    //   value: 'CREATED_BY',
+    //   label: (
+    //     <FormattedMessage
+    //       id='itemSearch.tokenfield.createdby'
+    //       defaultMessage='CREATED BY'
+    //     />
+    //   )
+    // };
+    // const labelC1 = [
+    //   {
+    //     value: ANY,
+    //     label: (
+    //       <FormattedMessage id='itemSearch.token1.all' defaultMessage='Any' />
+    //     )
+    //   },
+    //   {
+    //     value: SKU,
+    //     label: (
+    //       <FormattedMessage id='itemSearch.token1.sku' defaultMessage='SKU' />
+    //     )
+    //   },
+    //   {
+    //     value: LOCATION,
+    //     label: (
+    //       <FormattedMessage
+    //         id='itemSearch.token1.location'
+    //         defaultMessage='Location'
+    //       />
+    //     )
+    //   }
+    // ];
     const labelC2 = [
       {
         value: ALL,
-        label: <FormattedMessage id='audit.token2.all' defaultMessage='Any' />
+        label: (
+          <FormattedMessage id='itemSearch.token2.all' defaultMessage='Any' />
+        )
       },
       {
         value: NOT_YET_STARTED,
         label: (
           <FormattedMessage
-            id='audit.token2.notyetstarted'
+            id='itemSearch.token2.notyetstarted'
             defaultMessage='Not yet started'
           />
         )
@@ -230,7 +246,7 @@ class ItemSearchFilter extends React.Component {
         value: INPROGRESS,
         label: (
           <FormattedMessage
-            id='audit.token2.inProgress'
+            id='itemSearch.token2.inProgress'
             defaultMessage='In progress'
           />
         )
@@ -239,7 +255,7 @@ class ItemSearchFilter extends React.Component {
         value: TO_BE_RESOLVED,
         label: (
           <FormattedMessage
-            id='audit.token2.toberesolved'
+            id='itemSearch.token2.toberesolved'
             defaultMessage='To be resolved'
           />
         )
@@ -248,7 +264,7 @@ class ItemSearchFilter extends React.Component {
         value: AUDIT_CANCELLED,
         label: (
           <FormattedMessage
-            id='audit.token2.cancelled'
+            id='itemSearch.token2.cancelled'
             defaultMessage='Cancelled'
           />
         )
@@ -257,7 +273,7 @@ class ItemSearchFilter extends React.Component {
         value: AUDIT_COMPLETED,
         label: (
           <FormattedMessage
-            id='audit.token2.completed'
+            id='itemSearch.token2.completed'
             defaultMessage='Completed'
           />
         )
@@ -265,7 +281,10 @@ class ItemSearchFilter extends React.Component {
       {
         value: AUDIT_PAUSED,
         label: (
-          <FormattedMessage id='audit.token2.paused' defaultMessage='Paused' />
+          <FormattedMessage
+            id='itemSearch.token2.paused'
+            defaultMessage='Paused'
+          />
         )
       }
     ];
@@ -279,28 +298,28 @@ class ItemSearchFilter extends React.Component {
         selectedToken={selectedToken}
       />
     );
-    var column2 = (
-      <FilterTokenWrap
-        field={tokenAuditTypeField}
-        tokenCallBack={this._handelTokenClick.bind(this)}
-        label={labelC1}
-        selectedToken={selectedToken}
-        selection={SINGLE}
-      />
-    );
-    var column3 = (
-      <FilterTokenWrap
-        field={tokenCreatedByField}
-        tokenCallBack={this._handelTokenClick.bind(this)}
-        label={labelC3}
-        selectedToken={selectedToken}
-      />
-    );
+    // var column2 = (
+    //   <FilterTokenWrap
+    //     field={tokenAuditTypeField}
+    //     tokenCallBack={this._handelTokenClick.bind(this)}
+    //     label={labelC1}
+    //     selectedToken={selectedToken}
+    //     selection={SINGLE}
+    //   />
+    // );
+    // var column3 = (
+    //   <FilterTokenWrap
+    //     field={tokenCreatedByField}
+    //     tokenCallBack={this._handelTokenClick.bind(this)}
+    //     label={labelC3}
+    //     selectedToken={selectedToken}
+    //   />
+    // );
 
     var columnDetail = {
-      column1token: column1,
-      column2token: column2,
-      column3token: column3
+      column1token: column1
+      //column2token: column2,
+      //column3token: column3
     };
     return columnDetail;
   }
@@ -316,24 +335,24 @@ class ItemSearchFilter extends React.Component {
       tokenSelected: handelTokenClick(field, value, state, this.state)
     });
 
-    if (state !== 'addDefault') {
-      obj.name = mappingArray(selectedToken);
-      tokentoRemove = mappingArray(token, selectedToken);
-      queryField =
-        selectedToken.toString() === ANY
-          ? tokentoRemove
-          : arrayDiff(tempArray, obj.name);
-      if (queryField && queryField.length !== 0) {
-        this.setState({
-          searchQuery: handleInputQuery('', queryField, this.state)
-        });
-      }
-      if (field == 'AUDIT_TYPE')
-        this.setState({ textboxStatus: JSON.stringify(obj) });
-    } else {
-      if (field == 'AUDIT_TYPE')
-        this.setState({ textboxStatus: JSON.stringify(obj) });
-    }
+    // if (state !== 'addDefault') {
+    //   obj.name = mappingArray(selectedToken);
+    //   tokentoRemove = mappingArray(token, selectedToken);
+    //   queryField =
+    //     selectedToken.toString() === ANY
+    //       ? tokentoRemove
+    //       : arrayDiff(tempArray, obj.name);
+    //   if (queryField && queryField.length !== 0) {
+    //     this.setState({
+    //       searchQuery: handleInputQuery('', queryField, this.state)
+    //     });
+    //   }
+    //   if (field == 'AUDIT_TYPE')
+    //     this.setState({ textboxStatus: JSON.stringify(obj) });
+    // } else {
+    //   if (field == 'AUDIT_TYPE')
+    //     this.setState({ textboxStatus: JSON.stringify(obj) });
+    // }
   }
 
   _handleInputQuery(inputQuery, queryField) {
@@ -347,29 +366,30 @@ class ItemSearchFilter extends React.Component {
       _query = {};
 
     if (
-      JSON.stringify(this.state) !== JSON.stringify(this.props.auditFilterState)
+      JSON.stringify(this.state) !==
+      JSON.stringify(this.props.itemSearchFilterState)
     ) {
       this.props.setCurrentPageNumber(0);
     }
 
-    if (
-      filterState.tokenSelected[AUDIT_TYPE] &&
-      filterState.tokenSelected[AUDIT_TYPE][0] !== ANY
-    ) {
-      _query.auditType = filterState.tokenSelected[AUDIT_TYPE];
-    }
+    // if (
+    //   filterState.tokenSelected[AUDIT_TYPE] &&
+    //   filterState.tokenSelected[AUDIT_TYPE][0] !== ANY
+    // ) {
+    //   _query.auditType = filterState.tokenSelected[AUDIT_TYPE];
+    // }
     if (
       filterState.tokenSelected['STATUS'] &&
       filterState.tokenSelected['STATUS'][0] !== ALL
     ) {
       _query.status = filterState.tokenSelected['STATUS'];
     }
-    if (
-      filterState.tokenSelected['CREATED_BY'] &&
-      filterState.tokenSelected['CREATED_BY'][0] !== ALL
-    ) {
-      _query.createdBy = filterState.tokenSelected['CREATED_BY'];
-    }
+    // if (
+    //   filterState.tokenSelected['CREATED_BY'] &&
+    //   filterState.tokenSelected['CREATED_BY'][0] !== ALL
+    // ) {
+    //   _query.createdBy = filterState.tokenSelected['CREATED_BY'];
+    // }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
       _query.taskId = filterState.searchQuery[AUDIT_TASK_ID];
@@ -395,19 +415,19 @@ class ItemSearchFilter extends React.Component {
     _query.pageNo = this.props.currentPage;
     _query.pageSize = this.props.totalResults;
 
-    hashHistory.push({ pathname: '/auditlisting', query: _query });
+    hashHistory.push({ pathname: '/itemsearch', query: _query });
     this.props.filterApplied(true);
-    this.props.updateSubscription(true);
-    this.props.showAuditFilter(false);
+    //this.props.updateSubscription(true);
+    this.props.showItemSearchFilter(false);
   }
 
   _clearFilter() {
-    this.props.auditfilterState({
+    this.props.itemSearchfilterState({
       tokenSelected: {
-        AUDIT_TYPE: [ANY],
+        //AUDIT_TYPE: [ANY],
         STATUS: [ALL],
-        CREATED_BY: [ALL],
-        __typename: 'AuditFilterTokenSelected'
+        //CREATED_BY: [ALL],
+        __typename: 'ItemSearchFilterTokenSelected'
       },
       searchQuery: {
         SPECIFIC_SKU_ID: null,
@@ -416,18 +436,18 @@ class ItemSearchFilter extends React.Component {
         SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
-        __typename: 'AuditFilterSearchQuery'
+        __typename: 'ItemSearchFilterSearchQuery'
       },
       defaultToken: {
-        AUDIT_TYPE: [ANY],
+        //AUDIT_TYPE: [ANY],
         STATUS: [ALL],
-        CREATED_BY: [ALL],
-        __typename: 'AuditFilterDefaultToken'
+        //CREATED_BY: [ALL],
+        __typename: 'ItemSearchFilterDefaultToken'
       }
     });
     this.props.filterApplied(false);
-    hashHistory.push({ pathname: '/auditlisting', query: {} });
-    this.props.showAuditFilter(false);
+    hashHistory.push({ pathname: '/itemsearch', query: {} });
+    this.props.showItemSearchFilter(false);
   }
 
   render() {
@@ -507,10 +527,10 @@ class ItemSearchFilter extends React.Component {
     );
   }
 }
-const withClientData = graphql(auditClientData, {
+const withClientData = graphql(itemSearchClientData, {
   props: data => ({
-    auditFilterState: data.data.auditFilter
-      ? JSON.parse(JSON.stringify(data.data.auditFilter.filterState))
+    itemSearchFilterState: data.data.itemSearchFilter
+      ? JSON.parse(JSON.stringify(data.data.itemSearchFilter.filterState))
       : null
   })
 });
@@ -522,7 +542,7 @@ ItemSearchFilter.PropTypes = {
   showTableFilter: React.PropTypes.func,
   filterApplied: React.PropTypes.func,
   auditFilterStatus: React.PropTypes.bool,
-  showAuditFilter: React.PropTypes.func
+  showItemSearchFilter: React.PropTypes.func
 };
 const SET_TEXT_BOX_STATUS = gql`
   mutation setFilterTextBox($textBoxName: String!) {
@@ -531,7 +551,7 @@ const SET_TEXT_BOX_STATUS = gql`
 `;
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
-    setAuditFilterApplied(isFilterApplied: $isFilterApplied) @client
+    setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
   }
 `;
 const SET_UPDATE_SUBSCRIPTION = gql`
@@ -542,7 +562,7 @@ const SET_UPDATE_SUBSCRIPTION = gql`
 `;
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
-    setAuditFilterState(state: $state) @client
+    setItemSearchFilterState(state: $state) @client
   }
 `;
 const SET_PAGE_NUMBER = gql`
@@ -581,31 +601,31 @@ const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    auditfilterState: function(state) {
+    itemSearchfilterState: function(state) {
       mutate({ variables: { state: state } });
     }
   })
 });
 
-const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
-  props: function(data) {
-    var list = { pps_list: [] };
-    if (!data || !data.data.AuditFetchUser || !data.data.AuditFetchUser.list) {
-      auditUserList: list.users;
-      return {};
-    }
+// const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
+//   props: function(data) {
+//     var list = { pps_list: [] };
+//     if (!data || !data.data.AuditFetchUser || !data.data.AuditFetchUser.list) {
+//       auditUserList: list.users;
+//       return {};
+//     }
 
-    return {
-      auditUserList: data.data.AuditFetchUser.list.users
-    };
-  },
-  options: ({ match, location }) => ({
-    variables: {},
-    fetchPolicy: 'network-only'
-  })
-});
+//     return {
+//       auditUserList: data.data.AuditFetchUser.list.users
+//     };
+//   },
+//   options: ({ match, location }) => ({
+//     variables: {},
+//     fetchPolicy: 'network-only'
+//   })
+// });
 export default compose(
-  initialQuery,
+  //initialQuery,
   withApollo,
   withClientData,
   setTextBoxStatus,
