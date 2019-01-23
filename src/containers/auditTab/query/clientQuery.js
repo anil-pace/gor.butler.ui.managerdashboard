@@ -77,10 +77,7 @@ export const itemSearchClientData = gql`
           STATUS
         }
         searchQuery {
-          AUDIT_TASK_ID
-          SPECIFIC_PPS_ID
-          SPECIFIC_SKU_ID
-          SPECIFIC_LOCATION_ID
+          ITEM_SEARCH_TASK_ID
           FROM_DATE
           TO_DATE
         }

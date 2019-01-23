@@ -24,7 +24,7 @@ import {
   SPECIFIC_LOCATION_ID,
   SPECIFIC_SKU_ID,
   SPECIFIC_PPS_ID,
-  AUDIT_TASK_ID,
+  ITEM_SEARCH_TASK_ID,
   FROM_DATE,
   TO_DATE,
   NOT_YET_STARTED,
@@ -41,7 +41,15 @@ import {
   SINGLE,
   AUDIT_USERLIST,
   APP_JSON,
-  GET
+  GET,
+  PROCESSED,
+  PROCESSING,
+  CREATED,
+  FAILED,
+  PROCESSED_STATUS,
+  PROCESSING_STATUS,
+  CREATED_STATUS,
+  FAILED_STATUS
 } from '../../constants/frontEndConstants';
 import { USERLIST_URL } from '../../constants/configConstants';
 import { hashHistory } from 'react-router';
@@ -87,7 +95,7 @@ class ItemSearchFilter extends React.Component {
   _processAuditSearchField() {
     const filterInputFields = [
       {
-        value: AUDIT_TASK_ID,
+        value: ITEM_SEARCH_TASK_ID,
         label: (
           <FormattedMessage
             id='itemSearch.inputField.id'
@@ -95,6 +103,7 @@ class ItemSearchFilter extends React.Component {
           />
         )
       },
+      /*
       {
         value: SPECIFIC_PPS_ID,
         label: (
@@ -122,6 +131,7 @@ class ItemSearchFilter extends React.Component {
           />
         )
       },
+      */
       {
         value: FROM_DATE,
         by2value: true,
@@ -234,6 +244,43 @@ class ItemSearchFilter extends React.Component {
         )
       },
       {
+        value: PROCESSED_STATUS,
+        label: (
+          <FormattedMessage
+            id='itemSearch.token2.processed'
+            defaultMessage='Processed'
+          />
+        )
+      },
+      {
+        value: PROCESSING_STATUS,
+        label: (
+          <FormattedMessage
+            id='itemSearch.token2.processing'
+            defaultMessage='Processing'
+          />
+        )
+      },
+      {
+        value: CREATED_STATUS,
+        label: (
+          <FormattedMessage
+            id='itemSearch.token2.created'
+            defaultMessage='Created'
+          />
+        )
+      },
+      {
+        value: FAILED_STATUS,
+        label: (
+          <FormattedMessage
+            id='itemSearch.token2.failed'
+            defaultMessage='Failed'
+          />
+        )
+      }
+      /*,
+      {
         value: NOT_YET_STARTED,
         label: (
           <FormattedMessage
@@ -287,6 +334,7 @@ class ItemSearchFilter extends React.Component {
           />
         )
       }
+      */
     ];
 
     var selectedToken = this.state.tokenSelected;
@@ -325,12 +373,12 @@ class ItemSearchFilter extends React.Component {
   }
 
   _handelTokenClick(field, value, state) {
-    var tempArray = [SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID];
-    var obj = {},
-      queryField,
-      tokentoRemove;
-    var selectedToken = this.state.tokenSelected['AUDIT_TYPE'];
-    var token = [value];
+    // var tempArray = [SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID];
+    // var obj = {},
+    //   queryField,
+    //   tokentoRemove;
+    // var selectedToken = this.state.tokenSelected['AUDIT_TYPE'];
+    // var token = [value];
     this.setState({
       tokenSelected: handelTokenClick(field, value, state, this.state)
     });
@@ -391,31 +439,34 @@ class ItemSearchFilter extends React.Component {
     //   _query.createdBy = filterState.tokenSelected['CREATED_BY'];
     // }
 
-    if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
-      _query.taskId = filterState.searchQuery[AUDIT_TASK_ID];
-    }
-    if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_SKU_ID]) {
-      _query.skuId = filterState.searchQuery[SPECIFIC_SKU_ID];
-    }
     if (
       filterState.searchQuery &&
-      filterState.searchQuery[SPECIFIC_LOCATION_ID]
+      filterState.searchQuery[ITEM_SEARCH_TASK_ID]
     ) {
-      _query.locationId = filterState.searchQuery[SPECIFIC_LOCATION_ID];
+      _query.taskId = filterState.searchQuery[ITEM_SEARCH_TASK_ID];
     }
-    if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_PPS_ID]) {
-      _query.ppsId = filterState.searchQuery[SPECIFIC_PPS_ID];
-    }
+    // if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_SKU_ID]) {
+    //   _query.skuId = filterState.searchQuery[SPECIFIC_SKU_ID];
+    // }
+    // if (
+    //   filterState.searchQuery &&
+    //   filterState.searchQuery[SPECIFIC_LOCATION_ID]
+    // ) {
+    //   _query.locationId = filterState.searchQuery[SPECIFIC_LOCATION_ID];
+    // }
+    // if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_PPS_ID]) {
+    //   _query.ppsId = filterState.searchQuery[SPECIFIC_PPS_ID];
+    // }
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
       _query.fromDate = filterState.searchQuery[FROM_DATE];
     }
     if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
       _query.toDate = filterState.searchQuery[TO_DATE];
     }
-    _query.pageNo = this.props.currentPage;
-    _query.pageSize = this.props.totalResults;
+    // _query.pageNo = this.props.currentPage;
+    // _query.pageSize = this.props.totalResults;
 
-    hashHistory.push({ pathname: '/itemsearch', query: _query });
+    hashHistory.push({ pathname: 'audit/itemsearch', query: _query });
     this.props.filterApplied(true);
     //this.props.updateSubscription(true);
     this.props.showItemSearchFilter(false);
@@ -430,10 +481,10 @@ class ItemSearchFilter extends React.Component {
         __typename: 'ItemSearchFilterTokenSelected'
       },
       searchQuery: {
-        SPECIFIC_SKU_ID: null,
-        SPECIFIC_LOCATION_ID: null,
-        AUDIT_TASK_ID: null,
-        SPECIFIC_PPS_ID: null,
+        // SPECIFIC_SKU_ID: null,
+        // SPECIFIC_LOCATION_ID: null,
+        ITEM_SEARCH_TASK_ID: null,
+        // SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
         __typename: 'ItemSearchFilterSearchQuery'
@@ -446,7 +497,7 @@ class ItemSearchFilter extends React.Component {
       }
     });
     this.props.filterApplied(false);
-    hashHistory.push({ pathname: '/itemsearch', query: {} });
+    hashHistory.push({ pathname: 'audit/itemsearch', query: {} });
     this.props.showItemSearchFilter(false);
   }
 

@@ -28,9 +28,7 @@ const itemSearchFilterState = {
               isValue
               filterState {
                 defaultToken {
-                  AUDIT_TYPE
                   STATUS
-                  CREATED_BY
                   __typename
                 }
               }
@@ -93,25 +91,18 @@ const itemSearchFilterState = {
               isValue
               filterState {
                 tokenSelected {
-                  AUDIT_TYPE
                   STATUS
-                  CREATED_BY
                   __typename
                 }
                 searchQuery {
-                  AUDIT_TASK_ID
-                  SPECIFIC_PPS_ID
-                  SPECIFIC_SKU_ID
-                  SPECIFIC_LOCATION_ID
+                  ITEM_SEARCH_TASK_ID
                   FROM_DATE
                   TO_DATE
                   __typename
                 }
 
                 defaultToken {
-                  AUDIT_TYPE
                   STATUS
-                  CREATED_BY
                   __typename
                 }
               }
@@ -299,25 +290,18 @@ const itemSearchFilterState = {
               isValue
               filterState {
                 tokenSelected {
-                  AUDIT_TYPE
                   STATUS
-                  CREATED_BY
                   __typename
                 }
                 searchQuery {
-                  AUDIT_TASK_ID
-                  SPECIFIC_PPS_ID
-                  SPECIFIC_SKU_ID
-                  SPECIFIC_LOCATION_ID
+                  ITEM_SEARCH_TASK_ID
                   FROM_DATE
                   TO_DATE
                   __typename
                 }
 
                 defaultToken {
-                  AUDIT_TYPE
                   STATUS
-                  CREATED_BY
                   __typename
                 }
               }

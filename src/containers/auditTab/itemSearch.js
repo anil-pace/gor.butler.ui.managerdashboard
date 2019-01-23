@@ -44,7 +44,15 @@ import {
   AUDIT_SUBSCRIPTION_QUERY,
   AUDIT_REQUEST_QUERY
 } from './query/serverQuery';
-import { ITEM_SEARCH_QUERY } from './query/serverQuery';
+import {
+  updateSubscriptionPacket,
+  setWsAction
+} from './../../actions/socketActions';
+import { wsOverviewData } from './../../constants/initData.js';
+import {
+  ITEM_SEARCH_QUERY,
+  ITEM_SEARCH_START_QUERY
+} from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
   GET,
@@ -92,20 +100,22 @@ class ItemSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      query: null,
       page: 0,
-      page_size: 20,
-      data: null
+      page_size: 100,
+      data: null,
+      legacyDataSubscribed: false
     };
     this._processServerData = this._processServerData.bind(this);
     this._onScrollHandler = this._onScrollHandler.bind(this);
     this._fetchData = this._fetchData.bind(this);
     this._handleActions = this._handleActions.bind(this);
+    this._triggerItemSearchStart = this._triggerItemSearchStart.bind(this);
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
     this.showItemSearchFilter = this.props.showItemSearchFilter.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this._refreshList(nextProps.location.query);
     if (!nextProps.data.loading) {
       this.setState(state => {
         return {
@@ -113,7 +123,63 @@ class ItemSearch extends React.Component {
         };
       });
     }
+    if (!this.state.legacyDataSubscribed && nextProps.socketAuthorized) {
+      this.setState(
+        {
+          legacyDataSubscribed: true
+        },
+        () => {
+          this._subscribeLegacyData();
+        }
+      );
+    }
+    if (
+      nextProps.location &&
+      nextProps.location.query &&
+      (!this.state.query ||
+        JSON.stringify(nextProps.location.query) !==
+          JSON.stringify(this.state.query))
+    ) {
+      this.setState({ query: nextProps.location.query });
+      this._refreshList(nextProps.location.query);
+    }
   }
+
+  _triggerItemSearchStart(index) {
+    const _this = this;
+    let { page } = _this.state;
+    _this.props.client
+      .query({
+        query: ITEM_SEARCH_START_QUERY,
+        variables: {
+          input: {
+            //externalServiceRequestId: 'Search-Put-4vMppYep9e4gAUD',
+            // "attributes": {
+            //   "ppsIdList": [5]
+            // }
+            externalServiceRequestId: this.state.data[index]
+              .externalServiceRequestId,
+            attributes: {
+              //ppsIdList: this.state.data[index].attributes.ppsIdList
+              ppsIdList: [5]
+            }
+          }
+        },
+        fetchPolicy: 'network-only'
+      })
+      .then(data => {
+        let existingData = JSON.parse(JSON.stringify(_this.state.data));
+        let currentData = data.data.ItemSearchList.list.serviceRequests;
+        let mergedData = existingData.concat(currentData);
+        _this.setState(() => {
+          return {
+            data: mergedData,
+            page
+          };
+        });
+      });
+  }
+
   _fetchData() {
     const _this = this;
     let { page } = _this.state;
@@ -122,7 +188,7 @@ class ItemSearch extends React.Component {
         query: ITEM_SEARCH_QUERY,
         variables: {
           input: {
-            page_size: 10,
+            page_size: 100,
             page: ++page
           }
         },
@@ -140,6 +206,11 @@ class ItemSearch extends React.Component {
         });
       });
   }
+
+  _subscribeLegacyData() {
+    this.props.initDataSentCall(wsOverviewData['default']);
+  }
+
   _onScrollHandler(event) {
     if (
       event.target.scrollHeight - event.target.scrollTop ===
@@ -151,92 +222,80 @@ class ItemSearch extends React.Component {
 
   _refreshList(query) {
     var me = this;
-    if (this.props.currentPageNumber < this.props.TotalPage) {
-      if (query.scrolling) {
-        var pageNo = this.props.currentPageNumber + 1;
-        this.props.setCurrentPageNumber(pageNo);
-        query = this.props.location.query;
-        query.scrolling = true;
-      }
-      if (query)
-        this.props.itemSearchfilterState({
-          tokenSelected: {
-            __typename: 'AuditFilterTokenSelected',
-            AUDIT_TYPE: query.auditType
-              ? query.auditType.constructor === Array
-                ? query.auditType
-                : [query.auditType]
-              : [ANY],
-            STATUS: query.status
-              ? query.status.constructor === Array
-                ? query.status
-                : [query.status]
-              : [ALL],
-            CREATED_BY: query.createdBy
-              ? query.createdBy.constructor === Array
-                ? query.createdBy
-                : [query.createdBy]
-              : [ALL]
-          },
-          searchQuery: {
-            __typename: 'AuditFilterSearchQuery',
-            SPECIFIC_SKU_ID: query.skuId || '',
-            SPECIFIC_LOCATION_ID: query.locationId || '',
-            AUDIT_TASK_ID: query.taskId || '',
-            SPECIFIC_PPS_ID: query.ppsId || '',
-            FROM_DATE: query.fromDate || '',
-            TO_DATE: query.toDate || ''
-          },
-          defaultToken: {
-            __typename: 'AuditFilterDefaultToken',
-            AUDIT_TYPE: [ANY],
-            STATUS: [ALL],
-            CREATED_BY: [ALL]
-          }
-        });
-      this.props.setAuditSpinner(true);
-      this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              skuId: this.props.location.query.skuId || '',
-              locationId: this.props.location.query.locationId || '',
-              taskId: this.props.location.query.taskId || '',
-              ppsId: this.props.location.query.ppsId || '',
-              operatingMode: this.props.location.query.operatingMode || '',
-              status: this.props.location.query.status || '',
-              fromDate: this.props.location.query.fromDate || '',
-              toDate: this.props.location.query.toDate || '',
-              //auditType: this.props.location.query.auditType || '',
-              //createdBy: this.props.location.query.createdBy || '',
-              //pageSize:10,
-              //pageNo:pageNo||1
-              page: 0,
-              page_size: this.props.location.page || 10
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          me.props.setAuditSpinner(false);
-          var a = JSON.stringify(
-            data.data.AuditList ? data.data.AuditList.list : []
-          );
-
-          me.props.listDataAudit(a);
-          let stateData, finalData;
-          stateData = me.state.AuditList;
-          if (query.scrolling) {
-            finalData = stateData.concat(data.data.AuditList.list);
-          } else {
-            finalData = data.data.AuditList.list;
-          }
-          me.setState({ AuditList: finalData });
-          me.props.setAuditDetails(finalData);
-          me.updateSubscription({});
-        });
+    //if (this.props.currentPageNumber < this.props.TotalPage) {
+    if (query.scrolling) {
+      var pageNo = this.props.currentPageNumber + 1;
+      this.props.setCurrentPageNumber(pageNo);
+      query = this.props.location.query;
+      query.scrolling = true;
     }
+    if (query)
+      this.props.itemSearchfilterState({
+        tokenSelected: {
+          __typename: 'ItemSearchFilterTokenSelected',
+          // AUDIT_TYPE: query.auditType
+          //   ? query.auditType.constructor === Array
+          //     ? query.auditType
+          //     : [query.auditType]
+          //   : [ANY],
+          STATUS: query.status
+            ? query.status.constructor === Array
+              ? query.status
+              : [query.status]
+            : [ALL]
+          // CREATED_BY: query.createdBy
+          //   ? query.createdBy.constructor === Array
+          //     ? query.createdBy
+          //     : [query.createdBy]
+          //   : [ALL]
+        },
+        searchQuery: {
+          __typename: 'ItemSearchFilterSearchQuery',
+          // SPECIFIC_SKU_ID: query.skuId || '',
+          // SPECIFIC_LOCATION_ID: query.locationId || '',
+          ITEM_SEARCH_TASK_ID: query.taskId || '',
+          //SPECIFIC_PPS_ID: query.ppsId || '',
+          FROM_DATE: query.fromDate || '',
+          TO_DATE: query.toDate || ''
+        },
+        defaultToken: {
+          __typename: 'ItemSearchFilterDefaultToken',
+          //AUDIT_TYPE: [ANY],
+          STATUS: [ALL]
+          //CREATED_BY: [ALL]
+        }
+      });
+    //this.props.setAuditSpinner(true);
+    this.props.client
+      .query({
+        query: ITEM_SEARCH_QUERY,
+        variables: {
+          input: {
+            //"externalServiceRequestId": "<order id (externalServiceRequestId)>"
+            externalServiceRequestId: query.taskId
+          }
+        },
+        fetchPolicy: 'network-only'
+      })
+      .then(data => {
+        //me.props.setAuditSpinner(false);
+        var a = JSON.stringify(
+          data.data.AuditList ? data.data.AuditList.list : []
+        );
+
+        me.props.listDataAudit(a);
+        let stateData, finalData;
+        stateData = me.state.AuditList;
+        if (query.scrolling) {
+          finalData = stateData.concat(data.data.AuditList.list);
+        } else {
+          finalData = data.data.AuditList.list;
+        }
+        me.setState({ AuditList: finalData });
+        //me.props.setAuditDetails(finalData);
+        me.updateSubscription({});
+      });
+    //}
   }
 
   /**
@@ -248,22 +307,22 @@ class ItemSearch extends React.Component {
         //AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         //CREATED_BY: [ALL],
-        __typename: 'AuditFilterTokenSelected'
+        __typename: 'ItemSearchFilterTokenSelected'
       },
       searchQuery: {
         SPECIFIC_SKU_ID: null,
         SPECIFIC_LOCATION_ID: null,
-        AUDIT_TASK_ID: null,
+        ITEM_SEARCH_TASK_ID: null,
         SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
-        __typename: 'AuditFilterSearchQuery'
+        __typename: 'ItemSearchFilterSearchQuery'
       },
       defaultToken: {
         // AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         //CREATED_BY: [ALL],
-        __typename: 'AuditFilterDefaultToken'
+        __typename: 'ItemSearchFilterDefaultToken'
       }
     });
     this.props.filterApplied(false);
@@ -343,9 +402,9 @@ class ItemSearch extends React.Component {
             <div className='auditHeaderContainer'>
               <span className='auditHeader'>
                 <FormattedMessage
-                  id='audit.header.Audit'
+                  id='itemSearch.header.Audit'
                   description='button label for audit'
-                  defaultMessage='Audits'
+                  defaultMessage='Item Search'
                 />
               </span>
             </div>
@@ -362,7 +421,7 @@ class ItemSearch extends React.Component {
               >
                 <div className='gor-manage-task' />
                 <FormattedMessage
-                  id='audit.filter.filterLabel'
+                  id='itemSearch.filter.filterLabel'
                   description='button label for filter'
                   defaultMessage='FILTER DATA'
                 />
@@ -376,7 +435,7 @@ class ItemSearch extends React.Component {
           isFilterApplied={_this.props.isFilterApplied}
           filterText={
             <FormattedMessage
-              id='auditList.filter.search.bar'
+              id='itemSearch.filter.search.bar'
               description='total results for filter search bar'
               defaultMessage='{total} results found'
               values={{ total: _this.state.totalAudits || '0' }}
@@ -385,7 +444,7 @@ class ItemSearch extends React.Component {
           refreshList={_this._clearFilter.bind(this)}
           refreshText={
             <FormattedMessage
-              id='auditList.filter.search.bar.showall'
+              id='itemSearch.filter.search.bar.showall'
               description='button label for show all'
               defaultMessage='Show all results'
             />
@@ -454,7 +513,10 @@ class ItemSearch extends React.Component {
                                     {row.displayStartButton && (
                                       <button
                                         className='gor-add-btn gor-listing-button'
-                                        onClick={null}
+                                        onClick={_this._triggerItemSearchStart.bind(
+                                          this,
+                                          idx
+                                        )}
                                       >
                                         {'Start'}
                                       </button>
@@ -663,7 +725,7 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
         //pageSize:10,
         //pageNo:location.query.page||10,
         page: 0,
-        page_size: 10
+        page_size: 100
       }
     },
     fetchPolicy: 'network-only'
@@ -765,7 +827,7 @@ const setListData = graphql(SET_LIST_DATA, {
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    auditfilterState: function(state) {
+    itemSearchfilterState: function(state) {
       mutate({ variables: { state: state } });
     }
   })
@@ -781,14 +843,25 @@ const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
 ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
+
+var mapDispatchToProps = function(dispatch) {
+  return {
+    initDataSentCall: function(data) {
+      dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+    }
+  };
+};
+
 export default compose(
   withClientData,
   setVisibilityFilter,
+  setFilterApplied,
+  setFilterState,
   withQuery,
   withApollo
 )(
   connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(ItemSearch)
 );

@@ -560,6 +560,7 @@ export const AUDIT_TYPE="AUDIT_TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC_SKU_ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC_LOCATION_ID';
 export const ISSUE_FOUND='audit_pending_approval';
+export const ITEM_SEARCH_TASK_ID = "ITEM_SEARCH_TASK_ID";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";
