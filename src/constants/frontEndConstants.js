@@ -309,6 +309,8 @@ export const FIRE_EMERGENCY_POPUP_FLAG="FIRE_EMERGENCY_POPUP"
 export const DISPLAY_PPS_CONFIGURATION_SPINNER="DISPLAY_PPS_CONFIGURATION_SPINNER";
 export const DISPLAY_MSU_CONFIG_SPINNER="DISPLAY_MSU_CONFIG_SPINNER";
 export const DISPLAY_MSU_CONFIG_FILTER_SPINNER="DISPLAY_MSU_CONFIG_FILTER_SPINNER";
+export const ITEM_SEARCH = "itemSearch";
+export const AUDIT_LISTING = "auditlisting";
 
 
 
@@ -339,6 +341,10 @@ export const REPORTS_SUB_TAB_ROUTE_MAP={
 	[STORAGE_SPACE]:"storageSpace"
 
 
+}
+export const AUDIT_SUB_TAB_ROUTE_MAP={
+	[ITEM_SEARCH] : "itemSearch",
+	[AUDIT_LISTING]:"auditListing"
 }
 export const SHOW_UTILITY_TAB=true;
 /*Constant for time on header*/
@@ -554,6 +560,7 @@ export const AUDIT_TYPE="AUDIT_TYPE";
 export const SPECIFIC_SKU_ID='SPECIFIC_SKU_ID';
 export const SPECIFIC_LOCATION_ID='SPECIFIC_LOCATION_ID';
 export const ISSUE_FOUND='audit_pending_approval';
+export const ITEM_SEARCH_TASK_ID = "ITEM_SEARCH_TASK_ID";
 //Icons
 export const PICK_ICON=' iPick';
 export const STOCK_ICON="iStock";

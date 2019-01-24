@@ -372,7 +372,7 @@ else
 
   
 
-    <Link to="/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
+    <Link to="/audit/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
       <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
       </Link>
     <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>

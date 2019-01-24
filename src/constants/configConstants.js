@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 export const BASE_URL = 'localhost';
+=======
+export const BASE_URL = '192.168.9.215';
+>>>>>>> BSS-10579
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL = 'wss://';
 export const WS_URL = WS_PROTOCOL + BASE_URL + '/manager_api/wss';
 export const API_URL = PROTOCOL + BASE_URL + '/api';
 export const API_GATEWAY = API_URL + '/api-gateway';
+<<<<<<< HEAD
 
+=======
+>>>>>>> BSS-10579
 export const API_INTEGRATION_SERVICE =
   API_GATEWAY + '/integration-service/wms-integration/butler-core/api';
 export const LOGIN_URL = API_URL + '/auth/token';

@@ -261,6 +261,7 @@ class PPStable extends React.Component {
         let pick=this.props.operationMode.pick;
         let put=this.props.operationMode.put;
         let audit=this.props.operationMode.audit;
+        const search = this.props.operationMode.search;
         let notSet=this.props.operationMode.notSet;
         let operatorNum=this.props.operatorNum, j=1;
         let ppsOnState=this.props.ppsOnState;
@@ -356,11 +357,12 @@ class PPStable extends React.Component {
                                                       defaultMessage="CURRENT MODE"/>
                                     <div className="gorToolHeaderSubText">
                                         <FormattedMessage id="PPStable.ppsState" description='pps state for PPStable'
-                                                          defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})'
+                                                          defaultMessage='Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})'
                                                           values={{
                                                               pick: pick ? pick : '0',
                                                               put: put ? put : '0',
                                                               audit: audit ? audit : '0',
+                                                              search:search ? search : '0',
                                                               notSet: notSet ? notSet : '0'
                                                           }}/>
 

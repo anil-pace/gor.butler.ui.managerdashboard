@@ -368,6 +368,11 @@ export const  stringConfig= defineMessages({
         "id": "stringConfig.audit_reaudited",
         "description": "Text for audit reaudited status",
         "defaultMessage": "Re-audited"
+    },
+    search:{
+        "id": "stringConfig.item_search",
+        "description": "Item search mode for PPS",
+        "defaultMessage": "Item Search"
     }
 });
 export const  roleDesc= defineMessages({

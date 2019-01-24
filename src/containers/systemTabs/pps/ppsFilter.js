@@ -66,7 +66,9 @@ class PPSFilter extends React.Component{
                     { value: 'pick', label: <FormattedMessage id="pps.MODE.pick" defaultMessage="Pick"/>},
                     { value: 'put', label: <FormattedMessage id="pps.MODE.put" defaultMessage="Put"/>},
                     { value: 'audit', label: <FormattedMessage id="pps.MODE.audit" defaultMessage="Audit"/>},
+                    { value: 'search', label: <FormattedMessage id="v.MODE.search" defaultMessage="Item Search"/>},
                     { value: 'notset', label: <FormattedMessage id="v.MODE.notset" defaultMessage="Not set"/>}
+
                     ]; 
         let selectedToken= this.state.tokenSelected;
         let column1=<FilterTokenWrap field={tokenField1} tokenCallBack={this._handelTokenClick.bind(this)} label={labelC1} selectedToken={selectedToken}/>;

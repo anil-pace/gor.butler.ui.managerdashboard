@@ -62,7 +62,8 @@ class PPS extends React.Component {
             Modes:{
                 "pick":0,
                 "put":0,
-                "audit":0
+                "audit":0,
+                "search":0
             },
             legacyDataSubscribed:false
         }
@@ -171,7 +172,8 @@ class PPS extends React.Component {
         var Modes={
             "put":0,
             "pick":0,
-            "audit":0
+            "audit":0,
+            "search":0
         }
         for(let k in nextProps.checkedPps){
             if(nextProps.checkedPps[k].statusPriority === 0 || nextProps.checkedPps[k].statusPriority === 1){
@@ -194,6 +196,9 @@ class PPS extends React.Component {
                     }
                     if(allowedModes==="audit"){
                         Modes.audit++;
+                    }
+                    if(allowedModes==="search"){
+                        Modes.search++;
                     }
                 }
                 
@@ -311,7 +316,8 @@ class PPS extends React.Component {
         let pick=nProps.context.intl.formatMessage(stringConfig.pick);
         let put=nProps.context.intl.formatMessage(stringConfig.put);
         let audit=nProps.context.intl.formatMessage(stringConfig.audit);
-        var currentTask={"pick": pick, "put": put, "audit": audit};
+        let search=nProps.context.intl.formatMessage(stringConfig.search);
+        var currentTask={"pick": pick, "put": put, "audit": audit,"search":search};
         var priStatus={"open": 2, "close": 0,"force_close": 1};
         var checkedPPS = this.props.checkedPps || {};
         var requestedStatusText="--";
@@ -541,13 +547,13 @@ class PPS extends React.Component {
     render() {
         let filterHeight=screen.height - 190 - 50;
         let updateStatusIntl="";
-        let operationMode={"pick": 0, "put": 0, "audit": 0, "notSet": 0};
+        let operationMode={"pick": 0, "put": 0, "audit": 0, "notSet": 0,"search":0};
         let data, operatorNum=0, itemNumber=5, ppsOn=0, avgThroughput=0;
         if (this.props.data.PPSListSystem !== undefined) {
             data=this._processPPSData();
             for (var i=data.length - 1; i >= 0; i--) {
                 if (data[i].operatingModeClass !== null) {
-                    operationMode[data[i].operatingModeClass]=operationMode[data[i].operatingModeClass] + 1;
+                    operationMode[data[i].operatingModeClass]++;
                 }
                 else {
                     operationMode={"Pick": "--", "Put": "--", "Audit": "--", "NotSet": "--"};
@@ -580,6 +586,8 @@ class PPS extends React.Component {
                                         defaultMessage="Pick"/>
         let auditDrop=<FormattedMessage id="PPS.table.auditDrop" description="audit dropdown option for PPS"
                                           defaultMessage="Audit"/>
+        let searchDrop=<FormattedMessage id="PPS.table.searchDrop" description="Item Search dropdown option for PPS"
+                                          defaultMessage="Item Search"/>
         let openStatusLabel = <FormattedMessage id="PPS.table.openStatusLabel" description="audit dropdown option for Status change"
                                           defaultMessage="Open Selected PPS"/>
          let closeStatusLabel = <FormattedMessage id="PPS.table.closeStatusLabel" description="audit dropdown option for Status change"
@@ -600,7 +608,8 @@ class PPS extends React.Component {
         ];
         const modes=[ {value: 'put', disabled:(Modes.put===count ? false : true),label: pickDrop},
             {value: 'pick',  disabled:(Modes.pick===count ? false : true),label: putDrop},
-            {value: 'audit',  disabled:(Modes.audit===count ? false : true),label: auditDrop}];
+            {value: 'audit',  disabled:(Modes.audit===count ? false : true),label: auditDrop},
+            {value: 'search',  disabled:(Modes.search===count ? false : true),label: searchDrop}];
        
             drop=<Dropdown 
                     options={modes} 
