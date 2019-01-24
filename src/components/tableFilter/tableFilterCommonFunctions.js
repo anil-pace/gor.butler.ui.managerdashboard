@@ -1,7 +1,7 @@
 import {ADD_TOKEN, ADD_DEFAULT,SINGLE} from '../../constants/frontEndConstants';
  
 export function handelTokenClick(field,value,state,data) {
-        var selectedToken=data.tokenSelected;
+        var selectedToken=JSON.parse(JSON.stringify(data.tokenSelected));
         var defaultToken=data.defaultToken[field];
         
          

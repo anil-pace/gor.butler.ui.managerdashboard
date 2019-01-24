@@ -3373,7 +3373,6 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gorToolBar {
-  width: 100%;
   height: 68px;
   background: #FFFFFF;
   box-shadow: inset 0 5px 5px -5px #888888;
@@ -3711,7 +3710,7 @@ input[type="checkbox"] {
   font-size: 20px;
   font-weight: bold;
   color: #4d5055;
-  height: 35px;
+  height: 22vw;
 }
 
 .gor-table-header {
@@ -10163,6 +10162,10 @@ button:disabled {
   color: #4a4a4a;
 }
 
+.gor-AuditDetails-modal-content.is-details .gor-auditDetails-modal-body {
+  padding-top: 0px;
+}
+
 .gor-AuditDetails-modal-content .gor-auditDetails-modal-body {
   margin: 0px 0px 0px 17px;
   width: 92%;
@@ -13160,4 +13163,75 @@ checkmark1 for indeterminate state*/
 
 .users-table .table-header .row .cell:last-child {
   padding-right: 15px;
+}
+
+.table-itemsearch.table-item-search-details {
+  margin-top: 25px;
+}
+
+.table-itemsearch.table-item-search-details .table-head {
+  padding: 25px 15px;
+  border-top: 1px solid #E6E6E6;
+  border-bottom: 1px solid #E6E6E6;
+  background: #FAFAFA;
+}
+
+.table-itemsearch.table-item-search-details .table-head p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table-itemsearch.table-item-search-details .table-cell {
+  flex-grow: 1 !important;
+  text-align: inherit !important;
+}
+
+.table-itemsearch .container {
+  float: none;
+}
+
+.table-itemsearch .row {
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.table-itemsearch .row .table-cell {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.table-itemsearch .row .table-cell:first-child {
+  flex-grow: 0.25;
+  text-align: center;
+}
+
+.table-itemsearch .row .table-cell:nth-child(2) {
+  flex-grow: 1.5;
+}
+
+.table-itemsearch .row .table-cell:nth-child(3) {
+  flex-grow: 2;
+}
+
+.table-itemsearch .row.inner {
+  border: none;
+}
+
+.table-itemsearch .row.inner .table-cell {
+  flex-grow: 1;
+}
+
+.table-itemsearch .row.inner .table-cell:nth-child(2) {
+  flex-grow: 0.1;
+}
+
+.table-itemsearch .gor-separator {
+  margin-left: 10px;
+}
+
+.table-itemsearch .embeddedImage {
+  margin-top: 0;
+  float: none;
+  display: inline-block;
 }

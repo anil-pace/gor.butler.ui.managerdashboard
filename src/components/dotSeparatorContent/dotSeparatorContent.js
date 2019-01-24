@@ -1,5 +1,4 @@
 import React  from 'react';
-//import { FormattedMessage } from 'react-intl';
 
 
 class DotSeparator extends React.Component{
@@ -27,10 +26,10 @@ render()
     let header=this.removeEmptyElement(this.props.header);
     let subHeader=this.removeEmptyElement(this.props.subHeader);
     let finalHeader=[],finalSubHeader=[];
-    let headerClassName=this.props.headerClassName?this.props.headerClassName:"headerName";
-    let subheaderClassName=this.props.subheaderClassName?this.props.subheaderClassName:"subheaderName";
+    let headerClassName=this.props.headerClassName || "headerName";
+    let subheaderClassName=this.props.subheaderClassName || "subheaderName";
     header.map(function(item, i){
-                (header.length==i+1)?finalHeader.push(<span title={item} className={headerClassName}>{item}</span>):finalHeader.push(<span><span title={item} className={headerClassName}>{item}</span><span className='headerSeparation'>{separator}</span></span>)   
+                (header.length===i+1)?finalHeader.push(<span title={item} className={headerClassName}>{item}</span>):finalHeader.push(<span><span title={item} className={headerClassName}>{item}</span><span className='headerSeparation'>{separator}</span></span>)   
     })
 
     subHeader.map(function(item, i){

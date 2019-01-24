@@ -1295,6 +1295,12 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
+    "id": "stringConfig.item_search",
+    "description": "Item search mode for PPS",
+    "defaultMessage": "Item Search",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
     "id": "roleDesc.butler_supervisor",
     "description": "Text for Manager description",
     "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems",
@@ -2460,6 +2466,18 @@
     "description": "audit",
     "defaultMessage": "audit",
     "filepath": "./src/containers/auditTab/auditStart.js"
+  },
+  {
+    "id": "auditSubTabs.auditTab",
+    "description": "Audit tab for Audit tab",
+    "defaultMessage": "Audit",
+    "filepath": "./src/containers/auditTab/auditSubTabs.js"
+  },
+  {
+    "id": "auditSubTabs.itemSearch",
+    "description": "Item Search tab for Audit tab",
+    "defaultMessage": "Item Search",
+    "filepath": "./src/containers/auditTab/auditSubTabs.js"
   },
   {
     "id": "Audit.selectAttribute.apply",
@@ -6253,6 +6271,11 @@
     "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
   },
   {
+    "id": "v.MODE.search",
+    "defaultMessage": "Item Search",
+    "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
+  },
+  {
     "id": "v.MODE.notset",
     "defaultMessage": "Not set",
     "filepath": "./src/containers/systemTabs/pps/ppsFilter.js"
@@ -6327,6 +6350,12 @@
     "id": "PPS.table.auditDrop",
     "description": "audit dropdown option for PPS",
     "defaultMessage": "Audit",
+    "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
+  },
+  {
+    "id": "PPS.table.searchDrop",
+    "description": "Item Search dropdown option for PPS",
+    "defaultMessage": "Item Search",
     "filepath": "./src/containers/systemTabs/pps/ppsTab.js"
   },
   {
@@ -6428,7 +6457,7 @@
   {
     "id": "PPStable.ppsState",
     "description": "pps state for PPStable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})",
     "filepath": "./src/containers/systemTabs/pps/PPStable.js"
   },
   {

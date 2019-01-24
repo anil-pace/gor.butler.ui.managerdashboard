@@ -40,12 +40,12 @@ class ActionDropDown extends React.Component{
 		var arr=[];
 		var data=this.props.data;
 		data.map(function(item, i){
-			arr.push(<option className="headerName" name={item.name} value={item.value}>{item.name}</option>)
+			arr.push(<option key={item.value} className="headerName" name={item.name} value={item.value}>{item.name}</option>)
 		},this);
 	
 		return (
 			
-		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={(evt)=>{this._handleClick(evt,this.props.id,this.props.displayId)}} {...this.props}>
+		<div className="gor-actionDropDown" style={{position:'relative'}} onClick={(evt)=>{this._handleClick(evt,this.props.id,this.props.displayId)}} style={this.props.style}>
 		{this.props.children}
 			{this.state.visibleMenu?this.state.flyoutHack?<div className='gor-add-flyoutWrapper' style={{'bottom':0}} >{arr}</div>:<div className='gor-add-flyoutWrapper'>{arr}</div>:""}
 		</div>

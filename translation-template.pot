@@ -1088,6 +1088,11 @@ msgstr ""
         msgid "Re-audited"
         msgstr ""
 
+        #: stringConfig.item_search
+        msgctxt "stringConfig.item_search"
+        msgid "Item Search"
+        msgstr ""
+
         #: roleDesc.butler_supervisor
         msgctxt "roleDesc.butler_supervisor"
         msgid "Grant access to the Management Interface and Operator Interface to all systems"
@@ -2101,6 +2106,16 @@ msgstr ""
         #: audit.startaudit.audittext
         msgctxt "audit.startaudit.audittext"
         msgid "audit"
+        msgstr ""
+
+        #: auditSubTabs.auditTab
+        msgctxt "auditSubTabs.auditTab"
+        msgid "Audit"
+        msgstr ""
+
+        #: auditSubTabs.itemSearch
+        msgctxt "auditSubTabs.itemSearch"
+        msgid "Item Search"
         msgstr ""
 
         #: audit.nameplaceholder.text
@@ -4578,6 +4593,11 @@ msgstr ""
         msgid "Audit"
         msgstr ""
 
+        #: v.MODE.search
+        msgctxt "v.MODE.search"
+        msgid "Item Search"
+        msgstr ""
+
         #: v.MODE.notset
         msgctxt "v.MODE.notset"
         msgid "Not set"
@@ -4616,6 +4636,11 @@ msgstr ""
         #: PPS.table.auditDrop
         msgctxt "PPS.table.auditDrop"
         msgid "Audit"
+        msgstr ""
+
+        #: PPS.table.searchDrop
+        msgctxt "PPS.table.searchDrop"
+        msgid "Item Search"
         msgstr ""
 
         #: PPS.table.openStatusLabel
@@ -4690,7 +4715,7 @@ msgstr ""
 
         #: PPStable.ppsState
         msgctxt "PPStable.ppsState"
-        msgid "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})"
+        msgid "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})"
         msgstr ""
 
         #: PPStable.requestedMode.text
