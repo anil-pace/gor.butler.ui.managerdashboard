@@ -22,16 +22,16 @@ import { graphql, withApollo, compose } from 'react-apollo';
 import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
 import // SUBSCRIPTION_QUERY,
-// MSU_LIST_QUERY,
-// MSU_LIST_POST_FILTER_QUERY,
-// MSU_START_RECONFIG_QUERY,
-// MSU_STOP_RECONFIG_QUERY,
-// MSU_RELEASE_QUERY,
-//auditClientData,
-//SET_VISIBILITY
-// SET_FILTER_APPLIED,
-// SET_FILTER_STATE
-'./query/clientQuery';
+  // MSU_LIST_QUERY,
+  // MSU_LIST_POST_FILTER_QUERY,
+  // MSU_START_RECONFIG_QUERY,
+  // MSU_STOP_RECONFIG_QUERY,
+  // MSU_RELEASE_QUERY,
+  //auditClientData,
+  //SET_VISIBILITY
+  // SET_FILTER_APPLIED,
+  // SET_FILTER_STATE
+  './query/clientQuery';
 import gql from 'graphql-tag';
 import {
   itemSearchClientData,
@@ -102,9 +102,10 @@ class ItemSearch extends React.Component {
     this.state = {
       query: null,
       page: 0,
-      page_size: 100,
+      page_size: 20,
       data: null,
-      legacyDataSubscribed: false
+      legacyDataSubscribed: false,
+      itemSearchList: []
     };
     this._processServerData = this._processServerData.bind(this);
     this._onScrollHandler = this._onScrollHandler.bind(this);
@@ -138,7 +139,7 @@ class ItemSearch extends React.Component {
       nextProps.location.query &&
       (!this.state.query ||
         JSON.stringify(nextProps.location.query) !==
-          JSON.stringify(this.state.query))
+        JSON.stringify(this.state.query))
     ) {
       this.setState({ query: nextProps.location.query });
       this._refreshList(nextProps.location.query);
@@ -153,15 +154,10 @@ class ItemSearch extends React.Component {
         query: ITEM_SEARCH_START_QUERY,
         variables: {
           input: {
-            //externalServiceRequestId: 'Search-Put-4vMppYep9e4gAUD',
-            // "attributes": {
-            //   "ppsIdList": [5]
-            // }
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              //ppsIdList: this.state.data[index].attributes.ppsIdList
-              ppsIdList: [5]
+              ppsIdList: this.state.data[index].attributes.ppsIdList
             }
           }
         },
@@ -188,7 +184,7 @@ class ItemSearch extends React.Component {
         query: ITEM_SEARCH_QUERY,
         variables: {
           input: {
-            page_size: 100,
+            page_size: 10,
             page: ++page
           }
         },
@@ -233,95 +229,120 @@ class ItemSearch extends React.Component {
       this.props.itemSearchfilterState({
         tokenSelected: {
           __typename: 'ItemSearchFilterTokenSelected',
-          // AUDIT_TYPE: query.auditType
-          //   ? query.auditType.constructor === Array
-          //     ? query.auditType
-          //     : [query.auditType]
-          //   : [ANY],
           STATUS: query.status
             ? query.status.constructor === Array
               ? query.status
               : [query.status]
             : [ALL]
-          // CREATED_BY: query.createdBy
-          //   ? query.createdBy.constructor === Array
-          //     ? query.createdBy
-          //     : [query.createdBy]
-          //   : [ALL]
         },
         searchQuery: {
           __typename: 'ItemSearchFilterSearchQuery',
-          // SPECIFIC_SKU_ID: query.skuId || '',
-          // SPECIFIC_LOCATION_ID: query.locationId || '',
           ITEM_SEARCH_TASK_ID: query.taskId || '',
-          //SPECIFIC_PPS_ID: query.ppsId || '',
           FROM_DATE: query.fromDate || '',
           TO_DATE: query.toDate || ''
         },
         defaultToken: {
           __typename: 'ItemSearchFilterDefaultToken',
-          //AUDIT_TYPE: [ANY],
           STATUS: [ALL]
-          //CREATED_BY: [ALL]
         }
       });
     //this.props.setAuditSpinner(true);
-    this.props.client
-      .query({
-        query: ITEM_SEARCH_QUERY,
-        variables: {
-          input: {
-            //"externalServiceRequestId": "<order id (externalServiceRequestId)>"
-            externalServiceRequestId: query.taskId
-          }
-        },
-        fetchPolicy: 'network-only'
-      })
-      .then(data => {
-        //me.props.setAuditSpinner(false);
-        var a = JSON.stringify(
-          data.data.AuditList ? data.data.AuditList.list : []
-        );
+    if (query.taskId) {
+      this.props.client
+        .query({
+          query: ITEM_SEARCH_QUERY,
+          variables: {
+            input: {
+              "externalServiceRequestId": query.taskId,
+              "searchBy": "filter"
+            }
+          },
+          fetchPolicy: 'network-only'
+        })
+        .then(data => {
+          let existingData = JSON.parse(JSON.stringify(_this.state.data));
+          let currentData = data.data.ItemSearchList.list.serviceRequests;
+          let mergedData = existingData.concat(currentData);
+          _this.setState(() => {
+            return {
+              data: mergedData,
+              page
+            };
+          });
+        });
+    }
+    else if (query.status) {
+      this.props.client
+        .query({
+          query: ITEM_SEARCH_QUERY,
+          variables: {
+            input: {
+              "status": query.status,
+              "type": "SEARCH",
+              "searchBy": "filter"
+            }
+          },
+          fetchPolicy: 'network-only'
+        })
+        .then(data => {
+          let existingData = JSON.parse(JSON.stringify(_this.state.data));
+          let currentData = data.data.ItemSearchList.list.serviceRequests;
+          let mergedData = existingData.concat(currentData);
+          _this.setState(() => {
+            return {
+              data: mergedData,
+              page
+            };
+          });
+        });
+    }
 
-        me.props.listDataAudit(a);
-        let stateData, finalData;
-        stateData = me.state.AuditList;
-        if (query.scrolling) {
-          finalData = stateData.concat(data.data.AuditList.list);
-        } else {
-          finalData = data.data.AuditList.list;
-        }
-        me.setState({ AuditList: finalData });
-        //me.props.setAuditDetails(finalData);
-        me.updateSubscription({});
-      });
     //}
   }
+
+  _requestItemSearchList() {
+    this.props.client.query({
+      query: ITEM_SEARCH_QUERY,
+      variables: {
+        input: {
+          page: 0,
+          page_size: 10
+        }
+      },
+      fetchPolicy: 'network-only'
+    }).then(data => {
+      let existingData = JSON.parse(JSON.stringify(_this.state.data));
+      let currentData = data.data.ItemSearchList.list.serviceRequests;
+      let mergedData = existingData.concat(currentData);
+      _this.setState(() => {
+        return {
+          data: mergedData,
+          page
+        };
+      });
+    })
+  }
+
+
 
   /**
    *
    */
   _clearFilter() {
-    this.props.auditfilterState({
+    //this._requestItemSearchList();
+    this.props.itemSearchfilterState({
       tokenSelected: {
-        //AUDIT_TYPE: [ANY],
         STATUS: [ALL],
-        //CREATED_BY: [ALL],
         __typename: 'ItemSearchFilterTokenSelected'
       },
       searchQuery: {
-        SPECIFIC_SKU_ID: null,
-        SPECIFIC_LOCATION_ID: null,
         ITEM_SEARCH_TASK_ID: null,
-        SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
         __typename: 'ItemSearchFilterSearchQuery'
       },
       defaultToken: {
-        // AUDIT_TYPE: [ANY],
         STATUS: [ALL],
-        //CREATED_BY: [ALL],
         __typename: 'ItemSearchFilterDefaultToken'
       }
     });
@@ -389,9 +410,6 @@ class ItemSearch extends React.Component {
           }}
         >
           <ItemSearchFilter
-            auditDetail={_this.props.AuditList}
-            pollingFunc={_this.polling}
-            pollTimerId={_this.state.timerId}
             showItemSearchFilter={_this.showItemSearchFilter}
             isFilterApplied={_this.props.isFilterApplied}
             itemSearchfilterState={_this.props.itemSearchFilterStatus || null}
@@ -431,14 +449,14 @@ class ItemSearch extends React.Component {
         </div>
         {/*Filter Summary*/}
         <FilterSummary
-          total={this.state.totalAudits || 0}
+          total={_this.state.itemSearchList.length || 0}
           isFilterApplied={_this.props.isFilterApplied}
           filterText={
             <FormattedMessage
               id='itemSearch.filter.search.bar'
               description='total results for filter search bar'
               defaultMessage='{total} results found'
-              values={{ total: _this.state.totalAudits || '0' }}
+              values={{ total: _this.state.itemSearchList.length || 0 }}
             />
           }
           refreshList={_this._clearFilter.bind(this)}
@@ -457,14 +475,16 @@ class ItemSearch extends React.Component {
       <div>
         <div>
           <div className='gor-Auditlist-table'>
+            {/*
             {!this.props.showFilter ? (
               <Spinner
                 isLoading={this.props.auditSpinner}
                 setSpinner={this.props.setAuditSpinner}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
+              */}
             {toolbar}
             <div className='waveListWrapper'>
               {this.props.data.loading && (
@@ -480,223 +500,81 @@ class ItemSearch extends React.Component {
                     onScrollHandler={_this._onScrollHandler}
                   >
                     {tablerowdata
-                      ? tablerowdata.map(function(row, idx) {
-                          return (
-                            <GTableRow
-                              key={row.header[0]}
-                              index={idx}
-                              data={tablerowdata}
-                            >
-                              <div className='table-cell'>
-                                {row.displayStartButton && (
-                                  <label className='container'>
-                                    <input type='checkbox' onChange={null} />
-                                    <span className={'checkmark'} />
-                                  </label>
-                                )}
-                              </div>
-                              <div className='table-cell'>
-                                <span>
-                                  <i className='systemGenerated' />
-                                </span>
-                                <DotSeparatorContent
-                                  header={row.header}
-                                  subHeader={row.subHeader}
-                                  separator={<div className='dotImage' />}
-                                />
-                              </div>
-                              <div className='table-cell'>{row.status}</div>
-                              <div className='table-cell'>
-                                <div className='row inner'>
-                                  {' '}
-                                  <div className='table-cell'>
-                                    {row.displayStartButton && (
-                                      <button
-                                        className='gor-add-btn gor-listing-button'
-                                        onClick={_this._triggerItemSearchStart.bind(
-                                          this,
-                                          idx
-                                        )}
-                                      >
-                                        {'Start'}
-                                      </button>
-                                    )}
-                                  </div>
-                                  <div className='table-cell'>
-                                    <ActionDropDown
-                                      style={{ right: 0 }}
-                                      displayId={row.header[0]}
-                                      id={row.header[0]}
-                                      clickOptionBack={_this._handleActions}
-                                      data={actionOptions}
+                      ? tablerowdata.map(function (row, idx) {
+                        return (
+                          <GTableRow
+                            key={row.header[0]}
+                            index={idx}
+                            data={tablerowdata}
+                          >
+                            <div className='table-cell'>
+                              {row.displayStartButton && (
+                                <label className='container'>
+                                  <input type='checkbox' onChange={null} />
+                                  <span className={'checkmark'} />
+                                </label>
+                              )}
+                            </div>
+                            <div className='table-cell'>
+                              <span>
+                                <i className='systemGenerated' />
+                              </span>
+                              <DotSeparatorContent
+                                header={row.header}
+                                subHeader={row.subHeader}
+                                separator={<div className='dotImage' />}
+                              />
+                            </div>
+                            <div className='table-cell'>{row.status}</div>
+                            <div className='table-cell'>
+                              <div className='row inner'>
+                                {' '}
+                                <div className='table-cell'>
+                                  {row.displayStartButton && (
+                                    <button
+                                      className='gor-add-btn gor-listing-button'
+                                      onClick={_this._triggerItemSearchStart.bind(
+                                        this,
+                                        idx
+                                      )}
                                     >
-                                      <div className='embeddedImage' />
-                                    </ActionDropDown>
-                                  </div>
+                                      {'Start'}
+                                    </button>
+                                  )}
+                                </div>
+                                <div className='table-cell'>
+                                  <ActionDropDown
+                                    style={{ right: 0 }}
+                                    displayId={row.header[0]}
+                                    id={row.header[0]}
+                                    clickOptionBack={_this._handleActions}
+                                    data={actionOptions}
+                                  >
+                                    <div className='embeddedImage' />
+                                  </ActionDropDown>
                                 </div>
                               </div>
-                            </GTableRow>
-                          );
-                        })
+                            </div>
+                          </GTableRow>
+                        );
+                      })
                       : ''}
                   </GTableBody>
                 ) : (
-                  <div className='gor-no-data'>
-                    <FormattedMessage
-                      id='itemSearch.notfound'
-                      defaultMessage='No Records Present'
-                      description='Item Search not found'
-                    />
-                  </div>
-                )}
+                    <div className='gor-no-data'>
+                      <FormattedMessage
+                        id='itemSearch.notfound'
+                        defaultMessage='No Records Present'
+                        description='Item Search not found'
+                      />
+                    </div>
+                  )}
               </GTable>
             </div>
           </div>
         </div>
       </div>
     );
-
-    /*
-    return (
-      <div>
-        <div
-          className='gor-filter-wrap'
-          style={{
-            display: this.props.showFilter ? 'block' : 'none',
-            height: filterHeight
-          }}
-        >
-          <ItemSearchFilter
-            //auditDetail={this.props.AuditList}
-            //pollingFunc={_this.polling}
-            //pollTimerId={_this.state.timerId}
-            showItemSearchFilter={this.showItemSearchFilter}
-            isFilterApplied={this.props.isFilterApplied}
-            itemSearchfilterState={this.props.itemSearchFilterStatus || null}
-          />
-        </div>
-        <div className='gorToolBar auditListingToolbar'>
-          <div className='gorToolBarWrap auditListingToolbarWrap'>
-            <div className='auditHeaderContainer'>
-              <label className='container'>
-                <input type='checkbox' onChange={null} />
-                <span className={'checkmark'} />
-              </label>
-              <span className='auditHeader'>
-                <FormattedMessage
-                  id='itemSearch.header.label'
-                  description='header label for Item Search'
-                  defaultMessage='Item Search'
-                />
-              </span>
-            </div>
-          </div>
-
-          <div
-            style={{ float: 'right', marginTop: '18px', width: '21%' }}
-            className='gor-itemSearch-filter-create-wrap'
-          >
-            <div className='gor-button-wrap'>
-              <button
-                className={
-                  this.props.isFilterApplied
-                    ? 'gor-filterBtn-applied'
-                    : 'gor-filterBtn-btn'
-                }
-                onClick={_this.showItemSearchFilter.bind(this, true)}
-              >
-                <div className='gor-manage-task' />
-                <FormattedMessage
-                  id='audit.filter.filterLabel'
-                  description='button label for filter'
-                  defaultMessage='FILTER DATA'
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className='waveListWrapper'>
-          {this.props.data.loading && (
-            <Spinner isLoading={_this.props.data.loading} setSpinner={null} />
-          )}
-          <GTable options={['table-bordered', 'table-itemsearch']}>
-            {tablerowdata && tablerowdata.length >= 1 ? (
-              <GTableBody
-                data={tablerowdata}
-                onScrollHandler={_this._onScrollHandler}
-              >
-                {tablerowdata
-                  ? tablerowdata.map(function(row, idx) {
-                      return (
-                        <GTableRow
-                          key={row.header[0]}
-                          index={idx}
-                          data={tablerowdata}
-                        >
-                          <div className='table-cell'>
-                            {row.displayStartButton && (
-                              <label className='container'>
-                                <input type='checkbox' onChange={null} />
-                                <span className={'checkmark'} />
-                              </label>
-                            )}
-                          </div>
-                          <div className='table-cell'>
-                            <span>
-                              <i className='systemGenerated' />
-                            </span>
-                            <DotSeparatorContent
-                              header={row.header}
-                              subHeader={row.subHeader}
-                              separator={<div className='dotImage' />}
-                            />
-                          </div>
-                          <div className='table-cell'>{row.status}</div>
-                          <div className='table-cell'>
-                            <div className='row inner'>
-                              {' '}
-                              <div className='table-cell'>
-                                {row.displayStartButton && (
-                                  <button
-                                    className='gor-add-btn gor-listing-button'
-                                    onClick={null}
-                                  >
-                                    {'Start'}
-                                  </button>
-                                )}
-                              </div>
-                              <div className='table-cell'>
-                                <ActionDropDown
-                                  style={{ right: 0 }}
-                                  displayId={row.header[0]}
-                                  id={row.header[0]}
-                                  clickOptionBack={_this._handleActions}
-                                  data={actionOptions}
-                                >
-                                  <div className='embeddedImage' />
-                                </ActionDropDown>
-                              </div>
-                            </div>
-                          </div>
-                        </GTableRow>
-                      );
-                    })
-                  : ''}
-              </GTableBody>
-            ) : (
-              <div className='gor-no-data'>
-                <FormattedMessage
-                  id='itemSearch.notfound'
-                  defaultMessage='No Records Present'
-                  description='Item Search not found'
-                />
-              </div>
-            )}
-          </GTable>
-        </div>
-      </div>
-    );
-    */
   }
 }
 const mapStateToProps = (state, ownProps) => {
@@ -712,20 +590,8 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
   options: ({ match, location }) => ({
     variables: {
       input: {
-        // skuId: location.query.skuId || '',
-        // locationId: location.query.locationId || '',
-        // taskId: location.query.taskId || '',
-        // ppsId: location.query.ppsId || '',
-        // operatingMode: location.query.operatingMode || '',
-        // status: location.query.status || '',
-        // fromDate: location.query.fromDate || '',
-        // toDate: location.query.toDate || '',
-        //auditType: location.query.auditType || '',
-        //createdBy: location.query.createdBy || '',
-        //pageSize:10,
-        //pageNo:location.query.page||10,
         page: 0,
-        page_size: 100
+        page_size: 10
       }
     },
     fetchPolicy: 'network-only'
@@ -790,21 +656,21 @@ const withClientData = graphql(itemSearchClientData, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showItemSearchFilter: function(show) {
+    showItemSearchFilter: function (show) {
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function(applied) {
+    updateSubscription: function (applied) {
       mutate({ variables: { isUpdateSubsciption: applied } });
     }
   })
@@ -812,14 +678,14 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function(number) {
+    setCurrentPageNumber: function (number) {
       mutate({ variables: { pageNumber: number } });
     }
   })
 });
 const setListData = graphql(SET_LIST_DATA, {
   props: ({ mutate, ownProps }) => ({
-    listDataAudit: function(data) {
+    listDataAudit: function (data) {
       mutate({ variables: { listData: data } });
     }
   })
@@ -827,14 +693,14 @@ const setListData = graphql(SET_LIST_DATA, {
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    itemSearchfilterState: function(state) {
+    itemSearchfilterState: function (state) {
       mutate({ variables: { state: state } });
     }
   })
 });
 const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    setAuditSpinner: function(spinnerState) {
+    setAuditSpinner: function (spinnerState) {
       mutate({ variables: { auditSpinner: spinnerState } });
     }
   })
@@ -844,9 +710,9 @@ ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     }
   };
