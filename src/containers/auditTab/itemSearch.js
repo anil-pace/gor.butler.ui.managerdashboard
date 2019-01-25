@@ -51,7 +51,8 @@ import {
 import { wsOverviewData } from './../../constants/initData.js';
 import {
   ITEM_SEARCH_QUERY,
-  ITEM_SEARCH_START_QUERY
+  ITEM_SEARCH_START_QUERY,
+  ITEM_SEARCH_DETAILS_QUERY
 } from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
@@ -250,7 +251,7 @@ class ItemSearch extends React.Component {
     if (query.taskId) {
       this.props.client
         .query({
-          query: ITEM_SEARCH_QUERY,
+          query: ITEM_SEARCH_DETAILS_QUERY,
           variables: {
             input: {
               "externalServiceRequestId": query.taskId,
@@ -274,7 +275,7 @@ class ItemSearch extends React.Component {
     else if (query.status) {
       this.props.client
         .query({
-          query: ITEM_SEARCH_QUERY,
+          query: ITEM_SEARCH_DETAILS_QUERY,
           variables: {
             input: {
               "status": query.status,
