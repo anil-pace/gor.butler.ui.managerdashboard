@@ -1,29 +1,29 @@
 /**
  * Importing Router dependencies
  */
-import React  from 'react';
-import {connect} from 'react-redux';
-import {Router, Route, hashHistory, IndexRoute} from 'react-router';
-import {loginRequest} from '../actions/loginAction';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { loginRequest } from '../actions/loginAction';
 import Overview from '../containers/OverviewTab';
-import {tabSelected, subTabSelected} from '../actions/tabSelectAction';
-import {setInventorySpinner} from '../actions/inventoryActions';
-import {setAuditSpinner} from '../actions/auditActions';
-import {setOrderListSpinner} from '../actions/orderListActions';
-import {setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner} from '../actions/spinnerAction';
-import {AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER, MSU} from '../constants/appConstants';
-import {OVERVIEW, TAB_ROUTE_MAP, INVENTORY} from '../constants/frontEndConstants';
-import {translationMessages} from '../utilities/i18n';
-import {updateIntl} from 'react-intl-redux';
+import { tabSelected, subTabSelected } from '../actions/tabSelectAction';
+import { setInventorySpinner } from '../actions/inventoryActions';
+import { setAuditSpinner } from '../actions/auditActions';
+import { setOrderListSpinner } from '../actions/orderListActions';
+import { setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner } from '../actions/spinnerAction';
+import { AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER, MSU } from '../constants/appConstants';
+import { OVERVIEW, TAB_ROUTE_MAP, INVENTORY } from '../constants/frontEndConstants';
+import { translationMessages } from '../utilities/i18n';
+import { updateIntl } from 'react-intl-redux';
 
 class Routes extends React.Component {
 
 
     _requireAuth(nextState, replace) {
         if (sessionStorage.getItem('auth_token')) {
-            let subTab=(sessionStorage.getItem('subTab') || null);
-            let nextView=(sessionStorage.getItem('nextUrl') || 'md');
-            let selTab=(sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
+            let subTab = (sessionStorage.getItem('subTab') || null);
+            let nextView = (sessionStorage.getItem('nextUrl') || 'md');
+            let selTab = (sessionStorage.getItem('selTab') || TAB_ROUTE_MAP[OVERVIEW]);
             this.props.loginRequest();
             this.props.tabSelected(selTab);
             this.props.subTabSelected(subTab);
@@ -96,10 +96,10 @@ class Routes extends React.Component {
     }
 
     _handleNavigationChanges(context, replace) {
-        let pathname=context.location.pathname
+        let pathname = context.location.pathname
 
-        pathname=pathname.substring(1, pathname.length)
-        let navigator=pathname.split("/")
+        pathname = pathname.substring(1, pathname.length)
+        let navigator = pathname.split("/")
         sessionStorage.setItem("selTab", navigator[0])
         sessionStorage.setItem("nextView", pathname)
         if (navigator.length > 1) {
@@ -119,190 +119,190 @@ class Routes extends React.Component {
         return (
             <Router history={hashHistory}>
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="default" path="/"
-                       getComponent={(location, callback)=> {
-                           require.ensure([], function (require) {
-                               callback(null, require('../App').default);
-                           }, "defaultApp");
-                       }}
+                    getComponent={(location, callback) => {
+                        require.ensure([], function (require) {
+                            callback(null, require('../App').default);
+                        }, "defaultApp");
+                    }}
                 />
                 <Route name="login" path="/login" onEnter={this._refreshPage.bind(this)}
-                       getComponent={(location, callback)=> {
-                           require.ensure([], function (require) {
-                               callback(null, require('./Login/login').default);
-                           }, "login");
-                       }}
+                    getComponent={(location, callback) => {
+                        require.ensure([], function (require) {
+                            callback(null, require('./login/login').default);
+                        }, "login");
+                    }}
                 />
                 <Route onEnter={this._handleNavigationChanges.bind(this)} name="app" path="/md"
-                       getComponent={(location, callback)=> {
-                           require.ensure([], function (require) {
-                               callback(null, require('../App').default);
-                           }, "app");
-                       }}
+                    getComponent={(location, callback) => {
+                        require.ensure([], function (require) {
+                            callback(null, require('../App').default);
+                        }, "app");
+                    }}
                 >
                     <IndexRoute
-                        getComponent={(location, callback)=> {
+                        getComponent={(location, callback) => {
                             require.ensure([], function (require) {
                                 callback(null, require('../containers/OverviewTab').default);
                             }, "indexOverview");
                         }}
                     />
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="system" path="/system" className="gorResponsive"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/systemTab').default);
-                               }, "system");
-                           }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/systemTab').default);
+                            }, "system");
+                        }}
                     >
                         <IndexRoute
-                            getComponent={(location, callback)=> {
+                            getComponent={(location, callback) => {
                                 require.ensure([], function (require) {
                                     callback(null, require('../containers/systemTabs/sysOverview').default);
                                 }, "defaultSystem");
                             }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysOverview" path="/system/sysOverview"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/sysOverview').default);
-                                   }, "sysOverview");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/sysOverview').default);
+                                }, "sysOverview");
+                            }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="butlerbots" path="/system/butlerbots"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/butlerbotTab').default);
-                                   }, "butlerBots");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/butlerbotTab').default);
+                                }, "butlerBots");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="pps" path="/system/pps"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/pps/ppsTab').default);
-                                   }, "pps");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/pps/ppsTab').default);
+                                }, "pps");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="chargingstation" path="/system/chargingstation"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/chargingStationsTab').default);
-                                   }, "chargingStation");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/chargingStationsTab').default);
+                                }, "chargingStation");
+                            }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="sysControllers" path="/system/sysControllers"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/sysControllers').default);
-                                   }, "sysControllers");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/sysControllers').default);
+                                }, "sysControllers");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="ppsConfiguration" path="/system/ppsConfiguration"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/ppsConfigurationTab').default);
-                                   }, "ppsConfiguration");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/ppsConfigurationTab').default);
+                                }, "ppsConfiguration");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="msuConfiguration" path="/system/msuConfiguration"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/systemTabs/msuConfigurationTab').default);
-                                   }, "msuConfiguration");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/systemTabs/msuConfigurationTab').default);
+                                }, "msuConfiguration");
+                            }}
                         />
 
                     </Route>
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="orders" path="/orders"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/orderTab/orderListTab').default);
-                               }, "orders");
-                           }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/orderTab/orderListTab').default);
+                            }, "orders");
+                        }}
                     />
-                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit" className="gorResponsive"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/auditTab/auditSubTabs.js').default);
-                               }, "audit");
-                           }}
+                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="audit" path="/audit" className="gorResponsive"
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/auditTab/auditSubTabs.js').default);
+                            }, "audit");
+                        }}
                     >
-                    <IndexRoute
-                            getComponent={(location, callback)=> {
+                        <IndexRoute
+                            getComponent={(location, callback) => {
                                 require.ensure([], function (require) {
                                     callback(null, require('../containers/auditListing').default);
                                 }, "defaultAudit");
                             }}
                         />
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="auditlisting" path="/audit/auditlisting"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/auditListing').default);
-                               }, "auditlisting");
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/auditListing').default);
+                                }, "auditlisting");
 
-                           }}
-                    />
-                    <Route onEnter={this._handleNavigationChanges.bind(this)} name="itemsearch" path="/audit/itemsearch"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/auditTab/itemSearch').default);
-                               }, "itemsearch");
+                            }}
+                        />
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="itemsearch" path="/audit/itemsearch"
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/auditTab/itemSearch').default);
+                                }, "itemsearch");
 
-                           }}
-                    />
+                            }}
+                        />
                     </Route>
-                        
-                    
+
+
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="inventory" path="/inventory"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/inventoryTab').default);
-                               }, "inventory");
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/inventoryTab').default);
+                            }, "inventory");
 
 
-                           }}
+                        }}
                     />
 
-                   
+
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="users" path="/users"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/userTab/usersTab').default);
-                               }, "users");
-                           }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/userTab/usersTab').default);
+                            }, "users");
+                        }}
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="utilities" path="/utilities"
-                                             getComponent={(location, callback)=> {
-                                                 require.ensure([], function (require) {
-                                                     callback(null, require('../containers/utilityTab').default);
-                                                 }, "utilities");
-                                             }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/utilityTab').default);
+                            }, "utilities");
+                        }}
                     />
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="overview" path="/overview"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/OverviewTab').default);
-                               }, "overview");
-                           }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/OverviewTab').default);
+                            }, "overview");
+                        }}
                     />
 
 
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="reports" path="/reports"
-                           getComponent={(location, callback)=> {
-                               require.ensure([], function (require) {
-                                   callback(null, require('../containers/reportsTab/reportsTab.js').default);
-                               }, "reports");
-                           }}
+                        getComponent={(location, callback) => {
+                            require.ensure([], function (require) {
+                                callback(null, require('../containers/reportsTab/reportsTab.js').default);
+                            }, "reports");
+                        }}
                     >
-                    <IndexRoute
-                            getComponent={(location, callback)=> {
+                        <IndexRoute
+                            getComponent={(location, callback) => {
                                 require.ensure([], function (require) {
                                     callback(null, require('../containers/reportsTab/operationsLogTab.js').default);
                                 }, "defaultReports");
@@ -310,40 +310,40 @@ class Routes extends React.Component {
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="operationsLog" path="/reports/operationsLog"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/reportsTab/operationsLogTab.js').default);
-                                   }, "operationsLogTab");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/reportsTab/operationsLogTab.js').default);
+                                }, "operationsLogTab");
+                            }}
                         />
 
-                        
 
-                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="downloadReport" path="/reports/downloadReport"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/reportsTab/downloadReportTab.js').default);
-                                   }, "downloadReportTab");
-                               }}
+
+                        <Route onEnter={this._handleNavigationChanges.bind(this)} name="downloadReport" path="/reports/downloadReport"
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/reportsTab/downloadReportTab.js').default);
+                                }, "downloadReportTab");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="storageSpace" path="/reports/storageSpace"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/reportsTab/storageSpaceTab.js').default);
-                                   }, "storageSpaceTab");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/reportsTab/storageSpaceTab.js').default);
+                                }, "storageSpaceTab");
+                            }}
                         />
 
                         <Route onEnter={this._handleNavigationChanges.bind(this)} name="misc" path="/reports/misc"
-                               getComponent={(location, callback)=> {
-                                   require.ensure([], function (require) {
-                                       callback(null, require('../containers/reportsTab/misc.js').default);
-                                   }, "misc");
-                               }}
+                            getComponent={(location, callback) => {
+                                require.ensure([], function (require) {
+                                    callback(null, require('../containers/reportsTab/misc.js').default);
+                                }, "misc");
+                            }}
                         />
 
-                        
+
                     </Route>
 
                 </Route>
@@ -354,7 +354,7 @@ class Routes extends React.Component {
 }
 
 
-var mapDispatchToProps=function (dispatch) {
+var mapDispatchToProps = function (dispatch) {
     return {
         updateIntl: function (params) {
             dispatch(updateIntl(params));
@@ -396,10 +396,10 @@ var mapDispatchToProps=function (dispatch) {
 
 };
 
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state, ownProps) {
 
-    return  {
-        config:state.config||{}
+    return {
+        config: state.config || {}
     }
 }
 
