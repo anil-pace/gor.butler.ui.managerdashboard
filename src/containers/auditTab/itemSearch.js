@@ -229,8 +229,6 @@ class ItemSearch extends React.Component {
               "externalServiceRequestId": taskId,
               "status": status,
               "type": "SEARCH",
-              "page": 0,
-              "page_size": 10,
               "searchBy": "viaFilter"
             }
           },
