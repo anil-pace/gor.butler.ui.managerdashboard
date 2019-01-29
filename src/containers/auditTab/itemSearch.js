@@ -51,7 +51,8 @@ import {
 import { wsOverviewData } from './../../constants/initData.js';
 import {
   ITEM_SEARCH_QUERY,
-  ITEM_SEARCH_START_QUERY
+  ITEM_SEARCH_START_QUERY,
+  ITEM_SEARCH_DETAILS_QUERY
 } from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
@@ -216,8 +217,41 @@ class ItemSearch extends React.Component {
     }
   }
 
+  _requestItemSearchList(taskId, status) {
+    const _this = this;
+    let { page } = _this.state;
+    if (taskId || status) {
+      _this.props.client
+        .query({
+          query: ITEM_SEARCH_DETAILS_QUERY,
+          variables: {
+            input: {
+              "externalServiceRequestId": taskId,
+              "status": status,
+              "type": "SEARCH",
+              "page": 0,
+              "page_size": 10,
+              "searchBy": "viaFilter"
+            }
+          },
+          fetchPolicy: 'network-only'
+        })
+        .then(data => {
+          //let existingData = JSON.parse(JSON.stringify(_this.state.data));
+          let currentData = data.data.ItemSearchDetailsList.list;
+          //let mergedData = existingData.concat(currentData);
+          _this.setState(() => {
+            return {
+              data: currentData,
+              page
+            };
+          });
+        });
+    }
+  }
+
   _refreshList(query) {
-    var me = this;
+    let _this = this;
     //if (this.props.currentPageNumber < this.props.TotalPage) {
     if (query.scrolling) {
       var pageNo = this.props.currentPageNumber + 1;
@@ -247,81 +281,12 @@ class ItemSearch extends React.Component {
         }
       });
     //this.props.setAuditSpinner(true);
-    if (query.taskId) {
-      this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              "externalServiceRequestId": query.taskId,
-              "searchBy": "filter"
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          let existingData = JSON.parse(JSON.stringify(_this.state.data));
-          let currentData = data.data.ItemSearchList.list.serviceRequests;
-          let mergedData = existingData.concat(currentData);
-          _this.setState(() => {
-            return {
-              data: mergedData,
-              page
-            };
-          });
-        });
-    }
-    else if (query.status) {
-      this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              "status": query.status,
-              "type": "SEARCH",
-              "searchBy": "filter"
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          let existingData = JSON.parse(JSON.stringify(_this.state.data));
-          let currentData = data.data.ItemSearchList.list.serviceRequests;
-          let mergedData = existingData.concat(currentData);
-          _this.setState(() => {
-            return {
-              data: mergedData,
-              page
-            };
-          });
-        });
-    }
+    _this._requestItemSearchList(query.taskId, query.status);
 
     //}
   }
 
-  _requestItemSearchList() {
-    this.props.client.query({
-      query: ITEM_SEARCH_QUERY,
-      variables: {
-        input: {
-          page: 0,
-          page_size: 10
-        }
-      },
-      fetchPolicy: 'network-only'
-    }).then(data => {
-      let existingData = JSON.parse(JSON.stringify(_this.state.data));
-      let currentData = data.data.ItemSearchList.list.serviceRequests;
-      let mergedData = existingData.concat(currentData);
-      _this.setState(() => {
-        return {
-          data: mergedData,
-          page
-        };
-      });
-    })
-  }
+
 
 
 
@@ -329,7 +294,6 @@ class ItemSearch extends React.Component {
    *
    */
   _clearFilter() {
-    //this._requestItemSearchList();
     this.props.itemSearchfilterState({
       tokenSelected: {
         STATUS: [ALL],
