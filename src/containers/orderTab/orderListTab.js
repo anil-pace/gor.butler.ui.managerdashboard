@@ -67,6 +67,7 @@ class OrderListTab extends React.Component {
 			endDateForOrders: null,
 			ppsIdFilterForOrders: null,
 			statusFilterForOrders: null,
+			priorityFilterForOrders: null,
 			timerId: null
 		};
 	}
@@ -75,12 +76,19 @@ class OrderListTab extends React.Component {
 		var filtered_order_status =
 			!this.state.statusFilterForOrders || Array.isArray(this.state.statusFilterForOrders)
 				? this.state.statusFilterForOrders
-				: [ this.state.statusFilterForOrders ];
+				: [this.state.statusFilterForOrders];
+
+		var filtered_order_priority =
+			!this.state.priorityFilterForOrders || Array.isArray(this.state.priorityFilterForOrders)
+				? this.state.priorityFilterForOrders
+				: [this.state.priorityFilterForOrders];
+
 		let formData = {
 			start_date: this.state.startDateForOrders,
 			end_date: this.state.endDateForOrders,
+			filtered_ppsId: this.state.ppsIdFilterForOrders,
 			filtered_order_status: filtered_order_status,
-			filtered_ppsId: this.state.ppsIdFilterForOrders
+			simple_priority: filtered_order_priority
 		};
 		let params = {
 			url: ORDERS_REPORT_DOWNLOAD_URL,
@@ -95,7 +103,7 @@ class OrderListTab extends React.Component {
 		this.props.makeAjaxCall(params);
 	}
 
-	_reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, isFilterApplied = 'false') {
+	_reqCutOffTime(startDate, endDate, filteredPpsId, filteredOrderStatus, filteredOrderPriority, isFilterApplied = 'false') {
 		let formData = {
 			start_date: startDate,
 			end_date: endDate,
@@ -113,10 +121,19 @@ class OrderListTab extends React.Component {
 			/*Need to convert filteredOrderStatus into string as 
             react-router provides single query in string*/
 			if (filteredOrderStatus.constructor === String) {
-				filteredOrderStatus = [ filteredOrderStatus ];
+				filteredOrderStatus = [filteredOrderStatus];
 			}
 			formData['filtered_order_status'] = filteredOrderStatus.slice(0);
 			sessionStorage.setItem('filtered_order_status', JSON.stringify(filteredOrderStatus));
+		}
+		if (filteredOrderPriority) {
+			/*Need to convert filteredOrderPriority into string as 
+            react-router provides single query in string*/
+			if (filteredOrderPriority.constructor === String) {
+				filteredOrderPriority = [filteredOrderPriority];
+			}
+			formData['simple_priority'] = filteredOrderPriority.slice(0);
+			sessionStorage.setItem('simple_priority', JSON.stringify(filteredOrderPriority));
 		}
 
 		let params = {
@@ -136,7 +153,7 @@ class OrderListTab extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.socketAuthorized && !this.state.subscribed) {
-			this.setState({ subscribed: true }, function() {
+			this.setState({ subscribed: true }, function () {
 				this._subscribeData(nextProps);
 			});
 		}
@@ -192,16 +209,17 @@ class OrderListTab extends React.Component {
 				startDateForOrders: startDateFilter,
 				endDateForOrders: endDateFilter,
 				statusFilterForOrders: query.status,
+				priorityFilterForOrders: query.priority,
 				ppsIdFilterForOrders: query.ppsId
 			},
 			() => {
 				// Start the backend calls
 				if (this.props.isFilterApplied) {
-					this._reqCutOffTime(startDateFilter, endDateFilter, query.ppsId, query.status, 'true');
+					this._reqCutOffTime(startDateFilter, endDateFilter, query.ppsId, query.status, query.priority, 'true');
 					this._reqOrdersFulfillment(startDateFilter, endDateFilter, 'true');
 					this._reqOrdersSummary(startDateFilter, endDateFilter, 'true');
 				} else {
-					this._reqCutOffTime(startDateFilter, endDateFilter, query.ppsId, query.status);
+					this._reqCutOffTime(startDateFilter, endDateFilter, query.ppsId, query.status, query.priority);
 					this._reqOrdersFulfillment(startDateFilter, endDateFilter);
 					this._reqOrdersSummary(startDateFilter, endDateFilter);
 				}
@@ -213,12 +231,13 @@ class OrderListTab extends React.Component {
 		//set interval for polling
 		let self = this;
 		let timerId = 0;
-		timerId = setInterval(function() {
+		timerId = setInterval(function () {
 			let query = {};
 			query.startDate = sessionStorage.getItem('startDate');
 			query.endDate = sessionStorage.getItem('endDate');
 			query.filteredPpsId = sessionStorage.getItem('filtered_ppsId');
 			query.filteredOrderStatus = JSON.parse(sessionStorage.getItem('filtered_order_status'));
+			query.filteredOrderPriority = JSON.parse(sessionStorage.getItem('simple_priority'));
 			self._refreshList(query);
 		}, ORDERS_POLLING_INTERVAL);
 		self.setState({ timerId: timerId });
@@ -229,10 +248,12 @@ class OrderListTab extends React.Component {
 		hashHistory.push({ pathname: '/orders', query: {} });
 		sessionStorage.removeItem('filtered_ppsId');
 		sessionStorage.removeItem('filtered_order_status');
+		sessionStorage.removeItem('simple_priority');
 		this.props.orderfilterState({
 			tokenSelected: {
-				'ORDER TAGS': [ 'any' ],
-				STATUS: [ 'any' ]
+				'ORDER TAGS': ['any'],
+				STATUS: ['any'],
+				'PRIORITY': [ANY]
 			},
 			searchQuery: { ORDER_ID: '', PPS_ID: '' }
 		});
@@ -369,8 +390,8 @@ class OrderListTab extends React.Component {
 					{!this.props.showFilter ? (
 						<Spinner isLoading={this.props.orderListSpinner} setSpinner={this.props.setOrderListSpinner} />
 					) : (
-						''
-					)}
+							''
+						)}
 					<div>
 						<div
 							className='gor-filter-wrap'
@@ -436,8 +457,8 @@ class OrderListTab extends React.Component {
 														this.props.orderFilterStatus ? (
 															'gor-filterBtn-applied'
 														) : (
-															'gor-filterBtn-btn'
-														)
+																'gor-filterBtn-btn'
+															)
 													}
 													onClick={this._setFilter.bind(this)}
 												>
@@ -485,6 +506,7 @@ class OrderListTab extends React.Component {
 							endDate={this.state.endDateForOrders}
 							ppsIdFilter={this.state.ppsIdFilterForOrders}
 							statusFilter={this.state.statusFilterForOrders}
+							priorityFilter={this.state.priorityFilterForOrders}
 							intervalIdForCutOffTime={this.state.timerId}
 							isFilterApplied={this.props.isFilterApplied}
 							enableCollapseAllBtn={this._enableCollapseAllBtn}
@@ -493,16 +515,16 @@ class OrderListTab extends React.Component {
 						/>
 					)}
 					{!this.props.orderListSpinner &&
-					this.props.pbts.length === 0 && (
-						<div className='noOrdersPresent'>
-							{' '}
-							<FormattedMessage
-								id='orders.noOrders.noOrders'
-								description='display no orders'
-								defaultMessage='No orders available'
-							/>{' '}
-						</div>
-					)}
+						this.props.pbts.length === 0 && (
+							<div className='noOrdersPresent'>
+								{' '}
+								<FormattedMessage
+									id='orders.noOrders.noOrders'
+									description='display no orders'
+									defaultMessage='No orders available'
+								/>{' '}
+							</div>
+						)}
 					{this.props.orderListSpinner && <div className='noOrdersPresent' />}
 				</div>
 			</div>
@@ -537,43 +559,43 @@ function mapStateToProps(state, ownProps) {
 	};
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
 	return {
-		setOrderListSpinner: function(data) {
+		setOrderListSpinner: function (data) {
 			dispatch(setOrderListSpinner(data));
 		},
 
-		showTableFilter: function(data) {
+		showTableFilter: function (data) {
 			dispatch(showTableFilter(data));
 		},
-		filterApplied: function(data) {
+		filterApplied: function (data) {
 			dispatch(filterApplied(data));
 		},
-		orderfilterState: function(data) {
+		orderfilterState: function (data) {
 			dispatch(orderfilterState(data));
 		},
-		toggleOrderFilter: function(data) {
+		toggleOrderFilter: function (data) {
 			dispatch(toggleOrderFilter(data));
 		},
-		orderListRefreshed: function(data) {
+		orderListRefreshed: function (data) {
 			dispatch(orderListRefreshed(data));
 		},
-		updateSubscriptionPacket: function(data) {
+		updateSubscriptionPacket: function (data) {
 			dispatch(updateSubscriptionPacket(data));
 		},
-		initDataSentCall: function(data) {
+		initDataSentCall: function (data) {
 			dispatch(setWsAction({ type: WS_ONSEND, data: data }));
 		},
-		setOrderQuery: function(data) {
+		setOrderQuery: function (data) {
 			dispatch(setOrderQuery(data));
 		},
-		makeAjaxCall: function(params) {
+		makeAjaxCall: function (params) {
 			dispatch(makeAjaxCall(params));
 		},
-		unSetAllActivePbts: function() {
+		unSetAllActivePbts: function () {
 			dispatch(unSetAllActivePbts());
 		},
-		setInfiniteSpinner: function(data) {
+		setInfiniteSpinner: function (data) {
 			dispatch(setInfiniteSpinner(data));
 		}
 	};
