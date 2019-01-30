@@ -97,6 +97,69 @@ const actionOptions = [
   }
 ];
 
+const messages = defineMessages({
+  itemSearchCreatedStatus: {
+    id: 'itemSearch.notYetStarted.status',
+    defaultMessage: 'Not yet started'
+  },
+  itemSearchProcessingStatus: {
+    id: 'itemSearch.processing.status',
+    defaultMessage: 'Search in progress'
+  },
+  itemSearchProcessedStatus: {
+    id: 'itemSearch.completed.status',
+    defaultMessage: 'Completed'
+  },
+  auditPausedStatus: {
+    id: 'auditdetail.paused.status',
+    defaultMessage: 'Paused'
+  },
+  auditCompletedStatus: {
+    id: 'auditdetail.complete.status',
+    defaultMessage: 'Completed'
+  },
+  auditSKU: {
+    id: 'auditdetail.sku.prefix',
+    defaultMessage: 'SKU'
+  },
+  auditLocation: {
+    id: 'auditdetail.location.prefix',
+    defaultMessage: 'Location'
+  },
+  autoAssignpps: {
+    id: 'auditdetail.label.autoassignpps',
+    defaultMessage: 'Auto Assign PPS'
+  },
+  manualAssignpps: {
+    id: 'auditdetail.label.manualassignpps',
+    defaultMessage: 'Manually-Assign PPS'
+  },
+  completedOutof: {
+    id: 'auditdetail.label.completedoutof',
+    defaultMessage: 'completed out of'
+  },
+  linestobeResolved: {
+    id: 'auditdetail.label.linestoberesolved',
+    defaultMessage: 'lines to be resolved'
+  },
+  linesRejected: {
+    id: 'auditdetail.label.linesrejected',
+    defaultMessage: 'lines rejected'
+  },
+  linesApproved: {
+    id: 'auditdetail.label.linesapproved',
+    defaultMessage: 'lines approved'
+  },
+  auditConflictingOperatorStatus: {
+    id: 'auditdetail.auditConflictingOperatorStatus.status',
+    defaultMessage: 'Concerned MSU is in use'
+  },
+  auditwaitingStatus: {
+    id: 'auditdetail.auditwaitingStatus.status',
+    defaultMessage: 'Processing audit task'
+  }
+});
+
 class ItemSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -311,7 +374,12 @@ class ItemSearch extends React.Component {
     this.props.filterApplied(false);
     hashHistory.push({ pathname: '/itemsearch', query: {} });
   }
-  _processServerData() {
+  _processServerData(data, nProps) {
+    //nProps = this;
+    let notYetStarted = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
+    let searchInProgress = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
+    let completed = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
+
     var processedData = [];
     if (this.state.data && this.state.data.length) {
       let data = this.state.data.slice(0);
@@ -332,6 +400,13 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null
         ];
+        if (datum.status == 'CREATED') {
+          datum.status = notYetStarted;
+        } else if (data[i].audit_status == 'PROCESSING') {
+          datum.status = searchInProgress;
+        } else if (data[i].audit_status == 'PROCESSED') {
+          datum.status = completed;
+        }
         tuple.status = datum.status;
         tuple.displayStartButton =
           datum.status.toUpperCase() === 'CREATED' ? true : false;
