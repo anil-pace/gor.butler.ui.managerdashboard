@@ -5707,13 +5707,13 @@ button:disabled {
 .gor-audit-input {
   text-align: left;
   width: 80%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: none;
   height: 93%;
 }
 
 .gor-sku-error {
-  color: #EC1C24;
+  color: #ec1c24;
   padding-top: 10px;
   font-size: 15px;
 }
@@ -5752,7 +5752,7 @@ button:disabled {
   border-radius: 3px;
   background-color: #f36f36;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 14px;
   font-weight: 600;
   text-align: left;
@@ -5761,6 +5761,27 @@ button:disabled {
   vertical-align: sub;
   cursor: pointer;
   width: 141px;
+}
+
+.gor-Auditlist-table .gor-audit-generate-report-btn {
+  height: 35px;
+  border-radius: 3px;
+  background-color: #4d5055;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  font-family: 'source sans pro';
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  color: #ffffff;
+  padding-left: 15px;
+  vertical-align: sub;
+  cursor: pointer;
+  width: 141px;
+  margin-right: 30px;
+}
+
+.gor-Auditlist-table .gor-audit-generate-report-btn.disabled {
+  cursor: none;
 }
 
 .gor-Auditlist-table .gor-audit-filter-create-wrap {
@@ -9014,7 +9035,7 @@ button:disabled {
   border-radius: 3px;
   background-color: #4d5055;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 0.875rem;
   font-weight: 600;
   text-align: left;
@@ -9023,6 +9044,10 @@ button:disabled {
   padding-right: 0.875rem;
   vertical-align: sub;
   cursor: pointer;
+}
+
+.gor-operations-log .gor-rpt-dwnld.disabled {
+  cursor: default;
 }
 
 .gor-operations-log .ops-log-table .status {
