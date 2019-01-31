@@ -157,7 +157,8 @@ class ItemSearch extends React.Component {
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              ppsIdList: this.state.data[index].attributes.ppsIdList
+              ppsIdList: this.state.data[index].attributes.ppsIdList.length
+                ? this.state.data[index].attributes.ppsIdList : "123" //send hard-coded dummy value to platform, cannot be empty
             }
           }
         },
