@@ -79,22 +79,23 @@ import {
   WS_ONSEND,
   CANCEL_AUDIT,
   PAUSE_AUDIT,
-  SYSTEM_GENERATED
+  SYSTEM_GENERATED,
 } from '../../constants/frontEndConstants';
 
 const actionOptions = [
   {
     name: 'View Details',
     value: 'view_details'
-  },
-  {
-    name: 'Pause',
-    value: 'pause'
-  },
-  {
-    name: 'Cancel',
-    value: 'cancel'
   }
+  //,
+  // {
+  //   name: 'Pause',
+  //   value: 'pause'
+  // },
+  // {
+  //   name: 'Cancel',
+  //   value: 'cancel'
+  // }
 ];
 
 const messages = defineMessages({
@@ -109,6 +110,10 @@ const messages = defineMessages({
   itemSearchProcessedStatus: {
     id: 'itemSearch.completed.status',
     defaultMessage: 'Completed'
+  },
+  itemSearchFailedStatus: {
+    id: 'itemSearch.failed.status',
+    defaultMessage: 'Failed'
   },
   auditPausedStatus: {
     id: 'auditdetail.paused.status',
@@ -221,7 +226,8 @@ class ItemSearch extends React.Component {
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              ppsIdList: this.state.data[index].attributes.ppsIdList
+              ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList)]
+              //ppsIdList: [5]
             }
           }
         },
@@ -376,9 +382,10 @@ class ItemSearch extends React.Component {
   }
   _processServerData(data, nProps) {
     //nProps = this;
-    let notYetStarted = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
-    let searchInProgress = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
-    let completed = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
+    let notYetStartedItemSearch = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
+    let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
+    let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
+    let failedItemSearch = this.context.intl.formatMessage(messages.itemSearchFailedStatus);
 
     var processedData = [];
     if (this.state.data && this.state.data.length) {
@@ -387,6 +394,14 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
+        // let lengthOfSearch = containers.products.length;
+        // let typeOfSearch;
+        // if (lengthOfSearch === 1) {
+        //   typeOfSearch = "Single SKU"
+        // }
+        // else {
+        //   typeOfSearch = "Multiple SKU"
+        // }
         let productAttributes = containers
           ? containers.products[0].productAttributes
           : null;
@@ -398,18 +413,18 @@ class ItemSearch extends React.Component {
         tuple.subHeader = [
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
-            : null
+            : null,
+          //lengthOfSearch ? typeOfSearch : null,
+          //datum.updatedOn
         ];
-        if (datum.status == 'CREATED') {
-          datum.status = notYetStarted;
-        } else if (data[i].audit_status == 'PROCESSING') {
-          datum.status = searchInProgress;
-        } else if (data[i].audit_status == 'PROCESSED') {
-          datum.status = completed;
-        }
+        if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
+        else if (datum.status == 'PROCESSING') { datum.status = searchInProgressItemSearch; }
+        else if (datum.status == 'PROCESSED') { datum.status = completedItemSearch; }
+        else if (datum.status == 'FAILED') { datum.status = failedItemSearch; }
+
         tuple.status = datum.status;
         tuple.displayStartButton =
-          datum.status.toUpperCase() === 'CREATED' ? true : false;
+          datum.status.toUpperCase() === "NOT YET STARTED" ? true : false;
         processedData.push(tuple);
       }
     }
@@ -486,14 +501,14 @@ class ItemSearch extends React.Component {
         </div>
         {/*Filter Summary*/}
         <FilterSummary
-          total={_this.state.itemSearchList.length || 0}
+          total={_this.state.data ? _this.state.data.length : 5}
           isFilterApplied={_this.props.isFilterApplied}
           filterText={
             <FormattedMessage
               id='itemSearch.filter.search.bar'
               description='total results for filter search bar'
               defaultMessage='{total} results found'
-              values={{ total: _this.state.itemSearchList.length || 0 }}
+              values={{ total: _this.state.data ? _this.state.data.length : 5 }}
             />
           }
           refreshList={_this._clearFilter.bind(this)}
@@ -637,47 +652,47 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
 
 const SET_VISIBILITY = gql`
   mutation setAuditFiler($filter: String!) {
-    setShowItemSearchFilter(filter: $filter) @client
-  }
-`;
+          setShowItemSearchFilter(filter: $filter) @client
+      }
+    `;
 
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
-    setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
-  }
-`;
+          setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
+      }
+    `;
 const SET_UPDATE_SUBSCRIPTION = gql`
   mutation setUpdateSubscription($isUpdateSubsciption: String!) {
-    setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
-      @client
-  }
-`;
+          setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
+          @client
+      }
+    `;
 const SET_PAGE_NUMBER = gql`
   mutation setPageNumber($pageNumber: Int!) {
-    setAuditPageNumber(pageNumber: $pageNumber) @client
-  }
-`;
+          setAuditPageNumber(pageNumber: $pageNumber) @client
+      }
+    `;
 const SET_AUDIT_SPINNER_STATE = gql`
   mutation setauditSpinner($auditSpinner: String!) {
-    setAuditSpinnerState(auditSpinner: $auditSpinner) @client
-  }
-`;
+          setAuditSpinnerState(auditSpinner: $auditSpinner) @client
+      }
+    `;
 
 const SET_LIST_DATA = gql`
   mutation setListData($listData: String!) {
-    setAuditListData(listData: $listData) @client
-  }
-`;
+          setAuditListData(listData: $listData) @client
+      }
+    `;
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
-    setItemSearchFilterState(state: $state) @client
-  }
-`;
+          setItemSearchFilterState(state: $state) @client
+      }
+    `;
 const SET_CHECKED_AUDIT = gql`
   mutation setCheckedAudit($checkedAudit: Array!) {
-    setCheckedAudit(checkedAudit: $checkedAudit) @client
-  }
-`;
+          setCheckedAudit(checkedAudit: $checkedAudit) @client
+      }
+    `;
 
 const withClientData = graphql(itemSearchClientData, {
   props: data => ({
