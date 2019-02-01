@@ -82,6 +82,7 @@ import {
   SYSTEM_GENERATED,
   DESC
 } from '../../constants/frontEndConstants';
+import ItemSearchStart from './itemSearchStart';
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -227,6 +228,18 @@ class ItemSearch extends React.Component {
     } else if (field.target.value == 'autoassignpps') {
       this.startAuditAuto();
     }
+  }
+
+  startAudit() {
+    var auditId = this.props.checkedAudit;
+    modal.add(ItemSearchStart, {
+      title: '',
+      size: 'large',
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      auditID: auditId
+      //.. all what you put in here you will get access in the modal props ;),
+    });
   }
 
   _triggerItemSearchStart(index) {
