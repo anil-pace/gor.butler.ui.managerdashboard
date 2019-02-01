@@ -80,7 +80,10 @@ import {
   CANCEL_AUDIT,
   PAUSE_AUDIT,
   SYSTEM_GENERATED,
+  DESC
 } from '../../constants/frontEndConstants';
+import moment from 'moment';
+import 'moment-timezone';
 
 const actionOptions = [
   {
@@ -183,6 +186,7 @@ class ItemSearch extends React.Component {
     this._triggerItemSearchStart = this._triggerItemSearchStart.bind(this);
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
     this.showItemSearchFilter = this.props.showItemSearchFilter.bind(this);
+    this._handelClick = this._handelClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -212,6 +216,16 @@ class ItemSearch extends React.Component {
     ) {
       this.setState({ query: nextProps.location.query });
       this._refreshList(nextProps.location.query);
+    }
+  }
+
+  _handelClick(field) {
+    if (field.target.value == 'viewdetails') {
+      this.viewAuditDetails();
+    } else if (field.target.value == 'mannualassignpps') {
+      this.startAudit();
+    } else if (field.target.value == 'autoassignpps') {
+      this.startAuditAuto();
     }
   }
 
@@ -381,7 +395,7 @@ class ItemSearch extends React.Component {
     hashHistory.push({ pathname: '/itemsearch', query: {} });
   }
   _processServerData(data, nProps) {
-    //nProps = this;
+    const { timeOffset } = this.props;
     let notYetStartedItemSearch = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
     let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
     let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
@@ -394,14 +408,9 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
-        // let lengthOfSearch = containers.products.length;
-        // let typeOfSearch;
-        // if (lengthOfSearch === 1) {
-        //   typeOfSearch = "Single SKU"
-        // }
-        // else {
-        //   typeOfSearch = "Multiple SKU"
-        // }
+        let productsLength = containers.products.length;
+        let typeOfSearch = (productsLength === 1 ? "Single SKU" : "Multiple SKU");
+
         let productAttributes = containers
           ? containers.products[0].productAttributes
           : null;
@@ -414,8 +423,9 @@ class ItemSearch extends React.Component {
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
-          //lengthOfSearch ? typeOfSearch : null,
-          //datum.updatedOn
+          typeOfSearch,
+          //containers.products[0].createdOn
+          moment(containers.products[0].createdOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
         ];
         if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
         else if (datum.status == 'PROCESSING') { datum.status = searchInProgressItemSearch; }
@@ -450,6 +460,7 @@ class ItemSearch extends React.Component {
   }
   render() {
     var filterHeight = screen.height - 190;
+    let manualAssignpps = this.context.intl.formatMessage(messages.manualAssignpps);
     const _this = this;
     const tablerowdata = _this._processServerData(); //[{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[38,""],"subHeader":[["PPS 1"],"Single SKU","yesterday, 18:29"],"audit_id":"UmvjVRzWiP","display_id":38},"auditProgress":{"percentage":0,"flag":false,"status":"Waiting for the operator to login"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[37,""],"subHeader":[["PPS 5"],"Multi location","Dec 27, 15:05"],"audit_id":"SDod3kgYuY","display_id":37},"auditProgress":{"percentage":0,"flag":false,"status":"Processing audit task"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[36,""],"subHeader":["Multi PPS","Single SKU","Dec 27, 11:54"],"audit_id":"iGpKxPTKRw","display_id":36},"auditProgress":{"percentage":33.333333333333336,"flag":true,"status":"1 completed out of 3"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[35,""],"subHeader":[["PPS 4"],"Single SKU","Dec 26, 18:59 - 19:03"],"audit_id":"wzAxam7mVj","display_id":35},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[33,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 16:14"],"audit_id":"KscU3jyYFF","display_id":33},"auditProgress":{"percentage":0,"flag":false,"status":"Paused"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":true,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[32,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 15:56 - 16:11"],"audit_id":"qxtjAPF4Fh","display_id":32},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[31,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 12:23 - 12:25"],"audit_id":"yG5ELy7MV3","display_id":31},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[30,""],"subHeader":[["PPS 5"],"Single location","Dec 19, 18:12"],"audit_id":"KmC4LdEi67","display_id":30},"auditProgress":{"percentage":0,"flag":true,"status":"0 completed out of 1"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[29,""],"subHeader":[["PPS 4"],"Single location","Dec 19, 18:09 - 18:11"],"audit_id":"JWZoH2NXQt","display_id":29},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[28,""],"subHeader":[["PPS 4"],"Single location","Dec 19, 18:05 - 18:08"],"audit_id":"dUxFvKiV6i","display_id":28},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]}];
     let toolbar = (
@@ -582,6 +593,7 @@ class ItemSearch extends React.Component {
                               <div className='row inner'>
                                 {' '}
                                 <div className='table-cell'>
+                                  {/*
                                   {row.displayStartButton && (
                                     <button
                                       className='gor-add-btn gor-listing-button'
@@ -593,6 +605,29 @@ class ItemSearch extends React.Component {
                                       {'Start'}
                                     </button>
                                   )}
+                                      */}
+                                  {row.displayStartButton && (
+                                    <ActionDropDown
+                                      style={{
+                                        width: '115px',
+                                        display: 'inline',
+                                        float: 'left',
+                                        'padding-left': '25px'
+                                      }}
+                                      clickOptionBack={_this._handelClick}
+                                      data={[{ name: manualAssignpps, value: 'mannualassignpps' }]}
+                                    >
+                                      <button className='gor-add-btn gor-listing-button'>
+                                        <FormattedMessage
+                                          id='audit.start.Audit'
+                                          description='button label for start'
+                                          defaultMessage='START'
+                                        />
+                                        <div className='got-add-notch' />
+                                      </button>
+                                    </ActionDropDown>
+                                  )}
+
                                 </div>
                                 <div className='table-cell'>
                                   <ActionDropDown
@@ -643,7 +678,8 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
     variables: {
       input: {
         page: 0,
-        page_size: 10
+        page_size: 10,
+        order: DESC
       }
     },
     fetchPolicy: 'network-only'

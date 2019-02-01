@@ -305,7 +305,6 @@ export const ITEM_SEARCH_QUERY = gql`
           attributes {
             ppsIdList
           }
-          updatedOn
           expectations {
             containers {
               products {
@@ -314,6 +313,8 @@ export const ITEM_SEARCH_QUERY = gql`
                     product_sku
                   }
                 }
+                createdOn
+                updatedOn
               }
             }
           }
