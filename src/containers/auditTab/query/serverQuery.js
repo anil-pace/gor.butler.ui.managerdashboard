@@ -302,6 +302,8 @@ export const ITEM_SEARCH_QUERY = gql`
           status
           state
           externalServiceRequestId
+          createdOn
+          updatedOn
           attributes {
             ppsIdList
           }
