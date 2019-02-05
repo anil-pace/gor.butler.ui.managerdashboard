@@ -33,7 +33,7 @@ import { graphql, withApollo, compose } from "react-apollo";
 import { AuditParse } from '../../../src/utilities/auditResponseParser'
 import { ShowError } from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
-import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY } from './query/serverQuery';
+import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY, ITEM_SEARCH_PPS_LIST_FETCH_QUERY } from './query/serverQuery';
 import { auditClientPPSData } from './query/clientQuery';
 
 const messages = defineMessages({
@@ -788,16 +788,17 @@ const withClientData = graphql(auditClientPPSData, {
         })
 })
 
-const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
+//const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
+const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
 
     props: function (data) {
         var list = { pps_list: [] }
-        if (!data || !data.data.AuditPPSDetails || !data.data.AuditPPSDetails.list) {
+        if (!data || !data.data.ItemSearchPPSDetails || !data.data.ItemSearchPPSDetails.list) {
             ppsList: list
             return {}
         }
         return {
-            ppsList: data.data.AuditPPSDetails.list
+            ppsList: data.data.ItemSearchPPSDetails.list
         }
     },
     options: ({ match, location }) => ({

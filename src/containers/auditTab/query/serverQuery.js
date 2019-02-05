@@ -346,3 +346,19 @@ export const ITEM_SEARCH_START_QUERY = gql`
     }
   }
 `;
+
+export const ITEM_SEARCH_PPS_LIST_FETCH_QUERY = gql`
+  query ItemSearchPPSDetails  {
+    ItemSearchPPSDetails{
+      list {
+        pps_list{
+          operator_assigned
+          pps_id
+          pps_mode
+          }
+        }
+      }
+    }
+`;
+
+
