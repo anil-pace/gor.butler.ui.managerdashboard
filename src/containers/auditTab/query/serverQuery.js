@@ -281,13 +281,28 @@ export const ITEM_SEARCH_DETAILS_QUERY = gql`
   query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
     ItemSearchDetailsList(input: $input) {
       list {
+        type
+        status
+        state
         externalServiceRequestId
         createdOn
+        updatedOn
         attributes {
           ppsIdList
         }
         actuals {
           containers
+        }
+        expectations {
+          containers {
+            products {
+              productAttributes {
+                pdfa_values {
+                  product_sku
+                }
+              }
+            }
+          }
         }
       }
     }

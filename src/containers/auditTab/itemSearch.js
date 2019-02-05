@@ -11,6 +11,7 @@ import {
   GTableBody,
   GTableRow
 } from '../../components/gor-table-component';
+import { hashHistory } from 'react-router';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
 //import NameInitial from '../../components/NameInitial/nameInitial';
@@ -331,7 +332,7 @@ class ItemSearch extends React.Component {
           fetchPolicy: 'network-only'
         })
         .then(data => {
-          let currentData = data.data.ItemSearchList.list.serviceRequests;
+          let currentData = data.data.ItemSearchDetailsList.list;
           console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
           console.log(currentData);
           _this.setState(() => {
@@ -417,6 +418,9 @@ class ItemSearch extends React.Component {
     var processedData = [];
     if (this.state.data && this.state.data.length) {
       let data = this.state.data.slice(0);
+      console.log("#######################################################");
+      console.log("this.state.data.slice(0)" + this.state.data.slice(0));
+      console.log("data" + data);
       for (let i = 0, len = data.length; i < len; i++) {
         let tuple = {};
         let datum = data[i];
@@ -527,14 +531,14 @@ class ItemSearch extends React.Component {
         </div>
         {/*Filter Summary*/}
         <FilterSummary
-          total={_this.state.data ? _this.state.data.length : 5}
+          total={tablerowdata ? tablerowdata.length : 0}
           isFilterApplied={_this.props.isFilterApplied}
           filterText={
             <FormattedMessage
               id='itemSearch.filter.search.bar'
               description='total results for filter search bar'
               defaultMessage='{total} results found'
-              values={{ total: _this.state.data ? _this.state.data.length : 5 }}
+              values={{ total: tablerowdata ? tablerowdata.length : 0 }}
             />
           }
           refreshList={_this._clearFilter.bind(this)}
