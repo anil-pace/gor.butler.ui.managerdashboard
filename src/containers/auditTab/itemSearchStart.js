@@ -33,7 +33,7 @@ import { graphql, withApollo, compose } from "react-apollo";
 import { AuditParse } from '../../../src/utilities/auditResponseParser'
 import { ShowError } from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
-import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY, ITEM_SEARCH_PPS_LIST_FETCH_QUERY } from './query/serverQuery';
+import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY } from './query/serverQuery';
 import { auditClientPPSData } from './query/clientQuery';
 
 const messages = defineMessages({
@@ -58,14 +58,13 @@ const messages = defineMessages({
 
 
 
-class ItemSearchStart extends React.Component {
+class AuditStart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             checkedAuditPPS: [],
             checkedOtherPPS: [],
-            //auditId: this.props.auditID,
-            auditId: ["5"],
+            auditId: this.props.auditID,
             visiblePopUp: false,
             type: [{ 'type': "" }],
             items: []
@@ -87,14 +86,14 @@ class ItemSearchStart extends React.Component {
     _findDisplayidName(arrId) {
         var resultantArr = [];
         var dataSet = this.props.auditDetails;
-        // dataSet.forEach(function (entry) {
-        //     arrId.forEach(function (content) {
-        //         if (content == entry.audit_id) {
-        //             resultantArr.push({ id: entry.audit_id, dislayID: entry.display_id, name: entry.audit_name, type: entry.audit_type });
-        //         }
-        //     })
+        dataSet.forEach(function (entry) {
+            arrId.forEach(function (content) {
+                if (content == entry.audit_id) {
+                    resultantArr.push({ id: entry.audit_id, dislayID: entry.display_id, name: entry.audit_name, type: entry.audit_type });
+                }
+            })
 
-        // })
+        })
         this.setState({ 'type': resultantArr })
         return resultantArr;
     }
@@ -257,24 +256,24 @@ class ItemSearchStart extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // if (JSON.stringify(nextProps.ppsList.pps_list)) {
-        //     let attributeData = nextProps.ppsList.pps_list || [];
-        //     this.setState({ items: attributeData });
-        //     let auditList = [], otherList = [];
-        //     if (this.state.type[0].type == WALL_TO_WALL) {
-        //         for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
-        //             if (nextProps.ppsList.pps_list[i].pps_mode == 'audit')
-        //                 auditList.push(nextProps.ppsList.pps_list[i].pps_id);
-        //             else
-        //                 otherList.push(nextProps.ppsList.pps_list[i].pps_id);
-        //         }
-        //         this.props.setCheckedAuditpps(auditList);
-        //         this.props.setCheckedOtherpps(otherList);
-        //     }
-        // }
+        if (JSON.stringify(nextProps.ppsList.pps_list)) {
+            let attributeData = nextProps.ppsList.pps_list || [];
+            this.setState({ items: attributeData });
+            let auditList = [], otherList = [];
+            if (this.state.type[0].type == WALL_TO_WALL) {
+                for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
+                    if (nextProps.ppsList.pps_list[i].pps_mode == 'audit')
+                        auditList.push(nextProps.ppsList.pps_list[i].pps_id);
+                    else
+                        otherList.push(nextProps.ppsList.pps_list[i].pps_id);
+                }
+                this.props.setCheckedAuditpps(auditList);
+                this.props.setCheckedOtherpps(otherList);
+            }
+        }
 
-        // this.setState({ checkedAuditPPS: nextProps.checkedAuditPPSList });
-        // this.setState({ checkedOtherPPS: nextProps.checkedOtherPPSList });
+        this.setState({ checkedAuditPPS: nextProps.checkedAuditPPSList });
+        this.setState({ checkedOtherPPS: nextProps.checkedOtherPPSList });
 
 
     }
@@ -310,9 +309,9 @@ class ItemSearchStart extends React.Component {
             defaultMessage="Change PPS"
         />);
         let startAuditHeader = (<FormattedMessage
-            id="itemsearch.startitemsearch.headerstartitemsearch"
-            description="Heading for start item serach"
-            defaultMessage="Start Item Search"
+            id="audit.audittask.headerstartaudit"
+            description="Heading for start audit"
+            defaultMessage="Start Audit"
         />);
         let auditModePPS = (
             <FormattedMessage
@@ -388,32 +387,28 @@ class ItemSearchStart extends React.Component {
             />
         );
 
-        // let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
-        // let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
-        // let totalAuditPPSCount = 0;
-        // let totalOtherPPSCount = 0;
-        // Object.keys(items).forEach(function (key) {
-        //     if (items[key].pps_mode == "audit") totalAuditPPSCount++;
-        //     else {
-        //         totalOtherPPSCount++;
-        //     }
-        // });
+        let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
+        let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
+        let totalAuditPPSCount = 0;
+        let totalOtherPPSCount = 0;
+        Object.keys(items).forEach(function (key) {
+            if (items[key].pps_mode == "audit") totalAuditPPSCount++;
+            else {
+                totalOtherPPSCount++;
+            }
+        });
 
-        // let auditPPS = [],
-        //     otherPPS = [];
-        // Object.keys(items).map(function (key) {
-        //     if (items[key].pps_mode === "audit") {
-        //         auditPPS.push(items[key]);
-        //     } else {
-        //         otherPPS.push(items[key]);
-        //     }
-        // });
-
-        //var tablerowdataAudit = this._tableAuditPPSData(auditPPS);
-        //var tablerowdataOther = this._tableotherPPSData(otherPPS);
-
-        var tablerowdataAudit = this._tableAuditPPSData(["1", "2", "3"]);
-        var tablerowdataOther = this._tableotherPPSData(["11", "22", "32", "44"]);
+        let auditPPS = [],
+            otherPPS = [];
+        Object.keys(items).map(function (key) {
+            if (items[key].pps_mode === "audit") {
+                auditPPS.push(items[key]);
+            } else {
+                otherPPS.push(items[key]);
+            }
+        });
+        var tablerowdataAudit = this._tableAuditPPSData(auditPPS);
+        var tablerowdataOther = this._tableotherPPSData(otherPPS);
 
         var tableData = [
             { class: 'auditppscolumn1style' },
@@ -431,27 +426,21 @@ class ItemSearchStart extends React.Component {
                 <div className="gor-AuditDetails-modal-content">
                     <div className="gor-auditDetails-modal-head">
                         <span className="AuditIDWrapper">
-                            {startAuditHeader}
+                            {this.props.param == "CHANGE_PPS" ? changePPSHeader : startAuditHeader}
                         </span>
 
                         <span className="close" onClick={this._removeThisModal.bind(this)}>
-
-                        </span>
+                            ×
+            </span>
                     </div>
 
                     <div className="gor-auditDetails-modal-body">
                         {tablerowdataAudit.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
                             <div>
                                 <div className="content-body">
-
                                     <span className="left-float">
-                                        {this.state.type[0].type == WALL_TO_WALL
-                                            ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div>
-                                            : this.state.auditId.length > 1
-                                                ? <div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length + " Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div>
-                                                : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
+                                        {this.state.type[0].type == WALL_TO_WALL ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div> : this.state.auditId.length > 1 ? <div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length + " Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div> : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
                                     </span>
-
                                     {this.state.visiblePopUp ?
 
                                         <div className="outerWrapper">
@@ -477,11 +466,9 @@ class ItemSearchStart extends React.Component {
                                     <GTable options={["table-bordered", "auditStart"]}>
                                         <GTableHeader options={["auditTable"]}>
                                             <GTableHeaderCell key={1} header="Audit" className="audittable">
-                                                {/*
                                                 <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Audit")} />
                                                     <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
                                                 </label>
-                                            */}
                                                 <span>
                                                     {tablerowdataAudit.length + " "}
                                                     {auditModePPS}
@@ -525,13 +512,11 @@ class ItemSearchStart extends React.Component {
                                                                                         ? ""
                                                                                         : true
                                                                                 }
-                                                                            /*
-                                                                            disabled={me.state.type[0].type == WALL_TO_WALL}
-                                                                            onChange={me.CheckChange.bind(
-                                                                                me,
-                                                                                "Audit"
-                                                                            )}
-                                                                            */
+                                                                                disabled={me.state.type[0].type == WALL_TO_WALL}
+                                                                                onChange={me.CheckChange.bind(
+                                                                                    me,
+                                                                                    "Audit"
+                                                                                )}
                                                                             />
                                                                             <span className="checkmark" />
                                                                         </label>
@@ -599,7 +584,6 @@ class ItemSearchStart extends React.Component {
                                                     style={{ "margin-left": "10px" }}
                                                 >
                                                     {" "}
-                                                    {/*
                                                     <input
                                                         type="checkbox"
                                                         checked={
@@ -608,7 +592,6 @@ class ItemSearchStart extends React.Component {
                                                         disabled={me.state.type[0].type == WALL_TO_WALL}
                                                         onChange={me.headerCheckChange.bind(me, "other")}
                                                     />
-                                                
                                                     <span
                                                         className={
                                                             totalOtherPPSCount == checkedOtherPPSCount
@@ -616,7 +599,6 @@ class ItemSearchStart extends React.Component {
                                                                 : "checkmark1"
                                                         }
                                                     />
-                                                    */}
                                                 </label>
                                                 <span>
                                                     {tablerowdataOther.length + " "} {otherModePPS}
@@ -725,7 +707,7 @@ class ItemSearchStart extends React.Component {
         );
     }
 }
-ItemSearchStart.contextTypes = {
+AuditStart.contextTypes = {
     intl: React.PropTypes.object.isRequired
 };
 
@@ -738,6 +720,8 @@ var mapDispatchToProps = function (dispatch) {
     };
 };
 
+
+
 const SET_CHECKED_AUDIT_PPS = gql`
     mutation setCheckedAuditpps($checkedAuditPPSList: Array!) {
       setCheckedAuditpps(checkedAuditPPSList: $checkedAuditPPSList) @client
@@ -749,19 +733,6 @@ const SET_CHECKED_OTHER_PPS = gql`
       setCheckedOtherpps(checkedOtherPPSList: $checkedOtherPPSList) @client
     }
 `;
-
-const SET_AUDIT_LIST_REFRESH_STATE = gql`
-    mutation setauditListRefresh($auditRefreshFlag: String!) {
-      setAuditListRefreshState(auditRefreshFlag: $auditRefreshFlag) @client
-    }
-`;
-const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
-    props: ({ mutate, ownProps }) => ({
-        setAuditListRefresh: function (auditRefreshFlag) {
-            mutate({ variables: { auditRefreshFlag: auditRefreshFlag } })
-        },
-    }),
-});
 
 const CheckedAuditpps = graphql(SET_CHECKED_AUDIT_PPS, {
     props: ({ mutate, ownProps }) => ({
@@ -777,6 +748,18 @@ const CheckedOtherpps = graphql(SET_CHECKED_OTHER_PPS, {
         },
     }),
 });
+const SET_AUDIT_LIST_REFRESH_STATE = gql`
+    mutation setauditListRefresh($auditRefreshFlag: String!) {
+      setAuditListRefreshState(auditRefreshFlag: $auditRefreshFlag) @client
+    }
+`;
+const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
+    props: ({ mutate, ownProps }) => ({
+        setAuditListRefresh: function (auditRefreshFlag) {
+            mutate({ variables: { auditRefreshFlag: auditRefreshFlag } })
+        },
+    }),
+});
 
 
 const withClientData = graphql(auditClientPPSData, {
@@ -784,21 +767,20 @@ const withClientData = graphql(auditClientPPSData, {
         ({
             checkedAuditPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedAuditPPSList : [],
             checkedOtherPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedOtherPPSList : [],
-            //auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
+            auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
         })
 })
 
-//const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
-const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
+const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
 
     props: function (data) {
         var list = { pps_list: [] }
-        if (!data || !data.data.ItemSearchPPSDetails || !data.data.ItemSearchPPSDetails.list) {
+        if (!data || !data.data.AuditPPSDetails || !data.data.AuditPPSDetails.list) {
             ppsList: list
             return {}
         }
         return {
-            ppsList: data.data.ItemSearchPPSDetails.list
+            ppsList: data.data.AuditPPSDetails.list
         }
     },
     options: ({ match, location }) => ({
@@ -808,11 +790,7 @@ const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
 });
 
 export default compose(
-    //withClientData,
-    initialQuery,
-    //setAuditListRefreshState,
-    //CheckedAuditpps,
-    //CheckedOtherpps,
-    withApollo)
+    withClientData, initialQuery, setAuditListRefreshState,
+    CheckedAuditpps, CheckedOtherpps, withApollo)
     (connect(null, mapDispatchToProps)
-        (ItemSearchStart));
+        (AuditStart));

@@ -22,6 +22,7 @@ import { modal } from 'react-redux-modal';
 import { graphql, withApollo, compose } from 'react-apollo';
 import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
+import ItemSearchStart from './itemSearchStart';
 import // SUBSCRIPTION_QUERY,
   // MSU_LIST_QUERY,
   // MSU_LIST_POST_FILTER_QUERY,
@@ -83,7 +84,7 @@ import {
   SYSTEM_GENERATED,
   DESC
 } from '../../constants/frontEndConstants';
-import ItemSearchStart from './itemSearchStart';
+
 import moment from 'moment';
 import 'moment-timezone';
 
@@ -232,13 +233,14 @@ class ItemSearch extends React.Component {
   }
 
   startAudit() {
-    var auditId = this.props.checkedAudit;
+    //var auditId = this.props.checkedAudit;
+    var auditId = ["bgmfqENgdA"];
     modal.add(ItemSearchStart, {
       title: '',
       size: 'large',
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      auditID: auditId
+      auditID: auditId,
       //.. all what you put in here you will get access in the modal props ;),
     });
   }
