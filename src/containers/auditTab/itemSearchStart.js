@@ -76,7 +76,7 @@ class AuditStart extends React.Component {
     }
 
     componentDidMount() {
-        var resultantArr = this._findDisplayidName(this.state.auditId);
+        //var resultantArr = this._findDisplayidName(this.state.auditId);
     }
 
 
@@ -217,7 +217,7 @@ class AuditStart extends React.Component {
         if (type == "Audit") {
             if (e.currentTarget.checked) {
                 Object.keys(ppslist).forEach(function (key) {
-                    if (ppslist[key].pps_mode == "audit") arr.push(ppslist[key].pps_id);
+                    if (ppslist[key].pps_mode == "search") arr.push(ppslist[key].pps_id);
                 });
                 this.props.setCheckedAuditpps(arr);
             } else {
@@ -226,7 +226,7 @@ class AuditStart extends React.Component {
         } else {
             if (e.currentTarget.checked) {
                 Object.keys(ppslist).forEach(function (key) {
-                    if (ppslist[key].pps_mode !== "audit") arr.push(ppslist[key].pps_id);
+                    if (ppslist[key].pps_mode !== "search") arr.push(ppslist[key].pps_id);
                 });
                 this.props.setCheckedOtherpps(arr);
             } else {
@@ -262,7 +262,7 @@ class AuditStart extends React.Component {
             let auditList = [], otherList = [];
             if (this.state.type[0].type == WALL_TO_WALL) {
                 for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
-                    if (nextProps.ppsList.pps_list[i].pps_mode == 'audit')
+                    if (nextProps.ppsList.pps_list[i].pps_mode == 'search')
                         auditList.push(nextProps.ppsList.pps_list[i].pps_id);
                     else
                         otherList.push(nextProps.ppsList.pps_list[i].pps_id);
@@ -302,16 +302,40 @@ class AuditStart extends React.Component {
         }
 
         let me = this;
-        let items = this.state.items || [];
+        //let items = this.state.items || [];
+        let items = [{
+            "operator_assigned": "Anil_1",
+            "pps_id": "1",
+            "pps_mode": "put",
+        }, {
+            "operator_assigned": "Anil_2",
+            "pps_id": "2",
+            "pps_mode": "pick",
+        }, {
+            "operator_assigned": "Anil_3",
+            "pps_id": "3",
+            "pps_mode": "pick",
+        },
+        {
+            "operator_assigned": "Anil_4",
+            "pps_id": "4",
+            "pps_mode": "search",
+        },
+        {
+            "operator_assigned": "Anil_5",
+            "pps_id": "5",
+            "pps_mode": "search",
+        }
+        ];
         let changePPSHeader = (<FormattedMessage
             id="audit.audittask.headerchangeppd"
             description="Heading for change pps"
             defaultMessage="Change PPS"
         />);
         let startAuditHeader = (<FormattedMessage
-            id="audit.audittask.headerstartaudit"
-            description="Heading for start audit"
-            defaultMessage="Start Audit"
+            id="itemsSearch.starttask.headerstartitemSearch"
+            description="Heading for start item search"
+            defaultMessage="Start Item Search"
         />);
         let auditModePPS = (
             <FormattedMessage
@@ -346,9 +370,9 @@ class AuditStart extends React.Component {
         );
         let forAudit = (
             <FormattedMessage
-                id="audit.startaudit.Foraudit"
-                description="For audit"
-                defaultMessage="For audit"
+                id="itemSearch.startitemSearch.ForItemSearch"
+                description="For item search"
+                defaultMessage="For item search"
             />
         );
         let auditlistinfo = (
@@ -392,7 +416,7 @@ class AuditStart extends React.Component {
         let totalAuditPPSCount = 0;
         let totalOtherPPSCount = 0;
         Object.keys(items).forEach(function (key) {
-            if (items[key].pps_mode == "audit") totalAuditPPSCount++;
+            if (items[key].pps_mode == "search") totalAuditPPSCount++;
             else {
                 totalOtherPPSCount++;
             }
@@ -401,7 +425,7 @@ class AuditStart extends React.Component {
         let auditPPS = [],
             otherPPS = [];
         Object.keys(items).map(function (key) {
-            if (items[key].pps_mode === "audit") {
+            if (items[key].pps_mode === "search") {
                 auditPPS.push(items[key]);
             } else {
                 otherPPS.push(items[key]);
@@ -767,7 +791,7 @@ const withClientData = graphql(auditClientPPSData, {
         ({
             checkedAuditPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedAuditPPSList : [],
             checkedOtherPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedOtherPPSList : [],
-            auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
+            //auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
         })
 })
 
@@ -790,7 +814,11 @@ const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
 });
 
 export default compose(
-    withClientData, initialQuery, setAuditListRefreshState,
-    CheckedAuditpps, CheckedOtherpps, withApollo)
+    withClientData,
+    initialQuery,
+    setAuditListRefreshState,
+    CheckedAuditpps,
+    CheckedOtherpps,
+    withApollo)
     (connect(null, mapDispatchToProps)
         (AuditStart));

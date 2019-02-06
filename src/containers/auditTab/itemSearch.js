@@ -222,25 +222,27 @@ class ItemSearch extends React.Component {
     }
   }
 
-  _handelClick(field) {
+  _handelClick(index, field) {
     if (field.target.value == 'viewdetails') {
       this.viewAuditDetails();
     } else if (field.target.value == 'mannualassignpps') {
-      this.startAudit();
+      this.startAudit(index);
     } else if (field.target.value == 'autoassignpps') {
       this.startAuditAuto();
     }
   }
 
-  startAudit() {
+  startAudit(index) {
     //var auditId = this.props.checkedAudit;
-    var auditId = ["bgmfqENgdA"];
+    //var auditId = ["bgmfqENgdA"];
+    var auditId = this.state.data[index].externalServiceRequestId;
     modal.add(ItemSearchStart, {
       title: '',
       size: 'large',
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
       auditID: auditId,
+
       //.. all what you put in here you will get access in the modal props ;),
     });
   }
@@ -635,7 +637,7 @@ class ItemSearch extends React.Component {
                                         float: 'left',
                                         'padding-left': '25px'
                                       }}
-                                      clickOptionBack={_this._handelClick}
+                                      clickOptionBack={_this._handelClick.bind(this, idx)}
                                       data={[{ name: manualAssignpps, value: 'mannualassignpps' }]}
                                     >
                                       <button className='gor-add-btn gor-listing-button'>
