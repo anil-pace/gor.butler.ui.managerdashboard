@@ -20,7 +20,7 @@ import {
     APP_JSON,
     START_AUDIT_TASK,
     CHANGE_PPS_TASK,
-    WALL_TO_WALL
+    WALL_TO_WALL,
 } from "../../constants/frontEndConstants";
 import {
     START_AUDIT_URL,
@@ -33,7 +33,7 @@ import { graphql, withApollo, compose } from "react-apollo";
 import { AuditParse } from '../../../src/utilities/auditResponseParser'
 import { ShowError } from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
-import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY } from './query/serverQuery';
+import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY, ITEM_SEARCH_PPS_LIST_FETCH_QUERY, ITEM_SEARCH_START_QUERY } from './query/serverQuery';
 import { auditClientPPSData } from './query/clientQuery';
 
 const messages = defineMessages({
@@ -58,7 +58,7 @@ const messages = defineMessages({
 
 
 
-class AuditStart extends React.Component {
+class ItemSearchStart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,19 @@ class AuditStart extends React.Component {
             auditId: this.props.auditID,
             visiblePopUp: false,
             type: [{ 'type': "" }],
-            items: []
+            items: [],
+            localDataFromState: [
+                {
+                    "operator_assigned": "Anil_4",
+                    "pps_id": "4",
+                    "pps_mode": "search",
+                },
+                {
+                    "operator_assigned": "Anil_5",
+                    "pps_id": "5",
+                    "pps_mode": "search",
+                }
+            ]
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -135,6 +147,7 @@ class AuditStart extends React.Component {
         }
         return tableData;
     }
+
     _handlestartaudit(e) {
         var _this = this;
         let allAuditId,
@@ -148,19 +161,49 @@ class AuditStart extends React.Component {
             this.state.auditId.constructor.name !== "Array"
                 ? [this.state.auditId]
                 : this.state.auditId;
-        if (this.props.param == "CHANGE_PPS") {
-            URL = START_CHANGE_PPS_URL;
-            param = CHANGE_PPS_TASK;
-        } else {
-            URL = START_AUDIT_URL;
-            param = START_AUDIT_TASK;
-        }
+        /*
+            if (this.props.param == "CHANGE_PPS") {
+                URL = START_CHANGE_PPS_URL;
+                param = CHANGE_PPS_TASK;
+            } else {
+                URL = START_AUDIT_URL;
+                param = START_AUDIT_TASK;
+            }
+        */
         let formdata = {
             audit_id_list: allAuditId,
             pps_list: allPPSList
         };
 
         e.preventDefault();
+        _this.props.client
+            .query({
+                query: ITEM_SEARCH_START_QUERY,
+                variables: {
+                    input: {
+                        externalServiceRequestId: this.state.auditId,
+                        attributes: {
+                            ppsIdList: allPPSList
+                        }
+                    }
+                },
+                fetchPolicy: 'network-only'
+            })
+            .then(data => {
+                var AuditRequestSubmit = data.data.AuditRequestSubmit ? JSON.parse(data.data.AuditRequestSubmit.list) : ""
+                AuditParse(AuditRequestSubmit, 'START_AUDIT', _this)
+                // let existingData = JSON.parse(JSON.stringify(_this.state.data));
+                // let currentData = data.data.ItemSearchList.list.serviceRequests;
+                // let mergedData = existingData.concat(currentData);
+                // _this.setState(() => {
+                //     return {
+                //         data: mergedData,
+                //         page
+                //     };
+                // });
+            });
+        this.props.removeModal();
+        /*
         if (this.props.checkedOtherPPSList.length > 0) {
             let data = (
                 <FormattedMessage
@@ -191,7 +234,7 @@ class AuditStart extends React.Component {
 
             var dataToSent = JSON.stringify(startAuditData);
             this.props.client.query({
-                query: AUDIT_REQUEST_QUERY,
+                query: ITEM_SEARCH_START_QUERY,
                 variables: (function () {
                     return {
                         input: {
@@ -208,13 +251,16 @@ class AuditStart extends React.Component {
             })
             this.props.removeModal();
         }
+        */
 
     }
 
     headerCheckChange(type, e) {
-        let ppslist = this.props.ppsList.pps_list;
+        let localData = this.state.localDataFromState;
+        //let ppslist = this.props.ppsList.pps_list;
+        let ppslist = localData;
         let arr = [];
-        if (type == "Audit") {
+        if (type == "Search") {
             if (e.currentTarget.checked) {
                 Object.keys(ppslist).forEach(function (key) {
                     if (ppslist[key].pps_mode == "search") arr.push(ppslist[key].pps_id);
@@ -237,7 +283,7 @@ class AuditStart extends React.Component {
 
     CheckChange(type, e) {
         let arr = [];
-        if (type == "Audit") {
+        if (type == "Search") {
             arr = JSON.parse(JSON.stringify(this.props.checkedAuditPPSList));
             let a = arr.indexOf(e.currentTarget.id);
             a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
@@ -256,16 +302,18 @@ class AuditStart extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (JSON.stringify(nextProps.ppsList.pps_list)) {
-            let attributeData = nextProps.ppsList.pps_list || [];
+        let localData = this.state.localDataFromState
+        //if (JSON.stringify(nextProps.ppsList.pps_list)) {
+        if (JSON.stringify(localData)) {
+            let attributeData = localData || [];
             this.setState({ items: attributeData });
             let auditList = [], otherList = [];
             if (this.state.type[0].type == WALL_TO_WALL) {
-                for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
-                    if (nextProps.ppsList.pps_list[i].pps_mode == 'search')
-                        auditList.push(nextProps.ppsList.pps_list[i].pps_id);
+                for (var i = 0; i < localData.length; i++) {
+                    if (localData[i].pps_mode == 'search')
+                        auditList.push(localData[i].pps_id);
                     else
-                        otherList.push(nextProps.ppsList.pps_list[i].pps_id);
+                        otherList.push(localData[i].pps_id);
                 }
                 this.props.setCheckedAuditpps(auditList);
                 this.props.setCheckedOtherpps(otherList);
@@ -303,30 +351,8 @@ class AuditStart extends React.Component {
 
         let me = this;
         //let items = this.state.items || [];
-        let items = [{
-            "operator_assigned": "Anil_1",
-            "pps_id": "1",
-            "pps_mode": "put",
-        }, {
-            "operator_assigned": "Anil_2",
-            "pps_id": "2",
-            "pps_mode": "pick",
-        }, {
-            "operator_assigned": "Anil_3",
-            "pps_id": "3",
-            "pps_mode": "pick",
-        },
-        {
-            "operator_assigned": "Anil_4",
-            "pps_id": "4",
-            "pps_mode": "search",
-        },
-        {
-            "operator_assigned": "Anil_5",
-            "pps_id": "5",
-            "pps_mode": "search",
-        }
-        ];
+        let items = this.state.localDataFromState;
+
         let changePPSHeader = (<FormattedMessage
             id="audit.audittask.headerchangeppd"
             description="Heading for change pps"
@@ -489,8 +515,8 @@ class AuditStart extends React.Component {
                                 {tablerowdataAudit.length > 0 ? (
                                     <GTable options={["table-bordered", "auditStart"]}>
                                         <GTableHeader options={["auditTable"]}>
-                                            <GTableHeaderCell key={1} header="Audit" className="audittable">
-                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Audit")} />
+                                            <GTableHeaderCell key={1} header="Search" className="audittable">
+                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Search")} />
                                                     <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
                                                 </label>
                                                 <span>
@@ -539,7 +565,7 @@ class AuditStart extends React.Component {
                                                                                 disabled={me.state.type[0].type == WALL_TO_WALL}
                                                                                 onChange={me.CheckChange.bind(
                                                                                     me,
-                                                                                    "Audit"
+                                                                                    "Search"
                                                                                 )}
                                                                             />
                                                                             <span className="checkmark" />
@@ -600,7 +626,7 @@ class AuditStart extends React.Component {
                                         <GTableHeader options={["auditTable"]}>
                                             <GTableHeaderCell
                                                 key={1}
-                                                header="Audit"
+                                                header="Search"
                                                 className="audittable"
                                             >
                                                 <label
@@ -731,7 +757,7 @@ class AuditStart extends React.Component {
         );
     }
 }
-AuditStart.contextTypes = {
+ItemSearchStart.contextTypes = {
     intl: React.PropTypes.object.isRequired
 };
 
@@ -795,16 +821,17 @@ const withClientData = graphql(auditClientPPSData, {
         })
 })
 
-const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
 
+const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
+    //const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
     props: function (data) {
         var list = { pps_list: [] }
-        if (!data || !data.data.AuditPPSDetails || !data.data.AuditPPSDetails.list) {
+        if (!data || !data.data.ItemSearchPPSDetails || !data.data.ItemSearchPPSDetails.list) {
             ppsList: list
             return {}
         }
         return {
-            ppsList: data.data.AuditPPSDetails.list
+            ppsList: data.data.ItemSearchPPSDetails.list
         }
     },
     options: ({ match, location }) => ({
@@ -821,4 +848,4 @@ export default compose(
     CheckedOtherpps,
     withApollo)
     (connect(null, mapDispatchToProps)
-        (AuditStart));
+        (ItemSearchStart));
