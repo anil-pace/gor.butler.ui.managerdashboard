@@ -5,10 +5,10 @@ import gql from 'graphql-tag'
 const itemSearchInternalState = {
     defaults: {
         ppsCheckedData: {
-            checkedAuditPPSList: [],
+            checkedItemSearchPPSList: [],
             checkedOtherPPSList: [],
-            checkedAudit: [],
-            auditDetails: [],
+            checkedItemSearch: [],
+            itemSearchDetails: [],
             __typename: 'IntenalState'
         }
         // auditEditDupData: {
@@ -44,17 +44,17 @@ const itemSearchInternalState = {
     },
     resolvers: {
         Mutation: {
-            setCheckedAuditpps: (_, { checkedAuditPPSList }, { cache }) => {
+            setCheckedItemSearchpps: (_, { checkedItemSearchPPSList }, { cache }) => {
                 let query = gql`
                     query  {
                         ppsCheckedData @client{
-                            checkedAuditPPSList
+                            checkedItemSearchPPSList
                             __typename
                             }
                         }
                 `;
                 let previous = cache.readQuery({ query }).ppsCheckedData
-                previous.checkedAuditPPSList = checkedAuditPPSList
+                previous.checkedItemSearchPPSList = checkedItemSearchPPSList
                 cache.writeData({ data: { ppsCheckedData: previous } });
                 return null;
 
@@ -74,34 +74,34 @@ const itemSearchInternalState = {
                 return null;
 
             },
-            setCheckedAudit: (_, { checkedAudit }, { cache }) => {
+            setCheckedItemSearch: (_, { checkedItemSearch }, { cache }) => {
                 let query = gql`
                     query  {
                         ppsCheckedData @client{
-                            checkedAudit
-                            auditDetails
+                            checkedItemSearch
+                            itemSearchDetails
                             __typename
                             }
                         }
                 `;
                 let previous = cache.readQuery({ query }).ppsCheckedData
-                previous.checkedAudit = checkedAudit
+                previous.checkedItemSearch = checkedItemSearch
                 cache.writeData({ data: { ppsCheckedData: previous } });
                 return null;
 
             },
-            setAuditDetails: (_, { auditDetails }, { cache }) => {
+            setItemSearchDetails: (_, { itemSearchDetails }, { cache }) => {
                 let query = gql`
                     query  {
                         ppsCheckedData @client{
-                            checkedAudit
-                            auditDetails
+                            checkedItemSearch
+                            itemSearchDetails
                             __typename
                             }
                         }
                 `;
                 let previous = cache.readQuery({ query }).ppsCheckedData
-                previous.auditDetails = JSON.stringify(auditDetails);
+                previous.itemSearchDetails = JSON.stringify(itemSearchDetails);
                 cache.writeData({ data: { ppsCheckedData: previous } });
                 return null;
 
