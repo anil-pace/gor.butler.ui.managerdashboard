@@ -31,168 +31,24 @@ class ItemSearchDetails extends React.Component {
   }
   _processedData() {
     var processedData = {};
-    //const data = JSON.parse(JSON.stringify(this.state.data));
-    const data = [{
-      "id": 407,
-      "externalServiceRequestId": "Search-Put-Gry9yoRAzimtC27",
-      "serviceRequests": [],
-      "type": "SEARCH",
-      "actuals": {
-        "containers": [
-          {
-            "id": 1438,
-            "state": "complete",
-            "type": "VIRTUAL",
-            "barcode": null,
-            "products": [{
-              "id": 1438,
-              "uid": "1",
-              "possibleUids": null,
-              "uidType": null,
-              "productQuantity": 1,
-              "productAttributes": null,
-              "createdOn": "2019-02-04T06:41:13.372Z",
-              "updatedOn": "2019-02-04T06:41:13.372Z"
-            }],
-            "containers": [],
-            "actions": [],
-            "containerAttributes": {
-              "user_name": [
-                100,
-                101,
-                102,
-                97,
-                117,
-                108,
-                116,
-                95,
-                117,
-                115,
-                101,
-                114,
-                95,
-                110,
-                97,
-                109,
-                101
-              ],
-              "location": "032.0.D.01-D.02",
-              "irt_serial": "undefined"
-            },
-            "createdOn": "2019-02-04T06:41:13.372Z",
-            "updatedOn": "2019-02-04T06:41:13.378Z"
-          },
-          {
-            "id": 1439,
-            "state": "excess",
-            "type": "VIRTUAL",
-            "barcode": null,
-            "products": [{
-              "id": 1439,
-              "uid": "1",
-              "possibleUids": null,
-              "uidType": null,
-              "productQuantity": 1,
-              "productAttributes": null,
-              "createdOn": "2019-02-04T06:41:13.373Z",
-              "updatedOn": "2019-02-04T06:41:13.373Z"
-            }],
-            "containers": [],
-            "actions": [],
-            "containerAttributes": {
-              "user_name": [
-                100,
-                101,
-                102,
-                97,
-                117,
-                108,
-                116,
-                95,
-                117,
-                115,
-                101,
-                114,
-                95,
-                110,
-                97,
-                109,
-                101
-              ],
-              "location": "032.0.D.01-D.02",
-              "irt_serial": "undefined"
-            },
-            "createdOn": "2019-02-04T06:41:13.373Z",
-            "updatedOn": "2019-02-04T06:41:13.378Z"
-          }
-        ]
-      },
-      "expectations": {
-        "containers": [{
-          "id": 1435,
-          "state": "front_missing",
-          "type": "VIRTUAL",
-          "barcode": null,
-          "products": [{
-            "id": 1435,
-            "uid": "1",
-            "possibleUids": null,
-            "uidType": null,
-            "productQuantity": 1,
-            "productAttributes": {
-              "package_count": 1,
-              "pdfa_values": {
-                "product_sku": "mac1"
-              },
-              "package_name": "Item",
-              "serialized_content": []
-            },
-            "createdOn": "2019-02-04T06:33:43.469Z",
-            "updatedOn": "2019-02-04T06:33:43.469Z"
-          }],
-          "containers": [],
-          "actions": [],
-          "containerAttributes": {},
-          "createdOn": "2019-02-04T06:33:43.469Z",
-          "updatedOn": "2019-02-04T06:33:43.469Z"
-        }]
-      },
-      "receivedOn": "2019-02-04T06:33:43.468Z",
-      "status": "CREATED",
-      "state": "complete",
-      "attributes": {
-        "internal": "true",
-        "ppsIdList": [
-          5
-        ],
-        "slot_list": [
-          "032.0.D.01-D.02"
-        ],
-        "originalServiceRequestId": "405"
-      },
-      "snapshot": null,
-      "createdOn": "2019-02-04T06:33:43.468Z",
-      "updatedOn": "2019-02-04T06:41:13.378Z",
-      "isDeleted": null
-    }];
+    const data = JSON.parse(JSON.stringify(this.state.data));
     const { timeOffset } = this.props;
     let listData = [];
-    //const rawListData = data && JSON.parse(data[0].actuals.containers); // himanshu code
-    const rawListData = data && data[0].actuals.containers;
+    const rawListData = data && JSON.parse(data[0].actuals.containers);
     if (data && data.length) {
       processedData.tiledata = [{
-        "Created By": "-- TBD --",
-        "Operator": "-- TBD --",
-        "Item Search Type": data[0].attributes.slot_list.length > 1 ? "Multi location" : "Single location"
+        "Created By": "--",
+        "Operator": "--",
+        "Item Search Type": "--"
       },
       {
-        "Start Time": "-- which time to show ???--",
-        "End Time": data[0].state === "complete" ? moment(data[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') : "--",
-        "Progress": "-- TBD --",
+        "Start Time": moment(data[0].createdOn).tz(timeOffset).format('DD MMM,YYYY') || "--",
+        "End Time": "--",
+        "Progress": "--"
       }, {
         "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
-        "Show KQ": "-- TBD --",
-        "Reminder": "-- TBD --",
+        "Show KQ": "--",
+        "Reminder": "--"
       }
       ]
     }
@@ -201,7 +57,6 @@ class ItemSearchDetails extends React.Component {
         let generatedList = {};
         let datum = rawListData[i];
         //let containers = datum.expectations.containers[0] || null
-
         let productAttributes = datum ? datum.products[0].productAttributes : null;
         let pdfa_values = productAttributes ? productAttributes.pdfa_values : null
         let sku = pdfa_values ? pdfa_values.product_sku : null;
@@ -218,7 +73,7 @@ class ItemSearchDetails extends React.Component {
         }
         generatedList.operator = "--";
         generatedList.slot = datum.containerAttributes && datum.containerAttributes.location;
-        generatedList.itemStatus = datum.state;
+        generatedList.itemStatus = "--"
         listData.push(generatedList);
       }
 
@@ -277,9 +132,7 @@ class ItemSearchDetails extends React.Component {
                         <div className="table-cell" >
                           <DotSeparatorContent header={row.pdfaHeader} subHeader={row.pdfaSubHeader} separator={<div className="dotImage"></div>} />
                         </div>
-                        <div className="table-cell" >
-                          {"Operator: " + row.operator}
-                        </div>
+
                         <div className="table-cell" >
                           {"Slot: " + row.slot}
                         </div>
