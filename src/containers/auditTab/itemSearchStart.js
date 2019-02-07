@@ -33,7 +33,7 @@ class ItemSearchStart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            checkedAuditPPS: [],
+            checkedItemSearchPPS: [],
             checkedOtherPPS: [],
             itemSearchId: this.props.itemSearchID,
             visiblePopUp: false,
@@ -54,21 +54,21 @@ class ItemSearchStart extends React.Component {
     openPopup(e) {
         this.setState({ "visiblePopUp": !this.state.visiblePopUp });
     }
-    _findDisplayidName(arrId) {
-        var resultantArr = [];
-        var dataSet = this.props.auditDetails;
-        dataSet.forEach(function (entry) {
-            arrId.forEach(function (content) {
-                if (content == entry.audit_id) {
-                    resultantArr.push({ id: entry.audit_id, dislayID: entry.display_id, name: entry.audit_name, type: entry.audit_type });
-                }
-            })
+    // _findDisplayidName(arrId) {
+    //     var resultantArr = [];
+    //     var dataSet = this.props.auditDetails;
+    //     dataSet.forEach(function (entry) {
+    //         arrId.forEach(function (content) {
+    //             if (content == entry.audit_id) {
+    //                 resultantArr.push({ id: entry.audit_id, dislayID: entry.display_id, name: entry.audit_name, type: entry.audit_type });
+    //             }
+    //         })
 
-        })
-        this.setState({ 'type': resultantArr })
-        return resultantArr;
-    }
-    _tableAuditPPSData(itemsData) {
+    //     })
+    //     this.setState({ 'type': resultantArr })
+    //     return resultantArr;
+    // }
+    _tableItemSearchPPSData(itemsData) {
         let tableData = [];
         for (var i = 0; i < itemsData.length; i++) {
             let rowObject = {};
@@ -98,9 +98,9 @@ class ItemSearchStart extends React.Component {
         return tableData;
     }
 
-    _handlestartaudit(e) {
+    _handlestartItemSearch(e) {
         var _this = this;
-        let allPPSList = this.props.checkedAuditPPSList.concat(
+        let allPPSList = this.props.checkedItemSearchPPSList.concat(
             this.props.checkedOtherPPSList
         );
         let allAuditId =
@@ -138,9 +138,9 @@ class ItemSearchStart extends React.Component {
                 Object.keys(ppslist).forEach(function (key) {
                     if (ppslist[key].pps_mode == "search") arr.push(ppslist[key].pps_id);
                 });
-                this.props.setCheckedAuditpps(arr);
+                this.props.setCheckedItemSearchpps(arr);
             } else {
-                this.props.setCheckedAuditpps([]);
+                this.props.setCheckedItemSearchpps([]);
             }
         } else {
             if (e.currentTarget.checked) {
@@ -157,10 +157,10 @@ class ItemSearchStart extends React.Component {
     CheckChange(type, e) {
         let arr = [];
         if (type == "Search") {
-            arr = JSON.parse(JSON.stringify(this.props.checkedAuditPPSList));
+            arr = JSON.parse(JSON.stringify(this.props.checkedItemSearchPPSList));
             let a = arr.indexOf(e.currentTarget.id);
             a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
-            this.props.setCheckedAuditpps(arr);
+            this.props.setCheckedItemSearchpps(arr);
         } else {
             arr = JSON.parse(JSON.stringify(this.props.checkedOtherPPSList));
             let a = arr.indexOf(e.currentTarget.id);
@@ -170,7 +170,7 @@ class ItemSearchStart extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.setCheckedAuditpps([]);
+        this.props.setCheckedItemSearchpps([]);
         this.props.setCheckedOtherpps([]);
     }
 
@@ -178,20 +178,20 @@ class ItemSearchStart extends React.Component {
         if (JSON.stringify(nextProps.ppsList.pps_list)) {
             let attributeData = nextProps.ppsList.pps_list || [];
             this.setState({ items: attributeData });
-            let auditList = [], otherList = [];
+            let itemSearchList = [], otherList = [];
             if (this.state.type[0].type == WALL_TO_WALL) {
                 for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
                     if (nextProps.ppsList.pps_list[i].pps_mode == 'search')
-                        auditList.push(nextProps.ppsList.pps_list[i].pps_id);
+                        itemSearchList.push(nextProps.ppsList.pps_list[i].pps_id);
                     else
                         otherList.push(nextProps.ppsList.pps_list[i].pps_id);
                 }
-                this.props.setCheckedAuditpps(auditList);
+                this.props.setCheckedItemSearchpps(itemSearchList);
                 this.props.setCheckedOtherpps(otherList);
             }
         }
 
-        this.setState({ checkedAuditPPS: nextProps.checkedAuditPPSList });
+        this.setState({ checkedItemSearchPPS: nextProps.checkedItemSearchPPSList });
         this.setState({ checkedOtherPPS: nextProps.checkedOtherPPSList });
 
 
@@ -224,12 +224,12 @@ class ItemSearchStart extends React.Component {
         let items = this.state.items || [];
 
 
-        let startAuditHeader = (<FormattedMessage
+        let startItemSearchHeader = (<FormattedMessage
             id="itemsSearch.starttask.headerstartitemSearch"
             description="Heading for start item search"
             defaultMessage="Start Item Search"
         />);
-        let auditModePPS = (
+        let itemSearchModePPS = (
             <FormattedMessage
                 id="itemSearch.startItemSearch.itemSearchmodepps"
                 description="PPS in search mode"
@@ -238,90 +238,90 @@ class ItemSearchStart extends React.Component {
         );
         let otherModePPS = (
             <FormattedMessage
-                id="audit.startaudit.othermodepps"
+                id="itemSearch.startItemSearch.othermodepps"
                 description="PPS in other mode"
                 defaultMessage="PPS in other mode(s)"
             />
         );
         let operatorAssign = (
             <FormattedMessage
-                id="audit.startaudit.operatorassign"
+                id="itemSearch.startItemSearch.operatorassign"
                 description="Operator"
                 defaultMessage="Operator"
             />
         );
         let startButton = (
             <FormattedMessage
-                id="audit.startaudit.startButton"
+                id="itemSearch.startItemSearch.startButton"
                 description="start"
                 defaultMessage="START"
             />
         );
 
-        let forAudit = (
+        let forItemSearch = (
             <FormattedMessage
                 id="itemSearch.startitemSearch.ForItemSearch"
                 description="For item search"
                 defaultMessage="For item search"
             />
         );
-        let auditlistinfo = (
+        let itemSearchlistinfo = (
             <FormattedMessage
-                id="audit.startaudit.listauditid"
-                description="List of Audits"
-                defaultMessage="List of Audits"
+                id="itemSearch.startItemSearch.listauditid"
+                description="List of Item Search"
+                defaultMessage="List of Item Search"
             />
         );
         let fortext = (
             <FormattedMessage
-                id="audit.startaudit.for"
+                id="itemSearch.startItemSearch.for"
                 description="For"
                 defaultMessage="For"
             />
         );
         let view = (
             <FormattedMessage
-                id="audit.startaudit.View"
+                id="itemSearch.startItemSearch.View"
                 description="View"
                 defaultMessage="View"
             />
         );
         let ppsunavaible = (
             <FormattedMessage
-                id="audit.startaudit.ppsunavaible"
+                id="itemSearch.startItemSearch.ppsunavaible"
                 description="PPS not available"
                 defaultMessage="PPS Not Available"
             />
         );
-        let audit = (
+        let itemSearch = (
             <FormattedMessage
-                id="audit.startaudit.audittext"
-                description="audit"
-                defaultMessage="audit"
+                id="itemSearch.startItemSearch.itemSearchtext"
+                description="item search"
+                defaultMessage="item search"
             />
         );
 
-        let checkedAuditPPSCount = this.props.checkedAuditPPSList.length;
+        let checkedItemSearchPPSCount = this.props.checkedItemSearchPPSList.length;
         let checkedOtherPPSCount = this.props.checkedOtherPPSList.length;
-        let totalAuditPPSCount = 0;
+        let totalItemSearchPPSCount = 0;
         let totalOtherPPSCount = 0;
         Object.keys(items).forEach(function (key) {
-            if (items[key].pps_mode == "search") totalAuditPPSCount++;
+            if (items[key].pps_mode == "search") totalItemSearchPPSCount++;
             else {
                 totalOtherPPSCount++;
             }
         });
 
-        let auditPPS = [],
+        let itemSearchPPS = [],
             otherPPS = [];
         Object.keys(items).map(function (key) {
             if (items[key].pps_mode === "search") {
-                auditPPS.push(items[key]);
+                itemSearchPPS.push(items[key]);
             } else {
                 otherPPS.push(items[key]);
             }
         });
-        var tablerowdataAudit = this._tableAuditPPSData(auditPPS);
+        var tablerowdataItemSearch = this._tableItemSearchPPSData(itemSearchPPS);
         var tablerowdataOther = this._tableotherPPSData(otherPPS);
 
         var tableData = [
@@ -340,7 +340,7 @@ class ItemSearchStart extends React.Component {
                 <div className="gor-AuditDetails-modal-content">
                     <div className="gor-auditDetails-modal-head">
                         <span className="AuditIDWrapper">
-                            {this.props.param == "CHANGE_PPS" ? changePPSHeader : startAuditHeader}
+                            {this.props.param == "CHANGE_PPS" ? changePPSHeader : startItemSearchHeader}
                         </span>
 
                         <span className="close" onClick={this._removeThisModal.bind(this)}>
@@ -349,12 +349,12 @@ class ItemSearchStart extends React.Component {
                     </div>
 
                     <div className="gor-auditDetails-modal-body">
-                        {tablerowdataAudit.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
+                        {tablerowdataItemSearch.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
                             <div>
                                 <div className="content-body">
                                     <span className="left-float">
                                         {this.state.type[0].type == WALL_TO_WALL
-                                            ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div>
+                                            ? <div className="auditIdInfo"><span>Wall-to-Wall {itemSearch}</span></div>
                                             : this.state.itemSearchId.length > 1
                                                 ? <div className="auditIdInfo">
                                                     <span>
@@ -362,14 +362,14 @@ class ItemSearchStart extends React.Component {
                                                     </span>
 
                                                 </div>
-                                                : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
+                                                : <span>{forItemSearch} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
                                     </span>
 
                                     {this.state.visiblePopUp ?
 
                                         <div className="outerWrapper">
                                             <div className="tooltipHeader">
-                                                {auditlistinfo}
+                                                {itemSearchlistinfo}
                                                 <span className="closeTooltip" onClick={this.openPopup.bind(this)}> × </span>
                                             </div>
                                             <div className="tooltipText">
@@ -381,28 +381,28 @@ class ItemSearchStart extends React.Component {
 
                                 </div>
 
-                                {tablerowdataAudit.length > 0 ? (
+                                {tablerowdataItemSearch.length > 0 ? (
                                     <GTable options={["table-bordered", "auditStart"]}>
                                         <GTableHeader options={["auditTable"]}>
                                             <GTableHeaderCell key={1} header="Search" className="audittable">
-                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedAuditPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Search")} />
-                                                    <span className={totalAuditPPSCount == checkedAuditPPSCount ? "checkmark" : "checkmark1"} />
+                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedItemSearchPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Search")} />
+                                                    <span className={totalItemSearchPPSCount == checkedItemSearchPPSCount ? "checkmark" : "checkmark1"} />
                                                 </label>
                                                 <span>
-                                                    {tablerowdataAudit.length + " "}
-                                                    {auditModePPS}
+                                                    {tablerowdataItemSearch.length + " "}
+                                                    {itemSearchModePPS}
                                                 </span>
                                             </GTableHeaderCell>
                                         </GTableHeader>
 
-                                        <GTableBody data={tablerowdataAudit}>
+                                        <GTableBody data={tablerowdataItemSearch}>
 
-                                            {tablerowdataAudit ? tablerowdataAudit.map(function (row, idx) {
+                                            {tablerowdataItemSearch ? tablerowdataItemSearch.map(function (row, idx) {
                                                 return (
                                                     <GTableRow
                                                         key={idx}
                                                         index={idx}
-                                                        data={tablerowdataAudit}
+                                                        data={tablerowdataItemSearch}
                                                     >
                                                         {Object.keys(row).map(function (text, index) {
                                                             return (
@@ -418,13 +418,13 @@ class ItemSearchStart extends React.Component {
                                                                             <input
                                                                                 type="checkbox"
                                                                                 id={
-                                                                                    tablerowdataAudit[idx]["ppsDetails"][
+                                                                                    tablerowdataItemSearch[idx]["ppsDetails"][
                                                                                     "header"
                                                                                     ][0]
                                                                                 }
                                                                                 checked={
-                                                                                    me.state.checkedAuditPPS.indexOf(
-                                                                                        tablerowdataAudit[idx][
+                                                                                    me.state.checkedItemSearchPPS.indexOf(
+                                                                                        tablerowdataItemSearch[idx][
                                                                                         "ppsDetails"
                                                                                         ]["header"][0]
                                                                                     ) == -1
@@ -445,10 +445,10 @@ class ItemSearchStart extends React.Component {
                                                                     {index == 0 ? (
                                                                         <DotSeparatorContent
                                                                             header={
-                                                                                tablerowdataAudit[idx][text]["header"]
+                                                                                tablerowdataItemSearch[idx][text]["header"]
                                                                             }
                                                                             subHeader={
-                                                                                tablerowdataAudit[idx][text][
+                                                                                tablerowdataItemSearch[idx][text][
                                                                                 "subHeader"
                                                                                 ]
                                                                             }
@@ -460,7 +460,7 @@ class ItemSearchStart extends React.Component {
                                                                     {index == 1 ? (
                                                                         <div>
                                                                             {operatorAssign}:{" "}
-                                                                            {tablerowdataAudit[idx][text]}
+                                                                            {tablerowdataItemSearch[idx][text]}
                                                                         </div>
                                                                     ) : (
                                                                             ""
@@ -468,10 +468,10 @@ class ItemSearchStart extends React.Component {
                                                                     {index == 2 ? (
                                                                         <DotSeparatorContent
                                                                             header={
-                                                                                tablerowdataAudit[idx][text]["header"]
+                                                                                tablerowdataItemSearch[idx][text]["header"]
                                                                             }
                                                                             subHeader={
-                                                                                tablerowdataAudit[idx][text][
+                                                                                tablerowdataItemSearch[idx][text][
                                                                                 "subHeader"
                                                                                 ]
                                                                             }
@@ -613,10 +613,10 @@ class ItemSearchStart extends React.Component {
 
                         }
                     </div>
-                    {tablerowdataAudit.length == 0 && tablerowdataOther.length == 0 ? "" :
+                    {tablerowdataItemSearch.length == 0 && tablerowdataOther.length == 0 ? "" :
                         <button
                             className="gor-add-btn gor-listing-button rightMargin"
-                            onClick={this._handlestartaudit.bind(this)}
+                            onClick={this._handlestartItemSearch.bind(this)}
                         >
                             {startButton}
                         </button>
@@ -641,9 +641,9 @@ var mapDispatchToProps = function (dispatch) {
 
 
 
-const SET_CHECKED_AUDIT_PPS = gql`
-    mutation setCheckedAuditpps($checkedAuditPPSList: Array!) {
-      setCheckedAuditpps(checkedAuditPPSList: $checkedAuditPPSList) @client
+const SET_CHECKED_ITEM_SEARCH_PPS = gql`
+    mutation setCheckedItemSearchpps($checkedItemSearchPPSList: Array!) {
+      setCheckedItemSearchpps(checkedItemSearchPPSList: $checkedItemSearchPPSList) @client
     }
 `;
 
@@ -653,10 +653,10 @@ const SET_CHECKED_OTHER_PPS = gql`
     }
 `;
 
-const CheckedAuditpps = graphql(SET_CHECKED_AUDIT_PPS, {
+const CheckedItemSearchpps = graphql(SET_CHECKED_ITEM_SEARCH_PPS, {
     props: ({ mutate, ownProps }) => ({
-        setCheckedAuditpps: function (data) {
-            mutate({ variables: { checkedAuditPPSList: data } })
+        setCheckedItemSearchpps: function (data) {
+            mutate({ variables: { checkedItemSearchPPSList: data } })
         },
     }),
 });
@@ -684,7 +684,7 @@ const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
 const withClientData = graphql(itemSearchClientPPSData, {
     props: (data) =>
         ({
-            checkedAuditPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedAuditPPSList : [],
+            checkedItemSearchPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedItemSearchPPSList : [],
             checkedOtherPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedOtherPPSList : [],
             //auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
         })
@@ -712,7 +712,7 @@ export default compose(
     withClientData,
     initialQuery,
     setAuditListRefreshState,
-    CheckedAuditpps,
+    CheckedItemSearchpps,
     CheckedOtherpps,
     withApollo)
     (connect(null, mapDispatchToProps)
