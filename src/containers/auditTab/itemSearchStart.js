@@ -68,18 +68,6 @@ class ItemSearchStart extends React.Component {
             visiblePopUp: false,
             type: [{ 'type': "" }],
             items: [],
-            localDataFromState: [
-                {
-                    "operator_assigned": "Anil_4",
-                    "pps_id": "4",
-                    "pps_mode": "search",
-                },
-                {
-                    "operator_assigned": "Anil_5",
-                    "pps_id": "5",
-                    "pps_mode": "search",
-                }
-            ]
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -256,9 +244,7 @@ class ItemSearchStart extends React.Component {
     }
 
     headerCheckChange(type, e) {
-        let localData = this.state.localDataFromState;
-        //let ppslist = this.props.ppsList.pps_list;
-        let ppslist = localData;
+        let ppslist = this.props.ppsList.pps_list;
         let arr = [];
         if (type == "Search") {
             if (e.currentTarget.checked) {
@@ -302,18 +288,16 @@ class ItemSearchStart extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let localData = this.state.localDataFromState
-        //if (JSON.stringify(nextProps.ppsList.pps_list)) {
-        if (JSON.stringify(localData)) {
-            let attributeData = localData || [];
+        if (JSON.stringify(nextProps.ppsList.pps_list)) {
+            let attributeData = nextProps.ppsList.pps_list || [];
             this.setState({ items: attributeData });
             let auditList = [], otherList = [];
             if (this.state.type[0].type == WALL_TO_WALL) {
-                for (var i = 0; i < localData.length; i++) {
-                    if (localData[i].pps_mode == 'search')
-                        auditList.push(localData[i].pps_id);
+                for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
+                    if (nextProps.ppsList.pps_list[i].pps_mode == 'search')
+                        auditList.push(nextProps.ppsList.pps_list[i].pps_id);
                     else
-                        otherList.push(localData[i].pps_id);
+                        otherList.push(nextProps.ppsList.pps_list[i].pps_id);
                 }
                 this.props.setCheckedAuditpps(auditList);
                 this.props.setCheckedOtherpps(otherList);
@@ -350,8 +334,7 @@ class ItemSearchStart extends React.Component {
         }
 
         let me = this;
-        //let items = this.state.items || [];
-        let items = this.state.localDataFromState;
+        let items = this.state.items || [];
 
         let changePPSHeader = (<FormattedMessage
             id="audit.audittask.headerchangeppd"
@@ -488,9 +471,29 @@ class ItemSearchStart extends React.Component {
                         {tablerowdataAudit.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
                             <div>
                                 <div className="content-body">
+                                    {/*
                                     <span className="left-float">
                                         {this.state.type[0].type == WALL_TO_WALL ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div> : this.state.auditId.length > 1 ? <div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length + " Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div> : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
                                     </span>
+                                    */}
+
+                                    <span className="left-float">
+                                        {this.state.type[0].type == WALL_TO_WALL
+                                            ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div>
+                                            : this.state.auditId.length > 1
+                                                ? <div className="auditIdInfo">
+                                                    <span>
+                                                        {fortext}{" "}{" Item Search - " + this.state.auditId}
+                                                    </span>
+                                                    {/*
+                                                    <button className="viewButton"
+                                                        onClick={this.openPopup.bind(this)}>{view}
+                                                    </button>
+                                                    */}
+                                                </div>
+                                                : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
+                                    </span>
+
                                     {this.state.visiblePopUp ?
 
                                         <div className="outerWrapper">
@@ -504,12 +507,14 @@ class ItemSearchStart extends React.Component {
                                             </div>
                                         </div>
                                         : ""}
+                                    {/*
                                     <div className="ppsSearchWrap">
                                         <SearchFilter
                                             handleChange={this.handleChange}
                                             placeHolder={searchPlaceholder}
                                         />
                                     </div>
+                                    */}
                                 </div>
 
                                 {tablerowdataAudit.length > 0 ? (
@@ -822,8 +827,8 @@ const withClientData = graphql(auditClientPPSData, {
 })
 
 
-const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
-    //const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
+//const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
+const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
     props: function (data) {
         var list = { pps_list: [] }
         if (!data || !data.data.ItemSearchPPSDetails || !data.data.ItemSearchPPSDetails.list) {
