@@ -337,8 +337,6 @@ class ItemSearch extends React.Component {
         })
         .then(data => {
           let currentData = data.data.ItemSearchDetailsList.list;
-          console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-          console.log(currentData);
           _this.setState(() => {
             return {
               data: currentData,
@@ -422,9 +420,6 @@ class ItemSearch extends React.Component {
     var processedData = [];
     if (this.state.data && this.state.data.length) {
       let data = this.state.data.slice(0);
-      console.log("#######################################################");
-      console.log("this.state.data.slice(0)" + this.state.data.slice(0));
-      console.log("data" + data);
       for (let i = 0, len = data.length; i < len; i++) {
         let tuple = {};
         let datum = data[i];
@@ -484,8 +479,6 @@ class ItemSearch extends React.Component {
     let manualAssignpps = this.context.intl.formatMessage(messages.manualAssignpps);
     const _this = this;
     const tablerowdata = _this._processServerData();
-    console.log("=================================================>");
-    console.log(tablerowdata);
     let toolbar = (
       <div>
         <div
