@@ -330,7 +330,7 @@ class ItemSearch extends React.Component {
               "externalServiceRequestId": taskId,
               "status": status,
               "type": "SEARCH",
-              "searchBy": "viaFilter"
+              "searchBy": "filter"
             }
           },
           fetchPolicy: 'network-only'
@@ -594,12 +594,14 @@ class ItemSearch extends React.Component {
                             data={tablerowdata}
                           >
                             <div className='table-cell'>
+                              {/*
                               {row.displayStartButton && (
                                 <label className='container'>
                                   <input type='checkbox' onChange={null} />
                                   <span className={'checkmark'} />
                                 </label>
                               )}
+                              */}
                             </div>
                             <div className='table-cell'>
                               <span>
@@ -701,8 +703,7 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
     variables: {
       input: {
         page: 0,
-        page_size: 10,
-        order: DESC
+        page_size: 10
       }
     },
     fetchPolicy: 'network-only'

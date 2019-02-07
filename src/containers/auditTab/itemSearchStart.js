@@ -111,10 +111,12 @@ class ItemSearchStart extends React.Component {
                 subHeader: [itemsData[i].pps_mode]
             };
             rowObject.assignOperator = itemsData[i].operator_assigned;
+            /*
             rowObject.auditStatus = {
                 header: [itemsData[i].audits_pending + " " + pendingAudit],
                 subHeader: [itemsData[i].auditlines_pending + " " + linesRemaining]
             };
+            */
             tableData.push(rowObject);
             rowObject = {};
         }
@@ -348,9 +350,9 @@ class ItemSearchStart extends React.Component {
         />);
         let auditModePPS = (
             <FormattedMessage
-                id="audit.startaudit.auditmodepps"
-                description="PPS in audit mode"
-                defaultMessage="PPS in audit mode(s)"
+                id="itemSearch.startItemSearch.itemSearchmodepps"
+                description="PPS in search mode"
+                defaultMessage="PPS in search mode(s)"
             />
         );
         let otherModePPS = (
