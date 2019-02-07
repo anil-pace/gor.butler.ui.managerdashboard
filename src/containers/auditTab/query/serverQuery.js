@@ -281,13 +281,28 @@ export const ITEM_SEARCH_DETAILS_QUERY = gql`
   query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
     ItemSearchDetailsList(input: $input) {
       list {
+        type
+        status
+        state
         externalServiceRequestId
         createdOn
+        updatedOn
         attributes {
           ppsIdList
         }
         actuals {
           containers
+        }
+        expectations {
+          containers {
+            products {
+              productAttributes {
+                pdfa_values {
+                  product_sku
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -302,6 +317,8 @@ export const ITEM_SEARCH_QUERY = gql`
           status
           state
           externalServiceRequestId
+          createdOn
+          updatedOn
           attributes {
             ppsIdList
           }
@@ -329,3 +346,19 @@ export const ITEM_SEARCH_START_QUERY = gql`
     }
   }
 `;
+
+export const ITEM_SEARCH_PPS_LIST_FETCH_QUERY = gql`
+  query ItemSearchPPSDetails  {
+    ItemSearchPPSDetails{
+      list {
+        pps_list{
+          operator_assigned
+          pps_id
+          pps_mode
+          }
+        }
+      }
+    }
+`;
+
+
