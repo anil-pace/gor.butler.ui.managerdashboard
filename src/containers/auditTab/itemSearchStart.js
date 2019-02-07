@@ -16,45 +16,16 @@ import { GTableRow } from "../../components/gor-table-component/tableRow";
 import { userRequest } from "../../actions/userActions";
 import DotSeparatorContent from "../../components/dotSeparatorContent/dotSeparatorContent";
 import {
-    START_AUDIT,
-    APP_JSON,
-    START_AUDIT_TASK,
-    CHANGE_PPS_TASK,
     WALL_TO_WALL,
 } from "../../constants/frontEndConstants";
-import {
-    START_AUDIT_URL,
-    START_CHANGE_PPS_URL
-} from "../../constants/configConstants";
-import SearchFilter from "../../components/searchFilter/searchFilter";
+
 import AuditAction from "../auditTab/auditAction";
-import { modal } from "react-redux-modal";
 import { graphql, withApollo, compose } from "react-apollo";
 import { AuditParse } from '../../../src/utilities/auditResponseParser'
 import { ShowError } from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
-import { AUDIT_PPS_FETCH_QUERY, AUDIT_START, AUDIT_REQUEST_QUERY, ITEM_SEARCH_PPS_LIST_FETCH_QUERY, ITEM_SEARCH_START_QUERY } from './query/serverQuery';
-import { auditClientPPSData } from './query/clientQuery';
-
-const messages = defineMessages({
-    pendingAudit: {
-        id: "audit.startaudit.pendingAudit",
-        defaultMessage: "Audits pending"
-    },
-    linesRemaining: {
-        id: "audit.startaudit.linesRemaining",
-        defaultMessage: "lines remaining to be Audited"
-    },
-    searchPlaceholder: {
-        id: "audit.startaudit.searchPlaceholder",
-        defaultMessage: "Search PPS by opertor name or mode"
-    },
-
-
-});
-
-
-
+import { ITEM_SEARCH_PPS_LIST_FETCH_QUERY, ITEM_SEARCH_START_QUERY } from './query/serverQuery';
+import { itemSearchClientPPSData } from './query/clientQuery';
 
 
 
@@ -64,7 +35,7 @@ class ItemSearchStart extends React.Component {
         this.state = {
             checkedAuditPPS: [],
             checkedOtherPPS: [],
-            auditId: this.props.auditID,
+            itemSearchId: this.props.itemSearchID,
             visiblePopUp: false,
             type: [{ 'type': "" }],
             items: [],
@@ -76,7 +47,7 @@ class ItemSearchStart extends React.Component {
     }
 
     componentDidMount() {
-        //var resultantArr = this._findDisplayidName(this.state.auditId);
+        //var resultantArr = this._findDisplayidName(this.state.itemSearchId);
     }
 
 
@@ -98,11 +69,6 @@ class ItemSearchStart extends React.Component {
         return resultantArr;
     }
     _tableAuditPPSData(itemsData) {
-        let pendingAudit = this.context.intl.formatMessage(messages.pendingAudit);
-        let linesRemaining = this.context.intl.formatMessage(
-            messages.linesRemaining
-        );
-
         let tableData = [];
         for (var i = 0; i < itemsData.length; i++) {
             let rowObject = {};
@@ -111,12 +77,6 @@ class ItemSearchStart extends React.Component {
                 subHeader: [itemsData[i].pps_mode]
             };
             rowObject.assignOperator = itemsData[i].operator_assigned;
-            /*
-            rowObject.auditStatus = {
-                header: [itemsData[i].audits_pending + " " + pendingAudit],
-                subHeader: [itemsData[i].auditlines_pending + " " + linesRemaining]
-            };
-            */
             tableData.push(rowObject);
             rowObject = {};
         }
@@ -140,30 +100,13 @@ class ItemSearchStart extends React.Component {
 
     _handlestartaudit(e) {
         var _this = this;
-        let allAuditId,
-            URL = "",
-            cause = "",
-            param = "";
         let allPPSList = this.props.checkedAuditPPSList.concat(
             this.props.checkedOtherPPSList
         );
-        allAuditId =
-            this.state.auditId.constructor.name !== "Array"
-                ? [this.state.auditId]
-                : this.state.auditId;
-        /*
-            if (this.props.param == "CHANGE_PPS") {
-                URL = START_CHANGE_PPS_URL;
-                param = CHANGE_PPS_TASK;
-            } else {
-                URL = START_AUDIT_URL;
-                param = START_AUDIT_TASK;
-            }
-        */
-        let formdata = {
-            audit_id_list: allAuditId,
-            pps_list: allPPSList
-        };
+        let allAuditId =
+            this.state.itemSearchId.constructor.name !== "Array"
+                ? [this.state.itemSearchId]
+                : this.state.itemSearchId;
 
         e.preventDefault();
         _this.props.client
@@ -171,7 +114,7 @@ class ItemSearchStart extends React.Component {
                 query: ITEM_SEARCH_START_QUERY,
                 variables: {
                     input: {
-                        externalServiceRequestId: this.state.auditId,
+                        externalServiceRequestId: this.state.itemSearchId,
                         attributes: {
                             ppsIdList: allPPSList
                         }
@@ -182,67 +125,9 @@ class ItemSearchStart extends React.Component {
             .then(data => {
                 var AuditRequestSubmit = data.data.AuditRequestSubmit ? JSON.parse(data.data.AuditRequestSubmit.list) : ""
                 AuditParse(AuditRequestSubmit, 'START_AUDIT', _this)
-                // let existingData = JSON.parse(JSON.stringify(_this.state.data));
-                // let currentData = data.data.ItemSearchList.list.serviceRequests;
-                // let mergedData = existingData.concat(currentData);
-                // _this.setState(() => {
-                //     return {
-                //         data: mergedData,
-                //         page
-                //     };
-                // });
+
             });
         this.props.removeModal();
-        /*
-        if (this.props.checkedOtherPPSList.length > 0) {
-            let data = (
-                <FormattedMessage
-                    id="audit.ppschangeStart"
-                    defaultMessage="A mode change request will be sent for PPS that are not in Audit mode.Do you still wish to proceed?"
-                    description="Text for cancel"
-                />
-            );
-
-            modal.add(AuditAction, {
-                title: "",
-                size: "large", // large, medium or small,
-                closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-                hideCloseButton: false,
-                data: data,
-                param: param,
-                formdata: formdata,
-                URL: URL
-            });
-            this._removeThisModal();
-        } else {
-
-            let startAuditData = {
-                'formdata': formdata,
-                'cause': 'START_AUDIT',
-                'contentType': APP_JSON
-            }
-
-            var dataToSent = JSON.stringify(startAuditData);
-            this.props.client.query({
-                query: ITEM_SEARCH_START_QUERY,
-                variables: (function () {
-                    return {
-                        input: {
-                            data: dataToSent
-                        }
-                    }
-                }()),
-                fetchPolicy: 'network-only'
-            }).then(data => {
-
-                var AuditRequestSubmit = data.data.AuditRequestSubmit ? JSON.parse(data.data.AuditRequestSubmit.list) : ""
-
-                AuditParse(AuditRequestSubmit, 'START_AUDIT', _this)
-            })
-            this.props.removeModal();
-        }
-        */
-
     }
 
     headerCheckChange(type, e) {
@@ -338,11 +223,7 @@ class ItemSearchStart extends React.Component {
         let me = this;
         let items = this.state.items || [];
 
-        let changePPSHeader = (<FormattedMessage
-            id="audit.audittask.headerchangeppd"
-            description="Heading for change pps"
-            defaultMessage="Change PPS"
-        />);
+
         let startAuditHeader = (<FormattedMessage
             id="itemsSearch.starttask.headerstartitemSearch"
             description="Heading for start item search"
@@ -376,9 +257,7 @@ class ItemSearchStart extends React.Component {
                 defaultMessage="START"
             />
         );
-        let searchPlaceholder = this.context.intl.formatMessage(
-            messages.searchPlaceholder
-        );
+
         let forAudit = (
             <FormattedMessage
                 id="itemSearch.startitemSearch.ForItemSearch"
@@ -473,25 +352,15 @@ class ItemSearchStart extends React.Component {
                         {tablerowdataAudit.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
                             <div>
                                 <div className="content-body">
-                                    {/*
-                                    <span className="left-float">
-                                        {this.state.type[0].type == WALL_TO_WALL ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div> : this.state.auditId.length > 1 ? <div className="auditIdInfo"><span>{fortext}{" "}{this.state.auditId.length + " Audits | "}</span><button className="viewButton" onClick={this.openPopup.bind(this)}>{view}</button></div> : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
-                                    </span>
-                                    */}
-
                                     <span className="left-float">
                                         {this.state.type[0].type == WALL_TO_WALL
                                             ? <div className="auditIdInfo"><span>Wall-to-Wall {audit}</span></div>
-                                            : this.state.auditId.length > 1
+                                            : this.state.itemSearchId.length > 1
                                                 ? <div className="auditIdInfo">
                                                     <span>
-                                                        {fortext}{" "}{" Item Search - " + this.state.auditId}
+                                                        {fortext}{" "}{" Item Search - " + this.state.itemSearchId}
                                                     </span>
-                                                    {/*
-                                                    <button className="viewButton"
-                                                        onClick={this.openPopup.bind(this)}>{view}
-                                                    </button>
-                                                    */}
+
                                                 </div>
                                                 : <span>{forAudit} {dispId_Name[0].dislayID} {dispId_Name[0].name ? " - " + dispId_Name[0].name : ""}</span>}
                                     </span>
@@ -509,14 +378,7 @@ class ItemSearchStart extends React.Component {
                                             </div>
                                         </div>
                                         : ""}
-                                    {/*
-                                    <div className="ppsSearchWrap">
-                                        <SearchFilter
-                                            handleChange={this.handleChange}
-                                            placeHolder={searchPlaceholder}
-                                        />
-                                    </div>
-                                    */}
+
                                 </div>
 
                                 {tablerowdataAudit.length > 0 ? (
@@ -819,7 +681,7 @@ const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
 });
 
 
-const withClientData = graphql(auditClientPPSData, {
+const withClientData = graphql(itemSearchClientPPSData, {
     props: (data) =>
         ({
             checkedAuditPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedAuditPPSList : [],
@@ -829,7 +691,6 @@ const withClientData = graphql(auditClientPPSData, {
 })
 
 
-//const initialQuery = graphql(AUDIT_PPS_FETCH_QUERY, {
 const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
     props: function (data) {
         var list = { pps_list: [] }

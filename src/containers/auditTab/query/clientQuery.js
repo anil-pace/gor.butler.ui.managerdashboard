@@ -99,6 +99,16 @@ export const auditClientPPSData = gql`
     }
   }
 `;
+
+export const itemSearchClientPPSData = gql`
+  query {
+    ppsCheckedData @client {
+      checkedAuditPPSList
+      checkedOtherPPSList
+      auditDetails
+    }
+  }
+`;
 export const auditResolveData = gql`
   query {
     auditResolveData @client {

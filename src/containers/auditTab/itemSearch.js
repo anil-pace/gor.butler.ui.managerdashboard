@@ -6,48 +6,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GTable from '../../components/gor-table-component';
 import {
-  GTableHeader,
-  GTableHeaderCell,
   GTableBody,
   GTableRow
 } from '../../components/gor-table-component';
 import { hashHistory } from 'react-router';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
-//import NameInitial from '../../components/NameInitial/nameInitial';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
-//import ProgressBar from '../../components/progressBar/progressBar.js';
 import ActionDropDown from '../../components/actionDropDown/actionDropDown';
 import { modal } from 'react-redux-modal';
 import { graphql, withApollo, compose } from 'react-apollo';
 import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
 import ItemSearchStart from './itemSearchStart';
-import // SUBSCRIPTION_QUERY,
-  // MSU_LIST_QUERY,
-  // MSU_LIST_POST_FILTER_QUERY,
-  // MSU_START_RECONFIG_QUERY,
-  // MSU_STOP_RECONFIG_QUERY,
-  // MSU_RELEASE_QUERY,
-  //auditClientData,
-  //SET_VISIBILITY
-  // SET_FILTER_APPLIED,
-  // SET_FILTER_STATE
-  './query/clientQuery';
+
 import gql from 'graphql-tag';
 import {
   itemSearchClientData,
-  auditNeedRefreshFlag,
-  auditSelectedData,
-  auditSpinnerState
 } from './query/clientQuery';
+
 import {
-  AUDIT_QUERY,
-  AUDIT_SUBSCRIPTION_QUERY,
-  AUDIT_REQUEST_QUERY
-} from './query/serverQuery';
-import {
-  updateSubscriptionPacket,
   setWsAction
 } from './../../actions/socketActions';
 import { wsOverviewData } from './../../constants/initData.js';
@@ -58,31 +36,8 @@ import {
 } from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
-  GET,
-  PUT,
-  APP_JSON,
-  LOCATION,
-  SPECIFIC_LOCATION_ID,
-  SPECIFIC_SKU_ID,
-  AUDIT_TYPE,
-  SKU,
-  AUDIT_STATUS,
-  sortAuditHead,
-  sortOrder,
-  POST,
-  START_AUDIT_TASK,
-  AUDIT_CREATOR_NAME,
   ALL,
-  FILTER_PPS_ID,
-  AUDIT_START_TIME,
-  AUDIT_END_TIME,
-  AUDIT_CREATEDBY,
-  ANY,
   WS_ONSEND,
-  CANCEL_AUDIT,
-  PAUSE_AUDIT,
-  SYSTEM_GENERATED,
-  DESC
 } from '../../constants/frontEndConstants';
 
 import moment from 'moment';
@@ -93,15 +48,6 @@ const actionOptions = [
     name: 'View Details',
     value: 'view_details'
   }
-  //,
-  // {
-  //   name: 'Pause',
-  //   value: 'pause'
-  // },
-  // {
-  //   name: 'Cancel',
-  //   value: 'cancel'
-  // }
 ];
 
 const messages = defineMessages({
@@ -121,53 +67,9 @@ const messages = defineMessages({
     id: 'itemSearch.failed.status',
     defaultMessage: 'Failed'
   },
-  auditPausedStatus: {
-    id: 'auditdetail.paused.status',
-    defaultMessage: 'Paused'
-  },
-  auditCompletedStatus: {
-    id: 'auditdetail.complete.status',
-    defaultMessage: 'Completed'
-  },
-  auditSKU: {
-    id: 'auditdetail.sku.prefix',
-    defaultMessage: 'SKU'
-  },
-  auditLocation: {
-    id: 'auditdetail.location.prefix',
-    defaultMessage: 'Location'
-  },
-  autoAssignpps: {
-    id: 'auditdetail.label.autoassignpps',
-    defaultMessage: 'Auto Assign PPS'
-  },
   manualAssignpps: {
     id: 'auditdetail.label.manualassignpps',
     defaultMessage: 'Manually-Assign PPS'
-  },
-  completedOutof: {
-    id: 'auditdetail.label.completedoutof',
-    defaultMessage: 'completed out of'
-  },
-  linestobeResolved: {
-    id: 'auditdetail.label.linestoberesolved',
-    defaultMessage: 'lines to be resolved'
-  },
-  linesRejected: {
-    id: 'auditdetail.label.linesrejected',
-    defaultMessage: 'lines rejected'
-  },
-  linesApproved: {
-    id: 'auditdetail.label.linesapproved',
-    defaultMessage: 'lines approved'
-  },
-  auditConflictingOperatorStatus: {
-    id: 'auditdetail.auditConflictingOperatorStatus.status',
-    defaultMessage: 'Concerned MSU is in use'
-  },
-  auditwaitingStatus: {
-    id: 'auditdetail.auditwaitingStatus.status',
-    defaultMessage: 'Processing audit task'
   }
 });
 
@@ -223,25 +125,19 @@ class ItemSearch extends React.Component {
   }
 
   _handelClick(index, field) {
-    if (field.target.value == 'viewdetails') {
-      this.viewAuditDetails();
-    } else if (field.target.value == 'mannualassignpps') {
-      this.startAudit(index);
-    } else if (field.target.value == 'autoassignpps') {
-      this.startAuditAuto();
+    if (field.target.value == 'mannualassignpps') {
+      this.startItemSearch(index);
     }
   }
 
-  startAudit(index) {
-    //var auditId = this.props.checkedAudit;
-    //var auditId = ["bgmfqENgdA"];
-    var auditId = this.state.data[index].externalServiceRequestId;
+  startItemSearch(index) {
+    var itemSearchId = this.state.data[index].externalServiceRequestId;
     modal.add(ItemSearchStart, {
       title: '',
       size: 'large',
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      auditID: auditId,
+      itemSearchID: itemSearchId,
 
       //.. all what you put in here you will get access in the modal props ;),
     });
@@ -259,7 +155,6 @@ class ItemSearch extends React.Component {
               .externalServiceRequestId,
             attributes: {
               ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList)]
-              //ppsIdList: [5]
             }
           }
         },
@@ -349,7 +244,6 @@ class ItemSearch extends React.Component {
 
   _refreshList(query) {
     let _this = this;
-    //if (this.props.currentPageNumber < this.props.TotalPage) {
     if (query.scrolling) {
       var pageNo = this.props.currentPageNumber + 1;
       this.props.setCurrentPageNumber(pageNo);
@@ -377,10 +271,8 @@ class ItemSearch extends React.Component {
           STATUS: [ALL]
         }
       });
-    //this.props.setAuditSpinner(true);
     _this._requestItemSearchList(query.taskId, query.status);
 
-    //}
   }
 
 
@@ -440,7 +332,6 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSearch,
-          //containers.products[0].createdOn
           moment(containers.products[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
         ];
         if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
@@ -499,8 +390,8 @@ class ItemSearch extends React.Component {
             <div className='auditHeaderContainer'>
               <span className='auditHeader'>
                 <FormattedMessage
-                  id='itemSearch.header.Audit'
-                  description='button label for audit'
+                  id='itemSearch.header.itemSearch'
+                  description='button label for item search'
                   defaultMessage='Item Search'
                 />
               </span>
@@ -554,16 +445,6 @@ class ItemSearch extends React.Component {
       <div>
         <div>
           <div className='gor-Auditlist-table'>
-            {/*
-            {!this.props.showFilter ? (
-              <Spinner
-                isLoading={this.props.auditSpinner}
-                setSpinner={this.props.setAuditSpinner}
-              />
-            ) : (
-                ''
-              )}
-              */}
             {toolbar}
             <div className='waveListWrapper'>
               {this.props.data.loading && (
@@ -587,14 +468,7 @@ class ItemSearch extends React.Component {
                             data={tablerowdata}
                           >
                             <div className='table-cell'>
-                              {/*
-                              {row.displayStartButton && (
-                                <label className='container'>
-                                  <input type='checkbox' onChange={null} />
-                                  <span className={'checkmark'} />
-                                </label>
-                              )}
-                              */}
+
                             </div>
                             <div className='table-cell'>
                               <span>
@@ -611,19 +485,7 @@ class ItemSearch extends React.Component {
                               <div className='row inner'>
                                 {' '}
                                 <div className='table-cell'>
-                                  {/*
-                                  {row.displayStartButton && (
-                                    <button
-                                      className='gor-add-btn gor-listing-button'
-                                      onClick={_this._triggerItemSearchStart.bind(
-                                        this,
-                                        idx
-                                      )}
-                                    >
-                                      {'Start'}
-                                    </button>
-                                  )}
-                                      */}
+
                                   {row.displayStartButton && (
                                     <ActionDropDown
                                       style={{
@@ -637,7 +499,7 @@ class ItemSearch extends React.Component {
                                     >
                                       <button className='gor-add-btn gor-listing-button'>
                                         <FormattedMessage
-                                          id='audit.start.Audit'
+                                          id='itemSearch.start.itemSearch'
                                           description='button label for start'
                                           defaultMessage='START'
                                         />
@@ -714,22 +576,22 @@ const SET_FILTER_APPLIED = gql`
           setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
       }
     `;
-const SET_UPDATE_SUBSCRIPTION = gql`
-  mutation setUpdateSubscription($isUpdateSubsciption: String!) {
-          setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
-          @client
-      }
-    `;
-const SET_PAGE_NUMBER = gql`
-  mutation setPageNumber($pageNumber: Int!) {
-          setAuditPageNumber(pageNumber: $pageNumber) @client
-      }
-    `;
-const SET_AUDIT_SPINNER_STATE = gql`
-  mutation setauditSpinner($auditSpinner: String!) {
-          setAuditSpinnerState(auditSpinner: $auditSpinner) @client
-      }
-    `;
+// const SET_UPDATE_SUBSCRIPTION = gql`
+//   mutation setUpdateSubscription($isUpdateSubsciption: String!) {
+//           setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
+//           @client
+//       }
+//     `;
+// const SET_PAGE_NUMBER = gql`
+//   mutation setPageNumber($pageNumber: Int!) {
+//           setAuditPageNumber(pageNumber: $pageNumber) @client
+//       }
+//     `;
+// const SET_AUDIT_SPINNER_STATE = gql`
+//   mutation setauditSpinner($auditSpinner: String!) {
+//           setAuditSpinnerState(auditSpinner: $auditSpinner) @client
+//       }
+//     `;
 
 const SET_LIST_DATA = gql`
   mutation setListData($listData: String!) {
@@ -741,11 +603,11 @@ const SET_FILTER_STATE = gql`
           setItemSearchFilterState(state: $state) @client
       }
     `;
-const SET_CHECKED_AUDIT = gql`
-  mutation setCheckedAudit($checkedAudit: Array!) {
-          setCheckedAudit(checkedAudit: $checkedAudit) @client
-      }
-    `;
+// const SET_CHECKED_AUDIT = gql`
+//   mutation setCheckedAudit($checkedAudit: Array!) {
+//           setCheckedAudit(checkedAudit: $checkedAudit) @client
+//       }
+//     `;
 
 const withClientData = graphql(itemSearchClientData, {
   props: data => ({
@@ -773,28 +635,28 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
     }
   })
 });
-const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
-  props: ({ mutate, ownProps }) => ({
-    updateSubscription: function (applied) {
-      mutate({ variables: { isUpdateSubsciption: applied } });
-    }
-  })
-});
+// const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
+//   props: ({ mutate, ownProps }) => ({
+//     updateSubscription: function (applied) {
+//       mutate({ variables: { isUpdateSubsciption: applied } });
+//     }
+//   })
+// });
 
-const setPageNumber = graphql(SET_PAGE_NUMBER, {
-  props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function (number) {
-      mutate({ variables: { pageNumber: number } });
-    }
-  })
-});
-const setListData = graphql(SET_LIST_DATA, {
-  props: ({ mutate, ownProps }) => ({
-    listDataAudit: function (data) {
-      mutate({ variables: { listData: data } });
-    }
-  })
-});
+// const setPageNumber = graphql(SET_PAGE_NUMBER, {
+//   props: ({ mutate, ownProps }) => ({
+//     setCurrentPageNumber: function (number) {
+//       mutate({ variables: { pageNumber: number } });
+//     }
+//   })
+// });
+// const setListData = graphql(SET_LIST_DATA, {
+//   props: ({ mutate, ownProps }) => ({
+//     listDataAudit: function (data) {
+//       mutate({ variables: { listData: data } });
+//     }
+//   })
+// });
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
@@ -803,13 +665,13 @@ const setFilterState = graphql(SET_FILTER_STATE, {
     }
   })
 });
-const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
-  props: ({ mutate, ownProps }) => ({
-    setAuditSpinner: function (spinnerState) {
-      mutate({ variables: { auditSpinner: spinnerState } });
-    }
-  })
-});
+// const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
+//   props: ({ mutate, ownProps }) => ({
+//     setAuditSpinner: function (spinnerState) {
+//       mutate({ variables: { auditSpinner: spinnerState } });
+//     }
+//   })
+// });
 
 ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired
