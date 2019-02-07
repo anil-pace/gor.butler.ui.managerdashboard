@@ -103,9 +103,9 @@ export const auditClientPPSData = gql`
 export const itemSearchClientPPSData = gql`
   query {
     ppsCheckedData @client {
-      checkedAuditPPSList
+      checkedItemSearchPPSList
       checkedOtherPPSList
-      auditDetails
+      itemSearchDetails
     }
   }
 `;
