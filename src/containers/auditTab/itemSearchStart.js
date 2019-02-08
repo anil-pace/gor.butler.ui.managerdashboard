@@ -98,9 +98,11 @@ class ItemSearchStart extends React.Component {
                 fetchPolicy: 'network-only'
             })
             .then(data => {
-                console.log("item search start triggered");
+                _this.props.notifyfeedback("ItemSearch Start triggered successfully.");
 
-            });
+            }).catch(err => {
+                _this.props.notifyfeedback("ItemSearch Start failed.");
+            })
         this.props.removeModal();
     }
 
