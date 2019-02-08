@@ -6,95 +6,72 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GTable from '../../components/gor-table-component';
 import {
-  GTableHeader,
-  GTableHeaderCell,
   GTableBody,
   GTableRow
 } from '../../components/gor-table-component';
+import { hashHistory } from 'react-router';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
-//import NameInitial from '../../components/NameInitial/nameInitial';
 import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
-//import ProgressBar from '../../components/progressBar/progressBar.js';
 import ActionDropDown from '../../components/actionDropDown/actionDropDown';
 import { modal } from 'react-redux-modal';
 import { graphql, withApollo, compose } from 'react-apollo';
 import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
-import // SUBSCRIPTION_QUERY,
-  // MSU_LIST_QUERY,
-  // MSU_LIST_POST_FILTER_QUERY,
-  // MSU_START_RECONFIG_QUERY,
-  // MSU_STOP_RECONFIG_QUERY,
-  // MSU_RELEASE_QUERY,
-  //auditClientData,
-  //SET_VISIBILITY
-  // SET_FILTER_APPLIED,
-  // SET_FILTER_STATE
-  './query/clientQuery';
+import ItemSearchStart from './itemSearchStart';
+
 import gql from 'graphql-tag';
 import {
   itemSearchClientData,
-  auditNeedRefreshFlag,
-  auditSelectedData,
-  auditSpinnerState
 } from './query/clientQuery';
+
 import {
-  AUDIT_QUERY,
-  AUDIT_SUBSCRIPTION_QUERY,
-  AUDIT_REQUEST_QUERY
-} from './query/serverQuery';
-import {
-  updateSubscriptionPacket,
   setWsAction
 } from './../../actions/socketActions';
 import { wsOverviewData } from './../../constants/initData.js';
 import {
   ITEM_SEARCH_QUERY,
-  ITEM_SEARCH_START_QUERY
+  ITEM_SEARCH_START_QUERY,
+  ITEM_SEARCH_DETAILS_QUERY
 } from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
-  GET,
-  PUT,
-  APP_JSON,
-  LOCATION,
-  SPECIFIC_LOCATION_ID,
-  SPECIFIC_SKU_ID,
-  AUDIT_TYPE,
-  SKU,
-  AUDIT_STATUS,
-  sortAuditHead,
-  sortOrder,
-  POST,
-  START_AUDIT_TASK,
-  AUDIT_CREATOR_NAME,
   ALL,
-  FILTER_PPS_ID,
-  AUDIT_START_TIME,
-  AUDIT_END_TIME,
-  AUDIT_CREATEDBY,
-  ANY,
   WS_ONSEND,
-  CANCEL_AUDIT,
-  PAUSE_AUDIT,
-  SYSTEM_GENERATED
 } from '../../constants/frontEndConstants';
+
+import moment from 'moment';
+import 'moment-timezone';
 
 const actionOptions = [
   {
     name: 'View Details',
     value: 'view_details'
-  },
-  {
-    name: 'Pause',
-    value: 'pause'
-  },
-  {
-    name: 'Cancel',
-    value: 'cancel'
   }
 ];
+
+const messages = defineMessages({
+  itemSearchCreatedStatus: {
+    id: 'itemSearch.notYetStarted.status',
+    defaultMessage: 'Not yet started'
+  },
+  itemSearchProcessingStatus: {
+    id: 'itemSearch.processing.status',
+    defaultMessage: 'Search in progress'
+  },
+  itemSearchProcessedStatus: {
+    id: 'itemSearch.completed.status',
+    defaultMessage: 'Completed'
+  },
+  itemSearchFailedStatus: {
+    id: 'itemSearch.failed.status',
+    defaultMessage: 'Failed'
+  },
+  manualAssignpps: {
+    id: 'itemSearch.label.manualassignpps',
+    defaultMessage: 'Manually-Assign PPS'
+  }
+});
 
 class ItemSearch extends React.Component {
   constructor(props) {
@@ -114,6 +91,7 @@ class ItemSearch extends React.Component {
     this._triggerItemSearchStart = this._triggerItemSearchStart.bind(this);
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
     this.showItemSearchFilter = this.props.showItemSearchFilter.bind(this);
+    this._handelClick = this._handelClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -146,6 +124,25 @@ class ItemSearch extends React.Component {
     }
   }
 
+  _handelClick(index, field) {
+    if (field.target.value == 'mannualassignpps') {
+      this.startItemSearch(index);
+    }
+  }
+
+  startItemSearch(index) {
+    var itemSearchId = this.state.data[index].externalServiceRequestId;
+    modal.add(ItemSearchStart, {
+      title: '',
+      size: 'large',
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      itemSearchID: itemSearchId,
+
+      //.. all what you put in here you will get access in the modal props ;),
+    });
+  }
+
   _triggerItemSearchStart(index) {
     const _this = this;
     let { page } = _this.state;
@@ -157,7 +154,7 @@ class ItemSearch extends React.Component {
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              ppsIdList: this.state.data[index].attributes.ppsIdList
+              ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList, 10)]
             }
           }
         },
@@ -216,9 +213,37 @@ class ItemSearch extends React.Component {
     }
   }
 
+  _requestItemSearchList(taskId, status) {
+    const _this = this;
+    let { page } = _this.state;
+    if (taskId || status) {
+      _this.props.client
+        .query({
+          query: ITEM_SEARCH_DETAILS_QUERY,
+          variables: {
+            input: {
+              "externalServiceRequestId": taskId,
+              "status": status,
+              "type": "SEARCH",
+              "searchBy": "filter"
+            }
+          },
+          fetchPolicy: 'network-only'
+        })
+        .then(data => {
+          let currentData = data.data.ItemSearchDetailsList.list;
+          _this.setState(() => {
+            return {
+              data: currentData,
+              page
+            };
+          });
+        });
+    }
+  }
+
   _refreshList(query) {
-    var me = this;
-    //if (this.props.currentPageNumber < this.props.TotalPage) {
+    let _this = this;
     if (query.scrolling) {
       var pageNo = this.props.currentPageNumber + 1;
       this.props.setCurrentPageNumber(pageNo);
@@ -246,82 +271,11 @@ class ItemSearch extends React.Component {
           STATUS: [ALL]
         }
       });
-    //this.props.setAuditSpinner(true);
-    if (query.taskId) {
-      this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              "externalServiceRequestId": query.taskId,
-              "searchBy": "filter"
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          let existingData = JSON.parse(JSON.stringify(_this.state.data));
-          let currentData = data.data.ItemSearchList.list.serviceRequests;
-          let mergedData = existingData.concat(currentData);
-          _this.setState(() => {
-            return {
-              data: mergedData,
-              page
-            };
-          });
-        });
-    }
-    else if (query.status) {
-      this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              "status": query.status,
-              "type": "SEARCH",
-              "searchBy": "filter"
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          let existingData = JSON.parse(JSON.stringify(_this.state.data));
-          let currentData = data.data.ItemSearchList.list.serviceRequests;
-          let mergedData = existingData.concat(currentData);
-          _this.setState(() => {
-            return {
-              data: mergedData,
-              page
-            };
-          });
-        });
-    }
+    _this._requestItemSearchList(query.taskId, query.status);
 
-    //}
   }
 
-  _requestItemSearchList() {
-    this.props.client.query({
-      query: ITEM_SEARCH_QUERY,
-      variables: {
-        input: {
-          page: 0,
-          page_size: 10
-        }
-      },
-      fetchPolicy: 'network-only'
-    }).then(data => {
-      let existingData = JSON.parse(JSON.stringify(_this.state.data));
-      let currentData = data.data.ItemSearchList.list.serviceRequests;
-      let mergedData = existingData.concat(currentData);
-      _this.setState(() => {
-        return {
-          data: mergedData,
-          page
-        };
-      });
-    })
-  }
+
 
 
 
@@ -329,7 +283,6 @@ class ItemSearch extends React.Component {
    *
    */
   _clearFilter() {
-    //this._requestItemSearchList();
     this.props.itemSearchfilterState({
       tokenSelected: {
         STATUS: [ALL],
@@ -349,7 +302,13 @@ class ItemSearch extends React.Component {
     this.props.filterApplied(false);
     hashHistory.push({ pathname: '/itemsearch', query: {} });
   }
-  _processServerData() {
+  _processServerData(data, nProps) {
+    const { timeOffset } = this.props;
+    let notYetStartedItemSearch = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
+    let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
+    let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
+    let failedItemSearch = this.context.intl.formatMessage(messages.itemSearchFailedStatus);
+
     var processedData = [];
     if (this.state.data && this.state.data.length) {
       let data = this.state.data.slice(0);
@@ -357,6 +316,9 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
+        let productsLength = containers.products.length;
+        let typeOfSearch = (productsLength === 1 ? "Single SKU" : "Multiple SKU");
+
         let productAttributes = containers
           ? containers.products[0].productAttributes
           : null;
@@ -368,11 +330,18 @@ class ItemSearch extends React.Component {
         tuple.subHeader = [
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
-            : null
+            : null,
+          typeOfSearch,
+          moment(containers.products[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
         ];
+        if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
+        else if (datum.status == 'PROCESSING') { datum.status = searchInProgressItemSearch; }
+        else if (datum.status == 'PROCESSED') { datum.status = completedItemSearch; }
+        else if (datum.status == 'FAILED') { datum.status = failedItemSearch; }
+
         tuple.status = datum.status;
         tuple.displayStartButton =
-          datum.status.toUpperCase() === 'CREATED' ? true : false;
+          datum.status.toUpperCase() === "NOT YET STARTED" ? true : false;
         processedData.push(tuple);
       }
     }
@@ -398,8 +367,9 @@ class ItemSearch extends React.Component {
   }
   render() {
     var filterHeight = screen.height - 190;
+    let manualAssignpps = this.context.intl.formatMessage(messages.manualAssignpps);
     const _this = this;
-    const tablerowdata = _this._processServerData(); //[{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[38,""],"subHeader":[["PPS 1"],"Single SKU","yesterday, 18:29"],"audit_id":"UmvjVRzWiP","display_id":38},"auditProgress":{"percentage":0,"flag":false,"status":"Waiting for the operator to login"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[37,""],"subHeader":[["PPS 5"],"Multi location","Dec 27, 15:05"],"audit_id":"SDod3kgYuY","display_id":37},"auditProgress":{"percentage":0,"flag":false,"status":"Processing audit task"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[36,""],"subHeader":["Multi PPS","Single SKU","Dec 27, 11:54"],"audit_id":"iGpKxPTKRw","display_id":36},"auditProgress":{"percentage":33.333333333333336,"flag":true,"status":"1 completed out of 3"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[35,""],"subHeader":[["PPS 4"],"Single SKU","Dec 26, 18:59 - 19:03"],"audit_id":"wzAxam7mVj","display_id":35},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[33,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 16:14"],"audit_id":"KscU3jyYFF","display_id":33},"auditProgress":{"percentage":0,"flag":false,"status":"Paused"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":true,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[32,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 15:56 - 16:11"],"audit_id":"qxtjAPF4Fh","display_id":32},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[31,""],"subHeader":[["PPS 4"],"Single location","Dec 20, 12:23 - 12:25"],"audit_id":"yG5ELy7MV3","display_id":31},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[30,""],"subHeader":[["PPS 5"],"Single location","Dec 19, 18:12"],"audit_id":"KmC4LdEi67","display_id":30},"auditProgress":{"percentage":0,"flag":true,"status":"0 completed out of 1"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Cancel","value":"cancel"},{"name":"Duplicate","value":"duplicate"},{"name":"Pause","value":"pause"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[29,""],"subHeader":[["PPS 4"],"Single location","Dec 19, 18:09 - 18:11"],"audit_id":"JWZoH2NXQt","display_id":29},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]},{"initialName":{"name":"admin admin","flag":"admin admin"},"auditDetails":{"header":[28,""],"subHeader":[["PPS 4"],"Single location","Dec 19, 18:05 - 18:08"],"audit_id":"dUxFvKiV6i","display_id":28},"auditProgress":{"percentage":100,"flag":false,"status":"Completed"},"Status":{"resolveStatus":"","reAuditStatus":"","approvedState":""},"button":{"startButton":false,"resolveButton":false,"reAudit":false},"butoonToSHow":[{"name":"View Details","value":"viewdetails"},{"name":"Duplicate","value":"duplicate"}]}];
+    const tablerowdata = _this._processServerData();
     let toolbar = (
       <div>
         <div
@@ -420,8 +390,8 @@ class ItemSearch extends React.Component {
             <div className='auditHeaderContainer'>
               <span className='auditHeader'>
                 <FormattedMessage
-                  id='itemSearch.header.Audit'
-                  description='button label for audit'
+                  id='itemSearch.header.itemSearch'
+                  description='button label for item search'
                   defaultMessage='Item Search'
                 />
               </span>
@@ -449,14 +419,14 @@ class ItemSearch extends React.Component {
         </div>
         {/*Filter Summary*/}
         <FilterSummary
-          total={_this.state.itemSearchList.length || 0}
+          total={tablerowdata ? tablerowdata.length : 0}
           isFilterApplied={_this.props.isFilterApplied}
           filterText={
             <FormattedMessage
               id='itemSearch.filter.search.bar'
               description='total results for filter search bar'
               defaultMessage='{total} results found'
-              values={{ total: _this.state.itemSearchList.length || 0 }}
+              values={{ total: tablerowdata ? tablerowdata.length : 0 }}
             />
           }
           refreshList={_this._clearFilter.bind(this)}
@@ -475,16 +445,6 @@ class ItemSearch extends React.Component {
       <div>
         <div>
           <div className='gor-Auditlist-table'>
-            {/*
-            {!this.props.showFilter ? (
-              <Spinner
-                isLoading={this.props.auditSpinner}
-                setSpinner={this.props.setAuditSpinner}
-              />
-            ) : (
-                ''
-              )}
-              */}
             {toolbar}
             <div className='waveListWrapper'>
               {this.props.data.loading && (
@@ -508,12 +468,7 @@ class ItemSearch extends React.Component {
                             data={tablerowdata}
                           >
                             <div className='table-cell'>
-                              {row.displayStartButton && (
-                                <label className='container'>
-                                  <input type='checkbox' onChange={null} />
-                                  <span className={'checkmark'} />
-                                </label>
-                              )}
+
                             </div>
                             <div className='table-cell'>
                               <span>
@@ -530,17 +485,29 @@ class ItemSearch extends React.Component {
                               <div className='row inner'>
                                 {' '}
                                 <div className='table-cell'>
+
                                   {row.displayStartButton && (
-                                    <button
-                                      className='gor-add-btn gor-listing-button'
-                                      onClick={_this._triggerItemSearchStart.bind(
-                                        this,
-                                        idx
-                                      )}
+                                    <ActionDropDown
+                                      style={{
+                                        width: '115px',
+                                        display: 'inline',
+                                        float: 'left',
+                                        'padding-left': '25px'
+                                      }}
+                                      clickOptionBack={_this._handelClick.bind(this, idx)}
+                                      data={[{ name: manualAssignpps, value: 'mannualassignpps' }]}
                                     >
-                                      {'Start'}
-                                    </button>
+                                      <button className='gor-add-btn gor-listing-button'>
+                                        <FormattedMessage
+                                          id='itemSearch.start.itemSearch'
+                                          description='button label for start'
+                                          defaultMessage='START'
+                                        />
+                                        <div className='got-add-notch' />
+                                      </button>
+                                    </ActionDropDown>
                                   )}
+
                                 </div>
                                 <div className='table-cell'>
                                   <ActionDropDown
@@ -600,47 +567,27 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
 
 const SET_VISIBILITY = gql`
   mutation setAuditFiler($filter: String!) {
-    setShowItemSearchFilter(filter: $filter) @client
-  }
-`;
+          setShowItemSearchFilter(filter: $filter) @client
+      }
+    `;
 
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
-    setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
-  }
-`;
-const SET_UPDATE_SUBSCRIPTION = gql`
-  mutation setUpdateSubscription($isUpdateSubsciption: String!) {
-    setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
-      @client
-  }
-`;
-const SET_PAGE_NUMBER = gql`
-  mutation setPageNumber($pageNumber: Int!) {
-    setAuditPageNumber(pageNumber: $pageNumber) @client
-  }
-`;
-const SET_AUDIT_SPINNER_STATE = gql`
-  mutation setauditSpinner($auditSpinner: String!) {
-    setAuditSpinnerState(auditSpinner: $auditSpinner) @client
-  }
-`;
+          setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
+      }
+    `;
+
 
 const SET_LIST_DATA = gql`
   mutation setListData($listData: String!) {
-    setAuditListData(listData: $listData) @client
-  }
-`;
+          setAuditListData(listData: $listData) @client
+      }
+    `;
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
-    setItemSearchFilterState(state: $state) @client
-  }
-`;
-const SET_CHECKED_AUDIT = gql`
-  mutation setCheckedAudit($checkedAudit: Array!) {
-    setCheckedAudit(checkedAudit: $checkedAudit) @client
-  }
-`;
+          setItemSearchFilterState(state: $state) @client
+      }
+    `;
 
 const withClientData = graphql(itemSearchClientData, {
   props: data => ({
@@ -668,28 +615,6 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
     }
   })
 });
-const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
-  props: ({ mutate, ownProps }) => ({
-    updateSubscription: function (applied) {
-      mutate({ variables: { isUpdateSubsciption: applied } });
-    }
-  })
-});
-
-const setPageNumber = graphql(SET_PAGE_NUMBER, {
-  props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function (number) {
-      mutate({ variables: { pageNumber: number } });
-    }
-  })
-});
-const setListData = graphql(SET_LIST_DATA, {
-  props: ({ mutate, ownProps }) => ({
-    listDataAudit: function (data) {
-      mutate({ variables: { listData: data } });
-    }
-  })
-});
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
@@ -698,13 +623,7 @@ const setFilterState = graphql(SET_FILTER_STATE, {
     }
   })
 });
-const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
-  props: ({ mutate, ownProps }) => ({
-    setAuditSpinner: function (spinnerState) {
-      mutate({ variables: { auditSpinner: spinnerState } });
-    }
-  })
-});
+
 
 ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired

@@ -6,9 +6,11 @@ import merge from 'lodash.merge';
 import auditFilterState from './filter';
 import itemSearchFilterState from './itemSearch';
 import auditInternalState from './InternalState';
+import itemSearchInternalState from './ItemSearchInternalState';
 let audit_resolvers = merge(
   auditFilterState,
   auditInternalState,
+  itemSearchInternalState,
   itemSearchFilterState
 );
 export default audit_resolvers;
