@@ -19,10 +19,7 @@ import {
     WALL_TO_WALL,
 } from "../../constants/frontEndConstants";
 
-import AuditAction from "../auditTab/auditAction";
 import { graphql, withApollo, compose } from "react-apollo";
-import { AuditParse } from '../../../src/utilities/auditResponseParser'
-import { ShowError } from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
 import { ITEM_SEARCH_PPS_LIST_FETCH_QUERY, ITEM_SEARCH_START_QUERY } from './query/serverQuery';
 import { itemSearchClientPPSData } from './query/clientQuery';
@@ -46,28 +43,10 @@ class ItemSearchStart extends React.Component {
         this.props.removeModal();
     }
 
-    componentDidMount() {
-        //var resultantArr = this._findDisplayidName(this.state.itemSearchId);
-    }
-
-
     openPopup(e) {
         this.setState({ "visiblePopUp": !this.state.visiblePopUp });
     }
-    // _findDisplayidName(arrId) {
-    //     var resultantArr = [];
-    //     var dataSet = this.props.auditDetails;
-    //     dataSet.forEach(function (entry) {
-    //         arrId.forEach(function (content) {
-    //             if (content == entry.audit_id) {
-    //                 resultantArr.push({ id: entry.audit_id, dislayID: entry.display_id, name: entry.audit_name, type: entry.audit_type });
-    //             }
-    //         })
 
-    //     })
-    //     this.setState({ 'type': resultantArr })
-    //     return resultantArr;
-    // }
     _tableItemSearchPPSData(itemsData) {
         let tableData = [];
         for (var i = 0; i < itemsData.length; i++) {
@@ -103,10 +82,6 @@ class ItemSearchStart extends React.Component {
         let allPPSList = this.props.checkedItemSearchPPSList.concat(
             this.props.checkedOtherPPSList
         );
-        let allAuditId =
-            this.state.itemSearchId.constructor.name !== "Array"
-                ? [this.state.itemSearchId]
-                : this.state.itemSearchId;
 
         e.preventDefault();
         _this.props.client
@@ -123,8 +98,7 @@ class ItemSearchStart extends React.Component {
                 fetchPolicy: 'network-only'
             })
             .then(data => {
-                var AuditRequestSubmit = data.data.AuditRequestSubmit ? JSON.parse(data.data.AuditRequestSubmit.list) : ""
-                AuditParse(AuditRequestSubmit, 'START_AUDIT', _this)
+                console.log("item search start triggered");
 
             });
         this.props.removeModal();
@@ -685,8 +659,7 @@ const withClientData = graphql(itemSearchClientPPSData, {
     props: (data) =>
         ({
             checkedItemSearchPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedItemSearchPPSList : [],
-            checkedOtherPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedOtherPPSList : [],
-            //auditDetails: data.data.ppsCheckedData ? JSON.parse(data.data.ppsCheckedData.auditDetails) : []
+            checkedOtherPPSList: data.data.ppsCheckedData ? data.data.ppsCheckedData.checkedOtherPPSList : []
         })
 })
 

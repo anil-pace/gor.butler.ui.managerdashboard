@@ -68,7 +68,7 @@ const messages = defineMessages({
     defaultMessage: 'Failed'
   },
   manualAssignpps: {
-    id: 'auditdetail.label.manualassignpps',
+    id: 'itemSearch.label.manualassignpps',
     defaultMessage: 'Manually-Assign PPS'
   }
 });
@@ -576,22 +576,7 @@ const SET_FILTER_APPLIED = gql`
           setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
       }
     `;
-// const SET_UPDATE_SUBSCRIPTION = gql`
-//   mutation setUpdateSubscription($isUpdateSubsciption: String!) {
-//           setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
-//           @client
-//       }
-//     `;
-// const SET_PAGE_NUMBER = gql`
-//   mutation setPageNumber($pageNumber: Int!) {
-//           setAuditPageNumber(pageNumber: $pageNumber) @client
-//       }
-//     `;
-// const SET_AUDIT_SPINNER_STATE = gql`
-//   mutation setauditSpinner($auditSpinner: String!) {
-//           setAuditSpinnerState(auditSpinner: $auditSpinner) @client
-//       }
-//     `;
+
 
 const SET_LIST_DATA = gql`
   mutation setListData($listData: String!) {
@@ -603,11 +588,6 @@ const SET_FILTER_STATE = gql`
           setItemSearchFilterState(state: $state) @client
       }
     `;
-// const SET_CHECKED_AUDIT = gql`
-//   mutation setCheckedAudit($checkedAudit: Array!) {
-//           setCheckedAudit(checkedAudit: $checkedAudit) @client
-//       }
-//     `;
 
 const withClientData = graphql(itemSearchClientData, {
   props: data => ({
@@ -635,28 +615,6 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
     }
   })
 });
-// const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
-//   props: ({ mutate, ownProps }) => ({
-//     updateSubscription: function (applied) {
-//       mutate({ variables: { isUpdateSubsciption: applied } });
-//     }
-//   })
-// });
-
-// const setPageNumber = graphql(SET_PAGE_NUMBER, {
-//   props: ({ mutate, ownProps }) => ({
-//     setCurrentPageNumber: function (number) {
-//       mutate({ variables: { pageNumber: number } });
-//     }
-//   })
-// });
-// const setListData = graphql(SET_LIST_DATA, {
-//   props: ({ mutate, ownProps }) => ({
-//     listDataAudit: function (data) {
-//       mutate({ variables: { listData: data } });
-//     }
-//   })
-// });
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
@@ -665,13 +623,7 @@ const setFilterState = graphql(SET_FILTER_STATE, {
     }
   })
 });
-// const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
-//   props: ({ mutate, ownProps }) => ({
-//     setAuditSpinner: function (spinnerState) {
-//       mutate({ variables: { auditSpinner: spinnerState } });
-//     }
-//   })
-// });
+
 
 ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired
