@@ -154,7 +154,7 @@ class ItemSearch extends React.Component {
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList)]
+              ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList, 10)]
             }
           }
         },

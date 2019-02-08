@@ -37,18 +37,12 @@ class ItemSearchDetails extends React.Component {
     const rawListData = data && JSON.parse(data[0].actuals.containers);
     if (data && data.length) {
       processedData.tiledata = [{
-        "Created By": "--",
-        "Operator": "--",
+        "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
         "Item Search Type": "--"
       },
       {
         "Start Time": moment(data[0].createdOn).tz(timeOffset).format('DD MMM,YYYY') || "--",
-        "End Time": "--",
-        "Progress": "--"
-      }, {
-        "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
-        "Show KQ": "--",
-        "Reminder": "--"
+        "End Time": data[0].state === "complete" ? moment(data[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') : "--",
       }
       ]
     }
