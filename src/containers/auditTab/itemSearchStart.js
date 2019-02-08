@@ -98,10 +98,16 @@ class ItemSearchStart extends React.Component {
                 fetchPolicy: 'network-only'
             })
             .then(data => {
-                _this.props.notifyfeedback("ItemSearch Start triggered successfully.");
+                let showSuccessMsg = (<FormattedMessage id="itemSearch.start.successMessage"
+                    description='show success message for item start'
+                    defaultMessage='ItemSearch Start triggered successfully.' />);
+                _this.props.notifyfeedback(showSuccessMsg);
 
             }).catch(err => {
-                _this.props.notifyfeedback("ItemSearch Start failed.");
+                let showErrMsg = (<FormattedMessage id="itemSearch.start.failMessage"
+                    description='set fail message for item start'
+                    defaultMessage='ItemSearch Start failed.' />);
+                _this.props.notifyfeedback(showErrMsg);
             })
         this.props.removeModal();
     }
