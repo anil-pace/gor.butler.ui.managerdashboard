@@ -558,7 +558,9 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
     variables: {
       input: {
         page: 0,
-        page_size: 10
+        page_size: 10,
+        order: "DESC",
+        sort: "createdOn"
       }
     },
     fetchPolicy: 'network-only'
