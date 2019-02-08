@@ -115,10 +115,10 @@ class ItemSearchStart extends React.Component {
     headerCheckChange(type, e) {
         let ppslist = this.props.ppsList.pps_list;
         let arr = [];
-        if (type == "Search") {
+        if (type === "Search") {
             if (e.currentTarget.checked) {
                 Object.keys(ppslist).forEach(function (key) {
-                    if (ppslist[key].pps_mode == "search") arr.push(ppslist[key].pps_id);
+                    if (ppslist[key].pps_mode === "search") arr.push(ppslist[key].pps_id);
                 });
                 this.props.setCheckedItemSearchpps(arr);
             } else {
@@ -138,15 +138,15 @@ class ItemSearchStart extends React.Component {
 
     CheckChange(type, e) {
         let arr = [];
-        if (type == "Search") {
+        if (type === "Search") {
             arr = JSON.parse(JSON.stringify(this.props.checkedItemSearchPPSList));
             let a = arr.indexOf(e.currentTarget.id);
-            a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
+            a === -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
             this.props.setCheckedItemSearchpps(arr);
         } else {
             arr = JSON.parse(JSON.stringify(this.props.checkedOtherPPSList));
             let a = arr.indexOf(e.currentTarget.id);
-            a == -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
+            a === -1 ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
             this.props.setCheckedOtherpps(arr);
         }
     }
@@ -161,9 +161,9 @@ class ItemSearchStart extends React.Component {
             let attributeData = nextProps.ppsList.pps_list || [];
             this.setState({ items: attributeData });
             let itemSearchList = [], otherList = [];
-            if (this.state.type[0].type == WALL_TO_WALL) {
+            if (this.state.type[0].type === WALL_TO_WALL) {
                 for (var i = 0; i < nextProps.ppsList.pps_list.length; i++) {
-                    if (nextProps.ppsList.pps_list[i].pps_mode == 'search')
+                    if (nextProps.ppsList.pps_list[i].pps_mode === 'search')
                         itemSearchList.push(nextProps.ppsList.pps_list[i].pps_id);
                     else
                         otherList.push(nextProps.ppsList.pps_list[i].pps_id);
@@ -288,7 +288,7 @@ class ItemSearchStart extends React.Component {
         let totalItemSearchPPSCount = 0;
         let totalOtherPPSCount = 0;
         Object.keys(items).forEach(function (key) {
-            if (items[key].pps_mode == "search") totalItemSearchPPSCount++;
+            if (items[key].pps_mode === "search") totalItemSearchPPSCount++;
             else {
                 totalOtherPPSCount++;
             }
@@ -322,7 +322,7 @@ class ItemSearchStart extends React.Component {
                 <div className="gor-AuditDetails-modal-content">
                     <div className="gor-auditDetails-modal-head">
                         <span className="AuditIDWrapper">
-                            {this.props.param == "CHANGE_PPS" ? changePPSHeader : startItemSearchHeader}
+                            {this.props.param === "CHANGE_PPS" ? changePPSHeader : startItemSearchHeader}
                         </span>
 
                         <span className="close" onClick={this._removeThisModal.bind(this)}>
@@ -331,11 +331,11 @@ class ItemSearchStart extends React.Component {
                     </div>
 
                     <div className="gor-auditDetails-modal-body">
-                        {tablerowdataItemSearch.length == 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
+                        {tablerowdataItemSearch.length === 0 && tablerowdataOther.length == 0 ? <div className="ppsUnavailable">{ppsunavaible}</div> :
                             <div>
                                 <div className="content-body">
                                     <span className="left-float">
-                                        {this.state.type[0].type == WALL_TO_WALL
+                                        {this.state.type[0].type === WALL_TO_WALL
                                             ? <div className="auditIdInfo"><span>Wall-to-Wall {itemSearch}</span></div>
                                             : this.state.itemSearchId.length > 1
                                                 ? <div className="auditIdInfo">
@@ -367,8 +367,8 @@ class ItemSearchStart extends React.Component {
                                     <GTable options={["table-bordered", "auditStart"]}>
                                         <GTableHeader options={["auditTable"]}>
                                             <GTableHeaderCell key={1} header="Search" className="audittable">
-                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedItemSearchPPSList.length == 0 ? "" : true} disabled={me.state.type[0].type == WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Search")} />
-                                                    <span className={totalItemSearchPPSCount == checkedItemSearchPPSCount ? "checkmark" : "checkmark1"} />
+                                                <label className="container" style={{ "margin-left": "10px" }} >{" "}<input type="checkbox" checked={this.props.checkedItemSearchPPSList.length === 0 ? "" : true} disabled={me.state.type[0].type === WALL_TO_WALL} onChange={me.headerCheckChange.bind(me, "Search")} />
+                                                    <span className={totalItemSearchPPSCount === checkedItemSearchPPSCount ? "checkmark" : "checkmark1"} />
                                                 </label>
                                                 <span>
                                                     {tablerowdataItemSearch.length + " "}
@@ -409,11 +409,11 @@ class ItemSearchStart extends React.Component {
                                                                                         tablerowdataItemSearch[idx][
                                                                                         "ppsDetails"
                                                                                         ]["header"][0]
-                                                                                    ) == -1
+                                                                                    ) === -1
                                                                                         ? ""
                                                                                         : true
                                                                                 }
-                                                                                disabled={me.state.type[0].type == WALL_TO_WALL}
+                                                                                disabled={me.state.type[0].type === WALL_TO_WALL}
                                                                                 onChange={me.CheckChange.bind(
                                                                                     me,
                                                                                     "Search"
@@ -424,7 +424,7 @@ class ItemSearchStart extends React.Component {
                                                                     ) : (
                                                                             ""
                                                                         )}
-                                                                    {index == 0 ? (
+                                                                    {index === 0 ? (
                                                                         <DotSeparatorContent
                                                                             header={
                                                                                 tablerowdataItemSearch[idx][text]["header"]
@@ -439,7 +439,7 @@ class ItemSearchStart extends React.Component {
                                                                     ) : (
                                                                             ""
                                                                         )}
-                                                                    {index == 1 ? (
+                                                                    {index === 1 ? (
                                                                         <div>
                                                                             {operatorAssign}:{" "}
                                                                             {tablerowdataItemSearch[idx][text]}
@@ -447,7 +447,7 @@ class ItemSearchStart extends React.Component {
                                                                     ) : (
                                                                             ""
                                                                         )}
-                                                                    {index == 2 ? (
+                                                                    {index === 2 ? (
                                                                         <DotSeparatorContent
                                                                             header={
                                                                                 tablerowdataItemSearch[idx][text]["header"]
@@ -488,14 +488,14 @@ class ItemSearchStart extends React.Component {
                                                     <input
                                                         type="checkbox"
                                                         checked={
-                                                            this.props.checkedOtherPPSList.length == 0 ? "" : true
+                                                            this.props.checkedOtherPPSList.length === 0 ? "" : true
                                                         }
-                                                        disabled={me.state.type[0].type == WALL_TO_WALL}
+                                                        disabled={me.state.type[0].type === WALL_TO_WALL}
                                                         onChange={me.headerCheckChange.bind(me, "other")}
                                                     />
                                                     <span
                                                         className={
-                                                            totalOtherPPSCount == checkedOtherPPSCount
+                                                            totalOtherPPSCount === checkedOtherPPSCount
                                                                 ? "checkmark"
                                                                 : "checkmark1"
                                                         }
@@ -523,7 +523,7 @@ class ItemSearchStart extends React.Component {
                                                                         style={tableDataother[index].style}
                                                                         className={tableDataother[index].class ? tableDataother[index].class + " cell" : "" + "cell"}
                                                                     >
-                                                                        {index == 0 ? (
+                                                                        {index === 0 ? (
                                                                             <label
                                                                                 className="container marginAlign"
 
@@ -541,7 +541,7 @@ class ItemSearchStart extends React.Component {
                                                                                             tablerowdataOther[idx][
                                                                                             "ppsDetails"
                                                                                             ]["header"][0]
-                                                                                        ) == -1
+                                                                                        ) === -1
                                                                                             ? ""
                                                                                             : true
                                                                                     }
@@ -549,14 +549,14 @@ class ItemSearchStart extends React.Component {
                                                                                         me,
                                                                                         "Other"
                                                                                     )}
-                                                                                    disabled={me.state.type[0].type == WALL_TO_WALL}
+                                                                                    disabled={me.state.type[0].type === WALL_TO_WALL}
                                                                                 />
                                                                                 <span className="checkmark" />
                                                                             </label>
                                                                         ) : (
                                                                                 ""
                                                                             )}
-                                                                        {index == 0 ? (
+                                                                        {index === 0 ? (
                                                                             <DotSeparatorContent
                                                                                 header={
                                                                                     tablerowdataOther[idx][text]["header"]
@@ -571,7 +571,7 @@ class ItemSearchStart extends React.Component {
                                                                         ) : (
                                                                                 ""
                                                                             )}
-                                                                        {index == 1 ? (
+                                                                        {index === 1 ? (
                                                                             <div>
                                                                                 {operatorAssign}:{" "}
                                                                                 {tablerowdataOther[idx][text]}
@@ -595,7 +595,7 @@ class ItemSearchStart extends React.Component {
 
                         }
                     </div>
-                    {tablerowdataItemSearch.length == 0 && tablerowdataOther.length == 0 ? "" :
+                    {tablerowdataItemSearch.length === 0 && tablerowdataOther.length === 0 ? "" :
                         <button
                             className="gor-add-btn gor-listing-button rightMargin"
                             onClick={this._handlestartItemSearch.bind(this)}
