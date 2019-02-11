@@ -38,6 +38,8 @@ import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
   ALL,
   WS_ONSEND,
+  DESC,
+  CREATED_ON
 } from '../../constants/frontEndConstants';
 
 import moment from 'moment';
@@ -182,7 +184,9 @@ class ItemSearch extends React.Component {
         variables: {
           input: {
             page_size: 10,
-            page: ++page
+            page: ++page,
+            order: DESC,
+            sort: CREATED_ON
           }
         },
         fetchPolicy: 'network-only'
@@ -558,7 +562,10 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
     variables: {
       input: {
         page: 0,
-        page_size: 10
+        page_size: 10,
+        order: DESC,
+        sort: CREATED_ON
+
       }
     },
     fetchPolicy: 'network-only'
