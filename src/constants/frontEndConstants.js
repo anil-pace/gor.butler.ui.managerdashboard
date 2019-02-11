@@ -494,6 +494,7 @@ export const LEGEND_RECT = "RECTANGLE";
 export const LEGEND_DEFAULT = LEGEND_RECT;
 export const ASC = "ASC";
 export const DESC = "DESC";
+export const CREATED_ON = "createdOn";
 
 export const EN = 'en';
 export const JA = 'ja';
