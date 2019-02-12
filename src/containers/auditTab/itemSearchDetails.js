@@ -29,6 +29,19 @@ class ItemSearchDetails extends React.Component {
 
   }
   _processedData() {
+
+    let singleLocationTxt = (<FormattedMessage
+      id="itemsSearch.singleLocation.singleLocationText"
+      description="Text for Single location"
+      defaultMessage="Single location"
+    />);
+
+    let multiLocationTxt = (<FormattedMessage
+      id="itemsSearch.multiLocationTxt.multiLocationText"
+      description="Text for Multi location"
+      defaultMessage="Multi location"
+    />);
+
     var processedData = {};
     const data = JSON.parse(JSON.stringify(this.state.data));
     const { timeOffset } = this.props;
@@ -39,7 +52,7 @@ class ItemSearchDetails extends React.Component {
       processedData.tiledata = [{
         "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
         "Item Search Type": data[0].attributes.slot_list ?
-          data[0].attributes.slot_list.length > 1 ? "Multi location" : "Single location"
+          data[0].attributes.slot_list.length > 1 ? multiLocationTxt : singleLocationTxt
           : "--"
       },
       {
@@ -114,6 +127,7 @@ class ItemSearchDetails extends React.Component {
     const data = combinedData.processedData;
     const tableData = combinedData.tableData;
     const dataLen = Object.keys(data).length;
+
     return (
       <div>
         <div className="gor-modal-content pps-close">
@@ -133,7 +147,6 @@ class ItemSearchDetails extends React.Component {
                   <div className="auditDetailsLeft">
                     <Tile data={dataLen && data.tiledata[0]} />
                     <Tile data={dataLen && data.tiledata[1]} />
-                    <Tile className="width-auto" data={dataLen && data.tiledata[2]} />
                   </div>
 
                 </div>
