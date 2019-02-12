@@ -38,7 +38,9 @@ class ItemSearchDetails extends React.Component {
     if (data && data.length) {
       processedData.tiledata = [{
         "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
-        "Item Search Type": "--"
+        "Item Search Type": data[0].attributes.slot_list ?
+          data[0].attributes.slot_list.length > 1 ? "Multi location" : "Single location"
+          : "--"
       },
       {
         "Start Time": moment(data[0].createdOn).tz(timeOffset).format('DD MMM,YYYY') || "--",
