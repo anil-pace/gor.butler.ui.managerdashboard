@@ -8,7 +8,6 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import moment from 'moment';
 import 'moment-timezone';
 
-//let itemSearchId =null
 class ItemSearchDetails extends React.Component {
 
   constructor(props) {
@@ -33,8 +32,9 @@ class ItemSearchDetails extends React.Component {
     var processedData = {};
     const data = JSON.parse(JSON.stringify(this.state.data));
     const { timeOffset } = this.props;
-    let listData = [];
+    let tableData = [];
     const rawListData = data && JSON.parse(data[0].actuals.containers);
+
     if (data && data.length) {
       processedData.tiledata = [{
         "PPS ID": `PPS ${data[0].attributes.ppsIdList}`,
@@ -46,35 +46,63 @@ class ItemSearchDetails extends React.Component {
       }
       ]
     }
+
+
     if (rawListData && rawListData.length) {
       for (let i = 0, len = rawListData.length; i < len; i++) {
-        let generatedList = {};
+        //let generatedList = {};
         let datum = rawListData[i];
-        //let containers = datum.expectations.containers[0] || null
-        let productAttributes = datum ? datum.products[0].productAttributes : null;
-        let pdfa_values = productAttributes ? productAttributes.pdfa_values : null
-        let sku = pdfa_values ? pdfa_values.product_sku : null;
-        generatedList.id = rawListData[i].id;
-        generatedList.skuHeader = [sku];
-        if (pdfa_values) {
-          let pdfaValues = [];
-          delete pdfa_values.product_sku;
-          for (let k in pdfa_values) {
-            pdfaValues.push(pdfa_values[k])
+
+        let datumState = datum.state;
+        let datumProducts = datum.products;
+        let datumAttributes = datum.containerAttributes;
+        // 3rd column manipulation --OPERATOR -- read from actuals->containers[index]->containerAttributes.user_name
+        let operatorName = datumAttributes && datumAttributes.user_name;
+        // 4th column manipulation --SLOT -- read from actuals->containers[index]->containerAttributes.location
+        let slotId = datumAttributes && datumAttributes.location;
+
+        for (let j = 0; j < datumProducts.length; j++) {
+          let generatedList = {};
+          generatedList.operator = operatorName || "--";
+          generatedList.slot = slotId;
+
+          let actualProducts = datumProducts[j];
+          let productQuantity = actualProducts.productQuantity;
+
+          // 1st column manipulation --Nr.part  -- read from actuals->containers[index]->products[0]->productAttributes.pdfa_values.product_sku
+          let productAttributes = actualProducts ? actualProducts.productAttributes : null;
+          let pdfa_values = productAttributes ? productAttributes.pdfa_values : null
+          let productSKU = pdfa_values ? pdfa_values.product_sku : null;
+          let packageName = productAttributes ? productAttributes.package_name : null;
+          generatedList.id = rawListData[i].id;
+          generatedList.skuHeader = [productSKU];
+          generatedList.skuFooter = [packageName];
+
+          // 5th column manipulation -- ITEMS FOUND STATUS -- read from actuals->containers[index]->products[0].productQuantity
+          let itemStatusMessage = "";
+          if (datumState === "complete") {
+            if (productQuantity > 0) { itemStatusMessage = productQuantity + " item(s) found" }
+            else { itemStatusMessage = "No item found" }
           }
-          generatedList.pdfaHeader = [`${pdfaValues.length} Attributes Selected`];
-          generatedList.pdfaSubHeader = pdfaValues;
+          else if (datumState === "excess") {
+            if (productQuantity > 0) { itemStatusMessage = productQuantity + " Excess item(s) found" }
+            else { itemStatusMessage = "No excess item found" }
+          }
+          else if (datumState === "missing") {
+            if (productQuantity > 0) { itemStatusMessage = productQuantity + " item(s) missing" }
+            else { itemStatusMessage = "No missing item found" }
+          }
+          generatedList.itemStatus = itemStatusMessage;
+
+          tableData.push(generatedList);
         }
-        generatedList.operator = "--";
-        generatedList.slot = datum.containerAttributes && datum.containerAttributes.location;
-        generatedList.itemStatus = "--"
-        listData.push(generatedList);
+
       }
 
     }
     return {
       processedData,
-      listData
+      tableData
     };
   }
 
@@ -82,14 +110,13 @@ class ItemSearchDetails extends React.Component {
 
     const combinedData = this._processedData()
     const data = combinedData.processedData;
-    const listData = combinedData.listData;
+    const tableData = combinedData.tableData;
     const dataLen = Object.keys(data).length;
-    // const tablerowdata = [1,2,3,4];
     return (
       <div>
         <div className="gor-modal-content pps-close">
           <div className='gor-modal-head'>
-            <div className='gor-usr-add'>{"Search item task"}
+            <div className='gor-usr-add'>{"Search item task - " + this.props.itemSearchId}
 
             </div>
             <span className="close" onClick={this.props.removeModal}>×</span>
@@ -112,13 +139,13 @@ class ItemSearchDetails extends React.Component {
                 <div className="table-container table-bordered table-itemsearch table-item-search-details">
                   <div className="table-head">
                     <div className="table-head-cell" >
-                      <p>{listData.length + " SKUs in this item search task"}</p>
+                      <p>{tableData.length + " SKUs in this item search task"}</p>
                     </div>
                   </div>
-                  {listData && listData.length ? listData.map(function (row, idx) {
+                  {tableData && tableData.length ? tableData.map(function (row, idx) {
                     return (
 
-                      <GTableRow key={row.id} index={idx} data={listData} >
+                      <GTableRow key={row.id} index={idx} data={tableData} >
 
                         <div className="table-cell" >
                           <DotSeparatorContent header={row.skuHeader} subHeader={null} separator={<div className="dotImage"></div>} />
