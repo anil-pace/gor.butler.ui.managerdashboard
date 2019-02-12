@@ -166,9 +166,8 @@ class ItemSearchDetails extends React.Component {
                           <DotSeparatorContent header={row.skuHeader} subHeader={null} separator={<div className="dotImage"></div>} />
                         </div>
                         <div className="table-cell" >
-                          <DotSeparatorContent header={row.pdfaHeader} subHeader={row.pdfaSubHeader} separator={<div className="dotImage"></div>} />
+                          {"Operator: " + row.operator}
                         </div>
-
                         <div className="table-cell" >
                           {"Slot: " + row.slot}
                         </div>
