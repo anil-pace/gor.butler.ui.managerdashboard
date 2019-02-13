@@ -351,22 +351,24 @@ class ItemSearch extends React.Component {
     }
     return processedData;
   }
-  _handleActions(evt, action) {
+  _handleActions(index, evt, action) {
     var value = evt.target.value;
     if (value) {
       if (value === 'view_details') {
-        this._viewSearchDetails(action);
+        this._viewSearchDetails(index, action);
       }
     }
   }
-  _viewSearchDetails(action) {
+  _viewSearchDetails(index, action) {
+    var itemSearchId = this.state.data[index].externalServiceRequestId;
     modal.add(ItemSearchDetails, {
       title: '',
       size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
       searchId: action,
-      timeOffset: this.props.timeOffset
+      timeOffset: this.props.timeOffset,
+      itemSearchId: itemSearchId
     });
   }
   render() {
@@ -518,7 +520,7 @@ class ItemSearch extends React.Component {
                                     style={{ right: 0 }}
                                     displayId={row.header[0]}
                                     id={row.header[0]}
-                                    clickOptionBack={_this._handleActions}
+                                    clickOptionBack={_this._handleActions.bind(this, idx)}
                                     data={actionOptions}
                                   >
                                     <div className='embeddedImage' />
