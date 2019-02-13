@@ -5695,7 +5695,7 @@ msgstr ""
 
         #: order.setpriority.generateSuccess
         msgctxt "order.setpriority.generateSuccess"
-        msgid "Order Priority has been changed"
+        msgid "Change of Order Priority has been triggered"
         msgstr ""
 
         #: order.setpriority.generateFailure

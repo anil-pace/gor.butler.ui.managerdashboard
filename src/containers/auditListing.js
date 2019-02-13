@@ -2,10 +2,7 @@ import React from 'react';
 import Spinner from '../components/spinner/Spinner';
 import { connect } from 'react-redux';
 import AuditListingTab from './auditListingTab';
-import {
-  REQUEST_REPORT_SUCCESS,
-  REQUEST_REPORT_FAILURE
-} from './../constants/messageConstants';
+import { REQUEST_REPORT_SUCCESS } from './../constants/messageConstants';
 
 import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
 import AuditStart from '../containers/auditTab/auditStart';
@@ -13,25 +10,13 @@ import ActionDropDown from '../components/actionDropDown/actionDropDown';
 import { graphql, withApollo, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import {
-  GET,
   PUT,
   APP_JSON,
-  LOCATION,
   SPECIFIC_LOCATION_ID,
   SPECIFIC_SKU_ID,
-  AUDIT_TYPE,
-  SKU,
-  AUDIT_STATUS,
-  sortAuditHead,
-  sortOrder,
   POST,
   START_AUDIT_TASK,
-  AUDIT_CREATOR_NAME,
   ALL,
-  FILTER_PPS_ID,
-  AUDIT_START_TIME,
-  AUDIT_END_TIME,
-  AUDIT_CREATEDBY,
   ANY,
   WS_ONSEND,
   CANCEL_AUDIT,
@@ -39,8 +24,7 @@ import {
   SYSTEM_GENERATED
 } from '../constants/frontEndConstants';
 import { getDaysDiff } from '../utilities/getDaysDiff';
-import { addDateOffSet } from '../utilities/processDate';
-import GorPaginateV2 from '../components/gorPaginate/gorPaginateV2';
+
 import { hashHistory } from 'react-router';
 import {
   updateSubscriptionPacket,
@@ -54,14 +38,13 @@ import { modal } from 'react-redux-modal';
 import FilterSummary from './../components/tableFilter/filterSummary';
 
 import {
-  resetForm,
   notifyfeedback,
   notifySuccess,
   notifyFail
 } from '../actions/validationActions';
 import { setNotification } from '../actions/notificationAction';
 import { AuditParse } from '../utilities/auditResponseParser';
-import { ShowError } from '../utilities/ErrorResponseParser';
+
 import {
   auditClientData,
   auditNeedRefreshFlag,
@@ -278,7 +261,6 @@ class AuditTab extends React.Component {
         }
       })
       .then(result => {
-        console.log(result);
         this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
       });
   }
@@ -504,7 +486,7 @@ class AuditTab extends React.Component {
       }
     });
     this.props.filterApplied(false);
-    hashHistory.push({ pathname: '/auditlisting', query: {} });
+    hashHistory.push({ pathname: '/audit/auditlisting', query: {} });
   }
 
   _cancelAudit(auditId) {
