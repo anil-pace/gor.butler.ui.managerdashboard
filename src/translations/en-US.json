@@ -7784,7 +7784,7 @@
   {
     "id": "order.setpriority.generateSuccess",
     "description": "set order priority successfully",
-    "defaultMessage": "Order Priority has been changed",
+    "defaultMessage": "Change of Order Priority has been triggered",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {

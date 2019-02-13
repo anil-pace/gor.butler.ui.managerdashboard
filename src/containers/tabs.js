@@ -43,7 +43,7 @@ class Tabs extends React.Component{
         this.props.setFireHazrdFlag(false);      
   }
   _redirectAudit(){
-    hashHistory.push({pathname: "/auditlisting"})
+    hashHistory.push({pathname: "/audit/auditlisting"})
   }
 
 

@@ -44,14 +44,22 @@ class OrderFilter extends React.Component {
     super(props);
 
     this.state = {
-      tokenSelected: { 'ORDER TAGS': [ANY], STATUS: [ANY], 'ORDER_PRIORITY': [ANY] },
+      tokenSelected: {
+        'ORDER TAGS': [ANY],
+        STATUS: [ANY],
+        ORDER_PRIORITY: [ANY]
+      },
       searchQuery: {
         'FROM DATE': null,
         'FROM TIME': null,
         'TO DATE': null,
         'TO TIME': null
       },
-      defaultToken: { 'ORDER TAGS': [ANY], STATUS: [ANY], 'ORDER_PRIORITY': [ANY] }
+      defaultToken: {
+        'ORDER TAGS': [ANY],
+        STATUS: [ANY],
+        ORDER_PRIORITY: [ANY]
+      }
     };
 
     this._applyFilter = this._applyFilter.bind(this);
@@ -97,7 +105,8 @@ class OrderFilter extends React.Component {
             'FROM TIME': timeFrom,
             'TO DATE': dtTo,
             'TO TIME': timeTo
-          }
+          },
+          filter_applied: true
         },
         () => {
           this._applyFilter(true);
@@ -186,10 +195,7 @@ class OrderFilter extends React.Component {
       {
         value: HIGH_PRIORITY,
         label: (
-          <FormattedMessage
-            id='order.priority.high'
-            defaultMessage='High'
-          />
+          <FormattedMessage id='order.priority.high' defaultMessage='High' />
         )
       },
       {
@@ -203,12 +209,7 @@ class OrderFilter extends React.Component {
       },
       {
         value: LOW_PRIORITY,
-        label: (
-          <FormattedMessage
-            id='order.priority.low'
-            defaultMessage='Low'
-          />
-        )
+        label: <FormattedMessage id='order.priority.low' defaultMessage='Low' />
       },
       {
         value: CRITICAL_PRIORITY,
@@ -281,7 +282,6 @@ class OrderFilter extends React.Component {
         )
       }
     ];
-
 
     var selectedToken = this.state.tokenSelected;
     var column1 = (
@@ -433,6 +433,7 @@ class OrderFilter extends React.Component {
       _query.priority = filterState.tokenSelected[ORDER_PRIORITY];
     }
 
+    _query.filter_applied = true;
     hashHistory.push({ pathname: '/orders', query: _query });
     // Since we do not want to display the Filtered status on the initial load.
     // hence the param doNotShowFilterStatus is used
@@ -450,7 +451,7 @@ class OrderFilter extends React.Component {
       tokenSelected: {
         'ORDER TAGS': [ANY],
         STATUS: [ANY],
-        'PRIORITY': [ANY]
+        PRIORITY: [ANY]
       },
       searchQuery: { ORDER_ID: '', PPS_ID: '' }
     });
@@ -495,8 +496,8 @@ class OrderFilter extends React.Component {
                 />
               </div>
             ) : (
-                ''
-              )}
+              ''
+            )}
           </div>
 
           <div className='gor-filter-body'>
@@ -568,18 +569,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps = function(dispatch) {
   return {
-    showTableFilter: function (data) {
+    showTableFilter: function(data) {
       dispatch(showTableFilter(data));
     },
-    filterApplied: function (data) {
+    filterApplied: function(data) {
       dispatch(filterApplied(data));
     },
-    orderfilterState: function (data) {
+    orderfilterState: function(data) {
       dispatch(orderfilterState(data));
     },
-    toggleOrderFilter: function (data) {
+    toggleOrderFilter: function(data) {
       dispatch(toggleOrderFilter(data));
     }
   };
