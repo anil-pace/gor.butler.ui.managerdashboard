@@ -538,6 +538,7 @@ export const GOR_PERIPHERAL_OFFLINE = "offline";
 export const GOR_ON_STATUS = "open";
 export const GOR_CONNECTED_STATUS = "connected";
 export const GOR_MANUAL_MODE = "manual";
+export const GOR_AUTO_MODE = "auto";
 export const GOR_COMPLETED_STATUS = "Completed";
 export const GOR_IN_PROGRESS_STATUS = "In Progress";
 export const GOR_BREACHED_LINES = "gor-breached-lines";
