@@ -28,7 +28,10 @@ class ItemSearchFilter extends React.Component {
     super(props);
     this.state = {
       tokenSelected: { STATUS: [ALL] },
-      searchQuery: {},
+      searchQuery: {
+        'FROM DATE': null,
+        'TO DATE': null
+      },
       textboxStatus: null,
       defaultToken: { STATUS: [ALL] }
     };
@@ -51,6 +54,39 @@ class ItemSearchFilter extends React.Component {
         this.setState(nextProps.itemSearchFilterState);
       }
     }
+    if (
+      nextProps.timeOffset !== this.props.timeOffset &&
+      this.props.timeOffset
+    ) {
+      let dtFrom = moment()
+        .tz(nextProps.timeOffset)
+        .startOf('day')
+        .format('YYYY-MM-DD');
+      let dtTo = moment()
+        .tz(nextProps.timeOffset)
+        .endOf('day')
+        .format('YYYY-MM-DD');
+      // let timeFrom = moment()
+      //   .tz(nextProps.timeOffset)
+      //   .startOf('day')
+      //   .format('HH:mm:ss');
+      // let timeTo = moment()
+      //   .tz(nextProps.timeOffset)
+      //   .endOf('day')
+      //   .format('HH:mm:ss');
+      this.setState(
+        {
+          searchQuery: {
+            'FROM DATE': dtFrom,
+            'TO DATE': dtTo
+          },
+          //filter_applied: true
+        },
+        () => {
+          this._applyFilter(true);
+        }
+      );
+    }
   }
 
   _processItemSearchSearchField() {
@@ -65,7 +101,7 @@ class ItemSearchFilter extends React.Component {
         )
       },
       {
-        value: FROM_DATE,
+        value: 'FROM DATE',
         by2value: true,
         type: 'date',
         label: (
@@ -76,7 +112,7 @@ class ItemSearchFilter extends React.Component {
         )
       },
       {
-        value: TO_DATE,
+        value: 'TO DATE',
         by2value: true,
         type: 'date',
         label: (
@@ -217,11 +253,11 @@ class ItemSearchFilter extends React.Component {
       _query.taskId = filterState.searchQuery[ITEM_SEARCH_TASK_ID];
     }
 
-    if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
-      _query.fromDate = filterState.searchQuery[FROM_DATE];
+    if (filterState.searchQuery && filterState.searchQuery['FROM DATE']) {
+      _query.fromDate = filterState.searchQuery['FROM DATE'];
     }
-    if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
-      _query.toDate = filterState.searchQuery[TO_DATE];
+    if (filterState.searchQuery && filterState.searchQuery['TO DATE']) {
+      _query.toDate = filterState.searchQuery['TO DATE'];
     }
 
     hashHistory.push({ pathname: 'audit/itemsearch', query: _query });
