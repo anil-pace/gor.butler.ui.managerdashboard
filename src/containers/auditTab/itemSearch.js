@@ -72,6 +72,14 @@ const messages = defineMessages({
   manualAssignpps: {
     id: 'itemSearch.label.manualassignpps',
     defaultMessage: 'Manually-Assign PPS'
+  },
+  singleSKUtype: {
+    id: 'itemSearch.label.singleSKUtype',
+    defaultMessage: 'Single SKU'
+  },
+  multipleSKUtype: {
+    id: 'itemSearch.label.multipleSKUtype',
+    defaultMessage: 'Multiple SKU'
   }
 });
 
@@ -312,6 +320,8 @@ class ItemSearch extends React.Component {
     let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
     let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
     let failedItemSearch = this.context.intl.formatMessage(messages.itemSearchFailedStatus);
+    let singleSKUtype = this.context.intl.formatMessage(messages.singleSKUtype);
+    let multipleSKUtype = this.context.intl.formatMessage(messages.multipleSKUtype);
 
     var processedData = [];
     if (this.state.data && this.state.data.length) {
@@ -320,8 +330,7 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
-        let productsLength = containers.products.length;
-        let typeOfSearch = (productsLength === 1 ? "Single SKU" : "Multiple SKU");
+        let typeOfSKU = (datum && datum.expectations.containers.length === 1 ? singleSKUtype : multipleSKUtype);
 
         let productAttributes = containers
           ? containers.products[0].productAttributes
@@ -330,12 +339,18 @@ class ItemSearch extends React.Component {
           ? productAttributes.pdfa_values
           : null;
         let sku = pdfa_values ? pdfa_values.product_sku : null;
-        tuple.header = [datum.externalServiceRequestId, sku];
+
+        if (typeOfSKU === multipleSKUtype) { // dont show SKU ID in this case
+          tuple.header = [datum.externalServiceRequestId];
+        }
+        else {
+          tuple.header = [datum.externalServiceRequestId, sku];
+        }
         tuple.subHeader = [
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
-          typeOfSearch,
+          typeOfSKU,
           moment(containers.products[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
         ];
         if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
