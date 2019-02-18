@@ -120,11 +120,11 @@ class ItemSearchFilter extends React.Component {
         )
       },
       {
-        value: PROCESSED_STATUS,
+        value: CREATED_STATUS,
         label: (
           <FormattedMessage
-            id='itemSearch.token2.processed'
-            defaultMessage='Processed'
+            id='itemSearch.token2.created'
+            defaultMessage='Created'
           />
         )
       },
@@ -138,11 +138,11 @@ class ItemSearchFilter extends React.Component {
         )
       },
       {
-        value: CREATED_STATUS,
+        value: PROCESSED_STATUS,
         label: (
           <FormattedMessage
-            id='itemSearch.token2.created'
-            defaultMessage='Created'
+            id='itemSearch.token2.processed'
+            defaultMessage='Processed'
           />
         )
       },
