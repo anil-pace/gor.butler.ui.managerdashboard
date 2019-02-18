@@ -495,6 +495,8 @@ export const LEGEND_DEFAULT = LEGEND_RECT;
 export const ASC = "ASC";
 export const DESC = "DESC";
 export const CREATED_ON = "createdOn";
+export const SINGLE_SKU = "Single SKU";
+export const MULTIPLE_SKU = "Multiple SKU";
 
 export const EN = 'en';
 export const JA = 'ja';

@@ -39,7 +39,9 @@ import {
   ALL,
   WS_ONSEND,
   DESC,
-  CREATED_ON
+  CREATED_ON,
+  SINGLE_SKU,
+  MULTIPLE_SKU
 } from '../../constants/frontEndConstants';
 
 import moment from 'moment';
@@ -320,8 +322,7 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
-        let productsLength = containers.products.length;
-        let typeOfSearch = (productsLength === 1 ? "Single SKU" : "Multiple SKU");
+        let typeOfSKU = (datum && datum.expectations.containers.length === 1 ? SINGLE_SKU : MULTIPLE_SKU);
 
         let productAttributes = containers
           ? containers.products[0].productAttributes
@@ -330,12 +331,18 @@ class ItemSearch extends React.Component {
           ? productAttributes.pdfa_values
           : null;
         let sku = pdfa_values ? pdfa_values.product_sku : null;
-        tuple.header = [datum.externalServiceRequestId, sku];
+
+        if (typeOfSKU === MULTIPLE_SKU) { // dont show SKU ID in this case
+          tuple.header = [datum.externalServiceRequestId];
+        }
+        else {
+          tuple.header = [datum.externalServiceRequestId, sku];
+        }
         tuple.subHeader = [
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
-          typeOfSearch,
+          typeOfSKU,
           moment(containers.products[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
         ];
         if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
