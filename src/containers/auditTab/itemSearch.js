@@ -54,16 +54,16 @@ const actionOptions = [
 
 const messages = defineMessages({
   itemSearchCreatedStatus: {
-    id: 'itemSearch.notYetStarted.status',
-    defaultMessage: 'Not yet started'
+    id: 'itemSearch.created.status',
+    defaultMessage: 'Created'
   },
   itemSearchProcessingStatus: {
     id: 'itemSearch.processing.status',
-    defaultMessage: 'Search in progress'
+    defaultMessage: 'Processing'
   },
   itemSearchProcessedStatus: {
-    id: 'itemSearch.completed.status',
-    defaultMessage: 'Completed'
+    id: 'itemSearch.processed.status',
+    defaultMessage: 'Processed'
   },
   itemSearchFailedStatus: {
     id: 'itemSearch.failed.status',
@@ -360,7 +360,7 @@ class ItemSearch extends React.Component {
 
         tuple.status = datum.status;
         tuple.displayStartButton =
-          datum.status.toUpperCase() === "NOT YET STARTED" ? true : false;
+          datum.status.toUpperCase() === "CREATED" ? true : false;
         processedData.push(tuple);
       }
     }

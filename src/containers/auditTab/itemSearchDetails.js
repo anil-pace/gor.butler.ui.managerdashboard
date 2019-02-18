@@ -128,6 +128,22 @@ class ItemSearchDetails extends React.Component {
     const tableData = combinedData.tableData;
     const dataLen = Object.keys(data).length;
 
+    let operatorLabel = (
+      <FormattedMessage
+        id="itemSearch.operatorName.operatorLabel"
+        description="Operator"
+        defaultMessage="Operator: "
+      />
+    );
+
+    let slotIdLabel = (
+      <FormattedMessage
+        id="itemSearch.slotId.slotIdLabel"
+        description="Slot id"
+        defaultMessage="Slot: "
+      />
+    );
+
     return (
       <div>
         <div className="gor-modal-content pps-close">
@@ -166,11 +182,12 @@ class ItemSearchDetails extends React.Component {
                           <DotSeparatorContent header={row.skuHeader} subHeader={null} separator={<div className="dotImage"></div>} />
                         </div>
                         <div className="table-cell" >
-                          <DotSeparatorContent header={row.pdfaHeader} subHeader={row.pdfaSubHeader} separator={<div className="dotImage"></div>} />
+                          {operatorLabel}
+                          {row.operator}
                         </div>
-
                         <div className="table-cell" >
-                          {"Slot: " + row.slot}
+                          {slotIdLabel}
+                          {row.slot}
                         </div>
                         <div className="table-cell" >
                           <span>{row.itemStatus}</span>
