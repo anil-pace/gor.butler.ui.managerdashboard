@@ -254,6 +254,45 @@ class ItemSearch extends React.Component {
       query = this.props.location.query;
       query.scrolling = true;
     }
+
+    let timeOffset = null;
+    if (this.props.timeOffset) {
+      timeOffset = this.props.timeOffset;
+    } else {
+      timeOffset = '';
+    }
+    if (!query.fromDate) {
+      query.fromDate = moment
+        .tz(timeOffset)
+        .startOf('day')
+        .format('YYYY-MM-DD');
+    }
+    if (!query.toDate) {
+      query.toDate = moment
+        .tz(timeOffset)
+        .endOf('day')
+        .format('YYYY-MM-DD');
+    }
+    // if (!query.fromTime) {
+    //   query.fromTime = moment
+    //     .tz(timeOffset)
+    //     .startOf('day')
+    //     .format('HH:mm:ss');
+    // }
+    // if (!query.toTime) {
+    //   query.toTime = moment
+    //     .tz(timeOffset)
+    //     .endOf('day')
+    //     .format('HH:mm:ss');
+    // }
+
+    let startDateFilter = moment
+      .tz(query.fromDate + ' ' + query.fromTime, timeOffset)
+      .toISOString();
+    let endDateFilter = moment
+      .tz(query.toDate + ' ' + query.toTime, timeOffset)
+      .toISOString();
+
     if (query)
       this.props.itemSearchfilterState({
         tokenSelected: {
@@ -267,8 +306,8 @@ class ItemSearch extends React.Component {
         searchQuery: {
           __typename: 'ItemSearchFilterSearchQuery',
           ITEM_SEARCH_TASK_ID: query.taskId || '',
-          FROM_DATE: query.fromDate || '',
-          TO_DATE: query.toDate || ''
+          FROM_DATE: startDateFilter || '',
+          TO_DATE: endDateFilter || ''
         },
         defaultToken: {
           __typename: 'ItemSearchFilterDefaultToken',
