@@ -217,7 +217,7 @@ class ItemSearch extends React.Component {
     }
   }
 
-  _requestItemSearchList(taskId, status) {
+  _requestItemSearchList(taskId, status, startDateFilter, endDateFilter) {
     const _this = this;
     let { page } = _this.state;
     if (taskId || status) {
@@ -229,7 +229,9 @@ class ItemSearch extends React.Component {
               "externalServiceRequestId": taskId,
               "status": status,
               "type": "SEARCH",
-              "searchBy": "filter"
+              "searchBy": "filter",
+              "startDate": startDateFilter,
+              "endDate": endDateFilter
             }
           },
           fetchPolicy: 'network-only'
@@ -273,24 +275,13 @@ class ItemSearch extends React.Component {
         .endOf('day')
         .format('YYYY-MM-DD');
     }
-    // if (!query.fromTime) {
-    //   query.fromTime = moment
-    //     .tz(timeOffset)
-    //     .startOf('day')
-    //     .format('HH:mm:ss');
-    // }
-    // if (!query.toTime) {
-    //   query.toTime = moment
-    //     .tz(timeOffset)
-    //     .endOf('day')
-    //     .format('HH:mm:ss');
-    // }
+
 
     let startDateFilter = moment
-      .tz(query.fromDate + ' ' + query.fromTime, timeOffset)
+      .tz(query.fromDate, timeOffset)
       .toISOString();
     let endDateFilter = moment
-      .tz(query.toDate + ' ' + query.toTime, timeOffset)
+      .tz(query.toDate, timeOffset)
       .toISOString();
 
     if (query)
@@ -314,7 +305,7 @@ class ItemSearch extends React.Component {
           STATUS: [ALL]
         }
       });
-    _this._requestItemSearchList(query.taskId, query.status);
+    _this._requestItemSearchList(query.taskId, query.status, startDateFilter, endDateFilter);
 
   }
 
@@ -606,7 +597,6 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
         page_size: 10,
         order: DESC,
         sort: CREATED_ON
-
       }
     },
     fetchPolicy: 'network-only'
