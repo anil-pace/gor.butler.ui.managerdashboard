@@ -39,9 +39,7 @@ import {
   ALL,
   WS_ONSEND,
   DESC,
-  CREATED_ON,
-  SINGLE_SKU,
-  MULTIPLE_SKU
+  CREATED_ON
 } from '../../constants/frontEndConstants';
 
 import moment from 'moment';
@@ -74,6 +72,14 @@ const messages = defineMessages({
   manualAssignpps: {
     id: 'itemSearch.label.manualassignpps',
     defaultMessage: 'Manually-Assign PPS'
+  },
+  singleSKUtype: {
+    id: 'itemSearch.label.singleSKUtype',
+    defaultMessage: 'Single SKU'
+  },
+  multipleSKUtype: {
+    id: 'itemSearch.label.multipleSKUtype',
+    defaultMessage: 'Multiple SKU'
   }
 });
 
@@ -314,6 +320,8 @@ class ItemSearch extends React.Component {
     let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
     let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
     let failedItemSearch = this.context.intl.formatMessage(messages.itemSearchFailedStatus);
+    let singleSKUtype = this.context.intl.formatMessage(messages.singleSKUtype);
+    let multipleSKUtype = this.context.intl.formatMessage(messages.multipleSKUtype);
 
     var processedData = [];
     if (this.state.data && this.state.data.length) {
@@ -322,7 +330,7 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
-        let typeOfSKU = (datum && datum.expectations.containers.length === 1 ? SINGLE_SKU : MULTIPLE_SKU);
+        let typeOfSKU = (datum && datum.expectations.containers.length === 1 ? singleSKUtype : multipleSKUtype);
 
         let productAttributes = containers
           ? containers.products[0].productAttributes
@@ -332,7 +340,7 @@ class ItemSearch extends React.Component {
           : null;
         let sku = pdfa_values ? pdfa_values.product_sku : null;
 
-        if (typeOfSKU === MULTIPLE_SKU) { // dont show SKU ID in this case
+        if (typeOfSKU === multipleSKUtype) { // dont show SKU ID in this case
           tuple.header = [datum.externalServiceRequestId];
         }
         else {
