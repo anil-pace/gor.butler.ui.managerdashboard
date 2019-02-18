@@ -722,9 +722,9 @@ class CreateAudit extends React.Component {
     }
   }
   _updateInput(event, id) {
-    var input = event.target.value.trim(),
+    var input = event.target.value,
       selectionStart = event.target.selectionStart,
-      inputList = input.split(/[\s,;\t\n]+/),
+      inputList = input.split(/[;\t\n]+/),
       processedList = [],
       activeTabIndex = this.state.activeTabIndex,
       stateInputList = JSON.parse(
@@ -926,7 +926,7 @@ class CreateAudit extends React.Component {
       var reader = new FileReader();
 
       reader.onload = function() {
-        let data = reader.result.trim().split(/[\s,;\t\n]+/);
+        let data = reader.result.trim().split(/[;\t\n]+/);
         let processedList = [];
         for (let i = 0, len = data.length; i < len; i++) {
           let tuple = {};
