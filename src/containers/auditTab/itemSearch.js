@@ -5,10 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GTable from '../../components/gor-table-component';
-import {
-  GTableBody,
-  GTableRow
-} from '../../components/gor-table-component';
+import { GTableBody, GTableRow } from '../../components/gor-table-component';
 import { hashHistory } from 'react-router';
 import { FormattedMessage, defineMessages } from 'react-intl';
 import Spinner from '../../components/spinner/Spinner';
@@ -21,13 +18,9 @@ import ItemSearchFilter from './itemSearchFilter';
 import ItemSearchStart from './itemSearchStart';
 
 import gql from 'graphql-tag';
-import {
-  itemSearchClientData,
-} from './query/clientQuery';
+import { itemSearchClientData } from './query/clientQuery';
 
-import {
-  setWsAction
-} from './../../actions/socketActions';
+import { setWsAction } from './../../actions/socketActions';
 import { wsOverviewData } from './../../constants/initData.js';
 import {
   ITEM_SEARCH_QUERY,
@@ -127,7 +120,7 @@ class ItemSearch extends React.Component {
       nextProps.location.query &&
       (!this.state.query ||
         JSON.stringify(nextProps.location.query) !==
-        JSON.stringify(this.state.query))
+          JSON.stringify(this.state.query))
     ) {
       this.setState({ query: nextProps.location.query });
       this._refreshList(nextProps.location.query);
@@ -147,7 +140,7 @@ class ItemSearch extends React.Component {
       size: 'large',
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-      itemSearchID: itemSearchId,
+      itemSearchID: itemSearchId
 
       //.. all what you put in here you will get access in the modal props ;),
     });
@@ -164,7 +157,9 @@ class ItemSearch extends React.Component {
             externalServiceRequestId: this.state.data[index]
               .externalServiceRequestId,
             attributes: {
-              ppsIdList: [parseInt(this.state.data[index].attributes.ppsIdList, 10)]
+              ppsIdList: [
+                parseInt(this.state.data[index].attributes.ppsIdList, 10)
+              ]
             }
           }
         },
@@ -234,10 +229,10 @@ class ItemSearch extends React.Component {
           query: ITEM_SEARCH_DETAILS_QUERY,
           variables: {
             input: {
-              "externalServiceRequestId": taskId,
-              "status": status,
-              "type": "SEARCH",
-              "searchBy": "filter"
+              externalServiceRequestId: taskId,
+              status: status,
+              type: 'SEARCH',
+              searchBy: 'filter'
             }
           },
           fetchPolicy: 'network-only'
@@ -284,12 +279,7 @@ class ItemSearch extends React.Component {
         }
       });
     _this._requestItemSearchList(query.taskId, query.status);
-
   }
-
-
-
-
 
   /**
    *
@@ -316,10 +306,18 @@ class ItemSearch extends React.Component {
   }
   _processServerData(data, nProps) {
     const { timeOffset } = this.props;
-    let notYetStartedItemSearch = this.context.intl.formatMessage(messages.itemSearchCreatedStatus);
-    let searchInProgressItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessingStatus);
-    let completedItemSearch = this.context.intl.formatMessage(messages.itemSearchProcessedStatus);
-    let failedItemSearch = this.context.intl.formatMessage(messages.itemSearchFailedStatus);
+    let notYetStartedItemSearch = this.context.intl.formatMessage(
+      messages.itemSearchCreatedStatus
+    );
+    let searchInProgressItemSearch = this.context.intl.formatMessage(
+      messages.itemSearchProcessingStatus
+    );
+    let completedItemSearch = this.context.intl.formatMessage(
+      messages.itemSearchProcessedStatus
+    );
+    let failedItemSearch = this.context.intl.formatMessage(
+      messages.itemSearchFailedStatus
+    );
     let singleSKUtype = this.context.intl.formatMessage(messages.singleSKUtype);
     let multiSKUtype = this.context.intl.formatMessage(messages.multiSKUtype);
 
@@ -330,7 +328,10 @@ class ItemSearch extends React.Component {
         let tuple = {};
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
-        let typeOfSKU = (datum && datum.expectations.containers.length === 1 ? singleSKUtype : multiSKUtype);
+        let typeOfSKU =
+          datum && datum.expectations.containers.length === 1
+            ? singleSKUtype
+            : multiSKUtype;
 
         let productAttributes = containers
           ? containers.products[0].productAttributes
@@ -340,10 +341,10 @@ class ItemSearch extends React.Component {
           : null;
         let sku = pdfa_values ? pdfa_values.product_sku : null;
 
-        if (typeOfSKU === multiSKUtype) { // dont show SKU ID in this case
+        if (typeOfSKU === multiSKUtype) {
+          // dont show SKU ID in this case
           tuple.header = [datum.externalServiceRequestId];
-        }
-        else {
+        } else {
           tuple.header = [datum.externalServiceRequestId, sku];
         }
         tuple.subHeader = [
@@ -351,16 +352,22 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSKU,
-          moment(containers.products[0].updatedOn).tz(timeOffset).format('DD MMM,YYYY') || "--"
+          moment(containers.products[0].updatedOn)
+            .tz(timeOffset)
+            .format('DD MMM,YYYY') || '--'
         ];
-        if (datum.status == 'CREATED') { datum.status = notYetStartedItemSearch; }
-        else if (datum.status == 'PROCESSING') { datum.status = searchInProgressItemSearch; }
-        else if (datum.status == 'PROCESSED') { datum.status = completedItemSearch; }
-        else if (datum.status == 'FAILED') { datum.status = failedItemSearch; }
+        if (datum.status == 'CREATED') {
+          tuple.status = notYetStartedItemSearch;
+        } else if (datum.status == 'PROCESSING') {
+          tuple.status = searchInProgressItemSearch;
+        } else if (datum.status == 'PROCESSED') {
+          tuple.status = completedItemSearch;
+        } else if (datum.status == 'FAILED') {
+          tuple.status = failedItemSearch;
+        }
 
-        tuple.status = datum.status;
         tuple.displayStartButton =
-          datum.status.toUpperCase() === "CREATED" ? true : false;
+          datum.status.toUpperCase() === 'CREATED' ? true : false;
         processedData.push(tuple);
       }
     }
@@ -388,7 +395,9 @@ class ItemSearch extends React.Component {
   }
   render() {
     var filterHeight = screen.height - 190;
-    let manualAssignpps = this.context.intl.formatMessage(messages.manualAssignpps);
+    let manualAssignpps = this.context.intl.formatMessage(
+      messages.manualAssignpps
+    );
     const _this = this;
     const tablerowdata = _this._processServerData();
     let toolbar = (
@@ -481,82 +490,89 @@ class ItemSearch extends React.Component {
                     onScrollHandler={_this._onScrollHandler}
                   >
                     {tablerowdata
-                      ? tablerowdata.map(function (row, idx) {
-                        return (
-                          <GTableRow
-                            key={row.header[0]}
-                            index={idx}
-                            data={tablerowdata}
-                          >
-                            <div className='table-cell'>
-
-                            </div>
-                            <div className='table-cell'>
-                              <span>
-                                <i className='systemGenerated' />
-                              </span>
-                              <DotSeparatorContent
-                                header={row.header}
-                                subHeader={row.subHeader}
-                                separator={<div className='dotImage' />}
-                              />
-                            </div>
-                            <div className='table-cell'>{row.status}</div>
-                            <div className='table-cell'>
-                              <div className='row inner'>
-                                {' '}
-                                <div className='table-cell'>
-
-                                  {row.displayStartButton && (
+                      ? tablerowdata.map(function(row, idx) {
+                          return (
+                            <GTableRow
+                              key={row.header[0]}
+                              index={idx}
+                              data={tablerowdata}
+                            >
+                              <div className='table-cell' />
+                              <div className='table-cell'>
+                                <span>
+                                  <i className='systemGenerated' />
+                                </span>
+                                <DotSeparatorContent
+                                  header={row.header}
+                                  subHeader={row.subHeader}
+                                  separator={<div className='dotImage' />}
+                                />
+                              </div>
+                              <div className='table-cell'>{row.status}</div>
+                              <div className='table-cell'>
+                                <div className='row inner'>
+                                  {' '}
+                                  <div className='table-cell'>
+                                    {row.displayStartButton && (
+                                      <ActionDropDown
+                                        style={{
+                                          width: '115px',
+                                          display: 'inline',
+                                          float: 'left',
+                                          'padding-left': '25px'
+                                        }}
+                                        clickOptionBack={_this._handelClick.bind(
+                                          this,
+                                          idx
+                                        )}
+                                        data={[
+                                          {
+                                            name: manualAssignpps,
+                                            value: 'mannualassignpps'
+                                          }
+                                        ]}
+                                      >
+                                        <button className='gor-add-btn gor-listing-button'>
+                                          <FormattedMessage
+                                            id='itemSearch.start.itemSearch'
+                                            description='button label for start'
+                                            defaultMessage='START'
+                                          />
+                                          <div className='got-add-notch' />
+                                        </button>
+                                      </ActionDropDown>
+                                    )}
+                                  </div>
+                                  <div className='table-cell'>
                                     <ActionDropDown
-                                      style={{
-                                        width: '115px',
-                                        display: 'inline',
-                                        float: 'left',
-                                        'padding-left': '25px'
-                                      }}
-                                      clickOptionBack={_this._handelClick.bind(this, idx)}
-                                      data={[{ name: manualAssignpps, value: 'mannualassignpps' }]}
+                                      style={{ right: 0 }}
+                                      displayId={row.header[0]}
+                                      id={row.header[0]}
+                                      clickOptionBack={_this._handleActions.bind(
+                                        this,
+                                        idx
+                                      )}
+                                      data={actionOptions}
                                     >
-                                      <button className='gor-add-btn gor-listing-button'>
-                                        <FormattedMessage
-                                          id='itemSearch.start.itemSearch'
-                                          description='button label for start'
-                                          defaultMessage='START'
-                                        />
-                                        <div className='got-add-notch' />
-                                      </button>
+                                      <div className='embeddedImage' />
                                     </ActionDropDown>
-                                  )}
-
-                                </div>
-                                <div className='table-cell'>
-                                  <ActionDropDown
-                                    style={{ right: 0 }}
-                                    displayId={row.header[0]}
-                                    id={row.header[0]}
-                                    clickOptionBack={_this._handleActions.bind(this, idx)}
-                                    data={actionOptions}
-                                  >
-                                    <div className='embeddedImage' />
-                                  </ActionDropDown>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </GTableRow>
-                        );
-                      })
+                            </GTableRow>
+                          );
+                        })
                       : ''}
                   </GTableBody>
                 ) : (
-                    <div className='gor-no-data'>
-                      <FormattedMessage
-                        id='itemSearch.notfound'
-                        defaultMessage='No Records Present'
-                        description='Item Search not found'
-                      />
-                    </div>
-                  )}
+                  <div className='gor-no-data'>
+                    <FormattedMessage
+                      id='itemSearch.notfound'
+                      defaultMessage='No Records Present'
+                      description='Item Search not found'
+                    />
+                  </div>
+                )}
               </GTable>
             </div>
           </div>
@@ -582,7 +598,6 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
         page_size: 10,
         order: DESC,
         sort: CREATED_ON
-
       }
     },
     fetchPolicy: 'network-only'
@@ -591,27 +606,26 @@ const withQuery = graphql(ITEM_SEARCH_QUERY, {
 
 const SET_VISIBILITY = gql`
   mutation setAuditFiler($filter: String!) {
-          setShowItemSearchFilter(filter: $filter) @client
-      }
-    `;
+    setShowItemSearchFilter(filter: $filter) @client
+  }
+`;
 
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
-          setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
-      }
-    `;
-
+    setItemSearchFilterApplied(isFilterApplied: $isFilterApplied) @client
+  }
+`;
 
 const SET_LIST_DATA = gql`
   mutation setListData($listData: String!) {
-          setAuditListData(listData: $listData) @client
-      }
-    `;
+    setAuditListData(listData: $listData) @client
+  }
+`;
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
-          setItemSearchFilterState(state: $state) @client
-      }
-    `;
+    setItemSearchFilterState(state: $state) @client
+  }
+`;
 
 const withClientData = graphql(itemSearchClientData, {
   props: data => ({
@@ -627,14 +641,14 @@ const withClientData = graphql(itemSearchClientData, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showItemSearchFilter: function (show) {
+    showItemSearchFilter: function(show) {
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function (applied) {
+    filterApplied: function(applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
@@ -642,20 +656,19 @@ const setFilterApplied = graphql(SET_FILTER_APPLIED, {
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    itemSearchfilterState: function (state) {
+    itemSearchfilterState: function(state) {
       mutate({ variables: { state: state } });
     }
   })
 });
 
-
 ItemSearch.contextTypes = {
   intl: React.PropTypes.object.isRequired
 };
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps = function(dispatch) {
   return {
-    initDataSentCall: function (data) {
+    initDataSentCall: function(data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     }
   };
