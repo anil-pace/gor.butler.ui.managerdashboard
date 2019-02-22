@@ -24,8 +24,7 @@ import { setWsAction } from './../../actions/socketActions';
 import { wsOverviewData } from './../../constants/initData.js';
 import {
   ITEM_SEARCH_QUERY,
-  ITEM_SEARCH_START_QUERY,
-  ITEM_SEARCH_DETAILS_QUERY
+  ITEM_SEARCH_START_QUERY
 } from './query/serverQuery';
 import FilterSummary from '../../components/tableFilter/filterSummary';
 import {
@@ -220,19 +219,24 @@ class ItemSearch extends React.Component {
     }
   }
 
-  _requestItemSearchList(taskId, status) {
+  _requestItemSearchList(taskId, status, createdOn, updatedOn) {
     const _this = this;
     let { page } = _this.state;
     if (taskId || status) {
       _this.props.client
         .query({
-          query: ITEM_SEARCH_DETAILS_QUERY,
+          query: ITEM_SEARCH_QUERY,
           variables: {
             input: {
               externalServiceRequestId: taskId,
-              status: status,
+              status,
+              createdOn,
+              updatedOn,
               type: 'SEARCH',
-              searchBy: 'filter'
+              page_size: 10,
+              page: ++page,
+              order: DESC,
+              sort: CREATED_ON
             }
           },
           fetchPolicy: 'network-only'
@@ -270,15 +274,20 @@ class ItemSearch extends React.Component {
         searchQuery: {
           __typename: 'ItemSearchFilterSearchQuery',
           ITEM_SEARCH_TASK_ID: query.taskId || '',
-          FROM_DATE: query.fromDate || '',
-          TO_DATE: query.toDate || ''
+          FROM_DATE: query.createdOn || '',
+          TO_DATE: query.updatedOn || ''
         },
         defaultToken: {
           __typename: 'ItemSearchFilterDefaultToken',
           STATUS: [ALL]
         }
       });
-    _this._requestItemSearchList(query.taskId, query.status);
+    _this._requestItemSearchList(
+      query.taskId,
+      query.status,
+      query.createdOn,
+      query.updatedOn
+    );
   }
 
   /**
@@ -302,7 +311,7 @@ class ItemSearch extends React.Component {
       }
     });
     this.props.filterApplied(false);
-    hashHistory.push({ pathname: '/itemsearch', query: {} });
+    hashHistory.push({ pathname: 'audit/itemsearch', query: {} });
   }
   _processServerData(data, nProps) {
     const { timeOffset } = this.props;
