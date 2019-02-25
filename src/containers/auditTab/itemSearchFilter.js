@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Filter from '../../components/tableFilter/filter';
-
+import moment from 'moment-timezone';
 import { connect } from 'react-redux';
 import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
 import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
@@ -46,7 +46,7 @@ class ItemSearchFilter extends React.Component {
       if (
         nextProps.itemSearchFilterState &&
         JSON.stringify(this.state) !==
-        JSON.stringify(nextProps.itemSearchFilterState)
+          JSON.stringify(nextProps.itemSearchFilterState)
       ) {
         this.setState(nextProps.itemSearchFilterState);
       }
@@ -155,7 +155,6 @@ class ItemSearchFilter extends React.Component {
           />
         )
       }
-
     ];
 
     var selectedToken = this.state.tokenSelected;
@@ -168,7 +167,6 @@ class ItemSearchFilter extends React.Component {
       />
     );
 
-
     var columnDetail = {
       column1token: column1
     };
@@ -176,12 +174,9 @@ class ItemSearchFilter extends React.Component {
   }
 
   _handelTokenClick(field, value, state) {
-
     this.setState({
       tokenSelected: handelTokenClick(field, value, state, this.state)
     });
-
-
   }
 
   _handleInputQuery(inputQuery, queryField) {
@@ -201,14 +196,12 @@ class ItemSearchFilter extends React.Component {
       this.props.setCurrentPageNumber(0);
     }
 
-
     if (
       filterState.tokenSelected['STATUS'] &&
       filterState.tokenSelected['STATUS'][0] !== ALL
     ) {
       _query.status = filterState.tokenSelected['STATUS'];
     }
-
 
     if (
       filterState.searchQuery &&
@@ -218,10 +211,18 @@ class ItemSearchFilter extends React.Component {
     }
 
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
-      _query.fromDate = filterState.searchQuery[FROM_DATE];
+      _query.createdOn = moment
+        .tz(filterState.searchQuery[FROM_DATE], this.props.timeOffset)
+        .startOf('day')
+        .utc()
+        .format();
     }
     if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
-      _query.toDate = filterState.searchQuery[TO_DATE];
+      _query.updatedOn = moment
+        .tz(filterState.searchQuery[TO_DATE], this.props.timeOffset)
+        .endOf('day')
+        .utc()
+        .format();
     }
 
     hashHistory.push({ pathname: 'audit/itemsearch', query: _query });
@@ -284,11 +285,13 @@ class ItemSearchFilter extends React.Component {
                 />
               </div>
             ) : (
-                ''
-              )}
+              ''
+            )}
           </div>
           <div className='gor-filter-body'>
-            <div className='gor-filter-body-input-wrap'>{itemSearchSearchField}</div>
+            <div className='gor-filter-body-input-wrap'>
+              {itemSearchSearchField}
+            </div>
             <div className='gor-filter-body-filterToken-wrap'>
               <div className='gor-filter-body-filterToken-section1'>
                 {itemSearchFilterToken.column1token}
@@ -318,8 +321,8 @@ class ItemSearchFilter extends React.Component {
                     defaultMessage='Apply filter'
                   />
                 ) : (
-                    <div className='spinnerImage' />
-                  )}
+                  <div className='spinnerImage' />
+                )}
               </button>
             </div>
           </div>
@@ -371,21 +374,21 @@ const SET_PAGE_NUMBER = gql`
 `;
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function (number) {
+    setCurrentPageNumber: function(number) {
       mutate({ variables: { pageNumber: number } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function (applied) {
+    filterApplied: function(applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function (applied) {
+    updateSubscription: function(applied) {
       mutate({ variables: { isUpdateSubsciption: applied } });
     }
   })
@@ -393,19 +396,18 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
   props: ({ mutate, ownProps }) => ({
-    setTextBoxStatus: function (textBoxName) {
+    setTextBoxStatus: function(textBoxName) {
       mutate({ variables: { textBoxName: textBoxName } });
     }
   })
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    itemSearchfilterState: function (state) {
+    itemSearchfilterState: function(state) {
       mutate({ variables: { state: state } });
     }
   })
 });
-
 
 export default compose(
   withApollo,

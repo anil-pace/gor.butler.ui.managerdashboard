@@ -8,11 +8,11 @@ export  function storageSpaceReducer(state={},action){
 	  
 	  	case STORAGE_SPACE_FETCH:
 		  	return Object.assign({}, state, {
-		    	storageSpaceData:action.data || [],
-		    	reportsSpinner:false
-	      	});
-	    
-	  	default:
-	    	return state
+        storageSpaceData: action.data || [],
+        reportsSpinner: false
+      });
+
+    default:
+      return state;
   }
 }

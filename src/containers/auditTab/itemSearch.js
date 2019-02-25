@@ -16,6 +16,7 @@ import { graphql, withApollo, compose } from 'react-apollo';
 import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
 import ItemSearchStart from './itemSearchStart';
+import { removeDuplicates } from '../../utilities/utils';
 
 import gql from 'graphql-tag';
 import { itemSearchClientData } from './query/clientQuery';
@@ -88,7 +89,6 @@ class ItemSearch extends React.Component {
     };
     this._processServerData = this._processServerData.bind(this);
     this._onScrollHandler = this._onScrollHandler.bind(this);
-    this._fetchData = this._fetchData.bind(this);
     this._handleActions = this._handleActions.bind(this);
     this._triggerItemSearchStart = this._triggerItemSearchStart.bind(this);
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
@@ -121,8 +121,9 @@ class ItemSearch extends React.Component {
         JSON.stringify(nextProps.location.query) !==
           JSON.stringify(this.state.query))
     ) {
-      this.setState({ query: nextProps.location.query });
-      this._refreshList(nextProps.location.query);
+      this.setState({ query: nextProps.location.query, page: -1 }, () => {
+        this._refreshList(this.state.query);
+      }); // initializing page to -1 on filter toggle, so that when the filter is applied ++page will bring the correct page number
     }
   }
 
@@ -177,35 +178,6 @@ class ItemSearch extends React.Component {
       });
   }
 
-  _fetchData() {
-    const _this = this;
-    let { page } = _this.state;
-    _this.props.client
-      .query({
-        query: ITEM_SEARCH_QUERY,
-        variables: {
-          input: {
-            page_size: 10,
-            page: ++page,
-            order: DESC,
-            sort: CREATED_ON
-          }
-        },
-        fetchPolicy: 'network-only'
-      })
-      .then(data => {
-        let existingData = JSON.parse(JSON.stringify(_this.state.data));
-        let currentData = data.data.ItemSearchList.list.serviceRequests;
-        let mergedData = existingData.concat(currentData);
-        _this.setState(() => {
-          return {
-            data: mergedData,
-            page
-          };
-        });
-      });
-  }
-
   _subscribeLegacyData() {
     this.props.initDataSentCall(wsOverviewData['default']);
   }
@@ -215,42 +187,57 @@ class ItemSearch extends React.Component {
       event.target.scrollHeight - event.target.scrollTop ===
       event.target.clientHeight
     ) {
-      this._fetchData();
+      let query = this.props.location.query;
+
+      this._requestItemSearchList(
+        query.taskId,
+        query.status,
+        query.createdOn,
+        query.updatedOn
+      );
     }
   }
 
   _requestItemSearchList(taskId, status, createdOn, updatedOn) {
     const _this = this;
     let { page } = _this.state;
-    if (taskId || status) {
-      _this.props.client
-        .query({
-          query: ITEM_SEARCH_QUERY,
-          variables: {
-            input: {
-              externalServiceRequestId: taskId,
-              status,
-              createdOn,
-              updatedOn,
-              type: 'SEARCH',
-              page_size: 10,
-              page: ++page,
-              order: DESC,
-              sort: CREATED_ON
-            }
-          },
-          fetchPolicy: 'network-only'
-        })
-        .then(data => {
-          let currentData = data.data.ItemSearchDetailsList.list;
-          _this.setState(() => {
-            return {
-              data: currentData,
-              page
-            };
-          });
+    _this.props.client
+      .query({
+        query: ITEM_SEARCH_QUERY,
+        variables: {
+          input: {
+            externalServiceRequestId: taskId,
+            status,
+            createdOn,
+            updatedOn,
+            page_size: 10,
+            page: ++page,
+            order: DESC,
+            sort: CREATED_ON
+          }
+        },
+        fetchPolicy: 'network-only'
+      })
+      .then(data => {
+        let mergedData;
+        if (_this.state.page < 0) {
+          mergedData = data.data.ItemSearchList.list.serviceRequests;
+        } else {
+          let existingData = JSON.parse(JSON.stringify(_this.state.data));
+          let currentData = data.data.ItemSearchList.list.serviceRequests;
+          mergedData = removeDuplicates(
+            existingData.concat(currentData),
+            'externalServiceRequestId'
+          );
+        }
+
+        _this.setState(() => {
+          return {
+            data: mergedData,
+            page
+          };
         });
-    }
+      });
   }
 
   _refreshList(query) {
@@ -361,7 +348,8 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSKU,
-          moment(containers.products[0].updatedOn)
+          moment
+            .utc(datum.createdOn)
             .tz(timeOffset)
             .format('DD MMM,YYYY') || '--'
         ];
@@ -422,6 +410,7 @@ class ItemSearch extends React.Component {
             showItemSearchFilter={_this.showItemSearchFilter}
             isFilterApplied={_this.props.isFilterApplied}
             itemSearchfilterState={_this.props.itemSearchFilterStatus || null}
+            timeOffset={this.props.timeOffset}
           />
         </div>
         <div className='gorToolBar auditListingToolbar'>
