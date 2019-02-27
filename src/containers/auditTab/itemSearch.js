@@ -325,7 +325,7 @@ class ItemSearch extends React.Component {
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
         let typeOfSKU =
-          datum && datum.expectations.containers.length === 1
+          datum && datum.expectations.containers.length >= 1
             ? singleSKUtype
             : multiSKUtype;
 
