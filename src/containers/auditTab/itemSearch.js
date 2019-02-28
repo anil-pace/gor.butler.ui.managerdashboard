@@ -190,7 +190,7 @@ class ItemSearch extends React.Component {
       let query = this.props.location.query;
 
       this._requestItemSearchList(
-        query.taskId,
+        query.externalServiceRequestId,
         query.status,
         query.createdOn,
         query.updatedOn
@@ -198,7 +198,12 @@ class ItemSearch extends React.Component {
     }
   }
 
-  _requestItemSearchList(taskId, status, createdOn, updatedOn) {
+  _requestItemSearchList(
+    externalServiceRequestId,
+    status,
+    createdOn,
+    updatedOn
+  ) {
     const _this = this;
     let { page } = _this.state;
     _this.props.client
@@ -206,7 +211,7 @@ class ItemSearch extends React.Component {
         query: ITEM_SEARCH_QUERY,
         variables: {
           input: {
-            externalServiceRequestId: taskId,
+            externalServiceRequestId,
             status,
             createdOn,
             updatedOn,
@@ -260,7 +265,7 @@ class ItemSearch extends React.Component {
         },
         searchQuery: {
           __typename: 'ItemSearchFilterSearchQuery',
-          ITEM_SEARCH_TASK_ID: query.taskId || '',
+          ITEM_SEARCH_TASK_ID: query.externalServiceRequestId || '',
           FROM_DATE: query.createdOn || '',
           TO_DATE: query.updatedOn || ''
         },
@@ -270,7 +275,7 @@ class ItemSearch extends React.Component {
         }
       });
     _this._requestItemSearchList(
-      query.taskId,
+      query.externalServiceRequestId,
       query.status,
       query.createdOn,
       query.updatedOn
@@ -325,7 +330,7 @@ class ItemSearch extends React.Component {
         let datum = data[i];
         let containers = datum.expectations.containers[0] || null;
         let typeOfSKU =
-          datum && datum.expectations.containers.length >= 1
+          datum && datum.expectations.containers.length <= 1
             ? singleSKUtype
             : multiSKUtype;
 

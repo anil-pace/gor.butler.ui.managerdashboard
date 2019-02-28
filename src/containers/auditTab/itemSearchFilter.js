@@ -207,7 +207,8 @@ class ItemSearchFilter extends React.Component {
       filterState.searchQuery &&
       filterState.searchQuery[ITEM_SEARCH_TASK_ID]
     ) {
-      _query.taskId = filterState.searchQuery[ITEM_SEARCH_TASK_ID];
+      _query.externalServiceRequestId =
+        filterState.searchQuery[ITEM_SEARCH_TASK_ID];
     }
 
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
