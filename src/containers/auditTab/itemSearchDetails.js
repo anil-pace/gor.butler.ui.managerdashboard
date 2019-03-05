@@ -120,7 +120,7 @@ class ItemSearchDetails extends React.Component {
             if (productQuantity > 0) {
               itemStatusMessage = productQuantity + ' item(s) found';
             } else {
-              itemStatusMessage = 'No item found';
+              itemStatusMessage = 'No excess item found';
             }
           } else if (datumState === 'excess') {
             if (productQuantity > 0) {
