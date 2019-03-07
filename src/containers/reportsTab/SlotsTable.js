@@ -168,11 +168,13 @@ class SlotsTable extends React.Component {
                           ? { flex: '1 0 ' + self.state.header[4].width + '%' }
                           : {}
                       }
-                      className='cell'
+                      className='cell cell-progressbar'
                     >
                       <ProgressBar
                         progressBarWrapperWidth={'100px'}
-                        progressWidth={row.slotUtilization}
+                        progressWidth={
+                          row.slotUtilization ? row.slotUtilization : 0
+                        }
                       />
                       <span>{row.slotUtilization + '%'}</span>
                     </div>
