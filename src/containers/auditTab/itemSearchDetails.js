@@ -51,6 +51,7 @@ class ItemSearchDetails extends React.Component {
     const data = JSON.parse(JSON.stringify(this.state.data));
     const { timeOffset } = this.props;
     let tableData = [];
+    let noOfSkus = new Set();
     const rawListData = data && JSON.parse(data[0].actuals.containers);
 
     if (data && data.length) {
@@ -111,6 +112,7 @@ class ItemSearchDetails extends React.Component {
             ? productAttributes.package_name
             : null;
           generatedList.id = rawListData[i].id;
+          noOfSkus.add(productSKU);
           generatedList.skuHeader = [productSKU];
           generatedList.skuFooter = [packageName];
 
@@ -143,7 +145,8 @@ class ItemSearchDetails extends React.Component {
     }
     return {
       processedData,
-      tableData
+      tableData,
+      noOfSkus
     };
   }
 
@@ -151,6 +154,7 @@ class ItemSearchDetails extends React.Component {
     const combinedData = this._processedData();
     const data = combinedData.processedData;
     const tableData = combinedData.tableData;
+    const noOfSkus = combinedData.noOfSkus;
     const dataLen = Object.keys(data).length;
 
     let operatorLabel = (
@@ -200,9 +204,7 @@ class ItemSearchDetails extends React.Component {
                 <div className='table-container table-bordered table-itemsearch table-item-search-details'>
                   <div className='table-head'>
                     <div className='table-head-cell'>
-                      <p>
-                        {tableData.length + ' SKUs in this item search task'}
-                      </p>
+                      <p>{noOfSkus.size + ' SKUs in this item search task'}</p>
                     </div>
                   </div>
                   {tableData && tableData.length ? (
