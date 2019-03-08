@@ -94,6 +94,7 @@ class ItemSearch extends React.Component {
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
     this.showItemSearchFilter = this.props.showItemSearchFilter.bind(this);
     this._handelClick = this._handelClick.bind(this);
+    this._checkIfToday = this._checkIfToday.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -348,16 +349,24 @@ class ItemSearch extends React.Component {
         } else {
           tuple.header = [datum.externalServiceRequestId, sku];
         }
+
         tuple.subHeader = [
           datum.attributes.ppsIdList[0]
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSKU,
-          moment
-            .utc(datum.createdOn)
-            .tz(timeOffset)
-            .format('DD MMM,YYYY') || '--'
+          this._checkIfToday(datum)
+            ? 'Today,' +
+                moment
+                  .utc(datum.createdOn)
+                  .tz(timeOffset)
+                  .format('h:mm') || '--'
+            : moment
+                .utc(datum.createdOn)
+                .tz(timeOffset)
+                .format('DD MMM YYYY, h:mm') || '--'
         ];
+
         if (datum.status == 'CREATED') {
           tuple.status = notYetStartedItemSearch;
         } else if (datum.status == 'PROCESSING') {
@@ -374,6 +383,13 @@ class ItemSearch extends React.Component {
       }
     }
     return processedData;
+  }
+  _checkIfToday(datum) {
+    var todayDate = moment().format('DD/MM/YYYY');
+    if (datum.createdOn === todayDate) return true;
+    else {
+      return false;
+    }
   }
   _handleActions(index, evt, action) {
     var value = evt.target.value;
