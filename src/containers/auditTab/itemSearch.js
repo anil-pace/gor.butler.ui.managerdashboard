@@ -168,7 +168,7 @@ class ItemSearch extends React.Component {
       })
       .then(data => {
         let existingData = JSON.parse(JSON.stringify(_this.state.data));
-        let currentData = data.data.ItemSearchList.list.serviceRequests; //changes harcode
+        let currentData = data.data.ItemSearchList.list.serviceRequests;
         let mergedData = existingData.concat(currentData);
         _this.setState(() => {
           return {
@@ -385,12 +385,14 @@ class ItemSearch extends React.Component {
     return processedData;
   }
   _checkIfToday(datum) {
-    var todayDate = moment().format('DD/MM/YYYY');
+    var todayDate = moment()
+      .tz(this.props.timeOffset)
+      .format('DD/MM/YYYY');
     const createdOnDate = moment
       .utc(datum.createdOn)
       .tz(this.props.timeOffset)
       .format('DD/MM/YYYY');
-    if (createdOnDate !== todayDate) return true;
+    if (createdOnDate === todayDate) return true;
     else {
       return false;
     }
