@@ -17,6 +17,7 @@ import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
 import ItemSearchStart from './itemSearchStart';
 import { removeDuplicates } from '../../utilities/utils';
+import { checkIfToday } from '../../utilities/checkIfToday';
 
 import gql from 'graphql-tag';
 import { itemSearchClientData } from './query/clientQuery';
@@ -94,7 +95,6 @@ class ItemSearch extends React.Component {
     this._viewSearchDetails = this._viewSearchDetails.bind(this);
     this.showItemSearchFilter = this.props.showItemSearchFilter.bind(this);
     this._handelClick = this._handelClick.bind(this);
-    this._checkIfToday = this._checkIfToday.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -355,16 +355,7 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSKU,
-          this._checkIfToday(datum)
-            ? 'Today, ' +
-                moment
-                  .utc(datum.createdOn)
-                  .tz(timeOffset)
-                  .format('h:mm') || '--'
-            : moment
-                .utc(datum.createdOn)
-                .tz(timeOffset)
-                .format('DD MMM YYYY, h:mm') || '--'
+          checkIfToday(this.props.timeOffset, datum.createdOn)
         ];
 
         if (datum.status == 'CREATED') {
@@ -383,19 +374,6 @@ class ItemSearch extends React.Component {
       }
     }
     return processedData;
-  }
-  _checkIfToday(datum) {
-    var todayDate = moment()
-      .tz(this.props.timeOffset)
-      .format('DD/MM/YYYY');
-    const createdOnDate = moment
-      .utc(datum.createdOn)
-      .tz(this.props.timeOffset)
-      .format('DD/MM/YYYY');
-    if (createdOnDate === todayDate) return true;
-    else {
-      return false;
-    }
   }
   _handleActions(index, evt, action) {
     var value = evt.target.value;
