@@ -57,10 +57,7 @@ class ItemSearchDetails extends React.Component {
     if (data && data.length) {
       processedData.tiledata = [
         {
-          'PPS ID':
-            data[0].status !== 'CREATED' && data[0].attributes.ppsIdList
-              ? `PPS ${data[0].attributes.ppsIdList}`
-              : '--',
+          'PPS ID': `PPS ${data[0].attributes.ppsIdList}`,
           'Item Search Type': data[0].attributes.slot_list
             ? data[0].attributes.slot_list.length > 1
               ? multiLocationTxt
