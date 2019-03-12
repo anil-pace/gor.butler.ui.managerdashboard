@@ -156,8 +156,6 @@ class ItemSearchDetails extends React.Component {
   render() {
     const combinedData = this._processedData();
     const data = combinedData.processedData;
-    console.log(data);
-    console.log(combinedData);
     const tableData = combinedData.tableData;
     const noOfSkus = combinedData.noOfSkus;
     const dataLen = Object.keys(data).length;
