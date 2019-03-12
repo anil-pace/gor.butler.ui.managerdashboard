@@ -1,3 +1,6 @@
+import moment from 'moment';
+import 'moment-timezone';
+
 export function checkIfToday(timeOffset, createdOnDate) {
   let todayDate = moment.tz(timeOffset).format('DD/MM/YYYY');
 
@@ -10,14 +13,14 @@ export function checkIfToday(timeOffset, createdOnDate) {
     return (
       'Today, ' +
         moment
-          .utc(datum.createdOn)
+          .utc(createdOnDate)
           .tz(timeOffset)
           .format('h:mm') || '--'
     );
   } else {
     return (
       moment
-        .utc(datum.createdOn)
+        .utc(createdOnDate)
         .tz(timeOffset)
         .format('DD MMM YYYY, h:mm') || '--'
     );
