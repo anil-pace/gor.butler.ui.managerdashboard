@@ -78,7 +78,10 @@ class OrderPriority extends React.Component {
   }
 
   _changeOrderPriority(event) {
-    if (event.currentTarget.value !== this.props.orderPriority) {
+    if (
+      event.currentTarget.value !== this.props.orderPriority &&
+      this.props.status !== 'PROCESSED'
+    ) {
       this.setState({
         activePriority: event.currentTarget.value,
         applyButtonClassName: 'applyButton makeClickable'
