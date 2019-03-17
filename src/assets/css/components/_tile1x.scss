@@ -10,6 +10,9 @@
   font-size: 0;
   &.gor-double {
     width: 97%;
+    .gor-heading {
+      text-transform: none;
+    }
   }
   &.gor-single {
     width: 47%;
