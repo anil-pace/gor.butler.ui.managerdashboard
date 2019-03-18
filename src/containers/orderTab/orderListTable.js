@@ -818,6 +818,7 @@ class OrderListTable extends React.Component {
                   orderPriority={orderData[i].order_priority}
                   orderInternalId={orderData[i].order_internal_id}
                   orderType={orderData[i].order_type}
+                  status={orderData[i].status}
                 />
               ) : (
                 ''
