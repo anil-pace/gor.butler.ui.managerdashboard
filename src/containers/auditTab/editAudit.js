@@ -869,7 +869,7 @@ class EditAudit extends React.Component {
   _updateInput(event, id) {
     var input = event.target.value.trim(),
       selectionStart = event.target.selectionStart,
-      inputList = input.split(/[\s,;\t\n]+/),
+      inputList = input.split(/;\t\n]+/),
       processedList = [],
       activeTabIndex = this.state.activeTabIndex,
       stateInputList = JSON.parse(
