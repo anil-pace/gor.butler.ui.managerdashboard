@@ -291,10 +291,6 @@ class ButlerBot extends React.Component {
           data[i].tasktype === 'chargetask' ||
           data[i].tasktype === 'movetask')
       ) {
-        console.log('currentSubtask[0]' + currentSubtask[0]);
-        console.log('currentSubtask[1]' + currentSubtask[1]);
-        console.log('currentSubtask[2]' + currentSubtask[2]);
-        console.log('currentSubtask[3]' + currentSubtask[3]);
         butlerDetail.current = currentTask[data[i].tasktype];
         if (
           data[i].tasktype === 'picktask' ||
