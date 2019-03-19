@@ -1,128 +1,121 @@
 @import '../abstracts/functions';
 
 .health.mainBlock {
-			width: 100%;
-			
-		}
-		.health .block {
-		
-			display: inline-block;
-			text-align: center;
-			padding-top: calculateRem(10px);
-			padding-bottom: calculateRem(10px);
+  width: 100%;
+}
+.health .block {
+  display: inline-block;
+  text-align: center;
+  padding-top: calculateRem(10px);
+  padding-bottom: calculateRem(10px);
+}
+.health .attributes {
+  width: calculateRem(89px);
+  padding-right: 15px;
+  padding-left: 15px;
+}
 
-		}
-		.health .attributes {
-			width: calculateRem(89px);
-			padding-right: 15px;
-			padding-left: 15px;
-		}
+.health .upperText {
+  font-family: 'source sans pro';
+  font-size: calculateRem(24px);
+}
+.health .subtext {
+  font-family: 'source sans pro';
+  font-size: calculateRem(12px);
+  width: 99%;
+  text-transform: capitalize;
+}
 
-		.health .upperText {
-			font-family: "source sans pro";
-			font-size: calculateRem(24px);
-		}
-		.health .subtext {
-			font-family: "source sans pro";
-			font-size: calculateRem(12px);
-			width: 99%;
-		}
+.health .parameters {
+  width: auto;
+}
 
-		.health .parameters {
-			width: auto;
-		}
+.health .stoppedState {
+  background: #ec1c24;
+  width: calculateRem(28px);
+  height: calculateRem(18px);
+  border-radius: calculateRem(15px);
+  color: #ffffff;
+  font-family: 'source sans pro';
+  font-weight: bold;
+  padding-top: calculateRem(0px);
+  padding-bottom: calculateRem(0px);
+}
 
-		.health .stoppedState
-		{
-			background: #ec1c24;
-			width: calculateRem(28px);
-			height: calculateRem(18px);
-			border-radius: calculateRem(15px);
-			color: #ffffff;
-			font-family: "source sans pro";
-			font-weight: bold;
-			padding-top: calculateRem(0px);
-			padding-bottom: calculateRem(0px);
-		}
+.health .onState {
+  background: #ffffff;
+  width: calculateRem(28px);
+  height: calculateRem(18px);
+  border-radius: calculateRem(15px);
+  color: #666666;
+  font-family: 'source sans pro';
+  border-style: solid;
+  border-width: calculateRem(1px);
+  border-color: #00a54f;
+  padding-top: calculateRem(0px);
+  padding-bottom: calculateRem(0px);
+}
 
-		.health .onState
-		{
-			background: #ffffff;
-			width: calculateRem(28px);
-			height: calculateRem(18px);
-			border-radius:calculateRem(15px);
-			color: #666666;
-			font-family: "source sans pro";
-			border-style: solid;
-			border-width: calculateRem(1px);
-			border-color: #00a54f;
-			padding-top: calculateRem(0px);
-			padding-bottom: calculateRem(0px);
-		}
+.health .offState {
+  background: #ffffff;
+  width: calculateRem(28px);
+  height: calculateRem(18px);
+  border-radius: calculateRem(15px);
+  color: #666666;
+  font-family: 'source sans pro';
+  border-style: solid;
+  border-width: calculateRem(1px);
+  border-color: #999999;
+  padding-top: calculateRem(0px);
+  padding-bottom: calculateRem(0px);
+}
 
+.health .errorState {
+  background: #ffffff;
+  width: calculateRem(30px);
+  height: calculateRem(18px);
+  border-radius: calculateRem(15px);
+  color: #666666;
+  font-family: 'source sans pro';
+  border-style: solid;
+  border-width: calculateRem(1px);
+  border-color: #ec1c24;
+  padding-top: calculateRem(0px);
+  padding-bottom: calculateRem(0px);
+}
 
-		.health .offState
-		{
-			background: #ffffff;
-			width: calculateRem(28px);
-			height: calculateRem(18px);
-			border-radius: calculateRem(15px);
-			color: #666666;
-			font-family: "source sans pro";
-			border-style: solid;
-			border-width: calculateRem(1px);
-			border-color: #999999;
-			padding-top: calculateRem(0px);
-			padding-bottom: calculateRem(0px);
-		}
+.health .paramPosition {
+  padding-right: calculateRem(15px);
+  padding-left: calculateRem(15px);
+  width: auto;
+}
 
-		.health .errorState
-		{
-			background: #ffffff;
-			width: calculateRem(30px);
-			height: calculateRem(18px);
-			border-radius: calculateRem(15px);
-			color: #666666;
-			font-family: "source sans pro";
-			border-style: solid;
-			border-width: calculateRem(1px);
-			border-color: #ec1c24;
-			padding-top: calculateRem(0px);
-			padding-bottom: calculateRem(0px);
-		}
+.health .paramPositionFront {
+  padding-right: calculateRem(15px);
+  padding-left: calculateRem(10px);
+  width: auto;
+}
 
-		.health .paramPosition {
-			padding-right: calculateRem(15px);
-			padding-left: calculateRem(15px);
-			width: auto;
-		}
+.health .paramPositionMiddle {
+  padding-right: calculateRem(15px);
+  padding-left: calculateRem(15px);
+  width: auto;
+}
 
-		.health .paramPositionFront {
-			padding-right: calculateRem(15px);
-			padding-left: calculateRem(10px);
-			width: auto;
-		}
+.health .paramPositionBack {
+  padding-right: calculateRem(10px);
+  padding-left: calculateRem(15px);
+  width: auto;
+}
 
-		.health .paramPositionMiddle {
-			padding-right: calculateRem(15px);
-			padding-left: calculateRem(15px);
-			width: auto;
-		}
-
-		.health .paramPositionBack {
-			padding-right: calculateRem(10px);
-			padding-left: calculateRem(15px);
-			width: auto;
-		}
-
-		.health .status {
-			font-family: "source sans pro";
-			font-size: calculateRem(12px);
-			color: #666666;
-			text-align: center;
-		}
-		.health .horizontal-line{
-			display: inline-block;
-			height: calculateRem(30px);
-			border-left: calculateRem(1px) solid #f7f7f7;
-		}
+.health .status {
+  font-family: 'source sans pro';
+  font-size: calculateRem(12px);
+  color: #666666;
+  text-align: center;
+}
+.health .horizontal-line {
+  display: inline-block;
+  height: calculateRem(30px);
+  border-left: calculateRem(1px) solid #f7f7f7;
+}

@@ -1,3237 +1,3237 @@
 [
- {
-   "id": "commonDataTable.edit.button",
-   "description": "Edit",
-   "defaultMessage": "編輯"
- },
- {
-   "id": "commonDataTable.Delete.button",
-   "description": "Delete",
-   "defaultMessage": "刪除"
- },
- {
-   "id": "commonDataTable.attributesType.heading",
-   "description": "Box Id",
-   "defaultMessage": "箱盒 Id"
- },
- {
-   "id": "audit.resolveUnresolve",
-   "description": "{resolvedCount} issues, {unresolvedCount} unresolved",
-   "defaultMessage": "{resolvedCount} 個問題，{unresolvedCount} 個未解決"
- },
- {
-   "id": "audit.resolveIssues",
-   "description": "{resolvedCount} issues",
-   "defaultMessage": "{resolvedCount} 個問題"
- },
- {
-   "id": "audit.unresolveIssues",
-   "description": "{unresolvedCount},{unresolvedCount, plural, one {unresolved issue} other {unresolved issues}}",
-   "defaultMessage": "{unresolvedCount}，{unresolvedCount, plural, one {未解決的問題} other {未解決的問題}}"
- },
- {
-   "id": "commonDataTable.resolveAudit.approve",
-   "description": "Approve",
-   "defaultMessage": "核准"
- },
- {
-   "id": "commonDataTable.resolveAudit.reject",
-   "description": "Reject",
-   "defaultMessage": "拒絕"
- },
- {
-   "id": "commonDataTable.startAudit.button",
-   "description": "Start audit",
-   "defaultMessage": "開始稽核"
- },
- {
-   "id": "commonDataTable.resolveAudit.button",
-   "description": "Resolve",
-   "defaultMessage": "解決"
- },
- {
-   "id": "commonDataTable.viewIssues.button",
-   "description": "View issues",
-   "defaultMessage": "檢視問題"
- },
- {
-   "id": "footer.description",
-   "description": "Copyright @ 2017 GreyOrange Pte Ltd",
-   "defaultMessage": "版權所有 @ 2017 GreyOrange Pte Ltd"
- },
- {
-   "id": "paginate.page.heading",
-   "description": "Page",
-   "defaultMessage": "第  頁，"
- },
- {
-   "id": "paginate.page.pageNum",
-   "description": "of {totalPage}",
-   "defaultMessage": "共 {totalPage} 頁"
- },
- {
-   "id": "graph.noData",
-   "description": "No Data",
-   "defaultMessage": "無資料"
- },
- {
-   "id": "horizontal.graph.noData",
-   "description": "No Data",
-   "defaultMessage": "無資料"
- },
- {
-   "id": "snapshot.inventory.usedSpace",
-   "description": "{utilisedSpace}% space utilized",
-   "defaultMessage": "已使用 {utilisedSpace}% 空間"
- },
- {
-   "id": "header.butler",
-   "description": "Butler",
-   "defaultMessage": "Butler"
- },
- {
-   "id": "header.start",
-   "description": "Start time:{time}",
-   "defaultMessage": "開始時間：{time}"
- },
- {
-   "id": "header.butler",
-   "description": "Butler",
-   "defaultMessage": "Butler"
- },
- {
-   "id": "header.start",
-   "description": "Start time:{time}",
-   "defaultMessage": "開始時間：{time}"
- },
- {
-   "id": "header.option.normal",
-   "description": "Operation normal",
-   "defaultMessage": "作業正常"
- },
- {
-   "id": "header.option.pause",
-   "description": "Enter password to pause operation",
-   "defaultMessage": "請輸入密碼以暫停作業"
- },
- {
-   "id": "header.button.pause",
-   "description": "Pause",
-   "defaultMessage": "暫停"
- },
- {
-   "id": "header.emergency.heading",
-   "description": "Emergency",
-   "defaultMessage": "緊急"
- },
- {
-   "id": "header.emergency.subheading",
-   "description": "In Zone",
-   "defaultMessage": "區域內"
- },
- {
-   "id": "header.option.stopped",
-   "description": "Operation stopped",
-   "defaultMessage": "作業已停止"
- },
- {
-   "id": "header.button.resume",
-   "description": "Resume",
-   "defaultMessage": "恢復"
- },
- {
-   "id": "header.option.release",
-   "description": "Release the Emergency Stop button from the Zigbee box in order",
-   "defaultMessage": "釋放 Zigbee 盒的緊急停止按鈕，以恢復作業。"
- },
- {
-   "id": "header.option.resume",
-   "description": "Enter password to resume operation.",
-   "defaultMessage": "請輸入密碼以恢復作業。"
- },
- {
-   "id": "header.logout",
-   "description": "Logout",
-   "defaultMessage": "登出"
- },
- {
-   "id": "healthTab.status.on",
-   "description": "On",
-   "defaultMessage": "啟動"
- },
- {
-   "id": "healthTab.status.off",
-   "description": "Off",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "inventory.histogram.legend",
-   "description": "Items Stocked",
-   "defaultMessage": "庫存的品項"
- },
- {
-   "id": "inventory.linechart.legendPicked",
-   "description": "Items Picked",
-   "defaultMessage": "已揀貨品項"
- },
- {
-   "id": "inventory.linechart.legendPut",
-   "description": "Items Put",
-   "defaultMessage": "已放置品項"
- },
- {
-   "id": "inventory.header",
-   "description": "Inventory",
-   "defaultMessage": "存貨"
- },
- {
-   "id": "itemTable.categoryType.category",
-   "description": "Category",
-   "defaultMessage": "類別"
- },
- {
-   "id": "itemTable.cbmUsed.cbm",
-   "description": "CBM Used",
-   "defaultMessage": "使用的 CBM"
- },
- {
-   "id": "itemTable.daysInHand.count",
-   "description": "Days in Hand",
-   "defaultMessage": "可用天數"
- },
- {
-   "id": "inventory.linechart.toolTipPut",
-   "description": "Put",
-   "defaultMessage": "已放置"
- },
- {
-   "id": "inventory.linechart.toolTipPick",
-   "description": "Picked",
-   "defaultMessage": "已揀貨"
- },
- {
-   "id": "inventory.linechart.toolTipEntity",
-   "description": "Items",
-   "defaultMessage": "品項"
- },
- {
-   "id": "inventory.linechart.noDataText",
-   "description": "No Item Movement",
-   "defaultMessage": "無品項移動"
- },
- {
-   "id": "inventory.linechart.today",
-   "description": "Today's",
-   "defaultMessage": "今天"
- },
- {
-   "id": "inventory.snaphot.date",
-   "description": "Today's",
-   "defaultMessage": "今天"
- },
- {
-   "id": "inventory.snaphot.currentStock",
-   "description": "Current Stock",
-   "defaultMessage": "目前庫存"
- },
- {
-   "id": "inventory.snaphot.closingStock",
-   "description": "Closing Stock",
-   "defaultMessage": "期末存貨"
- },
- {
-   "id": "inventory.snaphot.header",
-   "description": "stock snapshot",
-   "defaultMessage": "庫存概況"
- },
- {
-   "id": "inventory.snaphot.itemsPut",
-   "description": "Items Put",
-   "defaultMessage": "已放置品項"
- },
- {
-   "id": "inventory.snaphot.itemsPick",
-   "description": "Items Pick",
-   "defaultMessage": "已揀貨品項"
- },
- {
-   "id": "inventory.snaphot.openingStock",
-   "description": "Opening Stock",
-   "defaultMessage": "期初存貨"
- },
- {
-   "id": "inventory.snaphot.sku",
-   "description": "SKUs",
-   "defaultMessage": "SKU"
- },
- {
-   "id": "inventory.snaphot.cbmUsed",
-   "description": "CBM Used",
-   "defaultMessage": "使用的 CBM"
- },
- {
-   "id": "login.butler.language",
-   "description": "Language",
-   "defaultMessage": "語言"
- },
- {
-   "id": "login.butler.manageInterface",
-   "description": "Management Interface",
-   "defaultMessage": "管理介面"
- },
- {
-   "id": "login.butler.error.username",
-   "description": "Please enter your username",
-   "defaultMessage": "請輸入您的使用者名稱"
- },
- {
-   "id": "login.butler.error.password",
-   "description": "Please enter your password",
-   "defaultMessage": "請輸入您的密碼"
- },
- {
-   "id": "login.form.username",
-   "description": "Username",
-   "defaultMessage": "使用者名稱"
- },
- {
-   "id": "login.form.password",
-   "description": "Password",
-   "defaultMessage": "密碼"
- },
- {
-   "id": "login.form.button",
-   "description": "Login",
-   "defaultMessage": "登入"
- },
- {
-   "id": "OrderSubTab.waves",
-   "description": "Waves",
-   "defaultMessage": "個別作業"
- },
- {
-   "id": "OrderSubTab.orderlist",
-   "description": "Order List",
-   "defaultMessage": "訂單列表"
- },
- {
-   "id": "butlerBot.tab.heading",
-   "description": "Butler Bots",
-   "defaultMessage": "Butler 機器人"
- },
- {
-   "id": "pps.tab.heading",
-   "description": "Pick Put Stations",
-   "defaultMessage": "揀放站"
- },
- {
-   "id": "chargingstation.tab.heading",
-   "description": "Charging Station",
-   "defaultMessage": "充電站"
- },
- {
-   "id": "gor.filter.heading",
-   "description": "Apply filter",
-   "defaultMessage": "套用篩選條件"
- },
- {
-   "id": "stringConfig.on",
-   "description": "on",
-   "defaultMessage": "啟動"
- },
- {
-   "id": "stringConfig.off",
-   "description": "off",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "stringConfig.per_hour",
-   "description": "per_hour",
-   "defaultMessage": "每小時"
- },
- {
-   "id": "stringConfig.pick",
-   "description": "pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "stringConfig.put",
-   "description": "put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "stringConfig.audit",
-   "description": "audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "stringConfig.soft",
-   "description": "soft",
-   "defaultMessage": "虛擬"
- },
- {
-   "id": "stringConfig.hard",
-   "description": "hard",
-   "defaultMessage": "實體"
- },
- {
-   "id": "stringConfig.soft_manual",
-   "description": "soft_manual",
-   "defaultMessage": "soft_manual"
- },
- {
-   "id": "stringConfig.pending",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "stringConfig.wave.pending",
-   "description": "Pending",
-   "defaultMessage": "待處理"
- },
- {
-   "id": "stringConfig.disconnected",
-   "description": "Disconnected",
-   "defaultMessage": "已斷線"
- },
- {
-   "id": "stringConfig.connected",
-   "description": "Connected",
-   "defaultMessage": "已連線"
- },
- {
-   "id": "stringConfig.completed",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "stringConfig.Completed",
-   "description": "completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "stringConfig.in_progress",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "stringConfig.breached",
-   "description": "Breached",
-   "defaultMessage": "違約"
- },
- {
-   "id": "stringConfig.fulfillable",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "stringConfig.abandoned",
-   "description": "Unfulfillable",
-   "defaultMessage": "不可供發貨"
- },
- {
-   "id": "stringConfig.manual",
-   "description": "Manual",
-   "defaultMessage": "手動"
- },
- {
-   "id": "stringConfig.auto",
-   "description": "Auto",
-   "defaultMessage": "自動"
- },
- {
-   "id": "stringConfig.notFulfillable",
-   "description": "Unfulfillable",
-   "defaultMessage": "不可供發貨"
- },
- {
-   "id": "stringConfig.exception",
-   "description": "Exception",
-   "defaultMessage": "例外"
- },
- {
-   "id": "stringConfig.online",
-   "description": "online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "stringConfig.offline",
-   "description": "offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "stringConfig.received",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "stringConfig.cancelled",
-   "description": "Cancelled",
-   "defaultMessage": "已取消"
- },
- {
-   "id": "stringConfig.butler_supervisor",
-   "description": "Manager",
-   "defaultMessage": "管理員"
- },
- {
-   "id": "stringConfig.butler_ui",
-   "description": "Operator",
-   "defaultMessage": "作業員"
- },
- {
-   "id": "stringConfig.admin",
-   "description": "Admin",
-   "defaultMessage": "系統管理員"
- },
- {
-   "id": "stringConfig.qc",
-   "description": "QC Operator",
-   "defaultMessage": "QC 作業員"
- },
- {
-   "id": "stringConfig.packing_operator",
-   "description": "Packing Operator",
-   "defaultMessage": "包裝作業員"
- },
- {
-   "id": "stringConfig.temporary_unfulfillable",
-   "description": "On hold",
-   "defaultMessage": "保留中"
- },
- {
-   "id": "stringConfig.audit_resolved",
-   "description": "Resolved",
-   "defaultMessage": "已解決"
- },
- {
-   "id": "stringConfig.audit_pending_approval",
-   "description": "Unresolved",
-   "defaultMessage": "未解決"
- },
- {
-   "id": "stringConfig.audit_rejected",
-   "description": "Rejected",
-   "defaultMessage": "已拒絕"
- },
- {
-   "id": "stringConfig.md001",
-   "description": "No personnel are present in the no-man zone.",
-   "defaultMessage": "無人員位於無人區。"
- },
- {
-   "id": "stringConfig.md002",
-   "description": "All Butler and MSU positions have been corrected.",
-   "defaultMessage": "所有 Butler 和 MSU 的位置皆已修正。"
- },
- {
-   "id": "stringConfig.md003",
-   "description": "All no-man zone gates are properly closed.",
-   "defaultMessage": "所有無人區閘門皆正確關閉。"
- },
- {
-   "id": "stringConfig.md004",
-   "description": "All no-man gate limit switches are active and working.",
-   "defaultMessage": "所有無人閘門限制開關皆已啟動且正常運作中。"
- },
- {
-   "id": "stringConfig.md005",
-   "description": "All Hard Emergency buttons are released.",
-   "defaultMessage": "所有實體緊急按鈕皆已釋放。"
- },
- {
-   "id": "stringConfig.md006",
-   "description": "All Zigbee boxes are online.",
-   "defaultMessage": "所有 Zigbee 機上盒皆已上線。"
- },
- {
-   "id": "stringConfig.audit_reaudited",
-   "description": "Re-audited",
-   "defaultMessage": "已再次稽核"
- },
- {
-   "id": "roleDesc.butler_supervisor",
-   "description": "Grant access to the Management Interface and Operator Interface to all systems",
-   "defaultMessage": "授與所有系統存取管理介面與操作人員介面的權限"
- },
- {
-   "id": "roleDesc.butler_ui",
-   "description": "Grant access to the Operator Interface at each Pick Put Station in the Butler system",
-   "defaultMessage": "授與 Butler 系統中各揀放站存取操作人員介面的權限"
- },
- {
-   "id": "login.lang.english",
-   "description": "English (United States)",
-   "defaultMessage": "英文（美國）"
- },
- {
-   "id": "login.lang.japanese",
-   "description": "?交隤?",
-   "defaultMessage": "?交隤?"
- },
- {
-   "id": "login.lang.spanish",
-   "description": "Espa?ol",
-   "defaultMessage": "西班牙文"
- },
- {
-   "id": "login.lang.chinese",
-   "description": "銝剜?",
-   "defaultMessage": "銝剜?"
- },
- {
-   "id": "login.lang.german",
-   "description": "Deutsch",
-   "defaultMessage": "荷蘭文"
- },
- {
-   "id": "login.lang.french",
-   "description": "Francais",
-   "defaultMessage": "法文"
- },
- {
-   "id": "login.autologout.message",
-   "description": "Due to session expiry, Auto Logout has been triggered!",
-   "defaultMessage": "由於工作階段過期，已自動登出！"
- },
- {
-   "id": "login.butler.fail",
-   "description": "Invalid username and/or password, please try again",
-   "defaultMessage": "無效的使用者和／或密碼，請再試一次"
- },
- {
-   "id": "login.butler.connection.fail",
-   "description": "Connection failure",
-   "defaultMessage": "連線失敗"
- },
- {
-   "id": "login.butler.unauthorized",
-   "description": "You are not authorized",
-   "defaultMessage": "您未獲得授權"
- },
- {
-   "id": "notify.success.edit",
-   "description": "User details updated successfully",
-   "defaultMessage": "成功更新使用者詳細資料"
- },
- {
-   "id": "ppsDetail.modeChange.success",
-   "description": "PPS Mode Change Request Processed",
-   "defaultMessage": "已處理 PPS 模式變更請求"
- },
- {
-   "id": "ppsDetail.modeChange.isAlreadyRequested",
-   "description": "PPS is already in requested mode",
-   "defaultMessage": "PPS 已是所需的模式"
- },
- {
-   "id": "ppsDetail.modeChange.tryLater",
-   "description": "Previous request of changing mode is already pending, Please try later!",
-   "defaultMessage": "前次變更模式的請求已在等待處理，請稍後再試！"
- },
- {
-   "id": "notify.error.usernameExists",
-   "description": "An account has already been created with this User ID",
-   "defaultMessage": "已有人使用此使用者 ID 建立帳號"
- },
- {
-   "id": "notify.error.passwordMissing",
-   "description": "Password not provided!",
-   "defaultMessage": "未提供密碼！"
- },
- {
-   "id": "notify.error.passwordMatch",
-   "description": "Passwords do not match!",
-   "defaultMessage": "密碼不符！"
- },
- {
-   "id": "notify.error.username",
-   "description": "Username is a required field!",
-   "defaultMessage": "使用者名稱為必填欄位！"
- },
- {
-   "id": "notify.error.role",
-   "description": "Role is a required field!",
-   "defaultMessage": "角色為必填欄位！"
- },
- {
-   "id": "appInfo.success",
-   "description": "Successfull",
-   "defaultMessage": "成功"
- },
- {
-   "id": "user.invalid.id",
-   "description": "Please enter a valid User ID",
-   "defaultMessage": "請輸入有效的使用者 ID"
- },
- {
-   "id": "user.invalid.format",
-   "description": "Please use only letters (a-z), numbers, and periods",
-   "defaultMessage": "限使用字母 (a-z)、數字和句點"
- },
- {
-   "id": "login.empty.password",
-   "description": "Please enter a password",
-   "defaultMessage": "請輸入密碼"
- },
- {
-   "id": "user.empty.name",
-   "description": "Please enter a user name",
-   "defaultMessage": "請輸入使用者名稱"
- },
- {
-   "id": "user.invalid.name",
-   "description": "Special characters like \"~\",\"@\" and \"%\" are not allowed",
-   "defaultMessage": "不可使用「~」、「@」和「%」等特殊字元"
- },
- {
-   "id": "user.invalid.password.operator",
-   "description": "Please enter a password of at least 6 alphanumeric characters",
-   "defaultMessage": "請輸入至少 6 個英數字元的密碼"
- },
- {
-   "id": "user.invalid.password.manager",
-   "description": "Please enter a password of at least 8 alphanumeric characters",
-   "defaultMessage": "請輸入至少 8 個英數字元的密碼"
- },
- {
-   "id": "user.match.password",
-   "description": "Both password entered do not match. Please try again",
-   "defaultMessage": "輸入的兩組密碼皆不相符。請再試一次"
- },
- {
-   "id": "msu.name.prefix",
-   "description": "MSU",
-   "defaultMessage": "MSU"
- },
- {
-   "id": "chargingStation.name.prefix",
-   "description": "CS",
-   "defaultMessage": "CS"
- },
- {
-   "id": "pps.name.prefix",
-   "description": "PPS",
-   "defaultMessage": "PPS"
- },
- {
-   "id": "audit.invalid.sku",
-   "description": "Please enter a valid SKU Number",
-   "defaultMessage": "請輸入有效的 SKU 號碼"
- },
- {
-   "id": "audit.invalid.location",
-   "description": "Please enter a valid location Number",
-   "defaultMessage": "請輸入有效的位置號碼"
- },
- {
-   "id": "notify.error.audit.location",
-   "description": "Location does not exist",
-   "defaultMessage": "位置不存在"
- },
- {
-   "id": "notify.error.audit.sku",
-   "description": "SKU does not exist",
-   "defaultMessage": "SKU 不存在"
- },
- {
-   "id": "notify.error.audit.g016",
-   "description": "Given audit does not exists",
-   "defaultMessage": "指定的稽核不存在"
- },
- {
-   "id": "notify.error.audit.AE001",
-   "description": "Audit Id does not exists",
-   "defaultMessage": "稽核 Id 不存在"
- },
- {
-   "id": "notify.error.audit.AE002",
-   "description": "Valid PPS not found for Audit",
-   "defaultMessage": "稽核查無有效的 PPS"
- },
- {
-   "id": "notify.error.audit.AE004",
-   "description": "Audit of location already under process",
-   "defaultMessage": "已在處理之位置的稽核"
- },
- {
-   "id": "notify.error.audit.AE005",
-   "description": "Audit of sku already under process",
-   "defaultMessage": "已在處理之 SKU 的稽核"
- },
- {
-   "id": "notify.error.audit.AE006",
-   "description": "Audit ID already processed",
-   "defaultMessage": "稽核 ID 已處理完畢"
- },
- {
-   "id": "notify.create.audit.success",
-   "description": "New audit task created successfully",
-   "defaultMessage": "已成功建立新的稽核工作"
- },
- {
-   "id": "notify.start.audit.success",
-   "description": "PPS assigned successfully. Audit task started",
-   "defaultMessage": "成功指派 PPS。稽核工作已開始"
- },
- {
-   "id": "notify.delete.audit.processed",
-   "description": "Audit already processed. Cannot delete",
-   "defaultMessage": "稽核已處理完畢。無法刪除"
- },
- {
-   "id": "notify.Location.audit.pending",
-   "description": "Location of audit pending for approval",
-   "defaultMessage": "等候核准之稽核的位置"
- },
- {
-   "id": "notify.Location.currently.processed",
-   "description": "Location of audit currently being processed",
-   "defaultMessage": "目前正在處理之稽核的位置"
- },
- {
-   "id": "notify.error.user.fail",
-   "description": "Error in updating user",
-   "defaultMessage": "更新使用者時發生錯誤"
- },
- {
-   "id": "notify.error.user.response",
-   "description": "Error in response",
-   "defaultMessage": "回應時發生錯誤"
- },
- {
-   "id": "notify.error.audit.create",
-   "description": "Error in creating audit",
-   "defaultMessage": "建立稽核時發生錯誤"
- },
- {
-   "id": "notify.error.api",
-   "description": "API response not registered",
-   "defaultMessage": "API 回應未登錄"
- },
- {
-   "id": "notify.error.connection",
-   "description": "Network Failure",
-   "defaultMessage": "網路失敗"
- },
- {
-   "id": "notify.error.400",
-   "description": "Network error: 400 Bad Request",
-   "defaultMessage": "網路錯誤：400 錯誤的要求"
- },
- {
-   "id": "notify.error.401",
-   "description": "Network error: 401 Unauthorized",
-   "defaultMessage": "網路錯誤：401 未經授權"
- },
- {
-   "id": "notify.error.403",
-   "description": "Network error: 403 Forbidden",
-   "defaultMessage": "網路錯誤：403 禁止"
- },
- {
-   "id": "notify.error.405",
-   "description": "Network error: 405 Method Not Allowed",
-   "defaultMessage": "網路錯誤：405 方式不允許"
- },
- {
-   "id": "notify.error.408",
-   "description": "Network error: 408 Request Time-out",
-   "defaultMessage": "網路錯誤：408 要求逾時"
- },
- {
-   "id": "notify.error.409",
-   "description": "Network error: 409 Conflict",
-   "defaultMessage": "網路錯誤：409 衝突"
- },
- {
-   "id": "notify.error.500",
-   "description": "Network error: 500 Internal Servor Error",
-   "defaultMessage": "網路錯誤：500 內部伺服器錯誤"
- },
- {
-   "id": "notify.error.502",
-   "description": "Network error: 502 Bad Gateway",
-   "defaultMessage": "網路錯誤：502 錯誤的閘道"
- },
- {
-   "id": "inventory.histogram.noDataText",
-   "description": "No Stock Found",
-   "defaultMessage": "查無庫存"
- },
- {
-   "id": "users.add.password.subheading.manager",
-   "description": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface",
-   "defaultMessage": "至少 8 個英數字元的密碼將用於登入管理介面和操作人員介面"
- },
- {
-   "id": "users.add.password.subheading.operator",
-   "description": "A password of 6 digits will be required for logging into the Operator Interface.",
-   "defaultMessage": "至少 6 個英數字元的密碼將用於登入操作人員介面。"
- },
- {
-   "id": "emergency.resume.coreerror",
-   "description": "Cannot connect to butler core",
-   "defaultMessage": "無法連線至 Butler 核心"
- },
- {
-   "id": "emergency.resume.statuserror",
-   "description": "Emergency status not soft_manual",
-   "defaultMessage": "緊急狀態非 soft_manual"
- },
- {
-   "id": "emergency.resume.success",
-   "description": "Operation resumed",
-   "defaultMessage": "已恢復作業"
- },
- {
-   "id": "widget.audit.heading.value",
-   "description": "None",
-   "defaultMessage": "無"
- },
- {
-   "id": "widget.audit.status.idle",
-   "description": "{count} idle PPS (Audit mode)",
-   "defaultMessage": "{count} 個閒置的 PPS（稽核模式）"
- },
- {
-   "id": "widget.audit.throughput",
-   "description": "{pps_count} PPS auditing {throughput} items/hr",
-   "defaultMessage": "{pps_count} 個 PPS 每小時稽核 {throughput} 件"
- },
- {
-   "id": "widget.audit.offline",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "widget.audit.emergency",
-   "description": "--",
-   "defaultMessage": "--"
- },
- {
-   "id": "widget.audit.heading",
-   "description": "Items audited",
-   "defaultMessage": "已稽核品項"
- },
- {
-   "id": "auditdetail.created.status",
-   "description": "Created",
-   "defaultMessage": "已建立"
- },
- {
-   "id": "auditdetail.pending.status",
-   "description": "Pending",
-   "defaultMessage": "待處理"
- },
- {
-   "id": "auditdetail.progress.status",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "auditdetail.completed.status",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "auditdetail.sku.prefix",
-   "description": "SKU",
-   "defaultMessage": "SKU"
- },
- {
-   "id": "auditdetail.location.prefix",
-   "description": "Location",
-   "defaultMessage": "位置"
- },
- {
-   "id": "auditdetail.auditPendingApp.prefix",
-   "description": "Issues found",
-   "defaultMessage": "發現問題"
- },
- {
-   "id": "auditdetail.auditRejected.prefix",
-   "description": "Rejected",
-   "defaultMessage": "已拒絕"
- },
- {
-   "id": "auditdetail.auditResolved.prefix",
-   "description": "Resolved",
-   "defaultMessage": "已解決"
- },
- {
-   "id": "auditdetail.auditReaudited.prefix",
-   "description": "Re-audited",
-   "defaultMessage": "已再次稽核"
- },
- {
-   "id": "audit.inputField.id",
-   "description": "AUDIT TASK ID",
-   "defaultMessage": "稽核工作 ID"
- },
- {
-   "id": "audit.inputField.sku",
-   "description": "SPECIFIC SKU ID",
-   "defaultMessage": "特定 SKU ID"
- },
- {
-   "id": "audit.inputField.location",
-   "description": "SPECIFIC LOCATION ID",
-   "defaultMessage": "特定位置 ID"
- },
- {
-   "id": "audit.tokenfield.typeAudit",
-   "description": "AUDIT TYPE",
-   "defaultMessage": "稽核類型"
- },
- {
-   "id": "audit.tokenfield.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "audit.token1.all",
-   "description": "Any",
-   "defaultMessage": "任何"
- },
- {
-   "id": "audit.token1.sku",
-   "description": "SKU",
-   "defaultMessage": "SKU"
- },
- {
-   "id": "audit.token1.location",
-   "description": "Location",
-   "defaultMessage": "位置"
- },
- {
-   "id": "audit.token2.all",
-   "description": "Any",
-   "defaultMessage": "任何"
- },
- {
-   "id": "audit.token2.issueFound",
-   "description": "Issue found",
-   "defaultMessage": "發現問題"
- },
- {
-   "id": "audit.token2.rejected",
-   "description": "Rejected",
-   "defaultMessage": "已拒絕"
- },
- {
-   "id": "audit.token2.resolved",
-   "description": "Resolved",
-   "defaultMessage": "已解決"
- },
- {
-   "id": "audit.token2.inProgress",
-   "description": "In progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "audit.token2.pending",
-   "description": "Pending",
-   "defaultMessage": "待處理"
- },
- {
-   "id": "audit.placeholder",
-   "description": "Manage Tasks",
-   "defaultMessage": "管理工作"
- },
- {
-   "id": "auditList.alert.lable",
-   "description": "{auditIssue},{auditIssue, plural, one {Alert} other {Alerts}}",
-   "defaultMessage": "{auditIssue}，{auditIssue, plural, one {警告} other {警告}}"
- },
- {
-   "id": "audit.table.duplicateTask",
-   "description": "Duplicate task",
-   "defaultMessage": "複製工作"
- },
- {
-   "id": "audit.table.deleteRecord",
-   "description": "Delete record",
-   "defaultMessage": "刪除紀錄"
- },
- {
-   "id": "audit.table.noData",
-   "description": "No Audit Task Found",
-   "defaultMessage": "查無稽核工作"
- },
- {
-   "id": "audit.table.heading",
-   "description": "Audit Tasks",
-   "defaultMessage": "稽核工作"
- },
- {
-   "id": "audit.table.buttonLable",
-   "description": "Create New Task",
-   "defaultMessage": "建立新工作"
- },
- {
-   "id": "audit.table.filterLabel",
-   "description": "Filter",
-   "defaultMessage": "篩選器"
- },
- {
-   "id": "orderlist.filter.search.bar",
-   "description": "{totalOrder} Orders found",
-   "defaultMessage": "找到 {totalOrder} 筆訂單"
- },
- {
-   "id": "orderlist.filter.search.bar.showall",
-   "description": "Show all orders",
-   "defaultMessage": "顯示所有訂單"
- },
- {
-   "id": "auditTable.stationID.heading",
-   "description": "AUDIT ID",
-   "defaultMessage": "稽核 ID"
- },
- {
-   "id": "auditTable.SubAuditID",
-   "description": "Total:{rowsCount}",
-   "defaultMessage": "總數：{rowsCount}"
- },
- {
-   "id": "audit.table.type",
-   "description": "AUDIT TYPE",
-   "defaultMessage": "稽核類型"
- },
- {
-   "id": "audit.auditType",
-   "description": "SKU ({sku}) . Location ({location})",
-   "defaultMessage": "SKU ({sku})位置 ({location})"
- },
- {
-   "id": "audit.table.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "auditTable.status",
-   "description": "{auditCompleted} Completed",
-   "defaultMessage": "{auditCompleted} 項已完成"
- },
- {
-   "id": "audit.table.startTime",
-   "description": "START TIME",
-   "defaultMessage": "開始時間"
- },
- {
-   "id": "audit.table.progress",
-   "description": "PROGRESS(%)",
-   "defaultMessage": "進度 (%)"
- },
- {
-   "id": "audit.Totalprogress",
-   "description": "{totalProgress}% Completed",
-   "defaultMessage": "已完成 {totalProgress}%"
- },
- {
-   "id": "audit.table.timeCompleted",
-   "description": "TIME COMPLETED",
-   "defaultMessage": "完成時間"
- },
- {
-   "id": "audit.table.action",
-   "description": "ACTIONS",
-   "defaultMessage": "動作"
- },
- {
-   "id": "audit.valid.sku",
-   "description": "SKU confirmed",
-   "defaultMessage": "SKU 已確認"
- },
- {
-   "id": "audit.invalid.sku",
-   "description": "Please enter correct SKU number",
-   "defaultMessage": "請輸入正確的 SKU 碼"
- },
- {
-   "id": "audit.noAtrributes.sku",
-   "description": "SKU confirmed but no Box Id found",
-   "defaultMessage": "SKU 已確認，但查無箱盒 Id"
- },
- {
-   "id": "audit.add.heading",
-   "description": "Create new audit",
-   "defaultMessage": "建立新的稽核工作"
- },
- {
-   "id": "audit.add.subheading",
-   "description": "Select and enter details below to create a new audit task",
-   "defaultMessage": "選擇並輸入下方詳細資訊，以建立新的稽核工作"
- },
- {
-   "id": "audit.add.auditdetails.heading",
-   "description": "Select audit type by",
-   "defaultMessage": "選擇稽核類型"
- },
- {
-   "id": "audit.add.typedetails.sku",
-   "description": "Audit by SKU code",
-   "defaultMessage": "依 SKU 碼稽核"
- },
- {
-   "id": "audit.add.typedetails.location",
-   "description": "Audit by Location code",
-   "defaultMessage": "依位置代碼稽核"
- },
- {
-   "id": "audit.add.sku.heading",
-   "description": "Enter SKU code",
-   "defaultMessage": "輸入 SKU 碼"
- },
- {
-   "id": "audits.validateSKU",
-   "description": "Validate",
-   "defaultMessage": "驗證"
- },
- {
-   "id": "audit.dropdown.heading",
-   "description": "Choose Box Id (Optional)",
-   "defaultMessage": "選擇箱盒 Id（選填）"
- },
- {
-   "id": "audit.add.location.heading",
-   "description": "Enter Location",
-   "defaultMessage": "輸入位置"
- },
- {
-   "id": "audit.add.location.subheading",
-   "description": "Format: (XXX.X.X.XX)",
-   "defaultMessage": "格式：(XXX.X.X.XX)"
- },
- {
-   "id": "audits.add.password.button",
-   "description": "Create audit",
-   "defaultMessage": "建立稽核"
- },
- {
-   "id": "audit.delete.heading",
-   "description": "Are you sure you would like to delete audit task {task_name} ?",
-   "defaultMessage": "您確定要刪除稽核工作 {task_name}？"
- },
- {
-   "id": "audit.duplicate.heading",
-   "description": "Are you sure you would like to duplicate audit task {task_name} ?",
-   "defaultMessage": "您確定要複製稽核工作 {task_name}？"
- },
- {
-   "id": "audit.start.auditdetails.subheading2",
-   "description": "There are currently no PPS in audit mode.",
-   "defaultMessage": "目前無 PPS 為稽核模式。"
- },
- {
-   "id": "audit.start.auditdetails.please",
-   "description": "Please",
-   "defaultMessage": "請"
- },
- {
-   "id": "audit.start.auditdetails.hyperlink",
-   "description": "go to the PPS mode",
-   "defaultMessage": "前往 PPS 模式"
- },
- {
-   "id": "audit.start.auditdetails.operations",
-   "description": "change PPS operations.",
-   "defaultMessage": "變更 PPS 作業。"
- },
- {
-   "id": "resolveAudit.table.batchID",
-   "description": "BOX ID.",
-   "defaultMessage": "箱盒 ID。"
- },
- {
-   "id": "resolveAudit.table.expectedItems",
-   "description": "EXPECTED QUANTITY",
-   "defaultMessage": "預期數量"
- },
- {
-   "id": "resolveAudit.table.actualQuantity",
-   "description": "ACTUAL QUANTITY",
-   "defaultMessage": "實際數量"
- },
- {
-   "id": "resolveAudit.table.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "resolveAudit.table.resolve",
-   "description": "RESOLVE",
-   "defaultMessage": "解決"
- },
- {
-   "id": "audit.inSlot.text",
-   "description": "In slot",
-   "defaultMessage": "於儲位中"
- },
- {
-   "id": "resolveAudit.table.slot",
-   "description": "SLOT ID",
-   "defaultMessage": "儲位 ID"
- },
- {
-   "id": "audit.resolve.heading",
-   "description": "Resolve issues",
-   "defaultMessage": "解決問題"
- },
- {
-   "id": "audit.viewIssues.heading",
-   "description": "View issues",
-   "defaultMessage": "檢視問題"
- },
- {
-   "id": "audit.missing.information",
-   "description": "Audit task #{auditId} - {auditType}",
-   "defaultMessage": "稽核工作 #{auditId} - {auditType}"
- },
- {
-   "id": "audit.missing.auditType",
-   "description": "Mismatch found in {totalLines} slot",
-   "defaultMessage": "{totalLines} 列儲位中發現不符情形"
- },
- {
-   "id": "resolveAudit.cancelLabel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "resolveAudit.confirmLabel",
-   "description": "Confirm",
-   "defaultMessage": "確認"
- },
- {
-   "id": "resolveAudit.closeLabel",
-   "description": "Close",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "resolveAudit.table.batchID",
-   "description": "BOX ID.",
-   "defaultMessage": "箱盒 ID。"
- },
- {
-   "id": "resolveAudit.table.expectedItems",
-   "description": "EXPECTED QUANTITY",
-   "defaultMessage": "預期數量"
- },
- {
-   "id": "resolveAudit.table.actualQuantity",
-   "description": "ACTUAL QUANTITY",
-   "defaultMessage": "實際數量"
- },
- {
-   "id": "resolveAudit.table.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "resolveAudit.table.resolve",
-   "description": "RESOLVE",
-   "defaultMessage": "解決"
- },
- {
-   "id": "audit.inSlot.text",
-   "description": "In slot",
-   "defaultMessage": "於儲位中"
- },
- {
-   "id": "resolveAudit.table.slot",
-   "description": "SLOT ID",
-   "defaultMessage": "儲位 ID"
- },
- {
-   "id": "audit.resolve.heading",
-   "description": "Resolve issues",
-   "defaultMessage": "解決問題"
- },
- {
-   "id": "audit.viewIssues.heading",
-   "description": "View issues",
-   "defaultMessage": "檢視問題"
- },
- {
-   "id": "audit.missing.information",
-   "description": "Audit task #{auditId} - {auditType}",
-   "defaultMessage": "稽核工作 #{auditId} - {auditType}"
- },
- {
-   "id": "audit.missing.auditType",
-   "description": "Mismatch found in {totalLines} slot",
-   "defaultMessage": "{totalLines} 列儲位中發現不符情形"
- },
- {
-   "id": "resolveAudit.cancelLabel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "resolveAudit.confirmLabel",
-   "description": "Confirm",
-   "defaultMessage": "確認"
- },
- {
-   "id": "resolveAudit.closeLabel",
-   "description": "Close",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "audit.start.ppscheckbox",
-   "description": "PPS {eta}",
-   "defaultMessage": "PPS {eta}"
- },
- {
-   "id": "audit.start.heading",
-   "description": "Start audit task",
-   "defaultMessage": "開始稽核工作"
- },
- {
-   "id": "audit.start.subheading",
-   "description": "Assign one or more PPS and start the audit task",
-   "defaultMessage": "指派一或多個 PPS，並開始稽核工作"
- },
- {
-   "id": "audit.start.auditdetails.heading",
-   "description": "Assign PPS for {task}",
-   "defaultMessage": "為 {task} 指派 PPS"
- },
- {
-   "id": "audit.start.auditdetails.subheading1",
-   "description": "All PPS below are currently in the audit mode.",
-   "defaultMessage": "下方所有 PPS 目前皆為稽核模式。"
- },
- {
-   "id": "audit.start.button",
-   "description": "Start task now",
-   "defaultMessage": "立即開始工作"
- },
- {
-   "id": "audit.back.button",
-   "description": "Go Back",
-   "defaultMessage": "返回"
- },
- {
-   "id": "audit.add.heading",
-   "description": "Create new audit",
-   "defaultMessage": "建立新的稽核工作"
- },
- {
-   "id": "audit.add.subheading",
-   "description": "Select and enter details below to create a new audit task",
-   "defaultMessage": "選擇並輸入下方詳細資訊，以建立新的稽核工作"
- },
- {
-   "id": "audit.add.auditdetails.heading",
-   "description": "Select the type of audit task",
-   "defaultMessage": "選擇稽核工作的類型"
- },
- {
-   "id": "audit.add.auditdetails.subheading",
-   "description": "Select the audit type and enter details accordingly",
-   "defaultMessage": "選擇稽核類型並據此輸入詳細資訊"
- },
- {
-   "id": "audit.add.auditdetails.fields",
-   "description": "All fields are required",
-   "defaultMessage": "所有欄位皆為必填"
- },
- {
-   "id": "audit.add.type.heading",
-   "description": "Audit type",
-   "defaultMessage": "稽核類型"
- },
- {
-   "id": "audit.add.typedetails.sku",
-   "description": "Audit by SKU code",
-   "defaultMessage": "依 SKU 碼稽核"
- },
- {
-   "id": "audit.add.typedetails.skutext",
-   "description": "Create an audit task based on the SKU code of an item",
-   "defaultMessage": "依品項的 SKU 碼建立稽核工作"
- },
- {
-   "id": "audit.add.typedetails.location",
-   "description": "Audit by Location code",
-   "defaultMessage": "依位置代碼稽核"
- },
- {
-   "id": "audit.add.typedetails.locationtext",
-   "description": "Create an audit task based on the location of a MSU",
-   "defaultMessage": "依 MSU 的位置建立稽核工作"
- },
- {
-   "id": "audit.add.sku.heading",
-   "description": "Enter SKU code",
-   "defaultMessage": "輸入 SKU 碼"
- },
- {
-   "id": "audit.add.sku.subheading",
-   "description": "Enter alphanumeric SKU code of the item to be audited",
-   "defaultMessage": "輸入須稽核品項的英數字 SKU 碼"
- },
- {
-   "id": "audit.add.location.heading",
-   "description": "Enter Location",
-   "defaultMessage": "輸入位置"
- },
- {
-   "id": "audit.add.location.subheading",
-   "description": "Format: (XXX.X.X.XX)",
-   "defaultMessage": "格式：(XXX.X.X.XX)"
- },
- {
-   "id": "audit.add.tips.heading",
-   "description": "Tips:",
-   "defaultMessage": "提示："
- },
- {
-   "id": "audit.add.tips.subheading",
-   "description": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task.",
-   "defaultMessage": "稽核工作建立後，請按一下稽核清單中的「指派 PPS」按鈕，開始稽核工作。"
- },
- {
-   "id": "audits.add.password.button",
-   "description": "Create audit",
-   "defaultMessage": "建立稽核"
- },
- {
-   "id": "audit.duplicate.heading",
-   "description": "Are you sure you would like to duplicate audit task {task_name} ?",
-   "defaultMessage": "您確定要複製稽核工作 {task_name}？"
- },
- {
-   "id": "emergency.heading",
-   "description": "Systemwide emergency stop",
-   "defaultMessage": "全系統緊急停止"
- },
- {
-   "id": "emergency.type",
-   "description": "The butler system is now stopped by a {type} emergency.",
-   "defaultMessage": "Butler 系統現在因 {type} 緊急狀況停止。"
- },
- {
-   "id": "emergency.action",
-   "description": "System reset required before returning to operation",
-   "defaultMessage": "須進行系統重設，方能恢復作業"
- },
- {
-   "id": "emergency.stop",
-   "description": "Stoppped:",
-   "defaultMessage": "停止："
- },
- {
-   "id": "emergency.trigger",
-   "description": "Triggered at:",
-   "defaultMessage": "觸發："
- },
- {
-   "id": "emergency.operator",
-   "description": "Operator:",
-   "defaultMessage": "作業員："
- },
- {
-   "id": "emergency.button",
-   "description": "Close",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "operation.alert.release",
-   "description": "Stop button released",
-   "defaultMessage": "已釋放停止按鈕"
- },
- {
-   "id": "operation.alert.release.text",
-   "description": "Emergency Stop button has been released.",
-   "defaultMessage": "已釋放緊急停止按鈕。"
- },
- {
-   "id": "operation.alert.release.subtext",
-   "description": "You will be required to enter your password in order to view the checklist.               Approving all the items on checklist will resume the warehouse operation",
-   "defaultMessage": "您須輸入密碼，方能檢視檢查清單。核准所有檢查清單中的項目將恢復倉庫作業"
- },
- {
-   "id": "operation.alert.release.button",
-   "description": "Resume operation",
-   "defaultMessage": "恢復作業"
- },
- {
-   "id": "operation.alert.stop",
-   "description": "Operation Stopped",
-   "defaultMessage": "作業停止"
- },
- {
-   "id": "operation.alert.pause",
-   "description": "Operation Paused",
-   "defaultMessage": "作業暫停"
- },
- {
-   "id": "operation.alert.stop.text",
-   "description": "Emergency Stop button has been pressed.",
-   "defaultMessage": "已按下緊急停止按鈕。"
- },
- {
-   "id": "operation.alert.pause.text",
-   "description": "Butler operation has been paused from the management dashboard",
-   "defaultMessage": "Butler 作業已透過管理儀表板暫停"
- },
- {
-   "id": "operation.alert.stop.subtext",
-   "description": "To resume butler operation in the warehouse, you will be required to go through a safety checklist",
-   "defaultMessage": "如須恢復倉庫中 Butler 的作業，您必須完成安全檢查清單"
- },
- {
-   "id": "operation.alert.pause.subtext",
-   "description": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse",
-   "defaultMessage": "您必須檢查緊急狀況並釋放緊急停止按紐，以恢復倉庫中的作業"
- },
- {
-   "id": "operation.pause.heading",
-   "description": "Pause Operation",
-   "defaultMessage": "暫停作業"
- },
- {
-   "id": "operation.pause.text",
-   "description": "All Butler bots, PPS and other sysytem components will be paused once               completed the last action",
-   "defaultMessage": "一旦完成最後動作，所有 Butler 機器人、PPS 和其他系統元件都將暫停"
- },
- {
-   "id": "operation.pause.error",
-   "description": "The entered input does not match. Please try again.",
-   "defaultMessage": "輸入的內容不符。請再試一次。"
- },
- {
-   "id": "operation.pause.cancel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "operation.pause.button",
-   "description": "Pause Operation",
-   "defaultMessage": "暫停作業"
- },
- {
-   "id": "operation.resume.heading",
-   "description": "Resume Operation",
-   "defaultMessage": "恢復作業"
- },
- {
-   "id": "operation.resume.text",
-   "description": "To resume operation, you will be required to go through a safety                 checklist to make sure that the Butler system is ready",
-   "defaultMessage": "如須恢復作業，您必須完成安全檢查清單，以確保 Butler 系統準備就緒"
- },
- {
-   "id": "operation.resume.error",
-   "description": "The entered input does not match. Please try again.",
-   "defaultMessage": "輸入的內容不符。請再試一次。"
- },
- {
-   "id": "operation.cancel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "operation.resume.view",
-   "description": "View safety checklist",
-   "defaultMessage": "檢視安全檢查清單"
- },
- {
-   "id": "operation.safety.steperror",
-   "description": "(Check again)",
-   "defaultMessage": "（再次檢查）"
- },
- {
-   "id": "operation.safety.heading",
-   "description": "Safety checklist",
-   "defaultMessage": "安全檢查清單"
- },
- {
-   "id": "operation.safety.steps",
-   "description": "Check approval steps",
-   "defaultMessage": "檢查核准步驟"
- },
- {
-   "id": "operation.safety.text",
-   "description": "Tick every item to confirm that the system is safe to resume operation.",
-   "defaultMessage": "勾選所有項目，以確認該系統可安全恢復作業。"
- },
- {
-   "id": "operation.safety.errors",
-   "description": "System has found some of these steps were not followed.                      Please check or contact service engineer for support",
-   "defaultMessage": "系統發現部分步驟未被遵守。請檢查或聯絡維修工程師以取得支援"
- },
- {
-   "id": "operation.safety.confirm",
-   "description": "",
-   "defaultMessage": ""
- },
- {
-   "id": "inventory.histogram.header",
-   "description": "Stock level history",
-   "defaultMessage": "庫存水準歷史紀錄"
- },
- {
-   "id": "inventory.linechart.header",
-   "description": "Item Movements",
-   "defaultMessage": "品項移動"
- },
- {
-   "id": "inventory.histogram.noDataText",
-   "description": "No Stock Found",
-   "defaultMessage": "查無庫存"
- },
- {
-   "id": "inventory.histogram.today",
-   "description": "Today's",
-   "defaultMessage": "今天"
- },
- {
-   "id": "snapshot.inventory.usedSpace",
-   "description": "{utilisedSpace}% space utilized",
-   "defaultMessage": "已使用 {utilisedSpace}% 空間"
- },
- {
-   "id": "itemCat.category.heading",
-   "description": "Category",
-   "defaultMessage": "類別"
- },
- {
-   "id": "itemCat.CBM.heading",
-   "description": "CBM Used",
-   "defaultMessage": "使用的 CBM"
- },
- {
-   "id": "itemCat.daysOnHand.heading",
-   "description": "Days on Hand",
-   "defaultMessage": "可用天數"
- },
- {
-   "id": "logout.question",
-   "description": "Are you sure you would like to log out now?",
-   "defaultMessage": "您確定要立即登出？"
- },
- {
-   "id": "logout.cancel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "logout.done",
-   "description": "Log out now",
-   "defaultMessage": "立即登出"
- },
- {
-   "id": "audit.start.auditdetails.subheading2",
-   "description": "There are currently no PPS in audit mode.",
-   "defaultMessage": "目前無 PPS 為稽核模式。"
- },
- {
-   "id": "audit.start.auditdetails.noPPS1",
-   "description": "Please",
-   "defaultMessage": "請"
- },
- {
-   "id": "audit.start.auditdetails.noPPS2",
-   "description": "go to the PPS mode",
-   "defaultMessage": "前往 PPS 模式"
- },
- {
-   "id": "audit.start.auditdetails.noPPS3",
-   "description": "change PPS operations.",
-   "defaultMessage": "變更 PPS 作業。"
- },
- {
-   "id": "pickPerformance.dropdown",
-   "description": "PPS Pick Performance",
-   "defaultMessage": "PPS 揀貨績效"
- },
- {
-   "id": "putPerformance.dropdown",
-   "description": "PPS Put Performance",
-   "defaultMessage": "PPS 放置績效"
- },
- {
-   "id": "auditPerformance.dropdown",
-   "description": "PPS Audit Performance",
-   "defaultMessage": "PPS 稽核績效"
- },
- {
-   "id": "order.inputField.id",
-   "description": "ORDER ID",
-   "defaultMessage": "訂單 ID"
- },
- {
-   "id": "order.token.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "order.token.timePeriod",
-   "description": "TIME PERIOD",
-   "defaultMessage": "期間"
- },
- {
-   "id": "order.STATUS.all",
-   "description": "All orders",
-   "defaultMessage": "所有訂單"
- },
- {
-   "id": "order.STATUS.breach",
-   "description": "Breached orders",
-   "defaultMessage": "違約訂單"
- },
- {
-   "id": "order.STATUS.pending",
-   "description": "Pending orders",
-   "defaultMessage": "待處理訂單"
- },
- {
-   "id": "order.STATUS.completed",
-   "description": "Completed orders",
-   "defaultMessage": "已完成訂單"
- },
- {
-   "id": "order.STATUS.exep",
-   "description": "Exception",
-   "defaultMessage": "例外"
- },
- {
-   "id": "order.timePeriod.all",
-   "description": "All",
-   "defaultMessage": "全部"
- },
- {
-   "id": "order.timePeriod.oneHr",
-   "description": "Last 1 hours",
-   "defaultMessage": "前 1 小時"
- },
- {
-   "id": "order.timePeriod.twoHR",
-   "description": "Last 2 hours",
-   "defaultMessage": "前 2 小時"
- },
- {
-   "id": "order.timePeriod.sixHr",
-   "description": "Last 6 hours",
-   "defaultMessage": "前 6 小時"
- },
- {
-   "id": "order.timePeriod.twoHr",
-   "description": "Last 12 hours",
-   "defaultMessage": "前 12 小時"
- },
- {
-   "id": "order.timePeriod.oneday",
-   "description": "Last 1 day",
-   "defaultMessage": "前1 天"
- },
- {
-   "id": "orderList.progress.status",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "orderList.completed.status",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "orderList.exception.status",
-   "description": "Exception",
-   "defaultMessage": "例外"
- },
- {
-   "id": "orderList.Unfulfillable.status",
-   "description": "Unfulfillable",
-   "defaultMessage": "不可供發貨"
- },
- {
-   "id": "orderlist.Refreshed.at",
-   "description": "Last Updated",
-   "defaultMessage": "上次更新時間"
- },
- {
-   "id": "orderlistTab.orderListRefreshedat",
-   "description": "Last Updated",
-   "defaultMessage": "上次更新時間"
- },
- {
-   "id": "table.filter.placeholder",
-   "description": "Filter by keywords",
-   "defaultMessage": "依關鍵字篩選"
- },
- {
-   "id": "orderlist.table.allDrop",
-   "description": "All orders",
-   "defaultMessage": "所有訂單"
- },
- {
-   "id": "orderlist.table.breachedDrop",
-   "description": "Breached orders",
-   "defaultMessage": "違約訂單"
- },
- {
-   "id": "pendingDrop.table.allDrop",
-   "description": "Pending orders",
-   "defaultMessage": "待處理訂單"
- },
- {
-   "id": "completedDrop.table.allDrop",
-   "description": "Completed orders",
-   "defaultMessage": "已完成訂單"
- },
- {
-   "id": "exceptionDrop.table",
-   "description": "Exception",
-   "defaultMessage": "例外"
- },
- {
-   "id": "orderlist.table.allTimeDrop",
-   "description": "All",
-   "defaultMessage": "全部"
- },
- {
-   "id": "orderlist.table.oneHrDrop",
-   "description": "Last 1 hours",
-   "defaultMessage": "前 1 小時"
- },
- {
-   "id": "pendingDrop.table.twoHrDrop",
-   "description": "Last 2 hours",
-   "defaultMessage": "前 2 小時"
- },
- {
-   "id": "completedDrop.table.sixHrDrop",
-   "description": "Last 6 hours",
-   "defaultMessage": "前 6 小時"
- },
- {
-   "id": "pendingDrop.table.twelveHrDrop",
-   "description": "Last 12 hours",
-   "defaultMessage": "前12 小時"
- },
- {
-   "id": "completedDrop.table.oneDayDrop",
-   "description": "Last 1 day",
-   "defaultMessage": "前1 天"
- },
- {
-   "id": "orderlist.table.noData",
-   "description": "No Orders Found",
-   "defaultMessage": "查無訂單"
- },
- {
-   "id": "order.table.heading",
-   "description": "OrderList",
-   "defaultMessage": "訂單列表"
- },
- {
-   "id": "order.table.buttonLable",
-   "description": "Refresh Data",
-   "defaultMessage": "重新整理資料"
- },
- {
-   "id": "gor.filter.filterLabel",
-   "description": "Filter Data",
-   "defaultMessage": "篩選資料"
- },
- {
-   "id": "orderlist.filter.search.bar",
-   "description": "{totalOrder} Orders found",
-   "defaultMessage": "找到 {totalOrder} 筆訂單"
- },
- {
-   "id": "orderlist.filter.search.bar.showall",
-   "description": "Show all orders",
-   "defaultMessage": "顯示所有訂單"
- },
- {
-   "id": "orderlist.order.headingText",
-   "description": "ORDER ID",
-   "defaultMessage": "訂單 ID"
- },
- {
-   "id": "orderlist.subTotalorder",
-   "description": "Total:{totalOrder}",
-   "defaultMessage": "總數：{totalOrder}"
- },
- {
-   "id": "orderList.table.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "orderlist.table.pickBy",
-   "description": "PICK BY",
-   "defaultMessage": "揀貨依據"
- },
- {
-   "id": "orderlist.pendingOrders",
-   "description": "{pendingOrders} orders pending",
-   "defaultMessage": "{pendingOrders} 筆訂單待處理"
- },
- {
-   "id": "orderlist.table.operatingMode",
-   "description": "RECEIVED TIME",
-   "defaultMessage": "接收時間"
- },
- {
-   "id": "orderlist.table.completedTime",
-   "description": "COMPLETED",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "orderlist.totalCompletedOrder",
-   "description": "Avg {totalCompletedOrder} orders/hr",
-   "defaultMessage": "平均每小時 {totalCompletedOrder} 筆"
- },
- {
-   "id": "orderlist.table.orderLine",
-   "description": "ORDER LINE",
-   "defaultMessage": "訂單產品線"
- },
- {
-   "id": "orderlist.itemsPerOrder",
-   "description": "Avg {itemsPerOrder} items/hr",
-   "defaultMessage": "平均每小時 {itemsPerOrder} 件"
- },
- {
-   "id": "waveDetail.id.prefix",
-   "description": "WAVE-{waveId}",
-   "defaultMessage": "個別作業-{waveId}"
- },
- {
-   "id": "waves.table.noData",
-   "description": "No Waves Found",
-   "defaultMessage": "查無個別作業"
- },
- {
-   "id": "waves.table.heading",
-   "description": "Waves",
-   "defaultMessage": "個別作業"
- },
- {
-   "id": "WavesTable.heading",
-   "description": "Waves",
-   "defaultMessage": "個別作業"
- },
- {
-   "id": "WavesTable.Totalwaves",
-   "description": "Total:{totalwave}",
-   "defaultMessage": "總數：{totalwave}"
- },
- {
-   "id": "waves.table.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "waves.table.startTime",
-   "description": "START TIME",
-   "defaultMessage": "開始時間"
- },
- {
-   "id": "WavesTable.pending.status",
-   "description": "{pendingWave} waves pending",
-   "defaultMessage": "{pendingWave} 項個別作業待處理"
- },
- {
-   "id": "waves.table.cutOffTime",
-   "description": "CUT-OFF TIME",
-   "defaultMessage": "截止時間"
- },
- {
-   "id": "WavesTable.progress.status",
-   "description": "{progressWave} waves in progress",
-   "defaultMessage": "{progressWave} 項個別作業進行中"
- },
- {
-   "id": "waves.table.ordersToFulfill",
-   "description": "ORDERS TO FULFILL",
-   "defaultMessage": "須完成的訂單"
- },
- {
-   "id": "WavesTable.orderRemaining.status",
-   "description": "{orderRemaining} remaining",
-   "defaultMessage": "剩餘 {orderRemaining} 筆"
- },
- {
-   "id": "waves.table.progress",
-   "description": "PROGRESS(%)",
-   "defaultMessage": "進度 (%)"
- },
- {
-   "id": "WavesTable.completed.status",
-   "description": "{completedWaves} waves completed",
-   "defaultMessage": "{completedWaves} 項個別作業已完成"
- },
- {
-   "id": "waves.table.totalOrders",
-   "description": "TOTAL ORDERS",
-   "defaultMessage": "訂單總數"
- },
- {
-   "id": "WavesTable.totalOrders.status",
-   "description": "{totalOrders} orders",
-   "defaultMessage": "{totalOrders} 筆訂單"
- },
- {
-   "id": "performanceParam.graph",
-   "description": "items/hr",
-   "defaultMessage": "件／小時"
- },
- {
-   "id": "health.pps",
-   "description": "PPS",
-   "defaultMessage": "PPS"
- },
- {
-   "id": "health.Butler",
-   "description": "Butler bots",
-   "defaultMessage": "Butler 機器人"
- },
- {
-   "id": "health.ChargingStation",
-   "description": "Charging Stations",
-   "defaultMessage": "充電站"
- },
- {
-   "id": "systemHealth.dropdown",
-   "description": "System Health",
-   "defaultMessage": "系統健康情況"
- },
- {
-   "id": "PPSpickPerformance.dropdown",
-   "description": "PPS Pick Performance",
-   "defaultMessage": "PPS 揀貨績效"
- },
- {
-   "id": "PPSputPerformance.dropdown",
-   "description": "PPS Put Performance",
-   "defaultMessage": "PPS 放置績效"
- },
- {
-   "id": "PPSauditPerformance.dropdown",
-   "description": "PPS Audit Performance",
-   "defaultMessage": "PPS 稽核績效"
- },
- {
-   "id": "health.noData",
-   "description": "No Data",
-   "defaultMessage": "無資料"
- },
- {
-   "id": "widget.pick.headingleft",
-   "description": "Orders to fullfill",
-   "defaultMessage": "須完成的訂單"
- },
- {
-   "id": "widget.pick.completed",
-   "description": "COMPLETED",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "widget.pick.none",
-   "description": "None",
-   "defaultMessage": "無"
- },
- {
-   "id": "widget.pick.idle",
-   "description": "{count} idle PPS (Pick mode)",
-   "defaultMessage": "{count} 個閒置的 PPS（揀貨模式）"
- },
- {
-   "id": "widget.pick.throughput",
-   "description": "{count} PPS fullfilling at {throughput} items/hr",
-   "defaultMessage": "{count} 個 PPS 每小時完成 {throughput} 件"
- },
- {
-   "id": "widget.pick.lowright",
-   "description": "Estimated to complete in {eta}",
-   "defaultMessage": "估計完成於 {eta}"
- },
- {
-   "id": "widget.pick.headingright",
-   "description": "Time to cut-off",
-   "defaultMessage": "截止時間"
- },
- {
-   "id": "widget.pick.textright",
-   "description": "{cut_off}",
-   "defaultMessage": "{cut_off}"
- },
- {
-   "id": "widget.pick.statusleft.onschedule",
-   "description": "On Schedule",
-   "defaultMessage": "準時"
- },
- {
-   "id": "widget.pick.statusleft.atrisk",
-   "description": "{count_risk},{count_risk, plural, one {order} other {orders}} at risk",
-   "defaultMessage": "{count_risk}、{count_risk, plural, one {訂單} other {訂單}} 有風險"
- },
- {
-   "id": "widget.pick.offline",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "widget.pick.emergency",
-   "description": "--",
-   "defaultMessage": "--"
- },
- {
-   "id": "widget.pick.statusleft.delay",
-   "description": "Delayed",
-   "defaultMessage": "延遲"
- },
- {
-   "id": "widget.pick.lowright.emergency",
-   "description": "Estimated to complete in --",
-   "defaultMessage": "估計完成時間 --"
- },
- {
-   "id": "widget.put.heading.value",
-   "description": "None",
-   "defaultMessage": "無"
- },
- {
-   "id": "widget.put.status.idle",
-   "description": "{count} idle PPS (Put mode)",
-   "defaultMessage": "{count} 個閒置的 PPS（放置模式）"
- },
- {
-   "id": "widget.put.throughput",
-   "description": "{count},{pluralMsg} stocking {throughput} items/hr",
-   "defaultMessage": "{count}、{pluralMsg} 每小時存放 {throughput} 件"
- },
- {
-   "id": "widget.put.offline",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "widget.put.emergency",
-   "description": "--",
-   "defaultMessage": "--"
- },
- {
-   "id": "widget.put.heading",
-   "description": "Items stocked",
-   "defaultMessage": "庫存的品項"
- },
- {
-   "id": "audit.start.ppscheckbox",
-   "description": "PPS {eta}",
-   "defaultMessage": "PPS {eta}"
- },
- {
-   "id": "audit.start.heading",
-   "description": "Start audit task",
-   "defaultMessage": "開始稽核工作"
- },
- {
-   "id": "audit.start.subheading",
-   "description": "Assign one or more PPS and start the audit task.",
-   "defaultMessage": "指派一或多個 PPS，並開始稽核工作。"
- },
- {
-   "id": "audit.start.auditdetails.heading",
-   "description": "Assign PPS for Location",
-   "defaultMessage": "為位置指派 PPS"
- },
- {
-   "id": "audit.start.auditdetails.subheading1",
-   "description": "All PPS below are currently in the audit mode.",
-   "defaultMessage": "下方所有 PPS 目前皆為稽核模式。"
- },
- {
-   "id": "audit.start.button",
-   "description": "Start task now",
-   "defaultMessage": "立即開始工作"
- },
- {
-   "id": "audit.back.button",
-   "description": "Go Back",
-   "defaultMessage": "返回"
- },
- {
-   "id": "butletbot.inputField.id",
-   "description": "BOT ID",
-   "defaultMessage": "機器人 ID"
- },
- {
-   "id": "butletbot.inputField.sku",
-   "description": "SPECIFIC LOCATION/ZONE",
-   "defaultMessage": "特定位置／區域"
- },
- {
-   "id": "butletbot.tokenfield.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "butletbot.tokenfield.MODE",
-   "description": "MODE",
-   "defaultMessage": "模式"
- },
- {
-   "id": "butletbot.token1.all",
-   "description": "Any",
-   "defaultMessage": "任何"
- },
- {
-   "id": "butletbot.token1.stopped",
-   "description": "Stopped",
-   "defaultMessage": "已停止"
- },
- {
-   "id": "butletbot.token1.error",
-   "description": "Error",
-   "defaultMessage": "錯誤"
- },
- {
-   "id": "butletbot.token1.warning",
-   "description": "Warning",
-   "defaultMessage": "警告"
- },
- {
-   "id": "butletbot.token1.Online",
-   "description": "Online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "butletbot.token1.Offline",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "butletbot.token2.any",
-   "description": "Any",
-   "defaultMessage": "任何"
- },
- {
-   "id": "butletbot.token2.pick",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "butletbot.token2.put",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "butletbot.token2.audit",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "butletbot.token2.charging",
-   "description": "Charging",
-   "defaultMessage": "充電"
- },
- {
-   "id": "butletbot.token2.notSet",
-   "description": "Not set",
-   "defaultMessage": "未設定"
- },
- {
-   "id": "butlerDetail.name.prefix",
-   "description": "BOT - {botId}",
-   "defaultMessage": "BOT - {botId}"
- },
- {
-   "id": "pps.name.prefix",
-   "description": "PPS {ppsId}",
-   "defaultMessage": "PPS {ppsId}"
- },
- {
-   "id": "charger.name.prefix",
-   "description": "CS - {csId}",
-   "defaultMessage": "CS - {csId}"
- },
- {
-   "id": "msu.name.prefix",
-   "description": "MSU - {msuId}",
-   "defaultMessage": "MSU - {msuId}"
- },
- {
-   "id": "audit.name.prefix",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "pick.name.prefix",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "Put.name.prefix",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "Charging.name.prefix",
-   "description": "Charging",
-   "defaultMessage": "充電"
- },
- {
-   "id": "Move.name.prefix",
-   "description": "Move",
-   "defaultMessage": "移動"
- },
- {
-   "id": "moving.task",
-   "description": "Moving to",
-   "defaultMessage": "移動至"
- },
- {
-   "id": "movingMount.task",
-   "description": "Moving to mount",
-   "defaultMessage": "移動以裝載"
- },
- {
-   "id": "movingDismount.task",
-   "description": "Moving to dismount",
-   "defaultMessage": "移動以卸貨"
- },
- {
-   "id": "docked.task",
-   "description": "Docked at",
-   "defaultMessage": "停靠於"
- },
- {
-   "id": "butlerbot.table.noData",
-   "description": "No Butler Bot Found",
-   "defaultMessage": "找不到 Butler 機器人"
- },
- {
-   "id": "butlerBot.table.heading",
-   "description": "Butler Bots",
-   "defaultMessage": "Butler 機器人"
- },
- {
-   "id": "butlerbot.table.filterLabel",
-   "description": "Filter",
-   "defaultMessage": "篩選器"
- },
- {
-   "id": "ButlerBotTable.TotalBot",
-   "description": "BOTS",
-   "defaultMessage": "機器人"
- },
- {
-   "id": "ButlerBotTable.subTotalBot",
-   "description": "Total: {totalBot}",
-   "defaultMessage": "總數：{totalBot}"
- },
- {
-   "id": "butlerBot.table.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "ButlerBotTable.status",
-   "description": "{onlineBots} Online",
-   "defaultMessage": "{onlineBots} 上線"
- },
- {
-   "id": "butlerBot.table.currentTask",
-   "description": "CURRENT TASK",
-   "defaultMessage": "目前的工作"
- },
- {
-   "id": "ButlerBotTable.botState",
-   "description": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})",
-   "defaultMessage": "揀貨 ({pick})。放置 ({put})。充電 ({charging})。閒置 ({idle})"
- },
- {
-   "id": "butlerBot.table.msu",
-   "description": "MSU MOUNTED",
-   "defaultMessage": "已裝載 MSU"
- },
- {
-   "id": "ButlerBotTable.mounted",
-   "description": "{msuMounted} Mounted",
-   "defaultMessage": "已裝載 {msuMounted}"
- },
- {
-   "id": "butlerBot.table.location",
-   "description": "LOCATION",
-   "defaultMessage": "位置"
- },
- {
-   "id": "ButlerBotTable.locations",
-   "description": "{locations} Locations",
-   "defaultMessage": "{locations} 位置"
- },
- {
-   "id": "butlerBot.table.voltage",
-   "description": "VOLTAGE",
-   "defaultMessage": "電壓"
- },
- {
-   "id": "ButlerBotTable.avgVoltage",
-   "description": "Avg {voltage}",
-   "defaultMessage": "平均 {voltage}"
- },
- {
-   "id": "chargersDetail.name.prefix",
-   "description": "Charging Stations - {csId}",
-   "defaultMessage": "充電站 - {csId}"
- },
- {
-   "id": "chargersDetail.butler.prefix",
-   "description": "Butler - {botId}",
-   "defaultMessage": "Butler - {botId}"
- },
- {
-   "id": "ChargingStations.table.noData",
-   "description": "No Charging Stations Found",
-   "defaultMessage": "找不到充電站"
- },
- {
-   "id": "ChargingStations.table.heading",
-   "description": "Charging Stations",
-   "defaultMessage": "充電站"
- },
- {
-   "id": "ChargingStationsTable.stationID.heading",
-   "description": "STATION ID",
-   "defaultMessage": "充電站 ID"
- },
- {
-   "id": "ChargingStationsTable.SubstationID",
-   "description": "Total:{rowsCount}",
-   "defaultMessage": "總數：{rowsCount}"
- },
- {
-   "id": "ChargingStations.table.STATUS",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "csTable.status",
-   "description": "{csConnected} connected",
-   "defaultMessage": "{csConnected} 已連接"
- },
- {
-   "id": "ChargingStations.table.operatingMode",
-   "description": "OPERATING MODE",
-   "defaultMessage": "作業模式"
- },
- {
-   "id": "ChargingStationsTable.mode",
-   "description": "Manual ({manual}) . Auto ({auto})",
-   "defaultMessage": "手動 ({manual})。自動 ({auto})"
- },
- {
-   "id": "ChargingStations.table.connectedBots",
-   "description": "BOTS CONNECTED",
-   "defaultMessage": "機器人已連接"
- },
- {
-   "id": "ChargingStationsTable.totalBots",
-   "description": "{totalBots} bots connected",
-   "defaultMessage": "已連接 {totalBots} 台機器人"
- },
- {
-   "id": "NotificationTable.table.heading",
-   "description": "Notifications",
-   "defaultMessage": "通知"
- },
- {
-   "id": "NotificationTable.table.component",
-   "description": "COMPONENT",
-   "defaultMessage": "元件"
- },
- {
-   "id": "Notifications.table.status",
-   "description": "EVENT TYPE",
-   "defaultMessage": "事件類型"
- },
- {
-   "id": "NotificationTable.table.description",
-   "description": "DESCRIPTION",
-   "defaultMessage": "描述"
- },
- {
-   "id": "NotificationTable.table.remark",
-   "description": "REMARKS",
-   "defaultMessage": "備註"
- },
- {
-   "id": "NotificationTable.table.location",
-   "description": "TIME",
-   "defaultMessage": "時間"
- },
- {
-   "id": "ppsDetail.name.prefix",
-   "description": "PPS-{ppsId}",
-   "defaultMessage": "PPS-{ppsId}"
- },
- {
-   "id": "ppsDetail.performance.prefix.items",
-   "description": "{performance} items/hr",
-   "defaultMessage": "{performance} 件／小時"
- },
- {
-   "id": "pps.dropdown.placeholder",
-   "description": "Change PPS Mode",
-   "defaultMessage": "變更 PPS 模式"
- },
- {
-   "id": "PPS.table.pickDrop",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "PPS.table.putDrop",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "PPS.table.auditDrop",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "PPStable.table.noData",
-   "description": "No PPS Found",
-   "defaultMessage": "查無 PPS"
- },
- {
-   "id": "pps.table.heading",
-   "description": "Pick Put Stations",
-   "defaultMessage": "揀放站"
- },
- {
-   "id": "PPStable.selected",
-   "description": "{selected} selected",
-   "defaultMessage": "已選擇 {selected}"
- },
- {
-   "id": "PPStable.ppsColumn.heading",
-   "description": "PPS",
-   "defaultMessage": "PPS"
- },
- {
-   "id": "PPStable.Subpps",
-   "description": "Total: {ppsTotal}",
-   "defaultMessage": "總數：{ppsTotal}"
- },
- {
-   "id": "PPS.table.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "PPStable.status",
-   "description": "{ppsOnState} On",
-   "defaultMessage": "{ppsOnState} 啟動"
- },
- {
-   "id": "PPS.table.operatingMode",
-   "description": "OPERATING MODE",
-   "defaultMessage": "作業模式"
- },
- {
-   "id": "PPStable.ppsState",
-   "description": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
-   "defaultMessage": "揀貨 ({pick})。放置 ({put})。稽核 ({audit})。未設定 ({notSet})"
- },
- {
-   "id": "PPS.table.performance",
-   "description": "PERFORMANCE",
-   "defaultMessage": "績效"
- },
- {
-   "id": "PPStable.avgThroughput",
-   "description": "Avg {avgThroughput} items/hr",
-   "defaultMessage": "平均 {avgThroughput} 件／小時"
- },
- {
-   "id": "PPS.table.operatorAssigned",
-   "description": "OPERATOR ASSIGNED",
-   "defaultMessage": "指派的作業員"
- },
- {
-   "id": "PPStable.totalOperator",
-   "description": "{operatorNum} operators",
-   "defaultMessage": "{operatorNum} 名作業員"
- },
- {
-   "id": "tabs.offline",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "overview.tab.heading",
-   "description": "OVERVIEW",
-   "defaultMessage": "總覽"
- },
- {
-   "id": "system.tab.heading",
-   "description": "SYSTEM",
-   "defaultMessage": "系統"
- },
- {
-   "id": "orders.tab.heading",
-   "description": "ORDERS",
-   "defaultMessage": "訂單"
- },
- {
-   "id": "users.tab.heading",
-   "description": "USERS",
-   "defaultMessage": "使用者"
- },
- {
-   "id": "inventory.tab.heading",
-   "description": "INVENTORY",
-   "defaultMessage": "存貨"
- },
- {
-   "id": "audit.tab.heading",
-   "description": "AUDIT",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "overviewStatus.tab.fulfilling",
-   "description": "Fulfilling orders",
-   "defaultMessage": "完成訂單"
- },
- {
-   "id": "overviewStatus.tab.default",
-   "description": "None",
-   "defaultMessage": "無"
- },
- {
-   "id": "overviewStatus.tab.stop",
-   "description": "Operation stopped",
-   "defaultMessage": "作業已停止"
- },
- {
-   "id": "systemStatus.tab.online",
-   "description": "Online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "ordersStatus.tab.heading",
-   "description": "{count}% fulfilled",
-   "defaultMessage": "已完成 {count}%"
- },
- {
-   "id": "usersStatus.tab.heading#",
-   "description": "{count},{count, plural,=0 {user} one {user} other {users}} online",
-   "defaultMessage": "{count}、{count, plural,=0 {使用者} one {使用者} other {使用者}} 上線"
- },
- {
-   "id": "inventoryStatus.tab.heading",
-   "description": "{count}% space utilized",
-   "defaultMessage": "已使用 {count}% 空間"
- },
- {
-   "id": "auditStatus.tab.heading",
-   "description": "{count} in progress",
-   "defaultMessage": "{count} 進行中"
- },
- {
-   "id": "auditStatus.tab.alert.heading",
-   "description": "{count},{count, plural, one {alert} other {alerts}}",
-   "defaultMessage": "{count}、{count, plural, one {警告} other {警告}}"
- },
- {
-   "id": "userDetails.operator",
-   "description": "Operator",
-   "defaultMessage": "作業員"
- },
- {
-   "id": "userDetails.manager",
-   "description": "Manager",
-   "defaultMessage": "管理員"
- },
- {
-   "id": "userDetails.pick.status",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "auditdetail.completed.status",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "userDetails.put.status",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "userDetails.audit.status",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "userDetails.front.status",
-   "description": "Front",
-   "defaultMessage": "前"
- },
- {
-   "id": "userDetails.back.status",
-   "description": "Back",
-   "defaultMessage": "後"
- },
- {
-   "id": "userDetails.online.status",
-   "description": "Online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "userDetails.offline.status",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "userDetails.location",
-   "description": "PPS {ppsId}",
-   "defaultMessage": "PPS {ppsId}"
- },
- {
-   "id": "users.add.heading",
-   "description": "Add new user",
-   "defaultMessage": "新增新使用者"
- },
- {
-   "id": "users.add.subheading",
-   "description": "All the fields are mandatory",
-   "defaultMessage": "所有欄位皆為必填"
- },
- {
-   "id": "users.add.userdetails.heading",
-   "description": "Enter User details",
-   "defaultMessage": "輸入使用者詳細資訊"
- },
- {
-   "id": "users.add.userdetails.subheading",
-   "description": "A User ID will be required to log into the system",
-   "defaultMessage": "須具備使用者 ID 方能登入系統"
- },
- {
-   "id": "users.add.userdetails.userid",
-   "description": "User ID",
-   "defaultMessage": "使用者 ID"
- },
- {
-   "id": "users.add.userdetails.firstname",
-   "description": "First Name",
-   "defaultMessage": "名字"
- },
- {
-   "id": "users.add.userdetails.lastname",
-   "description": "Last Name",
-   "defaultMessage": "姓氏"
- },
- {
-   "id": "users.add.password.heading",
-   "description": "Create password",
-   "defaultMessage": "建立密碼"
- },
- {
-   "id": "users.add.password.field1",
-   "description": "Password",
-   "defaultMessage": "密碼"
- },
- {
-   "id": "users.add.password.field2",
-   "description": "Confirm Password",
-   "defaultMessage": "確認密碼"
- },
- {
-   "id": "users.add.password.button",
-   "description": "Add new user",
-   "defaultMessage": "新增新使用者"
- },
- {
-   "id": "users.delete.heading",
-   "description": "Are you sure you would like to delete \"{user_name}\" ?",
-   "defaultMessage": "您確定要刪除「{user_name}」？"
- },
- {
-   "id": "users.delete.subheading",
-   "description": "Information related to the user will be lost",
-   "defaultMessage": "該使用者的相關資訊將會遺失"
- },
- {
-   "id": "users.delete.cancel",
-   "description": "Cancel",
-   "defaultMessage": "取消"
- },
- {
-   "id": "users.delete.confirm",
-   "description": "Delete",
-   "defaultMessage": "刪除"
- },
- {
-   "id": "users.edit.heading",
-   "description": "Edit user",
-   "defaultMessage": "編輯使用者"
- },
- {
-   "id": "users.edit.subheading",
-   "description": "All the fields are mandatory",
-   "defaultMessage": "所有欄位皆為必填"
- },
- {
-   "id": "users.edit.userdetails.heading",
-   "description": "Enter User details",
-   "defaultMessage": "輸入使用者詳細資訊"
- },
- {
-   "id": "users.edit.userdetails.subheading",
-   "description": "A User ID will be required to log into the system",
-   "defaultMessage": "須具備使用者 ID 方能登入系統"
- },
- {
-   "id": "users.edit.userdetails.userid",
-   "description": "User ID",
-   "defaultMessage": "使用者 ID"
- },
- {
-   "id": "users.edit.userdetails.firstname",
-   "description": "First Name",
-   "defaultMessage": "名字"
- },
- {
-   "id": "users.edit.userdetails.lastname",
-   "description": "Last Name",
-   "defaultMessage": "姓氏"
- },
- {
-   "id": "users.edit.changepassword.heading",
-   "description": "Change password",
-   "defaultMessage": "變更密碼"
- },
- {
-   "id": "users.edit.changepassword.subheading",
-   "description": "New password will be effective when user log-in next time",
-   "defaultMessage": "新密碼將於使用者下次登入時生效"
- },
- {
-   "id": "users.edit.password.field1",
-   "description": "Password",
-   "defaultMessage": "密碼"
- },
- {
-   "id": "users.edit.password.field2",
-   "description": "Confirm Password",
-   "defaultMessage": "確認密碼"
- },
- {
-   "id": "users.edit.password.",
-   "description": "New Password",
-   "defaultMessage": "新密碼"
- },
- {
-   "id": "users.edit.password.query",
-   "description": "Change Password",
-   "defaultMessage": "變更密碼"
- },
- {
-   "id": "users.edit.password.button",
-   "description": "Save",
-   "defaultMessage": "儲存"
- },
- {
-   "id": "users.add.roledetails.heading",
-   "description": "Choose a role",
-   "defaultMessage": "選擇角色"
- },
- {
-   "id": "users.add.roledetails.subheading",
-   "description": "User will be given a specific level of control over the Butler system depending on the designated role",
-   "defaultMessage": "將依指定的角色授予使用者特定層級的 Butler 系統控制權限"
- },
- {
-   "id": "users.add.roledetails.operator",
-   "description": "Operator",
-   "defaultMessage": "作業員"
- },
- {
-   "id": "users.add.roledetails.operatortext",
-   "description": "Grant access to the Operator Interface at each Pick Put Station in the Butler system",
-   "defaultMessage": "授與 Butler 系統中各揀放站存取操作人員介面的權限"
- },
- {
-   "id": "users.add.roledetails.manager",
-   "description": "Manager",
-   "defaultMessage": "管理員"
- },
- {
-   "id": "users.add.roledetails.managertext",
-   "description": "Grant access to the Management Interface and Operator Interface to all systems",
-   "defaultMessage": "授與所有系統存取管理介面與操作人員介面的權限"
- },
- {
-   "id": "users.add.roledetails.heading",
-   "description": "Choose a role",
-   "defaultMessage": "選擇角色"
- },
- {
-   "id": "users.add.roledetails.subheading",
-   "description": "User will be given a specific level of control over the Butler system depending on the designated role",
-   "defaultMessage": "將依指定的角色授予使用者特定層級的 Butler 系統控制權限"
- },
- {
-   "id": "user.table.noData",
-   "description": "No User Found",
-   "defaultMessage": "查無使用者"
- },
- {
-   "id": "user.table.heading",
-   "description": "Users",
-   "defaultMessage": "使用者"
- },
- {
-   "id": "user.button.heading",
-   "description": "Add new user",
-   "defaultMessage": "新增新使用者"
- },
- {
-   "id": "user.table.usersCount",
-   "description": "{rowsCount} USERS",
-   "defaultMessage": "{rowsCount} 使用者"
- },
- {
-   "id": "user.table.status",
-   "description": "STATUS",
-   "defaultMessage": "狀態"
- },
- {
-   "id": "user.table.role",
-   "description": "ROLE",
-   "defaultMessage": "角色"
- },
- {
-   "id": "user.table.workMode",
-   "description": "WORKMODE",
-   "defaultMessage": "工作模式"
- },
- {
-   "id": "user.table.location",
-   "description": "LOCATION",
-   "defaultMessage": "位置"
- },
- {
-   "id": "user.table.logInTime",
-   "description": "LOG IN TIME",
-   "defaultMessage": "登入時間"
- },
- {
-   "id": "user.table.action",
-   "description": "ACTIONS",
-   "defaultMessage": "動作"
- },
- {
-   "id": "butlerDetail.online.status",
-   "description": "Online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "butlerDetail.offline.status",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "butlerDetail.name.prefix",
-   "description": "BOT - {botId}",
-   "defaultMessage": "BOT - {botId}"
- },
- {
-   "id": "pps.name.prefix",
-   "description": "PPS - {ppsId}",
-   "defaultMessage": "PPS - {ppsId}"
- },
- {
-   "id": "charger.name.prefix",
-   "description": "CS - {csId}",
-   "defaultMessage": "CS - {csId}"
- },
- {
-   "id": "msu.name.prefix",
-   "description": "MSU - {msuId}",
-   "defaultMessage": "MSU - {msuId}"
- },
- {
-   "id": "chargersDetail.connected.status",
-   "description": "Connected",
-   "defaultMessage": "已連線"
- },
- {
-   "id": "chargersDetail.disconnected.status",
-   "description": "Disconnected",
-   "defaultMessage": "已斷線"
- },
- {
-   "id": "chargersDetail.manual.mode",
-   "description": "Manual",
-   "defaultMessage": "手動"
- },
- {
-   "id": "chargersDetail.auto.mode",
-   "description": "Auto",
-   "defaultMessage": "自動"
- },
- {
-   "id": "chargersDetail.name.prefix",
-   "description": "Charging Stations - {csId}",
-   "defaultMessage": "充電站 - {csId}"
- },
- {
-   "id": "chargersDetail.butler.prefix",
-   "description": "Butler - {botId}",
-   "defaultMessage": "Butler - {botId}"
- },
- {
-   "id": "orderList.progress.status",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "orderList.completed.status",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "orderList.Unfulfillable.status",
-   "description": "Unfulfillable",
-   "defaultMessage": "不可供發貨"
- },
- {
-   "id": "ppsDetail.pick.status",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "ppsDetail.put.status",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "ppsDetail.audit.status",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "ppsDetail.name.prefix",
-   "description": "PPS - {ppsId}",
-   "defaultMessage": "PPS - {ppsId}"
- },
- {
-   "id": "ppsDetail.on.status",
-   "description": "On",
-   "defaultMessage": "啟動"
- },
- {
-   "id": "ppsDetail.off.prefix",
-   "description": "Off",
-   "defaultMessage": "關閉"
- },
- {
-   "id": "userDetails.operator",
-   "description": "Operator",
-   "defaultMessage": "作業員"
- },
- {
-   "id": "userDetails.manager",
-   "description": "Manager",
-   "defaultMessage": "管理員"
- },
- {
-   "id": "userDetails.pick.status",
-   "description": "Pick",
-   "defaultMessage": "揀貨"
- },
- {
-   "id": "userDetails.put.status",
-   "description": "Put",
-   "defaultMessage": "放置"
- },
- {
-   "id": "userDetails.audit.status",
-   "description": "Audit",
-   "defaultMessage": "稽核"
- },
- {
-   "id": "userDetails.front.status",
-   "description": "Front",
-   "defaultMessage": "前"
- },
- {
-   "id": "userDetails.back.status",
-   "description": "Back",
-   "defaultMessage": "後"
- },
- {
-   "id": "userDetails.online.status",
-   "description": "Online",
-   "defaultMessage": "上線"
- },
- {
-   "id": "userDetails.Offline.status",
-   "description": "Offline",
-   "defaultMessage": "離線"
- },
- {
-   "id": "waveDetail.progress.status",
-   "description": "In Progress",
-   "defaultMessage": "進行中"
- },
- {
-   "id": "waveDetail.completed.status",
-   "description": "Completed",
-   "defaultMessage": "已完成"
- },
- {
-   "id": "waveDetail.breached.status",
-   "description": "Breached",
-   "defaultMessage": "違約"
- },
- {
-   "id": "waveDetail.pending.status",
-   "description": "Pending",
-   "defaultMessage": "待處理"
- },
- {
-   "id": "waveDetail.id.prefix",
-   "description": "WAVE-{waveId}",
-   "defaultMessage": "個別作業-{waveId}"
- },
- {
-   "id": "notify.success.add",
-   "description": "New user \"{first},{last}\" added successfully",
-   "defaultMessage": "成功新增新使用者「{first},{last}」"
- },
- {
-   "id": "notify.success.delete",
-   "description": "User \"{first},{last}\" deleted successfully",
-   "defaultMessage": "成功刪除使用者「{first},{last}」"
- },
- {
-   "id": "notify.delete.audit.success",
-   "description": "Audit task {audit_id} has been deleted",
-   "defaultMessage": "已刪除稽核工作 {audit_id}"
- },
- {
-   "id": "audit.resolve.success",
-   "description": "Audit task {auditId} with {auditType} - {auditTypeValue} has been approved",
-   "defaultMessage": "已核准類型為 {auditType} - {auditTypeValue} 的稽核工作 {auditId}"
- },
- {
-   "id": "audit.resolve.rejected",
-   "description": "Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected",
-   "defaultMessage": "已拒絕類型為 {auditType} - {auditTypeValue} 的稽核工作 {auditId}"
- }
+  {
+    "id": "commonDataTable.edit.button",
+    "description": "Edit",
+    "defaultMessage": "編輯"
+  },
+  {
+    "id": "commonDataTable.Delete.button",
+    "description": "Delete",
+    "defaultMessage": "刪除"
+  },
+  {
+    "id": "commonDataTable.attributesType.heading",
+    "description": "Box Id",
+    "defaultMessage": "箱盒 Id"
+  },
+  {
+    "id": "audit.resolveUnresolve",
+    "description": "{resolvedCount} issues, {unresolvedCount} unresolved",
+    "defaultMessage": "{resolvedCount} 個問題，{unresolvedCount} 個未解決"
+  },
+  {
+    "id": "audit.resolveIssues",
+    "description": "{resolvedCount} issues",
+    "defaultMessage": "{resolvedCount} 個問題"
+  },
+  {
+    "id": "audit.unresolveIssues",
+    "description": "{unresolvedCount},{unresolvedCount, plural, one {unresolved issue} other {unresolved issues}}",
+    "defaultMessage": "{unresolvedCount}，{unresolvedCount, plural, one {未解決的問題} other {未解決的問題}}"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.approve",
+    "description": "Approve",
+    "defaultMessage": "核准"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.reject",
+    "description": "Reject",
+    "defaultMessage": "拒絕"
+  },
+  {
+    "id": "commonDataTable.startAudit.button",
+    "description": "Start audit",
+    "defaultMessage": "開始稽核"
+  },
+  {
+    "id": "commonDataTable.resolveAudit.button",
+    "description": "Resolve",
+    "defaultMessage": "解決"
+  },
+  {
+    "id": "commonDataTable.viewIssues.button",
+    "description": "View issues",
+    "defaultMessage": "檢視問題"
+  },
+  {
+    "id": "footer.description",
+    "description": "Copyright @ 2017 GreyOrange Pte Ltd",
+    "defaultMessage": "版權所有 @ 2017 GreyOrange Pte Ltd"
+  },
+  {
+    "id": "paginate.page.heading",
+    "description": "Page",
+    "defaultMessage": "第  頁，"
+  },
+  {
+    "id": "paginate.page.pageNum",
+    "description": "of {totalPage}",
+    "defaultMessage": "共 {totalPage} 頁"
+  },
+  {
+    "id": "graph.noData",
+    "description": "No Data",
+    "defaultMessage": "無資料"
+  },
+  {
+    "id": "horizontal.graph.noData",
+    "description": "No Data",
+    "defaultMessage": "無資料"
+  },
+  {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "{utilisedSpace}% space utilized",
+    "defaultMessage": "已使用 {utilisedSpace}% 空間"
+  },
+  {
+    "id": "header.butler",
+    "description": "Butler",
+    "defaultMessage": "Butler"
+  },
+  {
+    "id": "header.start",
+    "description": "Start time:{time}",
+    "defaultMessage": "開始時間：{time}"
+  },
+  {
+    "id": "header.butler",
+    "description": "Butler",
+    "defaultMessage": "Butler"
+  },
+  {
+    "id": "header.start",
+    "description": "Start time:{time}",
+    "defaultMessage": "開始時間：{time}"
+  },
+  {
+    "id": "header.option.normal",
+    "description": "Operation normal",
+    "defaultMessage": "作業正常"
+  },
+  {
+    "id": "header.option.pause",
+    "description": "Enter password to pause operation",
+    "defaultMessage": "請輸入密碼以暫停作業"
+  },
+  {
+    "id": "header.button.pause",
+    "description": "Pause",
+    "defaultMessage": "暫停"
+  },
+  {
+    "id": "header.emergency.heading",
+    "description": "Emergency",
+    "defaultMessage": "緊急"
+  },
+  {
+    "id": "header.emergency.subheading",
+    "description": "In Zone",
+    "defaultMessage": "區域內"
+  },
+  {
+    "id": "header.option.stopped",
+    "description": "Operation stopped",
+    "defaultMessage": "作業已停止"
+  },
+  {
+    "id": "header.button.resume",
+    "description": "Resume",
+    "defaultMessage": "恢復"
+  },
+  {
+    "id": "header.option.release",
+    "description": "Release the Emergency Stop button from the Zigbee box in order",
+    "defaultMessage": "釋放 Zigbee 盒的緊急停止按鈕，以恢復作業。"
+  },
+  {
+    "id": "header.option.resume",
+    "description": "Enter password to resume operation.",
+    "defaultMessage": "請輸入密碼以恢復作業。"
+  },
+  {
+    "id": "header.logout",
+    "description": "Logout",
+    "defaultMessage": "登出"
+  },
+  {
+    "id": "healthTab.status.on",
+    "description": "On",
+    "defaultMessage": "啟動"
+  },
+  {
+    "id": "healthTab.status.off",
+    "description": "Off",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "inventory.histogram.legend",
+    "description": "Items Stocked",
+    "defaultMessage": "庫存的品項"
+  },
+  {
+    "id": "inventory.linechart.legendPicked",
+    "description": "Items Picked",
+    "defaultMessage": "已揀貨品項"
+  },
+  {
+    "id": "inventory.linechart.legendPut",
+    "description": "Items Put",
+    "defaultMessage": "已放置品項"
+  },
+  {
+    "id": "inventory.header",
+    "description": "Inventory",
+    "defaultMessage": "存貨"
+  },
+  {
+    "id": "itemTable.categoryType.category",
+    "description": "Category",
+    "defaultMessage": "類別"
+  },
+  {
+    "id": "itemTable.cbmUsed.cbm",
+    "description": "CBM Used",
+    "defaultMessage": "使用的 CBM"
+  },
+  {
+    "id": "itemTable.daysInHand.count",
+    "description": "Days in Hand",
+    "defaultMessage": "可用天數"
+  },
+  {
+    "id": "inventory.linechart.toolTipPut",
+    "description": "Put",
+    "defaultMessage": "已放置"
+  },
+  {
+    "id": "inventory.linechart.toolTipPick",
+    "description": "Picked",
+    "defaultMessage": "已揀貨"
+  },
+  {
+    "id": "inventory.linechart.toolTipEntity",
+    "description": "Items",
+    "defaultMessage": "品項"
+  },
+  {
+    "id": "inventory.linechart.noDataText",
+    "description": "No Item Movement",
+    "defaultMessage": "無品項移動"
+  },
+  {
+    "id": "inventory.linechart.today",
+    "description": "Today's",
+    "defaultMessage": "今天"
+  },
+  {
+    "id": "inventory.snaphot.date",
+    "description": "Today's",
+    "defaultMessage": "今天"
+  },
+  {
+    "id": "inventory.snaphot.currentStock",
+    "description": "Current Stock",
+    "defaultMessage": "目前庫存"
+  },
+  {
+    "id": "inventory.snaphot.closingStock",
+    "description": "Closing Stock",
+    "defaultMessage": "期末存貨"
+  },
+  {
+    "id": "inventory.snaphot.header",
+    "description": "stock snapshot",
+    "defaultMessage": "庫存概況"
+  },
+  {
+    "id": "inventory.snaphot.itemsPut",
+    "description": "Items Put",
+    "defaultMessage": "已放置品項"
+  },
+  {
+    "id": "inventory.snaphot.itemsPick",
+    "description": "Items Pick",
+    "defaultMessage": "已揀貨品項"
+  },
+  {
+    "id": "inventory.snaphot.openingStock",
+    "description": "Opening Stock",
+    "defaultMessage": "期初存貨"
+  },
+  {
+    "id": "inventory.snaphot.sku",
+    "description": "SKUs",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "inventory.snaphot.cbmUsed",
+    "description": "CBM Used",
+    "defaultMessage": "使用的 CBM"
+  },
+  {
+    "id": "login.butler.language",
+    "description": "Language",
+    "defaultMessage": "語言"
+  },
+  {
+    "id": "login.butler.manageInterface",
+    "description": "Management Interface",
+    "defaultMessage": "管理介面"
+  },
+  {
+    "id": "login.butler.error.username",
+    "description": "Please enter your username",
+    "defaultMessage": "請輸入您的使用者名稱"
+  },
+  {
+    "id": "login.butler.error.password",
+    "description": "Please enter your password",
+    "defaultMessage": "請輸入您的密碼"
+  },
+  {
+    "id": "login.form.username",
+    "description": "Username",
+    "defaultMessage": "使用者名稱"
+  },
+  {
+    "id": "login.form.password",
+    "description": "Password",
+    "defaultMessage": "密碼"
+  },
+  {
+    "id": "login.form.button",
+    "description": "Login",
+    "defaultMessage": "登入"
+  },
+  {
+    "id": "OrderSubTab.waves",
+    "description": "Waves",
+    "defaultMessage": "個別作業"
+  },
+  {
+    "id": "OrderSubTab.orderlist",
+    "description": "Order List",
+    "defaultMessage": "訂單列表"
+  },
+  {
+    "id": "butlerBot.tab.heading",
+    "description": "Butler Bots",
+    "defaultMessage": "Butler 機器人"
+  },
+  {
+    "id": "pps.tab.heading",
+    "description": "Pick Put Stations",
+    "defaultMessage": "揀放站"
+  },
+  {
+    "id": "chargingstation.tab.heading",
+    "description": "Charging Station",
+    "defaultMessage": "充電站"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "Apply filter",
+    "defaultMessage": "套用篩選條件"
+  },
+  {
+    "id": "stringConfig.on",
+    "description": "on",
+    "defaultMessage": "啟動"
+  },
+  {
+    "id": "stringConfig.off",
+    "description": "off",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "stringConfig.per_hour",
+    "description": "per_hour",
+    "defaultMessage": "每小時"
+  },
+  {
+    "id": "stringConfig.pick",
+    "description": "pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "stringConfig.put",
+    "description": "put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "stringConfig.audit",
+    "description": "audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "stringConfig.soft",
+    "description": "soft",
+    "defaultMessage": "虛擬"
+  },
+  {
+    "id": "stringConfig.hard",
+    "description": "hard",
+    "defaultMessage": "實體"
+  },
+  {
+    "id": "stringConfig.soft_manual",
+    "description": "soft_manual",
+    "defaultMessage": "soft_manual"
+  },
+  {
+    "id": "stringConfig.pending",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "stringConfig.wave.pending",
+    "description": "Pending",
+    "defaultMessage": "待處理"
+  },
+  {
+    "id": "stringConfig.disconnected",
+    "description": "Disconnected",
+    "defaultMessage": "已斷線"
+  },
+  {
+    "id": "stringConfig.connected",
+    "description": "Connected",
+    "defaultMessage": "已連線"
+  },
+  {
+    "id": "stringConfig.completed",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "stringConfig.Completed",
+    "description": "completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "stringConfig.in_progress",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "stringConfig.breached",
+    "description": "Breached",
+    "defaultMessage": "違約"
+  },
+  {
+    "id": "stringConfig.fulfillable",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "stringConfig.abandoned",
+    "description": "Unfulfillable",
+    "defaultMessage": "不可供發貨"
+  },
+  {
+    "id": "stringConfig.manual",
+    "description": "Manual",
+    "defaultMessage": "手動"
+  },
+  {
+    "id": "stringConfig.auto",
+    "description": "Auto",
+    "defaultMessage": "自動"
+  },
+  {
+    "id": "stringConfig.notFulfillable",
+    "description": "Unfulfillable",
+    "defaultMessage": "不可供發貨"
+  },
+  {
+    "id": "stringConfig.exception",
+    "description": "Exception",
+    "defaultMessage": "例外"
+  },
+  {
+    "id": "stringConfig.online",
+    "description": "online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "stringConfig.offline",
+    "description": "offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "stringConfig.received",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "stringConfig.cancelled",
+    "description": "Cancelled",
+    "defaultMessage": "已取消"
+  },
+  {
+    "id": "stringConfig.butler_supervisor",
+    "description": "Manager",
+    "defaultMessage": "管理員"
+  },
+  {
+    "id": "stringConfig.butler_ui",
+    "description": "Operator",
+    "defaultMessage": "作業員"
+  },
+  {
+    "id": "stringConfig.admin",
+    "description": "Admin",
+    "defaultMessage": "系統管理員"
+  },
+  {
+    "id": "stringConfig.qc",
+    "description": "QC Operator",
+    "defaultMessage": "QC 作業員"
+  },
+  {
+    "id": "stringConfig.packing_operator",
+    "description": "Packing Operator",
+    "defaultMessage": "包裝作業員"
+  },
+  {
+    "id": "stringConfig.temporary_unfulfillable",
+    "description": "On hold",
+    "defaultMessage": "保留中"
+  },
+  {
+    "id": "stringConfig.audit_resolved",
+    "description": "Resolved",
+    "defaultMessage": "已解決"
+  },
+  {
+    "id": "stringConfig.audit_pending_approval",
+    "description": "Unresolved",
+    "defaultMessage": "未解決"
+  },
+  {
+    "id": "stringConfig.audit_rejected",
+    "description": "Rejected",
+    "defaultMessage": "已拒絕"
+  },
+  {
+    "id": "stringConfig.md001",
+    "description": "No personnel are present in the no-man zone.",
+    "defaultMessage": "無人員位於無人區。"
+  },
+  {
+    "id": "stringConfig.md002",
+    "description": "All Butler and MSU positions have been corrected.",
+    "defaultMessage": "所有 Butler 和 MSU 的位置皆已修正。"
+  },
+  {
+    "id": "stringConfig.md003",
+    "description": "All no-man zone gates are properly closed.",
+    "defaultMessage": "所有無人區閘門皆正確關閉。"
+  },
+  {
+    "id": "stringConfig.md004",
+    "description": "All no-man gate limit switches are active and working.",
+    "defaultMessage": "所有無人閘門限制開關皆已啟動且正常運作中。"
+  },
+  {
+    "id": "stringConfig.md005",
+    "description": "All Hard Emergency buttons are released.",
+    "defaultMessage": "所有實體緊急按鈕皆已釋放。"
+  },
+  {
+    "id": "stringConfig.md006",
+    "description": "All Zigbee boxes are online.",
+    "defaultMessage": "所有 Zigbee 機上盒皆已上線。"
+  },
+  {
+    "id": "stringConfig.audit_reaudited",
+    "description": "Re-audited",
+    "defaultMessage": "已再次稽核"
+  },
+  {
+    "id": "roleDesc.butler_supervisor",
+    "description": "Grant access to the Management Interface and Operator Interface to all systems",
+    "defaultMessage": "授與所有系統存取管理介面與操作人員介面的權限"
+  },
+  {
+    "id": "roleDesc.butler_ui",
+    "description": "Grant access to the Operator Interface at each Pick Put Station in the Butler system",
+    "defaultMessage": "授與 Butler 系統中各揀放站存取操作人員介面的權限"
+  },
+  {
+    "id": "login.lang.english",
+    "description": "English (United States)",
+    "defaultMessage": "英文（美國）"
+  },
+  {
+    "id": "login.lang.japanese",
+    "description": "?交隤?",
+    "defaultMessage": "?交隤?"
+  },
+  {
+    "id": "login.lang.spanish",
+    "description": "Espa?ol",
+    "defaultMessage": "西班牙文"
+  },
+  {
+    "id": "login.lang.chinese",
+    "description": "銝剜?",
+    "defaultMessage": "銝剜?"
+  },
+  {
+    "id": "login.lang.german",
+    "description": "Deutsch",
+    "defaultMessage": "荷蘭文"
+  },
+  {
+    "id": "login.lang.french",
+    "description": "Francais",
+    "defaultMessage": "法文"
+  },
+  {
+    "id": "login.autologout.message",
+    "description": "Due to session expiry, Auto Logout has been triggered!",
+    "defaultMessage": "由於工作階段過期，已自動登出！"
+  },
+  {
+    "id": "login.butler.fail",
+    "description": "Invalid username and/or password, please try again",
+    "defaultMessage": "無效的使用者和／或密碼，請再試一次"
+  },
+  {
+    "id": "login.butler.connection.fail",
+    "description": "Connection failure",
+    "defaultMessage": "連線失敗"
+  },
+  {
+    "id": "login.butler.unauthorized",
+    "description": "You are not authorized",
+    "defaultMessage": "您未獲得授權"
+  },
+  {
+    "id": "notify.success.edit",
+    "description": "User details updated successfully",
+    "defaultMessage": "成功更新使用者詳細資料"
+  },
+  {
+    "id": "ppsDetail.modeChange.success",
+    "description": "PPS Mode Change Request Processed",
+    "defaultMessage": "已處理 PPS 模式變更請求"
+  },
+  {
+    "id": "ppsDetail.modeChange.isAlreadyRequested",
+    "description": "PPS is already in requested mode",
+    "defaultMessage": "PPS 已是所需的模式"
+  },
+  {
+    "id": "ppsDetail.modeChange.tryLater",
+    "description": "Previous request of changing mode is already pending, Please try later!",
+    "defaultMessage": "前次變更模式的請求已在等待處理，請稍後再試！"
+  },
+  {
+    "id": "notify.error.usernameExists",
+    "description": "An account has already been created with this User ID",
+    "defaultMessage": "已有人使用此使用者 ID 建立帳號"
+  },
+  {
+    "id": "notify.error.passwordMissing",
+    "description": "Password not provided!",
+    "defaultMessage": "未提供密碼！"
+  },
+  {
+    "id": "notify.error.passwordMatch",
+    "description": "Passwords do not match!",
+    "defaultMessage": "密碼不符！"
+  },
+  {
+    "id": "notify.error.username",
+    "description": "Username is a required field!",
+    "defaultMessage": "使用者名稱為必填欄位！"
+  },
+  {
+    "id": "notify.error.role",
+    "description": "Role is a required field!",
+    "defaultMessage": "角色為必填欄位！"
+  },
+  {
+    "id": "appInfo.success",
+    "description": "Successfull",
+    "defaultMessage": "成功"
+  },
+  {
+    "id": "user.invalid.id",
+    "description": "Please enter a valid User ID",
+    "defaultMessage": "請輸入有效的使用者 ID"
+  },
+  {
+    "id": "user.invalid.format",
+    "description": "Please use only letters (a-z), numbers, and periods",
+    "defaultMessage": "限使用字母 (a-z)、數字和句點"
+  },
+  {
+    "id": "login.empty.password",
+    "description": "Please enter a password",
+    "defaultMessage": "請輸入密碼"
+  },
+  {
+    "id": "user.empty.name",
+    "description": "Please enter a user name",
+    "defaultMessage": "請輸入使用者名稱"
+  },
+  {
+    "id": "user.invalid.name",
+    "description": "Special characters like \"~\",\"@\" and \"%\" are not allowed",
+    "defaultMessage": "不可使用「~」、「@」和「%」等特殊字元"
+  },
+  {
+    "id": "user.invalid.password.operator",
+    "description": "Please enter a password of at least 6 alphanumeric characters",
+    "defaultMessage": "請輸入至少 6 個英數字元的密碼"
+  },
+  {
+    "id": "user.invalid.password.manager",
+    "description": "Please enter a password of at least 8 alphanumeric characters",
+    "defaultMessage": "請輸入至少 8 個英數字元的密碼"
+  },
+  {
+    "id": "user.match.password",
+    "description": "Both password entered do not match. Please try again",
+    "defaultMessage": "輸入的兩組密碼皆不相符。請再試一次"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "MSU",
+    "defaultMessage": "MSU"
+  },
+  {
+    "id": "chargingStation.name.prefix",
+    "description": "CS",
+    "defaultMessage": "CS"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "Please enter a valid SKU Number",
+    "defaultMessage": "請輸入有效的 SKU 號碼"
+  },
+  {
+    "id": "audit.invalid.location",
+    "description": "Please enter a valid location Number",
+    "defaultMessage": "請輸入有效的位置號碼"
+  },
+  {
+    "id": "notify.error.audit.location",
+    "description": "Location does not exist",
+    "defaultMessage": "位置不存在"
+  },
+  {
+    "id": "notify.error.audit.sku",
+    "description": "SKU does not exist",
+    "defaultMessage": "SKU 不存在"
+  },
+  {
+    "id": "notify.error.audit.g016",
+    "description": "Given audit does not exists",
+    "defaultMessage": "指定的稽核不存在"
+  },
+  {
+    "id": "notify.error.audit.AE001",
+    "description": "Audit Id does not exists",
+    "defaultMessage": "稽核 Id 不存在"
+  },
+  {
+    "id": "notify.error.audit.AE002",
+    "description": "Valid PPS not found for Audit",
+    "defaultMessage": "稽核查無有效的 PPS"
+  },
+  {
+    "id": "notify.error.audit.AE004",
+    "description": "Audit of location already under process",
+    "defaultMessage": "已在處理之位置的稽核"
+  },
+  {
+    "id": "notify.error.audit.AE005",
+    "description": "Audit of sku already under process",
+    "defaultMessage": "已在處理之 SKU 的稽核"
+  },
+  {
+    "id": "notify.error.audit.AE006",
+    "description": "Audit ID already processed",
+    "defaultMessage": "稽核 ID 已處理完畢"
+  },
+  {
+    "id": "notify.create.audit.success",
+    "description": "New audit task created successfully",
+    "defaultMessage": "已成功建立新的稽核工作"
+  },
+  {
+    "id": "notify.start.audit.success",
+    "description": "PPS assigned successfully. Audit task started",
+    "defaultMessage": "成功指派 PPS。稽核工作已開始"
+  },
+  {
+    "id": "notify.delete.audit.processed",
+    "description": "Audit already processed. Cannot delete",
+    "defaultMessage": "稽核已處理完畢。無法刪除"
+  },
+  {
+    "id": "notify.Location.audit.pending",
+    "description": "Location of audit pending for approval",
+    "defaultMessage": "等候核准之稽核的位置"
+  },
+  {
+    "id": "notify.Location.currently.processed",
+    "description": "Location of audit currently being processed",
+    "defaultMessage": "目前正在處理之稽核的位置"
+  },
+  {
+    "id": "notify.error.user.fail",
+    "description": "Error in updating user",
+    "defaultMessage": "更新使用者時發生錯誤"
+  },
+  {
+    "id": "notify.error.user.response",
+    "description": "Error in response",
+    "defaultMessage": "回應時發生錯誤"
+  },
+  {
+    "id": "notify.error.audit.create",
+    "description": "Error in creating audit",
+    "defaultMessage": "建立稽核時發生錯誤"
+  },
+  {
+    "id": "notify.error.api",
+    "description": "API response not registered",
+    "defaultMessage": "API 回應未登錄"
+  },
+  {
+    "id": "notify.error.connection",
+    "description": "Network Failure",
+    "defaultMessage": "網路失敗"
+  },
+  {
+    "id": "notify.error.400",
+    "description": "Network error: 400 Bad Request",
+    "defaultMessage": "網路錯誤：400 錯誤的要求"
+  },
+  {
+    "id": "notify.error.401",
+    "description": "Network error: 401 Unauthorized",
+    "defaultMessage": "網路錯誤：401 未經授權"
+  },
+  {
+    "id": "notify.error.403",
+    "description": "Network error: 403 Forbidden",
+    "defaultMessage": "網路錯誤：403 禁止"
+  },
+  {
+    "id": "notify.error.405",
+    "description": "Network error: 405 Method Not Allowed",
+    "defaultMessage": "網路錯誤：405 方式不允許"
+  },
+  {
+    "id": "notify.error.408",
+    "description": "Network error: 408 Request Time-out",
+    "defaultMessage": "網路錯誤：408 要求逾時"
+  },
+  {
+    "id": "notify.error.409",
+    "description": "Network error: 409 Conflict",
+    "defaultMessage": "網路錯誤：409 衝突"
+  },
+  {
+    "id": "notify.error.500",
+    "description": "Network error: 500 Internal Servor Error",
+    "defaultMessage": "網路錯誤：500 內部伺服器錯誤"
+  },
+  {
+    "id": "notify.error.502",
+    "description": "Network error: 502 Bad Gateway",
+    "defaultMessage": "網路錯誤：502 錯誤的閘道"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "No Stock Found",
+    "defaultMessage": "查無庫存"
+  },
+  {
+    "id": "users.add.password.subheading.manager",
+    "description": "A password of at least 8 alphanumeric characters will be required for logging into the Management Interface and Operator Interface",
+    "defaultMessage": "至少 8 個英數字元的密碼將用於登入管理介面和操作人員介面"
+  },
+  {
+    "id": "users.add.password.subheading.operator",
+    "description": "A password of 6 digits will be required for logging into the Operator Interface.",
+    "defaultMessage": "至少 6 個英數字元的密碼將用於登入操作人員介面。"
+  },
+  {
+    "id": "emergency.resume.coreerror",
+    "description": "Cannot connect to butler core",
+    "defaultMessage": "無法連線至 Butler 核心"
+  },
+  {
+    "id": "emergency.resume.statuserror",
+    "description": "Emergency status not soft_manual",
+    "defaultMessage": "緊急狀態非 soft_manual"
+  },
+  {
+    "id": "emergency.resume.success",
+    "description": "Operation resumed",
+    "defaultMessage": "已恢復作業"
+  },
+  {
+    "id": "widget.audit.heading.value",
+    "description": "None",
+    "defaultMessage": "無"
+  },
+  {
+    "id": "widget.audit.status.idle",
+    "description": "{count} idle PPS (Audit mode)",
+    "defaultMessage": "{count} 個閒置的 PPS（稽核模式）"
+  },
+  {
+    "id": "widget.audit.throughput",
+    "description": "{pps_count} PPS auditing {throughput} items/hr",
+    "defaultMessage": "{pps_count} 個 PPS 每小時稽核 {throughput} 件"
+  },
+  {
+    "id": "widget.audit.offline",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "widget.audit.emergency",
+    "description": "--",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "widget.audit.heading",
+    "description": "Items audited",
+    "defaultMessage": "已稽核品項"
+  },
+  {
+    "id": "auditdetail.created.status",
+    "description": "Created",
+    "defaultMessage": "已建立"
+  },
+  {
+    "id": "auditdetail.pending.status",
+    "description": "Pending",
+    "defaultMessage": "待處理"
+  },
+  {
+    "id": "auditdetail.progress.status",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "auditdetail.sku.prefix",
+    "description": "SKU",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "auditdetail.location.prefix",
+    "description": "Location",
+    "defaultMessage": "位置"
+  },
+  {
+    "id": "auditdetail.auditPendingApp.prefix",
+    "description": "Issues found",
+    "defaultMessage": "發現問題"
+  },
+  {
+    "id": "auditdetail.auditRejected.prefix",
+    "description": "Rejected",
+    "defaultMessage": "已拒絕"
+  },
+  {
+    "id": "auditdetail.auditResolved.prefix",
+    "description": "Resolved",
+    "defaultMessage": "已解決"
+  },
+  {
+    "id": "auditdetail.auditReaudited.prefix",
+    "description": "Re-audited",
+    "defaultMessage": "已再次稽核"
+  },
+  {
+    "id": "audit.inputField.id",
+    "description": "AUDIT TASK ID",
+    "defaultMessage": "稽核工作 ID"
+  },
+  {
+    "id": "audit.inputField.sku",
+    "description": "SPECIFIC SKU ID",
+    "defaultMessage": "特定 SKU ID"
+  },
+  {
+    "id": "audit.inputField.location",
+    "description": "SPECIFIC LOCATION ID",
+    "defaultMessage": "特定位置 ID"
+  },
+  {
+    "id": "audit.tokenfield.typeAudit",
+    "description": "AUDIT TYPE",
+    "defaultMessage": "稽核類型"
+  },
+  {
+    "id": "audit.tokenfield.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "audit.token1.all",
+    "description": "Any",
+    "defaultMessage": "任何"
+  },
+  {
+    "id": "audit.token1.sku",
+    "description": "SKU",
+    "defaultMessage": "SKU"
+  },
+  {
+    "id": "audit.token1.location",
+    "description": "Location",
+    "defaultMessage": "位置"
+  },
+  {
+    "id": "audit.token2.all",
+    "description": "Any",
+    "defaultMessage": "任何"
+  },
+  {
+    "id": "audit.token2.issueFound",
+    "description": "Issue found",
+    "defaultMessage": "發現問題"
+  },
+  {
+    "id": "audit.token2.rejected",
+    "description": "Rejected",
+    "defaultMessage": "已拒絕"
+  },
+  {
+    "id": "audit.token2.resolved",
+    "description": "Resolved",
+    "defaultMessage": "已解決"
+  },
+  {
+    "id": "audit.token2.inProgress",
+    "description": "In progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "audit.token2.pending",
+    "description": "Pending",
+    "defaultMessage": "待處理"
+  },
+  {
+    "id": "audit.placeholder",
+    "description": "Manage Tasks",
+    "defaultMessage": "管理工作"
+  },
+  {
+    "id": "auditList.alert.lable",
+    "description": "{auditIssue},{auditIssue, plural, one {Alert} other {Alerts}}",
+    "defaultMessage": "{auditIssue}，{auditIssue, plural, one {警告} other {警告}}"
+  },
+  {
+    "id": "audit.table.duplicateTask",
+    "description": "Duplicate task",
+    "defaultMessage": "複製工作"
+  },
+  {
+    "id": "audit.table.deleteRecord",
+    "description": "Delete record",
+    "defaultMessage": "刪除紀錄"
+  },
+  {
+    "id": "audit.table.noData",
+    "description": "No Audit Task Found",
+    "defaultMessage": "查無稽核工作"
+  },
+  {
+    "id": "audit.table.heading",
+    "description": "Audit Tasks",
+    "defaultMessage": "稽核工作"
+  },
+  {
+    "id": "audit.table.buttonLable",
+    "description": "Create New Task",
+    "defaultMessage": "建立新工作"
+  },
+  {
+    "id": "audit.table.filterLabel",
+    "description": "Filter",
+    "defaultMessage": "篩選器"
+  },
+  {
+    "id": "orderlist.filter.search.bar",
+    "description": "{totalOrder} Orders found",
+    "defaultMessage": "找到 {totalOrder} 筆訂單"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "Show all orders",
+    "defaultMessage": "顯示所有訂單"
+  },
+  {
+    "id": "auditTable.stationID.heading",
+    "description": "AUDIT ID",
+    "defaultMessage": "稽核 ID"
+  },
+  {
+    "id": "auditTable.SubAuditID",
+    "description": "Total:{rowsCount}",
+    "defaultMessage": "總數：{rowsCount}"
+  },
+  {
+    "id": "audit.table.type",
+    "description": "AUDIT TYPE",
+    "defaultMessage": "稽核類型"
+  },
+  {
+    "id": "audit.auditType",
+    "description": "SKU ({sku}) . Location ({location})",
+    "defaultMessage": "SKU ({sku})位置 ({location})"
+  },
+  {
+    "id": "audit.table.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "auditTable.status",
+    "description": "{auditCompleted} Completed",
+    "defaultMessage": "{auditCompleted} 項已完成"
+  },
+  {
+    "id": "audit.table.startTime",
+    "description": "START TIME",
+    "defaultMessage": "開始時間"
+  },
+  {
+    "id": "audit.table.progress",
+    "description": "PROGRESS(%)",
+    "defaultMessage": "進度 (%)"
+  },
+  {
+    "id": "audit.Totalprogress",
+    "description": "{totalProgress}% Completed",
+    "defaultMessage": "已完成 {totalProgress}%"
+  },
+  {
+    "id": "audit.table.timeCompleted",
+    "description": "TIME COMPLETED",
+    "defaultMessage": "完成時間"
+  },
+  {
+    "id": "audit.table.action",
+    "description": "ACTIONS",
+    "defaultMessage": "動作"
+  },
+  {
+    "id": "audit.valid.sku",
+    "description": "SKU confirmed",
+    "defaultMessage": "SKU 已確認"
+  },
+  {
+    "id": "audit.invalid.sku",
+    "description": "Please enter correct SKU number",
+    "defaultMessage": "請輸入正確的 SKU 碼"
+  },
+  {
+    "id": "audit.noAtrributes.sku",
+    "description": "SKU confirmed but no Box Id found",
+    "defaultMessage": "SKU 已確認，但查無箱盒 Id"
+  },
+  {
+    "id": "audit.add.heading",
+    "description": "Create new audit",
+    "defaultMessage": "建立新的稽核工作"
+  },
+  {
+    "id": "audit.add.subheading",
+    "description": "Select and enter details below to create a new audit task",
+    "defaultMessage": "選擇並輸入下方詳細資訊，以建立新的稽核工作"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Select audit type by",
+    "defaultMessage": "選擇稽核類型"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Audit by SKU code",
+    "defaultMessage": "依 SKU 碼稽核"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Audit by Location code",
+    "defaultMessage": "依位置代碼稽核"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Enter SKU code",
+    "defaultMessage": "輸入 SKU 碼"
+  },
+  {
+    "id": "audits.validateSKU",
+    "description": "Validate",
+    "defaultMessage": "驗證"
+  },
+  {
+    "id": "audit.dropdown.heading",
+    "description": "Choose Box Id (Optional)",
+    "defaultMessage": "選擇箱盒 Id（選填）"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Enter Location",
+    "defaultMessage": "輸入位置"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Format: (XXX.X.X.XX)",
+    "defaultMessage": "格式：(XXX.X.X.XX)"
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Create audit",
+    "defaultMessage": "建立稽核"
+  },
+  {
+    "id": "audit.delete.heading",
+    "description": "Are you sure you would like to delete audit task {task_name} ?",
+    "defaultMessage": "您確定要刪除稽核工作 {task_name}？"
+  },
+  {
+    "id": "audit.duplicate.heading",
+    "description": "Are you sure you would like to duplicate audit task {task_name} ?",
+    "defaultMessage": "您確定要複製稽核工作 {task_name}？"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading2",
+    "description": "There are currently no PPS in audit mode.",
+    "defaultMessage": "目前無 PPS 為稽核模式。"
+  },
+  {
+    "id": "audit.start.auditdetails.please",
+    "description": "Please",
+    "defaultMessage": "請"
+  },
+  {
+    "id": "audit.start.auditdetails.hyperlink",
+    "description": "go to the PPS mode",
+    "defaultMessage": "前往 PPS 模式"
+  },
+  {
+    "id": "audit.start.auditdetails.operations",
+    "description": "change PPS operations.",
+    "defaultMessage": "變更 PPS 作業。"
+  },
+  {
+    "id": "resolveAudit.table.batchID",
+    "description": "BOX ID.",
+    "defaultMessage": "箱盒 ID。"
+  },
+  {
+    "id": "resolveAudit.table.expectedItems",
+    "description": "EXPECTED QUANTITY",
+    "defaultMessage": "預期數量"
+  },
+  {
+    "id": "resolveAudit.table.actualQuantity",
+    "description": "ACTUAL QUANTITY",
+    "defaultMessage": "實際數量"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "resolveAudit.table.resolve",
+    "description": "RESOLVE",
+    "defaultMessage": "解決"
+  },
+  {
+    "id": "audit.inSlot.text",
+    "description": "In slot",
+    "defaultMessage": "於儲位中"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "SLOT ID",
+    "defaultMessage": "儲位 ID"
+  },
+  {
+    "id": "audit.resolve.heading",
+    "description": "Resolve issues",
+    "defaultMessage": "解決問題"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "View issues",
+    "defaultMessage": "檢視問題"
+  },
+  {
+    "id": "audit.missing.information",
+    "description": "Audit task #{auditId} - {auditType}",
+    "defaultMessage": "稽核工作 #{auditId} - {auditType}"
+  },
+  {
+    "id": "audit.missing.auditType",
+    "description": "Mismatch found in {totalLines} slot",
+    "defaultMessage": "{totalLines} 列儲位中發現不符情形"
+  },
+  {
+    "id": "resolveAudit.cancelLabel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "resolveAudit.confirmLabel",
+    "description": "Confirm",
+    "defaultMessage": "確認"
+  },
+  {
+    "id": "resolveAudit.closeLabel",
+    "description": "Close",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "resolveAudit.table.batchID",
+    "description": "BOX ID.",
+    "defaultMessage": "箱盒 ID。"
+  },
+  {
+    "id": "resolveAudit.table.expectedItems",
+    "description": "EXPECTED QUANTITY",
+    "defaultMessage": "預期數量"
+  },
+  {
+    "id": "resolveAudit.table.actualQuantity",
+    "description": "ACTUAL QUANTITY",
+    "defaultMessage": "實際數量"
+  },
+  {
+    "id": "resolveAudit.table.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "resolveAudit.table.resolve",
+    "description": "RESOLVE",
+    "defaultMessage": "解決"
+  },
+  {
+    "id": "audit.inSlot.text",
+    "description": "In slot",
+    "defaultMessage": "於儲位中"
+  },
+  {
+    "id": "resolveAudit.table.slot",
+    "description": "SLOT ID",
+    "defaultMessage": "儲位 ID"
+  },
+  {
+    "id": "audit.resolve.heading",
+    "description": "Resolve issues",
+    "defaultMessage": "解決問題"
+  },
+  {
+    "id": "audit.viewIssues.heading",
+    "description": "View issues",
+    "defaultMessage": "檢視問題"
+  },
+  {
+    "id": "audit.missing.information",
+    "description": "Audit task #{auditId} - {auditType}",
+    "defaultMessage": "稽核工作 #{auditId} - {auditType}"
+  },
+  {
+    "id": "audit.missing.auditType",
+    "description": "Mismatch found in {totalLines} slot",
+    "defaultMessage": "{totalLines} 列儲位中發現不符情形"
+  },
+  {
+    "id": "resolveAudit.cancelLabel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "resolveAudit.confirmLabel",
+    "description": "Confirm",
+    "defaultMessage": "確認"
+  },
+  {
+    "id": "resolveAudit.closeLabel",
+    "description": "Close",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "audit.start.ppscheckbox",
+    "description": "PPS {eta}",
+    "defaultMessage": "PPS {eta}"
+  },
+  {
+    "id": "audit.start.heading",
+    "description": "Start audit task",
+    "defaultMessage": "開始稽核工作"
+  },
+  {
+    "id": "audit.start.subheading",
+    "description": "Assign one or more PPS and start the audit task",
+    "defaultMessage": "指派一或多個 PPS，並開始稽核工作"
+  },
+  {
+    "id": "audit.start.auditdetails.heading",
+    "description": "Assign PPS for {task}",
+    "defaultMessage": "為 {task} 指派 PPS"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading1",
+    "description": "All PPS below are currently in the audit mode.",
+    "defaultMessage": "下方所有 PPS 目前皆為稽核模式。"
+  },
+  {
+    "id": "audit.start.button",
+    "description": "Start task now",
+    "defaultMessage": "立即開始工作"
+  },
+  {
+    "id": "audit.back.button",
+    "description": "Go Back",
+    "defaultMessage": "返回"
+  },
+  {
+    "id": "audit.add.heading",
+    "description": "Create new audit",
+    "defaultMessage": "建立新的稽核工作"
+  },
+  {
+    "id": "audit.add.subheading",
+    "description": "Select and enter details below to create a new audit task",
+    "defaultMessage": "選擇並輸入下方詳細資訊，以建立新的稽核工作"
+  },
+  {
+    "id": "audit.add.auditdetails.heading",
+    "description": "Select the type of audit task",
+    "defaultMessage": "選擇稽核工作的類型"
+  },
+  {
+    "id": "audit.add.auditdetails.subheading",
+    "description": "Select the audit type and enter details accordingly",
+    "defaultMessage": "選擇稽核類型並據此輸入詳細資訊"
+  },
+  {
+    "id": "audit.add.auditdetails.fields",
+    "description": "All fields are required",
+    "defaultMessage": "所有欄位皆為必填"
+  },
+  {
+    "id": "audit.add.type.heading",
+    "description": "Audit type",
+    "defaultMessage": "稽核類型"
+  },
+  {
+    "id": "audit.add.typedetails.sku",
+    "description": "Audit by SKU code",
+    "defaultMessage": "依 SKU 碼稽核"
+  },
+  {
+    "id": "audit.add.typedetails.skutext",
+    "description": "Create an audit task based on the SKU code of an item",
+    "defaultMessage": "依品項的 SKU 碼建立稽核工作"
+  },
+  {
+    "id": "audit.add.typedetails.location",
+    "description": "Audit by Location code",
+    "defaultMessage": "依位置代碼稽核"
+  },
+  {
+    "id": "audit.add.typedetails.locationtext",
+    "description": "Create an audit task based on the location of a MSU",
+    "defaultMessage": "依 MSU 的位置建立稽核工作"
+  },
+  {
+    "id": "audit.add.sku.heading",
+    "description": "Enter SKU code",
+    "defaultMessage": "輸入 SKU 碼"
+  },
+  {
+    "id": "audit.add.sku.subheading",
+    "description": "Enter alphanumeric SKU code of the item to be audited",
+    "defaultMessage": "輸入須稽核品項的英數字 SKU 碼"
+  },
+  {
+    "id": "audit.add.location.heading",
+    "description": "Enter Location",
+    "defaultMessage": "輸入位置"
+  },
+  {
+    "id": "audit.add.location.subheading",
+    "description": "Format: (XXX.X.X.XX)",
+    "defaultMessage": "格式：(XXX.X.X.XX)"
+  },
+  {
+    "id": "audit.add.tips.heading",
+    "description": "Tips:",
+    "defaultMessage": "提示："
+  },
+  {
+    "id": "audit.add.tips.subheading",
+    "description": "Once an audit task has been created, please click on the \"Assign PPS\" button in the audit listing to start the audit task.",
+    "defaultMessage": "稽核工作建立後，請按一下稽核清單中的「指派 PPS」按鈕，開始稽核工作。"
+  },
+  {
+    "id": "audits.add.password.button",
+    "description": "Create audit",
+    "defaultMessage": "建立稽核"
+  },
+  {
+    "id": "audit.duplicate.heading",
+    "description": "Are you sure you would like to duplicate audit task {task_name} ?",
+    "defaultMessage": "您確定要複製稽核工作 {task_name}？"
+  },
+  {
+    "id": "emergency.heading",
+    "description": "Systemwide emergency stop",
+    "defaultMessage": "全系統緊急停止"
+  },
+  {
+    "id": "emergency.type",
+    "description": "The butler system is now stopped by a {type} emergency.",
+    "defaultMessage": "Butler 系統現在因 {type} 緊急狀況停止。"
+  },
+  {
+    "id": "emergency.action",
+    "description": "System reset required before returning to operation",
+    "defaultMessage": "須進行系統重設，方能恢復作業"
+  },
+  {
+    "id": "emergency.stop",
+    "description": "Stoppped:",
+    "defaultMessage": "停止："
+  },
+  {
+    "id": "emergency.trigger",
+    "description": "Triggered at:",
+    "defaultMessage": "觸發："
+  },
+  {
+    "id": "emergency.operator",
+    "description": "Operator:",
+    "defaultMessage": "作業員："
+  },
+  {
+    "id": "emergency.button",
+    "description": "Close",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "operation.alert.release",
+    "description": "Stop button released",
+    "defaultMessage": "已釋放停止按鈕"
+  },
+  {
+    "id": "operation.alert.release.text",
+    "description": "Emergency Stop button has been released.",
+    "defaultMessage": "已釋放緊急停止按鈕。"
+  },
+  {
+    "id": "operation.alert.release.subtext",
+    "description": "You will be required to enter your password in order to view the checklist.               Approving all the items on checklist will resume the warehouse operation",
+    "defaultMessage": "您須輸入密碼，方能檢視檢查清單。核准所有檢查清單中的項目將恢復倉庫作業"
+  },
+  {
+    "id": "operation.alert.release.button",
+    "description": "Resume operation",
+    "defaultMessage": "恢復作業"
+  },
+  {
+    "id": "operation.alert.stop",
+    "description": "Operation Stopped",
+    "defaultMessage": "作業停止"
+  },
+  {
+    "id": "operation.alert.pause",
+    "description": "Operation Paused",
+    "defaultMessage": "作業暫停"
+  },
+  {
+    "id": "operation.alert.stop.text",
+    "description": "Emergency Stop button has been pressed.",
+    "defaultMessage": "已按下緊急停止按鈕。"
+  },
+  {
+    "id": "operation.alert.pause.text",
+    "description": "Butler operation has been paused from the management dashboard",
+    "defaultMessage": "Butler 作業已透過管理儀表板暫停"
+  },
+  {
+    "id": "operation.alert.stop.subtext",
+    "description": "To resume butler operation in the warehouse, you will be required to go through a safety checklist",
+    "defaultMessage": "如須恢復倉庫中 Butler 的作業，您必須完成安全檢查清單"
+  },
+  {
+    "id": "operation.alert.pause.subtext",
+    "description": "You must check the emergency situation and release the Emergency Stop button in order to resume the operation in warehouse",
+    "defaultMessage": "您必須檢查緊急狀況並釋放緊急停止按紐，以恢復倉庫中的作業"
+  },
+  {
+    "id": "operation.pause.heading",
+    "description": "Pause Operation",
+    "defaultMessage": "暫停作業"
+  },
+  {
+    "id": "operation.pause.text",
+    "description": "All Butler bots, PPS and other sysytem components will be paused once               completed the last action",
+    "defaultMessage": "一旦完成最後動作，所有 Butler 機器人、PPS 和其他系統元件都將暫停"
+  },
+  {
+    "id": "operation.pause.error",
+    "description": "The entered input does not match. Please try again.",
+    "defaultMessage": "輸入的內容不符。請再試一次。"
+  },
+  {
+    "id": "operation.pause.cancel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "operation.pause.button",
+    "description": "Pause Operation",
+    "defaultMessage": "暫停作業"
+  },
+  {
+    "id": "operation.resume.heading",
+    "description": "Resume Operation",
+    "defaultMessage": "恢復作業"
+  },
+  {
+    "id": "operation.resume.text",
+    "description": "To resume operation, you will be required to go through a safety                 checklist to make sure that the Butler system is ready",
+    "defaultMessage": "如須恢復作業，您必須完成安全檢查清單，以確保 Butler 系統準備就緒"
+  },
+  {
+    "id": "operation.resume.error",
+    "description": "The entered input does not match. Please try again.",
+    "defaultMessage": "輸入的內容不符。請再試一次。"
+  },
+  {
+    "id": "operation.cancel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "operation.resume.view",
+    "description": "View safety checklist",
+    "defaultMessage": "檢視安全檢查清單"
+  },
+  {
+    "id": "operation.safety.steperror",
+    "description": "(Check again)",
+    "defaultMessage": "（再次檢查）"
+  },
+  {
+    "id": "operation.safety.heading",
+    "description": "Safety checklist",
+    "defaultMessage": "安全檢查清單"
+  },
+  {
+    "id": "operation.safety.steps",
+    "description": "Check approval steps",
+    "defaultMessage": "檢查核准步驟"
+  },
+  {
+    "id": "operation.safety.text",
+    "description": "Tick every item to confirm that the system is safe to resume operation.",
+    "defaultMessage": "勾選所有項目，以確認該系統可安全恢復作業。"
+  },
+  {
+    "id": "operation.safety.errors",
+    "description": "System has found some of these steps were not followed.                      Please check or contact service engineer for support",
+    "defaultMessage": "系統發現部分步驟未被遵守。請檢查或聯絡維修工程師以取得支援"
+  },
+  {
+    "id": "operation.safety.confirm",
+    "description": "",
+    "defaultMessage": ""
+  },
+  {
+    "id": "inventory.histogram.header",
+    "description": "Stock level history",
+    "defaultMessage": "庫存水準歷史紀錄"
+  },
+  {
+    "id": "inventory.linechart.header",
+    "description": "Item Movements",
+    "defaultMessage": "品項移動"
+  },
+  {
+    "id": "inventory.histogram.noDataText",
+    "description": "No Stock Found",
+    "defaultMessage": "查無庫存"
+  },
+  {
+    "id": "inventory.histogram.today",
+    "description": "Today's",
+    "defaultMessage": "今天"
+  },
+  {
+    "id": "snapshot.inventory.usedSpace",
+    "description": "{utilisedSpace}% space utilized",
+    "defaultMessage": "已使用 {utilisedSpace}% 空間"
+  },
+  {
+    "id": "itemCat.category.heading",
+    "description": "Category",
+    "defaultMessage": "類別"
+  },
+  {
+    "id": "itemCat.CBM.heading",
+    "description": "CBM Used",
+    "defaultMessage": "使用的 CBM"
+  },
+  {
+    "id": "itemCat.daysOnHand.heading",
+    "description": "Days on Hand",
+    "defaultMessage": "可用天數"
+  },
+  {
+    "id": "logout.question",
+    "description": "Are you sure you would like to log out now?",
+    "defaultMessage": "您確定要立即登出？"
+  },
+  {
+    "id": "logout.cancel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "logout.done",
+    "description": "Log out now",
+    "defaultMessage": "立即登出"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading2",
+    "description": "There are currently no PPS in audit mode.",
+    "defaultMessage": "目前無 PPS 為稽核模式。"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS1",
+    "description": "Please",
+    "defaultMessage": "請"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS2",
+    "description": "go to the PPS mode",
+    "defaultMessage": "前往 PPS 模式"
+  },
+  {
+    "id": "audit.start.auditdetails.noPPS3",
+    "description": "change PPS operations.",
+    "defaultMessage": "變更 PPS 作業。"
+  },
+  {
+    "id": "pickPerformance.dropdown",
+    "description": "PPS Pick Performance",
+    "defaultMessage": "PPS 揀貨績效"
+  },
+  {
+    "id": "putPerformance.dropdown",
+    "description": "PPS Put Performance",
+    "defaultMessage": "PPS 放置績效"
+  },
+  {
+    "id": "auditPerformance.dropdown",
+    "description": "PPS Audit Performance",
+    "defaultMessage": "PPS 稽核績效"
+  },
+  {
+    "id": "order.inputField.id",
+    "description": "ORDER ID",
+    "defaultMessage": "訂單 ID"
+  },
+  {
+    "id": "order.token.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "order.token.timePeriod",
+    "description": "TIME PERIOD",
+    "defaultMessage": "期間"
+  },
+  {
+    "id": "order.STATUS.all",
+    "description": "All orders",
+    "defaultMessage": "所有訂單"
+  },
+  {
+    "id": "order.STATUS.breach",
+    "description": "Breached orders",
+    "defaultMessage": "違約訂單"
+  },
+  {
+    "id": "order.STATUS.pending",
+    "description": "Pending orders",
+    "defaultMessage": "待處理訂單"
+  },
+  {
+    "id": "order.STATUS.completed",
+    "description": "Completed orders",
+    "defaultMessage": "已完成訂單"
+  },
+  {
+    "id": "order.STATUS.exep",
+    "description": "Exception",
+    "defaultMessage": "例外"
+  },
+  {
+    "id": "order.timePeriod.all",
+    "description": "All",
+    "defaultMessage": "全部"
+  },
+  {
+    "id": "order.timePeriod.oneHr",
+    "description": "Last 1 hours",
+    "defaultMessage": "前 1 小時"
+  },
+  {
+    "id": "order.timePeriod.twoHR",
+    "description": "Last 2 hours",
+    "defaultMessage": "前 2 小時"
+  },
+  {
+    "id": "order.timePeriod.sixHr",
+    "description": "Last 6 hours",
+    "defaultMessage": "前 6 小時"
+  },
+  {
+    "id": "order.timePeriod.twoHr",
+    "description": "Last 12 hours",
+    "defaultMessage": "前 12 小時"
+  },
+  {
+    "id": "order.timePeriod.oneday",
+    "description": "Last 1 day",
+    "defaultMessage": "前1 天"
+  },
+  {
+    "id": "orderList.progress.status",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "orderList.exception.status",
+    "description": "Exception",
+    "defaultMessage": "例外"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "Unfulfillable",
+    "defaultMessage": "不可供發貨"
+  },
+  {
+    "id": "orderlist.Refreshed.at",
+    "description": "Last Updated",
+    "defaultMessage": "上次更新時間"
+  },
+  {
+    "id": "orderlistTab.orderListRefreshedat",
+    "description": "Last Updated",
+    "defaultMessage": "上次更新時間"
+  },
+  {
+    "id": "table.filter.placeholder",
+    "description": "Filter by keywords",
+    "defaultMessage": "依關鍵字篩選"
+  },
+  {
+    "id": "orderlist.table.allDrop",
+    "description": "All orders",
+    "defaultMessage": "所有訂單"
+  },
+  {
+    "id": "orderlist.table.breachedDrop",
+    "description": "Breached orders",
+    "defaultMessage": "違約訂單"
+  },
+  {
+    "id": "pendingDrop.table.allDrop",
+    "description": "Pending orders",
+    "defaultMessage": "待處理訂單"
+  },
+  {
+    "id": "completedDrop.table.allDrop",
+    "description": "Completed orders",
+    "defaultMessage": "已完成訂單"
+  },
+  {
+    "id": "exceptionDrop.table",
+    "description": "Exception",
+    "defaultMessage": "例外"
+  },
+  {
+    "id": "orderlist.table.allTimeDrop",
+    "description": "All",
+    "defaultMessage": "全部"
+  },
+  {
+    "id": "orderlist.table.oneHrDrop",
+    "description": "Last 1 hours",
+    "defaultMessage": "前 1 小時"
+  },
+  {
+    "id": "pendingDrop.table.twoHrDrop",
+    "description": "Last 2 hours",
+    "defaultMessage": "前 2 小時"
+  },
+  {
+    "id": "completedDrop.table.sixHrDrop",
+    "description": "Last 6 hours",
+    "defaultMessage": "前 6 小時"
+  },
+  {
+    "id": "pendingDrop.table.twelveHrDrop",
+    "description": "Last 12 hours",
+    "defaultMessage": "前12 小時"
+  },
+  {
+    "id": "completedDrop.table.oneDayDrop",
+    "description": "Last 1 day",
+    "defaultMessage": "前1 天"
+  },
+  {
+    "id": "orderlist.table.noData",
+    "description": "No Orders Found",
+    "defaultMessage": "查無訂單"
+  },
+  {
+    "id": "order.table.heading",
+    "description": "OrderList",
+    "defaultMessage": "訂單列表"
+  },
+  {
+    "id": "order.table.buttonLable",
+    "description": "Refresh Data",
+    "defaultMessage": "重新整理資料"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "Filter Data",
+    "defaultMessage": "篩選資料"
+  },
+  {
+    "id": "orderlist.filter.search.bar",
+    "description": "{totalOrder} Orders found",
+    "defaultMessage": "找到 {totalOrder} 筆訂單"
+  },
+  {
+    "id": "orderlist.filter.search.bar.showall",
+    "description": "Show all orders",
+    "defaultMessage": "顯示所有訂單"
+  },
+  {
+    "id": "orderlist.order.headingText",
+    "description": "ORDER ID",
+    "defaultMessage": "訂單 ID"
+  },
+  {
+    "id": "orderlist.subTotalorder",
+    "description": "Total:{totalOrder}",
+    "defaultMessage": "總數：{totalOrder}"
+  },
+  {
+    "id": "orderList.table.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "orderlist.table.pickBy",
+    "description": "PICK BY",
+    "defaultMessage": "揀貨依據"
+  },
+  {
+    "id": "orderlist.pendingOrders",
+    "description": "{pendingOrders} orders pending",
+    "defaultMessage": "{pendingOrders} 筆訂單待處理"
+  },
+  {
+    "id": "orderlist.table.operatingMode",
+    "description": "RECEIVED TIME",
+    "defaultMessage": "接收時間"
+  },
+  {
+    "id": "orderlist.table.completedTime",
+    "description": "COMPLETED",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "orderlist.totalCompletedOrder",
+    "description": "Avg {totalCompletedOrder} orders/hr",
+    "defaultMessage": "平均每小時 {totalCompletedOrder} 筆"
+  },
+  {
+    "id": "orderlist.table.orderLine",
+    "description": "ORDER LINE",
+    "defaultMessage": "訂單產品線"
+  },
+  {
+    "id": "orderlist.itemsPerOrder",
+    "description": "Avg {itemsPerOrder} items/hr",
+    "defaultMessage": "平均每小時 {itemsPerOrder} 件"
+  },
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "WAVE-{waveId}",
+    "defaultMessage": "個別作業-{waveId}"
+  },
+  {
+    "id": "waves.table.noData",
+    "description": "No Waves Found",
+    "defaultMessage": "查無個別作業"
+  },
+  {
+    "id": "waves.table.heading",
+    "description": "Waves",
+    "defaultMessage": "個別作業"
+  },
+  {
+    "id": "WavesTable.heading",
+    "description": "Waves",
+    "defaultMessage": "個別作業"
+  },
+  {
+    "id": "WavesTable.Totalwaves",
+    "description": "Total:{totalwave}",
+    "defaultMessage": "總數：{totalwave}"
+  },
+  {
+    "id": "waves.table.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "waves.table.startTime",
+    "description": "START TIME",
+    "defaultMessage": "開始時間"
+  },
+  {
+    "id": "WavesTable.pending.status",
+    "description": "{pendingWave} waves pending",
+    "defaultMessage": "{pendingWave} 項個別作業待處理"
+  },
+  {
+    "id": "waves.table.cutOffTime",
+    "description": "CUT-OFF TIME",
+    "defaultMessage": "截止時間"
+  },
+  {
+    "id": "WavesTable.progress.status",
+    "description": "{progressWave} waves in progress",
+    "defaultMessage": "{progressWave} 項個別作業進行中"
+  },
+  {
+    "id": "waves.table.ordersToFulfill",
+    "description": "ORDERS TO FULFILL",
+    "defaultMessage": "須完成的訂單"
+  },
+  {
+    "id": "WavesTable.orderRemaining.status",
+    "description": "{orderRemaining} remaining",
+    "defaultMessage": "剩餘 {orderRemaining} 筆"
+  },
+  {
+    "id": "waves.table.progress",
+    "description": "PROGRESS(%)",
+    "defaultMessage": "進度 (%)"
+  },
+  {
+    "id": "WavesTable.completed.status",
+    "description": "{completedWaves} waves completed",
+    "defaultMessage": "{completedWaves} 項個別作業已完成"
+  },
+  {
+    "id": "waves.table.totalOrders",
+    "description": "TOTAL ORDERS",
+    "defaultMessage": "訂單總數"
+  },
+  {
+    "id": "WavesTable.totalOrders.status",
+    "description": "{totalOrders} orders",
+    "defaultMessage": "{totalOrders} 筆訂單"
+  },
+  {
+    "id": "performanceParam.graph",
+    "description": "items/hr",
+    "defaultMessage": "件／小時"
+  },
+  {
+    "id": "health.pps",
+    "description": "PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "health.Butler",
+    "description": "Butler bots",
+    "defaultMessage": "Butler 機器人"
+  },
+  {
+    "id": "health.ChargingStation",
+    "description": "Charging Stations",
+    "defaultMessage": "充電站"
+  },
+  {
+    "id": "systemHealth.dropdown",
+    "description": "System Health",
+    "defaultMessage": "系統健康情況"
+  },
+  {
+    "id": "PPSpickPerformance.dropdown",
+    "description": "PPS Pick Performance",
+    "defaultMessage": "PPS 揀貨績效"
+  },
+  {
+    "id": "PPSputPerformance.dropdown",
+    "description": "PPS Put Performance",
+    "defaultMessage": "PPS 放置績效"
+  },
+  {
+    "id": "PPSauditPerformance.dropdown",
+    "description": "PPS Audit Performance",
+    "defaultMessage": "PPS 稽核績效"
+  },
+  {
+    "id": "health.noData",
+    "description": "No Data",
+    "defaultMessage": "無資料"
+  },
+  {
+    "id": "widget.pick.headingleft",
+    "description": "Orders to fulfill",
+    "defaultMessage": "須完成的訂單"
+  },
+  {
+    "id": "widget.pick.completed",
+    "description": "COMPLETED",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "widget.pick.none",
+    "description": "None",
+    "defaultMessage": "無"
+  },
+  {
+    "id": "widget.pick.idle",
+    "description": "{count} idle PPS (Pick mode)",
+    "defaultMessage": "{count} 個閒置的 PPS（揀貨模式）"
+  },
+  {
+    "id": "widget.pick.throughput",
+    "description": "{count} PPS fullfilling at {throughput} items/hr",
+    "defaultMessage": "{count} 個 PPS 每小時完成 {throughput} 件"
+  },
+  {
+    "id": "widget.pick.lowright",
+    "description": "Estimated to complete in {eta}",
+    "defaultMessage": "估計完成於 {eta}"
+  },
+  {
+    "id": "widget.pick.headingright",
+    "description": "Time to cut-off",
+    "defaultMessage": "截止時間"
+  },
+  {
+    "id": "widget.pick.textright",
+    "description": "{cut_off}",
+    "defaultMessage": "{cut_off}"
+  },
+  {
+    "id": "widget.pick.statusleft.onschedule",
+    "description": "On Schedule",
+    "defaultMessage": "準時"
+  },
+  {
+    "id": "widget.pick.statusleft.atrisk",
+    "description": "{count_risk},{count_risk, plural, one {order} other {orders}} at risk",
+    "defaultMessage": "{count_risk}、{count_risk, plural, one {訂單} other {訂單}} 有風險"
+  },
+  {
+    "id": "widget.pick.offline",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "widget.pick.emergency",
+    "description": "--",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "widget.pick.statusleft.delay",
+    "description": "Delayed",
+    "defaultMessage": "延遲"
+  },
+  {
+    "id": "widget.pick.lowright.emergency",
+    "description": "Estimated to complete in --",
+    "defaultMessage": "估計完成時間 --"
+  },
+  {
+    "id": "widget.put.heading.value",
+    "description": "None",
+    "defaultMessage": "無"
+  },
+  {
+    "id": "widget.put.status.idle",
+    "description": "{count} idle PPS (Put mode)",
+    "defaultMessage": "{count} 個閒置的 PPS（放置模式）"
+  },
+  {
+    "id": "widget.put.throughput",
+    "description": "{count},{pluralMsg} stocking {throughput} items/hr",
+    "defaultMessage": "{count}、{pluralMsg} 每小時存放 {throughput} 件"
+  },
+  {
+    "id": "widget.put.offline",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "widget.put.emergency",
+    "description": "--",
+    "defaultMessage": "--"
+  },
+  {
+    "id": "widget.put.heading",
+    "description": "Items stocked",
+    "defaultMessage": "庫存的品項"
+  },
+  {
+    "id": "audit.start.ppscheckbox",
+    "description": "PPS {eta}",
+    "defaultMessage": "PPS {eta}"
+  },
+  {
+    "id": "audit.start.heading",
+    "description": "Start audit task",
+    "defaultMessage": "開始稽核工作"
+  },
+  {
+    "id": "audit.start.subheading",
+    "description": "Assign one or more PPS and start the audit task.",
+    "defaultMessage": "指派一或多個 PPS，並開始稽核工作。"
+  },
+  {
+    "id": "audit.start.auditdetails.heading",
+    "description": "Assign PPS for Location",
+    "defaultMessage": "為位置指派 PPS"
+  },
+  {
+    "id": "audit.start.auditdetails.subheading1",
+    "description": "All PPS below are currently in the audit mode.",
+    "defaultMessage": "下方所有 PPS 目前皆為稽核模式。"
+  },
+  {
+    "id": "audit.start.button",
+    "description": "Start task now",
+    "defaultMessage": "立即開始工作"
+  },
+  {
+    "id": "audit.back.button",
+    "description": "Go Back",
+    "defaultMessage": "返回"
+  },
+  {
+    "id": "butletbot.inputField.id",
+    "description": "BOT ID",
+    "defaultMessage": "機器人 ID"
+  },
+  {
+    "id": "butletbot.inputField.sku",
+    "description": "SPECIFIC LOCATION/ZONE",
+    "defaultMessage": "特定位置／區域"
+  },
+  {
+    "id": "butletbot.tokenfield.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "butletbot.tokenfield.MODE",
+    "description": "MODE",
+    "defaultMessage": "模式"
+  },
+  {
+    "id": "butletbot.token1.all",
+    "description": "Any",
+    "defaultMessage": "任何"
+  },
+  {
+    "id": "butletbot.token1.stopped",
+    "description": "Stopped",
+    "defaultMessage": "已停止"
+  },
+  {
+    "id": "butletbot.token1.error",
+    "description": "Error",
+    "defaultMessage": "錯誤"
+  },
+  {
+    "id": "butletbot.token1.warning",
+    "description": "Warning",
+    "defaultMessage": "警告"
+  },
+  {
+    "id": "butletbot.token1.Online",
+    "description": "Online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "butletbot.token1.Offline",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "butletbot.token2.any",
+    "description": "Any",
+    "defaultMessage": "任何"
+  },
+  {
+    "id": "butletbot.token2.pick",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "butletbot.token2.put",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "butletbot.token2.audit",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "butletbot.token2.charging",
+    "description": "Charging",
+    "defaultMessage": "充電"
+  },
+  {
+    "id": "butletbot.token2.notSet",
+    "description": "Not set",
+    "defaultMessage": "未設定"
+  },
+  {
+    "id": "butlerDetail.name.prefix",
+    "description": "BOT - {botId}",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "PPS {ppsId}",
+    "defaultMessage": "PPS {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "CS - {csId}",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "MSU - {msuId}",
+    "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "audit.name.prefix",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "pick.name.prefix",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "Put.name.prefix",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "Charging.name.prefix",
+    "description": "Charging",
+    "defaultMessage": "充電"
+  },
+  {
+    "id": "Move.name.prefix",
+    "description": "Move",
+    "defaultMessage": "移動"
+  },
+  {
+    "id": "moving.task",
+    "description": "Moving to",
+    "defaultMessage": "移動至"
+  },
+  {
+    "id": "movingMount.task",
+    "description": "Moving to mount",
+    "defaultMessage": "移動以裝載"
+  },
+  {
+    "id": "movingDismount.task",
+    "description": "Moving to dismount",
+    "defaultMessage": "移動以卸貨"
+  },
+  {
+    "id": "docked.task",
+    "description": "Docked at",
+    "defaultMessage": "停靠於"
+  },
+  {
+    "id": "butlerbot.table.noData",
+    "description": "No Butler Bot Found",
+    "defaultMessage": "找不到 Butler 機器人"
+  },
+  {
+    "id": "butlerBot.table.heading",
+    "description": "Butler Bots",
+    "defaultMessage": "Butler 機器人"
+  },
+  {
+    "id": "butlerbot.table.filterLabel",
+    "description": "Filter",
+    "defaultMessage": "篩選器"
+  },
+  {
+    "id": "ButlerBotTable.TotalBot",
+    "description": "BOTS",
+    "defaultMessage": "機器人"
+  },
+  {
+    "id": "ButlerBotTable.subTotalBot",
+    "description": "Total: {totalBot}",
+    "defaultMessage": "總數：{totalBot}"
+  },
+  {
+    "id": "butlerBot.table.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "ButlerBotTable.status",
+    "description": "{onlineBots} Online",
+    "defaultMessage": "{onlineBots} 上線"
+  },
+  {
+    "id": "butlerBot.table.currentTask",
+    "description": "CURRENT TASK",
+    "defaultMessage": "目前的工作"
+  },
+  {
+    "id": "ButlerBotTable.botState",
+    "description": "Pick ({pick}) . Put ({put}) . Charging ({charging}) . Idle ({idle})",
+    "defaultMessage": "揀貨 ({pick})。放置 ({put})。充電 ({charging})。閒置 ({idle})"
+  },
+  {
+    "id": "butlerBot.table.msu",
+    "description": "MSU MOUNTED",
+    "defaultMessage": "已裝載 MSU"
+  },
+  {
+    "id": "ButlerBotTable.mounted",
+    "description": "{msuMounted} Mounted",
+    "defaultMessage": "已裝載 {msuMounted}"
+  },
+  {
+    "id": "butlerBot.table.location",
+    "description": "LOCATION",
+    "defaultMessage": "位置"
+  },
+  {
+    "id": "ButlerBotTable.locations",
+    "description": "{locations} Locations",
+    "defaultMessage": "{locations} 位置"
+  },
+  {
+    "id": "butlerBot.table.voltage",
+    "description": "VOLTAGE",
+    "defaultMessage": "電壓"
+  },
+  {
+    "id": "ButlerBotTable.avgVoltage",
+    "description": "Avg {voltage}",
+    "defaultMessage": "平均 {voltage}"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "Charging Stations - {csId}",
+    "defaultMessage": "充電站 - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "Butler - {botId}",
+    "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "ChargingStations.table.noData",
+    "description": "No Charging Stations Found",
+    "defaultMessage": "找不到充電站"
+  },
+  {
+    "id": "ChargingStations.table.heading",
+    "description": "Charging Stations",
+    "defaultMessage": "充電站"
+  },
+  {
+    "id": "ChargingStationsTable.stationID.heading",
+    "description": "STATION ID",
+    "defaultMessage": "充電站 ID"
+  },
+  {
+    "id": "ChargingStationsTable.SubstationID",
+    "description": "Total:{rowsCount}",
+    "defaultMessage": "總數：{rowsCount}"
+  },
+  {
+    "id": "ChargingStations.table.STATUS",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "csTable.status",
+    "description": "{csConnected} connected",
+    "defaultMessage": "{csConnected} 已連接"
+  },
+  {
+    "id": "ChargingStations.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "作業模式"
+  },
+  {
+    "id": "ChargingStationsTable.mode",
+    "description": "Manual ({manual}) . Auto ({auto})",
+    "defaultMessage": "手動 ({manual})。自動 ({auto})"
+  },
+  {
+    "id": "ChargingStations.table.connectedBots",
+    "description": "BOTS CONNECTED",
+    "defaultMessage": "機器人已連接"
+  },
+  {
+    "id": "ChargingStationsTable.totalBots",
+    "description": "{totalBots} bots connected",
+    "defaultMessage": "已連接 {totalBots} 台機器人"
+  },
+  {
+    "id": "NotificationTable.table.heading",
+    "description": "Notifications",
+    "defaultMessage": "通知"
+  },
+  {
+    "id": "NotificationTable.table.component",
+    "description": "COMPONENT",
+    "defaultMessage": "元件"
+  },
+  {
+    "id": "Notifications.table.status",
+    "description": "EVENT TYPE",
+    "defaultMessage": "事件類型"
+  },
+  {
+    "id": "NotificationTable.table.description",
+    "description": "DESCRIPTION",
+    "defaultMessage": "描述"
+  },
+  {
+    "id": "NotificationTable.table.remark",
+    "description": "REMARKS",
+    "defaultMessage": "備註"
+  },
+  {
+    "id": "NotificationTable.table.location",
+    "description": "TIME",
+    "defaultMessage": "時間"
+  },
+  {
+    "id": "ppsDetail.name.prefix",
+    "description": "PPS-{ppsId}",
+    "defaultMessage": "PPS-{ppsId}"
+  },
+  {
+    "id": "ppsDetail.performance.prefix.items",
+    "description": "{performance} items/hr",
+    "defaultMessage": "{performance} 件／小時"
+  },
+  {
+    "id": "pps.dropdown.placeholder",
+    "description": "Change PPS Mode",
+    "defaultMessage": "變更 PPS 模式"
+  },
+  {
+    "id": "PPS.table.pickDrop",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "PPS.table.putDrop",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "PPS.table.auditDrop",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "PPStable.table.noData",
+    "description": "No PPS Found",
+    "defaultMessage": "查無 PPS"
+  },
+  {
+    "id": "pps.table.heading",
+    "description": "Pick Put Stations",
+    "defaultMessage": "揀放站"
+  },
+  {
+    "id": "PPStable.selected",
+    "description": "{selected} selected",
+    "defaultMessage": "已選擇 {selected}"
+  },
+  {
+    "id": "PPStable.ppsColumn.heading",
+    "description": "PPS",
+    "defaultMessage": "PPS"
+  },
+  {
+    "id": "PPStable.Subpps",
+    "description": "Total: {ppsTotal}",
+    "defaultMessage": "總數：{ppsTotal}"
+  },
+  {
+    "id": "PPS.table.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "PPStable.status",
+    "description": "{ppsOnState} On",
+    "defaultMessage": "{ppsOnState} 啟動"
+  },
+  {
+    "id": "PPS.table.operatingMode",
+    "description": "OPERATING MODE",
+    "defaultMessage": "作業模式"
+  },
+  {
+    "id": "PPStable.ppsState",
+    "description": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Not set ({notSet})",
+    "defaultMessage": "揀貨 ({pick})。放置 ({put})。稽核 ({audit})。未設定 ({notSet})"
+  },
+  {
+    "id": "PPS.table.performance",
+    "description": "PERFORMANCE",
+    "defaultMessage": "績效"
+  },
+  {
+    "id": "PPStable.avgThroughput",
+    "description": "Avg {avgThroughput} items/hr",
+    "defaultMessage": "平均 {avgThroughput} 件／小時"
+  },
+  {
+    "id": "PPS.table.operatorAssigned",
+    "description": "OPERATOR ASSIGNED",
+    "defaultMessage": "指派的作業員"
+  },
+  {
+    "id": "PPStable.totalOperator",
+    "description": "{operatorNum} operators",
+    "defaultMessage": "{operatorNum} 名作業員"
+  },
+  {
+    "id": "tabs.offline",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "overview.tab.heading",
+    "description": "OVERVIEW",
+    "defaultMessage": "總覽"
+  },
+  {
+    "id": "system.tab.heading",
+    "description": "SYSTEM",
+    "defaultMessage": "系統"
+  },
+  {
+    "id": "orders.tab.heading",
+    "description": "ORDERS",
+    "defaultMessage": "訂單"
+  },
+  {
+    "id": "users.tab.heading",
+    "description": "USERS",
+    "defaultMessage": "使用者"
+  },
+  {
+    "id": "inventory.tab.heading",
+    "description": "INVENTORY",
+    "defaultMessage": "存貨"
+  },
+  {
+    "id": "audit.tab.heading",
+    "description": "AUDIT",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "overviewStatus.tab.fulfilling",
+    "description": "Fulfilling orders",
+    "defaultMessage": "完成訂單"
+  },
+  {
+    "id": "overviewStatus.tab.default",
+    "description": "None",
+    "defaultMessage": "無"
+  },
+  {
+    "id": "overviewStatus.tab.stop",
+    "description": "Operation stopped",
+    "defaultMessage": "作業已停止"
+  },
+  {
+    "id": "systemStatus.tab.online",
+    "description": "Online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "ordersStatus.tab.heading",
+    "description": "{count}% fulfilled",
+    "defaultMessage": "已完成 {count}%"
+  },
+  {
+    "id": "usersStatus.tab.heading#",
+    "description": "{count},{count, plural,=0 {user} one {user} other {users}} online",
+    "defaultMessage": "{count}、{count, plural,=0 {使用者} one {使用者} other {使用者}} 上線"
+  },
+  {
+    "id": "inventoryStatus.tab.heading",
+    "description": "{count}% space utilized",
+    "defaultMessage": "已使用 {count}% 空間"
+  },
+  {
+    "id": "auditStatus.tab.heading",
+    "description": "{count} in progress",
+    "defaultMessage": "{count} 進行中"
+  },
+  {
+    "id": "auditStatus.tab.alert.heading",
+    "description": "{count},{count, plural, one {alert} other {alerts}}",
+    "defaultMessage": "{count}、{count, plural, one {警告} other {警告}}"
+  },
+  {
+    "id": "userDetails.operator",
+    "description": "Operator",
+    "defaultMessage": "作業員"
+  },
+  {
+    "id": "userDetails.manager",
+    "description": "Manager",
+    "defaultMessage": "管理員"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "auditdetail.completed.status",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "userDetails.put.status",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "userDetails.front.status",
+    "description": "Front",
+    "defaultMessage": "前"
+  },
+  {
+    "id": "userDetails.back.status",
+    "description": "Back",
+    "defaultMessage": "後"
+  },
+  {
+    "id": "userDetails.online.status",
+    "description": "Online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "userDetails.offline.status",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "userDetails.location",
+    "description": "PPS {ppsId}",
+    "defaultMessage": "PPS {ppsId}"
+  },
+  {
+    "id": "users.add.heading",
+    "description": "Add new user",
+    "defaultMessage": "新增新使用者"
+  },
+  {
+    "id": "users.add.subheading",
+    "description": "All the fields are mandatory",
+    "defaultMessage": "所有欄位皆為必填"
+  },
+  {
+    "id": "users.add.userdetails.heading",
+    "description": "Enter User details",
+    "defaultMessage": "輸入使用者詳細資訊"
+  },
+  {
+    "id": "users.add.userdetails.subheading",
+    "description": "A User ID will be required to log into the system",
+    "defaultMessage": "須具備使用者 ID 方能登入系統"
+  },
+  {
+    "id": "users.add.userdetails.userid",
+    "description": "User ID",
+    "defaultMessage": "使用者 ID"
+  },
+  {
+    "id": "users.add.userdetails.firstname",
+    "description": "First Name",
+    "defaultMessage": "名字"
+  },
+  {
+    "id": "users.add.userdetails.lastname",
+    "description": "Last Name",
+    "defaultMessage": "姓氏"
+  },
+  {
+    "id": "users.add.password.heading",
+    "description": "Create password",
+    "defaultMessage": "建立密碼"
+  },
+  {
+    "id": "users.add.password.field1",
+    "description": "Password",
+    "defaultMessage": "密碼"
+  },
+  {
+    "id": "users.add.password.field2",
+    "description": "Confirm Password",
+    "defaultMessage": "確認密碼"
+  },
+  {
+    "id": "users.add.password.button",
+    "description": "Add new user",
+    "defaultMessage": "新增新使用者"
+  },
+  {
+    "id": "users.delete.heading",
+    "description": "Are you sure you would like to delete \"{user_name}\" ?",
+    "defaultMessage": "您確定要刪除「{user_name}」？"
+  },
+  {
+    "id": "users.delete.subheading",
+    "description": "Information related to the user will be lost",
+    "defaultMessage": "該使用者的相關資訊將會遺失"
+  },
+  {
+    "id": "users.delete.cancel",
+    "description": "Cancel",
+    "defaultMessage": "取消"
+  },
+  {
+    "id": "users.delete.confirm",
+    "description": "Delete",
+    "defaultMessage": "刪除"
+  },
+  {
+    "id": "users.edit.heading",
+    "description": "Edit user",
+    "defaultMessage": "編輯使用者"
+  },
+  {
+    "id": "users.edit.subheading",
+    "description": "All the fields are mandatory",
+    "defaultMessage": "所有欄位皆為必填"
+  },
+  {
+    "id": "users.edit.userdetails.heading",
+    "description": "Enter User details",
+    "defaultMessage": "輸入使用者詳細資訊"
+  },
+  {
+    "id": "users.edit.userdetails.subheading",
+    "description": "A User ID will be required to log into the system",
+    "defaultMessage": "須具備使用者 ID 方能登入系統"
+  },
+  {
+    "id": "users.edit.userdetails.userid",
+    "description": "User ID",
+    "defaultMessage": "使用者 ID"
+  },
+  {
+    "id": "users.edit.userdetails.firstname",
+    "description": "First Name",
+    "defaultMessage": "名字"
+  },
+  {
+    "id": "users.edit.userdetails.lastname",
+    "description": "Last Name",
+    "defaultMessage": "姓氏"
+  },
+  {
+    "id": "users.edit.changepassword.heading",
+    "description": "Change password",
+    "defaultMessage": "變更密碼"
+  },
+  {
+    "id": "users.edit.changepassword.subheading",
+    "description": "New password will be effective when user log-in next time",
+    "defaultMessage": "新密碼將於使用者下次登入時生效"
+  },
+  {
+    "id": "users.edit.password.field1",
+    "description": "Password",
+    "defaultMessage": "密碼"
+  },
+  {
+    "id": "users.edit.password.field2",
+    "description": "Confirm Password",
+    "defaultMessage": "確認密碼"
+  },
+  {
+    "id": "users.edit.password.",
+    "description": "New Password",
+    "defaultMessage": "新密碼"
+  },
+  {
+    "id": "users.edit.password.query",
+    "description": "Change Password",
+    "defaultMessage": "變更密碼"
+  },
+  {
+    "id": "users.edit.password.button",
+    "description": "Save",
+    "defaultMessage": "儲存"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Choose a role",
+    "defaultMessage": "選擇角色"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "User will be given a specific level of control over the Butler system depending on the designated role",
+    "defaultMessage": "將依指定的角色授予使用者特定層級的 Butler 系統控制權限"
+  },
+  {
+    "id": "users.add.roledetails.operator",
+    "description": "Operator",
+    "defaultMessage": "作業員"
+  },
+  {
+    "id": "users.add.roledetails.operatortext",
+    "description": "Grant access to the Operator Interface at each Pick Put Station in the Butler system",
+    "defaultMessage": "授與 Butler 系統中各揀放站存取操作人員介面的權限"
+  },
+  {
+    "id": "users.add.roledetails.manager",
+    "description": "Manager",
+    "defaultMessage": "管理員"
+  },
+  {
+    "id": "users.add.roledetails.managertext",
+    "description": "Grant access to the Management Interface and Operator Interface to all systems",
+    "defaultMessage": "授與所有系統存取管理介面與操作人員介面的權限"
+  },
+  {
+    "id": "users.add.roledetails.heading",
+    "description": "Choose a role",
+    "defaultMessage": "選擇角色"
+  },
+  {
+    "id": "users.add.roledetails.subheading",
+    "description": "User will be given a specific level of control over the Butler system depending on the designated role",
+    "defaultMessage": "將依指定的角色授予使用者特定層級的 Butler 系統控制權限"
+  },
+  {
+    "id": "user.table.noData",
+    "description": "No User Found",
+    "defaultMessage": "查無使用者"
+  },
+  {
+    "id": "user.table.heading",
+    "description": "Users",
+    "defaultMessage": "使用者"
+  },
+  {
+    "id": "user.button.heading",
+    "description": "Add new user",
+    "defaultMessage": "新增新使用者"
+  },
+  {
+    "id": "user.table.usersCount",
+    "description": "{rowsCount} USERS",
+    "defaultMessage": "{rowsCount} 使用者"
+  },
+  {
+    "id": "user.table.status",
+    "description": "STATUS",
+    "defaultMessage": "狀態"
+  },
+  {
+    "id": "user.table.role",
+    "description": "ROLE",
+    "defaultMessage": "角色"
+  },
+  {
+    "id": "user.table.workMode",
+    "description": "WORKMODE",
+    "defaultMessage": "工作模式"
+  },
+  {
+    "id": "user.table.location",
+    "description": "LOCATION",
+    "defaultMessage": "位置"
+  },
+  {
+    "id": "user.table.logInTime",
+    "description": "LOG IN TIME",
+    "defaultMessage": "登入時間"
+  },
+  {
+    "id": "user.table.action",
+    "description": "ACTIONS",
+    "defaultMessage": "動作"
+  },
+  {
+    "id": "butlerDetail.online.status",
+    "description": "Online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "butlerDetail.offline.status",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "butlerDetail.name.prefix",
+    "description": "BOT - {botId}",
+    "defaultMessage": "BOT - {botId}"
+  },
+  {
+    "id": "pps.name.prefix",
+    "description": "PPS - {ppsId}",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "charger.name.prefix",
+    "description": "CS - {csId}",
+    "defaultMessage": "CS - {csId}"
+  },
+  {
+    "id": "msu.name.prefix",
+    "description": "MSU - {msuId}",
+    "defaultMessage": "MSU - {msuId}"
+  },
+  {
+    "id": "chargersDetail.connected.status",
+    "description": "Connected",
+    "defaultMessage": "已連線"
+  },
+  {
+    "id": "chargersDetail.disconnected.status",
+    "description": "Disconnected",
+    "defaultMessage": "已斷線"
+  },
+  {
+    "id": "chargersDetail.manual.mode",
+    "description": "Manual",
+    "defaultMessage": "手動"
+  },
+  {
+    "id": "chargersDetail.auto.mode",
+    "description": "Auto",
+    "defaultMessage": "自動"
+  },
+  {
+    "id": "chargersDetail.name.prefix",
+    "description": "Charging Stations - {csId}",
+    "defaultMessage": "充電站 - {csId}"
+  },
+  {
+    "id": "chargersDetail.butler.prefix",
+    "description": "Butler - {botId}",
+    "defaultMessage": "Butler - {botId}"
+  },
+  {
+    "id": "orderList.progress.status",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "orderList.completed.status",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "orderList.Unfulfillable.status",
+    "description": "Unfulfillable",
+    "defaultMessage": "不可供發貨"
+  },
+  {
+    "id": "ppsDetail.pick.status",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "ppsDetail.put.status",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "ppsDetail.audit.status",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "ppsDetail.name.prefix",
+    "description": "PPS - {ppsId}",
+    "defaultMessage": "PPS - {ppsId}"
+  },
+  {
+    "id": "ppsDetail.on.status",
+    "description": "On",
+    "defaultMessage": "啟動"
+  },
+  {
+    "id": "ppsDetail.off.prefix",
+    "description": "Off",
+    "defaultMessage": "關閉"
+  },
+  {
+    "id": "userDetails.operator",
+    "description": "Operator",
+    "defaultMessage": "作業員"
+  },
+  {
+    "id": "userDetails.manager",
+    "description": "Manager",
+    "defaultMessage": "管理員"
+  },
+  {
+    "id": "userDetails.pick.status",
+    "description": "Pick",
+    "defaultMessage": "揀貨"
+  },
+  {
+    "id": "userDetails.put.status",
+    "description": "Put",
+    "defaultMessage": "放置"
+  },
+  {
+    "id": "userDetails.audit.status",
+    "description": "Audit",
+    "defaultMessage": "稽核"
+  },
+  {
+    "id": "userDetails.front.status",
+    "description": "Front",
+    "defaultMessage": "前"
+  },
+  {
+    "id": "userDetails.back.status",
+    "description": "Back",
+    "defaultMessage": "後"
+  },
+  {
+    "id": "userDetails.online.status",
+    "description": "Online",
+    "defaultMessage": "上線"
+  },
+  {
+    "id": "userDetails.Offline.status",
+    "description": "Offline",
+    "defaultMessage": "離線"
+  },
+  {
+    "id": "waveDetail.progress.status",
+    "description": "In Progress",
+    "defaultMessage": "進行中"
+  },
+  {
+    "id": "waveDetail.completed.status",
+    "description": "Completed",
+    "defaultMessage": "已完成"
+  },
+  {
+    "id": "waveDetail.breached.status",
+    "description": "Breached",
+    "defaultMessage": "違約"
+  },
+  {
+    "id": "waveDetail.pending.status",
+    "description": "Pending",
+    "defaultMessage": "待處理"
+  },
+  {
+    "id": "waveDetail.id.prefix",
+    "description": "WAVE-{waveId}",
+    "defaultMessage": "個別作業-{waveId}"
+  },
+  {
+    "id": "notify.success.add",
+    "description": "New user \"{first},{last}\" added successfully",
+    "defaultMessage": "成功新增新使用者「{first},{last}」"
+  },
+  {
+    "id": "notify.success.delete",
+    "description": "User \"{first},{last}\" deleted successfully",
+    "defaultMessage": "成功刪除使用者「{first},{last}」"
+  },
+  {
+    "id": "notify.delete.audit.success",
+    "description": "Audit task {audit_id} has been deleted",
+    "defaultMessage": "已刪除稽核工作 {audit_id}"
+  },
+  {
+    "id": "audit.resolve.success",
+    "description": "Audit task {auditId} with {auditType} - {auditTypeValue} has been approved",
+    "defaultMessage": "已核准類型為 {auditType} - {auditTypeValue} 的稽核工作 {auditId}"
+  },
+  {
+    "id": "audit.resolve.rejected",
+    "description": "Audit task {auditId} with {auditType} - {auditTypeValue} has been rejected",
+    "defaultMessage": "已拒絕類型為 {auditType} - {auditTypeValue} 的稽核工作 {auditId}"
+  }
 ]
