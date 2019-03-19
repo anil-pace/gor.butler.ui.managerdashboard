@@ -196,6 +196,7 @@ class ItemSearchStart extends React.Component {
     }
 
     render() {
+
         var dispId_Name = this.state.type;
         let idList = [];
         for (var i = 0; i < dispId_Name.length; i++) {
@@ -680,7 +681,7 @@ const initialQuery = graphql(ITEM_SEARCH_PPS_LIST_FETCH_QUERY, {
             return {}
         }
         return {
-            ppsList: data.data.ItemSearchPPSDetails.list
+            ppsList: JSON.parse(JSON.stringify(data.data.ItemSearchPPSDetails.list))
         }
     },
     options: ({ match, location }) => ({
