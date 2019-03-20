@@ -194,8 +194,6 @@ class ButlerBot extends React.Component {
       document: SUBSCRIPTION_QUERY,
       notifyOnNetworkStatusChange: true,
       updateQuery: (previousResult, newResult) => {
-        console.log(newResult);
-
         return Object.assign(
           {},
           {
