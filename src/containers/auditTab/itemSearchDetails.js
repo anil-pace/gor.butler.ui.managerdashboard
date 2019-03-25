@@ -12,6 +12,7 @@ import {
 import { FormattedMessage, defineMessages } from 'react-intl';
 import moment from 'moment';
 import 'moment-timezone';
+import { checkMomentCalendar } from '../../utilities/checkMomentCalendar';
 
 class ItemSearchDetails extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class ItemSearchDetails extends React.Component {
     let tableData = [];
     let noOfSkus = new Set();
     const rawListData = data && JSON.parse(data[0].actuals.containers);
-
+    const locale = localStorage.getItem('localLanguage');
     if (data && data.length) {
       processedData.tiledata = [
         {
@@ -65,15 +66,14 @@ class ItemSearchDetails extends React.Component {
             : '--'
         },
         {
-          'Created Time':
-            moment(data[0].createdOn)
-              .tz(timeOffset)
-              .format('DD MMM,YYYY') || '--',
+          'Created Time': checkMomentCalendar(
+            timeOffset,
+            data[0].createdOn,
+            locale
+          ),
           'End Time':
             data[0].state === 'complete'
-              ? moment(data[0].updatedOn)
-                  .tz(timeOffset)
-                  .format('DD MMM,YYYY')
+              ? checkMomentCalendar(timeOffset, data[0].updatedOn, locale)
               : '--'
         }
       ];
