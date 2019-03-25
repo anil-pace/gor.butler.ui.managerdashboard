@@ -26,8 +26,8 @@
   }
   .gor-up-tile {
     padding: 30px 10px 10px 20px;
-    min-height: calculateRem(80px);
     text-transform: capitalize;
+    min-height: calculateRem(80px);
     .gor-tile-right {
       width: 50px;
       display: inline-block;
@@ -83,6 +83,7 @@
     vertical-align: middle;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    text-transform: capitalize;
   }
 }
 .gorNoML {

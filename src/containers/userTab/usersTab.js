@@ -262,6 +262,7 @@ class UsersTab extends React.Component {
         return user.full_name.match(match_exp);
       });
     }
+
     if (query.status) {
       query.status =
         query.status.constructor === Array ? query.status : [query.status];
@@ -286,7 +287,6 @@ class UsersTab extends React.Component {
         return query.mode.indexOf(user.role) > -1;
       });
     }
-
     return filtered_data;
   }
 
