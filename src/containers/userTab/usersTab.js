@@ -280,6 +280,13 @@ class UsersTab extends React.Component {
       });
     }
 
+    if (query.mode) {
+      query.mode = query.mode.constructor === Array ? query.mode : [query.mode];
+      filtered_data = filtered_data.filter(function(user) {
+        return query.mode.indexOf(user.role) > -1;
+      });
+    }
+
     return filtered_data;
   }
 
