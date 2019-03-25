@@ -36,7 +36,6 @@ import {
   CREATED_ON
 } from '../../constants/frontEndConstants';
 
-import moment, { locale } from 'moment';
 import 'moment-timezone';
 
 const actionOptions = [
