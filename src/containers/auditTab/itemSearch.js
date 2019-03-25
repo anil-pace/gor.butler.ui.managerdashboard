@@ -17,6 +17,7 @@ import ItemSearchDetails from './itemSearchDetails';
 import ItemSearchFilter from './itemSearchFilter';
 import ItemSearchStart from './itemSearchStart';
 import { removeDuplicates } from '../../utilities/utils';
+import { checkMomentCalendar } from '../../utilities/checkMomentCalendar';
 
 import gql from 'graphql-tag';
 import { itemSearchClientData } from './query/clientQuery';
@@ -35,7 +36,7 @@ import {
   CREATED_ON
 } from '../../constants/frontEndConstants';
 
-import moment from 'moment';
+import moment, { locale } from 'moment';
 import 'moment-timezone';
 
 const actionOptions = [
@@ -321,6 +322,7 @@ class ItemSearch extends React.Component {
     );
     let singleSKUtype = this.context.intl.formatMessage(messages.singleSKUtype);
     let multiSKUtype = this.context.intl.formatMessage(messages.multiSKUtype);
+    let locale = localStorage.getItem('localLanguage');
 
     var processedData = [];
     if (this.state.data && this.state.data.length) {
@@ -353,10 +355,7 @@ class ItemSearch extends React.Component {
             ? 'PPS ' + datum.attributes.ppsIdList[0]
             : null,
           typeOfSKU,
-          moment
-            .utc(datum.createdOn)
-            .tz(timeOffset)
-            .format('DD MMM,YYYY') || '--'
+          checkMomentCalendar(this.props.timeOffset, datum.createdOn, locale)
         ];
         if (datum.status == 'CREATED') {
           tuple.status = notYetStartedItemSearch;
