@@ -3140,7 +3140,7 @@ var messages = [
   {
     id: 'widget.pick.headingleft',
     description: 'Heading for pick status widget',
-    defaultMessage: 'Orders to fullfill',
+    defaultMessage: 'Orders to fulfill',
     filepath: './src/containers/pickStatusWidget.js'
   },
   {
