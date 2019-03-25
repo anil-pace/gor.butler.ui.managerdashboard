@@ -3610,7 +3610,7 @@ msgstr ""
 
         #: widget.pick.headingleft
         msgctxt "widget.pick.headingleft"
-        msgid "Orders to fullfill"
+        msgid "Orders to fulfill"
         msgstr ""
 
         #: widget.pick.completed
