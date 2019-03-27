@@ -21,7 +21,7 @@ import { ordersPlatformResponseParse } from '../utilities/ordersPlatformResParse
 import SockJS from 'sockjs-client';
 import webstomp from 'webstomp-client';
 
-const notificationSocketMiddleware = (function() {
+const notificationSocketMiddleware = (function () {
   var socket = null;
   var operatorLogWSClient = null;
   var ordersWSClient = null;
@@ -68,7 +68,7 @@ const notificationSocketMiddleware = (function() {
       case WS_NOTIFICATION_CONNECT:
         //Start a new connection to the server
         if (socket && socket.connected) {
-          socket.disconnect(function() {
+          socket.disconnect(function () {
             console.log('disconnected');
           });
         }
@@ -76,9 +76,9 @@ const notificationSocketMiddleware = (function() {
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        // socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL));
+        socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL));
         // //new WebSocket(WS_URL);
-        // socket.connect('','',onOpen(socket,store,action.token))
+        socket.connect('', '', onOpen(socket, store, action.token))
         /*socket.onmessage = onMessage(socket,store);
         socket.onclose = onClose(socket,store);
         socket.onopen = onOpen(socket,store,action.token);*/
