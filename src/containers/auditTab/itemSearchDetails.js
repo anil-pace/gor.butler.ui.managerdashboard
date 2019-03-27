@@ -55,7 +55,6 @@ class ItemSearchDetails extends React.Component {
     let noOfSkus = new Set();
     const rawListData = data && JSON.parse(data[0].actuals.containers);
     const locale = localStorage.getItem('localLanguage');
-
     if (data && data.length) {
       processedData.tiledata = [
         {

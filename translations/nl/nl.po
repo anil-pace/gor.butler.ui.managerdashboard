@@ -3928,6 +3928,11 @@ msgstr ""
         msgid "Moving to dismount"
         msgstr "Verplaatsen om los te maken"
 
+        #: goto_barcode.task
+        msgctxt "goto_barcode.task"
+        msgid "goto_barcode"
+        msgstr "ga naar barcode"
+
         #: docked.task
         msgctxt "docked.task"
         msgid "Docked at"
