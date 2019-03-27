@@ -5540,6 +5540,11 @@
     "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
+    "id": "goto_barcode.task",
+    "description": "goto_barcode task",
+    "defaultMessage": "goto barcode"
+  },
+  {
     "id": "docked.task",
     "description": "docked task",
     "defaultMessage": "Docked at",
