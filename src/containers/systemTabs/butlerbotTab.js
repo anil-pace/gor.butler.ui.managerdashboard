@@ -104,7 +104,7 @@ const BUTLER_BOTS_QUERY = gql`
         state
         power
         pps_id
-        current_task_status
+        status
       }
     }
   }
@@ -123,7 +123,7 @@ const SUBSCRIPTION_QUERY = gql`
         state
         power
         pps_id
-        current_task_status
+        status
       }
     }
   }
@@ -230,7 +230,8 @@ class ButlerBot extends React.Component {
       0: nProps.context.intl.formatMessage(messages.moving),
       1: nProps.context.intl.formatMessage(messages.movingMount),
       2: nProps.context.intl.formatMessage(messages.movingDismount),
-      3: nProps.context.intl.formatMessage(messages.docked)
+      3: nProps.context.intl.formatMessage(messages.docked),
+      4: nProps.context.intl.formatMessage(messages.gotoBarcode)
     };
 
     var priStatus = { online: 1, offline: 2 };
@@ -239,7 +240,8 @@ class ButlerBot extends React.Component {
       var botId = data[i].id,
         msuId = data[i].display_msu_id,
         csId = data[i].charger_id,
-        ppsId = data[i].pps_id;
+        ppsId = data[i].pps_id,
+        current_task_status = data[i].status;
       BOT = nProps.context.intl.formatMessage(messages.butlerPrefix, {
         botId: botId
       });
@@ -295,29 +297,32 @@ class ButlerBot extends React.Component {
           data[i].tasktype === 'audittask' ||
           data[i].tasktype === 'movetask'
         ) {
-          if (data[i].current_task_status === 'started') {
+          if (current_task_status === 'started') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[1];
           } else if (
-            (data[i].current_task_status === 'rack_picked' &&
-              data[i].current_subtask === 'pps_control') ||
-            (data[i].current_task_status === 'rack_picked' &&
-              data[i].current_subtask === 'goto_barcode')
+            (current_task_status === 'rack_picked' &&
+              data[i].current_subtask === 'pps_control')
           ) {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[3];
-          } else if (data[i].current_task_status === 'rack_picked') {
+          } else if (
+            current_task_status === 'item_search_completed' &&
+            data[i].current_subtask === 'goto_barcode'
+          )
+            butlerDetail.current += ' - ' + currentSubtask[4];
+          } else if (current_task_status === 'rack_picked') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[0];
-          } else if (data[i].current_task_status === 'storing') {
+          } else if (current_task_status === 'storing') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[2];
           }
         } else if (data[i].tasktype === 'chargetask') {
-          if (data[i].current_task_status === 'started') {
+          if (current_task_status === 'started') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[0];
-          } else if (data[i].current_task_status === 'charging_started') {
+          } else if (current_task_status === 'charging_started') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[3];
           }
