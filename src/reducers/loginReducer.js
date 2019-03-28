@@ -26,7 +26,7 @@ export function authLogin(state = {}, action) {
         action: 'LOGIN',
         role: ['butler_supervisor', 'admin', 'manager'],
         context: {
-          entity_id: 1,
+          entity_id: "1",
           app_name: 'managerdashboard_ui'
         }
       })
