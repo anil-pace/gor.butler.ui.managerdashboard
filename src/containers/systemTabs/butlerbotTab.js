@@ -301,8 +301,8 @@ class ButlerBot extends React.Component {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[1];
           } else if (
-            (current_task_status === 'rack_picked' &&
-              data[i].current_subtask === 'pps_control')
+            current_task_status === 'rack_picked' &&
+            data[i].current_subtask === 'pps_control'
           ) {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[3];
@@ -311,13 +311,12 @@ class ButlerBot extends React.Component {
             data[i].current_subtask === 'goto_barcode'
           )
             butlerDetail.current += ' - ' + currentSubtask[4];
-          } else if (current_task_status === 'rack_picked') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[0];
-          } else if (current_task_status === 'storing') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[2];
-          }
+        } else if (current_task_status === 'rack_picked') {
+          butlerDetail.current =
+            butlerDetail.current + ' - ' + currentSubtask[0];
+        } else if (current_task_status === 'storing') {
+          butlerDetail.current =
+            butlerDetail.current + ' - ' + currentSubtask[2];
         } else if (data[i].tasktype === 'chargetask') {
           if (current_task_status === 'started') {
             butlerDetail.current =
