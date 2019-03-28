@@ -59,9 +59,9 @@ class LoginForm extends React.Component {
       password: this.password.value,
       grant_type: 'password',
       action: 'LOGIN',
-      role: ['butler_supervisor', 'admin', 'manager'],
+      role: ['ROLE_ADMIN'],
       context: {
-        entity_id: "1",
+        entity_id: '1',
         app_name: 'managerdashboard_ui'
       }
     }
