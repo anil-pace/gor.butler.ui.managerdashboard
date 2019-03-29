@@ -1,70 +1,70 @@
-import React from 'react'
+import React from 'react';
 import {
   authLoginData,
   setLoginSpinner,
   setUsername
-} from '../../actions/loginAction'
+} from '../../actions/loginAction';
 import {
   validateID,
   validatePassword,
   loginError
-} from '../../actions/validationActions'
-import { connect } from 'react-redux'
+} from '../../actions/validationActions';
+import { connect } from 'react-redux';
 import {
   AUTH_LOGIN,
   ERROR,
   TYPING,
   APP_JSON,
   POST
-} from '../../constants/frontEndConstants'
-import { NO_NET } from '../../constants/messageConstants'
-import { LOGIN_URL } from '../../constants/configConstants'
-import { FormattedMessage } from 'react-intl'
-import { emptyField } from '../../utilities/fieldCheck'
+} from '../../constants/frontEndConstants';
+import { NO_NET } from '../../constants/messageConstants';
+import { LOGIN_URL } from '../../constants/configConstants';
+import { FormattedMessage } from 'react-intl';
+import { emptyField } from '../../utilities/fieldCheck';
 
 class LoginForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   _checkUser() {
     let userid = this.userName.value,
-      userNameCheck
-    userNameCheck = emptyField(userid)
-    this.props.validateID(userNameCheck)
-    return userNameCheck.type
+      userNameCheck;
+    userNameCheck = emptyField(userid);
+    this.props.validateID(userNameCheck);
+    return userNameCheck.type;
   }
   _typing(Field) {
-    if (Field === 1) this.userField.className = TYPING
-    else this.passField.className = TYPING
+    if (Field === 1) this.userField.className = TYPING;
+    else this.passField.className = TYPING;
   }
   _checkPass() {
     let password = this.password.value.trim(),
-      loginPassInfo
-    loginPassInfo = emptyField(password)
-    this.props.validatePass(loginPassInfo)
-    return loginPassInfo.type
+      loginPassInfo;
+    loginPassInfo = emptyField(password);
+    this.props.validatePass(loginPassInfo);
+    return loginPassInfo.type;
   }
   _handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (!window.navigator.onLine) {
-      this.props.loginError(NO_NET)
-      return
+      this.props.loginError(NO_NET);
+      return;
     }
     if (!this.props.userNameCheck.type || !this.props.passWordCheck.type) {
-      if (!this._checkUser()) return
-      if (!this._checkPass()) return
+      if (!this._checkUser()) return;
+      if (!this._checkPass()) return;
     }
     let formdata = {
       username: this.userName.value,
       password: this.password.value,
       grant_type: 'password',
       action: 'LOGIN',
-      role: ['butler_supervisor', 'admin', 'manager'],
+      role: ['ROLE_ADMIN'],
       context: {
-        entity_id: 1,
+        entity_id: '1',
         app_name: 'managerdashboard_ui'
       }
-    }
+    };
 
     let loginData = {
       url: LOGIN_URL,
@@ -73,11 +73,11 @@ class LoginForm extends React.Component {
       cause: AUTH_LOGIN,
       contentType: APP_JSON,
       accept: APP_JSON
-    }
-    sessionStorage.setItem('nextView', 'md')
-    this.props.setLoginSpinner(true)
-    this.props.setUsername(formdata.username)
-    this.props.authLoginData(loginData)
+    };
+    sessionStorage.setItem('nextView', 'md');
+    this.props.setLoginSpinner(true);
+    this.props.setUsername(formdata.username);
+    this.props.authLoginData(loginData);
   }
 
   render() {
@@ -87,7 +87,7 @@ class LoginForm extends React.Component {
         action='#'
         id='loginForm'
         ref={node => {
-          this.loginForm = node
+          this.loginForm = node;
         }}
         onSubmit={e => this._handleSubmit(e)}
       >
@@ -121,7 +121,7 @@ class LoginForm extends React.Component {
                   : ' gor-input-ok')
               }
               ref={node => {
-                this.userField = node
+                this.userField = node;
               }}
             >
               <div
@@ -140,7 +140,7 @@ class LoginForm extends React.Component {
                 id='username'
                 placeholder={this.props.intlMessages['login.form.username']}
                 ref={node => {
-                  this.userName = node
+                  this.userName = node;
                 }}
               />
             </div>
@@ -170,7 +170,7 @@ class LoginForm extends React.Component {
                   : ' gor-input-ok')
               }
               ref={node => {
-                this.passField = node
+                this.passField = node;
               }}
             >
               <div
@@ -189,7 +189,7 @@ class LoginForm extends React.Component {
                 id='password'
                 placeholder={this.props.intlMessages['login.form.password']}
                 ref={node => {
-                  this.password = node
+                  this.password = node;
                 }}
               />
             </div>
@@ -219,7 +219,7 @@ class LoginForm extends React.Component {
           </section>
         </div>
       </form>
-    )
+    );
   }
 }
 
@@ -230,31 +230,31 @@ function mapStateToProps(state, ownProps) {
     loginInfo: state.appInfo.loginInfo || {},
     passWordCheck: state.appInfo.passwordInfo || {},
     loginSpinner: state.spinner.loginSpinner
-  }
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
     authLoginData: function(params) {
-      dispatch(authLoginData(params))
+      dispatch(authLoginData(params));
     },
     validateID: function(data) {
-      dispatch(validateID(data))
+      dispatch(validateID(data));
     },
     validatePass: function(data) {
-      dispatch(validatePassword(data))
+      dispatch(validatePassword(data));
     },
     setLoginSpinner: function(data) {
-      dispatch(setLoginSpinner(data))
+      dispatch(setLoginSpinner(data));
     },
     setUsername: function(data) {
-      dispatch(setUsername(data))
+      dispatch(setUsername(data));
     },
     loginError: function(data) {
-      dispatch(loginError(data))
+      dispatch(loginError(data));
     }
-  }
+  };
 }
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginForm)
+)(LoginForm);
