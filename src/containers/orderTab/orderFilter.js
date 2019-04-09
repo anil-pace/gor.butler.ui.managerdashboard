@@ -449,13 +449,31 @@ class OrderFilter extends React.Component {
     sessionStorage.removeItem('simple_priority');
     this.props.orderfilterState({
       tokenSelected: {
-        'ORDER TAGS': [ANY],
+        ORDER_TAGS: [ANY],
         STATUS: [ANY],
         PRIORITY: [ANY]
       },
       searchQuery: { ORDER_ID: '', PPS_ID: '' }
     });
+    this.setState({
+      searchQuery: {
+        'FROM DATE': null,
+        'FROM TIME': null,
+        'TO DATE': null,
+        'TO TIME': null,
+        ORDER_ID: null,
+        PPS_ID: null
+      }
+    });
+    this.setState({
+      tokenSelected: {
+        ORDER_TAGS: ['any'],
+        ORDER_PRIORITY: ['any'],
+        STATUS: ['any']
+      }
+    });
     hashHistory.push({ pathname: '/orders', query: {} });
+    this.props.showTableFilter(false);
   }
 
   render() {
