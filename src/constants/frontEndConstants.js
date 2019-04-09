@@ -255,8 +255,9 @@ export const SKU_DATA = 'SKU_DATA'
 export const LOC_DATA = 'LOC_DATA'
 export const WHITELISTED_ROLES = {
   butler_supervisor: 'Manager',
-  admin: 'Admin',
-  manager: 'Manager'
+  ROLE_ADMIN: 'Admin',
+  manager: 'Manager',
+  admin: 'Admin'
 }
 
 /*Constants for pagination*/
