@@ -159,7 +159,7 @@ class OrderPriority extends React.Component {
               this._changeOrderPriority(evt);
             }}
           />
-          <label class='option-text'>
+          <label className='option-text'>
             <span>{data[index].text}</span>
           </label>
         </li>
