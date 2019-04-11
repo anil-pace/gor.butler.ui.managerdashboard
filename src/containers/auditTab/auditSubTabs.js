@@ -37,6 +37,8 @@ class AuditTab extends React.Component {
       />
     );
 
+    let showItemSearchTab = this.props.config.item_search_enabled
+
     return (
       <div>
         <div className='gorMainSubtab'>
@@ -83,9 +85,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    subTabSelected: function(data) {
+    subTabSelected: function (data) {
       dispatch(subTabSelected(data));
     }
   };
