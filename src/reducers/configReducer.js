@@ -7,7 +7,6 @@ export function configReducer(state = {}, action) {
     switch (action.type) {
         case RECEIVE_CONFIGS:
             let config = action.data;
-            console.log("action.data------------>", action.data)
             config.utility_tab.widgets.scripts.item_recall = true;
             // config.item_search_enabled = false;
 

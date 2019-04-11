@@ -41,8 +41,7 @@ class AuditTab extends React.Component {
       />
     );
 
-    console.log("item_search_enabled", this.props.config.item_search_enabled)
-    let showitemsearchtab = this.props.config.item_search_enabled
+    let showItemSearchTab = this.props.config.item_search_enabled
 
     return (
 
@@ -64,7 +63,7 @@ class AuditTab extends React.Component {
 
 
           {
-            showitemsearchtab ?
+            showItemSearchTab ?
 
               <Link
                 to='/audit/itemSearch'
