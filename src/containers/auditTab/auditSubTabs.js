@@ -16,12 +16,16 @@ import {
 import { FormattedMessage } from 'react-intl';
 
 class AuditTab extends React.Component {
+
   handleSysSubTabClick(tabName) {
+
     this.props.subTabSelected(AUDIT_SUB_TAB_ROUTE_MAP[tabName]);
     sessionStorage.setItem('subTab', AUDIT_SUB_TAB_ROUTE_MAP[tabName]);
   }
 
   render() {
+
+
     var auditTab = (
       <FormattedMessage
         id='auditSubTabs.auditTab'
@@ -37,8 +41,12 @@ class AuditTab extends React.Component {
       />
     );
 
+    console.log("item_search_enabled", this.props.config.item_search_enabled)
+    let showitemsearchtab = this.props.config.item_search_enabled
+
     return (
-      <div>
+
+      < div >
         <div className='gorMainSubtab'>
           <Link
             to='/audit/auditlisting'
@@ -54,23 +62,27 @@ class AuditTab extends React.Component {
             />
           </Link>
 
-          <Link
-            to='/audit/itemSearch'
-            onClick={this.handleSysSubTabClick.bind(this, ITEM_SEARCH)}
-          >
-            <SubTab
-              item={itemSearch}
-              changeClass={
-                this.props.subTab === ITEM_SEARCH
-                  ? 'gor-main-blockSelect'
-                  : 'gor-main-block'
-              }
-            />
-          </Link>
+
+          {
+            showitemsearchtab ?
+
+              <Link
+                to='/audit/itemSearch'
+                onClick={this.handleSysSubTabClick.bind(this, ITEM_SEARCH)}
+              >
+                <SubTab
+                  item={itemSearch}
+                  changeClass={
+                    this.props.subTab === ITEM_SEARCH
+                      ? 'gor-main-blockSelect'
+                      : 'gor-main-block'
+                  }
+                />
+              </Link> : null}
 
           {this.props.children}
         </div>
-      </div>
+      </div >
     );
   }
 }
@@ -83,9 +95,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    subTabSelected: function(data) {
+    subTabSelected: function (data) {
       dispatch(subTabSelected(data));
     }
   };
