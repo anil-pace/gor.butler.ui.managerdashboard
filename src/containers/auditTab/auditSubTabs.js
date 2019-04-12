@@ -41,11 +41,23 @@ class AuditTab extends React.Component {
       />
     );
 
-    let showItemSearchTab = this.props.config.item_search_enabled
+    let showItemSearchTab
+
+    try {
+      if (this.props.config.item_search_enabled == undefined) {
+        showItemSearchTab = true
+      } 
+      else {
+        showItemSearchTab = this.props.config.item_search_enabled
+      }
+    }
+    catch (err) {
+
+    }
 
     return (
 
-      < div >
+      <div>
         <div className='gorMainSubtab'>
           <Link
             to='/audit/auditlisting'
@@ -77,7 +89,7 @@ class AuditTab extends React.Component {
                       : 'gor-main-block'
                   }
                 />
-              </Link> : null}
+              </Link> : ""}
 
           {this.props.children}
         </div>

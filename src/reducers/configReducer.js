@@ -8,7 +8,6 @@ export function configReducer(state = {}, action) {
         case RECEIVE_CONFIGS:
             let config = action.data;
             config.utility_tab.widgets.scripts.item_recall = true;
-            // config.item_search_enabled = false;
 
             return Object.assign({}, state, config)
         default:
