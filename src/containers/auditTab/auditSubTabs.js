@@ -41,18 +41,13 @@ class AuditTab extends React.Component {
       />
     );
 
-    let showItemSearchTab
-
+    let showItemSearchTab = false
     try {
-      if (this.props.config.item_search_enabled == undefined) {
+      if (this.props.config.item_search_enabled) {
         showItemSearchTab = true
-      } 
-      else {
-        showItemSearchTab = this.props.config.item_search_enabled
       }
     }
     catch (err) {
-
     }
 
     return (
