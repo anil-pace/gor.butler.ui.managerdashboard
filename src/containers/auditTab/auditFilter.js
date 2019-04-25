@@ -1,14 +1,14 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import Filter from '../../components/tableFilter/filter';
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import Filter from '../../components/tableFilter/filter'
 
-import { connect } from 'react-redux';
-import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
-import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
+import { connect } from 'react-redux'
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap'
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer'
 import {
   handelTokenClick,
   handleInputQuery
-} from '../../components/tableFilter/tableFilterCommonFunctions';
+} from '../../components/tableFilter/tableFilterCommonFunctions'
 import {
   ANY,
   ALL,
@@ -28,29 +28,29 @@ import {
   AUDIT_CANCELLED,
   INPROGRESS,
   SINGLE
-} from '../../constants/frontEndConstants';
-import { hashHistory } from 'react-router';
-import { mappingArray, arrayDiff } from '../../utilities/utils';
-import { graphql, withApollo, compose } from 'react-apollo';
-import gql from 'graphql-tag';
-import { AUDIT_USER_FETCH_QUERY } from './query/serverQuery';
-import { auditClientData } from './query/clientQuery';
+} from '../../constants/frontEndConstants'
+import { hashHistory } from 'react-router'
+import { mappingArray, arrayDiff } from '../../utilities/utils'
+import { graphql, withApollo, compose } from 'react-apollo'
+import gql from 'graphql-tag'
+import { AUDIT_USER_FETCH_QUERY } from './query/serverQuery'
+import { auditClientData } from './query/clientQuery'
 class AuditFilter extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tokenSelected: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] },
       searchQuery: {},
       textboxStatus: null,
       defaultToken: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] }
-    };
-    this._applyFilter = this._applyFilter.bind(this);
-    this._closeFilter = this._closeFilter.bind(this);
-    this._clearFilter = this._clearFilter.bind(this);
+    }
+    this._applyFilter = this._applyFilter.bind(this)
+    this._closeFilter = this._closeFilter.bind(this)
+    this._clearFilter = this._clearFilter.bind(this)
   }
 
   _closeFilter() {
-    this.props.showAuditFilter(false);
+    this.props.showAuditFilter(false)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,7 +60,7 @@ class AuditFilter extends React.Component {
         JSON.stringify(this.state) !==
           JSON.stringify(nextProps.auditFilterState)
       ) {
-        this.setState(nextProps.auditFilterState);
+        this.setState(nextProps.auditFilterState)
       }
     }
   }
@@ -119,10 +119,10 @@ class AuditFilter extends React.Component {
           />
         )
       }
-    ];
+    ]
 
-    var inputValue = this.state.searchQuery;
-    var textboxStatus = this.state.textboxStatus || null;
+    var inputValue = this.state.searchQuery
+    var textboxStatus = this.state.textboxStatus || null
     var inputField = (
       <FilterInputFieldWrap
         inputText={filterInputFields}
@@ -130,8 +130,8 @@ class AuditFilter extends React.Component {
         inputValue={inputValue}
         textboxStatus={textboxStatus}
       />
-    );
-    return inputField;
+    )
+    return inputField
   }
 
   _processFilterToken() {
@@ -143,20 +143,20 @@ class AuditFilter extends React.Component {
           defaultMessage='AUDIT TYPE'
         />
       )
-    };
-    let userArr = this.props.auditUserList || [];
+    }
+    let userArr = this.props.auditUserList || []
     let labelC3 = [
       {
         value: ALL,
         label: <FormattedMessage id='audit.token3.all' defaultMessage='Any' />
       }
-    ];
+    ]
     userArr.forEach(data => {
       labelC3.push({
         value: data,
         label: data
-      });
-    });
+      })
+    })
 
     var tokenStatusField = {
       value: 'STATUS',
@@ -166,7 +166,7 @@ class AuditFilter extends React.Component {
           defaultMessage='STATUS'
         />
       )
-    };
+    }
     var tokenCreatedByField = {
       value: 'CREATED_BY',
       label: (
@@ -175,7 +175,7 @@ class AuditFilter extends React.Component {
           defaultMessage='CREATED BY'
         />
       )
-    };
+    }
     const labelC1 = [
       {
         value: ANY,
@@ -194,7 +194,7 @@ class AuditFilter extends React.Component {
           />
         )
       }
-    ];
+    ]
     const labelC2 = [
       {
         value: ALL,
@@ -251,9 +251,9 @@ class AuditFilter extends React.Component {
           <FormattedMessage id='audit.token2.paused' defaultMessage='Paused' />
         )
       }
-    ];
+    ]
 
-    var selectedToken = this.state.tokenSelected;
+    var selectedToken = this.state.tokenSelected
     var column1 = (
       <FilterTokenWrap
         field={tokenStatusField}
@@ -261,7 +261,7 @@ class AuditFilter extends React.Component {
         label={labelC2}
         selectedToken={selectedToken}
       />
-    );
+    )
     var column2 = (
       <FilterTokenWrap
         field={tokenAuditTypeField}
@@ -270,7 +270,7 @@ class AuditFilter extends React.Component {
         selectedToken={selectedToken}
         selection={SINGLE}
       />
-    );
+    )
     var column3 = (
       <FilterTokenWrap
         field={tokenCreatedByField}
@@ -278,110 +278,111 @@ class AuditFilter extends React.Component {
         label={labelC3}
         selectedToken={selectedToken}
       />
-    );
+    )
 
     var columnDetail = {
       column1token: column1,
       column2token: column2,
       column3token: column3
-    };
-    return columnDetail;
+    }
+    return columnDetail
   }
 
   _handelTokenClick(field, value, state) {
-    var tempArray = [SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID];
+    var tempArray = [SPECIFIC_SKU_ID, SPECIFIC_LOCATION_ID]
     var obj = {},
       queryField,
-      tokentoRemove;
-    var selectedToken = this.state.tokenSelected['AUDIT_TYPE'];
-    var token = [value];
-    this.setState({
-      tokenSelected: handelTokenClick(field, value, state, this.state)
-    });
-
-    if (state !== 'addDefault') {
-      obj.name = mappingArray(selectedToken);
-      tokentoRemove = mappingArray(token, selectedToken);
-      queryField =
-        selectedToken.toString() === ANY
-          ? tokentoRemove
-          : arrayDiff(tempArray, obj.name);
-      if (queryField && queryField.length !== 0) {
-        this.setState({
-          searchQuery: handleInputQuery('', queryField, this.state)
-        });
+      tokentoRemove
+    var selectedToken = null
+    var token = [value]
+    this.setState(
+      {
+        tokenSelected: handelTokenClick(field, value, state, this.state)
+      },
+      () => {
+        selectedToken = this.state.tokenSelected['AUDIT_TYPE']
+        if (state !== 'addDefault') {
+          obj.name = mappingArray(selectedToken)
+          tokentoRemove = mappingArray(token, selectedToken)
+          queryField =
+            selectedToken.toString() === ANY
+              ? tokentoRemove
+              : arrayDiff(tempArray, obj.name)
+          if (queryField && queryField.length !== 0) {
+            this.setState({
+              searchQuery: handleInputQuery('', queryField, this.state)
+            })
+          }
+        }
+        if (field == 'AUDIT_TYPE')
+          this.setState({ textboxStatus: JSON.stringify(obj) })
       }
-      if (field == 'AUDIT_TYPE')
-        this.setState({ textboxStatus: JSON.stringify(obj) });
-    } else {
-      if (field == 'AUDIT_TYPE')
-        this.setState({ textboxStatus: JSON.stringify(obj) });
-    }
+    )
   }
 
   _handleInputQuery(inputQuery, queryField) {
     this.setState({
       searchQuery: handleInputQuery(inputQuery, queryField, this.state)
-    });
+    })
   }
 
   _applyFilter() {
     var filterState = this.state,
-      _query = {};
+      _query = {}
 
     if (
       JSON.stringify(this.state) !== JSON.stringify(this.props.auditFilterState)
     ) {
-      this.props.setCurrentPageNumber(0);
+      this.props.setCurrentPageNumber(0)
     }
 
     if (
       filterState.tokenSelected[AUDIT_TYPE] &&
       filterState.tokenSelected[AUDIT_TYPE][0] !== ANY
     ) {
-      _query.auditType = filterState.tokenSelected[AUDIT_TYPE];
+      _query.auditType = filterState.tokenSelected[AUDIT_TYPE]
     }
     if (
       filterState.tokenSelected['STATUS'] &&
       filterState.tokenSelected['STATUS'][0] !== ALL
     ) {
-      _query.status = filterState.tokenSelected['STATUS'];
+      _query.status = filterState.tokenSelected['STATUS']
     }
     if (
       filterState.tokenSelected['CREATED_BY'] &&
       filterState.tokenSelected['CREATED_BY'][0] !== ALL
     ) {
-      _query.createdBy = filterState.tokenSelected['CREATED_BY'];
+      _query.createdBy = filterState.tokenSelected['CREATED_BY']
     }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
-      _query.taskId = filterState.searchQuery[AUDIT_TASK_ID];
+      _query.taskId = filterState.searchQuery[AUDIT_TASK_ID]
     }
     if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_SKU_ID]) {
-      _query.skuId = filterState.searchQuery[SPECIFIC_SKU_ID];
+      _query.skuId = filterState.searchQuery[SPECIFIC_SKU_ID]
     }
     if (
       filterState.searchQuery &&
       filterState.searchQuery[SPECIFIC_LOCATION_ID]
     ) {
-      _query.locationId = filterState.searchQuery[SPECIFIC_LOCATION_ID];
+      _query.locationId = filterState.searchQuery[SPECIFIC_LOCATION_ID]
     }
     if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_PPS_ID]) {
-      _query.ppsId = filterState.searchQuery[SPECIFIC_PPS_ID];
+      _query.ppsId = filterState.searchQuery[SPECIFIC_PPS_ID]
     }
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
-      _query.fromDate = filterState.searchQuery[FROM_DATE];
+      _query.fromDate = filterState.searchQuery[FROM_DATE]
     }
     if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
-      _query.toDate = filterState.searchQuery[TO_DATE];
+      _query.toDate = filterState.searchQuery[TO_DATE]
     }
-    _query.pageNo = this.props.currentPage;
-    _query.pageSize = this.props.totalResults;
+    _query.pageNo = this.props.currentPage
+    _query.pageSize = this.props.totalResults
 
-    hashHistory.push({ pathname: '/audit/auditlisting', query: _query });
-    this.props.filterApplied(true);
-    this.props.updateSubscription(true);
-    this.props.showAuditFilter(false);
+    hashHistory.push({ pathname: '/audit/auditlisting', query: _query })
+    this.props.filterApplied(true)
+    this.props.updateSubscription(true)
+    this.props.showAuditFilter(false)
   }
 
   _clearFilter() {
@@ -407,16 +408,16 @@ class AuditFilter extends React.Component {
         CREATED_BY: [ALL],
         __typename: 'AuditFilterDefaultToken'
       }
-    });
-    this.props.filterApplied(false);
-    hashHistory.push({ pathname: '/audit/auditlisting', query: {} });
-    this.props.showAuditFilter(false);
+    })
+    this.props.filterApplied(false)
+    hashHistory.push({ pathname: '/audit/auditlisting', query: {} })
+    this.props.showAuditFilter(false)
   }
 
   render() {
-    var noOrder = this.props.noResultFound;
-    var auditSearchField = this._processAuditSearchField();
-    var auditFilterToken = this._processFilterToken();
+    var noOrder = this.props.noResultFound
+    var auditSearchField = this._processAuditSearchField()
+    var auditFilterToken = this._processFilterToken()
     return (
       <div>
         <Filter>
@@ -487,7 +488,7 @@ class AuditFilter extends React.Component {
           </div>
         </Filter>
       </div>
-    );
+    )
   }
 }
 const withClientData = graphql(auditClientData, {
@@ -496,7 +497,7 @@ const withClientData = graphql(auditClientData, {
       ? JSON.parse(JSON.stringify(data.data.auditFilter.filterState))
       : null
   })
-});
+})
 
 AuditFilter.PropTypes = {
   showFilter: React.PropTypes.bool,
@@ -506,87 +507,87 @@ AuditFilter.PropTypes = {
   filterApplied: React.PropTypes.func,
   auditFilterStatus: React.PropTypes.bool,
   showAuditFilter: React.PropTypes.func
-};
+}
 const SET_TEXT_BOX_STATUS = gql`
   mutation setFilterTextBox($textBoxName: String!) {
     setAuditFilterTextBox(textBoxName: $textBoxName) @client
   }
-`;
+`
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
     setAuditFilterApplied(isFilterApplied: $isFilterApplied) @client
   }
-`;
+`
 const SET_UPDATE_SUBSCRIPTION = gql`
   mutation setUpdateSubscription($isUpdateSubsciption: String!) {
     setAuditUpdateSubscription(isUpdateSubsciption: $isUpdateSubsciption)
       @client
   }
-`;
+`
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
     setAuditFilterState(state: $state) @client
   }
-`;
+`
 const SET_PAGE_NUMBER = gql`
   mutation setPageNumber($pageNumber: Int!) {
     setAuditPageNumber(pageNumber: $pageNumber) @client
   }
-`;
+`
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
     setCurrentPageNumber: function(number) {
-      mutate({ variables: { pageNumber: number } });
+      mutate({ variables: { pageNumber: number } })
     }
   })
-});
+})
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
     filterApplied: function(applied) {
-      mutate({ variables: { isFilterApplied: applied } });
+      mutate({ variables: { isFilterApplied: applied } })
     }
   })
-});
+})
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
     updateSubscription: function(applied) {
-      mutate({ variables: { isUpdateSubsciption: applied } });
+      mutate({ variables: { isUpdateSubsciption: applied } })
     }
   })
-});
+})
 
 const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
   props: ({ mutate, ownProps }) => ({
     setTextBoxStatus: function(textBoxName) {
-      mutate({ variables: { textBoxName: textBoxName } });
+      mutate({ variables: { textBoxName: textBoxName } })
     }
   })
-});
+})
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
     auditfilterState: function(state) {
-      mutate({ variables: { state: state } });
+      mutate({ variables: { state: state } })
     }
   })
-});
+})
 
 const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
   props: function(data) {
-    var list = { pps_list: [] };
+    var list = { pps_list: [] }
     if (!data || !data.data.AuditFetchUser || !data.data.AuditFetchUser.list) {
-      auditUserList: list.users;
-      return {};
+      auditUserList: list.users
+      return {}
     }
 
     return {
       auditUserList: data.data.AuditFetchUser.list.users
-    };
+    }
   },
   options: ({ match, location }) => ({
     variables: {},
     fetchPolicy: 'network-only'
   })
-});
+})
 export default compose(
   initialQuery,
   withApollo,
@@ -596,4 +597,4 @@ export default compose(
   setFilterState,
   setUpdateSubscription,
   setPageNumber
-)(connect()(AuditFilter));
+)(connect()(AuditFilter))
