@@ -303,8 +303,8 @@ class ButlerBot extends React.Component {
           data[i].tasktype === 'movetask'
         ) {
           if (current_task_status === 'started') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[1];
+            butlerDetail.current = butlerDetail.current;
+            //butlerDetail.current + ' - ' + currentSubtask[1];
           } else if (
             current_task_status === 'rack_picked' &&
             data[i].current_subtask === 'pps_control'
@@ -317,18 +317,18 @@ class ButlerBot extends React.Component {
           )
             butlerDetail.current += ' - ' + currentSubtask[4];
         } else if (current_task_status === 'rack_picked') {
-          butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[0];
+          butlerDetail.current = butlerDetail.current;
+          //butlerDetail.current + ' - ' + currentSubtask[0];
         } else if (current_task_status === 'storing') {
-          butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[2];
+          butlerDetail.current = butlerDetail.current;
+          //butlerDetail.current + ' - ' + currentSubtask[2];
         } else if (data[i].tasktype === 'chargetask') {
           if (current_task_status === 'started') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[0];
           } else if (current_task_status === 'charging_started') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[3];
+            butlerDetail.current = butlerDetail.current;
+            //butlerDetail.current + ' - ' + currentSubtask[3];
           }
         }
         if (data[i].current_subtask !== null) {
