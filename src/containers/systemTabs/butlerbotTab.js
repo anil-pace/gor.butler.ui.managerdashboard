@@ -156,7 +156,7 @@ class ButlerBot extends React.Component {
       nextProps.location.query &&
       (!this.state.query ||
         JSON.stringify(nextProps.location.query) !==
-          JSON.stringify(this.state.query))
+        JSON.stringify(this.state.query))
     ) {
       this.setState({ query: nextProps.location.query });
 
@@ -276,7 +276,7 @@ class ButlerBot extends React.Component {
         butlerDetail.position = '--';
       }
       if (data[i].power || data[i].power === 0) {
-        butlerDetail.voltage = data[i].power + ' %';
+        butlerDetail.voltage = data[i].power.toFixed(2) + ' %';
       } else {
         butlerDetail.voltage = '--';
       }
@@ -360,7 +360,7 @@ class ButlerBot extends React.Component {
         query.butler_id.constructor === Array
           ? query.butler_id
           : [query.butler_id];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.butler_id.indexOf(bot.id.toString()) > -1;
       });
     }
@@ -371,7 +371,7 @@ class ButlerBot extends React.Component {
         query.location.constructor === Array
           ? query.location
           : [query.location];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.location.indexOf(bot.position.toString()) > -1;
       });
     }
@@ -379,7 +379,7 @@ class ButlerBot extends React.Component {
     if (query.status) {
       query.status =
         query.status.constructor === Array ? query.status : [query.status];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.status.indexOf(bot.state) > -1;
       });
     }
@@ -388,7 +388,7 @@ class ButlerBot extends React.Component {
         query.current_task.constructor === Array
           ? query.current_task
           : [query.current_task];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.current_task.indexOf(bot.tasktype) > -1;
       });
     }
@@ -421,7 +421,7 @@ class ButlerBot extends React.Component {
     }
 
     if (
-      Object.keys(query).filter(function(el) {
+      Object.keys(query).filter(function (el) {
         return el !== 'page';
       }).length !== 0
     ) {
@@ -639,12 +639,12 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    setButlerSpinner: function(data) {
+    setButlerSpinner: function (data) {
       dispatch(setButlerSpinner(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     }
   };
@@ -672,7 +672,7 @@ ButlerBot.PropTypes = {
 };
 
 const withQuery = graphql(BUTLER_BOTS_QUERY, {
-  props: function(data) {
+  props: function (data) {
     if (!data || !data.data.ButlerBotsList || !data.data.ButlerBotsList.list) {
       return {};
     }
@@ -742,21 +742,21 @@ const withClientData = graphql(botsClientData, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showBotsFilter: function(show) {
+    showBotsFilter: function (show) {
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    butlerfilterState: function(state) {
+    butlerfilterState: function (state) {
       mutate({ variables: { state: state } });
     }
   })
