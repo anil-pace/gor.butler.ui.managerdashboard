@@ -42,14 +42,20 @@ class AuditTab extends React.Component {
     );
 
     let showItemSearchTab = false
+<<<<<<< HEAD
 
+=======
+>>>>>>> BSS-13889
     try {
       if (this.props.config.item_search_enabled) {
         showItemSearchTab = true
       }
     }
     catch (err) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> BSS-13889
     }
 
     return (
@@ -73,6 +79,10 @@ class AuditTab extends React.Component {
 
           {
             showItemSearchTab ?
+<<<<<<< HEAD
+=======
+
+>>>>>>> BSS-13889
               <Link
                 to='/audit/itemSearch'
                 onClick={this.handleSysSubTabClick.bind(this, ITEM_SEARCH)}

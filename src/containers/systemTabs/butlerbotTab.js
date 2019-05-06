@@ -156,7 +156,11 @@ class ButlerBot extends React.Component {
       nextProps.location.query &&
       (!this.state.query ||
         JSON.stringify(nextProps.location.query) !==
-          JSON.stringify(this.state.query))
+<<<<<<< HEAD
+        JSON.stringify(this.state.query))
+=======
+        JSON.stringify(this.state.query))
+>>>>>>> BSS-13889
     ) {
       this.setState({ query: nextProps.location.query });
 
@@ -276,7 +280,11 @@ class ButlerBot extends React.Component {
         butlerDetail.position = '--';
       }
       if (data[i].power || data[i].power === 0) {
+<<<<<<< HEAD
         butlerDetail.voltage = data[i].power + ' %';
+=======
+        butlerDetail.voltage = data[i].power.toFixed(2) + ' %';
+>>>>>>> BSS-13889
       } else {
         butlerDetail.voltage = '--';
       }
@@ -303,8 +311,7 @@ class ButlerBot extends React.Component {
           data[i].tasktype === 'movetask'
         ) {
           if (current_task_status === 'started') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[1];
+            butlerDetail.current + ' - ' + currentSubtask[1];
           } else if (
             current_task_status === 'rack_picked' &&
             data[i].current_subtask === 'pps_control'
@@ -317,18 +324,15 @@ class ButlerBot extends React.Component {
           )
             butlerDetail.current += ' - ' + currentSubtask[4];
         } else if (current_task_status === 'rack_picked') {
-          butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[0];
+          butlerDetail.current + ' - ' + currentSubtask[0];
         } else if (current_task_status === 'storing') {
-          butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[2];
+          butlerDetail.current + ' - ' + currentSubtask[2];
         } else if (data[i].tasktype === 'chargetask') {
           if (current_task_status === 'started') {
             butlerDetail.current =
               butlerDetail.current + ' - ' + currentSubtask[0];
           } else if (current_task_status === 'charging_started') {
-            butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[3];
+            butlerDetail.current = butlerDetail.current;
           }
         }
         if (data[i].current_subtask !== null) {
@@ -360,7 +364,7 @@ class ButlerBot extends React.Component {
         query.butler_id.constructor === Array
           ? query.butler_id
           : [query.butler_id];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.butler_id.indexOf(bot.id.toString()) > -1;
       });
     }
@@ -371,7 +375,7 @@ class ButlerBot extends React.Component {
         query.location.constructor === Array
           ? query.location
           : [query.location];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.location.indexOf(bot.position.toString()) > -1;
       });
     }
@@ -379,7 +383,7 @@ class ButlerBot extends React.Component {
     if (query.status) {
       query.status =
         query.status.constructor === Array ? query.status : [query.status];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.status.indexOf(bot.state) > -1;
       });
     }
@@ -388,7 +392,7 @@ class ButlerBot extends React.Component {
         query.current_task.constructor === Array
           ? query.current_task
           : [query.current_task];
-      filtered_data = filtered_data.filter(function(bot) {
+      filtered_data = filtered_data.filter(function (bot) {
         return query.current_task.indexOf(bot.tasktype) > -1;
       });
     }
@@ -421,7 +425,7 @@ class ButlerBot extends React.Component {
     }
 
     if (
-      Object.keys(query).filter(function(el) {
+      Object.keys(query).filter(function (el) {
         return el !== 'page';
       }).length !== 0
     ) {
@@ -639,12 +643,21 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+<<<<<<< HEAD
+var mapDispatchToProps = function (dispatch) {
   return {
-    setButlerSpinner: function(data) {
+    setButlerSpinner: function (data) {
       dispatch(setButlerSpinner(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
+=======
+var mapDispatchToProps = function (dispatch) {
+  return {
+    setButlerSpinner: function (data) {
+      dispatch(setButlerSpinner(data));
+    },
+    initDataSentCall: function (data) {
+>>>>>>> BSS-13889
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     }
   };
@@ -672,7 +685,11 @@ ButlerBot.PropTypes = {
 };
 
 const withQuery = graphql(BUTLER_BOTS_QUERY, {
-  props: function(data) {
+<<<<<<< HEAD
+  props: function (data) {
+=======
+  props: function (data) {
+>>>>>>> BSS-13889
     if (!data || !data.data.ButlerBotsList || !data.data.ButlerBotsList.list) {
       return {};
     }
@@ -742,21 +759,33 @@ const withClientData = graphql(botsClientData, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showBotsFilter: function(show) {
+<<<<<<< HEAD
+    showBotsFilter: function (show) {
+=======
+    showBotsFilter: function (show) {
+>>>>>>> BSS-13889
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+<<<<<<< HEAD
+    filterApplied: function (applied) {
+=======
+    filterApplied: function (applied) {
+>>>>>>> BSS-13889
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    butlerfilterState: function(state) {
+<<<<<<< HEAD
+    butlerfilterState: function (state) {
+=======
+    butlerfilterState: function (state) {
+>>>>>>> BSS-13889
       mutate({ variables: { state: state } });
     }
   })
