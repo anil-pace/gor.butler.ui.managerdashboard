@@ -324,7 +324,7 @@ _timeFormat(UTCtime){
          }
          else{
          let items=itemsData[i].result;
-         let diff =items.expected_quantity-items.actual_quantity;
+         let diff =items.expected_quantity-items.actual_quantity-items.damaged_quantity;
          if(diff>0)
          {
           rowObject.status=diff+" "+vdMissingOut+" "+items.expected_quantity;
