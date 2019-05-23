@@ -19,7 +19,7 @@ class Bins extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedProfile && (!this.props.selectedProfile || nextProps.selectedProfile.profile_name !== this.props.selectedProfile.profile_name)) {
+        if (nextProps.selectedProfile && (!this.props.selectedProfile || nextProps.selectedProfile.profile_name !== this.props.selectedProfile.profile_name || nextProps.selectedPPS.pps_id !== this.props.selectedPPS.pps_id)) {
             /**
              * Profile changed from left hand side pane
              */
