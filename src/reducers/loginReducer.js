@@ -24,9 +24,9 @@ export function authLogin(state = {}, action) {
         username: sessionStorage.getItem('username'),
         grant_type: 'password',
         action: 'LOGIN',
-        role: ['butler_supervisor', 'admin', 'manager'],
+        role: ['ROLE_ADMIN'],
         context: {
-          entity_id: 1,
+          entity_id: '1',
           app_name: 'managerdashboard_ui'
         }
       })
