@@ -94,7 +94,7 @@ export const MSU_START_RECONFIG_QUERY = gql`
 `;
 
 export const MSU_STOP_RECONFIG_QUERY = gql`
-    query($input:MsuStopReconfigarams){
+    query($input:MsuStopReconfigParams){
             MsuStopReconfig(input:$input) {
                 list
             }
