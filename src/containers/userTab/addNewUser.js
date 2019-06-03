@@ -124,8 +124,8 @@ class AddUser extends React.Component {
       username: userid,
       password: pswd,
       email: email,
-      first_name: firstname,
-      last_name: lastname,
+      firstname: firstname,
+      lastname: lastname,
       authorities: role
     };
     this.props.createUser(formdata);
@@ -429,8 +429,8 @@ var mapDispatchToProps = function(dispatch) {
 const withMutations = graphql(CREATE_USER_MUTATION, {
   props: ({ ownProps, mutate }) => ({
     createUser: ({
-      first_name,
-      last_name,
+      firstname,
+      lastname,
       username,
       authorities,
       email,
@@ -439,8 +439,8 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
       mutate({
         variables: {
           input: {
-            first_name,
-            last_name,
+            firstname,
+            lastname,
             username,
             authorities,
             password,
