@@ -118,8 +118,8 @@ class EditUser extends React.Component {
     }
     let graphql_data = {
       id: this.props.id,
-      first_name: firstname,
-      last_name: lastname,
+      firstname: firstname,
+      lastname: lastname,
       password: pswd,
       username: this.props.userName,
       email: email,
@@ -433,8 +433,8 @@ var mapDispatchToProps = function(dispatch) {
 const withMutations = graphql(EDIT_USER_MUTATION, {
   props: ({ ownProps, mutate }) => ({
     editUser: ({
-      first_name,
-      last_name,
+      firstname,
+      lastname,
       username,
       authorities,
       password,
@@ -444,14 +444,14 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
       mutate({
         variables: {
           input: {
-            first_name,
-            last_name,
+            firstname,
+            lastname,
             username,
             authorities,
             password,
-            email
-          },
-          id: id
+            email,
+            id
+          }
         },
         update: (proxy, { data: { editUser } }) => {
           let msg = {};
