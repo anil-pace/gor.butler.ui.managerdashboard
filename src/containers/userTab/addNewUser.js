@@ -95,13 +95,6 @@ class AddUser extends React.Component {
     return passwordInfo.type;
   }
 
-  // _checkEmail() {
-  //   let email = this.email.value,
-  //     emailInfo;
-  //   emailInfo = idStatus(email, this.props.existingUserIds);
-  //   this.props.validateID(emailInfo);
-  // }
-
   _handleAddUser(e) {
     e.preventDefault();
     let pswd, confirmPswd, role, opt, userid, firstname, lastname, email;
@@ -238,35 +231,6 @@ class AddUser extends React.Component {
                   ) : (
                     ''
                   )}
-
-                  {/* <div className='gor-usr-hdsm'>
-                    <FormattedMessage
-                      id='users.add.userdetails.email'
-                      description='Text for user email'
-                      defaultMessage='Email'
-                    />
-                  </div>
-                  <input
-                    className={
-                      'gor-usr-fdlg' +
-                      (this.props.idCheck.type === ERROR
-                        ? ' gor-input-error'
-                        : ' gor-input-ok')
-                    }
-                    type='text'
-                    onBlur={this._checkId.bind(this)}
-                    id='email'
-                    ref={node => {
-                      this.email = node;
-                    }}
-                  />
-                  {this.props.emailCheck.type ? (
-                    tick
-                  ) : this.props.emailCheck.type === ERROR ? (
-                    <FieldError txt={this.props.emailCheck.msg} />
-                  ) : (
-                    ''
-                  )} */}
 
                   <div className='gor-usr-field'>
                     <div className='gor-usr-hdsm'>
@@ -486,7 +450,6 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
         update: (proxy, { data: { createUser } }) => {
           let msg = {};
           if (createUser.username) {
-            var details = Object.assign({}, createUser.username);
             msg = getFormattedMessages('NEWUSER', createUser.username);
             ownProps.notifyfeedback(msg);
           } else {
