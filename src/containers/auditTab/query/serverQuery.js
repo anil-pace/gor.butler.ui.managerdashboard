@@ -109,7 +109,8 @@ export const AUDIT_DETAILS_QUERY = gql`query AuditDetails($input: AuditDetailsPa
       operator_assigned
       result{
          actual_quantity
-      expected_quantity
+        expected_quantity
+        damaged_quantity
       }
             }
       progress{
@@ -145,7 +146,8 @@ export const AUDIT_DETAILS_SUBSCRIPTION_QUERY = gql`
         operator_assigned
         result{
            actual_quantity
-        expected_quantity
+          expected_quantity
+          damaged_quantity
         }
               }
         progress{
