@@ -235,7 +235,6 @@ class UsersTab extends React.Component {
         userData.location = '--';
         userData.logInTime = '--';
       }
-      console.log(data[i]);
       userData.role = [];
       userData.uid = data[i].user_id;
       userData.userName = data[i].user_name;
