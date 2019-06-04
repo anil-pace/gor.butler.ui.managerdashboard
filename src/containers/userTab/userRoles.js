@@ -20,7 +20,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName === currentRole.name) {
+      } else if (roleName.includes(currentRole.name)) {
         return true;
       }
       return false;
@@ -144,7 +144,7 @@ class UserRoles extends React.Component {
             defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'
           />
         </div>
-        <div className='gor-role'>
+        <div className='gor-role gor-multiple-roles'>
           <Select
             options={dataDropdown.options}
             value={dataDropdown.selected}
