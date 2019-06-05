@@ -198,7 +198,6 @@ class UsersTab extends React.Component {
     var work_place = { front: front, back: back };
 
     var userDetails = [],
-      roleIdArr = [],
       userData = {};
     for (var i = data.length - 1; i >= 0; i--) {
       userData.id =
@@ -236,11 +235,22 @@ class UsersTab extends React.Component {
         userData.logInTime = '--';
       }
       userData.role = [];
+      userData.roleId = [];
       userData.uid = data[i].user_id;
       userData.userName = data[i].user_name;
       userData.first = data[i].first_name;
       userData.last = data[i].last_name;
       userData.full_name = data[i].full_name;
+
+      const unmappedRoles =
+        data[i].role.length &&
+        data[i].role.map(elem => {
+          const roleVal = elem
+            .toLowerCase()
+            .split('role_')
+            .join('');
+          return roleVal;
+        });
 
       const mappedRoles =
         data[i].role.length &&
@@ -253,6 +263,7 @@ class UsersTab extends React.Component {
         });
       if (mappedRoles.length > 0) {
         userData.role.push(mappedRoles);
+        userData.roleId.push(unmappedRoles);
       }
 
       userDetails.push(userData);

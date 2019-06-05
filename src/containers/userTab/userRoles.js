@@ -20,7 +20,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName.includes(currentRole.name)) {
+      } else if (roleName[0].indexOf(currentRole.name) > -1) {
         return true;
       }
       return false;
