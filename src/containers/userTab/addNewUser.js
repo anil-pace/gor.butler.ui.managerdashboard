@@ -118,7 +118,7 @@ class AddUser extends React.Component {
 
     role = this.props.roleSet
       ? this._getId(this.props.roleSet)
-      : this._getId(BUTLER_UI);
+      : this._getId([BUTLER_UI]);
 
     let formdata = {
       username: userid,
@@ -449,7 +449,7 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
         },
         update: (proxy, { data: { createUser } }) => {
           let msg = {};
-          if (createUser.code === 'us001') {
+          if (createUser.username) {
             msg = getFormattedMessages('NEWUSER', createUser);
             ownProps.notifyfeedback(msg);
           } else {

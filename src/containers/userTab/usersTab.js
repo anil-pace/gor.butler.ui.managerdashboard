@@ -235,18 +235,36 @@ class UsersTab extends React.Component {
         userData.location = '--';
         userData.logInTime = '--';
       }
-
+      userData.role = [];
+      userData.roleId = [];
       userData.uid = data[i].user_id;
       userData.userName = data[i].user_name;
       userData.first = data[i].first_name;
       userData.last = data[i].last_name;
       userData.full_name = data[i].full_name;
-      userData.roleId = data[i].role;
-      if (role.hasOwnProperty(data[i].role)) {
-        userData.role = role[data[i].role];
-      } else {
-        userData.role = data[i].role;
+      const unmappedRoles =
+        data[i].role.length &&
+        data[i].role.map(elem => {
+          const roleVal = elem
+            .toLowerCase()
+            .split('role_')
+            .join('');
+          return roleVal;
+        });
+      const mappedRoles =
+        data[i].role.length &&
+        data[i].role.map(elem => {
+          const roleLabel = elem
+            .toLowerCase()
+            .split('role_')
+            .join('');
+          return role[roleLabel] ? role[roleLabel] : roleLabel;
+        });
+      if (mappedRoles.length > 0) {
+        userData.role.push(mappedRoles);
+        userData.roleId.push(unmappedRoles);
       }
+
       userDetails.push(userData);
       userData = {};
     }

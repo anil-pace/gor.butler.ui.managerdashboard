@@ -20,7 +20,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName === currentRole.name) {
+      } else if (roleName[0].indexOf(currentRole.name) > -1) {
         return true;
       }
       return false;
@@ -50,7 +50,6 @@ class UserRoles extends React.Component {
 
     for (let i = 0; i < len; i++) {
       currentRole = this.props.roleList[i];
-
       if (this._getChecked(this.props.roleName, currentRole)) {
         selected = {
           value: currentRole.name,
@@ -144,7 +143,7 @@ class UserRoles extends React.Component {
             defaultMessage='User will be given a specific level of control over the Butler system depending on the designated role'
           />
         </div>
-        <div className='gor-role'>
+        <div className='gor-role gor-multiple-roles'>
           <Select
             options={dataDropdown.options}
             value={dataDropdown.selected}
