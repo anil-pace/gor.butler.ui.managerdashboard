@@ -102,7 +102,7 @@ class EditUser extends React.Component {
     if (!this.props.nameCheck.type) {
       if (!this._checkName()) return;
     }
-    givenRole = this._getId(this.props.roleName);
+    givenRole = this._getId([this.props.roleName]);
 
     role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
 
@@ -455,11 +455,11 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
         },
         update: (proxy, { data: { editUser } }) => {
           let msg = {};
-          if (editUser.code === 'us004') {
-            msg = getFormattedMessages('EDITEDUSER', editUser);
+          if (editUser.username) {
+            msg = getFormattedMessages('EDITEDUSER', editUser.username);
             ownProps.notifyfeedback(msg);
           } else {
-            msg = getFormattedMessages('EDITEDUSERFAIL', editUser);
+            msg = getFormattedMessages('EDITEDUSERFAIL', editUser.username);
             ownProps.setNotification(msg);
           }
         }
