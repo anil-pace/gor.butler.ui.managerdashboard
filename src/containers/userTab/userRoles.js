@@ -92,6 +92,7 @@ class UserRoles extends React.Component {
       len,
       currentRole;
     len = this.props.roleList.length;
+    console.log(this.props.roleList);
     let infoHeading = (
       <div className='gor-role-heading'>
         <FormattedMessage
@@ -149,6 +150,8 @@ class UserRoles extends React.Component {
             value={dataDropdown.selected}
             removeSelected={true}
             multi={true}
+            required
+            placeholder={'Select role'}
             onChange={e => this._checkRole(e)}
             className={'gor-usr-dropdown'}
           />
