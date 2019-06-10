@@ -92,7 +92,6 @@ class UserRoles extends React.Component {
       len,
       currentRole;
     len = this.props.roleList.length;
-    console.log(this.props.roleList);
     let infoHeading = (
       <div className='gor-role-heading'>
         <FormattedMessage
