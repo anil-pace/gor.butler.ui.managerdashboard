@@ -235,14 +235,12 @@ class UsersTab extends React.Component {
         userData.location = '--';
         userData.logInTime = '--';
       }
-      userData.role = [];
-      userData.roleId = [];
       userData.uid = data[i].user_id;
       userData.userName = data[i].user_name;
       userData.first = data[i].first_name;
       userData.last = data[i].last_name;
       userData.full_name = data[i].full_name;
-      const unmappedRoles =
+      const roleId =
         data[i].role.length &&
         data[i].role.map(elem => {
           const roleVal = elem
@@ -251,7 +249,7 @@ class UsersTab extends React.Component {
             .join('');
           return roleVal;
         });
-      const mappedRoles =
+      const roles =
         data[i].role.length &&
         data[i].role.map(elem => {
           const roleLabel = elem
@@ -260,9 +258,9 @@ class UsersTab extends React.Component {
             .join('');
           return role[roleLabel] ? role[roleLabel] : roleLabel;
         });
-      if (mappedRoles.length > 0) {
-        userData.role.push(mappedRoles);
-        userData.roleId.push(unmappedRoles);
+      if (roleId.length > 0) {
+        Object.assign(userData, { role: roles });
+        Object.assign(userData, { roleId: roleId });
       }
 
       userDetails.push(userData);
