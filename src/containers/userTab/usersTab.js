@@ -40,6 +40,14 @@ const messages = defineMessages({
     id: 'userDetails.qc_operator',
     defaultMessage: 'QC Operator'
   },
+  sodimac_packing_operator: {
+    id: 'userDetails.sodimac_packing_operator',
+    defaultMessage: 'Operator Packing'
+  },
+  sodimac_rollcage_operator: {
+    id: 'userDetails.sodimac_rollcage_operator',
+    defaultMessage: 'Operator Rollcage'
+  },
   packing_operator: {
     id: 'userDetails.packing_operator',
     defaultMessage: 'Packing Operator'
@@ -177,9 +185,16 @@ class UsersTab extends React.Component {
     let operator = nProps.context.intl.formatMessage(messages.userOperator);
     let admin = nProps.context.intl.formatMessage(messages.userAdmin);
     let qc_operator = nProps.context.intl.formatMessage(messages.qc_operator);
+    let sodimac_packing_operator = nProps.context.intl.formatMessage(
+      messages.sodimac_packing_operator
+    );
+    let sodimac_rollcage_operator = nProps.context.intl.formatMessage(
+      messages.sodimac_rollcage_operator
+    );
     let packing_operator = nProps.context.intl.formatMessage(
       messages.packing_operator
     );
+
     let manager = nProps.context.intl.formatMessage(messages.userManager);
     let pick = nProps.context.intl.formatMessage(stringConfig.pick);
     let put = nProps.context.intl.formatMessage(stringConfig.put);
@@ -193,7 +208,9 @@ class UsersTab extends React.Component {
       butler_supervisor: manager,
       admin: admin,
       qc_operator: qc_operator,
-      packing_operator: packing_operator
+      packing_operator: packing_operator,
+      sodimac_rollcage_operator: sodimac_rollcage_operator,
+      sodimac_packing_operator: sodimac_packing_operator
     };
     var work_mode = { pick: pick, put: put, audit: audit };
     var work_place = { front: front, back: back };
