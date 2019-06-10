@@ -29,7 +29,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName[0] && roleName[0].indexOf(currentRole.name) > -1) {
+      } else if (roleName && roleName.indexOf(currentRole.name) > -1) {
         return true;
       }
       return false;
@@ -191,7 +191,7 @@ UserRoles.contextTypes = {
 };
 UserRoles.propTypes = {
   roleSet: React.PropTypes.array,
-  roleName: React.PropTypes.string,
+  roleName: React.PropTypes.array,
   setRole: React.PropTypes.func,
   roleList: React.PropTypes.array
 };
