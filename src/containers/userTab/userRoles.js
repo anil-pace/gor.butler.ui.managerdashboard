@@ -20,7 +20,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName[0].indexOf(currentRole.name) > -1) {
+      } else if (roleName[0] && roleName[0].indexOf(currentRole.name) > -1) {
         return true;
       }
       return false;
@@ -150,6 +150,7 @@ class UserRoles extends React.Component {
             value={dataDropdown.selected}
             removeSelected={true}
             multi={true}
+            required
             onChange={e => this._checkRole(e)}
             className={'gor-usr-dropdown'}
           />

@@ -449,8 +449,13 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
         },
         update: (proxy, { data: { createUser } }) => {
           let msg = {};
+<<<<<<< HEAD
           if (createUser.username) {
             msg = getFormattedMessages('NEWUSER', createUser.username);
+=======
+          if (createUser.firstname && createUser.lastname) {
+            msg = getFormattedMessages('NEWUSER', createUser);
+>>>>>>> c0e9ff0b2... BSS-14601
             ownProps.notifyfeedback(msg);
           } else {
             msg = getFormattedMessages('NEWUSERFAIL', createUser.username);
