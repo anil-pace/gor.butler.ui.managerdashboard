@@ -159,7 +159,6 @@ class UserRoles extends React.Component {
             options={dataDropdown.options}
             value={dataDropdown.selected}
             removeSelected={true}
-            isRequired
             placeholder={_this.context.intl.formatMessage(
               messages.selectRolePlaceholder
             )}
