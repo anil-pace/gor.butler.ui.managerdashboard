@@ -20,7 +20,7 @@ class UserRoles extends React.Component {
         if (currentRole.name === BUTLER_UI) {
           return true;
         }
-      } else if (roleName.includes(currentRole.name)) {
+      } else if (roleName[0].indexOf(currentRole.name) > -1) {
         return true;
       }
       return false;
@@ -50,7 +50,6 @@ class UserRoles extends React.Component {
 
     for (let i = 0; i < len; i++) {
       currentRole = this.props.roleList[i];
-
       if (this._getChecked(this.props.roleName, currentRole)) {
         selected = {
           value: currentRole.name,
