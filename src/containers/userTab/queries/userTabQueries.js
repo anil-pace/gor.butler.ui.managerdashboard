@@ -3,18 +3,13 @@ import gql from 'graphql-tag';
 export const DELETE_USER_MUTATION = gql`
   mutation deleteUser($id: ID) {
     deleteUser(id: $id) {
-      code
-      firstname
-      lastname
-      description
-      details
+      status
     }
   }
 `;
 export const EDIT_USER_MUTATION = gql`
   mutation editUser($id: ID, $input: CreateUserInput) {
     editUser(id: $id, input: $input) {
-      password
       username
       firstname
       lastname
