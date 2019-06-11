@@ -213,7 +213,7 @@ class UsersTable extends React.Component {
                       }
                       className='cell gor-add-ellipsis'
                     >
-                      {row.role.join(',')}
+                      {row.role ? row.role.join(',') : ''}
                     </div>
                     <div
                       style={

@@ -252,11 +252,7 @@ export function getFormattedMessages(action, values) {
         <FormattedMessage
           id='notify.success.delete'
           description='Text for successfull user deletion'
-          defaultMessage='User "{first} {last}"  deleted successfully'
-          values={{
-            first: values.details[0] || '--',
-            last: values.details[1] || '--'
-          }}
+          defaultMessage='User deleted successfully'
         />
       );
       break;
@@ -320,8 +316,8 @@ export function getFormattedMessages(action, values) {
           description='Text for successfull user added'
           defaultMessage='New user "{first} {last}" added successfully'
           values={{
-            first: values.details[0] || '--',
-            last: values.details[1] || '--'
+            first: values.firstname || '--',
+            last: values.lastname || '--'
           }}
         />
       );
