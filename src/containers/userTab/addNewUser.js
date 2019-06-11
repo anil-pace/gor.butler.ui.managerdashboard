@@ -118,7 +118,7 @@ class AddUser extends React.Component {
 
     role = this.props.roleSet
       ? this._getId(this.props.roleSet)
-      : this._getId(BUTLER_UI);
+      : this._getId([BUTLER_UI]);
 
     let formdata = {
       username: userid,
@@ -149,7 +149,7 @@ class AddUser extends React.Component {
       }
       return roleIdArr;
     } else {
-      return null;
+      return;
     }
   }
 
@@ -449,11 +449,11 @@ const withMutations = graphql(CREATE_USER_MUTATION, {
         },
         update: (proxy, { data: { createUser } }) => {
           let msg = {};
-          if (createUser.code === 'us001') {
-            msg = getFormattedMessages('NEWUSER', createUser);
+          if (createUser.username) {
+            msg = getFormattedMessages('NEWUSER', createUser.username);
             ownProps.notifyfeedback(msg);
           } else {
-            msg = getFormattedMessages('NEWUSERFAIL', createUser);
+            msg = getFormattedMessages('NEWUSERFAIL', createUser.username);
             ownProps.setNotification(msg);
           }
         }
