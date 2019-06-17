@@ -60,8 +60,13 @@ class EditUser extends React.Component {
       roleSelected;
     givenRole = this.props.roleName;
     roleSelected = this.props.roleSet ? this.props.roleSet : givenRole;
-    if (roleSelected !== givenRole) {
-      this.setState({ pwdView: true });
+
+    let len = givenRole.length;
+
+    for (let i = 0; i < len; i++) {
+      if (roleSelected.indexOf(givenRole[i]) > -1) {
+        this.setState({ pwdView: true });
+      }
     }
     passwordInfo = passwordStatus(pswd, confirmPswd, roleSelected);
     this.props.validatePassword(passwordInfo);
@@ -102,7 +107,7 @@ class EditUser extends React.Component {
     if (!this.props.nameCheck.type) {
       if (!this._checkName()) return;
     }
-    givenRole = this._getId([this.props.roleName]);
+    givenRole = this._getId(this.props.roleName);
 
     role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
 
@@ -455,8 +460,8 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
         },
         update: (proxy, { data: { editUser } }) => {
           let msg = {};
-          if (editUser.username) {
-            msg = getFormattedMessages('EDITEDUSER', editUser.username);
+          if (editUser.firstname && editUser.lastname) {
+            msg = getFormattedMessages('EDITEDUSER', editUser);
             ownProps.notifyfeedback(msg);
           } else {
             msg = getFormattedMessages('EDITEDUSERFAIL', editUser.username);
