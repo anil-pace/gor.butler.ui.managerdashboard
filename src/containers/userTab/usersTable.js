@@ -7,6 +7,7 @@ import Dimensions from 'react-dimensions';
 import { modal } from 'react-redux-modal';
 import EditUser from './editUser';
 import DeleteUser from './deleteUser';
+import DotSeparatorContent from '../../components/dotSeparatorContent/dotSeparatorContent';
 import GTable from './../../components/gor-table-component';
 import {
   GTableHeader,
@@ -191,7 +192,7 @@ class UsersTable extends React.Component {
                           ? { flex: '1 0 ' + self.state.header[0].width + '%' }
                           : {}
                       }
-                      className='cell'
+                      className='cell gor-capitalize'
                     >
                       {row.id}
                     </div>
@@ -213,7 +214,10 @@ class UsersTable extends React.Component {
                       }
                       className='cell gor-add-ellipsis'
                     >
-                      {row.role ? row.role.join(',') : ''}
+                      <DotSeparatorContent
+                        header={row.role}
+                        separator={<div className='dotImage' />}
+                      />
                     </div>
                     <div
                       style={
