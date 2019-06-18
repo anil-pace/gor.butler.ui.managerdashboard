@@ -278,7 +278,7 @@ export function getFormattedMessages(action, values) {
         ),
         desc: (
           <FormattedMessage
-            id='user.delete.fail'
+            id='user.edit.fail'
             description='Text for fail user edit'
             defaultMessage='Failed:"{description}" '
             values={{ description: values.description || '--' }}
