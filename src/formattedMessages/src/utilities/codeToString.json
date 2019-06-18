@@ -7,7 +7,7 @@
   {
     "id": "notify.success.delete",
     "description": "Text for successfull user deletion",
-    "defaultMessage": "User \"{first} {last}\" deleted successfully"
+    "defaultMessage": "User deleted successfully"
   },
   {
     "id": "notify.delete.audit.success",
