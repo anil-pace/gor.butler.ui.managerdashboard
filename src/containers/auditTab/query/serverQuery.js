@@ -19,6 +19,19 @@ export const AUDIT_REQUEST_QUERY = gql`query AuditRequestSubmit($input: AuditReq
   }
   `;
 
+export const AUDIT_CHANGE = gql`query AuditChangePPS($input: ChangePPSParams){
+  AuditChangePPS(input:$input){
+    list{
+    pps_list{
+      code
+      description
+      level
+  }
+}
+}
+}
+`;
+
 export const AUDIT_USER_FETCH_QUERY = gql`query AuditFetchUser{
   AuditFetchUser{
    list{
@@ -39,19 +52,7 @@ export const AUDIT_PPS_FETCH_QUERY = gql`query AuditPPSDetails  {
       }
           }
   }}`;
-export const AUDIT_START = gql`
-    query AuditChangePPS($params:ChangePPSParams){
-      AuditChangePPS(input:$params){
-        list{
-        pps_list{
-		    code
-        description
-        level
-      }
-    }
-		}
-}
- `;
+
 export const AUDIT_RESOLVE_QUERY = gql`
 query AuditResolve($input: AuditResolveParams){
     
