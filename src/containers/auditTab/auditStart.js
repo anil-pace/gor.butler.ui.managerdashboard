@@ -33,7 +33,7 @@ import {graphql, withApollo, compose} from "react-apollo";
 import {AuditParse} from '../../../src/utilities/auditResponseParser'
 import {ShowError} from '../../../src/utilities/ErrorResponseParser';
 import gql from 'graphql-tag';
-import {AUDIT_PPS_FETCH_QUERY,AUDIT_START,AUDIT_REQUEST_QUERY} from './query/serverQuery';
+import {AUDIT_PPS_FETCH_QUERY,AUDIT_CHANGE,AUDIT_REQUEST_QUERY} from './query/serverQuery';
 import {auditClientPPSData} from './query/clientQuery';
 
 const messages = defineMessages({
@@ -53,11 +53,6 @@ const messages = defineMessages({
   
 });
 
-
-
-
-
-
 class AuditStart extends React.Component {
   constructor(props) {  
     super(props);
@@ -70,6 +65,7 @@ class AuditStart extends React.Component {
       items: []
     };    
     this.handleChange = this.handleChange.bind(this);
+    this._handleStartChangeAudit=this._handleStartChangeAudit.bind(this);
   }
   _removeThisModal() {
     this.props.removeModal();
@@ -136,7 +132,7 @@ class AuditStart extends React.Component {
     }
     return tableData;
   }
-  _handlestartaudit(e) {
+  _handleStartChangeAudit(e) {
     var _this=this;
     let allAuditId,
       URL = "",
@@ -182,7 +178,7 @@ class AuditStart extends React.Component {
         URL: URL
       });
       this._removeThisModal();
-    } else {
+    } else if(this.props.param != "CHANGE_PPS") {
         
         let startAuditData = {
           'formdata': formdata,
@@ -208,6 +204,20 @@ class AuditStart extends React.Component {
                  AuditParse(AuditRequestSubmit,'START_AUDIT',_this)
                 })
       this.props.removeModal();
+    }
+    else {
+    this.props.client.query({
+                 query:AUDIT_CHANGE,
+                 variables: (function () {
+                  return {
+                      input:formdata
+                  }
+              }()),
+                 fetchPolicy: 'network-only'
+             }).then(data=>{
+               var ChangePPSParams=data.data.AuditChangePPS?JSON.parse(data.data.AuditChangePPS.list):""             
+              })
+    this.props.removeModal();
     }
 
   }
@@ -257,7 +267,7 @@ class AuditStart extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(nextProps.ppsList.pps_list)) {
+    if (nextProps.ppsList && JSON.stringify(nextProps.ppsList.pps_list)) {
       let attributeData = nextProps.ppsList.pps_list || [];
       this.setState({ items: attributeData });
       let auditList=[],otherList=[];
@@ -698,7 +708,7 @@ class AuditStart extends React.Component {
            {tablerowdataAudit.length==0 && tablerowdataOther.length==0?"":
           <button
             className="gor-add-btn gor-listing-button rightMargin"
-            onClick={this._handlestartaudit.bind(this)}
+            onClick={this._handleStartChangeAudit.bind(this)}
           >
             {startButton}
           </button>
