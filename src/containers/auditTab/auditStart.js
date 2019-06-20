@@ -215,7 +215,8 @@ class AuditStart extends React.Component {
               }()),
                  fetchPolicy: 'network-only'
              }).then(data=>{
-               var ChangePPSParams=data.data.AuditChangePPS?JSON.parse(data.data.AuditChangePPS.list):""             
+               var ChangePPSParams=data.data.AuditChangePPS?data.data.AuditChangePPS.list:"" 
+               AuditParse(ChangePPSParams,'CHANGE_PPS_TASK',_this)            
               })
     this.props.removeModal();
     }

@@ -22,11 +22,13 @@ export const AUDIT_REQUEST_QUERY = gql`query AuditRequestSubmit($input: AuditReq
 export const AUDIT_CHANGE = gql`query AuditChangePPS($input: ChangePPSParams){
   AuditChangePPS(input:$input){
     list{
-    pps_list{
       code
       description
       level
-  }
+      details {
+        audit_id
+        pps_list
+      }
 }
 }
 }
