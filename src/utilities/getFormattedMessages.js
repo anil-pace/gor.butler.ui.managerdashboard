@@ -117,6 +117,17 @@ export function getFormattedMessages(action, values) {
       );
       break;
 
+      case 'CHANGEPPS':
+      return (
+        <FormattedMessage
+          id='audit.changepps.success'
+          description='Change PPS success'
+          defaultMessage='PPS has been changed successfully'
+          values={values}
+        />
+      );
+      break;
+
     case 'DELETEAUDITFAIL':
       return (
         <FormattedMessage
