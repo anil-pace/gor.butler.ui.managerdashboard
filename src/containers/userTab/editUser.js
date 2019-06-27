@@ -114,10 +114,10 @@ class EditUser extends React.Component {
     if (
       !pswd &&
       !confirmPswd &&
-      (role === givenRole || this.props.roleSet !== BUTLER_SUPERVISOR)
+      !this.state.pwdView
     ) {
-      pswd = '__unchanged__';
-      confirmPswd = '__unchanged__';
+      pswd = '__NOT__';
+      confirmPswd = '__NOT__';
     } else if (!this._checkPwd()) {
       return;
     }
