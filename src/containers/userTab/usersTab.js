@@ -24,7 +24,6 @@ import {
   SET_FILTER_APPLIED,
   SET_FILTER_STATE
 } from './queries/userTabQueries';
-
 import gql from 'graphql-tag';
 //Mesages for internationalization
 const messages = defineMessages({
@@ -199,6 +198,7 @@ class UsersTab extends React.Component {
     var work_place = { front: front, back: back };
 
     var userDetails = [],
+      roleIdArr = [],
       userData = {};
     for (var i = data.length - 1; i >= 0; i--) {
       userData.id =
@@ -235,18 +235,34 @@ class UsersTab extends React.Component {
         userData.location = '--';
         userData.logInTime = '--';
       }
-
       userData.uid = data[i].user_id;
       userData.userName = data[i].user_name;
       userData.first = data[i].first_name;
       userData.last = data[i].last_name;
       userData.full_name = data[i].full_name;
-      userData.roleId = data[i].role;
-      if (role.hasOwnProperty(data[i].role)) {
-        userData.role = role[data[i].role];
-      } else {
-        userData.role = data[i].role;
+      const roleId =
+        data[i].role.length &&
+        data[i].role.map(elem => {
+          const roleVal = elem
+            .toLowerCase()
+            .split('role_')
+            .join('');
+          return roleVal;
+        });
+      const roles =
+        data[i].role.length &&
+        data[i].role.map(elem => {
+          const roleLabel = elem
+            .toLowerCase()
+            .split('role_')
+            .join('');
+          return role[roleLabel] ? role[roleLabel] : roleLabel;
+        });
+      if (roleId.length > 0) {
+        Object.assign(userData, { role: roles });
+        Object.assign(userData, { roleId: roleId });
       }
+
       userDetails.push(userData);
       userData = {};
     }

@@ -1,6 +1,5 @@
 .users-table {
   .offline {
-
     border-radius: 15px;
     text-align: center;
     width: 90px;
@@ -13,7 +12,6 @@
     background: #ffffff;
     text-transform: capitalize;
     padding: 5px 8px 8px;
-
   }
   .online {
     border-radius: 15px;
@@ -29,6 +27,12 @@
     text-transform: capitalize;
     padding: 5px 8px 8px;
   }
+  .gor-add-ellipsis {
+    text-overflow: ellipsis;
+  }
+  .gor-capitalize {
+    text-transform: capitalize;
+  }
 }
 
 .users-table {
@@ -40,7 +44,9 @@
       .cell:last-child {
         padding-right: 15px;
       }
-
+      .gor-add-ellipsis {
+        text-overflow: ellipsis;
+      }
     }
   }
   .table-header {
@@ -51,8 +57,6 @@
       .cell:last-child {
         padding-right: 15px;
       }
-
     }
   }
-
 }

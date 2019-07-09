@@ -3,6 +3,7 @@ import {codeToString} from "./codeToString";
 import {
     START_AUDIT,
     DELETE_AUDIT,
+    CHANGE_PPS_TASK,
     AUDIT_RESOLVE_CONFIRMED,
     CANCEL_AUDIT
 } from "../constants/frontEndConstants";
@@ -174,6 +175,23 @@ case DELETE_AUDIT:
           _this.props.setAuditListRefresh('flag');
         //  _this.props.setAuditSpinner(false);
       }
+      break;
+      case CHANGE_PPS_TASK:
+   
+    if(res.code!=="as007")
+    {
+            values={id:res.details.audit_id},
+            stringInfo = codeToString(res);
+            _this.props.setNotification(stringInfo);
+            _this.props.setAuditListRefresh('flag');
+        }
+        else{
+            values={id:res.details.audit_id};
+            msg = getFormattedMessages("CHANGEPPS", values);
+           _this.props.notifyfeedback(msg);
+           _this.props.setAuditListRefresh('flag'); //reset refresh flag
+
+        }
       break;
 
         default:
