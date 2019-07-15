@@ -163,6 +163,7 @@ class UserRoles extends React.Component {
             )}
             multi={true}
             required
+            closeOnSelect={false}
             onChange={e => this._checkRole(e)}
             className={'gor-usr-dropdown'}
           />
