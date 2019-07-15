@@ -29,10 +29,10 @@ class UsersTable extends React.Component {
         },
         { id: 1, text: 'STATUS', key: 'status', sortable: true },
         { id: 2, text: 'ROLE', key: 'role', sortable: true },
-        { id: 3, text: 'WORKMODE', key: 'role', sortable: true },
-        { id: 4, text: 'LOG IN TIME', key: 'role', sortable: true },
-        { id: 5, text: 'LOG IN TIME', key: 'role', sortable: true },
-        { id: 6, text: 'ACTIONS', key: 'role', sortable: false }
+        { id: 3, text: 'WORKMODE', key: 'workMode', sortable: true },
+        { id: 4, text: 'LOCATION', key: 'location', sortable: true },
+        { id: 5, text: 'LOG IN TIME', key: 'logInTime', sortable: true },
+        { id: 6, text: 'ACTIONS', key: 'actions', sortable: false }
       ],
       userList: props.data
     };
