@@ -18,17 +18,18 @@ import {
     WS_ONSEND
 } from '../../constants/frontEndConstants';
 
-import {SUBSCRIPTION_QUERY,
-        MSU_LIST_QUERY,
-        MSU_LIST_POST_FILTER_QUERY,
-        MSU_START_RECONFIG_QUERY,
-        MSU_STOP_RECONFIG_QUERY,
-        MSU_RELEASE_QUERY,
-        msuListClientData,
-        SET_VISIBILITY,
-        SET_FILTER_APPLIED,
-        SET_FILTER_STATE
-        } from './queries/msuReconfigTab';
+import {
+    SUBSCRIPTION_QUERY,
+    MSU_LIST_QUERY,
+    MSU_LIST_POST_FILTER_QUERY,
+    MSU_START_RECONFIG_QUERY,
+    MSU_STOP_RECONFIG_QUERY,
+    MSU_RELEASE_QUERY,
+    msuListClientData,
+    SET_VISIBILITY,
+    SET_FILTER_APPLIED,
+    SET_FILTER_STATE
+} from './queries/msuReconfigTab';
 
 import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag';
@@ -56,7 +57,7 @@ class MsuConfigTab extends React.Component {
         this._disableReleaseMsuBtn = this._disableReleaseMsuBtn.bind(this);
         this._startStopActionInitiated = this._startStopActionInitiated.bind(this);
         this.showMsuListFilter = this.props.showMsuListFilter.bind(this);
-        this._releaseMsuAction= this._releaseMsuAction.bind(this);
+        this._releaseMsuAction = this._releaseMsuAction.bind(this);
     }
 
 
@@ -154,6 +155,7 @@ class MsuConfigTab extends React.Component {
     }
 
     manipulateButtonActions(arg) {
+        console.log("manipulate buttons action bieng called");
         let isAnyMsuEmpty = [];
         let isAnyMsuDropping = [];
         let isAnyMsuDropped = [];
@@ -211,6 +213,7 @@ class MsuConfigTab extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
+        console.log(" coming inside COmponent will receive props ");
 
         if (!this.state.legacyDataSubscribed && nextProps.socketAuthorized) {
             this.setState({
@@ -228,6 +231,7 @@ class MsuConfigTab extends React.Component {
             this.manipulateButtonActions(nextProps.data.MsuList.list);
         }
         else {
+            console.log("coming insinde componet wil receive proios  + else pare");
             this.manipulateButtonActions(this.state.msuList);
         }
     }
@@ -259,6 +263,7 @@ class MsuConfigTab extends React.Component {
             },
             defaultToken: { "STATUS": ["any"], __typename: "MsuReconfigTokenSelected" }
         });
+        this.manipulateButtonActions(this.state.msuList);
     }
 
 
@@ -481,7 +486,7 @@ function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function (dispatch) {
     return {
         initDataSentCall: function (data) {
-        dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+            dispatch(setWsAction({ type: WS_ONSEND, data: data }));
         }
     }
 }
