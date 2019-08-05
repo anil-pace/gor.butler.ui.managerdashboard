@@ -5,7 +5,7 @@ import {EMPTY_PWD,TYPE_SUCCESS,EMPTY_NAME,INVALID_NAME,INVALID_PWD_OP,INVALID_PW
 export function nameStatus(firstname,lastname){
   // eslint-disable-next-line
           let nameInfo, format=  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; 
-          if(!firstname.length||!lastname.length||firstname.length>50||lastname.length>50)
+          if(!firstname.trim().length||!lastname.trim().length||firstname.trim().length>50||lastname.trim().length>50)
           {
             nameInfo={
               type:ERROR,
@@ -31,21 +31,21 @@ export function nameStatus(firstname,lastname){
 export function passwordStatus(pswd,confirmPswd,selectedRole){
           let passwordInfo,managerRole;
           managerRole=BUTLER_SUPERVISOR;
-          if(!pswd.length)
+          if(!pswd.trim().length)
           {
             passwordInfo={
               type:ERROR,
               msg:EMPTY_PWD           
             };            
           }
-          else if(pswd!==confirmPswd)
+          else if(pswd.trim()!==confirmPswd.trim())
           {
              passwordInfo={
               type:ERROR,
               msg:MATCH_PWD           
              };            
           }
-          else if(pswd.length<8)
+          else if(pswd.trim().length<8)
           {
             if(selectedRole===managerRole)
             {
@@ -54,7 +54,7 @@ export function passwordStatus(pswd,confirmPswd,selectedRole){
               msg:INVALID_PWD_MG           
               };
             }
-            else if(pswd.length<6)
+            else if(pswd.trim().length<6)
             {
               passwordInfo={
               type:ERROR,
