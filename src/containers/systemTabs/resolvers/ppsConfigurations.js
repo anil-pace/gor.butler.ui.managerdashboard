@@ -105,7 +105,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -161,7 +161,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -205,7 +205,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -266,7 +266,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
@@ -325,7 +325,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
@@ -377,7 +377,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
