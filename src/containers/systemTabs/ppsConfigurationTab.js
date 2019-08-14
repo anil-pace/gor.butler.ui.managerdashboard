@@ -2,31 +2,31 @@
  * Container for Overview tab
  * This will be switched based on tab click
  */
-import React  from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import Tags from './tags'
 import Bins from './ppsConfigurationBins'
 import PPSList from "./ppsConfigurationList";
-import {modal} from 'react-redux-modal'
+import { modal } from 'react-redux-modal'
 import CreateProfile from './createPPSProfile'
-import {FormattedMessage} from 'react-intl'
-import {PPS_STATUS_FCLOSE,WS_ONSEND} from './../../constants/frontEndConstants'
-import {wsOverviewData} from '../../constants/initData';
+import { FormattedMessage } from 'react-intl'
+import { PPS_STATUS_FCLOSE, WS_ONSEND } from './../../constants/frontEndConstants'
+import { wsOverviewData } from '../../constants/initData';
 import Spinner from './../../components/spinner/Spinner';
 import SaveApplyProfile from './saveApplyProfile'
-import {setWsAction} from '../../actions/socketActions';
+import { setWsAction } from '../../actions/socketActions';
 
-import {graphql, withApollo, compose} from "react-apollo";
+import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag'
 
 
 class PPSConfiguration extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {legacyDataSubscribed: false, currentView: 'tags', ppsList: []}
+        this.state = { legacyDataSubscribed: false, currentView: 'tags', ppsList: [] }
         this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
     }
-     _subscribeLegacyData() {
+    _subscribeLegacyData() {
         this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
@@ -36,12 +36,12 @@ class PPSConfiguration extends React.Component {
          * Change the local state
          */
         if (JSON.stringify(this.state.ppsList) !== JSON.stringify(nextProps.ppsList)) {
-            this.setState({ppsList: nextProps.ppsList})
+            this.setState({ ppsList: nextProps.ppsList })
         }
-        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
-            this.setState(()=>{
-                return{legacyDataSubscribed:true}
-            },()=>{
+        if (!this.state.legacyDataSubscribed && nextProps.socketAuthorized) {
+            this.setState(() => {
+                return { legacyDataSubscribed: true }
+            }, () => {
                 this._subscribeLegacyData()
             })
         }
@@ -55,14 +55,14 @@ class PPSConfiguration extends React.Component {
      */
     handleClickOnNavigation(currentView) {
 
-        this.setState({currentView: currentView})
+        this.setState({ currentView: currentView })
     }
 
     handleClickOnNext() {
         if (this.state.currentView === "tags") {
-            this.setState({currentView: 'bins'})
+            this.setState({ currentView: 'bins' })
         } else if (this.state.currentView === 'bins') {
-            this.setState({currentView: 'groups'})
+            this.setState({ currentView: 'groups' })
         } else {
             // Do Nothing
         }
@@ -74,9 +74,9 @@ class PPSConfiguration extends React.Component {
      */
     handleClickOnBack() {
         if (this.state.currentView === "groups") {
-            this.setState({currentView: 'bins'})
+            this.setState({ currentView: 'bins' })
         } else if (this.state.currentView === 'bins') {
-            this.setState({currentView: 'tags'})
+            this.setState({ currentView: 'tags' })
         } else {
             // Do Nothing
         }
@@ -121,7 +121,7 @@ class PPSConfiguration extends React.Component {
         let self = this
         this.formatData(form_data)
         return this.props.createPPSProfile(form_data).then(function (results, b, c) {
-            return self.props.setPPSProfileCreated({profile: results.data.createPPSProfile})
+            return self.props.setPPSProfileCreated({ profile: results.data.createPPSProfile })
         })
     }
 
@@ -171,7 +171,7 @@ class PPSConfiguration extends React.Component {
         delete form_data.applied
         this.formatData(form_data)
         return this.props.saveProfile(form_data).then(function (a, b, c) {
-            return self.props.setPPSProfileSaved({profile: a.data.savePPSProfile})
+            return self.props.setPPSProfileSaved({ profile: a.data.savePPSProfile })
         })
     }
 
@@ -197,78 +197,78 @@ class PPSConfiguration extends React.Component {
         let self = this
         return (
             <div className="pps-configuration-container">
-                <Spinner isLoading={self.props.loading}/>
+                <Spinner isLoading={self.props.loading} />
                 {self.state.ppsList.length > 0 &&
-                <PPSList selectedPPS={self.props.selectedPPS} selectedProfile={self.props.selectedProfile}
-                         ppsList={self.state.ppsList}
-                         selectPPSProfileForConfiguration={self.props.selectPPSProfileForConfiguration.bind(self)}/>}
+                    <PPSList selectedPPS={self.props.selectedPPS} selectedProfile={self.props.selectedProfile}
+                        ppsList={self.state.ppsList}
+                        selectPPSProfileForConfiguration={self.props.selectPPSProfileForConfiguration.bind(self)} />}
                 <div className="pps-configuration-details-container">
                     <div className="pps-configuration-navigation-tabs">
                         <div
                             className={['navigation-tab', (this.state.currentView === 'tags' ? 'active' : '')].join(" ")}
                             onClick={this.handleClickOnNavigation.bind(this, 'tags')}><FormattedMessage
-                            id="pps.configuration.bins.tags.label"
-                            description="Assign tags to bin"
-                            defaultMessage="Assign tags to bin"/></div>
+                                id="pps.configuration.bins.tags.label"
+                                description="Assign tags to bin"
+                                defaultMessage="Assign tags to bin" /></div>
                         <div
                             className={['navigation-tab', (this.state.currentView === 'bins' ? 'active' : '')].join(" ")}
                             onClick={this.handleClickOnNavigation.bind(this, 'bins')}><FormattedMessage
-                            id="pps.configuration.bins.activation.label"
-                            description="Bin active/inactive"
-                            defaultMessage="Bin active/inactive"/></div>
+                                id="pps.configuration.bins.activation.label"
+                                description="Bin active/inactive"
+                                defaultMessage="Bin active/inactive" /></div>
                         <div
                             className={['navigation-tab', (this.state.currentView === 'groups' ? 'active' : '')].join(" ")}
                             onClick={this.handleClickOnNavigation.bind(this, 'groups')}><FormattedMessage
-                            id="pps.configuration.group.activation.label"
-                            description="Bin group active/inactive"
-                            defaultMessage="Bin group active/inactive"/></div>
+                                id="pps.configuration.group.activation.label"
+                                description="Bin group active/inactive"
+                                defaultMessage="Bin group active/inactive" /></div>
                         <div className={['seat-description'].join(" ")}><FormattedMessage
                             id="pps.configuration.bins.frontView.label"
                             description="Front View"
-                            defaultMessage="Front View"/></div>
+                            defaultMessage="Front View" /></div>
                     </div>
                     <Bins selectedPPSBinGroup={this.props.selectedPPSBinGroup}
-                          selectedPPSBin={this.props.selectedPPSBin} selectedPPS={this.props.selectedPPS}
-                          selectedProfile={this.props.selectedProfile}
-                          currentView={this.state.currentView}/> {/* "currentView" will bes used to set the width of bins*/}
-                    {this.state.currentView === 'tags' && <Tags selectedPPSBin={this.props.selectedPPSBin}/>}
+                        selectedPPSBin={this.props.selectedPPSBin} selectedPPS={this.props.selectedPPS}
+                        selectedProfile={this.props.selectedProfile}
+                        currentView={this.state.currentView} /> {/* "currentView" will bes used to set the width of bins*/}
+                    {this.state.currentView === 'tags' && <Tags selectedPPSBin={this.props.selectedPPSBin} />}
 
 
                 </div>
                 {this.props.selectedPPS && <div className="pps-configuration-actions-container">
                     <button onClick={self.cancelProfileChanges.bind(self)} className="pps-bin-cancel-button">
                         <FormattedMessage id="pps.configuration.buttons.cancel.text"
-                                          description="CANCEL"
-                                          defaultMessage="CANCEL"/></button>
+                            description="CANCEL"
+                            defaultMessage="CANCEL" /></button>
                     {this.state.currentView !== "groups" &&
-                    <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">
-                        <FormattedMessage id="pps.configuration.buttons.next.text"
-                                          description="NEXT"
-                                          defaultMessage="NEXT"/></button>}
+                        <button onClick={self.handleClickOnNext.bind(self)} className="pps-bin-next-button">
+                            <FormattedMessage id="pps.configuration.buttons.next.text"
+                                description="NEXT"
+                                defaultMessage="NEXT" /></button>}
                     {this.state.currentView === "groups" &&
-                    <button disabled={self.props.selectedPPS.pps_profiles.filter(function (profile) {
-                        return profile.requested
-                    }).length > 0 || self.props.selectedPPS.pps_status === PPS_STATUS_FCLOSE || self.props.selectedPPS.requested_status === PPS_STATUS_FCLOSE}
+                        <button disabled={self.props.selectedPPS.pps_profiles.filter(function (profile) {
+                            return profile.requested
+                        }).length > 0 || self.props.selectedPPS.pps_status === PPS_STATUS_FCLOSE || self.props.selectedPPS.requested_status === PPS_STATUS_FCLOSE}
                             onClick={self.saveAndApplyProfileConfirmation.bind(self)}
                             className="pps-bin-save-apply-button"><FormattedMessage
-                        id="pps.configuration.buttons.saveApply.text"
-                        description="SAVE AND APPLY"
-                        defaultMessage="SAVE AND APPLY"/></button>}
+                                id="pps.configuration.buttons.saveApply.text"
+                                description="SAVE AND APPLY"
+                                defaultMessage="SAVE AND APPLY" /></button>}
                     {this.state.currentView !== "tags" &&
-                    <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">
-                        <FormattedMessage id="pps.configuration.buttons.back.text"
-                                          description="BACK"
-                                          defaultMessage="BACK"/></button>}
+                        <button onClick={self.handleClickOnBack.bind(self)} className="pps-bin-back-button">
+                            <FormattedMessage id="pps.configuration.buttons.back.text"
+                                description="BACK"
+                                defaultMessage="BACK" /></button>}
                     {this.state.currentView === "groups" &&
-                    <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage
-                        id="pps.configuration.buttons.saveNewProfile.text"
-                        description="SAVE AS NEW PROFILE"
-                        defaultMessage="SAVE AS NEW PROFILE"/></button>}
+                        <button onClick={self.createProfile.bind(self)} className="pps-bin-save-button"><FormattedMessage
+                            id="pps.configuration.buttons.saveNewProfile.text"
+                            description="SAVE AS NEW PROFILE"
+                            defaultMessage="SAVE AS NEW PROFILE" /></button>}
                     {this.state.currentView === "groups" &&
-                    <button disabled={self.props.selectedProfile.applied} onClick={self.saveProfile.bind(self, false)}
+                        <button disabled={self.props.selectedProfile.applied} onClick={self.saveProfile.bind(self, false)}
                             className="pps-bin-save-button"><FormattedMessage id="pps.configuration.buttons.save.text"
-                                                                              description="SAVE"
-                                                                              defaultMessage="SAVE"/></button>}
+                                description="SAVE"
+                                defaultMessage="SAVE" /></button>}
                 </div>}
 
             </div>
@@ -304,7 +304,7 @@ const PPS_LIST_QUERY = gql`
                     update_time
                     pps_bin_details {
                         bin_group_id
-                        breadth
+                        height
                         direction
                         enabled
                         length
@@ -346,7 +346,7 @@ const withQuery = graphql(PPS_LIST_QUERY, {
     props: (data) => ({
         ppsList: data.data.PPSList ? data.data.PPSList.list : []
     }),
-    options: ({match, location}) => ({
+    options: ({ match, location }) => ({
         variables: {},
         fetchPolicy: 'network-only'
     }),
@@ -378,7 +378,7 @@ const SELECTED_PPS_PROFILE = gql`
                 pps_bin_details {
                     bin_group_id
                     bin_tags
-                    breadth
+                    height
                     direction
                     enabled
                     length
@@ -399,7 +399,7 @@ const SELECTED_PPS_PROFILE = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -411,7 +411,7 @@ const SELECTED_PPS_PROFILE = gql`
         selectedPPSBin @client{
             bin_group_id
             bin_tags
-            breadth
+            height
             direction
             enabled
             length
@@ -465,9 +465,9 @@ const SELECT_PPS_PROFILE = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withSelectProfileMutations = graphql(SELECT_PPS_PROFILE, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         selectPPSProfileForConfiguration: function (state) {
-            return mutate({variables: {state: state}})
+            return mutate({ variables: { state: state } })
         },
     }),
 });
@@ -488,9 +488,9 @@ const SET_PPS_SPINNER = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withPPSSpinnerMutations = graphql(SET_PPS_SPINNER, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         setPPSConfigurationSpinner: function (state) {
-            mutate({variables: state})
+            mutate({ variables: state })
         },
     }),
 });
@@ -513,7 +513,7 @@ const SAVE_PROFILE_MUTATION = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -530,10 +530,10 @@ const SAVE_PROFILE_MUTATION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const savePPSProfileMutation = graphql(SAVE_PROFILE_MUTATION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         saveProfile: function (input) {
             return mutate({
-                variables: {input: input}
+                variables: { input: input }
             })
 
         },
@@ -562,7 +562,7 @@ const CREATE_PROFILE_MUTATION = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -580,10 +580,10 @@ const CREATE_PROFILE_MUTATION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const createPPSProfileMutation = graphql(CREATE_PROFILE_MUTATION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         createPPSProfile: function (input) {
             return mutate({
-                variables: {input: input}
+                variables: { input: input }
             })
 
         },
@@ -606,11 +606,11 @@ const SET_PPS_PROFILE_SAVED_MUTATION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withPPSProfileSavedMutations = graphql(SET_PPS_PROFILE_SAVED_MUTATION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         setPPSProfileSaved: function (state) {
             return mutate({
-                variables: {state: state},
-                refetchQueries: [{query: PPS_LIST_QUERY}]
+                variables: { state: state },
+                refetchQueries: [{ query: PPS_LIST_QUERY }]
             })
         },
     }),
@@ -632,11 +632,11 @@ const SET_PPS_PROFILE_CREATED_MUTATION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withPPSProfileCreatedMutations = graphql(SET_PPS_PROFILE_CREATED_MUTATION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         setPPSProfileCreated: function (state) {
             return mutate({
-                variables: {state: state},
-                refetchQueries: [{query: PPS_LIST_QUERY}]
+                variables: { state: state },
+                refetchQueries: [{ query: PPS_LIST_QUERY }]
             })
         },
     }),
@@ -657,27 +657,27 @@ const CANCEL_PROFILE_CHANGES_MUTATION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withCancelPPSProfileMutations = graphql(CANCEL_PROFILE_CHANGES_MUTATION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         cancelProfileChanges: function (state) {
             mutate({
-                variables: {state: state}
+                variables: { state: state }
             })
         },
     }),
 });
-const mapStateToProps = (state, ownProps)=>{
+const mapStateToProps = (state, ownProps) => {
     return {
-        controllers:state.sysControllersReducer.controllers || [],
-        hasDataChanged:state.sysControllersReducer.hasDataChanged,
+        controllers: state.sysControllersReducer.controllers || [],
+        hasDataChanged: state.sysControllersReducer.hasDataChanged,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
         wsSubscriptionData: state.recieveSocketActions.socketDataSubscriptionPacket
-        
+
     };
 }
-const mapDispatchToProps = (dispatch)=>{
-    return{
+const mapDispatchToProps = (dispatch) => {
+    return {
         initDataSentCall: function (data) {
-            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+            dispatch(setWsAction({ type: WS_ONSEND, data: data }));
         }
     }
 }
@@ -691,6 +691,6 @@ export default compose(
     savePPSProfileMutation,
     withPPSProfileSavedMutations,
     withCancelPPSProfileMutations,
-    createPPSProfileMutation)(connect(mapStateToProps,mapDispatchToProps)(PPSConfiguration));
+    createPPSProfileMutation)(connect(mapStateToProps, mapDispatchToProps)(PPSConfiguration));
 
 
