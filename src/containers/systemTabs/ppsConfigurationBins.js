@@ -143,7 +143,7 @@ class Bins extends React.Component {
         let y_array = self.props.selectedProfile.pps_bin_details.filter(function (bin) {
             return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
         }).map(function (bin) {
-            return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.breadth : 0
+            return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.height : 0
         }).sort(function (a, b) {
             return a - b
         });
@@ -299,7 +299,7 @@ class Bins extends React.Component {
                         left: bin.orig_cordinates[0] * container.x / total_x,
                         top: bin.orig_cordinates[1] * container.y / total_y,
                         width: bin.length * container.x / total_x,
-                        height: bin.breadth * container.y / total_y,
+                        height: bin.height * container.y / total_y,
                     }}>
 
                         {self.props.currentView === 'tags' && <div
