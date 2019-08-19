@@ -27,7 +27,7 @@ const ppsConfigurationState = {
     },
     resolvers: {
         Mutation: {
-            setSelectedProfile: (_, variables, {cache}) => {
+            setSelectedProfile: (_, variables, { cache }) => {
 
 
                 let selectedPPSProfile
@@ -52,43 +52,43 @@ const ppsConfigurationState = {
                 return null
 
             },
-            setSelectedBin: (_, variables, {cache}) => {
+            setSelectedBin: (_, variables, { cache }) => {
 
                 let previous = {}
                 previous.selectedPPSBin = variables.state.bin.pps_bin_id ? formatData(JSON.parse(JSON.stringify(variables.state.bin))) : null
                 /**
                  * TODO: Need to add bin id (The combination of PPS_id and Bin_id)
                  */
-                cache.writeData({data: {selectedPPSBin: previous.selectedPPSBin}});
+                cache.writeData({ data: { selectedPPSBin: previous.selectedPPSBin } });
                 return null
 
             },
 
 
-            setSelectedBinGroup: (_, variables, {cache}) => {
+            setSelectedBinGroup: (_, variables, { cache }) => {
 
 
-                cache.writeData({data: {selectedPPSBinGroup: variables.state.group}});
+                cache.writeData({ data: { selectedPPSBinGroup: variables.state.group } });
                 return null
 
             },
 
-            setClearSelectedBin: (_, variables, {cache}) => {
+            setClearSelectedBin: (_, variables, { cache }) => {
 
                 let previous = {}
                 previous.selectedPPSBin = null
-                cache.writeData({data: {selectedPPSBin: previous.selectedPPSBin}});
+                cache.writeData({ data: { selectedPPSBin: previous.selectedPPSBin } });
                 return null
 
             },
-            setPPSConfigurationSpinner: (_, variables, {cache}) => {
+            setPPSConfigurationSpinner: (_, variables, { cache }) => {
 
-                cache.writeData({data: {ppsConfigurationSpinner: variables.state}});
+                cache.writeData({ data: { ppsConfigurationSpinner: variables.state } });
                 return null
 
             },
 
-            addTagToSelectedBin: (_, variables, {cache}) => {
+            addTagToSelectedBin: (_, variables, { cache }) => {
                 let selected_tag = variables.state.tag
                 let selected_bin = JSON.parse(JSON.stringify(variables.state.bin))
 
@@ -105,7 +105,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -120,7 +120,7 @@ const ppsConfigurationState = {
 
 
                 `;
-                let previous = cache.readQuery({query}).selectedPPSProfile
+                let previous = cache.readQuery({ query }).selectedPPSProfile
 
                 previous.pps_bin_details.map(function (bin) {
                     if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
@@ -140,11 +140,11 @@ const ppsConfigurationState = {
                     return bin
                 })
 
-                cache.writeData({data: {selectedPPSProfile: previous, selectedPPSBin: selected_bin}});
+                cache.writeData({ data: { selectedPPSProfile: previous, selectedPPSBin: selected_bin } });
                 return null
 
             },
-            setPPSBinStatus: (_, variables, {cache}) => {
+            setPPSBinStatus: (_, variables, { cache }) => {
                 let bin_status = variables.state.enabled
                 let selected_bin = JSON.parse(JSON.stringify(variables.state.bin))
 
@@ -161,7 +161,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -176,7 +176,7 @@ const ppsConfigurationState = {
 
 
                 `;
-                let previous = cache.readQuery({query}).selectedPPSProfile
+                let previous = cache.readQuery({ query }).selectedPPSProfile
 
                 previous.pps_bin_details.map(function (bin) {
                     if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
@@ -186,11 +186,11 @@ const ppsConfigurationState = {
                     return bin
                 })
 
-                cache.writeData({data: {selectedPPSProfile: previous, selectedPPSBin: selected_bin}});
+                cache.writeData({ data: { selectedPPSProfile: previous, selectedPPSBin: selected_bin } });
                 return null
 
             },
-            setPPSBinGroupStatus: (_, variables, {cache}) => {
+            setPPSBinGroupStatus: (_, variables, { cache }) => {
                 let bin_group_status = variables.state.enabled
                 const query = gql`
                     query {
@@ -205,7 +205,7 @@ const ppsConfigurationState = {
                             pps_bin_details {
                                 bin_group_id
                                 bin_tags
-                                breadth
+                                height
                                 direction
                                 enabled
                                 length
@@ -225,8 +225,8 @@ const ppsConfigurationState = {
 
 
                 `;
-                let previous = cache.readQuery({query}).selectedPPSProfile
-                let selected_group = cache.readQuery({query}).selectedPPSBinGroup
+                let previous = cache.readQuery({ query }).selectedPPSProfile
+                let selected_group = cache.readQuery({ query }).selectedPPSBinGroup
 
                 previous.bin_group_details.map(function (group) {
                     if (group.bin_group_id === selected_group.bin_group_id) {
@@ -247,7 +247,7 @@ const ppsConfigurationState = {
             },
 
 
-            ppsProfileSavedMutation: (_, variables, {cache}) => {
+            ppsProfileSavedMutation: (_, variables, { cache }) => {
                 const query = gql`
                     query  {
 
@@ -266,7 +266,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
@@ -283,7 +283,7 @@ const ppsConfigurationState = {
 
                 `;
 
-                let selectedPPS = cache.readQuery({query}).selectedPPS
+                let selectedPPS = cache.readQuery({ query }).selectedPPS
                 let savedProfile = JSON.parse(JSON.stringify(variables.state.profile))
                 selectedPPS.pps_profiles.map(function (profile) {
                     if (profile.profile_name === savedProfile.profile_name) {
@@ -302,7 +302,7 @@ const ppsConfigurationState = {
             },
 
 
-            ppsProfileCreatedMutation: (_, variables, {cache}) => {
+            ppsProfileCreatedMutation: (_, variables, { cache }) => {
                 const query = gql`
                     query {
 
@@ -325,7 +325,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
@@ -342,7 +342,7 @@ const ppsConfigurationState = {
 
                 `;
 
-                let previous = cache.readQuery({query}).selectedPPS
+                let previous = cache.readQuery({ query }).selectedPPS
                 let createdProfile = JSON.parse(JSON.stringify(variables.state.profile))
                 previous.pps_profiles.push(formatData(createdProfile))
 
@@ -357,7 +357,7 @@ const ppsConfigurationState = {
             },
 
 
-            cancelPPSProfileChanges: (_, variables, {cache}) => {
+            cancelPPSProfileChanges: (_, variables, { cache }) => {
 
                 const query = gql`
                     query {
@@ -377,7 +377,7 @@ const ppsConfigurationState = {
                                 pps_bin_details {
                                     bin_group_id
                                     bin_tags
-                                    breadth
+                                    height
                                     direction
                                     enabled
                                     length
@@ -402,8 +402,8 @@ const ppsConfigurationState = {
 
 
                 `;
-                let selectedPPS = cache.readQuery({query}).selectedPPS
-                let already_selected_profile = cache.readQuery({query}).selectedPPSProfile
+                let selectedPPS = cache.readQuery({ query }).selectedPPS
+                let already_selected_profile = cache.readQuery({ query }).selectedPPSProfile
                 let selected_profile = JSON.parse(JSON.stringify(selectedPPS.pps_profiles.filter(function (profile) {
                     return profile.profile_name === already_selected_profile.profile_name
                 })[0]))
