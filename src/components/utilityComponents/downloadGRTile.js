@@ -56,6 +56,14 @@ class DownloadGRNTile extends React.Component {
     }
   }
 
+  _closeAndGenerateGRN() {
+    if (this.props.generateReport) {
+      this.props.closeAndGenerateReport(this.state.fileType, this.state.invoiceId);
+    } else {
+      throw new Error("Could not get the callback here!");
+    }
+  }
+
   _captureQuery(e) {
     if (e.target.value) {
       this.setState({ invoiceId: e.target.value });
@@ -111,12 +119,12 @@ class DownloadGRNTile extends React.Component {
         </div>
         {this.props.validatedInvoice
           ? <div className="gor-sku-error gor-utility-error-invoice">
-              <FormattedMessage
-                id="utility.downloadGRN.stnError"
-                description="Please enter correct STN number"
-                defaultMessage="Please enter correct STN number"
-              />
-            </div>
+            <FormattedMessage
+              id="utility.downloadGRN.stnError"
+              description="Please enter correct STN number"
+              defaultMessage="Please enter correct STN number"
+            />
+          </div>
           : ""}
         <UtilityDropDown
           items={fileType}
@@ -127,7 +135,25 @@ class DownloadGRNTile extends React.Component {
           changeMode={this._changeGRNFileType.bind(this)}
           currentState={currenFileType}
         />
+
         <div className="gor-utility-btn-wrap">
+          <button
+            onClick={this._closeAndGenerateGRN.bind(this)}
+            className={
+              this.state.invoiceId && this.state.fileType
+                ? "gor-download-button"
+                : "gor-download-button gor-disable-content"
+            }
+          >
+            <label>
+              <FormattedMessage
+                id="utility.cloaseAndDownloadGRN.head"
+                description="Close and Generate Report"
+                defaultMessage="Close and Generate Report"
+              />
+            </label>
+          </button>
+          <div style={{ "height": "5px" }}> </div>
           <button
             onClick={this._generateGRN.bind(this)}
             className={
