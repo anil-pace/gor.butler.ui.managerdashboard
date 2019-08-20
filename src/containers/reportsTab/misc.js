@@ -7,13 +7,20 @@ import {
   GR_REPORT_URL,
   CLOSE_GR_REPORT_URL
 } from "../../constants/configConstants";
+
+import {
+  authLoginData,
+  setLoginSpinner,
+  setUsername
+} from '../../actions/loginAction'
+
 import { connect } from "react-redux";
 import { getGRdata, validateInvoiceID } from "../../actions/utilityActions";
 import { setInventoryReportSpinner } from "../../actions/spinnerAction";
 import {
   GET,
   POST,
-  PUT,
+  APP_JSON,
   GR_REPORT_RESPONSE,
   INVENTORY_REPORT_RESPONSE,
   WS_ONSEND
@@ -59,13 +66,17 @@ class UtilityTab extends React.Component {
       throw new Error("Did not receive the Invoice id for GRN generation!");
     }
     var url = CLOSE_GR_REPORT_URL + invoiceId;
+
     let data = {
       url: url,
       method: POST,
       sync: true,
       token: this.props.auth_token,
       cause: GR_REPORT_RESPONSE,
+      accept: APP_JSON
     };
+    this.props.setLoginSpinner(true)
+    this.props.setInventoryReportSpinner(true);
     this.props.getGRdata(data);
     this.props.validateInvoiceID(false);
   }
@@ -224,7 +235,10 @@ var mapDispatchToProps = function (dispatch) {
     },
     initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
-    }
+    },
+    setLoginSpinner: function (data) {
+      dispatch(setLoginSpinner(data))
+    },
   };
 };
 UtilityTab.contextTypes = {
