@@ -145,7 +145,7 @@ export const GR_REPORT_URL =
   API_URL + '/platform-dashboard/report/generate-report';
 
 export const CLOSE_GR_REPORT_URL =
-  API_GATEWAY + '/sr-service/platform-srms/service-request/multi-system/close' + '?externalServiceRequestId='
+  API_GATEWAY + '/sr-service/platform-srms/service-request/multi-system/close?externalServiceRequestId='
 
 export const AUDIT_PAUSE_URL = API_URL + '/audit/pause/';
 export const AUDIT_DUPLICATE_URL = API_URL + '';

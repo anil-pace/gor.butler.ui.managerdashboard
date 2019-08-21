@@ -13,7 +13,7 @@ import { setInventoryReportSpinner } from "../../actions/spinnerAction";
 import {
   GET,
   POST,
-  PUT,
+  APP_JSON,
   GR_REPORT_RESPONSE,
   INVENTORY_REPORT_RESPONSE,
   WS_ONSEND
@@ -25,6 +25,7 @@ import {
   setWsAction
 } from "./../../actions/socketActions";
 import { wsOverviewData } from "./../../constants/initData.js";
+import { setLoginSpinner } from '../../actions/loginAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -65,7 +66,9 @@ class UtilityTab extends React.Component {
       sync: true,
       token: this.props.auth_token,
       cause: GR_REPORT_RESPONSE,
+      accept: APP_JSON
     };
+    this.props.setLoginSpinner(true)
     this.props.getGRdata(data);
     this.props.validateInvoiceID(false);
   }
@@ -224,6 +227,9 @@ var mapDispatchToProps = function (dispatch) {
     },
     initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+    },
+    setLoginSpinner: function (data) {
+      dispatch(setLoginSpinner(data))
     }
   };
 };
