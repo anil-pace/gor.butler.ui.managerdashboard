@@ -154,22 +154,7 @@ class DownloadGRNTile extends React.Component {
             </label>
           </button>
           <div style={{ "height": "5px" }}> </div>
-          <button
-            onClick={this._generateGRN.bind(this)}
-            className={
-              this.state.invoiceId && this.state.fileType
-                ? "gor-download-button"
-                : "gor-download-button gor-disable-content"
-            }
-          >
-            <label>
-              <FormattedMessage
-                id="utility.downloadGRN.head"
-                description="Generate Report"
-                defaultMessage="Generate Report"
-              />
-            </label>
-          </button>
+
         </div>
       </div>
     );

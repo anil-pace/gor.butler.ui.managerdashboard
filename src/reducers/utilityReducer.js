@@ -20,13 +20,13 @@ export function utilityValidations(state = {}, action) {
     switch (action.type) {
         case INVOICE_VALIDATION:
             var res = action.data;
-            if (res.alert_data) {
+            if (res === true) {
                 return Object.assign({}, state, {
-                    invalidInvoice: true
+                    invalidInvoice: false
                 });
             } else {
                 return Object.assign({}, state, {
-                    invalidInvoice: false
+                    invalidInvoice: true
                 });
             }
         case MASTER_UPLOAD_PROCESSING:
@@ -82,11 +82,11 @@ export function utilityValidations(state = {}, action) {
             });
 
         case REPORTS_HISTORY:
-            return Object.assign({}, state,{
+            return Object.assign({}, state, {
                 reportsHistory: action.data.data || []
             });
         case GRN_HISTORY:
-            return Object.assign({}, state,{
+            return Object.assign({}, state, {
                 grnHistory: action.data.data || []
             });
 
