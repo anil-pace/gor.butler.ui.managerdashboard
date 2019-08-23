@@ -1,40 +1,43 @@
-import React from "react";
-import UtilityTile from "../../components/utilityComponents/utilityTile";
-import DownloadReportTile from "../../components/utilityComponents/downloadReportsTile";
-import DownloadGRNTile from "../../components/utilityComponents/downloadGRTile";
+import React from 'react';
+import UtilityTile from '../../components/utilityComponents/utilityTile';
+import DownloadReportTile from '../../components/utilityComponents/downloadReportsTile';
+import DownloadGRNTile from '../../components/utilityComponents/downloadGRTile';
 import {
   INVENTORY_REPORT_URL,
-  GR_REPORT_URL
-} from "../../constants/configConstants";
-import { connect } from "react-redux";
-import { getGRdata, validateInvoiceID } from "../../actions/utilityActions";
-import { setInventoryReportSpinner } from "../../actions/spinnerAction";
+  GR_REPORT_URL,
+  CLOSE_GR_REPORT_URL
+} from '../../constants/configConstants';
+import { connect } from 'react-redux';
+import { getGRdata, validateInvoiceID } from '../../actions/utilityActions';
+import { setInventoryReportSpinner } from '../../actions/spinnerAction';
 import {
   GET,
   POST,
+  APP_JSON,
   GR_REPORT_RESPONSE,
   INVENTORY_REPORT_RESPONSE,
   WS_ONSEND
-} from "../../constants/frontEndConstants";
+} from '../../constants/frontEndConstants';
 
-import { defineMessages } from "react-intl";
+import { defineMessages } from 'react-intl';
 import {
   updateSubscriptionPacket,
   setWsAction
-} from "./../../actions/socketActions";
-import { wsOverviewData } from "./../../constants/initData.js";
+} from './../../actions/socketActions';
+import { wsOverviewData } from './../../constants/initData.js';
+import { setLoginSpinner } from '../../actions/loginAction';
 
 //Mesages for internationalization
 const messages = defineMessages({
   downloadReportsHead: {
-    id: "utility.downloadReport.head",
-    description: "Download Reports",
-    defaultMessage: "Download Reports"
+    id: 'utility.downloadReport.head',
+    description: 'Download Reports',
+    defaultMessage: 'Download Reports'
   },
   goodsRcvdNotesHead: {
-    id: "utility.goodsRcvdNotes.head",
-    description: "Goods Received Notes",
-    defaultMessage: "Goods Received Notes"
+    id: 'utility.goodsRcvdNotes.head',
+    description: 'Goods Received Notes',
+    defaultMessage: 'Goods Received Notes'
   }
 });
 
@@ -48,23 +51,45 @@ class UtilityTab extends React.Component {
     };
   }
 
+  _closeAndGenerateReport(reqFileType, invoiceId) {
+    var fileType = 'csv';
+    if (reqFileType) {
+      fileType = reqFileType;
+    }
+    if (!invoiceId) {
+      throw new Error('Did not receive the Invoice id for GRN generation!');
+    }
+    var url = CLOSE_GR_REPORT_URL + invoiceId;
+    let data = {
+      url: url,
+      method: POST,
+      sync: true,
+      token: this.props.auth_token,
+      cause: GR_REPORT_RESPONSE,
+      accept: APP_JSON
+    };
+    this.props.setLoginSpinner(true);
+    this.props.getGRdata(data);
+    this.props.validateInvoiceID(false);
+  }
+
   _generateReport(reqFileType) {
-    let fileType = "csv";
+    let fileType = 'csv';
     if (reqFileType) {
       fileType = reqFileType;
     }
 
     let url =
       INVENTORY_REPORT_URL +
-      "&user=" +
+      '&user=' +
       this.props.username +
-      "&sync=false&format=" +
+      '&sync=false&format=' +
       fileType;
     let data = {
       url: url,
       method: POST,
       token: this.props.auth_token,
-      responseType: "arraybuffer",
+      responseType: 'arraybuffer',
       cause: INVENTORY_REPORT_RESPONSE
     };
     this.props.setInventoryReportSpinner(true);
@@ -78,21 +103,21 @@ class UtilityTab extends React.Component {
   }
 
   _generateGRN(reqFileType, invoiceId) {
-    var fileType = "csv";
+    var fileType = 'csv';
     if (reqFileType) {
       fileType = reqFileType;
     }
     if (!invoiceId) {
-      throw new Error("Did not receive the Invoice id for GRN generation!");
+      throw new Error('Did not receive the Invoice id for GRN generation!');
     }
     var url =
-      GR_REPORT_URL + "/" + invoiceId + "?sync=false&format=" + fileType;
+      GR_REPORT_URL + '/' + invoiceId + '?sync=false&format=' + fileType;
     let data = {
       url: url,
       method: GET,
       token: this.props.auth_token,
       cause: GR_REPORT_RESPONSE,
-      responseType: "arraybuffer"
+      responseType: 'arraybuffer'
     };
     this.props.getGRdata(data);
     this.props.validateInvoiceID(false);
@@ -112,7 +137,7 @@ class UtilityTab extends React.Component {
 
   _subscribeData() {
     let updatedWsSubscription = this.props.wsSubscriptionData;
-    this.props.initDataSentCall(updatedWsSubscription["default"]);
+    this.props.initDataSentCall(updatedWsSubscription['default']);
     this.props.updateSubscriptionPacket(updatedWsSubscription);
   }
 
@@ -134,9 +159,9 @@ class UtilityTab extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{ display: 'flex', 'flex-direction': 'row' }}>
         {show_inventory_report ? (
-          <div>
+          <div style={{ width: '25%' }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.downloadReportsHead
@@ -150,7 +175,7 @@ class UtilityTab extends React.Component {
           </div>
         ) : null}
         {show_gr_report ? (
-          <div>
+          <div style={{ width: '25%', marginLeft: '2%' }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
@@ -159,6 +184,7 @@ class UtilityTab extends React.Component {
             >
               <DownloadGRNTile
                 validatedInvoice={this.props.validatedInvoice}
+                closeAndGenerateReport={this._closeAndGenerateReport.bind(this)}
                 generateReport={this._generateGRN.bind(this)}
                 timeOffset={this.props.timeOffset}
               />
@@ -201,6 +227,9 @@ var mapDispatchToProps = function(dispatch) {
     },
     initDataSentCall: function(data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+    },
+    setLoginSpinner: function(data) {
+      dispatch(setLoginSpinner(data));
     }
   };
 };
