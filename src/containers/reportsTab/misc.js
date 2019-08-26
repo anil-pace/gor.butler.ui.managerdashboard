@@ -70,7 +70,6 @@ class UtilityTab extends React.Component {
     };
     this.props.setLoginSpinner(true)
     this.props.getGRdata(data);
-    this.props.validateInvoiceID(false);
   }
 
   _generateReport(reqFileType) {

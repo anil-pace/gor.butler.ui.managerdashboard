@@ -114,6 +114,7 @@ import {
   g024,
   REQUEST_REPORT_SUCCESS,
   REQUEST_REPORT_FAILURE,
+  INCORRECT_STN_NUMBER,
   ITEM_RECALL_SUCCESS,
   INVALID_SKUID
 } from '../constants/messageConstants'
@@ -331,9 +332,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
     case GR_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
       store.dispatch(validateInvoiceID(res))
-      store.dispatch(
-        notifySuccess(getFormattedMessages('grnGenerated', res.data))
-      )
+      if(res === true) {
+        store.dispatch(
+          notifySuccess(getFormattedMessages('grnGenerated', res.data))
+        )
+      }else {
+        store.dispatch(notifyFail(INCORRECT_STN_NUMBER));
+      }
       break
     case INVENTORY_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
