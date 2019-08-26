@@ -19,9 +19,9 @@ import {
 export function utilityValidations(state = {}, action) {
     switch (action.type) {
         case INVOICE_VALIDATION:
-            var res = action.data;
-            if (res === true) {
-                return Object.assign({}, state, {
+            var res = action.data === true ? action.data : false;
+            if (res && res === true) {
+                return Object.assign({},state, {
                     invalidInvoice: false
                 });
             } else {
