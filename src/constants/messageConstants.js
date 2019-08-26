@@ -270,6 +270,9 @@ export const REQUEST_REPORT_SUCCESS = (<FormattedMessage id="operationsLog.repor
       defaultMessage='Request successfully generated. Kindly check the Download Tab'/>)
 export const REQUEST_REPORT_FAILURE = (<FormattedMessage id="operationsLog.reportRequest.failure" description='Status text for zone' 
       defaultMessage='Error creating request'/>)
+export const INCORRECT_STN_NUMBER = (<FormattedMessage id="miscReports.stnNumRequest.failure" description='Incorrect STN Number' 
+      defaultMessage='Error in closing STN'/>)
+      
 
 export const ZONE_SUB_STATUS_INTL_MESSAGE={
       zone_pause:(<FormattedMessage id="zoning.substatus.action.zone_pause" description='Status text for zone' 
