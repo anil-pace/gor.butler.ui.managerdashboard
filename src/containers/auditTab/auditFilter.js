@@ -22,6 +22,7 @@ import {
   TO_DATE,
   NOT_YET_STARTED,
   TO_BE_RESOLVED,
+  REJECTED, //audit_rejected
   AUDIT_PAUSED,
   AUDIT_TYPE,
   AUDIT_COMPLETED,
@@ -215,6 +216,15 @@ class AuditFilter extends React.Component {
           <FormattedMessage
             id='audit.token2.inProgress'
             defaultMessage='In progress'
+          />
+        )
+      },
+      {
+        value: REJECTED,
+        label: (
+          <FormattedMessage
+            id='audit.token2.auditrejected'
+            defaultMessage='Rejected'
           />
         )
       },
