@@ -17,52 +17,46 @@ import {
  */
 //Name to be corrected
 export function utilityValidations(state = {}, action) {
-    switch (action.type) {
-        case INVOICE_VALIDATION:
-            var res = action.data === true ? action.data : false;
-            if (res && res === true) {
-                return Object.assign({},state, {
-                    invalidInvoice: false
-                });
-            } else {
-                return Object.assign({}, state, {
-                    invalidInvoice: true
-                });
-            }
-        case MASTER_UPLOAD_PROCESSING:
-            return Object.assign({}, state, {
-                isMasterUploadProcessing: action.data
-            });
-        case MASTER_UPLOAD_SUCCESS:
-            if (action.data.alert_data) {
-                return Object.assign({}, state, {
-                    masterDataUploadSuccess: false,
-                    errorCode: action.data.alert_data[0].code,
-                    maxsize: action.data.alert_data[0].details.max_size
-                });
-            } else {
-                let newFileUploaded = !state.newFileUploaded;
-                return Object.assign({}, state, {
-                    masterDataUploadSuccess: action.data.data ? true : false,
-                    newFileUploaded: newFileUploaded,
-                    errorCode: "",
-                    maxsize: ""
-                });
-            }
-        case UPLOAD_HISTORY:
-            var uploadHistChanged = !state.uploadHistChanged;
-            return Object.assign({}, state, {
-                uploadHistoryData: action.data || [],
-                uploadHistChanged: uploadHistChanged
-            });
-        case UPDATE_FILE_SIZE:
-            return Object.assign({}, state, {
-                maxfilesizelimit: action.data.file_content_length || []
-            });
-        case UTILITY_TAB_REFRESHED:
-            return Object.assign({}, state, {
-                utilityTabRefreshed: new Date()
-            });
+  switch (action.type) {
+    case INVOICE_VALIDATION:
+      var res = action.data;
+      return Object.assign({}, state, {
+        invalidInvoice: res
+      });
+    case MASTER_UPLOAD_PROCESSING:
+      return Object.assign({}, state, {
+        isMasterUploadProcessing: action.data
+      });
+    case MASTER_UPLOAD_SUCCESS:
+      if (action.data.alert_data) {
+        return Object.assign({}, state, {
+          masterDataUploadSuccess: false,
+          errorCode: action.data.alert_data[0].code,
+          maxsize: action.data.alert_data[0].details.max_size
+        });
+      } else {
+        let newFileUploaded = !state.newFileUploaded;
+        return Object.assign({}, state, {
+          masterDataUploadSuccess: action.data.data ? true : false,
+          newFileUploaded: newFileUploaded,
+          errorCode: '',
+          maxsize: ''
+        });
+      }
+    case UPLOAD_HISTORY:
+      var uploadHistChanged = !state.uploadHistChanged;
+      return Object.assign({}, state, {
+        uploadHistoryData: action.data || [],
+        uploadHistChanged: uploadHistChanged
+      });
+    case UPDATE_FILE_SIZE:
+      return Object.assign({}, state, {
+        maxfilesizelimit: action.data.file_content_length || []
+      });
+    case UTILITY_TAB_REFRESHED:
+      return Object.assign({}, state, {
+        utilityTabRefreshed: new Date()
+      });
 
     case STOCK_LEDGER_SKU_VALIDATION:
       var res = action.data;

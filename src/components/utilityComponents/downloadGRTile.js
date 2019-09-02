@@ -1,9 +1,6 @@
 import React from 'react';
 import { FormattedMessage, FormattedDate, defineMessages } from 'react-intl';
 import UtilityDropDown from './utilityDropdownWrap';
-import ListItem from '../list/listItem';
-import { GR_REPORT_URL } from '../../constants/configConstants';
-import { GET, GR_REPORT_RESPONSE } from '../../constants/frontEndConstants';
 
 const messages = defineMessages({
   downloadRprtsStatusHead: {
@@ -85,6 +82,26 @@ class DownloadGRNTile extends React.Component {
   }
 
   render() {
+    let errorMessage = '';
+    if (this.props.validatedInvoice === true) {
+      errorMessage = (
+        <FormattedMessage
+          id='utility.downloadGRN.putAwayInProgress'
+          description='Put away in Progress'
+          defaultMessage='Put away in Progress'
+        />
+      );
+    } else if (this.props.validatedInvoice === false) {
+      errorMessage = (
+        <FormattedMessage
+          id='utility.downloadGRN.putAwayInProgress'
+          description='Put away in Progress'
+          defaultMessage='Put away in Progress'
+        />
+      );
+    } else {
+      errorMessage = this.props.validatedInvoice.reason;
+    }
     const fileType = [
       { value: 'csv', label: 'Comma separated values (csv)' },
       {
@@ -116,19 +133,17 @@ class DownloadGRNTile extends React.Component {
             }}
             onChange={this._captureQuery.bind(this)}
           />
-          {this.props.validatedInvoice ? (
+          {this.props.validatedInvoice === 'ERR002' ||
+          this.props.validatedInvoice === false ? (
             <div className='gor-login-error' />
           ) : (
             ''
           )}
         </div>
-        {this.props.validatedInvoice ? (
+        {this.props.validatedInvoice.code === 'ERR002' ||
+        this.props.validatedInvoice === false ? (
           <div className='gor-sku-error gor-utility-error-invoice'>
-            <FormattedMessage
-              id='utility.downloadGRN.stnError'
-              description='Please enter correct STN number'
-              defaultMessage='Please enter correct STN number'
-            />
+            {errorMessage}
           </div>
         ) : (
           ''
