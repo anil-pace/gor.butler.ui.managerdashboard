@@ -1,30 +1,27 @@
-import React from "react";
-import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
-import UtilityDropDown from "./utilityDropdownWrap";
-import ListItem from "../list/listItem";
-import { GR_REPORT_URL } from "../../constants/configConstants";
-import { GET, GR_REPORT_RESPONSE } from "../../constants/frontEndConstants";
+import React from 'react';
+import { FormattedMessage, FormattedDate, defineMessages } from 'react-intl';
+import UtilityDropDown from './utilityDropdownWrap';
 
 const messages = defineMessages({
   downloadRprtsStatusHead: {
-    id: "utility.downloadGRN.status.heading",
-    description: "GRN Status",
-    defaultMessage: "GRN Status"
+    id: 'utility.downloadGRN.status.heading',
+    description: 'GRN Status',
+    defaultMessage: 'GRN Status'
   },
   downloadGrnStnPlaceHolder: {
-    id: "utility.downloadGRN.stnPlaceholder",
-    description: "Enter STN Number",
-    defaultMessage: "Enter STN Number"
+    id: 'utility.downloadGRN.stnPlaceholder',
+    description: 'Enter STN Number',
+    defaultMessage: 'Enter STN Number'
   },
   downloadGrnSelectFormatPlaceHolder: {
-    id: "utility.downloadGRN.formatPlaceholder",
-    description: "Enter STN Number",
-    defaultMessage: "Select File type"
+    id: 'utility.downloadGRN.formatPlaceholder',
+    description: 'Enter STN Number',
+    defaultMessage: 'Select File type'
   },
   downloadGrnLink: {
-    id: "utility.reportsHistory.clickToDownload",
-    description: "file name",
-    defaultMessage: "Click here to download "
+    id: 'utility.reportsHistory.clickToDownload',
+    description: 'file name',
+    defaultMessage: 'Click here to download '
   }
 });
 
@@ -52,15 +49,18 @@ class DownloadGRNTile extends React.Component {
     if (this.props.generateReport) {
       this.props.generateReport(this.state.fileType, this.state.invoiceId);
     } else {
-      throw new Error("Could not get the callback here!");
+      throw new Error('Could not get the callback here!');
     }
   }
 
   _closeAndGenerateGRN() {
     if (this.props.generateReport) {
-      this.props.closeAndGenerateReport(this.state.fileType, this.state.invoiceId);
+      this.props.closeAndGenerateReport(
+        this.state.fileType,
+        this.state.invoiceId
+      );
     } else {
-      throw new Error("Could not get the callback here!");
+      throw new Error('Could not get the callback here!');
     }
   }
 
@@ -82,11 +82,31 @@ class DownloadGRNTile extends React.Component {
   }
 
   render() {
+    let errorMessage = '';
+    if (this.props.validatedInvoice === true) {
+      errorMessage = (
+        <FormattedMessage
+          id='utility.downloadGRN.noError'
+          description=''
+          defaultMessage=''
+        />
+      );
+    } else if (this.props.validatedInvoice === false) {
+      errorMessage = (
+        <FormattedMessage
+          id='utility.downloadGRN.putAwayInProgress'
+          description='Put away in Progress'
+          defaultMessage='Put away in Progress'
+        />
+      );
+    } else {
+      errorMessage = this.props.validatedInvoice.reason;
+    }
     const fileType = [
-      { value: "csv", label: "Comma separated values (csv)" },
+      { value: 'csv', label: 'Comma separated values (csv)' },
       {
-        value: "xlsx",
-        label: "ExceL Spreadsheet (xlsx)"
+        value: 'xlsx',
+        label: 'ExceL Spreadsheet (xlsx)'
       }
     ];
 
@@ -95,16 +115,16 @@ class DownloadGRNTile extends React.Component {
       : null;
     return (
       <div>
-        <div className="gor-utility-invoice-h1">
+        <div className='gor-utility-invoice-h1'>
           <FormattedMessage
-            id="utility.downloadGRN.label"
-            description="STN number:"
-            defaultMessage="STN number:"
+            id='utility.downloadGRN.label'
+            description='STN number:'
+            defaultMessage='STN number:'
           />
         </div>
-        <div className="gor-audit-input-wrap gor-utility-invoice-wrap">
+        <div className='gor-audit-input-wrap gor-utility-invoice-wrap'>
           <input
-            className="gor-audit-input gor-input-ok"
+            className='gor-audit-input gor-input-ok'
             placeholder={this.context.intl.formatMessage(
               messages.downloadGrnStnPlaceHolder
             )}
@@ -113,22 +133,24 @@ class DownloadGRNTile extends React.Component {
             }}
             onChange={this._captureQuery.bind(this)}
           />
-          {this.props.validatedInvoice
-            ? <div className="gor-login-error" />
-            : ""}
+          {this.props.validatedInvoice.code === 'ERR002' ||
+          this.props.validatedInvoice === false ? (
+            <div className='gor-login-error' />
+          ) : (
+            ''
+          )}
         </div>
-        {this.props.validatedInvoice
-          ? <div className="gor-sku-error gor-utility-error-invoice">
-            <FormattedMessage
-              id="utility.downloadGRN.stnError"
-              description="Please enter correct STN number"
-              defaultMessage="Please enter correct STN number"
-            />
+        {this.props.validatedInvoice.code === 'ERR002' ||
+        this.props.validatedInvoice === false ? (
+          <div className='gor-sku-error gor-utility-error-invoice'>
+            {errorMessage}
           </div>
-          : ""}
+        ) : (
+          ''
+        )}
         <UtilityDropDown
           items={fileType}
-          dropdownLabel="File format"
+          dropdownLabel='File format'
           placeHolderText={this.context.intl.formatMessage(
             messages.downloadGrnSelectFormatPlaceHolder
           )}
@@ -136,25 +158,24 @@ class DownloadGRNTile extends React.Component {
           currentState={currenFileType}
         />
 
-        <div className="gor-utility-btn-wrap">
+        <div className='gor-utility-btn-wrap'>
           <button
             onClick={this._closeAndGenerateGRN.bind(this)}
             className={
               this.state.invoiceId && this.state.fileType
-                ? "gor-download-button"
-                : "gor-download-button gor-disable-content"
+                ? 'gor-download-button'
+                : 'gor-download-button gor-disable-content'
             }
           >
             <label>
               <FormattedMessage
-                id="utility.cloaseAndDownloadGRN.head"
-                description="Close and Generate Report"
-                defaultMessage="Close and Generate Report"
+                id='utility.cloaseAndDownloadGRN.head'
+                description='Close and Generate Report'
+                defaultMessage='Close and Generate Report'
               />
             </label>
           </button>
-          <div style={{ "height": "5px" }}> </div>
-
+          <div style={{ height: '5px' }}> </div>
         </div>
       </div>
     );
