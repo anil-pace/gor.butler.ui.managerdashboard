@@ -40,12 +40,6 @@ const InventoryHistorySubscription = gql`
                 items_picked
                 items_put
                 date
-                category_data {
-                    days_on_hand
-                    category_type
-                    cbm_used
-                    warehouse_utilization
-                }
                 __typename
             }
         }
@@ -271,12 +265,6 @@ const InventoryHistoryQuery = gql`
                 items_picked
                 items_put
                 date
-                category_data {
-                    days_on_hand
-                    category_type
-                    cbm_used
-                    warehouse_utilization
-                }
             }
         }
     }
