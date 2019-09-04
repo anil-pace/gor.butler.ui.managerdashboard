@@ -95,7 +95,7 @@
     "build-dev": " npm-run-all -p watch-css start-js",
     "build-prod": "npm run build-css && npm run post-css && react-scripts build",
     "start": "npm run translate && REACT_APP_FILE_EXT= npm run build-dev",
-    "build": "REACT_APP_FILE_EXT=.min npm run build-prod",
+    "build": "npm run translate && REACT_APP_FILE_EXT=.min npm run build-prod",
     "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "translate": "react-intl-cra './src/**/*.js' './src/translations/en-US.json' && node scripts/translate.js &&  node scripts/po2json.js"
