@@ -261,7 +261,7 @@ export function getFormattedMessages(action, values) {
     case 'DELETEDUSER':
       return (
         <FormattedMessage
-          id='notify.success.delete'
+          id='notify.success.userdeletion'
           description='Text for successfull user deletion'
           defaultMessage='User deleted successfully'
         />
@@ -289,7 +289,7 @@ export function getFormattedMessages(action, values) {
         ),
         desc: (
           <FormattedMessage
-            id='user.delete.fail'
+            id='user.edit.fail'
             description='Text for fail user edit'
             defaultMessage='Failed:"{description}" '
             values={{ description: values.description || '--' }}
