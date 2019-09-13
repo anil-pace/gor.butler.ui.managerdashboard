@@ -165,6 +165,7 @@ class UtilityTab extends React.Component {
               tileHead={this.context.intl.formatMessage(
                 messages.downloadReportsHead
               )}
+              additionalClass='width-100'
             >
               <DownloadReportTile
                 generateReport={this._generateReport.bind(this)}
@@ -179,6 +180,7 @@ class UtilityTab extends React.Component {
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
               )}
+              additionalClass='width-100'
               showFooter={false}
             >
               <DownloadGRNTile

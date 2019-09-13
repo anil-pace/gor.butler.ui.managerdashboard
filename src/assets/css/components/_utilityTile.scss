@@ -62,11 +62,14 @@
   min-height: calculateRem(320px);
   margin: 1% 0% 0% 1%;
   font-size: 0;
-  width: 23.7%;
+  width: 24.7%;
   position: relative;
   vertical-align: top;
   &.item-recall {
     width: 47%;
+  }
+  &.width-100 {
+    width: 100%;
   }
 }
 
