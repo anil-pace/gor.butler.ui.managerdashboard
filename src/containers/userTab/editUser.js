@@ -116,8 +116,8 @@ class EditUser extends React.Component {
       !confirmPswd &&
       !this.state.pwdView
     ) {
-      pswd = '__NOT__';
-      confirmPswd = '__NOT__';
+      pswd = '__NOT';
+      confirmPswd = '__NOT';
     } else if (!this._checkPwd()) {
       return;
     }
