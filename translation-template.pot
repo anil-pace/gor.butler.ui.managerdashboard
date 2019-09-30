@@ -4108,6 +4108,11 @@ msgstr ""
         msgid "Moving to dismount"
         msgstr ""
 
+        #: goto_barcode.task
+        msgctxt "goto_barcode.task"
+        msgid "goto barcode"
+        msgstr ""
+
         #: docked.task
         msgctxt "docked.task"
         msgid "Docked at"
