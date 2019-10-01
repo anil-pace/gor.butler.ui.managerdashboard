@@ -111,13 +111,9 @@ class EditUser extends React.Component {
 
     role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
 
-    if (
-      !pswd &&
-      !confirmPswd &&
-      !this.state.pwdView
-    ) {
-      pswd = '__NOT';
-      confirmPswd = '__NOT';
+    if (!pswd && !confirmPswd && !this.state.pwdView) {
+      pswd = '_NOT';
+      confirmPswd = '_NOT';
     } else if (!this._checkPwd()) {
       return;
     }
