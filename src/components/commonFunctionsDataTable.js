@@ -151,19 +151,57 @@ export const ActionCell=({rowIndex, data, columnKey,selEdit,selDel,mid, ...props
   </Cell>
 );
 
+function displayAuditMessage(diff){
+  let tooltip = "";
+  if(diff > 0){
+    tooltip = (<FormattedMessage id="auditMessages.extraQuantity"
+    description='Extra Quantity'
+    defaultMessage='Extra Quantity {diff}'
+    values={{
+      diff: " (" +Math.abs(diff)+ ")"
+    }}/>)
+  }
+  else if(diff < 0){
+    tooltip = (<FormattedMessage id="auditMessages.missingQuantity"
+    description='Missing Quantity'
+    defaultMessage='Missing Quantity {diff}'
+    values={{
+        diff: " (" +Math.abs(diff)+ ")"
+    }}/>)
+  }
+  else{
+    tooltip = ""
+  }
+  return tooltip;
+}
+
 export const TextCell=({rowIndex, data, columnKey,setClass, ...props})=>{
-
-  const childrenCell =  React.Children.map(props.children, child => {
-
-       return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
-        <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
-      ):("");
+  if(columnKey === "actual_quantity"){
+    let diff = data.newData[rowIndex].actual_quantity - data.newData[rowIndex].expected_quantity;
+    let tooltip = displayAuditMessage(diff);
+    return(
+      <div style={{"padding": "0px"}} className="gor-audit-resolve-packing-cell">
+        {tooltip !== ""? <span style={{"marginLeft": "40px", "marginTop":"10px"}} className="tooltiptext">{tooltip}</span> : <span></span>}
+        <Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
+          {data.getObjectAt(rowIndex)[columnKey]}
+        </Cell>
+      </div>
+    )
+  }
+  else{
+    const childrenCell =  React.Children.map(props.children, child => {
+      return data.getObjectAt(rowIndex)[props.childColumnKey] ?(
+       <span className={props.childrenClass}>{child}{data.getObjectAt(rowIndex)[props.childColumnKey]}</span>
+     ):("");
     });
-  return(<Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
-    {data.getObjectAt(rowIndex)[columnKey]}
-    {childrenCell}
-  </Cell>
-)};
+    return(
+        <Cell {...props}  className={data.getObjectAt(rowIndex)[setClass]}>
+      {data.getObjectAt(rowIndex)[columnKey]}
+      {childrenCell}
+    </Cell>
+    )
+  }
+};
 
 export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
     let listLength = data.newData[rowIndex].anamoly_info.length;
@@ -181,14 +219,34 @@ export const AuditPackingSlotIdCell = ({rowIndex, data, columnKey, setClass, ...
     )
 };
 
+
 export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,dataIndex,dataKey, ...props}) => {
     let listLength = data.newData[rowIndex].anamoly_info.length;
     let dataToDisplay=[]; 
     for(let i = 0; i < listLength; i++){
-        dataToDisplay.push(<div className="gor-audit-resolve-packing-cell">{data.getObjectAt(rowIndex).anamoly_info[i]?data.getObjectAt(rowIndex).anamoly_info[i][dataKey]:""}</div>)
-    }
+      if(dataKey === "actual_quantity"){
+        let diff  = data.newData[rowIndex].anamoly_info[i].actual_quantity - data.newData[rowIndex].anamoly_info[i].expected_quantity;
+        let tooltip = displayAuditMessage(diff);
 
-    return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
+        dataToDisplay.push(<div className="gor-audit-resolve-packing-cell">
+            {tooltip !== ""? 
+              <span style={{"marginLeft": "20px","marginTop": "-5px"}} 
+                    className="tooltiptext">{tooltip}
+              </span> : <span></span>} 
+            {data.getObjectAt(rowIndex).anamoly_info[i]?
+              data.getObjectAt(rowIndex).anamoly_info[i][dataKey]:
+              ""}</div>
+        )
+      }
+      else{
+        dataToDisplay.push(<div className="gor-audit-resolve-packing-cell">
+          {data.getObjectAt(rowIndex).anamoly_info[i]?
+            data.getObjectAt(rowIndex).anamoly_info[i][dataKey]:
+            ""}</div>)
+      }
+    }
+    return (
+    <Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
             <div>
                 <div className="gor-audit-resolve-packing-cell"/>
                 {dataToDisplay}
@@ -197,10 +255,7 @@ export const AuditPackingQuantityCell = ({rowIndex, data, columnKey, setClass,da
     )
 };
 
-
-
 export const AuditPackingStatusCell = ({rowIndex, data, columnKey, setClass, ...props}) => {
-
     return (<Cell {...props} className={data.getObjectAt(rowIndex)[setClass]}>
 
             <div>
