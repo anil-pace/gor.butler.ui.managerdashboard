@@ -165,7 +165,7 @@ class UtilityTab extends React.Component {
               tileHead={this.context.intl.formatMessage(
                 messages.downloadReportsHead
               )}
-              additionalClass="gor-width-100"
+              additionalClass='width-100'
             >
               <DownloadReportTile
                 generateReport={this._generateReport.bind(this)}
@@ -181,7 +181,7 @@ class UtilityTab extends React.Component {
                 messages.goodsRcvdNotesHead
               )}
               showFooter={false}
-              additionalClass="gor-width-100"
+              additionalClass='width-100'
             >
               <DownloadGRNTile
                 validatedInvoice={this.props.validatedInvoice}
