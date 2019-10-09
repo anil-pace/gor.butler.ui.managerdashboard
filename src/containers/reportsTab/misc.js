@@ -6,10 +6,10 @@ import {
   INVENTORY_REPORT_URL,
   GR_REPORT_URL,
   CLOSE_GR_REPORT_URL
-} from '../../constants/configConstants';
-import { connect } from 'react-redux';
-import { getGRdata, validateInvoiceID } from '../../actions/utilityActions';
-import { setInventoryReportSpinner } from '../../actions/spinnerAction';
+} from "../../constants/configConstants";
+import { connect } from "react-redux";
+import { getGRdata, validateInvoiceID } from "../../actions/utilityActions";
+import { setInventoryReportSpinner } from "../../actions/spinnerAction";
 import {
   GET,
   POST,
@@ -23,8 +23,8 @@ import { defineMessages } from 'react-intl';
 import {
   updateSubscriptionPacket,
   setWsAction
-} from './../../actions/socketActions';
-import { wsOverviewData } from './../../constants/initData.js';
+} from "./../../actions/socketActions";
+import { wsOverviewData } from "./../../constants/initData.js";
 import { setLoginSpinner } from '../../actions/loginAction';
 
 //Mesages for internationalization
@@ -52,12 +52,12 @@ class UtilityTab extends React.Component {
   }
 
   _closeAndGenerateReport(reqFileType, invoiceId) {
-    var fileType = 'csv';
+    var fileType = "csv";
     if (reqFileType) {
       fileType = reqFileType;
     }
     if (!invoiceId) {
-      throw new Error('Did not receive the Invoice id for GRN generation!');
+      throw new Error("Did not receive the Invoice id for GRN generation!");
     }
     var url = CLOSE_GR_REPORT_URL + invoiceId;
     let data = {
@@ -68,7 +68,7 @@ class UtilityTab extends React.Component {
       cause: GR_REPORT_RESPONSE,
       accept: APP_JSON
     };
-    this.props.setLoginSpinner(true);
+    this.props.setLoginSpinner(true)
     this.props.getGRdata(data);
   }
 
@@ -158,9 +158,9 @@ class UtilityTab extends React.Component {
     }
 
     return (
-      <div style={{ display: 'flex', 'flex-direction': 'row' }}>
+      <div style={{ "display": "flex", "flex-direction": "row" }}>
         {show_inventory_report ? (
-          <div style={{ width: '25%' }}>
+          <div style={{ "width": "25%" }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.downloadReportsHead
@@ -175,7 +175,7 @@ class UtilityTab extends React.Component {
           </div>
         ) : null}
         {show_gr_report ? (
-          <div style={{ width: '25%', marginLeft: '2%' }}>
+          <div style={{ "width": "25%", marginLeft: "2%" }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
@@ -212,25 +212,25 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    getGRdata: function(data) {
+    getGRdata: function (data) {
       dispatch(getGRdata(data));
     },
-    validateInvoiceID: function(data) {
+    validateInvoiceID: function (data) {
       dispatch(validateInvoiceID(data));
     },
-    setInventoryReportSpinner: function(data) {
+    setInventoryReportSpinner: function (data) {
       dispatch(setInventoryReportSpinner(data));
     },
-    updateSubscriptionPacket: function(data) {
+    updateSubscriptionPacket: function (data) {
       dispatch(updateSubscriptionPacket(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     },
-    setLoginSpinner: function(data) {
-      dispatch(setLoginSpinner(data));
+    setLoginSpinner: function (data) {
+      dispatch(setLoginSpinner(data))
     }
   };
 };

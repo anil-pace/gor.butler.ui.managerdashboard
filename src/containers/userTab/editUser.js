@@ -1,12 +1,12 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { userRequest } from '../../actions/userActions';
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import { userRequest } from '../../actions/userActions'
 import {
   validateName,
   validatePassword,
   resetForm
-} from '../../actions/validationActions';
-import { connect } from 'react-redux';
+} from '../../actions/validationActions'
+import { connect } from 'react-redux'
 import {
   ERROR,
   GET_ROLES,
@@ -15,41 +15,41 @@ import {
   GET,
   APP_JSON,
   PUT
-} from '../../constants/frontEndConstants';
-import { BUTLER_SUPERVISOR } from '../../constants/backEndConstants';
-import { ROLE_URL, HEADER_URL } from '../../constants/configConstants';
-import FieldError from '../../components/fielderror/fielderror';
-import UserRoles from './userRoles';
-import { nameStatus, passwordStatus } from '../../utilities/fieldCheck';
-import { getFormattedMessages } from '../../utilities/getFormattedMessages';
-import { notifyfeedback, notifyFail } from './../../actions/validationActions';
-import { setNotification } from '../../actions/notificationAction';
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
-import { EDIT_USER_MUTATION } from './queries/userTabQueries';
+} from '../../constants/frontEndConstants'
+import { BUTLER_SUPERVISOR } from '../../constants/backEndConstants'
+import { ROLE_URL, HEADER_URL } from '../../constants/configConstants'
+import FieldError from '../../components/fielderror/fielderror'
+import UserRoles from './userRoles'
+import { nameStatus, passwordStatus } from '../../utilities/fieldCheck'
+import { getFormattedMessages } from '../../utilities/getFormattedMessages'
+import { notifyfeedback, notifyFail } from './../../actions/validationActions'
+import { setNotification } from '../../actions/notificationAction'
+import { graphql, compose } from 'react-apollo'
+import gql from 'graphql-tag'
+import { EDIT_USER_MUTATION } from './queries/userTabQueries'
 
 class EditUser extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { pwdView: false };
+    super(props)
+    this.state = { pwdView: false }
   }
 
   removeThisModal() {
-    this.props.resetForm();
-    this.props.removeModal();
+    this.props.resetForm()
+    this.props.removeModal()
   }
 
   _checkName() {
     let firstname = this.firstName.value,
       lastname = this.lastName.value,
-      nameInfo;
-    nameInfo = nameStatus(firstname, lastname);
-    this.props.validateName(nameInfo);
-    return nameInfo.type;
+      nameInfo
+    nameInfo = nameStatus(firstname, lastname)
+    this.props.validateName(nameInfo)
+    return nameInfo.type
   }
 
   _handleAnchorClick() {
-    this.setState({ pwdView: true });
+    this.setState({ pwdView: true })
   }
 
   _checkPwd() {
@@ -57,20 +57,20 @@ class EditUser extends React.Component {
       confirmPswd = this.confirmPswd.value,
       givenRole,
       passwordInfo,
-      roleSelected;
-    givenRole = this.props.roleName;
-    roleSelected = this.props.roleSet ? this.props.roleSet : givenRole;
+      roleSelected
+    givenRole = this.props.roleName
+    roleSelected = this.props.roleSet ? this.props.roleSet : givenRole
 
-    let len = givenRole.length;
+    let len = givenRole.length
 
     for (let i = 0; i < len; i++) {
       if (roleSelected.indexOf(givenRole[i]) > -1) {
-        this.setState({ pwdView: true });
+        this.setState({ pwdView: true })
       }
     }
-    passwordInfo = passwordStatus(pswd, confirmPswd, roleSelected);
-    this.props.validatePassword(passwordInfo);
-    return passwordInfo.type;
+    passwordInfo = passwordStatus(pswd, confirmPswd, roleSelected)
+    this.props.validatePassword(passwordInfo)
+    return passwordInfo.type
   }
 
   _getId(roleArr) {
@@ -78,44 +78,44 @@ class EditUser extends React.Component {
       let roles = this.props.roleList,
         roleIdArr = [],
         roleArrLen,
-        len;
-      len = roles.length;
-      roleArrLen = roleArr.length;
+        len
+      len = roles.length
+      roleArrLen = roleArr.length
       for (let j = 0; j < roleArrLen; j++) {
         for (let i = 0; i < len; i++) {
           if (roles[i].name == roleArr[j]) {
-            roleIdArr.push({ id: roles[i].id });
+            roleIdArr.push({ id: roles[i].id })
           }
         }
       }
-      return roleIdArr;
+      return roleIdArr
     } else {
-      return null;
+      return null
     }
   }
 
   _handleEditUser(e) {
-    e.preventDefault();
-    let pswd, confirmPswd, role, firstname, lastname, givenRole, email;
+    e.preventDefault()
+    let pswd, confirmPswd, role, firstname, lastname, givenRole, email
 
-    firstname = this.firstName.value;
-    lastname = this.lastName.value;
-    pswd = this.pswd.value;
-    confirmPswd = this.confirmPswd.value;
-    email = this.props.userName + '@gor.com';
+    firstname = this.firstName.value
+    lastname = this.lastName.value
+    pswd = this.pswd.value
+    confirmPswd = this.confirmPswd.value
+    email = this.props.userName + '@gor.com'
 
     if (!this.props.nameCheck.type) {
-      if (!this._checkName()) return;
+      if (!this._checkName()) return
     }
-    givenRole = this._getId(this.props.roleName);
+    givenRole = this._getId(this.props.roleName)
 
-    role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole;
+    role = this.props.roleSet ? this._getId(this.props.roleSet) : givenRole
 
     if (!pswd && !confirmPswd && !this.state.pwdView) {
-      pswd = '_NOT';
-      confirmPswd = '_NOT';
+      pswd = '_NOT'
+      confirmPswd = '_NOT'
     } else if (!this._checkPwd()) {
-      return;
+      return
     }
     let graphql_data = {
       id: this.props.id,
@@ -126,15 +126,15 @@ class EditUser extends React.Component {
       email: email,
       password_confirm: confirmPswd,
       authorities: role
-    };
-    let editurl = HEADER_URL + '/' + this.props.id;
-    this.props.editUser(graphql_data);
+    }
+    let editurl = HEADER_URL + '/' + this.props.id
+    this.props.editUser(graphql_data)
     // this.props.userRequest(userData);
-    this.removeThisModal();
+    this.removeThisModal()
   }
 
   render() {
-    let tick = <div className='gor-tick' />;
+    let tick = <div className='gor-tick' />
     return (
       <div>
         <div className='gor-modal-content'>
@@ -162,7 +162,7 @@ class EditUser extends React.Component {
               action='#'
               id='editUserForm'
               ref={node => {
-                this.editUserForm = node;
+                this.editUserForm = node
               }}
               onSubmit={e => this._handleEditUser(e)}
             >
@@ -196,7 +196,7 @@ class EditUser extends React.Component {
                     placeholder={this.props.userName}
                     id='userid'
                     ref={node => {
-                      this.userId = node;
+                      this.userId = node
                     }}
                     disabled
                   />
@@ -226,7 +226,7 @@ class EditUser extends React.Component {
                       defaultValue={this.props.first}
                       id='firstname'
                       ref={node => {
-                        this.firstName = node;
+                        this.firstName = node
                       }}
                     />
                   </div>
@@ -250,7 +250,7 @@ class EditUser extends React.Component {
                       defaultValue={this.props.last}
                       id='lastname'
                       ref={node => {
-                        this.lastName = node;
+                        this.lastName = node
                       }}
                     />
                   </div>
@@ -318,7 +318,7 @@ class EditUser extends React.Component {
                           : ''
                       }
                       ref={node => {
-                        this.pswd = node;
+                        this.pswd = node
                       }}
                     />
                     {this.props.passwordCheck.type ? tick : ''}
@@ -341,7 +341,7 @@ class EditUser extends React.Component {
                       id='confirmPswd'
                       onChange={this._checkPwd.bind(this)}
                       ref={node => {
-                        this.confirmPswd = node;
+                        this.confirmPswd = node
                       }}
                     />
                     {this.props.passwordCheck.type ? (
@@ -395,7 +395,7 @@ class EditUser extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 function mapStateToProps(state, ownProps) {
@@ -403,34 +403,34 @@ function mapStateToProps(state, ownProps) {
     nameCheck: state.appInfo.nameInfo || {},
     passwordCheck: state.appInfo.passwordInfo || {},
     roleSet: state.appInfo.roleSet || null
-  };
+  }
 }
 
 var mapDispatchToProps = function(dispatch) {
   return {
     userRequest: function(data) {
-      dispatch(userRequest(data));
+      dispatch(userRequest(data))
     },
     validateName: function(data) {
-      dispatch(validateName(data));
+      dispatch(validateName(data))
     },
     validatePassword: function(data) {
-      dispatch(validatePassword(data));
+      dispatch(validatePassword(data))
     },
     resetForm: function() {
-      dispatch(resetForm());
+      dispatch(resetForm())
     },
     notifyfeedback: function(data) {
-      dispatch(notifyfeedback(data));
+      dispatch(notifyfeedback(data))
     },
     setNotification: function(data) {
-      dispatch(setNotification(data));
+      dispatch(setNotification(data))
     },
     notifyFail: function(data) {
-      dispatch(notifyFail(data));
+      dispatch(notifyFail(data))
     }
-  };
-};
+  }
+}
 const withMutations = graphql(EDIT_USER_MUTATION, {
   props: ({ ownProps, mutate }) => ({
     editUser: ({
@@ -455,18 +455,18 @@ const withMutations = graphql(EDIT_USER_MUTATION, {
           }
         },
         update: (proxy, { data: { editUser } }) => {
-          let msg = {};
+          let msg = {}
           if (editUser.firstname && editUser.lastname) {
-            msg = getFormattedMessages('EDITEDUSER', editUser);
-            ownProps.notifyfeedback(msg);
+            msg = getFormattedMessages('EDITEDUSER', editUser)
+            ownProps.notifyfeedback(msg)
           } else {
-            msg = getFormattedMessages('EDITEDUSERFAIL', editUser.username);
-            ownProps.setNotification(msg);
+            msg = getFormattedMessages('EDITEDUSERFAIL', editUser.username)
+            ownProps.setNotification(msg)
           }
         }
       })
   })
-});
+})
 
 const ROLE_LIST_QUERY = gql`
   query RoleList($input: RoleListParams) {
@@ -478,7 +478,7 @@ const ROLE_LIST_QUERY = gql`
       }
     }
   }
-`;
+`
 const withRoleList = graphql(ROLE_LIST_QUERY, {
   props: data => ({
     roleList: (data.data && data.data.RoleList && data.data.RoleList.list) || []
@@ -487,7 +487,7 @@ const withRoleList = graphql(ROLE_LIST_QUERY, {
     variables: {},
     fetchPolicy: 'network-only'
   })
-});
+})
 
 export default connect(
   mapStateToProps,
@@ -497,4 +497,4 @@ export default connect(
     withRoleList,
     withMutations
   )(EditUser)
-);
+)

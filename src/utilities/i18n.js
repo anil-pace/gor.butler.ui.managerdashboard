@@ -21,32 +21,32 @@ import esTranslationMessages from '../translations/es-ES.json';
 import zhTranslationMessages from '../translations/zh-ZH.json';
 import nlTranslationMessages from '../translations/nl.json';
 
-addLocaleData([...enLocaleData, 
-              ...jaLocaleData, 
-              ...zhLocaleData, 
-              ...deLocaleData, 
-              ...frLocaleData,
-              ...esLocaleData,
-              ...nlLocaleData,
-              ...enTranslationMessages, 
-              ...jaTranslationMessages,
-              ...deTranslationMessages,
-              ...frTranslationMessages,
-              ...esTranslationMessages,
-              ...zhTranslationMessages,
-              ...nlTranslationMessages
-  ]);
+addLocaleData([...enLocaleData,
+...jaLocaleData,
+...zhLocaleData,
+...deLocaleData,
+...frLocaleData,
+...esLocaleData,
+...nlLocaleData,
+...enTranslationMessages,
+...jaTranslationMessages,
+...deTranslationMessages,
+...frTranslationMessages,
+...esTranslationMessages,
+...zhTranslationMessages,
+...nlTranslationMessages
+]);
 
-export const formatTranslationMessages=(messages)=> {
-  const formattedMessages={};
+export const formatTranslationMessages = (messages) => {
+  const formattedMessages = {};
   for (const message of messages) {
-    formattedMessages[message.id]=message.message || message.defaultMessage;
+    formattedMessages[message.id] = message.message || message.defaultMessage;
   }
 
   return formattedMessages;
 };
 
-export const translationMessages={
+export const translationMessages = {
   en: formatTranslationMessages(enTranslationMessages),
   ja: formatTranslationMessages(jaTranslationMessages),
   de: formatTranslationMessages(deTranslationMessages),

@@ -87,13 +87,13 @@ class OrderListTab extends React.Component {
   _requestReportDownload() {
     var filtered_order_status =
       !this.state.statusFilterForOrders ||
-      Array.isArray(this.state.statusFilterForOrders)
+        Array.isArray(this.state.statusFilterForOrders)
         ? this.state.statusFilterForOrders
         : [this.state.statusFilterForOrders];
 
     var filtered_order_priority =
       !this.state.priorityFilterForOrders ||
-      Array.isArray(this.state.priorityFilterForOrders)
+        Array.isArray(this.state.priorityFilterForOrders)
         ? this.state.priorityFilterForOrders
         : [this.state.priorityFilterForOrders];
 
@@ -114,6 +114,7 @@ class OrderListTab extends React.Component {
       formdata: formData,
       accept: APP_JSON
     };
+
     this.props.makeAjaxCall(params);
   }
 
@@ -180,7 +181,7 @@ class OrderListTab extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
-      this.setState({ subscribed: true }, function() {
+      this.setState({ subscribed: true }, function () {
         this._subscribeData(nextProps);
       });
     }
@@ -287,7 +288,7 @@ class OrderListTab extends React.Component {
     //set interval for polling
     let self = this;
     let timerId = 0;
-    timerId = setInterval(function() {
+    timerId = setInterval(function () {
       let query = {};
       query.startDate = sessionStorage.getItem('startDate');
       query.endDate = sessionStorage.getItem('endDate');
@@ -465,8 +466,8 @@ class OrderListTab extends React.Component {
               setSpinner={this.props.setOrderListSpinner}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           <div>
             <div
               className='gor-filter-wrap'
@@ -644,43 +645,43 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    setOrderListSpinner: function(data) {
+    setOrderListSpinner: function (data) {
       dispatch(setOrderListSpinner(data));
     },
 
-    showTableFilter: function(data) {
+    showTableFilter: function (data) {
       dispatch(showTableFilter(data));
     },
-    filterApplied: function(data) {
+    filterApplied: function (data) {
       dispatch(filterApplied(data));
     },
-    orderfilterState: function(data) {
+    orderfilterState: function (data) {
       dispatch(orderfilterState(data));
     },
-    toggleOrderFilter: function(data) {
+    toggleOrderFilter: function (data) {
       dispatch(toggleOrderFilter(data));
     },
-    orderListRefreshed: function(data) {
+    orderListRefreshed: function (data) {
       dispatch(orderListRefreshed(data));
     },
-    updateSubscriptionPacket: function(data) {
+    updateSubscriptionPacket: function (data) {
       dispatch(updateSubscriptionPacket(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     },
-    setOrderQuery: function(data) {
+    setOrderQuery: function (data) {
       dispatch(setOrderQuery(data));
     },
-    makeAjaxCall: function(params) {
+    makeAjaxCall: function (params) {
       dispatch(makeAjaxCall(params));
     },
-    unSetAllActivePbts: function() {
+    unSetAllActivePbts: function () {
       dispatch(unSetAllActivePbts());
     },
-    setInfiniteSpinner: function(data) {
+    setInfiniteSpinner: function (data) {
       dispatch(setInfiniteSpinner(data));
     }
   };

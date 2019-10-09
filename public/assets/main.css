@@ -874,13 +874,14 @@ body {
 }
 
 .health .upperText {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 1.5rem;
 }
 
 .health .subtext {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 0.75rem;
+  text-transform: capitalize;
   width: 99%;
 }
 
@@ -894,7 +895,7 @@ body {
   height: 1.125rem;
   border-radius: 0.9375rem;
   color: #ffffff;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-weight: bold;
   padding-top: 0rem;
   padding-bottom: 0rem;
@@ -906,7 +907,7 @@ body {
   height: 1.125rem;
   border-radius: 0.9375rem;
   color: #666666;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #00a54f;
@@ -920,7 +921,7 @@ body {
   height: 1.125rem;
   border-radius: 0.9375rem;
   color: #666666;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #999999;
@@ -934,7 +935,7 @@ body {
   height: 1.125rem;
   border-radius: 0.9375rem;
   color: #666666;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   border-style: solid;
   border-width: 0.0625rem;
   border-color: #ec1c24;
@@ -967,7 +968,7 @@ body {
 }
 
 .health .status {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 0.75rem;
   color: #666666;
   text-align: center;
@@ -1298,6 +1299,10 @@ body {
   width: 97%;
 }
 
+.gor-tile.gor-double .gor-heading {
+  text-transform: none;
+}
+
 .gor-tile.gor-single {
   width: 47%;
 }
@@ -1312,6 +1317,7 @@ body {
 
 .gor-tile .gor-up-tile {
   padding: 30px 10px 10px 20px;
+  text-transform: capitalize;
   min-height: 5rem;
 }
 
@@ -1353,7 +1359,7 @@ body {
 }
 
 .gor-tile .gor-success {
-  color: #10C469;
+  color: #10c469;
 }
 
 .gor-tile .gor-breach {
@@ -1371,7 +1377,7 @@ body {
 .gor-tile .gor-low-tile {
   font-family: 'Source Sans Pro semibold', sans-serif;
   font-size: 1rem;
-  background: #F7F7F7;
+  background: #f7f7f7;
   color: #666666;
   padding: 17px 0px 17px 20px;
   min-height: 1rem;
@@ -1379,6 +1385,7 @@ body {
   vertical-align: middle;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+  text-transform: capitalize;
 }
 
 .gorNoML {
@@ -1552,7 +1559,7 @@ body {
 }
 
 .gor-usr-dropdown {
-  width: 50%;
+  width: 55%;
   min-height: 25px;
   border-radius: 2px;
   display: inline-block;
@@ -3887,7 +3894,7 @@ input[type="checkbox"] {
 }
 
 .gor-add-btn.black {
-  background: #4D5055;
+  background: #4d5055;
   color: #fff;
 }
 
@@ -3936,7 +3943,7 @@ input[type="checkbox"] {
   font-size: 14px;
   background: #fff;
   border-radius: 3px;
-  border-color: #A6A7A9;
+  border-color: #a6a7a9;
   border-style: double;
   border-width: 2px;
   cursor: pointer;
@@ -3944,18 +3951,18 @@ input[type="checkbox"] {
 
 .gor-field-error {
   text-align: left;
-  color: #EC1C24;
+  color: #ec1c24;
   font-size: 18px;
   margin-top: 10px;
   width: 75%;
 }
 
 .gor-input-error {
-  border: 1px solid #EC1C24;
+  border: 1px solid #ec1c24;
 }
 
 .gor-input-ok {
-  border: 1px solid #AAAAAA;
+  border: 1px solid #aaaaaa;
 }
 
 .gor-usr-add {
@@ -3997,7 +4004,7 @@ input[type="checkbox"] {
   position: relative;
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 26px;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #aaaaaa;
   min-height: 3.75rem;
   width: 92%;
   padding-top: 40px;
@@ -4012,7 +4019,7 @@ input[type="checkbox"] {
 
 .gor-modal-content .gor-modal-head .close {
   background: #f2f2f2;
-  color: #AAAAAA;
+  color: #aaaaaa;
   float: right;
   text-align: center;
   font-size: 28px;
@@ -4062,7 +4069,7 @@ input[type="checkbox"] {
   margin-top: 0.625rem;
   padding: 0.625rem;
   width: 66%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
   display: inline-block;
 }
@@ -4082,7 +4089,7 @@ input[type="checkbox"] {
   margin-top: 0.625rem;
   padding: 0.625rem;
   width: 40%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
 }
 
@@ -4111,7 +4118,7 @@ input[type="checkbox"] {
   text-align: left;
   margin-top: 0.625rem;
   padding: 0.625rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
 }
 
@@ -4129,12 +4136,16 @@ input[type="checkbox"] {
   text-align: left;
   margin-top: 0.625rem;
   padding: 0.625rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
 }
 
 .gor-modal-content .gor-usr-details .gor-audit-field .gor-usr-fdsm:hover {
   border: 1px solid #666666;
+}
+
+.gor-modal-content .gor-multiple-roles .gor-usr-dropdown {
+  width: 70%;
 }
 
 .gor-modal-content .gor-pass-view1 {
@@ -6726,7 +6737,7 @@ button:disabled {
 .gor-utility-tile-h1 {
   width: 100%;
   height: 20%;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #aaaaaa;
 }
 
 .gor-utility-tile-h1 .gor-utility-tile-icon {
@@ -6758,7 +6769,7 @@ button:disabled {
 }
 
 .gor-utility-tile-body .gor-upl-err {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 .gor-utility-tile-body .gor-csv-processing {
@@ -6769,7 +6780,7 @@ button:disabled {
 }
 
 .gor-utility-tile-footer {
-  border-top: 1px solid #AAAAAA;
+  border-top: 1px solid #aaaaaa;
   height: 20%;
   position: absolute;
   bottom: 0px;
@@ -6794,7 +6805,7 @@ button:disabled {
   min-height: 20rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
-  width: 24.7%;
+  width: 100%;
   position: relative;
   vertical-align: top;
 }
@@ -6959,14 +6970,17 @@ button:disabled {
   padding-bottom: 10px;
 }
 
-.gor-utility-invoice-wrap, .gor-utility-sku-wrap, .gor-utility-duration-wrap {
+.gor-utility-invoice-wrap,
+.gor-utility-sku-wrap,
+.gor-utility-duration-wrap {
   margin-left: 34px;
   width: 76%;
   box-shadow: none;
   margin-top: 0px;
 }
 
-.gor-utility-invoice-h1, .gor-utility-stock-ledger-duration-label {
+.gor-utility-invoice-h1,
+.gor-utility-stock-ledger-duration-label {
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -6998,7 +7012,7 @@ button:disabled {
   cursor: pointer;
 }
 
-.gor-utility-duration-wrap input[type=checkbox] {
+.gor-utility-duration-wrap input[type='checkbox'] {
   margin-right: 5px;
 }
 
@@ -9190,6 +9204,15 @@ button:disabled {
   width: 240px;
 }
 
+.gor-storage-space .gor-storage-table .cell-progressbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.gor-storage-space .gor-storage-table .cell-progressbar .gor-progress-bar-wrapper {
+  margin-right: 10px;
+}
+
 .gor-storage-space .gor-ol-paginate-wrap {
   width: 100%;
 }
@@ -9232,7 +9255,7 @@ button:disabled {
   border-radius: 3px;
   background-color: #4d5055;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 0.875rem;
   font-weight: 600;
   text-align: left;
@@ -13174,6 +13197,14 @@ checkmark1 for indeterminate state*/
   padding: 5px 8px 8px;
 }
 
+.users-table .gor-add-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.users-table .gor-capitalize {
+  text-transform: capitalize;
+}
+
 .users-table .table-body .row .cell:first-child {
   padding-left: 15px;
 }
@@ -13188,6 +13219,10 @@ checkmark1 for indeterminate state*/
 
 .users-table .table-header .row .cell:last-child {
   padding-right: 15px;
+}
+
+.users-table .table-header .row .gor-add-ellipsis {
+  text-overflow: ellipsis;
 }
 
 .table-itemsearch.table-item-search-details {

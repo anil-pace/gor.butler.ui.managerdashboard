@@ -28,6 +28,14 @@
   padding: 5px 8px 8px;
 }
 
+.users-table .gor-add-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.users-table .gor-capitalize {
+  text-transform: capitalize;
+}
+
 .users-table .table-body .row .cell:first-child {
   padding-left: 15px;
 }
@@ -42,4 +50,8 @@
 
 .users-table .table-header .row .cell:last-child {
   padding-right: 15px;
+}
+
+.users-table .table-header .row .gor-add-ellipsis {
+  text-overflow: ellipsis;
 }

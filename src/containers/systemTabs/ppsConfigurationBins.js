@@ -4,10 +4,10 @@
 /**
  * Created by gaurav.m on 6/21/17.
  */
-import React  from 'react';
-import {FormattedMessage} from 'react-intl'
+import React from 'react';
+import { FormattedMessage } from 'react-intl'
 
-import {graphql, withApollo, compose} from "react-apollo";
+import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag'
 
 class Bins extends React.Component {
@@ -25,8 +25,8 @@ class Bins extends React.Component {
              */
 
             if (nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
-                    return bin.direction !== 'center'
-                }).length !== 0 && !this.state.currentBinDirection) {
+                return bin.direction !== 'center'
+            }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
             } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
                 return bin.direction !== 'center'
@@ -46,7 +46,7 @@ class Bins extends React.Component {
      * @param bin
      */
     selectBin(bin, currentView) {
-        this.props.selectPPSBin({bin, currentView})
+        this.props.selectPPSBin({ bin, currentView })
 
 
     }
@@ -57,7 +57,7 @@ class Bins extends React.Component {
      * @param currentView
      */
     clearSelectionPPSBin(bin, currentView) {
-        this.props.clearSelectionPPSBin({bin, currentView})
+        this.props.clearSelectionPPSBin({ bin, currentView })
     }
 
     /**
@@ -65,7 +65,7 @@ class Bins extends React.Component {
      * PPS Bin enable disable status
      */
     changePPSBinStatus(bin, status) {
-        this.props.changePPSBinStatus({bin, currentView: 'bins', enabled: status})
+        this.props.changePPSBinStatus({ bin, currentView: 'bins', enabled: status })
     }
 
 
@@ -74,7 +74,7 @@ class Bins extends React.Component {
      * @param status
      */
     changePPSBinGroupStatus(status) {
-        this.props.changePPSBinGroupStatus({enabled: status})
+        this.props.changePPSBinGroupStatus({ enabled: status })
     }
 
     /**
@@ -90,7 +90,7 @@ class Bins extends React.Component {
         if (this.props.selectedPPSBinGroup && this.props.selectedPPSBinGroup.bin_group_id === bin_group_id) {
             group = null
         }
-        this.props.selectPPSBinGroup({group: group})
+        this.props.selectPPSBinGroup({ group: group })
     }
 
     /**
@@ -115,8 +115,8 @@ class Bins extends React.Component {
      * @param dir
      */
     setBinDirection(dir) {
-        this.clearSelectionPPSBin({bin: this.props.selectedPPSBin, currentView: this.props.currentView})
-        this.setState({currentBinDirection: dir || null})
+        this.clearSelectionPPSBin({ bin: this.props.selectedPPSBin, currentView: this.props.currentView })
+        this.setState({ currentBinDirection: dir || null })
     }
 
     render() {
@@ -161,121 +161,121 @@ class Bins extends React.Component {
 
         let total_x = new Set(x_array).size * 10 + max_x
         let total_y = new Set(y_array).size * 10 + max_y
-        let container = {x: 900, y: 500} //Container is 900*500
+        let container = { x: 900, y: 500 } //Container is 900*500
 
         return <div
             className={["pps-bins-container", this.props.currentView === 'tags' ? 'include-tags' : null].join(" ")}>
             {this.props.currentView === 'tags' &&
-            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
-                <div style={{width: '65%', float: 'left'}}>
-                    <FormattedMessage id="pps.configuration.bins.selection.label"
-                                      description="Select a bin to manage tags"
-                                      defaultMessage="Select a bin to manage tags"/>
-                </div>
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
-                        id="pps.configuration.bins.direction.label"
-                        description="Bin Direction"
-                        defaultMessage="Current PPS Selection"/></span>
-                    <span className="currentBinDirection"
-                          style={{padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20}}>
-                        <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
-                              onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                            id="pps.configuration.bins.direction.left"
-                            description="Bin Direction LEFT"
-                            defaultMessage="LEFT"/></span>
-                    <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
-                          onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                        id="pps.configuration.bins.direction.right"
-                        description="Bin Direction RIGHT"
-                        defaultMessage="RIGHT"/></span>
-                    </span>
+                <div style={{ padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both' }}>
+                    <div style={{ width: '65%', float: 'left' }}>
+                        <FormattedMessage id="pps.configuration.bins.selection.label"
+                            description="Select a bin to manage tags"
+                            defaultMessage="Select a bin to manage tags" />
+                    </div>
+                    {self.state.currentBinDirection && <div style={{ width: '35%', 'float': 'right', fontSize: 14 }}>
+                        <span style={{ padding: '5px 10px', color: "#666" }}><FormattedMessage
+                            id="pps.configuration.bins.direction.label"
+                            description="Bin Direction"
+                            defaultMessage="Current PPS Selection" /></span>
+                        <span className="currentBinDirection"
+                            style={{ padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20 }}>
+                            <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'left')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.left"
+                                    description="Bin Direction LEFT"
+                                    defaultMessage="LEFT" /></span>
+                            <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'right')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.right"
+                                    description="Bin Direction RIGHT"
+                                    defaultMessage="RIGHT" /></span>
+                        </span>
+
+                    </div>}
+
 
                 </div>}
-
-
-            </div>}
             {this.props.currentView === 'bins' &&
-            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
-                <div style={{width: '65%', float: 'left'}}>
-                    <FormattedMessage id="pps.configuration.bins.selection.count"
-                                      description='total users for filter search bar'
-                                      defaultMessage='Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)'
-                                      values={{
-                                          deactivated: self.props.selectedProfile.pps_bin_details.filter(function (bin) {
-                                              return !bin.enabled
-                                          }).length.toString(),
-                                          total: self.props.selectedProfile.pps_bin_details.length
-                                      }}/>
-                </div>
+                <div style={{ padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both' }}>
+                    <div style={{ width: '65%', float: 'left' }}>
+                        <FormattedMessage id="pps.configuration.bins.selection.count"
+                            description='total users for filter search bar'
+                            defaultMessage='Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)'
+                            values={{
+                                deactivated: self.props.selectedProfile.pps_bin_details.filter(function (bin) {
+                                    return !bin.enabled
+                                }).length.toString(),
+                                total: self.props.selectedProfile.pps_bin_details.length
+                            }} />
+                    </div>
 
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
-                        id="pps.configuration.bins.direction.label"
-                        description="Bin Direction"
-                        defaultMessage="Current PPS Selection"/></span>
-                    <span className="currentBinDirection"
-                          style={{padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20}}>
-                        <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
-                              onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                            id="pps.configuration.bins.direction.left"
-                            description="Bin Direction LEFT"
-                            defaultMessage="LEFT"/></span>
-                    <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
-                          onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                        id="pps.configuration.bins.direction.right"
-                        description="Bin Direction RIGHT"
-                        defaultMessage="RIGHT"/></span>
-                    </span>
+                    {self.state.currentBinDirection && <div style={{ width: '35%', 'float': 'right', fontSize: 14 }}>
+                        <span style={{ padding: '5px 10px', color: "#666" }}><FormattedMessage
+                            id="pps.configuration.bins.direction.label"
+                            description="Bin Direction"
+                            defaultMessage="Current PPS Selection" /></span>
+                        <span className="currentBinDirection"
+                            style={{ padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20 }}>
+                            <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'left')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.left"
+                                    description="Bin Direction LEFT"
+                                    defaultMessage="LEFT" /></span>
+                            <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'right')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.right"
+                                    description="Bin Direction RIGHT"
+                                    defaultMessage="RIGHT" /></span>
+                        </span>
+
+                    </div>}
 
                 </div>}
-
-            </div>}
             {this.props.currentView === 'groups' &&
-            <div style={{padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both'}}>
+                <div style={{ padding: '2% 4%', color: '#666', overflow: 'auto', clear: 'both' }}>
 
-                <div style={{width: '65%', float: 'left'}}>
-                    <FormattedMessage
-                        id="pps.configuration.bins.group.selection.count"
-                        description='total users for filter search bar'
-                        defaultMessage='Select a bin group to activate or deactivate ({disabled}/{total} groups deactivated)'
-                        values={{
-                            disabled: self.props.selectedProfile.bin_group_details.filter(function (group) {
-                                return !group.enabled
-                            }).length.toString(), total: self.props.selectedProfile.bin_group_details.length
-                        }}/>
-                </div>
+                    <div style={{ width: '65%', float: 'left' }}>
+                        <FormattedMessage
+                            id="pps.configuration.bins.group.selection.count"
+                            description='total users for filter search bar'
+                            defaultMessage='Select a bin group to activate or deactivate ({disabled}/{total} groups deactivated)'
+                            values={{
+                                disabled: self.props.selectedProfile.bin_group_details.filter(function (group) {
+                                    return !group.enabled
+                                }).length.toString(), total: self.props.selectedProfile.bin_group_details.length
+                            }} />
+                    </div>
 
-                {self.state.currentBinDirection && <div style={{width: '35%', 'float': 'right', fontSize: 14}}>
-                    <span style={{padding: '5px 10px', color: "#666"}}><FormattedMessage
-                        id="pps.configuration.bins.direction.label"
-                        description="Bin Direction"
-                        defaultMessage="Current PPS Selection"/></span>
-                    <span className="currentBinDirection"
-                          style={{padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20}}>
-                        <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
-                              onClick={self.setBinDirection.bind(this, 'left')}
-                              style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                            id="pps.configuration.bins.direction.left"
-                            description="Bin Direction LEFT"
-                            defaultMessage="LEFT"/></span>
-                    <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
-                          onClick={self.setBinDirection.bind(this, 'right')}
-                          style={{padding: '5px 10px', cursor: 'pointer'}}><FormattedMessage
-                        id="pps.configuration.bins.direction.right"
-                        description="Bin Direction RIGHT"
-                        defaultMessage="RIGHT"/></span>
-                    </span>
+                    {self.state.currentBinDirection && <div style={{ width: '35%', 'float': 'right', fontSize: 14 }}>
+                        <span style={{ padding: '5px 10px', color: "#666" }}><FormattedMessage
+                            id="pps.configuration.bins.direction.label"
+                            description="Bin Direction"
+                            defaultMessage="Current PPS Selection" /></span>
+                        <span className="currentBinDirection"
+                            style={{ padding: '5px 10px', border: '1px solid #ccc', borderRadius: 20 }}>
+                            <span className={self.state.currentBinDirection === 'left' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'left')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.left"
+                                    description="Bin Direction LEFT"
+                                    defaultMessage="LEFT" /></span>
+                            <span className={self.state.currentBinDirection === 'right' ? 'active' : null}
+                                onClick={self.setBinDirection.bind(this, 'right')}
+                                style={{ padding: '5px 10px', cursor: 'pointer' }}><FormattedMessage
+                                    id="pps.configuration.bins.direction.right"
+                                    description="Bin Direction RIGHT"
+                                    defaultMessage="RIGHT" /></span>
+                        </span>
+
+                    </div>}
+
 
                 </div>}
-
-
-            </div>}
             <div style={{
                 width: container.x,
                 margin: 'auto',
@@ -304,7 +304,7 @@ class Bins extends React.Component {
 
                         {self.props.currentView === 'tags' && <div
                             onClick={selected_bin ? self.clearSelectionPPSBin.bind(self, bin, self.props.currentView) : self.selectBin.bind(self, bin, self.props.currentView)}
-                            className={[( selected_bin ? 'selected' : null)].join(" ")}
+                            className={[(selected_bin ? 'selected' : null)].join(" ")}
                             key={bin.pps_bin_id}
 
                             style={{
@@ -315,17 +315,17 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin"].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span className="gor-tag-icon-grey"/>{bin.bin_tags.length} <FormattedMessage
-                                    id="pps.configuration.bins.tagCount.text"
-                                    description="Tag"
-                                    defaultMessage="Tag"/></span>
+                                    <span className="gor-tag-icon-grey" />{bin.bin_tags.length} <FormattedMessage
+                                        id="pps.configuration.bins.tagCount.text"
+                                        description="Tag"
+                                        defaultMessage="Tag" /></span>
                                 <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
 
                         {self.props.currentView === 'bins' && <div
                             onClick={selected_bin ? self.clearSelectionPPSBin.bind(self, bin, self.props.currentView) : self.selectBin.bind(self, bin, self.props.currentView)}
-                            className={[( selected_bin ? 'selected' : null)].join(" ")}
+                            className={[(selected_bin ? 'selected' : null)].join(" ")}
                             key={bin.pps_bin_id}
 
                             style={{
@@ -336,7 +336,7 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin", (!bin.enabled ? 'disabled' : '')].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span style={{display: 'inline-block', width: 16, height: 16}}/> </span>
+                                    <span style={{ display: 'inline-block', width: 16, height: 16 }} /> </span>
                                 <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
@@ -344,7 +344,7 @@ class Bins extends React.Component {
                         {self.props.currentView === 'groups' && <div
                             key={bin.pps_bin_id}
                             onClick={self.selectPPSBinGroup.bind(self, bin.bin_group_id)}
-                            className={["pps-bin-group", "pps-bin-group-" + bin.bin_group_id, ( self.props.selectedPPSBinGroup.bin_group_id === bin.bin_group_id ? 'highlight' : null), self.isDisabledGroup.call(self, bin.bin_group_id) ? 'disabled' : ''].join(" ")}
+                            className={["pps-bin-group", "pps-bin-group-" + bin.bin_group_id, (self.props.selectedPPSBinGroup.bin_group_id === bin.bin_group_id ? 'highlight' : null), self.isDisabledGroup.call(self, bin.bin_group_id) ? 'disabled' : ''].join(" ")}
                             style={{
                                 height: '100%',
                                 boxSizing: 'border-box',
@@ -352,7 +352,7 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin", (!bin.enabled ? 'disabled' : '')].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span style={{display: 'inline-block', width: 16, height: 16}}/> </span>
+                                    <span style={{ display: 'inline-block', width: 16, height: 16 }} /> </span>
                                 <span className="pps-bin-info">{bin.pps_bin_id}</span>
                             </span>
                         </div>}
@@ -362,73 +362,73 @@ class Bins extends React.Component {
 
             {/*Bin enable/disable action items*/}
             {self.props.currentView === 'bins' &&
-            <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
-                {self.props.selectedPPSBin ? (
-                    <button
-                        disabled={self.props.selectedPPSBin.enabled}
-                        className="pps-bin-action-button"
-                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, true)}>
-                        <FormattedMessage id="pps.configuration.bins.activation.button.text"
-                                          description="ACTIVATE"
-                                          defaultMessage="ACTIVATE"/>
-                    </button> ) : (<button
-                    disabled={true}
-                    className="pps-bin-action-button">
-                    <FormattedMessage id="pps.configuration.bins.activation.button.text"
-                                      description="ACTIVATE"
-                                      defaultMessage="ACTIVATE"/>
-                </button>)}
+                <div className="pps-bin-actions pps-bin-row" style={{ textAlign: 'center' }}>
+                    {self.props.selectedPPSBin ? (
+                        <button
+                            disabled={self.props.selectedPPSBin.enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, true)}>
+                            <FormattedMessage id="pps.configuration.bins.activation.button.text"
+                                description="ACTIVATE"
+                                defaultMessage="ACTIVATE" />
+                        </button>) : (<button
+                            disabled={true}
+                            className="pps-bin-action-button">
+                            <FormattedMessage id="pps.configuration.bins.activation.button.text"
+                                description="ACTIVATE"
+                                defaultMessage="ACTIVATE" />
+                        </button>)}
 
-                {self.props.currentView === 'bins' && self.props.selectedPPSBin ? (
-                    <button
-                        disabled={!self.props.selectedPPSBin.enabled}
-                        className="pps-bin-action-button"
-                        onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, false)}>
-                        <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
-                                          description="DEACTIVATE"
-                                          defaultMessage="DEACTIVATE"/>
-                    </button> ) : (<button disabled={true}
-                                           className="pps-bin-action-button">
-                    <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
-                                      description="DEACTIVATE"
-                                      defaultMessage="DEACTIVATE"/>
-                </button>)}
-            </div>}
+                    {self.props.currentView === 'bins' && self.props.selectedPPSBin ? (
+                        <button
+                            disabled={!self.props.selectedPPSBin.enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinStatus.bind(self, self.props.selectedPPSBin, false)}>
+                            <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
+                                description="DEACTIVATE"
+                                defaultMessage="DEACTIVATE" />
+                        </button>) : (<button disabled={true}
+                            className="pps-bin-action-button">
+                            <FormattedMessage id="pps.configuration.bins.deactivation.button.text"
+                                description="DEACTIVATE"
+                                defaultMessage="DEACTIVATE" />
+                        </button>)}
+                </div>}
 
             {/*Bin enable/disable action items*/}
             {self.props.currentView === 'groups' &&
-            <div className="pps-bin-actions pps-bin-row" style={{textAlign: 'center'}}>
-                {self.props.selectedPPSBinGroup.bin_group_id ? (
-                    <button
-                        disabled={self.props.selectedPPSBinGroup.enabled}
-                        className="pps-bin-action-button"
-                        onClick={self.changePPSBinGroupStatus.bind(self, true)}>
-                        <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
-                                          description="ENABLE"
-                                          defaultMessage="ENABLE"/>
-                    </button> ) : (<button
-                    disabled={true}
-                    className="pps-bin-action-button">
-                    <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
-                                      description="ENABLE"
-                                      defaultMessage="ENABLE"/>
-                </button>)}
+                <div className="pps-bin-actions pps-bin-row" style={{ textAlign: 'center' }}>
+                    {self.props.selectedPPSBinGroup.bin_group_id ? (
+                        <button
+                            disabled={self.props.selectedPPSBinGroup.enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinGroupStatus.bind(self, true)}>
+                            <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
+                                description="ENABLE"
+                                defaultMessage="ENABLE" />
+                        </button>) : (<button
+                            disabled={true}
+                            className="pps-bin-action-button">
+                            <FormattedMessage id="pps.configuration.bins.group.enable.button.text"
+                                description="ENABLE"
+                                defaultMessage="ENABLE" />
+                        </button>)}
 
-                {self.props.selectedPPSBinGroup.bin_group_id ? (
-                    <button
-                        disabled={!self.props.selectedPPSBinGroup.enabled}
-                        className="pps-bin-action-button"
-                        onClick={self.changePPSBinGroupStatus.bind(self, false)}>
-                        <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
-                                          description="DISABLE"
-                                          defaultMessage="DISABLE"/>
-                    </button> ) : (<button disabled={true}
-                                           className="pps-bin-action-button">
-                    <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
-                                      description="DISABLE"
-                                      defaultMessage="DISABLE"/>
-                </button>)}
-            </div>}
+                    {self.props.selectedPPSBinGroup.bin_group_id ? (
+                        <button
+                            disabled={!self.props.selectedPPSBinGroup.enabled}
+                            className="pps-bin-action-button"
+                            onClick={self.changePPSBinGroupStatus.bind(self, false)}>
+                            <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
+                                description="DISABLE"
+                                defaultMessage="DISABLE" />
+                        </button>) : (<button disabled={true}
+                            className="pps-bin-action-button">
+                            <FormattedMessage id="pps.configuration.bins.group.disable.button.text"
+                                description="DISABLE"
+                                defaultMessage="DISABLE" />
+                        </button>)}
+                </div>}
 
 
         </div>
@@ -450,9 +450,9 @@ const SELECT_PPS_BIN = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withSelectPPSBinMutation = graphql(SELECT_PPS_BIN, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         selectPPSBin: function (state) {
-            mutate({variables: {state: state}})
+            mutate({ variables: { state: state } })
         }
     }),
 });
@@ -471,9 +471,9 @@ const SELECT_PPS_BIN_GROUP = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withSelectPPSBinGroupMutation = graphql(SELECT_PPS_BIN_GROUP, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         selectPPSBinGroup: function (state) {
-            mutate({variables: {state: state}})
+            mutate({ variables: { state: state } })
         }
     }),
 });
@@ -491,9 +491,9 @@ const CLEAR_PPS_BIN_SELECTION = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withClearPPSBinSelection = graphql(CLEAR_PPS_BIN_SELECTION, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         clearSelectionPPSBin: function (state) {
-            mutate({variables: {state: state}})
+            mutate({ variables: { state: state } })
         },
     }),
 });
@@ -511,9 +511,9 @@ const CHANGE_PPS_BIN_STATUS = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withPPSBinStatusMutation = graphql(CHANGE_PPS_BIN_STATUS, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         changePPSBinStatus: function (state) {
-            mutate({variables: {state: state}})
+            mutate({ variables: { state: state } })
         },
     }),
 });
@@ -531,9 +531,9 @@ const CHANGE_PPS_BIN_GROUP_STATUS = gql`
  * @type {ComponentDecorator<TProps&TGraphQLVariables, TChildProps>}
  */
 const withPPSBinGroupStatusMutation = graphql(CHANGE_PPS_BIN_GROUP_STATUS, {
-    props: ({mutate, ownProps}) => ({
+    props: ({ mutate, ownProps }) => ({
         changePPSBinGroupStatus: function (state) {
-            mutate({variables: {state: state}})
+            mutate({ variables: { state: state } })
         },
     }),
 });

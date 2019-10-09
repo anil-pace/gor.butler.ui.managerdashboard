@@ -20,6 +20,8 @@ class Routes extends React.Component {
 
 
     _requireAuth(nextState, replace) {
+
+
         if (sessionStorage.getItem('auth_token')) {
             let subTab = (sessionStorage.getItem('subTab') || null);
             let nextView = (sessionStorage.getItem('nextUrl') || 'md');
@@ -92,28 +94,51 @@ class Routes extends React.Component {
         if (sessionStorage.getItem('auth_token')) {
             this._requireAuth.call(this, nextState, replace);
         }
-
     }
 
     _handleNavigationChanges(context, replace) {
-        let pathname = context.location.pathname
 
-        pathname = pathname.substring(1, pathname.length)
-        let navigator = pathname.split("/")
-        sessionStorage.setItem("selTab", navigator[0])
-        sessionStorage.setItem("nextView", pathname)
-        if (navigator.length > 1) {
-            sessionStorage.setItem("subTab", navigator[1])
-            this.props.subTabSelected(navigator[1]);
-        } else {
-            sessionStorage.removeItem("subTab")
-            this.props.subTabSelected(null);
-        }
+        var autoLogin = new Promise(() => {
+            setTimeout(function () {
+                this.setSessionForAutoLogin()
+            }, 0);
+        });
+        autoLogin.then(() => {
+            let pathname = context.location.pathname
 
-        this.props.tabSelected(navigator[0]);
+            pathname = pathname.substring(1, pathname.length)
+            let navigator = pathname.split("/")
+            sessionStorage.setItem("selTab", navigator[0])
+            sessionStorage.setItem("nextView", pathname)
+            if (navigator.length > 1) {
+                sessionStorage.setItem("subTab", navigator[1])
+                this.props.subTabSelected(navigator[1]);
+            } else {
+                sessionStorage.removeItem("subTab")
+                this.props.subTabSelected(null);
+            }
 
+            this.props.tabSelected(navigator[0]);
+        })
+            .then(() => {
+                this.removeEventListner()
+            })
 
     }
+
+    setSessionForAutoLogin() {
+        window.addEventListener('message', addEventListner(event), true);
+
+    }
+
+    removeEventListner() {
+        window.removeEventListener('message', true);
+    }
+
+    addEventListner(event) {
+        sessionStorage.setItem('auth_token', event.data)
+    }
+
 
     render() {
         return (

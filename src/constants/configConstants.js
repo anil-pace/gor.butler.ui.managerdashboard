@@ -1,4 +1,4 @@
-export const BASE_URL = 'localhost';
+export const BASE_URL = '192.168.8.53';
 export const PROTOCOL = 'https://';
 export const WS_PROTOCOL = 'wss://';
 export const WS_URL = WS_PROTOCOL + BASE_URL + '/manager_api/wss';
@@ -145,8 +145,7 @@ export const GR_REPORT_URL =
   API_URL + '/platform-dashboard/report/generate-report';
 
 export const CLOSE_GR_REPORT_URL =
-  API_GATEWAY +
-  '/sr-service/platform-srms/service-request/multi-system/close?externalServiceRequestId=';
+  API_GATEWAY + '/sr-service/platform-srms/service-request/multi-system/close?externalServiceRequestId='
 
 export const AUDIT_PAUSE_URL = API_URL + '/audit/pause/';
 export const AUDIT_DUPLICATE_URL = API_URL + '';
