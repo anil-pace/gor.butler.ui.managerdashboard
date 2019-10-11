@@ -1,5 +1,7 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
+import moment from 'moment';
+import 'moment-timezone';
 import {Link} from 'react-router';
 import {
     RECIEVE_HEADER,GET, SOFT_MANUAL, SOFT,HARD,RECEIVE_SHIFT_START_TIME
@@ -14,9 +16,6 @@ import {connect} from 'react-redux';
 import HamBurger from '../hamburger/hamburger';
 import NotificationsWrapper from '../../containers/notifications/notificationsWrapper';
 import ResumeOperation from '../../containers/emergencyProcess/resumeOperation'; 
-
-
-
 
 class Header extends React.Component {
     constructor(props) {
@@ -108,19 +107,7 @@ class Header extends React.Component {
             headerInfo.fullName=(headerInfo.users[0].first_name || '') + ' ' + (headerInfo.users[0].last_name || '');
             headerInfo.designation=headerInfo.users[0].roles[0] || 'butler_ui';
         }
-        /**
-         * Hard coded start time is replaced
-         * with the time fetched in API.
-         */
-        if (this.props.shift_start_time){
-         headerInfo.start=this.context.intl.formatTime(this.props.shift_start_time, {
-            hour: 'numeric',
-            minute: 'numeric',
-            timeZone: this.props.timeOffset,
-            timeZoneName: 'long',
-            hour12: false
-        })}
-         return headerInfo
+    return headerInfo
      }
 
      
@@ -128,15 +115,9 @@ class Header extends React.Component {
 
     render() {
         var headerInfo=this._processData(),
-        startTime
+        startTime,warehouseTime
         if(this.props.shift_start_time){
-            startTime = this.context.intl.formatTime(this.props.shift_start_time, {
-            hour: 'numeric',
-            minute: 'numeric',
-            timeZone: this.props.timeOffset,
-            timeZoneName: 'long',
-            hour12: false
-        })
+            warehouseTime = moment.utc(this.props.shift_start_time).tz(this.props.timeOffset).format('HH:mmZ')
         }
         
         var emergencyDropDown;
@@ -231,10 +212,10 @@ class Header extends React.Component {
                                          defaultMessage="Butler"/>
                         </div>
                         <div className={"gor-menu-subheading "}>
-                            <FormattedMessage id="header.start" description='Start time '
-                                            defaultMessage='Start time:{time} '
+                            <FormattedMessage id="header.currentWarehouse" description='Current Warehouse Time '
+                                            defaultMessage='Current Warehouse Time:{time} '
                                             values={{
-                                                time: startTime
+                                                time: warehouseTime
                                             }}/>          
                         </div>
                     </div>  
