@@ -145,13 +145,6 @@ class UtilityTab extends React.Component {
     _renderStockLedgertile() {
         let current_state = this.state.stockLedgerState;
         let tile = [];
-        const fileType = [
-            {value: "csv", label: "Comma separated values (csv)"},
-            {
-                value: "xlsx",
-                label: "ExceL Spreadsheet (xlsx)"
-            }
-        ];
         let checkbox = (
             <div key="0">
                 <div
