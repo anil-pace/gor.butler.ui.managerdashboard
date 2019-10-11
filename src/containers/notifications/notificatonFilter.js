@@ -1,73 +1,52 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import Filter from '../../components/tableFilter/filter';
+import React from 'react'
+import { FormattedMessage } from 'react-intl'
+import Filter from '../../components/tableFilter/filter'
 import {
   showTableFilter,
   filterApplied,
   auditfilterState,
   toggleAuditFilter
-} from '../../actions/filterAction';
-import { connect } from 'react-redux';
-import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap';
-import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer';
-import { setTextBoxStatus } from '../../actions/auditActions';
+} from '../../actions/filterAction'
+import { connect } from 'react-redux'
+import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap'
+import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer'
+import { setTextBoxStatus } from '../../actions/auditActions'
 import {
   handelTokenClick,
   handleInputQuery
-} from '../../components/tableFilter/tableFilterCommonFunctions';
+} from '../../components/tableFilter/tableFilterCommonFunctions'
 import {
-  ANY,
   ALL,
-  SKU,
-  LOCATION,
-  ISSUE_FOUND,
-  SPECIFIC_LOCATION_ID,
-  SPECIFIC_SKU_ID,
-  SPECIFIC_PPS_ID,
   AUDIT_TASK_ID,
   FROM_DATE,
   TO_DATE,
-  NOT_YET_STARTED,
-  TO_BE_RESOLVED,
-  AUDIT_PAUSED,
-  AUDIT_DUPLICATED,
-  AUDIT_DELETED,
-  AUDIT_TYPE,
-  AUDIT_COMPLETED,
-  AUDIT_CANCELLED,
-  AUDIT_CREATED,
-  PENDING,
-  INPROGRESS,
-  AUDIT_RESOLVED,
-  AUDIT_LINE_REJECTED,
-  SINGLE,
   AUDIT_USERLIST,
   APP_JSON,
   GET
-} from '../../constants/frontEndConstants';
-import { USERLIST_URL } from '../../constants/configConstants';
-import { hashHistory } from 'react-router';
-import { setAuditSpinner } from './../../actions/auditActions';
-import { userRequest } from '../../actions/userActions';
-import { mappingArray, arrayDiff } from '../../utilities/utils';
-import { showNotificationFilter } from '../../actions/notificationAction';
+} from '../../constants/frontEndConstants'
+import { USERLIST_URL } from '../../constants/configConstants'
+import { hashHistory } from 'react-router'
+import { setAuditSpinner } from './../../actions/auditActions'
+import { userRequest } from '../../actions/userActions'
+import { mappingArray, arrayDiff } from '../../utilities/utils'
+import { showNotificationFilter } from '../../actions/notificationAction'
 
 class NotificatonFilter extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tokenSelected: { COMPONENT: [ALL] },
       searchQuery: {},
       defaultToken: { COMPONENT: [ALL] }
-    };
-    this._applyFilter = this._applyFilter.bind(this);
-    this._closeFilter = this._closeFilter.bind(this);
-    this._clearFilter = this._clearFilter.bind(this);
+    }
+    this._applyFilter = this._applyFilter.bind(this)
+    this._closeFilter = this._closeFilter.bind(this)
+    this._clearFilter = this._clearFilter.bind(this)
   }
 
   _closeFilter() {
-    var filterState = !this.props.showFilter;
-    this.props.showNotificationFilter(filterState);
+    var filterState = !this.props.showFilter
+    this.props.showNotificationFilter(filterState)
   }
 
   componentDidMount() {
@@ -78,8 +57,8 @@ class NotificatonFilter extends React.Component {
       contentType: APP_JSON,
       accept: APP_JSON,
       token: sessionStorage.getItem('auth_token')
-    };
-    this.props.userRequest(userData);
+    }
+    this.props.userRequest(userData)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,7 +66,7 @@ class NotificatonFilter extends React.Component {
       nextProps.auditFilterState &&
       JSON.stringify(this.state) !== JSON.stringify(nextProps.auditFilterState)
     ) {
-      this.setState(nextProps.auditFilterState);
+      this.setState(nextProps.auditFilterState)
     }
     /**
      * Hide the filter as soon as data in the list get updated.
@@ -97,7 +76,7 @@ class NotificatonFilter extends React.Component {
       JSON.stringify(nextProps.auditDetail) !==
         JSON.stringify(this.props.auditDetail)
     ) {
-      this.props.showTableFilter(false);
+      this.props.showTableFilter(false)
     }
   }
 
@@ -135,10 +114,10 @@ class NotificatonFilter extends React.Component {
           />
         )
       }
-    ];
+    ]
 
-    var inputValue = this.state.searchQuery;
-    var textboxStatus = this.props.textboxStatus || {};
+    var inputValue = this.state.searchQuery
+    var textboxStatus = this.props.textboxStatus || {}
     var inputField = (
       <FilterInputFieldWrap
         inputText={filterInputFields}
@@ -146,8 +125,8 @@ class NotificatonFilter extends React.Component {
         inputValue={inputValue}
         textboxStatus={textboxStatus}
       />
-    );
-    return inputField;
+    )
+    return inputField
   }
 
   _processFilterToken() {
@@ -159,7 +138,7 @@ class NotificatonFilter extends React.Component {
           defaultMessage='COMPONENT'
         />
       )
-    };
+    }
 
     const labelC2 = [
       {
@@ -187,9 +166,9 @@ class NotificatonFilter extends React.Component {
           <FormattedMessage id='audit.token2.system' defaultMessage='System' />
         )
       }
-    ];
+    ]
 
-    var selectedToken = this.state.tokenSelected;
+    var selectedToken = this.state.tokenSelected
     var column1 = (
       <FilterTokenWrap
         field={tokenStatusField}
@@ -197,47 +176,47 @@ class NotificatonFilter extends React.Component {
         label={labelC2}
         selectedToken={selectedToken}
       />
-    );
+    )
 
-    var columnDetail = { column1token: column1 };
-    return columnDetail;
+    var columnDetail = { column1token: column1 }
+    return columnDetail
   }
 
   _handelTokenClick(field, value, state) {
     this.setState({
       tokenSelected: handelTokenClick(field, value, state, this.state)
-    });
+    })
   }
 
   _handleInputQuery(inputQuery, queryField) {
     this.setState({
       searchQuery: handleInputQuery(inputQuery, queryField, this.state)
-    });
+    })
   }
 
   _applyFilter() {
     var filterState = this.state,
-      _query = {};
+      _query = {}
 
     if (
       filterState.tokenSelected['COMPONENT'] &&
       filterState.tokenSelected['COMPONENT'][0] !== ALL
     ) {
-      _query.status = filterState.tokenSelected['COMPONENT'];
+      _query.status = filterState.tokenSelected['COMPONENT']
     }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
-      _query.taskId = filterState.searchQuery[AUDIT_TASK_ID];
+      _query.taskId = filterState.searchQuery[AUDIT_TASK_ID]
     }
 
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
-      _query.fromDate = filterState.searchQuery[FROM_DATE];
+      _query.fromDate = filterState.searchQuery[FROM_DATE]
     }
     if (filterState.searchQuery && filterState.searchQuery[TO_DATE]) {
-      _query.toDate = filterState.searchQuery[TO_DATE];
+      _query.toDate = filterState.searchQuery[TO_DATE]
     }
 
-    hashHistory.push({ pathname: '/audit/auditlisting', query: _query });
+    hashHistory.push({ pathname: '/audit/auditlisting', query: _query })
   }
 
   _clearFilter() {
@@ -245,13 +224,13 @@ class NotificatonFilter extends React.Component {
       tokenSelected: { COMPONENT: [ALL] },
       searchQuery: {},
       defaultToken: { COMPONENT: [ALL] }
-    });
+    })
   }
 
   render() {
-    var noOrder = this.props.noResultFound;
-    var auditSearchField = this._processAuditSearchField();
-    var auditFilterToken = this._processFilterToken();
+    var noOrder = this.props.noResultFound
+    var auditSearchField = this._processAuditSearchField()
+    var auditFilterToken = this._processFilterToken()
     return (
       <div>
         <Filter>
@@ -316,7 +295,7 @@ class NotificatonFilter extends React.Component {
           </div>
         </Filter>
       </div>
-    );
+    )
   }
 }
 function mapStateToProps(state, ownProps) {
@@ -329,37 +308,37 @@ function mapStateToProps(state, ownProps) {
     auditFilterStatus: state.filterInfo.auditFilterStatus,
     textboxStatus: state.auditInfo.textBoxStatus || {},
     auditUserList: state.auditInfo.auditUserList || []
-  };
+  }
 }
 
 var mapDispatchToProps = function(dispatch) {
   return {
     showTableFilter: function(data) {
-      dispatch(showTableFilter(data));
+      dispatch(showTableFilter(data))
     },
     filterApplied: function(data) {
-      dispatch(filterApplied(data));
+      dispatch(filterApplied(data))
     },
     setTextBoxStatus: function(data) {
-      dispatch(setTextBoxStatus(data));
+      dispatch(setTextBoxStatus(data))
     },
     auditfilterState: function(data) {
-      dispatch(auditfilterState(data));
+      dispatch(auditfilterState(data))
     },
     toggleAuditFilter: function(data) {
-      dispatch(toggleAuditFilter(data));
+      dispatch(toggleAuditFilter(data))
     },
     setAuditSpinner: function(data) {
-      dispatch(setAuditSpinner(data));
+      dispatch(setAuditSpinner(data))
     },
     showNotificationFilter: function(data) {
-      dispatch(showNotificationFilter(data));
+      dispatch(showNotificationFilter(data))
     },
     userRequest: function(data) {
-      dispatch(userRequest(data));
+      dispatch(userRequest(data))
     }
-  };
-};
+  }
+}
 
 NotificatonFilter.PropTypes = {
   showFilter: React.PropTypes.bool,
@@ -370,9 +349,9 @@ NotificatonFilter.PropTypes = {
   auditFilterState: React.PropTypes.object,
   auditFilterStatus: React.PropTypes.bool,
   setTextBoxStatus: React.PropTypes.func
-};
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NotificatonFilter);
+)(NotificatonFilter)
