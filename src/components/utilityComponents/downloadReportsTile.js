@@ -1,58 +1,58 @@
-import React from "react";
-import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
-import UtilityDropDown from "./utilityDropdownWrap";
-import ListItem from "../list/listItem";
+import React from 'react';
+import { FormattedMessage, FormattedDate, defineMessages } from 'react-intl';
+import UtilityDropDown from './utilityDropdownWrap';
+import ListItem from '../list/listItem';
 
 const messages = defineMessages({
   downloadReportsHead: {
-    id: "utility.downloadReport.head",
-    description: "Download Reports",
-    defaultMessage: "Download Reports"
+    id: 'utility.downloadReport.head',
+    description: 'Download Reports',
+    defaultMessage: 'Download Reports'
   },
   downloadRprtsStatusHead: {
-    id: "utility.downloadReport.Status.heading",
-    description: "Reports Status",
-    defaultMessage: "Reports Status"
+    id: 'utility.downloadReport.Status.heading',
+    description: 'Reports Status',
+    defaultMessage: 'Reports Status'
   },
   downloadRprtsCategoryLabel: {
-    id: "utility.downloadRprts.CategoryLabel",
-    description: "Category",
-    defaultMessage: "Category"
+    id: 'utility.downloadRprts.CategoryLabel',
+    description: 'Category',
+    defaultMessage: 'Category'
   },
   downloadRprtsCategoryPlchldr: {
-    id: "utility.downloadRprts.CategoryPlchldr",
-    description: "Select Category",
-    defaultMessage: "Select Category"
+    id: 'utility.downloadRprts.CategoryPlchldr',
+    description: 'Select Category',
+    defaultMessage: 'Select Category'
   },
   downloadRprtsCategoryInventory: {
-    id: "utility.downloadRprts.CategoryInventory",
-    description: "Inventory",
-    defaultMessage: "Inventory"
+    id: 'utility.downloadRprts.CategoryInventory',
+    description: 'Inventory',
+    defaultMessage: 'Inventory'
   },
   downloadFileFormatPlchldr: {
-    id: "utility.downloadRprts.FileFormatPlchldr",
-    description: "Select File Format",
-    defaultMessage: "Select File Format"
+    id: 'utility.downloadRprts.FileFormatPlchldr',
+    description: 'Select File Format',
+    defaultMessage: 'Select File Format'
   },
   downloadFileFormatLabel: {
-    id: "utility.downloadRprts.FileFormatLabel",
-    description: "File Format",
-    defaultMessage: "File Format"
+    id: 'utility.downloadRprts.FileFormatLabel',
+    description: 'File Format',
+    defaultMessage: 'File Format'
   },
   downloadFileFormatCsv: {
-    id: "utility.downloadRports.csvFormat",
-    description: "Comma separated values (csv)",
-    defaultMessage: "Comma separated values (csv)"
+    id: 'utility.downloadRports.csvFormat',
+    description: 'Comma separated values (csv)',
+    defaultMessage: 'Comma separated values (csv)'
   },
   downloadFileFormatXls: {
-    id: "utiltiy.downloadRports.xlsFormat",
-    description: "ExceL Spreadsheet (xlsx)",
-    defaultMessage: "ExceL Spreadsheet (xlsx)"
+    id: 'utiltiy.downloadRports.xlsFormat',
+    description: 'ExceL Spreadsheet (xlsx)',
+    defaultMessage: 'ExceL Spreadsheet (xlsx)'
   },
   downloadLink: {
-    id: "utility.grnHistory.clickToDownload",
-    description: "file name",
-    defaultMessage: "Click here to download "
+    id: 'utility.grnHistory.clickToDownload',
+    description: 'file name',
+    defaultMessage: 'Click here to download '
   }
 });
 
@@ -77,7 +77,7 @@ class DownloadReportsTile extends React.Component {
     if (this.props.generateReport) {
       this.props.generateReport(this.state.fileType);
     } else {
-      throw new Error("Method for generating report not found");
+      throw new Error('Method for generating report not found');
     }
   }
 
@@ -90,7 +90,6 @@ class DownloadReportsTile extends React.Component {
     return null;
   }
 
- 
   shouldComponentUpdate(nextProps, nextState) {
     if (
       JSON.stringify(this.props.reportsHistory) ===
@@ -105,7 +104,7 @@ class DownloadReportsTile extends React.Component {
   render() {
     const modes = [
       {
-        value: "inventory",
+        value: 'inventory',
         label: this.context.intl.formatMessage(
           messages.downloadRprtsCategoryInventory
         )
@@ -113,12 +112,8 @@ class DownloadReportsTile extends React.Component {
     ];
     const fileType = [
       {
-        value: "csv",
+        value: 'csv',
         label: this.context.intl.formatMessage(messages.downloadFileFormatCsv)
-      },
-      {
-        value: "xlsx",
-        label: this.context.intl.formatMessage(messages.downloadFileFormatXls)
       }
     ];
 
@@ -153,20 +148,20 @@ class DownloadReportsTile extends React.Component {
           changeMode={this._changeReportFileType.bind(this)}
           currentState={currentFileState}
         />
-        <div className="gor-utility-btn-wrap">
+        <div className='gor-utility-btn-wrap'>
           <button
             onClick={this._generateReport.bind(this)}
             className={
               this.state.category && this.state.fileType
-                ? "gor-download-button"
-                : "gor-download-button gor-disable-content"
+                ? 'gor-download-button'
+                : 'gor-download-button gor-disable-content'
             }
           >
             <label>
               <FormattedMessage
-                id="utility.downloadReports.head"
-                description="Generate Report"
-                defaultMessage="Generate Report"
+                id='utility.downloadReports.head'
+                description='Generate Report'
+                defaultMessage='Generate Report'
                 x
               />
             </label>
