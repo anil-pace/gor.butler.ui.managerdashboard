@@ -115,10 +115,8 @@ class Header extends React.Component {
 
     render() {
         var headerInfo=this._processData(),
-        startTime,warehouseTime
-        if(this.props.shift_start_time){
-            warehouseTime = moment.utc(this.props.shift_start_time).tz(this.props.timeOffset).format('HH:mmZ')
-        }
+        warehouseTime
+            warehouseTime = moment.tz(this.props.timeOffset).format('HH:mm')
         
         var emergencyDropDown;
          if( this.props.breached){
@@ -213,9 +211,10 @@ class Header extends React.Component {
                         </div>
                         <div className={"gor-menu-subheading "}>
                             <FormattedMessage id="header.currentWarehouse" description='Current Warehouse Time '
-                                            defaultMessage='Current Warehouse Time:{time} '
+                                            defaultMessage='Current Warehouse Time:{time}, {timezone}'
                                             values={{
-                                                time: warehouseTime
+                                                time: warehouseTime,
+                                                timezone: this.props.timeOffset
                                             }}/>          
                         </div>
                     </div>  
