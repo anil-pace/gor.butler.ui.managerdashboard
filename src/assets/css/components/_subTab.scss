@@ -1,49 +1,47 @@
-.gorSubTab.gorContainer{
-			background-color:#F8F8F8;
-			width: auto;
-			display: inline-block;
-			color: #4d5055;
-		}
+.gorSubTab.gorContainer {
+  background-color: #f8f8f8;
+  width: auto;
+  display: inline-block;
+  color: #4d5055;
+  padding-left: 24px;
+}
 
-		.gorSubTab .gor-main-block:hover{
-			background-color:#999999;
-			color : #ffffff;
-		}
+.gorSubTab .gor-main-block:hover {
+  color: #000;
+}
 
-		.gorSubTab .gorInline{
-			display: inline-block;
-			width:100%;
-		}
+.gorSubTab .gorInline {
+  display: inline-block;
+  width: 100%;
+}
 
-		.gorSubTab .gor-main-block {
-			
-			padding-right: 20px;
-			padding-left: 20px;
-			height: 50px;
-			display: table-cell;
-			background: #F8F8F8;
-			cursor: pointer;
-			vertical-align: middle;
-		}
-		.gorSubTab .gor-upperText {
-			font-family: "source sans pro";
-			font-size: 18px;
-			font-weight: bold;
-			width:100%;
-			font-weight: bold;
-			
-		}
+.gorSubTab .gor-main-block {
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 50px;
+  display: table-cell;
+  background: #f8f8f8;
+  opacity: 0.7;
+  cursor: pointer;
+  vertical-align: middle;
+  border-bottom: 2px solid #fff;
+}
+.gorSubTab .gor-upperText {
+  font-family: 'source sans pro';
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  text-transform: uppercase;
+}
 
-		.gorSubTab .gor-main-blockSelect{
-		padding-right: 20px;
-			padding-left: 20px;
-			height: 50px;
-			display: table-cell;
-			cursor: pointer;
-			vertical-align: middle;
-			background-color:#999999;
-			color : #ffffff;
-		}
-		
-		
-		
+.gorSubTab .gor-main-blockSelect {
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 50px;
+  display: table-cell;
+  cursor: pointer;
+  vertical-align: middle;
+  color: #000;
+  opacity: 0.87;
+  border-bottom: 2px solid rgba(255, 129, 2, 1);
+}
