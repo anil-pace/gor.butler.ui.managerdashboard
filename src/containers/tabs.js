@@ -193,82 +193,82 @@ class Tabs extends React.Component{
     newaudit= <FormattedMessage id="newaudit.tab.heading" description="new audit tab" 
               defaultMessage="NEW AUDIT"/>;             
 
-    if(!this.props.system_status)
-    {
-     overviewStatus=offline;
-     systemStatus=offline;
-     ordersStatus=offline;
-     usersStatus=offline;
-     inventoryStatus=offline; 
-     auditStatus=offline;
-     systemClass=GOR_OFFLINE;
-    }
-    else
-    {
-      if(this.props.overview_status=== FULFILLING_ORDERS)
-      {
-        overviewStatus=<FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders" 
-              defaultMessage="Fulfilling orders"/>;  
-      }
-      else
-      {
-        overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
-              defaultMessage="None"/>;          
-      }
-      if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
-      {
+    // if(!this.props.system_status)
+    // {
+    //  overviewStatus=offline;
+    //  systemStatus=offline;
+    //  ordersStatus=offline;
+    //  usersStatus=offline;
+    //  inventoryStatus=offline; 
+    //  auditStatus=offline;
+    //  systemClass=GOR_OFFLINE;
+    // }
+    // else
+    // {
+    //   if(this.props.overview_status=== FULFILLING_ORDERS)
+    //   {
+    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders" 
+    //           defaultMessage="Fulfilling orders"/>;  
+    //   }
+    //   else
+    //   {
+    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status" 
+    //           defaultMessage="None"/>;          
+    //   }
+    //   if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
+    //   {
         
-        systemClass = 'gor-alert';
-        systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
-              defaultMessage="STOPPED"/>; 
-      }
-      else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
-        systemClass = 'gor-alert';
-        systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
-              defaultMessage="PAUSED"/>; 
-      }
-      else if(this.props.breached){
-        systemClass = 'gor-alert';
-        systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency" 
-              defaultMessage="BREACHED"/>; 
-      }
-      else{
-      systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
-              defaultMessage="Online"/>;  
-      systemClass=GOR_ONLINE;
-    }
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency" 
+    //           defaultMessage="STOPPED"/>; 
+    //   }
+    //   else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency" 
+    //           defaultMessage="PAUSED"/>; 
+    //   }
+    //   else if(this.props.breached){
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency" 
+    //           defaultMessage="BREACHED"/>; 
+    //   }
+    //   else{
+    //   systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online" 
+    //           defaultMessage="Online"/>;  
+    //   systemClass=GOR_ONLINE;
+    // }
 
-      ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
-      ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
-                                       defaultMessage="{count}% fulfilled" values={{count:ordersvalue}}/>;  
-      ordersClass=GOR_ONLINE;
+    //   ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
+    //   ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status " 
+    //                                    defaultMessage="{count}% fulfilled" values={{count:ordersvalue}}/>;  
+    //   ordersClass=GOR_ONLINE;
 
-      usersvalue=<FormattedNumber value={this.props.users_online}/>
-      usersStatus=<FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
-                                      defaultMessage="{count} {count,plural,=0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
+    //   usersvalue=<FormattedNumber value={this.props.users_online}/>
+    //   usersStatus=<FormattedMessage id="usersStatus.tab.heading#" description="users Status " 
+    //                                   defaultMessage="{count} {count,plural,=0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;  
 
-      inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
-      inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
-                                           defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;            
-      auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
-                                     defaultMessage="{count} in progress" 
-                                     values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
-      if(this.props.audit_count)
-      {
-        auditClass=GOR_ONLINE;
-      }
-      else
-      {
-        auditClass=GOR_OFFLINE;
-      }
-      if(this.props.audit_alert) {
-        auditClass=(this.props.audit_alert?'gor-alert':auditClass);
-        auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
-                                     defaultMessage="{count} {count,plural, one {alert} other {alerts}}" 
-                                     values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
-       auditIcon=true;                                                        
-      }
-    }
+    //   inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
+    //   inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status " 
+    //                                        defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;            
+    //   auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status " 
+    //                                  defaultMessage="{count} in progress" 
+    //                                  values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;          
+    //   if(this.props.audit_count)
+    //   {
+    //     auditClass=GOR_ONLINE;
+    //   }
+    //   else
+    //   {
+    //     auditClass=GOR_OFFLINE;
+    //   }
+    //   if(this.props.audit_alert) {
+    //     auditClass=(this.props.audit_alert?'gor-alert':auditClass);
+    //     auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert" 
+    //                                  defaultMessage="{count} {count,plural, one {alert} other {alerts}}" 
+    //                                  values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
+    //    auditIcon=true;                                                        
+    //   }
+    // }
 
     items={overview:overview,system:system,order:order,
            users:users,inventory:inventory,audit:audit,
