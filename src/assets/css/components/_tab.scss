@@ -1,106 +1,99 @@
-.gor-tabs{
+.gor-tabs {
+  .gorTab {
+    &.gorContainer {
+      background-color: #4d5055;
+      display: inline-block;
+      height: 48px;
+    }
+    .gor-main-block {
+      width: 118px;
+      padding: 0 20px;
+      height: 48px;
+      display: table-cell;
+      opacity: 0.7;
+      cursor: pointer;
+      vertical-align: middle;
+      text-align: center;
+      &.sel {
+        border-bottom: 2px solid rgba(255, 129, 2, 1);
+        opacity: 1;
+      }
+      .gor-normal-tab {
+        background: #4d5055;
+      }
+      .gor-toastify {
+        position: fixed;
+        width: 400px;
+        height: 83px;
+        border-radius: 6px;
+        background-color: #ec1c2d;
+        box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
+        right: 0;
+        top: 60px;
+      }
+    }
+    .gorInline {
+      display: inline-block;
+      width: 100%;
+    }
+    .gor-upperText {
+      font-family: 'Source Sans Pro';
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.3125;
+      padding-bottom: 3px;
+      color: #ffffff;
+      display: inline-block;
+    }
+    .gorSubText {
+      font-size: 14px;
+      padding-top: 0px;
+      font-weight: bold;
+    }
+    .gorOverview {
+      font-family: 'source sans pro';
+      color: #ffffff;
+    }
+    .gor-online {
+      font-family: 'source sans pro';
+      color: #10c469;
+    }
+    .gor-alert {
+      color: #ec1c24;
+    }
 
-	.gorTab{
-		&.gorContainer{
-			background-color:#4d5055;
-			display: inline-block;
-			height: 60px;
-		}
-		.gor-main-block{
-				width: 118px;
-				padding-left: 20px;
-				height: 62px;
-				display: table-cell;
-				border-right: .5px solid black;
-				cursor: pointer;
-				vertical-align: middle;
-				&:hover{
-					background-color:#323539;
-				}
-				&.sel{
-					background-color:#323539;
-				}
-				.gor-normal-tab
-				{
-				 background: #4d5055;
-				}
-				.gor-toastify{
-				    position: fixed;
-				    width: 400px;
-				    height: 83px;
-				    border-radius: 6px;
-				    background-color: #ec1c2d;
-				    box-shadow: 0 4px 14px 0 rgba(159, 0, 0, 0.3);
-				    right: 0;
-				    top: 60px;
-				}	
-
-			}
-		.gorInline{
-			display: inline-block;
-			width:100%;
-		}
-		.gor-upperText {
-			font-family: "source sans pro";
-			font-size: 18px;
-			font-weight: bold;
-			padding-bottom: 3px;
-			color: #ffffff;
-			display:inline-block;
-		}
-		.gorSubText {
-			font-size: 14px;
-			padding-top: 0px;
-			font-weight: bold;
-		}
-		.gorOverview{
-			font-family: "source sans pro";
-			color: #ffffff;
-		}
-		.gor-online{
-			font-family: "source sans pro";
-			color: #10c469;
-
-		}
-		.gor-alert{
-		    color:#EC1C24;
-		}
-
-		.gor-emergency-alert {
-			color:#FFFFFF;
-		}
-		.gor-offline{
-			font-family: "source sans pro";
-			color: #9C9FA0;
-		}
-		.gorEvent{
-			font-family: "source sans pro";
-			color: #27aae1;
-		}
-		.gorRisk{
-			font-family: "source sans pro";
-			color: #f99405;
-		}
-		.gorError{
-			font-family: "source sans pro";
-			color: #fc3838;
-		}
-		.gorEmergency{
-			font-family: "source sans pro";
-			color: #ffffff;
-			background: #fc3838;
-		}
-		.gorIconsInline{
-			display: inline-block;
-			vertical-align: super;
-			padding-left:18px;
-		}
-		.gorInlineDisplay{
-			display: inline-block;
-			font-size:13px;
-		}
-	}
+    .gor-emergency-alert {
+      color: #ffffff;
+    }
+    .gor-offline {
+      font-family: 'source sans pro';
+      color: #9c9fa0;
+    }
+    .gorEvent {
+      font-family: 'source sans pro';
+      color: #27aae1;
+    }
+    .gorRisk {
+      font-family: 'source sans pro';
+      color: #f99405;
+    }
+    .gorError {
+      font-family: 'source sans pro';
+      color: #fc3838;
+    }
+    .gorEmergency {
+      font-family: 'source sans pro';
+      color: #ffffff;
+      background: #fc3838;
+    }
+    .gorIconsInline {
+      display: inline-block;
+      vertical-align: super;
+      padding-left: 18px;
+    }
+    .gorInlineDisplay {
+      display: inline-block;
+      font-size: 13px;
+    }
+  }
 }
-
-
-
