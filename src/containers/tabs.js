@@ -356,10 +356,13 @@ else
   
   let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+  console.log(this.props);
+  console.log(this.props.tab);
+
 		return (
 		<div className="gor-tabs gor-main-block">
 		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW || this.props.tab === 'md' ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
 		</Link>
 
 		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
