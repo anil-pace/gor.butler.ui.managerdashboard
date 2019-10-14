@@ -1,281 +1,269 @@
-.filterWrapper{
-    .gorToolBarDropDown{
-        padding-left: 0px;
-        .gor-button-wrap{
-            .gor-msuConfig-btn{
-                font-family: 'Source Sans Pro Bold', sans-serif;
-                min-width: calculateRem(145px);
-                height: 2.1875rem;
-                font-size: 0.875rem;
-                border-radius: 3px;
-                display: inline-block;
-                cursor: pointer;
-                font-weight: 600;
-                margin-left: 30px;
-                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-                vertical-align: sub;
-                color: #ffffff;
-                &.grey{
-                    background-color: #4d5055;
-                }
-                &.orange{
-                    background: #f36f36;
-                }
-            }
-
+.gor-msu-config,
+.gor-pps-tab {
+  margin-top: 2px;
+}
+.filterWrapper {
+  .gorToolBarDropDown {
+    padding-left: 0px;
+    .gor-button-wrap {
+      .gor-msuConfig-btn {
+        font-family: 'Source Sans Pro Bold', sans-serif;
+        min-width: calculateRem(145px);
+        height: 2.1875rem;
+        font-size: 0.875rem;
+        border-radius: 3px;
+        display: inline-block;
+        cursor: pointer;
+        font-weight: 600;
+        margin-left: 30px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        vertical-align: sub;
+        color: #ffffff;
+        &.grey {
+          background-color: #4d5055;
         }
+        &.orange {
+          background: #f36f36;
+        }
+      }
     }
+  }
 }
 
-.noDataWrapper{
+.noDataWrapper {
+  font-weight: 600;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calculateRem(30px);
+  color: #aaaaaa;
+}
+
+.changeDestTypeBtn {
+  width: calculateRem(250px);
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border: 1px solid #ec6520;
+  color: #ec6520;
+  height: 35px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.msuConfigTableWrapper {
+  height: auto;
+  width: 100%;
+  background: #ffffff;
+  border-top: 2px solid #dddddd;
+  .DotSeparatorWrapper {
+    margin-left: 30px;
+  }
+  .ProgressBarWrapper {
+    width: calculateRem(120px);
+    margin-top: 5px;
+  }
+  .totalOrderWrapper {
+    position: absolute;
+    margin-left: 8.375rem;
+    line-height: 3em;
+    color: #4a4a4a;
+    font-size: 14px;
     font-weight: 600;
-    height: 70vh;
+  }
+  .msuIdWrapper {
+    padding-left: 7%;
+    .msuId {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333333;
+    }
+    .sourceType {
+      padding-top: 5px;
+      font-size: 14px;
+      font-weight: normal;
+      color: #333333;
+    }
+  }
+}
+
+.gor-smmodal-content {
+  border-radius: 0.5%;
+  margin-top: 15vh;
+  width: 55vw;
+  background: #fff;
+  margin: 0 auto;
+  .gor-smmodal-head {
+    height: 10vh;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: calculateRem(30px);
-    color: #aaaaaa;
-}
+    justify-content: space-between;
+    border-bottom: 1px solid #666666;
 
-.changeDestTypeBtn{
-    width: calculateRem(250px);
-    font-weight: bold;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    border: 1px solid #ec6520;
-    color: #ec6520;
-    height: 35px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.msuConfigTableWrapper{
-    height: auto;
+    .gor-usr-add {
+      padding-left: 5%;
+      font-size: 1.5rem;
+    }
+    .close {
+      margin-right: 2%;
+      background: #f2f2f2;
+      color: #aaaaaa;
+      float: right;
+      text-align: center;
+      font-size: 28px;
+      width: 30px;
+      height: 30px;
+      padding: 10px;
+      border-radius: 50%;
+    }
+  }
+  .gor-smmodal-body {
+    margin: auto;
+    // margin-top: 40px;
+    height: 60vh;
+    border-bottom: 1px solid #666666;
     width: 100%;
-    background: #ffffff;
-    border-top: 2px solid #dddddd;
-    .DotSeparatorWrapper{
-        margin-left: 30px
-    }
-    .ProgressBarWrapper{
-        width: calculateRem(120px);
-        margin-top: 5px
-    }
-    .totalOrderWrapper{
-        position: absolute;
-        margin-left: 8.375rem;
-        line-height: 3em;
-        color: #4a4a4a;
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .msuIdWrapper{
-        padding-left: 7%;
-        .msuId{
-            font-size: 16px;
-            font-weight: bold;
-            color: #333333;
-        }
-        .sourceType{
-            padding-top: 5px;
-            font-size: 14px;
-            font-weight: normal;
-            color: #333333;
-        }
-    }
 
-}
-
-.gor-smmodal-content{
-    border-radius: 0.5%;
-    margin-top: 15vh; 
-    width: 55vw;
-    background: #fff;
-    margin: 0 auto;
-    .gor-smmodal-head{
-        height: 10vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #666666;
-
-        .gor-usr-add{
-            padding-left: 5%;
-            font-size: 1.5rem;
+    .gor-body-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      .sourceWrapper {
+        height: 100%;
+        width: 50%;
+        .sourceTypeHeading {
+          height: 15%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 20px;
         }
-        .close{
-            margin-right: 2%;
-            background: #f2f2f2;
-            color: #AAAAAA;
-            float: right;
-            text-align: center;
-            font-size: 28px;
-            width: 30px;
-            height: 30px;
-            padding: 10px;
-            border-radius: 50%;
-        }
-    }
-    .gor-smmodal-body{
-        margin: auto;
-        // margin-top: 40px;
-        height: 60vh;
-        border-bottom: 1px solid #666666;
-        width: 100%;
 
-        .gor-body-content{
-            height: 100%;
+        .rackWrapper {
+          height: 85%;
+
+          .parent-container {
+            width: 100%;
+            height: 85%; //earlier not there
             display: flex;
             align-items: center;
-            .sourceWrapper{
-                 height: 100%;
-                 width: 50%;
-                 .sourceTypeHeading{
-                    height: 15%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: bold;
-                    font-size: 20px;
-                }
-
-                .rackWrapper{
-                    height: 85%;
-
-                    .parent-container{
-                        width: 100%;
-                        height: 85%; //earlier not there
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        .slotsFlexContainer{
-                            display: flex;
-                            flex-flow:column;
-                            height: 85%;
-                            width: 70%;
-                            background: #979797;
-                            position: relative;
-                            float: left;
-                            .subSlot{
-                                position: absolute;
-                                box-sizing: border-box;
-                            }       
-                            .legsSpaceContainer{
-                                position: relative; //position: absolute;
-                                top: 100%; 
-                                height: 20%;//height: 15vh; 
-                                margin-left: 0%;
-                                border-left: 0.625vw solid #939598;
-                                border-right: 0.625vw solid #939598;
-                            }
-                          
-                        }
-
-                    }
-
-                }
+            justify-content: center;
+            .slotsFlexContainer {
+              display: flex;
+              flex-flow: column;
+              height: 85%;
+              width: 70%;
+              background: #979797;
+              position: relative;
+              float: left;
+              .subSlot {
+                position: absolute;
+                box-sizing: border-box;
+              }
+              .legsSpaceContainer {
+                position: relative; //position: absolute;
+                top: 100%;
+                height: 20%; //height: 15vh;
+                margin-left: 0%;
+                border-left: 0.625vw solid #939598;
+                border-right: 0.625vw solid #939598;
+              }
             }
-
-            .destWrapper{
-                height: 100%;
-                 width: 50%;
-                 .gor-utility-dropDown-wrap{
-                    height: 12%;
-                    width: 70%;
-                    margin-left: calculateRem(58px);
-                 }
-                .Order-Stats-Drop{
-                    height: 15%;
-                    width: 100%;
-                    display:flex;
-                    align-items:center;
-                    justify-content: center;
-                    max-width: 100%;
-                    .ddown{
-                        border: 1px solid #888888;
-                        .Dropdown-control{
-                            background: transparent;
-                        }
-                    }
-                }
-                .rackWrapper{
-                    height: 85%;
-
-                    .parent-container{
-                        width: 100%;
-                        height: 85%; //earlier not there
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        .slotsFlexContainer{
-                            display: flex;
-                            flex-flow:column;
-                            height: 85%;
-                            width: 70%;
-                            background: #979797;
-                            position: relative;
-                            float: left;
-                            .subSlot{
-                                position: absolute;
-                                box-sizing: border-box;
-                            }       
-                            .legsSpaceContainer{
-                                position: relative; //position: absolute;
-                                top: 100%; 
-                                height: 20%;//height: 15vh; 
-                                margin-left: 0%;
-                                border-left: 0.625vw solid #939598;
-                                border-right: 0.625vw solid #939598;
-                            }
-                          
-                        }
-
-                    }
-
-                }
-            }
+          }
         }
+      }
+
+      .destWrapper {
+        height: 100%;
+        width: 50%;
+        .gor-utility-dropDown-wrap {
+          height: 12%;
+          width: 70%;
+          margin-left: calculateRem(58px);
+        }
+        .Order-Stats-Drop {
+          height: 15%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 100%;
+          .ddown {
+            border: 1px solid #888888;
+            .Dropdown-control {
+              background: transparent;
+            }
+          }
+        }
+        .rackWrapper {
+          height: 85%;
+
+          .parent-container {
+            width: 100%;
+            height: 85%; //earlier not there
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .slotsFlexContainer {
+              display: flex;
+              flex-flow: column;
+              height: 85%;
+              width: 70%;
+              background: #979797;
+              position: relative;
+              float: left;
+              .subSlot {
+                position: absolute;
+                box-sizing: border-box;
+              }
+              .legsSpaceContainer {
+                position: relative; //position: absolute;
+                top: 100%;
+                height: 20%; //height: 15vh;
+                margin-left: 0%;
+                border-left: 0.625vw solid #939598;
+                border-right: 0.625vw solid #939598;
+              }
+            }
+          }
+        }
+      }
     }
-    .gor-smmodal-footer{
-        height: 10vh;
-        display:flex;
-        align-items: center;
-        justify-content:space-between;
-        .gor-footer-msg{
-            padding-left: 5%;
-        }
-        .gor-button-wrap{
-            padding-right: 5%;
-            .gor-msuConfig-btn{
-                font-family: 'Source Sans Pro Bold', sans-serif;
-                min-width: calculateRem(145px);
-                height: 2.1875rem;
-                font-size: 0.875rem;
-                border-radius: 3px;
-                display: inline-block;
-                cursor: pointer;
-                font-weight: 600;
-                margin-left: 30px;
-                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-                vertical-align: sub;
-                color: #ffffff;
-                &.grey{
-                    background-color: #4d5055;
-                }
-                &.orange{
-                    background: #f36f36;
-                }
-            }
-        }
+  }
+  .gor-smmodal-footer {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .gor-footer-msg {
+      padding-left: 5%;
     }
+    .gor-button-wrap {
+      padding-right: 5%;
+      .gor-msuConfig-btn {
+        font-family: 'Source Sans Pro Bold', sans-serif;
+        min-width: calculateRem(145px);
+        height: 2.1875rem;
+        font-size: 0.875rem;
+        border-radius: 3px;
+        display: inline-block;
+        cursor: pointer;
+        font-weight: 600;
+        margin-left: 30px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        vertical-align: sub;
+        color: #ffffff;
+        &.grey {
+          background-color: #4d5055;
+        }
+        &.orange {
+          background: #f36f36;
+        }
+      }
+    }
+  }
 }
-
-
-
-    
-
-    
-
-
