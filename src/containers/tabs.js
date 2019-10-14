@@ -356,8 +356,6 @@ else
   
   let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
   let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
-  console.log(this.props);
-  console.log(this.props.tab);
 
 		return (
 		<div className="gor-tabs gor-main-block">
