@@ -96,7 +96,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                height
+                breadth
                 direction
                 enabled
                 length
@@ -147,7 +147,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                height
+                breadth
                 direction
                 enabled
                 length
@@ -186,7 +186,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                height
+                breadth
                 direction
                 enabled
                 length
@@ -238,7 +238,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  height
+                  breadth
                   direction
                   enabled
                   length
@@ -289,7 +289,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  height
+                  breadth
                   direction
                   enabled
                   length
@@ -331,7 +331,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  height
+                  breadth
                   direction
                   enabled
                   length
