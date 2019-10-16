@@ -7200,6 +7200,36 @@
     "filepath": "./src/containers/tabs.js"
   },
   {
+    "id": "downloads.tab.heading",
+    "description": "downloads tab",
+    "defaultMessage": "DOWNLOADS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "inbound.tab.heading",
+    "description": "inbound tab",
+    "defaultMessage": "INBOUND",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "outbound.tab.heading",
+    "description": "outbound tab",
+    "defaultMessage": "OUTBOUND",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "exceptions.tab.heading",
+    "description": "exceptions tab",
+    "defaultMessage": "EXCEPTIONS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "customernotifications.tab.heading",
+    "description": "customernotifications tab",
+    "defaultMessage": "CUSTOMER NOTIFICATIONS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
     "id": "operation.alert.resumed",
     "description": "Text to resume operation",
     "defaultMessage": "All operation has been resumed to normal state.",

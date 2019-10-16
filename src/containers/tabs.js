@@ -1,39 +1,63 @@
-import React  from 'react';
-import Tab from '../components/tabs/tab';
-import {Link,hashHistory}  from 'react-router';
-import { connect } from 'react-redux' ;
-import {setFireHazrdFlag} from '../actions/tabActions';
-import {modal} from 'react-redux-modal';
-import {setInventorySpinner} from '../actions/inventoryActions';
-import {setAuditSpinner} from '../actions/auditActions';
-import {setButlerSpinner} from '../actions/spinnerAction';
-import {setEmergencyModalStatus} from '../actions/tabActions'  
-import {OVERVIEW,SYSTEM,ORDERS,USERS,REPORTS,TAB_ROUTE_MAP,INVENTORY,AUDIT,
-FULFILLING_ORDERS,GOR_OFFLINE,GOR_ONLINE,GOR_NORMAL_TAB,GOR_FAIL,
-SOFT_MANUAL,HARD,SOFT,UTILITIES,FIRE_EMERGENCY_POPUP_FLAG,EMERGENCY_FIRE, NEWAUDIT,AUDITLISTING} from '../constants/frontEndConstants';
-import { FormattedMessage,FormattedNumber,FormattedRelative } from 'react-intl';
-import OperationStop from '../containers/emergencyProcess/OperationStop';
-import OperationPause from '../containers/emergencyProcess/OperationPause';
-import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'; 
-import fireHazard from '../containers/emergencyProcess/fireHazard'; 
-import GorToastify from '../components/gor-toastify/gor-toastify';
-import {setNotificationNull
-} from "../actions/notificationAction";
+import React from 'react'
+import Tab from '../components/tabs/tab'
+import { Link, hashHistory } from 'react-router'
+import { connect } from 'react-redux'
+import { setFireHazrdFlag } from '../actions/tabActions'
+import { modal } from 'react-redux-modal'
+import { setInventorySpinner } from '../actions/inventoryActions'
+import { setAuditSpinner } from '../actions/auditActions'
+import { setButlerSpinner } from '../actions/spinnerAction'
+import { setEmergencyModalStatus } from '../actions/tabActions'
+import {
+  OVERVIEW,
+  SYSTEM,
+  ORDERS,
+  USERS,
+  REPORTS,
+  TAB_ROUTE_MAP,
+  INVENTORY,
+  AUDIT,
+  FULFILLING_ORDERS,
+  GOR_OFFLINE,
+  GOR_ONLINE,
+  GOR_NORMAL_TAB,
+  GOR_FAIL,
+  SOFT_MANUAL,
+  HARD,
+  SOFT,
+  UTILITIES,
+  DOWNLOADS,
+  INBOUND,
+  OUTBOUND,
+  EXCEPTIONS,
+  CUSTOMERNOTIFICATIONS,
+  FIRE_EMERGENCY_POPUP_FLAG,
+  EMERGENCY_FIRE,
+  NEWAUDIT,
+  AUDITLISTING
+} from '../constants/frontEndConstants'
+import {
+  FormattedMessage,
+  FormattedNumber,
+  FormattedRelative
+} from 'react-intl'
+import OperationStop from '../containers/emergencyProcess/OperationStop'
+import OperationPause from '../containers/emergencyProcess/OperationPause'
+import EmergencyRelease from '../containers/emergencyProcess/emergencyRelease'
+import fireHazard from '../containers/emergencyProcess/fireHazard'
+import GorToastify from '../components/gor-toastify/gor-toastify'
+import { setNotificationNull } from '../actions/notificationAction'
 
-
-
-class Tabs extends React.Component{
-
-    /**
-     * [handleTabClick stores the selected tab]
-     * @param  {[string]} selTab [Name of selected tab]
-     * @return {[none]}        
-     */
-     constructor(props) 
-  {  
-    super(props);
-    this.state={
-      isHardEmergencyOpen:this.props.isHardEmergencyOpen
+class Tabs extends React.Component {
+  /**
+   * [handleTabClick stores the selected tab]
+   * @param  {[string]} selTab [Name of selected tab]
+   * @return {[none]}
+   */
+  constructor(props) {
+    super(props)
+    this.state = {
+      isHardEmergencyOpen: this.props.isHardEmergencyOpen
     }
     this._openPopup =  this._openPopup.bind(this);
     this._redirectAudit=this._redirectAudit.bind(this);
@@ -46,32 +70,91 @@ class Tabs extends React.Component{
     hashHistory.push({pathname: "/audit/auditlisting"})
   }
 
+  loginManagerDashboard = selectTab => {
+    let domain = window.location.origin
 
-    handleTabClick(selTab){
-    	/**
-         * Displaying loader currently for User tab
-         * only
-         */
-        switch(selTab){
+    let authtoken = sessionStorage.getItem('auth_token')
 
-          case SYSTEM:
-          this.props.setButlerSpinner(true);
-          break;
-
-          case INVENTORY:
-          this.props.setInventorySpinner(true);
-          break;
-          
-          default:
-          this.props.setInventorySpinner(false);
-          this.props.setButlerSpinner(false);
-          
-        }
+    switch (selectTab) {
+      case 'Downloads':
+        var new_win = window.open(domain + '/cockpit/#/reports/reportsdownload')
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
+      case 'Inbound':
+        var new_win = window.open(domain + '/cockpit/#/inbound/putsummary')
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
+      case 'Outbound':
+        var new_win = window.open(domain + '/cockpit/#/orders/ordersummary')
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
+      case 'Exceptions':
+        var new_win = window.open(domain + '/cockpit/#/exception/exceptionlist')
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
+        case 'CustomerNotifications':
+        var new_win = window.open(domain + '/cockpit/#/notification/notificationlist')
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
     }
-  _stopOperation(stopFlag,additionalProps={}) {
-      modal.add(OperationStop, {
-        title: '',
-        size: 'large', // large, medium or small,
+  }
+
+  handleTabClick(selTab) {
+    /**
+     * Displaying loader currently for User tab
+     * only
+     */
+    switch (selTab) {
+        case SYSTEM:
+        this.props.setButlerSpinner(true)
+        break
+
+        case INVENTORY:
+        this.props.setInventorySpinner(true)
+        break
+
+        case DOWNLOADS:
+        this.loginManagerDashboard('Downloads')
+        break
+
+        case INBOUND:
+        this.loginManagerDashboard('Inbound')
+        
+        break
+
+        case OUTBOUND:
+        this.loginManagerDashboard('Outbound')
+        break
+
+        case EXCEPTIONS:
+        this.loginManagerDashboard('Exceptions')
+        break
+
+        case CUSTOMERNOTIFICATIONS:
+        this.loginManagerDashboard('CustomerNotifications')
+        break
+
+      default:
+        this.props.setInventorySpinner(false)
+        this.props.setButlerSpinner(false)
+    }
+  }
+
+
+  _stopOperation(stopFlag, additionalProps = {}) {
+    modal.add(OperationStop, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
       emergencyPress: stopFlag,
@@ -159,39 +242,159 @@ class Tabs extends React.Component{
     
 
   }
-  _parseStatus()
-  {
-    let overview,system,order,ordersvalue,users,reports,usersvalue,inventoryvalue,overviewClass,
-        inventory,audit,overviewStatus,systemStatus,ordersStatus,usersStatus,auditStatus,inventoryStatus,
-        offline,systemClass,ordersClass,auditClass,items={}, auditIcon=false,utilities, newaudit, newauditStatus, newauditClass, newauditIcon;
 
-    offline=<FormattedMessage id="tabs.offline" description="offline" 
-              defaultMessage="Offline"/>;
+  _parseStatus() {
+    let overview,
+      system,
+      order,
+      ordersvalue,
+      users,
+      reports,
+      usersvalue,
+      inventoryvalue,
+      overviewClass,
+      inventory,
+      audit,
+      overviewStatus,
+      systemStatus,
+      ordersStatus,
+      usersStatus,
+      auditStatus,
+      inventoryStatus,
+      offline,
+      systemClass,
+      ordersClass,
+      auditClass,
+      items = {},
+      auditIcon = false,
+      utilities,
+      newaudit,
+      newauditStatus,
+      newauditClass,
+      newauditIcon,
+      downloads,
+      inbound,
+      outbound,
+      exceptions,
+      customernotifications
 
-    overview=<FormattedMessage id="overview.tab.heading" description="overview tab" 
-              defaultMessage="OVERVIEW"/>;
+    offline = (
+      <FormattedMessage
+        id='tabs.offline'
+        description='offline'
+        defaultMessage='Offline'
+      />
+    )
 
-    system=<FormattedMessage id="system.tab.heading" description="system tab" 
-              defaultMessage="SYSTEM"/>;
-              
-    order=<FormattedMessage id="orders.tab.heading" description="orders tab" 
-              defaultMessage="ORDERS"/>;
-              
-    users=<FormattedMessage id="users.tab.heading" description="users tab" 
-              defaultMessage="USERS"/> ;
-    inventory=<FormattedMessage id="inventory.tab.heading" description="inventory tab" 
-              defaultMessage="INVENTORY"/>; 
+    overview = (
+      <FormattedMessage
+        id='overview.tab.heading'
+        description='overview tab'
+        defaultMessage='OVERVIEW'
+      />
+    )
 
-    audit=<FormattedMessage id="audit.tab.heading" description="audit tab" 
-              defaultMessage="AUDIT"/>;  
+    system = (
+      <FormattedMessage
+        id='system.tab.heading'
+        description='system tab'
+        defaultMessage='SYSTEM'
+      />
+    )
 
-    utilities=<FormattedMessage id="utilities.tab.heading" description="audit tab" 
-              defaultMessage="UTILITIES"/>;   
-    reports= <FormattedMessage id="reports.tab.heading" description="reports tab" 
-              defaultMessage="REPORTS"/>;      
+    order = (
+      <FormattedMessage
+        id='orders.tab.heading'
+        description='orders tab'
+        defaultMessage='ORDERS'
+      />
+    )
 
-    newaudit= <FormattedMessage id="newaudit.tab.heading" description="new audit tab" 
-              defaultMessage="NEW AUDIT"/>;             
+    users = (
+      <FormattedMessage
+        id='users.tab.heading'
+        description='users tab'
+        defaultMessage='USERS'
+      />
+    )
+    inventory = (
+      <FormattedMessage
+        id='inventory.tab.heading'
+        description='inventory tab'
+        defaultMessage='INVENTORY'
+      />
+    )
+
+    audit = (
+      <FormattedMessage
+        id='audit.tab.heading'
+        description='audit tab'
+        defaultMessage='AUDIT'
+      />
+    )
+
+    utilities = (
+      <FormattedMessage
+        id='utilities.tab.heading'
+        description='audit tab'
+        defaultMessage='UTILITIES'
+      />
+    )
+    reports = (
+      <FormattedMessage
+        id='reports.tab.heading'
+        description='reports tab'
+        defaultMessage='REPORTS'
+      />
+    )
+
+    newaudit = (
+      <FormattedMessage
+        id='newaudit.tab.heading'
+        description='new audit tab'
+        defaultMessage='NEW AUDIT'
+      />
+    )
+
+    downloads = (
+      <FormattedMessage
+        id='downloads.tab.heading'
+        description='downloads tab'
+        defaultMessage='DOWNLOADS'
+      />
+    )
+
+    inbound = (
+      <FormattedMessage
+        id='inbound.tab.heading'
+        description='inbound tab'
+        defaultMessage='INBOUND'
+      />
+    )
+
+    outbound = (
+      <FormattedMessage
+        id='outbound.tab.heading'
+        description='outbound tab'
+        defaultMessage='OUTBOUND'
+      />
+    )
+
+    exceptions = (
+      <FormattedMessage
+        id='exceptions.tab.heading'
+        description='exceptions tab'
+        defaultMessage='EXCEPTIONS'
+      />
+    )
+
+    customernotifications = (
+      <FormattedMessage
+        id='customernotifications.tab.heading'
+        description='customernotifications tab'
+        defaultMessage='CUSTOMER NOTIFICATIONS'
+      />
+    )
 
     // if(!this.props.system_status)
     // {
@@ -270,15 +473,36 @@ class Tabs extends React.Component{
     //   }
     // }
 
-    items={overview:overview,system:system,order:order,
-           users:users,inventory:inventory,audit:audit,
-           reports:reports,
-           overviewStatus:overviewStatus, overviewClass:overviewClass,systemStatus:systemStatus,ordersStatus:ordersStatus,
-           auditStatus:auditStatus,usersStatus:usersStatus,inventoryStatus:inventoryStatus,
-           systemClass:systemClass,ordersClass:ordersClass,auditClass:auditClass,
-           auditIcon:auditIcon, utilities:utilities,
-           newaudit:newaudit, newauditStatus:newauditStatus, newauditClass:newauditClass, newauditIcon:newauditIcon
-         };
+    items = {
+      overview: overview,
+      system: system,
+      order: order,
+      users: users,
+      inventory: inventory,
+      audit: audit,
+      downloads:downloads,
+      inbound:inbound,
+      outbound:outbound,
+      exceptions:exceptions,
+      customernotifications:customernotifications,
+      reports: reports,
+      overviewStatus: overviewStatus,
+      overviewClass: overviewClass,
+      systemStatus: systemStatus,
+      ordersStatus: ordersStatus,
+      auditStatus: auditStatus,
+      usersStatus: usersStatus,
+      inventoryStatus: inventoryStatus,
+      systemClass: systemClass,
+      ordersClass: ordersClass,
+      auditClass: auditClass,
+      auditIcon: auditIcon,
+      utilities: utilities,
+      newaudit: newaudit,
+      newauditStatus: newauditStatus,
+      newauditClass: newauditClass,
+      newauditIcon: newauditIcon
+    }
 
     return items;
   }
@@ -338,67 +562,232 @@ else
     notificationWrap.push(singleNotification);
   return notificationWrap;
 }
-
-	render(){
-  let items=this._parseStatus();
-  let showFireHazardPopup,notificationPopup;
-  if(this.props.firehazadflag && (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime))
-  {
-  showFireHazardPopup=true;
-  }
-  else
-  {
-  showFireHazardPopup=false;
-  }
-  if(this.props.noticationData){
-    notificationPopup=true;
-  }
-  
-  let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
-  let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
-
-		return (
-		<div className="gor-tabs gor-main-block">
-		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW || this.props.tab === 'md' ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
-		</Link>
-
-		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-  
-
-    <Link to="/audit/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
-      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
-      </Link>
-    <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
-      <Tab items={{ tab: items.reports}} changeClass={(this.props.tab.toUpperCase()=== REPORTS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
-    <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
-		
-		<Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
-			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-    {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
-      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>:""}
-
     
-   {showFireHazardPopup?notificationWrap:""}
-   {notificationPopup?notificationWrap:""}
-   
-  </div>
-		);
-	}
+
+
+  render() {
+    let items = this._parseStatus()
+    let showFireHazardPopup, notificationPopup
+    if (
+      this.props.firehazadflag &&
+      (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime)
+    ) {
+      showFireHazardPopup = true
+    } else {
+      showFireHazardPopup = false
+    }
+    if (this.props.noticationData) {
+      notificationPopup = true
+    }
+
+    let notificationWrap = this._processNotification(
+      notificationPopup,
+      showFireHazardPopup
+    )
+    let showUtilityTab =
+      this.props.config.utility_tab && this.props.config.utility_tab.enabled
+
+    return (
+      <div className='gor-tabs gor-main-block'>
+        <Link to='/overview' onClick={this.handleTabClick.bind(this, OVERVIEW)}>
+          <Tab
+            items={{
+              tab: items.overview,
+              Status: items.overviewStatus,
+              currentState: items.overviewClass
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === OVERVIEW ||
+              this.props.tab === 'md'
+                ? 'sel'
+                : GOR_NORMAL_TAB
+            }
+            subIcons={false}
+          />
+        </Link>
+
+        <Link
+          to='/inbound/putsummary'
+          onClick={this.handleTabClick.bind(this, OUTBOUND)}
+        >
+          <Tab
+            items={{
+              tab: items.outbound,
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === OUTBOUND ? 'sel' : GOR_NORMAL_TAB
+            }
+          />
+        </Link>
+
+        <Link
+          to='/inbound/putsummary'
+          onClick={this.handleTabClick.bind(this, INBOUND)}
+        >
+          <Tab
+            items={{
+              tab: items.inbound,
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === INBOUND ? 'sel' : GOR_NORMAL_TAB
+            }
+          />
+        </Link>
+
+
+        <Link
+          to='/audit/auditlisting'
+          onClick={this.handleTabClick.bind(this, AUDITLISTING)}
+        >
+          <Tab
+            items={{
+              tab: items.audit,
+              Status: items.auditStatus,
+              currentState: items.auditClass
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === AUDIT ? 'sel' : GOR_NORMAL_TAB
+            }
+            subIcons={items.auditIcon}
+          />
+        </Link>
+
+        <Link
+          to='/inventory'
+          onClick={this.handleTabClick.bind(this, INVENTORY)}
+        >
+          <Tab
+            items={{
+              tab: items.inventory,
+              Status: items.inventoryStatus,
+              currentState: ''
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === INVENTORY
+                ? 'sel'
+                : GOR_NORMAL_TAB
+            }
+            subIcons={false}
+          />
+        </Link>
+
+        <Link
+          to='/system/sysOverview'
+          onClick={this.handleTabClick.bind(this, SYSTEM)}
+        >
+          <Tab
+            items={{
+              tab: items.system,
+              Status: items.systemStatus,
+              currentState: items.systemClass
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === SYSTEM ? 'sel' : GOR_NORMAL_TAB
+            }
+            subIcons={true}
+          />
+        </Link>
+
+        
+        
+        
+
+        <Link to='/users' onClick={this.handleTabClick.bind(this, USERS)}>
+          <Tab
+            items={{
+              tab: items.users,
+              Status: items.usersStatus,
+              currentState: ''
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === USERS ? 'sel' : GOR_NORMAL_TAB
+            }
+            subIcons={false}
+          />
+        </Link>
+
+        <Link
+          to='/reports/operationsLog'
+          onClick={this.handleTabClick.bind(this, REPORTS)}
+        >
+          <Tab
+            items={{ tab: items.reports }}
+            changeClass={
+              this.props.tab.toUpperCase() === REPORTS ? 'sel' : GOR_NORMAL_TAB
+            }
+            subIcons={false}
+          />
+        </Link>
+
+        <Link
+          to='reports/reportsdownload'
+          onClick={this.handleTabClick.bind(this, DOWNLOADS)}
+        >
+          <Tab
+            items={{
+              tab: items.downloads,
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === DOWNLOADS ? 'sel' : GOR_NORMAL_TAB
+            }
+          />
+        </Link>
+
+        <Link
+          to='/reports/reportsdownload'
+          onClick={this.handleTabClick.bind(this, EXCEPTIONS)}
+        >
+          <Tab
+            items={{
+              tab: items.exceptions,
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === EXCEPTIONS ? 'sel' : GOR_NORMAL_TAB
+            }
+          />
+        </Link>
+
+        <Link
+          to='/notification/notificationlist'
+          onClick={this.handleTabClick.bind(this, CUSTOMERNOTIFICATIONS)}
+        >
+          <Tab
+            items={{
+              tab: items.customernotifications,
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === CUSTOMERNOTIFICATIONS ? 'sel' : GOR_NORMAL_TAB
+            }
+          />
+        </Link>
+
+        {showUtilityTab ? (
+          <Link
+            to='/utilities'
+            onClick={this.handleTabClick.bind(this, UTILITIES)}
+          >
+            <Tab
+              items={{ tab: items.utilities, Status: '', currentState: '' }}
+              changeClass={
+                this.props.tab.toUpperCase() === UTILITIES
+                  ? 'sel'
+                  : GOR_NORMAL_TAB
+              }
+              subIcons={false}
+            />
+          </Link>
+          ) : (
+          ''
+        )}
+       
+        {showFireHazardPopup ? notificationWrap : ''}
+        {notificationPopup ? notificationWrap : ''}
+      </div>
+    )
+  }
 }
+  
+ 
 
 function mapStateToProps(state, ownProps){
 

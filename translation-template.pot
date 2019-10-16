@@ -5288,6 +5288,31 @@ msgstr ""
         msgid "NEW AUDIT"
         msgstr ""
 
+        #: downloads.tab.heading
+        msgctxt "downloads.tab.heading"
+        msgid "DOWNLOADS"
+        msgstr ""
+
+        #: inbound.tab.heading
+        msgctxt "inbound.tab.heading"
+        msgid "INBOUND"
+        msgstr ""
+
+        #: outbound.tab.heading
+        msgctxt "outbound.tab.heading"
+        msgid "OUTBOUND"
+        msgstr ""
+
+        #: exceptions.tab.heading
+        msgctxt "exceptions.tab.heading"
+        msgid "EXCEPTIONS"
+        msgstr ""
+
+        #: customernotifications.tab.heading
+        msgctxt "customernotifications.tab.heading"
+        msgid "CUSTOMER NOTIFICATIONS"
+        msgstr ""
+
         #: operation.alert.resumed
         msgctxt "operation.alert.resumed"
         msgid "All operation has been resumed to normal state."

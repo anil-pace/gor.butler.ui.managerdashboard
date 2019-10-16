@@ -108,6 +108,8 @@ export const USERS = 'USERS'
 export const AUDIT = 'AUDIT'
 export const REPORTS = 'REPORTS'
 export const UTILITIES = 'UTILITIES'
+export const DOWNLOADS = 'DOWNLOADS'
+export const CUSTOMERNOTIFICATIONS ='CUSTOMER NOTIFICATIONS'
 export const NOTIFICATION_TAB = 'Notification'
 export const BUTLERBOTS_TAB = 'Butler Bots'
 export const CHARGING_TAB = 'Charging Station'
@@ -317,7 +319,8 @@ export const TAB_ROUTE_MAP = {
   [INVENTORY]: 'inventory',
   [USERS]: 'users',
   [AUDIT]: 'audit',
-  [UTILITIES]: 'utilities'
+  [UTILITIES]: 'utilities',
+  [DOWNLOADS]: 'downloads',
 }
 export const SYS_SUB_TAB_ROUTE_MAP = {
   [NOTIFICATION]: 'notification',
