@@ -76,7 +76,10 @@ const notificationSocketMiddleware = (function() {
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL))
+        // @ts-ignore
+        socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL), {
+          heartbeat: false
+        })
         // //new WebSocket(WS_URL);
         socket.connect('', '', onOpen(socket, store, action.token))
         /*socket.onmessage = onMessage(socket,store);
