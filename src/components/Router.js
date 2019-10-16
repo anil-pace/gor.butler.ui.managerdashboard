@@ -149,7 +149,7 @@ class Routes extends React.Component {
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="system" path="/system" className="gorResponsive"
                         getComponent={(location, callback) => {
                             require.ensure([], function (require) {
-                                callback(null, require('../containers/systemTab').default);
+                                callback(null, require('../containers/systemTab/sysOverview').default);
                             }, "system");
                         }}
                     >

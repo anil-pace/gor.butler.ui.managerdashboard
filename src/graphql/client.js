@@ -26,7 +26,7 @@ const cache = new InMemoryCache({
 
 let state_link = withClientState({ ...resolvers, cache })
 let client = new ApolloClient({
-  ssrForceFetchDelay: 0,
+  ssrForceFetchDelay: 100,
   link: ApolloLink.from([
     errorLink,
     state_link,
