@@ -90,7 +90,6 @@ class Tabs extends React.Component {
         break
       case 'Outbound':
         var new_win = window.open(domain + '/cockpit/#/orders/ordersummary')
-        debugger
         setTimeout(function() {
           new_win.postMessage(authtoken, domain)
         }, 0)
@@ -134,7 +133,6 @@ class Tabs extends React.Component {
         break
 
         case OUTBOUND:
-          debugger
         this.loginManagerDashboard('Outbound')
         break
 
