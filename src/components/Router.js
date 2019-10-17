@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { loginRequest } from '../actions/loginAction';
-import Overview from '../containers/OverviewTab';
 import { tabSelected, subTabSelected } from '../actions/tabSelectAction';
 import { setInventorySpinner } from '../actions/inventoryActions';
 import { setAuditSpinner } from '../actions/auditActions';
@@ -13,7 +12,6 @@ import { setOrderListSpinner } from '../actions/orderListActions';
 import { setWavesSpinner, setButlerSpinner, setPpsSpinner, setCsSpinner, setUserSpinner } from '../actions/spinnerAction';
 import { AUDIT, ORDERLIST, WAVES, BUTLERBOTS, PPS, CHARGING, USER, MSU } from '../constants/appConstants';
 import { OVERVIEW, TAB_ROUTE_MAP, INVENTORY } from '../constants/frontEndConstants';
-import { translationMessages } from '../utilities/i18n';
 import { updateIntl } from 'react-intl-redux';
 
 class Routes extends React.Component {
@@ -149,7 +147,7 @@ class Routes extends React.Component {
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="system" path="/system" className="gorResponsive"
                         getComponent={(location, callback) => {
                             require.ensure([], function (require) {
-                                callback(null, require('../containers/systemTab/sysOverview').default);
+                                callback(null, require('../containers/systemTabs/sysOverview').default);
                             }, "system");
                         }}
                     >

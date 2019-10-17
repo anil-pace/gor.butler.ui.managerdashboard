@@ -408,7 +408,6 @@ function mapStateToProps(state, ownProps){
          system_emergency:state.tabsData.system_emergency||false,
          lastEmergencyState:state.tabsData.lastEmergencyState || "none",
          system_data:state.tabsData.system_data||null,
-         lastEmergencyState:state.tabsData.lastEmergencyState,
          breached: state.tabsData.breached,
          users_online:state.tabsData.users_online||0,
          audit_count:state.tabsData.audit_count||0,
