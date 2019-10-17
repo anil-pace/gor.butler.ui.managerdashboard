@@ -28,7 +28,7 @@ import {
   UTILITIES,
   DOWNLOADS,
   INBOUND,
-  OUTBOUND,
+  OUTBOUND, 
   EXCEPTIONS,
   CUSTOMERNOTIFICATIONS,
   FIRE_EMERGENCY_POPUP_FLAG,
@@ -90,6 +90,7 @@ class Tabs extends React.Component {
         break
       case 'Outbound':
         var new_win = window.open(domain + '/cockpit/#/orders/ordersummary')
+        debugger
         setTimeout(function() {
           new_win.postMessage(authtoken, domain)
         }, 0)
@@ -133,6 +134,7 @@ class Tabs extends React.Component {
         break
 
         case OUTBOUND:
+          debugger
         this.loginManagerDashboard('Outbound')
         break
 
@@ -588,7 +590,7 @@ else
       this.props.config.utility_tab && this.props.config.utility_tab.enabled
 
     return (
-      <div className='gor-tabs gor-main-block'>
+      <div className='gor-tabs gor-main-block gor-scrollable-tab'>
         <Link to='/overview' onClick={this.handleTabClick.bind(this, OVERVIEW)}>
           <Tab
             items={{
@@ -607,12 +609,12 @@ else
         </Link>
 
         <Link
-          to='/inbound/putsummary'
+          to='/orders/ordersummary'
           onClick={this.handleTabClick.bind(this, OUTBOUND)}
         >
           <Tab
             items={{
-              tab: items.outbound,
+              tab: items.outbound
             }}
             changeClass={
               this.props.tab.toUpperCase() === OUTBOUND ? 'sel' : GOR_NORMAL_TAB
