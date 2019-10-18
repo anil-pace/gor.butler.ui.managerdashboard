@@ -733,19 +733,6 @@ else
           />
         </Link>
 
-        <Link
-          to='/reports/reportsdownload'
-          onClick={this.handleTabClick.bind(this, EXCEPTIONS)}
-        >
-          <Tab
-            items={{
-              tab: items.exceptions,
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === EXCEPTIONS ? 'sel' : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
 
         <Link
           to='/notification/notificationlist'
