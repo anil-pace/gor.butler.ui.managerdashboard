@@ -94,12 +94,6 @@ class Tabs extends React.Component {
           new_win.postMessage(authtoken, domain)
         }, 0)
         break
-      case 'Exceptions':
-        var new_win = window.open(domain + '/cockpit/#/exception/exceptionlist')
-        setTimeout(function() {
-          new_win.postMessage(authtoken, domain)
-        }, 0)
-        break
         case 'CustomerNotifications':
         var new_win = window.open(domain + '/cockpit/#/notification/notificationlist')
         setTimeout(function() {
@@ -134,10 +128,6 @@ class Tabs extends React.Component {
 
         case OUTBOUND:
         this.loginManagerDashboard('Outbound')
-        break
-
-        case EXCEPTIONS:
-        this.loginManagerDashboard('Exceptions')
         break
 
         case CUSTOMERNOTIFICATIONS:
