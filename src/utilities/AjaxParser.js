@@ -331,9 +331,11 @@ export function AjaxParse(store, res, cause, status, saltParams) {
     case GR_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
       store.dispatch(validateInvoiceID(res))
-      store.dispatch(
-        notifySuccess(getFormattedMessages('grnGenerated', res.data))
-      )
+      if (res === true) {
+        store.dispatch(
+          notifySuccess(getFormattedMessages('grnGenerated', res.data))
+        )
+      }
       break
     case INVENTORY_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
