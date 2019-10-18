@@ -30,8 +30,17 @@ class DownloadGRNTile extends React.Component {
     super(props);
     this.state = {
       invoiceId: null,
-      fileType: null
+      fileType: null,
+      validatedInvoice: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.validatedInvoice !== this.state.validatedInvoice) {
+      this.setState({
+        validatedInvoice: nextProps.validatedInvoice
+      });
+    }
   }
 
   _changeGRNFileType(data) {
@@ -83,7 +92,10 @@ class DownloadGRNTile extends React.Component {
 
   render() {
     let errorMessage = '';
-    if (this.props.validatedInvoice === true) {
+    if (
+      this.state.validatedInvoice === true ||
+      this.state.validatedInvoice === undefined
+    ) {
       errorMessage = (
         <FormattedMessage
           id='utility.downloadGRN.noError'
@@ -91,7 +103,7 @@ class DownloadGRNTile extends React.Component {
           defaultMessage=''
         />
       );
-    } else if (this.props.validatedInvoice === false) {
+    } else if (this.state.validatedInvoice === false) {
       errorMessage = (
         <FormattedMessage
           id='utility.downloadGRN.putAwayInProgress'
@@ -100,7 +112,7 @@ class DownloadGRNTile extends React.Component {
         />
       );
     } else {
-      errorMessage = this.props.validatedInvoice.reason;
+      errorMessage = this.state.validatedInvoice.reason;
     }
     const fileType = [{ value: 'csv', label: 'Comma separated values (csv)' }];
 
@@ -127,18 +139,26 @@ class DownloadGRNTile extends React.Component {
             }}
             onChange={this._captureQuery.bind(this)}
           />
-          {this.props.validatedInvoice.code === 'ERR002' ||
-          this.props.validatedInvoice === false ? (
-            <div className='gor-login-error' />
+          {this.state.validatedInvoice ? (
+            this.state.validatedInvoice.code === 'ERR002' ||
+            this.state.validatedInvoice === false ? (
+              <div className='gor-login-error' />
+            ) : (
+              ''
+            )
           ) : (
             ''
           )}
         </div>
-        {this.props.validatedInvoice.code === 'ERR002' ||
-        this.props.validatedInvoice === false ? (
-          <div className='gor-sku-error gor-utility-error-invoice'>
-            {errorMessage}
-          </div>
+        {this.state.validatedInvoice ? (
+          this.state.validatedInvoice.code === 'ERR002' ||
+          this.state.validatedInvoice === false ? (
+            <div className='gor-sku-error gor-utility-error-invoice'>
+              {errorMessage}
+            </div>
+          ) : (
+            ''
+          )
         ) : (
           ''
         )}

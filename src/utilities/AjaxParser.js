@@ -2,17 +2,17 @@ import {
   receiveAuthData,
   setLoginSpinner,
   setTimeOffSetData
-} from '../actions/loginAction'
-import { recieveOrdersData } from '../actions/paginationAction'
+} from '../actions/loginAction';
+import { recieveOrdersData } from '../actions/paginationAction';
 
-import { assignRole, recieveConfigurations } from '../actions/userActions'
+import { assignRole, recieveConfigurations } from '../actions/userActions';
 import {
   recieveHeaderInfo,
   recieveShiftStartTime
-} from '../actions/headerAction'
-import { codeToString } from './codeToString'
-import { setOrderListSpinner } from '../actions/orderListActions'
-import { setMsuConfigSpinner } from '../actions/spinnerAction'
+} from '../actions/headerAction';
+import { codeToString } from './codeToString';
+import { setOrderListSpinner } from '../actions/orderListActions';
+import { setMsuConfigSpinner } from '../actions/spinnerAction';
 import {
   notifySuccess,
   notifyFail,
@@ -25,7 +25,7 @@ import {
   getSafetyErrorList,
   getErrorBotList,
   notifyfeedback
-} from '../actions/validationActions'
+} from '../actions/validationActions';
 import {
   ERROR,
   AUTH_LOGIN,
@@ -95,9 +95,9 @@ import {
   GET,
   POST,
   APP_JSON
-} from '../constants/frontEndConstants'
+} from '../constants/frontEndConstants';
 
-import { BUTLER_UI, CODE_E027 } from '../constants/backEndConstants'
+import { BUTLER_UI, CODE_E027 } from '../constants/backEndConstants';
 import {
   UE002,
   E028,
@@ -117,16 +117,16 @@ import {
   INCORRECT_STN_NUMBER,
   ITEM_RECALL_SUCCESS,
   INVALID_SKUID
-} from '../constants/messageConstants'
-import { ShowError } from './showError'
-import { endSession } from './endSession'
+} from '../constants/messageConstants';
+import { ShowError } from './showError';
+import { endSession } from './endSession';
 import {
   setSafetySpinner,
   setInventoryReportSpinner,
   setStockLedgerSpinner,
   setStockLedgerRawTransactionsSpinner
-} from '../actions/spinnerAction'
-import { statusToString } from './statusToString'
+} from '../actions/spinnerAction';
+import { statusToString } from './statusToString';
 import {
   validateInvoiceID,
   uploadMasterDataProcessing,
@@ -136,20 +136,20 @@ import {
   validateStockLedgerSKU,
   uploadReportHistory,
   uploadGRNHistory
-} from '../actions/utilityActions'
+} from '../actions/utilityActions';
 import {
   recievePendingMSU,
   resetCheckedPPSList
-} from '../actions/ppsModeChangeAction'
+} from '../actions/ppsModeChangeAction';
 
-import { getFormattedMessages } from '../utilities/getFormattedMessages'
+import { getFormattedMessages } from '../utilities/getFormattedMessages';
 import {
   recieveNotificationData,
   notificationReadIntimation,
   recieveAllNotifications,
   recieveAllSearchedNotifications,
   setNotification
-} from '../actions/notificationAction'
+} from '../actions/notificationAction';
 import {
   receivePPSProfiles,
   receiveTags,
@@ -159,11 +159,11 @@ import {
   tagAddedToList,
   setPPSConfigurationSpinner,
   profileRequested
-} from './../actions/ppsConfigurationActions'
+} from './../actions/ppsConfigurationActions';
 
-import { recieveOLData } from './../actions/operationsLogsActions'
-import { recieveReportsData } from './../actions/downloadReportsActions'
-import { recieveStorageSpaceData } from './../actions/storageSpaceActions'
+import { recieveOLData } from './../actions/operationsLogsActions';
+import { recieveReportsData } from './../actions/downloadReportsActions';
+import { recieveStorageSpaceData } from './../actions/storageSpaceActions';
 import {
   receiveMsuConfigList,
   receiveMsuConfigDestTypesList,
@@ -173,7 +173,7 @@ import {
   msuConfigStopReconfig,
   msuConfigReleaseMsu,
   msuConfigBlockAndPutChangeType
-} from './../actions/msuConfigAction'
+} from './../actions/msuConfigAction';
 
 import {
   receiveOrderFulfilmentData,
@@ -182,50 +182,50 @@ import {
   receiveOrdersPerPbtData,
   receiveOrdersLinesData,
   receiveOrdersPriority
-} from './../actions/norderDetailsAction'
+} from './../actions/norderDetailsAction';
 
-import { ORDERS_PER_PBT_URL } from './../constants/configConstants'
+import { ORDERS_PER_PBT_URL } from './../constants/configConstants';
 
-import { makeAjaxCall } from './../actions/ajaxActions'
+import { makeAjaxCall } from './../actions/ajaxActions';
 
 export function AjaxParse(store, res, cause, status, saltParams) {
-  let stringInfo = {}
+  let stringInfo = {};
   switch (cause) {
     case AUTH_LOGIN:
       if (res.auth_token) {
-        store.dispatch(receiveAuthData(res))
+        store.dispatch(receiveAuthData(res));
       } else {
-        store.dispatch(loginError(WRONG_CRED))
+        store.dispatch(loginError(WRONG_CRED));
       }
-      store.dispatch(setLoginSpinner(false))
-      break
+      store.dispatch(setLoginSpinner(false));
+      break;
     case ORDERS_RETRIEVE:
-      store.dispatch(recieveOrdersData(res))
-      store.dispatch(setOrderListSpinner(false))
-      break
+      store.dispatch(recieveOrdersData(res));
+      store.dispatch(setOrderListSpinner(false));
+      break;
 
     case GET_ROLES:
-      let rolesArr = []
+      let rolesArr = [];
       if (res.roles) {
-        rolesArr = res.roles
+        rolesArr = res.roles;
       }
-      store.dispatch(assignRole(rolesArr))
-      break
+      store.dispatch(assignRole(rolesArr));
+      break;
     case CHECK_ID:
-      let idExist
+      let idExist;
       if (res.users.length) {
         idExist = {
           type: ERROR,
           msg: UE002
-        }
+        };
       } else {
         idExist = {
           type: SUCCESS,
           msg: TYPE_SUCCESS
-        }
+        };
       }
-      store.dispatch(validateID(idExist))
-      break
+      store.dispatch(validateID(idExist));
+      break;
     case PPS_MODE_CHANGE:
       var successCount = res.successful.length,
         unsuccessfulCount = Object.keys(res.unsuccessful).length,
@@ -233,154 +233,152 @@ export function AjaxParse(store, res, cause, status, saltParams) {
           unsuccessful: unsuccessfulCount,
           totalCount: successCount + unsuccessfulCount
         },
-        msg = getFormattedMessages('mode', values)
-      store.dispatch(notifySuccess(msg))
-      store.dispatch(resetCheckedPPSList(res.successful))
-      break
+        msg = getFormattedMessages('mode', values);
+      store.dispatch(notifySuccess(msg));
+      store.dispatch(resetCheckedPPSList(res.successful));
+      break;
     case ADD_USER:
     case DELETE_USER:
     case EDIT_USER:
-      stringInfo = codeToString(res.alert_data[0])
+      stringInfo = codeToString(res.alert_data[0]);
       if (stringInfo.type) {
-        store.dispatch(notifyfeedback(stringInfo.msg))
+        store.dispatch(notifyfeedback(stringInfo.msg));
       } else {
-        store.dispatch(setNotification(stringInfo))
+        store.dispatch(setNotification(stringInfo));
       }
-      break
+      break;
 
     case RECIEVE_HEADER:
-      store.dispatch(recieveHeaderInfo(res))
-      break
+      store.dispatch(recieveHeaderInfo(res));
+      break;
     case RECEIVE_SHIFT_START_TIME:
-      store.dispatch(recieveShiftStartTime(res))
-      break
+      store.dispatch(recieveShiftStartTime(res));
+      break;
     case RECIEVE_TIME_OFFSET:
-      store.dispatch(setTimeOffSetData(res))
-      break
+      store.dispatch(setTimeOffSetData(res));
+      break;
 
     case PAUSE_OPERATION:
-      var pausePwd
+      var pausePwd;
       if (!res.auth_token) {
         pausePwd = {
           type: ERROR,
           msg: UE002
-        }
+        };
       } else {
         pausePwd = {
           type: SUCCESS,
           msg: TYPE_SUCCESS
-        }
+        };
         //hit next api
-        store.dispatch(modalStatus(true))
+        store.dispatch(modalStatus(true));
       }
-      store.dispatch(validatePassword(pausePwd))
-      break
+      store.dispatch(validatePassword(pausePwd));
+      break;
     case RESUME_OPERATION:
-      var resumePwd
+      var resumePwd;
       if (!res.auth_token) {
         resumePwd = {
           type: ERROR,
           msg: UE002
-        }
+        };
       } else {
         resumePwd = {
           type: SUCCESS,
           msg: TYPE_SUCCESS
-        }
+        };
         //hit next api
-        store.dispatch(modalStatus(true))
+        store.dispatch(modalStatus(true));
       }
-      store.dispatch(validatePassword(resumePwd))
-      break
+      store.dispatch(validatePassword(resumePwd));
+      break;
     case CHECK_SAFETY:
-      store.dispatch(getSafetyList(res || {}))
-      break
+      store.dispatch(getSafetyList(res || {}));
+      break;
     case CONFIRM_SAFETY:
       var rejectList = [],
         botErrorList = [],
         rejectResponse = res,
-        modalFlag = true
+        modalFlag = true;
 
       if (rejectResponse.successful) {
         if (!rejectResponse.emergency_end_time) {
-          store.dispatch(notifySuccess(ES))
+          store.dispatch(notifySuccess(ES));
         }
       } else if (rejectResponse.alert_data) {
         if (rejectResponse.alert_data[0].details[0]) {
           rejectList =
-            rejectResponse.alert_data[0].details[0].failed_validations
+            rejectResponse.alert_data[0].details[0].failed_validations;
           botErrorList =
-            rejectResponse.alert_data[0].details[0].displaced_bots || []
-          modalFlag = false
+            rejectResponse.alert_data[0].details[0].displaced_bots || [];
+          modalFlag = false;
         } else {
-          stringInfo = codeToString(res.alert_data[0])
-          store.dispatch(notifyFail(stringInfo.msg))
+          stringInfo = codeToString(res.alert_data[0]);
+          store.dispatch(notifyFail(stringInfo.msg));
         }
       }
-      store.dispatch(modalStatus(modalFlag))
-      store.dispatch(setSafetySpinner(false))
-      store.dispatch(getErrorBotList(botErrorList))
-      store.dispatch(getSafetyErrorList(rejectList))
-      break
+      store.dispatch(modalStatus(modalFlag));
+      store.dispatch(setSafetySpinner(false));
+      store.dispatch(getErrorBotList(botErrorList));
+      store.dispatch(getSafetyErrorList(rejectList));
+      break;
 
     case ITEM_RECALLED:
-      res.status = ITEM_RECALLED_DATA
-      stringInfo = statusToString(res)
-      store.dispatch(notifySuccess(stringInfo.msg))
-      break
+      res.status = ITEM_RECALLED_DATA;
+      stringInfo = statusToString(res);
+      store.dispatch(notifySuccess(stringInfo.msg));
+      break;
 
     case GR_REPORT_RESPONSE:
-      store.dispatch(setInventoryReportSpinner(false))
-      store.dispatch(validateInvoiceID(res))
-      if(res === true) {
+      store.dispatch(setInventoryReportSpinner(false));
+      store.dispatch(validateInvoiceID(res));
+      if (res === true) {
         store.dispatch(
           notifySuccess(getFormattedMessages('grnGenerated', res.data))
-        )
-      }else {
-        store.dispatch(notifyFail(INCORRECT_STN_NUMBER));
+        );
       }
-      break
+      break;
     case INVENTORY_REPORT_RESPONSE:
-      store.dispatch(setInventoryReportSpinner(false))
-      store.dispatch(validateInvoiceID(res))
+      store.dispatch(setInventoryReportSpinner(false));
+      store.dispatch(validateInvoiceID(res));
       store.dispatch(
         notifySuccess(getFormattedMessages('invntryRptGenerated', res.data))
-      )
+      );
 
-      break
+      break;
     case DOWNLOAD_STOCK_LEDGER_REPORT:
-      store.dispatch(setStockLedgerSpinner(false))
-      store.dispatch(validateStockLedgerSKU(res))
-      break
+      store.dispatch(setStockLedgerSpinner(false));
+      store.dispatch(validateStockLedgerSKU(res));
+      break;
     case DOWNLOAD_STOCK_LEDGER_RAW_TRANSACTIONS_REPORT:
-      store.dispatch(setStockLedgerRawTransactionsSpinner(false))
-      break
+      store.dispatch(setStockLedgerRawTransactionsSpinner(false));
+      break;
     case MASTER_FILE_UPLOAD:
-      store.dispatch(uploadMasterDataProcessing(false))
-      store.dispatch(uploadMasterDataSuccess(res))
-      break
+      store.dispatch(uploadMasterDataProcessing(false));
+      store.dispatch(uploadMasterDataSuccess(res));
+      break;
     case UPLOAD_HISTORY:
-      store.dispatch(uploadMasterDataHistory(res))
-      break
+      store.dispatch(uploadMasterDataHistory(res));
+      break;
     case REPORTS_HISTORY:
-      store.dispatch(uploadReportHistory(res))
+      store.dispatch(uploadReportHistory(res));
       store.dispatch(
         notifySuccess(getFormattedMessages('reprtsRefreshed', res.data))
-      )
-      break
+      );
+      break;
     case GRN_HISTORY:
-      store.dispatch(uploadGRNHistory(res))
+      store.dispatch(uploadGRNHistory(res));
       store.dispatch(
         notifySuccess(getFormattedMessages('grnRefreshed', res.data))
-      )
-      break
+      );
+      break;
     case GET_MAX_FILE_SIZE:
-      store.dispatch(updateMaxFileSize(res))
-      break
+      store.dispatch(updateMaxFileSize(res));
+      break;
 
     case GET_CONFIGS:
-      store.dispatch(recieveConfigurations(res))
-      break
+      store.dispatch(recieveConfigurations(res));
+      break;
     case PPS_STATUS_CHANGE:
       var successCount = res.successful.length,
         unsuccessfulCount = Object.keys(res.unsuccessful).length,
@@ -388,53 +386,53 @@ export function AjaxParse(store, res, cause, status, saltParams) {
           unsuccessful: unsuccessfulCount,
           totalCount: successCount + unsuccessfulCount
         },
-        msg = getFormattedMessages('status', values)
-      store.dispatch(notifySuccess(msg))
-      store.dispatch(resetCheckedPPSList(res.successful))
-      break
+        msg = getFormattedMessages('status', values);
+      store.dispatch(notifySuccess(msg));
+      store.dispatch(resetCheckedPPSList(res.successful));
+      break;
     case GET_PENDING_MSU:
-      store.dispatch(recievePendingMSU(res))
-      break
+      store.dispatch(recievePendingMSU(res));
+      break;
     case SEARCHED_NOTIFICATIONS_DATA:
-      store.dispatch(recieveNotificationData(res))
-      break
+      store.dispatch(recieveNotificationData(res));
+      break;
     case SEND_READ_INTIMATION:
-      store.dispatch(notificationReadIntimation(true))
-      break
+      store.dispatch(notificationReadIntimation(true));
+      break;
     case GET_ALL_NOTIFICATIONS:
-      store.dispatch(recieveAllNotifications(res, saltParams))
-      break
+      store.dispatch(recieveAllNotifications(res, saltParams));
+      break;
     case SEARCHED_NOTIFICATIONS_DATA_ALL:
-      store.dispatch(recieveAllSearchedNotifications(res))
-      break
+      store.dispatch(recieveAllSearchedNotifications(res));
+      break;
     case FETCH_PPS_PROFILES:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(receivePPSProfiles(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(receivePPSProfiles(res));
+      break;
 
     case FETCH_PROFILE_FOR_PPS:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(selectPPSProfileForConfiguration(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(selectPPSProfileForConfiguration(res));
+      break;
     case FETCH_TAGS:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(receiveTags(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(receiveTags(res));
+      break;
     case CREATE_NEW_PROFILE:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(profileCreated(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(profileCreated(res));
+      break;
 
     case SAVE_PPS_PROFILE:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(profileRequested(res))
-      store.dispatch(savedPPSProfile(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(profileRequested(res));
+      store.dispatch(savedPPSProfile(res));
+      break;
 
     case ADD_TAG_TO_LIST:
-      store.dispatch(setPPSConfigurationSpinner(false))
-      store.dispatch(tagAddedToList(res))
-      break
+      store.dispatch(setPPSConfigurationSpinner(false));
+      store.dispatch(tagAddedToList(res));
+      break;
 
     case CHANGE_PPS_PROFILE:
       /**
@@ -442,107 +440,107 @@ export function AjaxParse(store, res, cause, status, saltParams) {
        * will update the UI
        * We just need to hide the modal
        */
-      store.dispatch(profileRequested(res))
-      break
+      store.dispatch(profileRequested(res));
+      break;
     case OPERATION_LOG_FETCH:
-      store.dispatch(recieveOLData(res.hits))
-      break
+      store.dispatch(recieveOLData(res.hits));
+      break;
     case REPORTS_FETCH:
-      store.dispatch(recieveReportsData(res))
-      break
+      store.dispatch(recieveReportsData(res));
+      break;
     case GET_REPORT:
-      store.dispatch(recieveReportsData(res))
-      break
+      store.dispatch(recieveReportsData(res));
+      break;
     case DOWNLOAD_REPORT_REQUEST:
-      store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS))
-      break
+      store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
+      break;
     case STORAGE_SPACE_FETCH:
-      store.dispatch(recieveStorageSpaceData(res))
-      break
+      store.dispatch(recieveStorageSpaceData(res));
+      break;
 
     case ORDERS_FULFIL_FETCH:
-      store.dispatch(receiveOrderFulfilmentData(res))
-      break
+      store.dispatch(receiveOrderFulfilmentData(res));
+      break;
     case ORDERS_SUMMARY_FETCH:
-      store.dispatch(receiveOrderSummaryData(res))
-      break
+      store.dispatch(receiveOrderSummaryData(res));
+      break;
     case ORDERS_CUT_OFF_TIME_FETCH:
-      let storeFilterData = store.getState().filterInfo
+      let storeFilterData = store.getState().filterInfo;
       let filterApplied = storeFilterData
         ? storeFilterData.isFilterApplied
-        : false
-      store.dispatch(setOrderListSpinner(false))
-      store.dispatch(receiveCutOffTimeData(res, filterApplied))
-      break
+        : false;
+      store.dispatch(setOrderListSpinner(false));
+      store.dispatch(receiveCutOffTimeData(res, filterApplied));
+      break;
 
     case ORDERS_PER_PBT_FETCH:
-      store.dispatch(setOrderListSpinner(false))
-      store.dispatch(receiveOrdersPerPbtData(res, saltParams))
-      break
+      store.dispatch(setOrderListSpinner(false));
+      store.dispatch(receiveOrdersPerPbtData(res, saltParams));
+      break;
 
     case SET_ORDER_PRIORITY:
-      store.dispatch(receiveOrdersPriority(res))
+      store.dispatch(receiveOrdersPriority(res));
       if (res.id) {
-        msg = getFormattedMessages('SETORDERPRIORITYSUCCESS')
-        store.dispatch(notifyfeedback(msg))
+        msg = getFormattedMessages('SETORDERPRIORITYSUCCESS');
+        store.dispatch(notifyfeedback(msg));
       } else {
-        msg = getFormattedMessages('SETORDERPRIORITYFAILURE')
-        store.dispatch(notifyfeedback(msg))
+        msg = getFormattedMessages('SETORDERPRIORITYFAILURE');
+        store.dispatch(notifyfeedback(msg));
       }
-      break
+      break;
 
     case ORDERLINES_PER_ORDER_FETCH:
-      store.dispatch(receiveOrdersLinesData(res))
-      break
+      store.dispatch(receiveOrdersLinesData(res));
+      break;
 
     case ORDERS_REPORT_DOWNLOAD_REQUEST:
-      store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS))
-      break
+      store.dispatch(notifySuccess(REQUEST_REPORT_SUCCESS));
+      break;
 
     case SELLER_RECALL:
       if (status !== 202) {
-        ShowError(store, cause, status, res)
+        ShowError(store, cause, status, res);
       } else {
-        store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS))
+        store.dispatch(notifySuccess(ITEM_RECALL_SUCCESS));
       }
-      break
+      break;
     case FETCH_MSU_CONFIG_LIST:
-      store.dispatch(setMsuConfigSpinner(false))
-      store.dispatch(receiveMsuConfigList(res))
-      break
+      store.dispatch(setMsuConfigSpinner(false));
+      store.dispatch(receiveMsuConfigList(res));
+      break;
 
     case FETCH_MSU_CONFIG_DEST_TYPE_LIST:
-      store.dispatch(setMsuConfigSpinner(false))
-      store.dispatch(receiveMsuConfigDestTypesList(res))
-      break
+      store.dispatch(setMsuConfigSpinner(false));
+      store.dispatch(receiveMsuConfigDestTypesList(res));
+      break;
 
     case FETCH_MSU_CONFIG_LIST_VIA_FILTER:
-      store.dispatch(setMsuConfigSpinner(false))
-      store.dispatch(receiveMsuConfigListViaFilter(res))
-      break
+      store.dispatch(setMsuConfigSpinner(false));
+      store.dispatch(receiveMsuConfigListViaFilter(res));
+      break;
 
     case FETCH_MSU_CONFIG_RACK_STRUCTURE:
-      store.dispatch(receiveMsuConfigRackStructure(res))
-      break
+      store.dispatch(receiveMsuConfigRackStructure(res));
+      break;
 
     case FETCH_MSU_CONFIG_START_RECONFIG:
-      store.dispatch(msuConfigStartReconfig(res))
-      break
+      store.dispatch(msuConfigStartReconfig(res));
+      break;
 
     case FETCH_MSU_CONFIG_STOP_RECONFIG:
-      store.dispatch(msuConfigStopReconfig(res))
-      break
+      store.dispatch(msuConfigStopReconfig(res));
+      break;
 
     case FETCH_MSU_CONFIG_RELEASE_MSU:
-      store.dispatch(msuConfigReleaseMsu(res))
-      break
+      store.dispatch(msuConfigReleaseMsu(res));
+      break;
 
     case FETCH_MSU_CONFIG_BLOCK_PUT_CHANGE_TYPE:
-      store.dispatch(msuConfigBlockAndPutChangeType(res))
-      break
+      store.dispatch(msuConfigBlockAndPutChangeType(res));
+      break;
 
     default:
-      ShowError(store, cause, status)
-      break
+      ShowError(store, cause, status);
+      break;
   }
 }
