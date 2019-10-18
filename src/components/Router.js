@@ -17,7 +17,7 @@ import { translationMessages } from '../utilities/i18n';
 import { updateIntl } from 'react-intl-redux';
 import OverviewTab from '../containers/OverviewTab';
 import SystemTab from '../containers/systemTab';
-import SystemOverview from '../containers/OverviewTab';
+import SystemOverview from '../containers/systemTabs/sysOverview';
 import ppsTab from '../containers/systemTabs/pps/ppsTab';
 import butlerbotTab from '../containers/systemTabs/butlerbotTab';
 import chargingStationsTab from '../containers/systemTabs/chargingStationsTab';
