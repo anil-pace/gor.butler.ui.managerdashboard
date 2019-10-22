@@ -134,7 +134,6 @@ const ppsConfigurationState = {
       setPPSBinStatus: (_, variables, { cache }) => {
         let bin_status = variables.state.enabled
         let selected_bin = JSON.parse(JSON.stringify(variables.state.bin))
-
         const query = gql`
           query {
             selectedPPSProfile @client {
