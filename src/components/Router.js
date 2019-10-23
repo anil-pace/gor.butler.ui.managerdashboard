@@ -234,7 +234,6 @@ class Routes extends React.Component {
                        component = {OverviewTab}
                     />
 
-
                     <Route onEnter={this._handleNavigationChanges.bind(this)} name="reports" path="/reports"
                         component = {reportsTab}
                     >
