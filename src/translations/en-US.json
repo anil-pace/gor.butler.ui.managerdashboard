@@ -1915,7 +1915,7 @@
   {
     "id": "operationsLog.reportRequest.success",
     "description": "Status text for zone",
-    "defaultMessage": "Request successfully generated. Kindly check the Download Tab",
+    "defaultMessage": "Request successfully generated. Kindly check the Reports Tab",
     "filepath": "./src/constants/messageConstants.js"
   },
   {
@@ -5520,9 +5520,9 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "reportsTab.downloadReport",
+    "id": "reportsTab.downloadReports",
     "description": "Operations Log tab for Reports tab",
-    "defaultMessage": "Download",
+    "defaultMessage": "Archived Downloads",
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
@@ -7197,6 +7197,36 @@
     "id": "newaudit.tab.heading",
     "description": "new audit tab",
     "defaultMessage": "NEW AUDIT",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "downloads.tab.heading",
+    "description": "downloads tab",
+    "defaultMessage": "DOWNLOADS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "inbound.tab.heading",
+    "description": "inbound tab",
+    "defaultMessage": "INBOUND",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "outbound.tab.heading",
+    "description": "outbound tab",
+    "defaultMessage": "OUTBOUND",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "exceptions.tab.heading",
+    "description": "exceptions tab",
+    "defaultMessage": "EXCEPTIONS",
+    "filepath": "./src/containers/tabs.js"
+  },
+  {
+    "id": "customernotifications.tab.heading",
+    "description": "customernotifications tab",
+    "defaultMessage": "CUSTOMER NOTIFICATIONS",
     "filepath": "./src/containers/tabs.js"
   },
   {

@@ -1600,7 +1600,7 @@ msgstr ""
 
         #: operationsLog.reportRequest.success
         msgctxt "operationsLog.reportRequest.success"
-        msgid "Request successfully generated. Kindly check the Download Tab"
+        msgid "Request successfully generated. Kindly check the Reports Tab"
         msgstr "Verzoek is gegenereerd. Controleer het downloadtabblad"
 
         #: operationsLog.reportRequest.failure

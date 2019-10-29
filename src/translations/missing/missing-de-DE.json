@@ -968,7 +968,7 @@
 {
 	"id": "operationsLog.reportRequest.success",
 	"description": "Status text for zone",
-	"defaultMessage": "Request successfully generated. Kindly check the Download Tab",
+	"defaultMessage": "Request successfully generated. Kindly check the Reports Tab",
 	"filepath": "./src/constants/messageConstants.js"
 },
 {
