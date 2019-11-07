@@ -800,7 +800,7 @@ class PPS extends React.Component {
     return (
       <div>
         <div>
-          <div className='gorTesting'>
+          <div className='gorTesting gor-pps-tab'>
             {this.props.data.loading && (
               <Spinner isLoading={this.props.data.loading} setSpinner={null} />
             )}
