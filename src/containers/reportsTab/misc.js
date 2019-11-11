@@ -183,6 +183,7 @@ class UtilityTab extends React.Component {
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
               )}
+              additionalClass='width-100'
               showFooter={false}
             >
               <DownloadGRNTile
