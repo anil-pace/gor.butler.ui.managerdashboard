@@ -284,82 +284,141 @@ class Tabs extends React.Component {
       />
     )
 
-    // if(!this.props.system_status)
-    // {
-    //  overviewStatus=offline;
-    //  systemStatus=offline;
-    //  ordersStatus=offline;
-    //  usersStatus=offline;
-    //  inventoryStatus=offline;
-    //  auditStatus=offline;
-    //  systemClass=GOR_OFFLINE;
-    // }
-    // else
-    // {
-    //   if(this.props.overview_status=== FULFILLING_ORDERS)
-    //   {
-    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders"
-    //           defaultMessage="Fulfilling orders"/>;
-    //   }
-    //   else
-    //   {
-    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status"
-    //           defaultMessage="None"/>;
-    //   }
-    //   if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
-    //   {
+    if (!this.props.system_status) {
+      overviewStatus = offline
+      systemStatus = offline
+      ordersStatus = offline
+      usersStatus = offline
+      inventoryStatus = offline
+      auditStatus = offline
+      systemClass = GOR_OFFLINE
+    } else {
+      if (this.props.overview_status === FULFILLING_ORDERS) {
+        overviewStatus = (
+          <FormattedMessage
+            id='overviewStatus.tab.fulfilling'
+            description='overview Status fulfilling orders'
+            defaultMessage='Fulfilling orders'
+          />
+        )
+      } else {
+        overviewStatus = (
+          <FormattedMessage
+            id='overviewStatus.tab.default'
+            description='default overview Status'
+            defaultMessage='None'
+          />
+        )
+      }
+      if (
+        this.props.system_emergency &&
+        (this.props.system_data === HARD ||
+          this.props.lastEmergencyState === HARD)
+      ) {
+        systemClass = 'gor-alert'
+        systemStatus = (
+          <FormattedMessage
+            id='overviewStatus.tab.stop'
+            description='overview Status emergency'
+            defaultMessage='STOPPED'
+          />
+        )
+      } else if (
+        this.props.system_emergency &&
+        !this.props.breached &&
+        (this.props.system_data === SOFT ||
+          this.props.lastEmergencyState === SOFT)
+      ) {
+        systemClass = 'gor-alert'
+        systemStatus = (
+          <FormattedMessage
+            id='overviewStatus.tab.paused'
+            description='overview Status emergency'
+            defaultMessage='PAUSED'
+          />
+        )
+      } else if (this.props.breached) {
+        systemClass = 'gor-alert'
+        systemStatus = (
+          <FormattedMessage
+            id='overviewStatus.tab.breached'
+            description='overview Status emergency'
+            defaultMessage='BREACHED'
+          />
+        )
+      } else {
+        systemStatus = (
+          <FormattedMessage
+            id='systemStatus.tab.online'
+            description='system Status online'
+            defaultMessage='Online'
+          />
+        )
+        systemClass = GOR_ONLINE
+      }
 
-    //     systemClass = 'gor-alert';
-    //     systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency"
-    //           defaultMessage="STOPPED"/>;
-    //   }
-    //   else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
-    //     systemClass = 'gor-alert';
-    //     systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency"
-    //           defaultMessage="PAUSED"/>;
-    //   }
-    //   else if(this.props.breached){
-    //     systemClass = 'gor-alert';
-    //     systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency"
-    //           defaultMessage="BREACHED"/>;
-    //   }
-    //   else{
-    //   systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online"
-    //           defaultMessage="Online"/>;
-    //   systemClass=GOR_ONLINE;
-    // }
+      ordersvalue = <FormattedNumber value={this.props.orders_completed} />
+      ordersStatus = (
+        <FormattedMessage
+          id='ordersStatus.tab.heading'
+          description='orders Status '
+          defaultMessage='{count}% fulfilled'
+          values={{ count: ordersvalue }}
+        />
+      )
+      ordersClass = GOR_ONLINE
 
-    //   ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
-    //   ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status "
-    //                                    defaultMessage="{count}% fulfilled" values={{count:ordersvalue}}/>;
-    //   ordersClass=GOR_ONLINE;
+      usersvalue = <FormattedNumber value={this.props.users_online} />
+      usersStatus = (
+        <FormattedMessage
+          id='usersStatus.tab.heading#'
+          description='users Status '
+          defaultMessage='{count} {count,plural,=0 {user} one {user} other {users}} online'
+          values={{
+            count: this.props.users_online ? this.props.users_online : '0'
+          }}
+        />
+      )
 
-    //   usersvalue=<FormattedNumber value={this.props.users_online}/>
-    //   usersStatus=<FormattedMessage id="usersStatus.tab.heading#" description="users Status "
-    //                                   defaultMessage="{count} {count,plural,=0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;
-
-    //   inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
-    //   inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status "
-    //                                        defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;
-    //   auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status "
-    //                                  defaultMessage="{count} in progress"
-    //                                  values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;
-    //   if(this.props.audit_count)
-    //   {
-    //     auditClass=GOR_ONLINE;
-    //   }
-    //   else
-    //   {
-    //     auditClass=GOR_OFFLINE;
-    //   }
-    //   if(this.props.audit_alert) {
-    //     auditClass=(this.props.audit_alert?'gor-alert':auditClass);
-    //     auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert"
-    //                                  defaultMessage="{count} {count,plural, one {alert} other {alerts}}"
-    //                                  values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
-    //    auditIcon=true;
-    //   }
-    // }
+      inventoryvalue = <FormattedNumber value={this.props.space_utilized} />
+      inventoryStatus = (
+        <FormattedMessage
+          id='inventoryStatus.tab.heading'
+          description='inventory Status '
+          defaultMessage='{count}% space utilized'
+          values={{ count: inventoryvalue }}
+        />
+      )
+      auditStatus = (
+        <FormattedMessage
+          id='auditStatus.tab.heading'
+          description='audit Status '
+          defaultMessage='{count} in progress'
+          values={{
+            count: this.props.audit_count ? this.props.audit_count : 'None'
+          }}
+        />
+      )
+      if (this.props.audit_count) {
+        auditClass = GOR_ONLINE
+      } else {
+        auditClass = GOR_OFFLINE
+      }
+      if (this.props.audit_alert) {
+        auditClass = this.props.audit_alert ? 'gor-alert' : auditClass
+        auditStatus = (
+          <FormattedMessage
+            id='auditStatus.tab.alert.heading'
+            description='audit Status alert'
+            defaultMessage='{count} {count,plural, one {alert} other {alerts}}'
+            values={{
+              count: this.props.audit_alert ? this.props.audit_alert : '0'
+            }}
+          />
+        )
+        auditIcon = true
+      }
+    }
 
     items = {
       overview: overview,
@@ -623,50 +682,6 @@ class Tabs extends React.Component {
       </div>
     )
   }
-  
-  let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
-  let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
-		return (
-		<div className="gor-tabs gor-main-block">
-		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
-			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
-			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
-		</Link>
-
-		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
-			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-  
-
-    <Link to="/audit/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
-      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
-      </Link>
-    <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
-      <Tab items={{ tab: items.reports}} changeClass={(this.props.tab.toUpperCase()=== REPORTS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
-    <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
-      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>
-		
-		<Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
-			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-		</Link>
-
-    {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
-      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
-    </Link>:""}
-
-    
-   {showFireHazardPopup?notificationWrap:""}
-   {notificationPopup?notificationWrap:""}
-   
-  </div>
-		);
-	}
 }
 
 function mapStateToProps(state, ownProps) {
