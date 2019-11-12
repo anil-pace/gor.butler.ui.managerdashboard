@@ -1,5 +1,3 @@
-import { EXCEPTION_TRUE } from "./configConstants";
-
 /*Constants for login module*/
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_REDIRECT = 'LOGIN_REDIRECT'
@@ -110,11 +108,14 @@ export const USERS = 'USERS'
 export const AUDIT = 'AUDIT'
 export const REPORTS = 'REPORTS'
 export const UTILITIES = 'UTILITIES'
+<<<<<<< HEAD
 export const DOWNLOADS = 'DOWNLOADS'
 export const CUSTOMERNOTIFICATIONS ='CUSTOMER NOTIFICATIONS'
 export const EXCEPTIONS = 'EXCEPTIONS'
 export const OUTBOUND = 'OUTBOUND'
 export const INBOUND = 'INBOUND'
+=======
+>>>>>>> parent of 6f5e2ac... Merged in BSS-17945/AS-81 (pull request #980)
 export const NOTIFICATION_TAB = 'Notification'
 export const BUTLERBOTS_TAB = 'Butler Bots'
 export const CHARGING_TAB = 'Charging Station'
@@ -324,8 +325,7 @@ export const TAB_ROUTE_MAP = {
   [INVENTORY]: 'inventory',
   [USERS]: 'users',
   [AUDIT]: 'audit',
-  [UTILITIES]: 'utilities',
-  [DOWNLOADS]: 'downloads'
+  [UTILITIES]: 'utilities'
 }
 export const SYS_SUB_TAB_ROUTE_MAP = {
   [NOTIFICATION]: 'notification',

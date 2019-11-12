@@ -26,11 +26,6 @@ import {
   HARD,
   SOFT,
   UTILITIES,
-  DOWNLOADS,
-  INBOUND,
-  OUTBOUND, 
-  EXCEPTIONS,
-  CUSTOMERNOTIFICATIONS,
   FIRE_EMERGENCY_POPUP_FLAG,
   EMERGENCY_FIRE,
   NEWAUDIT,
@@ -59,53 +54,15 @@ class Tabs extends React.Component {
     this.state = {
       isHardEmergencyOpen: this.props.isHardEmergencyOpen
     }
-    this._openPopup =  this._openPopup.bind(this);
-    this._redirectAudit=this._redirectAudit.bind(this);
+    this._openPopup = this._openPopup.bind(this)
+    this._redirectAudit = this._redirectAudit.bind(this)
   }
 
-    _openPopup(){
-        this.props.setFireHazrdFlag(false);      
+  _openPopup() {
+    this.props.setFireHazrdFlag(false)
   }
-  _redirectAudit(){
-    hashHistory.push({pathname: "/audit/auditlisting"})
-  }
-
-  loginManagerDashboard = selectTab => {
-    let domain = window.location.origin
-
-    let authtoken = sessionStorage.getItem('auth_token')
-
-    switch (selectTab) {
-      case 'Downloads':
-        var new_win = window.open(domain + '/cockpit/#/reports/reportsdownload')
-        setTimeout(function() {
-          new_win.postMessage(authtoken, domain)
-        }, 0)
-        break
-      case 'Inbound':
-        var new_win = window.open(domain + '/cockpit/#/inbound/putsummary')
-        setTimeout(function() {
-          new_win.postMessage(authtoken, domain)
-        }, 0)
-        break
-      case 'Outbound':
-        var new_win = window.open(domain + '/cockpit/#/orders/ordersummary')
-        setTimeout(function() {
-          new_win.postMessage(authtoken, domain)
-        }, 0)
-        break
-      case 'CustomerNotifications':
-        var new_win = window.open(domain + '/cockpit/#/notification/notificationlist')
-        setTimeout(function() {
-          new_win.postMessage(authtoken, domain)
-        }, 0)
-        break
-      case 'Exceptions' : 
-      var new_win = window.open(domain + '/cockpit/#/exception/exceptionlist')
-      setTimeout(function(){
-        new_win.postMessage(authtoken,domain)},0)
-        break
-    }
+  _redirectAudit() {
+    hashHistory.push({ pathname: '/audit/auditlisting' })
   }
 
   handleTabClick(selTab) {
@@ -114,34 +71,12 @@ class Tabs extends React.Component {
      * only
      */
     switch (selTab) {
-        case SYSTEM:
+      case SYSTEM:
         this.props.setButlerSpinner(true)
         break
 
-        case INVENTORY:
+      case INVENTORY:
         this.props.setInventorySpinner(true)
-        break
-
-        case DOWNLOADS:
-        this.loginManagerDashboard('Downloads')
-        break
-
-        case INBOUND:
-        this.loginManagerDashboard('Inbound')
-        
-        break
-
-        case EXCEPTIONS:
-        this.loginManagerDashboard('Exceptions')
-        
-        break
-
-        case OUTBOUND:
-        this.loginManagerDashboard('Outbound')
-        break
-
-        case CUSTOMERNOTIFICATIONS:
-        this.loginManagerDashboard('CustomerNotifications')
         break
 
       default:
@@ -149,8 +84,6 @@ class Tabs extends React.Component {
         this.props.setButlerSpinner(false)
     }
   }
-
-
   _stopOperation(stopFlag, additionalProps = {}) {
     modal.add(OperationStop, {
       title: '',
@@ -158,91 +91,91 @@ class Tabs extends React.Component {
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
       emergencyPress: stopFlag,
-      controller:additionalProps.controller_id,
-      zone:additionalProps.zone_id,
-      sensor:additionalProps.sensor_activated,
-      poeEnabled:Object.keys(additionalProps).length ? true : false
-      });
-
+      controller: additionalProps.controller_id,
+      zone: additionalProps.zone_id,
+      sensor: additionalProps.sensor_activated,
+      poeEnabled: Object.keys(additionalProps).length ? true : false
+    })
   }
-  _emergencyRelease(additionalProps){
-      modal.add(EmergencyRelease, {
-        title: '',
-        size: 'large', // large, medium or small,
+  _emergencyRelease(additionalProps) {
+    modal.add(EmergencyRelease, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
-      releaseState:additionalProps.releaseState,
-      breached:additionalProps.breached,
-      zone:additionalProps.zone
-      });  
+      releaseState: additionalProps.releaseState,
+      breached: additionalProps.breached,
+      zone: additionalProps.zone
+    })
   }
-  _pauseOperation(stopFlag,additionalProps){
-     var zoneDetails = additionalProps.zoneDetails || {},
-     breached = additionalProps.breached;
-     modal.add(OperationPause, {
-        title: '',
-        size: 'large', // large, medium or small,
+  _pauseOperation(stopFlag, additionalProps) {
+    var zoneDetails = additionalProps.zoneDetails || {},
+      breached = additionalProps.breached
+    modal.add(OperationPause, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
       emergencyPress: stopFlag,
-      controller:zoneDetails.controller_id,
-      zone:zoneDetails.zone_id,
-      sensor:zoneDetails.sensor_activated,
-      poeEnabled:Object.keys(zoneDetails).length ? true : false,
-      breached:breached
-      });
+      controller: zoneDetails.controller_id,
+      zone: zoneDetails.zone_id,
+      sensor: zoneDetails.sensor_activated,
+      poeEnabled: Object.keys(zoneDetails).length ? true : false,
+      breached: breached
+    })
   }
-    _FireEmergencyRelease(){
-      modal.add(fireHazard, {
-        title: '',
-        size: 'large customColor', // large, medium or small,
+  _FireEmergencyRelease() {
+    modal.add(fireHazard, {
+      title: '',
+      size: 'large customColor', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-      });  
-  }
-  
- 
-  componentWillReceiveProps(nextProps){
-
-    if(nextProps.noticationData){
-         setTimeout(this.props.setNotificationNull.bind(this), 5000);    	
-    }
-
-    if(!nextProps.isEmergencyOpen){
-        if( nextProps.system_emergency  && nextProps.system_data === HARD){
-            this.props.setEmergencyModalStatus(true);
-            this._stopOperation(true, nextProps.zoneDetails);
-
-        }
-        else if(  nextProps.system_data === SOFT){
-          this.props.setEmergencyModalStatus(true);
-          this._pauseOperation(true, nextProps);
-        }
-        else if( 
-          nextProps.system_data === SOFT_MANUAL && 
-          (nextProps.lastEmergencyState === HARD || nextProps.lastEmergencyState === SOFT)){
-           let releaseState,breached = nextProps.breached,
-            zone = nextProps.zoneDetails.zone_id;
-            if(nextProps.lastEmergencyState === HARD){
-              releaseState=HARD
-            }
-            else if(nextProps.lastEmergencyState === SOFT){
-              releaseState=SOFT
-            }
-      
-           this.props.setEmergencyModalStatus(true);
-           this._emergencyRelease({releaseState,breached,zone});
-        }     
-    }
-    
-     if (nextProps.fireHazardType === EMERGENCY_FIRE && !nextProps.firehazadflag && !nextProps.fireHazardNotifyTime && nextProps.firehazadflag !== this.props.firehazadflag 
-          || (nextProps.fireHazardType === EMERGENCY_FIRE && (this.props.firehazadflag === false) && nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)){
-            this._FireEmergencyRelease();
-        }
-    
-
+    })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.noticationData) {
+      setTimeout(this.props.setNotificationNull.bind(this), 5000)
+    }
+
+    if (!nextProps.isEmergencyOpen) {
+      if (nextProps.system_emergency && nextProps.system_data === HARD) {
+        this.props.setEmergencyModalStatus(true)
+        this._stopOperation(true, nextProps.zoneDetails)
+      } else if (nextProps.system_data === SOFT) {
+        this.props.setEmergencyModalStatus(true)
+        this._pauseOperation(true, nextProps)
+      } else if (
+        nextProps.system_data === SOFT_MANUAL &&
+        (nextProps.lastEmergencyState === HARD ||
+          nextProps.lastEmergencyState === SOFT)
+      ) {
+        let releaseState,
+          breached = nextProps.breached,
+          zone = nextProps.zoneDetails.zone_id
+        if (nextProps.lastEmergencyState === HARD) {
+          releaseState = HARD
+        } else if (nextProps.lastEmergencyState === SOFT) {
+          releaseState = SOFT
+        }
+
+        this.props.setEmergencyModalStatus(true)
+        this._emergencyRelease({ releaseState, breached, zone })
+      }
+    }
+
+    if (
+      (nextProps.fireHazardType === EMERGENCY_FIRE &&
+        !nextProps.firehazadflag &&
+        !nextProps.fireHazardNotifyTime &&
+        nextProps.firehazadflag !== this.props.firehazadflag) ||
+      (nextProps.fireHazardType === EMERGENCY_FIRE &&
+        this.props.firehazadflag === false &&
+        nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)
+    ) {
+      this._FireEmergencyRelease()
+    }
+  }
   _parseStatus() {
     let overview,
       system,
@@ -271,12 +204,7 @@ class Tabs extends React.Component {
       newaudit,
       newauditStatus,
       newauditClass,
-      newauditIcon,
-      downloads,
-      inbound,
-      outbound,
-      exceptions,
-      customernotifications
+      newauditIcon
 
     offline = (
       <FormattedMessage
@@ -356,45 +284,82 @@ class Tabs extends React.Component {
       />
     )
 
-    downloads = (
-      <FormattedMessage
-        id='downloads.tab.heading'
-        description='downloads tab'
-        defaultMessage='DOWNLOADS'
-      />
-    )
+    // if(!this.props.system_status)
+    // {
+    //  overviewStatus=offline;
+    //  systemStatus=offline;
+    //  ordersStatus=offline;
+    //  usersStatus=offline;
+    //  inventoryStatus=offline;
+    //  auditStatus=offline;
+    //  systemClass=GOR_OFFLINE;
+    // }
+    // else
+    // {
+    //   if(this.props.overview_status=== FULFILLING_ORDERS)
+    //   {
+    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.fulfilling" description="overview Status fulfilling orders"
+    //           defaultMessage="Fulfilling orders"/>;
+    //   }
+    //   else
+    //   {
+    //     overviewStatus=<FormattedMessage id="overviewStatus.tab.default" description="default overview Status"
+    //           defaultMessage="None"/>;
+    //   }
+    //   if(this.props.system_emergency && (this.props.system_data === HARD || this.props.lastEmergencyState === HARD))
+    //   {
 
-    inbound = (
-      <FormattedMessage
-        id='inbound.tab.heading'
-        description='inbound tab'
-        defaultMessage='INBOUND'
-      />
-    )
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.stop" description="overview Status emergency"
+    //           defaultMessage="STOPPED"/>;
+    //   }
+    //   else if(this.props.system_emergency && !this.props.breached && (this.props.system_data === SOFT || this.props.lastEmergencyState === SOFT)){
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.paused" description="overview Status emergency"
+    //           defaultMessage="PAUSED"/>;
+    //   }
+    //   else if(this.props.breached){
+    //     systemClass = 'gor-alert';
+    //     systemStatus=<FormattedMessage id="overviewStatus.tab.breached" description="overview Status emergency"
+    //           defaultMessage="BREACHED"/>;
+    //   }
+    //   else{
+    //   systemStatus=<FormattedMessage id="systemStatus.tab.online" description="system Status online"
+    //           defaultMessage="Online"/>;
+    //   systemClass=GOR_ONLINE;
+    // }
 
-    outbound = (
-      <FormattedMessage
-        id='outbound.tab.heading'
-        description='outbound tab'
-        defaultMessage='OUTBOUND'
-      />
-    )
+    //   ordersvalue=<FormattedNumber value={this.props.orders_completed}/>
+    //   ordersStatus=<FormattedMessage id="ordersStatus.tab.heading" description="orders Status "
+    //                                    defaultMessage="{count}% fulfilled" values={{count:ordersvalue}}/>;
+    //   ordersClass=GOR_ONLINE;
 
-    exceptions = (
-      <FormattedMessage
-        id='exceptions.tab.heading'
-        description='exceptions tab'
-        defaultMessage='EXCEPTIONS'
-      />
-    )
+    //   usersvalue=<FormattedNumber value={this.props.users_online}/>
+    //   usersStatus=<FormattedMessage id="usersStatus.tab.heading#" description="users Status "
+    //                                   defaultMessage="{count} {count,plural,=0 {user} one {user} other {users}} online" values={{count:this.props.users_online?this.props.users_online:"0"}}/>;
 
-    customernotifications = (
-      <FormattedMessage
-        id='customernotifications.tab.heading'
-        description='customernotifications tab'
-        defaultMessage='CUSTOMER NOTIFICATIONS'
-      />
-    )
+    //   inventoryvalue=<FormattedNumber value={this.props.space_utilized}/>
+    //   inventoryStatus=<FormattedMessage id="inventoryStatus.tab.heading" description="inventory Status "
+    //                                        defaultMessage="{count}% space utilized" values={{count:inventoryvalue}}/>;
+    //   auditStatus=<FormattedMessage id="auditStatus.tab.heading" description="audit Status "
+    //                                  defaultMessage="{count} in progress"
+    //                                  values={{count:this.props.audit_count?this.props.audit_count:'None'}}/>;
+    //   if(this.props.audit_count)
+    //   {
+    //     auditClass=GOR_ONLINE;
+    //   }
+    //   else
+    //   {
+    //     auditClass=GOR_OFFLINE;
+    //   }
+    //   if(this.props.audit_alert) {
+    //     auditClass=(this.props.audit_alert?'gor-alert':auditClass);
+    //     auditStatus=<FormattedMessage id="auditStatus.tab.alert.heading" description="audit Status alert"
+    //                                  defaultMessage="{count} {count,plural, one {alert} other {alerts}}"
+    //                                  values={{count:this.props.audit_alert?this.props.audit_alert:"0"}}/>;
+    //    auditIcon=true;
+    //   }
+    // }
 
     items = {
       overview: overview,
@@ -403,11 +368,6 @@ class Tabs extends React.Component {
       users: users,
       inventory: inventory,
       audit: audit,
-      downloads:downloads,
-      inbound:inbound,
-      outbound:outbound,
-      exceptions:exceptions,
-      customernotifications:customernotifications,
       reports: reports,
       overviewStatus: overviewStatus,
       overviewClass: overviewClass,
@@ -427,66 +387,84 @@ class Tabs extends React.Component {
       newauditIcon: newauditIcon
     }
 
-    return items;
+    return items
   }
-   _processNotification(notificationPopup,showFireHazardPopup){
-  
-  var notificationWrap=[],singleNotification,time,timeText;
-  var originalDate=this.props.fireHazardNotifyTime? new Date(this.props.fireHazardNotifyTime): (this.props.fireHazardStartTime? new Date(this.props.fireHazardStartTime):new Date());
-  var convertedDate =  originalDate.getTime(); 
-  var timeText= <FormattedRelative value={convertedDate} timeZone={this.props.timeZone}/>;
+  _processNotification(notificationPopup, showFireHazardPopup) {
+    var notificationWrap = [],
+      singleNotification,
+      time,
+      timeText
+    var originalDate = this.props.fireHazardNotifyTime
+      ? new Date(this.props.fireHazardNotifyTime)
+      : this.props.fireHazardStartTime
+      ? new Date(this.props.fireHazardStartTime)
+      : new Date()
+    var convertedDate = originalDate.getTime()
+    var timeText = (
+      <FormattedRelative value={convertedDate} timeZone={this.props.timeZone} />
+    )
 
- if(this.props.fireHazardNotifyTime && showFireHazardPopup){
-singleNotification=<GorToastify key={1}>
-<div className="gor-toastify-content info">
-                  <p className="msg-content">
-                   <FormattedMessage id='operation.alert.resumed' 
-                    defaultMessage="All operation has been resumed to normal state."
-                            description="Text to resume operation"/>
-                  <span className="gor-toastify-updated-time">{timeText}</span>
-                  </p>
-                  <span className="gor-toastify-details">
-<span className="closeButton"  onClick={this._openPopup}></span>
-</span>
-     </div>
-     
-    </GorToastify>
-}else if(this.props.noticationData){
-  singleNotification=<GorToastify key={2}>
-  <div className="gor-toastify-content whiteBG" onClick={this._redirectAudit}>
-                    <div className={this.props.noticationData.type+'-Biggericon'}></div>
-                    <p className="msg-content-full">
-                    <div className='headermsg'>{this.props.noticationData.msg} </div>
-                    <div className='descmsg'>{this.props.noticationData.desc}</div>            
-                    </p>    
-     </div>
-    </GorToastify>
-}
-else
-{
-  singleNotification=<GorToastify key={3} >
-   <div className="gor-toastify-content">
-                  <p className="msg-content">
-                   <FormattedMessage id='operation.alert.triggeremergency' 
-                    defaultMessage="Fire emergency triggered. Follow evacuation procedures immediately"
-                            description="Text button to trigger emergency"/>
-                             <span className="gor-toastify-updated-time">{timeText}</span>
-                  </p>
-                  <span className="gor-toastify-details" onClick={this._openPopup}>
-
-<FormattedMessage id='operation.alert.toastifydetails' 
-                    defaultMessage="VIEW DETAILS"
-                            description="Text button to viewdetails"/>
-                  </span>
-
-     </div>
-    </GorToastify>
-} 
-    notificationWrap.push(singleNotification);
-  return notificationWrap;
-}
-    
-
+    if (this.props.fireHazardNotifyTime && showFireHazardPopup) {
+      singleNotification = (
+        <GorToastify key={1}>
+          <div className='gor-toastify-content info'>
+            <p className='msg-content'>
+              <FormattedMessage
+                id='operation.alert.resumed'
+                defaultMessage='All operation has been resumed to normal state.'
+                description='Text to resume operation'
+              />
+              <span className='gor-toastify-updated-time'>{timeText}</span>
+            </p>
+            <span className='gor-toastify-details'>
+              <span className='closeButton' onClick={this._openPopup}></span>
+            </span>
+          </div>
+        </GorToastify>
+      )
+    } else if (this.props.noticationData) {
+      singleNotification = (
+        <GorToastify key={2}>
+          <div
+            className='gor-toastify-content whiteBG'
+            onClick={this._redirectAudit}
+          >
+            <div
+              className={this.props.noticationData.type + '-Biggericon'}
+            ></div>
+            <p className='msg-content-full'>
+              <div className='headermsg'>{this.props.noticationData.msg} </div>
+              <div className='descmsg'>{this.props.noticationData.desc}</div>
+            </p>
+          </div>
+        </GorToastify>
+      )
+    } else {
+      singleNotification = (
+        <GorToastify key={3}>
+          <div className='gor-toastify-content'>
+            <p className='msg-content'>
+              <FormattedMessage
+                id='operation.alert.triggeremergency'
+                defaultMessage='Fire emergency triggered. Follow evacuation procedures immediately'
+                description='Text button to trigger emergency'
+              />
+              <span className='gor-toastify-updated-time'>{timeText}</span>
+            </p>
+            <span className='gor-toastify-details' onClick={this._openPopup}>
+              <FormattedMessage
+                id='operation.alert.toastifydetails'
+                defaultMessage='VIEW DETAILS'
+                description='Text button to viewdetails'
+              />
+            </span>
+          </div>
+        </GorToastify>
+      )
+    }
+    notificationWrap.push(singleNotification)
+    return notificationWrap
+  }
 
   render() {
     let items = this._parseStatus()
@@ -511,7 +489,7 @@ else
       this.props.config.utility_tab && this.props.config.utility_tab.enabled
 
     return (
-      <div className='gor-tabs gor-main-block gor-scrollable-tab'>
+      <div className='gor-tabs gor-main-block'>
         <Link to='/overview' onClick={this.handleTabClick.bind(this, OVERVIEW)}>
           <Tab
             items={{
@@ -522,84 +500,6 @@ else
             changeClass={
               this.props.tab.toUpperCase() === OVERVIEW ||
               this.props.tab === 'md'
-                ? 'sel'
-                : GOR_NORMAL_TAB
-            }
-            subIcons={false}
-          />
-        </Link>
-
-        <Link
-          to='/orders/ordersummary'
-          onClick={this.handleTabClick.bind(this, OUTBOUND)}
-        >
-          <Tab
-            items={{
-              tab: items.outbound
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === OUTBOUND ? 'sel' : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        <Link
-          to='/inbound/putsummary'
-          onClick={this.handleTabClick.bind(this, INBOUND)}
-        >
-          <Tab
-            items={{
-              tab: items.inbound,
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === INBOUND ? 'sel' : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        {/* <Link
-          to='/exception/exceptionlist'
-          onClick = {this.handleTabClick.bind(this,EXCEPTIONS)}
-        >
-          <Tab
-           items ={{
-             tab: items.exceptions,
-            }}
-          changeClass={
-            this.props.tab.toUpperCase() === EXCEPTIONS ? 'sel' : GOR_NORMAL_TAB
-          }
-          />
-        </Link> */}
-        
-        <Link
-          to='/audit/auditlisting'
-          onClick={this.handleTabClick.bind(this, AUDITLISTING)}
-        >
-          <Tab
-            items={{
-              tab: items.audit,
-              Status: items.auditStatus,
-              currentState: items.auditClass
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === AUDIT ? 'sel' : GOR_NORMAL_TAB
-            }
-            subIcons={items.auditIcon}
-          />
-        </Link>
-
-        <Link
-          to='/inventory'
-          onClick={this.handleTabClick.bind(this, INVENTORY)}
-        >
-          <Tab
-            items={{
-              tab: items.inventory,
-              Status: items.inventoryStatus,
-              currentState: ''
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === INVENTORY
                 ? 'sel'
                 : GOR_NORMAL_TAB
             }
@@ -624,24 +524,36 @@ else
           />
         </Link>
 
-        
-        
-        
-
-        <Link to='/users' onClick={this.handleTabClick.bind(this, USERS)}>
+        <Link to='/orders' onClick={this.handleTabClick.bind(this, ORDERS)}>
           <Tab
             items={{
-              tab: items.users,
-              Status: items.usersStatus,
-              currentState: ''
+              tab: items.order,
+              Status: items.ordersStatus,
+              currentState: items.ordersClass
             }}
             changeClass={
-              this.props.tab.toUpperCase() === USERS ? 'sel' : GOR_NORMAL_TAB
+              this.props.tab.toUpperCase() === ORDERS ? 'sel' : GOR_NORMAL_TAB
             }
             subIcons={false}
           />
         </Link>
 
+        <Link
+          to='/audit/auditlisting'
+          onClick={this.handleTabClick.bind(this, AUDITLISTING)}
+        >
+          <Tab
+            items={{
+              tab: items.audit,
+              Status: items.auditStatus,
+              currentState: items.auditClass
+            }}
+            changeClass={
+              this.props.tab.toUpperCase() === AUDIT ? 'sel' : GOR_NORMAL_TAB
+            }
+            subIcons={items.auditIcon}
+          />
+        </Link>
         <Link
           to='/reports/operationsLog'
           onClick={this.handleTabClick.bind(this, REPORTS)}
@@ -654,33 +566,36 @@ else
             subIcons={false}
           />
         </Link>
-
         <Link
-          to='reports/reportsdownload'
-          onClick={this.handleTabClick.bind(this, DOWNLOADS)}
+          to='/inventory'
+          onClick={this.handleTabClick.bind(this, INVENTORY)}
         >
           <Tab
             items={{
-              tab: items.downloads,
+              tab: items.inventory,
+              Status: items.inventoryStatus,
+              currentState: ''
             }}
             changeClass={
-              this.props.tab.toUpperCase() === DOWNLOADS ? 'sel' : GOR_NORMAL_TAB
+              this.props.tab.toUpperCase() === INVENTORY
+                ? 'sel'
+                : GOR_NORMAL_TAB
             }
+            subIcons={false}
           />
         </Link>
 
-
-        <Link
-          to='/notification/notificationlist'
-          onClick={this.handleTabClick.bind(this, CUSTOMERNOTIFICATIONS)}
-        >
+        <Link to='/users' onClick={this.handleTabClick.bind(this, USERS)}>
           <Tab
             items={{
-              tab: items.customernotifications,
+              tab: items.users,
+              Status: items.usersStatus,
+              currentState: ''
             }}
             changeClass={
-              this.props.tab.toUpperCase() === CUSTOMERNOTIFICATIONS ? 'sel' : GOR_NORMAL_TAB
+              this.props.tab.toUpperCase() === USERS ? 'sel' : GOR_NORMAL_TAB
             }
+            subIcons={false}
           />
         </Link>
 
@@ -699,60 +614,68 @@ else
               subIcons={false}
             />
           </Link>
-          ) : (
+        ) : (
           ''
         )}
-       
+
         {showFireHazardPopup ? notificationWrap : ''}
         {notificationPopup ? notificationWrap : ''}
       </div>
     )
   }
 }
-  
- 
 
-function mapStateToProps(state, ownProps){
-
-    return  {
-         tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
-         overview_status:state.tabsData.overview_status||null,
-         system_emergency:state.tabsData.system_emergency||false,
-         lastEmergencyState:state.tabsData.lastEmergencyState || "none",
-         system_data:state.tabsData.system_data||null,
-         lastEmergencyState:state.tabsData.lastEmergencyState,
-         breached: state.tabsData.breached,
-         users_online:state.tabsData.users_online||0,
-         audit_count:state.tabsData.audit_count||0,
-         space_utilized:state.tabsData.space_utilized||0,
-         orders_completed:state.tabsData.orders_completed||0,
-         system_status:state.tabsData.status||null,
-         audit_alert: state.tabsData.audit_alert || 0,
-         config:state.config||{},
-         firehazadflag:state.fireReducer.firehazadflag,
-         fireHazardType:state.fireHazardDetail.emergency_type,
-         fireHazardStartTime:state.fireHazardDetail.emergencyStartTime,
-         fireHazardNotifyTime:state.fireHazardDetail.notifyTime,
-         timeZone:state.authLogin.timeOffset,
-          zoneDetails: state.tabsData.zoneDetails || {},
-          isEmergencyOpen:state.tabsData.isEmergencyOpen,
-          noticationData:state.notificationReducer.noticationData||null
-
-    }
+function mapStateToProps(state, ownProps) {
+  return {
+    tab: state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
+    overview_status: state.tabsData.overview_status || null,
+    system_emergency: state.tabsData.system_emergency || false,
+    lastEmergencyState: state.tabsData.lastEmergencyState || 'none',
+    system_data: state.tabsData.system_data || null,
+    lastEmergencyState: state.tabsData.lastEmergencyState,
+    breached: state.tabsData.breached,
+    users_online: state.tabsData.users_online || 0,
+    audit_count: state.tabsData.audit_count || 0,
+    space_utilized: state.tabsData.space_utilized || 0,
+    orders_completed: state.tabsData.orders_completed || 0,
+    system_status: state.tabsData.status || null,
+    audit_alert: state.tabsData.audit_alert || 0,
+    config: state.config || {},
+    firehazadflag: state.fireReducer.firehazadflag,
+    fireHazardType: state.fireHazardDetail.emergency_type,
+    fireHazardStartTime: state.fireHazardDetail.emergencyStartTime,
+    fireHazardNotifyTime: state.fireHazardDetail.notifyTime,
+    timeZone: state.authLogin.timeOffset,
+    zoneDetails: state.tabsData.zoneDetails || {},
+    isEmergencyOpen: state.tabsData.isEmergencyOpen,
+    noticationData: state.notificationReducer.noticationData || null
+  }
 }
 
-var mapDispatchToProps=function(dispatch){
-	return {
-        setInventorySpinner:function(data){dispatch(setInventorySpinner(data));},
-        setAuditSpinner:function(data){dispatch(setAuditSpinner(data));},
-        setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
-        setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
-        setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));},
-        setNotificationNull:function(data){dispatch(setNotificationNull(data));}
-	}
-};
+var mapDispatchToProps = function(dispatch) {
+  return {
+    setInventorySpinner: function(data) {
+      dispatch(setInventorySpinner(data))
+    },
+    setAuditSpinner: function(data) {
+      dispatch(setAuditSpinner(data))
+    },
+    setButlerSpinner: function(data) {
+      dispatch(setButlerSpinner(data))
+    },
+    setFireHazrdFlag: function(data) {
+      dispatch(setFireHazrdFlag(data))
+    },
+    setEmergencyModalStatus: function(data) {
+      dispatch(setEmergencyModalStatus(data))
+    },
+    setNotificationNull: function(data) {
+      dispatch(setNotificationNull(data))
+    }
+  }
+}
 
-
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Tabs) ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tabs)
