@@ -156,9 +156,15 @@ class UtilityTab extends React.Component {
     }
 
     return (
-      <div style={{ display: 'flex', 'flex-direction': 'row' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap'
+        }}
+      >
         {show_inventory_report ? (
-          <div style={{ width: '25%' }}>
+          <div style={{ marginLeft: '2%' }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.downloadReportsHead
@@ -172,7 +178,7 @@ class UtilityTab extends React.Component {
           </div>
         ) : null}
         {show_gr_report ? (
-          <div style={{ width: '25%', marginLeft: '2%' }}>
+          <div style={{ marginLeft: '2%' }}>
             <UtilityTile
               tileHead={this.context.intl.formatMessage(
                 messages.goodsRcvdNotesHead
