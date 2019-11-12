@@ -623,6 +623,53 @@ class Tabs extends React.Component {
       </div>
     )
   }
+  
+  let notificationWrap=this._processNotification(notificationPopup,showFireHazardPopup);
+  let showUtilityTab=this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+  console.log(this.props);
+  console.log(this.props.tab);
+
+		return (
+		<div className="gor-tabs gor-main-block">
+		<Link to="/overview" onClick={this.handleTabClick.bind(this,OVERVIEW)}>
+			<Tab items={{ tab: items.overview, Status: items.overviewStatus, currentState:items.overviewClass }} changeClass={(this.props.tab.toUpperCase()=== OVERVIEW || this.props.tab === 'md' ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		</Link>
+
+		<Link to="/system/sysOverview" onClick={this.handleTabClick.bind(this,SYSTEM)}>
+			<Tab items={{ tab: items.system, Status: items.systemStatus, currentState:items.systemClass }} changeClass={(this.props.tab.toUpperCase()=== SYSTEM ? 'sel' :GOR_NORMAL_TAB)} subIcons={true}/>
+		</Link>
+
+		<Link to="/orders" onClick={this.handleTabClick.bind(this,ORDERS)}>
+			<Tab items={{ tab: items.order, Status: items.ordersStatus, currentState:items.ordersClass }} changeClass={(this.props.tab.toUpperCase()=== ORDERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		</Link>
+
+  
+
+    <Link to="/audit/auditlisting" onClick={this.handleTabClick.bind(this,AUDITLISTING)}>
+      <Tab items={{ tab: items.audit, Status: items.auditStatus, currentState:items.auditClass}} changeClass={(this.props.tab.toUpperCase()=== AUDIT ? 'sel' :GOR_NORMAL_TAB)} subIcons={items.auditIcon}/>
+      </Link>
+    <Link to="/reports/operationsLog" onClick={this.handleTabClick.bind(this,REPORTS)}>
+      <Tab items={{ tab: items.reports}} changeClass={(this.props.tab.toUpperCase()=== REPORTS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
+    <Link to="/inventory" onClick={this.handleTabClick.bind(this,INVENTORY)}>
+      <Tab items={{ tab: items.inventory, Status: items.inventoryStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== INVENTORY ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>
+		
+		<Link to="/users" onClick={this.handleTabClick.bind(this,USERS)}>
+			<Tab items={{ tab: items.users, Status: items.usersStatus, currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== USERS ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+		</Link>
+
+    {showUtilityTab?<Link to="/utilities" onClick={this.handleTabClick.bind(this,UTILITIES)}>
+      <Tab items={{ tab: items.utilities, Status:'', currentState:'' }} changeClass={(this.props.tab.toUpperCase()=== UTILITIES ? 'sel' :GOR_NORMAL_TAB)} subIcons={false}/>
+    </Link>:""}
+
+    
+   {showFireHazardPopup?notificationWrap:""}
+   {notificationPopup?notificationWrap:""}
+   
+  </div>
+		);
+	}
 }
 
 function mapStateToProps(state, ownProps) {
