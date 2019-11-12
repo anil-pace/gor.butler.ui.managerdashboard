@@ -2,7 +2,7 @@
 
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   position: absolute;
   top: 0;
   white-space: nowrap;
@@ -30,6 +30,8 @@
   white-space: normal;
   background: grey;
 }
+
+
 
 .fixedDataTableCellLayout_lastChild {
   border-width: 0 1px 1px 0;
@@ -68,8 +70,7 @@
   cursor: ew-resize;
 }
 
-.fixedDataTableCellLayout_columnResizerContainer:hover
-  .fixedDataTableCellLayout_columnResizerKnob {
+.fixedDataTableCellLayout_columnResizerContainer:hover .fixedDataTableCellLayout_columnResizerKnob {
   visibility: visible;
 }
 
@@ -92,13 +93,15 @@
   z-index: 10;
 }
 
-body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
+body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+ 
   display: none !important;
 }
 
 .fixedDataTableColumnResizerLineLayout_hiddenElem {
   display: none !important;
 }
+
 
 .fixedDataTableLayout_header,
 .fixedDataTableLayout_hasBottomBorder {
@@ -148,8 +151,9 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   position: absolute;
   top: 0;
   border-bottom: #e6e6e6;
-  border-style: solid;
-  border-bottom-width: 0.1px;
+    border-style: solid;
+    border-bottom-width: 0.1px;
+
 }
 
 .fixedDataTableRowLayout_body {
@@ -160,7 +164,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_fixedColumnsDivider {
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   border-left-style: solid;
   border-left-width: 1px;
   left: 0;
@@ -172,6 +176,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableRowLayout_columnsShadow {
   width: 4px;
 }
+
 
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -190,13 +195,13 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   overflow-x: hidden;
   position: absolute;
   -webkit-transition-duration: 250ms;
-  transition-duration: 250ms;
+          transition-duration: 250ms;
   -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
+          transition-timing-function: ease;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .ScrollbarLayout_mainVertical {
@@ -204,7 +209,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   right: 0;
   top: 0;
   -webkit-transition-property: background-color width;
-  transition-property: background-color width;
+          transition-property: background-color width;
   width: 15px;
 }
 
@@ -218,7 +223,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   height: 15px;
   left: 0;
   -webkit-transition-property: background-color height;
-  transition-property: background-color height;
+          transition-property: background-color height;
 }
 
 /* Touching the scroll-track directly makes the scroll-track bolder */
@@ -246,7 +251,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   display: block;
   position: absolute;
   -webkit-transition: background-color 250ms ease;
-  transition: background-color 250ms ease;
+          transition: background-color 250ms ease;
 }
 
 .ScrollbarLayout_faceHorizontal {
@@ -305,6 +310,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   border-color: #d3d3d3;
 }
 
+
 .public_fixedDataTable_header,
 .public_fixedDataTable_hasBottomBorder {
   border-color: #d3d3d3;
@@ -316,25 +322,25 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
-  border-bottom-style: solid;
-  border-color: #dedede;
-  border-bottom-width: 0px;
+border-bottom-style: solid;
+border-color: #dedede;
+border-bottom-width: 0px;
+
+
+  
 }
 
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  
   border-color: #d3d3d3;
 }
 
 .public_fixedDataTable_topShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=)
-    repeat-x;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
 }
 
 .public_fixedDataTable_bottomShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==)
-    repeat-x;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
 }
 
 .public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
@@ -362,96 +368,107 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableCell_highlighted {
   background-color: #f4f4f4;
 }
-.public_fixedDataTableRow_downloaded {
+.public_fixedDataTableRow_downloaded{
   background: #eeeeee !important;
 }
 
-.fixedDataTableRowLayout_rowWrapper {
-  &:hover {
-    .public_fixedDataTableCell_main {
-      background-color: #e6e6e6;
-    }
-    .public_fixedDataTableRow_main {
-      background-color: #e6e6e6;
-    }
-    .public_fixedDataTable_header {
-      background-color: #fff;
-    }
-  }
+
+.fixedDataTableRowLayout_rowWrapper{
+        &:hover{
+            .public_fixedDataTableCell_main{
+              background-color: #e6e6e6;
+            }
+            .public_fixedDataTableRow_main{
+              background-color: #e6e6e6;
+            }
+            .public_fixedDataTable_header{
+              background-color: #fff;
+            }
+        }
 }
+
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
-  background-color: #ffffff;
+
+background-color: #FFFFFF;
 }
 
-.Stopped {
-  .public_fixedDataTableCell_cellContent {
-    background: #fc3838;
-    border-radius: 15px;
-    text-align: center;
-    width: 90px;
-    color: #ffffff;
-    font-size: 12px;
-    max-height: 9px;
+
+.Stopped{   
+  .public_fixedDataTableCell_cellContent{
+      background: #fc3838;
+      border-radius: 15px;
+      text-align: center;
+      width:90px;
+      color: #ffffff;
+      font-size: 12px;
+      max-height: 9px;
   }
 }
-.error .public_fixedDataTableCell_cellContent {
-  background: #fc3838;
+.error .public_fixedDataTableCell_cellContent{
+   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
   text-transform: capitalize;
 }
-.Error .public_fixedDataTableCell_cellContent {
+.Error .public_fixedDataTableCell_cellContent{
+
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+
 }
 
-.Warning .public_fixedDataTableCell_cellContent,
-.warning .public_fixedDataTableCell_cellContent {
+.Warning .public_fixedDataTableCell_cellContent, .warning .public_fixedDataTableCell_cellContent{
+
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+
 }
 
-.Risk .public_fixedDataTableCell_cellContent {
+.Risk .public_fixedDataTableCell_cellContent{
+
   background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+
 }
 
-.not_fulfillable .public_fixedDataTableCell_cellContent {
+.not_fulfillable .public_fixedDataTableCell_cellContent{
+
   background: #ffffff;
   border-radius: 15px;
-  border: 1px solid #f99405;
+   border: 1px solid #f99405;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #f99405;
   font-size: 12px;
   max-height: 9px;
 }
 
-.on .public_fixedDataTableCell_cellContent,
-.open .public_fixedDataTableCell_cellContent {
+.on .public_fixedDataTableCell_cellContent,.open .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -460,14 +477,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+
 }
 
-.off .public_fixedDataTableCell_cellContent,
-.close .public_fixedDataTableCell_cellContent,
-.force_close .public_fixedDataTableCell_cellContent {
+.off .public_fixedDataTableCell_cellContent,.close .public_fixedDataTableCell_cellContent,.force_close .public_fixedDataTableCell_cellContent{
+
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -476,12 +493,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+
 }
-.online .public_fixedDataTableCell_cellContent,
-.success .public_fixedDataTableCell_cellContent {
+.online .public_fixedDataTableCell_cellContent,.success .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -490,12 +509,15 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+
 }
 
-.connected .public_fixedDataTableCell_cellContent {
+.connected .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -504,12 +526,15 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+
 }
 
-.completed .public_fixedDataTableCell_cellContent {
+.completed .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -517,12 +542,16 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background-color: #00a54f;
+
+
 }
 
-.complete .public_fixedDataTableCell_cellContent {
+.complete .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -530,12 +559,16 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background-color: #00a54f;
+
+
 }
 
-.INTERNAL_SERVER_ERROR .public_fixedDataTableCell_cellContent {
+.INTERNAL_SERVER_ERROR .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #ff0000;
@@ -543,31 +576,52 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background-color: #ff0000;
+
+
 }
-.breached .public_fixedDataTableCell_cellContent {
+.breached .public_fixedDataTableCell_cellContent{
+
   background: #fc3838;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
 }
 
-.gor-exception .public_fixedDataTableCell_cellContent {
-  background: #f99405;
+.gor-exception .public_fixedDataTableCell_cellContent{
+
+  background: #F99405;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
 }
 
-.offline .public_fixedDataTableCell_cellContent {
+.offline .public_fixedDataTableCell_cellContent{
+
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #aaaaaa;
+  color: #aaaaaa;
+  font-size: 12px;
+  max-height: 9px;
+  background: #ffffff;
+  text-transform: capitalize;
+
+}
+
+.disconnected .public_fixedDataTableCell_cellContent{
+
+  border-radius: 15px;
+  text-align: center;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #aaaaaa;
@@ -578,24 +632,10 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.disconnected .public_fixedDataTableCell_cellContent {
+.pending .public_fixedDataTableCell_cellContent{
   border-radius: 15px;
   text-align: center;
-  width: 90px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #aaaaaa;
-  color: #aaaaaa;
-  font-size: 12px;
-  max-height: 9px;
-  background: #ffffff;
-  text-transform: capitalize;
-}
-
-.pending .public_fixedDataTableCell_cellContent {
-  border-radius: 15px;
-  text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -605,7 +645,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
-.cancelled .public_fixedDataTableCell_cellContent {
+.cancelled .public_fixedDataTableCell_cellContent{
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -617,22 +657,22 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.abandoned .public_fixedDataTableCell_cellContent {
+.abandoned .public_fixedDataTableCell_cellContent{
   background: #ffffff;
   border-radius: 15px;
-  border: 1px solid #f99405;
+   border: 1px solid #f99405;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #f99405;
   font-size: 12px;
   max-height: 9px;
 }
 
-.rejected .public_fixedDataTableCell_cellContent {
+.rejected .public_fixedDataTableCell_cellContent{
   border-radius: 15px;
   text-align: center;
-  width: 90px;
-  border: 1px solid #aaaaaa;
+  width:90px;
+  border:1px solid #aaaaaa;
   color: #aaaaaa;
   font-size: 12px;
   max-height: 9px;
@@ -640,23 +680,23 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.temporary_unfulfillable .public_fixedDataTableCell_cellContent,
-.exception .public_fixedDataTableCell_cellContent {
-  background: #ffffff;
+.temporary_unfulfillable .public_fixedDataTableCell_cellContent,.exception .public_fixedDataTableCell_cellContent{
+  background: #ffffff; ;
   border-radius: 15px;
-  border: 1px solid #f36f36;
+   border: 1px solid #f36f36;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #f36f36;
   font-size: 12px;
   max-height: 9px;
   text-transform: capitalize;
+
 }
 
 .in_progress {
-  border-radius: 15px;
+border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -664,11 +704,12 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+  
 }
 
-.CREATED .public_fixedDataTableCell_cellContent,
-.exception .public_fixedDataTableCell_cellContent {
-  border-radius: 15px;
+
+.CREATED .public_fixedDataTableCell_cellContent,.exception .public_fixedDataTableCell_cellContent{
+border-radius: 15px;
   text-align: center;
   width: 90px;
   border: 1px solid #aaaaaa;
@@ -677,10 +718,11 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+  
 }
 
-.ACCEPTED .public_fixedDataTableCell_cellContent {
-  border-radius: 15px;
+.ACCEPTED .public_fixedDataTableCell_cellContent{
+border-radius: 15px;
   text-align: center;
   width: 90px;
   border: 1px solid #aaaaaa;
@@ -689,34 +731,40 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+  
 }
 
-.fulfillable .public_fixedDataTableCell_cellContent {
+.fulfillable .public_fixedDataTableCell_cellContent{
+
   border-radius: 15px;
   text-align: center;
-  width: 90px;
-  border: 1px solid #00a54f;
+  width:90px;
+  border:1px solid #00a54f;
   color: #00a54f;
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
   text-transform: capitalize;
+
 }
 
-.gor-order-exception .public_fixedDataTableCell_cellContent {
-  background: #f99405;
+.gor-order-exception .public_fixedDataTableCell_cellContent{
+background: #f99405;
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   color: #ffffff;
   font-size: 12px;
   max-height: 9px;
+  
 }
 
-.progress .public_fixedDataTableCell_cellContent {
+.progress .public_fixedDataTableCell_cellContent{
+
+  
   border-radius: 15px;
   text-align: center;
-  width: 90px;
+  width:90px;
   border-style: solid;
   border-width: 1px;
   border-color: #00a54f;
@@ -724,63 +772,64 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   font-size: 12px;
   max-height: 9px;
   background: #ffffff;
+
 }
 
-.left .public_fixedDataTableCell_cellContent {
+.left .public_fixedDataTableCell_cellContent{
   text-align: left;
 }
 
-.right .public_fixedDataTableCell_cellContent {
+.right .public_fixedDataTableCell_cellContent{
   text-align: left;
 }
 
-.completed {
-  .public_fixedDataTableCell_cellContent {
+.completed{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.complete {
-  .public_fixedDataTableCell_cellContent {
+.complete{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.pending {
-  .public_fixedDataTableCell_cellContent {
+.pending{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.Completed {
-  .public_fixedDataTableCell_cellContent {
+.Completed{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.auto {
-  .public_fixedDataTableCell_cellContent {
+.auto{
+  .public_fixedDataTableCell_cellContent{
+    text-transform: capitalize;
+  }
+} 
+.manual{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.manual {
-  .public_fixedDataTableCell_cellContent {
+.audit{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.audit {
-  .public_fixedDataTableCell_cellContent {
+.pick{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.pick {
-  .public_fixedDataTableCell_cellContent {
+.put{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
-.put {
-  .public_fixedDataTableCell_cellContent {
-    text-transform: capitalize;
-  }
-}
-.not_fulfillable {
-  .public_fixedDataTableCell_cellContent {
+.not_fulfillable{
+  .public_fixedDataTableCell_cellContent{
     text-transform: capitalize;
   }
 }
@@ -788,14 +837,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableCell_columnResizerKnob {
   background-color: #aaaaaa;
 }
-.FAILED {
-  .public_fixedDataTableCell_cellContent {
-    color: #ee434a;
+.FAILED{
+  .public_fixedDataTableCell_cellContent{
+      color:#EE434A;
   }
 }
-.PENDING {
-  .public_fixedDataTableCell_cellContent {
-    color: #6fc4e8;
+.PENDING{
+   .public_fixedDataTableCell_cellContent{
+      color:#6FC4E8;
   }
 }
 /**
@@ -843,14 +892,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #eeeeee !important;
 }
 
+
+
 .public_fixedDataTableRow_fixedColumnsDivider {
   border-color: #d3d3d3;
 }
 
 .public_fixedDataTableRow_columnsShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==)
-    repeat-y;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
 }
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -914,12 +963,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableCellGroupLayout_cellGroup {
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+          backface-visibility: hidden;
 
   left: calculateRem(1px);
   position: absolute;
   top: 0;
   white-space: nowrap;
+
+
 }
 
 .fixedDataTableCellGroupLayout_cellGroup > .public_fixedDataTableCell_main {
@@ -989,8 +1040,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   cursor: ew-resize;
 }
 
-.fixedDataTableCellLayout_columnResizerContainer:hover
-  .fixedDataTableCellLayout_columnResizerKnob {
+.fixedDataTableCellLayout_columnResizerContainer:hover .fixedDataTableCellLayout_columnResizerKnob {
   visibility: visible;
 }
 
@@ -1024,7 +1074,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   z-index: 10;
 }
 
-body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
+body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   /* the resizer line is in the wrong position in RTL with no easy fix.
    * Disabling is more useful than displaying it.
    * #167 (github) should look into this and come up with a permanent fix.
@@ -1111,7 +1161,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_fixedColumnsDivider {
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+          backface-visibility: hidden;
   border-left-style: solid;
   border-left-width: 1px;
   left: 0;
@@ -1127,7 +1177,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .fixedDataTableRowLayout_rowWrapper {
   position: absolute;
   top: 0;
-  z-index: 20;
+  z-index:20;
 }
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -1141,6 +1191,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
  */
 
 .ScrollbarLayout_main {
+  
 }
 
 .ScrollbarLayout_mainVertical {
@@ -1148,7 +1199,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   right: 0;
   top: 0;
   -webkit-transition-property: background-color width;
-  transition-property: background-color width;
+          transition-property: background-color width;
   width: 15px;
 }
 
@@ -1162,7 +1213,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   height: 15px;
   left: 0;
   -webkit-transition-property: background-color height;
-  transition-property: background-color height;
+          transition-property: background-color height;
 }
 
 /* Touching the scroll-track directly makes the scroll-track bolder */
@@ -1190,7 +1241,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   display: block;
   position: absolute;
   -webkit-transition: background-color 250ms ease;
-  transition: background-color 250ms ease;
+          transition: background-color 250ms ease;
 }
 
 .ScrollbarLayout_faceHorizontal {
@@ -1257,15 +1308,11 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .public_fixedDataTable_topShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=)
-    repeat-x;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
 }
 
 .public_fixedDataTable_bottomShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==)
-    repeat-x;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
 }
 
 .public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
@@ -1296,9 +1343,10 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 
 .public_fixedDataTableCell_cellContent {
   padding: 5px 8px 8px 8px;
-  a {
-    cursor: pointer;
+  a{
+    cursor:pointer;
   }
+  
 }
 
 .public_fixedDataTableCell_columnResizerKnob {
@@ -1344,18 +1392,15 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
   background-color: #f7f7f7;
 }
-.public_fixedDataTableRow_even,
-.public_fixedDataTableRow_odd {
-  background: #f7f7f7;
+.public_fixedDataTableRow_even,.public_fixedDataTableRow_odd{
+  background:#f7f7f7;
 }
 .public_fixedDataTableRow_fixedColumnsDivider {
   border-color: #ffffff;
 }
 
 .public_fixedDataTableRow_columnsShadow {
-  background: 0 0
-    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==)
-    repeat-y;
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
 }
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -1395,88 +1440,96 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #7d7d7d;
 }
 .gorToolBar {
-  height: 68px;
-  background: #ffffff;
-  box-shadow: inset 0 5px 5px -5px #888888;
-  font-family: 'source sans pro';
-  font-size: 20px;
-  color: #000000;
-  &.auditListingToolbar {
-    height: 80px;
-    background: #f2f2f2;
-    border-bottom: 2px solid #dddddd;
-    padding-left: 25px;
+  
+      height: 68px;
+      background: #FFFFFF;
+      box-shadow: inset 0 5px 5px -5px #888888;
+      font-family: "source sans pro";
+      font-size: 20px;
+      color: #000000;
+      &.auditListingToolbar{
+      height:80px;
+      background: #f2f2f2;
+      border-bottom:2px solid #dddddd; 
+       padding-left: 25px;
+      }
   }
-}
+
 
 .gorFilter {
   float: right;
   vertical-align: middle;
   box-sizing: border-box;
-  border: 1px solid #aaaaaa;
-  border-radius: 4px;
-  background-color: white;
-  font-family: 'source sans pro';
-  color: #aaaaaa;
-  height: 35px;
-  width: 200px;
-  padding-left: 9px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    background-color: white;
+    font-family: "source sans pro";
+    color: #aaaaaa;
+    height: 35px;
+    width: 200px;
+    padding-left: 9px;
+    
+
 }
 
 .gorToolBarFilter {
-  font-weight: bold;
-  color: #000000;
-  padding-top: 6px;
+
+font-weight: bold;
+color: #000000;
+padding-top: 6px;
   display: inline-block;
   width: 50%;
   vertical-align: middle;
 }
 
-.gorToolBarElements {
+.gorToolBarElements{
   display: inline-block;
   vertical-align: sub;
   padding-right: 10px;
   padding-top: 18px;
 }
 .gorToolBarDropDown {
-  padding-left: 10px;
+padding-left: 10px;
   display: inline-block;
   vertical-align: 8px;
-  &.pps {
+  &.pps{
     vertical-align: middle;
   }
 }
 
 .gorToolBarWrap {
-  width: 40%;
-  font-weight: bold;
-  color: #000000;
+width: 40%;
+font-weight: bold;
+color: #000000;
   display: inline-block;
   vertical-align: middle;
   padding-top: 6px;
-  &.auditListingToolbarWrap {
-    margin-top: 18px;
-    width: 18%;
+  &.auditListingToolbarWrap{
+      margin-top: 18px;
+      width:18%;
   }
-  .auditHeaderContainer {
-    display: inline-block;
-    padding-top: 7px;
+  .auditHeaderContainer{
+  display:inline-block;
+  padding-top:7px;
   }
 }
-.fixedDataTableLayout_main {
-  .gorToolHeaderEl {
-    display: inline-block;
-    float: left;
-  }
-  .sortIcon {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 5px;
-  }
+.fixedDataTableLayout_main{
+    .gorToolHeaderEl {
+      display: inline-block;
+      float:left;
+    }
+    .sortIcon{
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 5px;
+    }
+
 }
 
-.gorToolHeaderSubText {
-  font-family: 'source sans pro';
+
+
+.gorToolHeaderSubText{
+  font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
   padding-top: 14px;
@@ -1486,13 +1539,14 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 .gorTesting {
   width: 100%;
   height: 76vh;
-  position: relative;
+  position:relative;
 }
+
 
 .gor-Orderlist-table {
   width: 100%;
   height: 79vh;
-  position: relative;
+  position:relative;
 }
 
 .gorTableMainContainer {
@@ -1500,7 +1554,7 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gorInputFilter {
-  height: 30px;
+  height:30px;
   border-width: 0px;
   border-color: #ffffff;
   padding-left: 9px;
@@ -1513,10 +1567,10 @@ body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   padding-right: 40px;
 }
 
-input[type='checkbox'] {
-  width: 15px;
+input[type="checkbox"]{
+  width: 15px; 
   height: 15px;
-  zoom: 1.4;
+  zoom: 1.4; 
 }
 
 .statuslogoWrap {
@@ -1526,94 +1580,94 @@ input[type='checkbox'] {
 
 .alertState {
   color: #fc3838;
-  padding-top: 16px;
+  padding-top : 16px;
 }
 
 .gorDataTableDrop {
-  display: inline-block;
-  width: 100%;
-  height: calculateRem(30px);
-  background: transparent;
-  text-align: left;
-  .Dropdown-root {
-    position: relative;
-  }
-  .Dropdown-control {
-    position: relative;
-    border: 1px solid;
-    border-radius: calculateRem(3px);
-    box-sizing: border-box;
-    cursor: default;
-    outline: none;
-    padding: calculateRem(8px) calculateRem(52px) calculateRem(8px)
-      calculateRem(10px);
-    transition: all 200ms ease;
-    border-color: #aaaaaa;
-    font-size: 14px;
-    font-weight: 100;
-    color: #aaaaaa;
-  }
-  .Dropdown-arrow {
-    border-color: #a6a7a9 transparent transparent;
-    border-style: solid;
-    border-width: calculateRem(8px) calculateRem(5px) calculateRem(2px);
-    content: ' ';
-    display: block;
-    height: 0;
-    margin-top: -ceil(2.5);
-    position: absolute;
-    right: calculateRem(15px);
-    top: calculateRem(11px);
-  }
-  .Dropdown-control:hover {
-    box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
-    border: calculateRem(1px) solid #ccc;
-  }
-  .is-open .Dropdown-arrow {
-    border-color: #ffffff transparent transparent;
-    border-style: solid;
-    border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
-  }
-  .Dropdown-menu {
-    border: 1px solid;
-    border-radius: 3px;
-    box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
-    box-sizing: border-box;
-    margin-top: calculateRem(-1px);
-    max-height: calculateRem(200px);
-    overflow-y: auto;
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    z-index: 30;
-    -webkit-overflow-scrolling: touch;
-    border-color: #aaaaaa;
-    font-size: 14px;
-    font-weight: 100;
-    color: #aaaaaa;
-    background: #ffffff;
-  }
-  .Dropdown-option {
-    box-sizing: border-box;
-    color: #a6a7a9;
-    cursor: pointer;
-    display: block;
-    padding: calculateRem(8px) calculateRem(10px);
-  }
-  .Dropdown-option.is-selected {
-    font-weight: bold;
-  }
-  .Dropdown-option:hover {
-    color: #aaaaaa;
-    background: #f8f8f8;
-  }
-  .Dropdown-noresults {
-    box-sizing: border-box;
-    color: #ccc;
-    cursor: default;
-    display: block;
-    padding: calculateRem(8px) calculateRem(10px);
-  }
+        display:inline-block;
+        width:100%;
+        height:calculateRem(30px);
+        background:transparent;
+        text-align:left;    
+      .Dropdown-root 
+      {
+          position: relative;
+    }
+    .Dropdown-control {
+      position: relative;
+      border:1px solid;
+      border-radius: calculateRem(3px);
+      box-sizing: border-box;
+      cursor: default;
+      outline: none;
+      padding: calculateRem(8px) calculateRem(52px) calculateRem(8px) calculateRem(10px);
+      transition: all 200ms ease;
+      border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
+    }
+    .Dropdown-arrow {
+            border-color: #A6A7A9 transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(5px) calculateRem(2px);
+        content: ' ';
+        display: block;
+        height: 0;
+        margin-top: -ceil(2.5);
+        position: absolute;
+        right: calculateRem(15px);
+        top: calculateRem(11px);
+    }
+    .Dropdown-control:hover {
+        box-shadow: calculateRem(2px) calculateRem(2px) calculateRem(2px) #888888;
+        border: calculateRem(1px) solid #ccc;
+     }
+    .is-open .Dropdown-arrow {
+        border-color: #FFFFFF transparent transparent;
+        border-style: solid;
+        border-width: calculateRem(8px) calculateRem(7px) calculateRem(3px);
+    }
+    .Dropdown-menu {
+        border: 1px solid;
+        border-radius:3px;
+        box-shadow: 0 calculateRem(1px) 0 rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+        margin-top: calculateRem(-1px);
+        max-height: calculateRem(200px);
+        overflow-y: auto;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        z-index: 30;
+      -webkit-overflow-scrolling: touch;
+      border-color: #aaaaaa;
+      font-size: 14px;
+      font-weight: 100;
+      color: #aaaaaa;
+      background: #ffffff; 
+    }
+    .Dropdown-option {
+        box-sizing: border-box;
+      color: #A6A7A9;;
+        cursor: pointer;
+            display: block;
+            padding: calculateRem(8px) calculateRem(10px);    
+    }
+    .Dropdown-option.is-selected {
+        font-weight:bold;
+    }
+    .Dropdown-option:hover {
+        color: #aaaaaa;
+        background: #F8F8F8;
+    }
+    .Dropdown-noresults {
+      box-sizing: border-box; 
+      color: #ccc;
+      cursor: default;
+      display: block;
+      padding: calculateRem(8px) calculateRem(10px);
+    }
 }
 
 .gorProgressBar {
@@ -1624,13 +1678,14 @@ input[type='checkbox'] {
   display: inline-block;
   padding-left: 10px;
   vertical-align: top;
+
 }
 
 .gor-user-Logo-wrap {
   display: inline-block;
-  button {
-    background: none;
-    cursor: pointer;
+  button{
+    background:none;
+    cursor:pointer;
   }
 }
 
@@ -1638,39 +1693,44 @@ input[type='checkbox'] {
   height: 85vh;
 }
 
-.gor-refresh-btn {
-  font-family: 'Source Sans Pro Bold', sans-serif;
-  width: 113px;
-  height: 35px;
-  font-size: 14px;
-  background: #4d5055;
-  color: #ffffff;
-  border-radius: 3px;
-  margin-left: 30px;
-  vertical-align: sub;
-  cursor: pointer;
+
+
+.gor-refresh-btn{
+    font-family:'Source Sans Pro Bold', sans-serif;
+    width:113px;
+    height:35px;
+    font-size:14px;
+    background:#4d5055;
+    color:#ffffff;
+    border-radius:3px;
+    margin-left:30px;
+    vertical-align: sub;
+    cursor: pointer
+
 }
+
 
 .gor-dropDown-firstInnerElement {
   display: inline-block;
   padding-right: 15px;
-  width: 193px;
+  width:193px;
 }
 
 .gor-dropDown-secondInnerElement {
   display: inline-block;
   padding-right: 15px;
-  width: 143px;
+  width:143px;
 }
 
 .gor-progressBar {
-  background-color: #4d5055;
-  border-style: solid;
-  border-color: #4d5055;
-  border-radius: 15px;
-  height: 100%;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+    background-color: #4d5055;
+    border-style: solid;
+    border-color: #4d5055;
+    border-radius: 15px;
+    height: 100%;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  
 }
 
 .gor-progressBar-wrap {
@@ -1688,17 +1748,19 @@ input[type='checkbox'] {
   padding-left: 22px;
   vertical-align: middle;
   padding-top: 10px;
-  float: left;
+  float:left;
 }
 
-.gor-header-id {
+
+.gor-header-id 
+{
   display: inline-block;
   vertical-align: middle;
-  .public_fixedDataTableCell_wrap1 {
-    padding-left: 0;
+  .public_fixedDataTableCell_wrap1{
+    padding-left:0;
   }
-  .public_fixedDataTableCell_cellContent {
-    padding-left: 0;
+  .public_fixedDataTableCell_cellContent{
+    padding-left:0;
   }
 }
 
@@ -1707,14 +1769,14 @@ input[type='checkbox'] {
 }
 
 .gor-no-data {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  padding-top: 200px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #4d5055;
-  height: 22vw;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 200px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4d5055;
+    height: 22vw;
 }
 
 .gor-table-header {
@@ -1724,65 +1786,68 @@ input[type='checkbox'] {
 }
 
 .gor-user-add-wrap {
-  padding-left: 20px;
+  padding-left:20px;
 }
 
 .gorHeaderSubText {
-  font-family: 'source sans pro';
+font-family: "source sans pro";
   font-size: 12px;
   color: #666666;
   padding-top: 6px;
+  
 }
-.gor-subStatus-online {
-  font-family: 'source sans pro';
+.gor-subStatus-online{  
+  font-family: "source sans pro";
   color: #00a54f;
   font-size: 13px;
   padding-top: 11px;
-}
-.gor-dropD-text {
-  display: inline-block;
-  padding-right: 16px;
-  vertical-align: initial;
-  font-size: 14px;
-  font-weight: 100;
-  color: #aaaaaa;
+ }
+.gor-dropD-text{
+    display: inline-block;
+    padding-right: 16px;
+    vertical-align: initial;
+    font-size: 14px;
+    font-weight: 100;
+    color: #aaaaaa;
 }
 
-.gor-breached-lines .public_fixedDataTableCell_cellContent {
+.gor-breached-lines .public_fixedDataTableCell_cellContent{
   color: #fc3838;
   font-weight: bold;
 }
 
-.public_fixedDataTableCell_cellContent {
-  .ppsBinFooter {
+.public_fixedDataTableCell_cellContent{
+  .ppsBinFooter{
     margin-left: 31px;
     margin-top: -11px;
     font-size: 80%;
   }
 }
 
-.gor-pickpal {
-  margin-left: 5%;
-  color: #009bff;
-  font-weight: bold;
-  font-size: 12px;
+.gor-pickpal{
+    margin-left: 5%;
+    color: #009BFF;
+    font-weight: bold;
+    font-size: 12px;
 }
-.gorAuditHeader {
-  display: inline-block;
-  padding-left: 17px;
-  padding-top: 14px;
-}
+.gorAuditHeader { 
+  display: inline-block; 
+  padding-left: 17px; 
+  padding-top: 14px; 
+  }
 
 .gor-resolve-head {
   display: inline-block;
-  padding-top: 6px;
-  font-size: 14px;
-  color: #4d5055;
+    padding-top: 6px;
+    font-size: 14px;
+    color: #4d5055;
+  
 }
 
 .gor-tooltip {
   display: none;
   padding-left: 50px;
+
 }
 .gor-tool-tip-hover {
   font-weight: normal;
@@ -1791,35 +1856,37 @@ input[type='checkbox'] {
   padding-top: 4px;
 }
 
-.gor-subheading-title {
+.gor-subheading-title{
   line-height: 20px;
   font-size: 12px;
   text-align: left;
   color: #666666;
 }
-.gor-subheading {
+.gor-subheading{
   display: inline-block;
 }
 
 .gor-tooltip-text-wrap {
-  background-color: #ffffff;
-  border: solid 1px grey;
-  border-radius: 3px;
-  padding-bottom: 20px;
-  padding-left: 30px;
-  padding-top: 20px;
+    background-color: #ffffff;
+    border: solid 1px grey;
+    border-radius: 3px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-top: 20px;
 }
 
 .gor-tooltip-arrow {
-  width: 0;
-  height: 0;
+  width: 0; 
+  height: 0; 
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 12px solid black;
   margin-left: 23px;
 }
 
-.gor-tooltip-heading {
+.gor-tooltip-heading{
   font-weight: bold;
   padding-bottom: 15px;
 }
+
+

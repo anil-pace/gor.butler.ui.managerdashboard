@@ -299,7 +299,7 @@ class MsuConfigTab extends React.Component {
         return (
             <div>
                 <div>
-                    <div className="gorTesting gor-msu-config">
+                    <div className="gorTesting">
                         {this.props.data.loading && <Spinner isLoading={this.props.data.loading} setSpinner={null} />}
                         {msuListData ?
                             <div>
