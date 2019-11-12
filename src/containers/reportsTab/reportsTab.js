@@ -27,7 +27,7 @@ class ReportsTab extends React.Component{
 		var operationsLog=<FormattedMessage id="reportsTab.operationsLog" description="Operations Log tab for Reports tab" defaultMessage="Operations Log"/> 
 		var storageSpace=<FormattedMessage id="reportsTab.storageSpace" description="Storage space tab for Reports tab" defaultMessage="Storage Space"/>
 		var misc=<FormattedMessage id="reportsTab.misc" description="Storage space tab for GR Reports tab" defaultMessage="Misc"/>
-		var downloadReport=<FormattedMessage id="reportsTab.downloadReports" description="Operations Log tab for Reports tab" defaultMessage="Archived Downloads"/> 
+		var downloadReport=<FormattedMessage id="reportsTab.downloadReport" description="Operations Log tab for Reports tab" defaultMessage="Download"/> 
     
 		return (
 			<div>
