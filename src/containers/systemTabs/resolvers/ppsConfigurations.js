@@ -96,7 +96,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -114,12 +114,12 @@ const ppsConfigurationState = {
               bin.bin_tags = []
             }
             if (bin.bin_tags.indexOf(selected_tag) < 0) {
-              bin.bin_tags = [...bin.bin_tags, selected_tag]
-            } else {
-              let index = bin.bin_tags.indexOf(selected_tag)
-              var data = JSON.parse(JSON.stringify(bin.bin_tags))
-              data.splice(index, 1)
-              bin.bin_tags = JSON.parse(JSON.stringify(data))
+              /**
+               * Only one tag is supported as of now.
+               * @type {[*]}
+               */
+              //  selected_bin.tags.push(selected_tag)
+              bin.bin_tags = [selected_tag]
             }
             selected_bin = bin
           }
@@ -147,7 +147,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -186,7 +186,7 @@ const ppsConfigurationState = {
               pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -238,7 +238,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  breadth
+                  height
                   direction
                   enabled
                   length
@@ -289,7 +289,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  breadth
+                  height
                   direction
                   enabled
                   length
@@ -331,7 +331,7 @@ const ppsConfigurationState = {
                 pps_bin_details {
                   bin_group_id
                   bin_tags
-                  breadth
+                  height
                   direction
                   enabled
                   length
