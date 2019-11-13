@@ -2,17 +2,17 @@ import {
   receiveAuthData,
   setLoginSpinner,
   setTimeOffSetData
-} from '../actions/loginAction'
-import { recieveOrdersData } from '../actions/paginationAction'
+} from "../actions/loginAction"
+import { recieveOrdersData } from "../actions/paginationAction"
 
-import { assignRole, recieveConfigurations } from '../actions/userActions'
+import { assignRole, recieveConfigurations } from "../actions/userActions"
 import {
   recieveHeaderInfo,
   recieveShiftStartTime
-} from '../actions/headerAction'
-import { codeToString } from './codeToString'
-import { setOrderListSpinner } from '../actions/orderListActions'
-import { setMsuConfigSpinner } from '../actions/spinnerAction'
+} from "../actions/headerAction"
+import { codeToString } from "./codeToString"
+import { setOrderListSpinner } from "../actions/orderListActions"
+import { setMsuConfigSpinner } from "../actions/spinnerAction"
 import {
   notifySuccess,
   notifyFail,
@@ -25,7 +25,7 @@ import {
   getSafetyErrorList,
   getErrorBotList,
   notifyfeedback
-} from '../actions/validationActions'
+} from "../actions/validationActions"
 import {
   ERROR,
   AUTH_LOGIN,
@@ -95,9 +95,9 @@ import {
   GET,
   POST,
   APP_JSON
-} from '../constants/frontEndConstants'
+} from "../constants/frontEndConstants"
 
-import { BUTLER_UI, CODE_E027 } from '../constants/backEndConstants'
+import { BUTLER_UI, CODE_E027 } from "../constants/backEndConstants"
 import {
   UE002,
   E028,
@@ -117,16 +117,16 @@ import {
   INCORRECT_STN_NUMBER,
   ITEM_RECALL_SUCCESS,
   INVALID_SKUID
-} from '../constants/messageConstants'
-import { ShowError } from './showError'
-import { endSession } from './endSession'
+} from "../constants/messageConstants"
+import { ShowError } from "./showError"
+import { endSession } from "./endSession"
 import {
   setSafetySpinner,
   setInventoryReportSpinner,
   setStockLedgerSpinner,
   setStockLedgerRawTransactionsSpinner
-} from '../actions/spinnerAction'
-import { statusToString } from './statusToString'
+} from "../actions/spinnerAction"
+import { statusToString } from "./statusToString"
 import {
   validateInvoiceID,
   uploadMasterDataProcessing,
@@ -136,20 +136,20 @@ import {
   validateStockLedgerSKU,
   uploadReportHistory,
   uploadGRNHistory
-} from '../actions/utilityActions'
+} from "../actions/utilityActions"
 import {
   recievePendingMSU,
   resetCheckedPPSList
-} from '../actions/ppsModeChangeAction'
+} from "../actions/ppsModeChangeAction"
 
-import { getFormattedMessages } from '../utilities/getFormattedMessages'
+import { getFormattedMessages } from "../utilities/getFormattedMessages"
 import {
   recieveNotificationData,
   notificationReadIntimation,
   recieveAllNotifications,
   recieveAllSearchedNotifications,
   setNotification
-} from '../actions/notificationAction'
+} from "../actions/notificationAction"
 import {
   receivePPSProfiles,
   receiveTags,
@@ -159,11 +159,11 @@ import {
   tagAddedToList,
   setPPSConfigurationSpinner,
   profileRequested
-} from './../actions/ppsConfigurationActions'
+} from "./../actions/ppsConfigurationActions"
 
-import { recieveOLData } from './../actions/operationsLogsActions'
-import { recieveReportsData } from './../actions/downloadReportsActions'
-import { recieveStorageSpaceData } from './../actions/storageSpaceActions'
+import { recieveOLData } from "./../actions/operationsLogsActions"
+import { recieveReportsData } from "./../actions/downloadReportsActions"
+import { recieveStorageSpaceData } from "./../actions/storageSpaceActions"
 import {
   receiveMsuConfigList,
   receiveMsuConfigDestTypesList,
@@ -173,7 +173,7 @@ import {
   msuConfigStopReconfig,
   msuConfigReleaseMsu,
   msuConfigBlockAndPutChangeType
-} from './../actions/msuConfigAction'
+} from "./../actions/msuConfigAction"
 
 import {
   receiveOrderFulfilmentData,
@@ -182,11 +182,11 @@ import {
   receiveOrdersPerPbtData,
   receiveOrdersLinesData,
   receiveOrdersPriority
-} from './../actions/norderDetailsAction'
+} from "./../actions/norderDetailsAction"
 
-import { ORDERS_PER_PBT_URL } from './../constants/configConstants'
+import { ORDERS_PER_PBT_URL } from "./../constants/configConstants"
 
-import { makeAjaxCall } from './../actions/ajaxActions'
+import { makeAjaxCall } from "./../actions/ajaxActions"
 
 export function AjaxParse(store, res, cause, status, saltParams) {
   let stringInfo = {}
@@ -233,7 +233,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
           unsuccessful: unsuccessfulCount,
           totalCount: successCount + unsuccessfulCount
         },
-        msg = getFormattedMessages('mode', values)
+        msg = getFormattedMessages("mode", values)
       store.dispatch(notifySuccess(msg))
       store.dispatch(resetCheckedPPSList(res.successful))
       break
@@ -332,19 +332,17 @@ export function AjaxParse(store, res, cause, status, saltParams) {
     case GR_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
       store.dispatch(validateInvoiceID(res))
-      if(res === true) {
+      if (res === true) {
         store.dispatch(
-          notifySuccess(getFormattedMessages('grnGenerated', res.data))
+          notifySuccess(getFormattedMessages("grnGenerated", res.data))
         )
-      }else {
-        store.dispatch(notifyFail(INCORRECT_STN_NUMBER));
       }
       break
     case INVENTORY_REPORT_RESPONSE:
       store.dispatch(setInventoryReportSpinner(false))
       store.dispatch(validateInvoiceID(res))
       store.dispatch(
-        notifySuccess(getFormattedMessages('invntryRptGenerated', res.data))
+        notifySuccess(getFormattedMessages("invntryRptGenerated", res.data))
       )
 
       break
@@ -365,13 +363,13 @@ export function AjaxParse(store, res, cause, status, saltParams) {
     case REPORTS_HISTORY:
       store.dispatch(uploadReportHistory(res))
       store.dispatch(
-        notifySuccess(getFormattedMessages('reprtsRefreshed', res.data))
+        notifySuccess(getFormattedMessages("reprtsRefreshed", res.data))
       )
       break
     case GRN_HISTORY:
       store.dispatch(uploadGRNHistory(res))
       store.dispatch(
-        notifySuccess(getFormattedMessages('grnRefreshed', res.data))
+        notifySuccess(getFormattedMessages("grnRefreshed", res.data))
       )
       break
     case GET_MAX_FILE_SIZE:
@@ -388,7 +386,7 @@ export function AjaxParse(store, res, cause, status, saltParams) {
           unsuccessful: unsuccessfulCount,
           totalCount: successCount + unsuccessfulCount
         },
-        msg = getFormattedMessages('status', values)
+        msg = getFormattedMessages("status", values)
       store.dispatch(notifySuccess(msg))
       store.dispatch(resetCheckedPPSList(res.successful))
       break
@@ -483,10 +481,10 @@ export function AjaxParse(store, res, cause, status, saltParams) {
     case SET_ORDER_PRIORITY:
       store.dispatch(receiveOrdersPriority(res))
       if (res.id) {
-        msg = getFormattedMessages('SETORDERPRIORITYSUCCESS')
+        msg = getFormattedMessages("SETORDERPRIORITYSUCCESS")
         store.dispatch(notifyfeedback(msg))
       } else {
-        msg = getFormattedMessages('SETORDERPRIORITYFAILURE')
+        msg = getFormattedMessages("SETORDERPRIORITYFAILURE")
         store.dispatch(notifyfeedback(msg))
       }
       break
