@@ -120,14 +120,15 @@ export const BUTLERBOTS_TAB = 'Butler Bots'
 export const CHARGING_TAB = 'Charging Station'
 export const PPS_TAB = 'Pick Put Stations'
 export const ORDER_LIST = 'Order List'
-export const PPS_CONFIGURATION = 'PPS Configuration'
-export const MSU_CONFIGURATION = 'MSU Configuration'
+export const PPS_CONFIGURATION = 'ppsConfiguration'
+export const MSU_CONFIGURATION = 'msuConfiguration'
 export const WAVES = 'Waves'
 export const OPERATIONS_LOG = 'operationsLog'
 export const BUTLERBOTS = 'butlerbots'
 export const CHARGING = 'chargingstation'
 export const PPS = 'pps'
 export const ORDERLIST = 'ORDERLIST'
+export const SYS_CONTROLLERS = 'sysControllers'
 export const DOWNLOAD_REPORT = 'downloadReport'
 export const STORAGE_SPACE = 'storageSpace'
 export const MISC = 'misc'
@@ -325,7 +326,8 @@ export const TAB_ROUTE_MAP = {
   [USERS]: 'users',
   [AUDIT]: 'audit',
   [UTILITIES]: 'utilities',
-  [DOWNLOADS]: 'downloads'
+  [REPORTS]: 'reports',
+  [DOWNLOADS]: 'downloads',
 }
 export const SYS_SUB_TAB_ROUTE_MAP = {
   [NOTIFICATION]: 'notification',
@@ -334,6 +336,7 @@ export const SYS_SUB_TAB_ROUTE_MAP = {
   [CHARGING]: 'chargingstation',
   [WAVES]: 'waves',
   [ORDER_LIST]: 'orderlist',
+  [SYS_CONTROLLERS]:'sysControllers',
   [PPS_CONFIGURATION]: 'ppsConfiguration',
   [MSU_CONFIGURATION]: 'msuConfiguration'
 }

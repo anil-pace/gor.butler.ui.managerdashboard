@@ -8,6 +8,7 @@ import { setInventorySpinner } from '../actions/inventoryActions'
 import { setAuditSpinner } from '../actions/auditActions'
 import { setButlerSpinner } from '../actions/spinnerAction'
 import { setEmergencyModalStatus } from '../actions/tabActions'
+import {tabSelected} from '../actions/tabSelectAction'
 import {
   OVERVIEW,
   SYSTEM,
@@ -113,6 +114,7 @@ class Tabs extends React.Component {
      * Displaying loader currently for User tab
      * only
      */
+    this.props.tabSelected(TAB_ROUTE_MAP[selTab]);
     switch (selTab) {
         case SYSTEM:
         this.props.setButlerSpinner(true)
@@ -573,7 +575,7 @@ else
         
         <Link
           to='/audit/auditlisting'
-          onClick={this.handleTabClick.bind(this, AUDITLISTING)}
+          onClick={this.handleTabClick.bind(this, AUDIT)}
         >
           <Tab
             items={{
@@ -713,7 +715,7 @@ else
  
 
 function mapStateToProps(state, ownProps){
-
+  
     return  {
          tab:state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
          overview_status:state.tabsData.overview_status||null,
@@ -748,7 +750,8 @@ var mapDispatchToProps=function(dispatch){
         setButlerSpinner:function(data){dispatch(setButlerSpinner(data))},
         setFireHazrdFlag:function(data){dispatch(setFireHazrdFlag(data))},
         setEmergencyModalStatus:function(data){dispatch(setEmergencyModalStatus(data));},
-        setNotificationNull:function(data){dispatch(setNotificationNull(data));}
+        setNotificationNull:function(data){dispatch(setNotificationNull(data));},
+        tabSelected: function(data){ dispatch(tabSelected(data)); }
 	}
 };
 
