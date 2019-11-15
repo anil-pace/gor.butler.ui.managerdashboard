@@ -12,7 +12,6 @@ import {subTabSelected} from '../../actions/tabSelectAction'
 import {NOTIFICATION,SYS_SUB_TAB_ROUTE_MAP} from '../../constants/frontEndConstants'
 import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS,PPS_CONFIGURATION, MSU_CONFIGURATION} from '../../constants/backEndConstants';
 
-
 class SystemTab extends React.Component{
     
     handleSysSubTabClick(tabName){

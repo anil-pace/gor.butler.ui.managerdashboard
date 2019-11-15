@@ -704,7 +704,6 @@ else
           ) : (
           ''
         )}
-       
         {showFireHazardPopup ? notificationWrap : ''}
         {notificationPopup ? notificationWrap : ''}
       </div>

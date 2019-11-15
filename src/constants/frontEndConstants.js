@@ -440,7 +440,6 @@ export const INV_LINE_LEGEND_CONFIG = {
   containerWidth: '95%',
   containerHeight: '60px'
 }
-
 export const INVENTORY_HISTORY_DAYS_COUNT = 29
 export const INVENTORY_HISTOGRAM_CONFIG = {
   height: 250,
