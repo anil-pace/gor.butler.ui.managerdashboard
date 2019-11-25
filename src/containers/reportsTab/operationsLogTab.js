@@ -270,6 +270,7 @@ class OperationsLogTab extends React.Component {
             size: this.props.data.OperationLogList.total,
             requestId: this.props.location.query.request_id,
             userId: this.props.location.query.user_id,
+            username:sessionStorage.getItem('username'),
             skuId: this.props.location.query.sku_id,
             ppsId: this.props.location.query.pps_id,
             operatingMode: this.props.location.query.operatingMode,
