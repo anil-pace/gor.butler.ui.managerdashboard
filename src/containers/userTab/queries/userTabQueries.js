@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag"
 
 export const DELETE_USER_MUTATION = gql`
   mutation deleteUser($id: ID) {
@@ -6,7 +6,7 @@ export const DELETE_USER_MUTATION = gql`
       status
     }
   }
-`;
+`
 export const EDIT_USER_MUTATION = gql`
   mutation editUser($id: ID, $input: CreateUserInput) {
     editUser(id: $id, input: $input) {
@@ -18,23 +18,7 @@ export const EDIT_USER_MUTATION = gql`
       details
     }
   }
-`;
-export const SUBSCRIPTION_QUERY = gql`
-  subscription USER_CHANNEL($username: String) {
-    UserList(input: { username: $username }) {
-      list {
-        first_name
-        last_name
-        user_id
-        logged_in
-        role
-        user_name
-        login_time
-        full_name
-      }
-    }
-  }
-`;
+`
 
 export const USERS_QUERY = gql`
   query UserList($input: UserListParams) {
@@ -48,10 +32,13 @@ export const USERS_QUERY = gql`
         user_name
         login_time
         full_name
+        pps_id
+        pps_mode
+        seat_type
       }
     }
   }
-`;
+`
 export const userClientData = gql`
   query {
     todos @client
@@ -77,24 +64,24 @@ export const userClientData = gql`
       }
     }
   }
-`;
+`
 
 export const SET_VISIBILITY = gql`
   mutation setUserFiler($filter: String!) {
     setShowUserFilter(filter: $filter) @client
   }
-`;
+`
 
 export const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
     setUserFilterApplied(isFilterApplied: $isFilterApplied) @client
   }
-`;
+`
 export const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
     setUserFilterState(state: $state) @client
   }
-`;
+`
 
 export const CREATE_USER_MUTATION = gql`
   mutation createUser($input: CreateUserInput) {
@@ -107,7 +94,7 @@ export const CREATE_USER_MUTATION = gql`
       lastname
     }
   }
-`;
+`
 export const ROLE_LIST_QUERY = gql`
   query RoleList($input: RoleListParams) {
     RoleList(input: $input) {
@@ -118,4 +105,4 @@ export const ROLE_LIST_QUERY = gql`
       }
     }
   }
-`;
+`
