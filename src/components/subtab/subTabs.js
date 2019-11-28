@@ -58,7 +58,7 @@ class SystemTab extends React.Component{
 
       	let msuConfiguration=<FormattedMessage id="msuConfiguration.tab.heading" description="msu configuration tab" defaultMessage="MSU Configuration"/>
 
-        let sysControllers = <FormattedMessage id="sysControllers.tab.heading" description="Syatem controllers Tab"
+        let sysControllers = <FormattedMessage id="sysControllers.tab.heading" description="System controllers Tab"
               defaultMessage="System Controllers"/>
 
 		var selectClass={sysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block', msuConfiguration: 'gor-main-block'};
