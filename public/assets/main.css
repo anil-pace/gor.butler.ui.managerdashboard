@@ -1172,25 +1172,23 @@ body {
 .gor-tabs .gorTab.gorContainer {
   background-color: #4d5055;
   display: inline-block;
-  height: 60px;
+  height: 48px;
 }
 
 .gor-tabs .gorTab .gor-main-block {
   width: 118px;
-  padding-left: 20px;
-  height: 62px;
+  padding: 0 20px;
+  height: 48px;
   display: table-cell;
-  border-right: .5px solid black;
+  opacity: 0.7;
   cursor: pointer;
   vertical-align: middle;
-}
-
-.gor-tabs .gorTab .gor-main-block:hover {
-  background-color: #323539;
+  text-align: center;
 }
 
 .gor-tabs .gorTab .gor-main-block.sel {
-  background-color: #323539;
+  border-bottom: 2px solid #ff8102;
+  opacity: 1;
 }
 
 .gor-tabs .gorTab .gor-main-block .gor-normal-tab {
@@ -1214,9 +1212,10 @@ body {
 }
 
 .gor-tabs .gorTab .gor-upperText {
-  font-family: "source sans pro";
-  font-size: 18px;
-  font-weight: bold;
+  font-family: 'Source Sans Pro';
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3125;
   padding-bottom: 3px;
   color: #ffffff;
   display: inline-block;
@@ -1229,45 +1228,45 @@ body {
 }
 
 .gor-tabs .gorTab .gorOverview {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #ffffff;
 }
 
 .gor-tabs .gorTab .gor-online {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #10c469;
 }
 
 .gor-tabs .gorTab .gor-alert {
-  color: #EC1C24;
+  color: #ec1c24;
 }
 
 .gor-tabs .gorTab .gor-emergency-alert {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .gor-tabs .gorTab .gor-offline {
-  font-family: "source sans pro";
-  color: #9C9FA0;
+  font-family: 'source sans pro';
+  color: #9c9fa0;
 }
 
 .gor-tabs .gorTab .gorEvent {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #27aae1;
 }
 
 .gor-tabs .gorTab .gorRisk {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #f99405;
 }
 
 .gor-tabs .gorTab .gorError {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #fc3838;
 }
 
 .gor-tabs .gorTab .gorEmergency {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #ffffff;
   background: #fc3838;
 }
@@ -1439,6 +1438,19 @@ body {
 .gor-tabs.gor-main-block {
   background-color: #4d5055;
   clear: both;
+  padding-left: 4em;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.gor-tabs.gor-scrollable-tab {
+  overflow: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.gor-tabs.gor-scrollable-tab::-webkit-scrollbar {
+  display: none;
 }
 
 .ddown {
@@ -2116,7 +2128,7 @@ body {
   z-index: 10;
 }
 
-body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   display: none !important;
 }
 
@@ -2397,7 +2409,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .public_fixedDataTable_header:hover .public_fixedDataTableCell_main {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .Stopped .public_fixedDataTableCell_cellContent {
@@ -2431,7 +2443,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.Warning .public_fixedDataTableCell_cellContent, .warning .public_fixedDataTableCell_cellContent {
+.Warning .public_fixedDataTableCell_cellContent,
+.warning .public_fixedDataTableCell_cellContent {
   background: #f99405;
   border-radius: 15px;
   text-align: center;
@@ -2462,7 +2475,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   max-height: 9px;
 }
 
-.on .public_fixedDataTableCell_cellContent, .open .public_fixedDataTableCell_cellContent {
+.on .public_fixedDataTableCell_cellContent,
+.open .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2476,7 +2490,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.off .public_fixedDataTableCell_cellContent, .close .public_fixedDataTableCell_cellContent, .force_close .public_fixedDataTableCell_cellContent {
+.off .public_fixedDataTableCell_cellContent,
+.close .public_fixedDataTableCell_cellContent,
+.force_close .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2490,7 +2506,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.online .public_fixedDataTableCell_cellContent, .success .public_fixedDataTableCell_cellContent {
+.online .public_fixedDataTableCell_cellContent,
+.success .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2568,7 +2585,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gor-exception .public_fixedDataTableCell_cellContent {
-  background: #F99405;
+  background: #f99405;
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2653,7 +2670,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   text-transform: capitalize;
 }
 
-.temporary_unfulfillable .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent {
+.temporary_unfulfillable .public_fixedDataTableCell_cellContent,
+.exception .public_fixedDataTableCell_cellContent {
   background: #ffffff;
   border-radius: 15px;
   border: 1px solid #f36f36;
@@ -2678,7 +2696,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background: #ffffff;
 }
 
-.CREATED .public_fixedDataTableCell_cellContent, .exception .public_fixedDataTableCell_cellContent {
+.CREATED .public_fixedDataTableCell_cellContent,
+.exception .public_fixedDataTableCell_cellContent {
   border-radius: 15px;
   text-align: center;
   width: 90px;
@@ -2790,11 +2809,11 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .FAILED .public_fixedDataTableCell_cellContent {
-  color: #EE434A;
+  color: #ee434a;
 }
 
 .PENDING .public_fixedDataTableCell_cellContent {
-  color: #6FC4E8;
+  color: #6fc4e8;
 }
 
 /**
@@ -3016,7 +3035,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   z-index: 10;
 }
 
-body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
+body[dir='rtl'] .fixedDataTableColumnResizerLineLayout_main {
   /* the resizer line is in the wrong position in RTL with no easy fix.
    * Disabling is more useful than displaying it.
    * #167 (github) should look into this and come up with a permanent fix.
@@ -3331,7 +3350,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   background-color: #f7f7f7;
 }
 
-.public_fixedDataTableRow_even, .public_fixedDataTableRow_odd {
+.public_fixedDataTableRow_even,
+.public_fixedDataTableRow_odd {
   background: #f7f7f7;
 }
 
@@ -3381,9 +3401,9 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .gorToolBar {
   height: 68px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: inset 0 5px 5px -5px #888888;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 20px;
   color: #000000;
 }
@@ -3402,7 +3422,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   border: 1px solid #aaaaaa;
   border-radius: 4px;
   background-color: white;
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #aaaaaa;
   height: 35px;
   width: 200px;
@@ -3466,7 +3486,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .gorToolHeaderSubText {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 12px;
   color: #666666;
   padding-top: 14px;
@@ -3503,7 +3523,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   padding-right: 40px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   width: 15px;
   height: 15px;
   zoom: 1.4;
@@ -3547,7 +3567,7 @@ input[type="checkbox"] {
 }
 
 .gorDataTableDrop .Dropdown-arrow {
-  border-color: #A6A7A9 transparent transparent;
+  border-color: #a6a7a9 transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.3125rem 0.125rem;
   content: ' ';
@@ -3565,7 +3585,7 @@ input[type="checkbox"] {
 }
 
 .gorDataTableDrop .is-open .Dropdown-arrow {
-  border-color: #FFFFFF transparent transparent;
+  border-color: #ffffff transparent transparent;
   border-style: solid;
   border-width: 0.5rem 0.4375rem 0.1875rem;
 }
@@ -3592,7 +3612,7 @@ input[type="checkbox"] {
 
 .gorDataTableDrop .Dropdown-option {
   box-sizing: border-box;
-  color: #A6A7A9;
+  color: #a6a7a9;
   cursor: pointer;
   display: block;
   padding: 0.5rem 0.625rem;
@@ -3604,7 +3624,7 @@ input[type="checkbox"] {
 
 .gorDataTableDrop .Dropdown-option:hover {
   color: #aaaaaa;
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .gorDataTableDrop .Dropdown-noresults {
@@ -3731,14 +3751,14 @@ input[type="checkbox"] {
 }
 
 .gorHeaderSubText {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 12px;
   color: #666666;
   padding-top: 6px;
 }
 
 .gor-subStatus-online {
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   color: #00a54f;
   font-size: 13px;
   padding-top: 11px;
@@ -3766,7 +3786,7 @@ input[type="checkbox"] {
 
 .gor-pickpal {
   margin-left: 5%;
-  color: #009BFF;
+  color: #009bff;
   font-weight: bold;
   font-size: 12px;
 }
@@ -3831,15 +3851,15 @@ input[type="checkbox"] {
 }
 
 .gorSubTab.gorContainer {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   width: auto;
   display: inline-block;
   color: #4d5055;
+  padding-left: 24px;
 }
 
 .gorSubTab .gor-main-block:hover {
-  background-color: #999999;
-  color: #ffffff;
+  color: #000;
 }
 
 .gorSubTab .gorInline {
@@ -3852,17 +3872,19 @@ input[type="checkbox"] {
   padding-left: 20px;
   height: 50px;
   display: table-cell;
-  background: #F8F8F8;
+  background: #f8f8f8;
+  opacity: 0.7;
   cursor: pointer;
   vertical-align: middle;
+  border-bottom: 2px solid #fff;
 }
 
 .gorSubTab .gor-upperText {
-  font-family: "source sans pro";
-  font-size: 18px;
-  font-weight: bold;
+  font-family: 'source sans pro';
+  font-size: 13px;
+  font-weight: 500;
   width: 100%;
-  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .gorSubTab .gor-main-blockSelect {
@@ -3872,12 +3894,13 @@ input[type="checkbox"] {
   display: table-cell;
   cursor: pointer;
   vertical-align: middle;
-  background-color: #999999;
-  color: #ffffff;
+  color: #000;
+  opacity: 0.87;
+  border-bottom: 2px solid #ff8102;
 }
 
 .gorMainSubtab {
-  background-color: #F8F8F8;
+  background-color: #fff;
   width: 100%;
   height: 50px;
 }
@@ -5395,7 +5418,7 @@ button:disabled {
 .gor-auditResolve-head {
   font-family: 'Source Sans Pro Regular', sans-serif;
   font-size: 1.625rem;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #aaaaaa;
   min-height: 3.75rem;
   width: 92%;
   padding-top: 2.5rem;
@@ -5452,6 +5475,36 @@ button:disabled {
 .gor-audit-resolve-packing-cell {
   height: 30px;
   padding-top: 15px;
+  position: relative;
+}
+
+.gor-audit-resolve-packing-cell .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: #ffff;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.gor-audit-resolve-packing-cell .tooltiptext::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+}
+
+.gor-audit-resolve-packing-cell:hover .tooltiptext {
+  visibility: visible;
 }
 
 .gor-paginate-wrap {
@@ -5735,6 +5788,7 @@ button:disabled {
 }
 
 .gor-Auditlist-table {
+  margin-top: -2px;
   width: 100%;
   position: relative;
 }
@@ -6113,11 +6167,11 @@ button:disabled {
   margin-top: 0.625rem;
   padding: 0.625rem;
   width: 82%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
   display: block;
   margin-left: 20px;
-  border: 1px solid #AAAAAA;
+  border: 1px solid #aaaaaa;
 }
 
 .gor-filter-input-wrap:hover {
@@ -6209,7 +6263,7 @@ button:disabled {
 }
 
 .gor-no-result-filter {
-  color: #EC1C24;
+  color: #ec1c24;
   padding-top: 30px;
   font-size: 20px;
   padding-left: 20px;
@@ -6260,7 +6314,6 @@ button:disabled {
   background-color: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   border: solid 1px #f36f36;
-  width: 131px;
 }
 
 .gor-download-button {
@@ -6805,13 +6858,17 @@ button:disabled {
   min-height: 20rem;
   margin: 1% 0% 0% 1%;
   font-size: 0;
-  width: 100%;
+  width: 24.7%;
   position: relative;
   vertical-align: top;
 }
 
 .gor-utility-tile.item-recall {
   width: 47%;
+}
+
+.gor-utility-tile.width-100 {
+  width: 100%;
 }
 
 .gor-utility-updown-bar {
@@ -8425,6 +8482,7 @@ button:disabled {
   overflow: auto;
   position: absolute;
   width: 100%;
+  margin-top: 2px;
 }
 
 .pps-configuration-container .pps-configuration-details-container {
@@ -8475,7 +8533,7 @@ button:disabled {
   font-size: 14px;
   background: #fff;
   border-radius: 3px;
-  border-color: #A6A7A9;
+  border-color: #a6a7a9;
   border-style: double;
   border-width: 2px;
   cursor: pointer;
@@ -8483,7 +8541,8 @@ button:disabled {
   margin-right: 10px;
 }
 
-.pps-configuration-container .pps-bin-next-button, .pps-configuration-container .pps-bin-save-apply-button {
+.pps-configuration-container .pps-bin-next-button,
+.pps-configuration-container .pps-bin-save-apply-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
@@ -8515,7 +8574,7 @@ button:disabled {
   font-size: 14px;
   background: #fff;
   border-radius: 3px;
-  border-color: #A6A7A9;
+  border-color: #a6a7a9;
   border-style: double;
   border-width: 2px;
   cursor: pointer;
@@ -8525,7 +8584,8 @@ button:disabled {
   float: right;
 }
 
-.pps-configuration-container .pps-bin-cancel-button, .pps-configuration-container .pps-bin-save-button {
+.pps-configuration-container .pps-bin-cancel-button,
+.pps-configuration-container .pps-bin-save-button {
   font-family: 'Source Sans Pro Bold', sans-serif;
   width: auto;
   height: 30px;
@@ -8547,7 +8607,8 @@ button:disabled {
   float: right;
 }
 
-.pps-configuration-container .pps-bin-cancel-button:focus, .pps-configuration-container .pps-bin-save-button:focus {
+.pps-configuration-container .pps-bin-cancel-button:focus,
+.pps-configuration-container .pps-bin-save-button:focus {
   outline: none;
 }
 
@@ -8781,7 +8842,7 @@ button:disabled {
   float: right;
 }
 
-.pps-configuration-container .pps-tag-selection input[type=checkbox] {
+.pps-configuration-container .pps-tag-selection input[type='checkbox'] {
   margin: 0px;
 }
 
@@ -8947,7 +9008,7 @@ button:disabled {
   width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
-  background: #4D5055;
+  background: #4d5055;
   color: #ffffff;
   border-radius: 3px;
   margin-right: 0.625rem;
@@ -8992,7 +9053,7 @@ button:disabled {
 }
 
 .pps-table .gor-pps-profile-drop .gor-dropdown-option:hover {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 .pps-table .gor-pps-profile-drop .gor-option-wrapper {
@@ -9005,6 +9066,10 @@ button:disabled {
 
 .pps-table .gor-pps-profile-drop .gor-white-background {
   background-color: transparent;
+}
+
+.gor-operations-log {
+  margin-top: -2px;
 }
 
 .gor-operations-log .gor-ol-paginate-wrap {
@@ -9110,12 +9175,16 @@ button:disabled {
   padding-right: 15px;
 }
 
+.gor-download-rpts {
+  margin-top: -2px;
+}
+
 .gor-download-rpts .gor-download-report-table .row {
   background: #f7f7f7;
 }
 
 .gor-download-rpts .gor-download-report-table .row:hover {
-  background: #DDDDDD;
+  background: #dddddd;
 }
 
 .gor-download-rpts .gor-download-report-table .cell {
@@ -9129,7 +9198,7 @@ button:disabled {
   border-radius: 3px;
   background-color: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  font-family: "source sans pro";
+  font-family: 'source sans pro';
   font-size: 1rem;
   font-weight: 600;
   text-align: left;
@@ -9192,6 +9261,10 @@ button:disabled {
   margin-left: 4%;
   background: #fff;
   margin-top: 2rem;
+}
+
+.gor-storage-space {
+  margin-top: -2px;
 }
 
 .gor-storage-space .gor-storage-table .row {
@@ -9266,12 +9339,16 @@ button:disabled {
   cursor: pointer;
 }
 
+.gor-sys-controller {
+  margin-top: 2px;
+}
+
 .gor-sys-controller .gor-syscontroller-table .row {
   background: #f7f7f7;
 }
 
 .gor-sys-controller .gor-syscontroller-table .row:hover {
-  background: #DDDDDD;
+  background: #dddddd;
 }
 
 .gor-sys-controller .gor-syscontroller-table .cell {
@@ -9932,12 +10009,16 @@ button:disabled {
   max-height: 334px;
 }
 
+.gor-butler-bots {
+  margin-top: 2px;
+}
+
 .gor-butler-bots .gor-bots-table .row {
   background: #f7f7f7;
 }
 
 .gor-butler-bots .gor-bots-table .row:hover {
-  background: #DDDDDD;
+  background: #dddddd;
 }
 
 .gor-butler-bots .gor-bots-table .cell {
@@ -10013,12 +10094,16 @@ button:disabled {
   margin-top: 2rem;
 }
 
+.gor-charging-station {
+  margin-top: 2px;
+}
+
 .gor-charging-station .gor-chergingstation-table .row {
   background: #f7f7f7;
 }
 
 .gor-charging-station .gor-chergingstation-table .row:hover {
-  background: #DDDDDD;
+  background: #dddddd;
 }
 
 .gor-charging-station .gor-chergingstation-table .cell {
@@ -12875,6 +12960,11 @@ checkmark1 for indeterminate state*/
   pointer-events: none;
 }
 
+.gor-msu-config,
+.gor-pps-tab {
+  margin-top: 2px;
+}
+
 .filterWrapper .gorToolBarDropDown {
   padding-left: 0px;
 }
@@ -12992,7 +13082,7 @@ checkmark1 for indeterminate state*/
 .gor-smmodal-content .gor-smmodal-head .close {
   margin-right: 2%;
   background: #f2f2f2;
-  color: #AAAAAA;
+  color: #aaaaaa;
   float: right;
   text-align: center;
   font-size: 28px;
