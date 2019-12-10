@@ -304,7 +304,7 @@ const PPS_LIST_QUERY = gql`
                     update_time
                     pps_bin_details {
                         bin_group_id
-                        breadth
+                        height
                         direction
                         enabled
                         length
@@ -378,7 +378,7 @@ const SELECTED_PPS_PROFILE = gql`
                 pps_bin_details {
                     bin_group_id
                     bin_tags
-                    breadth
+                    height
                     direction
                     enabled
                     length
@@ -399,7 +399,7 @@ const SELECTED_PPS_PROFILE = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -411,7 +411,7 @@ const SELECTED_PPS_PROFILE = gql`
         selectedPPSBin @client{
             bin_group_id
             bin_tags
-            breadth
+            height
             direction
             enabled
             length
@@ -513,7 +513,7 @@ const SAVE_PROFILE_MUTATION = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
@@ -562,7 +562,7 @@ const CREATE_PROFILE_MUTATION = gql`
             pps_bin_details {
                 bin_group_id
                 bin_tags
-                breadth
+                height
                 direction
                 enabled
                 length
