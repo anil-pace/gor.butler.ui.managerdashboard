@@ -2,8 +2,16 @@ import React  from 'react';
 import { connect } from 'react-redux' ;
 import { logoutRequest } from '../actions/loginAction';
 import { endWsAction } from '../actions/socketActions';
+import { LOGOUT_URL } from '../constants/configConstants'
 import { FormattedMessage } from 'react-intl';        
-
+import {
+  authLoginData,
+} from '../actions/loginAction'
+import {
+  AUTH_LOGOUT,
+  APP_JSON,
+  POST
+} from '../constants/frontEndConstants'
 class LogOut extends React.Component{
   constructor(props) 
   {
@@ -19,11 +27,26 @@ class LogOut extends React.Component{
     this.props.removeModal();
   }
   appLogout() {
+
+    let formdata = {
+      username: sessionStorage.getItem('username'), token: sessionStorage.getItem('auth_token'),
+      context: { entity_id:"1", app_name: "managerdashboard_ui"}
+    };
+    let logoutPayload = {
+      url: LOGOUT_URL,
+      formdata: formdata,
+      method: POST,
+      username: sessionStorage.getItem('username'),
+      token: sessionStorage.getItem('auth_token'),
+      cause: AUTH_LOGOUT,
+      contentType: APP_JSON,
+      accept: APP_JSON
+    };
       this.props.removeModal();
       sessionStorage.clear();
       this.props.userLogout();
       this.props.endConnect();
-     
+      this.props.authLoginData(logoutPayload)
     }  
     render()
     {
@@ -53,6 +76,9 @@ function mapStateToProps(state, ownProps){
 
     function mapDispatchToProps(dispatch){
       return {
+        authLoginData: function(params) {
+          dispatch(authLoginData(params))
+        },
         endConnect: function(){ dispatch(endWsAction()); },
         userLogout: function(){ dispatch(logoutRequest()); }
       }
