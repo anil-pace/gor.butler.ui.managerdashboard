@@ -5,35 +5,35 @@ export const WS_URL = WS_PROTOCOL + BASE_URL + '/manager_api/wss'
 export const API_URL = PROTOCOL + BASE_URL + '/api'
 export const API_GATEWAY = API_URL + '/api-gateway'
 export const API_INTEGRATION_SERVICE =
-  API_GATEWAY + '/integration-service/wms-integration/butler-core/api'
-export const LOGIN_URL = API_URL + '/auth/token'
-export const HEADER_URL = API_URL + '/user'
-export const PPS_MODE_CHANGE_URL = API_URL + '/pps/change_mode'
-export const PPS_STATUS_CHANGE_URL = API_URL + '/pps/change_status'
-export const GET_PPS_MSU = API_URL + '/pps/get_pending_msu'
-export const PAGE_SIZE_URL = '&PAGE_SIZE='
-export const ROLE_URL = HEADER_URL + '/role'
-export const CHECK_USER = HEADER_URL + '?username='
-export const AUDIT_URL = API_URL + '/audit'
-export const DELETE_AUDIT_URL = AUDIT_URL + '/delete/'
-export const CANCEL_AUDIT_URL = AUDIT_URL + '/cancel/'
-export const START_AUDIT_URL = AUDIT_URL + '/start'
-export const START_CHANGE_PPS_URL = AUDIT_URL + '/change_pps'
-export const WS_GRAPHQL_ENDPOINT = '/subscriptions'
-export const GRAPHQL_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3020/graphql'
-    : `${PROTOCOL}${BASE_URL}/graphql`
+  API_GATEWAY + '/integration-service/wms-integration/butler-core/api';
+export const LOGIN_URL = API_URL + '/auth/token';
+export const HEADER_URL = API_URL + '/user';
+export const PPS_MODE_CHANGE_URL = API_URL + '/pps/change_mode';
+export const PPS_STATUS_CHANGE_URL = API_URL + '/pps/change_status';
+export const GET_PPS_MSU = API_URL + '/pps/get_pending_msu';
+export const PAGE_SIZE_URL = '&PAGE_SIZE=';
+export const ROLE_URL = HEADER_URL + '/role';
+export const CHECK_USER = HEADER_URL + '?username=';
+export const AUDIT_URL = API_URL + '/audit';
+export const DELETE_AUDIT_URL = AUDIT_URL + '/delete/';
+export const CANCEL_AUDIT_URL = AUDIT_URL + '/cancel/';
+export const START_AUDIT_URL = AUDIT_URL + '/start';
+export const START_CHANGE_PPS_URL = AUDIT_URL + '/change_pps';
+export const WS_GRAPHQL_ENDPOINT = '/subscriptions';
+export const HTTP_GRAPH_SERVER =  process.env.NODE_ENV === 'development' 
+? 'http://localhost:3020'
+: `${PROTOCOL}${BASE_URL}/`;
+export const GRAPHQL_URL = HTTP_GRAPH_SERVER +'/graphql'
 export const WS_GRAPHQL_URL =
   process.env.NODE_ENV === 'development'
     ? 'ws://localhost:3020/subscriptions'
-    : `${WS_PROTOCOL}${BASE_URL}${WS_GRAPHQL_ENDPOINT}`
-
-export const SEARCH_AUDIT_URL = AUDIT_URL + '/search?'
-export const PPSLIST_URL = API_URL + '/audit/pps_info'
-export const PPSLIST_ALL_URL = PPSLIST_URL + '?mode=any'
-export const PPSLIST_ACTIVE_AUDIT_URL = PPSLIST_URL + '?mode=audit_active'
-export const AUDITDETAIL_URL = API_URL + '/audit/audit_details'
+    : `${WS_PROTOCOL}${BASE_URL}${WS_GRAPHQL_ENDPOINT}`;
+export const LOGOUT_URL = HTTP_GRAPH_SERVER + '/logout'
+export const SEARCH_AUDIT_URL = AUDIT_URL + '/search?';
+export const PPSLIST_URL = API_URL + '/audit/pps_info';
+export const PPSLIST_ALL_URL = PPSLIST_URL + '?mode=any';
+export const PPSLIST_ACTIVE_AUDIT_URL = PPSLIST_URL + '?mode=audit_active';
+export const AUDITDETAIL_URL = API_URL + '/audit/audit_details';
 
 export const ORDER_PAGE = '?page='
 export const EXCEPTION_TRUE = 'exception'
