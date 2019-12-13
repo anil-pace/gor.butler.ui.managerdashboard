@@ -200,25 +200,25 @@ class AuditTab extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.socketAuthorized &&
       nextProps.auditRefreshFlag !== this.props.auditRefreshFlag
     ) {
       this._refreshList(nextProps.location.query);
     }
-
+    this.props.setAuditSpinner(true);
     if (
       (JSON.stringify(this.props.AuditList) !==
         JSON.stringify(nextProps.AuditList) &&
         !nextProps.dataFromWS) ||
       (nextProps.socketAuthorized && nextProps.AuditList.length == 0)
     ) {
-      this.setState({ AuditList: nextProps.AuditList });
+      this.setState({
+        AuditList: nextProps.AuditList,
+        totalAudits: nextProps.TotalResults,
+        totalPage: nextProps.TotalPage,
+      });
       this.props.setAuditDetails(nextProps.AuditList);
-      this.setState({ totalAudits: nextProps.TotalResults });
-      this.setState({ totalPage: nextProps.TotalPage });
-      this.updateSubscription({});
       this.props.setCurrentPageNumber(nextProps.CurrentPageNo);
-      this._subscribeData();
+      this.props.setAuditSpinner(false)
     }
 
     if (this.props.isUpdateSubsciption) {
@@ -281,7 +281,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -371,6 +371,7 @@ class AuditTab extends React.Component {
   }
 
   _refreshList(query) {
+    this.props.setAuditSpinner(true);
     var me = this;
     if (this.props.currentPageNumber < this.props.TotalPage) {
       if (query.scrolling) {
@@ -415,7 +416,8 @@ class AuditTab extends React.Component {
             CREATED_BY: [ALL]
           }
         });
-      this.props.setAuditSpinner(true);
+
+
       this.props.client
         .query({
           query: AUDIT_QUERY,
@@ -502,7 +504,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -531,7 +533,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -611,8 +613,8 @@ class AuditTab extends React.Component {
         data[i].audit_status == 'audit_created'
           ? ''
           : data[i].pps_id
-          ? data[i].pps_id
-          : '';
+            ? data[i].pps_id
+            : '';
 
       if (data[i].audit_status == 'audit_created') {
         auditData.status = notStarted;
@@ -973,8 +975,8 @@ class AuditTab extends React.Component {
                 </ActionDropDown>
               </div>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <div className='gor-audit-filter-create-wrap'>
             <div className='gor-button-wrap'>
@@ -1061,8 +1063,8 @@ class AuditTab extends React.Component {
                 setSpinner={this.props.setAuditSpinner}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {toolbar}
             {renderTab}
           </div>
@@ -1086,24 +1088,24 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    notifyfeedback: function(data) {
+    notifyfeedback: function (data) {
       dispatch(notifyfeedback(data));
     },
-    setNotification: function(data) {
+    setNotification: function (data) {
       dispatch(setNotification(data));
     },
-    notifySuccess: function(data) {
+    notifySuccess: function (data) {
       dispatch(notifySuccess(data));
     },
-    notifyFail: function(data) {
+    notifyFail: function (data) {
       dispatch(notifyFail(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     },
-    updateSubscriptionPacket: function(data) {
+    updateSubscriptionPacket: function (data) {
       dispatch(updateSubscriptionPacket(data));
     }
   };
@@ -1133,7 +1135,7 @@ AuditTab.PropTypes = {
 };
 
 const withQuery = graphql(AUDIT_QUERY, {
-  props: function(data) {
+  props: function (data) {
     return {
       AuditList: data.data.AuditList ? data.data.AuditList.list : [],
       PageResult: data.data.AuditList ? data.data.AuditList.page_results : 10,
@@ -1144,7 +1146,7 @@ const withQuery = graphql(AUDIT_QUERY, {
     };
   },
   options: ({ match, location }) => ({
-    variables: (function() {
+    variables: (function () {
       return {
         input: {
           skuId: location.query.skuId || '',
@@ -1243,7 +1245,7 @@ const clientAuditSpinnerState = graphql(auditSpinnerState, {
 
 const checkedAudit = graphql(SET_CHECKED_AUDIT, {
   props: ({ mutate, ownProps }) => ({
-    setCheckedAudit: function(data) {
+    setCheckedAudit: function (data) {
       mutate({ variables: { checkedAudit: data } });
     }
   })
@@ -1251,21 +1253,21 @@ const checkedAudit = graphql(SET_CHECKED_AUDIT, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showAuditFilter: function(show) {
+    showAuditFilter: function (show) {
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function(applied) {
+    updateSubscription: function (applied) {
       mutate({ variables: { isUpdateSubsciption: applied } });
     }
   })
@@ -1273,14 +1275,14 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function(number) {
+    setCurrentPageNumber: function (number) {
       mutate({ variables: { pageNumber: number } });
     }
   })
 });
 const setListData = graphql(SET_LIST_DATA, {
   props: ({ mutate, ownProps }) => ({
-    listDataAudit: function(data) {
+    listDataAudit: function (data) {
       mutate({ variables: { listData: data } });
     }
   })
@@ -1288,14 +1290,14 @@ const setListData = graphql(SET_LIST_DATA, {
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    auditfilterState: function(state) {
+    auditfilterState: function (state) {
       mutate({ variables: { state: state } });
     }
   })
 });
 const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    setAuditSpinner: function(spinnerState) {
+    setAuditSpinner: function (spinnerState) {
       mutate({ variables: { auditSpinner: spinnerState } });
     }
   })
@@ -1308,7 +1310,7 @@ const SET_AUDIT_DETAILS = gql`
 `;
 const setAuditListDetails = graphql(SET_AUDIT_DETAILS, {
   props: ({ mutate, ownProps }) => ({
-    setAuditDetails: function(auditDetails) {
+    setAuditDetails: function (auditDetails) {
       mutate({ variables: { auditDetails: auditDetails } });
     }
   })
@@ -1321,7 +1323,7 @@ const SET_AUDIT_LIST_REFRESH_STATE = gql`
 `;
 const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
   props: ({ mutate, ownProps }) => ({
-    setAuditListRefresh: function(auditRefreshFlag) {
+    setAuditListRefresh: function (auditRefreshFlag) {
       mutate({ variables: { auditRefreshFlag: auditRefreshFlag } });
     }
   })
