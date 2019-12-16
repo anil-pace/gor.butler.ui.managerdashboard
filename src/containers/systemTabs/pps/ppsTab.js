@@ -588,7 +588,7 @@ class PPS extends React.Component {
       for (let k in this.props.checkedPps) {
         selectedPps[k] = 'open';
       }
-      formData['requested_pps_status'] = selectedPps;
+      formData['requested_status'] = selectedPps;
       this.changePPSStatus(formData);
     }
   }
