@@ -1,19 +1,19 @@
 /**
  * Created by gaurav.m on 2/28/18.
  */
-import gql from 'graphql-tag'
+import gql from "graphql-tag"
 var formatData = function(obj) {
   if (!obj) {
     return obj
   }
   let self = JSON.parse(JSON.stringify(obj))
   Object.keys(obj).forEach(function(key) {
-    if (obj.hasOwnProperty(key) && typeof key === 'object') {
+    if (obj.hasOwnProperty(key) && typeof key === "object") {
       obj[key].__typename = key
       formatData(obj[key])
     }
   })
-  self.__typename = 'ppsConfiguration'
+  self.__typename = "ppsConfiguration"
 
   return self
 }
@@ -100,7 +100,7 @@ const ppsConfigurationState = {
                 direction
                 enabled
                 length
-                orig_cordinates
+                coordinate
                 pps_bin_id
               }
             }
@@ -151,7 +151,7 @@ const ppsConfigurationState = {
                 direction
                 enabled
                 length
-                orig_cordinates
+                coordinate
                 pps_bin_id
               }
             }
@@ -190,7 +190,7 @@ const ppsConfigurationState = {
                 direction
                 enabled
                 length
-                orig_cordinates
+                coordinate
                 pps_bin_id
               }
             }
@@ -242,7 +242,7 @@ const ppsConfigurationState = {
                   direction
                   enabled
                   length
-                  orig_cordinates
+                  coordinate
                   pps_bin_id
                 }
               }
@@ -293,7 +293,7 @@ const ppsConfigurationState = {
                   direction
                   enabled
                   length
-                  orig_cordinates
+                  coordinate
                   pps_bin_id
                 }
               }
@@ -335,7 +335,7 @@ const ppsConfigurationState = {
                   direction
                   enabled
                   length
-                  orig_cordinates
+                  coordinate
                   pps_bin_id
                 }
               }

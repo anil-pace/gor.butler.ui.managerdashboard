@@ -136,14 +136,14 @@ class Bins extends React.Component {
         let x_array = self.props.selectedProfile.pps_bin_details.filter(function (bin) {
             return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
         }).map(function (bin) {
-            return bin.orig_cordinates ? bin.orig_cordinates[0] + bin.length : 0
+            return bin.coordinate ? bin.coordinate[0] + bin.length : 0
         }).sort(function (a, b) {
             return a - b
         });
         let y_array = self.props.selectedProfile.pps_bin_details.filter(function (bin) {
             return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
         }).map(function (bin) {
-            return bin.orig_cordinates ? bin.orig_cordinates[1] + bin.height : 0
+            return bin.coordinate ? bin.coordinate[1] + bin.height : 0
         }).sort(function (a, b) {
             return a - b
         });
@@ -296,8 +296,8 @@ class Bins extends React.Component {
                     return <div key={bin.pps_bin_id} style={{
                         display: 'inline-block',
                         position: 'absolute',
-                        left: bin.orig_cordinates[0] * container.x / total_x,
-                        top: bin.orig_cordinates[1] * container.y / total_y,
+                        left: bin.coordinate[0] * container.x / total_x,
+                        top: bin.coordinate[1] * container.y / total_y,
                         width: bin.length * container.x / total_x,
                         height: bin.height * container.y / total_y,
                     }}>
