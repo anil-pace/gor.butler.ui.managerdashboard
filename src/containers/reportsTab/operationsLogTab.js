@@ -230,11 +230,20 @@ class OperationsLogTab extends React.Component {
     } else {
       this.props.filterApplied(false);
     }
+   
+    let operatingMode =[];
+    if (query.operatingMode.constructor === Array && query.operatingMode.length>0){
+      operatingMode =[...query.operatingMode]
+    }else if (query.operatingMode.constructor === String){
+      operatingMode.push(query.operatingMode)
+    }else{
+      operatingMode = ['any']
+    }
     this.props.operationsLogFilterState({
       tokenSelected: {
         status: query.status || ['any'],
         timeperiod: query.time_period || ['realtime'],
-        operatingMode: query.operatingMode || ['any'],
+        operatingMode: operatingMode,
         __typename: 'OperationsLogFilterTokenSelected'
       },
       searchQuery: {
@@ -621,10 +630,10 @@ const withClientData = graphql(operationsLogClientData, {
     return {
       showFilter: data.data.operationsLogFilter.display,
       isFilterApplied: data.data.operationsLogFilter.isFilterApplied,
-      filterState: JSON.parse(
+      filterState: JSON.parse( 
         JSON.stringify(data.data.operationsLogFilter.filterState)
-      )
-    };
+        )
+      };
   }
 });
 
