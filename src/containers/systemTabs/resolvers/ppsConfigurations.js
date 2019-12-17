@@ -29,6 +29,7 @@ const ppsConfigurationState = {
     Mutation: {
       setSelectedProfile: (_, variables, { cache }) => {
         let selectedPPSProfile
+        console.log("var", variables)
         if (variables.state.profile) {
           selectedPPSProfile = JSON.parse(
             JSON.stringify(variables.state.profile)
@@ -93,7 +94,7 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              pps_bin_details {
+              bin_details {
                 bin_group_id
                 bin_tags
                 height
@@ -108,7 +109,7 @@ const ppsConfigurationState = {
         `
         let previous = cache.readQuery({ query }).selectedPPSProfile
 
-        previous.pps_bin_details.map(function(bin) {
+        previous.bin_details.map(function(bin) {
           if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
             if (!bin.bin_tags) {
               bin.bin_tags = []
@@ -144,7 +145,7 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              pps_bin_details {
+              bin_details {
                 bin_group_id
                 bin_tags
                 height
@@ -159,7 +160,7 @@ const ppsConfigurationState = {
         `
         let previous = cache.readQuery({ query }).selectedPPSProfile
 
-        previous.pps_bin_details.map(function(bin) {
+        previous.bin_details.map(function(bin) {
           if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
             bin.enabled = bin_status
             selected_bin = bin
@@ -183,7 +184,7 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              pps_bin_details {
+              bin_details {
                 bin_group_id
                 bin_tags
                 height
@@ -235,7 +236,7 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                pps_bin_details {
+                bin_details {
                   bin_group_id
                   bin_tags
                   height
@@ -286,7 +287,7 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                pps_bin_details {
+                bin_details {
                   bin_group_id
                   bin_tags
                   height
@@ -328,7 +329,7 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                pps_bin_details {
+                bin_details {
                   bin_group_id
                   bin_tags
                   height
@@ -343,7 +344,7 @@ const ppsConfigurationState = {
 
             selectedPPSProfile @client {
               profile_name
-              pps_bin_details {
+              bin_details {
                 bin_group_id
                 bin_tags
                 pps_bin_id

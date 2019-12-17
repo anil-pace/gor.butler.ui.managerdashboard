@@ -24,11 +24,11 @@ class Bins extends React.Component {
              * Profile changed from left hand side pane
              */
 
-            if (nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
+            if (nextProps.selectedProfile && nextProps.selectedProfile.bin_details.filter(function (bin) {
                 return bin.direction !== 'center'
             }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
-            } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
+            } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.bin_details.filter(function (bin) {
                 return bin.direction !== 'center'
             }).length !== 0) {
                 this.setBinDirection(this.state.currentBinDirection)
@@ -133,14 +133,14 @@ class Bins extends React.Component {
          * Finding the sorted array of x and y co-ordinates
          */
 
-        let x_array = self.props.selectedProfile.pps_bin_details.filter(function (bin) {
+        let x_array = self.props.selectedProfile.bin_details.filter(function (bin) {
             return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
         }).map(function (bin) {
             return bin.coordinate ? bin.coordinate[0] + bin.length : 0
         }).sort(function (a, b) {
             return a - b
         });
-        let y_array = self.props.selectedProfile.pps_bin_details.filter(function (bin) {
+        let y_array = self.props.selectedProfile.bin_details.filter(function (bin) {
             return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
         }).map(function (bin) {
             return bin.coordinate ? bin.coordinate[1] + bin.height : 0
@@ -204,10 +204,10 @@ class Bins extends React.Component {
                             description='total users for filter search bar'
                             defaultMessage='Select a bin to activate or deactivate ({deactivated}/{total} bins deactivated)'
                             values={{
-                                deactivated: self.props.selectedProfile.pps_bin_details.filter(function (bin) {
+                                deactivated: self.props.selectedProfile.bin_details.filter(function (bin) {
                                     return !bin.enabled
                                 }).length.toString(),
-                                total: self.props.selectedProfile.pps_bin_details.length
+                                total: self.props.selectedProfile.bin_details.length
                             }} />
                     </div>
 
@@ -287,7 +287,7 @@ class Bins extends React.Component {
             }}>
                 {/*The co-ordinates need to be in proportion to the dimension of*/}
                 {/*the container.*/}
-                {self.props.selectedProfile.pps_bin_details.filter(function (bin) {
+                {self.props.selectedProfile.bin_details.filter(function (bin) {
                     return (!self.state.currentBinDirection || bin.direction === self.state.currentBinDirection)
                 }).map(function (bin, index) {
                     let bin_id = [self.props.selectedPPS.pps_id, bin.pps_bin_id].join("-")
