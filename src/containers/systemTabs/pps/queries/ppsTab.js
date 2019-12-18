@@ -64,6 +64,12 @@ export const PPS_LIST_QUERY = gql`
         allowed_modes
         status
         requested_status
+        performance
+        pps_profiles {
+          applied
+          profile_name
+          requested
+        }
         requested_mode
         mode
         user_name
