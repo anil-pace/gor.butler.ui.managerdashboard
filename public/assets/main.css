@@ -1027,6 +1027,7 @@ body {
   min-width: 5em;
   height: 35px;
   top: 2.75rem;
+  z-index:1;
   display: block;
   padding-right: 3px;
   width: 251px;

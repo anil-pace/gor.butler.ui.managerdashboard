@@ -20,15 +20,16 @@ export const CANCEL_AUDIT_URL = AUDIT_URL + "/cancel/"
 export const START_AUDIT_URL = AUDIT_URL + "/start"
 export const START_CHANGE_PPS_URL = AUDIT_URL + "/change_pps"
 export const WS_GRAPHQL_ENDPOINT = "/subscriptions"
-export const GRAPHQL_URL =
+export const HTTP_GRAPH_SERVER =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:3020/graphql"
-    : `${PROTOCOL}${BASE_URL}/graphql`
+    ? "http://localhost:3020"
+    : `${PROTOCOL}${BASE_URL}/`
+export const GRAPHQL_URL = HTTP_GRAPH_SERVER + "/graphql"
 export const WS_GRAPHQL_URL =
   process.env.NODE_ENV === "development"
     ? "ws://localhost:3020/subscriptions"
     : `${WS_PROTOCOL}${BASE_URL}${WS_GRAPHQL_ENDPOINT}`
-
+export const LOGOUT_URL = HTTP_GRAPH_SERVER + "/logout"
 export const SEARCH_AUDIT_URL = AUDIT_URL + "/search?"
 export const PPSLIST_URL = API_URL + "/audit/pps_info"
 export const PPSLIST_ALL_URL = PPSLIST_URL + "?mode=any"
