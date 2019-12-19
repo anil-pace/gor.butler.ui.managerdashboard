@@ -1,9 +1,9 @@
-import React from "react";
-import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
-import UtilityDropDown from "./utilityDropdownWrap";
-import ListItem from "../list/listItem";
-import { GR_REPORT_URL } from "../../constants/configConstants";
-import { GET, GR_REPORT_RESPONSE } from "../../constants/frontEndConstants";
+import React from "react"
+import { FormattedMessage, FormattedDate, defineMessages } from "react-intl"
+import UtilityDropDown from "./utilityDropdownWrap"
+import ListItem from "../list/listItem"
+import { GR_REPORT_URL } from "../../constants/configConstants"
+import { GET, GR_REPORT_RESPONSE } from "../../constants/frontEndConstants"
 
 const messages = defineMessages({
   downloadRprtsStatusHead: {
@@ -26,39 +26,39 @@ const messages = defineMessages({
     description: "file name",
     defaultMessage: "Click here to download "
   }
-});
+})
 
 class DownloadGRNTile extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       invoiceId: null,
       fileType: null
-    };
+    }
   }
 
   _changeGRNFileType(data) {
-    this.setState({ fileType: data.value });
+    this.setState({ fileType: data.value })
   }
   _getCurrentDropDownState(fileType, currentValue) {
     for (var i = fileType.length - 1; i >= 0; i--) {
       if (fileType[i].value === currentValue) {
-        return fileType[i].label;
+        return fileType[i].label
       }
     }
-    return null;
+    return null
   }
   _generateGRN() {
     if (this.props.generateReport) {
-      this.props.generateReport(this.state.fileType, this.state.invoiceId);
+      this.props.generateReport(this.state.fileType, this.state.invoiceId)
     } else {
-      throw new Error("Could not get the callback here!");
+      throw new Error("Could not get the callback here!")
     }
   }
 
   _captureQuery(e) {
     if (e.target.value) {
-      this.setState({ invoiceId: e.target.value });
+      this.setState({ invoiceId: e.target.value })
     }
   }
 
@@ -67,24 +67,18 @@ class DownloadGRNTile extends React.Component {
       JSON.stringify(this.props.reportsHistory) ===
       JSON.stringify(nextProps.reportsHistory)
     ) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
   render() {
-    const fileType = [
-      { value: "csv", label: "Comma separated values (csv)" },
-      {
-        value: "xlsx",
-        label: "ExceL Spreadsheet (xlsx)"
-      }
-    ];
+    const fileType = [{ value: "csv", label: "Comma separated values (csv)" }]
 
     let currenFileType = this.state.fileType
       ? this._getCurrentDropDownState(fileType, this.state.fileType)
-      : null;
+      : null
     return (
       <div>
         <div className="gor-utility-invoice-h1">
@@ -101,23 +95,27 @@ class DownloadGRNTile extends React.Component {
               messages.downloadGrnStnPlaceHolder
             )}
             ref={node => {
-              this.invoiceId = node;
+              this.invoiceId = node
             }}
             onChange={this._captureQuery.bind(this)}
           />
-          {this.props.validatedInvoice
-            ? <div className="gor-login-error" />
-            : ""}
+          {this.props.validatedInvoice ? (
+            <div className="gor-login-error" />
+          ) : (
+            ""
+          )}
         </div>
-        {this.props.validatedInvoice
-          ? <div className="gor-sku-error gor-utility-error-invoice">
-              <FormattedMessage
-                id="utility.downloadGRN.stnError"
-                description="Please enter correct STN number"
-                defaultMessage="Please enter correct STN number"
-              />
-            </div>
-          : ""}
+        {this.props.validatedInvoice ? (
+          <div className="gor-sku-error gor-utility-error-invoice">
+            <FormattedMessage
+              id="utility.downloadGRN.stnError"
+              description="Please enter correct STN number"
+              defaultMessage="Please enter correct STN number"
+            />
+          </div>
+        ) : (
+          ""
+        )}
         <UtilityDropDown
           items={fileType}
           dropdownLabel="File format"
@@ -146,12 +144,12 @@ class DownloadGRNTile extends React.Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
 DownloadGRNTile.contextTypes = {
   intl: React.PropTypes.object.isRequired
-};
+}
 
-export default DownloadGRNTile;
+export default DownloadGRNTile

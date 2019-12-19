@@ -1,7 +1,7 @@
-import React from "react";
-import { FormattedMessage, FormattedDate, defineMessages } from "react-intl";
-import UtilityDropDown from "./utilityDropdownWrap";
-import ListItem from "../list/listItem";
+import React from "react"
+import { FormattedMessage, FormattedDate, defineMessages } from "react-intl"
+import UtilityDropDown from "./utilityDropdownWrap"
+import ListItem from "../list/listItem"
 
 const messages = defineMessages({
   downloadReportsHead: {
@@ -44,61 +44,55 @@ const messages = defineMessages({
     description: "Comma separated values (csv)",
     defaultMessage: "Comma separated values (csv)"
   },
-  downloadFileFormatXls: {
-    id: "utiltiy.downloadRports.xlsFormat",
-    description: "ExceL Spreadsheet (xlsx)",
-    defaultMessage: "ExceL Spreadsheet (xlsx)"
-  },
   downloadLink: {
     id: "utility.grnHistory.clickToDownload",
     description: "file name",
     defaultMessage: "Click here to download "
   }
-});
+})
 
 class DownloadReportsTile extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       category: null,
       fileType: null
-    };
+    }
   }
 
   _changeReportCategory(data) {
-    this.setState({ category: data.value });
+    this.setState({ category: data.value })
   }
 
   _changeReportFileType(data) {
-    this.setState({ fileType: data.value });
+    this.setState({ fileType: data.value })
   }
 
   _generateReport() {
     if (this.props.generateReport) {
-      this.props.generateReport(this.state.fileType);
+      this.props.generateReport(this.state.fileType)
     } else {
-      throw new Error("Method for generating report not found");
+      throw new Error("Method for generating report not found")
     }
   }
 
   _getCurrentDropDownState(fileType, currentValue) {
     for (var i = fileType.length - 1; i >= 0; i--) {
       if (fileType[i].value === currentValue) {
-        return fileType[i].label;
+        return fileType[i].label
       }
     }
-    return null;
+    return null
   }
 
- 
   shouldComponentUpdate(nextProps, nextState) {
     if (
       JSON.stringify(this.props.reportsHistory) ===
       JSON.stringify(nextProps.reportsHistory)
     ) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
@@ -110,24 +104,20 @@ class DownloadReportsTile extends React.Component {
           messages.downloadRprtsCategoryInventory
         )
       }
-    ];
+    ]
     const fileType = [
       {
         value: "csv",
         label: this.context.intl.formatMessage(messages.downloadFileFormatCsv)
-      },
-      {
-        value: "xlsx",
-        label: this.context.intl.formatMessage(messages.downloadFileFormatXls)
       }
-    ];
+    ]
 
     let currentFileState = this.state.fileType
       ? this._getCurrentDropDownState(fileType, this.state.fileType)
-      : null;
+      : null
     let currentCategoryState = this.state.category
       ? this._getCurrentDropDownState(modes, this.state.category)
-      : null;
+      : null
 
     return (
       <div>
@@ -173,15 +163,15 @@ class DownloadReportsTile extends React.Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 DownloadReportsTile.propTypes = {
   reportsHistChanged: React.PropTypes.bool
-};
+}
 
 DownloadReportsTile.contextTypes = {
   intl: React.PropTypes.object.isRequired
-};
+}
 
-export default DownloadReportsTile;
+export default DownloadReportsTile
