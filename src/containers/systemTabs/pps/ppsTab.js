@@ -378,19 +378,6 @@ class PPS extends React.Component {
     for (var i = data.length - 1; i >= 0; i--) {
       detail = {}
       ppsId = data[i].pps_id
-      // if (binDetailsList) {
-      //   for (var j = 0; j < binDetailsList.length; j++) {
-      //     if (ppsId === parseInt(binDetailsList[j].pps_id)) {
-      //       let activeBins, totalBins
-      //       activeBins = binDetailsList[j].active_bins
-      //       totalBins = binDetailsList[j].total_bins
-      //       ppsBinDetails = nProps.context.intl.formatMessage(
-      //         messages.ppsBinFooter,
-      //         { currentPpsId: activeBins, totalPpsId: totalBins }
-      //       )
-      //     }
-      //   }
-      // }
       performance = 0
       performance = data[i].performance < 0 ? 0 : data[i].performance
       OPEN = nProps.context.intl.formatMessage(stringConfig.open)
@@ -554,11 +541,9 @@ class PPS extends React.Component {
       if (!requestObj) {
         let selectedPps = this.props.checkedPps,
           openPps = {},
-          selectedPpsIdArray = []
         for (let k in selectedPps) {
           if (selectedPps[k].statusPriority === 2) {
             // status priority for open is 2
-            selectedPpsIdArray.push(k)
             openPps[k] = selectedPps[k]
           }
         }
