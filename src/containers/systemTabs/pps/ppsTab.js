@@ -392,7 +392,7 @@ class PPS extends React.Component {
       //   }
       // }
       performance = 0
-      // performance = data[i].performance < 0 ? 0 : data[i].performance
+      performance = data[i].performance < 0 ? 0 : data[i].performance
       OPEN = nProps.context.intl.formatMessage(stringConfig.open)
       CLOSE = nProps.context.intl.formatMessage(stringConfig.close)
       FCLOSE = nProps.context.intl.formatMessage(stringConfig.fclose)
@@ -437,8 +437,8 @@ class PPS extends React.Component {
       detail.statusClass = data[i].status
       detail.operatingMode = currentTask[data[i].mode]
       detail.operatingModeClass = data[i].mode
-      // detail.performance = PERFORMANCE ///  orders /items
-      // detail.ppsThroughput = data[i].performance < 0 ? 0 : data[i].performance
+      detail.performance = PERFORMANCE ///  orders /items
+      detail.ppsThroughput = data[i].performance < 0 ? 0 : data[i].performance
       if (!data[i].operators_assigned) {
         detail.operatorAssigned = "--"
       } else {
