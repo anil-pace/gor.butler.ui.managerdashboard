@@ -200,9 +200,6 @@ class PPSConfiguration extends React.Component {
 
   render() {
     let self = this
-    // console.log("State is", self.state)
-    console.log("State is", self.props)
-
     return (
       <div className="pps-configuration-container">
         <Spinner isLoading={self.props.loading} />
@@ -374,8 +371,15 @@ const PPS_LIST_QUERY = gql`
     PPSList(input: $input) {
       list {
         pps_id
+        pps_mode
+        pps_mode_changed_time
+        pps_position
+        pps_requested_mode
         pps_status
+        pps_url
         requested_status
+        status
+        types_required
         pps_profiles {
           applied
           create_time
@@ -383,7 +387,7 @@ const PPS_LIST_QUERY = gql`
           pps_id
           requested
           update_time
-          bin_details {
+          pps_bin_details {
             bin_group_id
             height
             direction
@@ -391,12 +395,24 @@ const PPS_LIST_QUERY = gql`
             length
             bin_tags
             pps_bin_id
-            coordinate
+            orig_cordinates
           }
           bin_group_details {
             enabled
             bin_group_id
           }
+        }
+        pps_seats {
+          seat_active
+          seat_name
+          seat_type
+          user_name
+        }
+        pps_bins {
+          create_time
+          pps_bin_id
+          pps_id
+          update_time
         }
       }
     }
@@ -439,15 +455,15 @@ const SELECTED_PPS_PROFILE = gql`
           bin_group_id
           enabled
         }
-        bin_details {
+        pps_bin_details {
           bin_group_id
+          bin_tags
           height
           direction
           enabled
           length
-          bin_tags
+          orig_cordinates
           pps_bin_id
-          coordinate
         }
       }
     }
@@ -458,26 +474,26 @@ const SELECTED_PPS_PROFILE = gql`
         bin_group_id
         enabled
       }
-      bin_details {
+      pps_bin_details {
         bin_group_id
+        bin_tags
         height
         direction
         enabled
         length
-        bin_tags
+        orig_cordinates
         pps_bin_id
-        coordinate
       }
     }
     selectedPPSBin @client {
       bin_group_id
+      bin_tags
       height
       direction
       enabled
       length
-      bin_tags
+      orig_cordinates
       pps_bin_id
-      coordinate
     }
 
     selectedPPSBinGroup @client {
@@ -563,15 +579,15 @@ const SAVE_PROFILE_MUTATION = gql`
         bin_group_id
         enabled
       }
-      bin_details {
+      pps_bin_details {
         bin_group_id
+        bin_tags
         height
         direction
         enabled
         length
-        bin_tags
+        orig_cordinates
         pps_bin_id
-        coordinate
       }
     }
   }
@@ -609,15 +625,15 @@ const CREATE_PROFILE_MUTATION = gql`
         bin_group_id
         enabled
       }
-      bin_details {
+      pps_bin_details {
         bin_group_id
+        bin_tags
         height
         direction
         enabled
         length
-        bin_tags
+        orig_cordinates
         pps_bin_id
-        coordinate
       }
     }
   }

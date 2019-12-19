@@ -466,7 +466,7 @@ class PPS extends React.Component {
         detail.totalOperator = detail.totalOperator + data[i].user_name.length
       }
       detail.totalUser = totalUser
-      // detail.profiles = data[i].pps_profiles || []
+      detail.profiles = data[i].pps_profiles || []
       PPSData.push(detail)
     }
     return PPSData

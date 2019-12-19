@@ -1,19 +1,19 @@
 /**
  * Created by gaurav.m on 2/28/18.
  */
-import gql from "graphql-tag"
+import gql from 'graphql-tag'
 var formatData = function(obj) {
   if (!obj) {
     return obj
   }
   let self = JSON.parse(JSON.stringify(obj))
   Object.keys(obj).forEach(function(key) {
-    if (obj.hasOwnProperty(key) && typeof key === "object") {
+    if (obj.hasOwnProperty(key) && typeof key === 'object') {
       obj[key].__typename = key
       formatData(obj[key])
     }
   })
-  self.__typename = "ppsConfiguration"
+  self.__typename = 'ppsConfiguration'
 
   return self
 }
@@ -29,7 +29,6 @@ const ppsConfigurationState = {
     Mutation: {
       setSelectedProfile: (_, variables, { cache }) => {
         let selectedPPSProfile
-        console.log("var", variables)
         if (variables.state.profile) {
           selectedPPSProfile = JSON.parse(
             JSON.stringify(variables.state.profile)
@@ -94,14 +93,14 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              bin_details {
+              pps_bin_details {
                 bin_group_id
                 bin_tags
                 height
                 direction
                 enabled
                 length
-                coordinate
+                orig_cordinates
                 pps_bin_id
               }
             }
@@ -109,7 +108,7 @@ const ppsConfigurationState = {
         `
         let previous = cache.readQuery({ query }).selectedPPSProfile
 
-        previous.bin_details.map(function(bin) {
+        previous.pps_bin_details.map(function(bin) {
           if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
             if (!bin.bin_tags) {
               bin.bin_tags = []
@@ -145,14 +144,14 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              bin_details {
+              pps_bin_details {
                 bin_group_id
                 bin_tags
                 height
                 direction
                 enabled
                 length
-                coordinate
+                orig_cordinates
                 pps_bin_id
               }
             }
@@ -160,7 +159,7 @@ const ppsConfigurationState = {
         `
         let previous = cache.readQuery({ query }).selectedPPSProfile
 
-        previous.bin_details.map(function(bin) {
+        previous.pps_bin_details.map(function(bin) {
           if (bin.pps_bin_id === variables.state.bin.pps_bin_id) {
             bin.enabled = bin_status
             selected_bin = bin
@@ -184,14 +183,14 @@ const ppsConfigurationState = {
                 bin_group_id
                 enabled
               }
-              bin_details {
+              pps_bin_details {
                 bin_group_id
                 bin_tags
                 height
                 direction
                 enabled
                 length
-                coordinate
+                orig_cordinates
                 pps_bin_id
               }
             }
@@ -236,14 +235,14 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                bin_details {
+                pps_bin_details {
                   bin_group_id
                   bin_tags
                   height
                   direction
                   enabled
                   length
-                  coordinate
+                  orig_cordinates
                   pps_bin_id
                 }
               }
@@ -287,14 +286,14 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                bin_details {
+                pps_bin_details {
                   bin_group_id
                   bin_tags
                   height
                   direction
                   enabled
                   length
-                  coordinate
+                  orig_cordinates
                   pps_bin_id
                 }
               }
@@ -329,14 +328,14 @@ const ppsConfigurationState = {
                   bin_group_id
                   enabled
                 }
-                bin_details {
+                pps_bin_details {
                   bin_group_id
                   bin_tags
                   height
                   direction
                   enabled
                   length
-                  coordinate
+                  orig_cordinates
                   pps_bin_id
                 }
               }
@@ -344,7 +343,7 @@ const ppsConfigurationState = {
 
             selectedPPSProfile @client {
               profile_name
-              bin_details {
+              pps_bin_details {
                 bin_group_id
                 bin_tags
                 pps_bin_id
