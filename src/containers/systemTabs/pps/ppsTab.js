@@ -540,7 +540,7 @@ class PPS extends React.Component {
     if (selection.value === "close") {
       if (!requestObj) {
         let selectedPps = this.props.checkedPps,
-          openPps = {},
+          openPps = {}
         for (let k in selectedPps) {
           if (selectedPps[k].statusPriority === 2) {
             // status priority for open is 2
