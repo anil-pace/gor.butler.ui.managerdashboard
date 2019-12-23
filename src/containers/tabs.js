@@ -77,8 +77,16 @@ class Tabs extends React.Component {
     let authtoken = sessionStorage.getItem('auth_token')
 
     switch (selectTab) {
-      case 'Downloads':
-        var new_win = window.open(domain + '/cockpit/#/reports/reportsdownload')
+      case "Downloads":
+        var new_win = window.open(
+          domain + "/cockpit/#/reports/reportsdownload"
+        );
+        setTimeout(function() {
+          new_win.postMessage(authtoken, domain);
+        }, 0);
+        break;
+      case "Inbound":
+        var new_win = window.open(domain + "/cockpit/#/inbound/putsummary");
         setTimeout(function() {
           new_win.postMessage(authtoken, domain)
         }, 0)
@@ -546,7 +554,7 @@ else
         </Link>
 
         <Link
-          to='/inbound/putsummary'
+          to="/inbound/putsummary"
           onClick={this.handleTabClick.bind(this, INBOUND)}
         >
           <Tab
