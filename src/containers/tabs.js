@@ -559,7 +559,7 @@ else
           />
         </Link>
 
-        {/* <Link
+        <Link
           to='/exception/exceptionlist'
           onClick = {this.handleTabClick.bind(this,EXCEPTIONS)}
         >
@@ -571,8 +571,8 @@ else
             this.props.tab.toUpperCase() === EXCEPTIONS ? 'sel' : GOR_NORMAL_TAB
           }
           />
-        </Link> */}
-        
+        </Link>
+
         <Link
           to='/audit/auditlisting'
           onClick={this.handleTabClick.bind(this, AUDIT)}
