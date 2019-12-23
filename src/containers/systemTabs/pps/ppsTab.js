@@ -160,17 +160,13 @@ class PPS extends React.Component {
     if (query.pps_id) {
       filterSubsData["pps_id"] = Number(query.pps_id)
     }
-    if (query.pps_status) {
-      filterSubsData["pps_status"] =
-        query.pps_status.constructor === String
-          ? [query.pps_status]
-          : query.pps_status
+    if (query.status) {
+      filterSubsData["status"] =
+        query.status.constructor === String ? [query.status] : query.status
     }
-    if (query.current_task) {
-      filterSubsData["current_task"] =
-        query.current_task.constructor === String
-          ? [query.current_task]
-          : query.current_task
+    if (query.mode) {
+      filterSubsData["mode"] =
+        query.mode.constructor === String ? [query.mode] : query.mode
     }
 
     if (query.minRange || query.maxRange) {
@@ -190,16 +186,16 @@ class PPS extends React.Component {
     this.props.ppsfilterState({
       tokenSelected: {
         __typename: "tokenSelected",
-        STATUS: filterSubsData.pps_status ? filterSubsData.pps_status : ["all"],
-        MODE: query.current_task
-          ? query.current_task.constructor === Array
-            ? query.current_task
-            : [query.current_task]
+        STATUS: filterSubsData.status ? filterSubsData.status : ["all"],
+        MODE: query.mode
+          ? query.mode.constructor === Array
+            ? query.mode
+            : [query.mode]
           : ["all"]
       },
       searchQuery: {
         __typename: "searchQuery",
-        OPERATOR_ASSIGNED: filterSubsData.operators_assigned || null,
+        OPERATOR_ASSIGNED: filterSubsData.user_name || null,
         PPS_ID: filterSubsData.pps_id || null
       },
       defaultToken: {
@@ -262,18 +258,18 @@ class PPS extends React.Component {
     input_variables = Object.assign(
       {
         pps_id: null,
-        operator: null,
-        current_task: null,
-        pps_status: null,
+        user_name: null,
+        mode: null,
+        status: null,
         performance: null
       },
       input_variables
     )
     return init_data.filter(function(pps) {
       let matchPPSId = !input_variables["pps_id"],
-        matchOperator = !input_variables["operator"],
-        matchCurrentTask = !input_variables["current_task"],
-        matchStatus = !input_variables["pps_status"],
+        matchOperator = !input_variables["user_name"],
+        matchCurrentTask = !input_variables["mode"],
+        matchStatus = !input_variables["status"],
         matchPerformance = !input_variables["performance"]
       for (let key in input_variables) {
         if (key === "pps_id" && input_variables[key]) {
@@ -282,7 +278,7 @@ class PPS extends React.Component {
           } else {
             matchPPSId = false
           }
-        } else if (key === "operator" && input_variables[key]) {
+        } else if (key === "user_name" && input_variables[key]) {
           if (
             pps[key] &&
             pps[key][0].toString().replace(",", " ") === input_variables[key]
@@ -292,10 +288,10 @@ class PPS extends React.Component {
             matchOperator = false
           }
         } else if (
-          (key === "current_task" || key === "pps_status") &&
+          (key === "mode" || key === "status") &&
           input_variables[key]
         ) {
-          let isStatus = key === "pps_status"
+          let isStatus = key === "status"
           if (input_variables[key].constructor === Array) {
             for (let i = 0, len = input_variables[key].length; i < len; i++) {
               if (
@@ -373,6 +369,7 @@ class PPS extends React.Component {
     var priStatus = { open: 2, close: 0, force_close: 1 }
     var checkedPPS = this.props.checkedPps || {}
     var requestedStatusText = "--"
+    var performance = this.props.ppsPerformance
     var activeBins, totalBins
     detail.totalOperator = 0
     for (var i = data.length - 1; i >= 0; i--) {
@@ -426,7 +423,7 @@ class PPS extends React.Component {
       detail.operatingModeClass = data[i].mode
       detail.performance = PERFORMANCE ///  orders /items
       detail.ppsThroughput = data[i].performance < 0 ? 0 : data[i].performance
-      if (!data[i].operators_assigned) {
+      if (!data[i].user_name.length < 0) {
         detail.operatorAssigned = "--"
       } else {
         var userFirstLast
@@ -996,7 +993,8 @@ PPS.PropTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     intlMessages: state.intl.messages,
-    socketAuthorized: state.recieveSocketActions.socketAuthorized
+    socketAuthorized: state.recieveSocketActions.socketAuthorized,
+    ppsPerformance: state.ppsPerformance || {}
   }
 }
 function mapDispatchToProps(dispatch) {
