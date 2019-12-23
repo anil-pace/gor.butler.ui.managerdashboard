@@ -85,7 +85,7 @@ class Tabs extends React.Component {
         }, 0);
         break;
       case "Inbound":
-        var new_win = window.open(domain + "/cockpit/#/inbound/putlist");
+        var new_win = window.open(domain + "/cockpit/#/inbound/putsummary");
         setTimeout(function() {
           new_win.postMessage(authtoken, domain);
         }, 0);
@@ -569,7 +569,7 @@ class Tabs extends React.Component {
         </Link>
 
         <Link
-          to="/inbound/putlist"
+          to="/inbound/putsummary"
           onClick={this.handleTabClick.bind(this, INBOUND)}
         >
           <Tab
