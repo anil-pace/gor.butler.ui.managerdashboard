@@ -2,405 +2,403 @@
  * Container for Overview tab
  * This will be switched based on tab click
  */
- import React  from 'react';
- import {connect} from 'react-redux';
- import GTable from '../components/gor-table-component'
- import {GTableHeader, GTableHeaderCell, GTableBody, GTableRow} from '../components/gor-table-component'
- import {FormattedMessage,defineMessages} from 'react-intl';
- import ResolveAudit from './auditTab/resolveAudit';
- import NameInitial from '../components/NameInitial/nameInitial';
- import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
- import ProgressBar from '../components/progressBar/progressBar.js';
- import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
- import AuditStart from '../containers/auditTab/auditStart';
- import ActionDropDown from '../components/actionDropDown/actionDropDown';
- import {modal} from 'react-redux-modal';
- import AuditAction from '../containers/auditTab/auditAction';
- import EditAudit from '../containers/auditTab/editAudit';  
- import {graphql, withApollo, compose} from "react-apollo";
- import Dimensions from 'react-dimensions';
+import React from 'react';
+import { connect } from 'react-redux';
+import GTable from '../components/gor-table-component'
+import { GTableHeader, GTableHeaderCell, GTableBody, GTableRow } from '../components/gor-table-component'
+import { FormattedMessage, defineMessages } from 'react-intl';
+import ResolveAudit from './auditTab/resolveAudit';
+import NameInitial from '../components/NameInitial/nameInitial';
+import DotSeparatorContent from '../components/dotSeparatorContent/dotSeparatorContent';
+import ProgressBar from '../components/progressBar/progressBar.js';
+import viewDetailsAudit from '../containers/auditTab/viewDetailsAudit';
+import AuditStart from '../containers/auditTab/auditStart';
+import ActionDropDown from '../components/actionDropDown/actionDropDown';
+import { modal } from 'react-redux-modal';
+import AuditAction from '../containers/auditTab/auditAction';
+import EditAudit from '../containers/auditTab/editAudit';
+import { graphql, withApollo, compose } from "react-apollo";
+import Dimensions from 'react-dimensions';
 import gql from 'graphql-tag'
- import {
-    APP_JSON,
-    GET,PAUSE_AUDIT,DELETE_AUDIT,CANCEL_AUDIT,AUDIT_DUPLICATE,START_AUDIT,POST,START_AUDIT_TASK,PUT,
-    PAGE_DEFAULT_LIMIT
+import {
+  APP_JSON,
+  GET, PAUSE_AUDIT, DELETE_AUDIT, CANCEL_AUDIT, AUDIT_DUPLICATE, START_AUDIT, POST, START_AUDIT_TASK, PUT,
+  PAGE_DEFAULT_LIMIT
 } from '../constants/frontEndConstants';
 import {
-   AUDIT_PAUSE_URL,CANCEL_AUDIT_URL,DELETE_AUDIT_URL,AUDIT_DUPLICATE_URL,START_AUDIT_URL
-} from '../constants/configConstants'; 
+  AUDIT_PAUSE_URL, CANCEL_AUDIT_URL, DELETE_AUDIT_URL, AUDIT_DUPLICATE_URL, START_AUDIT_URL
+} from '../constants/configConstants';
 
-const messages=defineMessages({
+const messages = defineMessages({
   alCancel: {
     id: "auditlisting.cancel.status",
     defaultMessage: "Cancel"
-},
-alDelete: {
+  },
+  alDelete: {
     id: "auditlisting.delete.status",
     defaultMessage: "Delete"
-},
-alDuplicate: {
+  },
+  alDuplicate: {
     id: "auditlisting.duplicate.prefix",
     defaultMessage: "Duplicate"
-},
-alResolve: {
+  },
+  alResolve: {
     id: "auditlisting.resolve.status",
     defaultMessage: "Resolve"
-},
-alPause: {
-  id: "auditlisting.pause.status",
-  defaultMessage: "Pause"
-},
-alEdit: {
-  id: "auditlisting.edit.status",
-  defaultMessage: "Edit"
-},
-alViewDetails: {
-  id: "auditlisting.viewdetails.status",
-  defaultMessage: "View Details"
-},
-autoAssignPPS: {
-  id: "auditlisting.label.autoassignpps",
-  defaultMessage: "Auto Assign PPS"
-},
-manualAssignPPS: {
-  id: "auditlisting.label.manualassignpps",
-  defaultMessage: "Manually-Assign PPS"
-},
-startButton: {
-  id: "auditlisting.label.startbutton",
-  defaultMessage: "START"
-},
-reauditButton: {
-  id: "auditlisting.label.reauditbutton",
-  defaultMessage: "RE-AUDIT"
-},
-resolveButton: {
-  id: "auditlisting.label.reolvebutton",
-  defaultMessage: "RESOLVE"
-},
-multiPPS:{
-  id: "viewDetais.audit.multiPPS",
-  defaultMessage: "Multi PPS"
-}
+  },
+  alPause: {
+    id: "auditlisting.pause.status",
+    defaultMessage: "Pause"
+  },
+  alEdit: {
+    id: "auditlisting.edit.status",
+    defaultMessage: "Edit"
+  },
+  alViewDetails: {
+    id: "auditlisting.viewdetails.status",
+    defaultMessage: "View Details"
+  },
+  autoAssignPPS: {
+    id: "auditlisting.label.autoassignpps",
+    defaultMessage: "Auto Assign PPS"
+  },
+  manualAssignPPS: {
+    id: "auditlisting.label.manualassignpps",
+    defaultMessage: "Manually-Assign PPS"
+  },
+  startButton: {
+    id: "auditlisting.label.startbutton",
+    defaultMessage: "START"
+  },
+  reauditButton: {
+    id: "auditlisting.label.reauditbutton",
+    defaultMessage: "RE-AUDIT"
+  },
+  resolveButton: {
+    id: "auditlisting.label.reolvebutton",
+    defaultMessage: "RESOLVE"
+  },
+  multiPPS: {
+    id: "viewDetais.audit.multiPPS",
+    defaultMessage: "Multi PPS"
+  }
 });
 
- class AuditListingTab extends React.Component{
+class AuditListingTab extends React.Component {
 
-   constructor(props) {
+  constructor(props) {
     super(props);
     this._handelClick = this._handelClick.bind(this);
     this._handelResolveAudit = this._handelResolveAudit.bind(this);
-    this.state={visibleMenu:false} ;
-    this.state={checkedAudit:[]};    
-  }	
-
-  headerCheckChange(e){
-  let arr = JSON.parse(JSON.stringify(this.props.checkedAudit));
-  let a= arr.indexOf(e.currentTarget.id);
-  (a==-1)?arr.push(e.currentTarget.id): arr.splice(a,1);
-  this.props.setCheckedAudit(arr);
- }
- componentWillReceiveProps(nextProps){
-  this.setState({'checkedAudit':nextProps.checkedAudit});
- }
-
-
- viewAuditDetails(auditId,displayId) {
-  modal.add(viewDetailsAudit, {
-    title: '',
-    size: 'large',
-       	            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-       	            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-       	            auditId:auditId,
-                    displayId:displayId
-                    //.. all what you put in here you will get access in the modal props ;),
-                  });
-}
-startAudit(auditID) {
-  modal.add(AuditStart, {
-    title: '',
-    size: 'large',
-   closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-   hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-   auditID: auditID,
-   arrNameId:this.state.arrNameId
-   //.. all what you put in here you will get access in the modal props ;),
-                      });
-}  
-
-_handelClick(field,id,displayId) {
-  let auditId=id;
-  if(field.target.value=='viewdetails'){
-    this.viewAuditDetails(auditId,displayId);
-  }else if(field.target.value=='pause'){
-    this.props.pauseAudit(auditId,'pause');
-  }else if(field.target.value=='cancel'){
-    this._auditAction(auditId,CANCEL_AUDIT,displayId);
-     }else if(field.target.value=='delete'){
-    this._auditAction(auditId,DELETE_AUDIT,displayId);
-  }else if(field.target.value=='duplicate'){
-    this._duplicateAudit(auditId,'duplicate');
-  }else if(field.target.value=='edit'){
-    this._editAudit(auditId,'edit');
-  }else if(field.target.value=='mannualassignpps'){
-    this.startAudit([auditId]);
-  }else if(field.target.value=='autoassignpps'){
-    this.startAuditAuto(auditId);
+    this.state = { visibleMenu: false };
+    this.state = { checkedAudit: [] };
   }
-}
+
+  headerCheckChange(e) {
+    let arr = JSON.parse(JSON.stringify(this.props.checkedAudit));
+    let a = arr.indexOf(e.currentTarget.id);
+    (a == -1) ? arr.push(e.currentTarget.id) : arr.splice(a, 1);
+    this.props.setCheckedAudit(arr);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ 'checkedAudit': nextProps.checkedAudit });
+  }
 
 
-_editAudit(auditId,param){
- modal.add(EditAudit, {
-        title: '',
-        size: 'large',
-            closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-            hideCloseButton: true, // (optional) if you don't wanna show the top right close button
-            param:param,
-            auditId:auditId
-            //.. all what you put in here you will get access in the modal props ;),
-        });
-}
-_duplicateAudit(auditId,param){
-   modal.add(EditAudit, {
-        title: '',
-        size: 'large', // large, medium or small,
+  viewAuditDetails(auditId, displayId) {
+    modal.add(viewDetailsAudit, {
+      title: '',
+      size: 'large',
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      auditId: auditId,
+      displayId: displayId
+      //.. all what you put in here you will get access in the modal props ;),
+    });
+  }
+  startAudit(auditID) {
+    modal.add(AuditStart, {
+      title: '',
+      size: 'large',
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      auditID: auditID,
+      arrNameId: this.state.arrNameId
+      //.. all what you put in here you will get access in the modal props ;),
+    });
+  }
+
+  _handelClick(field, id, displayId) {
+    let auditId = id;
+    if (field.target.value == 'viewdetails') {
+      this.viewAuditDetails(auditId, displayId);
+    } else if (field.target.value == 'pause') {
+      this.props.pauseAudit(auditId, 'pause');
+    } else if (field.target.value == 'cancel') {
+      this._auditAction(auditId, CANCEL_AUDIT, displayId);
+    } else if (field.target.value == 'delete') {
+      this._auditAction(auditId, DELETE_AUDIT, displayId);
+    } else if (field.target.value == 'duplicate') {
+      this._duplicateAudit(auditId, 'duplicate');
+    } else if (field.target.value == 'edit') {
+      this._editAudit(auditId, 'edit');
+    } else if (field.target.value == 'mannualassignpps') {
+      this.startAudit([auditId]);
+    } else if (field.target.value == 'autoassignpps') {
+      this.startAuditAuto(auditId);
+    }
+  }
+
+
+  _editAudit(auditId, param) {
+    modal.add(EditAudit, {
+      title: '',
+      size: 'large',
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      param: param,
+      auditId: auditId
+      //.. all what you put in here you will get access in the modal props ;),
+    });
+  }
+  _duplicateAudit(auditId, param) {
+    modal.add(EditAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: true,
-      param:param,
-      auditId:auditId
-      });
-}
-_handelResolveAudit(event){
-  let auditId=event.currentTarget.id;
-  modal.add(ResolveAudit, {
-    title: '',
-    size: 'large', // large, medium or small,
-    closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-    hideCloseButton: true,
-    auditId: auditId,
-    screenId: "APPROVE_AUDIT",
-    auditType: auditId,
-    auditMethod: 'pdfa'//"location or pdfa"
-});
-}
-
-startAuditAuto(auditId){
-  let formData={
-    audit_id_list:(auditId).constructor.name!=="Array"?[auditId]:auditId,
-    pps_list:[]
+      param: param,
+      auditId: auditId
+    });
   }
-      let auditData={
-                'url':START_AUDIT_URL,
-                'method':POST,
-                'cause':START_AUDIT_TASK,
-                'contentType':APP_JSON,
-                'accept':APP_JSON,
-                'formdata':formData,
-                'token':sessionStorage.getItem('auth_token')
-            }
-      this.props.userRequest(auditData);
-} 
-_onScrollHandler(event){
+  _handelResolveAudit(event) {
+    let auditId = event.currentTarget.id;
+    modal.add(ResolveAudit, {
+      title: '',
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true,
+      auditId: auditId,
+      screenId: "APPROVE_AUDIT",
+      auditType: auditId,
+      auditMethod: 'pdfa'//"location or pdfa"
+    });
+  }
 
-if(event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight && Math.ceil(this.props.totalAudits/PAGE_DEFAULT_LIMIT)!==Number(this.props.currentPage)){
-    let query={scrolling:true}
-    this.props.refreshCallback(query);
-    
-}
-}
+  startAuditAuto(auditId) {
+    let formData = {
+      audit_id_list: (auditId).constructor.name !== "Array" ? [auditId] : auditId,
+      pps_list: []
+    }
+    let auditData = {
+      'url': START_AUDIT_URL,
+      'method': POST,
+      'cause': START_AUDIT_TASK,
+      'contentType': APP_JSON,
+      'accept': APP_JSON,
+      'formdata': formData,
+      'token': sessionStorage.getItem('auth_token')
+    }
+    this.props.userRequest(auditData);
+  }
+  _onScrollHandler(event) {
+
+    if (event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight && Math.ceil(this.props.totalAudits / PAGE_DEFAULT_LIMIT) !== Number(this.props.currentPage)) {
+      let query = { scrolling: true }
+      this.props.refreshCallback(query);
+
+    }
+  }
 
 
 
 
- _auditAction(auditId,param,displayId){
-  let data;
-  let URL;
-  let formdata={};
-if(param==CANCEL_AUDIT){
-  data=<FormattedMessage id='audit.cancel' 
-                        defaultMessage="Are you sure want to cancel {auditId} audit?" description="Text for cancel"
-                        values={{auditId:displayId}}/>
-                      URL=CANCEL_AUDIT_URL;
-                      formdata=auditId;
-                      }
-                      else if(param==DELETE_AUDIT)
-                      {
-  data=<FormattedMessage id='audit.deleteAudit' 
-                        defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
-                        values={{auditId:displayId}}/>
-                      URL=DELETE_AUDIT_URL;
-                      formdata=auditId;
-                      }              
+  _auditAction(auditId, param, displayId) {
+    let data;
+    let URL;
+    let formdata = {};
+    if (param == CANCEL_AUDIT) {
+      data = <FormattedMessage id='audit.cancel'
+        defaultMessage="Are you sure want to cancel {auditId} audit?" description="Text for cancel"
+        values={{ auditId: displayId }} />
+      URL = CANCEL_AUDIT_URL;
+      formdata = auditId;
+    }
+    else if (param == DELETE_AUDIT) {
+      data = <FormattedMessage id='audit.deleteAudit'
+        defaultMessage="Are you sure want to delete {auditId} audit?" description="Text for delete"
+        values={{ auditId: displayId }} />
+      URL = DELETE_AUDIT_URL;
+      formdata = auditId;
+    }
 
-      modal.add(AuditAction, {
-        title: '',
-        size: 'large', // large, medium or small,
+    modal.add(AuditAction, {
+      title: '',
+      size: 'large', // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false,
-      data:data,
-      param:param,
-      formdata:formdata,  
-      URL:URL
-      });  
-  } 
-
-_findStatus(data)
-{
- 
-return (Math.round(data.completed*100)/data.total||0);
-}
-
-_tableBodyData(itemsData){
-  let alCancel = this.context.intl.formatMessage(messages.alCancel);
-  let alDelete = this.context.intl.formatMessage(messages.alDelete);
-  let alDuplicate = this.context.intl.formatMessage(messages.alDuplicate);
-  let alResolve = this.context.intl.formatMessage(messages.alResolve);
-  let alPause = this.context.intl.formatMessage(messages.alPause);
-  let alEdit = this.context.intl.formatMessage(messages.alEdit);
-  let alViewDetails = this.context.intl.formatMessage(messages.alViewDetails);
- let multiPPS=this.context.intl.formatMessage(messages.multiPPS);
- 
-  let tableData=[];
-  for(var i=0;i<itemsData.length;i++){
-  let rowObject={};
-  var list="";
-  rowObject.initialName={
-    'name':itemsData[i].system_created_audit==true?"":itemsData[i].system_created_audit,
-    'flag':itemsData[i].system_created_audit
-  }
- list=itemsData[i].pps_id?(itemsData[i].pps_id).length>1?multiPPS:itemsData[i].pps_id:"";
-  rowObject.auditDetails={
-      "header":[itemsData[i].display_id,itemsData[i].audit_name],
-      "subHeader":[list,itemsData[i].auditBased,itemsData[i].totalTime],
-      "audit_id":itemsData[i].id,
-      "display_id":itemsData[i].display_id
-      }
-  rowObject.auditProgress={
-   "percentage": this._findStatus(itemsData[i].progressStatus),
-   "flag":(itemsData[i].progressBarflag)?true:false,
-   "status":itemsData[i].status
+      data: data,
+      param: param,
+      formdata: formdata,
+      URL: URL
+    });
   }
 
-  rowObject.Status={
-  "resolveStatus":itemsData[i].lineResolveState||"",
-  "reAuditStatus":itemsData[i].lineReAuditState||"",
-  "approvedState":itemsData[i].lineApprovedState||""
+  _findStatus(data) {
+
+    return (Math.round(data.completed * 100) / data.total || 0);
   }
-  
-  rowObject.button={
-    "startButton":itemsData[i].button['audit_start_button']=='enable'?true:false,
-    "resolveButton":itemsData[i].button['audit_resolve_button']=='enable'?true:false,
-    "reAudit":itemsData[i].button['audit_reaudit_button']=='enable'?true:false,
+
+  _tableBodyData(itemsData) {
+    let alCancel = this.context.intl.formatMessage(messages.alCancel);
+    let alDelete = this.context.intl.formatMessage(messages.alDelete);
+    let alDuplicate = this.context.intl.formatMessage(messages.alDuplicate);
+    let alResolve = this.context.intl.formatMessage(messages.alResolve);
+    let alPause = this.context.intl.formatMessage(messages.alPause);
+    let alEdit = this.context.intl.formatMessage(messages.alEdit);
+    let alViewDetails = this.context.intl.formatMessage(messages.alViewDetails);
+    let multiPPS = this.context.intl.formatMessage(messages.multiPPS);
+
+    let tableData = [];
+    for (var i = 0; i < itemsData.length; i++) {
+      let rowObject = {};
+      var list = "";
+      rowObject.initialName = {
+        'name': itemsData[i].system_created_audit == true ? "" : itemsData[i].system_created_audit,
+        'flag': itemsData[i].system_created_audit
+      }
+      list = itemsData[i].pps_id ? (itemsData[i].pps_id).length > 1 ? multiPPS : itemsData[i].pps_id : "";
+      rowObject.auditDetails = {
+        "header": [itemsData[i].display_id, itemsData[i].audit_name],
+        "subHeader": [list, itemsData[i].auditBased, itemsData[i].totalTime],
+        "audit_id": itemsData[i].id,
+        "display_id": itemsData[i].display_id
+      }
+      rowObject.auditProgress = {
+        "percentage": this._findStatus(itemsData[i].progressStatus),
+        "flag": (itemsData[i].progressBarflag) ? true : false,
+        "status": itemsData[i].status
+      }
+
+      rowObject.Status = {
+        "resolveStatus": itemsData[i].lineResolveState || "",
+        "reAuditStatus": itemsData[i].lineReAuditState || "",
+        "approvedState": itemsData[i].lineApprovedState || ""
+      }
+
+      rowObject.button = {
+        "startButton": itemsData[i].button['audit_start_button'] == 'enable' ? true : false,
+        "resolveButton": itemsData[i].button['audit_resolve_button'] == 'enable' ? true : false,
+        "reAudit": itemsData[i].button['audit_reaudit_button'] == 'enable' ? true : false,
+      }
+      rowObject.butoonToSHow = [];
+      rowObject.butoonToSHow.push({ name: alViewDetails, value: 'viewdetails' });
+      if (itemsData[i].button['audit_cancel_button'] == 'enable') {
+        rowObject.butoonToSHow.push({ name: alCancel, value: 'cancel' });
+      }
+      if (itemsData[i].button['audit_delete_button'] == 'enable') {
+        rowObject.butoonToSHow.push({ name: alDelete, value: 'delete' });
+      }
+      if (itemsData[i].button['audit_duplicate_button'] == 'enable') {
+        rowObject.butoonToSHow.push({ name: alDuplicate, value: 'duplicate' });
+      }
+      if (itemsData[i].button['audit_pause_button'] == 'enable') {
+        rowObject.butoonToSHow.push({ name: alPause, value: 'pause' });
+      }
+      if (itemsData[i].button['audit_edit_button'] == 'enable') {
+        rowObject.butoonToSHow.push({ name: alEdit, value: 'edit' });
+      }
+
+
+
+      tableData.push(rowObject);
+      rowObject = {};
+    }
+    return tableData;
   }
-  rowObject.butoonToSHow=[];
-    rowObject.butoonToSHow.push({name:alViewDetails,value:'viewdetails'});
-      if(itemsData[i].button['audit_cancel_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alCancel,value:'cancel'});
-      }
-      if(itemsData[i].button['audit_delete_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alDelete,value:'delete'});
-      }
-       if(itemsData[i].button['audit_duplicate_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alDuplicate,value:'duplicate'});
-      }
-      if(itemsData[i].button['audit_pause_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alPause,value:'pause'});
-      }
-      if(itemsData[i].button['audit_edit_button']=='enable'){
-      rowObject.butoonToSHow.push({name:alEdit,value:'edit'});
-      }
-      
-      
-
-  tableData.push(rowObject);
-  rowObject={};
-}
-return tableData;
-} 
 
 
-render(){
-  let autoAssignPPS = this.context.intl.formatMessage(messages.autoAssignPPS);
-  let manualAssignPPS = this.context.intl.formatMessage(messages.manualAssignPPS);
-  let startButton = this.context.intl.formatMessage(messages.startButton);
-  let reauditButton = this.context.intl.formatMessage(messages.reauditButton);
-  let resolveButton = this.context.intl.formatMessage(messages.resolveButton);
+  render() {
+    let autoAssignPPS = this.context.intl.formatMessage(messages.autoAssignPPS);
+    let manualAssignPPS = this.context.intl.formatMessage(messages.manualAssignPPS);
+    let startButton = this.context.intl.formatMessage(messages.startButton);
+    let reauditButton = this.context.intl.formatMessage(messages.reauditButton);
+    let resolveButton = this.context.intl.formatMessage(messages.resolveButton);
 
-  let me=this;
-  var itemsData=me.props.items;
-  var tablerowdata=this._tableBodyData(itemsData);
-  var tableData=[
-  {class:"auditListColumn1Style"}, 
-  {class:"auditListColumn2Style"}, 
-  {class:"auditListColumn3Style",progressWidth:80}, 
-  {class:"centerAligned auditListColumn4Style"},
-  {class:"bothAligned auditListColumn4Style"},
-  {class:"auditListColumn6Style"}
-  ];
-  return(
-
-   <div>
-
-   <div className="waveListWrapper">
-   <GTable options={['table-bordered','table-auditListing']}>
-
-{tablerowdata && tablerowdata.length>=1?
-  <GTableBody data={tablerowdata}   onScrollHandler={me._onScrollHandler.bind(this)}>
-   {tablerowdata ? tablerowdata.map(function (row, idx) {
+    let me = this;
+    var itemsData = me.props.items;
+    var tablerowdata = this._tableBodyData(itemsData);
+    var tableData = [
+      { class: "auditListColumn1Style" },
+      { class: "auditListColumn2Style" },
+      { class: "auditListColumn3Style", progressWidth: 80 },
+      { class: "centerAligned auditListColumn4Style" },
+      { class: "bothAligned auditListColumn4Style" },
+      { class: "auditListColumn6Style" }
+    ];
     return (
 
-    <GTableRow key={idx} index={idx} data={tablerowdata} >
+      <div>
 
-    {Object.keys(row).map(function (text, index) {
-      let visibilityStatus=tablerowdata[idx]['button'].startButton && tablerowdata[idx]['auditDetails']['subHeader'][1]!=="Wall-to-Wall"? 'visible':'hidden';
-      return <div key={index} style={tableData[index].style} className={tableData[index].class?tableData[index].class+" cell":""+"cell"}>
-      {index==0?<label className="container checkBoxalign" style={{'visibility':visibilityStatus}}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1?'':true}  onChange={me.headerCheckChange.bind(me)}/><span className="checkmark"></span></label> :""}
-      {index==0?tablerowdata[idx][text]['flag']!==true?<NameInitial name={tablerowdata[idx][text]['name']} shape='round'/>:<div title="System Generated" className='systemGenerated'></div>:""}
-      {index==1?<DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} separator={<div className="dotImage"></div>} />:""} 
-      {index==2?tablerowdata[idx][text]['flag']?<div style={{'text-align':'left'}} className="fontstyleColumn"><ProgressBar progressBarWrapperWidth="150px" progressWidth={tablerowdata[idx][text]['percentage']}/><div style={{'padding-top':'10px'}}>{tablerowdata[idx][text]['status']}</div></div>:<div style={{'text-align':'left'}}>{tablerowdata[idx][text]['status']}</div>:""}
-      {index==3?<div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div><div>{tablerowdata[idx][text]['approvedState']}</div></div>:""}
-      {index==4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length<=1)||(me.state.checkedAudit.length>1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id'])==-1))?<div style={{'position':'relative'}}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{float:'right'}} clickOptionBack={me._handelClick} data={[{name:manualAssignPPS,value:'mannualassignpps'}]}>      <button className="gor-add-btn gor-listing-button">
+        <div className="waveListWrapper">
+          <GTable options={['table-bordered', 'table-auditListing']}>
 
-      {startButton}
-       <div className="got-add-notch"></div>
-      </button>      
-      </ActionDropDown></div>:""}
-       {/* {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
+            {tablerowdata && tablerowdata.length >= 1 ?
+              <GTableBody data={tablerowdata} onScrollHandler={me._onScrollHandler.bind(this)}>
+                {tablerowdata ? tablerowdata.map(function (row, idx) {
+                  return (
+
+                    <GTableRow key={idx} index={idx} data={tablerowdata} >
+
+                      {Object.keys(row).map(function (text, index) {
+                        let visibilityStatus = tablerowdata[idx]['button'].startButton && tablerowdata[idx]['auditDetails']['subHeader'][1] !== "Wall-to-Wall" ? 'visible' : 'hidden';
+                        return <div key={index} style={tableData[index].style} className={tableData[index].class ? tableData[index].class + " cell" : "" + "cell"}>
+                          {index == 0 ? <label className="container checkBoxalign" style={{ 'visibility': visibilityStatus }}> <input type="checkbox" id={tablerowdata[idx]['auditDetails']['audit_id']} checked={(me.state.checkedAudit).indexOf(tablerowdata[idx]['auditDetails']['audit_id']) == -1 ? '' : true} onChange={me.headerCheckChange.bind(me)} /><span className="checkmark"></span></label> : ""}
+                          {index == 0 ? tablerowdata[idx][text]['flag'] !== true ? <NameInitial name={tablerowdata[idx][text]['name']} shape='round' /> : <div title="System Generated" className='systemGenerated'></div> : ""}
+                          {index == 1 ? <DotSeparatorContent header={tablerowdata[idx][text]['header']} subHeader={tablerowdata[idx][text]['subHeader']} key={idx} separator={<div className="dotImage"></div>} /> : ""}
+                          {index == 2 ? tablerowdata[idx][text]['flag'] ? <div style={{ textAlign: 'left' }} className="fontstyleColumn"><ProgressBar progressBarWrapperWidth="150px" progressWidth={tablerowdata[idx][text]['percentage']} /><div style={{ 'padding-top': '10px' }}>{tablerowdata[idx][text]['status']}</div></div> : <div style={{ textAlign: 'left' }}>{tablerowdata[idx][text]['status']}</div> : ""}
+                          {index == 3 ? <div className="column4Style"><div>{tablerowdata[idx][text]['resolveStatus']}</div> <div>{tablerowdata[idx][text]['reAuditStatus']}</div><div>{tablerowdata[idx][text]['approvedState']}</div></div> : ""}
+                          {index == 4 && tablerowdata[idx][text].startButton && ((me.state.checkedAudit.length <= 1) || (me.state.checkedAudit.length > 1 && me.state.checkedAudit.indexOf(tablerowdata[idx]['auditDetails']['audit_id']) == -1)) ? <div style={{ 'position': 'relative' }}><ActionDropDown id={tablerowdata[idx]['auditDetails']['audit_id']} style={{ float: 'right' }} clickOptionBack={me._handelClick} data={[{ name: manualAssignPPS, value: 'mannualassignpps' }]}>      <button className="gor-add-btn gor-listing-button">
+
+                            {startButton}
+                            <div className="got-add-notch"></div>
+                          </button>
+                          </ActionDropDown></div> : ""}
+                          {/* {index==4 && tablerowdata[idx][text].reAudit?<button className="gor-add-btn gor-listing-button">
     {reauditButton}
       </button>:""} */}
-      {index==4 && tablerowdata[idx][text].resolveButton?
-      <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id']+","+tablerowdata[idx]['auditDetails']['display_id']} style={{float:'right'}}   onClick={me._handelResolveAudit}>
-      {resolveButton}
-      </button>:""}
-       {index==5?<ActionDropDown style={{right:0}} displayId = {tablerowdata[idx]['auditDetails']['header'][0]} id={tablerowdata[idx]['auditDetails']['audit_id']} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
-      <div className='embeddedImage'></div>    
-      </ActionDropDown>:""}
+                          {index == 4 && tablerowdata[idx][text].resolveButton ?
+                            <button className="gor-add-btn gor-listing-button" id={tablerowdata[idx]['auditDetails']['audit_id'] + "," + tablerowdata[idx]['auditDetails']['display_id']} style={{ float: 'right' }} onClick={me._handelResolveAudit}>
+                              {resolveButton}
+                            </button> : ""}
+                          {index == 5 ? <ActionDropDown style={{ right: 0 }} displayId={tablerowdata[idx]['auditDetails']['header'][0]} id={tablerowdata[idx]['auditDetails']['audit_id']} clickOptionBack={me._handelClick} data={tablerowdata[idx][text]}>
+                            <div className='embeddedImage'></div>
+                          </ActionDropDown> : ""}
 
+                        </div>
+                      })}
+
+                    </GTableRow>
+                  )
+                }) : ""}
+              </GTableBody> : <div className="gor-Audit-no-data" style={{ backgroundColor: 'white' }}>
+                <div>
+                  <FormattedMessage id='audit.notfound' defaultMessage="There are no audit to view." description="audit not found" />
+                </div>
+                <div>
+                  <FormattedMessage id='audit.notfoundcreate' defaultMessage="Create audit" description="Create audit" />
+                </div>
+              </div>}
+
+          </GTable>
+        </div>
       </div>
-    })}
-
-    </GTableRow>
     )
-  }):""}
-  </GTableBody>:<div className="gor-Audit-no-data" style={{'background-color':'white'}}>
-  <div>
-  <FormattedMessage id='audit.notfound'  defaultMessage="There are no audit to view." description="audit not found"/>
-  </div>
-  <div>
-  <FormattedMessage id='audit.notfoundcreate'  defaultMessage="Create audit" description="Create audit"/>
-  </div>
-  </div>}
-
-  </GTable>
-  </div>
-  </div>
-  )
-}
+  }
 }
 
-AuditListingTab.contextTypes={
+AuditListingTab.contextTypes = {
   intl: React.PropTypes.object.isRequired
 }
-export default AuditListingTab ;
+export default AuditListingTab;
 
