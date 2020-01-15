@@ -1,13 +1,13 @@
-import React from "react";
-import Tab from "../components/tabs/tab";
-import { Link, hashHistory } from "react-router";
-import { connect } from "react-redux";
-import { setFireHazrdFlag } from "../actions/tabActions";
-import { modal } from "react-redux-modal";
-import { setInventorySpinner } from "../actions/inventoryActions";
-import { setAuditSpinner } from "../actions/auditActions";
-import { setButlerSpinner } from "../actions/spinnerAction";
-import { setEmergencyModalStatus } from "../actions/tabActions";
+import React from "react"
+import Tab from "../components/tabs/tab"
+import { Link, hashHistory } from "react-router"
+import { connect } from "react-redux"
+import { setFireHazrdFlag } from "../actions/tabActions"
+import { modal } from "react-redux-modal"
+import { setInventorySpinner } from "../actions/inventoryActions"
+import { setAuditSpinner } from "../actions/auditActions"
+import { setButlerSpinner } from "../actions/spinnerAction"
+import { setEmergencyModalStatus } from "../actions/tabActions"
 import {
   OVERVIEW,
   SYSTEM,
@@ -35,18 +35,18 @@ import {
   EMERGENCY_FIRE,
   NEWAUDIT,
   AUDITLISTING
-} from "../constants/frontEndConstants";
+} from "../constants/frontEndConstants"
 import {
   FormattedMessage,
   FormattedNumber,
   FormattedRelative
-} from "react-intl";
-import OperationStop from "../containers/emergencyProcess/OperationStop";
-import OperationPause from "../containers/emergencyProcess/OperationPause";
-import EmergencyRelease from "../containers/emergencyProcess/emergencyRelease";
-import fireHazard from "../containers/emergencyProcess/fireHazard";
-import GorToastify from "../components/gor-toastify/gor-toastify";
-import { setNotificationNull } from "../actions/notificationAction";
+} from "react-intl"
+import OperationStop from "../containers/emergencyProcess/OperationStop"
+import OperationPause from "../containers/emergencyProcess/OperationPause"
+import EmergencyRelease from "../containers/emergencyProcess/emergencyRelease"
+import fireHazard from "../containers/emergencyProcess/fireHazard"
+import GorToastify from "../components/gor-toastify/gor-toastify"
+import { setNotificationNull } from "../actions/notificationAction"
 
 class Tabs extends React.Component {
   /**
@@ -55,65 +55,61 @@ class Tabs extends React.Component {
    * @return {[none]}
    */
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isHardEmergencyOpen: this.props.isHardEmergencyOpen
-    };
-    this._openPopup = this._openPopup.bind(this);
-    this._redirectAudit = this._redirectAudit.bind(this);
+    }
+    this._openPopup = this._openPopup.bind(this)
+    this._redirectAudit = this._redirectAudit.bind(this)
   }
 
   _openPopup() {
-    this.props.setFireHazrdFlag(false);
+    this.props.setFireHazrdFlag(false)
   }
   _redirectAudit() {
-    hashHistory.push({ pathname: "/audit/auditlisting" });
+    hashHistory.push({ pathname: "/audit/auditlisting" })
   }
 
   loginManagerDashboard = selectTab => {
-    let domain = window.location.origin;
+    let domain = window.location.origin
 
-    let authtoken = sessionStorage.getItem("auth_token");
+    let authtoken = sessionStorage.getItem("auth_token")
 
     switch (selectTab) {
       case "Downloads":
-        var new_win = window.open(
-          domain + "/cockpit/#/reports/reportsdownload"
-        );
+        var new_win = window.open(domain + "/cockpit/#/reports/reportsdownload")
         setTimeout(function() {
-          new_win.postMessage(authtoken, domain);
-        }, 0);
-        break;
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
       case "Inbound":
-        var new_win = window.open(domain + "/cockpit/#/inbound/putsummary");
+        var new_win = window.open(domain + "/cockpit/#/inbound/putlist")
         setTimeout(function() {
-          new_win.postMessage(authtoken, domain);
-        }, 0);
-        break;
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
       case "Outbound":
-        var new_win = window.open(domain + "/cockpit/#/orders/ordersummary");
+        var new_win = window.open(domain + "/cockpit/#/orders/ordersummary")
         setTimeout(function() {
-          new_win.postMessage(authtoken, domain);
-        }, 0);
-        break;
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
       case "CustomerNotifications":
         var new_win = window.open(
           domain + "/cockpit/#/notification/notificationlist"
-        );
+        )
         setTimeout(function() {
-          new_win.postMessage(authtoken, domain);
-        }, 0);
-        break;
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
       case "Exceptions":
-        var new_win = window.open(
-          domain + "/cockpit/#/exception/exceptionlist"
-        );
+        var new_win = window.open(domain + "/cockpit/#/exception/exceptionlist")
         setTimeout(function() {
-          new_win.postMessage(authtoken, domain);
-        }, 0);
-        break;
+          new_win.postMessage(authtoken, domain)
+        }, 0)
+        break
     }
-  };
+  }
 
   handleTabClick(selTab) {
     /**
@@ -122,38 +118,38 @@ class Tabs extends React.Component {
      */
     switch (selTab) {
       case SYSTEM:
-        this.props.setButlerSpinner(true);
-        break;
+        this.props.setButlerSpinner(true)
+        break
 
       case INVENTORY:
-        this.props.setInventorySpinner(true);
-        break;
+        this.props.setInventorySpinner(true)
+        break
 
       case DOWNLOADS:
-        this.loginManagerDashboard("Downloads");
-        break;
+        this.loginManagerDashboard("Downloads")
+        break
 
       case INBOUND:
-        this.loginManagerDashboard("Inbound");
+        this.loginManagerDashboard("Inbound")
 
-        break;
+        break
 
       case EXCEPTIONS:
-        this.loginManagerDashboard("Exceptions");
+        this.loginManagerDashboard("Exceptions")
 
-        break;
+        break
 
       case OUTBOUND:
-        this.loginManagerDashboard("Outbound");
-        break;
+        this.loginManagerDashboard("Outbound")
+        break
 
       case CUSTOMERNOTIFICATIONS:
-        this.loginManagerDashboard("CustomerNotifications");
-        break;
+        this.loginManagerDashboard("CustomerNotifications")
+        break
 
       default:
-        this.props.setInventorySpinner(false);
-        this.props.setButlerSpinner(false);
+        this.props.setInventorySpinner(false)
+        this.props.setButlerSpinner(false)
     }
   }
 
@@ -168,7 +164,7 @@ class Tabs extends React.Component {
       zone: additionalProps.zone_id,
       sensor: additionalProps.sensor_activated,
       poeEnabled: Object.keys(additionalProps).length ? true : false
-    });
+    })
   }
   _emergencyRelease(additionalProps) {
     modal.add(EmergencyRelease, {
@@ -179,11 +175,11 @@ class Tabs extends React.Component {
       releaseState: additionalProps.releaseState,
       breached: additionalProps.breached,
       zone: additionalProps.zone
-    });
+    })
   }
   _pauseOperation(stopFlag, additionalProps) {
     var zoneDetails = additionalProps.zoneDetails || {},
-      breached = additionalProps.breached;
+      breached = additionalProps.breached
     modal.add(OperationPause, {
       title: "",
       size: "large", // large, medium or small,
@@ -195,7 +191,7 @@ class Tabs extends React.Component {
       sensor: zoneDetails.sensor_activated,
       poeEnabled: Object.keys(zoneDetails).length ? true : false,
       breached: breached
-    });
+    })
   }
   _FireEmergencyRelease() {
     modal.add(fireHazard, {
@@ -203,21 +199,21 @@ class Tabs extends React.Component {
       size: "large customColor", // large, medium or small,
       closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
       hideCloseButton: false
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.noticationData) {
-      setTimeout(this.props.setNotificationNull.bind(this), 5000);
+      setTimeout(this.props.setNotificationNull.bind(this), 5000)
     }
 
     if (!nextProps.isEmergencyOpen) {
       if (nextProps.system_emergency && nextProps.system_data === HARD) {
-        this.props.setEmergencyModalStatus(true);
-        this._stopOperation(true, nextProps.zoneDetails);
+        this.props.setEmergencyModalStatus(true)
+        this._stopOperation(true, nextProps.zoneDetails)
       } else if (nextProps.system_data === SOFT) {
-        this.props.setEmergencyModalStatus(true);
-        this._pauseOperation(true, nextProps);
+        this.props.setEmergencyModalStatus(true)
+        this._pauseOperation(true, nextProps)
       } else if (
         nextProps.system_data === SOFT_MANUAL &&
         (nextProps.lastEmergencyState === HARD ||
@@ -225,15 +221,15 @@ class Tabs extends React.Component {
       ) {
         let releaseState,
           breached = nextProps.breached,
-          zone = nextProps.zoneDetails.zone_id;
+          zone = nextProps.zoneDetails.zone_id
         if (nextProps.lastEmergencyState === HARD) {
-          releaseState = HARD;
+          releaseState = HARD
         } else if (nextProps.lastEmergencyState === SOFT) {
-          releaseState = SOFT;
+          releaseState = SOFT
         }
 
-        this.props.setEmergencyModalStatus(true);
-        this._emergencyRelease({ releaseState, breached, zone });
+        this.props.setEmergencyModalStatus(true)
+        this._emergencyRelease({ releaseState, breached, zone })
       }
     }
 
@@ -246,7 +242,7 @@ class Tabs extends React.Component {
         this.props.firehazadflag === false &&
         nextProps.fireHazardNotifyTime !== this.props.fireHazardNotifyTime)
     ) {
-      this._FireEmergencyRelease();
+      this._FireEmergencyRelease()
     }
   }
 
@@ -283,7 +279,7 @@ class Tabs extends React.Component {
       inbound,
       outbound,
       exceptions,
-      customernotifications;
+      customernotifications
 
     offline = (
       <FormattedMessage
@@ -291,7 +287,7 @@ class Tabs extends React.Component {
         description="offline"
         defaultMessage="Offline"
       />
-    );
+    )
 
     overview = (
       <FormattedMessage
@@ -299,7 +295,7 @@ class Tabs extends React.Component {
         description="overview tab"
         defaultMessage="OVERVIEW"
       />
-    );
+    )
 
     system = (
       <FormattedMessage
@@ -307,7 +303,7 @@ class Tabs extends React.Component {
         description="system tab"
         defaultMessage="SYSTEM"
       />
-    );
+    )
 
     order = (
       <FormattedMessage
@@ -315,7 +311,7 @@ class Tabs extends React.Component {
         description="orders tab"
         defaultMessage="ORDERS"
       />
-    );
+    )
 
     users = (
       <FormattedMessage
@@ -323,14 +319,14 @@ class Tabs extends React.Component {
         description="users tab"
         defaultMessage="USERS"
       />
-    );
+    )
     inventory = (
       <FormattedMessage
         id="inventory.tab.heading"
         description="inventory tab"
         defaultMessage="INVENTORY"
       />
-    );
+    )
 
     audit = (
       <FormattedMessage
@@ -338,7 +334,7 @@ class Tabs extends React.Component {
         description="audit tab"
         defaultMessage="AUDIT"
       />
-    );
+    )
 
     utilities = (
       <FormattedMessage
@@ -346,14 +342,14 @@ class Tabs extends React.Component {
         description="audit tab"
         defaultMessage="UTILITIES"
       />
-    );
+    )
     reports = (
       <FormattedMessage
         id="reports.tab.heading"
         description="reports tab"
         defaultMessage="REPORTS"
       />
-    );
+    )
 
     newaudit = (
       <FormattedMessage
@@ -361,7 +357,7 @@ class Tabs extends React.Component {
         description="new audit tab"
         defaultMessage="NEW AUDIT"
       />
-    );
+    )
 
     downloads = (
       <FormattedMessage
@@ -369,7 +365,7 @@ class Tabs extends React.Component {
         description="downloads tab"
         defaultMessage="DOWNLOADS"
       />
-    );
+    )
 
     inbound = (
       <FormattedMessage
@@ -377,7 +373,7 @@ class Tabs extends React.Component {
         description="inbound tab"
         defaultMessage="INBOUND"
       />
-    );
+    )
 
     outbound = (
       <FormattedMessage
@@ -385,7 +381,7 @@ class Tabs extends React.Component {
         description="outbound tab"
         defaultMessage="OUTBOUND"
       />
-    );
+    )
 
     exceptions = (
       <FormattedMessage
@@ -393,7 +389,7 @@ class Tabs extends React.Component {
         description="exceptions tab"
         defaultMessage="EXCEPTIONS"
       />
-    );
+    )
 
     customernotifications = (
       <FormattedMessage
@@ -401,7 +397,7 @@ class Tabs extends React.Component {
         description="customernotifications tab"
         defaultMessage="CUSTOMER NOTIFICATIONS"
       />
-    );
+    )
 
     items = {
       overview: overview,
@@ -432,24 +428,24 @@ class Tabs extends React.Component {
       newauditStatus: newauditStatus,
       newauditClass: newauditClass,
       newauditIcon: newauditIcon
-    };
+    }
 
-    return items;
+    return items
   }
   _processNotification(notificationPopup, showFireHazardPopup) {
     var notificationWrap = [],
       singleNotification,
       time,
-      timeText;
+      timeText
     var originalDate = this.props.fireHazardNotifyTime
       ? new Date(this.props.fireHazardNotifyTime)
       : this.props.fireHazardStartTime
       ? new Date(this.props.fireHazardStartTime)
-      : new Date();
-    var convertedDate = originalDate.getTime();
+      : new Date()
+    var convertedDate = originalDate.getTime()
     var timeText = (
       <FormattedRelative value={convertedDate} timeZone={this.props.timeZone} />
-    );
+    )
 
     if (this.props.fireHazardNotifyTime && showFireHazardPopup) {
       singleNotification = (
@@ -468,7 +464,7 @@ class Tabs extends React.Component {
             </span>
           </div>
         </GorToastify>
-      );
+      )
     } else if (this.props.noticationData) {
       singleNotification = (
         <GorToastify key={2}>
@@ -485,7 +481,7 @@ class Tabs extends React.Component {
             </p>
           </div>
         </GorToastify>
-      );
+      )
     } else {
       singleNotification = (
         <GorToastify key={3}>
@@ -507,33 +503,33 @@ class Tabs extends React.Component {
             </span>
           </div>
         </GorToastify>
-      );
+      )
     }
-    notificationWrap.push(singleNotification);
-    return notificationWrap;
+    notificationWrap.push(singleNotification)
+    return notificationWrap
   }
 
   render() {
-    let items = this._parseStatus();
-    let showFireHazardPopup, notificationPopup;
+    let items = this._parseStatus()
+    let showFireHazardPopup, notificationPopup
     if (
       this.props.firehazadflag &&
       (this.props.fireHazardNotifyTime || this.props.fireHazardStartTime)
     ) {
-      showFireHazardPopup = true;
+      showFireHazardPopup = true
     } else {
-      showFireHazardPopup = false;
+      showFireHazardPopup = false
     }
     if (this.props.noticationData) {
-      notificationPopup = true;
+      notificationPopup = true
     }
 
     let notificationWrap = this._processNotification(
       notificationPopup,
       showFireHazardPopup
-    );
+    )
     let showUtilityTab =
-      this.props.config.utility_tab && this.props.config.utility_tab.enabled;
+      this.props.config.utility_tab && this.props.config.utility_tab.enabled
 
     return (
       <div className="gor-tabs gor-main-block gor-scrollable-tab">
@@ -569,7 +565,7 @@ class Tabs extends React.Component {
         </Link>
 
         <Link
-          to="/inbound/putsummary"
+          to="/inbound/putlist"
           onClick={this.handleTabClick.bind(this, INBOUND)}
         >
           <Tab
@@ -583,16 +579,18 @@ class Tabs extends React.Component {
         </Link>
 
         <Link
-          to='/exception/exceptionlist'
-          onClick = {this.handleTabClick.bind(this,EXCEPTIONS)}
+          to="/exception/exceptionlist"
+          onClick={this.handleTabClick.bind(this, EXCEPTIONS)}
         >
           <Tab
-           items ={{
-             tab: items.exceptions,
+            items={{
+              tab: items.exceptions
             }}
-          changeClass={
-            this.props.tab.toUpperCase() === EXCEPTIONS ? 'sel' : GOR_NORMAL_TAB
-          }
+            changeClass={
+              this.props.tab.toUpperCase() === EXCEPTIONS
+                ? "sel"
+                : GOR_NORMAL_TAB
+            }
           />
         </Link>
 
@@ -730,7 +728,7 @@ class Tabs extends React.Component {
         {showFireHazardPopup ? notificationWrap : ""}
         {notificationPopup ? notificationWrap : ""}
       </div>
-    );
+    )
   }
 }
 
@@ -758,30 +756,30 @@ function mapStateToProps(state, ownProps) {
     zoneDetails: state.tabsData.zoneDetails || {},
     isEmergencyOpen: state.tabsData.isEmergencyOpen,
     noticationData: state.notificationReducer.noticationData || null
-  };
+  }
 }
 
 var mapDispatchToProps = function(dispatch) {
   return {
     setInventorySpinner: function(data) {
-      dispatch(setInventorySpinner(data));
+      dispatch(setInventorySpinner(data))
     },
     setAuditSpinner: function(data) {
-      dispatch(setAuditSpinner(data));
+      dispatch(setAuditSpinner(data))
     },
     setButlerSpinner: function(data) {
-      dispatch(setButlerSpinner(data));
+      dispatch(setButlerSpinner(data))
     },
     setFireHazrdFlag: function(data) {
-      dispatch(setFireHazrdFlag(data));
+      dispatch(setFireHazrdFlag(data))
     },
     setEmergencyModalStatus: function(data) {
-      dispatch(setEmergencyModalStatus(data));
+      dispatch(setEmergencyModalStatus(data))
     },
     setNotificationNull: function(data) {
-      dispatch(setNotificationNull(data));
+      dispatch(setNotificationNull(data))
     }
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs)
