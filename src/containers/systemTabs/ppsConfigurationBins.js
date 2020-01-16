@@ -315,7 +315,7 @@ class Bins extends React.Component {
                             }}>
                             <span className={["pps-bin"].join(" ")}>
                                 <span className="pps-bin-tag-info">
-                                    <span className="gor-tag-icon-grey" />{bin.bin_tags.length} <FormattedMessage
+                                    <span className="gor-tag-icon-grey" />{bin && bin.bin_tags && bin.bin_tags.length} <FormattedMessage
                                         id="pps.configuration.bins.tagCount.text"
                                         description="Tag"
                                         defaultMessage="Tag" /></span>
