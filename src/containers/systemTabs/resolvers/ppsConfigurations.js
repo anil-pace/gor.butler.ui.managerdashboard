@@ -1,19 +1,19 @@
 /**
  * Created by gaurav.m on 2/28/18.
  */
-import gql from 'graphql-tag'
+import gql from "graphql-tag"
 var formatData = function(obj) {
   if (!obj) {
     return obj
   }
   let self = JSON.parse(JSON.stringify(obj))
   Object.keys(obj).forEach(function(key) {
-    if (obj.hasOwnProperty(key) && typeof key === 'object') {
+    if (obj.hasOwnProperty(key) && typeof key === "object") {
       obj[key].__typename = key
       formatData(obj[key])
     }
   })
-  self.__typename = 'ppsConfiguration'
+  self.__typename = "ppsConfiguration"
 
   return self
 }
@@ -35,9 +35,9 @@ const ppsConfigurationState = {
           )
         } else {
           variables.state.pps.pps_profiles.forEach(function(prfl, index) {
-            if (prfl.applied) {
-              selectedPPSProfile = JSON.parse(JSON.stringify(prfl))
-            }
+            // if (prfl.applied) {
+            selectedPPSProfile = JSON.parse(JSON.stringify(prfl))
+            // }
           })
         }
         let selectedPPSBin = null
