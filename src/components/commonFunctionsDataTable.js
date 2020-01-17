@@ -507,6 +507,7 @@ export class ActionCellPPS extends React.Component {
     return profiles
 }
 
+
     render() {
         let self = this
         if (self.props.data.getObjectAt(self.props.rowIndex)) {
@@ -517,11 +518,18 @@ export class ActionCellPPS extends React.Component {
                     return profile.requested
                 }).length > 0
             return <Cell>
-                <div className="gor-pps-profile-drop">
-                    <Dropdown disabled={any_requested_profile ||forced_close_pps} noBorder={true} labelIcon={"gor-action-pps-icon"} listItemIcon={"gor-tick-icon"} placeholder={placeholder} options={options}
-                              onSelectHandler={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}
-                              resetOnSelect={true}/>
+              <div className="gor-pps-profile-drop">
+                <select style={{"width": "10em","height": "2em","marginTop": "0.4em", "fontSize": "14px" }}
+                  disabled={any_requested_profile ||forced_close_pps}
+                  name="select" 
+                  onChange={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}>
+                {options.map(function(eachOption) { 
+                    return (<option value={eachOption.value}>{eachOption.label}</option>);
+                })}
+              </select>
                 </div>
+
+              
                 {any_requested_profile &&
                 <span className="requestedProfileTxt"><FormattedMessage id="pps.configuration.profile.requestedText"
                                                                         description='requested profile for PPS'
