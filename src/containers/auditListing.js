@@ -281,7 +281,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -342,6 +342,8 @@ class AuditTab extends React.Component {
           skuId: this.props.location.query.skuId || '',
           locationId: this.props.location.query.locationId || '',
           taskId: this.props.location.query.taskId || '',
+          taskName: this.props.location.query.taskName || '',
+          orderNo: this.props.location.query.orderNo || '',
           ppsId: this.props.location.query.ppsId || '',
           operatingMode: this.props.location.query.operatingMode || '',
           status: this.props.location.query.status || '',
@@ -349,6 +351,7 @@ class AuditTab extends React.Component {
           toDate: this.props.location.query.toDate || '',
           auditType: this.props.location.query.auditType || '',
           createdBy: this.props.location.query.createdBy || '',
+          inventoryFound: this.props.location.query.inventoryFound || '',
           pageSize: pageSize,
           pageNo: 1
         }
@@ -397,6 +400,11 @@ class AuditTab extends React.Component {
               ? query.createdBy.constructor === Array
                 ? query.createdBy
                 : [query.createdBy]
+              : [ALL],
+            INVENTORY_FOUND: query.inventoryFound
+              ? query.inventoryFound.constructor === Array
+                ? query.inventoryFound
+                : [query.inventoryFound]
               : [ALL]
           },
           searchQuery: {
@@ -404,6 +412,8 @@ class AuditTab extends React.Component {
             SPECIFIC_SKU_ID: query.skuId || '',
             SPECIFIC_LOCATION_ID: query.locationId || '',
             AUDIT_TASK_ID: query.taskId || '',
+            AUDIT_TASK_NAME: query.taskName || '',
+            ORDER_NO: query.orderNo || '',
             SPECIFIC_PPS_ID: query.ppsId || '',
             FROM_DATE: query.fromDate || '',
             TO_DATE: query.toDate || ''
@@ -412,7 +422,8 @@ class AuditTab extends React.Component {
             __typename: 'AuditFilterDefaultToken',
             AUDIT_TYPE: [ANY],
             STATUS: [ALL],
-            CREATED_BY: [ALL]
+            CREATED_BY: [ALL],
+            INVENTORY_FOUND: [ALL]
           }
         });
       this.props.setAuditSpinner(true);
@@ -424,6 +435,8 @@ class AuditTab extends React.Component {
               skuId: this.props.location.query.skuId || '',
               locationId: this.props.location.query.locationId || '',
               taskId: this.props.location.query.taskId || '',
+              taskName: this.props.location.query.taskName || '',
+              orderNo: this.props.location.query.orderNo || '',
               ppsId: this.props.location.query.ppsId || '',
               operatingMode: this.props.location.query.operatingMode || '',
               status: this.props.location.query.status || '',
@@ -431,6 +444,7 @@ class AuditTab extends React.Component {
               toDate: this.props.location.query.toDate || '',
               auditType: this.props.location.query.auditType || '',
               createdBy: this.props.location.query.createdBy || '',
+              inventoryFound: this.props.location.query.inventoryFound || '',
               pageSize: 10,
               pageNo: pageNo || 1
             }
@@ -467,12 +481,15 @@ class AuditTab extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
+        INVENTORY_FOUND: [ALL],
         __typename: 'AuditFilterTokenSelected'
       },
       searchQuery: {
         SPECIFIC_SKU_ID: null,
         SPECIFIC_LOCATION_ID: null,
         AUDIT_TASK_ID: null,
+        AUDIT_TASK_NAME: null,
+        ORDER_NO: null,
         SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
@@ -482,6 +499,7 @@ class AuditTab extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
+        INVENTORY_FOUND: [ALL],
         __typename: 'AuditFilterDefaultToken'
       }
     });
@@ -502,7 +520,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -531,7 +549,7 @@ class AuditTab extends React.Component {
     this.props.client
       .query({
         query: AUDIT_REQUEST_QUERY,
-        variables: (function() {
+        variables: (function () {
           return {
             input: {
               data: dataToSent
@@ -611,8 +629,8 @@ class AuditTab extends React.Component {
         data[i].audit_status == 'audit_created'
           ? ''
           : data[i].pps_id
-          ? data[i].pps_id
-          : '';
+            ? data[i].pps_id
+            : '';
 
       if (data[i].audit_status == 'audit_created') {
         auditData.status = notStarted;
@@ -973,8 +991,8 @@ class AuditTab extends React.Component {
                 </ActionDropDown>
               </div>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <div className='gor-audit-filter-create-wrap'>
             <div className='gor-button-wrap'>
@@ -1061,8 +1079,8 @@ class AuditTab extends React.Component {
                 setSpinner={this.props.setAuditSpinner}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {toolbar}
             {renderTab}
           </div>
@@ -1086,24 +1104,24 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var mapDispatchToProps = function(dispatch) {
+var mapDispatchToProps = function (dispatch) {
   return {
-    notifyfeedback: function(data) {
+    notifyfeedback: function (data) {
       dispatch(notifyfeedback(data));
     },
-    setNotification: function(data) {
+    setNotification: function (data) {
       dispatch(setNotification(data));
     },
-    notifySuccess: function(data) {
+    notifySuccess: function (data) {
       dispatch(notifySuccess(data));
     },
-    notifyFail: function(data) {
+    notifyFail: function (data) {
       dispatch(notifyFail(data));
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }));
     },
-    updateSubscriptionPacket: function(data) {
+    updateSubscriptionPacket: function (data) {
       dispatch(updateSubscriptionPacket(data));
     }
   };
@@ -1133,7 +1151,7 @@ AuditTab.PropTypes = {
 };
 
 const withQuery = graphql(AUDIT_QUERY, {
-  props: function(data) {
+  props: function (data) {
     return {
       AuditList: data.data.AuditList ? data.data.AuditList.list : [],
       PageResult: data.data.AuditList ? data.data.AuditList.page_results : 10,
@@ -1144,12 +1162,14 @@ const withQuery = graphql(AUDIT_QUERY, {
     };
   },
   options: ({ match, location }) => ({
-    variables: (function() {
+    variables: (function () {
       return {
         input: {
           skuId: location.query.skuId || '',
           locationId: location.query.locationId || '',
           taskId: location.query.taskId || '',
+          taskName: location.query.taskName || '',
+          orderNo: location.query.orderNo || '',
           ppsId: location.query.ppsId || '',
           operatingMode: location.query.operatingMode || '',
           status: location.query.status || '',
@@ -1157,6 +1177,7 @@ const withQuery = graphql(AUDIT_QUERY, {
           toDate: location.query.toDate || '',
           auditType: location.query.auditType || '',
           createdBy: location.query.createdBy || '',
+          inventoryFound: location.query.inventoryFound || '',
           pageSize: 10,
           pageNo: location.query.page || 1
         }
@@ -1243,7 +1264,7 @@ const clientAuditSpinnerState = graphql(auditSpinnerState, {
 
 const checkedAudit = graphql(SET_CHECKED_AUDIT, {
   props: ({ mutate, ownProps }) => ({
-    setCheckedAudit: function(data) {
+    setCheckedAudit: function (data) {
       mutate({ variables: { checkedAudit: data } });
     }
   })
@@ -1251,21 +1272,21 @@ const checkedAudit = graphql(SET_CHECKED_AUDIT, {
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showAuditFilter: function(show) {
+    showAuditFilter: function (show) {
       mutate({ variables: { filter: show } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function(applied) {
+    updateSubscription: function (applied) {
       mutate({ variables: { isUpdateSubsciption: applied } });
     }
   })
@@ -1273,14 +1294,14 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function(number) {
+    setCurrentPageNumber: function (number) {
       mutate({ variables: { pageNumber: number } });
     }
   })
 });
 const setListData = graphql(SET_LIST_DATA, {
   props: ({ mutate, ownProps }) => ({
-    listDataAudit: function(data) {
+    listDataAudit: function (data) {
       mutate({ variables: { listData: data } });
     }
   })
@@ -1288,14 +1309,14 @@ const setListData = graphql(SET_LIST_DATA, {
 
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    auditfilterState: function(state) {
+    auditfilterState: function (state) {
       mutate({ variables: { state: state } });
     }
   })
 });
 const setSpinnerState = graphql(SET_AUDIT_SPINNER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    setAuditSpinner: function(spinnerState) {
+    setAuditSpinner: function (spinnerState) {
       mutate({ variables: { auditSpinner: spinnerState } });
     }
   })
@@ -1308,7 +1329,7 @@ const SET_AUDIT_DETAILS = gql`
 `;
 const setAuditListDetails = graphql(SET_AUDIT_DETAILS, {
   props: ({ mutate, ownProps }) => ({
-    setAuditDetails: function(auditDetails) {
+    setAuditDetails: function (auditDetails) {
       mutate({ variables: { auditDetails: auditDetails } });
     }
   })
@@ -1321,7 +1342,7 @@ const SET_AUDIT_LIST_REFRESH_STATE = gql`
 `;
 const setAuditListRefreshState = graphql(SET_AUDIT_LIST_REFRESH_STATE, {
   props: ({ mutate, ownProps }) => ({
-    setAuditListRefresh: function(auditRefreshFlag) {
+    setAuditListRefresh: function (auditRefreshFlag) {
       mutate({ variables: { auditRefreshFlag: auditRefreshFlag } });
     }
   })

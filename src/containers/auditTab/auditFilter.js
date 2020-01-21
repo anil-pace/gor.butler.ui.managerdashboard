@@ -25,6 +25,10 @@ import {
   REJECTED, //audit_rejected
   AUDIT_PAUSED,
   AUDIT_TYPE,
+  AUDIT_TASK_NAME,
+  LESS_THAN_ACTUAL,
+  MORE_THAN_ACTUAL,
+  ORDER_NO,
   AUDIT_COMPLETED,
   AUDIT_CANCELLED,
   INPROGRESS,
@@ -40,10 +44,10 @@ class AuditFilter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tokenSelected: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] },
+      tokenSelected: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL], INVENTORY_FOUND: [ALL] },
       searchQuery: {},
       textboxStatus: null,
-      defaultToken: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL] }
+      defaultToken: { AUDIT_TYPE: [ANY], STATUS: [ALL], CREATED_BY: [ALL], INVENTORY_FOUND: [ALL] }
     }
     this._applyFilter = this._applyFilter.bind(this)
     this._closeFilter = this._closeFilter.bind(this)
@@ -59,7 +63,7 @@ class AuditFilter extends React.Component {
       if (
         nextProps.auditFilterState &&
         JSON.stringify(this.state) !==
-          JSON.stringify(nextProps.auditFilterState)
+        JSON.stringify(nextProps.auditFilterState)
       ) {
         this.setState(nextProps.auditFilterState)
       }
@@ -74,6 +78,15 @@ class AuditFilter extends React.Component {
           <FormattedMessage
             id='audit.inputField.id'
             defaultMessage='AUDIT ID'
+          />
+        )
+      },
+      {
+        value: AUDIT_TASK_NAME,
+        label: (
+          <FormattedMessage
+            id='audit.inputField.name'
+            defaultMessage='AUDIT NAME'
           />
         )
       },
@@ -96,6 +109,12 @@ class AuditFilter extends React.Component {
             id='audit.inputField.location'
             defaultMessage='LOCATION ID'
           />
+        )
+      },
+      {
+        value: ORDER_NO,
+        label: (
+          <FormattedMessage id='audit.inputField.order_no' defaultMessage='ORDER NO' />
         )
       },
       {
@@ -174,6 +193,16 @@ class AuditFilter extends React.Component {
         <FormattedMessage
           id='audit.tokenfield.createdby'
           defaultMessage='CREATED BY'
+        />
+      )
+    }
+
+    var tokenInventoryFoundField = {
+      value: 'INVENTORY_FOUND',
+      label: (
+        <FormattedMessage
+          id='audit.tokenfield.inventoryfound'
+          defaultMessage='INVENTORY FOUND'
         />
       )
     }
@@ -262,6 +291,25 @@ class AuditFilter extends React.Component {
         )
       }
     ]
+    const labelC4 = [
+      {
+        value: ANY,
+        label: <FormattedMessage id='audit.token4.all' defaultMessage='Any' />
+      },
+      {
+        value: LESS_THAN_ACTUAL,
+        label: <FormattedMessage id='audit.token4.less_than_actual' defaultMessage='Less Than Actual' />
+      },
+      {
+        value: MORE_THAN_ACTUAL,
+        label: (
+          <FormattedMessage
+            id='audit.token4.more_than_actual'
+            defaultMessage='More Than Actual'
+          />
+        )
+      }
+    ]
 
     var selectedToken = this.state.tokenSelected
     var column1 = (
@@ -289,11 +337,21 @@ class AuditFilter extends React.Component {
         selectedToken={selectedToken}
       />
     )
+    var column4 = (
 
+      <FilterTokenWrap
+        field={tokenInventoryFoundField}
+        tokenCallBack={this._handelTokenClick.bind(this)}
+        label={labelC4}
+        selectedToken={selectedToken}
+        selection={SINGLE}
+      />
+    )
     var columnDetail = {
       column1token: column1,
       column2token: column2,
-      column3token: column3
+      column3token: column3,
+      column4token: column4
     }
     return columnDetail
   }
@@ -364,9 +422,18 @@ class AuditFilter extends React.Component {
     ) {
       _query.createdBy = filterState.tokenSelected['CREATED_BY']
     }
+    if (
+      filterState.tokenSelected['INVENTORY_FOUND'] &&
+      filterState.tokenSelected['INVENTORY_FOUND'][0] !== ALL
+    ) {
+      _query.inventoryFound = filterState.tokenSelected['INVENTORY_FOUND']
+    }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
       _query.taskId = filterState.searchQuery[AUDIT_TASK_ID]
+    }
+    if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_NAME]) {
+      _query.taskName = filterState.searchQuery[AUDIT_TASK_NAME]
     }
     if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_SKU_ID]) {
       _query.skuId = filterState.searchQuery[SPECIFIC_SKU_ID]
@@ -380,6 +447,10 @@ class AuditFilter extends React.Component {
     if (filterState.searchQuery && filterState.searchQuery[SPECIFIC_PPS_ID]) {
       _query.ppsId = filterState.searchQuery[SPECIFIC_PPS_ID]
     }
+    if (filterState.searchQuery && filterState.searchQuery[ORDER_NO]) {
+      _query.orderNo = filterState.searchQuery[ORDER_NO]
+    }
+
     if (filterState.searchQuery && filterState.searchQuery[FROM_DATE]) {
       _query.fromDate = filterState.searchQuery[FROM_DATE]
     }
@@ -401,12 +472,15 @@ class AuditFilter extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
+        INVENTORY_FOUND: [ALL],
         __typename: 'AuditFilterTokenSelected'
       },
       searchQuery: {
         SPECIFIC_SKU_ID: null,
         SPECIFIC_LOCATION_ID: null,
         AUDIT_TASK_ID: null,
+        AUDIT_TASK_NAME: null,
+        ORDER_NO: null,
         SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
@@ -416,6 +490,7 @@ class AuditFilter extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
+        INVENTORY_FOUND: [ALL],
         __typename: 'AuditFilterDefaultToken'
       }
     })
@@ -457,8 +532,8 @@ class AuditFilter extends React.Component {
                 />
               </div>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <div className='gor-filter-body'>
             <div className='gor-filter-body-input-wrap'>{auditSearchField}</div>
@@ -471,6 +546,9 @@ class AuditFilter extends React.Component {
               </div>
               <div className='gor-filter-body-filterToken-section1'>
                 {auditFilterToken.column3token}
+              </div>
+              <div className='gor-filter-body-filterToken-section1'>
+                {auditFilterToken.column4token}
               </div>
             </div>
           </div>
@@ -491,8 +569,8 @@ class AuditFilter extends React.Component {
                     defaultMessage='Apply filter'
                   />
                 ) : (
-                  <div className='spinnerImage' />
-                )}
+                    <div className='spinnerImage' />
+                  )}
               </button>
             </div>
           </div>
@@ -546,21 +624,21 @@ const SET_PAGE_NUMBER = gql`
 `
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function(number) {
+    setCurrentPageNumber: function (number) {
       mutate({ variables: { pageNumber: number } })
     }
   })
 })
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } })
     }
   })
 })
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function(applied) {
+    updateSubscription: function (applied) {
       mutate({ variables: { isUpdateSubsciption: applied } })
     }
   })
@@ -568,21 +646,21 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
   props: ({ mutate, ownProps }) => ({
-    setTextBoxStatus: function(textBoxName) {
+    setTextBoxStatus: function (textBoxName) {
       mutate({ variables: { textBoxName: textBoxName } })
     }
   })
 })
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    auditfilterState: function(state) {
+    auditfilterState: function (state) {
       mutate({ variables: { state: state } })
     }
   })
 })
 
 const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
-  props: function(data) {
+  props: function (data) {
     var list = { pps_list: [] }
     if (!data || !data.data.AuditFetchUser || !data.data.AuditFetchUser.list) {
       auditUserList: list.users
