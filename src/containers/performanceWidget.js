@@ -99,10 +99,6 @@ class PerformanceWidget extends React.Component {
 
 	}
 
-	updateValues(previousResult, newResult) {
-		console.log(this.props.data)
-	}
-
 	updateSubscription(subscription, variables) {
 		if (this.subscription) {
 			this.subscription()
@@ -112,8 +108,6 @@ class PerformanceWidget extends React.Component {
 			document: SUBSCRIPTION_QUERY,
 			notifyOnNetworkStatusChange: true,
 			updateQuery: (previousResult, newResult) => {
-				console.log("pre", previousResult, 'next', newResult)
-				console.log(this.props)
 				return Object.assign({}, previousResult, {
 					SystemHealthList: {
 						data: newResult.subscriptionData.data.SystemHealthList.data
@@ -126,7 +120,6 @@ class PerformanceWidget extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		this.setState({ renderState: nextProps.widget })
 		if (!this.subscription) {
-			// console.log("inside", this.props)
 			this.updateSubscription(nextProps.subscribeToMore, {})
 		}
 	}
