@@ -2,8 +2,8 @@
  * Container for Inventory tab
  * This will be switched based on tab click
  */
-import React  from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import {
     INVENTORY_HISTOGRAM_CONFIG,
     LEGEND_ROUND,
@@ -11,20 +11,21 @@ import {
     INV_LINE_LEGEND_CONFIG,
     INV_LINE_LEGEND_IPUT_COLOR,
     INV_HIST_LEGEND_COLOR,
-    INV_HIST_LEGEND_CONFIG, CATEGORY_COLOR_MAP,WS_ONSEND
+    INV_HIST_LEGEND_CONFIG, CATEGORY_COLOR_MAP, WS_ONSEND
 } from './../constants/frontEndConstants';
 import Legend from './../components/legend/legend';
-import { setWsAction} from './../actions/socketActions'
-import {wsOverviewData} from './../constants/initData.js';
+import { setWsAction } from './../actions/socketActions'
+import { wsOverviewData } from './../constants/initData.js';
 import InventoryHistogram from './inventoryTab/inventoryHistogram'
 import PickPutLineGraph from './../components/inventory/pickPutLineGraph'
 import SnapShot from './../components/inventory/snapShot'
 import ItemCategoryTable from './../components/inventory/itemCategoryTable'
 import InventoryStacked from './../containers/inventoryTab/inventoryStacked'
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import Spinner from "./../components/spinner/Spinner"
 import 'moment-timezone';
-import {graphql, withApollo, compose} from "react-apollo";
+import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag'
 
 const InventoryHistorySubscription = gql`
@@ -51,7 +52,12 @@ const InventoryHistorySubscription = gql`
 class InventoryTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {formattedData: null, selectedData: null,legacyDataSubscribed:false}
+        this.state = {
+            formattedData: null,
+            selectedData: null,
+            legacyDataSubscribed: false,
+            spinnerFlag: true
+        }
         this.subscription = null
         this._subscribeLegacyData = this._subscribeLegacyData.bind(this);
 
@@ -61,24 +67,25 @@ class InventoryTab extends React.Component {
         this.props.setInventoryDate(data.customData);
 
     }
-     _subscribeLegacyData() {
+    _subscribeLegacyData() {
         this.props.initDataSentCall(wsOverviewData["default"]);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data) || !this.subscription ) {
+        if (JSON.stringify(nextProps.data) !== JSON.stringify(this.props.data) || !this.subscription) {
             this.formatData(nextProps.data || [])
         }
 
         if (!this.subscription && nextProps.subscribeToMore) {
             this.updateSubscription(nextProps.subscribeToMore, {})
         }
-        if(!this.state.legacyDataSubscribed && nextProps.socketAuthorized){
-            this.setState(()=>{
-                return{legacyDataSubscribed:true}
-            },()=>{
+        if (!this.state.legacyDataSubscribed && nextProps.socketAuthorized) {
+            this.setState(() => {
+                return { legacyDataSubscribed: true }
+            }, () => {
                 this._subscribeLegacyData()
             })
+            this.setState({ spinnerFlag: false })
         }
     }
 
@@ -105,7 +112,7 @@ class InventoryTab extends React.Component {
     formatData(data) {
         let return_data = {}
         let self = this;
-        const {timeOffset} = self.props;
+        const { timeOffset } = self.props;
         let currentDate = data[0] ? data[0].date : moment.utc().format();
         data.forEach(function (inv, index) {
             let graphInfo = {}, inventory_data,
@@ -128,7 +135,7 @@ class InventoryTab extends React.Component {
 
             }
 
-            let otherInfo = {...inventory_data, current_stock, unusedSpace, colorCode}
+            let otherInfo = { ...inventory_data, current_stock, unusedSpace, colorCode }
             let timeinMS = moment(inv_date).toDate().getTime();
             graphInfo.xAxisData = [Math.random(), inv_date.split("-")[2]].join("_")
             graphInfo.yAxisData = current_stock
@@ -136,12 +143,12 @@ class InventoryTab extends React.Component {
             graphInfo.items_put = inv ? inv.items_put : 0
             graphInfo.date = inv_date;//.toDate()
             graphInfo.customData = timeinMS;//inv_date.toDate().getTime()
-            return_data[timeinMS] = {graphInfo, otherInfo}
+            return_data[timeinMS] = { graphInfo, otherInfo }
 
 
         })
 
-        this.setState({formattedData: return_data,currentDate:currentDate}, function () {
+        this.setState({ formattedData: return_data, currentDate: currentDate }, function () {
             self.selectData()
         })
 
@@ -149,13 +156,13 @@ class InventoryTab extends React.Component {
 
     selectData(timeStamp) {
         if (timeStamp) {
-            this.setState({selectedData: this.state.formattedData[timeStamp].otherInfo})
+            this.setState({ selectedData: this.state.formattedData[timeStamp].otherInfo })
         } else {
             let firstIndexData = Object.keys(this.state.formattedData)[0]
-            if(firstIndexData){
-                this.setState({selectedData: this.state.formattedData[firstIndexData].otherInfo})
+            if (firstIndexData) {
+                this.setState({ selectedData: this.state.formattedData[firstIndexData].otherInfo })
             }
-            
+
         }
 
     }
@@ -166,7 +173,7 @@ class InventoryTab extends React.Component {
             data: [{
                 color: INV_HIST_LEGEND_COLOR,
                 name: <FormattedMessage id="inventory.histogram.legend" description="Inventory Histogram Legend"
-                                        defaultMessage="Items Stocked">
+                    defaultMessage="Items Stocked">
                     {(message) => <tspan>{message}</tspan>}
                 </FormattedMessage>
             }],
@@ -177,16 +184,16 @@ class InventoryTab extends React.Component {
                 {
                     color: INV_LINE_LEGEND_IPICKED_COLOR,
                     name: <FormattedMessage id="inventory.linechart.legendPicked"
-                                            description="Inventory Linechart Legend for picked"
-                                            defaultMessage="Items Picked">
+                        description="Inventory Linechart Legend for picked"
+                        defaultMessage="Items Picked">
                         {(message) => <tspan>{message}</tspan>}
                     </FormattedMessage>
                 },
                 {
                     color: INV_LINE_LEGEND_IPUT_COLOR,
                     name: <FormattedMessage id="inventory.linechart.legendPut"
-                                            description="Inventory Linechart Legend for put"
-                                            defaultMessage="Items Put">
+                        description="Inventory Linechart Legend for put"
+                        defaultMessage="Items Put">
                         {(message) => <tspan>{message}</tspan>}
                     </FormattedMessage>
                 }
@@ -194,43 +201,49 @@ class InventoryTab extends React.Component {
             config: INV_LINE_LEGEND_CONFIG
         }
 
-        const timeOffset = this.props.timeOffset 
+        const timeOffset = this.props.timeOffset
         return (
             <div className="gorInventory wrapper">
+                <Spinner
+                    isLoading={this.state.spinnerFlag}
+                    setSpinner={this.props.setInventorySpinner} />
                 <div>
                     <div className="head">
-
-                        <div className="labelCnt"><span><FormattedMessage id="inventory.header"
-                                                                          description="Inventory Header Message"
-                                                                          defaultMessage="Inventory"/> </span></div>
+                        <div className="labelCnt">
+                            <span>
+                                <FormattedMessage id="inventory.header"
+                                    description="Inventory Header Message"
+                                    defaultMessage="Inventory" />
+                            </span>
+                        </div>
                     </div>
                     {this.state.formattedData && <div >
                         <div className="histCnt">
                             <div>
                                 <div className="histLbl">
                                     <FormattedMessage id="inventory.histogram.header"
-                                                      description="Inventory Histogram Header Message"
-                                                      defaultMessage="Stock level history"/>
+                                        description="Inventory Histogram Header Message"
+                                        defaultMessage="Stock level history" />
                                 </div>
                                 <div className="legendCnt">
-                                    <Legend legendData={histogramLegend}/>
+                                    <Legend legendData={histogramLegend} />
                                 </div>
                                 <div className="histogram">
                                     <InventoryHistogram selectData={this.selectData.bind(this)}
-                                                        noData={this.props.noData}
-                                                        recreatedData={this.state.formattedData}/>
+                                        noData={this.props.noData}
+                                        recreatedData={this.state.formattedData} />
                                 </div>
                                 <div className="histLbl">
                                     <FormattedMessage id="inventory.linechart.header"
-                                                      description="Inventory Line Chart Header Message"
-                                                      defaultMessage="Item Movements"/>
+                                        description="Inventory Line Chart Header Message"
+                                        defaultMessage="Item Movements" />
                                 </div>
                                 <div className="legendCnt">
-                                    <Legend legendData={lineChartLagend} legendType={LEGEND_ROUND}/>
+                                    <Legend legendData={lineChartLagend} legendType={LEGEND_ROUND} />
                                 </div>
                                 <div className="lineGraph">
                                     <PickPutLineGraph noData={this.props.noData}
-                                                      recreatedData={this.state.formattedData}/>
+                                        recreatedData={this.state.formattedData} />
 
                                 </div>
 
@@ -241,9 +254,9 @@ class InventoryTab extends React.Component {
                                 <SnapShot
                                     currentDate={this.state.currentDate}
                                     timeOffset={this.props.timeOffset}
-                                    snapshotTabData={this.state.selectedData || {}}/>
-                                <InventoryStacked snapshotData={this.state.selectedData || {}}/>
-                                <ItemCategoryTable snapshotData={this.state.selectedData || {}}/>
+                                    snapshotTabData={this.state.selectedData || {}} />
+                                <InventoryStacked snapshotData={this.state.selectedData || {}} />
+                                <ItemCategoryTable snapshotData={this.state.selectedData || {}} />
                             </div>
                         </div>
                     </div>}
@@ -280,31 +293,30 @@ const withNetworkData = graphql(InventoryHistoryQuery, {
             subscribeToMore: result.data.subscribeToMore
         }
     },
-    options: ({match, location}) => ({
+    options: ({ match, location }) => ({
         variables: {},
         fetchPolicy: 'network-only'
     }),
 })
 
-const mapStateToProps = function(state, ownProps) {
+const mapStateToProps = function (state, ownProps) {
 
     return {
         intlMessages: state.intl.messages,
         socketAuthorized: state.recieveSocketActions.socketAuthorized,
-        timeOffset:state.authLogin.timeOffset || Intl.DateTimeFormat().resolvedOptions().timeZone
+        timeOffset: state.authLogin.timeOffset || Intl.DateTimeFormat().resolvedOptions().timeZone
     };
 }
 
-const mapDispatchToProps=function (dispatch) {
+const mapDispatchToProps = function (dispatch) {
     return {
         initDataSentCall: function (data) {
-            dispatch(setWsAction({type: WS_ONSEND, data: data}));
+            dispatch(setWsAction({ type: WS_ONSEND, data: data }));
         }
-        
     };
 }
 
 
 export default compose(
-    withNetworkData
+    withNetworkData,
 )(connect(mapStateToProps, mapDispatchToProps)(InventoryTab));
