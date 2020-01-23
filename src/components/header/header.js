@@ -260,9 +260,6 @@ class Header extends React.Component {
                                         headerInfo ? headerInfo.fullName : 'Fetching...'
                                     }
                                 </div>
-                                <div className="subTextClient">
-                                    {headerInfo.designation ? this.context.intl.formatMessage(stringConfig[headerInfo.designation]) : "--"}
-                                </div>
                             </div>
                             <div className="block user-icon">
 
