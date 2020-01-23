@@ -380,13 +380,6 @@ class Header extends React.Component {
                 <div className='upperTextClient truncate'>
                   {headerInfo ? headerInfo.fullName : 'Fetching...'}
                 </div>
-                <div className='subTextClient'>
-                  {headerInfo.designation
-                    ? this.context.intl.formatMessage(
-                        stringConfig[headerInfo.designation]
-                      )
-                    : '--'}
-                </div>
               </div>
               <div className='block user-icon'></div>
 
