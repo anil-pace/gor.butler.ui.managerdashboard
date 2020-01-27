@@ -652,6 +652,7 @@ const FETCH_MASTER_DATA_UPLOAD_HISTORY = gql`
         failed
         requestfile
         responsefile
+        fileName
       }
     }
   }
