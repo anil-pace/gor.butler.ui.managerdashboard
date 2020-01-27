@@ -97,8 +97,6 @@ class PPSList extends React.Component {
                                 : "default"
                             }
                           >
-                            {console.log("Sudivya", index, profile)}
-
                             <div
                               className={[
                                 profile.profile_name
