@@ -119,7 +119,9 @@ export class DataListWrapper {
   constructor(indexMap, data) {
     this._indexMap=indexMap;
     this._data=data;
+    
   }
+  
 
   getSize() {
     return this._indexMap.length;
@@ -455,6 +457,8 @@ export const ActionCellAudit=({rowIndex, data, columnKey, handleAudit,manageAudi
 export class ActionCellPPS extends React.Component {
     constructor(props){
         super(props)
+        this.handleSelectedValue = this.handleSelectedValue.bind(this)
+
     }
     /**
      * The method will return
@@ -506,10 +510,15 @@ export class ActionCellPPS extends React.Component {
 
     return profiles
 }
+handleSelectedValue = (e) =>{
+let selectedIndex=e.target.value
+this.props.confirmApplyProfile(this.props.data.getObjectAt(this.props.rowIndex)['ppsId'],selectedIndex)
+}
 
 
     render() {
         let self = this
+
         if (self.props.data.getObjectAt(self.props.rowIndex)) {
             let placeholder = self.ppsProfilePlaceHolder(self.props.data, self.props.rowIndex)
             let options = self.availablePPSProfiles(self.props.data, self.props.rowIndex)
@@ -518,13 +527,13 @@ export class ActionCellPPS extends React.Component {
                     return profile.requested
                 }).length > 0
             return <Cell>
-              <div className="gor-pps-profile-drop">
+              <div className="gor-pps-profile-drop" id="gor-pps-profile-drop">
                 <select style={{"width": "10em","height": "2em","marginTop": "0.4em", "fontSize": "14px" }}
                   disabled={any_requested_profile ||forced_close_pps}
                   name="select" 
-                  onChange={self.props.confirmApplyProfile.bind(self, self.props.data.getObjectAt(self.props.rowIndex)['ppsId'])}>
+                  onChange={self.handleSelectedValue}>
                 {options.map(function(eachOption) { 
-                    return (<option value={eachOption.value}>{eachOption.label}</option>);
+                    return (<option value={eachOption.value} selected>{eachOption.label}</option>);
                 })}
               </select>
                 </div>
