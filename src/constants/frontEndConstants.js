@@ -111,7 +111,7 @@ export const AUDIT = 'AUDIT'
 export const REPORTS = 'REPORTS'
 export const UTILITIES = 'UTILITIES'
 export const DOWNLOADS = 'DOWNLOADS'
-export const CUSTOMERNOTIFICATIONS ='CUSTOMER NOTIFICATIONS'
+export const CUSTOMERNOTIFICATIONS = 'CUSTOMER NOTIFICATIONS'
 export const EXCEPTIONS = 'EXCEPTIONS'
 export const OUTBOUND = 'OUTBOUND'
 export const INBOUND = 'INBOUND'
@@ -336,7 +336,7 @@ export const SYS_SUB_TAB_ROUTE_MAP = {
   [CHARGING]: 'chargingstation',
   [WAVES]: 'waves',
   [ORDER_LIST]: 'orderlist',
-  [SYS_CONTROLLERS]:'sysControllers',
+  [SYS_CONTROLLERS]: 'sysControllers',
   [PPS_CONFIGURATION]: 'ppsConfiguration',
   [MSU_CONFIGURATION]: 'msuConfiguration'
 }
@@ -357,6 +357,8 @@ export const HEADER_START_TIME = ' 09:00:15 (IST)'
 export const SET_AUDIT = 'SET_AUDIT'
 export const RESET_AUDIT = 'RESET_AUDIT'
 export const SKU = 'sku'
+export const LESS_THAN_ACTUAL = 'less_than_actual'
+export const MORE_THAN_ACTUAL = 'more_than_actual'
 export const LOCATION = 'location'
 export const AUDIT_COMPLETED =
   'audit_aborted__audit_reaudited__audit_completed__audit_resolved'
@@ -571,6 +573,7 @@ export const AUDIT_STATUS = 'audit_status'
 export const AUDIT_TYPE = 'AUDIT_TYPE'
 export const SPECIFIC_SKU_ID = 'SPECIFIC_SKU_ID'
 export const SPECIFIC_LOCATION_ID = 'SPECIFIC_LOCATION_ID'
+export const ORDER_NO = 'ORDER_NO'
 export const ISSUE_FOUND = 'audit_pending_approval'
 export const ITEM_SEARCH_TASK_ID = 'ITEM_SEARCH_TASK_ID'
 //Icons
@@ -646,6 +649,7 @@ export const USER_FILTER_STATE = 'USER_FILTER_STATE'
 
 //Emergency & Pause operation
 export const AUDIT_TASK_ID = 'AUDIT_TASK_ID'
+export const AUDIT_TASK_NAME = 'AUDIT_TASK_NAME'
 export const ADD_TOKEN = 'add'
 export const ADD_DEFAULT = 'addDefault'
 export const SOFT_MANUAL = 'soft_manual'

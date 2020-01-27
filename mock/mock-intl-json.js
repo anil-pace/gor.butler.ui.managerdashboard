@@ -594,7 +594,7 @@ var messages = [
   {
     id: 'utility.uploadHist.fileName',
     description: 'Upload file name',
-    defaultMessage: 'File {fileName}',
+    defaultMessage: ' {fileName}',
     filepath: './src/components/utilityComponents/accordianBar.js'
   },
   {

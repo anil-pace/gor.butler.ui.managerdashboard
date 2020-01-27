@@ -649,7 +649,7 @@ msgstr "システムコントローラ"
 
 #: utility.uploadHist.fileName
 msgctxt "utility.uploadHist.fileName"
-msgid "File {fileName}"
+msgid " {fileName}"
 msgstr "ファイル {fileName}"
 
 #: utility.uploadHist.success
