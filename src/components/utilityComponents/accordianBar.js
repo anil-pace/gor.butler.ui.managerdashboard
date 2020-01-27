@@ -55,7 +55,7 @@ class AccordianBar extends React.Component{
 	    								<div className={this.props.showPanel?"gor-down-arrow":"gor-right-arrow"}/>
 	    							</div>
 	    							<div className="gor-inline">
-										<div className="gor-utility-master-h1 fileNameShow" 
+										<div className="gor-utility-master-h1 " 
 										title = {this.props.data.fileName}
 											style ={{
 											whiteSpace: "nowrap",
