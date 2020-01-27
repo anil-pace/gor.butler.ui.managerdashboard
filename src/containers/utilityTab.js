@@ -662,22 +662,21 @@ const UPLOAD_MASTER_DATA_MUTATION=gql`
 const FETCH_MASTER_DATA_UPLOAD_HISTORY = gql`
     query MasterDataUploadHistory {
     MasterDataUploadHistory {
-    list {
-      createTime
-    updateTime
-    id
-    total
-    created
-    updated
-    deleted
-    failed
-    requestfile
-    responsefile
-    fileName
+      list {
+        createTime
+        updateTime
+        id
+        total
+        created
+        updated
+        deleted
+        failed
+        requestfile
+        responsefile
+        fileName
+      }
     }
-  }
 }
-
 `
 
 const withMasterDataUpload=graphql(UPLOAD_MASTER_DATA_MUTATION, {
