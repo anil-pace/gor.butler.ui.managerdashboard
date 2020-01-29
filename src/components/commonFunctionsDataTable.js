@@ -458,7 +458,6 @@ export class ActionCellPPS extends React.Component {
     constructor(props){
         super(props)
         this.handleSelectedValue = this.handleSelectedValue.bind(this)
-
     }
     /**
      * The method will return
@@ -531,9 +530,10 @@ this.props.confirmApplyProfile(this.props.data.getObjectAt(this.props.rowIndex)[
                 <select style={{"width": "10em","height": "2em","marginTop": "0.4em", "fontSize": "14px" }}
                   disabled={any_requested_profile ||forced_close_pps}
                   name="select" 
+                  value={placeholder}
                   onChange={self.handleSelectedValue}>
                 {options.map(function(eachOption) { 
-                    return (<option value={eachOption.value} selected>{eachOption.label}</option>);
+                    return (<option value={eachOption.value}>{eachOption.label}</option>);
                 })}
               </select>
                 </div>
