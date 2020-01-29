@@ -426,27 +426,7 @@ class PPS extends React.Component {
       if (!data[i].user_name.length < 0) {
         detail.operatorAssigned = "--"
       } else {
-        var userFirstLast
-        totalUser = totalUser + data[i].user_name.length
-        for (var j = data[i].user_name.length - 1; j >= 0; j--) {
-          if (GOR_FIRST_LAST) {
-            userFirstLast =
-              (data[i].user_name[j][0] ? data[i].user_name[j][0] : "") +
-              " " +
-              (data[i].user_name[j][1] ? data[i].user_name[j][1] : "")
-          } else {
-            userFirstLast =
-              (data[i].user_name[j][1] ? data[i].user_name[j][1] : "") +
-              " " +
-              (data[i].user_name[j][0] ? data[i].user_name[j][0] : "")
-          }
-          if (detail.operatorAssigned) {
-            detail.operatorAssigned =
-              detail.operatorAssigned + ", " + userFirstLast
-          } else {
-            detail.operatorAssigned = userFirstLast
-          }
-        }
+        detail.operatorAssigned = data[i].user_name.join(",")
         detail.totalOperator = detail.totalOperator + data[i].user_name.length
       }
       detail.totalUser = totalUser
