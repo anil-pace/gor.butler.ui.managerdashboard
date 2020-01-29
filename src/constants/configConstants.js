@@ -1,4 +1,6 @@
 export const BASE_URL = 'localhost'
+export const ENVIRONMENT = "production" // this config needs to be changed when not on production
+export const REDIRECT_URL = "/cockpit/#/"
 export const PROTOCOL = 'https://'
 export const WS_PROTOCOL = 'wss://'
 export const WS_URL = WS_PROTOCOL + BASE_URL + '/manager_api/wss'
@@ -20,10 +22,10 @@ export const CANCEL_AUDIT_URL = AUDIT_URL + '/cancel/';
 export const START_AUDIT_URL = AUDIT_URL + '/start';
 export const START_CHANGE_PPS_URL = AUDIT_URL + '/change_pps';
 export const WS_GRAPHQL_ENDPOINT = '/subscriptions';
-export const HTTP_GRAPH_SERVER =  process.env.NODE_ENV === 'development' 
-? 'http://localhost:3020'
-: `${PROTOCOL}${BASE_URL}/`;
-export const GRAPHQL_URL = HTTP_GRAPH_SERVER +'/graphql'
+export const HTTP_GRAPH_SERVER = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3020'
+  : `${PROTOCOL}${BASE_URL}/`;
+export const GRAPHQL_URL = HTTP_GRAPH_SERVER + '/graphql'
 export const WS_GRAPHQL_URL =
   process.env.NODE_ENV === 'development'
     ? 'ws://localhost:3020/subscriptions'
