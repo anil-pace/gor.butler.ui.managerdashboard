@@ -1,4 +1,6 @@
 export const BASE_URL = 'localhost'
+export const ENVIRONMENT = "production" // this config needs to be changed when not on production
+export const REDIRECT_URL = "/cockpit/#/"
 export const PROTOCOL = 'https://'
 export const WS_PROTOCOL = 'wss://'
 export const WS_URL = WS_PROTOCOL + BASE_URL + '/manager_api/wss'
