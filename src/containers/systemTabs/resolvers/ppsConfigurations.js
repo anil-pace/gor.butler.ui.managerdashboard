@@ -35,9 +35,9 @@ const ppsConfigurationState = {
           )
         } else {
           variables.state.pps.pps_profiles.forEach(function(prfl, index) {
-            // if (prfl.applied) {
-            selectedPPSProfile = JSON.parse(JSON.stringify(prfl))
-            // }
+            if (prfl.applied) {
+              selectedPPSProfile = JSON.parse(JSON.stringify(prfl))
+            }
           })
         }
         let selectedPPSBin = null
