@@ -261,7 +261,7 @@ class viewDetailsAudit extends React.Component {
       ppsList = data.pps_id || "";
     }
     tile3Data[vdhPPSid]=ppsList||"";
-    tile3Data[vdhShowKQ]=data.kq?trueStatus:falseStatus;
+    tile3Data[vdhShowKQ]=data.kq;
     tile2Data[vdhStartTime]=this._timeFormat(data.start_request_time);
     tile2Data[vdhEndTime]=this._timeFormat(data.completion_time);
     tile2Data[vdhProgress]=data.progress && data.progress.total>=1? data.progress.completed +" "+vdLinesCompleted+" "+data.progress.total:"-";
