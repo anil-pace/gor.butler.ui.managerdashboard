@@ -3708,10 +3708,10 @@ msgstr ""
         msgid "STATUS"
         msgstr "STATUS"
 
-        #: operationLog.table.requestId
-        msgctxt "operationLog.table.requestId"
-        msgid "REQUEST ID"
-        msgstr "VERZOEK-ID"
+        #: operationLog.table.externalId
+        msgctxt "operationLog.table.externalId"
+        msgid "EXTERNAL ID"
+        msgstr "EXTERNAL-ID"
 
         #: operationLog.table.skuId
         msgctxt "operationLog.table.skuId"
@@ -3737,6 +3737,12 @@ msgstr ""
         msgctxt "operationLog.table.timestamp"
         msgid "TIMESTAMP"
         msgstr "TIJDSTEMPEL"
+
+        #: operationLog.table.requestId
+        msgctxt "operationLog.table.requestId"
+        msgid "REQUEST ID"
+        msgstr "VERZOEK-ID"
+
 
         #: reportsTab.operationsLog
         msgctxt "reportsTab.operationsLog"

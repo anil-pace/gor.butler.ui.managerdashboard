@@ -2,19 +2,19 @@
  * Container for Inventory tab
  * This will be switched based on tab click
  */
-import React from 'react';
+import React from "react"
 import {
   FormattedMessage,
   FormattedDate,
   injectIntl,
   intlShape,
   defineMessages
-} from 'react-intl';
-import { connect } from 'react-redux';
-import Dimensions from 'react-dimensions';
-import { withRouter } from 'react-router';
-import { wsOverviewData } from '../../constants/initData.js';
-import { setWsAction } from '../../actions/socketActions';
+} from "react-intl"
+import { connect } from "react-redux"
+import Dimensions from "react-dimensions"
+import { withRouter } from "react-router"
+import { wsOverviewData } from "../../constants/initData.js"
+import { setWsAction } from "../../actions/socketActions"
 import {
   POST,
   APP_JSON,
@@ -22,28 +22,28 @@ import {
   DOWNLOAD_REPORT_REQUEST,
   REPORT_NAME_OPERATOR_LOGS,
   WS_ONSEND
-} from '../../constants/frontEndConstants';
+} from "../../constants/frontEndConstants"
 
-import OperationsFilter from './operationsFilter';
-import FilterSummary from '../../components/tableFilter/filterSummary';
-import { REQUEST_REPORT_DOWNLOAD } from '../../constants/configConstants';
-import { notifySuccess } from '../../actions/validationActions';
-import OperationsLogTable from './operationsLogTable';
+import OperationsFilter from "./operationsFilter"
+import FilterSummary from "../../components/tableFilter/filterSummary"
+import { REQUEST_REPORT_DOWNLOAD } from "../../constants/configConstants"
+import { notifySuccess } from "../../actions/validationActions"
+import OperationsLogTable from "./operationsLogTable"
 
-import { graphql, compose, withApollo } from 'react-apollo';
-import { hashHistory } from 'react-router';
+import { graphql, compose, withApollo } from "react-apollo"
+import { hashHistory } from "react-router"
 
-import gql from 'graphql-tag';
-import { REQUEST_REPORT_SUCCESS } from './../../constants/messageConstants';
+import gql from "graphql-tag"
+import { REQUEST_REPORT_SUCCESS } from "./../../constants/messageConstants"
 
 /*Intl Messages*/
 const messages = defineMessages({
   genRepTooltip: {
-    id: 'operationLog.genRep.tooltip',
-    description: 'Tooltip to display Generate button',
-    defaultMessage: 'Reports not available for Realtime filter'
+    id: "operationLog.genRep.tooltip",
+    description: "Tooltip to display Generate button",
+    defaultMessage: "Reports not available for Realtime filter"
   }
-});
+})
 
 const OPS_LOG_SUBSCRIPTION_QUERY = gql`
   subscription OperationLogList($input: OperationLogListParams) {
@@ -52,6 +52,7 @@ const OPS_LOG_SUBSCRIPTION_QUERY = gql`
         createdTime
         executionId
         operatingMode
+        externalId
         requestId
         userId
         productInfo {
@@ -93,7 +94,7 @@ const OPS_LOG_SUBSCRIPTION_QUERY = gql`
       }
     }
   }
-`;
+`
 
 const GENERATE_REPORT_QUERY = gql`
   query GenerateOperationsLogReport($input: GenerateOperationsLogReportParams) {
@@ -110,29 +111,29 @@ const GENERATE_REPORT_QUERY = gql`
       storageId
     }
   }
-`;
+`
 
 class OperationsLogTab extends React.Component {
   constructor(props, context) {
-    super(props, context);
-    this._requestReportDownload = this._requestReportDownload.bind(this);
-    this._setFilter = this._setFilter.bind(this);
-    this.subscription = null;
-    this.state = { query: null, page: 1, subscribed: false };
+    super(props, context)
+    this._requestReportDownload = this._requestReportDownload.bind(this)
+    this._setFilter = this._setFilter.bind(this)
+    this.subscription = null
+    this.state = { query: null, page: 1, subscribed: false }
   }
 
   removeSubscription() {
     if (this.subscription) {
-      this.subscription();
+      this.subscription()
     }
 
-    this.subscription = null;
+    this.subscription = null
   }
   componentWillMount() {
     if (this.props.socketAuthorized && !this.state.subscribed) {
       this.setState({ subscribed: true }, function() {
-        this._subscribeData();
-      });
+        this._subscribeData()
+      })
     }
   }
   componentWillUnmount() {
@@ -140,26 +141,26 @@ class OperationsLogTab extends React.Component {
      * If a user navigates back to the inventory page,
      * it should subscribe to the packet again.
      */
-    this.setState({ subscribed: false });
+    this.setState({ subscribed: false })
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
       this.setState({ subscribed: true }, function() {
-        this._subscribeData(nextProps.location.query);
-      });
+        this._subscribeData(nextProps.location.query)
+      })
     }
     if (
       !this.state.query ||
       JSON.stringify(nextProps.location.query) !==
         JSON.stringify(this.state.query)
     ) {
-      this.removeSubscription();
-      this.setState({ query: nextProps.location.query });
-      this._setFilterState(nextProps.location.query);
-      let time_period = null;
+      this.removeSubscription()
+      this.setState({ query: nextProps.location.query })
+      this._setFilterState(nextProps.location.query)
+      let time_period = null
       try {
-        time_period = nextProps.location.query.time_period;
+        time_period = nextProps.location.query.time_period
       } catch (ex) {}
       if (
         !this.subscription &&
@@ -171,20 +172,21 @@ class OperationsLogTab extends React.Component {
          * we'll show last 100 logs in a day.
          * @type {()=>void}
          */
-        var timePeriodObj = { value: 0, unit: '' };
-        var timeperiod = nextProps.location.query.time_period;
+        var timePeriodObj = { value: 0, unit: "" }
+        var timeperiod = nextProps.location.query.time_period
         if (timeperiod) {
-          var timeperiodArray = timeperiod.split('_');
+          var timeperiodArray = timeperiod.split("_")
           timePeriodObj = {
             value: timeperiodArray[0],
             unit: timeperiodArray[1]
-          };
+          }
         }
         this.subscription = nextProps.data.subscribeToMore({
           document: OPS_LOG_SUBSCRIPTION_QUERY,
           variables: (function() {
             return {
               input: {
+                externalId: nextProps.location.query.external_id,
                 requestId: nextProps.location.query.request_id,
                 userId: nextProps.location.query.user_id,
                 skuId: nextProps.location.query.sku_id,
@@ -203,7 +205,7 @@ class OperationsLogTab extends React.Component {
                 page: 0,
                 PAGE_SIZE: 100
               }
-            };
+            }
           })(),
           updateQuery: (previousResult, newResult) => {
             return Object.assign(
@@ -213,60 +215,63 @@ class OperationsLogTab extends React.Component {
                   list: newResult.subscriptionData.data.OperationLogList.list
                 }
               }
-            );
+            )
           }
-        });
+        })
       }
     }
   }
 
   _subscribeData() {
-    this.props.initDataSentCall(wsOverviewData['default']);
+    this.props.initDataSentCall(wsOverviewData["default"])
   }
 
   _setFilterState(query) {
     if (Object.keys(query).length !== 0) {
-      this.props.filterApplied(true);
+      this.props.filterApplied(true)
     } else {
-      this.props.filterApplied(false);
+      this.props.filterApplied(false)
     }
-    let operatingMode =[];
-        if (query.operatingMode.constructor === Array && query.operatingMode.length>0){
-          operatingMode =[...query.operatingMode]
-        }else if (query.operatingMode.constructor === String){
-          operatingMode.push(query.operatingMode)
-        }else{
-          operatingMode = ['any']
-        }
+    let operatingMode = []
+    if (
+      query.operatingMode.constructor === Array &&
+      query.operatingMode.length > 0
+    ) {
+      operatingMode = [...query.operatingMode]
+    } else if (query.operatingMode.constructor === String) {
+      operatingMode.push(query.operatingMode)
+    } else {
+      operatingMode = ["any"]
+    }
     this.props.operationsLogFilterState({
       tokenSelected: {
-        status: query.status || ['any'],
-        timeperiod: query.time_period || ['realtime'],
+        status: query.status || ["any"],
+        timeperiod: query.time_period || ["realtime"],
         operatingMode: operatingMode,
-        __typename: 'OperationsLogFilterTokenSelected'
+        __typename: "OperationsLogFilterTokenSelected"
       },
       searchQuery: {
         request_id: query.request_id || null,
         sku_id: query.sku_id || null,
         pps_id: query.pps_id || null,
         user_id: query.user_id || null,
-        __typename: 'OperationsLogFilterSearchQuery'
+        __typename: "OperationsLogFilterSearchQuery"
       },
       defaultToken: {
-        status: ['any'],
-        operatingMode: ['any'],
-        timeperiod: ['realtime'],
-        __typename: 'OperationsLogDefaultToken'
+        status: ["any"],
+        operatingMode: ["any"],
+        timeperiod: ["realtime"],
+        __typename: "OperationsLogDefaultToken"
       }
-    });
+    })
   }
 
   _clearFilter() {
-    hashHistory.push({ pathname: '/reports/operationsLog', query: {} });
+    hashHistory.push({ pathname: "/reports/operationsLog", query: {} })
   }
 
   _setFilter() {
-    this.props.showOperationsLogFilter(!this.props.showFilter);
+    this.props.showOperationsLogFilter(!this.props.showFilter)
   }
 
   _requestReportDownload() {
@@ -277,34 +282,36 @@ class OperationsLogTab extends React.Component {
           input: {
             size: this.props.data.OperationLogList.total,
             requestId: this.props.location.query.request_id,
+            externalId: this.props.location.query.external_id,
             userId: this.props.location.query.user_id,
-            username:sessionStorage.getItem('username'),
+            username: sessionStorage.getItem("username"),
             skuId: this.props.location.query.sku_id,
             ppsId: this.props.location.query.pps_id,
             operatingMode: this.props.location.query.operatingMode,
             status: this.props.location.query.status,
             timePeriod: this.props.location.query.time_period
               ? {
-                  value: this.props.location.query.time_period.split('_')[0],
-                  unit: this.props.location.query.time_period.split('_')[1]
+                  value: this.props.location.query.time_period.split("_")[0],
+                  unit: this.props.location.query.time_period.split("_")[1]
                 }
-              : { value: 0, unit: '' }
+              : { value: 0, unit: "" }
           }
         },
-        fetchPolicy: 'network-only'
+        fetchPolicy: "network-only"
       })
       .then(data => {
-        this.props.notifySuccess(REQUEST_REPORT_SUCCESS);
-      });
+        this.props.notifySuccess(REQUEST_REPORT_SUCCESS)
+      })
   }
 
   fetchNextResults(page) {
-    let self = this;
+    let self = this
     return self.props.data.fetchMore({
       variables: (function() {
         return {
           input: {
             requestId: self.props.location.query.request_id,
+            externalId: self.props.location.query.external_id,
             userId: self.props.location.query.user_id,
             skuId: self.props.location.query.sku_id,
             ppsId: self.props.location.query.pps_id,
@@ -320,60 +327,60 @@ class OperationsLogTab extends React.Component {
               : null,
             timePeriod: self.props.location.query.time_period
               ? {
-                  value: self.props.location.query.time_period.split('_')[0],
-                  unit: self.props.location.query.time_period.split('_')[1]
+                  value: self.props.location.query.time_period.split("_")[0],
+                  unit: self.props.location.query.time_period.split("_")[1]
                 }
-              : { value: 0, unit: '' },
+              : { value: 0, unit: "" },
             page: page,
             PAGE_SIZE: 25
           }
-        };
+        }
       })(),
       updateQuery: self.props.updateQuery
-    });
+    })
   }
 
   _onScrollHandler(event) {
-    let self = this;
-    let page_num = self.state.page;
+    let self = this
+    let page_num = self.state.page
     if (
       Math.floor(event.target.scrollHeight) -
         Math.floor(event.target.scrollTop) ===
       Math.floor(event.target.clientHeight)
     ) {
       let total,
-        data_list = [];
+        data_list = []
       try {
-        total = this.props.data.OperationLogList.total;
-        data_list = this.props.data.OperationLogList.list;
+        total = this.props.data.OperationLogList.total
+        data_list = this.props.data.OperationLogList.list
       } catch (ex) {}
       if (data_list.length < total) {
-        let next_page = page_num + 1;
+        let next_page = page_num + 1
         self.fetchNextResults(next_page).then(function() {
-          self.setState({ page: next_page });
-        });
+          self.setState({ page: next_page })
+        })
       }
     }
   }
 
   render() {
-    var _this = this;
-    var filterHeight = screen.height - 190 - 50;
+    var _this = this
+    var filterHeight = screen.height - 190 - 50
     let data_list = [],
-      total = 0;
+      total = 0
     try {
-      total = this.props.data.OperationLogList.total;
-      data_list = this.props.data.OperationLogList.list;
+      total = this.props.data.OperationLogList.total
+      data_list = this.props.data.OperationLogList.list
     } catch (ex) {}
     let FETCH_REAL_TIME_DATA =
       this.props.location.query.time_period !== REALTIME &&
-      JSON.stringify(this.props.location.query) !== '{}';
+      JSON.stringify(this.props.location.query) !== "{}"
     return (
-      <div className='gorTesting wrapper gor-operations-log'>
+      <div className="gorTesting wrapper gor-operations-log">
         <div
-          className='gor-filter-wrap'
+          className="gor-filter-wrap"
           style={{
-            width: this.props.showFilter ? '350px' : '0px',
+            width: this.props.showFilter ? "350px" : "0px",
             height: filterHeight
           }}
         >
@@ -389,48 +396,48 @@ class OperationsLogTab extends React.Component {
             filterState={this.props.filterState}
           />
         </div>
-        <div className='gorToolBar'>
-          <div className='gorToolBarWrap'>
-            <div className='gorToolBarElements'>
+        <div className="gorToolBar">
+          <div className="gorToolBarWrap">
+            <div className="gorToolBarElements">
               <FormattedMessage
-                id='operationLog.table.heading'
-                description='Heading for PPS'
-                defaultMessage='Operations Log'
+                id="operationLog.table.heading"
+                description="Heading for PPS"
+                defaultMessage="Operations Log"
               />
             </div>
           </div>
-          <div className='filterWrapper'>
-            <div className='gorToolBarDropDown'>
-              <div className='gor-button-wrap'>
+          <div className="filterWrapper">
+            <div className="gorToolBarDropDown">
+              <div className="gor-button-wrap">
                 <button
                   disabled={this.props.data.OperationLogList ? false : true}
                   title={this.props.intl.formatMessage(messages.genRepTooltip)}
                   className={
                     this.props.data.OperationLogList
-                      ? 'gor-rpt-dwnld'
-                      : 'gor-rpt-dwnld disabled'
+                      ? "gor-rpt-dwnld"
+                      : "gor-rpt-dwnld disabled"
                   }
                   onClick={this._requestReportDownload}
                 >
                   <FormattedMessage
-                    id='operationLog.table.downloadBtn'
-                    description='button label for download report'
-                    defaultMessage='Generate Report'
+                    id="operationLog.table.downloadBtn"
+                    description="button label for download report"
+                    defaultMessage="Generate Report"
                   />
                 </button>
                 <button
                   className={
                     this.props.isFilterApplied
-                      ? 'gor-filterBtn-applied'
-                      : 'gor-filterBtn-btn'
+                      ? "gor-filterBtn-applied"
+                      : "gor-filterBtn-btn"
                   }
                   onClick={this._setFilter}
                 >
-                  <div className='gor-manage-task' />
+                  <div className="gor-manage-task" />
                   <FormattedMessage
-                    id='gor.filter.filterLabel'
-                    description='button label for filter'
-                    defaultMessage='Filter data'
+                    id="gor.filter.filterLabel"
+                    description="button label for filter"
+                    defaultMessage="Filter data"
                   />
                 </button>
               </div>
@@ -444,38 +451,39 @@ class OperationsLogTab extends React.Component {
             isFilterApplied={this.props.isFilterApplied}
             filterText={
               <FormattedMessage
-                id='operationsLog.filter.search.bar'
-                description='total waves for filter search bar'
-                defaultMessage='{total} Results found'
+                id="operationsLog.filter.search.bar"
+                description="total waves for filter search bar"
+                defaultMessage="{total} Results found"
                 values={{ total: total }}
               />
             }
             refreshList={this._clearFilter}
             refreshText={
               <FormattedMessage
-                id='operationsLog.filter.search.bar.showall'
-                description='button label for show all'
-                defaultMessage='Show all Operations'
+                id="operationsLog.filter.search.bar.showall"
+                description="button label for show all"
+                defaultMessage="Show all Operations"
               />
             }
           />
         ) : null}
+        {console.log(data_list)}
         <OperationsLogTable
           loading={this.props.data.loading}
           onScrollHandler={
             FETCH_REAL_TIME_DATA ? _this._onScrollHandler.bind(_this) : false
           }
-          forceUpdate={JSON.stringify(this.props.location.query) === '{}'}
+          forceUpdate={JSON.stringify(this.props.location.query) === "{}"}
           data={data_list}
           timeOffset={_this.props.timeOffset}
         />
       </div>
-    );
+    )
   }
 }
 OperationsLogTab.propTypes = {
   intl: intlShape.isRequired
-};
+}
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -483,18 +491,18 @@ function mapStateToProps(state, ownProps) {
     wsSubscriptionData:
       state.recieveSocketActions.socketDataSubscriptionPacket || wsOverviewData,
     socketAuthorized: state.recieveSocketActions.socketAuthorized
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     notifySuccess: function(data) {
-      dispatch(notifySuccess(data));
+      dispatch(notifySuccess(data))
     },
     initDataSentCall: function(data) {
-      dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+      dispatch(setWsAction({ type: WS_ONSEND, data: data }))
     }
-  };
+  }
 }
 
 const OPS_LOG_QUERY = gql`
@@ -504,6 +512,7 @@ const OPS_LOG_QUERY = gql`
         createdTime
         executionId
         operatingMode
+        externalId
         requestId
         userId
         productInfo {
@@ -522,6 +531,10 @@ const OPS_LOG_QUERY = gql`
           children {
             id
             type
+            children {
+              id
+              type
+            }
           }
         }
 
@@ -531,6 +544,10 @@ const OPS_LOG_QUERY = gql`
           children {
             id
             type
+            children {
+              id
+              type
+            }
           }
         }
 
@@ -546,7 +563,7 @@ const OPS_LOG_QUERY = gql`
       total
     }
   }
-`;
+`
 
 const withQuery = graphql(OPS_LOG_QUERY, {
   props: function(data) {
@@ -563,16 +580,17 @@ const withQuery = graphql(OPS_LOG_QUERY, {
               ]
             }
           }
-        );
+        )
       },
       refreshedAt: new Date().getTime()
-    };
+    }
   },
   options: ({ match, location }) => ({
     variables: (function() {
       return {
         input: {
           requestId: location.query.request_id,
+          externalId: location.query.external_id,
           userId: location.query.user_id,
           skuId: location.query.sku_id,
           ppsId: location.query.pps_id,
@@ -580,17 +598,17 @@ const withQuery = graphql(OPS_LOG_QUERY, {
           status: location.query.status,
           timePeriod: location.query.time_period
             ? {
-                value: location.query.time_period.split('_')[0],
-                unit: location.query.time_period.split('_')[1]
+                value: location.query.time_period.split("_")[0],
+                unit: location.query.time_period.split("_")[1]
               }
-            : { value: 0, unit: '' }
+            : { value: 0, unit: "" }
         }
-      };
+      }
     })(),
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only'
+    fetchPolicy: "network-only"
   })
-});
+})
 const operationsLogClientData = gql`
   query {
     operationsLogFilter @client {
@@ -621,11 +639,11 @@ const operationsLogClientData = gql`
       }
     }
   }
-`;
+`
 const withClientData = graphql(operationsLogClientData, {
   props: function(data) {
     if (!data.data) {
-      return {};
+      return {}
     }
     return {
       showFilter: data.data.operationsLogFilter.display,
@@ -633,48 +651,48 @@ const withClientData = graphql(operationsLogClientData, {
       filterState: JSON.parse(
         JSON.stringify(data.data.operationsLogFilter.filterState)
       )
-    };
+    }
   }
-});
+})
 
 const SET_VISIBILITY = gql`
   mutation setUserFiler($filter: String!) {
     setShowOperationsLogFilter(filter: $filter) @client
   }
-`;
+`
 
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
     setFilterApplied(isFilterApplied: $isFilterApplied) @client
   }
-`;
+`
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
     setOperationsLogFilterState(state: $state) @client
   }
-`;
+`
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
     showOperationsLogFilter: function(show) {
-      mutate({ variables: { filter: show } });
+      mutate({ variables: { filter: show } })
     }
   })
-});
+})
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
     filterApplied: function(applied) {
-      mutate({ variables: { isFilterApplied: applied } });
+      mutate({ variables: { isFilterApplied: applied } })
     }
   })
-});
+})
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
     operationsLogFilterState: function(state) {
-      mutate({ variables: { state: state } });
+      mutate({ variables: { state: state } })
     }
   })
-});
+})
 
 export default compose(
   withQuery,
@@ -688,4 +706,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )(Dimensions()(withRouter(injectIntl(OperationsLogTab))))
-);
+)
