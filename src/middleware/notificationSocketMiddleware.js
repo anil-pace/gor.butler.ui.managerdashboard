@@ -1,7 +1,7 @@
 import {
   wsNotificationResponseAction,
   wsNotificationEndConnection
-} from '../actions/notificationSocketActions'
+} from "../actions/notificationSocketActions"
 import {
   WS_NOTIFICATION_CONNECT,
   WS_NOTIFICATION_DISCONNECT,
@@ -13,13 +13,37 @@ import {
   WS_ORDERS_PLATFORM_UNSUBSCRIBE,
   WS_ORDERS_HEADER_UNSUBSCRIBE,
   WS_ORDERS_HEADER_SUBSCRIBE
-} from '../constants/frontEndConstants'
-import { WS_NOTIFICATION_URL, WS_URL } from '../constants/configConstants'
-import { NotificationResponseParse } from '../utilities/notificationResponseParser'
-import { OLResponseParse } from '../utilities/operationLogsResParser'
-import { ordersPlatformResponseParse } from '../utilities/ordersPlatformResParser'
-import SockJS from 'sockjs-client'
-import webstomp from 'webstomp-client'
+} from "../constants/frontEndConstants"
+import {
+  WS_NOTIFICATION_URL,
+  WS_URL,
+  WS_PROTOCOL,
+  WS_REROUTING,
+  BASE_URL
+} from "../constants/configConstants"
+import { NotificationResponseParse } from "../utilities/notificationResponseParser"
+import { OLResponseParse } from "../utilities/operationLogsResParser"
+import { ordersPlatformResponseParse } from "../utilities/ordersPlatformResParser"
+import SockJS from "sockjs-client"
+import webstomp from "webstomp-client"
+
+// const notificationSocketMiddleware = new WebSocket(
+//   "ws://192.168.8.203:8079/platform-dashboard/dashboard/notification"
+// )
+
+// notificationSocketMiddleware.onopen = evt => {
+//   // on connecting, do nothing but log it to the console
+//   console.log("connected", evt)
+// }
+
+// notificationSocketMiddleware.onmessage = evt => {
+//   // on receiving a message, add it to the list of messages
+//   console.log("msg")
+// }
+
+// notificationSocketMiddleware.onclose = () => {
+//   console.log("disconnected")
+// }
 
 const notificationSocketMiddleware = (function() {
   var socket = null
@@ -29,20 +53,19 @@ const notificationSocketMiddleware = (function() {
 
   const onMessage = (ws, store, module) => frame => {
     //Parse the JSON message received on the websocket
-
     var msg = frame.body ? JSON.parse(frame.body) : []
     switch (module) {
-      case 'notifications':
+      case "notifications":
         NotificationResponseParse(store, msg)
         break
-      case 'operations':
+      case "operations":
         OLResponseParse(store, msg)
         break
-      case 'orders':
+      case "orders":
         ordersPlatformResponseParse(store, msg, null)
         break
-      case 'orders_header':
-        ordersPlatformResponseParse(store, msg, 'header')
+      case "orders_header":
+        ordersPlatformResponseParse(store, msg, "header")
       default:
       //do nothing
     }
@@ -50,15 +73,12 @@ const notificationSocketMiddleware = (function() {
 
   const onOpen = (ws, store, token) => evt => {
     //Send a handshake, or authenticate with remote end
-
     //Tell the store we're connected
-
     store.dispatch(wsNotificationResponseAction(evt.type))
   }
 
   const onClose = (ws, store) => evt => {
     //Tell the store we've disconnected
-
     store.dispatch(wsNotificationEndConnection())
   }
 
@@ -67,23 +87,41 @@ const notificationSocketMiddleware = (function() {
       //The user wants us to connect
       case WS_NOTIFICATION_CONNECT:
         //Start a new connection to the server
-        if (socket && socket.connected) {
-          socket.disconnect(function() {
-            console.log('disconnected')
-          })
+
+        if (socket !== null && socket.readyState === 1) {
+          socket.close()
         }
         //Send an action that shows a "connecting..." status for now
         //store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL))
-        // //new WebSocket(WS_URL);
-        socket.connect('', '', onOpen(socket, store, action.token))
-        /*socket.onmessage = onMessage(socket,store);
-        socket.onclose = onClose(socket,store);
-        socket.onopen = onOpen(socket,store,action.token);*/
+        if (!socket) {
+          socket = new WebSocket(
+            WS_PROTOCOL + BASE_URL + WS_REROUTING + WS_NOTIFICATION_URL
+          )
+          socket.onmessage = onMessage(socket, store)
+          socket.onclose = onClose(socket, store)
+          socket.onopen = onOpen(socket, store, action.token)
+        }
 
         break
+
+      // //Start a new connection to the server
+      // if (socket && socket.connected) {
+      //   socket.disconnect(function() {
+      //     console.log("disconnected")
+      //   })
+      // }
+      // //Send an action that shows a "connecting..." status for now
+      // //store.dispatch(actions.connecting());
+
+      // //Attempt to connect (we could send a 'failed' action on error)
+      // // socket = webstomp.over(new SockJS(WS_NOTIFICATION_URL))
+      // // socket.connect("", "", onOpen(socket, store, action.token))
+      // socket.onmessage = onMessage(socket, store)
+      // socket.onclose = onClose(socket, store)
+      // socket.onopen = onOpen(socket, store, action.token)
+      // break
 
       //The user wants us to disconnect
       case WS_NOTIFICATION_DISCONNECT:
@@ -101,13 +139,13 @@ const notificationSocketMiddleware = (function() {
         socket.send(JSON.stringify(action.data))
         break
       case WS_NOTIFICATION_SUBSCRIBE:
-        socket.subscribe(action.data, onMessage(socket, store, 'notifications'))
+        socket.subscribe(action.data, onMessage(socket, store, "notifications"))
         break
       case WS_OPERATOR_LOG_SUBSCRIBE:
         if (socket && !operatorLogWSClient) {
           operatorLogWSClient = socket.subscribe(
             action.data.url,
-            onMessage(socket, store, 'operations')
+            onMessage(socket, store, "operations")
           )
           socket.send(action.data.url, action.data.filters)
         }
@@ -125,7 +163,7 @@ const notificationSocketMiddleware = (function() {
         if (socket && !ordersWSClient) {
           ordersWSClient = socket.subscribe(
             action.data.url,
-            onMessage(socket, store, 'orders')
+            onMessage(socket, store, "orders")
           )
           socket.send(action.data.url, action.data.filters)
         }
@@ -143,7 +181,7 @@ const notificationSocketMiddleware = (function() {
         if (socket && !orderHeaderWSClient) {
           orderHeaderWSClient = socket.subscribe(
             action.data.url,
-            onMessage(socket, store, 'orders_header')
+            onMessage(socket, store, "orders_header")
           )
           socket.send(action.data.url, action.data.filters)
         }
