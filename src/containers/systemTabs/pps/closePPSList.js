@@ -77,15 +77,16 @@ class ClosePPSList extends React.Component {
     var pendingMSU = this.props.pendingMSU
       ? this.props.pendingMSU.successful
       : {}
+
     var areAllSelected = true
     processedData.header = [
       {
         id: 1,
         text: (
           <FormattedMessage
-            id="ppsclose.tblhead1.text"
+            id="ppsclose.thead1.text"
             description="Table first head"
-            defaultMessage="SLOT ID"
+            defaultMessage="PPS ID"
           />
         ),
         sortable: false
@@ -94,9 +95,9 @@ class ClosePPSList extends React.Component {
         id: 2,
         text: (
           <FormattedMessage
-            id="ppsclose.tblhead2.text"
+            id="ppsclose.thead2.text"
             description="Table second head"
-            defaultMessage="MSU Pending"
+            defaultMessage="RACKS PENDING"
           />
         ),
         sortable: false
@@ -105,8 +106,19 @@ class ClosePPSList extends React.Component {
         id: 3,
         text: (
           <FormattedMessage
-            id="ppsclose.tblhead3.text"
+            id="ppsclose.thead3.text"
             description="Table third head"
+            defaultMessage="ITEMS PENDING"
+          />
+        ),
+        sortable: false
+      },
+      {
+        id: 4,
+        text: (
+          <FormattedMessage
+            id="ppsclose.thead4.text"
+            description="Table fourth head"
             defaultMessage="ACTION"
           />
         ),
@@ -117,7 +129,19 @@ class ClosePPSList extends React.Component {
     for (let i = 0; i < ppsLen; i++) {
       let row = []
       row.push("PPS " + checkedPPS[i])
-      row.push(pendingMSU[checkedPPS[i]])
+      if (Object.keys(pendingMSU).length > 0) {
+        row.push(
+          pendingMSU[checkedPPS[i]].hasOwnProperty("pending_rack_count")
+            ? pendingMSU[checkedPPS[i]].pending_rack_count
+            : "-"
+        )
+        row.push(
+          pendingMSU[checkedPPS[i]].hasOwnProperty("pending_pick_count")
+            ? pendingMSU[checkedPPS[i]].pending_pick_count
+            : "-"
+        )
+      }
+
       row.push(
         <div key={i}>
           <label>
