@@ -2065,12 +2065,12 @@ msgstr ""
 
         #: audit.token4.less_than_expected
         msgctxt "audit.token4.less_than_expected"
-        msgid "Less Than Actual"
+        msgid "Less Than Expected"
         msgstr ""
 
         #: audit.token4.more_than_expected
         msgctxt "audit.token4.more_than_expected"
-        msgid "More Than Actual"
+        msgid "More Than Expected"
         msgstr ""
 
         #: audit.token4.system
@@ -4828,6 +4828,51 @@ msgstr ""
         msgid "TIME"
         msgstr ""
 
+        #: ppsclose.thead1.text
+        msgctxt "ppsclose.thead1.text"
+        msgid "PPS ID"
+        msgstr ""
+
+        #: ppsclose.thead2.text
+        msgctxt "ppsclose.thead2.text"
+        msgid "RACKS PENDING"
+        msgstr ""
+
+        #: ppsclose.subhead.racksPending
+        msgctxt "ppsclose.subhead.racksPending"
+        msgid "{sumRackPending}"
+        msgstr ""
+
+        #: ppsclose.thead3.text
+        msgctxt "ppsclose.thead3.text"
+        msgid "ITEMS PENDING"
+        msgstr ""
+
+        #: ppsclose.subhead1.itemPending
+        msgctxt "ppsclose.subhead1.itemPending"
+        msgid "{sumItemsPending}"
+        msgstr ""
+
+        #: ppsclose.thead4.text
+        msgctxt "ppsclose.thead4.text"
+        msgid "ACTION"
+        msgstr ""
+
+        #: pps.mode.confirm.mode.text
+        msgctxt "pps.mode.confirm.mode.text"
+        msgid "Are you sure you want to change mode for all PPS?"
+        msgstr ""
+
+        #: pps.mode.confirm.apply.warning
+        msgctxt "pps.mode.confirm.apply.warning"
+        msgid "Warning: All pps mode change might impact the operations"
+        msgstr ""
+
+        #: pps.configuration.confirm.saveAndApply.profile
+        msgctxt "pps.configuration.confirm.saveAndApply.profile"
+        msgid "SAVE AND APPLY"
+        msgstr ""
+
         #: pps.inputField.id
         msgctxt "pps.inputField.id"
         msgid "PPS ID"
@@ -5181,11 +5226,6 @@ msgstr ""
         #: pps.configuration.confirm.saveAndapply.profile.description
         msgctxt "pps.configuration.confirm.saveAndapply.profile.description"
         msgid "Profile will be applied after pending tasks are completed"
-        msgstr ""
-
-        #: pps.configuration.confirm.saveAndApply.profile
-        msgctxt "pps.configuration.confirm.saveAndApply.profile"
-        msgid "SAVE AND APPLY"
         msgstr ""
 
         #: sysController.table.heading

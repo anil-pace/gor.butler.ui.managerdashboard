@@ -905,6 +905,12 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
+    "id": "utiltiy.downloadRports.xlsFormat",
+    "description": "ExceL Spreadsheet (xlsx)",
+    "defaultMessage": "ExceL Spreadsheet (xlsx)",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.grnHistory.clickToDownload",
     "description": "file name",
     "defaultMessage": "Click here to download",
@@ -6533,20 +6539,38 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
-    "id": "ppsclose.tblhead1.text",
+    "id": "ppsclose.thead1.text",
     "description": "Table first head",
-    "defaultMessage": "SLOT ID",
+    "defaultMessage": "PPS ID",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead2.text",
+    "id": "ppsclose.thead2.text",
     "description": "Table second head",
-    "defaultMessage": "MSU Pending",
+    "defaultMessage": "RACKS PENDING",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead3.text",
+    "id": "ppsclose.subhead.racksPending",
+    "description": "subheader for rackPending",
+    "defaultMessage": "{sumRackPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead3.text",
     "description": "Table third head",
+    "defaultMessage": "ITEMS PENDING",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.subhead1.itemPending",
+    "description": "subheader for itemsPending",
+    "defaultMessage": "{sumItemsPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead4.text",
+    "description": "Table fourth head",
     "defaultMessage": "ACTION",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
