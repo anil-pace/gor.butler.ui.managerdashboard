@@ -1,65 +1,66 @@
-.gor-modal-content{
-	&.pps-close{
-		.gor-modal-head{
-			position:relative;
-		}
-	}
+.gor-modal-content {
+  &.pps-close {
+    .gor-modal-head {
+      position: relative;
+    }
+  }
 }
-.pps-close-wrap{
-	margin: auto;
-    width: 60%;
+.subtext-header {
+  display: block;
+}
+.pps-close-wrap {
+  margin: auto;
+  width: 60%;
+  margin-top: 30px;
+  &.pps-submit-cont {
+    text-align: right;
+    .pps-close-cancel {
+      margin-right: 20px;
+    }
+  }
+  .pps-close-head {
+    .left-sec {
+      width: 50%;
+      display: inline-block;
+    }
+    .right-sec {
+      width: 50%;
+      display: inline-block;
+      text-align: right;
+    }
+    .close-all-link {
+      padding: 0 10px;
+      color: #2892be;
+      border-right: 1px solid #c0c0c0;
+    }
+    .fclose-all-link {
+      padding: 0 10px;
+      color: #2892be;
+    }
+  }
+  .table-container {
     margin-top: 30px;
-    &.pps-submit-cont{
-        text-align: right;
-        .pps-close-cancel{
-            margin-right:20px;
-        }
+    .table-header {
+      .cell {
+        border-top: none;
+      }
     }
-    .pps-close-head{
-    	.left-sec{
-    		width: 50%;
-    		display: inline-block;
-    	}
-    	.right-sec{
-    		width: 50%;
-		    display: inline-block;
-		    text-align: right;
-    	}
-    	.close-all-link{
-    		padding: 0 10px;
-		    color: #2892BE;
-		    border-right: 1px solid #C0C0C0;
-    	}
-    	.fclose-all-link{
-    		padding: 0 10px;
-		    color: #2892BE;
-    	}
-    }
-    .table-container{
-        margin-top:30px;
-        .table-header{
-            .cell{
-                border-top:none;
-            }
-    }
-
-    }
-    
+  }
 }
-.pps-table{
-    .requestedModeTxt{
-        display:inline-block;
-        width:65px;
-        float:right;
-        margin-right:45%;
-        font-size:12px;
-        color:#27aae1;
-        vertical-align: middle;
-    }
-    .close{
-        float: none;
-        font-size: inherit;
-        color: inherit;
-        cursor: default;
-    }
+.pps-table {
+  .requestedModeTxt {
+    display: inline-block;
+    width: 65px;
+    float: right;
+    margin-right: 45%;
+    font-size: 12px;
+    color: #27aae1;
+    vertical-align: middle;
+  }
+  .close {
+    float: none;
+    font-size: inherit;
+    color: inherit;
+    cursor: default;
+  }
 }

@@ -186,6 +186,18 @@
     "filepath": "./src/components/commonFunctionsDataTable.js"
   },
   {
+    "id": "auditMessages.extraQuantity",
+    "description": "Extra Quantity",
+    "defaultMessage": "Extra Quantity {diff}",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
+    "id": "auditMessages.missingQuantity",
+    "description": "Missing Quantity",
+    "defaultMessage": "Missing Quantity {diff}",
+    "filepath": "./src/components/commonFunctionsDataTable.js"
+  },
+  {
     "id": "commonDataTable.attributesType.itemSelectedText",
     "description": "heading for attribute",
     "defaultMessage": "{count} items selected",
@@ -462,9 +474,9 @@
     "filepath": "./src/components/header/header.js"
   },
   {
-    "id": "header.start",
-    "description": "Start time",
-    "defaultMessage": "Start time:{time}",
+    "id": "header.currentWarehouse",
+    "description": "Current Warehouse Time",
+    "defaultMessage": "Current Warehouse Time:{time}, {timezone}",
     "filepath": "./src/components/header/header.js"
   },
   {
@@ -744,14 +756,14 @@
   },
   {
     "id": "sysControllers.tab.heading",
-    "description": "Syatem controllers Tab",
+    "description": "System controllers Tab",
     "defaultMessage": "System Controllers",
     "filepath": "./src/components/subtab/subTabs.js"
   },
   {
     "id": "utility.uploadHist.fileName",
     "description": "Upload file name",
-    "defaultMessage": " {fileName}",
+    "defaultMessage": "{fileName}",
     "filepath": "./src/components/utilityComponents/accordianBar.js"
   },
   {
@@ -827,21 +839,21 @@
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
+    "id": "utility.downloadGRN.putAwayInProgress",
+    "description": "Put away in Progress",
+    "defaultMessage": "Put away in Progress",
+    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
+  },
+  {
     "id": "utility.downloadGRN.label",
     "description": "STN number:",
     "defaultMessage": "STN number:",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
-    "id": "utility.downloadGRN.stnError",
-    "description": "Please enter correct STN number",
-    "defaultMessage": "Please enter correct STN number",
-    "filepath": "./src/components/utilityComponents/downloadGRTile.js"
-  },
-  {
-    "id": "utility.downloadGRN.head",
-    "description": "Generate Report",
-    "defaultMessage": "Generate Report",
+    "id": "utility.cloaseAndDownloadGRN.head",
+    "description": "Close and Generate Report",
+    "defaultMessage": "Close and Generate Report",
     "filepath": "./src/components/utilityComponents/downloadGRTile.js"
   },
   {
@@ -1925,6 +1937,12 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "miscReports.stnNumRequest.failure",
+    "description": "Incorrect STN Number",
+    "defaultMessage": "Error in closing STN",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
     "id": "zoning.substatus.action.zone_pause",
     "description": "Status text for zone",
     "defaultMessage": "Zone pause activated",
@@ -2063,6 +2081,12 @@
     "id": "audit.start.Audit",
     "description": "button label for start",
     "defaultMessage": "START",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
+    "id": "audit.table.generateAuditReport",
+    "description": "button label for generate report",
+    "defaultMessage": "GENERATE REPORT",
     "filepath": "./src/containers/auditListing.js"
   },
   {
@@ -2250,6 +2274,11 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
+    "id": "audit.inputField.name",
+    "defaultMessage": "AUDIT NAME",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
     "id": "audit.inputField.pps",
     "defaultMessage": "PPS ID",
     "filepath": "./src/containers/auditTab/auditFilter.js"
@@ -2262,6 +2291,11 @@
   {
     "id": "audit.inputField.location",
     "defaultMessage": "LOCATION ID",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.inputField.order_no",
+    "defaultMessage": "ORDER NO",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2295,6 +2329,11 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
+    "id": "audit.tokenfield.inventoryfound",
+    "defaultMessage": "INVENTORY FOUND",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
     "id": "audit.token1.all",
     "defaultMessage": "Any",
     "filepath": "./src/containers/auditTab/auditFilter.js"
@@ -2325,6 +2364,11 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
+    "id": "audit.token2.auditrejected",
+    "defaultMessage": "Rejected",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
     "id": "audit.token2.toberesolved",
     "defaultMessage": "To be resolved",
     "filepath": "./src/containers/auditTab/auditFilter.js"
@@ -2342,6 +2386,21 @@
   {
     "id": "audit.token2.paused",
     "defaultMessage": "Paused",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.less_than_actual",
+    "defaultMessage": "Less Than Actual",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.more_than_actual",
+    "defaultMessage": "More Than Actual",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -3194,7 +3253,67 @@
     "filepath": "./src/containers/auditTab/editAudit.js"
   },
   {
-    "id": "itemSearch.label.startbutton",
+    "id": "itemSearch.created.status",
+    "defaultMessage": "Created",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.processing.status",
+    "defaultMessage": "Processing",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.processed.status",
+    "defaultMessage": "Processed",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.failed.status",
+    "defaultMessage": "Failed",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.label.manualassignpps",
+    "defaultMessage": "Manually-Assign PPS",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.label.singleSKUtype",
+    "defaultMessage": "Single SKU",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.label.multiSKUtype",
+    "defaultMessage": "Multi SKU",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.header.itemSearch",
+    "description": "button label for item search",
+    "defaultMessage": "Item Search",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.filter.filterLabel",
+    "description": "button label for filter",
+    "defaultMessage": "FILTER DATA",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.filter.search.bar",
+    "description": "total results for filter search bar",
+    "defaultMessage": "{total} results found",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.filter.search.bar.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all results",
+    "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemSearch.start.itemSearch",
+    "description": "button label for start",
     "defaultMessage": "START",
     "filepath": "./src/containers/auditTab/itemSearch.js"
   },
@@ -3203,6 +3322,195 @@
     "description": "Item Search not found",
     "defaultMessage": "No Records Present",
     "filepath": "./src/containers/auditTab/itemSearch.js"
+  },
+  {
+    "id": "itemsSearch.singleLocation.singleLocationText",
+    "description": "Text for Single location",
+    "defaultMessage": "Single location",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemsSearch.multiLocationTxt.multiLocationText",
+    "description": "Text for Multi location",
+    "defaultMessage": "Multi location",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemSearch.operatorName.operatorLabel",
+    "description": "Operator",
+    "defaultMessage": "Operator:",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemSearch.slotId.slotIdLabel",
+    "description": "Slot id",
+    "defaultMessage": "Slot:",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemsearch.details",
+    "description": "Heading for audit details",
+    "defaultMessage": "Basic details",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemSearch.notfound",
+    "description": "No Data to display",
+    "defaultMessage": "No records Present",
+    "filepath": "./src/containers/auditTab/itemSearchDetails.js"
+  },
+  {
+    "id": "itemSearch.inputField.id",
+    "defaultMessage": "ITEM SEARCH ID",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.inputField.fromdate",
+    "defaultMessage": "FROM DATE",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.inputField.todate",
+    "defaultMessage": "TO DATE",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.tokenfield.STATUS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.token2.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.token2.created",
+    "defaultMessage": "Created",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.token2.processing",
+    "defaultMessage": "Processing",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.token2.processed",
+    "defaultMessage": "Processed",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.token2.failed",
+    "defaultMessage": "Failed",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "gor.filter.filterLabel",
+    "description": "label for filter",
+    "defaultMessage": "Filter data",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "gor.filter.hide",
+    "description": "label for hide",
+    "defaultMessage": "Hide",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "gor.filter.noResult",
+    "description": "label for no result",
+    "defaultMessage": "No results found, please try again",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "gor.filter.reset",
+    "description": "label for reset",
+    "defaultMessage": "Reset",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "gor.filter.heading",
+    "description": "filter heading",
+    "defaultMessage": "Apply filter",
+    "filepath": "./src/containers/auditTab/itemSearchFilter.js"
+  },
+  {
+    "id": "itemSearch.start.successMessage",
+    "description": "show success message for item start",
+    "defaultMessage": "ItemSearch Start triggered successfully.",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.start.failMessage",
+    "description": "set fail message for item start",
+    "defaultMessage": "ItemSearch Start failed.",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemsSearch.starttask.headerstartitemSearch",
+    "description": "Heading for start item search",
+    "defaultMessage": "Start Item Search",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.itemSearchmodepps",
+    "description": "PPS in search mode",
+    "defaultMessage": "PPS in search mode(s)",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.othermodepps",
+    "description": "PPS in other mode",
+    "defaultMessage": "PPS in other mode(s)",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.operatorassign",
+    "description": "Operator",
+    "defaultMessage": "Operator",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.startButton",
+    "description": "start",
+    "defaultMessage": "START",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startitemSearch.ForItemSearch",
+    "description": "For item search",
+    "defaultMessage": "For item search",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.listauditid",
+    "description": "List of Item Search",
+    "defaultMessage": "List of Item Search",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.for",
+    "description": "For",
+    "defaultMessage": "For",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.View",
+    "description": "View",
+    "defaultMessage": "View",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.ppsunavaible",
+    "description": "PPS not available",
+    "defaultMessage": "PPS Not Available",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
+  },
+  {
+    "id": "itemSearch.startItemSearch.itemSearchtext",
+    "description": "item search",
+    "defaultMessage": "item search",
+    "filepath": "./src/containers/auditTab/itemSearchStart.js"
   },
   {
     "id": "audit.start.auditdetails.subheading2",
@@ -3412,7 +3720,12 @@
   },
   {
     "id": "viewDetais.extra.status",
-    "defaultMessage": "extra entitiy found",
+    "defaultMessage": "extra entity found",
+    "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
+  },
+  {
+    "id": "viewDetais.damaged.status",
+    "defaultMessage": "damaged entity found",
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
   },
   {
@@ -4192,8 +4505,38 @@
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
+    "id": "order.token.status_1",
+    "defaultMessage": "PRIORITY",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
     "id": "order.token.status",
     "defaultMessage": "STATUS",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.priority.any",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.priority.high",
+    "defaultMessage": "High",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.priority.normal",
+    "defaultMessage": "Normal",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.priority.low",
+    "defaultMessage": "Low",
+    "filepath": "./src/containers/orderTab/orderFilter.js"
+  },
+  {
+    "id": "order.priority.critical",
+    "defaultMessage": "Critical",
     "filepath": "./src/containers/orderTab/orderFilter.js"
   },
   {
@@ -5170,9 +5513,9 @@
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
-    "id": "operationLog.table.requestId",
-    "description": "Request ID",
-    "defaultMessage": "REQUEST ID",
+    "id": "operationLog.table.externalId",
+    "description": "External ID",
+    "defaultMessage": "External ID",
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
@@ -5206,6 +5549,12 @@
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
+  },
+  {
     "id": "notification.infinite.message",
     "description": "Infinite scroll message",
     "defaultMessage": "Loading More",
@@ -5230,9 +5579,9 @@
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
-    "id": "reportsTab.downloadReport",
+    "id": "reportsTab.downloadReports",
     "description": "Operations Log tab for Reports tab",
-    "defaultMessage": "Download",
+    "defaultMessage": "Archived Downloads",
     "filepath": "./src/containers/reportsTab/reportsTab.js"
   },
   {
@@ -5542,7 +5891,8 @@
   {
     "id": "goto_barcode.task",
     "description": "goto_barcode task",
-    "defaultMessage": "goto barcode"
+    "defaultMessage": "Go to barcode",
+    "filepath": "./src/containers/systemTabs/butlerbotTab.js"
   },
   {
     "id": "docked.task",
@@ -6162,20 +6512,38 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
-    "id": "ppsclose.tblhead1.text",
+    "id": "ppsclose.thead1.text",
     "description": "Table first head",
-    "defaultMessage": "SLOT ID",
+    "defaultMessage": "PPS ID",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead2.text",
+    "id": "ppsclose.thead2.text",
     "description": "Table second head",
-    "defaultMessage": "MSU Pending",
+    "defaultMessage": "RACKS PENDING",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead3.text",
+    "id": "ppsclose.subhead.racksPending",
+    "description": "subheader for rackPending",
+    "defaultMessage": "{sumRackPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead3.text",
     "description": "Table third head",
+    "defaultMessage": "ITEMS PENDING",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.subhead1.itemPending",
+    "description": "subheader for itemsPending",
+    "defaultMessage": "{sumItemsPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead4.text",
+    "description": "Table fourth head",
     "defaultMessage": "ACTION",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
@@ -6688,15 +7056,57 @@
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "sysControllerList.filter.search.bar",
-    "description": "total pps for filter search bar",
-    "defaultMessage": "{total} Controllers found",
+    "id": "sysController.summary.showall",
+    "description": "button label for show all",
+    "defaultMessage": "Show all Zones",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
-    "id": "sysControllerList.filter.search.bar.showall",
-    "description": "button label for show all",
-    "defaultMessage": "Show all Controllers",
+    "id": "sysControllers.idColumn.heading",
+    "description": "CONTROLLER ID",
+    "defaultMessage": "CONTROLLER ID",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysControllers.totalControllers",
+    "description": "total controllers",
+    "defaultMessage": "Total:{count}",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.status",
+    "description": "Status for PPS",
+    "defaultMessage": "STATUS",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.location",
+    "description": "Location",
+    "defaultMessage": "LOCATION",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.conDetails",
+    "description": "Status for PPS",
+    "defaultMessage": "CONNECTION DETAILS",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.ethernetStatus",
+    "description": "sysController.table.ethernetStatus",
+    "defaultMessage": "Ethernet Network:",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.zigbeeStatus",
+    "description": "sysController.table.zigbeeStatus",
+    "defaultMessage": "Zigbee Network:",
+    "filepath": "./src/containers/systemTabs/sysControllers.js"
+  },
+  {
+    "id": "sysController.table.operatingMode",
+    "description": "Status for PPS",
+    "defaultMessage": "OPERATING MODE",
     "filepath": "./src/containers/systemTabs/sysControllers.js"
   },
   {
@@ -6867,69 +7277,33 @@
     "filepath": "./src/containers/tabs.js"
   },
   {
-    "id": "overviewStatus.tab.fulfilling",
-    "description": "overview Status fulfilling orders",
-    "defaultMessage": "Fulfilling orders",
+    "id": "downloads.tab.heading",
+    "description": "downloads tab",
+    "defaultMessage": "DOWNLOADS",
     "filepath": "./src/containers/tabs.js"
   },
   {
-    "id": "overviewStatus.tab.default",
-    "description": "default overview Status",
-    "defaultMessage": "None",
+    "id": "inbound.tab.heading",
+    "description": "inbound tab",
+    "defaultMessage": "INBOUND",
     "filepath": "./src/containers/tabs.js"
   },
   {
-    "id": "overviewStatus.tab.stop",
-    "description": "overview Status emergency",
-    "defaultMessage": "STOPPED",
+    "id": "outbound.tab.heading",
+    "description": "outbound tab",
+    "defaultMessage": "OUTBOUND",
     "filepath": "./src/containers/tabs.js"
   },
   {
-    "id": "overviewStatus.tab.paused",
-    "description": "overview Status emergency",
-    "defaultMessage": "PAUSED",
+    "id": "exceptions.tab.heading",
+    "description": "exceptions tab",
+    "defaultMessage": "EXCEPTIONS",
     "filepath": "./src/containers/tabs.js"
   },
   {
-    "id": "overviewStatus.tab.breached",
-    "description": "overview Status emergency",
-    "defaultMessage": "BREACHED",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "systemStatus.tab.online",
-    "description": "system Status online",
-    "defaultMessage": "Online",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "ordersStatus.tab.heading",
-    "description": "orders Status",
-    "defaultMessage": "{count}% fulfilled",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "usersStatus.tab.heading#",
-    "description": "users Status",
-    "defaultMessage": "{count} {count, plural, =0 {user} one {user} other {users}} online",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "inventoryStatus.tab.heading",
-    "description": "inventory Status",
-    "defaultMessage": "{count}% space utilized",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "auditStatus.tab.heading",
-    "description": "audit Status",
-    "defaultMessage": "{count} in progress",
-    "filepath": "./src/containers/tabs.js"
-  },
-  {
-    "id": "auditStatus.tab.alert.heading",
-    "description": "audit Status alert",
-    "defaultMessage": "{count} {count, plural, one {alert} other {alerts}}",
+    "id": "customernotifications.tab.heading",
+    "description": "customernotifications tab",
+    "defaultMessage": "CUSTOMER NOTIFICATIONS",
     "filepath": "./src/containers/tabs.js"
   },
   {
@@ -7295,6 +7669,12 @@
     "description": "filter heading",
     "defaultMessage": "Apply filter",
     "filepath": "./src/containers/userTab/userFilter.js"
+  },
+  {
+    "id": "UsersTab.userroles.selectRolePlaceholder",
+    "description": "Select a role",
+    "defaultMessage": "Select a role",
+    "filepath": "./src/containers/userTab/userRoles.js"
   },
   {
     "id": "users.roles.info.heading",
@@ -7823,6 +8203,12 @@
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
+    "id": "audit.changepps.success",
+    "description": "Change PPS success",
+    "defaultMessage": "PPS has been changed successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
     "id": "audit.delete.reject",
     "description": "Audit deletion",
     "defaultMessage": "Audit {id} failed to delete",
@@ -7892,6 +8278,60 @@
     "id": "audit.resolve.fail_desc",
     "description": "audit resolve fail all description",
     "defaultMessage": "Audit resolve failed due to network issue",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.success.userdeletion",
+    "description": "Text for successfull user deletion",
+    "defaultMessage": "User deleted successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.successfully.edit",
+    "description": "Text for successfull user edit",
+    "defaultMessage": "User details updated successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.fail.edit",
+    "description": "Text for fail user edit",
+    "defaultMessage": "Failed to update user details",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "user.edit.fail",
+    "description": "Text for fail user edit",
+    "defaultMessage": "Failed:\"{description}\"",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.fail.delete",
+    "description": "Text for fail user deletion",
+    "defaultMessage": "User deleted failed",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "user.delete.fail",
+    "description": "Text for fail user deletion",
+    "defaultMessage": "Failed:\"{description}\"",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.successfully.add",
+    "description": "Text for successfull user added",
+    "defaultMessage": "New user \"{first} {last}\" added successfully",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "notify.fail.add",
+    "description": "Text for fail user add",
+    "defaultMessage": "Failed to add new user",
+    "filepath": "./src/utilities/getFormattedMessages.js"
+  },
+  {
+    "id": "user.add.fail",
+    "description": "Text for fail user add",
+    "defaultMessage": "Failed:\"{description}\"",
     "filepath": "./src/utilities/getFormattedMessages.js"
   },
   {
