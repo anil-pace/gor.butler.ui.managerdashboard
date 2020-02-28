@@ -2287,6 +2287,11 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
+    "id": "audit.inputField.name",
+    "defaultMessage": "AUDIT NAME",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
     "id": "audit.inputField.pps",
     "defaultMessage": "PPS ID",
     "filepath": "./src/containers/auditTab/auditFilter.js"
@@ -2299,6 +2304,11 @@
   {
     "id": "audit.inputField.location",
     "defaultMessage": "LOCATION ID",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.inputField.order_no",
+    "defaultMessage": "ORDER NO",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2329,6 +2339,11 @@
   {
     "id": "audit.tokenfield.createdby",
     "defaultMessage": "CREATED BY",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.tokenfield.inventoryfound",
+    "defaultMessage": "INVENTORY FOUND",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2384,6 +2399,21 @@
   {
     "id": "audit.token2.paused",
     "defaultMessage": "Paused",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.less_than_actual",
+    "defaultMessage": "Less Than Actual",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.more_than_actual",
+    "defaultMessage": "More Than Actual",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -5496,9 +5526,9 @@
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
-    "id": "operationLog.table.requestId",
-    "description": "Request ID",
-    "defaultMessage": "REQUEST ID",
+    "id": "operationLog.table.externalId",
+    "description": "External ID",
+    "defaultMessage": "External ID",
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
@@ -5529,6 +5559,12 @@
     "id": "operationLog.table.timestamp",
     "description": "Status for PPS",
     "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
@@ -6489,20 +6525,38 @@
     "filepath": "./src/containers/systemTabs/notificationTable.js"
   },
   {
-    "id": "ppsclose.tblhead1.text",
+    "id": "ppsclose.thead1.text",
     "description": "Table first head",
-    "defaultMessage": "SLOT ID",
+    "defaultMessage": "PPS ID",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead2.text",
+    "id": "ppsclose.thead2.text",
     "description": "Table second head",
-    "defaultMessage": "MSU Pending",
+    "defaultMessage": "RACKS PENDING",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
   {
-    "id": "ppsclose.tblhead3.text",
+    "id": "ppsclose.subhead.racksPending",
+    "description": "subheader for rackPending",
+    "defaultMessage": "{sumRackPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead3.text",
     "description": "Table third head",
+    "defaultMessage": "ITEMS PENDING",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.subhead1.itemPending",
+    "description": "subheader for itemsPending",
+    "defaultMessage": "{sumItemsPending}",
+    "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
+  },
+  {
+    "id": "ppsclose.thead4.text",
+    "description": "Table fourth head",
     "defaultMessage": "ACTION",
     "filepath": "./src/containers/systemTabs/pps/closePPSList.js"
   },
