@@ -81,9 +81,73 @@ class ClosePPSList extends React.Component {
       : {}
 
     var areAllSelected = true
-    let sumRackPending = 0,
+    var sumRackPending = 0,
       sumItemsPending = 0
 
+    processedData.filteredData = []
+    for (let i = 0; i < ppsLen; i++) {
+      let row = []
+
+      row.push("PPS " + checkedPPS[i])
+      if (Object.keys(pendingMSU).length > 0) {
+        // sum for Items Pending needed to display in header
+        sumRackPending += pendingMSU[checkedPPS[i]].hasOwnProperty(
+          PENDING_RACK_COUNT
+        )
+          ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
+          : 0
+
+        // sum for Rack Pending needed to display in header
+        sumItemsPending += pendingMSU[checkedPPS[i]].hasOwnProperty(
+          PENDING_ITEM_COUNT
+        )
+          ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
+          : 0
+
+        row.push(
+          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_RACK_COUNT)
+            ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
+            : "-"
+        )
+        row.push(
+          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_ITEM_COUNT)
+            ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
+            : "-"
+        )
+      } else {
+        row.push("-")
+        row.push("-")
+      }
+
+      row.push(
+        <div key={i}>
+          <label>
+            <input
+              type="radio"
+              value={close}
+              name={"radio_pps_" + checkedPPS[i]}
+              onChange={this._onRadioChange.bind(this, checkedPPS[i], close)}
+              checked={this.state[checkedPPS[i]].checkedValue === close}
+            />
+            Close
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={fclose}
+              name={"radio_pps_" + checkedPPS[i]}
+              onChange={this._onRadioChange.bind(this, checkedPPS[i], fclose)}
+              checked={this.state[checkedPPS[i]].checkedValue === fclose}
+            />
+            Force Close
+          </label>
+        </div>
+      )
+      processedData.filteredData.push(row)
+      if (!this.state[checkedPPS[i]].checkedValue) {
+        areAllSelected = false
+      }
+    }
     processedData.header = [
       {
         id: 1,
@@ -148,53 +212,7 @@ class ClosePPSList extends React.Component {
         sortable: false
       }
     ]
-    processedData.filteredData = []
-    for (let i = 0; i < ppsLen; i++) {
-      let row = []
 
-      row.push("PPS " + checkedPPS[i])
-      if (Object.keys(pendingMSU).length > 0) {
-        row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_RACK_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
-            : "-"
-        )
-        row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_ITEM_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
-            : "-"
-        )
-      }
-
-      row.push(
-        <div key={i}>
-          <label>
-            <input
-              type="radio"
-              value={close}
-              name={"radio_pps_" + checkedPPS[i]}
-              onChange={this._onRadioChange.bind(this, checkedPPS[i], close)}
-              checked={this.state[checkedPPS[i]].checkedValue === close}
-            />
-            Close
-          </label>
-          <label>
-            <input
-              type="radio"
-              value={fclose}
-              name={"radio_pps_" + checkedPPS[i]}
-              onChange={this._onRadioChange.bind(this, checkedPPS[i], fclose)}
-              checked={this.state[checkedPPS[i]].checkedValue === fclose}
-            />
-            Force Close
-          </label>
-        </div>
-      )
-      processedData.filteredData.push(row)
-      if (!this.state[checkedPPS[i]].checkedValue) {
-        areAllSelected = false
-      }
-    }
     processedData.confirmDisable = !areAllSelected
     return processedData
   }
