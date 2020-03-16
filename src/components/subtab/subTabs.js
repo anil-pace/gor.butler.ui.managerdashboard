@@ -16,7 +16,7 @@ import {BUTLERBOTS,PPS,CHARGING,SYS_OVERVIEW,SYS_CONTROLLERS,PPS_CONFIGURATION, 
 class SystemTab extends React.Component{
     
     handleSysSubTabClick(tabName){
-      this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
+	  this.props.subTabSelected(SYS_SUB_TAB_ROUTE_MAP[tabName]);
       sessionStorage.setItem("subTab",SYS_SUB_TAB_ROUTE_MAP[tabName])
       switch(tabName) {
   					case BUTLERBOTS:
@@ -62,7 +62,6 @@ class SystemTab extends React.Component{
               defaultMessage="System Controllers"/>
 
 		var selectClass={sysControllers:"gor-main-block",sysOverview : "gor-main-block" ,notification:"gor-main-block", butlerbots:"gor-main-block", pps:"gor-main-block", chargingstation:"gor-main-block",ppsConfiguration:'gor-main-block', msuConfiguration: 'gor-main-block'};
-
 		if(this.props.subTab.length) {
 			selectClass[this.props.subTab]="gor-main-blockSelect";
 		}
