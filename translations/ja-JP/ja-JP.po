@@ -1628,7 +1628,7 @@ msgstr "基準"
 
 #: operationsLog.reportRequest.success
 msgctxt "operationsLog.reportRequest.success"
-msgid "Request successfully generated. Kindly check the Download Tab"
+msgid "Request successfully generated. Kindly check the Reports Tab"
 msgstr "要求が効果的に発生されました。ダウンロードのタブを確認してください"
 
 #: operationsLog.reportRequest.failure
@@ -2822,7 +2822,7 @@ msgstr "{zone}の{controller}経由のSOPの破棄によって緊急停止が活
 #: operation.alert.pause.text
 msgctxt "operation.alert.pause.text"
 msgid "Emergency-Pause activated via Controller {controller} in {zone}."
-msgstr "Butler 管理ダッシュボードで操作が一時停止しました"
+msgstr "{zone}のコントローラー{controller}を介して緊急停止が有効になりました"
 
 #: operation.alert.pause.nonPOE
 msgctxt "operation.alert.pause.nonPOE"
