@@ -905,12 +905,6 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
-    "id": "utiltiy.downloadRports.xlsFormat",
-    "description": "ExceL Spreadsheet (xlsx)",
-    "defaultMessage": "ExceL Spreadsheet (xlsx)",
-    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
-  },
-  {
     "id": "utility.grnHistory.clickToDownload",
     "description": "file name",
     "defaultMessage": "Click here to download",
@@ -6541,6 +6535,30 @@
     "description": "Change Profile to PPS",
     "defaultMessage": "Change",
     "filepath": "./src/containers/systemTabs/pps/confirmApplyProfile.js"
+  },
+  {
+    "id": "pps.mode.confirm.mode.text",
+    "description": "Apply mode to all PPS",
+    "defaultMessage": "Are you sure you want to change mode for all PPS?",
+    "filepath": "./src/containers/systemTabs/pps/confirmChangePPSMode.js"
+  },
+  {
+    "id": "pps.mode.confirm.apply.warning",
+    "description": "Warning: All pps mode change might impact the operations",
+    "defaultMessage": "Warning: All pps mode change might impact the operations",
+    "filepath": "./src/containers/systemTabs/pps/confirmChangePPSMode.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/systemTabs/pps/confirmChangePPSMode.js"
+  },
+  {
+    "id": "pps.configuration.confirm.saveAndApply.profile",
+    "description": "Save and Apply Profile to PPS",
+    "defaultMessage": "SAVE AND APPLY",
+    "filepath": "./src/containers/systemTabs/pps/confirmChangePPSMode.js"
   },
   {
     "id": "pps.inputField.id",
