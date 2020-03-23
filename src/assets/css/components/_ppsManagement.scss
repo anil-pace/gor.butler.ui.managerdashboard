@@ -1,4 +1,4 @@
-@import '../abstracts/functions';
+@import "../abstracts/functions";
 
 .pps-configuration-container {
   box-sizing: border-box;
@@ -46,7 +46,7 @@
   }
 
   .pps-bin-action-button {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     width: 113px;
     height: 35px;
     font-size: 14px;
@@ -62,7 +62,7 @@
 
   .pps-bin-next-button,
   .pps-bin-save-apply-button {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     width: auto;
     height: 30px;
     font-size: 14px;
@@ -87,7 +87,7 @@
   }
 
   .pps-bin-back-button {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     width: 113px;
     height: 30px;
     font-size: 14px;
@@ -105,7 +105,7 @@
 
   .pps-bin-cancel-button,
   .pps-bin-save-button {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     width: auto;
     height: 30px;
     font-size: 14px;
@@ -374,7 +374,7 @@
     float: right;
   }
 
-  .pps-tag-selection input[type='checkbox'] {
+  .pps-tag-selection input[type="checkbox"] {
     margin: 0px;
   }
 
@@ -503,18 +503,18 @@
     }
   }
   .gor-create-profile-body {
-    font-size: 14px;
-    padding: 0px calculateRem(30px);
-    min-height: calculateRem(150px);
+    font-size: 16px;
+    padding: calculateRem(30px);
+    min-height: calculateRem(100px);
     display: table;
-    width: 50%;
+    width: 100%;
   }
   .gor-create-profile-action-button {
     text-align: right;
     margin-right: calculateRem(20px);
   }
   .gor-save-profile-btn {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     min-width: calculateRem(113px);
     height: calculateRem(35px);
     font-size: 14px;
@@ -528,7 +528,7 @@
     padding-top: 0;
   }
   .gor-cancel-btn {
-    font-family: 'Source Sans Pro Bold', sans-serif;
+    font-family: "Source Sans Pro Bold", sans-serif;
     width: calculateRem(113px);
     height: calculateRem(35px);
     font-size: 14px;
