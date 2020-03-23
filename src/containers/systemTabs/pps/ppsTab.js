@@ -46,6 +46,7 @@ import {
 import { graphql, withApollo, compose } from "react-apollo"
 import { modal } from "react-redux-modal"
 import ClosePPSList from "./closePPSList"
+import ConfirmChangePPSMode from "./confirmChangePPSMode"
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -593,6 +594,24 @@ class PPS extends React.Component {
     this.changePPSmode(formData)
   }
 
+  modeChangeConfirmation(data) {
+    if (
+      this.props.data.PPSListSystem.list.length ===
+      Object.keys(this.props.checkedPps).length
+    ) {
+      let self = this
+      modal.add(ConfirmChangePPSMode, {
+        title: "",
+        size: "large", // large, medium or small,
+        closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+        hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+        applyMode: self.handleModeChange.bind(this, data)
+      })
+    } else {
+      this.handleModeChange(data)
+    }
+  }
+
   render() {
     let filterHeight = screen.height - 190 - 50
     let updateStatusIntl = ""
@@ -737,7 +756,7 @@ class PPS extends React.Component {
     drop = (
       <Dropdown
         options={modes}
-        onSelectHandler={e => this.handleModeChange(e)}
+        onSelectHandler={e => this.modeChangeConfirmation(e)}
         disabled={bDropRender}
         resetOnSelect={true}
         placeholder={modeDropPHolder}
