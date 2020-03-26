@@ -559,7 +559,7 @@ class Tabs extends React.Component {
         </Link>
 
         <Link
-          to="/orders/ordersummary"
+          to="/orders/orderlist"
           onClick={this.handleTabClick.bind(this, OUTBOUND)}
         >
           <Tab
