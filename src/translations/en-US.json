@@ -1739,6 +1739,19 @@
     "filepath": "./src/constants/messageConstants.js"
   },
   {
+    "id": "audit.cancellation.error.g025",
+    "description": "Audit cancellation failed because of audit status",
+    "defaultMessage": "Audit cancellation failed because of audit status",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+  {
+    "id": "audit.cancellation.error.g027",
+    "description": "Audit cancellation failed",
+    "defaultMessage": "Audit cancellation failed",
+    "filepath": "./src/constants/messageConstants.js"
+  },
+
+  {
     "id": "audit.cancellation.error.g021",
     "description": "Audit Id already sent for cancellation",
     "defaultMessage": "Audit Id already sent for cancellation",
