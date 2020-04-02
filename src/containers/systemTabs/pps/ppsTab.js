@@ -73,7 +73,6 @@ class PPS extends React.Component {
       query: null,
       sortedDataList: null,
       openCount: 0,
-      closeRequestedCount: 0, //includes both close and force_close count
       closeCount: 0,
       Modes: {
         pick: 0,
@@ -210,7 +209,6 @@ class PPS extends React.Component {
   _processCheckedPPS(nextProps) {
     var closeCount = 0
     var openCount = 0
-    var closeRequestedCount = 0
     var Modes = {
       put: 0,
       pick: 0,
@@ -227,12 +225,6 @@ class PPS extends React.Component {
         openCount++
       }
 
-      if (
-        nextProps.checkedPps[k].requested_status.toUpperCase() === "CLOSE" ||
-        nextProps.checkedPps[k].requested_status.toUpperCase() === "FORCE_CLOSE"
-      ) {
-        closeRequestedCount++
-      }
       if (nextProps.checkedPps[k].allowedModes) {
         for (let i = 0; i < nextProps.checkedPps[k].allowedModes.length; i++) {
           let allowedModes = nextProps.checkedPps[k].allowedModes[i]
@@ -255,8 +247,7 @@ class PPS extends React.Component {
     this.setState({
       openCount: openCount,
       closeCount: closeCount,
-      Modes: Modes,
-      closeRequestedCount: closeRequestedCount
+      Modes: Modes
     })
   }
 
@@ -702,7 +693,6 @@ class PPS extends React.Component {
     var openCount = this.state.openCount
     var closeCount = this.state.closeCount
     var Modes = this.state.Modes
-    let closeRequestedCount = this.state.closeRequestedCount
     var count = openCount + closeCount
     const bDropRender = this.props.checkedPps
       ? Object.keys(this.props.checkedPps).length
@@ -712,7 +702,7 @@ class PPS extends React.Component {
     const status = [
       {
         value: "open",
-        disabled: closeCount || closeRequestedCount ? false : true,
+        disabled: closeCount ? false : true,
         label: openStatusLabel
       },
       {
