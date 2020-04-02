@@ -1928,11 +1928,6 @@ msgstr ""
         msgid "AUDIT ID"
         msgstr ""
 
-        #: audit.inputField.name
-        msgctxt "audit.inputField.name"
-        msgid "AUDIT NAME"
-        msgstr ""
-
         #: audit.inputField.pps
         msgctxt "audit.inputField.pps"
         msgid "PPS ID"
@@ -1946,11 +1941,6 @@ msgstr ""
         #: audit.inputField.location
         msgctxt "audit.inputField.location"
         msgid "LOCATION ID"
-        msgstr ""
-
-        #: audit.inputField.order_no
-        msgctxt "audit.inputField.order_no"
-        msgid "ORDER NO"
         msgstr ""
 
         #: audit.inputField.fromdate
@@ -1981,11 +1971,6 @@ msgstr ""
         #: audit.tokenfield.createdby
         msgctxt "audit.tokenfield.createdby"
         msgid "CREATED BY"
-        msgstr ""
-
-        #: audit.tokenfield.inventoryfound
-        msgctxt "audit.tokenfield.inventoryfound"
-        msgid "INVENTORY FOUND"
         msgstr ""
 
         #: audit.token1.all
@@ -2041,21 +2026,6 @@ msgstr ""
         #: audit.token2.paused
         msgctxt "audit.token2.paused"
         msgid "Paused"
-        msgstr ""
-
-        #: audit.token4.all
-        msgctxt "audit.token4.all"
-        msgid "Any"
-        msgstr ""
-
-        #: audit.token4.less_than_actual
-        msgctxt "audit.token4.less_than_actual"
-        msgid "Less Than Actual"
-        msgstr ""
-
-        #: audit.token4.more_than_actual
-        msgctxt "audit.token4.more_than_actual"
-        msgid "More Than Actual"
         msgstr ""
 
         #: gor.filter.filterLabel
@@ -4118,11 +4088,6 @@ msgstr ""
         msgid "No Data Found"
         msgstr ""
 
-        #: operationLog.table.externalId
-        msgctxt "operationLog.table.externalId"
-        msgid "External ID"
-        msgstr ""
-
         #: reportsTab.operationsLog
         msgctxt "reportsTab.operationsLog"
         msgid "Operations Log"
@@ -4801,36 +4766,6 @@ msgstr ""
         #: NotificationTable.table.location
         msgctxt "NotificationTable.table.location"
         msgid "TIME"
-        msgstr ""
-
-        #: ppsclose.thead1.text
-        msgctxt "ppsclose.thead1.text"
-        msgid "PPS ID"
-        msgstr ""
-
-        #: ppsclose.thead2.text
-        msgctxt "ppsclose.thead2.text"
-        msgid "RACKS PENDING"
-        msgstr ""
-
-        #: ppsclose.subhead.racksPending
-        msgctxt "ppsclose.subhead.racksPending"
-        msgid "{sumRackPending}"
-        msgstr ""
-
-        #: ppsclose.thead3.text
-        msgctxt "ppsclose.thead3.text"
-        msgid "ITEMS PENDING"
-        msgstr ""
-
-        #: ppsclose.subhead1.itemPending
-        msgctxt "ppsclose.subhead1.itemPending"
-        msgid "{sumItemsPending}"
-        msgstr ""
-
-        #: ppsclose.thead4.text
-        msgctxt "ppsclose.thead4.text"
-        msgid "ACTION"
         msgstr ""
 
         #: pps.inputField.id

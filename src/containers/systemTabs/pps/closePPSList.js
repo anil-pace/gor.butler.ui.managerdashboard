@@ -21,8 +21,6 @@ const closeAll = "closeAll"
 const fcloseAll = "fcloseAll"
 const close = "close"
 const fclose = "force_close"
-const PENDING_RACK_COUNT = "pending_rack_count"
-const PENDING_ITEM_COUNT = "pending_entity_count"
 class ClosePPSList extends React.Component {
   constructor(props) {
     super(props)
@@ -81,9 +79,6 @@ class ClosePPSList extends React.Component {
       : {}
 
     var areAllSelected = true
-    let sumRackPending = 0,
-      sumItemsPending = 0
-
     processedData.header = [
       {
         id: 1,
@@ -105,14 +100,6 @@ class ClosePPSList extends React.Component {
             defaultMessage="RACKS PENDING"
           />
         ),
-        subtext: (
-          <FormattedMessage
-            id="ppsclose.subhead.racksPending"
-            description="subheader for rackPending"
-            defaultMessage="{sumRackPending}"
-            values={{ sumRackPending: sumRackPending ? sumRackPending : "0" }}
-          />
-        ),
         sortable: false
       },
       {
@@ -122,16 +109,6 @@ class ClosePPSList extends React.Component {
             id="ppsclose.thead3.text"
             description="Table third head"
             defaultMessage="ITEMS PENDING"
-          />
-        ),
-        subtext: (
-          <FormattedMessage
-            id="ppsclose.subhead1.itemPending"
-            description="subheader for itemsPending"
-            defaultMessage="{sumItemsPending}"
-            values={{
-              sumItemsPending: sumItemsPending ? sumItemsPending : "0"
-            }}
           />
         ),
         sortable: false
@@ -151,17 +128,16 @@ class ClosePPSList extends React.Component {
     processedData.filteredData = []
     for (let i = 0; i < ppsLen; i++) {
       let row = []
-
       row.push("PPS " + checkedPPS[i])
       if (Object.keys(pendingMSU).length > 0) {
         row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_RACK_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
+          pendingMSU[checkedPPS[i]].hasOwnProperty("pending_rack_count")
+            ? pendingMSU[checkedPPS[i]].pending_rack_count
             : "-"
         )
         row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_ITEM_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
+          pendingMSU[checkedPPS[i]].hasOwnProperty("pending_pick_count")
+            ? pendingMSU[checkedPPS[i]].pending_pick_count
             : "-"
         )
       }
@@ -258,9 +234,6 @@ class ClosePPSList extends React.Component {
                             }
                           >
                             <span>{header.text}</span>
-                            <span className="subtext-header">
-                              {header.subtext}
-                            </span>
                           </GTableHeaderCell>
                         )
                       })}
