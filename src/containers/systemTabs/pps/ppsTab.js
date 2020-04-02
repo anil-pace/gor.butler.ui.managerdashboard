@@ -229,7 +229,7 @@ class PPS extends React.Component {
 
       if (
         nextProps.checkedPps[k].requested_status.toUpperCase() === "CLOSE" ||
-        nextProps.checkedPps[k].requested_status.toUpperCase() === "FORCE CLOSE"
+        nextProps.checkedPps[k].requested_status.toUpperCase() === "FORCE_CLOSE"
       ) {
         closeRequestedCount++
       }
