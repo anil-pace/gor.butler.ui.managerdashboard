@@ -96,7 +96,7 @@ class Tabs extends React.Component {
         }, 0)
         break
       case "Outbound":
-        var new_win = window.open(domain + "/cockpit/#/orders/ordersummary")
+        var new_win = window.open(domain + "/cockpit/#/orders/orderslist")
         setTimeout(function() {
           new_win.postMessage(authtoken, domain)
         }, 0)
