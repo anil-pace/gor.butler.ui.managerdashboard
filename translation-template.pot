@@ -5211,7 +5211,6 @@ msgstr ""
         #: sysControllers.totalControllers
         msgctxt "sysControllers.totalControllers"
         msgid "Total:{count}"
-<<<<<<< HEAD
         msgstr ""
 
         #: sysController.table.status
@@ -5234,30 +5233,6 @@ msgstr ""
         msgid "Ethernet Network:"
         msgstr ""
 
-=======
-        msgstr ""
-
-        #: sysController.table.status
-        msgctxt "sysController.table.status"
-        msgid "STATUS"
-        msgstr ""
-
-        #: sysController.table.location
-        msgctxt "sysController.table.location"
-        msgid "LOCATION"
-        msgstr ""
-
-        #: sysController.table.conDetails
-        msgctxt "sysController.table.conDetails"
-        msgid "CONNECTION DETAILS"
-        msgstr ""
-
-        #: sysController.table.ethernetStatus
-        msgctxt "sysController.table.ethernetStatus"
-        msgid "Ethernet Network:"
-        msgstr ""
-
->>>>>>> 2f1afcb61... BSS-19891: PPS Close Enhancements
         #: sysController.table.zigbeeStatus
         msgctxt "sysController.table.zigbeeStatus"
         msgid "Zigbee Network:"
