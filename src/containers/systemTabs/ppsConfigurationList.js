@@ -101,6 +101,7 @@ class PPSList extends React.Component {
                               className={[
                                 profile.profile_name
                                   ? profile.profile_name ===
+                                      self.props.selectedProfile &&
                                     self.props.selectedProfile.profile_name
                                     ? "selected"
                                     : ""

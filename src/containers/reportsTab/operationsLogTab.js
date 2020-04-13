@@ -467,7 +467,6 @@ class OperationsLogTab extends React.Component {
             }
           />
         ) : null}
-        {console.log(data_list)}
         <OperationsLogTable
           loading={this.props.data.loading}
           onScrollHandler={
