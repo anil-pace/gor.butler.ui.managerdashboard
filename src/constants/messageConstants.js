@@ -204,10 +204,12 @@ export const allStatusSuccess = (<FormattedMessage id="pps.statusChange.allStatu
 
 export const allModeSuccess =(<FormattedMessage id="pps.modeChange.allModeSuccess" description='Records in file should not be greater than' 
       defaultMessage='Mode change request successful'/>)
-export const ppsModeFailure = "{unsuccessful}/{totalCount} mode change requests rejected";
+export const ppsModeFailure = "{unsuccessful}/{totalCount} mode change requests were rejected";
 export const ppsStatusFailure = "{unsuccessful}/{totalCount} status change requests rejected";
 export const ppsModeSuccess ="Mode change request successful";
 export const ppsStatusSuccess ="Status change request successful";
+export const ppsStatusOpen ="Open requested for the selected  PPS";
+export const ppsStatusClose ="Selected PPS are closing now";
 
 //Message for system emergency audit
 export const SYTEM_GENERATED_TEXT=(<FormattedMessage id="audit.subheading" description='System Generated' defaultMessage='System Generated'/>);   
