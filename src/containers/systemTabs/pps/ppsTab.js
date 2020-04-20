@@ -20,7 +20,9 @@ import {
   ppsStatusFailure,
   ppsStatusSuccess,
   ppsModeFailure,
-  ppsModeSuccess
+  ppsModeSuccess,
+  ppsStatusOpen,
+  ppsStatusClose
 } from "../../../constants/messageConstants"
 import { notifySuccess, notifyFail } from "./../../../actions/validationActions"
 import {
@@ -444,7 +446,7 @@ class PPS extends React.Component {
     this.setState({ sortedDataList: updatedList })
   }
 
-  changePPSStatus(requestObj) {
+  changePPSStatus(requestObj, status) {
     let _this = this
     _this.props.client
       .query({
@@ -476,7 +478,12 @@ class PPS extends React.Component {
               )
             )
           } else {
-            _this.props.notifySuccess(ppsStatusSuccess)
+            if (status === "close") {
+              _this.props.notifySuccess(ppsStatusClose)
+            } else {
+              _this.props.notifySuccess(ppsStatusOpen)
+            }
+
             _this.props.setCheckedPps("{}")
           }
         }
@@ -513,7 +520,7 @@ class PPS extends React.Component {
     var checkedPPS = [],
       j = 0,
       sortedIndex
-
+    let selectvalue = selection.value
     if (selection.value === "close") {
       if (!requestObj) {
         let selectedPps = this.props.checkedPps,
@@ -540,7 +547,7 @@ class PPS extends React.Component {
           handleStatusChange: this.handleStatusChange
         })
       } else {
-        this.changePPSStatus(requestObj)
+        this.changePPSStatus(requestObj, selectvalue)
       }
     } else if (selection.value === "open") {
       let formData = {},
@@ -551,7 +558,7 @@ class PPS extends React.Component {
       }
 
       formData["requested_status"] = selectedPps
-      this.changePPSStatus(formData)
+      this.changePPSStatus(formData, selectvalue)
     }
   }
   changePPSmode(params) {

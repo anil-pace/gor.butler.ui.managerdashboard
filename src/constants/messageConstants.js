@@ -595,6 +595,8 @@ export const ppsStatusFailure =
   "{unsuccessful}/{totalCount} status change requests rejected"
 export const ppsModeSuccess = "Mode change request successful"
 export const ppsStatusSuccess = "Status change request successful"
+export const ppsStatusOpen = "Open requested for the selected  PPS"
+export const ppsStatusClose = "Selected PPS are closing now"
 
 //Message for system emergency audit
 export const SYTEM_GENERATED_TEXT = (
