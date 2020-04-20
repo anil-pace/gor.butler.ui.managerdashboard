@@ -150,12 +150,14 @@ class OperationsLogTable extends React.Component {
                             row.source.children[0].id
                           : "--") +
                         (row.source.children.length &&
-                        row.source.children[0].children
+                        row.source.children[0].children &&
+                        row.source.children[0].children[0] &&
+                        row.source.children[0].children[0].type
                           ? "/" +
                             row.source.children[0].children[0].type +
                             "-" +
                             row.source.children[0].children[0].id
-                          : "")
+                          : "-")
                       : "-- --"}
                   </div>
                   <div className="cell">
@@ -171,7 +173,9 @@ class OperationsLogTable extends React.Component {
                             row.destination.children[0].id
                           : "--") +
                         (row.destination.children.length &&
-                        row.destination.children[0].children
+                        row.destination.children[0].children &&
+                        row.destination.children[0].children[0] &&
+                        row.destination.children[0].children[0].type
                           ? "/" +
                             row.destination.children[0].children[0].type +
                             "-" +
