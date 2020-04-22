@@ -21,8 +21,6 @@ const closeAll = "closeAll"
 const fcloseAll = "fcloseAll"
 const close = "close"
 const fclose = "force_close"
-const PENDING_RACK_COUNT = "pending_rack_count"
-const PENDING_ITEM_COUNT = "pending_entity_count"
 class ClosePPSList extends React.Component {
   constructor(props) {
     super(props)
@@ -79,46 +77,47 @@ class ClosePPSList extends React.Component {
     var pendingMSU = this.props.pendingMSU
       ? this.props.pendingMSU.successful
       : {}
-
     var areAllSelected = true
-    var sumRackPending = 0,
-      sumItemsPending = 0
-
+    processedData.header = [
+      {
+        id: 1,
+        text: (
+          <FormattedMessage
+            id="ppsclose.tblhead1.text"
+            description="Table first head"
+            defaultMessage="SLOT ID"
+          />
+        ),
+        sortable: false
+      },
+      {
+        id: 2,
+        text: (
+          <FormattedMessage
+            id="ppsclose.tblhead2.text"
+            description="Table second head"
+            defaultMessage="MSU Pending"
+          />
+        ),
+        sortable: false
+      },
+      {
+        id: 3,
+        text: (
+          <FormattedMessage
+            id="ppsclose.tblhead3.text"
+            description="Table third head"
+            defaultMessage="ACTION"
+          />
+        ),
+        sortable: false
+      }
+    ]
     processedData.filteredData = []
     for (let i = 0; i < ppsLen; i++) {
       let row = []
-
       row.push("PPS " + checkedPPS[i])
-      if (Object.keys(pendingMSU).length > 0) {
-        // sum for Items Pending needed to display in header
-        sumRackPending += pendingMSU[checkedPPS[i]].hasOwnProperty(
-          PENDING_RACK_COUNT
-        )
-          ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
-          : 0
-
-        // sum for Rack Pending needed to display in header
-        sumItemsPending += pendingMSU[checkedPPS[i]].hasOwnProperty(
-          PENDING_ITEM_COUNT
-        )
-          ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
-          : 0
-
-        row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_RACK_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_RACK_COUNT]
-            : "-"
-        )
-        row.push(
-          pendingMSU[checkedPPS[i]].hasOwnProperty(PENDING_ITEM_COUNT)
-            ? pendingMSU[checkedPPS[i]][PENDING_ITEM_COUNT]
-            : "-"
-        )
-      } else {
-        row.push("-")
-        row.push("-")
-      }
-
+      row.push(pendingMSU[checkedPPS[i]])
       row.push(
         <div key={i}>
           <label>
@@ -148,71 +147,6 @@ class ClosePPSList extends React.Component {
         areAllSelected = false
       }
     }
-    processedData.header = [
-      {
-        id: 1,
-        text: (
-          <FormattedMessage
-            id="ppsclose.thead1.text"
-            description="Table first head"
-            defaultMessage="PPS ID"
-          />
-        ),
-        sortable: false
-      },
-      {
-        id: 2,
-        text: (
-          <FormattedMessage
-            id="ppsclose.thead2.text"
-            description="Table second head"
-            defaultMessage="RACKS PENDING"
-          />
-        ),
-        subtext: (
-          <FormattedMessage
-            id="ppsclose.subhead.racksPending"
-            description="subheader for rackPending"
-            defaultMessage="{sumRackPending}"
-            values={{ sumRackPending: sumRackPending ? sumRackPending : "0" }}
-          />
-        ),
-        sortable: false
-      },
-      {
-        id: 3,
-        text: (
-          <FormattedMessage
-            id="ppsclose.thead3.text"
-            description="Table third head"
-            defaultMessage="ITEMS PENDING"
-          />
-        ),
-        subtext: (
-          <FormattedMessage
-            id="ppsclose.subhead1.itemPending"
-            description="subheader for itemsPending"
-            defaultMessage="{sumItemsPending}"
-            values={{
-              sumItemsPending: sumItemsPending ? sumItemsPending : "0"
-            }}
-          />
-        ),
-        sortable: false
-      },
-      {
-        id: 4,
-        text: (
-          <FormattedMessage
-            id="ppsclose.thead4.text"
-            description="Table fourth head"
-            defaultMessage="ACTION"
-          />
-        ),
-        sortable: false
-      }
-    ]
-
     processedData.confirmDisable = !areAllSelected
     return processedData
   }
@@ -276,9 +210,6 @@ class ClosePPSList extends React.Component {
                             }
                           >
                             <span>{header.text}</span>
-                            <span className="subtext-header">
-                              {header.subtext}
-                            </span>
                           </GTableHeaderCell>
                         )
                       })}
