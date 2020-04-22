@@ -48,6 +48,8 @@ import EmergencyRelease from "../containers/emergencyProcess/emergencyRelease"
 import fireHazard from "../containers/emergencyProcess/fireHazard"
 import GorToastify from "../components/gor-toastify/gor-toastify"
 import { setNotificationNull } from "../actions/notificationAction"
+import { graphql, withApollo, compose } from "react-apollo"
+import gql from "graphql-tag"
 
 class Tabs extends React.Component {
   /**
@@ -58,6 +60,7 @@ class Tabs extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      tabConfig: "",
       isHardEmergencyOpen: this.props.isHardEmergencyOpen
     }
     this._openPopup = this._openPopup.bind(this)
@@ -541,194 +544,240 @@ class Tabs extends React.Component {
 
     return (
       <div className="gor-tabs gor-main-block gor-scrollable-tab">
-        <Link to="/overview" onClick={this.handleTabClick.bind(this, OVERVIEW)}>
-          <Tab
-            items={{
-              tab: items.overview,
-              Status: items.overviewStatus,
-              currentState: items.overviewClass
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === OVERVIEW ||
-              this.props.tab === "md"
-                ? "sel"
-                : GOR_NORMAL_TAB
-            }
-            subIcons={false}
-          />
-        </Link>
-
-        <Link
-          to="/orders/orderslist"
-          onClick={this.handleTabClick.bind(this, OUTBOUND)}
-        >
-          <Tab
-            items={{
-              tab: items.outbound
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === OUTBOUND ? "sel" : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        <Link
-          to="/inbound/putlist"
-          onClick={this.handleTabClick.bind(this, INBOUND)}
-        >
-          <Tab
-            items={{
-              tab: items.inbound
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === INBOUND ? "sel" : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        <Link
-          to="/exception/exceptionlist"
-          onClick={this.handleTabClick.bind(this, EXCEPTIONS)}
-        >
-          <Tab
-            items={{
-              tab: items.exceptions
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === EXCEPTIONS
-                ? "sel"
-                : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        <Link
-          to="/audit/auditlisting"
-          onClick={this.handleTabClick.bind(this, AUDIT)}
-        >
-          <Tab
-            items={{
-              tab: items.audit,
-              Status: items.auditStatus,
-              currentState: items.auditClass
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === AUDIT ? "sel" : GOR_NORMAL_TAB
-            }
-            subIcons={items.auditIcon}
-          />
-        </Link>
-
-        <Link
-          to="/inventory"
-          onClick={this.handleTabClick.bind(this, INVENTORY)}
-        >
-          <Tab
-            items={{
-              tab: items.inventory,
-              Status: items.inventoryStatus,
-              currentState: ""
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === INVENTORY
-                ? "sel"
-                : GOR_NORMAL_TAB
-            }
-            subIcons={false}
-          />
-        </Link>
-
-        <Link
-          to="/system/sysOverview"
-          onClick={this.handleTabClick.bind(this, SYSTEM)}
-        >
-          <Tab
-            items={{
-              tab: items.system,
-              Status: items.systemStatus,
-              currentState: items.systemClass
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === SYSTEM ? "sel" : GOR_NORMAL_TAB
-            }
-            subIcons={true}
-          />
-        </Link>
-
-        <Link to="/users" onClick={this.handleTabClick.bind(this, USERS)}>
-          <Tab
-            items={{
-              tab: items.users,
-              Status: items.usersStatus,
-              currentState: ""
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === USERS ? "sel" : GOR_NORMAL_TAB
-            }
-            subIcons={false}
-          />
-        </Link>
-
-        <Link
-          to="/reports/operationsLog"
-          onClick={this.handleTabClick.bind(this, REPORTS)}
-        >
-          <Tab
-            items={{ tab: items.reports }}
-            changeClass={
-              this.props.tab.toUpperCase() === REPORTS ? "sel" : GOR_NORMAL_TAB
-            }
-            subIcons={false}
-          />
-        </Link>
-
-        <Link
-          to="reports/reportsdownload"
-          onClick={this.handleTabClick.bind(this, DOWNLOADS)}
-        >
-          <Tab
-            items={{
-              tab: items.downloads
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === DOWNLOADS
-                ? "sel"
-                : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        <Link
-          to="/notification/notificationlist"
-          onClick={this.handleTabClick.bind(this, CUSTOMERNOTIFICATIONS)}
-        >
-          <Tab
-            items={{
-              tab: items.customernotifications
-            }}
-            changeClass={
-              this.props.tab.toUpperCase() === CUSTOMERNOTIFICATIONS
-                ? "sel"
-                : GOR_NORMAL_TAB
-            }
-          />
-        </Link>
-
-        {showUtilityTab ? (
+        {this.props.tabConfig.OVERVIEW === "true" ? (
           <Link
-            to="/utilities"
-            onClick={this.handleTabClick.bind(this, UTILITIES)}
+            to="/overview"
+            onClick={this.handleTabClick.bind(this, OVERVIEW)}
           >
             <Tab
-              items={{ tab: items.utilities, Status: "", currentState: "" }}
+              items={{
+                tab: items.overview,
+                Status: items.overviewStatus,
+                currentState: items.overviewClass
+              }}
               changeClass={
-                this.props.tab.toUpperCase() === UTILITIES
+                this.props.tab.toUpperCase() === OVERVIEW ||
+                this.props.tab === "md"
                   ? "sel"
                   : GOR_NORMAL_TAB
               }
               subIcons={false}
             />
           </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.OUTBOUND === "true" ? (
+          <Link
+            to="/orders/orderslist"
+            onClick={this.handleTabClick.bind(this, OUTBOUND)}
+          >
+            <Tab
+              items={{
+                tab: items.outbound
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === OUTBOUND
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.INBOUND === "true" ? (
+          <Link
+            to="/inbound/putlist"
+            onClick={this.handleTabClick.bind(this, INBOUND)}
+          >
+            <Tab
+              items={{
+                tab: items.inbound
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === INBOUND
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.EXCEPTOINS === "true" ? (
+          <Link
+            to="/exception/exceptionlist"
+            onClick={this.handleTabClick.bind(this, EXCEPTIONS)}
+          >
+            <Tab
+              items={{
+                tab: items.exceptions
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === EXCEPTIONS
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.AUDIT === "true" ? (
+          <Link
+            to="/audit/auditlisting"
+            onClick={this.handleTabClick.bind(this, AUDIT)}
+          >
+            <Tab
+              items={{
+                tab: items.audit,
+                Status: items.auditStatus,
+                currentState: items.auditClass
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === AUDIT ? "sel" : GOR_NORMAL_TAB
+              }
+              subIcons={items.auditIcon}
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.INVENTORY === "true" ? (
+          <Link
+            to="/inventory"
+            onClick={this.handleTabClick.bind(this, INVENTORY)}
+          >
+            <Tab
+              items={{
+                tab: items.inventory,
+                Status: items.inventoryStatus,
+                currentState: ""
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === INVENTORY
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+              subIcons={false}
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.SYSTEM === "true" ? (
+          <Link
+            to="/system/sysOverview"
+            onClick={this.handleTabClick.bind(this, SYSTEM)}
+          >
+            <Tab
+              items={{
+                tab: items.system,
+                Status: items.systemStatus,
+                currentState: items.systemClass
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === SYSTEM ? "sel" : GOR_NORMAL_TAB
+              }
+              subIcons={true}
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.USERS === "true" ? (
+          <Link to="/users" onClick={this.handleTabClick.bind(this, USERS)}>
+            <Tab
+              items={{
+                tab: items.users,
+                Status: items.usersStatus,
+                currentState: ""
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === USERS ? "sel" : GOR_NORMAL_TAB
+              }
+              subIcons={false}
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.REPORTS === "true" ? (
+          <Link
+            to="/reports/operationsLog"
+            onClick={this.handleTabClick.bind(this, REPORTS)}
+          >
+            <Tab
+              items={{ tab: items.reports }}
+              changeClass={
+                this.props.tab.toUpperCase() === REPORTS
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+              subIcons={false}
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.DOWNLOADS === "true" ? (
+          <Link
+            to="reports/reportsdownload"
+            onClick={this.handleTabClick.bind(this, DOWNLOADS)}
+          >
+            <Tab
+              items={{
+                tab: items.downloads
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === DOWNLOADS
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.CUSTOMERNOTIFICATION === "true" ? (
+          <Link
+            to="/notification/notificationlist"
+            onClick={this.handleTabClick.bind(this, CUSTOMERNOTIFICATIONS)}
+          >
+            <Tab
+              items={{
+                tab: items.customernotifications
+              }}
+              changeClass={
+                this.props.tab.toUpperCase() === CUSTOMERNOTIFICATIONS
+                  ? "sel"
+                  : GOR_NORMAL_TAB
+              }
+            />
+          </Link>
+        ) : (
+          ""
+        )}
+        {this.props.tabConfig.UTILS === "true" ? (
+          showUtilityTab ? (
+            <Link
+              to="/utilities"
+              onClick={this.handleTabClick.bind(this, UTILITIES)}
+            >
+              <Tab
+                items={{ tab: items.utilities, Status: "", currentState: "" }}
+                changeClass={
+                  this.props.tab.toUpperCase() === UTILITIES
+                    ? "sel"
+                    : GOR_NORMAL_TAB
+                }
+                subIcons={false}
+              />
+            </Link>
+          ) : (
+            ""
+          )
         ) : (
           ""
         )}
@@ -740,6 +789,10 @@ class Tabs extends React.Component {
   }
 }
 
+Tabs.contextTypes = {
+  tabConfig: React.PropTypes.string
+}
+
 function mapStateToProps(state, ownProps) {
   return {
     tab: state.tabSelected.tab || TAB_ROUTE_MAP[OVERVIEW],
@@ -747,7 +800,6 @@ function mapStateToProps(state, ownProps) {
     system_emergency: state.tabsData.system_emergency || false,
     lastEmergencyState: state.tabsData.lastEmergencyState || "none",
     system_data: state.tabsData.system_data || null,
-    lastEmergencyState: state.tabsData.lastEmergencyState,
     breached: state.tabsData.breached,
     users_online: state.tabsData.users_online || 0,
     audit_count: state.tabsData.audit_count || 0,
@@ -763,7 +815,8 @@ function mapStateToProps(state, ownProps) {
     timeZone: state.authLogin.timeOffset,
     zoneDetails: state.tabsData.zoneDetails || {},
     isEmergencyOpen: state.tabsData.isEmergencyOpen,
-    noticationData: state.notificationReducer.noticationData || null
+    noticationData: state.notificationReducer.noticationData || null,
+    tabConfig: ownProps.tabConfig ? JSON.parse(ownProps.tabConfig) : ""
   }
 }
 
@@ -793,4 +846,22 @@ var mapDispatchToProps = function(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs)
+const TAB_CONFIG_QUERY = gql`
+  query {
+    TabsConfiguration {
+      list
+    }
+  }
+`
+const withTabConfig = graphql(TAB_CONFIG_QUERY, {
+  props: data => ({
+    tabConfig:
+      data.data.TabsConfiguration && data.data.TabsConfiguration.list
+        ? data.data.TabsConfiguration.list
+        : ""
+  })
+})
+
+export default compose(withTabConfig)(
+  connect(mapStateToProps, mapDispatchToProps)(Tabs)
+)
