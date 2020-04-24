@@ -1473,6 +1473,16 @@ msgstr ""
         msgid "Internal server error while requesting for audit cancel"
         msgstr ""
 
+        #: audit.cancellation.error.g025
+        msgctxt "audit.cancellation.error.g025"
+        msgid "Audit cancellation failed because of audit status"
+        msgstr ""
+
+        #: audit.cancellation.error.g027
+        msgctxt "audit.cancellation.error.g027"
+        msgid "Audit cancellation failed"
+        msgstr ""
+
         #: audit.cancellation.error.g021
         msgctxt "audit.cancellation.error.g021"
         msgid "Audit Id already sent for cancellation"
@@ -5871,16 +5881,6 @@ msgstr ""
         #: audit.fail.duplicated
         msgctxt "audit.fail.duplicated"
         msgid "Audit could not be duplicated due to network issue"
-        msgstr ""
-
-        #: audit.Cancellation.fail
-        msgctxt "audit.Cancellation.fail"
-        msgid "AUDIT NOT CANCELLED"
-        msgstr ""
-
-        #: audit.duplicate.fail_desc
-        msgctxt "audit.duplicate.fail_desc"
-        msgid "Audit {id} could not be cancelled due to network issue"
         msgstr ""
 
         #: audit.start.changepps
