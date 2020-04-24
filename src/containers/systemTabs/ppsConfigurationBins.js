@@ -9,6 +9,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag'
+import { PPS_BIN_DIRECTION } from '../../constants/appConstants';
 
 class Bins extends React.Component {
     constructor(props) {
@@ -19,17 +20,18 @@ class Bins extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
+        
         if (nextProps.selectedProfile && (!this.props.selectedProfile || nextProps.selectedProfile.profile_name !== this.props.selectedProfile.profile_name || nextProps.selectedPPS.pps_id !== this.props.selectedPPS.pps_id)) {
             /**
              * Profile changed from left hand side pane
              */
 
             if (nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
-                return bin.direction !== 'center'
+                return !PPS_BIN_DIRECTION.includes(bin.direction)   
             }).length !== 0 && !this.state.currentBinDirection) {
                 this.setBinDirection('left')
             } else if (this.state.currentBinDirection && nextProps.selectedProfile && nextProps.selectedProfile.pps_bin_details.filter(function (bin) {
-                return bin.direction !== 'center'
+                return !PPS_BIN_DIRECTION.includes(bin.direction)  
             }).length !== 0) {
                 this.setBinDirection(this.state.currentBinDirection)
             } else {
