@@ -118,6 +118,7 @@ class OperationsLogTab extends React.Component {
     super(props, context)
     this._requestReportDownload = this._requestReportDownload.bind(this)
     this._setFilter = this._setFilter.bind(this)
+    this._resetPage = this._resetPage.bind(this)
     this.subscription = null
     this.state = { query: null, page: 1, subscribed: false }
   }
@@ -195,12 +196,12 @@ class OperationsLogTab extends React.Component {
                   ? Array.isArray(nextProps.location.query.operatingMode)
                     ? nextProps.location.query.operatingMode
                     : [nextProps.location.query.operatingMode]
-                  : null,
+                  : undefined,
                 status: nextProps.location.query.status
                   ? Array.isArray(nextProps.location.query.status)
                     ? nextProps.location.query.status
                     : [nextProps.location.query.status]
-                  : null,
+                  : undefined,
                 timePeriod: timePeriodObj,
                 page: 0,
                 PAGE_SIZE: 100
@@ -234,11 +235,17 @@ class OperationsLogTab extends React.Component {
     }
     let operatingMode = []
     if (
+      query.operatingMode &&
+      query.operatingMode.constructor &&
       query.operatingMode.constructor === Array &&
       query.operatingMode.length > 0
     ) {
       operatingMode = [...query.operatingMode]
-    } else if (query.operatingMode.constructor === String) {
+    } else if (
+      query.operatingMode &&
+      query.operatingMode.constructor &&
+      query.operatingMode.constructor === String
+    ) {
       operatingMode.push(query.operatingMode)
     } else {
       operatingMode = ["any"]
@@ -319,12 +326,12 @@ class OperationsLogTab extends React.Component {
               ? Array.isArray(self.props.location.query.operatingMode)
                 ? self.props.location.query.operatingMode
                 : [self.props.location.query.operatingMode]
-              : null,
+              : undefined,
             status: self.props.location.query.status
               ? Array.isArray(self.props.location.query.status)
                 ? self.props.location.query.status
                 : [self.props.location.query.status]
-              : null,
+              : undefined,
             timePeriod: self.props.location.query.time_period
               ? {
                   value: self.props.location.query.time_period.split("_")[0],
@@ -362,6 +369,9 @@ class OperationsLogTab extends React.Component {
       }
     }
   }
+  _resetPage() {
+    this.setState({ page: 1 }, () => {})
+  }
 
   render() {
     var _this = this
@@ -385,6 +395,7 @@ class OperationsLogTab extends React.Component {
           }}
         >
           <OperationsFilter
+            resetPage={this._resetPage}
             refreshList={this._clearFilter.bind(this)}
             refreshedAt={this.props.refreshedAt}
             showOperationsLogFilter={this.props.showOperationsLogFilter.bind(
