@@ -159,6 +159,7 @@ class OperationsFilter extends React.Component {
   }
 
   _applyFilter() {
+    this.props.resetPage()
     let filterState = this.state,
       _query = {}
     if (filterState.searchQuery) {
