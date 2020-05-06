@@ -1938,6 +1938,11 @@ msgstr ""
         msgid "AUDIT ID"
         msgstr ""
 
+        #: audit.inputField.name
+        msgctxt "audit.inputField.name"
+        msgid "AUDIT NAME"
+        msgstr ""
+
         #: audit.inputField.pps
         msgctxt "audit.inputField.pps"
         msgid "PPS ID"
@@ -1951,6 +1956,11 @@ msgstr ""
         #: audit.inputField.location
         msgctxt "audit.inputField.location"
         msgid "LOCATION ID"
+        msgstr ""
+
+        #: audit.inputField.order_no
+        msgctxt "audit.inputField.order_no"
+        msgid "ORDER NO (Max. 100)"
         msgstr ""
 
         #: audit.inputField.fromdate
@@ -1981,6 +1991,16 @@ msgstr ""
         #: audit.tokenfield.createdby
         msgctxt "audit.tokenfield.createdby"
         msgid "CREATED BY"
+        msgstr ""
+
+        #: audit.tokenfield.inventoryfound
+        msgctxt "audit.tokenfield.inventoryfound"
+        msgid "INVENTORY FOUND"
+        msgstr ""
+
+        #: audit.tokenfield.source
+        msgctxt "audit.tokenfield.source"
+        msgid "SOURCE"
         msgstr ""
 
         #: audit.token1.all
@@ -2036,6 +2056,31 @@ msgstr ""
         #: audit.token2.paused
         msgctxt "audit.token2.paused"
         msgid "Paused"
+        msgstr ""
+
+        #: audit.token4.all
+        msgctxt "audit.token4.all"
+        msgid "Any"
+        msgstr ""
+
+        #: audit.token4.less_than_expected
+        msgctxt "audit.token4.less_than_expected"
+        msgid "Less Than Actual"
+        msgstr ""
+
+        #: audit.token4.more_than_expected
+        msgctxt "audit.token4.more_than_expected"
+        msgid "More Than Actual"
+        msgstr ""
+
+        #: audit.token4.system
+        msgctxt "audit.token4.system"
+        msgid "System"
+        msgstr ""
+
+        #: audit.token4.manual
+        msgctxt "audit.token4.manual"
+        msgid "Manual"
         msgstr ""
 
         #: gor.filter.filterLabel
@@ -4096,6 +4141,11 @@ msgstr ""
         #: operationsLog.table.noData
         msgctxt "operationsLog.table.noData"
         msgid "No Data Found"
+        msgstr ""
+
+        #: operationLog.table.externalId
+        msgctxt "operationLog.table.externalId"
+        msgid "External ID"
         msgstr ""
 
         #: reportsTab.operationsLog

@@ -1762,7 +1762,6 @@
     "defaultMessage": "Audit cancellation failed",
     "filepath": "./src/constants/messageConstants.js"
   },
-
   {
     "id": "audit.cancellation.error.g021",
     "description": "Audit Id already sent for cancellation",
@@ -2281,6 +2280,11 @@
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
+    "id": "audit.inputField.name",
+    "defaultMessage": "AUDIT NAME",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
     "id": "audit.inputField.pps",
     "defaultMessage": "PPS ID",
     "filepath": "./src/containers/auditTab/auditFilter.js"
@@ -2293,6 +2297,11 @@
   {
     "id": "audit.inputField.location",
     "defaultMessage": "LOCATION ID",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.inputField.order_no",
+    "defaultMessage": "ORDER NO (Max. 100)",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2323,6 +2332,16 @@
   {
     "id": "audit.tokenfield.createdby",
     "defaultMessage": "CREATED BY",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.tokenfield.inventoryfound",
+    "defaultMessage": "INVENTORY FOUND",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.tokenfield.source",
+    "defaultMessage": "SOURCE",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -2378,6 +2397,31 @@
   {
     "id": "audit.token2.paused",
     "defaultMessage": "Paused",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.all",
+    "defaultMessage": "Any",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.less_than_expected",
+    "defaultMessage": "Less Than Expected",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.more_than_expected",
+    "defaultMessage": "More Than Expected",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.system",
+    "defaultMessage": "System",
+    "filepath": "./src/containers/auditTab/auditFilter.js"
+  },
+  {
+    "id": "audit.token4.manual",
+    "defaultMessage": "Manual",
     "filepath": "./src/containers/auditTab/auditFilter.js"
   },
   {
@@ -5490,9 +5534,9 @@
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
-    "id": "operationLog.table.requestId",
-    "description": "Request ID",
-    "defaultMessage": "REQUEST ID",
+    "id": "operationLog.table.externalId",
+    "description": "External ID",
+    "defaultMessage": "External ID",
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
@@ -5523,6 +5567,12 @@
     "id": "operationLog.table.timestamp",
     "description": "Status for PPS",
     "defaultMessage": "TIMESTAMP",
+    "filepath": "./src/containers/reportsTab/operationsLogTable.js"
+  },
+  {
+    "id": "operationLog.table.requestId",
+    "description": "Request ID",
+    "defaultMessage": "REQUEST ID",
     "filepath": "./src/containers/reportsTab/operationsLogTable.js"
   },
   {
@@ -8075,18 +8125,6 @@
     "id": "audit.fail.duplicated",
     "description": "audit edit fail description",
     "defaultMessage": "Audit could not be duplicated due to network issue",
-    "filepath": "./src/utilities/codeToString.js"
-  },
-  {
-    "id": "audit.Cancellation.fail",
-    "description": "audit not cancelled",
-    "defaultMessage": "AUDIT NOT CANCELLED",
-    "filepath": "./src/utilities/codeToString.js"
-  },
-  {
-    "id": "audit.duplicate.fail_desc",
-    "description": "audit duplicate fail description",
-    "defaultMessage": "Audit {id} could not be cancelled due to network issue",
     "filepath": "./src/utilities/codeToString.js"
   },
   {
