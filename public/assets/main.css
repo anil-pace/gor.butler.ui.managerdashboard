@@ -1028,7 +1028,7 @@ body {
   height: 35px;
   z-index: 1;
   top: 2.75rem;
-  z-index:1;
+  z-index: 1;
   display: block;
   padding-right: 3px;
   width: 251px;
@@ -6092,7 +6092,7 @@ button:disabled {
 }
 
 .gor-filter-wrap {
-  width: 350px;
+  width: 360px;
   height: 614px;
   background-color: #ffffff;
   box-shadow: -3px 0 7px 0 rgba(0, 0, 0, 0.3);
@@ -6197,6 +6197,14 @@ button:disabled {
   margin-left: 20px;
 }
 
+.gor-filter-input-warning {
+  font-size: 12px;
+  font-weight: 600;
+  color: red;
+  padding-top: 1px;
+  margin-left: 20px;
+}
+
 .gor-filter-token-wrap {
   border-radius: 3px;
   background-color: #ffffff;
@@ -6249,15 +6257,15 @@ button:disabled {
 }
 
 .gor-filter-body-filterToken-section1 {
-  width: 50%;
+  width: 57%;
   display: inline-block;
   float: left;
 }
 
 .gor-filter-body-filterToken-section2 {
-  width: 45%;
+  width: 43%;
   display: inline-block;
-  float: left;
+  float: right;
 }
 
 .gor-filter-token-container {
@@ -6290,7 +6298,7 @@ button:disabled {
 }
 
 .gor-filterBtn-btn {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   height: 35px;
   font-size: 14px;
   color: #666666;
@@ -6305,7 +6313,7 @@ button:disabled {
 }
 
 .gor-filterBtn-applied {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   min-width: 125px;
   height: 35px;
   font-size: 14px;
@@ -6319,7 +6327,7 @@ button:disabled {
 }
 
 .gor-download-button {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   min-width: 125px;
   height: 35px;
   font-size: 14px;
@@ -7501,21 +7509,22 @@ button:disabled {
 .table-container .table-header .cell {
   font-weight: bold;
   border: none;
-  border-top: 1px solid #DCDCDC;
-  border-bottom: 1px solid #DCDCDC;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
   background-color: #fff;
   padding: 20px 5px;
+  padding-left: 5px;
   cursor: pointer;
 }
 
 .table-container .table-header .cell.asc:after {
-  content: '↑';
+  content: "↑";
   margin-left: 2px;
   height: 100%;
 }
 
 .table-container .table-header .cell.desc:after {
-  content: '↓';
+  content: "↓";
   margin-left: 2px;
   line-height: 100%;
 }
@@ -7550,7 +7559,7 @@ button:disabled {
 }
 
 .table-container.table-striped .table-body .row:nth-child(even) {
-  background-color: #FaFaFa;
+  background-color: #fafafa;
 }
 
 .table-container.table-striped .table-body .row:nth-child(odd) {
@@ -7558,7 +7567,7 @@ button:disabled {
 }
 
 .table-container.table-hover .table-body .row:hover {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 @media all and (max-width: 43.125em) {
@@ -7571,7 +7580,7 @@ button:disabled {
     display: block;
     background: #222;
     color: #fff;
-    padding: .25em .5em;
+    padding: 0.25em 0.5em;
     position: absolute;
     top: 0;
     left: 0;
