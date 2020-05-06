@@ -1,11 +1,11 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag"
 export const auditNeedRefreshFlag = gql`
   query {
     auditNeedRefreshFlag @client {
       auditRefreshFlag
     }
   }
-`;
+`
 export const auditEditDupData = gql`
   query {
     auditEditDupData @client {
@@ -22,14 +22,14 @@ export const auditEditDupData = gql`
       auditValidationSpinner
     }
   }
-`;
+`
 export const auditSpinnerState = gql`
   query {
     auditSpinnerstatus @client {
       auditSpinner
     }
   }
-`;
+`
 export const auditClientData = gql`
   query {
     auditFilter @client {
@@ -44,12 +44,15 @@ export const auditClientData = gql`
           AUDIT_TYPE
           STATUS
           CREATED_BY
+          INVENTORY_FOUND
+          SOURCE
         }
         searchQuery {
           AUDIT_TASK_ID
           SPECIFIC_PPS_ID
           SPECIFIC_SKU_ID
           SPECIFIC_LOCATION_ID
+          ORDER_NO
           FROM_DATE
           TO_DATE
         }
@@ -58,11 +61,13 @@ export const auditClientData = gql`
           AUDIT_TYPE
           STATUS
           CREATED_BY
+          INVENTORY_FOUND
+          SOURCE
         }
       }
     }
   }
-`;
+`
 export const itemSearchClientData = gql`
   query {
     itemSearchFilter @client {
@@ -88,7 +93,7 @@ export const itemSearchClientData = gql`
       }
     }
   }
-`;
+`
 
 export const auditClientPPSData = gql`
   query {
@@ -98,7 +103,7 @@ export const auditClientPPSData = gql`
       auditDetails
     }
   }
-`;
+`
 
 export const itemSearchClientPPSData = gql`
   query {
@@ -108,7 +113,7 @@ export const itemSearchClientPPSData = gql`
       itemSearchDetails
     }
   }
-`;
+`
 export const auditResolveData = gql`
   query {
     auditResolveData @client {
@@ -117,14 +122,14 @@ export const auditResolveData = gql`
       datachange
     }
   }
-`;
+`
 export const auditResolveSpinnerState = gql`
   query {
     auditSpinnerstatus @client {
       resolveAuditSpinner
     }
   }
-`;
+`
 export const auditViewSpinnerState = gql`
   query {
     auditSpinnerstatus @client {
@@ -132,11 +137,11 @@ export const auditViewSpinnerState = gql`
       viewAuditSpinner
     }
   }
-`;
+`
 export const auditSelectedData = gql`
   query {
     ppsCheckedData @client {
       checkedAudit
     }
   }
-`;
+`
