@@ -1,5 +1,5 @@
 .gor-filter-wrap {
-  width: 360px;
+  width: 350px;
   height: 614px;
   background-color: #ffffff;
   box-shadow: -3px 0 7px 0 rgba(0, 0, 0, 0.3);
@@ -99,13 +99,7 @@
   padding-top: 15px;
   margin-left: 20px;
 }
-.gor-filter-input-warning {
-  font-size: 12px;
-  font-weight: 600;
-  color: red;
-  padding-top: 1px;
-  margin-left: 20px;
-}
+
 .gor-filter-token-wrap {
   border-radius: 3px;
   background-color: #ffffff;
@@ -157,15 +151,15 @@
   padding-bottom: 11px;
 }
 .gor-filter-body-filterToken-section1 {
-  width: 57%;
+  width: 50%;
   display: inline-block;
   float: left;
 }
 
 .gor-filter-body-filterToken-section2 {
-  width: 43%;
+  width: 45%;
   display: inline-block;
-  float: right;
+  float: left;
 }
 
 .gor-filter-token-container {
@@ -198,7 +192,7 @@
 }
 
 .gor-filterBtn-btn {
-  font-family: "Source Sans Pro Bold", sans-serif;
+  font-family: 'Source Sans Pro Bold', sans-serif;
   height: 35px;
   font-size: 14px;
   color: #666666;
@@ -213,7 +207,7 @@
 }
 
 .gor-filterBtn-applied {
-  font-family: "Source Sans Pro Bold", sans-serif;
+  font-family: 'Source Sans Pro Bold', sans-serif;
   min-width: 125px;
   height: 35px;
   font-size: 14px;
@@ -227,7 +221,7 @@
 }
 
 .gor-download-button {
-  font-family: "Source Sans Pro Bold", sans-serif;
+  font-family: 'Source Sans Pro Bold', sans-serif;
   min-width: 125px;
   height: 35px;
   font-size: 14px;

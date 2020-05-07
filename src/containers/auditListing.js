@@ -239,8 +239,6 @@ class AuditTab extends React.Component {
             toDate: this.props.location.query.toDate || "",
             auditType: this.props.location.query.auditType || "",
             createdBy: this.props.location.query.createdBy || "",
-            inventoryFound: this.props.location.query.inventoryFound || "",
-            creatorName: this.props.location.query.creatorName || "",
             pageSize: pageSize,
             pageNo: 1
           }
@@ -307,52 +305,6 @@ class AuditTab extends React.Component {
       //.. all what you put in here you will get access in the modal props ;),
     })
   }
-  /**
-   * The method will update the subscription packet
-   * and will fetch the data from the socket.
-   * @private
-   */
-
-  updateSubscription(variables) {
-    let pageNo = this.props.currentPageNumber
-    let pageSize = pageNo * 10 || 10
-    this.subscription = this.props.subscribeToMore({
-      variables: {
-        input: {
-          skuId: this.props.location.query.skuId || "",
-          locationId: this.props.location.query.locationId || "",
-          taskId: this.props.location.query.taskId || "",
-          taskName: this.props.location.query.taskName || "",
-          orderNo: this.props.location.query.orderNo || "",
-          ppsId: this.props.location.query.ppsId || "",
-          operatingMode: this.props.location.query.operatingMode || "",
-          status: this.props.location.query.status || "",
-          fromDate: this.props.location.query.fromDate || "",
-          toDate: this.props.location.query.toDate || "",
-          auditType: this.props.location.query.auditType || "",
-          createdBy: this.props.location.query.createdBy || "",
-          inventoryFound: this.props.location.query.inventoryFound || "",
-          creatorName: this.props.location.query.creatorName || "",
-          pageSize: pageSize,
-          pageNo: 1
-        }
-      },
-      document: AUDIT_SUBSCRIPTION_QUERY,
-      notifyOnNetworkStatusChange: true,
-      updateQuery: (previousResult, newResult) => {
-        return Object.assign(
-          {},
-          {
-            AuditList: {
-              list: newResult.subscriptionData.data.AuditList.list,
-              __typename: newResult.subscriptionData.data.AuditList.__typename
-            },
-            dataFromWS: true
-          }
-        )
-      }
-    })
-  }
 
   _refreshList(query) {
     this.props.setAuditSpinner(true)
@@ -382,16 +334,6 @@ class AuditTab extends React.Component {
               ? query.createdBy.constructor === Array
                 ? query.createdBy
                 : [query.createdBy]
-              : [ALL],
-            INVENTORY_FOUND: query.inventoryFound
-              ? query.inventoryFound.constructor === Array
-                ? query.inventoryFound
-                : [query.inventoryFound]
-              : [ALL],
-            SOURCE: query.creatorName
-              ? query.creatorName.constructor === Array
-                ? query.creatorName
-                : [query.creatorName]
               : [ALL]
           },
           searchQuery: {
@@ -399,8 +341,6 @@ class AuditTab extends React.Component {
             SPECIFIC_SKU_ID: query.skuId || "",
             SPECIFIC_LOCATION_ID: query.locationId || "",
             AUDIT_TASK_ID: query.taskId || "",
-            AUDIT_TASK_NAME: query.taskName || "",
-            ORDER_NO: query.orderNo || "",
             SPECIFIC_PPS_ID: query.ppsId || "",
             FROM_DATE: query.fromDate || "",
             TO_DATE: query.toDate || ""
@@ -409,9 +349,7 @@ class AuditTab extends React.Component {
             __typename: "AuditFilterDefaultToken",
             AUDIT_TYPE: [ANY],
             STATUS: [ALL],
-            CREATED_BY: [ALL],
-            INVENTORY_FOUND: [ALL],
-            SOURCE: [ALL]
+            CREATED_BY: [ALL]
           }
         })
       this.props.client
@@ -422,8 +360,6 @@ class AuditTab extends React.Component {
               skuId: this.props.location.query.skuId || "",
               locationId: this.props.location.query.locationId || "",
               taskId: this.props.location.query.taskId || "",
-              taskName: this.props.location.query.taskName || "",
-              orderNo: this.props.location.query.orderNo || "",
               ppsId: this.props.location.query.ppsId || "",
               operatingMode: this.props.location.query.operatingMode || "",
               status: this.props.location.query.status || "",
@@ -431,8 +367,6 @@ class AuditTab extends React.Component {
               toDate: this.props.location.query.toDate || "",
               auditType: this.props.location.query.auditType || "",
               createdBy: this.props.location.query.createdBy || "",
-              inventoryFound: this.props.location.query.inventoryFound || "",
-              creatorName: this.props.location.query.creatorName || "",
               pageSize: 10,
               pageNo: pageNo || 1
             }
@@ -473,16 +407,12 @@ class AuditTab extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
-        INVENTORY_FOUND: [ALL],
-        SOURCE: [ALL],
         __typename: "AuditFilterTokenSelected"
       },
       searchQuery: {
         SPECIFIC_SKU_ID: null,
         SPECIFIC_LOCATION_ID: null,
         AUDIT_TASK_ID: null,
-        AUDIT_TASK_NAME: null,
-        ORDER_NO: null,
         SPECIFIC_PPS_ID: null,
         FROM_DATE: null,
         TO_DATE: null,
@@ -492,8 +422,6 @@ class AuditTab extends React.Component {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
-        INVENTORY_FOUND: [ALL],
-        SOURCE: [ALL],
         __typename: "AuditFilterDefaultToken"
       }
     })
@@ -1105,12 +1033,6 @@ var mapDispatchToProps = function(dispatch) {
     },
     notifyFail: function(data) {
       dispatch(notifyFail(data))
-    },
-    initDataSentCall: function(data) {
-      dispatch(setWsAction({ type: WS_ONSEND, data: data }))
-    },
-    updateSubscriptionPacket: function(data) {
-      dispatch(updateSubscriptionPacket(data))
     }
   }
 }
@@ -1155,8 +1077,6 @@ const withQuery = graphql(AUDIT_QUERY, {
           skuId: location.query.skuId || "",
           locationId: location.query.locationId || "",
           taskId: location.query.taskId || "",
-          taskName: location.query.taskName || "",
-          orderNo: location.query.orderNo || "",
           ppsId: location.query.ppsId || "",
           operatingMode: location.query.operatingMode || "",
           status: location.query.status || "",
@@ -1164,9 +1084,6 @@ const withQuery = graphql(AUDIT_QUERY, {
           toDate: location.query.toDate || "",
           auditType: location.query.auditType || "",
           createdBy: location.query.createdBy || "",
-          inventoryFound: location.query.inventoryFound || "",
-          creatorName: location.query.creatorName || "",
-
           pageSize: 10,
           pageNo: location.query.page || 1
         }
