@@ -194,7 +194,11 @@ export function ResponseParse(store, res) {
 
     case EMERGENCY:
       store.dispatch(recievefireHazardDetails(res))
-      if (res.complete_data[0].emergency_type === EMERGENCY_FIRE)
+      console.log(res.complete_data[0].emergency_type)
+      if (
+        res.complete_data[0].emergency_type === EMERGENCY_FIRE &&
+        res.complete_data[0].emergency_data.source_of_fire !== "none"
+      )
         store.dispatch(setFireHazrdFlag(false))
       break
     default:
