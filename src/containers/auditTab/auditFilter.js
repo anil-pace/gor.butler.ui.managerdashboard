@@ -499,7 +499,7 @@ class AuditFilter extends React.Component {
       filterState.tokenSelected["SOURCE"] &&
       filterState.tokenSelected["SOURCE"][0] !== ALL
     ) {
-      _query.creatorName = filterState.tokenSelected["SOURCE"] //change here
+      _query.creatorName = filterState.tokenSelected["SOURCE"]
     }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
@@ -532,31 +532,31 @@ class AuditFilter extends React.Component {
     }
     _query.pageNo = this.props.currentPage
     _query.pageSize = this.props.totalResults
-    hashHistory.push({ pathname: "/audit/auditlisting", query: _query })
+    this.setFilterState(_query)
     this.props.filterApplied(true)
-    this.props.updateSubscription(true)
+    hashHistory.push({ pathname: "/audit/auditlisting", query: _query })
     this.props.showAuditFilter(false)
   }
 
-  _clearFilter() {
+  setFilterState(query = {}) {
     this.props.auditfilterState({
       tokenSelected: {
-        AUDIT_TYPE: [ANY],
-        STATUS: [ALL],
-        CREATED_BY: [ALL],
-        INVENTORY_FOUND: [ALL],
-        SOURCE: [ALL],
+        AUDIT_TYPE: query.auditType || [ANY],
+        STATUS: query.status || [ALL],
+        CREATED_BY: query.createdBy || [ALL],
+        INVENTORY_FOUND: query.inventoryFound || [ALL],
+        SOURCE: query.creatorName || [ALL],
         __typename: "AuditFilterTokenSelected"
       },
       searchQuery: {
-        SPECIFIC_SKU_ID: null,
-        SPECIFIC_LOCATION_ID: null,
-        AUDIT_TASK_ID: null,
-        AUDIT_TASK_NAME: null,
-        ORDER_NO: null,
-        SPECIFIC_PPS_ID: null,
-        FROM_DATE: null,
-        TO_DATE: null,
+        SPECIFIC_SKU_ID: query.skuId || null,
+        SPECIFIC_LOCATION_ID: query.locationId || null,
+        AUDIT_TASK_ID: query.taskId || null,
+        AUDIT_TASK_NAME: query.taskName || null,
+        ORDER_NO: query.orderNo || null,
+        SPECIFIC_PPS_ID: query.ppsId || null,
+        FROM_DATE: query.fromDate || null,
+        TO_DATE: query.toDate || null,
         __typename: "AuditFilterSearchQuery"
       },
       defaultToken: {
@@ -568,6 +568,10 @@ class AuditFilter extends React.Component {
         __typename: "AuditFilterDefaultToken"
       }
     })
+  }
+
+  _clearFilter() {
+    this.setFilterState()
     this.props.filterApplied(false)
     hashHistory.push({ pathname: "/audit/auditlisting", query: {} })
     this.props.showAuditFilter(false)
