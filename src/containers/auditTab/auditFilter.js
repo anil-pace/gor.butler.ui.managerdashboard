@@ -1,14 +1,14 @@
-import React from 'react'
-import { FormattedMessage } from 'react-intl'
-import Filter from '../../components/tableFilter/filter'
+import React from "react"
+import { FormattedMessage } from "react-intl"
+import Filter from "../../components/tableFilter/filter"
 
-import { connect } from 'react-redux'
-import FilterInputFieldWrap from '../../components/tableFilter/filterInputFieldWrap'
-import FilterTokenWrap from '../../components/tableFilter/filterTokenContainer'
+import { connect } from "react-redux"
+import FilterInputFieldWrap from "../../components/tableFilter/filterInputFieldWrap"
+import FilterTokenWrap from "../../components/tableFilter/filterTokenContainer"
 import {
   handelTokenClick,
   handleInputQuery
-} from '../../components/tableFilter/tableFilterCommonFunctions'
+} from "../../components/tableFilter/tableFilterCommonFunctions"
 import {
   ANY,
   ALL,
@@ -29,13 +29,13 @@ import {
   AUDIT_CANCELLED,
   INPROGRESS,
   SINGLE
-} from '../../constants/frontEndConstants'
-import { hashHistory } from 'react-router'
-import { mappingArray, arrayDiff } from '../../utilities/utils'
-import { graphql, withApollo, compose } from 'react-apollo'
-import gql from 'graphql-tag'
-import { AUDIT_USER_FETCH_QUERY } from './query/serverQuery'
-import { auditClientData } from './query/clientQuery'
+} from "../../constants/frontEndConstants"
+import { hashHistory } from "react-router"
+import { mappingArray, arrayDiff } from "../../utilities/utils"
+import { graphql, withApollo, compose } from "react-apollo"
+import gql from "graphql-tag"
+import { AUDIT_USER_FETCH_QUERY } from "./query/serverQuery"
+import { auditClientData } from "./query/clientQuery"
 class AuditFilter extends React.Component {
   constructor(props) {
     super(props)
@@ -72,51 +72,51 @@ class AuditFilter extends React.Component {
         value: AUDIT_TASK_ID,
         label: (
           <FormattedMessage
-            id='audit.inputField.id'
-            defaultMessage='AUDIT ID'
+            id="audit.inputField.id"
+            defaultMessage="AUDIT ID"
           />
         )
       },
       {
         value: SPECIFIC_PPS_ID,
         label: (
-          <FormattedMessage id='audit.inputField.pps' defaultMessage='PPS ID' />
+          <FormattedMessage id="audit.inputField.pps" defaultMessage="PPS ID" />
         )
       },
       {
         value: SPECIFIC_SKU_ID,
         label: (
-          <FormattedMessage id='audit.inputField.sku' defaultMessage='SKU ID' />
+          <FormattedMessage id="audit.inputField.sku" defaultMessage="SKU ID" />
         )
       },
       {
         value: SPECIFIC_LOCATION_ID,
         label: (
           <FormattedMessage
-            id='audit.inputField.location'
-            defaultMessage='LOCATION ID'
+            id="audit.inputField.location"
+            defaultMessage="LOCATION ID"
           />
         )
       },
       {
         value: FROM_DATE,
         by2value: true,
-        type: 'date',
+        type: "date",
         label: (
           <FormattedMessage
-            id='audit.inputField.fromdate'
-            defaultMessage='FROM DATE'
+            id="audit.inputField.fromdate"
+            defaultMessage="FROM DATE"
           />
         )
       },
       {
         value: TO_DATE,
         by2value: true,
-        type: 'date',
+        type: "date",
         label: (
           <FormattedMessage
-            id='audit.inputField.todate'
-            defaultMessage='TO DATE'
+            id="audit.inputField.todate"
+            defaultMessage="TO DATE"
           />
         )
       }
@@ -137,11 +137,11 @@ class AuditFilter extends React.Component {
 
   _processFilterToken() {
     var tokenAuditTypeField = {
-      value: 'AUDIT_TYPE',
+      value: "AUDIT_TYPE",
       label: (
         <FormattedMessage
-          id='audit.tokenfield.typeAudit'
-          defaultMessage='AUDIT TYPE'
+          id="audit.tokenfield.typeAudit"
+          defaultMessage="AUDIT TYPE"
         />
       )
     }
@@ -149,7 +149,7 @@ class AuditFilter extends React.Component {
     let labelC3 = [
       {
         value: ALL,
-        label: <FormattedMessage id='audit.token3.all' defaultMessage='Any' />
+        label: <FormattedMessage id="audit.token3.all" defaultMessage="Any" />
       }
     ]
     userArr.forEach(data => {
@@ -160,38 +160,38 @@ class AuditFilter extends React.Component {
     })
 
     var tokenStatusField = {
-      value: 'STATUS',
+      value: "STATUS",
       label: (
         <FormattedMessage
-          id='audit.tokenfield.STATUS'
-          defaultMessage='STATUS'
+          id="audit.tokenfield.STATUS"
+          defaultMessage="STATUS"
         />
       )
     }
     var tokenCreatedByField = {
-      value: 'CREATED_BY',
+      value: "CREATED_BY",
       label: (
         <FormattedMessage
-          id='audit.tokenfield.createdby'
-          defaultMessage='CREATED BY'
+          id="audit.tokenfield.createdby"
+          defaultMessage="CREATED BY"
         />
       )
     }
     const labelC1 = [
       {
         value: ANY,
-        label: <FormattedMessage id='audit.token1.all' defaultMessage='Any' />
+        label: <FormattedMessage id="audit.token1.all" defaultMessage="Any" />
       },
       {
         value: SKU,
-        label: <FormattedMessage id='audit.token1.sku' defaultMessage='SKU' />
+        label: <FormattedMessage id="audit.token1.sku" defaultMessage="SKU" />
       },
       {
         value: LOCATION,
         label: (
           <FormattedMessage
-            id='audit.token1.location'
-            defaultMessage='Location'
+            id="audit.token1.location"
+            defaultMessage="Location"
           />
         )
       }
@@ -199,14 +199,14 @@ class AuditFilter extends React.Component {
     const labelC2 = [
       {
         value: ALL,
-        label: <FormattedMessage id='audit.token2.all' defaultMessage='Any' />
+        label: <FormattedMessage id="audit.token2.all" defaultMessage="Any" />
       },
       {
         value: NOT_YET_STARTED,
         label: (
           <FormattedMessage
-            id='audit.token2.notyetstarted'
-            defaultMessage='Not yet started'
+            id="audit.token2.notyetstarted"
+            defaultMessage="Not yet started"
           />
         )
       },
@@ -214,8 +214,8 @@ class AuditFilter extends React.Component {
         value: INPROGRESS,
         label: (
           <FormattedMessage
-            id='audit.token2.inProgress'
-            defaultMessage='In progress'
+            id="audit.token2.inProgress"
+            defaultMessage="In progress"
           />
         )
       },
@@ -223,8 +223,8 @@ class AuditFilter extends React.Component {
         value: REJECTED,
         label: (
           <FormattedMessage
-            id='audit.token2.auditrejected'
-            defaultMessage='Rejected'
+            id="audit.token2.auditrejected"
+            defaultMessage="Rejected"
           />
         )
       },
@@ -232,8 +232,8 @@ class AuditFilter extends React.Component {
         value: TO_BE_RESOLVED,
         label: (
           <FormattedMessage
-            id='audit.token2.toberesolved'
-            defaultMessage='To be resolved'
+            id="audit.token2.toberesolved"
+            defaultMessage="To be resolved"
           />
         )
       },
@@ -241,8 +241,8 @@ class AuditFilter extends React.Component {
         value: AUDIT_CANCELLED,
         label: (
           <FormattedMessage
-            id='audit.token2.cancelled'
-            defaultMessage='Cancelled'
+            id="audit.token2.cancelled"
+            defaultMessage="Cancelled"
           />
         )
       },
@@ -250,15 +250,15 @@ class AuditFilter extends React.Component {
         value: AUDIT_COMPLETED,
         label: (
           <FormattedMessage
-            id='audit.token2.completed'
-            defaultMessage='Completed'
+            id="audit.token2.completed"
+            defaultMessage="Completed"
           />
         )
       },
       {
         value: AUDIT_PAUSED,
         label: (
-          <FormattedMessage id='audit.token2.paused' defaultMessage='Paused' />
+          <FormattedMessage id="audit.token2.paused" defaultMessage="Paused" />
         )
       }
     ]
@@ -310,8 +310,8 @@ class AuditFilter extends React.Component {
         tokenSelected: handelTokenClick(field, value, state, this.state)
       },
       () => {
-        selectedToken = this.state.tokenSelected['AUDIT_TYPE']
-        if (state !== 'addDefault') {
+        selectedToken = this.state.tokenSelected["AUDIT_TYPE"]
+        if (state !== "addDefault") {
           obj.name = mappingArray(selectedToken)
           tokentoRemove = mappingArray(token, selectedToken)
           queryField =
@@ -320,11 +320,11 @@ class AuditFilter extends React.Component {
               : arrayDiff(tempArray, obj.name)
           if (queryField && queryField.length !== 0) {
             this.setState({
-              searchQuery: handleInputQuery('', queryField, this.state)
+              searchQuery: handleInputQuery("", queryField, this.state)
             })
           }
         }
-        if (field == 'AUDIT_TYPE')
+        if (field == "AUDIT_TYPE")
           this.setState({ textboxStatus: JSON.stringify(obj) })
       }
     )
@@ -353,16 +353,16 @@ class AuditFilter extends React.Component {
       _query.auditType = filterState.tokenSelected[AUDIT_TYPE]
     }
     if (
-      filterState.tokenSelected['STATUS'] &&
-      filterState.tokenSelected['STATUS'][0] !== ALL
+      filterState.tokenSelected["STATUS"] &&
+      filterState.tokenSelected["STATUS"][0] !== ALL
     ) {
-      _query.status = filterState.tokenSelected['STATUS']
+      _query.status = filterState.tokenSelected["STATUS"]
     }
     if (
-      filterState.tokenSelected['CREATED_BY'] &&
-      filterState.tokenSelected['CREATED_BY'][0] !== ALL
+      filterState.tokenSelected["CREATED_BY"] &&
+      filterState.tokenSelected["CREATED_BY"][0] !== ALL
     ) {
-      _query.createdBy = filterState.tokenSelected['CREATED_BY']
+      _query.createdBy = filterState.tokenSelected["CREATED_BY"]
     }
 
     if (filterState.searchQuery && filterState.searchQuery[AUDIT_TASK_ID]) {
@@ -389,38 +389,42 @@ class AuditFilter extends React.Component {
     _query.pageNo = this.props.currentPage
     _query.pageSize = this.props.totalResults
 
-    hashHistory.push({ pathname: '/audit/auditlisting', query: _query })
+    hashHistory.push({ pathname: "/audit/auditlisting", query: _query })
+    this.setFilterState(_query)
     this.props.filterApplied(true)
     this.props.updateSubscription(true)
     this.props.showAuditFilter(false)
   }
-
-  _clearFilter() {
+  setFilterState(query = {}) {
     this.props.auditfilterState({
       tokenSelected: {
-        AUDIT_TYPE: [ANY],
-        STATUS: [ALL],
-        CREATED_BY: [ALL],
-        __typename: 'AuditFilterTokenSelected'
+        AUDIT_TYPE: query.auditType || [ANY],
+        STATUS: query.status || [ALL],
+        CREATED_BY: query.createdBy || [ALL],
+        __typename: "AuditFilterTokenSelected"
       },
       searchQuery: {
-        SPECIFIC_SKU_ID: null,
-        SPECIFIC_LOCATION_ID: null,
-        AUDIT_TASK_ID: null,
-        SPECIFIC_PPS_ID: null,
-        FROM_DATE: null,
-        TO_DATE: null,
-        __typename: 'AuditFilterSearchQuery'
+        SPECIFIC_SKU_ID: query.skuId || null,
+        SPECIFIC_LOCATION_ID: query.locationId || null,
+        AUDIT_TASK_ID: query.taskId || null,
+        SPECIFIC_PPS_ID: query.ppsId || null,
+        FROM_DATE: query.fromDate || null,
+        TO_DATE: query.toDate || null,
+        __typename: "AuditFilterSearchQuery"
       },
       defaultToken: {
         AUDIT_TYPE: [ANY],
         STATUS: [ALL],
         CREATED_BY: [ALL],
-        __typename: 'AuditFilterDefaultToken'
+        __typename: "AuditFilterDefaultToken"
       }
     })
+  }
+
+  _clearFilter() {
+    this.setFilterState()
     this.props.filterApplied(false)
-    hashHistory.push({ pathname: '/audit/auditlisting', query: {} })
+    hashHistory.push({ pathname: "/audit/auditlisting", query: {} })
     this.props.showAuditFilter(false)
   }
 
@@ -431,67 +435,67 @@ class AuditFilter extends React.Component {
     return (
       <div>
         <Filter>
-          <div className='gor-filter-header'>
-            <div className='gor-filter-header-h1'>
+          <div className="gor-filter-header">
+            <div className="gor-filter-header-h1">
               <FormattedMessage
-                id='gor.filter.filterLabel'
-                description='label for filter'
-                defaultMessage='Filter data'
+                id="gor.filter.filterLabel"
+                description="label for filter"
+                defaultMessage="Filter data"
               />
             </div>
-            <div className='gor-filter-header-h2' onClick={this._closeFilter}>
+            <div className="gor-filter-header-h2" onClick={this._closeFilter}>
               <FormattedMessage
-                id='gor.filter.hide'
-                description='label for hide'
-                defaultMessage='Hide'
+                id="gor.filter.hide"
+                description="label for hide"
+                defaultMessage="Hide"
               />
             </div>
           </div>
           <div>
             {noOrder ? (
-              <div className='gor-no-result-filter'>
+              <div className="gor-no-result-filter">
                 <FormattedMessage
-                  id='gor.filter.noResult'
-                  description='label for no result'
-                  defaultMessage='No results found, please try again'
+                  id="gor.filter.noResult"
+                  description="label for no result"
+                  defaultMessage="No results found, please try again"
                 />
               </div>
             ) : (
-              ''
+              ""
             )}
           </div>
-          <div className='gor-filter-body'>
-            <div className='gor-filter-body-input-wrap'>{auditSearchField}</div>
-            <div className='gor-filter-body-filterToken-wrap'>
-              <div className='gor-filter-body-filterToken-section1'>
+          <div className="gor-filter-body">
+            <div className="gor-filter-body-input-wrap">{auditSearchField}</div>
+            <div className="gor-filter-body-filterToken-wrap">
+              <div className="gor-filter-body-filterToken-section1">
                 {auditFilterToken.column1token}
               </div>
-              <div className='gor-filter-body-filterToken-section1'>
+              <div className="gor-filter-body-filterToken-section1">
                 {auditFilterToken.column2token}
               </div>
-              <div className='gor-filter-body-filterToken-section1'>
+              <div className="gor-filter-body-filterToken-section1">
                 {auditFilterToken.column3token}
               </div>
             </div>
           </div>
-          <div className='gor-filter-footer'>
-            <span className='gor-filter-footer-h2' onClick={this._clearFilter}>
+          <div className="gor-filter-footer">
+            <span className="gor-filter-footer-h2" onClick={this._clearFilter}>
               <FormattedMessage
-                id='gor.filter.reset'
-                description='label for reset'
-                defaultMessage='Reset'
+                id="gor.filter.reset"
+                description="label for reset"
+                defaultMessage="Reset"
               />
             </span>
-            <div className='gor-filter-btn-wrap'>
-              <button className='gor-add-btn' onClick={this._applyFilter}>
+            <div className="gor-filter-btn-wrap">
+              <button className="gor-add-btn" onClick={this._applyFilter}>
                 {!this.props.auditSpinner ? (
                   <FormattedMessage
-                    id='gor.filter.heading'
-                    description='filter heading'
-                    defaultMessage='Apply filter'
+                    id="gor.filter.heading"
+                    description="filter heading"
+                    defaultMessage="Apply filter"
                   />
                 ) : (
-                  <div className='spinnerImage' />
+                  <div className="spinnerImage" />
                 )}
               </button>
             </div>
@@ -595,7 +599,7 @@ const initialQuery = graphql(AUDIT_USER_FETCH_QUERY, {
   },
   options: ({ match, location }) => ({
     variables: {},
-    fetchPolicy: 'network-only'
+    fetchPolicy: "network-only"
   })
 })
 export default compose(
