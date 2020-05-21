@@ -217,7 +217,8 @@ class Tabs extends React.Component {
     let selTab = Object.values(TAB_ROUTE_MAP).find(el =>
       window.location.hash.includes(el)
     )
-    this.props.tabSelected(TAB_ROUTE_MAP[selTab.toUpperCase()])
+    if (selTab && selTab.toUpperCase())
+      this.props.tabSelected(TAB_ROUTE_MAP[selTab.toUpperCase()])
   }
 
   componentWillReceiveProps(nextProps) {
