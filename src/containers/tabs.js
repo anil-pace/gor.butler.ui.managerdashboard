@@ -213,7 +213,17 @@ class Tabs extends React.Component {
     })
   }
 
+  setInitalSeletedTab() {
+    let selTab = Object.values(TAB_ROUTE_MAP).find(el =>
+      window.location.hash.includes(el)
+    )
+    this.props.tabSelected(TAB_ROUTE_MAP[selTab.toUpperCase()])
+  }
+
   componentWillReceiveProps(nextProps) {
+    if (!window.location.hash.includes(nextProps.tab))
+      this.setInitalSeletedTab()
+
     if (nextProps.noticationData) {
       setTimeout(this.props.setNotificationNull.bind(this), 5000)
     }
