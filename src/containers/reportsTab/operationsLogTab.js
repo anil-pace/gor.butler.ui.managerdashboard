@@ -52,6 +52,7 @@ const OPS_LOG_SUBSCRIPTION_QUERY = gql`
         createdTime
         executionId
         operatingMode
+        externalId
         requestId
         userId
         productInfo {
@@ -186,6 +187,7 @@ class OperationsLogTab extends React.Component {
           variables: (function() {
             return {
               input: {
+                externalId: nextProps.location.query.external_id,
                 requestId: nextProps.location.query.request_id,
                 userId: nextProps.location.query.user_id,
                 skuId: nextProps.location.query.sku_id,
@@ -231,7 +233,6 @@ class OperationsLogTab extends React.Component {
     } else {
       this.props.filterApplied(false)
     }
-
     let operatingMode = []
     if (
       query.operatingMode &&
@@ -288,6 +289,7 @@ class OperationsLogTab extends React.Component {
           input: {
             size: this.props.data.OperationLogList.total,
             requestId: this.props.location.query.request_id,
+            externalId: this.props.location.query.external_id,
             userId: this.props.location.query.user_id,
             username: sessionStorage.getItem("username"),
             skuId: this.props.location.query.sku_id,
@@ -316,6 +318,7 @@ class OperationsLogTab extends React.Component {
         return {
           input: {
             requestId: self.props.location.query.request_id,
+            externalId: self.props.location.query.external_id,
             userId: self.props.location.query.user_id,
             skuId: self.props.location.query.sku_id,
             ppsId: self.props.location.query.pps_id,
@@ -519,6 +522,7 @@ const OPS_LOG_QUERY = gql`
         createdTime
         executionId
         operatingMode
+        externalId
         requestId
         userId
         productInfo {
@@ -537,6 +541,10 @@ const OPS_LOG_QUERY = gql`
           children {
             id
             type
+            children {
+              id
+              type
+            }
           }
         }
 
@@ -546,6 +554,10 @@ const OPS_LOG_QUERY = gql`
           children {
             id
             type
+            children {
+              id
+              type
+            }
           }
         }
 
@@ -588,6 +600,7 @@ const withQuery = graphql(OPS_LOG_QUERY, {
       return {
         input: {
           requestId: location.query.request_id,
+          externalId: location.query.external_id,
           userId: location.query.user_id,
           skuId: location.query.sku_id,
           ppsId: location.query.pps_id,

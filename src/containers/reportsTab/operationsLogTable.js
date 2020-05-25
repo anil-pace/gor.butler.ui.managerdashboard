@@ -55,12 +55,11 @@ class OperationsLogTable extends React.Component {
             <GTableHeaderCell>
               {" "}
               <FormattedMessage
-                id="operationLog.table.requestId"
-                description="Request ID"
-                defaultMessage="REQUEST ID"
+                id="operationLog.table.externalId"
+                description="External ID"
+                defaultMessage="External ID"
               />
             </GTableHeaderCell>
-
             <GTableHeaderCell>
               {" "}
               <FormattedMessage
@@ -105,6 +104,14 @@ class OperationsLogTable extends React.Component {
                 defaultMessage="TIMESTAMP"
               />
             </GTableHeaderCell>
+            <GTableHeaderCell>
+              {" "}
+              <FormattedMessage
+                id="operationLog.table.requestId"
+                description="Request ID"
+                defaultMessage="REQUEST ID"
+              />
+            </GTableHeaderCell>
           </GTableHeader>
           <GTableBody
             data={data_list}
@@ -121,8 +128,7 @@ class OperationsLogTable extends React.Component {
                         : row.status.type}
                     </div>
                   </div>
-
-                  <div className="cell">{row.requestId}</div>
+                  <div className="cell">{row.externalId || "--"}</div>
                   <div className="cell">
                     {(row.productInfo.type || "--") +
                       " " +
@@ -142,7 +148,16 @@ class OperationsLogTable extends React.Component {
                             row.source.children[0].type +
                             "-" +
                             row.source.children[0].id
-                          : "--")
+                          : "--") +
+                        (row.source.children.length &&
+                        row.source.children[0].children &&
+                        row.source.children[0].children[0] &&
+                        row.source.children[0].children[0].type
+                          ? "/" +
+                            row.source.children[0].children[0].type +
+                            "-" +
+                            row.source.children[0].children[0].id
+                          : "-")
                       : "-- --"}
                   </div>
                   <div className="cell">
@@ -156,7 +171,16 @@ class OperationsLogTable extends React.Component {
                             row.destination.children[0].type +
                             "-" +
                             row.destination.children[0].id
-                          : "--")
+                          : "--") +
+                        (row.destination.children.length &&
+                        row.destination.children[0].children &&
+                        row.destination.children[0].children[0] &&
+                        row.destination.children[0].children[0].type
+                          ? "/" +
+                            row.destination.children[0].children[0].type +
+                            "-" +
+                            row.destination.children[0].children[0].id
+                          : "")
                       : "-- --"}
                   </div>
                   <div className="cell">{row.userId}</div>
@@ -171,6 +195,7 @@ class OperationsLogTable extends React.Component {
                       timeZone={self.props.timeOffset}
                     />
                   </div>
+                  <div className="cell">{row.requestId}</div>
                 </GTableRow>
               )
             })}

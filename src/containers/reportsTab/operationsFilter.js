@@ -167,6 +167,15 @@ class OperationsFilter extends React.Component {
         _query.request_id = filterState.searchQuery["request_id"]
       }
 
+      if (filterState.searchQuery["external_id"]) {
+        _query.external_id = filterState.searchQuery["external_id"]
+      }
+      if (filterState.searchQuery["source_id"]) {
+        _query.source_id = filterState.searchQuery["source_id"]
+      }
+      if (filterState.searchQuery["destination_id"]) {
+        _query.destination_id = filterState.searchQuery["destination_id"]
+      }
       if (filterState.searchQuery["pps_id"]) {
         _query.pps_id = filterState.searchQuery["pps_id"]
       }

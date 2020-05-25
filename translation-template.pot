@@ -1938,6 +1938,11 @@ msgstr ""
         msgid "AUDIT ID"
         msgstr ""
 
+        #: audit.inputField.name
+        msgctxt "audit.inputField.name"
+        msgid "AUDIT NAME"
+        msgstr ""
+
         #: audit.inputField.pps
         msgctxt "audit.inputField.pps"
         msgid "PPS ID"
@@ -1951,6 +1956,11 @@ msgstr ""
         #: audit.inputField.location
         msgctxt "audit.inputField.location"
         msgid "LOCATION ID"
+        msgstr ""
+
+        #: audit.inputField.order_no
+        msgctxt "audit.inputField.order_no"
+        msgid "ORDER NO (Max. 100)"
         msgstr ""
 
         #: audit.inputField.fromdate
@@ -1981,6 +1991,16 @@ msgstr ""
         #: audit.tokenfield.createdby
         msgctxt "audit.tokenfield.createdby"
         msgid "CREATED BY"
+        msgstr ""
+
+        #: audit.tokenfield.inventoryfound
+        msgctxt "audit.tokenfield.inventoryfound"
+        msgid "INVENTORY FOUND"
+        msgstr ""
+
+        #: audit.tokenfield.source
+        msgctxt "audit.tokenfield.source"
+        msgid "SOURCE"
         msgstr ""
 
         #: audit.token1.all
@@ -2036,6 +2056,31 @@ msgstr ""
         #: audit.token2.paused
         msgctxt "audit.token2.paused"
         msgid "Paused"
+        msgstr ""
+
+        #: audit.token4.all
+        msgctxt "audit.token4.all"
+        msgid "Any"
+        msgstr ""
+
+        #: audit.token4.less_than_expected
+        msgctxt "audit.token4.less_than_expected"
+        msgid "Less Than Expected"
+        msgstr ""
+
+        #: audit.token4.more_than_expected
+        msgctxt "audit.token4.more_than_expected"
+        msgid "More Than Expected"
+        msgstr ""
+
+        #: audit.token4.system
+        msgctxt "audit.token4.system"
+        msgid "System"
+        msgstr ""
+
+        #: audit.token4.manual
+        msgctxt "audit.token4.manual"
+        msgid "Manual"
         msgstr ""
 
         #: gor.filter.filterLabel
@@ -4098,6 +4143,11 @@ msgstr ""
         msgid "No Data Found"
         msgstr ""
 
+        #: operationLog.table.externalId
+        msgctxt "operationLog.table.externalId"
+        msgid "External ID"
+        msgstr ""
+
         #: reportsTab.operationsLog
         msgctxt "reportsTab.operationsLog"
         msgid "Operations Log"
@@ -4778,6 +4828,51 @@ msgstr ""
         msgid "TIME"
         msgstr ""
 
+        #: ppsclose.thead1.text
+        msgctxt "ppsclose.thead1.text"
+        msgid "PPS ID"
+        msgstr ""
+
+        #: ppsclose.thead2.text
+        msgctxt "ppsclose.thead2.text"
+        msgid "RACKS PENDING"
+        msgstr ""
+
+        #: ppsclose.subhead.racksPending
+        msgctxt "ppsclose.subhead.racksPending"
+        msgid "{sumRackPending}"
+        msgstr ""
+
+        #: ppsclose.thead3.text
+        msgctxt "ppsclose.thead3.text"
+        msgid "ITEMS PENDING"
+        msgstr ""
+
+        #: ppsclose.subhead1.itemPending
+        msgctxt "ppsclose.subhead1.itemPending"
+        msgid "{sumItemsPending}"
+        msgstr ""
+
+        #: ppsclose.thead4.text
+        msgctxt "ppsclose.thead4.text"
+        msgid "ACTION"
+        msgstr ""
+
+        #: pps.mode.confirm.mode.text
+        msgctxt "pps.mode.confirm.mode.text"
+        msgid "Are you sure you want to change mode for all PPS?"
+        msgstr ""
+
+        #: pps.mode.confirm.apply.warning
+        msgctxt "pps.mode.confirm.apply.warning"
+        msgid "Warning: All pps mode change might impact the operations"
+        msgstr ""
+
+        #: pps.configuration.confirm.saveAndApply.profile
+        msgctxt "pps.configuration.confirm.saveAndApply.profile"
+        msgid "SAVE AND APPLY"
+        msgstr ""
+
         #: pps.inputField.id
         msgctxt "pps.inputField.id"
         msgid "PPS ID"
@@ -5131,11 +5226,6 @@ msgstr ""
         #: pps.configuration.confirm.saveAndapply.profile.description
         msgctxt "pps.configuration.confirm.saveAndapply.profile.description"
         msgid "Profile will be applied after pending tasks are completed"
-        msgstr ""
-
-        #: pps.configuration.confirm.saveAndApply.profile
-        msgctxt "pps.configuration.confirm.saveAndApply.profile"
-        msgid "SAVE AND APPLY"
         msgstr ""
 
         #: sysController.table.heading
