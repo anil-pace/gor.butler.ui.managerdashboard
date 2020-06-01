@@ -3581,7 +3581,7 @@
   },
   {
     "id": "audit.inSlot.text",
-    "defaultMessage": "En slot",
+    "defaultMessage": "En slot ",
     "filepath": "./src/containers/auditTab/resolveAudit.js"
   },
   {

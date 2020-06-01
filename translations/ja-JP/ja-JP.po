@@ -2423,8 +2423,8 @@ msgstr "解決"
 
 #: audit.inSlot.text
 msgctxt "audit.inSlot.text"
-msgid "In slot"
-msgstr "スロット内"
+msgid "In slot "
+msgstr "スロット内 "
 
 #: resolveAudit.table.slot
 msgctxt "resolveAudit.table.slot"
