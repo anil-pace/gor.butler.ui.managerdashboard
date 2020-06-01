@@ -3,10 +3,7 @@ export const ENVIRONMENT = "production" // this config needs to be changed when 
 export const REDIRECT_URL = "/cockpit/#/"
 export const PROTOCOL = "https://"
 export const WS_PROTOCOL = "wss://"
-<<<<<<< HEAD
 export const WS_REROUTING = "/api"
-=======
->>>>>>> c4714bf3c... Merged in BSS-24200 (pull request #1072)
 export const WS_URL = WS_PROTOCOL + BASE_URL + "/manager_api/wss"
 export const API_URL = PROTOCOL + BASE_URL + "/api"
 export const API_GATEWAY = API_URL + "/api-gateway"
