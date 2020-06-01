@@ -296,8 +296,8 @@ class PPSFilter extends React.Component {
                 />
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
           <div className="gor-filter-body">
             <div className="gor-filter-body-input-wrap">{ppsSearchField}</div>
@@ -305,7 +305,7 @@ class PPSFilter extends React.Component {
               <div className="gor-filter-body-filterToken-section1">
                 {ppsFilterToken.column1token}
               </div>
-              <div className="gor-filter-body-filterToken-section1">
+              <div className="gor-filter-body-filterToken-section2">
                 {ppsFilterToken.column2token}
               </div>
             </div>
@@ -328,8 +328,8 @@ class PPSFilter extends React.Component {
                     defaultMessage="Apply filter"
                   />
                 ) : (
-                  <div className="spinnerImage"></div>
-                )}
+                    <div className="spinnerImage"></div>
+                  )}
               </button>
             </div>
           </div>
