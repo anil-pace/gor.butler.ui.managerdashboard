@@ -242,8 +242,8 @@ class OperationsFilter extends React.Component {
                 />
               </div>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </div>
           <div className="gor-filter-body">
             <div className="gor-filter-body-filterToken-wrap">
@@ -251,7 +251,7 @@ class OperationsFilter extends React.Component {
                 {olFilterToken.column1token}
                 <div>{olFilterToken.column3token}</div>
               </div>
-              <div className="gor-filter-body-filterToken-section1">
+              <div className="gor-filter-body-filterToken-section2">
                 {olFilterToken.column2token}
               </div>
             </div>
@@ -277,8 +277,8 @@ class OperationsFilter extends React.Component {
                     defaultMessage="Apply filter"
                   />
                 ) : (
-                  <div className="spinnerImage"></div>
-                )}
+                    <div className="spinnerImage"></div>
+                  )}
               </button>
             </div>
           </div>

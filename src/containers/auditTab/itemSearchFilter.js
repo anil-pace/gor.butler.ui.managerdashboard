@@ -46,7 +46,7 @@ class ItemSearchFilter extends React.Component {
       if (
         nextProps.itemSearchFilterState &&
         JSON.stringify(this.state) !==
-          JSON.stringify(nextProps.itemSearchFilterState)
+        JSON.stringify(nextProps.itemSearchFilterState)
       ) {
         this.setState(nextProps.itemSearchFilterState);
       }
@@ -286,8 +286,8 @@ class ItemSearchFilter extends React.Component {
                 />
               </div>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </div>
           <div className='gor-filter-body'>
             <div className='gor-filter-body-input-wrap'>
@@ -297,7 +297,7 @@ class ItemSearchFilter extends React.Component {
               <div className='gor-filter-body-filterToken-section1'>
                 {itemSearchFilterToken.column1token}
               </div>
-              <div className='gor-filter-body-filterToken-section1'>
+              <div className='gor-filter-body-filterToken-section2'>
                 {itemSearchFilterToken.column2token}
               </div>
               <div className='gor-filter-body-filterToken-section1'>
@@ -322,8 +322,8 @@ class ItemSearchFilter extends React.Component {
                     defaultMessage='Apply filter'
                   />
                 ) : (
-                  <div className='spinnerImage' />
-                )}
+                    <div className='spinnerImage' />
+                  )}
               </button>
             </div>
           </div>
@@ -375,21 +375,21 @@ const SET_PAGE_NUMBER = gql`
 `;
 const setPageNumber = graphql(SET_PAGE_NUMBER, {
   props: ({ mutate, ownProps }) => ({
-    setCurrentPageNumber: function(number) {
+    setCurrentPageNumber: function (number) {
       mutate({ variables: { pageNumber: number } });
     }
   })
 });
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } });
     }
   })
 });
 const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
   props: ({ mutate, ownProps }) => ({
-    updateSubscription: function(applied) {
+    updateSubscription: function (applied) {
       mutate({ variables: { isUpdateSubsciption: applied } });
     }
   })
@@ -397,14 +397,14 @@ const setUpdateSubscription = graphql(SET_UPDATE_SUBSCRIPTION, {
 
 const setTextBoxStatus = graphql(SET_TEXT_BOX_STATUS, {
   props: ({ mutate, ownProps }) => ({
-    setTextBoxStatus: function(textBoxName) {
+    setTextBoxStatus: function (textBoxName) {
       mutate({ variables: { textBoxName: textBoxName } });
     }
   })
 });
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    itemSearchfilterState: function(state) {
+    itemSearchfilterState: function (state) {
       mutate({ variables: { state: state } });
     }
   })

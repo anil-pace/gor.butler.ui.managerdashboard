@@ -7,7 +7,7 @@ import { handelTokenClick, handleInputQuery } from '../../components/tableFilter
 import { hashHistory } from 'react-router';
 import { graphql, withApollo, compose } from "react-apollo";
 import gql from 'graphql-tag';
-import {MSU_SOURCE_TYPE_QUERY} from './queries/msuReconfigTab';
+import { MSU_SOURCE_TYPE_QUERY } from './queries/msuReconfigTab';
 
 
 class MsuConfigFilter extends React.Component {
@@ -156,7 +156,7 @@ class MsuConfigFilter extends React.Component {
                             <div className="gor-filter-body-filterToken-section1">
                                 {msuConfigFilterToken.column1token}
                             </div>
-                            <div className="gor-filter-body-filterToken-section1">
+                            <div className="gor-filter-body-filterToken-section2">
                                 {msuConfigFilterToken.column2token}
                             </div>
 
