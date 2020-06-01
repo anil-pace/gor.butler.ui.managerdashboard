@@ -3,10 +3,7 @@ export const ENVIRONMENT = "production" // this config needs to be changed when 
 export const REDIRECT_URL = "/cockpit/#/"
 export const PROTOCOL = "https://"
 export const WS_PROTOCOL = "wss://"
-export const WS_REROUTING = "/api"
 export const WS_URL = WS_PROTOCOL + BASE_URL + "/manager_api/wss"
-export const API_URL = PROTOCOL + BASE_URL + "/api"
-export const API_GATEWAY = API_URL + "/api-gateway"
 export const API_INTEGRATION_SERVICE =
   API_GATEWAY + "/integration-service/wms-integration/butler-core/api"
 export const LOGIN_URL = API_URL + "/auth/token"

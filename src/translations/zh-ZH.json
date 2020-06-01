@@ -1266,8 +1266,8 @@
   },
   {
     "id": "audit.inSlot.text",
-    "description": "In slot",
-    "defaultMessage": "於儲位中"
+    "description": "In slot ",
+    "defaultMessage": "於儲位中 "
   },
   {
     "id": "resolveAudit.table.slot",
@@ -1336,8 +1336,8 @@
   },
   {
     "id": "audit.inSlot.text",
-    "description": "In slot",
-    "defaultMessage": "於儲位中"
+    "description": "In slot ",
+    "defaultMessage": "於儲位中 "
   },
   {
     "id": "resolveAudit.table.slot",
