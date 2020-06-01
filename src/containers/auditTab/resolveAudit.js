@@ -17,8 +17,6 @@ import {ShowError} from '../../../src/utilities/ErrorResponseParser';
 import {auditResolveData,auditResolveSpinnerState} from './query/clientQuery';
 import {AUDIT_RESOLVE_QUERY,AUDIT_RESOLVE_SUBMIT_QUERY} from './query/serverQuery';
 
-
-
 class ResolveAudit extends React.Component{
   constructor(props) 
   {
@@ -193,7 +191,7 @@ var _this=this;
       else {
         slotIdHashMap[columnSlotId]=i;
         slotIdData.slotId=auditDataLine[i].slot_id;
-        slotIdData.slotIdDataLine.push(auditDataLine[i]);
+        slotIdData.slotIdDataLine= this.getSlotIdDataLines(auditDataLine[i])
         slotIdGrouping[columnSlotId]=slotIdData;
         actualMapping[auditDataLine[i].auditLineId]=i;
         slotIdData={slotId:"", slotIdDataLine:[]}
@@ -201,6 +199,20 @@ var _this=this;
     }
     this.actualMapping=actualMapping; //due to grouping, actual mapping is lost. hence storing here
     return slotIdGrouping;
+  }
+
+  
+  getSlotIdDataLines(data){
+    var lines = []
+    let copy = JSON.stringify(data)
+    for(let el in data.anamoly_info){
+      let obj = JSON.parse(copy)
+      obj.actual_quantity= data.anamoly_info[el].actual_quantity
+      obj.expected_quantity=data.anamoly_info[el].expected_quantity
+      obj.attributeDetail = data.anamoly_info[el].name
+      lines.push(obj)
+    }
+    return lines
   }
 
   _renderPDFAtable(data) {
@@ -233,14 +245,25 @@ var _this=this;
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         var auditDataList=new tableRenderer(data[key].slotIdDataLine ? data[key].slotIdDataLine.length : 0);
-        var inSlot=<FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/> 
+        
+        var inSlot=<span><FormattedMessage id="audit.inSlot.text" defaultMessage='In slot '/>{key}:</span> 
         var containerHeight=(auditDataList.getSize())*GOR_USER_TABLE_HEADER_HEIGHT+2;
         auditDataList.newData=data[key].slotIdDataLine;
         resolveTable=<div> 
-                      <div className="gor-auditresolve-pdfa-slot-header">
-                        <span>{inSlot} </span>
-                        <span><b>{key}:</b></span>
-                      </div>
+                      <Table
+                      rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
+                      rowsCount={1}
+                      headerHeight={0}
+                      width={GOR_AUDIT_RESOLVE_WIDTH}
+                      height={GOR_USER_TABLE_HEADER_HEIGHT}
+                      {...this.props}>
+                      <Column cell={inSlot} width={220}/>
+                      <Column width={220}/>
+                      <Column width={220}/>
+                      <Column  columnKey="status" cell={<TextCell data={auditDataList}> </TextCell>} width={220}/>
+                      <Column  columnKey="resolve" cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={this.props.screenId}> </ResolveCell>} width={220}/>
+                      </Table>
+                      
                       <Table
                       rowHeight={GOR_USER_TABLE_HEADER_HEIGHT}
                       rowsCount={auditDataList.getSize()}
@@ -251,8 +274,6 @@ var _this=this;
                       <Column  columnKey="attributeDetail" cell={<TextCell data={auditDataList}/>} width={220}/>
                       <Column  columnKey="expected_quantity" cell={  <TextCell data={auditDataList} />} width={220}/>
                       <Column  columnKey="actual_quantity" cell={  <TextCell data={auditDataList} setClass={GOR_BREACHED_LINES}> </TextCell>} width={220}/>
-                      <Column  columnKey="status" cell={<TextCell data={auditDataList}> </TextCell>} width={220}/>
-                      <Column  columnKey="resolve" cell={  <ResolveCell data={auditDataList} checkStatus={this._checkAuditStatus.bind(this)} screenId={this.props.screenId}> </ResolveCell>} width={220}/>
                     </Table>        
                     </div>
         pdfaResolveTable.push(resolveTable);               
