@@ -905,6 +905,12 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
+    "id": "utiltiy.downloadRports.xlsFormat",
+    "description": "ExceL Spreadsheet (xlsx)",
+    "defaultMessage": "ExceL Spreadsheet (xlsx)",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.grnHistory.clickToDownload",
     "description": "file name",
     "defaultMessage": "Click here to download",
@@ -1762,7 +1768,6 @@
     "defaultMessage": "Audit cancellation failed",
     "filepath": "./src/constants/messageConstants.js"
   },
-
   {
     "id": "audit.cancellation.error.g021",
     "description": "Audit Id already sent for cancellation",
@@ -3545,7 +3550,7 @@
   },
   {
     "id": "audit.inSlot.text",
-    "defaultMessage": "In slot",
+    "defaultMessage": "In slot ",
     "filepath": "./src/containers/auditTab/resolveAudit.js"
   },
   {
@@ -8075,18 +8080,6 @@
     "id": "audit.fail.duplicated",
     "description": "audit edit fail description",
     "defaultMessage": "Audit could not be duplicated due to network issue",
-    "filepath": "./src/utilities/codeToString.js"
-  },
-  {
-    "id": "audit.Cancellation.fail",
-    "description": "audit not cancelled",
-    "defaultMessage": "AUDIT NOT CANCELLED",
-    "filepath": "./src/utilities/codeToString.js"
-  },
-  {
-    "id": "audit.duplicate.fail_desc",
-    "description": "audit duplicate fail description",
-    "defaultMessage": "Audit {id} could not be cancelled due to network issue",
     "filepath": "./src/utilities/codeToString.js"
   },
   {

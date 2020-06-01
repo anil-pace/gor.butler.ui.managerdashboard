@@ -2390,8 +2390,8 @@ msgstr ""
 
         #: audit.inSlot.text
         msgctxt "audit.inSlot.text"
-        msgid "In slot"
-        msgstr "in sleuf"
+        msgid "In slot "
+        msgstr "in sleuf "
 
         #: resolveAudit.table.slot
         msgctxt "resolveAudit.table.slot"

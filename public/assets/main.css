@@ -1028,7 +1028,7 @@ body {
   height: 35px;
   z-index: 1;
   top: 2.75rem;
-  z-index:1;
+  z-index: 1;
   display: block;
   padding-right: 3px;
   width: 251px;
@@ -8529,7 +8529,7 @@ button:disabled {
 }
 
 .pps-configuration-container .pps-bin-action-button {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   width: 113px;
   height: 35px;
   font-size: 14px;
@@ -8545,7 +8545,7 @@ button:disabled {
 
 .pps-configuration-container .pps-bin-next-button,
 .pps-configuration-container .pps-bin-save-apply-button {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   width: auto;
   height: 30px;
   font-size: 14px;
@@ -8570,7 +8570,7 @@ button:disabled {
 }
 
 .pps-configuration-container .pps-bin-back-button {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   width: 113px;
   height: 30px;
   font-size: 14px;
@@ -8588,7 +8588,7 @@ button:disabled {
 
 .pps-configuration-container .pps-bin-cancel-button,
 .pps-configuration-container .pps-bin-save-button {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   width: auto;
   height: 30px;
   font-size: 14px;
@@ -8844,7 +8844,7 @@ button:disabled {
   float: right;
 }
 
-.pps-configuration-container .pps-tag-selection input[type='checkbox'] {
+.pps-configuration-container .pps-tag-selection input[type="checkbox"] {
   margin: 0px;
 }
 
@@ -8977,11 +8977,11 @@ button:disabled {
 }
 
 .gor-create-profile .gor-create-profile-body {
-  font-size: 14px;
-  padding: 0px 1.875rem;
-  min-height: 9.375rem;
+  font-size: 16px;
+  padding: 1.875rem;
+  min-height: 6.25rem;
   display: table;
-  width: 50%;
+  width: 100%;
 }
 
 .gor-create-profile .gor-create-profile-action-button {
@@ -8990,7 +8990,7 @@ button:disabled {
 }
 
 .gor-create-profile .gor-save-profile-btn {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   min-width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
@@ -9006,7 +9006,7 @@ button:disabled {
 }
 
 .gor-create-profile .gor-cancel-btn {
-  font-family: 'Source Sans Pro Bold', sans-serif;
+  font-family: "Source Sans Pro Bold", sans-serif;
   width: 7.0625rem;
   height: 2.1875rem;
   font-size: 14px;
