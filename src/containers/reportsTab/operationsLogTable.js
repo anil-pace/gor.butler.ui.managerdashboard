@@ -117,7 +117,7 @@ class OperationsLogTable extends React.Component {
             data={data_list}
             onScrollHandler={this.props.onScrollHandler}
           >
-            {data_list.map(function(row, idx) {
+            {data_list.map(function (row, idx) {
               return (
                 <GTableRow key={idx} index={idx} data={data_list}>
                   <div className="cell">{row.operatingMode}</div>
@@ -135,52 +135,55 @@ class OperationsLogTable extends React.Component {
                       (row.productInfo.id || "--") +
                       "/" +
                       (row.productInfo.quantity
-                        ? row.productInfo.quantity + " items"
-                        : "--")}
+                        ? row.productInfo.quantity
+                        : "--") +
+                      (row.productInfo.label
+                        ? row.productInfo.label
+                        : " items")}
                   </div>
                   <div className="cell">
                     {row.source
                       ? [row.source.type || "--", row.source.id || "--"].join(
-                          " "
-                        ) +
-                        (row.source.children
-                          ? "/" +
-                            row.source.children[0].type +
-                            "-" +
-                            row.source.children[0].id
-                          : "--") +
-                        (row.source.children.length &&
+                        " "
+                      ) +
+                      (row.source.children
+                        ? "/" +
+                        row.source.children[0].type +
+                        "-" +
+                        row.source.children[0].id
+                        : "--") +
+                      (row.source.children.length &&
                         row.source.children[0].children &&
                         row.source.children[0].children[0] &&
                         row.source.children[0].children[0].type
-                          ? "/" +
-                            row.source.children[0].children[0].type +
-                            "-" +
-                            row.source.children[0].children[0].id
-                          : "-")
+                        ? "/" +
+                        row.source.children[0].children[0].type +
+                        "-" +
+                        row.source.children[0].children[0].id
+                        : "-")
                       : "-- --"}
                   </div>
                   <div className="cell">
                     {row.destination
                       ? [
-                          row.destination.type || "--",
-                          row.destination.id || "--"
-                        ].join(" ") +
-                        (row.destination.children
-                          ? "/" +
-                            row.destination.children[0].type +
-                            "-" +
-                            row.destination.children[0].id
-                          : "--") +
-                        (row.destination.children.length &&
+                        row.destination.type || "--",
+                        row.destination.id || "--"
+                      ].join(" ") +
+                      (row.destination.children
+                        ? "/" +
+                        row.destination.children[0].type +
+                        "-" +
+                        row.destination.children[0].id
+                        : "--") +
+                      (row.destination.children.length &&
                         row.destination.children[0].children &&
                         row.destination.children[0].children[0] &&
                         row.destination.children[0].children[0].type
-                          ? "/" +
-                            row.destination.children[0].children[0].type +
-                            "-" +
-                            row.destination.children[0].children[0].id
-                          : "")
+                        ? "/" +
+                        row.destination.children[0].children[0].type +
+                        "-" +
+                        row.destination.children[0].children[0].id
+                        : "")
                       : "-- --"}
                   </div>
                   <div className="cell">{row.userId}</div>
