@@ -132,7 +132,7 @@ class OperationsLogTab extends React.Component {
   }
   componentWillMount() {
     if (this.props.socketAuthorized && !this.state.subscribed) {
-      this.setState({ subscribed: true }, function() {
+      this.setState({ subscribed: true }, function () {
         this._subscribeData()
       })
     }
@@ -147,14 +147,14 @@ class OperationsLogTab extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.socketAuthorized && !this.state.subscribed) {
-      this.setState({ subscribed: true }, function() {
+      this.setState({ subscribed: true }, function () {
         this._subscribeData(nextProps.location.query)
       })
     }
     if (
       !this.state.query ||
       JSON.stringify(nextProps.location.query) !==
-        JSON.stringify(this.state.query)
+      JSON.stringify(this.state.query)
     ) {
       this.removeSubscription()
       this.setState({ query: nextProps.location.query })
@@ -162,7 +162,7 @@ class OperationsLogTab extends React.Component {
       let time_period = null
       try {
         time_period = nextProps.location.query.time_period
-      } catch (ex) {}
+      } catch (ex) { }
       if (
         !this.subscription &&
         nextProps.data.subscribeToMore &&
@@ -184,7 +184,7 @@ class OperationsLogTab extends React.Component {
         }
         this.subscription = nextProps.data.subscribeToMore({
           document: OPS_LOG_SUBSCRIPTION_QUERY,
-          variables: (function() {
+          variables: (function () {
             return {
               input: {
                 externalId: nextProps.location.query.external_id,
@@ -298,9 +298,9 @@ class OperationsLogTab extends React.Component {
             status: this.props.location.query.status,
             timePeriod: this.props.location.query.time_period
               ? {
-                  value: this.props.location.query.time_period.split("_")[0],
-                  unit: this.props.location.query.time_period.split("_")[1]
-                }
+                value: this.props.location.query.time_period.split("_")[0],
+                unit: this.props.location.query.time_period.split("_")[1]
+              }
               : { value: 0, unit: "" }
           }
         },
@@ -314,7 +314,7 @@ class OperationsLogTab extends React.Component {
   fetchNextResults(page) {
     let self = this
     return self.props.data.fetchMore({
-      variables: (function() {
+      variables: (function () {
         return {
           input: {
             requestId: self.props.location.query.request_id,
@@ -334,9 +334,9 @@ class OperationsLogTab extends React.Component {
               : undefined,
             timePeriod: self.props.location.query.time_period
               ? {
-                  value: self.props.location.query.time_period.split("_")[0],
-                  unit: self.props.location.query.time_period.split("_")[1]
-                }
+                value: self.props.location.query.time_period.split("_")[0],
+                unit: self.props.location.query.time_period.split("_")[1]
+              }
               : { value: 0, unit: "" },
             page: page,
             PAGE_SIZE: 25
@@ -352,7 +352,7 @@ class OperationsLogTab extends React.Component {
     let page_num = self.state.page
     if (
       Math.floor(event.target.scrollHeight) -
-        Math.floor(event.target.scrollTop) ===
+      Math.floor(event.target.scrollTop) ===
       Math.floor(event.target.clientHeight)
     ) {
       let total,
@@ -360,17 +360,17 @@ class OperationsLogTab extends React.Component {
       try {
         total = this.props.data.OperationLogList.total
         data_list = this.props.data.OperationLogList.list
-      } catch (ex) {}
+      } catch (ex) { }
       if (data_list.length < total) {
         let next_page = page_num + 1
-        self.fetchNextResults(next_page).then(function() {
+        self.fetchNextResults(next_page).then(function () {
           self.setState({ page: next_page })
         })
       }
     }
   }
   _resetPage() {
-    this.setState({ page: 1 }, () => {})
+    this.setState({ page: 1 }, () => { })
   }
 
   render() {
@@ -381,7 +381,7 @@ class OperationsLogTab extends React.Component {
     try {
       total = this.props.data.OperationLogList.total
       data_list = this.props.data.OperationLogList.list
-    } catch (ex) {}
+    } catch (ex) { }
     let FETCH_REAL_TIME_DATA =
       this.props.location.query.time_period !== REALTIME ||
       JSON.stringify(this.props.location.query) !== "{}"
@@ -506,10 +506,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    notifySuccess: function(data) {
+    notifySuccess: function (data) {
       dispatch(notifySuccess(data))
     },
-    initDataSentCall: function(data) {
+    initDataSentCall: function (data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }))
     }
   }
@@ -529,6 +529,7 @@ const OPS_LOG_QUERY = gql`
           id
           quantity
           type
+          label
           children {
             id
             quantity
@@ -576,7 +577,7 @@ const OPS_LOG_QUERY = gql`
 `
 
 const withQuery = graphql(OPS_LOG_QUERY, {
-  props: function(data) {
+  props: function (data) {
     return {
       ...data,
       updateQuery: (previousResult, newResult) => {
@@ -596,7 +597,7 @@ const withQuery = graphql(OPS_LOG_QUERY, {
     }
   },
   options: ({ match, location }) => ({
-    variables: (function() {
+    variables: (function () {
       return {
         input: {
           requestId: location.query.request_id,
@@ -608,9 +609,9 @@ const withQuery = graphql(OPS_LOG_QUERY, {
           status: location.query.status,
           timePeriod: location.query.time_period
             ? {
-                value: location.query.time_period.split("_")[0],
-                unit: location.query.time_period.split("_")[1]
-              }
+              value: location.query.time_period.split("_")[0],
+              unit: location.query.time_period.split("_")[1]
+            }
             : { value: 0, unit: "" }
         }
       }
@@ -651,7 +652,7 @@ const operationsLogClientData = gql`
   }
 `
 const withClientData = graphql(operationsLogClientData, {
-  props: function(data) {
+  props: function (data) {
     if (!data.data) {
       return {}
     }
@@ -684,21 +685,21 @@ const SET_FILTER_STATE = gql`
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showOperationsLogFilter: function(show) {
+    showOperationsLogFilter: function (show) {
       mutate({ variables: { filter: show } })
     }
   })
 })
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function(applied) {
+    filterApplied: function (applied) {
       mutate({ variables: { isFilterApplied: applied } })
     }
   })
 })
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    operationsLogFilterState: function(state) {
+    operationsLogFilterState: function (state) {
       mutate({ variables: { state: state } })
     }
   })
