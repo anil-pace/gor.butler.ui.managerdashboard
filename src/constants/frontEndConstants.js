@@ -713,6 +713,7 @@ export const PPS_STATUS_FCLOSE = "force_close"
 export const PPS_STATUS_OPEN = "open"
 export const GET_PENDING_MSU = "GET_PENDING_MSU"
 export const RESET_CHECKED_PPS = "RESET_CHECKED_PPS"
+export const PPS_MODE_EXTRACTION = "extraction_station"
 /*Constants for Notifications*/
 export const SEARCHED_NOTIFICATIONS_DATA = "SEARCHED_NOTIFICATIONS_DATA"
 export const WS_NOTIFICATIONS_DATA = "WS_NOTIFICATIONS_DATA"

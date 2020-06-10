@@ -3595,7 +3595,7 @@
   },
   {
     "id": "audit.inSlot.text",
-    "defaultMessage": "In slot ",
+    "defaultMessage": "In slot",
     "filepath": "./src/containers/auditTab/resolveAudit.js"
   },
   {
@@ -3993,12 +3993,6 @@
     "id": "operation.fire.header",
     "description": "Header Text FIRE EMERGENCY",
     "defaultMessage": "FIRE EMERGENCY",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
-    "id": "operation.fire.cautionText",
-    "description": "Description Text FIRE EMERGENCY",
-    "defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
@@ -6879,9 +6873,39 @@
     "filepath": "./src/containers/systemTabs/pps/PPStable.js"
   },
   {
-    "id": "PPStable.ppsState",
+    "id": "PPStable.ppsState.pick",
     "description": "pps state for PPStable",
-    "defaultMessage": "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})",
+    "defaultMessage": "Pick ({pick}) .",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState.put",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Put ({put}) .",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState.audit",
+    "description": "pps state for PPStable",
+    "defaultMessage": "Audit ({audit})",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState.notSet",
+    "description": "pps state for PPStable",
+    "defaultMessage": ". Not Set ({notSet})",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState.extraction",
+    "description": "pps state for PPStable",
+    "defaultMessage": ". Extraction Station ({extraction})",
+    "filepath": "./src/containers/systemTabs/pps/PPStable.js"
+  },
+  {
+    "id": "PPStable.ppsState.search",
+    "description": "pps state for PPStable",
+    "defaultMessage": ". Search ({search})",
     "filepath": "./src/containers/systemTabs/pps/PPStable.js"
   },
   {

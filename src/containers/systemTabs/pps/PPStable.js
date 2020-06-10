@@ -17,7 +17,8 @@ import { defineMessages } from "react-intl"
 import {
   GOR_STATUS,
   GOR_STATUS_PRIORITY,
-  GOR_TABLE_HEADER_HEIGHT
+  GOR_TABLE_HEADER_HEIGHT,
+  PPS_MODE_EXTRACTION
 } from "../../../constants/frontEndConstants"
 
 import { modal } from "react-redux-modal"
@@ -297,7 +298,8 @@ class PPStable extends React.Component {
     let pick = this.props.operationMode.pick
     let put = this.props.operationMode.put
     let audit = this.props.operationMode.audit
-    const search = this.props.operationMode.search
+    let extraction = this.props.operationMode[PPS_MODE_EXTRACTION]
+    let search = this.props.operationMode.search
     let notSet = this.props.operationMode.notSet
     let operatorNum = this.props.operatorNum,
       j = 1
@@ -434,18 +436,78 @@ class PPStable extends React.Component {
                     defaultMessage="CURRENT MODE"
                   />
                   <div className="gorToolHeaderSubText">
-                    <FormattedMessage
-                      id="PPStable.ppsState"
-                      description="pps state for PPStable"
-                      defaultMessage="Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})"
-                      values={{
-                        pick: pick ? pick : "0",
-                        put: put ? put : "0",
-                        audit: audit ? audit : "0",
-                        search: search ? search : "0",
-                        notSet: notSet ? notSet : "0"
-                      }}
-                    />
+                    {pick ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.pick"
+                        description="pps state for PPStable"
+                        defaultMessage="Pick ({pick}) . "
+                        values={{
+                          pick: pick
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {put ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.put"
+                        description="pps state for PPStable"
+                        defaultMessage="Put ({put}) . "
+                        values={{
+                          put: put
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {audit ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.audit"
+                        description="pps state for PPStable"
+                        defaultMessage="Audit ({audit})"
+                        values={{
+                          audit: audit
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {notSet ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.notSet"
+                        description="pps state for PPStable"
+                        defaultMessage=" . Not Set ({notSet})"
+                        values={{
+                          notSet: notSet
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {extraction ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.extraction"
+                        description="pps state for PPStable"
+                        defaultMessage=" . Extraction Station ({extraction})"
+                        values={{
+                          extraction: extraction
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {search ? (
+                      <FormattedMessage
+                        id="PPStable.ppsState.search"
+                        description="pps state for PPStable"
+                        defaultMessage=" . Search ({search})"
+                        values={{
+                          search: search
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </SortHeaderCell>

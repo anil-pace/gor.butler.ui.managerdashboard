@@ -31,7 +31,8 @@ import {
   PPS_STATUS_CLOSE,
   PPS_STATUS_FCLOSE,
   GOR_FIRST_LAST,
-  GOR_ON_STATUS
+  GOR_ON_STATUS,
+  PPS_MODE_EXTRACTION
 } from "../../../constants/frontEndConstants"
 import {
   PPS_LIST_SUBSCRIPTION,
@@ -631,7 +632,14 @@ class PPS extends React.Component {
   render() {
     let filterHeight = screen.height - 190 - 50
     let updateStatusIntl = ""
-    let operationMode = { pick: 0, put: 0, audit: 0, notSet: 0, search: 0 }
+    let operationMode = {
+      pick: 0,
+      put: 0,
+      audit: 0,
+      notSet: 0,
+      search: 0,
+      [PPS_MODE_EXTRACTION]: 0
+    }
     let data,
       operatorNum = 0,
       itemNumber = 5,
@@ -643,7 +651,13 @@ class PPS extends React.Component {
         if (data[i].operatingModeClass !== null) {
           operationMode[data[i].operatingModeClass]++
         } else {
-          operationMode = { Pick: "--", Put: "--", Audit: "--", NotSet: "--" }
+          operationMode = {
+            Pick: "--",
+            Put: "--",
+            Audit: "--",
+            NotSet: "--",
+            [PPS_MODE_EXTRACTION]: "--"
+          }
           operatorNum = "--"
         }
 
@@ -730,11 +744,15 @@ class PPS extends React.Component {
     var Modes = this.state.Modes
     let closeRequestedCount = this.state.closeRequestedCount
     var count = openCount + closeCount
-    const bDropRender = this.props.checkedPps
-      ? Object.keys(this.props.checkedPps).length
+    var bDropRender =
+      this.props.checkedPps && //added chech for extraction pps
+      Object.keys(this.props.checkedPps).length &&
+      !Object.values(this.props.checkedPps).find(el => {
+        return el.operatingMode === PPS_MODE_EXTRACTION
+      })
         ? false
         : true
-      : true
+
     const status = [
       {
         value: "open",

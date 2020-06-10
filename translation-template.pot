@@ -2760,7 +2760,7 @@ msgstr ""
 
         #: audit.inSlot.text
         msgctxt "audit.inSlot.text"
-        msgid "In slot "
+        msgid "In slot"
         msgstr ""
 
         #: resolveAudit.table.slot
@@ -3111,11 +3111,6 @@ msgstr ""
         #: operation.fire.header
         msgctxt "operation.fire.header"
         msgid "FIRE EMERGENCY"
-        msgstr ""
-
-        #: operation.fire.cautionText
-        msgctxt "operation.fire.cautionText"
-        msgid "Fire emergency has been triggered and system has started its safety measures."
         msgstr ""
 
         #: operation.fire.evacuation
@@ -5053,9 +5048,29 @@ msgstr ""
         msgid "CURRENT MODE"
         msgstr ""
 
-        #: PPStable.ppsState
-        msgctxt "PPStable.ppsState"
-        msgid "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})"
+        #: PPStable.ppsState.pick
+        msgctxt "PPStable.ppsState.pick"
+        msgid "Pick ({pick}) ."
+        msgstr ""
+
+        #: PPStable.ppsState.put
+        msgctxt "PPStable.ppsState.put"
+        msgid "Put ({put}) ."
+        msgstr ""
+
+        #: PPStable.ppsState.audit
+        msgctxt "PPStable.ppsState.audit"
+        msgid "Audit ({audit})"
+        msgstr ""
+
+        #: PPStable.ppsState.notSet
+        msgctxt "PPStable.ppsState.notSet"
+        msgid ". Not Set ({notSet})"
+        msgstr ""
+
+        #: PPStable.ppsState.extraction
+        msgctxt "PPStable.ppsState.extraction"
+        msgid ". Extraction Station ({extraction})"
         msgstr ""
 
         #: PPStable.requestedMode.text
