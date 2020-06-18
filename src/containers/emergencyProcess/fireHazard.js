@@ -37,16 +37,21 @@ class FireHazard extends React.Component {
   }
   componentWillMount() {
     var limit = this.props.config.fire_emergency_enable_resume_after * 60
-    var duration =
-      (limit - getSecondsDiff(this.props.fireHazard.emergencyStartTime)) * 1000
+    var seconds = getSecondsDiff(this.props.fireHazard.emergencyStartTime)
+    if (seconds >= limit) this.setState({ buttonDisable: false })
+    else {
+      var duration =
+        (limit - getSecondsDiff(this.props.fireHazard.emergencyStartTime)) *
+        1000
 
-    if (this.state.buttonDisable) {
-      setTimeout(
-        function() {
-          this.setState({ buttonDisable: false })
-        }.bind(this),
-        duration
-      )
+      if (this.state.buttonDisable) {
+        setTimeout(
+          function() {
+            this.setState({ buttonDisable: false })
+          }.bind(this),
+          duration
+        )
+      }
     }
   }
   shouldComponentUpdate() {
