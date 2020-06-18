@@ -2760,7 +2760,7 @@ msgstr ""
 
         #: audit.inSlot.text
         msgctxt "audit.inSlot.text"
-        msgid "In slot "
+        msgid "In slot"
         msgstr ""
 
         #: resolveAudit.table.slot
@@ -3111,11 +3111,6 @@ msgstr ""
         #: operation.fire.header
         msgctxt "operation.fire.header"
         msgid "FIRE EMERGENCY"
-        msgstr ""
-
-        #: operation.fire.cautionText
-        msgctxt "operation.fire.cautionText"
-        msgid "Fire emergency has been triggered and system has started its safety measures."
         msgstr ""
 
         #: operation.fire.evacuation

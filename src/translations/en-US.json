@@ -3595,7 +3595,7 @@
   },
   {
     "id": "audit.inSlot.text",
-    "defaultMessage": "In slot ",
+    "defaultMessage": "In slot",
     "filepath": "./src/containers/auditTab/resolveAudit.js"
   },
   {
@@ -3993,12 +3993,6 @@
     "id": "operation.fire.header",
     "description": "Header Text FIRE EMERGENCY",
     "defaultMessage": "FIRE EMERGENCY",
-    "filepath": "./src/containers/emergencyProcess/fireHazard.js"
-  },
-  {
-    "id": "operation.fire.cautionText",
-    "description": "Description Text FIRE EMERGENCY",
-    "defaultMessage": "Fire emergency has been triggered and system has started its safety measures.",
     "filepath": "./src/containers/emergencyProcess/fireHazard.js"
   },
   {
