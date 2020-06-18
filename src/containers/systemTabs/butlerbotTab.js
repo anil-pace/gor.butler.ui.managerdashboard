@@ -1,100 +1,100 @@
-import React from 'react';
-import ButlerBotsTable from './ButlerBotsTable';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { stringConfig } from '../../constants/backEndConstants';
-import { hashHistory } from 'react-router';
+import React from "react"
+import ButlerBotsTable from "./ButlerBotsTable"
+import { connect } from "react-redux"
+import { FormattedMessage } from "react-intl"
+import { stringConfig } from "../../constants/backEndConstants"
+import { hashHistory } from "react-router"
 import {
   INITIAL_HEADER_SORT,
   INITIAL_HEADER_ORDER,
   GOR_PERIPHERAL_ONLINE,
   GOR_PERIPHERAL_OFFLINE,
   WS_ONSEND
-} from '../../constants/frontEndConstants';
-import Spinner from '../../components/spinner/Spinner';
-import { setButlerSpinner } from '../../actions/spinnerAction';
-import { wsOverviewData } from '../../constants/initData.js';
-import { defineMessages } from 'react-intl';
-import ButlerBotFilter from './butlerBotFilter';
-import { setWsAction } from '../../actions/socketActions';
-import FilterSummary from '../../components/tableFilter/filterSummary';
-import { graphql, withApollo, compose } from 'react-apollo';
-import gql from 'graphql-tag';
+} from "../../constants/frontEndConstants"
+import Spinner from "../../components/spinner/Spinner"
+import { setButlerSpinner } from "../../actions/spinnerAction"
+import { wsOverviewData } from "../../constants/initData.js"
+import { defineMessages } from "react-intl"
+import ButlerBotFilter from "./butlerBotFilter"
+import { setWsAction } from "../../actions/socketActions"
+import FilterSummary from "../../components/tableFilter/filterSummary"
+import { graphql, withApollo, compose } from "react-apollo"
+import gql from "graphql-tag"
 //Mesages for internationalization
 const messages = defineMessages({
   butlerPrefix: {
-    id: 'butlerDetail.name.prefix',
-    description: 'prefix for butler id',
-    defaultMessage: 'BOT - {botId}'
+    id: "butlerDetail.name.prefix",
+    description: "prefix for butler id",
+    defaultMessage: "BOT - {botId}"
   },
   chargerPrefix: {
-    id: 'charger.name.prefix',
-    description: 'prefix for charger id',
-    defaultMessage: 'CS - {csId}'
+    id: "charger.name.prefix",
+    description: "prefix for charger id",
+    defaultMessage: "CS - {csId}"
   },
   msuPrefix: {
-    id: 'msu.name.prefix',
-    description: 'prefix for msu id',
-    defaultMessage: 'MSU - {msuId}'
+    id: "msu.name.prefix",
+    description: "prefix for msu id",
+    defaultMessage: "MSU - {msuId}"
   },
 
   ppsPrefix: {
-    id: 'pps.name.prefix',
-    description: 'prefix for pps id',
-    defaultMessage: 'PPS {ppsId}'
+    id: "pps.name.prefix",
+    description: "prefix for pps id",
+    defaultMessage: "PPS {ppsId}"
   },
 
   audit: {
-    id: 'audit.name.prefix',
-    description: 'prefix for audit',
-    defaultMessage: 'Audit'
+    id: "audit.name.prefix",
+    description: "prefix for audit",
+    defaultMessage: "Audit"
   },
   pick: {
-    id: 'pick.name.prefix',
-    description: 'prefix for Pick',
-    defaultMessage: 'Pick'
+    id: "pick.name.prefix",
+    description: "prefix for Pick",
+    defaultMessage: "Pick"
   },
   put: {
-    id: 'Put.name.prefix',
-    description: 'prefix for put',
-    defaultMessage: 'Put'
+    id: "Put.name.prefix",
+    description: "prefix for put",
+    defaultMessage: "Put"
   },
   charging: {
-    id: 'Charging.name.prefix',
-    description: 'prefix for Charging',
-    defaultMessage: 'Charging'
+    id: "Charging.name.prefix",
+    description: "prefix for Charging",
+    defaultMessage: "Charging"
   },
   move: {
-    id: 'Move.name.prefix',
-    description: 'prefix for Charging',
-    defaultMessage: 'Move'
+    id: "Move.name.prefix",
+    description: "prefix for Charging",
+    defaultMessage: "Move"
   },
   moving: {
-    id: 'moving.task',
-    description: 'moving task',
-    defaultMessage: 'Moving to'
+    id: "moving.task",
+    description: "moving task",
+    defaultMessage: "Moving to"
   },
   movingMount: {
-    id: 'movingMount.task',
-    description: 'movingMount task',
-    defaultMessage: 'Moving to mount'
+    id: "movingMount.task",
+    description: "movingMount task",
+    defaultMessage: "Moving to mount"
   },
   movingDismount: {
-    id: 'movingDismount.task',
-    description: 'movingDismount task',
-    defaultMessage: 'Moving to dismount'
+    id: "movingDismount.task",
+    description: "movingDismount task",
+    defaultMessage: "Moving to dismount"
   },
   gotoBarcode: {
-    id: 'goto_barcode.task',
-    description: 'goto_barcode task',
-    defaultMessage: 'Go to barcode'
+    id: "goto_barcode.task",
+    description: "goto_barcode task",
+    defaultMessage: "Go to barcode"
   },
   docked: {
-    id: 'docked.task',
-    description: 'docked task',
-    defaultMessage: 'Docked at'
+    id: "docked.task",
+    description: "docked task",
+    defaultMessage: "Docked at"
   }
-});
+})
 
 const BUTLER_BOTS_QUERY = gql`
   query ButlerBotsList($input: ButlerBotsListParams) {
@@ -110,10 +110,13 @@ const BUTLER_BOTS_QUERY = gql`
         power
         pps_id
         status
+        taskinfoJson {
+          type
+        }
       }
     }
   }
-`;
+`
 
 const SUBSCRIPTION_QUERY = gql`
   subscription BUTLER_CHANNEL($id: Int) {
@@ -132,22 +135,22 @@ const SUBSCRIPTION_QUERY = gql`
       }
     }
   }
-`;
+`
 
 class ButlerBot extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { query: null, legacyDataSubscribed: false };
+    super(props)
+    this.state = { query: null, legacyDataSubscribed: false }
     // keep track of subscription handle to not subscribe twice.
     // we don't need to unsubscribe on unmount, because the subscription
     // gets stopped when the query stops.
-    this.subscription = null;
-    (this.linked = false),
-      (this.showBotsFilter = this.props.showBotsFilter.bind(this));
+    this.subscription = null
+    ;(this.linked = false),
+      (this.showBotsFilter = this.props.showBotsFilter.bind(this))
   }
 
   _subscribeLegacyData() {
-    this.props.initDataSentCall(wsOverviewData['default']);
+    this.props.initDataSentCall(wsOverviewData["default"])
   }
 
   componentWillReceiveProps(nextProps) {
@@ -156,43 +159,43 @@ class ButlerBot extends React.Component {
       nextProps.location.query &&
       (!this.state.query ||
         JSON.stringify(nextProps.location.query) !==
-        JSON.stringify(this.state.query))
+          JSON.stringify(this.state.query))
     ) {
-      this.setState({ query: nextProps.location.query });
+      this.setState({ query: nextProps.location.query })
 
-      this._refreshList(nextProps.location.query);
+      this._refreshList(nextProps.location.query)
     }
 
     if (
       this.props.data &&
-      (!this.props.data.ButlerBotsList &&
-        nextProps.data.ButlerBotsList &&
-        !this.subscription &&
-        !nextProps.data.loading)
+      !this.props.data.ButlerBotsList &&
+      nextProps.data.ButlerBotsList &&
+      !this.subscription &&
+      !nextProps.data.loading
     ) {
-      this.updateSubscription(nextProps.location.query);
+      this.updateSubscription(nextProps.location.query)
     }
     if (!this.state.legacyDataSubscribed && nextProps.socketAuthorized) {
       this.setState(
         () => {
-          return { legacyDataSubscribed: true };
+          return { legacyDataSubscribed: true }
         },
         () => {
-          this._subscribeLegacyData();
+          this._subscribeLegacyData()
         }
-      );
+      )
     }
   }
 
   componentWillUnMount() {
     if (this.subscription) {
-      this.subscription();
+      this.subscription()
     }
   }
 
   updateSubscription(variables) {
     if (this.subscription) {
-      this.subscription();
+      this.subscription()
     }
     this.subscription = this.props.data.subscribeToMore({
       variables: variables,
@@ -206,30 +209,30 @@ class ButlerBot extends React.Component {
               list: newResult.subscriptionData.data.ButlerBotsList.list
             }
           }
-        );
+        )
       }
-    });
+    })
   }
 
   _processButlersData(butler_data) {
-    var nProps = this;
+    var nProps = this
     var butlerData = [],
-      butlerDetail = {};
-    var data = this._filterList(butler_data, nProps.props.location.query);
+      butlerDetail = {}
+    var data = this._filterList(butler_data, nProps.props.location.query)
     var currentTask = {
       picktask: nProps.context.intl.formatMessage(messages.pick),
       preputtask: nProps.context.intl.formatMessage(messages.put),
       audittask: nProps.context.intl.formatMessage(messages.audit),
       chargetask: nProps.context.intl.formatMessage(messages.charging),
       movetask: nProps.context.intl.formatMessage(messages.move)
-    };
+    }
     var currentTaskClass = {
-      picktask: 'Pick',
-      preputtask: 'Put',
-      audittask: 'Audit',
-      chargetask: 'Charging',
-      movetask: 'Move'
-    };
+      picktask: "Pick",
+      preputtask: "Put",
+      audittask: "Audit",
+      chargetask: "Charging",
+      movetask: "Move"
+    }
 
     var currentSubtask = {
       0: nProps.context.intl.formatMessage(messages.moving),
@@ -237,241 +240,270 @@ class ButlerBot extends React.Component {
       2: nProps.context.intl.formatMessage(messages.movingDismount),
       3: nProps.context.intl.formatMessage(messages.docked),
       4: nProps.context.intl.formatMessage(messages.gotoBarcode)
-    };
+    }
 
-    var priStatus = { online: 1, offline: 2 };
-    let BOT, PPS, CS, MSU;
+    var priStatus = { online: 1, offline: 2 }
+    let BOT, PPS, CS, MSU
     for (var i = data.length - 1; i >= 0; i--) {
-      var botId = data[i].id !== 'undefined' ? data[i].id : null,
-        msuId = data[i].display_msu_id !== 'undefined' ? data[i].display_msu_id : null,
-        csId = data[i].charger_id !== 'undefined' ? data[i].charger_id : null,
-        ppsId = data[i].pps_id !== 'undefined' ? data[i].pps_id : null,
-        current_task_status = data[i].status !== 'undefined' ? data[i].status : null
+      var botId = data[i].id !== "undefined" ? data[i].id : null,
+        msuId =
+          data[i].display_msu_id !== "undefined"
+            ? data[i].display_msu_id
+            : null,
+        csId = data[i].charger_id !== "undefined" ? data[i].charger_id : null,
+        ppsId = data[i].pps_id !== "undefined" ? data[i].pps_id : null,
+        current_task_status =
+          data[i].status !== "undefined" ? data[i].status : null
 
-      BOT = botId ? nProps.context.intl.formatMessage(messages.butlerPrefix, {
-        botId: botId
-      }) : "";
+      BOT = botId
+        ? nProps.context.intl.formatMessage(messages.butlerPrefix, {
+            botId: botId
+          })
+        : ""
 
-      PPS = ppsId ? nProps.context.intl.formatMessage(messages.ppsPrefix, {
-        ppsId: ppsId
-      }) : "";
+      PPS = ppsId
+        ? nProps.context.intl.formatMessage(messages.ppsPrefix, {
+            ppsId: ppsId
+          })
+        : ""
 
-      CS = csId ? nProps.context.intl.formatMessage(messages.chargerPrefix, {
-        csId: csId
-      }) : "";
+      CS = csId
+        ? nProps.context.intl.formatMessage(messages.chargerPrefix, {
+            csId: csId
+          })
+        : ""
 
-      MSU = msuId ? nProps.context.intl.formatMessage(messages.msuPrefix, {
-        msuId: msuId
-      }) : "";
+      MSU = msuId
+        ? nProps.context.intl.formatMessage(messages.msuPrefix, {
+            msuId: msuId
+          })
+        : ""
 
-      butlerDetail = {};
-      butlerDetail.id = BOT;
-      butlerDetail.statusClass = data[i].state;
+      butlerDetail = {}
+      butlerDetail.id = BOT
+      butlerDetail.statusClass = data[i].state
       if (stringConfig[data[i].state]) {
         butlerDetail.status = nProps.context.intl.formatMessage(
           stringConfig[data[i].state]
-        );
+        )
       } else {
-        butlerDetail.status = data[i].state;
+        butlerDetail.status = data[i].state
       }
-      butlerDetail.statusPriority = priStatus[data[i].state];
+      butlerDetail.statusPriority = priStatus[data[i].state]
       if (data[i].position) {
-        butlerDetail.position = data[i].position;
+        butlerDetail.position = data[i].position
       } else {
-        butlerDetail.position = '--';
+        butlerDetail.position = "--"
       }
       if (data[i].power || data[i].power === 0) {
-        butlerDetail.voltage = data[i].power.toFixed(2) + ' %';
+        butlerDetail.voltage = data[i].power.toFixed(2) + " %"
       } else {
-        butlerDetail.voltage = '--';
+        butlerDetail.voltage = "--"
       }
-      butlerDetail.butlerAvgVoltage = data[i].power || 0;
-      butlerDetail.taskNum = currentTask[data[i].tasktype];
-      butlerDetail.taskNumClass = currentTaskClass[data[i].tasktype];
-      butlerDetail.taskType = data[i].tasktype;
+      butlerDetail.butlerAvgVoltage = data[i].power || 0
+      butlerDetail.taskNum = currentTask[data[i].tasktype]
+
+      if (
+        data[i].tasktype === "picktask" &&
+        data[i].taskinfoJson &&
+        data[i].taskinfoJson.type === "put"
+      )
+        butlerDetail.taskNumClass = currentTaskClass["preputtask"]
+      else {
+        butlerDetail.taskNumClass = currentTaskClass[data[i].tasktype]
+      }
+
+      butlerDetail.taskType = data[i].tasktype
       if (data[i].display_msu_id === null) {
-        butlerDetail.msu = '--';
+        butlerDetail.msu = "--"
       } else {
-        butlerDetail.msu = MSU;
+        butlerDetail.msu = MSU
       }
       if (
         data[i].tasktype !== null &&
-        (data[i].tasktype === 'picktask' ||
-          data[i].tasktype === 'audittask' ||
-          data[i].tasktype === 'chargetask' ||
-          data[i].tasktype === 'movetask')
+        (data[i].tasktype === "picktask" ||
+          data[i].tasktype === "audittask" ||
+          data[i].tasktype === "chargetask" ||
+          data[i].tasktype === "movetask")
       ) {
-        butlerDetail.current = currentTask[data[i].tasktype];
         if (
-          data[i].tasktype === 'picktask' ||
-          data[i].tasktype === 'audittask' ||
-          data[i].tasktype === 'movetask'
+          data[i].tasktype === "picktask" &&
+          data[i].taskinfoJson &&
+          data[i].taskinfoJson.type === "put"
+        )
+          butlerDetail.current = currentTask["preputtask"]
+        else {
+          butlerDetail.current = currentTask[data[i].tasktype]
+        }
+
+        if (
+          data[i].tasktype === "picktask" ||
+          data[i].tasktype === "audittask" ||
+          data[i].tasktype === "movetask"
         ) {
-          if (current_task_status === 'started' && MSU) {
+          if (current_task_status === "started" && MSU) {
             butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[1];
+              butlerDetail.current + " - " + currentSubtask[1]
           } else if (
-            current_task_status === 'rack_picked' &&
-            data[i].current_subtask === 'pps_control' && PPS
+            current_task_status === "rack_picked" &&
+            data[i].current_subtask === "pps_control" &&
+            PPS
           ) {
             butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[3];
+              butlerDetail.current + " - " + currentSubtask[3]
           } else if (
-            current_task_status === 'item_search_completed' &&
-            data[i].current_subtask === 'goto_barcode'
+            current_task_status === "item_search_completed" &&
+            data[i].current_subtask === "goto_barcode"
           )
-            butlerDetail.current += ' - ' + currentSubtask[4];
-        } else if (current_task_status === 'rack_picked') {
+            butlerDetail.current += " - " + currentSubtask[4]
+        } else if (current_task_status === "rack_picked") {
           butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[0];
-        } else if (current_task_status === 'storing' && MSU) {
+            butlerDetail.current + " - " + currentSubtask[0]
+        } else if (current_task_status === "storing" && MSU) {
           butlerDetail.current =
-            butlerDetail.current + ' - ' + currentSubtask[2];
-        } else if (data[i].tasktype === 'chargetask') {
-          if (current_task_status === 'started' && PPS) {
+            butlerDetail.current + " - " + currentSubtask[2]
+        } else if (data[i].tasktype === "chargetask") {
+          if (current_task_status === "started" && PPS) {
             butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[0];
-          } else if (current_task_status === 'charging_started' && CS) {
+              butlerDetail.current + " - " + currentSubtask[0]
+          } else if (current_task_status === "charging_started" && CS) {
             butlerDetail.current =
-              butlerDetail.current + ' - ' + currentSubtask[3];
+              butlerDetail.current + " - " + currentSubtask[3]
           }
         }
         if (data[i].current_subtask !== null) {
           if (data[i].charger_id !== null) {
             butlerDetail.current =
-              butlerDetail.current + ' CS ' + data[i].charger_id;
+              butlerDetail.current + " CS " + data[i].charger_id
           } else if (data[i].display_msu_id !== null) {
             butlerDetail.current =
-              butlerDetail.current + ' MSU ' + data[i].display_msu_id;
+              butlerDetail.current + " MSU " + data[i].display_msu_id
           } else {
-            butlerDetail.current = butlerDetail.current + ' ' + PPS;
+            butlerDetail.current = butlerDetail.current + " " + PPS
           }
         }
       } else {
-        butlerDetail.current = '--';
+        butlerDetail.current = "--"
       }
-      butlerData.push(butlerDetail);
+      butlerData.push(butlerDetail)
     }
-
-    return butlerData;
+    return butlerData
   }
 
   _filterList(init_data, query) {
-    let filtered_data = init_data;
+    let filtered_data = init_data
 
     if (query.butler_id) {
-      query.butler_id = query.butler_id.toString().replace(/^\D+/g, '');
+      query.butler_id = query.butler_id.toString().replace(/^\D+/g, "")
       query.butler_id =
         query.butler_id.constructor === Array
           ? query.butler_id
-          : [query.butler_id];
-      filtered_data = filtered_data.filter(function (bot) {
-        return query.butler_id.indexOf(bot.id.toString()) > -1;
-      });
+          : [query.butler_id]
+      filtered_data = filtered_data.filter(function(bot) {
+        return query.butler_id.indexOf(bot.id.toString()) > -1
+      })
     }
 
     if (query.location) {
-      query.location = query.location.toString().replace(/^\s+/g, '');
+      query.location = query.location.toString().replace(/^\s+/g, "")
       query.location =
-        query.location.constructor === Array
-          ? query.location
-          : [query.location];
-      filtered_data = filtered_data.filter(function (bot) {
-        return query.location.indexOf(bot.position.toString()) > -1;
-      });
+        query.location.constructor === Array ? query.location : [query.location]
+      filtered_data = filtered_data.filter(function(bot) {
+        return query.location.indexOf(bot.position.toString()) > -1
+      })
     }
 
     if (query.status) {
       query.status =
-        query.status.constructor === Array ? query.status : [query.status];
-      filtered_data = filtered_data.filter(function (bot) {
-        return query.status.indexOf(bot.state) > -1;
-      });
+        query.status.constructor === Array ? query.status : [query.status]
+      filtered_data = filtered_data.filter(function(bot) {
+        return query.status.indexOf(bot.state) > -1
+      })
     }
     if (query.current_task) {
       query.current_task =
         query.current_task.constructor === Array
           ? query.current_task
-          : [query.current_task];
-      filtered_data = filtered_data.filter(function (bot) {
-        return query.current_task.indexOf(bot.tasktype) > -1;
-      });
+          : [query.current_task]
+      filtered_data = filtered_data.filter(function(bot) {
+        return query.current_task.indexOf(bot.tasktype) > -1
+      })
     }
 
-    return filtered_data;
+    return filtered_data
   }
 
   _refreshList(query) {
-    this.props.setButlerSpinner(true);
-    let filterSubsData = {};
+    this.props.setButlerSpinner(true)
+    let filterSubsData = {}
     if (query.location) {
-      filterSubsData['location'] = ['contains', query.location];
+      filterSubsData["location"] = ["contains", query.location]
     }
     if (query.butler_id) {
-      filterSubsData['butler_id'] = ['=', query.butler_id];
+      filterSubsData["butler_id"] = ["=", query.butler_id]
     }
     if (query.status) {
-      filterSubsData['state'] = [
-        'in',
+      filterSubsData["state"] = [
+        "in",
         query.status.constructor === Array ? query.status : [query.status]
-      ];
+      ]
     }
     if (query.current_task) {
-      filterSubsData['current_task'] = [
-        'in',
+      filterSubsData["current_task"] = [
+        "in",
         query.current_task.constructor === Array
           ? query.current_task
           : [query.current_task]
-      ];
+      ]
     }
 
     if (
-      Object.keys(query).filter(function (el) {
-        return el !== 'page';
+      Object.keys(query).filter(function(el) {
+        return el !== "page"
       }).length !== 0
     ) {
-      this.props.filterApplied(true);
+      this.props.filterApplied(true)
     } else {
-      this.props.filterApplied(false);
+      this.props.filterApplied(false)
     }
 
     this.props.butlerfilterState({
       tokenSelected: {
-        __typename: 'ButlerBotsTokenSelected',
+        __typename: "ButlerBotsTokenSelected",
         STATUS: query.status
           ? query.status.constructor === Array
             ? query.status
             : [query.status]
-          : ['any'],
+          : ["any"],
         MODE: query.current_task
           ? query.current_task.constructor === Array
             ? query.current_task
             : [query.current_task]
-          : ['any']
+          : ["any"]
       },
       searchQuery: {
-        __typename: 'ButlerBotsSearchQuery',
+        __typename: "ButlerBotsSearchQuery",
         SPECIFIC_LOCATION_ZONE: query.location || null,
         BOT_ID: query.butler_id || null
       },
       defaultToken: {
-        STATUS: ['any'],
-        MODE: ['any'],
-        __typename: 'ButlerBotsDefaultToken'
+        STATUS: ["any"],
+        MODE: ["any"],
+        __typename: "ButlerBotsDefaultToken"
       }
-    });
+    })
   }
 
   _clearFilter() {
-    hashHistory.push({ pathname: '/system/butlerbots', query: {} });
+    hashHistory.push({ pathname: "/system/butlerbots", query: {} })
   }
 
   render() {
-    var filterHeight = screen.height - 190 - 50;
-    let updateStatusIntl = '';
-    var itemNumber = 6;
+    var filterHeight = screen.height - 190 - 50
+    let updateStatusIntl = ""
+    var itemNumber = 6
     var butlerData,
-      avgVoltage = 0;
+      avgVoltage = 0
     var taskDetail = {
       Put: 0,
       Pick: 0,
@@ -483,76 +515,76 @@ class ButlerBot extends React.Component {
       location: 0,
       online: 0,
       offline: 0
-    };
+    }
 
-    var data = this.props.butlerBotsList;
+    var data = this.props.butlerBotsList
 
     if (data !== undefined) {
-      butlerData = this._processButlersData(data);
-      let activeBotsCount = 0;
+      butlerData = this._processButlersData(data)
+      let activeBotsCount = 0
       if (butlerData && butlerData.length) {
         for (var i = butlerData.length - 1; i >= 0; i--) {
-          avgVoltage = (butlerData[i].butlerAvgVoltage || 0) + avgVoltage;
+          avgVoltage = (butlerData[i].butlerAvgVoltage || 0) + avgVoltage
           activeBotsCount = butlerData[i].butlerAvgVoltage
             ? activeBotsCount + 1
-            : activeBotsCount;
+            : activeBotsCount
           if (
             butlerData[i].taskNumClass === null ||
             butlerData[i].taskNumClass === undefined
           ) {
-            taskDetail['Idle']++;
+            taskDetail["Idle"]++
           } else {
-            taskDetail[butlerData[i].taskNumClass]++;
+            taskDetail[butlerData[i].taskNumClass]++
           }
 
-          if (butlerData[i].msu !== '--') {
-            taskDetail['msuMounted']++;
+          if (butlerData[i].msu !== "--") {
+            taskDetail["msuMounted"]++
           }
 
           if (butlerData[i].position !== null) {
-            taskDetail['location']++;
+            taskDetail["location"]++
           }
 
           if (butlerData[i].statusClass === GOR_PERIPHERAL_ONLINE) {
-            taskDetail['online']++;
+            taskDetail["online"]++
           }
 
           if (butlerData[i].statusClass === GOR_PERIPHERAL_OFFLINE) {
-            taskDetail['offline']++;
+            taskDetail["offline"]++
           }
         }
         avgVoltage =
-          avgVoltage !== 0 ? (avgVoltage / activeBotsCount).toFixed(1) : '--';
-        taskDetail['avgVoltage'] = avgVoltage + '%';
+          avgVoltage !== 0 ? (avgVoltage / activeBotsCount).toFixed(1) : "--"
+        taskDetail["avgVoltage"] = avgVoltage + "%"
       } else {
         taskDetail = {
-          Put: '--',
-          Pick: '--',
-          Charging: '--',
-          Idle: '--',
-          Audit: '--',
+          Put: "--",
+          Pick: "--",
+          Charging: "--",
+          Idle: "--",
+          Audit: "--",
           avgVoltage: 0,
-          msuMounted: '--',
-          location: '--',
-          online: '--'
-        };
+          msuMounted: "--",
+          location: "--",
+          online: "--"
+        }
       }
     }
 
     if (!data) {
-      return null;
+      return null
     } else {
       return (
         <div>
           <div>
-            <div className='gorTesting wrapper gor-butler-bots'>
+            <div className="gorTesting wrapper gor-butler-bots">
               {butlerData ? (
                 <div>
                   <div>
                     <div
-                      className='gor-filter-wrap'
+                      className="gor-filter-wrap"
                       style={{
-                        width: this.props.showFilter ? '350px' : '0px',
+                        width: this.props.showFilter ? "350px" : "0px",
                         height: filterHeight
                       }}
                     >
@@ -567,33 +599,33 @@ class ButlerBot extends React.Component {
                       />
                     </div>
 
-                    <div className='gorToolBar'>
-                      <div className='gorToolBarWrap'>
-                        <div className='gorToolBarElements'>
+                    <div className="gorToolBar">
+                      <div className="gorToolBarWrap">
+                        <div className="gorToolBarElements">
                           <FormattedMessage
-                            id='butlerBot.table.heading'
-                            description='Heading for butlerbot'
-                            defaultMessage='Butler Bots'
+                            id="butlerBot.table.heading"
+                            description="Heading for butlerbot"
+                            defaultMessage="Butler Bots"
                           />
                         </div>
                       </div>
 
-                      <div className='filterWrapper'>
-                        <div className='gorToolBarDropDown'>
-                          <div className='gor-button-wrap'>
+                      <div className="filterWrapper">
+                        <div className="gorToolBarDropDown">
+                          <div className="gor-button-wrap">
                             <button
                               className={
                                 this.props.isFilterApplied
-                                  ? 'gor-filterBtn-applied'
-                                  : 'gor-filterBtn-btn'
+                                  ? "gor-filterBtn-applied"
+                                  : "gor-filterBtn-btn"
                               }
                               onClick={this.showBotsFilter.bind(this, true)}
                             >
-                              <div className='gor-manage-task' />
+                              <div className="gor-manage-task" />
                               <FormattedMessage
-                                id='gor.filter.filterLabel'
-                                description='button label for filter'
-                                defaultMessage='Filter data'
+                                id="gor.filter.filterLabel"
+                                description="button label for filter"
+                                defaultMessage="Filter data"
                               />
                             </button>
                           </div>
@@ -608,18 +640,18 @@ class ButlerBot extends React.Component {
                       responseFlag={this.props.responseFlag}
                       filterText={
                         <FormattedMessage
-                          id='botList.filter.search.bar'
-                          description='total bots for filter search bar'
-                          defaultMessage='{total} Bots found'
+                          id="botList.filter.search.bar"
+                          description="total bots for filter search bar"
+                          defaultMessage="{total} Bots found"
                           values={{ total: butlerData.length || 0 }}
                         />
                       }
                       refreshList={this._clearFilter.bind(this)}
                       refreshText={
                         <FormattedMessage
-                          id='botList.filter.search.bar.showall'
-                          description='button label for show all'
-                          defaultMessage='Show all Bots'
+                          id="botList.filter.search.bar.showall"
+                          description="button label for show all"
+                          defaultMessage="Show all Bots"
                         />
                       }
                     />
@@ -633,7 +665,7 @@ class ButlerBot extends React.Component {
             </div>
           </div>
         </div>
-      );
+      )
     }
   }
 }
@@ -641,24 +673,24 @@ function mapStateToProps(state, ownProps) {
   return {
     intlMessages: state.intl.messages,
     socketAuthorized: state.recieveSocketActions.socketAuthorized
-  };
+  }
 }
 
-var mapDispatchToProps = function (dispatch) {
+var mapDispatchToProps = function(dispatch) {
   return {
-    setButlerSpinner: function (data) {
-      dispatch(setButlerSpinner(data));
+    setButlerSpinner: function(data) {
+      dispatch(setButlerSpinner(data))
     },
-    initDataSentCall: function (data) {
-      dispatch(setWsAction({ type: WS_ONSEND, data: data }));
+    initDataSentCall: function(data) {
+      dispatch(setWsAction({ type: WS_ONSEND, data: data }))
     }
-  };
-};
+  }
+}
 
 ButlerBot.contextTypes = {
   intl: React.PropTypes.object.isRequired,
   client: React.PropTypes.object.isRequired
-};
+}
 ButlerBot.PropTypes = {
   butlerFilter: React.PropTypes.string,
   butlerSortHeader: React.PropTypes.string,
@@ -674,22 +706,22 @@ ButlerBot.PropTypes = {
   butlerHeaderSortOrder: React.PropTypes.func,
   showBotsFilter: React.PropTypes.func,
   filterApplied: React.PropTypes.func
-};
+}
 
 const withQuery = graphql(BUTLER_BOTS_QUERY, {
-  props: function (data) {
+  props: function(data) {
     if (!data || !data.data.ButlerBotsList || !data.data.ButlerBotsList.list) {
-      return {};
+      return {}
     }
     return {
       butlerBotsList: data.data.ButlerBotsList.list
-    };
+    }
   },
   options: ({ match, location }) => ({
     variables: {},
-    fetchPolicy: 'network-only'
+    fetchPolicy: "network-only"
   })
-});
+})
 
 const botsClientData = gql`
   query {
@@ -713,24 +745,24 @@ const botsClientData = gql`
       }
     }
   }
-`;
+`
 
 const SET_VISIBILITY = gql`
   mutation setBotsFilter($filter: String!) {
     setShowBotsFilter(filter: $filter) @client
   }
-`;
+`
 
 const SET_FILTER_APPLIED = gql`
   mutation setFilterApplied($isFilterApplied: String!) {
     setButlerBotsFilterApplied(isFilterApplied: $isFilterApplied) @client
   }
-`;
+`
 const SET_FILTER_STATE = gql`
   mutation setFilterState($state: String!) {
     setBotsFilterState(state: $state) @client
   }
-`;
+`
 
 const withClientData = graphql(botsClientData, {
   props: data => ({
@@ -743,29 +775,29 @@ const withClientData = graphql(botsClientData, {
       ? JSON.parse(JSON.stringify(data.data.botsFilter.filterState))
       : null
   })
-});
+})
 
 const setVisibilityFilter = graphql(SET_VISIBILITY, {
   props: ({ mutate, ownProps }) => ({
-    showBotsFilter: function (show) {
-      mutate({ variables: { filter: show } });
+    showBotsFilter: function(show) {
+      mutate({ variables: { filter: show } })
     }
   })
-});
+})
 const setFilterApplied = graphql(SET_FILTER_APPLIED, {
   props: ({ mutate, ownProps }) => ({
-    filterApplied: function (applied) {
-      mutate({ variables: { isFilterApplied: applied } });
+    filterApplied: function(applied) {
+      mutate({ variables: { isFilterApplied: applied } })
     }
   })
-});
+})
 const setFilterState = graphql(SET_FILTER_STATE, {
   props: ({ mutate, ownProps }) => ({
-    butlerfilterState: function (state) {
-      mutate({ variables: { state: state } });
+    butlerfilterState: function(state) {
+      mutate({ variables: { state: state } })
     }
   })
-});
+})
 
 export default compose(
   withClientData,
@@ -773,9 +805,4 @@ export default compose(
   setFilterApplied,
   setFilterState,
   withQuery
-)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ButlerBot)
-);
+)(connect(mapStateToProps, mapDispatchToProps)(ButlerBot))
