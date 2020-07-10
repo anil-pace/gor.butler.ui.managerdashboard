@@ -927,6 +927,7 @@ class AuditTab extends React.Component {
             showAuditFilter={this.showAuditFilter}
             isFilterApplied={this.props.isFilterApplied}
             auditfilterState={this.props.auditFilterStatus || null}
+            query={this.props.location.query}
           />
         </div>
         <div className="gorToolBar auditListingToolbar">
