@@ -88,6 +88,9 @@ class AuditFilter extends React.Component {
         this.setState(nextProps.auditFilterState)
       }
     }
+    if (!nextProps.auditFilterState) {
+      this.setFilterState(nextProps.query)
+    }
   }
 
   _processAuditSearchField() {
