@@ -5053,6 +5053,11 @@ msgstr ""
         msgid "Pick ({pick}) . Put ({put}) . Audit ({audit}) . Item Search ({search}) . Not set ({notSet})"
         msgstr ""
 
+        #: PPStable.ppsState.search
+        msgctxt "PPStable.ppsState.search"
+        msgid ". Search ({search})"
+        msgstr ""
+
         #: PPStable.requestedMode.text
         msgctxt "PPStable.requestedMode.text"
         msgid "Requested Mode:"

@@ -52,7 +52,7 @@
 }
 .table-container .table-body {
   max-height: 60vh;
-  overflow: auto;
+  overflow: visible;
 }
 
 .table-container .table-body .cell {
