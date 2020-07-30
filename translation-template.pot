@@ -1778,6 +1778,11 @@ msgstr ""
         msgid "CREATE AUDIT"
         msgstr ""
 
+        #: audit.table.suggestedAudit
+        msgctxt "audit.table.suggestedAudit"
+        msgid "SUGGESTED AUDIT"
+        msgstr ""
+
         #: audit.filter.filterLabel
         msgctxt "audit.filter.filterLabel"
         msgid "FILTER DATA"
@@ -2846,6 +2851,16 @@ msgstr ""
         #: audit.sku.alert.cancel
         msgctxt "audit.sku.alert.cancel"
         msgid "Cancel"
+        msgstr ""
+
+        #: pps.configuration.confirm.apply.cancel
+        msgctxt "pps.configuration.confirm.apply.cancel"
+        msgid "Cancel"
+        msgstr ""
+
+        #: pps.configuration.confirm.saveAndApply.profile
+        msgctxt "pps.configuration.confirm.saveAndApply.profile"
+        msgid "SAVE AND APPLY"
         msgstr ""
 
         #: viewDetais.multisku.status
@@ -4628,11 +4643,6 @@ msgstr ""
         msgid "PPS Configuration will be changed"
         msgstr ""
 
-        #: pps.configuration.confirm.apply.cancel
-        msgctxt "pps.configuration.confirm.apply.cancel"
-        msgid "Cancel"
-        msgstr ""
-
         #: pps.configuration.confirm.change.profile
         msgctxt "pps.configuration.confirm.change.profile"
         msgid "Change"
@@ -4861,11 +4871,6 @@ msgstr ""
         #: pps.mode.confirm.apply.warning
         msgctxt "pps.mode.confirm.apply.warning"
         msgid "Warning: All pps mode change might impact the operations"
-        msgstr ""
-
-        #: pps.configuration.confirm.saveAndApply.profile
-        msgctxt "pps.configuration.confirm.saveAndApply.profile"
-        msgid "SAVE AND APPLY"
         msgstr ""
 
         #: pps.inputField.id
