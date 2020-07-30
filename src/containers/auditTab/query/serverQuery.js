@@ -1,25 +1,25 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag"
 export const AUDIT_VALIDATE_QUERY = gql`
   query AuditSKUList($sku: dataListParams) {
     AuditSKUList(input: $sku) {
       list
     }
   }
-`;
+`
 export const AUDIT_EDIT_DUPLICATE_QUERY = gql`
   query EditAuditDetails($data: EditAuditParams) {
     EditAuditDetails(input: $data) {
       list
     }
   }
-`;
+`
 export const AUDIT_REQUEST_QUERY = gql`
   query AuditRequestSubmit($input: AuditRequestSubmitParams) {
     AuditRequestSubmit(input: $input) {
       list
     }
   }
-`;
+`
 
 export const AUDIT_CHANGE = gql`
   query AuditChangePPS($input: ChangePPSParams) {
@@ -35,7 +35,7 @@ export const AUDIT_CHANGE = gql`
       }
     }
   }
-`;
+`
 
 export const AUDIT_USER_FETCH_QUERY = gql`
   query AuditFetchUser {
@@ -45,7 +45,7 @@ export const AUDIT_USER_FETCH_QUERY = gql`
       }
     }
   }
-`;
+`
 export const AUDIT_PPS_FETCH_QUERY = gql`
   query AuditPPSDetails {
     AuditPPSDetails {
@@ -60,7 +60,7 @@ export const AUDIT_PPS_FETCH_QUERY = gql`
       }
     }
   }
-`;
+`
 
 export const AUDIT_RESOLVE_QUERY = gql`
   query AuditResolve($input: AuditResolveParams) {
@@ -85,7 +85,7 @@ export const AUDIT_RESOLVE_QUERY = gql`
       }
     }
   }
-`;
+`
 
 export const AUDIT_RESOLVE_SUBMIT_QUERY = gql`
   query AuditResolveSubmit($input: AuditResolveSubmitParams) {
@@ -93,7 +93,7 @@ export const AUDIT_RESOLVE_SUBMIT_QUERY = gql`
       list
     }
   }
-`;
+`
 
 export const AUDIT_DETAILS_QUERY = gql`
   query AuditDetails($input: AuditDetailsParams) {
@@ -128,7 +128,7 @@ export const AUDIT_DETAILS_QUERY = gql`
       }
     }
   }
-`;
+`
 
 export const AUDIT_DETAILS_SUBSCRIPTION_QUERY = gql`
   subscription AUDIT_DETAILS_CHANNEL($input: AuditDetailsParams) {
@@ -163,7 +163,7 @@ export const AUDIT_DETAILS_SUBSCRIPTION_QUERY = gql`
       }
     }
   }
-`;
+`
 export const AUDIT_QUERY = gql`
   query AuditList($input: AuditListParams) {
     AuditList(input: $input) {
@@ -217,7 +217,7 @@ export const AUDIT_QUERY = gql`
       total_results
     }
   }
-`;
+`
 
 export const AUDIT_SUBSCRIPTION_QUERY = gql`
   subscription AUDIT_CHANNEL($input: AuditListParams) {
@@ -272,7 +272,7 @@ export const AUDIT_SUBSCRIPTION_QUERY = gql`
       total_results
     }
   }
-`;
+`
 
 export const ITEM_SEARCH_DETAILS_QUERY = gql`
   query ItemSearchDetailsList($input: ItemSearchDetailsListParams) {
@@ -305,7 +305,7 @@ export const ITEM_SEARCH_DETAILS_QUERY = gql`
       }
     }
   }
-`;
+`
 export const ITEM_SEARCH_QUERY = gql`
   query ItemSearchList($input: ItemSearchListParams) {
     ItemSearchList(input: $input) {
@@ -335,7 +335,7 @@ export const ITEM_SEARCH_QUERY = gql`
       }
     }
   }
-`;
+`
 
 export const ITEM_SEARCH_START_QUERY = gql`
   query ItemSearchStart($input: ItemSearchStartParams) {
@@ -343,7 +343,7 @@ export const ITEM_SEARCH_START_QUERY = gql`
       list
     }
   }
-`;
+`
 
 export const ITEM_SEARCH_PPS_LIST_FETCH_QUERY = gql`
   query ItemSearchPPSDetails {
@@ -357,4 +357,28 @@ export const ITEM_SEARCH_PPS_LIST_FETCH_QUERY = gql`
       }
     }
   }
-`;
+`
+
+export const SUGGESTED_COUNT = gql`
+  query AuditSuggestedCount {
+    AuditSuggestedCount {
+      list {
+        breached_slots_count
+        suggested_slots_count
+        total_slots
+        remaining_days
+      }
+    }
+  }
+`
+
+export const CREATE_SUGGESTED_AUDIT = gql`
+  query AuditCreateSuggestedAudit($input: AuditCreateSuggestedAuditParams) {
+    AuditCreateSuggestedAudit(input: $input) {
+      list {
+        error
+        data
+      }
+    }
+  }
+`

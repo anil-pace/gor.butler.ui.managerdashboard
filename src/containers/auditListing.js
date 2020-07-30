@@ -50,6 +50,7 @@ import {
   AUDIT_QUERY,
   AUDIT_REQUEST_QUERY
 } from "../../src/containers/auditTab/query/serverQuery"
+import suggestedAudit from "./auditTab/suggestedAudit"
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -309,95 +310,121 @@ class AuditTab extends React.Component {
   _refreshList(query) {
     this.props.setAuditSpinner(true)
     var me = this
-    if (this.props.currentPageNumber < this.props.TotalPage) {
-      if (query.scrolling) {
-        var pageNo = this.props.currentPageNumber + 1
-        this.props.setCurrentPageNumber(pageNo)
-        query = this.props.location.query
-        query.scrolling = true
+    if (this.props.currentPageNumber < this.props.TotalPage)
+      this.callGraphql(query)
+    else {
+      if (query.shouldRefresh) {
+        this._clearFilter()
+        this.callGraphql(query)
       }
-      if (query)
-        this.props.auditfilterState({
-          tokenSelected: {
-            __typename: "AuditFilterTokenSelected",
-            AUDIT_TYPE: query.auditType
-              ? query.auditType.constructor === Array
-                ? query.auditType
-                : [query.auditType]
-              : [ANY],
-            STATUS: query.status
-              ? query.status.constructor === Array
-                ? query.status
-                : [query.status]
-              : [ALL],
-            CREATED_BY: query.createdBy
-              ? query.createdBy.constructor === Array
-                ? query.createdBy
-                : [query.createdBy]
-              : [ALL]
-          },
-          searchQuery: {
-            __typename: "AuditFilterSearchQuery",
-            SPECIFIC_SKU_ID: query.skuId || "",
-            SPECIFIC_LOCATION_ID: query.locationId || "",
-            AUDIT_TASK_ID: query.taskId || "",
-            SPECIFIC_PPS_ID: query.ppsId || "",
-            FROM_DATE: query.fromDate || "",
-            TO_DATE: query.toDate || ""
-          },
-          defaultToken: {
-            __typename: "AuditFilterDefaultToken",
-            AUDIT_TYPE: [ANY],
-            STATUS: [ALL],
-            CREATED_BY: [ALL]
-          }
-        })
-      this.props.client
-        .query({
-          query: AUDIT_QUERY,
-          variables: {
-            input: {
-              skuId: this.props.location.query.skuId || "",
-              locationId: this.props.location.query.locationId || "",
-              taskId: this.props.location.query.taskId || "",
-              ppsId: this.props.location.query.ppsId || "",
-              operatingMode: this.props.location.query.operatingMode || "",
-              status: this.props.location.query.status || "",
-              fromDate: this.props.location.query.fromDate || "",
-              toDate: this.props.location.query.toDate || "",
-              auditType: this.props.location.query.auditType || "",
-              createdBy: this.props.location.query.createdBy || "",
-              pageSize: 10,
-              pageNo: pageNo || 1
-            }
-          },
-          fetchPolicy: "network-only"
-        })
-        .then(data => {
-          me.props.setAuditSpinner(false)
-          var a = JSON.stringify(
-            data.data.AuditList ? data.data.AuditList.list : []
-          )
-
-          me.props.listDataAudit(a)
-          let stateData, finalData
-          stateData = me.state.AuditList
-          if (query.scrolling) {
-            finalData = stateData.concat(data.data.AuditList.list)
-          } else {
-            finalData = data.data.AuditList.list
-          }
-          me.setState({ AuditList: finalData })
-          me.props.setAuditDetails(finalData)
-        })
-        .catch(err => {
-          me.props.setAuditSpinner(false)
-        })
-    } else {
       me.props.setAuditSpinner(false)
     }
   }
 
+  callGraphql(query) {
+    var me = this
+    if (query.scrolling) {
+      var pageNo = this.props.currentPageNumber + 1
+      this.props.setCurrentPageNumber(pageNo)
+      query = this.props.location.query
+      query.scrolling = true
+    }
+    if (query)
+      this.props.auditfilterState({
+        tokenSelected: {
+          __typename: "AuditFilterTokenSelected",
+          AUDIT_TYPE: query.auditType
+            ? query.auditType.constructor === Array
+              ? query.auditType
+              : [query.auditType]
+            : [ANY],
+          STATUS: query.status
+            ? query.status.constructor === Array
+              ? query.status
+              : [query.status]
+            : [ALL],
+          CREATED_BY: query.createdBy
+            ? query.createdBy.constructor === Array
+              ? query.createdBy
+              : [query.createdBy]
+            : [ALL],
+          INVENTORY_FOUND: query.inventoryFound
+            ? query.inventoryFound.constructor === Array
+              ? query.inventoryFound
+              : [query.inventoryFound]
+            : [ALL],
+          SOURCE: query.creatorName
+            ? query.creatorName.constructor === Array
+              ? query.creatorName
+              : [query.creatorName]
+            : [ALL]
+        },
+        searchQuery: {
+          __typename: "AuditFilterSearchQuery",
+          SPECIFIC_SKU_ID: query.skuId || "",
+          SPECIFIC_LOCATION_ID: query.locationId || "",
+          AUDIT_TASK_ID: query.taskId || "",
+          AUDIT_TASK_NAME: query.taskName || "",
+          ORDER_NO: query.orderNo || "",
+          SPECIFIC_PPS_ID: query.ppsId || "",
+          FROM_DATE: query.fromDate || "",
+          TO_DATE: query.toDate || ""
+        },
+        defaultToken: {
+          __typename: "AuditFilterDefaultToken",
+          AUDIT_TYPE: [ANY],
+          STATUS: [ALL],
+          CREATED_BY: [ALL],
+          INVENTORY_FOUND: [ALL],
+          SOURCE: [ALL]
+        }
+      })
+    this.props.client
+      .query({
+        query: AUDIT_QUERY,
+        variables: {
+          input: {
+            skuId: this.props.location.query.skuId || "",
+            locationId: this.props.location.query.locationId || "",
+            taskId: this.props.location.query.taskId || "",
+            taskName: this.props.location.query.taskName || "",
+            orderNo: this.props.location.query.orderNo || "",
+            ppsId: this.props.location.query.ppsId || "",
+            operatingMode: this.props.location.query.operatingMode || "",
+            status: this.props.location.query.status || "",
+            fromDate: this.props.location.query.fromDate || "",
+            toDate: this.props.location.query.toDate || "",
+            auditType: this.props.location.query.auditType || "",
+            createdBy: this.props.location.query.createdBy || "",
+            inventoryFound: this.props.location.query.inventoryFound || "",
+            creatorName: this.props.location.query.creatorName || "",
+            pageSize: 10,
+            pageNo: pageNo || 1
+          }
+        },
+        fetchPolicy: "network-only"
+      })
+      .then(data => {
+        me.props.setAuditSpinner(false)
+        var a = JSON.stringify(
+          data.data.AuditList ? data.data.AuditList.list : []
+        )
+
+        me.props.listDataAudit(a)
+        let stateData, finalData
+        stateData = me.state.AuditList
+        if (query.scrolling) {
+          finalData = stateData.concat(data.data.AuditList.list)
+        } else {
+          finalData = data.data.AuditList.list
+        }
+        me.setState({ AuditList: finalData })
+        me.props.setAuditDetails(finalData)
+      })
+      .catch(err => {
+        me.props.setAuditSpinner(false)
+      })
+  }
   /**
    *
    */
@@ -795,6 +822,17 @@ class AuditTab extends React.Component {
     })
   }
 
+  suggestedAudit() {
+    modal.add(suggestedAudit, {
+      title: "",
+      size: "large",
+      closeOnOutsideClick: false, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      refreshList: this._refreshList.bind(this)
+      //.. all what you put in here you will get access in the modal props ;),
+    })
+  }
+
   //Render Function goes here
   render() {
     let autoAssignpps = this.context.intl.formatMessage(messages.autoAssignpps)
@@ -944,6 +982,18 @@ class AuditTab extends React.Component {
                   id="audit.table.createAudit"
                   description="button label for audit create"
                   defaultMessage="CREATE AUDIT"
+                />
+              </button>
+            </div>
+            <div className="gor-button-wrap">
+              <button
+                className="gor-suggested-audit-btn"
+                onClick={this.suggestedAudit.bind(this)}
+              >
+                <FormattedMessage
+                  id="audit.table.suggestedAudit"
+                  description="button label for audit suggest"
+                  defaultMessage="SUGGESTED AUDIT"
                 />
               </button>
             </div>

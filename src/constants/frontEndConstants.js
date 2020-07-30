@@ -855,6 +855,10 @@ export const AUDIT_EDIT = "AUDIT_EDIT"
 export const SET_AUDIT_EDIT_DATA = "SET_AUDIT_EDIT_DATA"
 export const START_AUDIT_TASK = "START_AUDIT_TASK"
 export const CHANGE_PPS_TASK = "CHANGE_PPS_TASK"
+export const MAX_SIZE_INPUT = 100
+export const GREATER_THAN_TOTAL_COUNT = "greater_than_TOTAL_count"
+export const NOT_A_VALID_NUMBER = "not_a_valid_number"
+
 //FeedBack Notification
 export const NOTIFY_FEEDBACK = "NOTIFY_FEEDBACK"
 export const AUDIT_EDIT_REQUEST = "AUDIT_EDIT_REQUEST"
