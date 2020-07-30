@@ -72,6 +72,21 @@
     padding-left: 10px;
   }
 
+  .gor-suggested-audit-btn {
+    font-family: "Source Sans Pro Bold", sans-serif;
+    height: 35px;
+    font-size: 13px;
+    color: #ffffff;
+    margin-left: 30px;
+    vertical-align: sub;
+    border-radius: 3px;
+    background-color: #4d5055;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #aaaaaa;
+    cursor: pointer;
+    width: 131px;
+  }
+
   .gor-audit-create-btn {
     height: 35px;
     border-radius: 3px;
@@ -389,4 +404,128 @@
 .checkBoxalign {
   margin-top: 12px;
   margin-left: 20px;
+}
+
+.gor-suggest-audit {
+  width: 40%;
+  min-height: calculateRem(300px);
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: auto;
+  clear: both;
+  line-height: 31px;
+  color: #4d5055;
+  .gor-suggest-audit-header {
+    font-family: "SourceSansPro-Semibold";
+    font-weight: 600;
+    font-size: 26px;
+    margin: auto;
+    padding: calculateRem(25px);
+    padding-bottom: 0;
+    min-height: calculateRem(30px);
+    clear: both;
+    overflow: auto;
+    .gor-suggest-audit-header-description {
+      font-weight: 400;
+      font-size: 16px;
+      display: block;
+    }
+  }
+  .gor-suggest-audit-body {
+    font-size: 14px;
+    padding: calculateRem(25px);
+    padding-bottom: 0;
+    min-height: calculateRem(100px);
+    display: inline-block;
+    color: #333333;
+    font-weight: 600;
+    line-height: 17px;
+    .gor-suggest-audit-body-tile {
+      display: inline-flex;
+      .gor-suggest-audit-body-tile1 {
+        padding-right: calculateRem(16px);
+      }
+      .gor-suggest-audit-body-tile2 {
+        padding-right: calculateRem(16px);
+        padding-left: calculateRem(16px);
+      }
+      .gor-suggest-audit-body-tile3 {
+        padding-left: calculateRem(16px);
+      }
+    }
+    .gor-suggest-audit-body-block {
+      padding-top: calculateRem(16px);
+      .gor-suggest-audit-body-block-input {
+        padding-top: calculateRem(16px);
+        font-size: 12px;
+        color: #4d5055;
+        display: flex;
+        height: calculateRem(25px);
+        text-align: center;
+
+        .gor-suggest-audit-body-block-input-wrap {
+          padding-left: calculateRem(16px);
+          max-height: calculateRem(25px);
+          .gor-suggest-audit-body-block-input-field {
+            padding: calculateRem(2px) calculateRem(9px) calculateRem(2px)
+              calculateRem(9px);
+            border: 1px solid #979797;
+            height: calculateRem(21px);
+            font-size: 14px;
+            text-align: left;
+            width: calculateRem(40px);
+            background-color: #ffffff;
+            color: #666666;
+            &.gor-input-typing {
+              color: #666666;
+              &:focus {
+                color: #333333;
+              }
+            }
+          }
+        }
+      }
+      .gor-suggest-audit-body-block-input-ok {
+        display: none;
+      }
+      .gor-suggest-audit-body-block-input-error {
+        font-size: 12px;
+        letter-spacing: 0px;
+        color: #ec1c24;
+        display: block;
+        line-height: 14px;
+      }
+    }
+  }
+  .gor-suggest-audit-action-button {
+    text-align: right;
+    margin-right: calculateRem(20px);
+  }
+  .gor-save-profile-btn {
+    font-family: "Source Sans Pro Bold", sans-serif;
+    min-width: calculateRem(113px);
+    height: calculateRem(35px);
+    font-size: 14px;
+    background: #f36f36;
+    color: #ffffff;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .gor-filter-input-text {
+    padding-top: 0;
+  }
+  .gor-cancel-btn {
+    font-family: "Source Sans Pro Bold", sans-serif;
+    width: calculateRem(113px);
+    height: calculateRem(35px);
+    font-size: 14px;
+    background: #4d5055;
+    color: #ffffff;
+    border-radius: 3px;
+    margin-right: calculateRem(10px);
+    display: inline-block;
+    cursor: pointer;
+  }
 }

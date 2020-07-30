@@ -2108,6 +2108,12 @@
     "filepath": "./src/containers/auditListing.js"
   },
   {
+    "id": "audit.table.suggestedAudit",
+    "description": "button label for audit suggest",
+    "defaultMessage": "SUGGESTED AUDIT",
+    "filepath": "./src/containers/auditListing.js"
+  },
+  {
     "id": "audit.filter.filterLabel",
     "description": "button label for filter",
     "defaultMessage": "FILTER DATA",
@@ -3723,6 +3729,18 @@
     "description": "Text for cancel",
     "defaultMessage": "Cancel",
     "filepath": "./src/containers/auditTab/skuAlerts.js"
+  },
+  {
+    "id": "pps.configuration.confirm.apply.cancel",
+    "description": "Cancel apply Profile to PPS",
+    "defaultMessage": "Cancel",
+    "filepath": "./src/containers/auditTab/suggestedAudit.js"
+  },
+  {
+    "id": "pps.configuration.confirm.saveAndApply.profile",
+    "description": "Save and Apply Profile to PPS",
+    "defaultMessage": "SAVE AND APPLY",
+    "filepath": "./src/containers/auditTab/suggestedAudit.js"
   },
   {
     "id": "viewDetais.multisku.status",
