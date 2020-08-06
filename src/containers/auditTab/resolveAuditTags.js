@@ -181,8 +181,9 @@ class ResolveAuditTags extends React.Component {
                               resetOnSelect={false}
                               placeholder={lotValuePlaceHolder}
                               placeholderClass={
-                                ".gor-dropdown-placeholder-padding"
+                                "gor-dropdown-placeholder-padding"
                               }
+                              widthClass="gor-dropdown-max-width"
                             />
                           </div>
                         ) : null}

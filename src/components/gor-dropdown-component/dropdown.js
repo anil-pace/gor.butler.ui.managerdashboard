@@ -86,7 +86,11 @@ class Dropdown extends Component {
   render() {
     return (
       <div
-        className="gor-dropdown-wrapper"
+        className={
+          this.props.widthClass
+            ? `${this.props.widthClass} gor-dropdown-wrapper`
+            : "gor-dropdown-wrapper"
+        }
         onClick={!this.props.disabled ? this._toggleDropdown.bind(this) : null}
       >
         <span
