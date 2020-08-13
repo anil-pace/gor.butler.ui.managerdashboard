@@ -2858,11 +2858,6 @@ msgstr ""
         msgid "Cancel"
         msgstr ""
 
-        #: pps.configuration.confirm.saveAndApply.profile
-        msgctxt "pps.configuration.confirm.saveAndApply.profile"
-        msgid "SAVE AND APPLY"
-        msgstr ""
-
         #: viewDetais.multisku.status
         msgctxt "viewDetais.multisku.status"
         msgid "Multi SKU"
@@ -4871,6 +4866,11 @@ msgstr ""
         #: pps.mode.confirm.apply.warning
         msgctxt "pps.mode.confirm.apply.warning"
         msgid "Warning: All pps mode change might impact the operations"
+        msgstr ""
+
+        #: pps.configuration.confirm.saveAndApply.profile
+        msgctxt "pps.configuration.confirm.saveAndApply.profile"
+        msgid "SAVE AND APPLY"
         msgstr ""
 
         #: pps.inputField.id
