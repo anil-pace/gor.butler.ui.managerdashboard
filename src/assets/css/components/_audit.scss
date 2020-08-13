@@ -405,6 +405,9 @@
     }
     .gor-suggest-audit-body-block {
       padding-top: calculateRem(16px);
+      .gor-suggest-audit-body-block-padding-top {
+        padding-top: calculateRem(5px);
+      }
       .gor-suggest-audit-body-block-input {
         padding-top: calculateRem(16px);
         font-size: 12px;
