@@ -6226,6 +6226,10 @@ button:disabled {
   padding-top: 1rem;
 }
 
+.gor-suggest-audit .gor-suggest-audit-body .gor-suggest-audit-body-block .gor-suggest-audit-body-block-padding-top {
+  padding-top: 0.3125rem;
+}
+
 .gor-suggest-audit .gor-suggest-audit-body .gor-suggest-audit-body-block .gor-suggest-audit-body-block-input {
   padding-top: 1rem;
   font-size: 12px;

@@ -3737,12 +3737,6 @@
     "filepath": "./src/containers/auditTab/suggestedAudit.js"
   },
   {
-    "id": "pps.configuration.confirm.saveAndApply.profile",
-    "description": "Save and Apply Profile to PPS",
-    "defaultMessage": "SAVE AND APPLY",
-    "filepath": "./src/containers/auditTab/suggestedAudit.js"
-  },
-  {
     "id": "viewDetais.multisku.status",
     "defaultMessage": "Multi SKU",
     "filepath": "./src/containers/auditTab/viewDetailsAudit.js"
