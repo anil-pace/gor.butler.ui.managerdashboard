@@ -32,7 +32,7 @@ class SuggestAudit extends React.Component {
   async callGraphql(_query, variables = undefined) {
     return await this.props.client.query({
       query: _query,
-      variables: { input: { slot_count: variables } },
+      variables: { input: { query: variables } },
       fetchPolicy: "network-only"
     })
   }
@@ -76,9 +76,11 @@ class SuggestAudit extends React.Component {
   }
 
   createSuggestedAudit() {
-    let variables = this.slotCount.value
+    let slots = this.slotCount.value
+    let auditName = this.auditName.value
+    let query = JSON.stringify({ slots, auditName })
     this.setState({ spinnerState: true })
-    this.callGraphql(CREATE_SUGGESTED_AUDIT, variables)
+    this.callGraphql(CREATE_SUGGESTED_AUDIT, query)
       .then(data => {
         this.props.notifySuccess("Audit created successfully.")
         this.closeModal()
@@ -94,6 +96,13 @@ class SuggestAudit extends React.Component {
     if (value && value >= this.state.total_slots)
       return GREATER_THAN_TOTAL_COUNT
     if (!value) return NOT_A_VALID_NUMBER
+  }
+
+  _typingAuditName = e => {
+    if (!e.target.value) {
+      this.setState({ isEnabledCreateAuditButton: false })
+      return
+    }
   }
 
   _typing = e => {
@@ -181,6 +190,19 @@ class SuggestAudit extends React.Component {
               </div>
               <div className="gor-suggest-audit-body-block">
                 No. of days remaining in this cycle: {this.state.remaining_days}
+                <div className="gor-suggest-audit-body-block-padding-top">
+                  Enter Audit Name
+                </div>
+                <div className="gor-suggest-audit-body-block-padding-top">
+                  <input
+                    className=".gor-suggest-audit-body-block-padding-top"
+                    ref={node => {
+                      this.auditName = node
+                    }}
+                    onChange={this._typingAuditName.bind(this)}
+                    placeholder="Ex. Audit1"
+                  />
+                </div>
                 <div className="gor-suggest-audit-body-block-input">
                   <div>Enter Slots Count</div>
                   <div className="gor-suggest-audit-body-block-input-wrap">
@@ -229,11 +251,7 @@ class SuggestAudit extends React.Component {
                 onClick={this.createSuggestedAudit.bind(this)}
                 className="gor-save-profile-btn"
               >
-                <FormattedMessage
-                  id="pps.configuration.confirm.saveAndApply.profile"
-                  description="Save and Apply Profile to PPS"
-                  defaultMessage="SAVE AND APPLY"
-                />
+                Create Audit
               </button>
             </div>
           </div>
