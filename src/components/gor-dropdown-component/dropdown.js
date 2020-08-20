@@ -50,6 +50,10 @@ class Dropdown extends Component {
           break
         }
       }
+      if (typeof value === "number" && value === options[i].value) {
+        selectedOption = Object.assign({}, options[i])
+        break
+      }
     }
     if (!selectedOption.value) {
       selectedOption = Object.assign({}, options[0])
