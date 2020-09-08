@@ -367,27 +367,3 @@ export const ITEM_SEARCH_PPS_LIST_FETCH_QUERY = gql`
     }
   }
 `
-
-export const SUGGESTED_COUNT = gql`
-  query AuditSuggestedCount {
-    AuditSuggestedCount {
-      list {
-        breached_slots_count
-        suggested_slots_count
-        total_slots
-        remaining_days
-      }
-    }
-  }
-`
-
-export const CREATE_SUGGESTED_AUDIT = gql`
-  query AuditCreateSuggestedAudit($input: AuditCreateSuggestedAuditParams) {
-    AuditCreateSuggestedAudit(input: $input) {
-      list {
-        error
-        data
-      }
-    }
-  }
-`
