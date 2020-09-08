@@ -133,10 +133,7 @@ class ResolveAudit extends React.Component{
     }
     else{
       newAuditLineId=this.state.auditDataList.newData[rowIndex].auditLineId
-      let slotID = this.state.auditDataList.newData[rowIndex].slot_id
-      let actualQty = this.state.auditDataList.newData[rowIndex].actual_quantity
-      let itemID = this.state.auditDataList.newData[rowIndex].item_id  
-      checkedAudit={"response":state, "auditline_id":newAuditLineId,"slot_id":slotID,"actual_qty":actualQty,"item_id":itemID}
+      checkedAudit={"response":state, "auditline_id":newAuditLineId}
     }
     var tempState=this.state.checkedState.slice();
     for (var i=tempState.length - 1; i >= 0; i--) {

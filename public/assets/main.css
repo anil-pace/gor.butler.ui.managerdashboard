@@ -7784,12 +7784,7 @@ button:disabled {
 }
 
 .gor-dropdown-placeholder-padding {
-  padding-right: 100px;
-}
-
-.gor-dropdown-max-width {
-  width: 100%;
-  max-height: 32px;
+  padding-right: 150px;
 }
 
 .gor-toastify {
