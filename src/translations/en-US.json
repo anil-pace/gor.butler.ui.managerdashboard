@@ -3647,30 +3647,6 @@
     "filepath": "./src/containers/auditTab/resolveAudit.js"
   },
   {
-    "id": "audit.resolve.heading",
-    "description": "Heading for resolve audit",
-    "defaultMessage": "Resolve issues",
-    "filepath": "./src/containers/auditTab/resolveAuditTags.js"
-  },
-  {
-    "id": "audit.header.information",
-    "description": "missing information for audit",
-    "defaultMessage": "Audit task #{auditId}",
-    "filepath": "./src/containers/auditTab/resolveAuditTags.js"
-  },
-  {
-    "id": "resolveAudit.cancelLabel",
-    "description": "button label for cancel",
-    "defaultMessage": "Cancel",
-    "filepath": "./src/containers/auditTab/resolveAuditTags.js"
-  },
-  {
-    "id": "resolveAudit.confirmLabel",
-    "description": "button label for confirm",
-    "defaultMessage": "Confirm",
-    "filepath": "./src/containers/auditTab/resolveAuditTags.js"
-  },
-  {
     "id": "audit.sku.update",
     "description": "Text for logout button",
     "defaultMessage": "Update Audit",

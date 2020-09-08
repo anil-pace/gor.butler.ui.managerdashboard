@@ -16,8 +16,6 @@ import {AuditParse} from '../../../src/utilities/auditResponseParser';
 import {ShowError} from '../../../src/utilities/ErrorResponseParser';
 import {auditResolveData,auditResolveSpinnerState} from './query/clientQuery';
 import {AUDIT_RESOLVE_QUERY,AUDIT_RESOLVE_SUBMIT_QUERY} from './query/serverQuery';
-import { modal } from 'react-redux-modal';
-import resolveAuditTags from './resolveAuditTags';
 
 class ResolveAudit extends React.Component{
   constructor(props) 
@@ -91,7 +89,6 @@ class ResolveAudit extends React.Component{
       totalMismatch=(data[i].expected_quantity-data[i].actual_quantity) + totalMismatch;
       auditData.slot_id=data[i].slot_id;
       auditData.auditLineId=data[i].auditline_id;
-      auditData.item_id=data[i].item_id;
         if(data[i].status){
             /**
              * Data from the backend for the comparison.
@@ -122,19 +119,15 @@ class ResolveAudit extends React.Component{
   } 
 
   _checkAuditStatus(rowIndex,state,auditLineId) {
-    var newAuditLineId,checkedAudit,auditIndexed=false;
+    var newAuditLineId;
     if(this.state.auditParamType===AUDIT_BY_SKU) {
       var newAuditLineIndex=this.actualMapping[auditLineId]; //in case of pdfa rowindex wont work so using actual index
-      newAuditLineId=this.state.auditDataList.newData[newAuditLineIndex].auditLineId
-      let slotID = this.state.auditDataList.newData[newAuditLineIndex].slot_id
-      let actualQty = this.state.auditDataList.newData[newAuditLineIndex].actual_quantity
-      let itemID = this.state.auditDataList.newData[newAuditLineIndex].item_id
-      checkedAudit={"response":state, "auditline_id":newAuditLineId,"slot_id":slotID,"actual_qty":actualQty,"item_id":itemID}
+      newAuditLineId=this.state.auditDataList.newData[newAuditLineIndex].auditLineId;
     }
     else{
       newAuditLineId=this.state.auditDataList.newData[rowIndex].auditLineId
-      checkedAudit={"response":state, "auditline_id":newAuditLineId}
     }
+    var checkedAudit={"response":state, "auditline_id":newAuditLineId}, auditIndexed=false;
     var tempState=this.state.checkedState.slice();
     for (var i=tempState.length - 1; i >= 0; i--) {
       if(tempState[i].auditline_id=== newAuditLineId) {
@@ -183,30 +176,6 @@ var _this=this;
 
     this._removeThisModal();
   }
-
-
-  _handelResolveAuditTags() {
-    let auditId =this.state.checkedState 
-    
-    let auditConfirmDetail={data:{
-      username: this.props.username||"admin",
-      auditlines:this.state.checkedState
-    }}
-
-    modal.add(resolveAuditTags, {
-      title: '',
-      size: 'large', // large, medium or small,
-      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
-      hideCloseButton: true,
-      auditConfirmDetail: auditConfirmDetail,
-      screenId: "APPROVE_AUDIT",
-      // auditType: auditId,
-      // auditMethod: 'pdfa',//"location or pdfa"
-      auditData: this._findDisplayidName(this.props.auditId),
-      _removeThisModal: this._removeThisModal.bind(this)
-    })
-  }
-
 
   _resolveIssueByPdfa() {
     var slotIdHashMap={};
@@ -486,7 +455,7 @@ var _this=this;
                           </button>
                         </div>
                         <div className="gor-auditresolve-btn">
-                          <button disabled={!this.state.checkedState || this.state.checkedState.length<1} className="gor-add-btn" onClick={this._handelResolveAuditTags.bind(this)}>
+                          <button disabled={!this.state.checkedState || this.state.checkedState.length<1} className="gor-add-btn" onClick={this._confirmIssues.bind(this)}>
                             <FormattedMessage id="resolveAudit.confirmLabel" description='button label for confirm' defaultMessage='Confirm'/>
                           </button>
                         </div>   
