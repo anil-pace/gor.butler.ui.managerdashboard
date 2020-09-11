@@ -378,7 +378,14 @@ class PPS extends React.Component {
     let put = nProps.context.intl.formatMessage(stringConfig.put)
     let audit = nProps.context.intl.formatMessage(stringConfig.audit)
     let search = nProps.context.intl.formatMessage(stringConfig.search)
-    var currentTask = { pick: pick, put: put, audit: audit, search: search }
+    let extraction = nProps.context.intl.formatMessage(stringConfig.extraction)
+    var currentTask = {
+      pick: pick,
+      put: put,
+      audit: audit,
+      search: search,
+      extraction: extraction
+    }
     var priStatus = { open: 2, close: 0, force_close: 1 }
     var checkedPPS = this.props.checkedPps || {}
     var requestedStatusText = "--"
@@ -748,7 +755,7 @@ class PPS extends React.Component {
       this.props.checkedPps && //added chech for extraction pps
       Object.keys(this.props.checkedPps).length &&
       !Object.values(this.props.checkedPps).find(el => {
-        return el.operatingMode === PPS_MODE_EXTRACTION
+        return el.operatingMode === "Extraction Station"
       })
         ? false
         : true
@@ -910,7 +917,6 @@ class PPS extends React.Component {
                 />
               </div>
             ) : null}
-
             <PPStable
               updateSortedDataList={this.updateSortedDataList.bind(this)}
               items={data}

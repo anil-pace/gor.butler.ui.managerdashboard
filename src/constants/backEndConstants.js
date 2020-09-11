@@ -375,6 +375,11 @@ export const stringConfig = defineMessages({
     id: "stringConfig.item_search",
     description: "Item search mode for PPS",
     defaultMessage: "Item Search"
+  },
+  extraction: {
+    id: "stringConfig.extraction",
+    description: "Extraction mode for PPS",
+    defaultMessage: "Extraction Station"
   }
 })
 export const roleDesc = defineMessages({
