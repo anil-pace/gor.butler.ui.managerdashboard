@@ -1313,6 +1313,12 @@
     "filepath": "./src/constants/backEndConstants.js"
   },
   {
+    "id": "stringConfig.extraction",
+    "description": "Extraction mode for PPS",
+    "defaultMessage": "Extraction Station",
+    "filepath": "./src/constants/backEndConstants.js"
+  },
+  {
     "id": "roleDesc.butler_supervisor",
     "description": "Text for Manager description",
     "defaultMessage": "Grant access to the Management Interface and Operator Interface to all systems",
