@@ -94,10 +94,10 @@ export function removeDuplicates(arr, prop) {
 export function humanizeObjValue(list) {
   return list.map(el => {
     el.tag_values = JSON.stringify(el.tag_values)
-      .replace(/^[\s_]+|[\s_]+$/g, "")
-      .replace(/[_\s]+/g, " ")
+      // .replace(/^[\s_]+|[\s_]+$/g, "")
+      // .replace(/[_\s]+/g, " ")
       .replace(/[\])}[{(]/g, "")
-      .replace(/['"]+/g, "")
+    // .replace(/['"]+/g, "")
     return el
   })
 }

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {GOR_BREACHED_LINES,APPROVE_AUDIT,
   GOR_USER_TABLE_HEADER_HEIGHT,GOR_AUDIT_RESOLVE_MIN_HEIGHT,GOR_AUDIT_RESOLVE_WIDTH,
-   AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA} from '../../constants/frontEndConstants';
+   AUDIT_RESOLVE_CONFIRMED,AUDIT_BY_SKU,GOR_AUDIT_STATUS_DATA, AUDIT_APPROVED, AUDIT_REJECTED} from '../../constants/frontEndConstants';
 import {Table, Column} from 'fixed-data-table';
 import {tableRenderer,TextCell,ResolveCell,AuditPackingSlotIdCell,AuditPackingQuantityCell,AuditPackingStatusCell,AuditPackingResolveCell} from '../../components/commonFunctionsDataTable';
 import {stringConfig} from '../../constants/backEndConstants';
@@ -189,11 +189,15 @@ var _this=this;
 
 
   _handelResolveAuditTags() {
-    let auditId =this.state.checkedState 
-    
+    let auditlineIDApproved =this.state.checkedState.filter(el=>el.response===AUDIT_APPROVED)
+    let auditlineIDRejected =this.state.checkedState.filter(el=>el.response===AUDIT_REJECTED)
+  
+    // console.log(auditlineIDApproved,auditlineIDRejected)
+
+
     let auditConfirmDetail={data:{
       username: this.props.username||"admin",
-      auditlines:this.state.checkedState
+      auditlines: this.state.checkedState
     }}
 
     modal.add(resolveAuditTags, {
@@ -203,8 +207,8 @@ var _this=this;
       hideCloseButton: true,
       auditConfirmDetail: auditConfirmDetail,
       screenId: "APPROVE_AUDIT",
-      // auditType: auditId,
-      // auditMethod: 'pdfa',//"location or pdfa"
+      auditlineIDApproved:auditlineIDApproved,
+      auditlineIDRejected:auditlineIDRejected,
       auditData: this._findDisplayidName(this.props.auditId),
       _removeThisModal: this._removeThisModal.bind(this)
     })

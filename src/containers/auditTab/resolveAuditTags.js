@@ -44,10 +44,9 @@ class ResolveAuditTags extends React.Component {
   }
 
   componentDidMount() {
-    var _this = this
     this.setState({ requestObj: this.props.auditConfirmDetail })
     let _input = {
-      auditlines: this.props.auditConfirmDetail.data.auditlines.map(el => {
+      auditlines: this.props.auditlineIDApproved.map(el => {
         return { slot: el.slot_id, item_id: el.item_id }
       })
     }
@@ -60,14 +59,35 @@ class ResolveAuditTags extends React.Component {
           let tags = respData.filter(item => {
             return item.slot_id === el.slot_id && item.item_id === el.item_id
           })
+
           el.possible_tags =
-            tags && tags[0].possible_tags
+            tags && tags.length && tags[0].possible_tags
               ? humanizeObjValue(tags[0].possible_tags)
               : []
           return el
         })
       }
-      this.setState({ auditTagsData: _auditTagsData })
+      let linesWithNotTags = _auditTagsData.filter(
+        el => !el.possible_tags.length
+      ).length
+
+      this.setState(
+        {
+          auditTagsData: _auditTagsData,
+          auditLinesWithTags:
+            this.props.auditConfirmDetail.data.auditlines.length -
+            linesWithNotTags
+        },
+        () => {
+          if (
+            linesWithNotTags ===
+            this.props.auditConfirmDetail.data.auditlines.length
+          ) {
+            this._confirmIssues()
+            this._removeThisModal()
+          }
+        }
+      )
     })
   }
 
@@ -146,52 +166,53 @@ class ResolveAuditTags extends React.Component {
           </GTableHeader>
           <GTableBody>
             {this.state.auditTagsData.map((row, index) => {
-              return (
-                <GTableRow className={"row"} index={index} data={row}>
-                  {Object.keys(row).map(text => {
-                    return (
-                      <div>
-                        {text === "slot_id" ? (
-                          <div className={"tagTableCell"}>
-                            Slot ID: {row[text]}
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        {text === "item_id" ? (
-                          <div className={"tagTableCell"}>
-                            SKU ID: {row[text]}
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        {text === "actual_qty" ? (
-                          <div className={"tagTableCell"}>
-                            Actual Qty: {row[text]}
-                          </div>
-                        ) : null}
-                        {text === "possible_tags" ? (
-                          <div className="tagTableCell bothAligned tableDropdown">
-                            <Dropdown
-                              options={this.processedOptions(row[text])}
-                              onSelectHandler={e =>
-                                this.changeSelectedTag(e, index)
-                              }
-                              selectedOption={row.selected_tpid}
-                              resetOnSelect={false}
-                              placeholder={lotValuePlaceHolder}
-                              placeholderClass={
-                                "gor-dropdown-placeholder-padding"
-                              }
-                              widthClass="gor-dropdown-max-width"
-                            />
-                          </div>
-                        ) : null}
-                      </div>
-                    )
-                  })}
-                </GTableRow>
-              )
+              if (row.possible_tags.length)
+                return (
+                  <GTableRow className={"row"} index={index} data={row}>
+                    {Object.keys(row).map(text => {
+                      return (
+                        <div>
+                          {text === "slot_id" ? (
+                            <div className={"tagTableCell"}>
+                              Slot ID: {row[text]}
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {text === "item_id" ? (
+                            <div className={"tagTableCell"}>
+                              SKU ID: {row[text]}
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {text === "actual_qty" ? (
+                            <div className={"tagTableCell"}>
+                              Actual Qty: {row[text]}
+                            </div>
+                          ) : null}
+                          {text === "possible_tags" ? (
+                            <div className="tagTableCell bothAligned tableDropdown">
+                              <Dropdown
+                                options={this.processedOptions(row[text])}
+                                onSelectHandler={e =>
+                                  this.changeSelectedTag(e, index)
+                                }
+                                selectedOption={row.selected_tpid}
+                                resetOnSelect={false}
+                                placeholder={lotValuePlaceHolder}
+                                placeholderClass={
+                                  "gor-dropdown-placeholder-padding"
+                                }
+                                widthClass="gor-dropdown-max-width"
+                              />
+                            </div>
+                          ) : null}
+                        </div>
+                      )
+                    })}
+                  </GTableRow>
+                )
             })}
           </GTableBody>
         </GTable>
@@ -204,9 +225,19 @@ class ResolveAuditTags extends React.Component {
     return rawString.split(",")
   }
 
+  isConfirmDisabled() {
+    var count = 0
+    this.state.auditTagsData.map(el => {
+      if (el.selected_tpid) count++
+    })
+    if (count === this.state.auditLinesWithTags) return true
+    return false
+  }
+
   render() {
     var auditData = this.props.auditData
     var resolveTable = this._renderSkutable()
+    let disabled = !this.isConfirmDisabled()
 
     return (
       <div>
@@ -256,6 +287,7 @@ class ResolveAuditTags extends React.Component {
                   </div>
                   <div className="gor-auditresolve-btn">
                     <button
+                      disabled={disabled}
                       className="gor-add-btn"
                       onClick={this._confirmIssues.bind(this)}
                     >
