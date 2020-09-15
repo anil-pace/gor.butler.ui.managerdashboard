@@ -97,7 +97,7 @@ export function humanizeObjValue(list) {
       // .replace(/^[\s_]+|[\s_]+$/g, "")
       // .replace(/[_\s]+/g, " ")
       .replace(/[\])}[{(]/g, "")
-    // .replace(/['"]+/g, "")
+      .replace(/['"]+/g, "")
     return el
   })
 }
