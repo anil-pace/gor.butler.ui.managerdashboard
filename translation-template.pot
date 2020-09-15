@@ -1102,14 +1102,9 @@ msgstr ""
         msgctxt "stringConfig.item_search"
         msgid "Item Search"
         msgstr ""
-        
-        #: stringConfig.extraction
-        msgctxt "stringConfig.extraction_station"
-        msgid "Extraction Station"
-        msgstr ""
 
-        #: stringConfig.extraction_station
-        msgctxt "stringConfig.extraction_station"
+        #: stringConfig.extraction
+        msgctxt "stringConfig.extraction"
         msgid "Extraction Station"
         msgstr ""
 
