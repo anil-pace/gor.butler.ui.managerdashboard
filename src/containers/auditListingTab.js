@@ -338,13 +338,13 @@ class AuditListingTab extends React.Component {
     ];
     return (
 
-      <div>
+      <div style={{overflow:"auto"}} onScroll={me._onScrollHandler.bind(this)} >
 
         <div className="waveListWrapper">
           <GTable options={['table-bordered', 'table-auditListing']}>
 
             {tablerowdata && tablerowdata.length >= 1 ?
-              <GTableBody data={tablerowdata} onScrollHandler={me._onScrollHandler.bind(this)}>
+              <GTableBody data={tablerowdata}>
                 {tablerowdata ? tablerowdata.map(function (row, idx) {
                   return (
 
