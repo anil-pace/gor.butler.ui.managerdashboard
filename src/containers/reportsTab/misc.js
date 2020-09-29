@@ -8,6 +8,8 @@ import {
   CLOSE_GR_REPORT_URL
 } from "../../constants/configConstants"
 import { connect } from "react-redux"
+import { graphql, withApollo, compose } from "react-apollo"
+
 import { getGRdata, validateInvoiceID } from "../../actions/utilityActions"
 import { setInventoryReportSpinner } from "../../actions/spinnerAction"
 import {
@@ -18,7 +20,6 @@ import {
   INVENTORY_REPORT_RESPONSE,
   WS_ONSEND
 } from "../../constants/frontEndConstants"
-
 import { defineMessages } from "react-intl"
 import {
   updateSubscriptionPacket,
@@ -26,6 +27,8 @@ import {
 } from "./../../actions/socketActions"
 import { wsOverviewData } from "./../../constants/initData.js"
 import { setLoginSpinner } from "../../actions/loginAction"
+import { GENERATE_ITEM_MASTER_REPORT } from "./query/serverQuery"
+import { notifyFail, notifySuccess } from "../../actions/validationActions"
 
 //Mesages for internationalization
 const messages = defineMessages({
@@ -70,6 +73,26 @@ class UtilityTab extends React.Component {
     }
     this.props.setLoginSpinner(true)
     this.props.getGRdata(data)
+  }
+
+  async callGraphql(_query, variables = undefined) {
+    this.props.setInventoryReportSpinner(true)
+    return await this.props.client.query({
+      query: _query,
+      variables: { input: { query: variables } },
+      fetchPolicy: "network-only"
+    })
+  }
+
+  _generateItemMasterReport = e => {
+    this.callGraphql(GENERATE_ITEM_MASTER_REPORT)
+      .then(() => {
+        this.props.setInventoryReportSpinner(false)
+        this.props.notifySuccess("Report generate request sent successfully")
+      })
+      .catch(err => {
+        this.props.notifyFail(err.message)
+      })
   }
 
   _generateReport(reqFileType) {
@@ -168,6 +191,9 @@ class UtilityTab extends React.Component {
             >
               <DownloadReportTile
                 generateReport={this._generateReport.bind(this)}
+                generateItemMasterReport={this._generateItemMasterReport.bind(
+                  this
+                )}
                 timeOffset={this.props.timeOffset}
               />
             </UtilityTile>
@@ -225,6 +251,12 @@ var mapDispatchToProps = function(dispatch) {
     updateSubscriptionPacket: function(data) {
       dispatch(updateSubscriptionPacket(data))
     },
+    notifySuccess: function(data) {
+      dispatch(notifySuccess(data))
+    },
+    notifyFail: function(data) {
+      dispatch(notifyFail(data))
+    },
     initDataSentCall: function(data) {
       dispatch(setWsAction({ type: WS_ONSEND, data: data }))
     },
@@ -237,4 +269,6 @@ UtilityTab.contextTypes = {
   intl: React.PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UtilityTab)
+export default compose(withApollo)(
+  connect(mapStateToProps, mapDispatchToProps)(UtilityTab)
+)

@@ -1,5 +1,5 @@
-export const BASE_URL = "localhost"
-export const ENVIRONMENT = "production" // this config needs to be changed when not on production
+export const BASE_URL = "192.168.8.57"
+export const ENVIRONMENT = "productmion" // this config needs to be changed when not on production
 export const REDIRECT_URL = "/cockpit/#/"
 export const PROTOCOL = "https://"
 export const WS_PROTOCOL = "wss://"

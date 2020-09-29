@@ -748,6 +748,11 @@ msgstr ""
         msgid "Inventory"
         msgstr ""
 
+        #: utility.downloadRprts.CategoryItemMaster
+        msgctxt "utility.downloadRprts.CategoryItemMaster"
+        msgid "Item Master"
+        msgstr ""
+
         #: utility.downloadRprts.FileFormatPlchldr
         msgctxt "utility.downloadRprts.FileFormatPlchldr"
         msgid "Select File Format"

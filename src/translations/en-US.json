@@ -887,6 +887,12 @@
     "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
   },
   {
+    "id": "utility.downloadRprts.CategoryItemMaster",
+    "description": "Item Master",
+    "defaultMessage": "Item Master",
+    "filepath": "./src/components/utilityComponents/downloadReportsTile.js"
+  },
+  {
     "id": "utility.downloadRprts.FileFormatPlchldr",
     "description": "Select File Format",
     "defaultMessage": "Select File Format",
